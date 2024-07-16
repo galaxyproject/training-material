@@ -1,0 +1,856 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>GTN Transcriptomics All Updates • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
+h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
+h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
+p { margin: 0; }
+a{text-decoration:none; color: var(--brand);}
+div.entry { position: relative; pointer: cursor; margin-bottom: 0.6rem; padding: 0.4rem; border: 1px solid var(--brand);}
+div.entry[data-has-link="true"]:hover { box-shadow: 4px 4px 0px #782760; }
+div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
+div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
+div small {display: none;}
+div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
+header img {margin-right: 0.5em}
+main { grid-area: main; padding: 15px 5px 10px 5px;}
+footer { grid-area: footer; padding: 0.5em; border-top: 2px solid var(--secondary); }
+div.entry ul a { text-decoration: underline; }
+div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
+footer a { text-decoration: underline; }
+footer a:hover{ font-weight:700; }
+main { overflow-y: auto; overflow-x: hidden; }
+
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GTN Transcriptomics All Updates</a></h1><p>The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: BY-COVID: Data Download</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2024-06-11T12:50:30+00:00">2024-06-11T12:50:30+00:00</time>
+</div>
+<p class="summary">Downloads data from NCBI assuming the correct data input format. (I.e. it should be two columns, with a header, Run and Group, where Run is an SRR identifier.)</p>
+<small>
+        Published: 2024-06-11T12:50:30+00:00<br>
+        Tags:
+        workflows, transcriptomics, name:BY-COVID, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: mRNA-Seq BY-COVID Pipeline: Counts</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/PapXis/">Iacopo Cristoferi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="">Clinical Bioinformatics Unit, Pathology Department, Eramus Medical Center</a></span><time datetime="2024-03-28T21:41:17+00:00">2024-03-28T21:41:17+00:00</time>
+</div>
+<p class="summary">This portion of the workflow produces sets of feature Counts ready for analysis by limma/etc.</p>
+<small>
+        Published: 2024-03-28T21:41:17+00:00<br>
+        Tags:
+        workflows, transcriptomics, name:BY-COVID, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: mRNA-Seq BY-COVID Pipeline: Analysis</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/PapXis/">Iacopo Cristoferi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="">Clinical Bioinformatics Unit, Pathology Department, Eramus Medical Center</a></span><time datetime="2024-03-28T21:41:17+00:00">2024-03-28T21:41:17+00:00</time>
+</div>
+<p class="summary">Analyse Bulk RNA-Seq data in preparation for downstream Pathways analysis with MINERVA</p>
+<small>
+        Published: 2024-03-28T21:41:17+00:00<br>
+        Tags:
+        workflows, transcriptomics, name:BY-COVID, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Pathway analysis with the MINERVA Platform</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mjostaszewski/">Marek Ostaszewski</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/MattiHoch/">Matti Hoch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/PapXis/">Iacopo Cristoferi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mbaardwijk/">Myrthe van Baardwijk</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2024-03-28T21:41:17+00:00">2024-03-28T21:41:17+00:00</time>
+</div>
+<p class="summary">This tutorial is a partial reproduction of Togami et al. 2022 wherein they evaluated mRNA and miRNA in a selection of COVID-19 patients and healthy controls.
+
+</p>
+<small>
+        Published: 2024-03-28T21:41:17+00:00<br>
+        Tags:
+        transcriptomics, bulk, rna-seq, viz, cyoa, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Identification of non-canonical ORFs and their potential biological function</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></span><time datetime="2023-07-11T10:15:34+00:00">2023-07-11T10:15:34+00:00</time>
+</div>
+<p class="summary">Index of contents
+</p>
+<small>
+        Published: 2023-07-11T10:15:34+00:00<br>
+        Tags:
+        transcriptomics, alternative splicing, isoform switching, new tutorial_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Filter, Plot and Explore Single-cell RNA-seq Data updated</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Julia Jakiela</a></span><time datetime="2023-06-13T11:38:52+00:00">2023-06-13T11:38:52+00:00</time>
+</div>
+<p class="summary">Filter, Plot and Explore Single-cell RNA-seq Data</p>
+<small>
+        Published: 2023-06-13T11:38:52+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Preprocessing of 10X scRNA-seq data</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></span><time datetime="2023-05-19T11:33:23+00:00">2023-05-19T11:33:23+00:00</time>
+</div>
+<p class="summary"></p>
+<small>
+        Published: 2023-05-19T11:33:23+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Genome-wide alternative splicing analysis: human</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></span><time datetime="2023-05-17T16:20:54+00:00">2023-05-17T16:20:54+00:00</time>
+</div>
+<p class="summary">Training workflow</p>
+<small>
+        Published: 2023-05-17T16:20:54+00:00<br>
+        Tags:
+        workflows, transcriptomics, name:alternative_splicing, name:GTN, name:transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Genome-wide alternative splicing analysis</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2023-05-17T16:20:54+00:00">2023-05-17T16:20:54+00:00</time>
+</div>
+<p class="summary">Discovered over 40 years ago, alternative splicing (AS) formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  (Alt 1980). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average (Piovesan et al. 2016). In humans,  approximately 95% of multi-exon genes show evidence of AS and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions (Carninci et al. 2006, Miura et al. 2012). Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes (Wang et al. 2008, Kalsotra and Cooper 2011).
+</p>
+<small>
+        Published: 2023-05-17T16:20:54+00:00<br>
+        Tags:
+        transcriptomics, alternative splicing, isoform switching, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: RNA-seq Alignment with STAR</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Sofokli5/">Sofoklis Keisaris</a></span><time datetime="2023-05-15T12:12:40+00:00">2023-05-15T12:12:40+00:00</time>
+</div>
+<p class="summary">In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for counting and locating the genes in RNA sequences. The first and most critical step in an RNA-seq analysis.
+</p>
+<small>
+        Published: 2023-05-15T12:12:40+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-bash-star-align/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Cell Cycle Regression Workflow</a></h2>
+<div class="meta"><time datetime="2023-01-25T09:43:32+00:00">2023-01-25T09:43:32+00:00</time></div>
+<p class="summary"></p>
+<small>
+        Published: 2023-01-25T09:43:32+00:00<br>
+        Tags:
+        workflows, single-cell, 10x, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
+<p class="summary">After completing the MuSiC deconvolution tutorial (Wang et al. 2019), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas (Moreno et al. 2021).  Let’s get started!
+</p>
+<small>
+        Published: 2023-01-20T10:58:39+00:00<br>
+        Tags:
+        single-cell, transcriptomics, data management, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Comparing inferred cell compositions using MuSiC deconvolution</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
+<p class="summary">The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site MuSiC or published article (Wang et al. 2019).
+</p>
+<small>
+        Published: 2023-01-20T10:58:39+00:00<br>
+        Tags:
+        single-cell, transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Post: New Tutorial Suite: Deconvolution with MuSiC, from public data to disease interrogation!</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2022-11-29T00:00:00+00:00">2022-11-29T00:00:00+00:00</time>
+</div>
+<p class="summary">The still new and shiny single-cell analysis topic now boasts a deconvolution tutorial suite! What does deconvolution do you ask? Well, in this context, it infers cell proportions from bulk RNA-seq data. You heard that correctly - instead of expensive new single-cell experiments, you can re-analyse old bulk RNA-seq data and estimate cell proportions. All you need is a reasonably good single cell dataset to use as a reference and you’re good to go! The tutorial suite shows you how to build your reference from publicly available single cell data, and apply analysis to some publicly available bulk RNA-seq data.
+</p>
+<small>
+        Published: 2022-11-29T00:00:00+00:00<br>
+        Tags:
+        news, new tutorial, single-cell, transcriptomics, new news</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: QC + Mapping + Counting (single+paired) - Ref Based RNA Seq - Transcriptomics - GTN</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2022-04-25T11:33:54+00:00">2022-04-25T11:33:54+00:00</time>
+</div>
+<p class="summary">Reference-based RNA-Seq data analysis</p>
+<small>
+        Published: 2022-04-25T11:33:54+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting-paired-and-single.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/different_results.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/different_results.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: I get a different number of transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states. Why?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
+<p class="summary">This is okay! Many aspects of the tutorial can potentially affect the exact results you obtain. For example, the reference genome version used and versions of tools. It’s less important to get the exact results shown in the tutorial, and more important to understand the concepts so you can apply them to your own data.
+</p>
+<small>
+        Published: 2022-02-28T15:26:33+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/different_results.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/quantification_alternatives.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/quantification_alternatives.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: Can I use alternative tools for the Quantification step?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></span><time datetime="2022-02-28T12:17:18+00:00">2022-02-28T12:17:18+00:00</time>
+</div>
+<p class="summary">There are some alternatives to Salmon for reference transcriptome-based RNA quantification. Kallisto and Sailfish use a similar approach, known as pseudoalignment.
+</p>
+<small>
+        Published: 2022-02-28T12:17:18+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/quantification_alternatives.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: MuSiC Workflow</a></h2>
+<div class="meta"><time datetime="2022-02-11T12:34:18+00:00">2022-02-11T12:34:18+00:00</time></div>
+<p class="summary">Bulk RNA Deconvolution with MuSiC</p>
+<small>
+        Published: 2022-02-11T12:34:18+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Bulk RNA Deconvolution with MuSiC</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2022-02-11T12:34:18+00:00">2022-02-11T12:34:18+00:00</time>
+</div>
+<p class="summary">Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain estimates of the proportions of cell types within the bulk sample. To do this, we can use single cell RNA-seq data as a reference for estimating the cell type proportions within the bulk data.
+</p>
+<small>
+        Published: 2022-02-11T12:34:18+00:00<br>
+        Tags:
+        single-cell, transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/transcript.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/transcript.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: I’m using the same training data, tools, and parameters as the tutorial, but I get a different number of transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states. Why?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">This is okay! Many aspects of the tutorial can potentially affect the exact results you obtain. For example, the reference genome version used and versions of tools. It’s less important to get the exact results shown in the tutorial, and more important to understand the concepts so you can apply them to your own data.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/faqs/transcript.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/strandedness.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/strandedness.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: In 'infer experiments' I get unequal numbers, but in the IGV it looks like it is unstranded. What does this mean?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">It’s also often the case that elimination of the second strand is not perfect, and there are genuine cases of bidirectional transcription in the genome. 70 / 30 % as in your report is not a good result for a stranded library. You can treat this as a stranded library in your analysis, but for instance you couldn’t make the conclusion that a given gene is actually transcribed from the reverse strand. Likely that the library preparation didn’t work perfectly. This can depend on many factors, one is that you need to completely digest your DNA using a high quality DNase before doing the reverse transcription.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/strandedness.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_tool.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_tool.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: RNAstar: Why do we set 36 for 'Length of the genomic sequence around annotated junctions'?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">RNA STAR is using the gene model to create the database of splice junctions, and that these don’t “need” to have a length longer than the reads (37bp).
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_tool.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_bam.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_bam.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: Is it possible to visualize the RNA STAR bam file using the JBrowse tool?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">Yes, that should work.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/rnastar_bam.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/infer_experiments.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/infer_experiments.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: When is the "infer experiment" tool used in practice?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">Often you are already aware whether the RNA-seq data is stranded or not in the first place because you sequenced it yourself or ordered it from a company.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/infer_experiments.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/different_padj_value.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/different_padj_value.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: Could I use a different p-adj value for filtering differentially expressed genes?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">Yes, you can modify this value, to perform a more rigorous analysis, or extend the range of genes selected. A higher p-value will significantly increase the number of genes selected, at the expense of including possible false positives.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/faqs/different_padj_value.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/deseq2.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/deseq2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ New FAQ: The tutorial uses the normalised count table for visualisation. What about using VST normalised counts or rlog normalised counts?</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-11-22T14:46:46+00:00">2021-11-22T14:46:46+00:00</time>
+</div>
+<p class="summary">this depends on what you would like to do with the table. The DESeq2 wrapper in Galaxy can output all of these, and there is a nice discussion in the DESeq2 vignette about this topic.
+</p>
+<small>
+        Published: 2021-11-22T14:46:46+00:00<br>
+        Tags:
+        faqs, transcriptomics, new faq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/faqs/deseq2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Visualization of RNA-Seq results with Volcano Plot in R</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a></span><time datetime="2021-06-14T16:11:02+00:00">2021-06-14T16:11:02+00:00</time>
+</div>
+<p class="summary">The Volcano plot tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.
+</p>
+<small>
+        Published: 2021-06-14T16:11:02+00:00<br>
+        Tags:
+        transcriptomics, interactive-tools, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Whole transcriptome analysis of Arabidopsis thaliana</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2021-04-16T10:55:25+00:00">2021-04-16T10:55:25+00:00</time>
+</div>
+<p class="summary">Introduction
+</p>
+<small>
+        Published: 2021-04-16T10:55:25+00:00<br>
+        Tags:
+        transcriptomics, miRNA, plants, stress tolerance, new tutorial_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2021/04/10/tutorial_plant_transcriptomics.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2021/04/10/tutorial_plant_transcriptomics.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Post: New Tutorials: Whole transcriptome analysis of Arabidopsis thaliana</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></span><time datetime="2021-04-10T00:00:00+00:00">2021-04-10T00:00:00+00:00</time>
+</div>
+<p class="summary">Plant lovers are in luck! A new tutorial on this fascinating kingdom has been added to the GTN. It details the necessary steps to identify potential targets of brassinosteroid-induced miRNAs. Brassinosteroids are phytohormones that have the ability to stimulate plant growth and confer resistance against abiotic and biotic stresses. These characteristics have led to great interest in the field of biotechnology due to its potential for increasing agricultural productivity.
+</p>
+<small>
+        Published: 2021-04-10T00:00:00+00:00<br>
+        Tags:
+        news, new tutorial, transcriptomics, plants, mirna, new news</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2021/04/10/tutorial_plant_transcriptomics.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Plant bulk RNA-Seq workflow</a></h2>
+<div class="meta"><time datetime="2021-04-08T16:29:49+00:00">2021-04-08T16:29:49+00:00</time></div>
+<p class="summary">Identify upregulated miRNAS and analyze potential targets in downregulated genes.</p>
+<small>
+        Published: 2021-04-08T16:29:49+00:00<br>
+        Tags:
+        workflows, transcriptomics, mirna, arabidopsis, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Whole transcriptome analysis of Arabidopsis thaliana</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></span><time datetime="2021-04-08T16:29:49+00:00">2021-04-08T16:29:49+00:00</time>
+</div>
+<p class="summary">As sessile organisms, the survival of plants under adverse environmental conditions depends, to a large extent, on their ability to perceive stress stimuli and respond appropriately to counteract the potentially damaging effects. Coordination of phytohormones and reactive oxygen species are considered a key element for enhancing stress resistance, allowing fine-tuning of gene expression in response to environmental changes (Planas-Riverola et al. 2019, Ivashuta et al. 2011). These molecules constitute complex signalling networks, endowing with the ability to respond to a variable natural environment.
+</p>
+<small>
+        Published: 2021-04-08T16:29:49+00:00<br>
+        Tags:
+        transcriptomics, miRNA, plants, stress tolerance, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: scRNA Plant Analysis</a></h2>
+<div class="meta"><time datetime="2021-04-08T10:59:53+00:00">2021-04-08T10:59:53+00:00</time></div>
+<p class="summary">Downstream Single-cell RNA Plant analysis with ScanPy</p>
+<small>
+        Published: 2021-04-08T10:59:53+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: QC report</a></h2>
+<div class="meta"><time datetime="2020-11-15T11:49:58+00:00">2020-11-15T11:49:58+00:00</time></div>
+<p class="summary">rna-seq-reads-to-counts</p>
+<small>
+        Published: 2020-11-15T11:49:58+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/xgaia/">Xavier Garnier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/annesiegel/">Anne Siegel</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/odameron/">Olivier Dameron</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a></span><time datetime="2020-07-17T09:55:17+00:00">2020-07-17T09:55:17+00:00</time>
+</div>
+<p class="summary">How to explore data
+</p>
+<small>
+        Published: 2020-07-17T09:55:17+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: RNA-Seq analysis with AskOmics Interactive Tool</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/xgaia/">Xavier Garnier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/annesiegel/">Anne Siegel</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/odameron/">Olivier Dameron</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a></span><time datetime="2020-07-09T08:03:59+00:00">2020-07-09T08:03:59+00:00</time>
+</div>
+<p class="summary">AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into “RDF triples” and store them in a specific kind of database: an “RDF triplestore”. Under this form, data can then be queried using a specific language: “SPARQL”. AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.
+</p>
+<small>
+        Published: 2020-07-09T08:03:59+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/workflows/rna-rna-interactome-data-analysis-chira.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/workflows/rna-rna-interactome-data-analysis-chira.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: RNA-RNA interactome data analysis - chira  v1.4.3</a></h2>
+<div class="meta"><time datetime="2020-03-23T21:25:12+00:00">2020-03-23T21:25:12+00:00</time></div>
+<p class="summary">RNA-RNA interactome analysis using ChiRA tool suite</p>
+<small>
+        Published: 2020-03-23T21:25:12+00:00<br>
+        Tags:
+        workflows, transcriptomics, RNA, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/workflows/rna-rna-interactome-data-analysis-chira.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: RNA-RNA interactome data analysis</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2020-03-23T21:25:12+00:00">2020-03-23T21:25:12+00:00</time>
+</div>
+<p class="summary">With the advances in the next-generation sequencing technologies, genome-wide RNA-RNA interaction predictions are now
+
+</p>
+<small>
+        Published: 2020-03-23T21:25:12+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/full-de-novo/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/full-de-novo/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: trinity NG</a></h2>
+<div class="meta"><time datetime="2020-02-13T15:48:56+00:00">2020-02-13T15:48:56+00:00</time></div>
+<p class="summary">roscoff hackathon</p>
+<small>
+        Published: 2020-02-13T15:48:56+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/full-de-novo/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Scater</a></h2>
+<div class="meta"><time datetime="2019-10-23T18:48:12+00:00">2019-10-23T18:48:12+00:00</time></div>
+<p class="summary">Single-cell quality control with scater</p>
+<small>
+        Published: 2019-10-23T18:48:12+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: RNA Seq Counts to Viz in R</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tobyhodges/">Toby Hodges</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/">Gallantries: Bridging Training Communities in Life Science, Environment and Health</a></span><time datetime="2019-10-08T17:25:07+00:00">2019-10-08T17:25:07+00:00</time>
+</div>
+<p class="summary">This tutorial will show you how to visualise RNA Sequencing Counts with R
+</p>
+<small>
+        Published: 2019-10-08T17:25:07+00:00<br>
+        Tags:
+        transcriptomics, interactive-tools, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: QC + Mapping + Counting - Ref Based RNA Seq - Transcriptomics - GTN - subworkflows</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2019-09-23T19:19:35+00:00">2019-09-23T19:19:35+00:00</time>
+</div>
+<p class="summary">Reference-based RNA-Seq data analysis</p>
+<small>
+        Published: 2019-09-23T19:19:35+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: DEG Part - Ref Based RNA Seq - Transcriptomics - GTN</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2019-09-23T19:19:35+00:00">2019-09-23T19:19:35+00:00</time>
+</div>
+<p class="summary">Reference-based RNA-Seq data analysis</p>
+<small>
+        Published: 2019-09-23T19:19:35+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Visualization Of RNA-Seq Results With Volcano Plot</a></h2>
+<div class="meta"><time datetime="2019-07-07T08:07:41+00:00">2019-07-07T08:07:41+00:00</time></div>
+<p class="summary">Visualization of RNA-Seq results with Volcano Plot</p>
+<small>
+        Published: 2019-07-07T08:07:41+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: RaceID Workflow</a></h2>
+<div class="meta"><time datetime="2019-03-25T16:14:31+00:00">2019-03-25T16:14:31+00:00</time></div>
+<p class="summary">Downstream Single-cell RNA analysis with RaceID</p>
+<small>
+        Published: 2019-03-25T16:14:31+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: CelSeq2: Single Batch (mm10)</a></h2>
+<div class="meta"><time datetime="2019-02-22T19:53:50+00:00">2019-02-22T19:53:50+00:00</time></div>
+<p class="summary">Pre-processing of Single-Cell RNA Data</p>
+<small>
+        Published: 2019-02-22T19:53:50+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: CelSeq2: Multi Batch (mm10)</a></h2>
+<div class="meta"><time datetime="2019-02-22T19:53:50+00:00">2019-02-22T19:53:50+00:00</time></div>
+<p class="summary">Pre-processing of Single-Cell RNA Data</p>
+<small>
+        Published: 2019-02-22T19:53:50+00:00<br>
+        Tags:
+        workflows, single-cell, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: GO Enrichment Workflow</a></h2>
+<div class="meta"><time datetime="2019-02-19T17:07:43+00:00">2019-02-19T17:07:43+00:00</time></div>
+<p class="summary">GO Enrichment Analysis Tutorial</p>
+<small>
+        Published: 2019-02-19T17:07:43+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: GO Enrichment Analysis</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/igcbioinformatics/">IGC Bioinformatics Unit</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a></span><time datetime="2019-01-23T08:47:44+00:00">2019-01-23T08:47:44+00:00</time>
+</div>
+<p class="summary">When we have a large list of genes of interest, such as a list of differentially expressed genes obtained from an RNA-Seq experiment, how do we extract biological meaning from it?
+</p>
+<small>
+        Published: 2019-01-23T08:47:44+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Visualization of RNA-Seq results with Volcano Plot</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a></span><time datetime="2018-12-31T10:26:01+00:00">2018-12-31T10:26:01+00:00</time>
+</div>
+<p class="summary">
+
+</p>
+<small>
+        Published: 2018-12-31T10:26:01+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Heatmap2 Workflow</a></h2>
+<div class="meta"><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time></div>
+<p class="summary">Visualization of RNA-Seq results with heatmap2</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: RNA Seq Reads To Counts</a></h2>
+<div class="meta"><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time></div>
+<p class="summary">RNA-Seq reads to counts</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: RNA Seq Genes To Pathways (imported from uploaded file)</a></h2>
+<div class="meta"><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time></div>
+<p class="summary">RNA-seq genes to pathways</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/workflows/rna-seq-counts-to-genes.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/workflows/rna-seq-counts-to-genes.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: RNA Seq Counts To Genes</a></h2>
+<div class="meta"><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time></div>
+<p class="summary">RNA-seq counts to genes</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/workflows/rna-seq-counts-to-genes.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: 2: RNA-seq counts to genes</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/">Belinda Phipson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/JovMaksimovic/">Jovana Maksimovic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/annatrigos/">Anna Trigos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mritchie/">Matt Ritchie</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/">Harriet Dashnow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Shians/">Shian Su</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/charitylaw/">Charity Law</a></span><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time>
+</div>
+<p class="summary">Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
+</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        transcriptomics, limma-voom, mouse, QC, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: 3: RNA-seq genes to pathways</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/">Belinda Phipson</a></span><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time>
+</div>
+<p class="summary">Sometimes there is quite a long list of genes to interpret after a differential expression analysis, and it is usually infeasible to go through the list one gene at a time trying to understand it’s biological function. A common downstream procedure is gene set testing, which aims to understand which pathways/gene networks the differentially expressed genes are implicated in. There are many different gene set testing methods that can be applied and it can be useful to try several.
+</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        transcriptomics, mouse, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Visualization of RNA-Seq results with heatmap2</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a></span><time datetime="2018-12-31T00:41:48+00:00">2018-12-31T00:41:48+00:00</time>
+</div>
+<p class="summary">Heatmaps are commonly used to visualize RNA-Seq results. They are useful for visualizing the expression of genes across the samples. In this tutorial we show how the heatmap2 tool in Galaxy can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an RNA-Seq experiment, similar to what is shown for the fruitfly dataset in the RNA-seq ref-based tutorial. We will also show how a heatmap for a custom set of genes an be created.
+</p>
+<small>
+        Published: 2018-12-31T00:41:48+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Blockclust 1.1.0 Clustering</a></h2>
+<div class="meta"><time datetime="2018-12-14T13:36:25+00:00">2018-12-14T13:36:25+00:00</time></div>
+<p class="summary">Small Non-coding RNA Clustering using BlockClust</p>
+<small>
+        Published: 2018-12-14T13:36:25+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Small Non-coding RNA Clustering using BlockClust</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2018-12-14T13:36:25+00:00">2018-12-14T13:36:25+00:00</time>
+</div>
+<p class="summary">Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.
+</p>
+<small>
+        Published: 2018-12-14T13:36:25+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Network Analysis with Heinz</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/sanneabeln/">Sanne Abeln</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ChaoZhang123/">Chao Zhang</a></span><time datetime="2018-10-16T12:07:43+00:00">2018-10-16T12:07:43+00:00</time>
+</div>
+<p class="summary">Metagenomics / metatranscriptomics
+</p>
+<small>
+        Published: 2018-10-16T12:07:43+00:00<br>
+        Tags:
+        transcriptomics, metatranscriptomics, network analysis, new tutorial_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Workflow Constructed From History 'Heinz Workflow Trial Sep 11'</a></h2>
+<div class="meta"><time datetime="2018-10-11T09:07:16+00:00">2018-10-11T09:07:16+00:00</time></div>
+<p class="summary">Network analysis with Heinz</p>
+<small>
+        Published: 2018-10-11T09:07:16+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Network analysis with Heinz</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ChaoZhang123/">Chao Zhang</a></span><time datetime="2018-10-11T09:07:16+00:00">2018-10-11T09:07:16+00:00</time>
+</div>
+<p class="summary">Overview
+</p>
+<small>
+        Published: 2018-10-11T09:07:16+00:00<br>
+        Tags:
+        transcriptomics, metatranscriptomics, network analysis, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: 1: RNA-Seq reads to counts</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/">Belinda Phipson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/">Harriet Dashnow</a></span><time datetime="2018-09-23T10:38:20+00:00">2018-09-23T10:38:20+00:00</time>
+</div>
+<p class="summary">Measuring gene expression on a genome-wide scale has become common practice over the last two decades or so, with microarrays predominantly used pre-2008. With the advent of next generation sequencing technology in 2008, an increasing number of scientists use this technology to measure and understand changes in gene expression in often complex systems. As sequencing costs have decreased, using RNA-Seq to simultaneously measure the expression of tens of thousands of genes for multiple samples has never been easier. The cost of these experiments has now moved from generating the data to storing and analysing it.
+</p>
+<small>
+        Published: 2018-09-23T10:38:20+00:00<br>
+        Tags:
+        transcriptomics, collections, mouse, QC, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/workflows/transcriptomics-denovo-workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/workflows/transcriptomics-denovo-workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: De novo transcriptome reconstruction with RNA-Seq</a></h2>
+<div class="meta"><time datetime="2018-09-17T08:57:36+00:00">2018-09-17T08:57:36+00:00</time></div>
+<p class="summary">De novo transcriptome reconstruction with RNA-Seq</p>
+<small>
+        Published: 2018-09-17T08:57:36+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/workflows/transcriptomics-denovo-workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/workflows/init_workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/workflows/init_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: Tutorial CLIPseq Explorer Demultiplexed PEAKachu eCLIP Hg38 </a></h2>
+<div class="meta"><time datetime="2018-08-17T20:40:15+00:00">2018-08-17T20:40:15+00:00</time></div>
+<p class="summary">CLIP-Seq data analysis from pre-processing to motif detection</p>
+<small>
+        Published: 2018-08-17T20:40:15+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/workflows/init_workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: CLIP-Seq data analysis from pre-processing to motif detection</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dmaticzka/">Daniel Maticzka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-08-17T20:40:15+00:00">2018-08-17T20:40:15+00:00</time>
+</div>
+<p class="summary">The eCLIP data provided here is a subset of the eCLIP data of RBFOX2 from a study published by Nostrand et al. (Nostrand et al. 2016). The dataset contains the first biological replicate of RBFOX2 CLIP-seq and the input control experiment (FASTQ files). The data was changed and downsampled to reduce data processing time, consequently the data does not correspond to the original source pulled from Nostrand et al. (Nostrand et al. 2016). Also included is a text file (.txt) encompassing the chromosome sizes of hg38 and a genome annotation (.gtf) file taken from Ensembl.
+</p>
+<small>
+        Published: 2018-08-17T20:40:15+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/_workflows/workflow.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/_workflows/workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: rna-seq-viz-with-cummerbund</a></h2>
+<div class="meta"><time datetime="2017-12-07T11:07:28+00:00">2017-12-07T11:07:28+00:00</time></div>
+<p class="summary">Visualization of RNA-Seq results with CummeRbund</p>
+<small>
+        Published: 2017-12-07T11:07:28+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/_workflows/workflow.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Visualization of RNA-Seq results with CummeRbund</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bagnacan/">Andrea Bagnacani</a></span><time datetime="2017-10-16T12:59:20+00:00">2017-10-16T12:59:20+00:00</time>
+</div>
+<p class="summary">Why visualization?
+</p>
+<small>
+        Published: 2017-10-16T12:59:20+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Visualization of RNA-Seq results with CummeRbund</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bagnacan/">Andrea Bagnacani</a></span><time datetime="2017-10-16T12:59:20+00:00">2017-10-16T12:59:20+00:00</time>
+</div>
+<p class="summary">RNA-Seq analysis helps researchers annotate new genes and splice variants, and provides cell- and context-specific quantification of gene expression. RNA-Seq data, however, are complex and require both computer science and mathematical knowledge to be managed and interpreted.
+</p>
+<small>
+        Published: 2017-10-16T12:59:20+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-cummerbund/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_2_Salmon_and_DESeq2.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_2_Salmon_and_DESeq2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: sRNA Seq Step 2: Salmon And DESeq2</a></h2>
+<div class="meta"><time datetime="2017-06-29T12:29:59+00:00">2017-06-29T12:29:59+00:00</time></div>
+<p class="summary">This workflow completes the second part of the sRNA-seq tutorial from transcript quantification through differential abundance testing.</p>
+<small>
+        Published: 2017-06-29T12:29:59+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_2_Salmon_and_DESeq2.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_1_Read_preprocessing_and_removal_of_artifacts.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_1_Read_preprocessing_and_removal_of_artifacts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ New Workflow: sRNA Seq Step 1: Read Pre Processing And Removal Of Artifacts (no Grooming)</a></h2>
+<div class="meta"><time datetime="2017-06-29T12:29:59+00:00">2017-06-29T12:29:59+00:00</time></div>
+<p class="summary">This workflow completes the first part of the small RNA-seq tutorial from read pre-processing to trimming.e</p>
+<small>
+        Published: 2017-06-29T12:29:59+00:00<br>
+        Tags:
+        workflows, transcriptomics, new </small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/workflows/sRNA_seq_Step_1_Read_preprocessing_and_removal_of_artifacts.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Differential abundance testing of small RNAs</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a></span><time datetime="2017-06-29T12:29:59+00:00">2017-06-29T12:29:59+00:00</time>
+</div>
+<p class="summary">Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - e.g. microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in Drosophila melanogaster.
+</p>
+<small>
+        Published: 2017-06-29T12:29:59+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/srna/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: De novo transcriptome reconstruction with RNA-Seq</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a></span><time datetime="2017-02-19T23:07:52+00:00">2017-02-19T23:07:52+00:00</time>
+</div>
+<p class="summary">The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by Wu et al. in 2014 DOI:10.1101/gr.164830.113. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.” To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu et al.
+</p>
+<small>
+        Published: 2017-02-19T23:07:52+00:00<br>
+        Tags:
+        transcriptomics, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/de-novo/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ New Slide: Introduction to Transcriptomics</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mwolfien/">Markus Wolfien</a></span><time datetime="2016-10-05T15:28:00+00:00">2016-10-05T15:28:00+00:00</time>
+</div>
+<p class="summary">What is RNA sequencing?
+</p>
+<small>
+        Published: 2016-10-05T15:28:00+00:00<br>
+        Tags:
+        transcriptomics, new introduction_slides</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div>
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">
+<h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 New Tutorial: Reference-based RNA-Seq data analysis</a></h2>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pvanheus/">Peter van Heusden</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2016-10-05T15:28:00+00:00">2016-10-05T15:28:00+00:00</time>
+</div>
+<p class="summary">In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling Drosophila cells after the depletion of a regulatory gene.
+</p>
+<small>
+        Published: 2016-10-05T15:28:00+00:00<br>
+        Tags:
+        transcriptomics, bulk, rna-seq, collections, drosophila, QC, cyoa, new tutorial_hands_on</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
+</div></main><footer><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GTN RSS</a>
+           •
+          <a target="_blank" href="https://spdx.org/licenses/CC-BY-4.0">CC-BY 4.0</a>
+           •
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/faqs/gtn/fair_training.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">FAIR</a>
+           •
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/feeds/transcriptomics-all.i.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
+           🔗
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

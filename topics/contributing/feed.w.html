@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Contributing to the Galaxy Training Material • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Contributing to the Galaxy Training Material</a></h1><p>Recently added tutorials, slides, FAQs, and events in the contributing topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Contributing to the Galaxy Training Material</a></h1><p>Recently added tutorials, slides, FAQs, and events in the contributing topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Preparing materials for asynchronous learning: Tips</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-02T09:28:11+00:00">2023-11-02T09:28:11+00:00</time>
+</div>
 <p class="summary">The use of snippets is extremely important for asynchronous, remote learning. In this situation as students do not have a teacher immediately on hand, and likely do not have friends or colleagues sitting working with them, they will rely on these boxes to refresh their knowledge and know what to do.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Preparing materials for asynchronous learning: Self-Study</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-02T09:28:11+00:00">2023-11-02T09:28:11+00:00</time>
+</div>
 <p class="summary">In the context of remote trainings, where a teacher isn’t synchronously available, ensuring that you have questions throughout your materials for students to check their understanding is incredibly key.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Preparing materials for asynchronous learning: FAQs</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-02T09:28:11+00:00">2023-11-02T09:28:11+00:00</time>
+</div>
 <p class="summary">When you are running a remote, asynchronous lesson, you’ll want to be sure you collect all student questions and add them back to your tutorial afterwards, as FAQs. This will help other learners as they progress through the materials, and can give you a very easy URL to point your learners to if they get stuck on a particular task.
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Preparing materials for asynchronous learning: CYOA</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-02T09:28:11+00:00">2023-11-02T09:28:11+00:00</time>
+</div>
 <p class="summary">If you are running a remote training, and expect your users to follow a specific path, be certain to include the URL parameter to select the pathway to avoid student confusion. Please note that all tutorials using a CYOA should be tagged which will give you a heads up as a trainer.
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/faqs/learning-pathways.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/faqs/learning-pathways.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Defining a Learning Pathway</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2023-04-13T15:51:25+00:00">2023-04-13T15:51:25+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -76,9 +87,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/faqs/learning-pathways.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/python/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/python/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Teaching Python</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-10-19T13:04:07+00:00">2022-10-19T13:04:07+00:00</time>
+</div>
 <p class="summary">Improving student learning and out comes should always be a goal of teaching. Here we present several strategies to improve student experiences during courses by focusing on how they approach specific problems, and giving them real world applicable solutions to those problems.
 </p>
 <small>
@@ -86,9 +99,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/python/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Principles of learning and how they apply to training and teaching</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">In this tutorial we will discuss the principles of learning
 </p>
 <small>
@@ -96,9 +111,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/learning-principles/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Design and plan session, course, materials</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">Teaching and training, core elements of academic life, can be enormously
 
 </p>
@@ -107,9 +124,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/design/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/faqs/contributing_a_notebook.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/faqs/contributing_a_notebook.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Contributing a Jupyter Notebook to the GTN</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2022-09-01T12:58:15+00:00">2022-09-01T12:58:15+00:00</time>
+</div>
 <p class="summary">Problem: I have a notebook that I’d like to add to the GTN.
 </p>
 <small>
@@ -117,9 +136,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/faqs/contributing_a_notebook.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/schemas/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/schemas/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 GTN Metadata</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-02T12:10:27+00:00">2022-06-02T12:10:27+00:00</time>
+</div>
 <p class="summary">Training Materials
 </p>
 <small>
@@ -127,9 +148,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/schemas/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Adding Quizzes to your Tutorial</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-05-19T13:47:04+00:00">2022-05-19T13:47:04+00:00</time>
+</div>
 <p class="summary">Interactive quizzes can be used either alone, or with a classroom of students, to check student’s knowledge.
 </p>
 <small>
@@ -137,9 +160,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Running the GTN website online using GitPod</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-06-24T18:48:57+00:00">2021-06-24T18:48:57+00:00</time>
+</div>
 <p class="summary">If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitPod!
 </p>
 <small>
@@ -147,17 +172,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Retrieve climate data from Copernicus</a></h2>
+<div class="meta"><time datetime="2021-06-11T10:08:00+00:00">2021-06-11T10:08:00+00:00</time></div>
 <p class="summary">Retrieve climate data from Copernicus</p>
 <small>
         Published: 2021-06-11T10:08:00+00:00<br>
         Tags:
         workflows, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Updating diffs in admin training</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-06-07T08:12:11+00:00">2021-06-07T08:12:11+00:00</time>
+</div>
 <p class="summary">Updating Diffs
 </p>
 <small>
@@ -165,9 +193,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/tutorial_from_workflows.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/tutorial_from_workflows.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How can I create a tutorial skeleton from a Galaxy workflow?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-03-24T13:50:23+00:00">2021-03-24T13:50:23+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -176,9 +206,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/tutorial_from_workflows.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/icons_list.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/icons_list.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Which icons are available to use in my tutorial?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-03-24T13:50:23+00:00">2021-03-24T13:50:23+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -187,9 +219,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/faqs/icons_list.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Adding auto-generated video to your slides</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2020-10-20T11:32:49+00:00">2020-10-20T11:32:49+00:00</time>
+</div>
 <p class="summary">Video Lectures
 </p>
 <small>
@@ -197,17 +231,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/Galaxy-Workflow-MakeAFakeInput.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/Galaxy-Workflow-MakeAFakeInput.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MakeAFakeInput</a></h2>
+<div class="meta"><time datetime="2019-08-02T14:24:47+00:00">2019-08-02T14:24:47+00:00</time></div>
 <p class="summary">Creating a new tutorial</p>
 <small>
         Published: 2019-08-02T14:24:47+00:00<br>
         Tags:
         workflows, contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/workflows/Galaxy-Workflow-MakeAFakeInput.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Creating a new tutorial</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2018-06-20T10:15:12+00:00">2018-06-20T10:15:12+00:00</time>
+</div>
 <p class="summary">Galaxy is a great solution to train bioinformatics concepts:
 </p>
 <small>
@@ -215,9 +252,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Creating Slides</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2018-06-13T06:55:39+00:00">2018-06-13T06:55:39+00:00</time>
+</div>
 <p class="summary">Slides
 </p>
 <small>
@@ -225,9 +264,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Contributing with GitHub via its interface</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-06-12T14:10:14+00:00">2018-06-12T14:10:14+00:00</time>
+</div>
 <p class="summary">All the training material which you find on https://training.galaxyproject.org/training-material/ is stored on a GitHub repository (https://github.com/galaxyproject/training-material), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 </p>
 <small>
@@ -235,9 +276,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Contributing with GitHub via command-line</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-06-12T13:21:35+00:00">2018-06-12T13:21:35+00:00</time>
+</div>
 <p class="summary">Most of the content is written in GitHub Flavored Markdown with some metadata (or variables) found in YAML files. Everything is stored on a GitHub repository: https://github.com/galaxyproject/training-material.
 </p>
 <small>
@@ -245,9 +288,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Including a new topic</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-06-04T17:05:29+00:00">2018-06-04T17:05:29+00:00</time>
+</div>
 <p class="summary">Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (e.g. transcriptomics directory contains the material related to exome sequencing analysis).
 </p>
 <small>
@@ -255,9 +300,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generating PDF artefacts of the website</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-06-04T17:05:29+00:00">2018-06-04T17:05:29+00:00</time>
+</div>
 <p class="summary">The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.
 </p>
 <small>
@@ -265,9 +312,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Running the GTN website locally</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2017-06-25T22:36:01+00:00">2017-06-25T22:36:01+00:00</time>
+</div>
 <p class="summary">If you want to run the entire GTN material website locally or test your new training material you can do this!
 </p>
 <small>
@@ -275,9 +324,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Creating Interactive Galaxy Tours</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2017-06-25T22:36:01+00:00">2017-06-25T22:36:01+00:00</time>
+</div>
 <p class="summary">Galaxy is a great solution to train the bioinformatics concepts:
 </p>
 <small>
@@ -285,9 +336,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Creating content in Markdown</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2017-06-25T22:36:01+00:00">2017-06-25T22:36:01+00:00</time>
+</div>
 <p class="summary">Once we have set up the infrastructure, we are ready to write the tutorial.
 </p>
 <small>
@@ -295,9 +348,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Tools, Data, and Workflows for tutorials</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2017-06-25T22:36:01+00:00">2017-06-25T22:36:01+00:00</time>
+</div>
 <p class="summary">Building a Galaxy instance specifically for your training
 </p>
 <small>
@@ -305,9 +360,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/introduction/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Overview of the Galaxy Training Material</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2017-06-25T22:36:01+00:00">2017-06-25T22:36:01+00:00</time>
+</div>
 <p class="summary">Welcome to the Galaxy Community
 </p>
 <small>
@@ -315,9 +372,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         contributing</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/github-command-line-contribution/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Contributing with GitHub via command-line</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time>
+</div>
 <p class="summary">Steps
 </p>
 <small>
@@ -332,4 +391,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/contributing/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

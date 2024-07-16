@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Galaxy interface — Monthly Updates • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,11 +24,11 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Galaxy interface — Monthly Updates</a></h1><p>The latest materials, events, news in the GTN.</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="false">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Galaxy interface — Monthly Updates</a></h1><p>The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2024-02-05">
 <h2>February 2024</h2>
+<div class="meta"><time datetime="2024-02-05T15:13:56+00:00">2024-02-05T15:13:56+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -46,8 +48,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2022-07-06">
 <h2>July 2022</h2>
+<div class="meta"><time datetime="2022-07-06T17:14:41+00:00">2022-07-06T17:14:41+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>❓ Faqs</h4>
@@ -67,8 +70,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2022-06-02">
 <h2>June 2022</h2>
+<div class="meta"><time datetime="2022-06-02T13:08:39+00:00">2022-06-02T13:08:39+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -97,8 +101,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2022-02-28">
 <h2>February 2022</h2>
+<div class="meta"><time datetime="2022-02-28T12:17:18+00:00">2022-02-28T12:17:18+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>❓ Faqs</h4>
@@ -136,8 +141,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2022-01-14">
 <h2>January 2022</h2>
+<div class="meta"><time datetime="2022-01-14T08:54:57+00:00">2022-01-14T08:54:57+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>🖼️ Slides</h4>
@@ -157,8 +163,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2021-08-10">
 <h2>August 2021</h2>
+<div class="meta"><time datetime="2021-08-10T09:29:31+00:00">2021-08-10T09:29:31+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -190,8 +197,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2021-06-03">
 <h2>June 2021</h2>
+<div class="meta"><time datetime="2021-06-08T08:34:12+00:00">2021-06-08T08:34:12+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -223,8 +231,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2021-05-31">
 <h2>May 2021</h2>
+<div class="meta"><time datetime="2021-05-31T08:41:38+00:00">2021-05-31T08:41:38+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -244,8 +253,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2020-12-09">
 <h2>December 2020</h2>
+<div class="meta"><time datetime="2020-12-09T14:45:02+00:00">2020-12-09T14:45:02+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -271,8 +281,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2020-07-04">
 <h2>July 2020</h2>
+<div class="meta"><time datetime="2020-07-17T15:58:34+00:00">2020-07-17T15:58:34+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -307,8 +318,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2020-03-05">
 <h2>March 2020</h2>
+<div class="meta"><time datetime="2020-03-05T20:21:54+00:00">2020-03-05T20:21:54+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -328,8 +340,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2019-10-08">
 <h2>October 2019</h2>
+<div class="meta"><time datetime="2019-10-17T08:28:43+00:00">2019-10-17T08:28:43+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -352,8 +365,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2019-06-27">
 <h2>June 2019</h2>
+<div class="meta"><time datetime="2019-06-27T16:47:31+00:00">2019-06-27T16:47:31+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -379,8 +393,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2019-04-08">
 <h2>April 2019</h2>
+<div class="meta"><time datetime="2019-04-08T14:31:33+00:00">2019-04-08T14:31:33+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -400,8 +415,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2019-03-06">
 <h2>March 2019</h2>
+<div class="meta"><time datetime="2019-03-06T13:41:44+00:00">2019-03-06T13:41:44+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -421,8 +437,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2018-07-02">
 <h2>July 2018</h2>
+<div class="meta"><time datetime="2018-07-02T20:56:54+00:00">2018-07-02T20:56:54+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -442,8 +459,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2018-05-25">
 <h2>May 2018</h2>
+<div class="meta"><time datetime="2018-05-25T20:37:22+00:00">2018-05-25T20:37:22+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -463,8 +481,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2017-10-18">
 <h2>October 2017</h2>
+<div class="meta"><time datetime="2017-10-18T16:00:54+00:00">2017-10-18T16:00:54+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -484,8 +503,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2017-05-24">
 <h2>May 2017</h2>
+<div class="meta"><time datetime="2017-05-24T15:51:24+00:00">2017-05-24T15:51:24+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>🖼️ Slides</h4>
@@ -505,8 +525,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2017-02-20">
 <h2>February 2017</h2>
+<div class="meta"><time datetime="2017-02-20T22:21:58+00:00">2017-02-20T22:21:58+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -526,8 +547,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2016-09-30">
 <h2>September 2016</h2>
+<div class="meta"><time datetime="2016-09-30T12:51:14+00:00">2016-09-30T12:51:14+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -547,8 +569,9 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         </small>
 </div>
-<div xmlns="" class="entry" data-has-link="false">
+<div xmlns="" class="entry" data-has-link="false" id="https://training.galaxyproject.org/training-material/month/2016-07-11">
 <h2>July 2016</h2>
+<div class="meta"><time datetime="2016-07-11T21:11:59+00:00">2016-07-11T21:11:59+00:00</time></div>
 <p class="summary"><content xmlns="http://www.w3.org/2005/Atom" type="xhtml">
       <div xmlns="http://www.w3.org/1999/xhtml">
         <h4>📚 Tutorials</h4>
@@ -575,4 +598,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/feeds/galaxy-interface-month.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

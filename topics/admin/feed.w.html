@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Galaxy Server administration • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Galaxy Server administration</a></h1><p>Recently added tutorials, slides, FAQs, and events in the admin topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Galaxy Server administration</a></h1><p>Recently added tutorials, slides, FAQs, and events in the admin topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/poll-ssa/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/poll-ssa/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Administrator Time Burden and Technology Usage</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/vladvisan/">Vlad Visan</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/vladvisan/">Vlad Visan</a></span><time datetime="2024-07-10T18:44:14+00:00">2024-07-10T18:44:14+00:00</time>
+</div>
 <p class="summary">##Context
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, deploying, maintenance, survey</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/poll-ssa/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/data-source-with-pulsar.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/data-source-with-pulsar.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Using data source tools with Pulsar</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martinwolst/">Martin Wolstencroft</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martinwolst/">Martin Wolstencroft</a></span><time datetime="2024-01-19T19:50:15+00:00">2024-01-19T19:50:15+00:00</time>
+</div>
 <p class="summary">Data source tools such as UCSC Main will fail if Pulsar is the default destination.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/data-source-with-pulsar.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-update-22.05.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-update-22.05.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Updating from 22.01 to 23.0 with Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-01T17:37:12+00:00">2023-11-01T17:37:12+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -56,9 +63,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-update-22.05.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/python-memory-leaks.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/python-memory-leaks.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Debugging Memory Leaks</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-09-22T09:44:14+00:00">2023-09-22T09:44:14+00:00</time>
+</div>
 <p class="summary">memray is a great memory profiler for debugging memory issues.
 </p>
 <small>
@@ -66,9 +75,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/python-memory-leaks.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-ui-slow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-ui-slow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Galaxy UI is slow</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">There is a great Tutorial from @mvdbeek which we recommend you follow.
 </p>
 <small>
@@ -76,9 +87,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-ui-slow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-missing.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-missing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Tool missing from Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">First, restart Galaxy and watch the log for lines like:
 </p>
 <small>
@@ -86,9 +99,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-missing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-memory-error.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-memory-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Debugging tool memory errors</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">Often the tool output contains one of:
 </p>
 <small>
@@ -96,9 +111,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-memory-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-error.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Debugging tool errors</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">Tool stdout/stderr is available in UI under “i” icon on history dataset
 </p>
 <small>
@@ -106,9 +123,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-tool-error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-blank-screen.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-blank-screen.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Blank page or no CSS/JavaScript</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">This generally means that serving of static content is broken:
 </p>
 <small>
@@ -116,9 +135,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-blank-screen.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/database-slow-query.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/database-slow-query.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Database Issues</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-05-11T13:25:10+00:00">2023-05-11T13:25:10+00:00</time>
+</div>
 <p class="summary">For slow queries, start with EXPLAIN ANALYZE
 </p>
 <small>
@@ -126,9 +147,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/database-slow-query.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/sentry/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/sentry/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Monitoring Galaxy and Pulsar with Sentry</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a></span><time datetime="2023-04-19T12:33:06+00:00">2023-04-19T12:33:06+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -136,9 +159,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/sentry/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/mapping_by_user.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/mapping_by_user.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Mapping Jobs to Specific Storage By User</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">It is possible to map your jobs to use specific storage backends based on user! If you have e.g. specific user groups that need their data stored separately from other users, for whatever political reasons, then in your dynamic destination you can do something like:
 </p>
 <small>
@@ -146,9 +171,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/mapping_by_user.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/maintain_fail-users-jobs.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/maintain_fail-users-jobs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Failing all jobs from a specific user</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">This command will let you quickly fail every job from the user ‘service-account’ (replace with your preferred user)
 </p>
 <small>
@@ -156,9 +183,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/maintain_fail-users-jobs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/library-permissions.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/library-permissions.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Library Permission Issues</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">When running setup-data-libraries it imports the library with the permissions of the admin user, rather locked down to the account that handled the importing.
 </p>
 <small>
@@ -166,9 +195,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/library-permissions.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-commit.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-commit.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Time to git commit</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -177,9 +208,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-commit.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-attributes.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-attributes.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Using Git With Ansible Vaults</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">When looking at git log to see what you changed, you cannot easily look into
 
 </p>
@@ -188,9 +221,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-attributes.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/byobu-shortcuts.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/byobu-shortcuts.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Opening a split screen in byobu</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">Opening a split screen in byobu
 </p>
 <small>
@@ -198,9 +233,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/byobu-shortcuts.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_see_inventory.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_see_inventory.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How do I see what variables are set for a host?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -209,9 +246,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_see_inventory.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Customizing the look of Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/">Laila Los</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/">Laila Los</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
 
 </p>
@@ -220,9 +259,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Deploying a Beacon v1 in Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">This tutorial will guide you through setting up a GA4GH Beacon!
 </p>
 <small>
@@ -230,9 +271,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ga4gh, beacon, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/beacon/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization-manual/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization-manual/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Customizing the look of Galaxy (Manual)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/">Laila Los</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ElectronicBlueberry/">Laila Los</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">Customizing your Galaxy instance makes it more recognizable at a glance, and can help communicate its purpose to its users.
 
 </p>
@@ -241,9 +284,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/customization-manual/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Server Maintenance: Cleanup, Backup, and Restoration</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">Keeping your Galaxy cleaned up is an important way to retain space, especially since for many groups that is the
 
 </p>
@@ -252,9 +297,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, deploying, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Setting up Celery Workers for Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></span><time datetime="2023-04-16T09:02:56+00:00">2023-04-16T09:02:56+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -262,9 +309,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Reference Data with Data Managers</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a></span><time datetime="2023-03-17T11:29:55+00:00">2023-03-17T11:29:55+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -272,9 +321,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Deploying Tailscale/Headscale for private mesh networking</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-09-21T14:40:57+00:00">2022-09-21T14:40:57+00:00</time>
+</div>
 <p class="summary">Tailscale makes secure networking easy, it really is like magic. If you’ve used wireguard before, you know it takes a bit to setup and some configuration if you need to do anything fancy.
 </p>
 <small>
@@ -282,9 +333,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, wireguard, networking</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard-headscale/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Deploying Wireguard for private mesh networking</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-09-21T08:23:59+00:00">2022-09-21T08:23:59+00:00</time>
+</div>
 <p class="summary">In this tutorial we will briefly cover what Wireguard is and how you can leverage it for your needs. This will not make you an expert on Wireguard but will give you the tools you need in order to setup a local Wireguard network.
 </p>
 <small>
@@ -292,9 +345,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, wireguard, networking</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/wireguard/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-gat-path.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-gat-path.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Galaxy Admin Training Path</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-07-22T14:24:02+00:00">2022-07-22T14:24:02+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -303,9 +358,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/git-gat-path.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy and Celery</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></span><time datetime="2022-07-16T17:42:54+00:00">2022-07-16T17:42:54+00:00</time>
+</div>
 <p class="summary">Can you eat it?
 </p>
 <small>
@@ -313,9 +370,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 How I learned to stop worrying and love the systemd</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-07-06T17:13:50+00:00">2022-07-06T17:13:50+00:00</time>
+</div>
 <p class="summary">Many linux sysadmins with years and years of experience bemoan systemd (“it’s infecting everything! Now it wants to mess with time? And DNS???”) and journalctl (“unix was supposed to be about files!”) and while those are fair complaints and make systemd and friends wildly more opaque than traditional SysV and logging to files, there are some benefits that can be obtained, and may be interesting even to the wise old admins. There is a lot of convenience in systemd that can make the tradeoffs worth it.
 </p>
 <small>
@@ -323,9 +382,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, systemd</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/stop-worrying-love-systemd/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-how-many-mules.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-how-many-mules.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How many mules?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
 </p>
 <small>
@@ -333,9 +394,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/galaxy-how-many-mules.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Customising the welcome page</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -344,9 +407,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/faqs/custom-welcome.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_yaml.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_yaml.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Is YAML sensitive to True/true/False/false</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">By this reference, YAML doesn’t really care:
 </p>
 <small>
@@ -354,9 +419,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_yaml.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-properties.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-properties.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How do I know what I can do with a role? What variables are available?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, galaxyproject) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.
 </p>
 <small>
@@ -364,9 +431,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-properties.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-prefix.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-prefix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What is the difference between the roles with `role:` prefix and without?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">The bare role name is just simplified syntax for the roles, you could equally specifiy role: <name> every time but it’s only necessary if you want to set additional variables like become_user
 </p>
 <small>
@@ -374,9 +443,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_role-prefix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_error-no-hosts-matched.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_error-no-hosts-matched.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Error: "skipping: no hosts matched"</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">There can be multiple reasons this happens, so we’ll step through all of them.
 
 </p>
@@ -385,9 +456,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_error-no-hosts-matched.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_diff.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_diff.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What if you forget `--diff`?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">If you forget to use --diff, it is not easy to see what has changed. Some modules like the copy and template modules have a backup option. If you set this option, then it will keep a backup copy next to the destination file.
 </p>
 <small>
@@ -395,9 +468,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_diff.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_define-once.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_define-once.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Define once, reference many times</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -406,9 +481,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_define-once.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible-connection.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible-connection.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Variable connection</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-06-07T12:09:49+00:00">2022-06-07T12:09:49+00:00</time>
+</div>
 <p class="summary">When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named my_hosts, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group all). There is a precedence order, but then these variables are available for roles and tasks to consume.
 </p>
 <small>
@@ -416,9 +493,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible-connection.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/diffs.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/diffs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How to read a Diff</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-03-01T10:29:25+00:00">2022-03-01T10:29:25+00:00</time>
+</div>
 <p class="summary">If you haven’t worked with diffs before, this can be something quite new or different.
 </p>
 <small>
@@ -426,9 +505,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/diffs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Performant Uploads with TUS</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2022-03-01T10:29:25+00:00">2022-03-01T10:29:25+00:00</time>
+</div>
 <p class="summary">Here you’ll learn to setup TUS an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading.
 </p>
 <small>
@@ -436,9 +517,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tus/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Enable upload via FTP</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2021-06-18T13:52:44+00:00">2021-06-18T13:52:44+00:00</time>
+</div>
 <p class="summary">This tutorial will guide you to setup an File Transfer Protocol (FTP) server so galaxy users can use it to upload large files. Indeed, as written on the galaxy community hub, uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.
 </p>
 <small>
@@ -446,9 +529,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, data, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ftp/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/upgrading/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/upgrading/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Upgrading Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2021-06-08T09:15:42+00:00">2021-06-08T09:15:42+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -456,9 +541,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/upgrading/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/missed-something.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/missed-something.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Got lost along the way?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-06-07T08:12:11+00:00">2021-06-07T08:12:11+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -467,9 +554,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/missed-something.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/install_tool.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/install_tool.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Install tools via the Admin UI</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-03-24T13:50:23+00:00">2021-03-24T13:50:23+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -478,9 +567,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/install_tool.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_local.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_local.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Running Ansible on your remote machine</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-03-24T13:50:23+00:00">2021-03-24T13:50:23+00:00</time>
+</div>
 <p class="summary">It is possible to have ansible installed on the remote machine and run it there, not just from your local machine connecting to the remote machine.
 </p>
 <small>
@@ -488,9 +579,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/ansible_local.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/faqs/admin-testing.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/admin-testing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Operating system compatibility</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-03-24T13:50:23+00:00">2021-03-24T13:50:23+00:00</time>
+</div>
 <p class="summary">These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.
 </p>
 <small>
@@ -498,9 +591,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/faqs/admin-testing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2021/03/01/gat.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2021/03/01/gat.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 Galaxy Admin Training Success</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-03-01T00:00:00+00:00">2021-03-01T00:00:00+00:00</time>
+</div>
 <p class="summary">The Galaxy Admins and the GTN instructors community has just run the largest-ever Galaxy Admin training event.
 </p>
 <small>
@@ -508,9 +603,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, admin, gat, event, pandemic, remote-teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2021/03/01/gat.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mapping Jobs to Destinations using TPV</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></span><time datetime="2021-01-17T11:37:17+00:00">2021-01-17T11:37:17+00:00</time>
+</div>
 <p class="summary">This tutorial heavily builds on the Connecting Galaxy to a compute cluster and it’s expected you have completed this tutorial first.
 </p>
 <small>
@@ -518,9 +615,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, jobs, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Storage Management</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-01-14T08:41:22+00:00">2021-01-14T08:41:22+00:00</time>
+</div>
 <p class="summary">Data Libraries
 </p>
 <small>
@@ -528,9 +627,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, storage, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Data Libraries</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2021-01-14T08:41:22+00:00">2021-01-14T08:41:22+00:00</time>
+</div>
 <p class="summary">Data libraries are a great way to provide structured repositories of data to
 
 </p>
@@ -539,9 +640,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, storage, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/data-library/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/apptainer/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/apptainer/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Use Apptainer containers for running Galaxy jobs</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/torfinnnome/">Torfinn Nome</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/torfinnnome/">Torfinn Nome</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></span><time datetime="2021-01-08T14:43:22+00:00">2021-01-08T14:43:22+00:00</time>
+</div>
 <p class="summary">In this tutorial you will learn how to configure Galaxy to run jobs using Apptainer containers provided by the BioContainers community.
 
 </p>
@@ -550,9 +653,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, jobs, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/apptainer/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Reference Data with CVMFS without Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2020-06-17T17:37:46+00:00">2020-06-17T17:37:46+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -560,9 +665,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs-manual/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Interactive Tools</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/">Estelle Ancelet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/">Estelle Ancelet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2020-03-02T18:20:57+00:00">2020-03-02T18:20:57+00:00</time>
+</div>
 <p class="summary">History
 </p>
 <small>
@@ -570,9 +677,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, interactive-tools</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Running Jobs on Remote Resources with Pulsar</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2020-02-28T19:24:42+00:00">2020-02-28T19:24:42+00:00</time>
+</div>
 <p class="summary">What are heterogenous compute resources?
 </p>
 <small>
@@ -580,9 +689,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, jobs, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Interactive Tools</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2020-02-27T15:21:14+00:00">2020-02-27T15:21:14+00:00</time>
+</div>
 <p class="summary">Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is Jupyter Notebook. Galaxy Interactive Tools are similar in purpose to Galaxy Interactive Environments (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy’s job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
 </p>
 <small>
@@ -590,9 +701,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, interactive-tools</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Training Infrastructure as a Service (TIaaS)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2020-02-12T14:46:40+00:00">2020-02-12T14:46:40+00:00</time>
+</div>
 <p class="summary">Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS).
 
 </p>
@@ -601,9 +714,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, training, jobs, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Installation with Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2020-02-04T13:39:23+00:00">2020-02-04T13:39:23+00:00</time>
+</div>
 <p class="summary">Install PostgreSQL & Galaxy extensions
 </p>
 <small>
@@ -611,9 +726,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, deploying, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Automation with Jenkins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-08-06T13:56:16+00:00">2019-08-06T13:56:16+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -621,9 +738,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, automation</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/jenkins/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Managing Galaxy on Kubernetes</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/almahmoud/">Alex Mahmoud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/almahmoud/">Alex Mahmoud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></span><time datetime="2019-07-02T18:24:39+00:00">2019-07-02T18:24:39+00:00</time>
+</div>
 <p class="summary">Managing Galaxy on Kubernetes
 </p>
 <small>
@@ -631,9 +750,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, kubernetes</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Installation on Kubernetes</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/almahmoud/">Alex Mahmoud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/afgane/">Enis Afgan</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nuwang/">Nuwan Goonasekera</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/almahmoud/">Alex Mahmoud</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></span><time datetime="2019-07-02T18:24:39+00:00">2019-07-02T18:24:39+00:00</time>
+</div>
 <p class="summary">Galaxy Helm Chart
 </p>
 <small>
@@ -641,9 +762,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, kubernetes</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Monitoring with gxadmin</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-04-26T16:41:13+00:00">2019-04-26T16:41:13+00:00</time>
+</div>
 <p class="summary">Database Queries
 </p>
 <small>
@@ -651,9 +774,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, monitoring, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/general-monitoring/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/general-monitoring/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Monitoring</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-04-26T16:41:13+00:00">2019-04-26T16:41:13+00:00</time>
+</div>
 <p class="summary">Manage Jobs
 </p>
 <small>
@@ -661,9 +786,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/general-monitoring/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Reference Data with CVMFS</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-04-26T16:41:13+00:00">2019-04-26T16:41:13+00:00</time>
+</div>
 <p class="summary">Built in Data
 </p>
 <small>
@@ -671,9 +798,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cloudbursting/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cloudbursting/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy on the Cloud</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2019-01-31T19:06:48+00:00">2019-01-31T19:06:48+00:00</time>
+</div>
 <p class="summary">All these Clouds
 </p>
 <small>
@@ -681,9 +810,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cloudbursting/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/empathy/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/empathy/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Empathy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2019-01-31T16:14:13+00:00">2019-01-31T16:14:13+00:00</time>
+</div>
 <p class="summary">Part of the Job
 </p>
 <small>
@@ -691,9 +822,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/empathy/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reports/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reports/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Monitoring with Reports</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-31T15:17:51+00:00">2019-01-31T15:17:51+00:00</time>
+</div>
 <p class="summary">The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 </p>
 <small>
@@ -701,9 +834,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, monitoring, git-gat, broken</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reports/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Server Maintenance: Cleanup, Backup, and Restoration</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-31T15:17:51+00:00">2019-01-31T15:17:51+00:00</time>
+</div>
 <p class="summary">Server Maintenance
 </p>
 <small>
@@ -711,9 +846,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, deploying, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/backup-cleanup/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Monitoring with Telegraf and Grafana</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-31T15:17:51+00:00">2019-01-31T15:17:51+00:00</time>
+</div>
 <p class="summary">Telegraf, InfluxDB, and Grafana
 </p>
 <small>
@@ -721,9 +858,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, monitoring, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Monitoring with Telegraf and Grafana</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-31T15:17:51+00:00">2019-01-31T15:17:51+00:00</time>
+</div>
 <p class="summary">Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 </p>
 <small>
@@ -731,9 +870,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, monitoring, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/monitoring/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 External Authentication</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-29T19:10:52+00:00">2019-01-29T19:10:52+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -741,9 +882,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, authentication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Installation with Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2019-01-28T10:40:06+00:00">2019-01-28T10:40:06+00:00</time>
+</div>
 <p class="summary">This tutorial assumes you have some familiarity with Ansible and are comfortable with writing and running playbooks.  If not, please consider following our Ansible Tutorial first.
 </p>
 <small>
@@ -751,9 +894,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, deploying, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Monitoring with gxadmin</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-28T04:20:16+00:00">2019-01-28T04:20:16+00:00</time>
+</div>
 <p class="summary">We will just briefly cover the features available in gxadmin, there are lots of queries that may or may not be useful for your Galaxy instance and you will have to read the documentation before using them.
 </p>
 <small>
@@ -761,9 +906,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, monitoring, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/gxadmin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Storage Management</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-28T04:12:36+00:00">2019-01-28T04:12:36+00:00</time>
+</div>
 <p class="summary">Object Store Plugins
 </p>
 <small>
@@ -771,9 +918,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, storage</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Distributed Object Storage</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a></span><time datetime="2019-01-28T04:12:36+00:00">2019-01-28T04:12:36+00:00</time>
+</div>
 <p class="summary">You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.
 </p>
 <small>
@@ -781,9 +930,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, storage</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/object-store/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ External Authentication</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">Auth Mechanisms supported
 </p>
 <small>
@@ -791,9 +942,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, authentication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/external-auth/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/database/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/database/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galactic Database</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">Galactic Database
 </p>
 <small>
@@ -801,9 +954,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/database/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Reference Genomes in Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -811,9 +966,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/production/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/production/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Gearing towards production</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abdulrahmanazab/">Abdulrahman Azab</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abdulrahmanazab/">Abdulrahman Azab</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">Production server
 </p>
 <small>
@@ -821,9 +978,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/production/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/systemd-supervisor/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/systemd-supervisor/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Controlling Galaxy with systemd or Supervisor</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">class: special
 </p>
 <small>
@@ -831,9 +990,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/systemd-supervisor/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/troubleshooting/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/troubleshooting/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Troubleshooting</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">In system administration…
 </p>
 <small>
@@ -841,9 +1002,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/troubleshooting/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/uwsgi/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/uwsgi/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ uWSGI</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2019-01-28T04:08:04+00:00">2019-01-28T04:08:04+00:00</time>
+</div>
 <p class="summary">What is uWSGI?
 </p>
 <small>
@@ -851,9 +1014,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/uwsgi/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Running Jobs on Remote Resources with Pulsar</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/">Mira Kuntz</a></span><time datetime="2019-01-28T04:02:36+00:00">2019-01-28T04:02:36+00:00</time>
+</div>
 <p class="summary">Pulsar is the Galaxy Project’s remote job running system. It was written by John Chilton (@jmchilton) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.
 </p>
 <small>
@@ -861,9 +1026,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, jobs, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Tool Management with Ephemeris</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/cat-bro/">Catherine Bromhead</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/cat-bro/">Catherine Bromhead</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2019-01-27T22:09:32+00:00">2019-01-27T22:09:32+00:00</time>
+</div>
 <p class="summary">Galaxy tools
 </p>
 <small>
@@ -871,9 +1038,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, tools, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Tool Management with Ephemeris</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2019-01-27T22:09:32+00:00">2019-01-27T22:09:32+00:00</time>
+</div>
 <p class="summary">This tutorial will introduce you to one of Galaxy’s associated projects - Ephemeris. Ephemeris is a small Python library and set of scripts for managing the bootstrapping of Galaxy plugins - tools, index data, and workflows. It aims to help automate, and limit the quantity of manual actions admins have to do in order to maintain a Galaxy instance.
 </p>
 <small>
@@ -881,9 +1050,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, tools, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/tool-management/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Reference Data with CVMFS</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2019-01-27T16:50:26+00:00">2019-01-27T16:50:26+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -892,9 +1063,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/cvmfs/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Terraform</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-10-27T07:51:23+00:00">2018-10-27T07:51:23+00:00</time>
+</div>
 <p class="summary">Why Terraform
 </p>
 <small>
@@ -902,9 +1075,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, terraform, deploying, cloud</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Deploying a compute cluster in OpenStack via Terraform</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-10-27T07:51:23+00:00">2018-10-27T07:51:23+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -912,9 +1087,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, terraform, deploying, cloud</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/terraform/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-10-27T07:51:23+00:00">2018-10-27T07:51:23+00:00</time>
+</div>
 <p class="summary">Configuration Management
 </p>
 <small>
@@ -922,9 +1099,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Ansible</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2018-07-11T08:27:13+00:00">2018-07-11T08:27:13+00:00</time>
+</div>
 <p class="summary">Overview
 </p>
 <small>
@@ -932,9 +1111,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, ansible</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Connecting Galaxy to a compute cluster</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-01-07T13:46:01+00:00">2018-01-07T13:46:01+00:00</time>
+</div>
 <p class="summary">Galaxy Job Configuration
 </p>
 <small>
@@ -942,9 +1123,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, jobs, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Connecting Galaxy to a compute cluster</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-01-07T13:46:01+00:00">2018-01-07T13:46:01+00:00</time>
+</div>
 <p class="summary">The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
 
 </p>
@@ -953,9 +1136,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin, jobs, ansible, git-gat</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/users-groups-quotas/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/users-groups-quotas/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ User, Role, Group, Quota, and Authentication managment</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-01-07T13:28:18+00:00">2018-01-07T13:28:18+00:00</time>
+</div>
 <p class="summary">Users
 </p>
 <small>
@@ -963,9 +1148,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/users-groups-quotas/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/advanced-galaxy-customisation/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/advanced-galaxy-customisation/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Advanced customisation of a Galaxy instance</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a></span><time datetime="2017-06-27T19:49:22+00:00">2017-06-27T19:49:22+00:00</time>
+</div>
 <p class="summary">Setup
 </p>
 <small>
@@ -973,9 +1160,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/advanced-galaxy-customisation/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/introduction/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy from an administrator's point of view</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/valentinmarcon/">Valentin Marcon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/valentinmarcon/">Valentin Marcon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/">Nate Coraor</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time>
+</div>
 <p class="summary">
 </p>
 <small>
@@ -983,9 +1172,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/galaxy-docker/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/galaxy-docker/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Docker and Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2016-09-29T17:43:47+00:00">2016-09-29T17:43:47+00:00</time>
+</div>
 <p class="summary">Preparing Admin Training VMs
 </p>
 <small>
@@ -993,9 +1184,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         admin</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/galaxy-docker/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/admin/tutorials/database-schema/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/database-schema/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Database schema</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2016-07-20T11:10:47+00:00">2016-07-20T11:10:47+00:00</time>
+</div>
 <p class="summary">For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 </p>
 <small>
@@ -1010,4 +1203,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/admin/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

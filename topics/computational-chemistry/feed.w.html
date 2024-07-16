@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Computational chemistry • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,21 +24,24 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Computational chemistry</a></h1><p>Recently added tutorials, slides, FAQs, and events in the computational-chemistry topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Computational chemistry</a></h1><p>Recently added tutorials, slides, FAQs, and events in the computational-chemistry topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Data management in Medicinal Chemistry workflow</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a></span><time datetime="2024-01-08T09:55:32+00:00">2024-01-08T09:55:32+00:00</time>
+</div>
 <p class="summary">Workflow includes data import, format conversion and some basic medicinal chemistry analyses.</p>
 <small>
         Published: 2024-01-08T09:55:32+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Data management in Medicinal Chemistry</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-01-08T09:55:32+00:00">2024-01-08T09:55:32+00:00</time>
+</div>
 <p class="summary">The development of medicinal chemistry is advancing very rapidly. Big pharmaceutical companies, research institutes and universities are working on ground-breaking solutions to help patients combat all kinds of diseases. During that development process, tons of data are generated – not only from the lab environment but also from clinical trials. Given that the discovery of more potent, safer and cheaper drugs is the ultimate goal of all research bodies, we should all focus on making the data we gather FAIR: Findable, Accessible, Interoperable, and Reusable to push the boundaries of drug development even further.
 </p>
 <small>
@@ -44,27 +49,33 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry, fair, data-management, medicinal-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Analysis using MDAnalysis</a></h2>
-<p class="authors"><i>By: </i><a href="">Chris Barnett</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Chris Barnett</a></span><time datetime="2022-03-07T09:36:39+00:00">2022-03-07T09:36:39+00:00</time>
+</div>
 <p class="summary">Analysis of MD trajectories using MDAnalysis, generating a Ramachandran plot and various timeseries.</p>
 <small>
         Published: 2022-03-07T09:36:39+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/advanced_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Zauberkugel</a></h2>
-<p class="authors"><i>By: </i><a href="">Aurélien F. A. Moumbock</a>, <a href="">Albert-Ludwigs-Universität Freiburg</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/aurelienmoumbock/">Aurélien F. A. Moumbock</a>, <a href="">Albert-Ludwigs-Universität Freiburg</a></span><time datetime="2022-02-15T13:56:40+00:00">2022-02-15T13:56:40+00:00</time>
+</div>
 <p class="summary">Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</p>
 <small>
         Published: 2022-02-15T13:56:40+00:00<br>
         Tags:
         workflows, computational-chemistry, cheminformatics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Protein target prediction of a bioactive ligand with Align-it and ePharmaLib</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/aurelienmoumbock/">Aurélien F. A. Moumbock</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/aurelienmoumbock/">Aurélien F. A. Moumbock</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2022-02-15T13:56:40+00:00">2022-02-15T13:56:40+00:00</time>
+</div>
 <p class="summary">Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich (Ehrlich 1909). According to the International Union of Pure and Applied Chemistry (IUPAC), a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” (Wermuth et al. 1998). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model (Moumbock et al. 2019). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets (Steindl et al. 2006).
 </p>
 <small>
@@ -72,25 +83,29 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/zauberkugel/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MD protein-ligand workflow (from PDB structure)</a></h2>
+<div class="meta"><time datetime="2020-05-20T17:27:02+00:00">2020-05-20T17:27:02+00:00</time></div>
 <p class="summary">High Throughput Molecular Dynamics and Analysis</p>
 <small>
         Published: 2020-05-20T17:27:02+00:00<br>
         Tags:
         workflows, computational-chemistry, cheminformatics, moleculardynamics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/analysis_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/analysis_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Workflow constructed from history 'Hsp90-MDAnalysis'</a></h2>
+<div class="meta"><time datetime="2020-05-20T17:27:02+00:00">2020-05-20T17:27:02+00:00</time></div>
 <p class="summary">High Throughput Molecular Dynamics and Analysis</p>
 <small>
         Published: 2020-05-20T17:27:02+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/workflows/analysis_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 High Throughput Molecular Dynamics and Analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/">Tharindu Senapathi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/">Tharindu Senapathi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2020-05-20T17:27:02+00:00">2020-05-20T17:27:02+00:00</time>
+</div>
 <p class="summary">This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to the N-terminal domain of Hsp90 (heat shock protein 90).
 </p>
 <small>
@@ -98,17 +113,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring</a></h2>
+<div class="meta"><time datetime="2020-03-27T13:26:13+00:00">2020-03-27T13:26:13+00:00</time></div>
 <p class="summary">Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring</p>
 <small>
         Published: 2020-03-27T13:26:13+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2020-03-27T13:26:13+00:00">2020-03-27T13:26:13+00:00</time>
+</div>
 <p class="summary">This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described in our dedicated site.
 </p>
 <small>
@@ -116,17 +134,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry, covid19, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CTB Workflow</a></h2>
+<div class="meta"><time datetime="2019-10-19T00:16:01+00:00">2019-10-19T00:16:01+00:00</time></div>
 <p class="summary">CTB Unittest workflow</p>
 <small>
         Published: 2019-10-19T00:16:01+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Protein-ligand docking</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2019-10-19T00:16:01+00:00">2019-10-19T00:16:01+00:00</time>
+</div>
 <p class="summary">Cheminformatics is the use of computational techniques and information about molecules to solve problems in chemistry. This involves a number of steps: retrieving data on chemical compounds, sorting data for properties which are of interest, and extracting new information. This tutorial will provide a brief overview of all of these, centered around protein-ligand docking, a molecular modelling technique. The purpose of protein-ligand docking is to find the optimal binding between a small molecule (ligand) and a protein. It is generally applied to the drug discovery and development process with the aim of finding a potential drug candidate. First, a target protein is identified. This protein is usually linked to a disease and is known to bind small molecules. Second, a ‘library’ of possible ligands is assembled. Ligands are small molecules that bind to a protein and may interfere with protein function. Each of the compounds in the library is then ‘docked’ into the protein to find the optimal binding position and energy.
 </p>
 <small>
@@ -134,41 +155,47 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ NAMD MD From CHARMM GUI</a></h2>
+<div class="meta"><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time></div>
 <p class="summary">Running molecular dynamics simulations using NAMD</p>
 <small>
         Published: 2019-06-03T07:41:49+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow_charmmgui.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MD NAMD</a></h2>
+<div class="meta"><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time></div>
 <p class="summary">Running molecular dynamics simulations using NAMD</p>
 <small>
         Published: 2019-06-03T07:41:49+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GROMACS Training Workflow</a></h2>
+<div class="meta"><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time></div>
 <p class="summary">Running molecular dynamics simulations using GROMACS</p>
 <small>
         Published: 2019-06-03T07:41:49+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Simple Analysis</a></h2>
+<div class="meta"><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time></div>
 <p class="summary">Analysis of molecular dynamics simulations</p>
 <small>
         Published: 2019-06-03T07:41:49+00:00<br>
         Tags:
         workflows, computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Setting up molecular systems</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/">Nadia Goué</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/">Nadia Goué</a></span><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time>
+</div>
 <p class="summary">In this tutorial, we’ll cover the basics of molecular modelling by setting up a protein in complex with a ligand and uploading the structure to Galaxy. This tutorial will make use of CHARMM-GUI. Please note that the follow-up to this tutorial (located in Running molecular dynamics simulations using NAMD) requires access to NAMD Galaxy tools, which can be accessed using the Docker container but are currently not available on any public Galaxy server.
 </p>
 <small>
@@ -176,9 +203,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/setting-up-molecular-systems/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Running molecular dynamics simulations using GROMACS</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time>
+</div>
 <p class="summary">Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 </p>
 <small>
@@ -186,9 +215,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Analysis of molecular dynamics simulations</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/">Tharindu Senapathi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/">Nadia Goué</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/chrisbarnettster/">Christopher Barnett</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tsenapathi/">Tharindu Senapathi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nagoue/">Nadia Goué</a></span><time datetime="2019-06-03T07:41:49+00:00">2019-06-03T07:41:49+00:00</time>
+</div>
 <p class="summary">Molecular dynamics simulations return highly complex data. The Cartesian positions of each atom of the system (thousands or even millions) are recorded at every time step of the trajectory; this may again be thousands to millions of steps in length. Therefore, some kind of further analysis is needed to extract useful information from the data.
 </p>
 <small>
@@ -203,4 +234,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

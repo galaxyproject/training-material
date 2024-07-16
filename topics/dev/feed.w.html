@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Development in Galaxy • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Development in Galaxy</a></h1><p>Recently added tutorials, slides, FAQs, and events in the dev topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Development in Galaxy</a></h1><p>Recently added tutorials, slides, FAQs, and events in the dev topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Creation of an interactive Galaxy tools table for your community</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2024-03-13T15:41:48+00:00">2024-03-13T15:41:48+00:00</time>
+</div>
 <p class="summary">Galaxy offers thousands of tools. They are developed across various GitHub repositories. Furthermore, Galaxy also embraces granular implementation of software tools as sub-modules. In practice, this means that tool suites are separated into Galaxy tools, also known as wrappers, that capture their component operations. Some key examples of suites include Mothur and OpenMS, which translate to tens and even hundreds of Galaxy tools.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev, Community, SIG</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Adding and updating best practice metadata for Galaxy tools using the bio.tools registry</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/supernord/">Johan Gustafsson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/">Paul Zierep</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/supernord/">Johan Gustafsson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/paulzierep/">Paul Zierep</a></span><time datetime="2024-03-06T08:37:45+00:00">2024-03-06T08:37:45+00:00</time>
+</div>
 <p class="summary">Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as bio.tools.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Writing Automated Tests for Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a></span><time datetime="2022-07-15T10:22:17+00:00">2022-07-15T10:22:17+00:00</time>
+</div>
 <p class="summary">The Galaxy code base contains thousands of tests that include tests of different types (unit vs. functional vs. end-to-end; client vs. backend, etc.) that are supported by a variety of testing frameworks and libraries. In this tutorial, we will offer a small, yet representative sample of the types of tests you might write, as well as the concepts and issues you may need to be familiar with when writing tests for Galaxy code, whether as part of a new feature you are implementing, or as a standalone contribution to Galaxy’s testing code.
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/writing_tests/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Scripting Galaxy using the API and BioBlend</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2022-06-23T11:09:29+00:00">2022-06-23T11:09:29+00:00</time>
+</div>
 <p class="summary">BioBlend (Sloggett et al. 2013) is a Python library to enable simple interaction with Galaxy (Afgan et al. 2018) via the command line or scripts.
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Interactive Tools</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/">Estelle Ancelet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/">Yvan Le Bras</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/">Cameron Hyde</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/">Lain Pavot</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/eancelet/">Estelle Ancelet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/">Yvan Le Bras</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/neoformit/">Cameron Hyde</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Lain-inrae/">Lain Pavot</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-03-02T09:20:19+00:00">2022-03-02T09:20:19+00:00</time>
+</div>
 <p class="summary"><!–
 </p>
 <small>
@@ -75,9 +86,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/selenium_error.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/selenium_error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ When I try to run a Selenium test, I get an error</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/">Assunta DeSanto</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/">Assunta DeSanto</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">If you get the following error:
 </p>
 <small>
@@ -85,9 +98,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/selenium_error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/replace_manual_install.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/replace_manual_install.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Is the ToolFactory a complete replacement for manual tool building?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -96,9 +111,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/replace_manual_install.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/planemo_multiple.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/planemo_multiple.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Only one Planemo test runs at a time. Why doesn't the server allow more than one at once?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -107,9 +124,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/planemo_multiple.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/no_tests_no_yarn.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/no_tests_no_yarn.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ I cannot run client tests because yarn is not installed.</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Make sure you have executed scripts/common_startup.sh and have activated the virtual environment (. .venv/vin/activate) in your current terminal session.
 </p>
 <small>
@@ -117,9 +136,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/faqs/no_tests_no_yarn.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/local_install.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/local_install.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do I need that big (~5GB!) complicated Docker thing - can I just install the ToolFactory into our local galaxy server from the toolshed?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">You can but it can’t really be very useful. The ToolFactory is a Galaxy tool, but it installs newly generated tools automatically into the local Galaxy server. This is not normally possible because a tool cannot escape Galaxy’s job execution environment isolation. The ToolFactory needs to write to the normally forbidden server’s configuration so the new tool appears in the tool menu and is installed in the TFtools directory which is a subdirectory of the Galaxy tools directory.
 
 </p>
@@ -128,9 +149,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/local_install.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/job_grey.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/job_grey.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ First job I submitted remains grey or running for a long time - is it broken?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -139,9 +162,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/job_grey.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/get_planemo.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/get_planemo.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Where can I get planemo?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -150,9 +175,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/get_planemo.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/formats.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/formats.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What file/data formats are defined for I/O in Galaxy?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -161,9 +188,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/formats.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_compose.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_compose.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ `docker-compose up` fails with error `/usr/bin/start.sh: line 133: /galaxy/.venv/bin/uwsgi: No such file or directory`</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -172,9 +201,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_compose.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_closure_args.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_closure_args.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ My Rscript tool generates a strange R error on STDOUT about an invalid operation on a closure called 'args' ?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Did your code declare the args vector with something like args = commandArgs(trailingOnly=TRUE) before it tried to access args[1] ?
 
 </p>
@@ -183,9 +214,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/error_closure_args.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/collections_test.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/collections_test.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ I want to use a collection for outputs but it always passes the test even when the script fails. Why?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -194,9 +227,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/faqs/collections_test.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/bioconda_files_exist.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/bioconda_files_exist.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ The folder `recipes/belerophon/` and the file `meta.yaml` already exist in bioconda?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">The recipe has already been added previously. If you want to create the recipe from scratch you may just do this in another directory below recipes/.
 </p>
 <small>
@@ -204,18 +239,22 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/faqs/bioconda_files_exist.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/faqs/contributing.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/faqs/contributing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How to Contribute to Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-06-24T09:10:40+00:00">2021-06-24T09:10:40+00:00</time>
+</div>
 <p class="summary">Contributing to Galaxy is a multi-step process, this will guide you through it.</p>
 <small>
         Published: 2021-06-24T09:10:40+00:00<br>
         Tags:
         faqs, dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/faqs/contributing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Creating Galaxy tools from Conda Through Deployment</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davebx/">Dave B.</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bernt-matthias/">Matthias Bernt</a></span><time datetime="2021-06-15T15:07:18+00:00">2021-06-15T15:07:18+00:00</time>
+</div>
 <p class="summary">Tools wrappers allow any command line runnable code or programs to be run inside a galaxy environment.
 
 </p>
@@ -224,9 +263,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-from-scratch/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Debugging Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/">Assunta DeSanto</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/">Assunta DeSanto</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a></span><time datetime="2021-06-15T10:13:45+00:00">2021-06-15T10:13:45+00:00</time>
+</div>
 <p class="summary">In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy’s GitHub Actions, to identifying their cause, developing a solution and committing your edits
 </p>
 <small>
@@ -234,9 +275,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/debugging/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Contributing a New Feature to Galaxy Core</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/">John Davis</a></span><time datetime="2021-06-08T09:41:28+00:00">2021-06-08T09:41:28+00:00</time>
+</div>
 <p class="summary">This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.
 </p>
 <small>
@@ -244,9 +287,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/core-contributing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 ToolFactory: Generating Tools From More Complex Scripts</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2021-05-26T12:43:45+00:00">2021-05-26T12:43:45+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -255,9 +300,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators-advanced/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to the ToolFactory tutorial.</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a></span><time datetime="2021-05-26T12:43:45+00:00">2021-05-26T12:43:45+00:00</time>
+</div>
 <p class="summary">What is the ToolFactory?
 </p>
 <small>
@@ -265,9 +312,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 ToolFactory: Generating Tools From Simple Scripts</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/fubar2/">Ross Lazarus</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2021-05-26T12:43:45+00:00">2021-05-26T12:43:45+00:00</time>
+</div>
 <p class="summary">The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using
 
 </p>
@@ -276,9 +325,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Contributing to BioBlend as a developer</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/">Erik Schill</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rikeshi/">Erik Schill</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2021-05-25T10:02:52+00:00">2021-05-25T10:02:52+00:00</time>
+</div>
 <p class="summary">BioBlend (Sloggett et al. 2013) is a Python library to enable simple interaction with Galaxy (Afgan et al. 2018) via the command line or scripts.
 </p>
 <small>
@@ -286,9 +337,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-dev/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda_sys/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda_sys/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Prerequisites for building software/conda packages</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/cmonjeau/">Cyril Monjeaud</a></span><time datetime="2018-02-15T12:06:42+00:00">2018-02-15T12:06:42+00:00</time>
+</div>
 <p class="summary">class: left, enlarge120
 </p>
 <small>
@@ -296,9 +349,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda_sys/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Webhooks</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-06-27T14:40:59+00:00">2017-06-27T14:40:59+00:00</time>
+</div>
 <p class="summary">In this tutorial we are going to demonstrate how to add a webhook to the tool-execution endpoint. This is the web-page that appears
 
 </p>
@@ -307,9 +362,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Visualizations: JavaScript Plugins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/guerler/">Aysam Guerler</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/guerler/">Aysam Guerler</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></span><time datetime="2017-06-22T17:42:15+00:00">2017-06-22T17:42:15+00:00</time>
+</div>
 <p class="summary">Javascript Plugin Development in Galaxy
 </p>
 <small>
@@ -317,9 +374,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 JavaScript plugins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/guerler/">Aysam Guerler</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/guerler/">Aysam Guerler</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></span><time datetime="2017-06-22T17:42:15+00:00">2017-06-22T17:42:15+00:00</time>
+</div>
 <p class="summary">In this tutorial we are going to demonstrate how to add a third party
 
 </p>
@@ -328,9 +387,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-charts/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/containers/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/containers/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Tool Dependencies and Containers</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-06-20T21:12:27+00:00">2017-06-20T21:12:27+00:00</time>
+</div>
 <p class="summary">Planemo
 </p>
 <small>
@@ -338,9 +399,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/containers/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Code Architecture</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-06-20T21:12:27+00:00">2017-06-20T21:12:27+00:00</time>
+</div>
 <p class="summary">layout: true
 </p>
 <small>
@@ -348,9 +411,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/architecture/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Tool Dependencies and Conda</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hmenager/">Hervé Ménager</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hmenager/">Hervé Ménager</a></span><time datetime="2017-06-20T21:12:27+00:00">2017-06-20T21:12:27+00:00</time>
+</div>
 <p class="summary">Planemo
 </p>
 <small>
@@ -358,9 +423,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/conda/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/toolshed/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/toolshed/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Tool Shed: sharing Galaxy tools</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/">Loraine Guéguen</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slegras/">Stéphanie Legras</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/loraine-gueguen/">Loraine Guéguen</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slegras/">Stéphanie Legras</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time>
+</div>
 <p class="summary">1. What is a Tool Shed?
 </p>
 <small>
@@ -368,9 +435,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/toolshed/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Webhooks</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/martenson/">Martin Čech</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-04-03T16:49:33+00:00">2017-04-03T16:49:33+00:00</time>
+</div>
 <p class="summary">What are Galaxy Webhooks?
 </p>
 <small>
@@ -378,9 +447,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/webhooks/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Scripting Galaxy using the API and BioBlend</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/odoppelt/">Olivia Doppelt-Azeroual</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fmareuil/">Fabien Mareuil</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/odoppelt/">Olivia Doppelt-Azeroual</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fmareuil/">Fabien Mareuil</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dannon/">Dannon Baker</a></span><time datetime="2017-01-17T17:40:36+00:00">2017-01-17T17:40:36+00:00</time>
+</div>
 <p class="summary">Galaxy API
 </p>
 <small>
@@ -388,9 +459,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/bioblend-api/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tours/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tours/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Galaxy Interactive Tours</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-01-12T10:30:27+00:00">2017-01-12T10:30:27+00:00</time>
+</div>
 <p class="summary">What are Galaxy Interactive Tours?
 </p>
 <small>
@@ -398,9 +471,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/interactive-tours/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-source-integration/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-source-integration/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Data source integration</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/">Gianmauro Cuccuru</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2016-09-30T10:05:09+00:00">2016-09-30T10:05:09+00:00</time>
+</div>
 <p class="summary">Data Source Integration
 </p>
 <small>
@@ -408,9 +483,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/data-source-integration/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-integration/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-integration/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Tool development and integration into Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/">Gildas Le Corguillé</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/">John Chilton</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/">Gildas Le Corguillé</a></span><time datetime="2016-09-30T10:05:09+00:00">2016-09-30T10:05:09+00:00</time>
+</div>
 <p class="summary">Galaxy tools
 </p>
 <small>
@@ -418,9 +495,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-integration/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-generic/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-generic/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Generic plugins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a></span><time datetime="2016-09-30T10:05:09+00:00">2016-09-30T10:05:09+00:00</time>
+</div>
 <p class="summary">Why visualizations?
 </p>
 <small>
@@ -428,9 +507,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         dev</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-generic/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-generic/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/tutorials/visualization-generic/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generic plugins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yhoogstrate/">Youri Hoogstrate</a></span><time datetime="2016-09-30T10:05:09+00:00">2016-09-30T10:05:09+00:00</time>
+</div>
 <p class="summary">Visualizations may be very helpful in understanding data better. There is a whole
 
 </p>
@@ -446,4 +527,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/dev/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

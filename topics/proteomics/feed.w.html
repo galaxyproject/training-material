@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Proteomics • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Proteomics</a></h1><p>Recently added tutorials, slides, FAQs, and events in the proteomics topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Proteomics</a></h1><p>Recently added tutorials, slides, FAQs, and events in the proteomics topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clinical-MP-3-Verification</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></span><time datetime="2024-02-06T15:43:02+00:00">2024-02-06T15:43:02+00:00</time>
+</div>
 <p class="summary">Introduction
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-TMT11</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-3-verification/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-5-data-interpretation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-5-data-interpretation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clinical-MP-5-Data Interpretation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></span><time datetime="2024-02-06T15:43:02+00:00">2024-02-06T15:43:02+00:00</time>
+</div>
 <p class="summary">The final workflow in the array of clinical metaproteomics tutorials is the data interpretation workflow. Interpreting MaxQuant data using MSstats involves applying a rigorous statistical framework to glean meaningful insights from quantitative proteomic datasets. The MaxQuant output is explored to understand data distribution and variability. Subsequent normalization helps account for systematic variations. MSstats allows the user to define the experimental design, including sample groups and conditions, to perform statistical analysis. The output provides valuable information about differential protein expression across conditions, estimates of fold changes, and associated p-values, aiding in the identification of biologically significant proteins. Furthermore, MSstats enables quality control and data visualization, ultimately enhancing our ability to draw meaningful conclusions from complex proteomic datasets. Additional tutorial material for using MaxQuant and MSstatTMT for TMT data analysis can be found at MaxQuant and MSstats for the analysis of TMT data.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-TMT11</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-5-data-interpretation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clinical-MP-2-Discovery</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></span><time datetime="2024-02-06T15:43:02+00:00">2024-02-06T15:43:02+00:00</time>
+</div>
 <p class="summary">This tutorial can be followed with any user-defined database but would work best if the clinical metaproteomics database generation module was used (see Database Generation tutorial). The MetaNovo tool generates a more manageable database that contains identified proteins. The MetaNovo-generated database merged with Human SwissProt (reviewed only) and contaminants (cRAP) databases to generate a compact database (~21.2k protein sequences) that will be used for peptide identification.
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-TMT11</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-2-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-1-database-generation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-1-database-generation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clinical-MP-1-Database-Generation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></span><time datetime="2024-02-06T15:43:02+00:00">2024-02-06T15:43:02+00:00</time>
+</div>
 <p class="summary">Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins Batut et al. 2018 ; [Jagtap et al. 2015 .
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-TMT11</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-1-database-generation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clinical-MP-4-Quantitation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/katherine-d21/">Katherine Do</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dechendb/">Dechen Bhuming</a></span><time datetime="2024-02-06T15:43:02+00:00">2024-02-06T15:43:02+00:00</time>
+</div>
 <p class="summary">Introduction
 </p>
 <small>
@@ -75,9 +86,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-TMT11</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/clinical-mp-4-quantitation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/variant_mapping_file.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/variant_mapping_file.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do we have a variant mapping file when it is not being used in the workflow?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">We are working on updating the existing annotation tool to include the variant mapping file. Once that is done, the variant mapping file will also be an input for those tools.
 </p>
 <small>
@@ -85,9 +98,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/variant_mapping_file.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/search_gui.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/search_gui.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How many search engines can you use in SearchGUI?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">SearchGUI has options to use upto 9 search algorithms. However, running all at the same time can be time consuming. According to our initial test, upto 4 search engines can give you good results.
 </p>
 <small>
@@ -95,9 +110,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/search_gui.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_variants.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_variants.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What kind of variants are seen in the output?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">From this workflow we can see insertions, deletions, SNVs, or we will know whether it’s an intron, exon, splice junction etc.
 </p>
 <small>
@@ -105,9 +122,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_variants.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_querytabular.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_querytabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ The workflows contain several Query tabular for text manipulation, is there a tutorial for that?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">Query tabular loads a tabular database and creates a sqlite database and tabular file. To learn more about SQL Queries - please look at this documentation.
 </p>
 <small>
@@ -115,9 +134,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_querytabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_own_data.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_own_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Can I use these workflows on datasets generated from our laboratory?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">Yes, the workflows can be used on other datasets as well. However, you will need to consider data acquisition and sample preparation methods so that the tool parameters can be adjusted accordingly.
 </p>
 <small>
@@ -125,9 +146,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_own_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_example_histories.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_example_histories.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Example histories for the proteogenomics tutorials</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">If you get stuck or would like to see what the results should look like, you can have a look at one of the following public histories:
 </p>
 <small>
@@ -135,9 +158,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/proteogenomics_example_histories.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/mvp.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/mvp.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ In the MVP platform, is it possible to view the genomic location of all the peptides?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">Not really, you can only view the genomic localization of the peptides that were present in the genomic mapping file (output from the first workflow).
 </p>
 <small>
@@ -145,9 +170,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/faqs/mvp.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/chromosome_names.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/chromosome_names.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do we change the chromosome names in the Ensembl GTF to match the UCSC genome reference?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">UCSC chromosome names begin with the prefix chr, but Ensembl chromosome names do not. For example, chromosome 19 would be denoted as chr19 in UCSC, and as 19 in Ensemble. Most tools would view those as different when looking for matches/overlaps. Therefore it is always a good idea to make sure these match before you perform any downstream analysis.
 </p>
 <small>
@@ -155,9 +182,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/chromosome_names.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/alignment_tools.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/alignment_tools.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Is it possible to replace the existing alignment tools such as HISAT and Freebayes with other tools?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2022-03-03T12:15:42+00:00">2022-03-03T12:15:42+00:00</time>
+</div>
 <p class="summary">The tools in this workflow are customizable, however, the user has to ensure that the inputs are in the correct format, while using the same reference genome database.
 </p>
 <small>
@@ -165,9 +194,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/faqs/alignment_tools.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Does MaxQuant in Galaxy support TMT, iTRAQ, etc.?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Yes, iTRAQ 4 and 8 plex;  TMT 2,6,8,10,11 plex; iodoTMT6plex
 </p>
 <small>
@@ -175,9 +206,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/tmt_itraq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/stats.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/stats.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ MSStats: what does ‘compare groups = yes’ mean? And the comparison matrix to define the contrast between the 2 groups?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">MSstats consists of three parts:
 </p>
 <small>
@@ -185,9 +218,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/stats.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/shotgun.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/shotgun.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How many proteins can be identified and quantified in shotgun proteomics?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">This is depending on the sample, the used technique(s) and the mass spectrometer. Routinely most labs obtain 4000 proteins, but with more effort  10.000 proteins could be analyzed in a single run.
 </p>
 <small>
@@ -195,9 +230,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/shotgun.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/faqs/resources.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/faqs/resources.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Additional resources to learn more about proteomic data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">To learn more about proteomic data analysis, we suggest you look at:
 </p>
 <small>
@@ -205,9 +242,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/faqs/resources.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/quantitation_default.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/quantitation_default.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ For the “quantitation method” what is the default if I just leave it as “None”? Label free?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">It will report raw intensity (NON-normalized) values which were not normalized like e.g. the LFQ intensities.
 </p>
 <small>
@@ -215,9 +254,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/quantitation_default.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/outputs.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/outputs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Does MaxQuant give as output possibility the PSMs and PEPs?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Many output options, evidence & msms contain e.g. PSM or feature level info
 </p>
 <small>
@@ -225,9 +266,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/outputs.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What does it mean to normalize the LFQ intensities?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Median normalization typically refers to subtracting the median of all intensities within one sample from all of the intensities (e.g. Intensity of Protein A - Median of all intensities from Sample 1) , to account for measurement variations. Before normalization log2 transformation is required since many statistical tests demand that the data is actually normal distributed. (Non log intensities show very high values but have a minimum (limit of quantification) leading to a somehow right skewed distribution, after log-transformation the intensity distribution is more like a gaussian distribution. Beside the median (or median-polish) normalization there is also other e.g. the quantile  normalization.
 </p>
 <small>
@@ -235,9 +278,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/normalize_lfq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ If you use a mqpar file, can you include modifications that are not in the Galaxy version? For instance, propionamide (Cys alkylation by acrylamide).</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">No, one is limited to the modifications which are installed in MaxQuant. The mqpar only contains more parameters / options than the GUI in galaxy.
 
 </p>
@@ -246,9 +291,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/mqpar.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/merge_database.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/merge_database.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Do you need to merge the databases? Because you can select multiple fasta files in MaxQuant.</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">For MaxQuant one does not need to merge the databases, also MaxQuant offers the function to add common contaminants to the provided fasta.
 </p>
 <small>
@@ -256,9 +303,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/merge_database.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ When can you use (or cannot use) Match between runs in MaxQuant?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">No golden rule here. For quantitative comparison of different sample groups it can be valuable to use MBR to increase the number of identified + quantified proteins in all samples and then have more proteins that occur in most of the samples to compare them.
 </p>
 <small>
@@ -266,9 +315,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/match.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/gene_ontology.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/gene_ontology.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What is Gene Ontology (GO)?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">A very commonly used way of specifying these sets is to gather genes/proteins that share
 
 </p>
@@ -277,9 +328,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/gene_ontology.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/enrichment.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/enrichment.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What is the principle of an enrichment analysis?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Enrichment analysis approach (also called over-representation analysis (ORA)) was introduced to test whether pre-specified sets of proteins (e.g. those acting together in a given biological process), change in abundance more systematically than as expected by chance. This type of analysis investigates hypotheses that are more directly relevant to the biological function, and can also help highlight a process over-represented within a subset of proteins.
 </p>
 <small>
@@ -287,9 +340,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/enrichment.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/contaminants.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/contaminants.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Do we need a contaminant FASTA for MQ in galaxy?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Normally MaxQuant has a default contaminant fasta that we don’t have to input ourselves.
 
 </p>
@@ -298,9 +353,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/contaminants.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/build_error.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/build_error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ The Build tissue-specific expression dataset tool (step one) exits with an error code.</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">For the HPS source files version select HPA normal tissue 23/10/2018 rather than the version from 01/04/2020.
 </p>
 <small>
@@ -308,9 +365,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/faqs/build_error.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What is the advantage of breaking down protein to peptides before mass spec?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Mass spectrometry works better for peptides: LC separation and ionization is working better on peptides than on proteins and proteins generate too complex and overlaying mass spectra due to their isotopes and their mass might be shifted due to posttranslational modifications or point mutations.
 </p>
 <small>
@@ -318,9 +377,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/breakdown.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/without_spectral_library.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/without_spectral_library.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Can EncyclopeDIA be run on a DIA-MS dataset without a spectral library?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Yes. In this GTN, the workflow presented is the Standard EncyclopeDIA workflow; however, there is a variation upon the Standard EncyclopeDIA workflow, named the WALNUT EncyclopeDIA workflow in which a spectral library is not required. Simply, the WALNUT variation of the workflow omits the DLIB spectral/PROSIT library input, hence requiring just the GPF DIA dataset collection, Experimental DIA dataset collection, and the FASTA Protein Database file. Therefore, the Chromatogram Library is generated using the GPF DIA dataset collection and the FASTA Protein Database alone. This method does generate fewer searches than if a spectral library is used. The Galaxy-P team tested the efficacy of the WALNUT workflow compared to the Standard EncyclopeDIA workflow, and more information on that comparison and those results can be found at this link.
 </p>
 <small>
@@ -328,9 +389,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/without_spectral_library.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/advantages.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/advantages.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What advantages does a Chromatogram Library have over a DDA-generated library or predicted spectral library?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">While generating a Chromatogram Library is the most time consuming step of the EncyclopeDIA workflow, it is beneficial to DIA data analysis. DIA is a novel technique and methods for DIA data analysis are still being developed. One method commonly used includes searching DIA data against DDA-generated libraries. However, there are limitations in this method. Firstly, DDA-generated libraries are not always an accurate representation of DIA data: differences in the methods of data collection play an important role in the efficacy of the library. Secondly, DDA-generated libraries often require labs to run completely separate DDA experiments to simply generate a library with which to analyze their DIA data.
 
 </p>
@@ -339,9 +402,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/faqs/advantages.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/studying_microbiome_state.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/studying_microbiome_state.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What other methods are available to study the functional state of the microbiome within Galaxy?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Other software such as EggNOG Mapper, MEGAN5, MetaGOmics, MetaProteomeAnalyzer (MPA) and  ProPHAnE also generate functional outputs.
 </p>
 <small>
@@ -349,9 +414,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/studying_microbiome_state.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_strategies.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_strategies.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ I have a really large search database, what search strategies do you recommend for searching my mass spectrometry dataset?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Readers are encouraged to use the database sectioning approach described by Praveen Kumar et al and available within Galaxy. Readers are also encouraged to consider other approaches such as MetaNovo (not yet available in Galaxy). In absence of any database or taxonomic information about the microbiome dataset, other methods such as COMPIL 2.0  and De novo search methods can also be considered.
 </p>
 <small>
@@ -359,9 +426,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_strategies.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_algorithms.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_algorithms.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Which search algorithms are recommended for searching the metaproteomics data?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">SearchGUI supports search using nine search algorithms (X! Tandem. MS-GF+. OMSSA, Comet, Tide, MyriMatch, MS_Amanda, DirecTag and Novor). For this tutorial, we have used the first two search algorithms in the list. In our hands, the first four search algorithms have given us the most optimal results.
 </p>
 <small>
@@ -369,9 +438,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/search_algorithms.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/reusing_workflows.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/reusing_workflows.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Can I use these workflows on datasets generated from our laboratory?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Yes, the workflows can be used on other datasets as well. However, you will need to consider data acquisition and sample preparation methods so that the tool parameters can be adjusted accordingly.
 </p>
 <small>
@@ -379,9 +450,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/reusing_workflows.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/functional_analysis_tools.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/functional_analysis_tools.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Within the Galaxy framework we recommend the use of Unipept software that uses UniProt databases and annotation to detect proteins (EC terms) and functional groups such as GO Ontology and InterPro terms. Other software tools such as EggNOG Mapper are also available within the Galaxy platform. Other software such as MEGAN5, MetaGOmics, MetaProteomeAnalyzer (MPA), ProPHAnE also generate functional outputs.
 </p>
 <small>
@@ -389,9 +462,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/functional_analysis_tools.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/determine_taxonomic_composition.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/determine_taxonomic_composition.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What software tools are available to determine taxonomic composition from mass spectrometry data?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Within the Galaxy framework we recommend the use of Unipept software that uses NCBI taxonomy and UniProt databases to detect unique peptides for taxonomy. Other software tools such as MetaTryp 2.0 (PMID: 32897080) can also be used to determine the taxonomic composition of the metaproteomics datasets.
 </p>
 <small>
@@ -399,9 +474,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/determine_taxonomic_composition.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/converting_FASTA.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/converting_FASTA.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ I have FASTQ files from metagenomics or metatranscriptomics datasets? How can I convert them into a protein FASTA file for metaproteomics searches?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Galaxy has a tool named Sixgill that can be used to convert the nucleic acid sequences to ‘metapeptide’ sequences. There are other options available within Galaxy such as the GalaxyGraph approach and Metagenome Binning, Assembly and Annotation Workflow. Please contact us, if you need assistance.
 </p>
 <small>
@@ -409,9 +486,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/converting_FASTA.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/convert_to_MGF.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/convert_to_MGF.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How does one convert RAW files to MGF peak lists within Galaxy?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">Galaxy has implemented msconvert tool so that RAW files from Thermo instruments can be converted into MGF or mzML formats.
 </p>
 <small>
@@ -419,9 +498,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/convert_to_MGF.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/comparing_measurement.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/comparing_measurement.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How does one compare metaproteomics measurements from two experimental conditions?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-17T11:38:33+00:00">2021-11-17T11:38:33+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -430,9 +511,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/comparing_measurement.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/tools_versions.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/tools_versions.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Which version of SearchGUI and PeptideShaker shall I use for this tutorial?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/millen2223/">Milla Berezutskaia</a></span><time datetime="2021-11-14T18:06:10+00:00">2021-11-14T18:06:10+00:00</time>
+</div>
 <p class="summary">We highly recommend the usage of SearchGUI Galaxy version 3.3.10.1 and PeptideShaker version Galaxy Version 1.16.36.3. The newer versions of SearchGUI and PeptideShaker have not yet been tested for this workflow.
 </p>
 <small>
@@ -440,17 +523,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/faqs/tools_versions.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MaxQuant MSstatsTMT Training</a></h2>
+<div class="meta"><time datetime="2021-08-13T21:11:55+00:00">2021-08-13T21:11:55+00:00</time></div>
 <p class="summary">MaxQuant and MSstats for the analysis of TMT data</p>
 <small>
         Published: 2021-08-13T21:11:55+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 MaxQuant and MSstats for the analysis of TMT data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/KlemensFroehlich/">Klemens Fröhlich</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/KlemensFroehlich/">Klemens Fröhlich</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></span><time datetime="2021-08-13T21:11:55+00:00">2021-08-13T21:11:55+00:00</time>
+</div>
 <p class="summary">In this training we will cover the full analysis workflow from tandem mass tag (TMT) labeled samples using MaxQuant in conjunction with MSstatsTMT.
 </p>
 <small>
@@ -458,17 +544,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, TMT</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-tmt/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ May19 EncyclopeDIA raw inputs</a></h2>
+<div class="meta"><time datetime="2021-06-21T11:20:22+00:00">2021-06-21T11:20:22+00:00</time></div>
 <p class="summary">encyclopedia</p>
 <small>
         Published: 2021-06-21T11:20:22+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 EncyclopeDIA</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a></span><time datetime="2021-06-21T11:20:22+00:00">2021-06-21T11:20:22+00:00</time>
+</div>
 <p class="summary">Data Independent Acquisition (DIA) was introduced as a method to provide reproducible quantitative information as an improvement over the Data Dependent Acquisition (DDA) Gillet et al. 2012. Despite benefits of DIA, such as increased depth of coverage and lesser missing values, the computational analysis of the complicated and multiplexed data presents challenges. Therefore, with the rise of usage of this technique, rises a need for new and robust methods of data analysis.
 </p>
 <small>
@@ -476,9 +565,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DIA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Which isobaric labeled quantification methods does MaxQuant in Galaxy support?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2021-06-03T14:41:33+00:00">2021-06-03T14:41:33+00:00</time>
+</div>
 <p class="summary">The current MaxQuant version supports: iTRAQ 4 and 8 plex; TMT 2,6,8,10,11 plex; iodoTMT6plex. Includion of TMT16 plex is in preparation.
 </p>
 <small>
@@ -486,9 +577,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_isobaric_quant.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Including custom modifications into MaxQuant in Galaxy?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2021-06-03T14:41:33+00:00">2021-06-03T14:41:33+00:00</time>
+</div>
 <p class="summary">Unfortunately the inclusion of custom modifications is not possible by the user because it requires profound changes in the underlying code. Please let us know the modification you need by creating a new issue: https://github.com/galaxyproteomics/tools-galaxyp/issues entitled MaxQuant new modification request.
 </p>
 <small>
@@ -496,9 +589,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_custom_modifications.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_collection.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_collection.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Do I need to create collections to run MaxQuant analysis or can I use single sample inputs?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2021-06-03T14:41:33+00:00">2021-06-03T14:41:33+00:00</time>
+</div>
 <p class="summary">Collections are not necessary to run MaxQuant but they make the history more clean and easier to navigate. The multiple datasets options allows to select multiple files that are not part of a collection and will give the same result as with a collection as input.
 </p>
 <small>
@@ -506,17 +601,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         faqs, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/faqs/Maxquant_collection.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: MaxQuant and MSstats LFQ workflow</a></h2>
+<div class="meta"><time datetime="2021-02-17T12:39:38+00:00">2021-02-17T12:39:38+00:00</time></div>
 <p class="summary">MaxQuant and MSstats for the analysis of label-free data</p>
 <small>
         Published: 2021-02-17T12:39:38+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 MaxQuant and MSstats for the analysis of label-free data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></span><time datetime="2021-02-17T12:39:38+00:00">2021-02-17T12:39:38+00:00</time>
+</div>
 <p class="summary">Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. Classical statistical approaches and methods from other omics technologies are not ideal because they do not take into account the speciality of mass spectrometry data that include several thousands of proteins but often only a few dozens of samples (referred to as ‘curse of dimensionality’) and stochastic data properties that reflect sample preparation and spectral acquisition (Choi 2014).
 </p>
 <small>
@@ -524,25 +622,29 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, label-free</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Copy of PeptideDataAnalysis (imported from uploaded file)</a></h2>
+<div class="meta"><time datetime="2021-01-22T18:29:07+00:00">2021-01-22T18:29:07+00:00</time></div>
 <p class="summary">Peptide Library Data Analysis</p>
 <small>
         Published: 2021-01-22T18:29:07+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/PeptideDataAnalysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ PeptideML</a></h2>
+<div class="meta"><time datetime="2021-01-22T18:29:07+00:00">2021-01-22T18:29:07+00:00</time></div>
 <p class="summary">ML Modeling of Anti-cancer Peptides</p>
 <small>
         Published: 2021-01-22T18:29:07+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/PeptideML.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Machine Learning Modeling of Anticancer Peptides</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/">Jayadev Joshi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/">Jayadev Joshi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></span><time datetime="2021-01-22T18:29:07+00:00">2021-01-22T18:29:07+00:00</time>
+</div>
 <p class="summary">Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequence-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to describe a biological activity such as anticancer property. Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build an ML model and this model can be used to predict biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models.
 </p>
 <small>
@@ -550,9 +652,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, ML, cancer</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Peptide Library Data Analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/">Jayadev Joshi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jaidevjoshi83/">Jayadev Joshi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></span><time datetime="2021-01-22T18:29:07+00:00">2021-01-22T18:29:07+00:00</time>
+</div>
 <p class="summary">Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.
 </p>
 <small>
@@ -560,41 +664,47 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/workflows/Galaxy-Workflow-DIA_lib_Training_HEK_Ecoli_3_EG_data.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/workflows/Galaxy-Workflow-DIA_lib_Training_HEK_Ecoli_3_EG_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ DIA_lib_OSW</a></h2>
+<div class="meta"><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time></div>
 <p class="summary">DIA library Training HEK Ecoli data</p>
 <small>
         Published: 2020-12-02T18:41:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/workflows/Galaxy-Workflow-DIA_lib_Training_HEK_Ecoli_3_EG_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ DIA_Analysis_OSW</a></h2>
+<div class="meta"><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time></div>
 <p class="summary">DIA Analysis Training using HEK Ecoli data in OSW</p>
 <small>
         Published: 2020-12-02T18:41:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/workflows/Galaxy-Workflow-_DIA_Training_using_HEK_Ecoli_3_EG_data_.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_msstats_input_tabular.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_msstats_input_tabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ DIA_analysis_MSstats</a></h2>
+<div class="meta"><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time></div>
 <p class="summary">DIA MSstats Training msstats input tabular</p>
 <small>
         Published: 2020-12-02T18:41:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_msstats_input_tabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_export_tabular.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_export_tabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ DIA_analysis_MSstats</a></h2>
+<div class="meta"><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time></div>
 <p class="summary">DIA MSstats Training export tabular</p>
 <small>
         Published: 2020-12-02T18:41:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/workflows/Galaxy-Workflow-DIA_MSstats_Training_export_tabular.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 DIA Analysis using OpenSwathWorkflow</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time>
+</div>
 <p class="summary">This training covers data independent acquisition (DIA) mass spectrometry (MS) applying spectral libraries for peptide identification and quantification.
 
 </p>
@@ -603,9 +713,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DIA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Library Generation for DIA Analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time>
+</div>
 <p class="summary">The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT and DIA allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.
 </p>
 <small>
@@ -613,9 +725,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DIA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Statistical analysis of DIA data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2020-12-02T18:41:23+00:00">2020-12-02T18:41:23+00:00</time>
+</div>
 <p class="summary">This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the DIA library generation tutorial as well as the DIA analysis tutorial, which teach the principles and characteristics of DIA data analysis.
 </p>
 <small>
@@ -623,25 +737,29 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DIA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ metaquantome-taxonomy-workflow</a></h2>
+<div class="meta"><time datetime="2020-10-29T08:30:35+00:00">2020-10-29T08:30:35+00:00</time></div>
 <p class="summary">metaquantome-taxonomy</p>
 <small>
         Published: 2020-10-29T08:30:35+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ metaquantome-function-worklow</a></h2>
+<div class="meta"><time datetime="2020-10-29T08:30:35+00:00">2020-10-29T08:30:35+00:00</time></div>
 <p class="summary">metaquantome-function</p>
 <small>
         Published: 2020-10-29T08:30:35+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 metaQuantome 3: Taxonomy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></span><time datetime="2020-10-29T08:30:35+00:00">2020-10-29T08:30:35+00:00</time>
+</div>
 <p class="summary">metaQuantome software suite Easterly et al. 2019 was developed by the Team for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 </p>
 <small>
@@ -649,9 +767,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 metaQuantome 2: Function</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></span><time datetime="2020-10-29T08:30:35+00:00">2020-10-29T08:30:35+00:00</time>
+</div>
 <p class="summary">metaQuantome software suite Easterly et al. 2019 was developed by the Team for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 </p>
 <small>
@@ -659,17 +779,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-function/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ metaQuantome_datacreation_workflow</a></h2>
+<div class="meta"><time datetime="2020-10-16T12:55:39+00:00">2020-10-16T12:55:39+00:00</time></div>
 <p class="summary">metaquantome-data-creation</p>
 <small>
         Published: 2020-10-16T12:55:39+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 metaQuantome 1: Data creation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/emmaleith/">Emma Leith</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mariecrane/">Marie Crane</a></span><time datetime="2020-10-16T12:55:39+00:00">2020-10-16T12:55:39+00:00</time>
+</div>
 <p class="summary">Metaproteomics “Metaproteomics video” involves the characterization of community-level expression of microbial proteins from an environmental
 
 </p>
@@ -678,17 +801,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: MaxQuant workflow</a></h2>
+<div class="meta"><time datetime="2020-04-29T19:12:37+00:00">2020-04-29T19:12:37+00:00</time></div>
 <p class="summary">Label-free data analysis using MaxQuant</p>
 <small>
         Published: 2020-04-29T19:12:37+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/workflows/maxquant_label_free.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Label-free data analysis using MaxQuant</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></span><time datetime="2020-04-29T19:12:37+00:00">2020-04-29T19:12:37+00:00</time>
+</div>
 <p class="summary">The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.
 </p>
 <small>
@@ -696,25 +822,29 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, label-free</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ ProteoRE ProteomeAnnotation Tutorial (release 2.0)</a></h2>
+<div class="meta"><time datetime="2019-09-12T14:26:28+00:00">2019-09-12T14:26:28+00:00</time></div>
 <p class="summary">Annotating a protein list identified by LC-MS/MS experiments</p>
 <small>
         Published: 2019-09-12T14:26:28+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ 'Proteome Annotation'</a></h2>
+<div class="meta"><time datetime="2019-09-12T14:26:28+00:00">2019-09-12T14:26:28+00:00</time></div>
 <p class="summary">Annotating a protein list identified by LC-MS/MS experiments</p>
 <small>
         Published: 2019-09-12T14:26:28+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/workflows/Galaxy-Workflow-_Proteome_annotation_.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Annotating a protein list identified by LC-MS/MS experiments</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/vloux/">Valentin Loux</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/">David Christiany</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/">Yves Vandenbrouck</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/vloux/">Valentin Loux</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/">David Christiany</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/">Yves Vandenbrouck</a></span><time datetime="2019-09-12T14:26:28+00:00">2019-09-12T14:26:28+00:00</time>
+</div>
 <p class="summary">ProteoRE Galaxy instance provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled “Proteomic characterization of human exhaled breath condensate” Lacombe et al. 2018.
 
 </p>
@@ -723,17 +853,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, human</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteome_annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ 'Biomarkers4Paris' Workflow</a></h2>
+<div class="meta"><time datetime="2019-06-13T19:56:33+00:00">2019-06-13T19:56:33+00:00</time></div>
 <p class="summary">Biomarker candidate identification</p>
 <small>
         Published: 2019-06-13T19:56:33+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Biomarker candidate identification</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/">David Christiany</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vloux/">Valentin Loux</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/">Yves Vandenbrouck</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/combesf/">Florence Combes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/davidchristiany/">David Christiany</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vloux/">Valentin Loux</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvandenb/">Yves Vandenbrouck</a></span><time datetime="2019-06-13T19:56:33+00:00">2019-06-13T19:56:33+00:00</time>
+</div>
 <p class="summary">A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 
 </p>
@@ -742,17 +875,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, human</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/biomarker_selection/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MS Imaging Loading Exploring Data</a></h2>
+<div class="meta"><time datetime="2019-03-04T07:30:26+00:00">2019-03-04T07:30:26+00:00</time></div>
 <p class="summary">Mass spectrometry imaging: Loading and exploring MSI data</p>
 <small>
         Published: 2019-03-04T07:30:26+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/workflows/ms_imaging_loading_exploring_data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mass spectrometry imaging: Loading and exploring MSI data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2018-11-27T16:18:26+00:00">2018-11-27T16:18:26+00:00</time>
+</div>
 <p class="summary">Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.
 </p>
 <small>
@@ -760,33 +896,38 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, mouse, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GTN Proteogemics3 Novel Peptide Analysis</a></h2>
+<div class="meta"><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time></div>
 <p class="summary">Proteogenomics 3: Novel peptide analysis</p>
 <small>
         Published: 2018-11-20T19:05:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/workflows/galaxy-workflow-mouse_novel_peptide_analysis.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/workflows/galaxy-workflow-mouse_rnaseq_dbsearch.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/workflows/galaxy-workflow-mouse_rnaseq_dbsearch.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GTN Proteogemics2 Database Search</a></h2>
+<div class="meta"><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time></div>
 <p class="summary">Proteogenomics 2: Database Search</p>
 <small>
         Published: 2018-11-20T19:05:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/workflows/galaxy-workflow-mouse_rnaseq_dbsearch.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/galaxy-workflow-mouse_rnaseq_dbcreation.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/galaxy-workflow-mouse_rnaseq_dbcreation.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GTN Proteogenomics1 Database Creation</a></h2>
+<div class="meta"><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time></div>
 <p class="summary">Proteogenomics Galaxy Training Network Database Creation</p>
 <small>
         Published: 2018-11-20T19:05:23+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/workflows/galaxy-workflow-mouse_rnaseq_dbcreation.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Proteogenomics 2: Database Search</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></span><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time>
+</div>
 <p class="summary">In this tutorial, we perform proteogenomic database searching using the Mass Spectrometry data. The inputs for performing the proteogenomic database searching are the peaklist MGF files and the FASTA database file. The FASTA database is obtained by running the first workflow “Uniprot_cRAP_SAV_indel_translatedbed.FASTA”. The second workflow focuses on performing database search of the peak list files (MGFs).
 </p>
 <small>
@@ -794,9 +935,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, proteogenomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Proteogenomics 3: Novel peptide analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></span><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time>
+</div>
 <p class="summary">The third and the last workflow in the proteogenomics tutorial is to identifying the “Novel peptides” using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
 
 </p>
@@ -805,9 +948,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, proteogenomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Proteogenomics 1: Database Creation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jraysajulga/">Ray Sajulga</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pravs3683/">Praveen Kumar</a></span><time datetime="2018-11-20T19:05:23+00:00">2018-11-20T19:05:23+00:00</time>
+</div>
 <p class="summary">Proteogenomics involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization
 </p>
 <small>
@@ -815,9 +960,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, proteogenomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/introduction/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to proteomics, protein identification, quantification and statistical modelling</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a></span><time datetime="2017-12-01T15:49:27+00:00">2017-12-01T15:49:27+00:00</time>
+</div>
 <p class="summary">Proteomics
 </p>
 <small>
@@ -825,25 +972,29 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/introduction/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Peptide And Protein ID Via OMS Using Two Search Engines</a></h2>
+<div class="meta"><time datetime="2017-11-14T18:07:11+00:00">2017-11-14T18:07:11+00:00</time></div>
 <p class="summary">Peptide and Protein ID using OpenMS tools</p>
 <small>
         Published: 2017-11-14T18:07:11+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: Peptide and Protein ID using OpenMS</a></h2>
+<div class="meta"><time datetime="2017-10-16T10:13:27+00:00">2017-10-16T10:13:27+00:00</time></div>
 <p class="summary">Peptide and Protein ID using OpenMS tools</p>
 <small>
         Published: 2017-10-16T10:13:27+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Peptide and Protein ID using OpenMS tools</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-10-16T10:13:27+00:00">2017-10-16T10:13:27+00:00</time>
+</div>
 <p class="summary">Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most settings, proteins are digested to peptides prior to LC-MS/MS analysis. In this so-called “bottom-up” procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 </p>
 <small>
@@ -851,17 +1002,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, HeLa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/workflows/workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Metaproteomics_GTN</a></h2>
+<div class="meta"><time datetime="2017-06-28T13:33:16+00:00">2017-06-28T13:33:16+00:00</time></div>
 <p class="summary">Metaproteomics tutorial</p>
 <small>
         Published: 2017-06-28T13:33:16+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Metaproteomics tutorial</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timothygriffin/">Timothy J. Griffin</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pratikdjagtap/">Pratik Jagtap</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jj-umn/">James Johnson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankclemens/">Clemens Blank</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/subinamehta/">Subina Mehta</a></span><time datetime="2017-06-28T13:33:16+00:00">2017-06-28T13:33:16+00:00</time>
+</div>
 <p class="summary">In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.
 
 </p>
@@ -870,17 +1024,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: Peptide and Protein Quantification via stable istobe labeling</a></h2>
+<div class="meta"><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time></div>
 <p class="summary">Peptide and Protein Quantification via Stable Isotope Labelling (SIL)</p>
 <small>
         Published: 2017-06-12T08:10:40+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/workflows/workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Peptide and Protein ID using SearchGUI and PeptideShaker</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time>
+</div>
 <p class="summary">Identifying the proteins contained in a sample is an important step in any proteomic experiment. However, in most experimental set ups, proteins are digested to peptides before the LC-MS/MS analysis. In this so-called “bottom-up” procedure, only peptide masses are measured. Therefore, protein identification cannot be performed directly from raw data, but is a multi-step process:
 </p>
 <small>
@@ -888,57 +1045,65 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, HeLa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ ProteinID SG PS Tutorial WF datasetCollection</a></h2>
+<div class="meta"><time datetime="2017-04-26T19:14:57+00:00">2017-04-26T19:14:57+00:00</time></div>
 <p class="summary">Peptide and Protein ID using SearchGUI and PeptideShaker</p>
 <small>
         Published: 2017-04-26T19:14:57+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS_multipleFiles.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Peptide And Protein ID Tutorial</a></h2>
+<div class="meta"><time datetime="2017-04-26T19:14:57+00:00">2017-04-26T19:14:57+00:00</time></div>
 <p class="summary">Peptide and Protein ID using SearchGUI and PeptideShaker</p>
 <small>
         Published: 2017-04-26T19:14:57+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-sg-ps/workflows/wf_proteinID_SG_PS.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Secreted Proteins Via GO Annotation And WoLF PSORT For shCTSB Paper</a></h2>
+<div class="meta"><time datetime="2017-04-13T23:10:55+00:00">2017-04-13T23:10:55+00:00</time></div>
 <p class="summary">version 1.0, 160318, published at https://github.com/Stortebecker/secretome_prediction</p>
 <small>
         Published: 2017-04-13T23:10:55+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/secretome-prediction/workflows/WF_secretomePrediction_goWolfpsort.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/workflows/WF_ntails.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/workflows/WF_ntails.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Tails Triple Dimethyl OpenMS2.1</a></h2>
+<div class="meta"><time datetime="2017-04-13T23:10:55+00:00">2017-04-13T23:10:55+00:00</time></div>
 <p class="summary">Detection and quantitation of N-termini (degradomics) via N-TAILS</p>
 <small>
         Published: 2017-04-13T23:10:55+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/workflows/WF_ntails.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling_mycoplasma.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling_mycoplasma.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: database handling including mycoplasma</a></h2>
+<div class="meta"><time datetime="2017-04-13T23:10:55+00:00">2017-04-13T23:10:55+00:00</time></div>
 <p class="summary">Protein FASTA Database Handling</p>
 <small>
         Published: 2017-04-13T23:10:55+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling_mycoplasma.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Proteomics: database handling</a></h2>
+<div class="meta"><time datetime="2017-04-13T23:10:55+00:00">2017-04-13T23:10:55+00:00</time></div>
 <p class="summary">Protein FASTA Database Handling</p>
 <small>
         Published: 2017-04-13T23:10:55+00:00<br>
         Tags:
         workflows, proteomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/workflows/wf_database-handling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Peptide and Protein Quantification via Stable Isotope Labelling (SIL)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/matthias313/">Matthias Fahrner</a></span><time datetime="2017-03-17T17:43:31+00:00">2017-03-17T17:43:31+00:00</time>
+</div>
 <p class="summary">To compare protein amounts in different samples from MS/MS data, two different experiment setups exist. Firstly, unmodified proteins can be measured in separate runs at one sample per MS-run. Secondly, proteins of samples to compare can be labelled with small chemical tags, mixed, and measured side-by-side in a single MS-run.
 
 </p>
@@ -947,9 +1112,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA, SILAC</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Label-free versus Labelled - How to Choose Your Quantitation Method</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-03-17T17:41:07+00:00">2017-03-17T17:41:07+00:00</time>
+</div>
 <p class="summary">Purpose
 </p>
 <small>
@@ -957,9 +1124,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Protein FASTA Database Handling</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-02-14T12:20:30+00:00">2017-02-14T12:20:30+00:00</time>
+</div>
 <p class="summary">In mass spectrometry based proteomics experiments, peptides are assigned to experimentally acquired tandem mass spectra (MS2) by a method called peptide-spectral matching. Peptide spectral matching is commonly achieved by using search algorithms to match the acquired MS2 spectra to theoretical spectra. The theoretical spectra are generated from an in silico digestion and fragmentation of proteins in the FASTA database. Ideally, the protein FASTA databases will contain all proteins of the organism under investigation.
 </p>
 <small>
@@ -967,9 +1136,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         proteomics, DDA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/ntails/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Detection and quantitation of N-termini (degradomics) via N-TAILS</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/">Florian Christoph Sigloch</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2017-02-14T12:20:30+00:00">2017-02-14T12:20:30+00:00</time>
+</div>
 <p class="summary">N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and “unusual” N-termini are identified, where “unusual” means that the protein N-terminus was changes.
 
 </p>
@@ -985,4 +1156,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

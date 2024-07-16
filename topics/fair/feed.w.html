@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>FAIR Data, Workflows, and Research • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">FAIR Data, Workflows, and Research</a></h1><p>Recently added tutorials, slides, FAQs, and events in the fair topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">FAIR Data, Workflows, and Research</a></h1><p>Recently added tutorials, slides, FAQs, and events in the fair topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-rna/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-rna/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIRification of an RNAseq dataset</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-27T09:25:48+00:00">2024-03-27T09:25:48+00:00</time>
+</div>
 <p class="summary">RNA sequencing is chosen here as an example of how to FAIRify data for a popular assay in the Life Sciences. RNAseq data can be shared and curated in designated public repositories using established ontologies (and controlled vocabularies) for describing protocols and biological material (metadata).
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-rna/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-data-registration/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-data-registration/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Data Registration</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T08:27:31+00:00">2024-03-26T08:27:31+00:00</time>
+</div>
 <p class="summary">The concept of data registration is defined as well as ways in which data registration can be achieved.  Learners will be able to describe why indexed data repositories are important as well as resources enabling you to choose a searchable repository.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-data-registration/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-origin/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-origin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIR and its Origins</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T08:27:31+00:00">2024-03-26T08:27:31+00:00</time>
+</div>
 <p class="summary">FAIR as an acronym, its origins and its guiding principles are introduced.  Learners will be able to explain the difference between FAIR and open data and contextualise the main principles of FAIR around the common characteristics of identifiers, access, metadata and registration.
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-origin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-persistent-identifiers/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-persistent-identifiers/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Persistent Identifiers</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T08:27:31+00:00">2024-03-26T08:27:31+00:00</time>
+</div>
 <p class="summary">The persistent identifier is defined.  Learners will be able to define the structure of an identifier and explain its importance.
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-persistent-identifiers/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Metadata</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T08:27:31+00:00">2024-03-26T08:27:31+00:00</time>
+</div>
 <p class="summary">The term metadata is defined along with what constitutes rich metadata.  Learners will be able to recall examples of community/domain standards that apply to data and metadata.
 </p>
 <small>
@@ -75,9 +86,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-metadata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-access/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-access/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Access</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmand/">Robert Andrews</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsjuty/">Nick Juty</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/smza/">Munazah Andrabi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saramorsy/">Sara Morsy</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kellsnow/">Kellie Snow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khens/">Korneel Hens</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/proccaserra/">Philippe Rocca-Serra</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lcooper/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sitjart/">Xenia Perez Sitja</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/asmasonomics/">Andrew Mason</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bfranicevic/">Branka Franicevic</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/saskia-lawson-tovey/">Saskia Lawson-Tovey</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T08:27:31+00:00">2024-03-26T08:27:31+00:00</time>
+</div>
 <p class="summary">Data access including levels of access are described.  Learners will be able to illustrate data access in terms of the FAIR Principles using companion terms including communications protocol and authentication.  Learners will also be able to interpret the data usage licence associated with different data sets
 </p>
 <small>
@@ -85,9 +98,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-access/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2024/03/26/FAIR-pointers.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/03/26/FAIR-pointers.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Learning Pathway for FAIR Data Management developed by ELIXIR-UK Data Stewardship Fellows and Experts</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-03-26T00:00:00+00:00">2024-03-26T00:00:00+00:00</time>
+</div>
 <p class="summary">ELIXIR-UK’s Data Stewardship Fellowship is excited to announce a new learning pathway focused on FAIR Data Management! This program equips researchers and research support staff with the skills to effectively manage their research data.
 </p>
 <small>
@@ -95,9 +110,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, fair, dmp, data stewardship, data management, new learning pathway</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2024/03/26/FAIR-pointers.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2024/01/17/sc-fair-data.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/01/17/sc-fair-data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 FAIR Data management in single cell analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2024-01-17T00:00:00+00:00">2024-01-17T00:00:00+00:00</time>
+</div>
 <p class="summary">New single cell section: Changing data formats & preparing objects
 </p>
 <small>
@@ -105,9 +122,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, single cell, data management, data import, fair</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2024/01/17/sc-fair-data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Data management in Medicinal Chemistry</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2024-01-08T09:55:32+00:00">2024-01-08T09:55:32+00:00</time>
+</div>
 <p class="summary">The development of medicinal chemistry is advancing very rapidly. Big pharmaceutical companies, research institutes and universities are working on ground-breaking solutions to help patients combat all kinds of diseases. During that development process, tons of data are generated – not only from the lab environment but also from clinical trials. Given that the discovery of more potent, safer and cheaper drugs is the ultimate goal of all research bodies, we should all focus on making the data we gather FAIR: Findable, Accessible, Interoperable, and Reusable to push the boundaries of drug development even further.
 </p>
 <small>
@@ -115,9 +134,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         computational-chemistry, fair, data-management, medicinal-chemistry</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-ena/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-ena/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Sequence data submission to ENA</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/sonalhenson/">Sonal Henson</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/sonalhenson/">Sonal Henson</a></span><time datetime="2023-11-01T08:38:03+00:00">2023-11-01T08:38:03+00:00</time>
+</div>
 <p class="summary">DNA sequencing has become one of the key technologies in molecular biology, with applications in diagnostics, evolutionary biology, drug discovery, forensics and much more. Drop in sequencing costs and breakthroughs in sequencing technologies has seen increasing utilization of sequencing as a research tool, featuring in thousands of life-science publications every year.
 </p>
 <small>
@@ -125,9 +146,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, FAIR, ENA</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-ena/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-clinical/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-clinical/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Making clinical datasets FAIR</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/SNG888/">Sandra Ng</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/SNG888/">Sandra Ng</a></span><time datetime="2023-10-24T09:11:59+00:00">2023-10-24T09:11:59+00:00</time>
+</div>
 <p class="summary">The life science community is generally very good at sharing omics data on platforms such as GEO and ArrayExpress.  However, the metadata and clinical data associated with the omics datasets are often incredibly sparse.  Tracking down the meta- and clinical data of omics datasets can be time-consuming for both data owner and researcher and is a significant hurdle when trying to explore enriched omics data.
 </p>
 <small>
@@ -135,9 +158,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, open, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-clinical/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-09-13T09:31:14+00:00">2023-09-13T09:31:14+00:00</time>
+</div>
 <p class="summary">Metadata guidelines for bioimaging data
 </p>
 <small>
@@ -145,9 +170,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, data management, bioimaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIR Bioimage Metadata</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/Laura190/">Laura Cooper</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-09-13T09:31:14+00:00">2023-09-13T09:31:14+00:00</time>
+</div>
 <p class="summary">FAIR Bioimaging
 </p>
 <small>
@@ -155,9 +182,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, data management, bioimaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIR data management solutions</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-05-30T12:53:37+00:00">2023-05-30T12:53:37+00:00</time>
+</div>
 <p class="summary">The FAIR (Findable, Accessible, Interoperable, Reusable)  data stewardship created the foundation for sharing and publishing digital assets, especially data. This apply to machine accessibility and emphasize that all digital assets should share data in a way that will enable maximum use and reuse.
 </p>
 <small>
@@ -165,9 +194,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, dmp, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/data-management/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-gtn/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-gtn/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIR Galaxy Training Material</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-05-30T12:53:37+00:00">2023-05-30T12:53:37+00:00</time>
+</div>
 <p class="summary">Encouraging computational reproducibility in research, we will present a variety of data stewardship recommendations that we have found useful in the process of training development. As part of that process, we are exploring the application of the FAIR (Findable, Accessible, Interoperable, Reusable) guidelines to the Galaxy Training Network (GTN) materials, in order to improve their secondary use and adaptation.
 </p>
 <small>
@@ -175,9 +206,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, gtn, training</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-gtn/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 FAIR in a nutshell</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-05-30T12:53:37+00:00">2023-05-30T12:53:37+00:00</time>
+</div>
 <p class="summary">The FAIR (Findable, Accessible, Interoperable, Reusable) principles emphasize machine-actionability. The main objective of FAIR is to increase data reuse by researchers. The core concepts of the FAIR principles are based on good scientific practice and intuitively grounded.
 </p>
 <small>
@@ -185,9 +218,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, open, data stewardship</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 RO-Crate - Introduction</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stain/">Stian Soiland-Reyes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/">Peter Sefton</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/stain/">Stian Soiland-Reyes</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/">Peter Sefton</a></span><time datetime="2023-05-23T10:15:15+00:00">2023-05-23T10:15:15+00:00</time>
+</div>
 <p class="summary">This tutorial assumes you have already completed An overview of the RO-Crate concept and its implementations and have a basic understanding of working with JSON.
 </p>
 <small>
@@ -195,18 +230,22 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-intro/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-submitting-life-monitor/sort-and-change-case-workflow/sort-and-change-case.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-submitting-life-monitor/sort-and-change-case-workflow/sort-and-change-case.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ sort-and-change-case (imported from uploaded file)</a></h2>
-<p class="authors"><i>By: </i><a href="">Simone Leo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-05-11T12:51:10+00:00<br>
         Tags:
         workflows, fair</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-submitting-life-monitor/sort-and-change-case-workflow/sort-and-change-case.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Exporting Workflow Run RO-Crates from Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pauldg/">Paul De Geest</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pauldg/">Paul De Geest</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary">Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to keep provenance of the workflow invocation (an invocation of a workflow means one run or execution of the workflow) it can be exported from Galaxy in the form of a Workflow Run Crate RO-Crate profile.
 </p>
 <small>
@@ -214,9 +253,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, ro-crate, workflows</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Workflow Run RO-Crate Introduction</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary">The Workflow Run RO-Crate working group is developing a series of RO-Crate profiles for representing the provenance of computational workflow executions. The set includes three profiles, which represent provenance with increasing level of detail:
 </p>
 <small>
@@ -224,9 +265,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, ro-crate</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-workflow-run-ro-crate/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Best practices for workflows in GitHub repositories</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary">A workflow, just like any other piece of software, can be formally correct and runnable but still lack a number of additional features that might help its reusability, interoperability, understandability, etc.
 </p>
 <small>
@@ -234,9 +277,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, ro-crate, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-python/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-python/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 RO-Crate in Python</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kinow/">Bruno P. Kinoshita</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kinow/">Bruno P. Kinoshita</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary">This tutorial will show you how to manipulate RO-Crates in Python using the ro-crate-py package. It is based on the ro-crate-py documentation.
 </p>
 <small>
@@ -244,9 +289,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         fair, ro-crate, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-python/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-submitting-life-monitor/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-submitting-life-monitor/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Submitting workflows to LifeMonitor</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ilveroluca/">Luca Pireddu</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kikkomep/">Marco Enrico Piras</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ilveroluca/">Luca Pireddu</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/simleo/">Simone Leo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kikkomep/">Marco Enrico Piras</a></span><time datetime="2023-05-11T12:51:10+00:00">2023-05-11T12:51:10+00:00</time>
+</div>
 <p class="summary">Life Monitor (LM) is a service to support the
 
 </p>
@@ -262,4 +309,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/fair/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

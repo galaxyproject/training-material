@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Teaching and Hosting Galaxy training • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Teaching and Hosting Galaxy training</a></h1><p>Recently added tutorials, slides, FAQs, and events in the teaching topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Teaching and Hosting Galaxy training</a></h1><p>Recently added tutorials, slides, FAQs, and events in the teaching topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gallantries-coursebuilder/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gallantries-coursebuilder/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Course Builder</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2023-11-02T09:28:11+00:00">2023-11-02T09:28:11+00:00</time>
+</div>
 <p class="summary">As part of the Gallantries Project we developed a small “Course Builder” which can help you build a schedule of pre-existing videos from the GTN Video library to use with your courses.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching, cyoa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gallantries-coursebuilder/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-final-exercise/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-final-exercise/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Train-the-Trainer: putting it all together</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2023-06-12T05:47:02+00:00">2023-06-12T05:47:02+00:00</time>
+</div>
 <p class="summary">Running a demo training
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-final-exercise/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gtn-for-instructors/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gtn-for-instructors/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Overview of the Galaxy Training Material for Instructors</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2022-09-23T13:25:51+00:00">2022-09-23T13:25:51+00:00</time>
+</div>
 <p class="summary">Some questions
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/gtn-for-instructors/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Training techniques to enhance learner participation and engagement</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">Effective training
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/learner_participation_engagement/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/experiences/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/experiences/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Teaching experiences</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">We all teach in different ways, share your training philosophy and help other instructors find the way that is best for them!
 </p>
 <small>
@@ -75,9 +86,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/experiences/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Assessment and feedback in training and teachings</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">Assessment is the evaluation or estimation of the nature, quality, or ability of someone or something, while feedback integrate the output of the assessment in the learning process.
 </p>
 <small>
@@ -85,9 +98,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/assessment/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/motivation_demotivation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/motivation_demotivation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Motivation and Demotivation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fpsom/">Fotis E. Psomopoulos</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/allegravia/">Allegra Via</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ppalagi/">Patricia Palagi</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/elixir-goblet-ttt/">ELIXIR Goblet Train the Trainers</a></span><time datetime="2022-09-23T10:02:09+00:00">2022-09-23T10:02:09+00:00</time>
+</div>
 <p class="summary">In order to facilitate learning, we had to learn (a bit) how learning works. But motivation is key to learning. If we want to enhance motivation, we have to learn a bit how motivation works.
 
 </p>
@@ -96,9 +111,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/motivation_demotivation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/galaxy-admin-training/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/galaxy-admin-training/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Galaxy Admin Training</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2020-11-04T23:36:15+00:00">2020-11-04T23:36:15+00:00</time>
+</div>
 <p class="summary">Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.
 </p>
 <small>
@@ -106,9 +123,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/galaxy-admin-training/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-intro/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-intro/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Workshop Kickoff</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2019-06-04T15:45:44+00:00">2019-06-04T15:45:44+00:00</time>
+</div>
 <p class="summary">name: start
 </p>
 <small>
@@ -116,9 +135,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/workshop-intro/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Organizing a workshop</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-11-15T12:26:10+00:00">2018-11-15T12:26:10+00:00</time>
+</div>
 <p class="summary">These recommendations are highly inspired from the one by The Carpentries
 </p>
 <small>
@@ -126,9 +147,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/running-workshop/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Running a workshop as instructor</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-11-15T12:26:10+00:00">2018-11-15T12:26:10+00:00</time>
+</div>
 <p class="summary">In this tutorial you’ll learn how to run a workshop as a Galaxy Instructor
 </p>
 <small>
@@ -136,9 +159,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/running-workshop/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Training Infrastructure as a Service</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-11-15T12:26:10+00:00">2018-11-15T12:26:10+00:00</time>
+</div>
 <p class="summary">UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use Galaxy with a private queue for your training event. Your trainees’ jobs won’t wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the Galaxy admins, rather than feeling the stress of debugging and fixing your private Galaxy.
 </p>
 <small>
@@ -146,9 +171,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         teaching, cyoa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Set up a Galaxy for Training</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-06-04T17:05:29+00:00">2018-06-04T17:05:29+00:00</time>
+</div>
 <p class="summary">In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 </p>
 <small>
@@ -163,4 +190,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/teaching/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>GMOD • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/gmod/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GMOD</a></h1><p>Recently added tutorials, slides, FAQs, and events in the gmod topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/gmod/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GMOD</a></h1><p>Recently added tutorials, slides, FAQs, and events in the gmod topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Bacterial Genome Annotation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2024-02-01T10:04:54+00:00">2024-02-01T10:04:54+00:00</time>
+</div>
 <p class="summary">After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, illumina, bacteria, microgalaxy, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/bacterial-genome-annotation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Identification of AMR genes in an assembled bacterial genome</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/">Bazante Sanders</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/">Bazante Sanders</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2024-01-23T16:20:06+00:00">2024-01-23T16:20:06+00:00</time>
+</div>
 <p class="summary">Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections.
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, illumina, amr, one-health, jbrowse1, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/amr-gene-detection/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 SARS-CoV-2 Viral Sample Alignment and Variant Visualization</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/">Natalie Kucher</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/">Ava Hoffman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmeller/">Robert Meller</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/">Natalie Kucher</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/">Ava Hoffman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmeller/">Robert Meller</a></span><time datetime="2023-07-10T11:58:19+00:00">2023-07-10T11:58:19+00:00</time>
+</div>
 <p class="summary">There is a growing need for undergraduate students to learn cutting-edge concepts in genomics data science, including performing analysis on the cloud instead of a personal computer.
 </p>
 <small>
@@ -55,9 +62,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         sequence-analysis, covid19, gmod, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Refining Genome Annotations with Apollo (eukaryotes)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2022-08-22T19:31:27+00:00">2022-08-22T19:31:27+00:00</time>
+</div>
 <p class="summary">After automatically annotating your genome using Funannotate or Maker for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 </p>
 <small>
@@ -65,9 +74,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, eukaryote, cyoa, jbrowse1, apollo2</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo-euk/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genome annotation with Funannotate</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2021-11-29T13:29:30+00:00">2021-11-29T13:29:30+00:00</time>
+</div>
 <p class="summary">Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 </p>
 <small>
@@ -75,9 +86,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, eukaryote, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Refining Genome Annotations with Apollo</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nathandunn/">Nathan Dunn</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/">Gallantries: Bridging Training Communities in Life Science, Environment and Health</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nathandunn/">Nathan Dunn</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/">Gallantries: Bridging Training Communities in Life Science, Environment and Health</a></span><time datetime="2021-06-04T16:47:17+00:00">2021-06-04T16:47:17+00:00</time>
+</div>
 <p class="summary">Genome annotation
 </p>
 <small>
@@ -85,9 +98,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, prokaryote, microgalaxy, jbrowse1, apollo2</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Refining Genome Annotations with Apollo (prokaryotes)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nathandunn/">Nathan Dunn</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nathandunn/">Nathan Dunn</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mboudet/">Mateo Boudet</a></span><time datetime="2021-06-04T09:17:20+00:00">2021-06-04T09:17:20+00:00</time>
+</div>
 <p class="summary">After automatically annotating your genome using Prokka for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 </p>
 <small>
@@ -95,9 +110,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, prokaryote, microgalaxy, jbrowse1, apollo2</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/apollo/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genome Assembly of MRSA from Oxford Nanopore MinION data (and optionally Illumina data)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/">Bazante Sanders</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/">Bazante Sanders</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-03-24T18:30:46+00:00">2021-03-24T18:30:46+00:00</time>
+</div>
 <p class="summary">Sequencing (determining of DNA/RNA nucleotide sequence) is used all over
 
 </p>
@@ -106,18 +123,22 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         assembly, nanopore, amr, gmod, jbrowse1, microgalaxy</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genome annotation with Maker (short)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2021-01-12T13:45:59+00:00">2021-01-12T13:45:59+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2021-01-12T13:45:59+00:00<br>
         Tags:
         genome-annotation, gmod, eukaryote, maker, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 InterMine integration with Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/danielabutano/">Daniela Butano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yochannah/">Yo Yehudi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/danielabutano/">Daniela Butano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yochannah/">Yo Yehudi</a></span><time datetime="2020-12-09T14:45:02+00:00">2020-12-09T14:45:02+00:00</time>
+</div>
 <p class="summary">InterMine (Smith et al. 2012) is a well-establish platform to integrate and access life sciences data.
 
 </p>
@@ -126,9 +147,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, gmod, intermine</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/intermine/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ JBrowse</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a></span><time datetime="2020-01-10T12:21:13+00:00">2020-01-10T12:21:13+00:00</time>
+</div>
 <p class="summary">JBrowse for Genomics Visualisation
 </p>
 <small>
@@ -136,9 +159,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         visualisation, gmod, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genomic Data Visualisation with JBrowse</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/">Gallantries: Bridging Training Communities in Life Science, Environment and Health</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/">Gallantries: Bridging Training Communities in Life Science, Environment and Health</a></span><time datetime="2020-01-10T12:21:13+00:00">2020-01-10T12:21:13+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -147,18 +172,22 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         visualisation, gmod, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genome annotation with Maker</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/">Anthony Bretaudeau</a></span><time datetime="2018-09-24T16:21:32+00:00">2018-09-24T16:21:32+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2018-09-24T16:21:32+00:00<br>
         Tags:
         genome-annotation, gmod, eukaryote, jbrowse1, maker</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Making sense of a newly assembled genome</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/">Delphine Lariviere</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/delphine-l/">Delphine Lariviere</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/">Helena Rasche</a></span><time datetime="2018-06-14T14:42:30+00:00">2018-06-14T14:42:30+00:00</time>
+</div>
 <p class="summary">In this tutorial we begin with a new genome assembly just produced in the Unicycler tutorial. This is an assembly of E. coli C, which we will be comparing to assemblies of all other complete genes of this species.
 </p>
 <small>
@@ -166,9 +195,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         assembly, gmod, prokaryote, microgalaxy, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Genome annotation with Prokka</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2018-03-06T18:15:31+00:00">2018-03-06T18:15:31+00:00</time>
+</div>
 <p class="summary"><!–
 </p>
 <small>
@@ -176,9 +207,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, prokaryote, microgalaxy, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Genome annotation with Prokka</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a></span><time datetime="2018-03-06T18:15:31+00:00">2018-03-06T18:15:31+00:00</time>
+</div>
 <p class="summary">In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
 </p>
 <small>
@@ -186,9 +219,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         genome-annotation, gmod, prokaryote, microgalaxy, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/microbial-variants/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Microbial Variant Calling</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/annasyme/">Anna Syme</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/">Simon Gladman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tseemann/">Torsten Seemann</a></span><time datetime="2018-02-26T16:12:34+00:00">2018-02-26T16:12:34+00:00</time>
+</div>
 <p class="summary">Variant calling is the process of identifying differences between two genome samples. Usually differences are limited to single nucleotide polymorphisms (SNPs) and small insertions and deletions (indels). Larger structural variation such as inversions, duplications and large deletions are not typically covered by “variant calling”.
 </p>
 <small>
@@ -203,4 +238,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/gmod/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

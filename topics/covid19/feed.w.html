@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>SARS-CoV-2 • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/covid19/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">SARS-CoV-2</a></h1><p>Recently added tutorials, slides, FAQs, and events in the covid19 topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/covid19/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">SARS-CoV-2</a></h1><p>Recently added tutorials, slides, FAQs, and events in the covid19 topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 SARS-CoV-2 Viral Sample Alignment and Variant Visualization</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/">Natalie Kucher</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/">Ava Hoffman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmeller/">Robert Meller</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nakucher/">Natalie Kucher</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/avahoffman/">Ava Hoffman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/robertmeller/">Robert Meller</a></span><time datetime="2023-07-10T11:58:19+00:00">2023-07-10T11:58:19+00:00</time>
+</div>
 <p class="summary">There is a growing need for undergraduate students to learn cutting-edge concepts in genomics data science, including performing analysis on the cloud instead of a personal computer.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         sequence-analysis, covid19, gmod, jbrowse1</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/sars-with-galaxy-on-anvil/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Submitting SARS-CoV-2 sequences to ENA</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/">Miguel Roncoroni</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/">Miguel Roncoroni</a></span><time datetime="2021-08-10T09:29:31+00:00">2021-08-10T09:29:31+00:00</time>
+</div>
 <p class="summary">The European Nucleotide Archive
 </p>
 <small>
@@ -45,9 +50,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Submitting sequence data to ENA</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/">Miguel Roncoroni</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/">Bert Droesbeke</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/B0r1sD/">Boris Depoortere</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/roncoronimiguel/">Miguel Roncoroni</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bedroesb/">Bert Droesbeke</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/B0r1sD/">Boris Depoortere</a></span><time datetime="2021-08-10T09:29:31+00:00">2021-08-10T09:29:31+00:00</time>
+</div>
 <p class="summary">Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 
 </p>
@@ -56,9 +63,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Removal of human reads from SARS-CoV-2 sequencing data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></span><time datetime="2021-08-04T12:11:40+00:00">2021-08-04T12:11:40+00:00</time>
+</div>
 <p class="summary">Patient samples for pathogen detection are usually “contaminated” with human host DNA.
 
 </p>
@@ -67,9 +76,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         sequence-analysis, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2021-06-30T06:20:05+00:00">2021-06-30T06:20:05+00:00</time>
+</div>
 <p class="summary">Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
 </p>
 <small>
@@ -77,9 +88,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         variant-analysis, covid19, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Automating Galaxy workflows using the command line</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></span><time datetime="2021-06-08T08:34:12+00:00">2021-06-08T08:34:12+00:00</time>
+</div>
 <p class="summary">Galaxy is well-known as a web-based data analysis platform which provides a graphical interface for executing common bioinformatics tools in a reproducible manner. However, Galaxy is not just a user-friendly interface for executing one tool at a time. It provides two very useful features which allow scaling data analyses up to a high-throughput level: dataset collections and workflows.
 </p>
 <small>
@@ -87,9 +100,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, workflows, variant-analysis, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-automation/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to SRA Aligned Read Format and Cloud Metadata for SARS-CoV-2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jontrow/">Jon Trow</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jontrow/">Jon Trow</a></span><time datetime="2021-06-03T10:42:16+00:00">2021-06-03T10:42:16+00:00</time>
+</div>
 <p class="summary">Why have SRA data in the cloud?
 </p>
 <small>
@@ -97,9 +112,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, ncbi, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jontrow/">Jon Trow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/RareSeas/">Adelaide Rhodes</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/jontrow/">Jon Trow</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/RareSeas/">Adelaide Rhodes</a></span><time datetime="2021-05-31T08:41:38+00:00">2021-05-31T08:41:38+00:00</time>
+</div>
 <p class="summary">Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.
 </p>
 <small>
@@ -107,9 +124,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         galaxy-interface, ncbi, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a></span><time datetime="2021-01-07T10:02:09+00:00">2021-01-07T10:02:09+00:00</time>
+</div>
 <p class="summary">.enlarge120[
 </p>
 <small>
@@ -117,9 +136,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         assembly, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/">Dave Clements</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/">Marius van den Beek</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/">Dave Clements</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/">Anton Nekrutenko</a></span><time datetime="2020-06-24T15:38:29+00:00">2020-06-24T15:38:29+00:00</time>
+</div>
 <p class="summary">The aim of this tutorial is twofold:
 </p>
 <small>
@@ -127,9 +148,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         variant-analysis, covid19, virology, one-health</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></span><time datetime="2020-04-21T21:52:12+00:00">2020-04-21T21:52:12+00:00</time>
+</div>
 <p class="summary">In some research or clinical contexts it is not possible, or very hard, to
 
 </p>
@@ -138,9 +161,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         assembly, covid19</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Virtual screening of the SARS-CoV-2 main protease with rxDock and pose scoring</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/simonbray/">Simon Bray</a></span><time datetime="2020-03-27T13:26:13+00:00">2020-03-27T13:26:13+00:00</time>
+</div>
 <p class="summary">This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described in our dedicated site.
 </p>
 <small>
@@ -155,4 +180,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/covid19/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

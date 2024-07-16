@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Imaging • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,20 +24,22 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Imaging</a></h1><p>Recently added tutorials, slides, FAQs, and events in the imaging topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Imaging</a></h1><p>Recently added tutorials, slides, FAQs, and events in the imaging topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GTN_Exemplar_002_TMA_workflow</a></h2>
+<div class="meta"><time datetime="2023-02-14T08:03:56+00:00">2023-02-14T08:03:56+00:00</time></div>
 <p class="summary">End-to-End Tissue Microarray Analysis with Galaxy-ME</p>
 <small>
         Published: 2023-02-14T08:03:56+00:00<br>
         Tags:
         workflows, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 End-to-End Tissue Microarray Image Analysis with Galaxy-ME</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/CameronFRWatson/">Cameron Watson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/alliecreason/">Allison Creason</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/CameronFRWatson/">Cameron Watson</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/alliecreason/">Allison Creason</a></span><time datetime="2023-02-14T08:03:56+00:00">2023-02-14T08:03:56+00:00</time>
+</div>
 <p class="summary">Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for downstream processing and analysis. The MCMICRO (Schapiro et al. 2021) pipeline was developed to process multiplex images into single-cell data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for single-cell analysis, spatial analysis, and interactive visualization are available in Galaxy to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in Galaxy are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the Galaxy multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).
 </p>
 <small>
@@ -43,9 +47,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2021/03/18/tutorial_imaging_cell_profiler.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2021/03/18/tutorial_imaging_cell_profiler.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial: Object tracking using CellProfiler</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/">Yi Sun</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/">Yi Sun</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></span><time datetime="2021-03-18T00:00:00+00:00">2021-03-18T00:00:00+00:00</time>
+</div>
 <p class="summary">Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division. However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.
 </p>
 <small>
@@ -53,17 +59,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, new tutorial, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2021/03/18/tutorial_imaging_cell_profiler.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CP_object_tracking_example</a></h2>
+<div class="meta"><time datetime="2021-03-17T18:17:34+00:00">2021-03-17T18:17:34+00:00</time></div>
 <p class="summary">example cellprofiler pipeline</p>
 <small>
         Published: 2021-03-17T18:17:34+00:00<br>
         Tags:
         workflows, imaging, CellProfiler</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Object tracking using CellProfiler</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/">Yi Sun</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/sunyi000/">Yi Sun</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></span><time datetime="2021-03-17T18:17:34+00:00">2021-03-17T18:17:34+00:00</time>
+</div>
 <p class="summary">Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. Neumann et al. 2010, Hériché et al. 2014). However, automated time-lapse imaging can produce large amounts of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points.
 </p>
 <small>
@@ -71,17 +80,20 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CP_pipeline_IDR_training</a></h2>
+<div class="meta"><time datetime="2020-07-01T17:08:12+00:00">2020-07-01T17:08:12+00:00</time></div>
 <p class="summary">Nucleoli segmentation and feature extraction using CellProfiler</p>
 <small>
         Published: 2020-07-01T17:08:12+00:00<br>
         Tags:
         workflows, imaging, CellProfiler</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Nucleoli Segmentation &lt;br&gt; &amp; &lt;br&gt; Feature Extraction &lt;br&gt; using CellProfiler</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></span><time datetime="2020-07-01T17:08:12+00:00">2020-07-01T17:08:12+00:00</time>
+</div>
 <p class="summary">What is the nucleoli?
 </p>
 <small>
@@ -89,9 +101,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Nucleoli segmentation and feature extraction using CellProfiler</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/jkh1/">Jean-Karim Hériché</a></span><time datetime="2020-07-01T17:08:12+00:00">2020-07-01T17:08:12+00:00</time>
+</div>
 <p class="summary">The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei (Fig. 1).
 
 </p>
@@ -100,36 +114,44 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'</a></h2>
-<p class="authors"><i>By: </i><a href="">Till Korten</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Till Korten</a></span><time datetime="2019-08-13T12:47:55+00:00">2019-08-13T12:47:55+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2019-08-13T12:47:55+00:00<br>
         Tags:
         workflows, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ feature_extraction</a></h2>
-<p class="authors"><i>By: </i><a href="">Till Korten</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Till Korten</a></span><time datetime="2019-08-13T12:47:55+00:00">2019-08-13T12:47:55+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2019-08-13T12:47:55+00:00<br>
         Tags:
         workflows, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ analyze_screen</a></h2>
-<p class="authors"><i>By: </i><a href="">Till Korten</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Till Korten</a></span><time datetime="2019-08-13T12:47:55+00:00">2019-08-13T12:47:55+00:00</time>
+</div>
 <p class="summary">Analyse HeLa fluorescence siRNA screen</p>
 <small>
         Published: 2019-08-13T12:47:55+00:00<br>
         Tags:
         workflows, imaging</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Analyse HeLa fluorescence siRNA screen</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/">Thomas Wollmann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/">Leonid Kostrykin</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/">Thomas Wollmann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/">Leonid Kostrykin</a></span><time datetime="2019-08-13T12:47:55+00:00">2019-08-13T12:47:55+00:00</time>
+</div>
 <p class="summary">This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at Zenodo.
 </p>
 <small>
@@ -137,9 +159,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging, HeLa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Introduction to image analysis using Galaxy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/">Thomas Wollmann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/">Leonid Kostrykin</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/thomaswollmann/">Thomas Wollmann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/">Saskia Hiltemann</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/">Leonid Kostrykin</a></span><time datetime="2019-08-13T12:47:55+00:00">2019-08-13T12:47:55+00:00</time>
+</div>
 <p class="summary">Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.
 </p>
 <small>
@@ -147,9 +171,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         imaging, HeLa</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Mass spectrometry imaging: Loading and exploring MSI data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/foellmelanie/">Melanie Föll</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/">Björn Grüning</a></span><time datetime="2018-11-27T16:18:26+00:00">2018-11-27T16:18:26+00:00</time>
+</div>
 <p class="summary">Mass spectrometry imaging (MSI) is applied to measure the spatial distribution of hundreds of biomolecules in a sample. A mass spectrometer scans over the entire sample and collects a mass spectrum every 5-200 µm. This results in thousands of spots in which a mass spectrum is acquired. Each mass spectrum consists of hundreds of analytes that are measured by their mass-to-charge (m/z) ratio. For each analyte the peak intensity in the mass spectra of every pixel is known and can be set together to map the spatial distribution of the analyte in the sample.
 </p>
 <small>
@@ -164,4 +190,14 @@ main { overflow-y: auto; overflow-x: hidden; }
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/imaging/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

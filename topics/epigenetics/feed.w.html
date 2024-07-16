@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Epigenetics • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Epigenetics</a></h1><p>Recently added tutorials, slides, FAQs, and events in the epigenetics topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Epigenetics</a></h1><p>Recently added tutorials, slides, FAQs, and events in the epigenetics topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial: Single-cell ATAC-seq standard processing with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-12T00:00:00+00:00">2024-07-12T00:00:00+00:00</time>
+</div>
 <p class="summary">We are proud to announce that a new training, explaining the analysis of single cell ATAC-seq data with SnapATAC2 and Scanpy, is now available in the Galaxy Training Network.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, new tutorial, single-cell, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Workflow - Standard processing of 10X single cell ATAC-seq data with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-11T14:34:09+00:00">2024-07-11T14:34:09+00:00</time>
+</div>
 <p class="summary">Workflow of Tutorial "Single-cell ATAC-seq standard processing with SnapATAC2".
 This workflow takes a fragment file as input and performs the standard steps of scATAC-seq analysis: filtering, dimension reduction, embedding and visualization of marker genes with SnapATAC2.
 In an alternative step, the fragment file can also be generated from a BAM file. </p>
@@ -46,9 +51,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         workflows, single-cell, scATAC-seq, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Single-cell ATAC-seq standard processing with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-11T14:34:09+00:00">2024-07-11T14:34:09+00:00</time>
+</div>
 <p class="summary">Single-cell Assay for Transposase-Accessible Chromatin using sequencing (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. “open”) chromatin and not in closed chromatin.
 
 </p>
@@ -57,8 +64,9 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ ATAC-seq GTM</a></h2>
+<div class="meta"><time datetime="2024-03-06T07:59:37+00:00">2024-03-06T07:59:37+00:00</time></div>
 <p class="summary">atac-seq
 </p>
 <small>
@@ -66,18 +74,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/cut_and_run/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Infinium Human Methylation BeadChip</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2023-10-23T10:11:26+00:00">2023-10-23T10:11:26+00:00</time>
+</div>
 <p class="summary">The workflow containes the step to perpare the data for and run Galaxy Infinium Human Methylation BeadChip tool that represents many popular algorithms for detecting somatic genetic alterations from genome and exome data</p>
 <small>
         Published: 2023-10-23T10:11:26+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/workflows/Infinium-Human-Methylation-BeadChip.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Pre-processing of 10X Single-Cell ATAC-seq Datasets</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-04-24T18:23:20+00:00">2023-04-24T18:23:20+00:00</time>
+</div>
 <p class="summary">Similar to bulk ATAC-Seq, single-cell ATAC-Seq (scATAC-seq) leverages the hyperactive Tn5 Transposase to profile open chromatin regions but at single-cell resolution. Thus helps in understanding cell type-specific chromatin accessibility from a heterogeneous cell population.
 </p>
 <small>
@@ -85,9 +97,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/ucsc_import.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/ucsc_import.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ UCSC import: what should my file look like?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">~2020 lines, with the following header line:
 </p>
 <small>
@@ -95,9 +109,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/ucsc_import.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/subsampling.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/subsampling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Is it possible to subsample some samples if you have more reads?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -106,9 +122,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/subsampling.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/heatmap_colours.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/heatmap_colours.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Changing the heatmap colours</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">You can change the heatmap color, by expanding the Show advanced options section. There are many options here, including setting the colors.
 </p>
 <small>
@@ -116,9 +134,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/heatmap_colours.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/bowtie_parameters.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/bowtie_parameters.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ In bowtie 2 parameters, in place of 1000 for other experiments, should we mention the median fragment length observed in our library?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Not the median fragment length but the maximum fragment length you expect. However, you will see that in illumina sequencers, the longer the fragments are the less efficiently they are sequenced so long fragment length pairs are not very numerous.
 </p>
 <small>
@@ -126,9 +146,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/bowtie_parameters.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/adapter_trimming.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/adapter_trimming.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Automatically trim adapters (without providing custom sequences)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">There are many tools for this: Trimmomatic, Trim Galore, and a few others (search: “Trim”).
 
 </p>
@@ -137,9 +159,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/faqs/adapter_trimming.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to ATAC-Seq data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a></span><time datetime="2021-04-08T13:47:23+00:00">2021-04-08T13:47:23+00:00</time>
+</div>
 <p class="summary">Where does my data come from?
 </p>
 <small>
@@ -147,16 +171,18 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</a></h2>
+<div class="meta"><time datetime="2020-10-07T11:07:32+00:00">2020-10-07T11:07:32+00:00</time></div>
 <p class="summary">Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</p>
 <small>
         Published: 2020-10-07T11:07:32+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/workflows/tal1-binding-site-identification-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ ATAC-seq GTM</a></h2>
+<div class="meta"><time datetime="2019-09-02T16:17:33+00:00">2019-09-02T16:17:33+00:00</time></div>
 <p class="summary">atac-seq
 </p>
 <small>
@@ -164,9 +190,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 ATAC-Seq data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/">Lucille Delisle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/">Maria Doyle</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/heylf/">Florian Heyl</a></span><time datetime="2019-09-02T16:17:33+00:00">2019-09-02T16:17:33+00:00</time>
+</div>
 <p class="summary">In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. Assay for Transposase-Accessible Chromatin using sequencing (ATAC-Seq) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.
 </p>
 <small>
@@ -174,18 +202,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/workflows/formation_of_super_structures_on_xi.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/workflows/formation_of_super_structures_on_xi.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ GTN - ChIP Seq - Formation Of Super Structures On Xi</a></h2>
-<p class="authors"><i>By: </i><a href="">Friederike Dündar</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="">Vivek Bhardwaj</a>, <a href="">Fidel Ramirez</a>, <a href="">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Friederike Dündar</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="">Vivek Bhardwaj</a>, <a href="">Fidel Ramirez</a>, <a href="">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2018-09-17T07:13:05+00:00">2018-09-17T07:13:05+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2018-09-17T07:13:05+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/workflows/formation_of_super_structures_on_xi.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ ChIP-seq data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/LeilyR/">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/LeilyR/">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2018-09-17T07:13:05+00:00">2018-09-17T07:13:05+00:00</time>
+</div>
 <p class="summary">ChIP-seq
 </p>
 <small>
@@ -193,9 +225,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics, ChIP-seq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Formation of the Super-Structures on the Inactive X</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/friedue/">Friederike Dündar</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/">Fidel Ramirez</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/LeilyR/">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/friedue/">Friederike Dündar</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/">Fidel Ramirez</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/LeilyR/">Leily Rabbani</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2018-09-17T07:13:05+00:00">2018-09-17T07:13:05+00:00</time>
+</div>
 <p class="summary">Within a cell nucleus, the DNA is tightly-packed and the chromatin is spatially distributed with different levels and scales of organizations.
 </p>
 <small>
@@ -203,9 +237,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics, ChIP-seq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ EWAS Epigenome-Wide Association Studies Introduction</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2018-08-27T08:04:21+00:00">2018-08-27T08:04:21+00:00</time>
+</div>
 <p class="summary">What is the topic?
 </p>
 <small>
@@ -213,9 +249,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Infinium Human Methylation BeadChip</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/">Katarzyna Kamieniecka</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/">Khaled Jum'ah</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/">Krzysztof Poterlowicz</a></span><time datetime="2018-08-27T08:04:21+00:00">2018-08-27T08:04:21+00:00</time>
+</div>
 <p class="summary">This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance Hugo et al. 2015.
 </p>
 <small>
@@ -223,17 +261,20 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/ewas-suite/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/workflows/Galaxy-Workflow-Galaxy_Hi-C.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/workflows/Galaxy-Workflow-Galaxy_Hi-C.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Galaxy Workflow Galaxy Hi C</a></h2>
+<div class="meta"><time datetime="2018-02-23T17:11:15+00:00">2018-02-23T17:11:15+00:00</time></div>
 <p class="summary">Hi-C analysis of Drosophila melanogaster cells using HiCExplorer</p>
 <small>
         Published: 2018-02-23T17:11:15+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/workflows/Galaxy-Workflow-Galaxy_Hi-C.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Hi-C analysis of Drosophila melanogaster cells using HiCExplorer</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/">Fidel Ramirez</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/">Ekaterina Polkh</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/">Fidel Ramirez</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/">Ekaterina Polkh</a></span><time datetime="2018-02-23T11:09:57+00:00">2018-02-23T11:09:57+00:00</time>
+</div>
 <p class="summary">In this HiCExplorer tutorial we will generate and plot a Hi-C contact matrix.
 
 </p>
@@ -242,33 +283,38 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/hicexplorer/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/qc_mapping.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/qc_mapping.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Identification Of The Binding Sites Of The Estrogen Receptor - Qc Mapping</a></h2>
+<div class="meta"><time datetime="2017-09-18T20:09:29+00:00">2017-09-18T20:09:29+00:00</time></div>
 <p class="summary">Identification of the binding sites of the Estrogen receptor</p>
 <small>
         Published: 2017-09-18T20:09:29+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/qc_mapping.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/chip_seq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/chip_seq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Identification Of The Binding Sites Of The Estrogen Receptor - Chip Seq</a></h2>
+<div class="meta"><time datetime="2017-09-18T20:09:29+00:00">2017-09-18T20:09:29+00:00</time></div>
 <p class="summary">Identification of the binding sites of the Estrogen receptor</p>
 <small>
         Published: 2017-09-18T20:09:29+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/chip_seq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Workflow Methylation Seq</a></h2>
+<div class="meta"><time datetime="2017-09-13T09:19:44+00:00">2017-09-13T09:19:44+00:00</time></div>
 <p class="summary">DNA Methylation data analysis</p>
 <small>
         Published: 2017-09-13T09:19:44+00:00<br>
         Tags:
         workflows, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/workflows/methylation-seq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/introduction-chip-seq/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/introduction-chip-seq/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to ChIP-Seq data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a></span><time datetime="2017-06-12T08:10:40+00:00">2017-06-12T08:10:40+00:00</time>
+</div>
 <p class="summary">What is ChIP sequencing?
 </p>
 <small>
@@ -276,9 +322,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/introduction-chip-seq/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 DNA Methylation data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dpryan79/">Devon Ryan</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/dpryan79/">Devon Ryan</a></span><time datetime="2017-02-16T08:40:49+00:00">2017-02-16T08:40:49+00:00</time>
+</div>
 <p class="summary">We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
 </p>
 <small>
@@ -286,9 +334,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/methylation-seq/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Identification of the binding sites of the T-cell acute lymphocytic leukemia protein 1 (TAL1)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/malloryfreeberg/">Mallory Freeberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/moheydarian/">Mo Heydarian</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/">Vivek Bhardwaj</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a></span><time datetime="2016-12-20T14:12:55+00:00">2016-12-20T14:12:55+00:00</time>
+</div>
 <p class="summary">This tutorial uses ChIP-seq datasets from a study published by Wu et al. 2014. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.”
 </p>
 <small>
@@ -296,9 +346,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         epigenetics, ChIP-seq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/tal1-binding-site-identification/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/introduction-dna-methylation/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/introduction-dna-methylation/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introduction to DNA Methylation data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/">Yvan Le Bras</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/">Joachim Wolff</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/">Yvan Le Bras</a></span><time datetime="2016-10-05T15:07:38+00:00">2016-10-05T15:07:38+00:00</time>
+</div>
 <p class="summary">DNA Methylation data analysis
 </p>
 <small>
@@ -313,4 +365,14 @@ In an alternative step, the fragment file can also be generated from a BAM file.
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/epigenetics/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>

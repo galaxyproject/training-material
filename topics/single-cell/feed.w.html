@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta><title>Single Cell • GTN News </title><link rel="icon" type="image/png" href="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></link><link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"></link><style type="text/css">
-:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;}
-body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand);}
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
 h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
 h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
 p { margin: 0; }
@@ -12,8 +12,10 @@ div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
 div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
 div small {display: none;}
 div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
-.authors{font-style: italic; font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem;}
-body { display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
 header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
 header img {margin-right: 0.5em}
 main { grid-area: main; padding: 15px 5px 10px 5px;}
@@ -22,12 +24,13 @@ div.entry ul a { text-decoration: underline; }
 div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
 footer a { text-decoration: underline; }
 footer a:hover{ font-weight:700; }
-main { background: /* Shadow Cover TOP */ linear-gradient( white 30%, rgba(255, 255, 255, 0) ) center top, /* Shadow Cover BOTTOM */ linear-gradient( rgba(255, 255, 255, 0), white 70% ) center bottom, /* Shadow TOP */ radial-gradient( farthest-side at 50% 0, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center top, /* Shadow BOTTOM */ radial-gradient( farthest-side at 50% 100%, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0) ) center bottom; background-repeat: no-repeat; background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px; background-attachment: local, local, scroll, scroll;}
 main { overflow-y: auto; overflow-x: hidden; }
 
-        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Single Cell</a></h1><p>Recently added tutorials, slides, FAQs, and events in the single-cell topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true">
+        </style></head><body><header><hgroup><h1><a class="head_link" target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">Single Cell</a></h1><p>Recently added tutorials, slides, FAQs, and events in the single-cell topic</p></hgroup><a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"><img width="30px" alt="gtn logo" src="https://training.galaxyproject.org/training-material/assets/images/GTN-60px.png"></img></a></header><main><div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial: Single-cell ATAC-seq standard processing with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-12T00:00:00+00:00">2024-07-12T00:00:00+00:00</time>
+</div>
 <p class="summary">We are proud to announce that a new training, explaining the analysis of single cell ATAC-seq data with SnapATAC2 and Scanpy, is now available in the Galaxy Training Network.
 </p>
 <small>
@@ -35,9 +38,11 @@ main { overflow-y: auto; overflow-x: hidden; }
         Tags:
         news, new tutorial, single-cell, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2024/07/12/tutorial-snapatac-standard.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Workflow - Standard processing of 10X single cell ATAC-seq data with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-11T14:34:09+00:00">2024-07-11T14:34:09+00:00</time>
+</div>
 <p class="summary">Workflow of Tutorial "Single-cell ATAC-seq standard processing with SnapATAC2".
 This workflow takes a fragment file as input and performs the standard steps of scATAC-seq analysis: filtering, dimension reduction, embedding and visualization of marker genes with SnapATAC2.
 In an alternative step, the fragment file can also be generated from a BAM file. </p>
@@ -46,9 +51,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         workflows, single-cell, scATAC-seq, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/workflows/Standard-processing-of-10X-single-cell-ATAC-seq-data-with-SnapATAC2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Single-cell ATAC-seq standard processing with SnapATAC2</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/timonschlegel/">Timon Schlegel</a></span><time datetime="2024-07-11T14:34:09+00:00">2024-07-11T14:34:09+00:00</time>
+</div>
 <p class="summary">Single-cell Assay for Transposase-Accessible Chromatin using sequencing (scATAC-seq) analysis is a method to decipher the chromatin states of the analyzed cells. In general, genes are only expressed in accessible (i.e. “open”) chromatin and not in closed chromatin.
 
 </p>
@@ -57,9 +64,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 From GTN Intern to Tutorial Author to Bioinformatician</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a></span><time datetime="2024-06-13T00:00:00+00:00">2024-06-13T00:00:00+00:00</time>
+</div>
 <p class="summary">With growing access and interest in sequencing data, Galaxy is a knight in shining armor for wet lab scientists hoping to analyze their own data. With long term intentions of increasing access to bioinformatic analyses, the Galaxy Training Network (GTN) creates a safe space where non-computer-scientists may analyze their own data and even learn to code: an invaluable skill in today’s scientific world. Galaxy introduced me to brand new skills as an undergraduate and ultimately changed the trajectory of my career. Here is my story as a biology undergraduate with no coding experience turned GTN contributor &, eventually, coding bioinformatician: thanks to Galaxy.
 </p>
 <small>
@@ -67,9 +76,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         news, single-cell, training, education, trajectory, user, contributor</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2024/06/13/from-gtn-intern-to-tutorial-author-to-bioinformatician.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Filter, plot, and explore single cell RNA-seq data with Seurat</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pcm32/">Pablo Moreno</a></span><time datetime="2024-04-09T08:31:24+00:00">2024-04-09T08:31:24+00:00</time>
+</div>
 <p class="summary">You’ve previously done all the work to make a single cell matrix. Now it’s time to fully process our data using Seurat: remove low quality cells, reduce the many dimensions of data that make it difficult to work with, and ultimately try to define clusters and find some biological meaning and insights! There are many packages for analysing single cell data - Seurat (Satija et al. 2015), Scanpy (Wolf et al. 2018), Monocle (Trapnell et al. 2014), Scater (McCarthy et al. 2017), and many more. We’re working with Seurat because it is well updated, broadly used, and highly trusted within the field of bioinformatics.
 </p>
 <small>
@@ -77,36 +88,44 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-SingleCellExperiment-(SCE)-conversion.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-SingleCellExperiment-(SCE)-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ AnnData to SingleCellExperiment (SCE) conversion</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></span><time datetime="2024-02-13T12:28:05+00:00">2024-02-13T12:28:05+00:00</time>
+</div>
 <p class="summary">AnnData to SCE format conversion (manually using Galaxy buttons)</p>
 <small>
         Published: 2024-02-13T12:28:05+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-SingleCellExperiment-(SCE)-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Seurat-conversion.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Seurat-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ AnnData to Seurat conversion</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></span><time datetime="2024-02-13T12:28:05+00:00">2024-02-13T12:28:05+00:00</time>
+</div>
 <p class="summary">AnnData to Seurat format conversion (manually using Galaxy buttons)</p>
 <small>
         Published: 2024-02-13T12:28:05+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Seurat-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Cell-Data-Set-(CDS)-conversion.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Cell-Data-Set-(CDS)-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ AnnData to Cell Data Set (CDS) conversion</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a></span><time datetime="2024-02-13T12:28:05+00:00">2024-02-13T12:28:05+00:00</time>
+</div>
 <p class="summary">AnnData to CDS format conversion (manually using Galaxy buttons). This workflow does not include renaming the column containing gene symbols. </p>
 <small>
         Published: 2024-02-13T12:28:05+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/workflows/AnnData-to-Cell-Data-Set-(CDS)-conversion.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Converting between common single cell data formats</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2024-02-13T12:28:05+00:00">2024-02-13T12:28:05+00:00</time>
+</div>
 <p class="summary">You finally decided to analyse some single cell data, you got your files either from the lab or publicly available sources, you opened the first tutorial available on Galaxy Training Network and… you hit the wall! The format of your files is not compatible with the one used in tutorial! Have you been there?
 
 </p>
@@ -115,9 +134,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, data management, data import</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-ingest/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2023/12/22/single-cell.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2023/12/22/single-cell.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 Galaxy Single-cell Community: Year in Review</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-12-22T00:00:00+00:00">2023-12-22T00:00:00+00:00</time>
+</div>
 <p class="summary">🚀Embarking on a cosmic journey, the Galaxy Single-cell Community has clustered together to unveil a constellation of tools, making strides in RNA-stellar discoveries and creating out-of-this-world workflows. With a commitment to battling work duplication across the multiverse, this community is boldly charting a course for global domination, proving that when it comes to bioinformatics, the Galaxy is the limit!✨
 </p>
 <small>
@@ -125,27 +146,33 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         news, gtn, communications, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2023/12/22/single-cell.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ EBI SCXA to AnnData (Scanpy) or Seurat Object</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a></span><time datetime="2023-12-14T16:16:41+00:00">2023-12-14T16:16:41+00:00</time>
+</div>
 <p class="summary">Creates input file for Filter, Plot, Explore tutorial</p>
 <small>
         Published: 2023-12-14T16:16:41+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/workflows/EBI-SCXA-to-AnnData-(Scanpy)-or-Seurat-Object.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/NCBI_to_Anndata.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/NCBI_to_Anndata.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ NCBI to Anndata</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-12-13T18:43:30+00:00">2023-12-13T18:43:30+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-12-13T18:43:30+00:00<br>
         Tags:
         workflows, single-cell, name:single-cell, name:data-management</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/workflows/NCBI_to_Anndata.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Converting NCBI Data to the AnnData Format</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></span><time datetime="2023-12-13T18:43:30+00:00">2023-12-13T18:43:30+00:00</time>
+</div>
 <p class="summary">The goal of this tutorial is to take raw NCBI data from some published research, convert the raw data into the AnnData format then add metadata to the object so that it can be used for further processing / analysis. Here we will look at the steps to obtain, understand, and manipulate the data in order for it to be properly processed.
 </p>
 <small>
@@ -153,9 +180,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, data management, data import</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-ncbi-anndata/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generating a single cell matrix using Alevin and combining datasets (bash + R)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-12-08T14:46:22+00:00">2023-12-08T14:46:22+00:00</time>
+</div>
 <p class="summary">Setting up the environment
 </p>
 <small>
@@ -163,18 +192,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/alevin-commandline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/workflows/inferring-trajectories-with-scanpy-workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/workflows/inferring-trajectories-with-scanpy-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Inferring Trajectories with Scanpy Tutorial Workflow</a></h2>
-<p class="authors"><i>By: </i><a href="">Marisa Loach</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Marisa Loach</a></span><time datetime="2023-12-08T07:20:20+00:00">2023-12-08T07:20:20+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-12-08T07:20:20+00:00<br>
         Tags:
         workflows, single-cell, name:singlecell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/workflows/inferring-trajectories-with-scanpy-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Inferring single cell trajectories with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/">Marisa Loach</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/">Marisa Loach</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-12-08T07:20:20+00:00">2023-12-08T07:20:20+00:00</time>
+</div>
 <p class="summary">Introduction
 </p>
 <small>
@@ -182,18 +215,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/Clustering-3k-PBMC-with-Scanpy.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/Clustering-3k-PBMC-with-Scanpy.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Clustering 3k PBMC with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-12-05T14:45:06+00:00">2023-12-05T14:45:06+00:00</time>
+</div>
 <p class="summary">Workflow based on clustering 3K PBMCs with Scanpy tutorial</p>
 <small>
         Published: 2023-12-05T14:45:06+00:00<br>
         Tags:
         workflows, single-cell, name:scRNA-seq, name:single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/workflows/Clustering-3k-PBMC-with-Scanpy.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Importing files from public atlases</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-11-14T17:16:58+00:00">2023-11-14T17:16:58+00:00</time>
+</div>
 <p class="summary">Introduction
 </p>
 <small>
@@ -201,9 +238,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, data import, data management</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/EBI-retrieval/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/notebook_warning.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/notebook_warning.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Notebook-based tutorials can give different outputs</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-10-17T12:50:06+00:00">2023-10-17T12:50:06+00:00</time>
+</div>
 <p class="summary">The nature of coding pulls the most recent tools to perform tasks. This can - and often does - change the outputs of an analysis. Be prepared, as you are unlikely to get outputs identical to a tutorial if you are running it in a programming environment like a Jupyter Notebook or R-Studio. That’s ok! The outputs should still be pretty close.
 </p>
 <small>
@@ -211,9 +250,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/notebook_warning.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/user_community_join.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/user_community_join.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How can I talk with other users?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-10-08T15:21:27+00:00">2023-10-08T15:21:27+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -222,9 +263,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/user_community_join.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/single_cell_omics.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/single_cell_omics.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Use our Single Cell Omics Lab</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-10-08T15:21:27+00:00">2023-10-08T15:21:27+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -233,18 +276,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/single_cell_omics.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Filter, plot, and explore single cell RNA-seq data with Seurat (R)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/Camila-goclowski/">Camila Goclowski</a></span><time datetime="2023-10-02T09:11:50+00:00">2023-10-02T09:11:50+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-10-02T09:11:50+00:00<br>
         Tags:
         single-cell, 10x, paper-replication, R, rmarkdown-notebook, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Automated Cell Annotation</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a></span><time datetime="2023-09-04T08:24:00+00:00">2023-09-04T08:24:00+00:00</time>
+</div>
 <p class="summary">What is Cell Annotation?
 </p>
 <small>
@@ -252,27 +299,33 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/">Morgan Howells</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2023-08-25T05:00:35+00:00">2023-08-25T05:00:35+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-08-25T05:00:35+00:00<br>
         Tags:
         single-cell, 10x, paper-replication, Python, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Scanpy Parameter Iterator workflow full (imported from URL)</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a></span><time datetime="2023-07-19T06:47:23+00:00">2023-07-19T06:47:23+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-07-19T06:47:23+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Scanpy Parameter Iterator</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></span><time datetime="2023-07-19T06:47:23+00:00">2023-07-19T06:47:23+00:00</time>
+</div>
 <p class="summary">The magic of bioinformatic analysis is that we use maths, statistics and complicated algorithms to deal with huge amounts of data to help us investigate biology. However, analysis is not always straightforward – each tool has various parameters to select. Eventually, we can end up with very different outcomes depending on the values we choose. With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data, then make sure your analysis shows that, for you to then be able to identify the 25% new information.
 </p>
 <small>
@@ -280,54 +333,66 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Filter, Plot and Explore Single-cell RNA-seq Data updated</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Julia Jakiela</a></span><time datetime="2023-06-13T11:38:52+00:00">2023-06-13T11:38:52+00:00</time>
+</div>
 <p class="summary">Filter, Plot and Explore Single-cell RNA-seq Data</p>
 <small>
         Published: 2023-06-13T11:38:52+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Preprocessing of 10X scRNA-seq data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a>, <a href="">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a></span><time datetime="2023-05-19T11:33:23+00:00">2023-05-19T11:33:23+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-05-19T11:33:23+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/workflows/scRNA-seq-Preprocessing-TenX.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Trajectory-analysis-using-Monocle3---full-tutorial-workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Trajectory-analysis-using-Monocle3---full-tutorial-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Trajectory analysis using Monocle3 - full tutorial workflow</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a></span><time datetime="2023-05-16T08:09:55+00:00">2023-05-16T08:09:55+00:00</time>
+</div>
 <p class="summary">Trajectory analysis using Monocle3, starting from AnnData</p>
 <small>
         Published: 2023-05-16T08:09:55+00:00<br>
         Tags:
         workflows, single-cell, name:trajectory_analysis, name:transcriptomics, name:scRNA-seq, name:single_cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Trajectory-analysis-using-Monocle3---full-tutorial-workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ scATAC-seq FASTQ to Count Matrix</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-04-24T18:23:20+00:00">2023-04-24T18:23:20+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-04-24T18:23:20+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-FASTQ-to-Count-Matrix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ scATAC-seq Count Matrix Filtering</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-04-24T18:23:20+00:00">2023-04-24T18:23:20+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-04-24T18:23:20+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/workflows/scATAC-seq-Count-Matrix-Filtering.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Pre-processing of 10X Single-Cell ATAC-seq Datasets</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2023-04-24T18:23:20+00:00">2023-04-24T18:23:20+00:00</time>
+</div>
 <p class="summary">Similar to bulk ATAC-Seq, single-cell ATAC-Seq (scATAC-seq) leverages the hyperactive Tn5 Transposase to profile open chromatin regions but at single-cell resolution. Thus helps in understanding cell type-specific chromatin accessibility from a heterogeneous cell population.
 </p>
 <small>
@@ -335,26 +400,31 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, epigenetics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scatac-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Inferring single cell trajectories with Monocle3 (R)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></span><time datetime="2023-04-12T19:29:39+00:00">2023-04-12T19:29:39+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2023-04-12T19:29:39+00:00<br>
         Tags:
         single-cell, 10x, paper-replication, R, rmarkdown-notebook, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Cell Cycle Regression Workflow</a></h2>
+<div class="meta"><time datetime="2023-01-25T09:43:32+00:00">2023-01-25T09:43:32+00:00</time></div>
 <p class="summary"></p>
 <small>
         Published: 2023-01-25T09:43:32+00:00<br>
         Tags:
         workflows, single-cell, 10x, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Removing the effects of the cell cycle</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/">Marisa Loach</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/">Marisa Loach</a></span><time datetime="2023-01-25T09:43:32+00:00">2023-01-25T09:43:32+00:00</time>
+</div>
 <p class="summary">Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.
 </p>
 <small>
@@ -362,27 +432,33 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MuSiC-Deconvolution: Compare</a></h2>
-<p class="authors"><i>By: </i><a href="">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">This workflow runs 3 comparisons using MuSiC Deconvolution compare: where datasets cell compositions are inferred from a reference containing healthy and diseased cells; where diseased are inferred from disease and healthy from healthy; and where both diseased and healthy are inferred from a healthy reference.</p>
 <small>
         Published: 2023-01-20T10:58:39+00:00<br>
         Tags:
         workflows, single-cell, name:singlecell, name:transcriptomics, name:training</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MuSiC-Deconvolution: Data generation | bulk | ESet</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">This workflow creates bulk ESet objects from uploaded raw matrix &amp; metadata files</p>
 <small>
         Published: 2023-01-20T10:58:39+00:00<br>
         Tags:
         workflows, single-cell, name:singlecell, name:transcriptomics, name:training</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MuSiC-Deconvolution: Data generation | sc | metadata</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">This workflow generates from only an EBI SCXA reference the metadata for creating an ESet object
 </p>
 <small>
@@ -390,18 +466,22 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         workflows, single-cell, name:singlecell, name:transcriptomics, name:training, name:deconvolution</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MuSiC-Deconvolution: Data generation | sc | matrix + ESet</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">This workflow creates an ESet object from scRNA metadata file and EBI SCXA retrieveal</p>
 <small>
         Published: 2023-01-20T10:58:39+00:00<br>
         Tags:
         workflows, single-cell, name:singlecell, name:training, name:transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">After completing the MuSiC Wang et al. 2019 deconvolution tutorial, you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw scRNA-seq dataset pulled from a public resource (the EMBL-EBI single cell expression atlas Moreno et al. 2021. Let’s get started!
 </p>
 <small>
@@ -409,9 +489,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, data management</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">After completing the MuSiC deconvolution tutorial (Wang et al. 2019), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas (Moreno et al. 2021).  Let’s get started!
 </p>
 <small>
@@ -419,9 +501,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, transcriptomics, data management</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Comparing inferred cell compositions using MuSiC deconvolution</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2023-01-20T10:58:39+00:00">2023-01-20T10:58:39+00:00</time>
+</div>
 <p class="summary">The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site MuSiC or published article (Wang et al. 2019).
 </p>
 <small>
@@ -429,9 +513,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial Suite: Deconvolution with MuSiC, from public data to disease interrogation!</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2022-11-29T00:00:00+00:00">2022-11-29T00:00:00+00:00</time>
+</div>
 <p class="summary">The still new and shiny single-cell analysis topic now boasts a deconvolution tutorial suite! What does deconvolution do you ask? Well, in this context, it infers cell proportions from bulk RNA-seq data. You heard that correctly - instead of expensive new single-cell experiments, you can re-analyse old bulk RNA-seq data and estimate cell proportions. All you need is a reasonably good single cell dataset to use as a reference and you’re good to go! The tutorial suite shows you how to build your reference from publicly available single cell data, and apply analysis to some publicly available bulk RNA-seq data.
 </p>
 <small>
@@ -439,9 +525,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         news, new tutorial, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2022/11/29/deconvolution.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/protocol.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/protocol.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ How do I know what protocol my data was sequenced with?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-11-18T15:34:02+00:00">2022-11-18T15:34:02+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -450,9 +538,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/protocol.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2022/11/18/singlecell.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2022/11/18/singlecell.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Topic: Single Cell Analysis!</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-11-18T00:00:00+00:00">2022-11-18T00:00:00+00:00</time>
+</div>
 <p class="summary">Single-cell analysis now has it’s own topic! These tutorials were previously part of the transcriptomics topic, but due to the amazing efforts by
 
 </p>
@@ -461,25 +551,29 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         news, new topic, single-cell, new feature</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2022/11/18/singlecell.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Monocle3 workflow</a></h2>
+<div class="meta"><time datetime="2022-09-30T20:06:34+00:00">2022-09-30T20:06:34+00:00</time></div>
 <p class="summary">Trajectory analysis using Monocle3, starting from 3 input files: expression matrix, gene and cell annotations</p>
 <small>
         Published: 2022-09-30T20:06:34+00:00<br>
         Tags:
         workflows, single-cell, name:trajectory_analysis, name:transcriptomics, name:scRNA-seq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ AnnData object to Monocle input files</a></h2>
+<div class="meta"><time datetime="2022-09-30T20:06:34+00:00">2022-09-30T20:06:34+00:00</time></div>
 <p class="summary">Preparing and filtering gene and cell annotations files and expression matrix to be passed as input for Monocle</p>
 <small>
         Published: 2022-09-30T20:06:34+00:00<br>
         Tags:
         workflows, single-cell, name:trajectory_analysis, name:transcriptomics, name:scRNA-seq</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-trajectories/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-trajectories/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Trajectory analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></span><time datetime="2022-09-30T20:06:34+00:00">2022-09-30T20:06:34+00:00</time>
+</div>
 <p class="summary">What is trajectory analysis?
 </p>
 <small>
@@ -487,9 +581,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-trajectories/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Inferring single cell trajectories with Monocle3</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a></span><time datetime="2022-09-30T20:06:34+00:00">2022-09-30T20:06:34+00:00</time>
+</div>
 <p class="summary">This tutorial is a follow-up to the ‘Single-cell RNA-seq: Case Study’. We will use the same sample from the previous tutorials. If you haven’t done them yet, it’s highly recommended that you go through them to get an idea how to prepare a single cell matrix, combine datasets and filter, plot and process scRNA-seq data to get the data in the form we’ll be working on today.
 </p>
 <small>
@@ -497,9 +593,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/faqs/alevin_version.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/faqs/alevin_version.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why is Alevin is not working?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-09-08T14:00:12+00:00">2022-09-08T14:00:12+00:00</time>
+</div>
 <p class="summary">Check your tool version, you need to use 1.3.0+galaxy2
 </p>
 <small>
@@ -507,9 +605,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/faqs/alevin_version.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial_ES.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a></span><time datetime="2022-09-08T14:00:12+00:00">2022-09-08T14:00:12+00:00</time>
+</div>
 <p class="summary">Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos FASTQ a una matriz de datos en formato AnnData donde cada célula es una fila y cada gen es una columna. Pero, ¿Qué es una matriz de datos y cuál es el formato AnnData? Lo averiguaremos a su debido tiempo. Enfatizamos que este es el primer paso para procesar datos de secuenciación de células únicas para poder realizar su análisis.
 </p>
 <small>
@@ -517,9 +617,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Combining single cell datasets after pre-processing</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a></span><time datetime="2022-09-08T14:00:12+00:00">2022-09-08T14:00:12+00:00</time>
+</div>
 <p class="summary">This tutorial will take you from the multiple AnnData outputs of the previous tutorial to a single, combined  AnnData object, ready for all the fun downstream processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.
 </p>
 <small>
@@ -527,9 +629,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/umap_plot_errors.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/umap_plot_errors.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ The UMAP Plots errors out sometimes?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">Try a different colour palette. For upstream code reasons, the default color palette sometimes causes the tool to error out.
 </p>
 <small>
@@ -537,9 +641,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/umap_plot_errors.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/r1r2.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/r1r2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Are Barcodes always on R1 and Sequence data on R2?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">No, it really depends on the protocol. In some protocols this convention is swapped, in others the barcodes can be distributed across both reads.
 </p>
 <small>
@@ -547,9 +653,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/faqs/r1r2.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ AnnData Import/ AnnData Manipulate not working?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-03-02T15:46:20+00:00">2022-03-02T15:46:20+00:00</time>
+</div>
 <p class="summary">
 
 </p>
@@ -558,9 +666,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/faqs/anndata_not_working.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_results_missing.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_results_missing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ On the Scanpy PlotEmbed step, my object doesn’t have Il2ra or Cd8b1 or Cd8a etc.</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Check your Anndata object - it should be 7874 x 14832, i.e. 7874 cells x 14832 genes. Is it actually 2000 genes only (i.e. and therefore missing the above markers)? You may have selected to remove genes at the Scanpy FindVariableGenes step (last toggle, ‘Remove genes not marked as highly variable’ < Select NO.) (Most likely you did this correctly the first time, but later in investigating how many got marked as highly variable, may have run this tool again and removed the nonvariable ones. We’ve updated the text to more clearly prevent this, but you may have gotten caught out!)
 </p>
 <small>
@@ -568,9 +678,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_results_missing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_fails.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_fails.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ On Scanpy PlotEmbed, the tool is failing</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Try selecting “Use raw attributes if present: NO”
 </p>
 <small>
@@ -578,9 +690,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/plotembed_fails.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ My Scanpy FindMarkers step is giving me an empty table</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Try selecting: “Use programme defaults: Yes” and see if that fixes it.
 </p>
 <small>
@@ -588,9 +702,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/faqs/findmarkers_empty.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/faqs/alevin_version.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/faqs/alevin_version.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why is Alevin is not working?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2022-02-28T15:26:33+00:00">2022-02-28T15:26:33+00:00</time>
+</div>
 <p class="summary">Check your tool version, you need to use 1.3.0+galaxy2
 </p>
 <small>
@@ -598,17 +714,20 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/faqs/alevin_version.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ MuSiC Workflow</a></h2>
+<div class="meta"><time datetime="2022-02-11T12:34:18+00:00">2022-02-11T12:34:18+00:00</time></div>
 <p class="summary">Bulk RNA Deconvolution with MuSiC</p>
 <small>
         Published: 2022-02-11T12:34:18+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Bulk RNA Deconvolution with MuSiC</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2022-02-11T12:34:18+00:00">2022-02-11T12:34:18+00:00</time>
+</div>
 <p class="summary">Bulk RNA-seq data contains a mixture of transcript signatures from several types of cells. We wish to deconvolve this mixture to obtain estimates of the proportions of cell types within the bulk sample. To do this, we can use single cell RNA-seq data as a reference for estimating the cell type proportions within the bulk data.
 </p>
 <small>
@@ -616,9 +735,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/umi.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/umi.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Are UMIs not actually unique?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2021-11-17T06:38:37+00:00">2021-11-17T06:38:37+00:00</time>
+</div>
 <p class="summary">Not strictly, but unique enough. The distribution of UMIs should ideally be uniform so that the chance of any two same UMIs capturing the same transcript (via different amplicons) is small. As barcodes have increased in size, the number of UMIs has also increased allowing for UMIs to reach more or less the same numbers of transcripts.
 </p>
 <small>
@@ -626,9 +747,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/umi.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/variable_genes.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/variable_genes.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do we only consider highly variable genes?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-11T16:57:25+00:00">2021-11-11T16:57:25+00:00</time>
+</div>
 <p class="summary">The non-variable genes are likely housekeeping genes, which are expressed everywhere and are not so useful for distinguishing one cell type from another. However background genes are important to the analysis and are used to generate a background baseline model for measuring the variability of the other genes.
 </p>
 <small>
@@ -636,9 +759,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/variable_genes.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/techniques.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/techniques.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Can RNA-seq techniques be applied to scRNA-seq?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-11T16:57:25+00:00">2021-11-11T16:57:25+00:00</time>
+</div>
 <p class="summary">The short answer is ‘no, but yes’. At the beginning this was impossible due to the over-prevalence of dropout events (“zeroes”) in the data complicating the normalisation techniques, but this is not so much of a problem any more with newer methods.
 </p>
 <small>
@@ -646,9 +771,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/techniques.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/gene_profile.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/gene_profile.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ What exactly is a ‘Gene profile’?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-11T16:57:25+00:00">2021-11-11T16:57:25+00:00</time>
+</div>
 <p class="summary">Think of it like a fingerprint that some cells exhibit and others don’t. It’s a small collection of genes which are up or down regulated in relation to one another. Their differences are not absolute, but relative. So if CellA has 100 counts of Gene1 and 50 counts of Gene2, this creates a relation of 2:1 between Gene1 and Gene2. If CellB has a 20 counts of Gene1 and 10 counts of Gene2, then they share the same relation. If CellA and CellB share other relations with other genes than this might be enough to say that they share a Gene profile, and will therefore likely cluster together as they describe the same cell type.
 </p>
 <small>
@@ -656,9 +783,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/gene_profile.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/dimension_reduction.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/dimension_reduction.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why do we do dimension reduction and then clustering? Why not just cluster on the actual data?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-11T16:57:25+00:00">2021-11-11T16:57:25+00:00</time>
+</div>
 <p class="summary">The actual data has tens of thousands of genes, and so tens of thousands of variables to consider. Even after selecting for the most variable genes and the most high quality genes, we can still be left with > 1000 genes. Performing clustering on a dataset with 1000s of variables is possible, but computationally expensive. It is therefore better to perform dimension reduction to reduce the number of variables to a latent representation of these variables. These latent variables are ideally more than 10 but less than 50 to capture the variability in the data to perform clustering upon.
 </p>
 <small>
@@ -666,9 +795,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/dimension_reduction.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/amplification.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/amplification.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">❓ Why is amplification more of an issue in scRNA-seq than RNA-seq?</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/rahmot/">Rahmot Afolabi</a></span><time datetime="2021-11-11T16:57:25+00:00">2021-11-11T16:57:25+00:00</time>
+</div>
 <p class="summary">Due to the extremely small amount of starting material, the initial amplification is likely to be uneven due to the first cycle of amplified products being overrepresented in the second cycle of amplification leading to further bias. In Bulk RNA-seq, the larger selection of RNA molecules to amplify, evens out the odds that any one transcript will be amplified more than others.
 </p>
 <small>
@@ -676,9 +807,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         faqs, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/faqs/amplification.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_ES.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Una introducción al análisis de datos scRNA-seq</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/IrelCM/">Irelka Colina</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/IrelCM/">Irelka Colina</a></span><time datetime="2021-10-19T15:23:36+00:00">2021-10-19T15:23:36+00:00</time>
+</div>
 <p class="summary">Single-cell RNA-seq
 </p>
 <small>
@@ -686,9 +819,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Introducción al análisis de datos de scRNA-seq</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2021-10-19T15:12:12+00:00">2021-10-19T15:12:12+00:00</time>
+</div>
 <p class="summary">RNA-seq de una sola célula
 </p>
 <small>
@@ -696,9 +831,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides_CAT_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Filtrado, representación y exploración de secuenciación de ARN de células únicas</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/">Nicolas Palopoli</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/">Lorena Gallego Villar</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/npalopoli/">Nicolas Palopoli</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/lgallegovillar/">Lorena Gallego Villar</a></span><time datetime="2021-10-07T15:52:06+00:00">2021-10-07T15:52:06+00:00</time>
+</div>
 <p class="summary">Introducción
 </p>
 <small>
@@ -706,9 +843,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generación de una matriz de datos de secuenciación de ARN de células únicas utilizando Alevin</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pclo/">Patricia Carvajal López</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/ales-ibt/">Alejandra Escobar-Zepeda</a></span><time datetime="2021-08-31T20:57:30+00:00">2021-08-31T20:57:30+00:00</time>
+</div>
 <p class="summary">Este tutorial te ayudará a pasar de datos crudos de secuenciación en archivos FASTQ a una matriz de datos en formato AnnData donde cada célula es una fila y cada gen es una columna. Pero, ¿Qué es una matriz de datos y cuál es el formato AnnData? Lo averiguaremos a su debido tiempo. Enfatizamos que este es el primer paso para procesar datos de secuenciación de células únicas para poder realizar su análisis.
 </p>
 <small>
@@ -716,17 +855,20 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial_ES.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ scRNA Plant Analysis</a></h2>
+<div class="meta"><time datetime="2021-04-08T10:59:53+00:00">2021-04-08T10:59:53+00:00</time></div>
 <p class="summary">Downstream Single-cell RNA Plant analysis with ScanPy</p>
 <small>
         Published: 2021-04-08T10:59:53+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Analysis of plant scRNA-Seq Data with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/">Cristóbal Gallardo</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2021-04-08T10:59:53+00:00">2021-04-08T10:59:53+00:00</time>
+</div>
 <p class="summary">Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 </p>
 <small>
@@ -734,9 +876,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, plants, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Inferring single cell trajectories with Scanpy (Python)</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2021-04-07T14:04:47+00:00">2021-04-07T14:04:47+00:00</time>
+</div>
 <p class="summary">Run the tutorial!
 </p>
 <small>
@@ -744,9 +888,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication, Python, jupyter-notebook</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/news/2021/03/30/tutorial_scrna_plant.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/news/2021/03/30/tutorial_scrna_plant.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📰 New Tutorial: Downstream Single-cell RNA Plant analysis with ScanPy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/">Beatriz Serrano-Solano</a></span><time datetime="2021-03-30T00:00:00+00:00">2021-03-30T00:00:00+00:00</time>
+</div>
 <p class="summary">Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 </p>
 <small>
@@ -754,17 +900,20 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         news, new tutorial, single-cell, plant</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/news/2021/03/30/tutorial_scrna_plant.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CS3_Filter, Plot and Explore Single-cell RNA-seq Data</a></h2>
+<div class="meta"><time datetime="2021-03-24T11:32:22+00:00">2021-03-24T11:32:22+00:00</time></div>
 <p class="summary">Updated tool versions Aug 24 2022</p>
 <small>
         Published: 2021-03-24T11:32:22+00:00<br>
         Tags:
         workflows, single-cell, name:transcriptomics, name:training, name:singlecell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Filter, plot and explore single-cell RNA-seq data with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2021-03-24T11:32:22+00:00">2021-03-24T11:32:22+00:00</time>
+</div>
 <p class="summary">You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat Satija et al. 2015, Scanpy Wolf et al. 2018, Monocle Trapnell et al. 2014, Scater McCarthy et al. 2017, and so forth. We’re working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
 </p>
 <small>
@@ -772,27 +921,33 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/workflows/Combining-datasets-after-pre-processing.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/workflows/Combining-datasets-after-pre-processing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Combining datasets after pre-processing</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2021-03-03T13:21:27+00:00">2021-03-03T13:21:27+00:00</time>
+</div>
 <p class="summary">Updated March 2024</p>
 <small>
         Published: 2021-03-03T13:21:27+00:00<br>
         Tags:
         workflows, single-cell, name:training, name:single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/workflows/Combining-datasets-after-pre-processing.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Generating a single cell matrix using Alevin</a></h2>
-<p class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="">Julia Jakiela</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a></span><time datetime="2021-03-03T13:21:27+00:00">2021-03-03T13:21:27+00:00</time>
+</div>
 <p class="summary">This workflow generates a single cell matrix using Alevin. </p>
 <small>
         Published: 2021-03-03T13:21:27+00:00<br>
         Tags:
         workflows, single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/workflows/Generating-a-single-cell-matrix-using-Alevin.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Generating a single cell matrix using Alevin</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pinin4fjords/">Jonathan Manning</a></span><time datetime="2021-03-03T13:21:27+00:00">2021-03-03T13:21:27+00:00</time>
+</div>
 <p class="summary">This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What’s a data matrix, and what’s AnnData format? Well you’ll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of ATGGGCTT etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you’re starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as ‘Cell A has 4 GAPDHs’, which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you’re still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 </p>
 <small>
@@ -800,9 +955,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x, paper-replication</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ An introduction to scRNA-seq data analysis</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2021-01-29T16:45:13+00:00">2021-01-29T16:45:13+00:00</time>
+</div>
 <p class="summary">Single-cell RNA-seq
 </p>
 <small>
@@ -810,9 +967,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Dealing with Cross-Contamination in Fixed Barcode Protocols</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></span><time datetime="2020-03-17T16:28:35+00:00">2020-03-17T16:28:35+00:00</time>
+</div>
 <p class="summary">Fixed Barcode Protocols and Multiplexing
 </p>
 <small>
@@ -820,9 +979,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Clustering 3K PBMCs with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2020-02-28T16:35:17+00:00">2020-02-28T16:35:17+00:00</time>
+</div>
 <p class="summary">Single Cell RNA Pre-processing
 </p>
 <small>
@@ -830,9 +991,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Clustering 3K PBMCs with Scanpy</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2019-12-19T19:40:33+00:00">2019-12-19T19:40:33+00:00</time>
+</div>
 <p class="summary">Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells. The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq.
 </p>
 <small>
@@ -840,17 +1003,20 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ Scater</a></h2>
+<div class="meta"><time datetime="2019-10-23T18:48:12+00:00">2019-10-23T18:48:12+00:00</time></div>
 <p class="summary">Single-cell quality control with scater</p>
 <small>
         Published: 2019-10-23T18:48:12+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Single-cell quality control with scater</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ethering/">Graham Etherington</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/ethering/">Graham Etherington</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/">Nicola Soranzo</a></span><time datetime="2019-10-23T18:48:12+00:00">2019-10-23T18:48:12+00:00</time>
+</div>
 <p class="summary">Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.
 </p>
 <small>
@@ -858,9 +1024,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-scater-qc/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Pre-processing of 10X Single-Cell RNA Datasets</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/hrhotz/">Hans-Rudolf Hotz</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/">Daniel Blankenberg</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/">Pavankumar Videm</a></span><time datetime="2019-09-11T13:07:03+00:00">2019-09-11T13:07:03+00:00</time>
+</div>
 <p class="summary">Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
 
 </p>
@@ -869,42 +1037,49 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell, 10x</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ RaceID Workflow</a></h2>
+<div class="meta"><time datetime="2019-03-25T16:14:31+00:00">2019-03-25T16:14:31+00:00</time></div>
 <p class="summary">Downstream Single-cell RNA analysis with RaceID</p>
 <small>
         Published: 2019-03-25T16:14:31+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Downstream Single-cell RNA analysis with RaceID</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></span><time datetime="2019-03-25T16:14:31+00:00">2019-03-25T16:14:31+00:00</time>
+</div>
 <p class="summary"></p>
 <small>
         Published: 2019-03-25T16:14:31+00:00<br>
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CelSeq2: Single Batch (mm10)</a></h2>
+<div class="meta"><time datetime="2019-02-22T19:53:50+00:00">2019-02-22T19:53:50+00:00</time></div>
 <p class="summary">Pre-processing of Single-Cell RNA Data</p>
 <small>
         Published: 2019-02-22T19:53:50+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_pp_celseq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🛠️ CelSeq2: Multi Batch (mm10)</a></h2>
+<div class="meta"><time datetime="2019-02-22T19:53:50+00:00">2019-02-22T19:53:50+00:00</time></div>
 <p class="summary">Pre-processing of Single-Cell RNA Data</p>
 <small>
         Published: 2019-02-22T19:53:50+00:00<br>
         Tags:
         workflows, single-cell, transcriptomics</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Pre-processing of Single-Cell RNA Data</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/">Bérénice Batut</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/">Anika Erxleben</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/wm75/">Wolfgang Maier</a></span><time datetime="2019-02-22T19:53:50+00:00">2019-02-22T19:53:50+00:00</time>
+</div>
 <p class="summary">Introduction
 </p>
 <small>
@@ -912,9 +1087,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">📚 Understanding Barcodes</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a></span><time datetime="2019-02-20T18:33:11+00:00">2019-02-20T18:33:11+00:00</time>
+</div>
 <p class="summary">Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:
 </p>
 <small>
@@ -922,9 +1099,11 @@ In an alternative step, the fragment file can also be generated from a BAM file.
         Tags:
         single-cell</small><a target="_blank" class="cover" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-umis/tutorial.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss"></a>
 </div>
-<div xmlns="" class="entry" data-has-link="true">
+<div xmlns="" class="entry" data-has-link="true" id="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html">
 <h2><a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">🖼️ Plates, Batches, and Barcodes</a></h2>
-<p class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></p>
+<div class="meta">
+<span class="authors"><i>By: </i><a href="https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/">Wendi Bacon</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/">Mehmet Tekman</a>, <a href="https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/">Alex Ostrovsky</a></span><time datetime="2019-02-16T20:04:07+00:00">2019-02-16T20:04:07+00:00</time>
+</div>
 <p class="summary">Sorting Plates
 </p>
 <small>
@@ -939,4 +1118,14 @@ In an alternative step, the fragment file can also be generated from a BAM file.
            •
           <a target="_blank" href="https://training.galaxyproject.org/training-material/topics/single-cell/feed.xml?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
            🔗
-          </a></footer></body></html>
+          </a></footer><script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script><script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script></body></html>
