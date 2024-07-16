@@ -16,7 +16,7 @@ We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-stan
     - [Admin Training]({{ site.baseurl }}/topics/admin/feed.xml)
     - ...and every other topic
 - Monthly/Weekly/Daily digests, which include all *new* tutorials, slides, workflows, FAQs, events, and contributors.
-    - [GTN Firehose]({{ site.baseurl }}/feeds/matrix.xml) (every change as it happens!)
+    - [GTN Firehose]({{ site.baseurl }}/feeds/matrix-all.xml) (every change as it happens!)
     - [GTN Monthly]({{ site.baseurl }}/feeds/matrix-month.xml)
     - [GTN Weekly]({{ site.baseurl }}/feeds/matrix-week.xml)
     - [GTN Daily]({{ site.baseurl }}/feeds/matrix-day.xml)
@@ -44,9 +44,9 @@ amenable to embedding.
 <iframe width="340px" height="600px" src="/training-material/topics/one-health/feed.w.html"></iframe>
 
 ```html
-<iframe width="340px" height="600px" src="/training-material/events/feed.w.html"></iframe>
-<iframe width="340px" height="600px" src="/training-material/topics/admin/feed.w.html"></iframe>
-<iframe width="340px" height="600px" src="/training-material/topics/one-health/feed.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/events/feed.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/topics/admin/feed.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/topics/one-health/feed.w.html"></iframe>
 ```
 
 ### Digests
@@ -60,9 +60,9 @@ We created these 'digests' based on the bot that posted updates to our Matrix ch
 These can be embedded like so:
 
 ```html
-<iframe width="340px" height="600px" src="/training-material/feeds/matrix-month.w.html"></iframe>
-<iframe width="340px" height="600px" src="/training-material/feeds/matrix-week.w.html"></iframe>
-<iframe width="340px" height="600px" src="/training-material/feeds/matrix-day.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/feeds/matrix-month.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/feeds/matrix-week.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/feeds/matrix-day.w.html"></iframe>
 ```
 
 ### Community Specific Digests
@@ -75,8 +75,8 @@ Some digests were created for individual communities:
 These are easily embedded, note the `.w.html` ending, indicating a widget. (There is a `.w.xml` version with an atom feed and separate XSLT style sheet, but we've generated the HTML from that automatically as well, which is more compatible with Safari users..)
 
 ```html
-<iframe width="340px" height="600px" src="/training-material/feeds/single-cell-month.w.html"></iframe>
-<iframe width="340px" height="600px" src="/training-material/feeds/one-health-month.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/feeds/single-cell-month.w.html"></iframe>
+<iframe width="340px" height="600px" src="{{ site.url }}{{ site.baseurl }}/feeds/one-health-month.w.html"></iframe>
 ```
 
 ### Differences between feeds

@@ -242,7 +242,9 @@ def all_date_sorted_materials(site)
       'tags' => wf_data['tags'],
       'contributors' => wf_data.fetch('creator', []).map do |c|
         p ">> #{c}"
-        matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
+        matched = site.data['contributors'].select{|k, v| 
+          v.fetch('orcid', "does-not-exist") == c.fetch('identifier', "").gsub('https://orcid.org/', '')
+        }.first
         if matched
           matched[0]
         else
@@ -357,13 +359,11 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
     'day' => 'Daily',
     'week' => 'Weekly',
     'month' => 'Monthly',
-    nil => 'Firehose'
+    nil => 'All'
   }
 
-  path = "feeds/matrix-#{group_by}.i.xml"
-  if filter_by
-    path = "feeds/#{filter_by}-#{group_by}.i.xml"
-  end
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.i.xml"
 
   feed_path = File.join(site.dest, path)
   Jekyll.logger.info '[GTN/Feeds] Generating matrix/i feed'
@@ -382,9 +382,10 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
       # convert '2024-01-01' to date
       xml.updated(DateTime.now.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
-      title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
-      xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest materials, events, news in the GTN.')
+      title_parts = ["GTN", filter_title, lookup[group_by], "Updates"].compact
+      # title used for slack's 'bot name', so should be something useful.
+      xml.title(title_parts.join(' '))
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |bucket_date, parts|
@@ -395,8 +396,13 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
               xml.entry do
 
                 # This is a feed of only NEW tutorials, so we only include publication times.
-                xml.published(bucket_date.to_euro_lunch.rfc3339)
-                xml.updated(bucket_date.to_euro_lunch.rfc3339)
+                if group_by.nil?
+                  xml.published(bucket_date.rfc3339)
+                  xml.updated(bucket_date.rfc3339)
+                else
+                  xml.published(bucket_date.to_euro_lunch.rfc3339)
+                  xml.updated(bucket_date.to_euro_lunch.rfc3339)
+                end
 
                 href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
@@ -498,10 +504,8 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
     'month' => 'Monthly'
   }
 
-  path = "feeds/matrix-#{group_by}.xml"
-  if filter_by
-    path = "feeds/#{filter_by}-#{group_by}.xml"
-  end
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.xml"
 
   feed_path = File.join(site.dest, path)
   Jekyll.logger.info '[GTN/Feeds] Generating matrix feed'
@@ -523,7 +527,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest materials, events, news in the GTN.')
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
@@ -700,6 +704,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         {title: "#{topic} all changes", url: "#{site.config['url']}#{site.baseurl}/topic/feed.xml"}
 
       generate_matrix_feed(site, bucket, group_by: 'month', filter_by: topic)
+      generate_matrix_feed_itemized(site, bucket, group_by: nil, filter_by: topic)
+
       opml['GTN Topics - Digests'] <<
         {title: "#{topic} monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/#{topic}-month.xml"}
     end
