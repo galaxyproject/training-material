@@ -362,10 +362,8 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
     nil => 'All'
   }
 
-  path = "feeds/matrix-#{group_by || 'all'}.i.xml"
-  if filter_by
-    path = "feeds/#{filter_by}-#{group_by}.i.xml"
-  end
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.i.xml"
 
   feed_path = File.join(site.dest, path)
   Jekyll.logger.info '[GTN/Feeds] Generating matrix/i feed'
@@ -506,10 +504,8 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
     'month' => 'Monthly'
   }
 
-  path = "feeds/matrix-#{group_by}.xml"
-  if filter_by
-    path = "feeds/#{filter_by}-#{group_by}.xml"
-  end
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.xml"
 
   feed_path = File.join(site.dest, path)
   Jekyll.logger.info '[GTN/Feeds] Generating matrix feed'
