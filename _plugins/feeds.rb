@@ -359,10 +359,10 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
     'day' => 'Daily',
     'week' => 'Weekly',
     'month' => 'Monthly',
-    nil => 'Firehose'
+    nil => 'All'
   }
 
-  path = "feeds/matrix-#{group_by}.i.xml"
+  path = "feeds/matrix-#{group_by || 'all'}.i.xml"
   if filter_by
     path = "feeds/#{filter_by}-#{group_by}.i.xml"
   end
@@ -384,9 +384,10 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
       # convert '2024-01-01' to date
       xml.updated(DateTime.now.rfc3339)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
-      title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
-      xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest materials, events, news in the GTN.')
+      title_parts = ["GTN", filter_title, lookup[group_by], "Updates"].compact
+      # title used for slack's 'bot name', so should be something useful.
+      xml.title(title_parts.join(' '))
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |bucket_date, parts|
@@ -530,7 +531,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest materials, events, news in the GTN.')
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
