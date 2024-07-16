@@ -126,7 +126,7 @@
   <span class="ruby-identifier">previous_commit</span> = <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">first</span>
   <span class="ruby-identifier">previous</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">discover_caches</span>)
 
-  <span class="ruby-node">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39; #{previous_commit}..`</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">previous</span>
+  <span class="ruby-node">`git log --first-parent --name-only --pretty=&#39;GTN_GTN:%ct&#39; #{previous_commit}..`</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">previous</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -178,7 +178,7 @@
           <div class="method-source-code" id="command-source">
             <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">command</span>
-  <span class="ruby-string">`git log --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>
+  <span class="ruby-string">`git log --first-parent --name-only --pretty=&#39;GTN_GTN:%ct&#39;`</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

@@ -139,9 +139,9 @@
       "id": "computational-chemistry/covid19-docking",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-03 14:30:27 +0000",
+      "mod_date": "2023-11-09 08:55:09 +0000",
       "pub_date": "2020-03-27 13:26:13 +0000",
-      "version": 17,
+      "version": 10,
       "workflows": [
         {
           "workflow": "workflow.ga",
@@ -161,7 +161,7 @@
           ],
           "name": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "title": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
-          "version": 4,
+          "version": 3,
           "description": "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring",
           "tags": [
             "computational-chemistry"
@@ -204,7 +204,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:45 +0000",
+          "modified": "2024-07-16 08:09:58 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCandidates\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nhits.sdf\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nCandidates\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nhits.sdf\"]\n  3[label=\"Enumerate changes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Compound conversion\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Create Frankenstein ligand\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Compound conversion\"]\n  3 -> 6 [label=\"output\"]\n  7[label=\"rDock cavity definition\"]\n  4 -> 7 [label=\"outfile\"]\n  5 -> 7 [label=\"outfile\"]\n  8[label=\"Split file\"]\n  6 -> 8 [label=\"outfile\"]\n  9[label=\"rDock docking\"]\n  4 -> 9 [label=\"outfile\"]\n  8 -> 9 [label=\"list_output_sdf\"]\n  7 -> 9 [label=\"activesite\"]\n  10[label=\"Collapse Collection\"]\n  9 -> 10 [label=\"output\"]\n  11[label=\"XChem TransFS pose scoring\"]\n  1 -> 11 [label=\"output\"]\n  10 -> 11 [label=\"output\"]\n  12[label=\"Max SuCOS score\"]\n  11 -> 12 [label=\"output\"]\n  2 -> 12 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -470,9 +470,9 @@
       "id": "genome-annotation/amr-gene-detection",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-03-13 15:45:16 +0000",
+      "mod_date": "2024-03-13 18:55:00 +0000",
       "pub_date": "2024-01-23 16:20:06 +0000",
-      "version": 9,
+      "version": 5,
       "workflows": [
         {
           "workflow": "main-workflow.ga",
@@ -501,7 +501,7 @@
           ],
           "name": "mrsa AMR gene detection",
           "title": "mrsa AMR gene detection",
-          "version": 4,
+          "version": 1,
           "description": "Identification of AMR genes in an assembled bacterial genome",
           "tags": [
             "genome-annotation",
@@ -545,9 +545,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:47 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  77b11fc9-a4ff-4cbb-a5a6-de9ec9979098[\"Output\\nstararm_detailed_summary\"];\n  3 --> 77b11fc9-a4ff-4cbb-a5a6-de9ec9979098;\n  style 77b11fc9-a4ff-4cbb-a5a6-de9ec9979098 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  6b7cdb0d-a0c1-4cac-a72b-baf03e2bb31d[\"Output\\nbakta_annotation_summary\"];\n  4 --> 6b7cdb0d-a0c1-4cac-a72b-baf03e2bb31d;\n  style 6b7cdb0d-a0c1-4cac-a72b-baf03e2bb31d stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  03dcfc22-1d20-445c-8efe-42af2940009d[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 03dcfc22-1d20-445c-8efe-42af2940009d;\n  style 03dcfc22-1d20-445c-8efe-42af2940009d stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  cc0f32d5-10ee-4835-ad0b-984215db7382[\"Output\\njbrowse_output\"];\n  8 --> cc0f32d5-10ee-4835-ad0b-984215db7382;\n  style cc0f32d5-10ee-4835-ad0b-984215db7382 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ncontigs\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nforward_reads\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nreverse_reads\"]\n  3[label=\"staramr\"]\n  0 -> 3 [label=\"output\"]\n  k77b11fc9a4ff4cbba5a6de9ec9979098[color=lightseagreen,label=\"Output\\nstararm_detailed_summary\"]\n  3 -> k77b11fc9a4ff4cbba5a6de9ec9979098\n  4[label=\"Bakta\"]\n  0 -> 4 [label=\"output\"]\n  k6b7cdb0da0c14caca72bbaf03e2bb31d[color=lightseagreen,label=\"Output\\nbakta_annotation_summary\"]\n  4 -> k6b7cdb0da0c14caca72bbaf03e2bb31d\n  5[label=\"Bowtie2\"]\n  1 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  k03dcfc221d20445c8efe42af2940009d[color=lightseagreen,label=\"Output\\nbowtie_mapping_stats\"]\n  5 -> k03dcfc221d20445c8efe42af2940009d\n  6[label=\"Select\"]\n  3 -> 6 [label=\"detailed_summary\"]\n  7[label=\"Table to GFF3\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"JBrowse\"]\n  4 -> 8 [label=\"annotation_gff3\"]\n  7 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"output\"]\n  kcc0f32d510ee4835ad0b984215db7382[color=lightseagreen,label=\"Output\\njbrowse_output\"]\n  8 -> kcc0f32d510ee4835ad0b984215db7382\n}",
+          "modified": "2024-07-16 08:10:00 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ncontigs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nforward_reads\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nreverse_reads\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"staramr\"];\n  0 -->|output| 3;\n  5668eba3-4d2f-4845-809b-e91d8478f787[\"Output\\nstararm_detailed_summary\"];\n  3 --> 5668eba3-4d2f-4845-809b-e91d8478f787;\n  style 5668eba3-4d2f-4845-809b-e91d8478f787 stroke:#2c3143,stroke-width:4px;\n  4[\"Bakta\"];\n  0 -->|output| 4;\n  66270fc7-e36e-41b2-92e6-bd63dacc3772[\"Output\\nbakta_annotation_summary\"];\n  4 --> 66270fc7-e36e-41b2-92e6-bd63dacc3772;\n  style 66270fc7-e36e-41b2-92e6-bd63dacc3772 stroke:#2c3143,stroke-width:4px;\n  5[\"Bowtie2\"];\n  1 -->|output| 5;\n  2 -->|output| 5;\n  0 -->|output| 5;\n  5c626331-f354-4bf8-8e83-2e7c1531b780[\"Output\\nbowtie_mapping_stats\"];\n  5 --> 5c626331-f354-4bf8-8e83-2e7c1531b780;\n  style 5c626331-f354-4bf8-8e83-2e7c1531b780 stroke:#2c3143,stroke-width:4px;\n  6[\"Select\"];\n  3 -->|detailed_summary| 6;\n  7[\"Table to GFF3\"];\n  6 -->|out_file1| 7;\n  8[\"JBrowse\"];\n  4 -->|annotation_gff3| 8;\n  7 -->|output| 8;\n  5 -->|output| 8;\n  81546c15-08f4-4c36-9920-6ee4da127e75[\"Output\\njbrowse_output\"];\n  8 --> 81546c15-08f4-4c36-9920-6ee4da127e75;\n  style 81546c15-08f4-4c36-9920-6ee4da127e75 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ncontigs\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nforward_reads\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nreverse_reads\"]\n  3[label=\"staramr\"]\n  0 -> 3 [label=\"output\"]\n  k5668eba34d2f4845809be91d8478f787[color=lightseagreen,label=\"Output\\nstararm_detailed_summary\"]\n  3 -> k5668eba34d2f4845809be91d8478f787\n  4[label=\"Bakta\"]\n  0 -> 4 [label=\"output\"]\n  k66270fc7e36e41b292e6bd63dacc3772[color=lightseagreen,label=\"Output\\nbakta_annotation_summary\"]\n  4 -> k66270fc7e36e41b292e6bd63dacc3772\n  5[label=\"Bowtie2\"]\n  1 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  0 -> 5 [label=\"output\"]\n  k5c626331f3544bf88e832e7c1531b780[color=lightseagreen,label=\"Output\\nbowtie_mapping_stats\"]\n  5 -> k5c626331f3544bf88e832e7c1531b780\n  6[label=\"Select\"]\n  3 -> 6 [label=\"detailed_summary\"]\n  7[label=\"Table to GFF3\"]\n  6 -> 7 [label=\"out_file1\"]\n  8[label=\"JBrowse\"]\n  4 -> 8 [label=\"annotation_gff3\"]\n  7 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"output\"]\n  k81546c1508f44c3699206ee4da127e75[color=lightseagreen,label=\"Output\\njbrowse_output\"]\n  8 -> k81546c1508f44c3699206ee4da127e75\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.10.0+galaxy1",
             "toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0",
@@ -864,9 +864,9 @@
       "id": "evolution/mtb_phylogeny",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-02-15 00:53:30 +0000",
+      "mod_date": "2024-03-12 16:38:55 +0000",
       "pub_date": "2022-03-16 10:37:17 +0000",
-      "version": 19,
+      "version": 11,
       "workflows": [
         {
           "workflow": "main_workflow.ga",
@@ -886,7 +886,7 @@
           ],
           "name": "Mtb phylogeny",
           "title": "Mtb phylogeny",
-          "version": 3,
+          "version": 1,
           "description": "Estimate a phylogenetic tree from whole genome sequencing data for M. tuberculosis",
           "tags": [
             "evolution"
@@ -922,7 +922,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:47 +0000",
+          "modified": "2024-07-16 08:10:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput alignment\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"RStudio\"];\n  2[\"Estimate phylogeny with RAxML\"];\n  0 -->|output| 2;\n  9f8ae577-c583-4a2d-b64d-14c25fb859d9[\"Output\\nBest-scoring ML Tree\"];\n  2 --> 9f8ae577-c583-4a2d-b64d-14c25fb859d9;\n  style 9f8ae577-c583-4a2d-b64d-14c25fb859d9 stroke:#2c3143,stroke-width:4px;\n  bdb8cf2f-b553-4a96-8b55-38b4b499ab88[\"Output\\nInfo\"];\n  2 --> bdb8cf2f-b553-4a96-8b55-38b4b499ab88;\n  style bdb8cf2f-b553-4a96-8b55-38b4b499ab88 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput alignment\"]\n  1[label=\"RStudio\"]\n  2[label=\"Estimate phylogeny with RAxML\"]\n  0 -> 2 [label=\"output\"]\n  k9f8ae577c5834a2db64d14c25fb859d9[color=lightseagreen,label=\"Output\\nBest-scoring ML Tree\"]\n  2 -> k9f8ae577c5834a2db64d14c25fb859d9\n  kbdb8cf2fb5534a968b5538b4b499ab88[color=lightseagreen,label=\"Output\\nInfo\"]\n  2 -> kbdb8cf2fb5534a968b5538b4b499ab88\n}",
           "workflow_tools": [
@@ -1109,9 +1109,9 @@
       "id": "evolution/mtb_transmission",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-07-12 09:08:58 +0000",
+      "mod_date": "2024-07-12 09:36:52 +0000",
       "pub_date": "2022-03-16 08:35:43 +0000",
-      "version": 16,
+      "version": 12,
       "workflows": [
         {
           "workflow": "Galaxy-Workflow-From_BAMs_to_drug_resistance_prediction_with_TB-profiler.ga",
@@ -1131,7 +1131,7 @@
           ],
           "name": "From BAMs to drug resistance prediction with TB-profiler",
           "title": "From BAMs to drug resistance prediction with TB-profiler",
-          "version": 2,
+          "version": 1,
           "description": "Starting from the BAM files produced by snippy, generate a table that summarizes the drug-resistance profile for each sample",
           "tags": [
             "evolution"
@@ -1160,7 +1160,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:47 +0000",
+          "modified": "2024-07-16 08:10:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nMTB single-end BAMs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nMTB paired-end BAMs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Merge collections\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Samtools view BAM > SAM\"];\n  2 -->|output| 3;\n  aa220027-9d10-4328-b2c2-e4d139d5d5bd[\"Output\\nSamtools view on input dataset(s): filtered alignments\"];\n  3 --> aa220027-9d10-4328-b2c2-e4d139d5d5bd;\n  style aa220027-9d10-4328-b2c2-e4d139d5d5bd stroke:#2c3143,stroke-width:4px;\n  4[\"Sed MTB_anc to Chromosome\"];\n  3 -->|outputsam| 4;\n  5[\"Samtools view SAM > BAM\"];\n  4 -->|output| 5;\n  6[\"TB-profiler\"];\n  5 -->|outputsam| 6;\n  7[\"Get drug resistance profile\"];\n  6 -->|output_txt| 7;\n  8[\"Add Sample Name\"];\n  7 -->|output| 8;\n  9[\"Concatenate DR profiles in a single table\"];\n  8 -->|output| 9;\n  10[\"Cleanup the table\"];\n  9 -->|out_file1| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nMTB single-end BAMs\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nMTB paired-end BAMs\"]\n  2[label=\"Merge collections\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Samtools view BAM > SAM\"]\n  2 -> 3 [label=\"output\"]\n  kaa2200279d104328b2c2e4d139d5d5bd[color=lightseagreen,label=\"Output\\nSamtools view on input dataset(s): filtered alignments\"]\n  3 -> kaa2200279d104328b2c2e4d139d5d5bd\n  4[label=\"Sed MTB_anc to Chromosome\"]\n  3 -> 4 [label=\"outputsam\"]\n  5[label=\"Samtools view SAM > BAM\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"TB-profiler\"]\n  5 -> 6 [label=\"outputsam\"]\n  7[label=\"Get drug resistance profile\"]\n  6 -> 7 [label=\"output_txt\"]\n  8[label=\"Add Sample Name\"]\n  7 -> 8 [label=\"output\"]\n  9[label=\"Concatenate DR profiles in a single table\"]\n  8 -> 9 [label=\"output\"]\n  10[label=\"Cleanup the table\"]\n  9 -> 10 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -1192,7 +1192,7 @@
           ],
           "name": "From Fastqs to VCFs and BAMs",
           "title": "From Fastqs to VCFs and BAMs",
-          "version": 2,
+          "version": 1,
           "description": "From Fastqs to VCFs and BAMs",
           "tags": [
             "evolution"
@@ -1221,7 +1221,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:47 +0000",
+          "modified": "2024-07-16 08:10:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nSingle-End FASTQs\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nPaired-End FASTQs\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Trimmomatic\"];\n  0 -->|output| 3;\n  4[\"Trimmomatic\"];\n  1 -->|output| 4;\n  5[\"Mapping and variant calling of SINGLE END FASTQs with snippy\"];\n  3 -->|fastq_out| 5;\n  2 -->|output| 5;\n  6[\"Mapping and variant calling of PAIRED END FASTQs with snippy\"];\n  4 -->|fastq_out_paired| 6;\n  2 -->|output| 6;\n  7[\"Merge PE/SE VCFs in a single collection with all samples\"];\n  5 -->|snpvcf| 7;\n  6 -->|snpvcf| 7;\n  8[\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"];\n  5 -->|snpsbam| 8;\n  6 -->|snpsbam| 8;\n  9[\"TB Variant Filter\"];\n  7 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nSingle-End FASTQs\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nPaired-End FASTQs\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nMycobacterium_tuberculosis_ancestral_reference.gbk\"]\n  3[label=\"Trimmomatic\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Trimmomatic\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Mapping and variant calling of SINGLE END FASTQs with snippy\"]\n  3 -> 5 [label=\"fastq_out\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Mapping and variant calling of PAIRED END FASTQs with snippy\"]\n  4 -> 6 [label=\"fastq_out_paired\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"Merge PE/SE VCFs in a single collection with all samples\"]\n  5 -> 7 [label=\"snpvcf\"]\n  6 -> 7 [label=\"snpvcf\"]\n  8[label=\"Merge PE/SE BAMs in a single collection with all samples Part the workflow ”Identifying DR with TB-profiler\"]\n  5 -> 8 [label=\"snpsbam\"]\n  6 -> 8 [label=\"snpsbam\"]\n  9[label=\"TB Variant Filter\"]\n  7 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -1250,7 +1250,7 @@
           ],
           "name": "From VCFs to SNP distance matrix",
           "title": "From VCFs to SNP distance matrix",
-          "version": 2,
+          "version": 1,
           "description": "Given a set of VCF files and the reference genome used to do the mapping and SNP calling, create a multifasta file containing the genomes of all samples and calculate the matrix of pairwise SNP distances",
           "tags": [
             "evolution"
@@ -1279,7 +1279,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:47 +0000",
+          "modified": "2024-07-16 08:10:00 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter TB variants\"];\n  0 -->|output| 2;\n  3[\"Generate the complete genome of each of the samples\"];\n  2 -->|output1| 3;\n  1 -->|output| 3;\n  ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a[\"Output\\n#{input_file}\"];\n  3 --> ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a;\n  style ce5dd7a2-c33d-46b4-9f02-68c2bdfcf31a stroke:#2c3143,stroke-width:4px;\n  4[\"Concatenate genomes to build a MSA\"];\n  3 -->|output_file| 4;\n  5[\"Keep only variable positions\"];\n  4 -->|out_file1| 5;\n  6[\"Calculate SNP distances\"];\n  5 -->|output_fasta| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nCollection of VCFs to analyze\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference genome of the MTBC ancestor\"]\n  2[label=\"Filter TB variants\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Generate the complete genome of each of the samples\"]\n  2 -> 3 [label=\"output1\"]\n  1 -> 3 [label=\"output\"]\n  kce5dd7a2c33d46b49f0268c2bdfcf31a[color=lightseagreen,label=\"Output\\n#{input_file}\"]\n  3 -> kce5dd7a2c33d46b49f0268c2bdfcf31a\n  4[label=\"Concatenate genomes to build a MSA\"]\n  3 -> 4 [label=\"output_file\"]\n  5[label=\"Keep only variable positions\"]\n  4 -> 5 [label=\"out_file1\"]\n  6[label=\"Calculate SNP distances\"]\n  5 -> 6 [label=\"output_fasta\"]\n}",
           "workflow_tools": [
@@ -1657,9 +1657,9 @@
       "id": "variant-analysis/tb-variant-analysis",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-06-12 13:17:26 +0000",
+      "mod_date": "2024-06-14 09:56:50 +0000",
       "pub_date": "2020-07-25 20:58:54 +0000",
-      "version": 75,
+      "version": 29,
       "workflows": [
         {
           "workflow": "tb-variant-analysis.ga",
@@ -1683,7 +1683,7 @@
           ],
           "name": "TB Variant Analysis v1.0",
           "title": "TB Variant Analysis v1.0",
-          "version": 14,
+          "version": 7,
           "description": "Predict variants and drug resistance from M. tuberculosis sequence samples (Illumina)",
           "tags": [
             "pathogen",
@@ -1799,7 +1799,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:50 +0000",
+          "modified": "2024-07-16 08:10:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nReads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference Genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nMinimum depth of coverage\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nMinimum variant allele frequency\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Parameter\\nAdditional BWA-MEM options\"];\n  style 4 fill:#ded,stroke:#393,stroke-width:4px;\n  5[\"fastp\"];\n  0 -->|output| 5;\n  6[\"seqret\"];\n  1 -->|output| 6;\n  7[\"snippy\"];\n  4 -->|output| 7;\n  2 -->|output| 7;\n  3 -->|output| 7;\n  5 -->|output_paired_coll| 7;\n  1 -->|output| 7;\n  8[\"Kraken2\"];\n  5 -->|output_paired_coll| 8;\n  c7abf2bf-ed4c-433e-a695-9eca61282bb5[\"Output\\nreport_output\"];\n  8 --> c7abf2bf-ed4c-433e-a695-9eca61282bb5;\n  style c7abf2bf-ed4c-433e-a695-9eca61282bb5 stroke:#2c3143,stroke-width:4px;\n  083a0e51-7780-4c91-a071-dc0e4641d060[\"Output\\noutput\"];\n  8 --> 083a0e51-7780-4c91-a071-dc0e4641d060;\n  style 083a0e51-7780-4c91-a071-dc0e4641d060 stroke:#2c3143,stroke-width:4px;\n  9[\"QualiMap BamQC\"];\n  7 -->|snpsbam| 9;\n  10[\"mosdepth\"];\n  2 -->|output| 10;\n  7 -->|snpsbam| 10;\n  11[\"TB Variant Filter\"];\n  7 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  7 -->|snpsbam| 12;\n  335635b4-a4de-4980-ad02-68f0035daeaa[\"Output\\noutput_txt\"];\n  12 --> 335635b4-a4de-4980-ad02-68f0035daeaa;\n  style 335635b4-a4de-4980-ad02-68f0035daeaa stroke:#2c3143,stroke-width:4px;\n  13[\"TB Variant Filter\"];\n  7 -->|snpvcf| 13;\n  14[\"Flatten collection\"];\n  9 -->|raw_data| 14;\n  15[\"Text reformatting\"];\n  10 -->|output_quantized_bed| 15;\n  16[\"Text transformation\"];\n  11 -->|output1| 16;\n  007df8c2-bd13-495f-8904-abf31d4594d0[\"Output\\nFinal annotated VCF\"];\n  16 --> 007df8c2-bd13-495f-8904-abf31d4594d0;\n  style 007df8c2-bd13-495f-8904-abf31d4594d0 stroke:#2c3143,stroke-width:4px;\n  17[\"MultiQC\"];\n  5 -->|report_json| 17;\n  14 -->|output| 17;\n  59528235-7525-4ef9-8810-36f1ed0f01f6[\"Output\\nhtml_report\"];\n  17 --> 59528235-7525-4ef9-8810-36f1ed0f01f6;\n  style 59528235-7525-4ef9-8810-36f1ed0f01f6 stroke:#2c3143,stroke-width:4px;\n  18[\"bcftools consensus\"];\n  13 -->|output1| 18;\n  6 -->|out_file1| 18;\n  15 -->|outfile| 18;\n  c71b135d-35f9-44d0-a20e-f25528e518af[\"Output\\nconsensus_genome\"];\n  18 --> c71b135d-35f9-44d0-a20e-f25528e518af;\n  style c71b135d-35f9-44d0-a20e-f25528e518af stroke:#2c3143,stroke-width:4px;\n  19[\"TB Variant Report\"];\n  16 -->|output| 19;\n  12 -->|results_json| 19;\n  959528d2-f8f2-4440-99cf-44fddd6c5069[\"Output\\ndrug_resistance_report_html\"];\n  19 --> 959528d2-f8f2-4440-99cf-44fddd6c5069;\n  style 959528d2-f8f2-4440-99cf-44fddd6c5069 stroke:#2c3143,stroke-width:4px;\n  4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0[\"Output\\nvariants_report_html\"];\n  19 --> 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0;\n  style 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nReads\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference Genome\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nMinimum depth of coverage\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\nMinimum variant allele frequency\"]\n  4[color=lightgreen,label=\"ℹ️ Input Parameter\\nAdditional BWA-MEM options\"]\n  5[label=\"fastp\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"seqret\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"snippy\"]\n  4 -> 7 [label=\"output\"]\n  2 -> 7 [label=\"output\"]\n  3 -> 7 [label=\"output\"]\n  5 -> 7 [label=\"output_paired_coll\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"Kraken2\"]\n  5 -> 8 [label=\"output_paired_coll\"]\n  kc7abf2bfed4c433ea6959eca61282bb5[color=lightseagreen,label=\"Output\\nreport_output\"]\n  8 -> kc7abf2bfed4c433ea6959eca61282bb5\n  k083a0e5177804c91a071dc0e4641d060[color=lightseagreen,label=\"Output\\noutput\"]\n  8 -> k083a0e5177804c91a071dc0e4641d060\n  9[label=\"QualiMap BamQC\"]\n  7 -> 9 [label=\"snpsbam\"]\n  10[label=\"mosdepth\"]\n  2 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"snpsbam\"]\n  11[label=\"TB Variant Filter\"]\n  7 -> 11 [label=\"snpvcf\"]\n  12[label=\"TB-Profiler Profile\"]\n  7 -> 12 [label=\"snpsbam\"]\n  k335635b4a4de4980ad0268f0035daeaa[color=lightseagreen,label=\"Output\\noutput_txt\"]\n  12 -> k335635b4a4de4980ad0268f0035daeaa\n  13[label=\"TB Variant Filter\"]\n  7 -> 13 [label=\"snpvcf\"]\n  14[label=\"Flatten collection\"]\n  9 -> 14 [label=\"raw_data\"]\n  15[label=\"Text reformatting\"]\n  10 -> 15 [label=\"output_quantized_bed\"]\n  16[label=\"Text transformation\"]\n  11 -> 16 [label=\"output1\"]\n  k007df8c2bd13495f8904abf31d4594d0[color=lightseagreen,label=\"Output\\nFinal annotated VCF\"]\n  16 -> k007df8c2bd13495f8904abf31d4594d0\n  17[label=\"MultiQC\"]\n  5 -> 17 [label=\"report_json\"]\n  14 -> 17 [label=\"output\"]\n  k5952823575254ef9881036f1ed0f01f6[color=lightseagreen,label=\"Output\\nhtml_report\"]\n  17 -> k5952823575254ef9881036f1ed0f01f6\n  18[label=\"bcftools consensus\"]\n  13 -> 18 [label=\"output1\"]\n  6 -> 18 [label=\"out_file1\"]\n  15 -> 18 [label=\"outfile\"]\n  kc71b135d35f944d0a20ef25528e518af[color=lightseagreen,label=\"Output\\nconsensus_genome\"]\n  18 -> kc71b135d35f944d0a20ef25528e518af\n  19[label=\"TB Variant Report\"]\n  16 -> 19 [label=\"output\"]\n  12 -> 19 [label=\"results_json\"]\n  k959528d2f8f2444099cf44fddd6c5069[color=lightseagreen,label=\"Output\\ndrug_resistance_report_html\"]\n  19 -> k959528d2f8f2444099cf44fddd6c5069\n  k4d9636eb075b4fd2a1e41a7c37a17fc0[color=lightseagreen,label=\"Output\\nvariants_report_html\"]\n  19 -> k4d9636eb075b4fd2a1e41a7c37a17fc0\n}",
           "workflow_tools": [
@@ -2086,9 +2086,9 @@
       "id": "variant-analysis/sars-cov-2",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-05-29 15:37:52 +0000",
+      "mod_date": "2024-06-14 09:56:50 +0000",
       "pub_date": "2020-06-24 15:38:29 +0000",
-      "version": 45,
+      "version": 16,
       "workflows": [
         {
           "workflow": "main_workflow.ga",
@@ -2108,7 +2108,7 @@
           ],
           "name": "Simple COVID-19 - PE Variation",
           "title": "Simple COVID-19 - PE Variation",
-          "version": 7,
+          "version": 1,
           "description": "Analysis of variation within individual COVID-19 samples (Paired End Illumina). Does not use paured",
           "tags": [
             "variant-analysis"
@@ -2172,7 +2172,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:50 +0000",
+          "modified": "2024-07-16 08:10:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRA Manifest\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  2ca7c89b-999f-41dc-8037-e54e25959a7e[\"Output\\nRealigned Alignments with Indel Qualities\"];\n  8 --> 2ca7c89b-999f-41dc-8037-e54e25959a7e;\n  style 2ca7c89b-999f-41dc-8037-e54e25959a7e stroke:#2c3143,stroke-width:4px;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  06259137-eaa5-404a-923c-70ee5f1d89d4[\"Output\\nSnpSift tabular output\"];\n  11 --> 06259137-eaa5-404a-923c-70ee5f1d89d4;\n  style 06259137-eaa5-404a-923c-70ee5f1d89d4 stroke:#2c3143,stroke-width:4px;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n  758ffde5-7ddd-482a-88b2-1504f8335488[\"Output\\nMultiQC Report PE\"];\n  12 --> 758ffde5-7ddd-482a-88b2-1504f8335488;\n  style 758ffde5-7ddd-482a-88b2-1504f8335488 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRA Manifest\"]\n  2[label=\"Faster Download and Extract Reads in FASTQ\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  2 -> 3 [label=\"list_paired\"]\n  4[label=\"Map with BWA-MEM\"]\n  3 -> 4 [label=\"output_paired_coll\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MarkDuplicates\"]\n  4 -> 5 [label=\"bam_output\"]\n  6[label=\"Realign reads\"]\n  5 -> 6 [label=\"outFile\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Samtools stats\"]\n  5 -> 7 [label=\"outFile\"]\n  8[label=\"Insert indel qualities\"]\n  6 -> 8 [label=\"realigned\"]\n  0 -> 8 [label=\"output\"]\n  k2ca7c89b999f41dc8037e54e25959a7e[color=lightseagreen,label=\"Output\\nRealigned Alignments with Indel Qualities\"]\n  8 -> k2ca7c89b999f41dc8037e54e25959a7e\n  9[label=\"Call variants\"]\n  8 -> 9 [label=\"output\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"SnpEff eff:\"]\n  9 -> 10 [label=\"variants\"]\n  11[label=\"SnpSift Extract Fields\"]\n  10 -> 11 [label=\"snpeff_output\"]\n  k06259137eaa5404a923c70ee5f1d89d4[color=lightseagreen,label=\"Output\\nSnpSift tabular output\"]\n  11 -> k06259137eaa5404a923c70ee5f1d89d4\n  12[label=\"MultiQC\"]\n  3 -> 12 [label=\"report_json\"]\n  7 -> 12 [label=\"output\"]\n  5 -> 12 [label=\"metrics_file\"]\n  10 -> 12 [label=\"csvFile\"]\n  k758ffde57ddd482a88b21504f8335488[color=lightseagreen,label=\"Output\\nMultiQC Report PE\"]\n  12 -> k758ffde57ddd482a88b21504f8335488\n}",
           "workflow_tools": [
@@ -2225,6 +2225,11 @@
           {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
             "usegalaxy": false
           },
           {
@@ -2478,9 +2483,9 @@
       "id": "variant-analysis/pox-tiled-amplicon",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-03-20 15:09:06 +0000",
+      "mod_date": "2024-03-20 20:52:23 +0000",
       "pub_date": "2023-05-15 10:22:16 +0000",
-      "version": 10,
+      "version": 4,
       "workflows": [
         {
           "workflow": "pox-virus-tiled-amplicon-ref-masking.ga",
@@ -2539,7 +2544,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-07-16 00:05:50 +0000",
+          "modified": "2024-07-16 08:10:03 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPrimer Scheme\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select pool1 primers\"];\n  0 -->|output| 2;\n  3[\"Select pool2 primers\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Get start position of Pool2\"];\n  6 -->|out_file| 9;\n  10[\"Get end position of sequence\"];\n  7 -->|out_file1| 10;\n  11[\"Get end position of Pool1\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"Mask Reference for Pool2\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  af755a5e-2b20-49bc-9d52-34781f937f48[\"Output\\nmasked_ref_pool2\"];\n  14 --> af755a5e-2b20-49bc-9d52-34781f937f48;\n  style af755a5e-2b20-49bc-9d52-34781f937f48 stroke:#2c3143,stroke-width:4px;\n  15[\"Mask Reference for Pool1\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n  0c3b5b20-c426-428c-a08b-c835a82477c1[\"Output\\nmasked_ref_pool1\"];\n  15 --> 0c3b5b20-c426-428c-a08b-c835a82477c1;\n  style 0c3b5b20-c426-428c-a08b-c835a82477c1 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPrimer Scheme\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference FASTA\"]\n  2[label=\"Select pool1 primers\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Select pool2 primers\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Compute sequence length\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Datamash\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Datamash\"]\n  3 -> 6 [label=\"out_file1\"]\n  7[label=\"Cut\"]\n  4 -> 7 [label=\"output\"]\n  8[label=\"Compute\"]\n  5 -> 8 [label=\"out_file\"]\n  9[label=\"Get start position of Pool2\"]\n  6 -> 9 [label=\"out_file\"]\n  10[label=\"Get end position of sequence\"]\n  7 -> 10 [label=\"out_file1\"]\n  11[label=\"Get end position of Pool1\"]\n  8 -> 11 [label=\"out_file1\"]\n  12[label=\"Compose text parameter value\"]\n  9 -> 12 [label=\"text_param\"]\n  13[label=\"Compose text parameter value\"]\n  11 -> 13 [label=\"text_param\"]\n  10 -> 13 [label=\"text_param\"]\n  14[label=\"Mask Reference for Pool2\"]\n  1 -> 14 [label=\"output\"]\n  12 -> 14 [label=\"out1\"]\n  kaf755a5e2b2049bc9d5234781f937f48[color=lightseagreen,label=\"Output\\nmasked_ref_pool2\"]\n  14 -> kaf755a5e2b2049bc9d5234781f937f48\n  15[label=\"Mask Reference for Pool1\"]\n  1 -> 15 [label=\"output\"]\n  13 -> 15 [label=\"out1\"]\n  k0c3b5b20c426428ca08bc835a82477c1[color=lightseagreen,label=\"Output\\nmasked_ref_pool1\"]\n  15 -> k0c3b5b20c426428ca08bc835a82477c1\n}",
           "workflow_tools": [
@@ -2916,9 +2921,9 @@
       "id": "variant-analysis/sars-cov-2-variant-discovery",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-05-29 14:28:52 +0000",
+      "mod_date": "2024-06-14 09:56:50 +0000",
       "pub_date": "2021-06-30 06:20:05 +0000",
-      "version": 35,
+      "version": 15,
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/sars-cov-2-variant-discovery/tutorial.json",
       "tools": [
         "Filter1",
@@ -3150,9 +3155,9 @@
       "id": "variant-analysis/aiv-analysis",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-03-20 15:09:06 +0000",
+      "mod_date": "2024-03-20 20:52:23 +0000",
       "pub_date": "2022-11-21 16:45:21 +0000",
-      "version": 16,
+      "version": 9,
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/aiv-analysis/tutorial.json",
       "tools": [
         "Grep1",
