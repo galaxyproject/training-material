@@ -304,6 +304,7 @@ def all_date_sorted_materials(site)
 
   bucket
     .reject{|x| x[0] > DateTime.now } # Remove future-dated materials
+    .reject{|x| x[2]['draft'] == true } # Remove drafts
     .sort_by {|x| x[0] } # Date-sorted, not strictly necessary since will be grouped.
     .reverse
 end
