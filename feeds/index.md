@@ -16,7 +16,7 @@ We offer a wide range of [RSS feeds]({{ site.baseurl }}/news/2024/06/04/gtn-stan
     - [Admin Training]({{ site.baseurl }}/topics/admin/feed.xml)
     - ...and every other topic
 - Monthly/Weekly/Daily digests, which include all *new* tutorials, slides, workflows, FAQs, events, and contributors.
-    - [GTN Firehose]({{ site.baseurl }}/feeds/matrix.xml) (every change as it happens!)
+    - [GTN Firehose]({{ site.baseurl }}/feeds/matrix-all.xml) (every change as it happens!)
     - [GTN Monthly]({{ site.baseurl }}/feeds/matrix-month.xml)
     - [GTN Weekly]({{ site.baseurl }}/feeds/matrix-week.xml)
     - [GTN Daily]({{ site.baseurl }}/feeds/matrix-day.xml)
