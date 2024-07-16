@@ -16,6 +16,7 @@ TRACKING = "?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
 PRIO = [
   'news',
   'events',
+  'learning-pathways',
   'tutorials',
   'slides',
   'faqs',
@@ -96,6 +97,7 @@ ICON_FOR = {
   'news' => '📰',
   'faqs' => '❓',
   'workflows' => '🛠️',
+  'learning-pathways' => '🛤️'
 }
 
 def generate_opml(site, groups)
@@ -146,7 +148,7 @@ def generate_topic_feeds(site, topic, bucket)
 
       mats.each do |time, group, page, tags|
         xml.entry do
-          xml.title(ICON_FOR[group] + " " +page.data['title'])
+          xml.title(ICON_FOR[group] + " " + page.data['title'])
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
           # Our links are (mostly) stable
@@ -206,6 +208,7 @@ def all_date_sorted_materials(site)
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
   faqs = site.pages.select { |x| x['layout'] == 'faq' }
+  pathways = site.pages.select { |x| x['layout'] == 'learning-pathway' }
   workflows = Dir.glob('topics/**/*.ga')
 
   bucket = events.map do |e|
@@ -232,6 +235,11 @@ def all_date_sorted_materials(site)
     [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
   end
 
+  bucket += pathways.map do |n|
+    tags = ['learning-pathway'] + (n['tags'] || [])
+    [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'learning-pathways', n, tags]
+  end
+
   bucket += workflows.map do |n|
     tag = Gtn::PublicationTimes.clean_path(n).split('/')[1]
     wf_data = JSON.parse(File.read(n))
@@ -241,7 +249,6 @@ def all_date_sorted_materials(site)
       'description' => wf_data['annotation'],
       'tags' => wf_data['tags'],
       'contributors' => wf_data.fetch('creator', []).map do |c|
-        p ">> #{c}"
         matched = site.data['contributors'].select{|k, v| 
           v.fetch('orcid', "does-not-exist") == c.fetch('identifier', "").gsub('https://orcid.org/', '')
         }.first
@@ -423,7 +430,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                   xml.summary(text)
                 end
 
-                prefix = type.gsub(/s$/, '').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
+                prefix = type.gsub(/s$/, '').gsub(/-/, ' ').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
                 title = "#{ICON_FOR[type]} New #{prefix}: #{page.data['title']}"
 
                 xml.title(title)
@@ -554,7 +561,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
               # xml.h4 title
 
               parts.group_by { |x| x[1] }.sort_by { |x| PRIO[x[0]] }.each do |type, items|
-                xml.h4 "#{ICON_FOR[type]} #{type.capitalize}"
+                xml.h4 "#{ICON_FOR[type]} #{type.gsub(/-/, ' ').capitalize}"
                 if items.length.positive?
                   xml.ul do
                     items.each do |date, _type, page, _tags|
