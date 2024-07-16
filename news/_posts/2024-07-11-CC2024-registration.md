@@ -11,7 +11,7 @@ Are you interested in training and want to connect with other enthusiastic train
 [Check out the event](https://biont-training.eu/CarpentryConnect2024.html){:.btn.btn-info}
 You can register to participate remotely or in-person before 15th September.
 
-# If you would like to learn more about the event please also see the previous Carpentries posts on this topic:
+**If you would like to learn more about the event please also see the previous Carpentries posts on this topic:**
 
 1. [Registration Open for CarpentryConnect Heidelberg](https://carpentries.org/blog/2024/06/cchd24-registration-programme/)
 2. [Exciting updates from the CarpentryConnect Heidelberg 2024 organising committee](https://carpentries.org/blog/2024/05/cchd2024-updates-from-the-organising-committee/), where we announced the three keynote speakers: Radhika S Khetani, Yanina Bellini Saibene, and Malvika Sharan.
