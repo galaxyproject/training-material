@@ -740,7 +740,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >    {: .tip}
     >
     > 2. **IGV** {% icon tool %}
-    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
+    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 3 between 9,445 kb to 9,448 kb), on the `mapped.bam` track
     >    2. Right click and then select `Color Aligments by` -> `first-in-pair strand`
     >    3. Right click and select `Squished`
     >
