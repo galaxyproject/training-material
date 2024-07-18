@@ -10,7 +10,13 @@ draft: true
 contributions:
     organisers:
         - shiltemann
-        - bebatut
+        - dannon
+        - nakucher
+        - jdavcs
+        - nekrut
+        - delphine-l
+        - teresa-m
+        - erxleben
     instructors:
         - hexylena
         - bebatut
@@ -19,7 +25,7 @@ contributions:
         - gallantries
 
 cost: free 
-audience: Everyone who would like to get to know Galaxy, wants to learn bioinformaitcs data analysis, or what to learn a specific new kind of anlaysis.
+audience: Everyone who would like to get to know Galaxy, learn bioinformatics data analysis, or master a specific new kind of analysis is welcome.
 contact_email: erxleben@informatik.uni-freiburg.de
 async: true
 date_start: 2024-10-07
@@ -43,7 +49,7 @@ infrastructure:
 program:
   - section: "Monday: Galaxy introduction"
     description: |
-      On the first day you will get to know galaxy and some basics of sequence data analysis. Feel free to skip this day if you don't need this introduction. Please enjoy this intoduction and get fit for the next days.
+      On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don’t need this introduction. Please enjoy this introduction and prepare for the upcoming days.
     tutorials:
       - name: galaxy-intro-short
         topic: introduction
@@ -60,7 +66,7 @@ program:
 
   - section: "Friday: Grab bag"
     description: | 
-      You can not get enaghe? Then please pick what ever tutorial you like from the track of the privious days or from the list below. 
+      Can't get enough? Then please pick whichever tutorial you like from the track of the previous days or from the list below.
     tutorials:
       - name: troubleshooting
         topic: admin
@@ -69,6 +75,19 @@ program:
 
 # Wellcome to the Galaxy Training Academy 
 
-Do you want to learn how to use Galaxy, a open source data analysis platform. Than you are at the right place. This 
+Do you want to learn how to use Galaxy, a open source data analysis platform. Than you are at the right place. We offer here a 5-day Global Online and Asynchronous learining event. 
 
+## Program
+on the first day you can make your self familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton. 
+
+
+## What you need
+You only need a prowser and an account at a galaxy instance registerd for this event. Please have a look at the setup tab
+
+
+## Event style
+You can follow our porvieded leraning pathes in your own past using our provieded self-learining materials. Next to the programm you will find Slack channels you can join to exchange with othe and other participants during the event. Here you will also find help if you have qustions or run into an issue during the training. We try to cover all time zoons with helpers for each topic, but pleses be pacient if you do not get an emediat respons.
+
+## Code of conduct
+During we will follow our coude of conduct and also ask all particpants to do so. 
 
