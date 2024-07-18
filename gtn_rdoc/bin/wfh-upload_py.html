@@ -123,13 +123,27 @@
 
 <main role="main" aria-label="Page bin/wfh-upload.py">
 
-<p>!/usr/bin/env python import yaml import json import os import sys import requests import glob import time import multiprocessing</p>
+<p>!/usr/bin/env python import yaml import json import os import sys import requests import glob import time import multiprocessing import argparse</p>
 
-<p>GTN_PROJECT_ID = 63</p>
+<p># GTN_BOT_ID = <a href="https://workflowhub.eu/people/731">workflowhub.eu/people/731</a></p>
 
-<p>if len(sys.argv) == 2:</p>
+<p>argparser = argparse.ArgumentParser() argparser.add_argument(“–prod”, action=“store_true”, help=“Upload to production”) argparser.add_argument(“–crate”, type=str, help=“Upload a single crate (defaults to all)”) args = argparser.parse_args()</p>
 
-<pre class="ruby"><span class="ruby-identifier">crates</span> = [<span class="ruby-identifier">sys</span>.<span class="ruby-identifier">argv</span>[<span class="ruby-value">1</span>]]
+<p>if args.prod:</p>
+
+<pre class="ruby"><span class="ruby-constant">WORKFLOWHUB</span> = <span class="ruby-string">&quot;https://workflowhub.eu&quot;</span>
+<span class="ruby-constant">GTN_PROJECT_ID</span> = <span class="ruby-value">12</span>
+</pre>
+
+<p>else:</p>
+
+<pre class="ruby"><span class="ruby-constant">WORKFLOWHUB</span> = <span class="ruby-string">&quot;https://dev.workflowhub.eu&quot;</span>
+<span class="ruby-constant">GTN_PROJECT_ID</span> = <span class="ruby-value">63</span>
+</pre>
+
+<p>if args.crate:</p>
+
+<pre class="ruby"><span class="ruby-identifier">crates</span> = [<span class="ruby-identifier">args</span>.<span class="ruby-identifier">crate</span>]
 </pre>
 
 <p>else:</p>
@@ -158,12 +172,14 @@ except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
     &quot;workflow[project_ids][]&quot;: (None, GTN_PROJECT_ID), # GTN&#39;s ID.
 }
 headers = {
-    &quot;authorization&quot;: &quot;Token &quot; + os.environ[&quot;DEV_WFH_TOKEN&quot;], 
+    &quot;authorization&quot;: &quot;Token &quot; + os.environ[&quot;WFH_TOKEN&quot;],
     &#39;User-Agent&#39;: &#39;GTN (github.com/galaxyproject/training-material@1.0)&#39;,
+    # &#39;Content-type&#39;: &#39;application/json&#39;,
+    &#39;Accept&#39;: &#39;application/json&#39;,
 }
 
 response = requests.post(
-    &quot;https://dev.workflowhub.eu/workflows/submit&quot;, files=payload, headers=headers
+    f&quot;{WORKFLOWHUB}/workflows/submit&quot;, files=payload, headers=headers
 )
 code = response.status_code
 if code != 200:
@@ -180,25 +196,57 @@ permissions_update = {
     &quot;id&quot;: wfid,
     &quot;type&quot;: &quot;workflows&quot;,
     &quot;attributes&quot;: {
-      &quot;policy&quot;: {
-        &quot;access&quot;: &quot;download&quot;,
-        &quot;permissions&quot;: [
-          {
-            &quot;resource&quot;: {
-              &quot;id&quot;: str(GTN_PROJECT_ID),
-              &quot;type&quot;: &quot;projects&quot;
-            },
-            &quot;access&quot;: &quot;manage&quot;
-          }
-        ]
-      }
     }
   }
 }
+current_policy = response.json()[&#39;data&#39;][&#39;attributes&#39;][&#39;policy&#39;]
 
-if response.json()[&#39;data&#39;][&#39;attributes&#39;][&#39;discussion_links&#39;] and not any(
+updated_policy = {}
+if current_policy[&#39;access&#39;] != &#39;download&#39;:
+    updated_policy[&#39;access&#39;] = &#39;download&#39;
+
+gtn_permission = [x for x in current_policy[&#39;permissions&#39;] if x[&#39;resource&#39;][&#39;id&#39;] == str(GTN_PROJECT_ID)]
+if len(gtn_permission) != 1:
+    updated_policy[&#39;permissions&#39;] = current_policy[&#39;permissions&#39;] + [
+        {
+            &quot;resource&quot;: {
+                &quot;id&quot;: str(GTN_PROJECT_ID),
+                &quot;type&quot;: &quot;projects&quot;
+            },
+            &quot;access&quot;: &quot;manage&quot;
+        }
+    ]
+else:
+    if gtn_permission[0][&#39;access&#39;] != &#39;manage&#39;:
+        gtn_permission[0][&#39;access&#39;] = &#39;manage&#39;
+        updated_policy[&#39;permissions&#39;] = current_policy[&#39;permissions&#39;]
+
+# &quot;policy&quot;: {
+#   &quot;access&quot;: &quot;download&quot;,
+#   &quot;permissions&quot;: [
+#     {
+#       &quot;resource&quot;: {
+#         &quot;id&quot;: str(GTN_PROJECT_ID),
+#         &quot;type&quot;: &quot;projects&quot;
+#       },
+#       &quot;access&quot;: &quot;manage&quot;
+#     }
+#   ]
+# }
+
+# {&#39;access&#39;: &#39;download&#39;,
+#  &#39;permissions&#39;: [{&#39;access&#39;: &#39;manage&#39;,
+#                   &#39;resource&#39;: {&#39;id&#39;: &#39;63&#39;, &#39;type&#39;: &#39;projects&#39;}}]}
+#
+if updated_policy:
+    push = True
+    permissions_update[&#39;data&#39;][&#39;attributes&#39;][&#39;policy&#39;] = updated_policy
+
+dls = response.json()[&#39;data&#39;][&#39;attributes&#39;][&#39;discussion_links&#39;]
+if dls is None or len(dls) == 0 or (not any(
     x[&#39;label&#39;] == &#39;GTN Matrix&#39; for x in response.json()[&#39;data&#39;][&#39;attributes&#39;][&#39;discussion_links&#39;]
-):
+)):
+    push = True
     permissions_update[&#39;data&#39;][&#39;attributes&#39;][&#39;discussion_links&#39;] = [
         {
             &quot;label&quot;: &quot;GTN Matrix&quot;,
@@ -206,13 +254,16 @@ if response.json()[&#39;data&#39;][&#39;attributes&#39;][&#39;discussion_links&#
         }
     ]
 
-headers.update({
-    &#39;Content-type&#39;: &#39;application/json&#39;,
-    &#39;Accept&#39;: &#39;application/json&#39;,
-})
-response2 = requests.put(f&quot;https://dev.workflowhub.eu/workflows/{wfid}&quot;, headers=headers, json=permissions_update)
-if response2.status_code != 200:
-    print(f&quot;Error {response2.status_code} updating permissions for {wfid}: {response2.text}&quot;)
+# https://github.com/seek4science/seek/issues/1957
+if push:
+    print(f&quot;Permissions update required for {wfid}: {permissions_update[&#39;data&#39;][&#39;attributes&#39;]}&quot;)
+    headers.update({
+        &#39;Content-type&#39;: &#39;application/json&#39;,
+        &#39;Accept&#39;: &#39;application/json&#39;,
+    })
+    response2 = requests.put(f&quot;{WORKFLOWHUB}/workflows/{wfid}&quot;, headers=headers, json=permissions_update)
+    if response2.status_code != 200:
+        print(f&quot;Error {response2.status_code} updating permissions for {wfid}: {response2.text}&quot;)
 
 p = crate_path.split(&quot;/&quot;)
 windex = p.index(&quot;workflows&quot;)

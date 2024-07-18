@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -283,7 +283,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #f6e200; --color-darker: #dbc900; --color-dimmed: #e8d600;">transcriptomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #d7c600; --color-darker: #c0b000; --color-dimmed: #cbbb00;">transcriptomics</div>
 			
 			</br>
 			
@@ -331,8 +331,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///transcriptomics-ref-based/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/transcriptomics/ref-based/qc-mapping-counting/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1323" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -351,11 +352,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Main</a></li>
+					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Europe</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting">Galaxy France</a></li>
 					
@@ -456,6 +457,293 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   46c7a2e8-7819-4715-a028-7ad1de9ed605["Output\nfeatureCounts"];
   8 --> 46c7a2e8-7819-4715-a028-7ad1de9ed605;
   style 46c7a2e8-7819-4715-a028-7ad1de9ed605 stroke:#2c3143,stroke-width:4px;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset collection</td>
+					<td>Paired list collection with PE fastqs</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td></td>
+					<td>FastQC</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>cutadapt</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>STAR + multiQC</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>more QC</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Determine strandness</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>count STAR</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>count featureCount</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Cut1">Cut1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=__FLATTEN__">__FLATTEN__</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0">toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/fastqc/3d0c7bdf12f5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4">toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.4</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/picard/f9242e01365a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4">toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/devteam/samtools_idxstats/7def34e6cf4d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/featurecounts/6f66ae7c5f7a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357">toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/gtftobed12/b026dae67fba">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2">toolshed.g2.bx.psu.edu/repos/iuc/length_and_gc_content/length_and_gc_content/0.1.2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/length_and_gc_content/e3ba567abdf5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/multiqc/abfd8a6544d7">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/pygenometracks/360df4999907">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3">toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/rgrnastar/3ea5a2a63fa2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1">toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/lparsons/cutadapt/135b80fb1ac2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2">toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/nilesh/rseqc/473382134e56">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -691,7 +979,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

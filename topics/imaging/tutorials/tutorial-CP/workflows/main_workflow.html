@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -264,9 +264,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd2fa; --color-darker: #ffaaf8; --color-dimmed: #ffbef9;">CellProfiler</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa5f7; --color-darker: #ff7cf5; --color-dimmed: #ff92f6;">CellProfiler</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd3ed; --color-darker: #ffaedf; --color-dimmed: #ffc1e6;">imaging</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa9de; --color-darker: #ff83d3; --color-dimmed: #ff97d8;">imaging</div>
 			
 			</br>
 			
@@ -310,8 +310,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///imaging-tutorial-CP/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/imaging/tutorial-CP/main-workflow/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1262" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -330,13 +331,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy Main</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-tutorial-CP/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -397,6 +398,437 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   24["Run CellProfiler"];
   1 -->|output_tar| 24;
   23 -->|output_pipeline| 24;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9</td>
+					<td>Starting Modules</td>
+					<td>Starting modules</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41</td>
+					<td>IDR Download</td>
+					<td>Download images</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9</td>
+					<td>IdentifyPrimaryObjects</td>
+					<td>Segment complete nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9</td>
+					<td>ConvertObjectsToImage</td>
+					<td>Segmentation mask complete nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9</td>
+					<td>DisplayDataOnImage</td>
+					<td>Label nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9</td>
+					<td>SaveImages</td>
+					<td>Save labelled nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9</td>
+					<td>EnhanceOrSuppressFeatures</td>
+					<td>Detect dark holes in nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9</td>
+					<td>MaskImage</td>
+					<td>Segment nucleoli that fall inside nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9</td>
+					<td>IdentifyPrimaryObjects</td>
+					<td>Segment nucleoli</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9</td>
+					<td>ConvertObjectsToImage</td>
+					<td>Convert the segmented nucleoli into an image</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9</td>
+					<td>GrayToColor</td>
+					<td>Combine masks (nuclei + nucleoli)</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9</td>
+					<td>SaveImages</td>
+					<td>Save combined segmentation masks</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9</td>
+					<td>IdentifyPrimaryObjects</td>
+					<td>Segment all nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9</td>
+					<td>ConvertObjectsToImage</td>
+					<td>Segmentation mask nucleoli including cells touching borders</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0</td>
+					<td>ImageMath</td>
+					<td>Extract background</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9</td>
+					<td>MeasureGranularity</td>
+					<td>Measure the image granularity</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9</td>
+					<td>MeasureTexture</td>
+					<td>Measure the nuclei texture</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9</td>
+					<td>MeasureObjectIntensity</td>
+					<td>Measure the nuclei intensity</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9</td>
+					<td>MeasureObjectSizeShape</td>
+					<td>Measure size and shape of nuclei and nucleoli</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9</td>
+					<td>RelateObjects</td>
+					<td>Relate nucleoli with their parent nuclei</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9</td>
+					<td>MeasureImageQuality</td>
+					<td>Measure the image quality</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9</td>
+					<td>MeasureImageAreaOccupied</td>
+					<td>Measure the area occupied by nuclei and nucleoli</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9</td>
+					<td>MeasureImageIntensity</td>
+					<td>Measure the image intensity</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9</td>
+					<td>ExportToSpreadsheet</td>
+					<td>Export measurements</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9</td>
+					<td>CellProfiler</td>
+					<td>Run CellProfiler</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_cellprofiler/e917a2424690">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_common/e7273daa5ae2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_convert_objects_to_image/df3ad3ba5c6f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_display_data_on_image/2484086dee41">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_enhance_or_suppress_features/f2ed92b011a9">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_export_to_spreadsheet/f8fa0f6718a3">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_gray_to_color/31d195bedf6d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_identify_primary_objects/993faa34333b">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0">toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_image_math/c09dcda1143f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_mask_image/3a05117669cf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_granularity/a1a961c46d4b">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_image_area_occupied/20dbb1f7ec7b">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_image_intensity/5499dc6f8ac1">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_image_quality/e972e07c7845">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_object_intensity/980aed9e8fd5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_object_size_shape/79e10d12d90a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_measure_texture/035a58c7f54a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_relate_objects/8083a87d2fdf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9">toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/cp_save_images/4ecf93628f97">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41">toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/idr_download_by_ids/e08b1dc0480c">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -548,7 +980,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

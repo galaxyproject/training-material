@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -265,7 +265,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd7cd; --color-darker: #ffb5a0; --color-dimmed: #ffc6b8;">microbiome</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffb19a; --color-darker: #ff9167; --color-dimmed: #ffa182;">microbiome</div>
 			
 			</br>
 			
@@ -311,8 +311,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///microbiome-mothur-miseq-sop-short/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/microbiome/mothur-miseq-sop-short/workflow2-data-cleaning/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1112" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -331,13 +332,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy France</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop-short/versions/workflow2-data-cleaning">Import to another server (≥23.0+ only!)</a>
@@ -383,6 +384,195 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   10["Summary.seqs"];
   9 -->|count_out| 10;
   9 -->|fasta_out| 10;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Aligned Sequences</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Count Table</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</td>
+					<td>Summary.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</td>
+					<td>Screen.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0</td>
+					<td>Filter.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</td>
+					<td>Unique.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0</td>
+					<td>Pre.cluster</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</td>
+					<td>Summary.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1</td>
+					<td>Chimera.vsearch</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0</td>
+					<td>Remove.seqs</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</td>
+					<td>Summary.seqs</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1">toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_chimera_vsearch/12e856482d26">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0">toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_filter_seqs/3524ca06478e">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0">toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_pre_cluster/6532c3424bfe">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0">toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_remove_seqs/d38f2ac5db71">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1">toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_screen_seqs/63b74bfc8052">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0">toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_summary_seqs/600c14c6dcc5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0">toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/mothur_unique_seqs/a033f325ad8d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -492,7 +682,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

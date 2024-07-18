@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -264,7 +264,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd4e7; --color-darker: #ffafd5; --color-dimmed: #ffc2de;">metabolomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffabd3; --color-darker: #ff86c4; --color-dimmed: #ff99cb;">metabolomics</div>
 			
 			</br>
 			
@@ -308,8 +308,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///metabolomics-msi-finding-nglycans/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/metabolomics/msi-finding-nglycans/msi-finding-diff-analytes/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1123" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -330,9 +331,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-msi-finding-nglycans/versions/msi-finding-diff-analytes">Galaxy Australia</a></li>
 					
@@ -390,6 +391,286 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   9["MSI preprocessing"];
   5 -->|outfile_imzml| 9;
   8 -->|intensity_matrix| 9;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>treated</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>control</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>Glycan_IDs</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>all_files</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td></td>
+					<td>Input dataset</td>
+					<td>treated</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Input dataset</td>
+					<td>control</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3</td>
+					<td>MSI classification</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3</td>
+					<td>MSI segmentation</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1</td>
+					<td>Join two files</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>Summary_Statistics1</td>
+					<td>Summary Statistics</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2</td>
+					<td>MSI mz images</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>Grep1</td>
+					<td>Select</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2</td>
+					<td>MSI mz images</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Input dataset</td>
+					<td>Glycan_IDs</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Input dataset</td>
+					<td>all_files</td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3</td>
+					<td>MSI combine</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3</td>
+					<td>MSI preprocessing</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3</td>
+					<td>MSI Qualitycontrol</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3</td>
+					<td>MALDIquant preprocessing</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Filter1">Filter1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Grep1">Grep1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Summary_Statistics1">Summary_Statistics1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1">toolshed.g2.bx.psu.edu/repos/bgruening/join_files_on_column_fuzzy/join_files_on_column_fuzzy/1.0.1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/join_files_on_column_fuzzy/22ec3c1a20cd">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_classification/cardinal_classification/1.12.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_classification/b574b84afc4d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_combine/cardinal_combine/1.12.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_combine/48c07268f341">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/1.12.1.2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_mz_images/25b83cbd596a">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_preprocessing/cardinal_preprocessing/1.12.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_preprocessing/ed9ed1e6cca2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/1.12.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_quality_report/3b7a35d50ebf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3">toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_segmentations/cardinal_segmentations/1.12.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/cardinal_segmentations/82f6c2f4332d">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4">toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_peak_detection/maldi_quant_peak_detection/1.18.0.4</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/maldi_quant_peak_detection/e9300ef37403">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3">toolshed.g2.bx.psu.edu/repos/galaxyp/maldi_quant_preprocessing/maldi_quant_preprocessing/1.18.0.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/galaxyp/maldi_quant_preprocessing/71411ac28268">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -520,7 +801,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

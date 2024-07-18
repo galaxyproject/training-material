@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -267,7 +267,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #bbf200; --color-darker: #a6d700; --color-dimmed: #b0e500;">genome-annotation</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #a3d400; --color-darker: #91bd00; --color-dimmed: #9ac800;">genome-annotation</div>
 			
 			</br>
 			
@@ -311,8 +311,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///genome-annotation-bacterial-genome-annotation/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/genome-annotation/bacterial-genome-annotation/bacterial-genome-annotation/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1136" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -333,9 +334,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-bacterial-genome-annotation/versions/bacterial-genome-annotation">Galaxy Main</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-bacterial-genome-annotation/versions/bacterial-genome-annotation">Galaxy Australia</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-bacterial-genome-annotation/versions/bacterial-genome-annotation">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-bacterial-genome-annotation/versions/bacterial-genome-annotation">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-bacterial-genome-annotation/versions/bacterial-genome-annotation">Galaxy France</a></li>
 					
@@ -386,6 +387,179 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   4 -->|annotation_gff3| 10;
   9 -->|output| 10;
   1 -->|annotation| 10;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>contigs</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy0</td>
+					<td>ISEScan</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/plasmidfinder/plasmidfinder/2.1.6+galaxy1</td>
+					<td>PlasmidFinder</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.2+galaxy1</td>
+					<td>Integron Finder</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0</td>
+					<td>Bakta</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Grouping1">Grouping1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0">toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/d698c222f354">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/bakta/728dacaf08a9">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.2+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.2+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/integron_finder/4768f7f8e93f">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/isescan/19f42b3ea391">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/jbrowse/a6e57ff585c0">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/plasmidfinder/plasmidfinder/2.1.6+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/plasmidfinder/plasmidfinder/2.1.6+galaxy1</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/plasmidfinder/7075b7a5441b">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2">toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/tbl2gff3/4a7f4b0cc0a3">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -495,7 +669,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

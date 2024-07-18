@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -269,7 +269,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #a7f600; --color-darker: #94db00; --color-dimmed: #9de800;">epigenetics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #92d700; --color-darker: #81c000; --color-dimmed: #89cc00;">epigenetics</div>
 			
 			</br>
 			
@@ -313,8 +313,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///epigenetics-ewas-suite/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/epigenetics/ewas-suite/infinium-human-methylation-beadchip/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1165" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -333,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy France</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy Europe</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy Main</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/epigenetics-ewas-suite/versions/infinium-human-methylation-beadchip">Import to another server (≥23.0+ only!)</a>
@@ -425,6 +426,195 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   03b88399-095b-4bd5-9693-528c60338407["Output\nGO Enrichment Analysis Visualization"];
   15 --> 03b88399-095b-4bd5-9693-528c60338407;
   style 03b88399-095b-4bd5-9693-528c60338407 stroke:#2c3143,stroke-width:4px;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R01C02_Red.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R02C02_Red.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R05C02_Red.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R06C02_Red.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R01C02_Green.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R02C02_Green.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R05C02_Green.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>R06C02_Green.idat</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>phenotype Table txt file</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>UCSC Main on Human</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0</td>
+					<td>Infinium Human Methylation BeadChip</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0</td>
+					<td>ChIPpeakAnno annoPeaks</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>Cut1</td>
+					<td>Cut</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>Remove beginning1</td>
+					<td>Remove beginning</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0</td>
+					<td>Cluster Profiler Bitr</td>
+					<td></td>
+				</tr>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0</td>
+					<td>Cluster Profiler GO</td>
+					<td></td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Cut1">Cut1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=Remove beginning1">Remove beginning1</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0">toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/kpbioteam/chipeakanno_annopeaks/104882a2de00">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0">toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/kpbioteam/clusterprofiler_bitr/762c61c71874">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0">toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/kpbioteam/clusterprofiler_go/5299be80cafb">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0">toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/kpbioteam/ewastools/369fef559cfc">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -555,7 +745,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

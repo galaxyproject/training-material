@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@47c97420b7f308a761ae90615e3aab45e3f4e430",
+		release: "galaxy-training-network@2ad57e7651102924594beb13de8dfb542eccf186",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -264,13 +264,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #f2e400; --color-darker: #d7ca00; --color-dimmed: #e4d700;">statistics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #d4c700; --color-darker: #bdb100; --color-dimmed: #c8bc00;">statistics</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #00fcce; --color-darker: #00e0b7; --color-dimmed: #00eec2;">classification</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #00ddb4; --color-darker: #00c5a0; --color-dimmed: #00d1aa;">classification</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #d2e0ff; --color-darker: #aac7ff; --color-dimmed: #bed4ff;">ml</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #a5c5ff; --color-darker: #7cafff; --color-dimmed: #91baff;">ml</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffd4ea; --color-darker: #ffafda; --color-dimmed: #ffc2e2;">cancer</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffaad8; --color-darker: #ff85cb; --color-dimmed: #ff98d2;">cancer</div>
 			
 			</br>
 			
@@ -314,8 +314,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows///statistics-aberrant_pi3k_pathway_analysis/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="/training-material/api/workflows/statistics/aberrant_pi3k_pathway_analysis/main-workflow/rocrate.zip" class="btn btn-secondary"><img src="/training-material/assets/images/ro-crate.png" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			
+
 			
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/1284" class="btn btn-secondary"><img src="/training-material/assets/images/workflowhub-icon.svg" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			
@@ -334,13 +335,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy Main</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy Australia</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy France</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy Europe</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/statistics-aberrant_pi3k_pathway_analysis/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -479,6 +480,286 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 8 stroke:#2c3143,stroke-width:4px;
   9["ℹ️ Input Dataset\ngdsc2_ccle_pharm_fitted_dose_data.txt"];
   style 9 stroke:#2c3143,stroke-width:4px;</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>pancan_rnaseq_freeze.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>pancan_mutation_freeze.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>GSE69822_pi3k_sign.txt</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>GSE69822_pi3k_trans.csv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>GDSC_CCLE_common_mut_cnv_binary.tsv.gz</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>ccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>GDSC_EXP_CCLE_converted_name.tsv.gz</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>compounds_of_interest.txt</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>cosmic_cancer_classification.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>path_rtk_ras_pi3k_genes.txt</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>copy_number_loss_status.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>copy_number_gain_status.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>mutation_burden_freeze.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>sample_freeze.tsv</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>mc3.v0.2.8.PUBLIC.maf</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>CCLE_DepMap_18Q1_maf_20180207.txt</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>gdsc1_ccle_pharm_fitted_dose_data.txt</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>gdsc2_ccle_pharm_fitted_dose_data.txt</td>
+				</tr>
+				
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_alternative_genes_pathwaymapper/c594c4333b76">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_apply_weights/3543d3e66ecb">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_classifier/20b049f5b3f5">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_compare_within_models/84ac2a86bde1">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_external_sample_status_prediction/8f426aeccfe3">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_map_mutation_class/54c85c40dce1">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_pathway_count_heatmaps/dc1d71493ebf">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_targene_cell_line_predictions/872aab514d37">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_pharmacology/pancancer_targene_pharmacology/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_pharmacology/pancancer_targene_pharmacology/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_targene_pharmacology/aa5e0e353148">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_targene_summary_figures/d533f991e22e">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_visualize_decisions/f6dd27775d28">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9">toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/vijay/pancancer_within_disease_analysis/99d944bfe9b3">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 
@@ -616,7 +897,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47c97420b7f308a761ae90615e3aab45e3f4e430">47c9742</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ad57e7651102924594beb13de8dfb542eccf186">2ad57e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
