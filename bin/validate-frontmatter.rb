@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'date'
 require 'yaml'
 require 'find'
 require 'pathname'
@@ -11,7 +12,11 @@ require './bin/gtn'
 module SchemaValidator
   # Schemas
   @TOPIC_SCHEMA_UNSAFE = YAML.load_file('bin/schema-topic.yaml')
-  @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+  begin
+    @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml', aliases: true)
+  rescue StandardError
+    @TUTORIAL_SCHEMA_UNSAFE = YAML.load_file('bin/schema-tutorial.yaml')
+  end
   @SLIDES_SCHEMA_UNSAFE = YAML.load_file('bin/schema-slides.yaml')
   @FAQ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-faq.yaml')
   @QUIZ_SCHEMA_UNSAFE = YAML.load_file('bin/schema-quiz.yaml')
@@ -104,7 +109,11 @@ module SchemaValidator
 
   def self.lintable?(fn)
     begin
-      data = YAML.load_file(fn)
+      begin
+        data = YAML.load_file(fn, permitted_classes: [Date])
+      rescue StandardError
+        data = YAML.load_file(fn)
+      end
     rescue StandardError => e
       return ["YAML error, failed to parse #{fn}, #{e}"]
     end
@@ -186,6 +195,14 @@ module SchemaValidator
     errs = []
     data = lintable?(fn)
     return data if data.nil? || data.is_a?(Array)
+
+    if data.key?('cover') 
+      if !data['cover'].start_with?('https://')
+        if !File.exist?(data['cover'])
+          errs.push("Cover image #{data['cover']} does not exist")
+        end
+      end
+    end
 
     errs.push(*validate_document(data, @news_validator))
     errs

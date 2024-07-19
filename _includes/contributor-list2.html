@@ -24,6 +24,34 @@
 	</tr>
 	{% endif %}
 
+	{% if include.contributors.data %}
+	<tr>
+		<td><abbr title="These people generated some of the underlying data used in the learning resource.">Data provider(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.data %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.organisers %}
+	<tr>
+		<td><abbr title="These were responsible for organisation of this event">Organisers(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.organisers %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+		</td>
+	</tr>
+	{% endif %}
+
+	{% if include.contributors.instructors %}
+	<tr>
+		<td><abbr title="These folks either taught at the event or supported its instruction">Instructor(s)</abbr></td>
+		<td>
+			{% for id in include.contributors.instructors %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			{%- if include.newcontributors -%}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id='newcontributors' %}{% endif %}{% endif %}
+		</td>
+	</tr>
+	{% endif %}
 
 	{% if include.contributors.translation %}
 	<tr>
@@ -69,5 +97,6 @@
 		</td>
 	</tr>
 	{% endif %}
+
 </table>
 {% endif %}

@@ -48,6 +48,17 @@ follow_up_training:
 contributors:
   - fubar2
   - hexylena
+
+recordings:
+- captioners:
+  - fubar2
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: 8nKBfVM6240
+  speakers:
+  - fubar2
+
 ---
 
 The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using
@@ -627,8 +638,8 @@ Thanks all! It has been a lot of fun.
 
 Special thanks to:
 
-- {% include _includes/contributor-badge.html id="hexylena" %} for
+- @gtn:hexylena for
     - review and contribution to the tutorial and associated code.
     - the vision of instant installation of generated tools for developer feedback.
     - elegantly generated lint-free XML provided by [galaxyml code](https://github.com/hexylena/galaxyxml)
-- {% include _includes/contributor-badge.html id="mvdbeek" %} for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.
+- @gtn:mvdbeek for thoughtful comments on the role of the ToolFactory that helped motivate the tutorial.

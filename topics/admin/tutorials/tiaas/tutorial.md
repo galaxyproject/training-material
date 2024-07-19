@@ -32,6 +32,18 @@ requirements:
       - pulsar
 abbreviations:
   TIaaS: Training Infrastructure as a Service
+
+recordings:
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 24M
+  youtube_id: tz0ZbK_8Vcc
+  speakers:
+  - hexylena
+
 ---
 
 Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed {TIaaS}.
@@ -91,7 +103,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -346,3 +346,8 @@ telegraf_plugins_extra:
+>    @@ -349,3 +349,8 @@ telegraf_plugins_extra:
 >           - timeout = "10s"
 >           - data_format = "influx"
 >           - interval = "15s"

@@ -4,7 +4,7 @@ redirect_from:
   - /topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial
 
 title: "Use Jupyter notebooks in Galaxy"
-zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"
+zenodo_link: "https://zenodo.org/record/1185122"
 questions:
   - "How to use a Jupyter Notebook in Galaxy"
 objectives:
@@ -23,8 +23,8 @@ subtopic: analyse
 
 
 In this tutorial we are going to explore the basics of using Jupyter in Galaxy. We will use a RNA seq count file as a test set to get a hang of the Jupyter notebooks.
-The file is available in [Zenodo](https://zenodo.org/record/1185122#.WzlCQNhKgWo) or in the *Tutorial* section of *Data Libraries*.
-Select a file ending with `.count` and upload it in your history (If you want to know how to upload data in galaxy, see [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) tutorial)
+The file is available in [Zenodo](https://zenodo.org/record/1185122) or in the *Tutorial* section of *Data Libraries*.
+Select a file ending with `.counts` and upload it in your history (If you want to know how to upload data in galaxy, see [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) tutorial)
 
 > <agenda-title></agenda-title>
 >
@@ -55,7 +55,7 @@ The Jupyter notebook can be started from different points. You can either open a
 > <hands-on-title>Launching a Jupyter notebook from a dataset or a saved Jupyter notebook</hands-on-title>
 > If you only need one dataset from your history to perform you analysis or want to open a Jupyter notebook that you previously saved in your history, you can launch a Jupyter from a single dataset.
 > 1. Expand the dataset in you history by clicking on its name.
-> 2. Click on the visualization icon {% icon galaxy-barchart %} of the dataset `[...].count`.
+> 2. Click on the visualization icon {% icon galaxy-barchart %} of the dataset `[...].counts`.
 > 3. Select the Jupyter visualization in the list. ![Visualisation list](../../images/visu_list.png)
 >
 {: .hands_on}
@@ -67,7 +67,7 @@ The Jupyter notebook can be started from different points. You can either open a
 > 2. To open a notebook, set the parameters as follows :
 >   - *"GIE"* : `Jupyter`
 >   - *"Image"* : `quay.io/bgruening/docker-jupyter-notebook:17.09`
->   - *"Datasets"* : The datasets you want to work on, here your `[...].count` file. If the first dataset you select is a notebook from you history, it will be opened instead of a new notebook.
+>   - *"Datasets"* : The datasets you want to work on, here your `[...].counts` file. If the first dataset you select is a notebook from you history, it will be opened instead of a new notebook.
 > 3. Click *Launch*
 >
 {: .hands_on}

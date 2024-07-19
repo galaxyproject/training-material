@@ -1,5 +1,9 @@
 name: Deploy Website
 
+concurrency:
+  group: deploy-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
 on:
   push:
     branches:
@@ -14,22 +18,29 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository_owner == 'galaxyproject'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          # Avg commits between successive monday:
+          #  Min.   :  2.0
+          #  1st Qu.: 25.0
+          #  Median : 54.5
+          #  Mean   : 65.2
+          #  3rd Qu.: 94.0
+          #  Max.   :282.0
+          fetch-depth: 400
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
+          python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/setup-node@v2
+          ruby-version: "3.2"
+      - uses: actions/setup-node@v4
         with:
           node-version: '19'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -48,7 +59,7 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Build Site
+      - name: Prepare Site Metadata
         run: |
           gem install bundler
           python -m pip install --upgrade pip
@@ -56,14 +67,17 @@ jobs:
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
+          curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           rdoc bin _plugins/ --output gtn_rdoc
+
+      - name: Build Site
+        run: |
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
           cp metadata/feedback.csv _site/training-material/api/feedback.csv
+          cp metadata/feedback2.yaml _site/training-material/api/feedback2.yaml
         env:
           GTN_FORK: ${{ github.repository_owner }}
 

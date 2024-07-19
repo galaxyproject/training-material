@@ -16,9 +16,9 @@ module Gtn
       if data.key?('contributors')
         data['contributors']
       elsif data.key?('contributions')
-        data['contributions'].keys.map { |k| data['contributions'][k] }.flatten
+        data['contributions'].values.flatten
       else
-        {}
+        []
       end
     end
 
@@ -30,11 +30,39 @@ module Gtn
     # +Array+ of contributor IDs
     def self.get_authors(data)
       if data.key?('contributors')
-        data['contributors']
+        data['contributors'] || []
       elsif data.key?('contributions')
-        data['contributions']['authorship']
+        data['contributions']['authorship'] || []
       else
-        {}
+        []
+      end
+    end
+
+    ##
+    # Returns event organisers
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_organisers(data)
+      if data.key?('contributions') && data['contributions'].key?('organisers')
+        data['contributions']['organisers']
+      else
+        []
+      end
+    end
+
+    ##
+    # Returns event instructors
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_instructors(data)
+      if data.key?('contributions') && data['contributions'].key?('instructors')
+        data['contributions']['instructors']
+      else
+        []
       end
     end
 
@@ -52,6 +80,20 @@ module Gtn
           .reject { |k| k == 'funding' }
           .reject { |k| k == 'authorship' }
           .values.flatten.uniq
+      else
+        []
+      end
+    end
+
+    ##
+    # Get the funders of a material.
+    # Params:
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of contributor IDs
+    def self.get_funders(data)
+      if data.key?('contributions') && data['contributions'].key?('funding')
+        data['contributions']['funding']
       else
         []
       end
@@ -76,7 +118,7 @@ module Gtn
     # Returns:
     # +Hash+ of contributor information
     # +String+ type of contributor (e.g. 'contributor', 'organisation', 'funder')
-    def self.fetch(site, c)
+    def self.fetch(site, c, warn: false)
       if _load_file(site, 'contributors').key?(c)
         return ['contributor', site.data['contributors'][c]]
       elsif _load_file(site, 'organisations').key?(c)
@@ -84,7 +126,9 @@ module Gtn
       elsif _load_file(site, 'funders').key?(c)
         return ['funder', site.data['funders'][c]]
       else
-        Jekyll.logger.warn "Contributor #{c} not found"
+        if ! warn
+          Jekyll.logger.warn "Contributor #{c} not found"
+        end
       end
 
       ['contributor', { 'name' => c }]
@@ -108,8 +152,8 @@ module Gtn
     # +c+:: +String+ of contributor ID
     # Returns:
     # +String+ of contributor name
-    def self.fetch_name(site, c)
-      fetch(site, c)[1].fetch('name', c)
+    def self.fetch_name(site, c, warn: false)
+      fetch(site, c, warn: warn)[1].fetch('name', c)
     end
 
     ##
@@ -119,7 +163,10 @@ module Gtn
     # Returns:
     # +Hash+ of contributors, funders, organisations merged together
     def self.list(site)
-      site.data['contributors'].merge(site.data['funders']).merge(site.data['organisations'])
+      site.data['contributors']
+          .merge(site.data['funders'])
+          .merge(site.data['organisations'])
+          .reject { |c| c['halloffame'] == 'no' }
     end
 
     ##

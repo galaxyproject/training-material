@@ -17,6 +17,7 @@ redirect_from:
   - /topics/introduction/videos/index
   - /topics/metabolomics/videos/index
   - /topics/metagenomics/videos/index
+  - /topics/microbiome/videos/index
   - /topics/proteomics/videos/index
   - /topics/sequence-analysis/videos/index
   - /topics/statistics/videos/index

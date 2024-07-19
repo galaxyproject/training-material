@@ -1,0 +1,311 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Checking expected species and contamination in bacterial isolate",
+    "creator": [
+        {
+            "alternateName": "pimarin",
+            "class": "Person",
+            "email": "mailto:pierre.marin@france-bioinformatique.fr",
+            "familyName": "MARIN",
+            "identifier": "0000-0002-8304-138X",
+            "name": "Pierre"
+        },
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Checking expected species and contamination in bacterial isolate",
+    "steps": {
+        "0": {
+            "annotation": "reverse_reads",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "reverse_reads",
+                    "name": "reverse_reads"
+                }
+            ],
+            "label": "reverse_reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 56
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fastq\", \"fastq.gz\", \"fastqsanger\", \"fastqsanger.gz\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a39893cf-49cb-4c5c-9e71-0f8004a2a1ee",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "forward_reads",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "forward_reads",
+                    "name": "forward_reads"
+                }
+            ],
+            "label": "forward_reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 179
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fastq\", \"fastq.gz\", \"fastqsanger\", \"fastqsanger.gz\"], \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "ca539dfd-e173-42d6-998a-0fc4c5f3d5b8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "single_paired|forward_input": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "single_paired|reverse_input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Kraken2",
+            "outputs": [
+                {
+                    "name": "report_output",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 280,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e674066930b2",
+                "name": "kraken2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"confidence\": \"0.0\", \"kraken2_database\": \"2023-08-24T153645Z_standard_prebuilt_pluspf_16gb_2022-06-07\", \"min_base_quality\": \"10\", \"minimum_hit_groups\": \"2\", \"quick\": false, \"report\": {\"create_report\": true, \"use_mpa_style\": false, \"report_zero_counts\": false, \"report_minimizer_data\": false}, \"single_paired\": {\"single_paired_selector\": \"yes\", \"__current_case__\": 1, \"forward_input\": {\"__class__\": \"ConnectedValue\"}, \"reverse_input\": {\"__class__\": \"ConnectedValue\"}}, \"split_reads\": false, \"use_names\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.1+galaxy1",
+            "type": "tool",
+            "uuid": "75b7f2b8-2b63-4f1a-a877-4babef16a08b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "kraken_report_reads",
+                    "output_name": "output",
+                    "uuid": "a408a644-58cd-4f5e-af25-15b5ea63aa76"
+                },
+                {
+                    "label": "kraken_report_tabular",
+                    "output_name": "report_output",
+                    "uuid": "54b85a53-72ee-4b73-b186-7fd55e8aab9b"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "report_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Bracken",
+            "outputs": [
+                {
+                    "name": "report",
+                    "type": "tabular"
+                },
+                {
+                    "name": "kraken_report",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 40
+            },
+            "post_job_actions": {
+                "RenameDatasetActionkraken_report": {
+                    "action_arguments": {
+                        "newname": "bracken_kraken_report"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "kraken_report"
+                },
+                "RenameDatasetActionreport": {
+                    "action_arguments": {
+                        "newname": "bracken_report_tsv"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "report"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.9+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "0357fb68688c419f",
+                "name": "bracken",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"kmer_distr\": \"bf6177af-7f5b-4005-9bec-fc7c89c3cb1c\", \"level\": \"S\", \"logfile_output\": false, \"out_report\": true, \"threshold\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8+galaxy0",
+            "type": "tool",
+            "uuid": "53b9c80b-f5f4-4fee-9778-fb4fd6b76165",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "bracken_report_tsv",
+                    "output_name": "report",
+                    "uuid": "ae6c6464-f5f5-4e5b-b616-d38166fc0133"
+                },
+                {
+                    "label": "bracken_kraken_report",
+                    "output_name": "kraken_report",
+                    "uuid": "8ca52af9-f839-42b6-aa74-f1a6a1dfbbc8"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Recentrifuge",
+            "outputs": [
+                {
+                    "name": "html_report",
+                    "type": "html"
+                },
+                {
+                    "name": "logfile",
+                    "type": "txt"
+                },
+                {
+                    "name": "data_tsv",
+                    "type": "tabular"
+                },
+                {
+                    "name": "stat_tsv",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 560,
+                "top": 329
+            },
+            "post_job_actions": {
+                "RenameDatasetActiondata_tsv": {
+                    "action_arguments": {
+                        "newname": "recentrifuge_data_tabular"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "data_tsv"
+                },
+                "RenameDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "newname": "recentrifuge_report_html"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "html_report"
+                },
+                "RenameDatasetActionlogfile": {
+                    "action_arguments": {
+                        "newname": "recentrifuge_logfile"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "logfile"
+                },
+                "RenameDatasetActionstat_tsv": {
+                    "action_arguments": {
+                        "newname": "recentrifuge_stats_tabular"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "stat_tsv"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/recentrifuge/recentrifuge/1.12.1+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "b5407cc2bf51",
+                "name": "recentrifuge",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_option\": {\"controls\": \"0\", \"scoring\": null, \"minscore_value\": \"0\", \"mintaxa\": \"0\", \"exclude_taxa_name\": null, \"include_taxa_name\": null, \"avoidcross\": false}, \"database\": {\"database_name\": \"ncbi-2023-06-27\"}, \"file_type\": {\"filetype\": \"kraken\", \"__current_case__\": 3}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"more_advanced_option\": {\"ctrlminscore\": \"0\", \"ctrlmintaxa\": \"0\", \"summary\": \"ADD\", \"takeoutroot\": false, \"nokollapse\": false, \"strain\": true, \"sequential\": false}, \"output_option\": {\"extra\": \"TSV\", \"nohtml\": false, \"no_logfile\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.12.1+galaxy0",
+            "type": "tool",
+            "uuid": "4b3b34ad-2352-4e93-abbc-69da3ab9ee3a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "recentrifuge_stats_tabular",
+                    "output_name": "stat_tsv",
+                    "uuid": "b5694f2d-c8cd-4460-bfff-74fd0792ecb3"
+                },
+                {
+                    "label": "recentrifuge_report_html",
+                    "output_name": "html_report",
+                    "uuid": "bd947a1d-0443-465f-8658-5d76d9ce69f8"
+                },
+                {
+                    "label": "recentrifuge_data_tabular",
+                    "output_name": "data_tsv",
+                    "uuid": "c7457acb-41bc-4191-b3fb-6716e15fbe57"
+                },
+                {
+                    "label": "recentrifuge_logfile",
+                    "output_name": "logfile",
+                    "uuid": "94f6ff07-0e06-47ad-88f8-a058d0808537"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "ecology"
+    ],
+    "uuid": "262cc80b-e4a4-4759-91d5-fab27f396a13",
+    "version": 8
+}

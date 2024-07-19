@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Biodiversity data exploration
-zenodo_link: https://zenodo.org/record/6107457/files/IMOS-National_Reef_Monitoring_Network_Sub-Facility-Global_reef_fish_abundance_and_biomass.csv?download=1
+zenodo_link: https://zenodo.org/record/6107457
 questions:
 - How to explore biodiversity data?
 - How to look at Homoscedasticity, normality or collinearity of presences-absence or abundance data?
@@ -23,8 +23,23 @@ contributions:
   - colineroyaux
   - yvanlebras
   funding:
+  - pndb
   - gallantries
+  - pndb
+  - fnso2019
 
+
+recordings:
+- captioners:
+  - onorvez
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 1H
+  youtube_id: rWfPr-5F3GQ
+  speakers:
+  - onorvez
+
+subtopic: ecologypreprocess
 ---
 
 

@@ -21,7 +21,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
-subtopic: core
+subtopic: next-steps
 contributors:
   - pajanne
   - blankclemens
@@ -87,7 +87,7 @@ Let's start with a fresh history.
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >   ![Renaming history]({% link shared/images/rename_history.png %})
 >    >
 >    > * Type `Galaxy Introduction` as the name
 >    > * Press <kbd>Enter</kbd>

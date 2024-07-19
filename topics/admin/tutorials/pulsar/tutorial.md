@@ -39,6 +39,26 @@ requirements:
       - cvmfs
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
+
+recordings:
+- captioners:
+  - hexylena
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 1H28M
+  youtube_id: f0QdF8NDhsM
+  speakers:
+  - slugger70
+- captioners:
+  - simonbray
+  - slugger70
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 57M
+  youtube_id: a7fKJT4Fs9k
+  speakers:
+  - slugger70
+
 ---
 
 
@@ -271,7 +291,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -171,8 +171,11 @@ certbot_environment: staging
+>    @@ -174,8 +174,11 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - www-data
@@ -283,7 +303,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -222,6 +225,47 @@ slurm_config:
+>    @@ -225,6 +228,47 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     

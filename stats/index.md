@@ -1,14 +1,16 @@
 ---
 layout: base
+title: GTN Statistics
 redirect_from:
 - /stats
+description: Some useful statistics about the GTN. We're a growing community!
 ---
 
 <!-- tutorial stats -->
-{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.enable != false" %}
+{% assign tutorials = site.pages | where:"layout", "tutorial_hands_on" | where_exp:"item","item.draft != true" %}
 
 <!-- topic stats -->
-{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
+{% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.draft != true" %}
 {% assign topics_science = site | list_topics_by_category: "science" | to_vals %}
 {% assign topics_technical = site | list_topics_by_category: "technical" | to_vals %}
 
@@ -42,7 +44,6 @@ redirect_from:
 
 <section>
 <h1>GTN Statistics</h1>
-
 <div class="stats">
 
 {% snippet faqs/gtn/gtn_stats.md %}
@@ -63,7 +64,8 @@ redirect_from:
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Growing Community</h5>
-   <canvas id="contributorsGraph" width="400" height="400"></canvas>
+   <canvas id="contributorsGraph" width="400" height="200"></canvas>
+   <canvas id="tutoTimeBar" width="400" height="200"></canvas>
    </div>
  </div>
 </div>
@@ -98,9 +100,40 @@ redirect_from:
  </div>
 </div>
 
+<!-- Latest Added Tutorials -->
+<div class="col-md-6">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">New Tutorials</h5>
+   {% assign latest_tutorials_published = site | recently_published_tutorials %}
+   <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
+    </thead>
+    <tbody>
+    {% for tuto in latest_tutorials_published %}
+            {% assign topic_id = tuto | get_topic %}
+            {% assign topic = site.data[topic_id] %}
+      <tr>
+        <td>{{ tuto.path | gtn_pub_date | date: "%b %-d, %Y"  }}</td>
+        <td style="text-align:right">
+            <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+                {{ topic.title }}
+            </a>
+</td>
+        <td><a href="{{ site.baseurl }}/{{ tuto.url }}">
+            {{ tuto.title }}
+            </a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+   </div>
+ </div>
+</div>
 
 <!-- Latest modified Tutorials -->
-<div class="col-md-12">
+<div class="col-md-6">
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Recently Updated Tutorials</h5>
@@ -114,7 +147,7 @@ redirect_from:
             {% assign topic_id = tuto | get_topic %}
             {% assign topic = site.data[topic_id] %}
       <tr>
-        <td>{{ tuto.last_modified_at | date: "%b %-d, %Y"  }}</td>
+        <td>{{ tuto.path | gtn_mod_date | date: "%b %-d, %Y"  }}</td>
         <td style="text-align:right">
             <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
                 {{ topic.title }}
@@ -127,12 +160,9 @@ redirect_from:
     {% endfor %}
     </tbody>
    </table>
-    <p class="card-text">Thanks a lot for your contributions!</p>
-
    </div>
  </div>
 </div>
-
 
 <!-- Plausible Graphs -->
 <div class="col-md-12">
@@ -257,8 +287,6 @@ var tutorialsBarTechnical = new Chart("tutorialsBarTechnical", {
 // Contributors chart
 var data_contributors = [{%for c in contributors_over_time %}{x:"{{contributors_over_time_labels[forloop.index]}}" , y: {{c}} } {%unless forloop.last%},{%endunless%}{%endfor%}];
 
-var labels_contributors = [{%for l in contributors_over_time_labels %}"{{l}}"{%unless forloop.last%},{%endunless%}{%endfor%}];
-
 var contributorsBar = new Chart('contributorsGraph', {
   type: 'line',
   data: {
@@ -294,5 +322,47 @@ var contributorsBar = new Chart('contributorsGraph', {
     }
   }
 });
+
+// Tutorials Over Time chart
+var data_tuto_over_time = {{ site | tutorials_over_time_bar_chart }};
+var labels_tuto_over_time = data_tuto_over_time.map(x => x.x)
+
+var tutoTimeBar = new Chart('tutoTimeBar', {
+  type: 'line',
+  data: {
+    datasets: [{
+      data: data_tuto_over_time,
+      borderColor: style.getPropertyValue("--text-color"),
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats:{month:'YYYY-MM'},
+          min:'2017-10',
+          unit: 'month',
+          distribution: 'linear'
+        }
+      }]
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Materials over time (Tutorials + Slides)'
+    }
+  }
+});
+
+
 
 </script>

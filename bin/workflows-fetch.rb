@@ -3,6 +3,7 @@ require 'json'
 require 'net/http'
 require 'uri'
 require 'yaml'
+require './_plugins/gtn/usegalaxy'
 
 def request(url)
   uri = URI.parse(url)
@@ -11,15 +12,19 @@ def request(url)
   req_options = {
     use_ssl: uri.scheme == 'https',
   }
-  response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
     http.request(request)
   end
-  response
 end
 
 # Get the list of workflows
 def fetch_workflows(server)
-  response = request("#{server}/api/workflows/")
+  begin
+    response = request("#{server}/api/workflows/")
+  rescue StandardError
+    puts "ERROR: Failed to fetch workflows from #{server}"
+    return []
+  end
 
   begin
     JSON.parse(response.body).map do |w|
@@ -31,34 +36,32 @@ def fetch_workflows(server)
   end
 end
 
-def fetch_workflowhub()
-  projects = JSON.parse(request("https://workflowhub.eu/projects").body)
-  project_mapping = projects['data'].map{|p| [p['id'], p['attributes']['title']]}.to_h
+def fetch_workflowhub
+  projects = JSON.parse(request('https://workflowhub.eu/projects').body)
+  project_mapping = projects['data'].to_h { |p| [p['id'], p['attributes']['title']] }
 
-  response = request("https://workflowhub.eu/workflows?filter[workflow_type]=galaxy")
+  response = request('https://workflowhub.eu/workflows?filter[workflow_type]=galaxy')
   data = JSON.parse(response.body)
   if !data['links']['next'].nil?
-    puts "ERROR: Cannot yet handle multiple pages"
+    puts 'ERROR: Cannot yet handle multiple pages'
     exit 42
   end
   puts "INFO: Fetching #{data['data'].length} workflows from WorkflowHub"
-  data['data'].map.with_index { |w, i|
+  data['data'].map.with_index do |w, _i|
     # {"id"=>"14", "type"=>"workflows", "attributes"=>{"title"=>"Cheminformatics - Docking"}, "links"=>{"self"=>"/workflows/14"}}
     wf_info = JSON.parse(request("https://workflowhub.eu#{w['links']['self']}").body)
     creator_list = []
 
     creator0 = wf_info['data']['attributes']['creators'][0]
-    owner = ""
-    if !creator0.nil?
-      # Primary
-      creator_list.push(creator0['given_name'] + " " + creator0['family_name'])
-    else
+    if creator0.nil?
       # Other creators
       other = wf_info['data']['attributes']['other_creators']
       if !other.nil? && other.length.positive?
-        creator_list.push(wf_info['data']['attributes']['other_creators'].split(',').map{|x| x.strip})
-      else
+        creator_list.push(wf_info['data']['attributes']['other_creators'].split(',').map(&:strip))
       end
+    else
+      # Primary
+      creator_list.push("#{creator0['given_name']} #{creator0['family_name']}")
     end
     # Projects
     wf_info['data']['relationships']['projects']['data'].each do |p|
@@ -74,25 +77,22 @@ def fetch_workflowhub()
         'number_of_steps' => wf_info['data']['attributes']['internals']['steps'].length,
         'server' => 'https://workflowhub.eu',
         'id' => wf_info['data']['id'],
-        'tags' => wf_info['data']['attributes']['tags'].map{|t| t.gsub(/^name:/, '')},
+        'tags' => wf_info['data']['attributes']['tags'].map { |t| t.gsub(/^name:/, '') },
         'update_time' => wf_info['data']['attributes']['updated_at'],
       }
-    rescue
+    rescue StandardError
       r = nil
     end
     r
-  }.reject{|x| x.nil? }
+  end.compact
 end
 
-
 # Parse the response
-workflows_eu = fetch_workflows('https://usegalaxy.eu')
-puts "INFO: Fetched #{workflows_eu.length} workflows from EU"
-workflows_org = fetch_workflows("https://usegalaxy.org")
-puts "INFO: Fetched #{workflows_org.length} workflows from ORG"
-workflows_aus = fetch_workflows("https://usegalaxy.org.au")
-puts "INFO: Fetched #{workflows_aus.length} workflows from AUS"
-workflows = workflows_eu + workflows_org + workflows_aus
+workflows = Gtn::Usegalaxy.servers.map do |server|
+  workflows = fetch_workflows(server[:url])
+  puts "INFO: Fetched #{workflows.length} workflows from #{server[:name]}"
+  workflows
+end.flatten
 
 # Cleanup the list
 workflows.filter! do |w|
@@ -100,7 +100,7 @@ workflows.filter! do |w|
 end
 
 # Add in WFHub workflows
-workflows += fetch_workflowhub()
+workflows += fetch_workflowhub
 
 # Group by name + owner
 cleaned = workflows.group_by { |w| "#{w['name']}<WFID>#{w['owner']}" }

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "How to reproduce published Galaxy analyses"
-zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
+zenodo_link: https://zenodo.org/record/1319069
 level: Introductory
 questions:
   - "How to reproduce published Galaxy results (workflows and histories)"
@@ -40,12 +40,13 @@ For more background information about Galaxy, have a look into the Galaxy public
 
 # What does Galaxy look like?
 
-Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.\* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au). To learn more about the different Galaxy servers visit the [slides: options for using Galaxy]({{site.baseurl}}/topics/introduction/tutorials/options-for-using-galaxy/slides.html#1). The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.
+{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+Many different Galaxy servers exist. Some are public, some are private, some focus on a specific topic and others like the usegalaxy.\* servers cover a broad range of tools. To reproduce published results it is highly recommended to use the same Galaxy server that was used in the original study. In the case that this was a private server that is not accessible to you, you might want to use one of the main Galaxy servers: {% for server in servers %}[{{ server.name }}]({{ server.url }}){% if forloop.last %}{% else %}, {% endif %}{% endfor %}. To learn more about the different Galaxy servers visit the [slides: options for using Galaxy]({% link /topics/introduction/tutorials/options-for-using-galaxy/slides.html %}). The particular Galaxy server that you are using may look slightly different than the one shown in this training. Galaxy instance administrators can choose the exact version of Galaxy they would like to offer and can customize its look to some extent. The basic functionality will be rather similar across instances, so don’t worry! In this training we will use the European Galaxy server on which the original analysis was performed and shared.
 
 
 > <hands-on-title>Log in or register</hands-on-title>
 > 1. Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)
-> 2. Browse to the [Galaxy Europe instance](https://usegalaxy.eu/) (recommended) or to a Galaxy instance of your choosing
+> 2. Browse to the [Galaxy Europe instance](https://usegalaxy.eu/) or to a Galaxy instance of your choosing
 > 3. Choose *Login or Register* from the navigation bar at the top of the page
 > 4. If you have previously registered an account with this particular instance of Galaxy (user accounts are *not* shared between public servers!), proceed by logging in with your registered *public name*, or email address, and your password.
 >
@@ -90,7 +91,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 
 > <hands-on-title>Data upload</hands-on-title>
 >
-> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo]({{ page.zenodo_link }}) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv

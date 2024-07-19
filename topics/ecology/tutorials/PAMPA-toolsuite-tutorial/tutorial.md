@@ -28,11 +28,27 @@ tags:
   - EBV dataset
   - EBV workflow
   - modeling
-contributors:
-- colineroyaux
-- yvanlebras
-- jbmihoub
+contributions:
+  authorship:
+  - colineroyaux
+  - yvanlebras
+  - dpelletier
+  - jbmihoub
+  funding:
+  - gallantries
+  - pndb
 
+recordings:
+- captioners:
+  - colineroyaux
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 2H
+  youtube_id: leMPC2Ckehc
+  speakers:
+  - colineroyaux
+
+subtopic: ecologyanalysis
 ---
 
 

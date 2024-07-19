@@ -7,7 +7,7 @@ jobs:
   admin-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -20,7 +20,7 @@ jobs:
   assembly-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -33,7 +33,7 @@ jobs:
   climate-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -46,7 +46,7 @@ jobs:
   computational-chemistry-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -59,7 +59,7 @@ jobs:
   contributing-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -72,7 +72,7 @@ jobs:
   dev-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -85,7 +85,7 @@ jobs:
   ecology-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -98,7 +98,7 @@ jobs:
   epigenetics-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -111,7 +111,7 @@ jobs:
   genome-annotation-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -124,7 +124,7 @@ jobs:
   imaging-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -137,7 +137,7 @@ jobs:
   introduction-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -147,10 +147,23 @@ jobs:
         repository: galaxy/introduction-training
         tags: latest, 20.05
         dockerfile: topics/introduction/docker/Dockerfile
+  materials-science-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/materials-science-training
+        tags: latest, 20.05
+        dockerfile: topics/materials-science/docker/Dockerfile
   metabolomics-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -163,7 +176,7 @@ jobs:
   # metagenomics-docker:
   #   runs-on: ubuntu-latest
   #   steps:
-  #   - uses: actions/checkout@v2
+  #   - uses: actions/checkout@v4
   #   - name: Build and push to Docker Hub
   #     uses: docker/build-push-action@v1
   #     with:
@@ -176,7 +189,7 @@ jobs:
   # proteomics-docker:
   #   runs-on: ubuntu-latest
   #   steps:
-  #   - uses: actions/checkout@v2
+  #   - uses: actions/checkout@v4
   #   - name: Build and push to Docker Hub
   #     uses: docker/build-push-action@v1
   #     with:
@@ -189,7 +202,7 @@ jobs:
   sequence-analysis-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -202,7 +215,7 @@ jobs:
   statistics-docker:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     - name: Build and push to Docker Hub
       uses: docker/build-push-action@v1
       with:
@@ -215,7 +228,7 @@ jobs:
   # transcriptomics-docker:
   #   runs-on: ubuntu-latest
   #   steps:
-  #   - uses: actions/checkout@v2
+  #   - uses: actions/checkout@v4
   #   - name: Build and push to Docker Hub
   #     uses: docker/build-push-action@v1
   #     with:
@@ -228,7 +241,7 @@ jobs:
   # variant-analysis-docker:
   #   runs-on: ubuntu-latest
   #   steps:
-  #   - uses: actions/checkout@v2
+  #   - uses: actions/checkout@v4
   #   - name: Build and push to Docker Hub
   #     uses: docker/build-push-action@v1
   #     with:

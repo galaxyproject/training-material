@@ -83,8 +83,12 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml --incremental
+	bundle exec jekyll serve --config _config.yml --incremental --livereload
 .PHONY: serve-gitpod
+
+serve-gitpod-quick: bundle-install  ## run a server on a gitpod.io environment
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental --livereload
+.PHONY: serve-gitpod-quick
 
 build-gitpod: bundle-install  ## run a build on a gitpod.io environment
 	bundle exec jekyll build --config _config.yml
@@ -232,6 +236,9 @@ _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 
 video: ## Build all videos
 	bash bin/ari-make.sh
+
+metadata/public-server-tools.json:
+	python ./bin/supported-fetch.py
 
 annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \

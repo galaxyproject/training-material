@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Classification in Machine Learning'
-zenodo_link: https://zenodo.org/record/3738729#.XoZyHXUzaV4
+zenodo_link: https://zenodo.org/record/3738729
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
@@ -21,6 +21,17 @@ contributors:
 - khanteymoori
 - anuprulez
 - simonbray
+
+recordings:
+- captioners:
+  - anuprulez
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H50M
+  youtube_id: Gz2OdRPS2Nk
+  speakers:
+  - anuprulez
+
 ---
 
 
@@ -76,7 +87,7 @@ Let's begin by uploading the necessary datasets.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3738729#.Xs1EeHUzY5k)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/3738729/files/train_rows.csv
@@ -112,7 +123,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 
 > <hands-on-title>Train logistic regression classifier</hands-on-title>
 >
-> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Logistic Regression`
 >          - *"Select input type"*: `tabular data`
@@ -148,7 +159,7 @@ Now, we will predict the class in the test dataset using this classifier in orde
 
 > <hands-on-title>Predict class using the logistic regression classifier</hands-on-title>
 >
-> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.8.4) %}:
+> 1. {% tool [Generalized linear models for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_generalized_linear/sklearn_generalized_linear/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LogisticRegression_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -173,7 +184,7 @@ We will evaluate the classification by comparing the predicted with the expected
 Now we visualize and analyze the classification using the "Plot confusion matrix, precision, recall and ROC and AUC curves" tool.
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
@@ -244,7 +255,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 
 > <hands-on-title>Train k-nearest neighbor classifier</hands-on-title>
 >
-> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
@@ -274,7 +285,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 
 > <hands-on-title>Predict class using the k-nearest neighbor classifier</hands-on-title>
 >
-> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.8.4) %}:
+> {% tool [Nearest Neighbors Classification](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_nn_classifier/sklearn_nn_classifier/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -287,7 +298,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
@@ -313,7 +324,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 
 > <hands-on-title>Train a SVM classifier</hands-on-title>
 >
->  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Support Vector Classification`
 >          - *"Select input type"*: `tabular data`
@@ -345,7 +356,7 @@ Now we will evaluate the performance of the SVM classifier:
 
 > <hands-on-title>Predict class SVM classifier</hands-on-title>
 >
->  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.8.4) %}:
+>  {% tool [Support vector machines (SVMs)](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_svm_classifier/sklearn_svm_classifier/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `SVM_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -358,7 +369,7 @@ Now we will evaluate the performance of the SVM classifier:
 Now let's visualize the results:
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.2) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
@@ -377,7 +388,7 @@ One big advantage of random forest is that it can be used for both classificatio
 
 > <hands-on-title>Train random forest</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
@@ -409,7 +420,7 @@ After learning on the training dataset, we should evaluate the performance on th
 
 > <hands-on-title>Predict targets using the random forest</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
 >       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
@@ -436,16 +447,14 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a `h5mlm` file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
 > <hands-on-title>Create pipeline</hands-on-title>
 >
-> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.8.4) %}:
+> {% tool [Pipeline builder](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_build_pipeline/sklearn_build_pipeline/1.0.11.0) %}:
 >    - In *"Final Estimator"*:
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `BaggingClassifier`
->    - In *"Output parameters for searchCV?"*: `Yes`
-> 
 >      We choose `Final Estimator` as we have only the estimator and no preprocessor and need the parameters of only the estimator.
 >
 {: .hands_on}
@@ -457,9 +466,9 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 
 > <hands-on-title>Hyperparameter search</hands-on-title>
 >
-> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.8.4) %}:
+> {% tool [Hyperparameter search](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_searchcv/sklearn_searchcv/1.0.11.0) %}:
 >    - *"Select a model selection search scheme"*: `GridSearchCV - Exhaustive search over specified parameter values for an estimator `
->        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `zipped` file (output of **Pipeline builder** {% icon tool %})
+>        - {% icon param-files %} *"Choose the dataset containing pipeline/estimator object"*: `h5mlm` file (output of **Pipeline builder** {% icon tool %})
 >        - {% icon param-files %} *"Is the estimator a deep learning model?"*: `NO` {% icon tool %})
 >        - In *"Search parameters Builder"*:
 >             - {% icon param-files %} *"Choose the dataset containing parameter names"*: `tabular` file (output of **Estimator attributes** {% icon tool %})
@@ -499,9 +508,9 @@ Using the **Hyperparameter search** tool, we found the best model, based on the 
 
 > <hands-on-title>Predict age</hands-on-title>
 >
-> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.8.4) %}:
+> 1. {% tool [Ensemble methods for classification and regression](toolshed.g2.bx.psu.edu/repos/bgruening/sklearn_ensemble/sklearn_ensemble/1.0.11.0) %}:
 >    - *"Select a Classification Task"*: `Load a model and predict`
->        - {% icon param-files %} *"Models"*: `zipped` file (output of **Hyperparameter search** {% icon tool %})
+>        - {% icon param-files %} *"Models"*: `h5mlm` file (output of **Hyperparameter search** {% icon tool %})
 >        - {% icon param-files %} *"Data (tabular)"*: `test_rows` tabular file
 >        - *"Does the dataset contain header"*: `Yes`
 >

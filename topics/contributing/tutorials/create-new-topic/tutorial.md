@@ -207,7 +207,7 @@ For tag based topics, first ensure that all of the relevant tutorials share a si
 
 Compare with other topic level metadata files in the `metadata/` directory of the training material. Then create a file of your own naming the topic and providing editorial board members and so on. We will use the Covid-19 synthetic topic as an example:
 
-```
+```yaml
 ---
 name: "covid19"
 type: "use"
@@ -228,6 +228,31 @@ As you can see it is very short, and there are only a handful of important point
 - `subtopics` must not be set.
 
 With this done, all materials tagged `covid19` will be aggregated and available under this synthetic topic. They are organised by the "parent" topic, so e.g. assembly tutorials are collected together and transcriptomics tutorials are also in a section together, similar to how other tutorials define subtopics.
+
+## More manual tag based topics
+
+If you wish to more manually curate the tutorials listed in your tag-based topic, you can provide subtopics. These must have IDs that match tags that are expected to be found within your tag-based topic.
+
+```yaml
+---
+name: gmod
+type: use
+topic_type: technology
+title: GMOD
+edam_ontology: ["topic_0362"]
+
+tag_based: true
+
+subtopics:
+  - id: jbrowse1
+    title: "JBrowse 1"
+    description: Learn to use JBrowse v1 here.
+  - id: apollo2
+    title: Apollo v2
+    description: Apollo is a collaborative, real time genome annotation editor.
+```
+
+Here anything with a tag `jbrowse1` will appear under the JBrowse section, same for `apollo2` and the Apollo section. Tutorials may appear multiple times, but this is still useful as it gives you a way to provide additional organisation within your topic.
 
 
 # Conclusion

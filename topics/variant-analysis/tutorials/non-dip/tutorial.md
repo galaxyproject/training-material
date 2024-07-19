@@ -6,6 +6,7 @@ subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
 tags:
   - prokaryote
+  - microgalaxy
 questions:
   - "How does frequency of mitochondrial polymorphisms change from mother to child?"
 objectives:
@@ -19,6 +20,13 @@ key_points:
 contributors:
   - nekrut
   - astrovsky01
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0196 # Sequence assembly
+- topic_2885 # DNA polymorphism
+- topic_3301 # Microbiology
+- topic_0080 # Sequence analysis
+- topic_0199 # Genetic variation
 ---
 
 

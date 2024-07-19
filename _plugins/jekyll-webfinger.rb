@@ -3,8 +3,13 @@
 require './_plugins/gtn'
 
 Jekyll::Hooks.register :site, :post_write do |site|
+  if Jekyll.env != 'production'
+    Jekyll.logger.info '[GTN/Webfinger] Skipping webfinger generation in development'
+    next
+  end
+
   # Make the directory
-  Jekyll.logger.info 'Generating webfinger files'
+  Jekyll.logger.info '[GTN/Webfinger] Generating webfinger files'
   FileUtils.mkdir_p "#{site.dest}/api/fedi"
 
   Gtn::Contributors.list(site)

@@ -330,7 +330,7 @@ Snakemake rules are a bit more complex, in Snakemake you will write rules that f
 
 ### FastQC
 
-> <code-in-title>Mask</code-in-title>
+> <code-in-title>Make</code-in-title>
 > <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
 > 	<span class="s2">fastqc $<</span>
 > </code></pre>

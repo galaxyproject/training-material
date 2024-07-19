@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Metaproteomics tutorial"
-edam_ontology: ["topic_0121"]
 zenodo_link: "https://doi.org/10.5281/zenodo.839701"
 questions:
   - "How can I match metaproteomic mass spectrometry data to peptide sequences derived from shotgun metagenomic data?"
@@ -22,7 +21,23 @@ contributors:
   - blankclemens
   - subinamehta
 subtopic: multi-omics
-tags: [microbiome]
+tags: [microgalaxy]
+edam_ontology:
+- topic_0121 # Proteomics
+- topic_3922 # Proteogenomics
+- topic_3050 # Biodiversity
+- topic_0637 # Taxonomy
+
+recordings:
+- captioners:
+  - emmaleith
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: 3_yaPp-RCFw
+  speakers:
+  - pratikdjagtap
+
 ---
 
 In this metaproteomics tutorial we will identify expressed proteins from a complex bacterial community sample.

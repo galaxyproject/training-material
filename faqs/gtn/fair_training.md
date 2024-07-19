@@ -8,6 +8,9 @@ contributors: [hexylena]
 
 This infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) principles for training materials {% cite Garcia2020 %}. Following these principles enables trainers and trainees to find, reuse, adapt, and improve the available tutorials.
 
+The GTN receives a 100% score on the [FAIR Checker](https://fair-checker.france-bioinformatique.fr/check), as noted in our recent [news post]({{ site.baseurl }}/news/2024/05/13/fair.html)
+
+
 10 Simple Rules                                                            | Implementation in GTN framework
 ---------------                                                            | -------------------------------
 Plan to share your training materials online                               | Online [training material portfolio](https://training.galaxyproject.org/), managed via [a public GitHub repository](https://github.com/galaxyproject/training-material)

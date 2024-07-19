@@ -6,6 +6,9 @@ on:
     - cron:  '0 4 1 * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   setup:
     if: github.repository_owner == 'galaxyproject'
@@ -17,35 +20,23 @@ jobs:
           echo "release_title=$(LC_ALL=C date '+%Y %B %d')" >> $GITHUB_ENV
           echo "release_tag=$(LC_ALL=C date -I)" >> $GITHUB_ENV
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
         with:
-          tag_name: ${{ env.release_tag }}
-          commitish: main
-          release_name: Release ${{ env.release_title }}
-          body: "Monthly release of the GTN materials"
-          draft: false
-          prerelease: false
-
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+          # Based on logic in deploy.yml
+          fetch-depth: 1200
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/setup-node@v2
+          ruby-version: "3.2"
+      - uses: actions/setup-node@v4
         with:
           node-version: '19'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -66,31 +57,32 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Configure AWS credentials from GTN account
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+      - name: List Tags
+        run: |
+          git tag -l
 
       - name: Build Site
         run: |
-          git tag -l
-          git checkout ${SOURCE_TAG}
           gem install bundler
           bundle config path vendor/bundle
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
+          curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | ruby bin/yaml2json.rb > api/swagger.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           SOURCE_TAG: ${{ env.release_tag }}
           GTN_FORK: ${{ github.repository_owner }}
+
+      - name: Configure AWS credentials from GTN account
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
       - name: Deploy 🚀
         run: |
@@ -98,3 +90,8 @@ jobs:
           ./bin/publish-archive
         env:
           SOURCE_TAG: ${{ env.release_tag }}
+
+      - name: Create Release
+        id: create_release
+        run: |
+          gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." --target main --latest

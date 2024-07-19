@@ -39,6 +39,26 @@ follow_up_training:
     topic_name: admin
     tutorials:
       - job-destinations
+
+recordings:
+- captioners:
+  - cat-bro
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 31M
+  youtube_id: R0NbHscL3jA
+  speakers:
+  - hexylena
+- captioners:
+  - beatrizserrano
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 6M
+  youtube_id: 7CYI5yw9MN8
+  speakers:
+  - hexylena
+
 ---
 
 The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
@@ -125,10 +145,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -191,6 +191,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -194,6 +194,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-www-data.pem
->     
+>
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
 >    +slurm_nodes:
@@ -385,7 +405,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +        env:
 >    +        - name: LC_ALL
 >    +          value: C
->    +        - name: SINGULARITY_CACHEDIR
+>    +        - name: APPTAINER_CACHEDIR
 >    +          value: /tmp/singularity
 >    +        - name: APPTAINER_TMPDIR
 >    +          value: /tmp

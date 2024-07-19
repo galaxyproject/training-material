@@ -19,10 +19,14 @@ tags:
   - gbif
   - data management
   - data cleaning
-contributors:
-- yvanlebras
-- sbenateau
+contributions:
+  authorship:
+  - yvanlebras
+  - sbenateau
+  funding:
+  - pndb
 
+subtopic: ecologypreprocess
 ---
 
 

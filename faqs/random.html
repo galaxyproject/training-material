@@ -1,0 +1,28 @@
+---
+layout: base
+title: Random FAQ
+---
+
+<style>
+div.main-content > blockquote {
+	display: none;
+}
+</style>
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md box_type="comment" %}
+
+{% snippet faqs/galaxy/why_not_excel.md box_type="comment" %}
+
+{% snippet faqs/galaxy/tutorial_mode.md box_type="comment" %}
+
+{% snippet faqs/gtn/fair_training.md box_type="comment" %}
+
+{% snippet faqs/gtn/why-the-gtn.md box_type="comment" %}
+
+<script>
+let faqs = document.querySelectorAll("div.main-content > blockquote")
+let random_faq = Math.floor(Math.random() * faqs.length);
+faqs[random_faq].style.display = 'block';
+</script>
+
+{% bibliography --cited %}

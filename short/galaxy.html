@@ -1,60 +1,157 @@
 ---
 layout: base
+title: My Galaxy Instance
+description: This page will redirect you to a specific page in your preferred Galaxy instance.
 ---
 
-<h1> My Galaxy Instance </h1>
+<div class="row justify-content-md-center">
+	<div class="card col-md-6" style="padding: 0">
+		<div class="card-body">
+			<h1 class="h5 card-title" style="margin-top: 0">My Galaxy Training</h1>
 
-<p>
-My Galaxy Instance allows the GTN to link you to specific pages in your preferred Galaxy
-</p>
+			<p class="card-text">
+			This page lets us redirect you to specific pages in your preferred Galaxy. See the <a href="{% link faqs/gtn/my-galaxy-training.md %}">FAQ</a> for more information.
+			</p>
 
-<a id="clickthrough" class="btn btn-primary" href="https://usegalaxy.eu">Go to your server</a>
-<input id="domain" type="text" placeholder="usegalaxy.eu" />
-<button id="edit" class="btn btn-secondary">Edit</button>
-<button id="save" class="btn btn-primary">Save</button>
+			<p class="card-text">
+				You are being redirected to <code id="path"></code>
+			</p>
 
-<p>
-Configure My Galaxy Instance by entering your preferred Galaxy Server (e.g. usegalaxy.eu or usegalaxy.org.au) and clicking Save.
-</p>
-<p>
-<b>Note</b>: This URL is only stored in your browser.
-</p>
+			<h2 class="preferred-set">Go!</h2>
+			<p class="preferred-set card-text">
+				<a id="preferred" class="btn btn-primary" href="https://usegalaxy.eu">Go to https://usegalaxy.eu</a>
+			</p>
+
+			<details id="set-preferred" open>
+				<summary>Select your Preferred Galaxy Server</summary>
+				<p class="card-text">
+					<span>
+					{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+					{% for server in servers %}
+					<a id="{{server.id}}" class="clickthrough btn btn-primary" href="{{ server.url }}">
+						<img alt="logo" src="{{ server.url }}/static/favicon.svg" style="height: 1em; margin-right: 0.5em" onload="doneLoading('{{ server.id }}')"/>
+						{{ server.human }}
+					</a>
+					{% endfor %}
+					</span>
+					<button id="set-other" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">Other</button>
+				</p>
+			</details>
+		</div>
+	</div>
+
+</div>
+
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Set Custom Server</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	<input id="domain" type="text" placeholder="usegalaxy.eu" />
+	<b>Note</b>: This URL is only stored in your browser.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="save-other" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.preferred-set {
+	display: none;
+	text-align: center;
+}
+</style>
+
 
 <script>
-// Without jquery we wait for the page to load
-document.addEventListener("DOMContentLoaded", function(event) {
-	// Get the path from the URL parameter named 'path'
-	let params = new URLSearchParams(window.location.search);
-	let path = params.get('path') || '/';
-	var url = localStorage.getItem('gxy-url');
+let path = params.get('path') || '/';
+var preferred_server = localStorage.getItem('gxy-url');
 
-	function setUrl(url, path) {
-		$('#clickthrough').attr('href', 'https://' + url + path);
-		$("#clickthrough").text(`Go to your https://${url}${path}`);
-		$('#clickthrough').show();
-		$('#domain').hide();
-		$('#domain').val(url);
-		$('#edit').show();
-		$('#save').hide();
-	}
-	if (url) {
-		setUrl(url, path);
-	} else {
-		$('#edit').hide();
-		$('#clickthrough').hide();
-	}
 
-	$('#save').click(function() {
-		var url = $('#domain').val();
-		localStorage.setItem('gxy-url', url);
-		setUrl(url, path);
+var startTime = new Date().getTime();
+let serverLoadTimes = {};
+function doneLoading(server) {
+	var loadtime = new Date().getTime() - startTime;
+	serverLoadTimes[server] = loadtime;
+	console.log(`${server} image took ${loadtime} ms to load`);
+	reorderServers();
+};
+
+function reorderServers() {
+	var servers = document.querySelectorAll('.clickthrough');
+	var serverArray = Array.from(servers);
+	serverArray.sort(function(a, b) {
+		return serverLoadTimes[a.id] - serverLoadTimes[b.id];
 	});
-	$('#edit').click(function() {
-		$('#clickthrough').hide();
-		$('#domain').show();
-		$('#domain').val(url);
-		$('#edit').hide();
-		$('#save').show();
+	serverArray.forEach(function(el) {
+		document.getElementById(el.id).parentElement.appendChild(el);
+	});
+}
+
+document.getElementById('path').innerHTML = path;
+
+function showPreferred(server_domain) {
+	// Show the preferred server buttons
+	document.querySelectorAll('.preferred-set').forEach(function(el) {
+		el.style.display = 'block';
+	});
+	// Collapse the details box
+	document.getElementById('set-preferred').open = false;
+	document.getElementById('preferred').innerHTML = 'Go to ' + server_domain;
+	document.getElementById('preferred').href = server_domain + path;
+}
+// If no preferred server is set
+if (preferred_server === null) {
+	// Dialog is open by default.
+} else {
+	showPreferred(preferred_server);
+}
+
+document.querySelectorAll('.clickthrough').forEach(function(el) {
+	el.addEventListener('click', function(event) {
+		// Don't follow the link
+		var href = $(this).attr('href');
+		event.preventDefault();
+		console.log(href);
+		// Set the url
+		localStorage.setItem('gxy-url', href);
+		// Redirect
+		window.location.href = href + path;
+	});
+});
+
+// They're bootstrap modals, and this is the only modal interaction, so we have
+// to wait for BS+JQ to be available.
+document.addEventListener("DOMContentLoaded", function(event) {
+	document.getElementById('save-other').addEventListener('click', function(event) {
+		// Set the url
+		var domain = document.getElementById('domain').value;
+		if (domain === '') {
+			alert('Please enter a domain');
+			return;
+		}
+		if (!domain.startsWith('http')) {
+			domain = 'https://' + domain;
+		}
+		localStorage.setItem('gxy-url', domain);
+		showPreferred(domain);
+
+		//Close
+		$('#exampleModal').modal('hide');
 	});
 });
 </script>
+
+<style>
+.clickthrough {
+	margin: 0.1em;
+}
+</style>

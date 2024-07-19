@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require 'bibtex'
+require 'citeproc/ruby'
+require 'csl/styles'
+
 module Gtn
   # GTN implementation of Jekyll::Scholar except faster.
   module Scholar
@@ -30,7 +34,7 @@ module Gtn
     end
 
     def self.discover_bib
-      puts '[GTN/scholar] Creating global bib cache'
+      Jekyll.logger.info '[GTN/scholar] Creating global bib cache'
       global_bib = BibTeX::Bibliography.new
       bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).grep(/bib$/)
       bib_paths.each do |path|
@@ -39,7 +43,7 @@ module Gtn
           global_bib << x
         end
       end
-      puts "[GTN/scholar] Done: #{global_bib.length}"
+      Jekyll.logger.info "[GTN/scholar] Done: #{global_bib.length}"
       style = CSL::Style.load('_layouts/g3.csl')
       cp = CiteProc::Processor.new style: style,
                                    format: 'html', locale: 'en'

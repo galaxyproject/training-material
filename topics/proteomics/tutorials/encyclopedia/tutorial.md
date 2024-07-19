@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: 'http://doi.org/10.5281/zenodo.4926594'
+zenodo_link: 'https://doi.org/10.5281/zenodo.4926594'
 tags: [DIA]
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
@@ -24,6 +24,17 @@ contributors:
 - pratikdjagtap
 - timothygriffin
 
+
+
+recordings:
+- captioners:
+  - mtekman
+  date: '2021-06-25'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: eCEjHtbZLVg
+  speakers:
+  - emmaleith
 
 ---
 

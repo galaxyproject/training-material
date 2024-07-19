@@ -25,7 +25,8 @@ key_points:
   - "View the output files by clicking on the eye icon."
   - "View all your histories and move files between them. Switch to a different history."
   - "Log out of your Galaxy server. When you log back in (to the same server), your histories will all be there."
-subtopic: core
+subtopic: first
+priority: 2
 translations:
   - es
 contributions:
@@ -62,9 +63,7 @@ contributions:
 >   > <comment-title>Different Galaxy servers</comment-title>
 >   >  This is an image of Galaxy Australia, located at [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
->   > The particular Galaxy server that you are using may look slightly different and have a different web address:
->   > - The main Galaxy server is [usegalaxy.org](https://usegalaxy.org/)
->   > - The European Galaxy server is [usegalaxy.eu](https://usegalaxy.eu/)
+>   > The particular Galaxy server that you are using may look slightly different and have a different web address.
 >   >
 >   > You can also find more possible Galaxy servers at the top of this tutorial in **Available on these Galaxies**
 >   {: .comment}
@@ -89,7 +88,7 @@ Your "History" is in the panel at the right.
 > 1. Go to the **History** panel (on the right)
 > 2. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.](../../../../shared/images/rename_history.png){:width="250px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.]({% link shared/images/rename_history.png %}){:width="250px"}
 >
 >    > <comment-title></comment-title>
 >    >
@@ -182,6 +181,8 @@ Let's look at the quality of the reads in this file.
 {: .hands_on}
 
 This tool will run and two new output datasets will appear at the top of your history panel.
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
 ## View results
 
