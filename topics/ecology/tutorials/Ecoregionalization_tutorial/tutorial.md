@@ -532,7 +532,7 @@ The third output corresponds to the main information of the tool, a graph presen
 >    - {% icon param-file %} *"Taxa selected file (File 'List of taxa' from TaxaSeeker tool)"*: `List_of_taxa` (output of **TaxaSeeker** {% icon tool %})
 >    - {% icon param-file %} *"Prediction files"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
 >
->       {% snippet faqs/galaxy/tools_select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >    - *"Number of Cluster to test"*: `10` (You can choose any number, but remember that the more cluster numbers to test the longer it will take)
 >
