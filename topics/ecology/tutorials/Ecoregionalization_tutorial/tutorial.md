@@ -23,6 +23,7 @@ tags:
 - ecology
 - EBV workflow
 - modeling
+- earth-system
 contributions:
   authorship:
     - PaulineSGN
