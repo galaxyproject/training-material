@@ -142,7 +142,11 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 >    ```
 >    [https://zenodo.org/record/5932108/files/wolf_tutorial.zip](https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip)
+>    ```
+>    ```
 >    https://data.indores.fr/api/access/datafile/9777 : "ceamarc_env.tab"
+>    ```
+>    ```
 >    https://data.indores.fr/api/access/datafile/9756 : "pivot_wider_jupytool_notebook.ipynb"
 >    ```
 >
