@@ -11,7 +11,7 @@ objectives:
 - Learning about Silhouette index and select an appropriate number of cluster
 - Learning about Clara clustering algorithm (PAM for large datasets)
 - Create an ecoregionalization map
-time_estimation: 1H
+time_estimation: 2H
 key_points:
 - GeoNearestNeighbor
 - BRT tool
