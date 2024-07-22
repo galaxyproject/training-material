@@ -366,7 +366,7 @@ For this tutorial we will use the ENA default sample checklist.
 {: .hands_on}
 
 > <hands-on-title> ENA Upload Tool </hands-on-title>
-> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/view/iuc/ena_upload/5cb6146337d8) %} with the following parameters:
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 > - *"Action to execute"*: `Add new (meta)data`
 > - *"Select the metadata input method"*: `Excel file`
 > - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
