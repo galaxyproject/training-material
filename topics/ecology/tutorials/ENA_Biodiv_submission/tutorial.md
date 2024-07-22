@@ -48,7 +48,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 > <hands-on-title> Data Upload </hands-on-title>
 > 1. Create a new history for this tutorial
-{% snippet faqs/galaxy/histories_create_new.md %}
+> {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files.
 > 
@@ -75,9 +75,9 @@ The goal is to present an accessible and reproductible workflow for data submiss
 <hands-on-title> Run "Prepare Data Submission" Workflow </hands-on-title>
 > Workflow is accessible there:
 >
-[https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
+> [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
-{% snippet faqs/galaxy/workflows_run.md%}
+> {% snippet faqs/galaxy/workflows_run.md%}
 >
 > ![Data submission Workflow](./images/image7.PNG)
 {: .hands_on}
@@ -121,7 +121,6 @@ We are doing a first Quality control on the raw files using FastQC and MultiQC.
 Cutadapt enables the removal of adapters, polyA tails, and other artifacts from sequences. The tool also filters reads based on quality.
 
 > <hands-on-title> Cutadapt </hands-on-title>
-
 > 1. {% tool [Cutadapt](https://toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0) %} with the following parameters:
 >
 >     - **"Single-end or Paired-end reads?"**: `Single-end`
@@ -315,7 +314,7 @@ Results of BLAST alignments conducted on our sequences. Columns names are:
 | 23     | qlen         | Query sequence length                          |
 | 24     | slen         | Subject sequence length                        |
 | 25     | salltitles   | All subject title(s), separated by a '<>'      |
->
+
 
 ### Filtered Blast Results
 Files containing the closest homologous sequences.
@@ -377,13 +376,14 @@ For this tutorial we will use the ENA default sample checklist.
 >    > The ENA upload tool only allows .fastq.gz files for submission
 >    {: .comment}
 >    
-> <warning-title> Danger: Submit to ENA test server! </warning-title>
-> We suggest you first submit to the test server before making a public submission!
-{: .warning}
-> 
+>    > <warning-title> Danger: Submit to ENA test server! </warning-title>
+>    > We suggest you first submit to the test server before making a public submission!
+> {: .warning}
+>
+> ![ENA Upload tool](./images/image3.png)
 {: .hands_on}
 
-> ![ENA Upload tool](./images/image3.png)
+
 
 # Conclusion
 
