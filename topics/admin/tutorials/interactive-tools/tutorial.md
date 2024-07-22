@@ -252,9 +252,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    | `gie_proxy_virtualenv`         | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
 >    | `gie_proxy_setup_service`      | string        | Whether to configure the proxy as a service, only option is `systemd` |
 >    | `gie_proxy_sessions_path`      | path (string) | Path of Interactive Tools sessions map                                |
->    |--------------------------------|---------------|-----------------------------------------------------------------------|
 >    | `gie_proxy_path_prefix`        | path (string) | Requests accessing this cause the proxy to behave differently. It must be configured to `/interactivetool/ep` to make [Path-based Interactive Tools][path-based_interactive_tools] work.    |
->    |--------------------------------|---------------|-----------------------------------------------------------------------|
 >
 >    Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
