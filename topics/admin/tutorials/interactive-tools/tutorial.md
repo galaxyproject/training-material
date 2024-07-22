@@ -920,62 +920,17 @@ By design, [SQLite is the wrong choice for high availability setups][sqlite_situ
 >
 > <br>
 >
-> 1. Access PostgresSQL **in your database server**.
+> 1. **On your database server**, access PostgresSQL and create a `gxitproxy` database to store the Interactive Tools Session Map. For simplicity, the same user that operates on the Galaxy main database, typically named `galaxy`, is also going to operate on this one and will own the new database.
 > 
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
->    > sudo -iu postgres psql
+>    > # one-liner that connects to Postgres, creates the database and assigns ownership
+>    > sudo -u postgres createdb -O galaxy gxitproxy
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > <code-out-title>SQL</code-out-title>
->    > ```
->    > psql (10.12 (Ubuntu 10.12-0ubuntu0.18.04.1))
->    > Type "help" for help.
->    >
->    > postgres=#
->    > ```
->    {: .code-out}
->
-> 2. Create a `gxitproxy` database to store the Interactive Tools Session Map.
->
->    > <code-in-title>SQL</code-in-title>
->    > ```sql
->    > CREATE DATABASE gxitproxy;
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
->    > <code-out-title>SQL</code-out-title>
->    > ```
->    > CREATE DATABASE
->    > ```
->    {: .code-out}
->
-> 3. For simplicity, the same user that operates on the Galaxy main database, typically named `galaxy`, is also going to operate on this one. Make this user the owner of the new database.
->
->    > <code-in-title>SQL</code-in-title>
->    > ```sql
->    > ALTER DATABASE gxitproxy OWNER TO galaxy;
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
->
->    > <code-out-title>SQL</code-out-title>
->    > ```
->    > ALTER DATABASE
->    > ```
->    {: .code-out}
->
-> 4. Sign out of the `postgres` database using `exit`. Then connect to the `gxitproxy` database as `galaxy`.
->
->    > <code-in-title>SQL</code-in-title>
->    > ```sql
->    > exit
->    > ```
->    > {: data-cmd="true"}
->    {: .code-in}
+> 2. Connect to the `gxitproxy` database as `galaxy`.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -993,7 +948,7 @@ By design, [SQLite is the wrong choice for high availability setups][sqlite_situ
 >    > ```
 >    {: .code-out}
 >
-> 5. Create a `gxitproxy` table in the new database.
+> 3. Create a `gxitproxy` table in the new database.
 >
 >    > <code-in-title>SQL</code-in-title>
 >    > ```sql
@@ -1008,7 +963,7 @@ By design, [SQLite is the wrong choice for high availability setups][sqlite_situ
 >    > ```
 >    {: .code-out}
 >
-> 6. This is enough to let Galaxy and the Interactive Tool Proxy store the Interactive Tools Session Map in PostgreSQL. But there is a catch: when the Interactive Tool Proxy uses SQLite, it knows the database has changed because it watches the file for changes. When using Postgres, this mechanism is not available. By default, the proxy simply polls the database at regular intervals. To let the user access interactive tools as fast as possible, the proxy can also be notified of updates via [PostgreSQL asynchronous notifications](https://www.postgresql.org/docs/16/libpq-notify.html). To enable them, you have to create a PostgreSQL trigger that sends a NOTIFY message to the channel `gxitproxy` every time the table `gxitproxy` changes.
+> 4. This is enough to let Galaxy and the Interactive Tool Proxy store the Interactive Tools Session Map in PostgreSQL. But there is a catch: when the Interactive Tool Proxy uses SQLite, it knows the database has changed because it watches the file for changes. When using Postgres, this mechanism is not available. By default, the proxy simply polls the database at regular intervals. To let the user access interactive tools as fast as possible, the proxy can also be notified of updates via [PostgreSQL asynchronous notifications](https://www.postgresql.org/docs/16/libpq-notify.html). To enable them, you have to create a PostgreSQL trigger that sends a NOTIFY message to the channel `gxitproxy` every time the table `gxitproxy` changes.
 >
 >    Run the following commands to create to create a function that sends a NOTIFY message to the channel `gxitproxy` and a trigger that runs the function every time the table `gxitproxy` changes.
 >
