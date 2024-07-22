@@ -33,18 +33,20 @@ Additionally, we will perform alignments with the NCBI database to ensure the ac
 The worklow is made of 17 Galaxy tools, we will  present them and explain what they do.
 The goal is to present an accessible and reproductible workflow for data submission.
  
-<!-- This is a comment. -->
-
+> <agenda-title></agenda-title>
+>
 > In this tutorial, we will cover:
 >
 > 1. How to prepare sequences with the Data Submission Workflow 
 > 2. How to use the ENA upload Tool
 >
+{: .agenda}
 
 # 1. How to prepare raw data with the Data Submission Workflow
 
 ## **Run Workflow**
 
+> <hands-on-title> Data Upload </hands-on-title>
 > 1. Create a new history for this tutorial
 {% snippet faqs/galaxy/histories_create_new.md %}
 >
@@ -60,37 +62,36 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 > 3673 becomes A2_RC_8F2_B.pl_HCOI.ab1
 > 3609 becomes A12_RC_9G4_B.md_HCOI.ab1
->    
-> 5. Build a Collection
-
-{% snippet faqs/galaxy/collections_build_list.md%}
-
-> <tip-title>Importing data  </tip-title>
 >
-> * Check that datatype is ab1
-> 
-{: .tip}
+> 4. Check that datatype is ab1
+>
+> 5. Build a Collection
+>
+>    {% snippet faqs/galaxy/collections_build_list.md%}
+>
+{: .hands_on}
 
-> 5. Run Prepare Data Submission Workflow
+
+<hands-on-title> Run "Prepare Data Submission" Workflow </hands-on-title>
+> Workflow is accessible there:
 >
 [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
 {% snippet faqs/galaxy/workflows_run.md%}
 >
 > ![Data submission Workflow](./images/image7.PNG)
-
->
+{: .hands_on}
 
 # Tools used in the "Prepare Data submission" Workflow
 
 ## **Converting Ab1 files to Fastq**
 
-> We use **Ab1 to Fastq converter** to convert the sequences from AB1 format to FASTQ format.
+We use **Ab1 to Fastq converter** to convert the sequences from AB1 format to FASTQ format.
 
 
 ## **Quality Control**
 
-> We are doing a first Quality control on the raw files using FastQC and MultiQC.
+We are doing a first Quality control on the raw files using FastQC and MultiQC.
 
 > <hands-on-title> FastQC </hands-on-title>
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} on the Fastq files:
@@ -112,12 +113,13 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 > 1. What is the quality of your sequences?
 > 2. Do you have adapters?
+{:   .question}
 
 ## **Cleaning the Data**
 
-> **1. Cutadapt**>
-> Enables the removal of adapters, polyA tails, and other artifacts from sequences. The tool also filters reads based on quality.
->
+### Cutadapt
+Cutadapt enables the removal of adapters, polyA tails, and other artifacts from sequences. The tool also filters reads based on quality.
+
 > <hands-on-title> Cutadapt </hands-on-title>
 
 > 1. {% tool [Cutadapt](https://toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0) %} with the following parameters:
@@ -138,8 +140,8 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >    >
 >    > We do a second quality control similar to the first one to check the quality of the sequences after cleaning them.
 >    {: .comment}
->
-> **2.Quality Control with FASTQC and MultiQC**
+
+### Quality Control with FASTQC and MultiQC
 
 > <hands-on-title> FastQC </hands-on-title>
 >
@@ -161,7 +163,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 {: .hands_on}
 
->  **3. Filtering the collection**
+### Filtering the collection
 
 > <hands-on-title> Filter empty datasets </hands-on-title>
 >
@@ -181,7 +183,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 {: .hands_on}
 
->  **4. Changing files names**
+### Changing files names
 
 > <hands-on-title>Extract element identifiers </hands-on-title>
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} 
@@ -221,7 +223,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 {: .hands_on}
 
-> **5. Compress file(s)**
+### Compress file(s)
 
 > <hands-on-title> Compress files </hands-on-title>
 >
@@ -236,14 +238,15 @@ The goal is to present an accessible and reproductible workflow for data submiss
 
 ## Alignements on NCBI database
 
-> **1. Converting files to fasta format**
+### Converting files to fasta format**
+
 > <hands-on-title> FASTQ to FASTA </hands-on-title>
 >
 > 1. {% tool [FASTQ to FASTA](toolshed.g2.bx.psu.edu/repos/devteam/fastqtofasta/fastq_to_fasta_python/1.1.5) %} with the following parameters:
 >
 {: .hands_on}
 
-> **2. NCBI BLAST+ blastn**
+### NCBI BLAST+ blastn
 
 > <hands-on-title> NCBI BLAST </hands-on-title>
 >
@@ -262,27 +265,28 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >        - *"Column start"*: `c1`
 >        - *"Column end"*: `c1`
 >
->
 {: .hands_on}
->
 
 ## Workflow Outputs
 
->1. **Collection of raw Fastq files**
->   Input AB1 files converted into Fastq files.
+### Collection of raw Fastq files
 
->2. **Collection of Fastq files (after quality control)**
->   renamed Fastq files ready for submission after quality control and filtering.
+Input AB1 files converted into Fastq files.
 
->3. **Collection of Fasta files**
->   Fastq files converted into Fasta format. Used for conducting BLAST alignments.
+### Collection of Fastq files (after quality control)
+Renamed Fastq files ready for submission after quality control and filtering.
 
->4. **FastQC Quality Control Results**
+### Collection of Fasta files
+Fastq files converted into Fasta format. Used for conducting BLAST alignments.
 
->6. **MultiQC Quality Control Results**
+### FastQC Quality Control Results
+Both raw FastQC results and HTML reports are created
 
->7. **Raw Blast Results**
->   Results of BLAST alignments conducted on our sequences. Columns names are:
+### MultiQC Quality Control Results
+Both raw MultiQC statistics and HTML report are created
+
+### Raw Blast Results
+Results of BLAST alignments conducted on our sequences. Columns names are:
 
 | Column | NCBI name    | Description                                    |
 |--------|--------------|------------------------------------------------|
@@ -313,25 +317,22 @@ The goal is to present an accessible and reproductible workflow for data submiss
 | 25     | salltitles   | All subject title(s), separated by a '<>'      |
 >
 
->8. **Filtered Blast Results**
->   Files containing the closest homologous sequences.
+### Filtered Blast Results
+Files containing the closest homologous sequences.
 
->9. **Collection of Fastq.gz_files**
->   Contains filtered, compressed sequences.
+### Collection of Fastq.gz_files**
+Contains filtered, compressed sequences.
 
-# 2. How to use ENA upload Tool
+# How to use ENA upload Tool
 
 ## Adding ENA "Webin" credentials to your Galaxy user information
 
->    ***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
+***TODO***: *Having an ENA Submission Account: Make sure you have a submission account with the European Nucleotide Archive (ENA). You will need the identifier and the password.*
 
 >  <hands-on-title> Add your "WEBIN" credentials to your Galaxy account </hands-on-title>
-
 >  **Instructions:**
 >	- From the Menu, click on "User" > "Preferences". Click on "Manage Information". Scroll down to "Your ENA Webin account details" and enter your ENA "Webin" identifier and password.
-
->![Adding ENA Webin credentials](./images/imageI.png)
-
+>  ![Adding ENA Webin credentials](./images/imageI.png)
 {: .hands_on}
 
 ## Submitting using a metadata template file
@@ -339,9 +340,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 For this tutorial we will use the ENA default sample checklist.
 
 > <hands-on-title> Excel Metadata Template </hands-on-title>
-
 > ![Excel Metadata template](./images/image2.png)
-
 > ***TODO***: *It is crucial to fill in all the fields marked "Mandatory" and ensure that the sequence names match exactly those indicated in the Excel file.*
 >
 >  <comment-title> ENA Metadata Templates </comment-title>
@@ -368,7 +367,6 @@ For this tutorial we will use the ENA default sample checklist.
 {: .hands_on}
 
 > <hands-on-title> ENA Upload Tool </hands-on-title>
-
 > 1. {% tool [ENA Upload tool](https://toolshed.g2.bx.psu.edu/view/iuc/ena_upload/5cb6146337d8) %} with the following parameters:
 > - *"Action to execute"*: `Add new (meta)data`
 > - *"Select the metadata input method"*: `Excel file`
