@@ -67,7 +67,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 > 5. Build a Collection
 >
->    {% snippet faqs/galaxy/collections_build_list.md%}
+>    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -77,7 +77,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 > [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
 >
-> {% snippet faqs/galaxy/workflows_run.md%}
+> {% snippet faqs/galaxy/workflows_run.md %}
 >
 > ![Data submission Workflow](./images/image7.PNG)
 {: .hands_on}
@@ -121,7 +121,7 @@ We are doing a first Quality control on the raw files using FastQC and MultiQC.
 Cutadapt enables the removal of adapters, polyA tails, and other artifacts from sequences. The tool also filters reads based on quality.
 
 > <hands-on-title> Cutadapt </hands-on-title>
-> 1. {% tool [Cutadapt](https://toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0) %} with the following parameters:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy0) %} with the following parameters:
 >
 >     - **"Single-end or Paired-end reads?"**: `Single-end`
 >     - In **"Read Modification Options"**:
@@ -210,7 +210,7 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 >
 > 1. {% tool [Paste](Paste1) %} 
 >     ***TODO***: *Make sure the output file's datatype is 'tabular' if not change it.*
->   {% snippet faqs/galaxy/datasets_change_datatype.md%}
+>   {% snippet faqs/galaxy/datasets_change_datatype.md %}
 > 
 {: .hands_on}
 
@@ -366,7 +366,7 @@ For this tutorial we will use the ENA default sample checklist.
 {: .hands_on}
 
 > <hands-on-title> ENA Upload Tool </hands-on-title>
-> 1. {% tool [ENA Upload tool](https://toolshed.g2.bx.psu.edu/view/iuc/ena_upload/5cb6146337d8) %} with the following parameters:
+> 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/view/iuc/ena_upload/5cb6146337d8) %} with the following parameters:
 > - *"Action to execute"*: `Add new (meta)data`
 > - *"Select the metadata input method"*: `Excel file`
 > - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
