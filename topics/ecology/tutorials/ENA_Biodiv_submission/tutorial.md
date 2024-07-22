@@ -72,7 +72,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 {: .hands_on}
 
 
-<hands-on-title> Run "Prepare Data Submission" Workflow </hands-on-title>
+> <hands-on-title> Run "Prepare Data Submission" Workflow </hands-on-title>
 > Workflow is accessible there:
 >
 > [https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission](https://ecology.usegalaxy.eu/u/najatamk/w/workflow-constructed-from-history-workflow-data-submission-1).
