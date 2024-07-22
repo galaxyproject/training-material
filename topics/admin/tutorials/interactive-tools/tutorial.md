@@ -1008,12 +1008,9 @@ By design, [SQLite is the wrong choice for high availability setups][sqlite_situ
 >    > ```
 >    {: .code-out}
 >
-> This is enough to let Galaxy and the Interactive Tool Proxy store the Interactive Tools Session Map in PostgreSQL. But there is a catch: when the Interactive Tool Proxy uses SQLite, it knows the database has changed because it watches the file for changes. When using Postgres, this mechanism is not available. By default, the proxy simply polls the database at regular intervals. To let the user access interactive tools as fast as possible, the proxy can also be notified of updates via [PostgreSQL asynchronous notifications](https://www.postgresql.org/docs/16/libpq-notify.html). To enable them, you have to create a PostgreSQL trigger that sends a NOTIFY message to the channel `gxitproxy` every time the table `gxitproxy` changes.
+> 6. This is enough to let Galaxy and the Interactive Tool Proxy store the Interactive Tools Session Map in PostgreSQL. But there is a catch: when the Interactive Tool Proxy uses SQLite, it knows the database has changed because it watches the file for changes. When using Postgres, this mechanism is not available. By default, the proxy simply polls the database at regular intervals. To let the user access interactive tools as fast as possible, the proxy can also be notified of updates via [PostgreSQL asynchronous notifications](https://www.postgresql.org/docs/16/libpq-notify.html). To enable them, you have to create a PostgreSQL trigger that sends a NOTIFY message to the channel `gxitproxy` every time the table `gxitproxy` changes.
 >
-> <br>
-> 
-> {:start="6"}
-> 6. Run the following commands to create to create a function that sends a NOTIFY message to the channel `gxitproxy` and a trigger that runs the function every time the table `gxitproxy` changes.
+>    Run the following commands to create to create a function that sends a NOTIFY message to the channel `gxitproxy` and a trigger that runs the function every time the table `gxitproxy` changes.
 >
 >    > <code-in-title>SQL</code-in-title>
 >    > ```sql
