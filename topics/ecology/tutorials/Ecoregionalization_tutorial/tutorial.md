@@ -11,7 +11,7 @@ objectives:
 - Learning about Silhouette index and select an appropriate number of cluster
 - Learning about Clara clustering algorithm (PAM for large datasets)
 - Create an ecoregionalization map
-time_estimation: 1H
+time_estimation: 2H
 key_points:
 - GeoNearestNeighbor
 - BRT tool
@@ -23,6 +23,7 @@ tags:
 - ecology
 - EBV workflow
 - modeling
+- earth-system
 contributions:
   authorship:
     - PaulineSGN
@@ -141,7 +142,9 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 >    ```
 >    https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip : "occurrence.txt"
+>    ```
 >    https://data.indores.fr/api/access/datafile/9777 : "ceamarc_env.tab"
+>    ```
 >    https://data.indores.fr/api/access/datafile/9756 : "pivot_wider_jupytool_notebook.ipynb"
 >    ```
 >
@@ -370,7 +373,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 
 > <hands-on-title> Pivot_wider with Jupytool </hands-on-title>
 >
-> 1. {% tool [Interactive JupyTool and notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
+> 1. {% tool [Interactive JupyterLab and notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Load a previous notebook`
 >        - {% icon param-file %} *"IPython Notebook"*: `pivot_wider_jupytool_notebook.ipynb` (Input dataset)
 >        - *"Execute notebook and return a new one."*: `Yes`
@@ -527,7 +530,7 @@ The third output corresponds to the main information of the tool, a graph presen
 >    - {% icon param-file %} *"Taxa selected file (File 'List of taxa' from TaxaSeeker tool)"*: `List_of_taxa` (output of **TaxaSeeker** {% icon tool %})
 >    - {% icon param-file %} *"Prediction files"*: `Prediction files collection` (output of **BRT tool prediction** {% icon tool %})
 >
->       {% snippet faqs/galaxy/tools_select_collection.md %}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
 >    - *"Number of Cluster to test"*: `10` (You can choose any number, but remember that the more cluster numbers to test the longer it will take)
 >
