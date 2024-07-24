@@ -116,8 +116,8 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > >    ports:
 > >      - "27017:27017"
 > >    environment:
-> >      MONGO_INITDB_ROOT_USERNAME: admin
-> >      MONGO_INITDB_ROOT_PASSWORD: adminpass
+> >      MONGO_INITDB_ROOT_USERNAME: root
+> >      MONGO_INITDB_ROOT_PASSWORD: example
 > >
 > >  mongo-express:
 > >    image: mongo-express
@@ -125,8 +125,8 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > >    environment:
 > >      - ME_CONFIG_MONGODB_SERVER=mongo-client
 > >      - ME_CONFIG_MONGODB_PORT=27017
-> >      - ME_CONFIG_BASICAUTH_USERNAME=admin
-> >      - ME_CONFIG_BASICAUTH_PASSWORD=adminpass
+> >      - ME_CONFIG_BASICAUTH_USERNAME=root
+> >      - ME_CONFIG_BASICAUTH_PASSWORD=example
 > >    ports:
 > >      - "8081:8081"
 > >
@@ -137,8 +137,8 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > >      - mongo-client
 > >    environment:
 > >      - MONGO_INITDB_DATABASE=admin
-> >      - MONGO_INITDB_ROOT_USERNAME=admin
-> >      - MONGO_INITDB_ROOT_PASSWORD=adminpass
+> >      - MONGO_INITDB_ROOT_USERNAME=root
+> >      - MONGO_INITDB_ROOT_PASSWORD=example
 > >    volumes:
 > >      - ./mongo-init:/docker-entrypoint-initdb.d
 > > ```
@@ -205,9 +205,14 @@ We will use docker and docker-compose for this step. If you don't have it instal
 {: .hands_on}
 
 
+> <comment-title>Create B2RI V2 Beacon Protocole</comment-title>
+> - Clone to the [beacon2-ri-tools-v2](https://github.com/EGA-archive/beacon2-ri-tools-v2) GitHub repository and follow the instructions to build the beacon protocols 
+> - , and use additional tools needed for preprocessing the data and metadata
+{: .comment}
+
 
 # Data Preparation
-First, begin by uploading the data into Galaxy and preparing it to be imported into the Beacon database. The datasets were obtained from 
+Upload the data into Galaxy and prepare it to be imported into the Beacon database. The datasets were obtained from 
 [1000genomes-dragen](https://us-west-2.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&tab=objects).
 
 | Name | Format | Data size (MB) |
@@ -254,8 +259,8 @@ First, begin by uploading the data into Galaxy and preparing it to be imported i
 > 5. To track the data in the history, it is recommended to tag the datasets by attaching a meaningful tag '#'
 >    to them. The tagging will automatically be attached to any file generated
 >    from the original tagged dataset.
->   *e.g.*, `#genomicvariants` for structural varients VCF file and
->   *e.g.*, `#phenopacket` metadata tsv file.
+>   *e.g.*, `#genomicVariations` for structural varients VCF file and
+>   *e.g.*, `#individuals` metadata tsv file.
 >
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
@@ -265,10 +270,10 @@ First, begin by uploading the data into Galaxy and preparing it to be imported i
 
 
 ## Convert the Genomic Variants VCF file into JSON
-We will preprocess the genomic variant data and convert it from VCF format into JSON format.
+This step is to preprocess the genomic variant data and convert it from VCF to JSON.
 
 > <hands-on-title>Convert the Genomic Variants VCF file into JSON</hands-on-title>
-> 1. Run {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.0.4+galaxy0) %} on the structural variants VCF file
+> 1. Run {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.1.0+galaxy0.1) %} on the structural variants VCF file
 >       - {% icon param-files %} *"CNV VCF file"*: `HG00096` file
 >
 >
@@ -392,8 +397,6 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 
 
 
-
-
 # Import data into Beacon MongoDB
 
 Now that the data are in the Beacon proper format and with creating the Beacon MongoDB server, we are ready to import the data we have into Beacon.
@@ -402,40 +405,38 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 
 
 > <hands-on-title>Import data into Beacon MongoDB</hands-on-title>
-> 1. Use {% tool [Beacon2 Import](Beacon2-import##################) %} to import genomic variant file Beacon database
+> 1. Use {% tool [Beacon2 Import](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0) %} to import genomic variant file Beacon database
 >   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'HG00096' from {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.0.4+galaxy0) %}`
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `Beacon`
->   - *"COLLECTION"*: `genomicvariants`
->   - *"Access authenticated Beacon"*: `Yes`
->   - *"ADVANCE CONNECTION"*: `Yes`
->   - *"DATABASE AUTHENTICATON SOURCE"*: `admin`
->   - *"DATABASE USER"*: `admin`
->   - *"DATABASE PASSWORD"*: `adminpass`
+>   - *"COLLECTION"*: `genomicVariations`
 >
->   - When you run the tool for the first time, it will create a new database named Beacon and a collection named genomicvariants on MongoDB. It will then upload the data from the HG00096 JSON file into the genomicvariants collection.
+> > <comment-title>Use Credentials to Access Specific Beacon</comment-title>
+> > 1. Make sure you are logged in to Galaxy.
+> > 2. Go to **User > Preferences** in the top menu bar.
+> > 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
+> > 4. Make the changes and click on the **Save** button at the bottom.
+> {: .comment}
+>
+>
+>   - When you run the tool for the first time, it will create a new database named Beacon and a collection named genomicVariations on MongoDB. It will then upload the data from the HG00096 JSON file into the genomicVariations collection.
 >   - If you use the same database name and collection name again, it will append the data to the collection. There is an option to clear all or specific collections before uploading the data, but be careful, as deleting is permanent.
 >   - Always remember to back up important data before making any deletions.
 >
-> 2. Use {% tool [Beacon2 Import](Beacon2-import##################) %} to import phenopacket file into the created Beacon database
+> 2. Use {% tool [Beacon2 Import](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0) %} to import phenopacket file into the created Beacon database
 >   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'Phenopacket' from {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %}`
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `Beacon`
->   - *"COLLECTION"*: `phenopacket`
->   - *"Access authenticated Beacon"*: `Yes`
->   - *"ADVANCE CONNECTION"*: `Yes`
->   - *"DATABASE AUTHENTICATON SOURCE"*: `admin`
->   - *"DATABASE USER"*: `admin`
->   - *"DATABASE PASSWORD"*: `adminpass`
+>   - *"COLLECTION"*: `individuals`
 >
 {: .hands_on}
 
 
 
 
-# Search Beacon MongoDB
+# Search Beacon MongoDB for CNVs
 
 In the last step, we imported the data into the Beacon. Now, we will query the database to look for the samples that match our query. 
 
@@ -444,51 +445,54 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
 >
-> 2. Use {% tool [Beacon2 Range](Beacon2 Range##################) %} to perform a range query on Beacon **genomicvariants** collection
+> 2. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to perform a range query on Beacon **genomicVariations** collection
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `Beacon`
->   - *"COLLECTION"*: `genomicvariants`
->   - *"START"*: `58278107`
->   - *"END"*: `58279217`
->   - *"Access authenticated Beacon"*: `Yes`
->   - *"ADVANCE CONNECTION"*: `Yes`
->   - *"DATABASE AUTHENTICATON SOURCE"*: `admin`
->   - *"DATABASE USER"*: `query_user`
->   - *"DATABASE PASSWORD"*: `querypassword`
+>   - *"COLLECTION"*: `genomicVariations`
+>   - *"CHROMOSOME"*: `1`
+>   - *"START"*: `243618689`
+>   - *"END"*: `243620819`
+>   - *"VARIANT STATE ID"*: `EFO:0030068`
 > The srarch function will queiry the Beacon database and print out the resutls that matches our quiery specifications. In this case it will print something like this. 
 > > ```json
-> >    {
-> >       "biosampleId": "HG00096",
-> >       "assemblyId": "GRCh38",
-> >       "variantInternalId": "chr1:58278107-58279217:EFO:0030069",
-> >       "variantType": "DEL",
-> >       "variantId": "EFO:0030069",
-> >       "start": 58278107,
-> >       "end": 58279217,
-> >       "referenceName": "1",
-> >       "info": {
-> >           "legacyId": "DRAGEN:LOSS:chr1:58278108-58279217",
-> >           "cnCount": 0,
-> >           "cnValue": 0.0937719
-> >       }
-> >     }
+> >    {'_id': ObjectId('6690160a3a936e8e0a7828e2'),
+> > 'assemblyId': 'GRCh38',
+> > 'biosampleId': 'HG00096',
+> > 'definitions': {'Location': {'chromosome': '1',
+> >                              'end': 243620819,
+> >                              'start': 243618689}},
+> > 'id': 'refvar-6690160a3a936e8e0a7828e2',
+> > 'info': {'cnCount': 1,
+> >          'cnValue': 0.422353,
+> >          'legacyId': 'DRAGEN:LOSS:chr1:243618690-243620819'},
+> > 'updated': '2024-07-11T17:26:27.265115',
+> > 'variantInternalId': 'chr1:243618689-243620819:EFO:0030068',
+> > 'variantState': {'id': 'EFO:0030068', 'label': 'low-level loss'}}
 > > ```
 >
-> We used the read-only access user to query the Beacon database. Creating read-only users for Beacon-providing institutions helps prevent unwanted data overwrites that can occur by mistake.
+> When sharing a Beacon protocol, it is important to provide users with read-only access to query the Beacon database. Creating read-only users for Beacon-providing institutions helps prevent unwanted data overwrites that can occur by mistake.
 > 
+> > <comment-title>Use Credentials to Access Specific Beacon</comment-title>
+> > 1. Make sure you are logged in to Galaxy.
+> > 2. Go to **User > Preferences** in the top menu bar.
+> > 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
+> > 4. Make the changes and click on the **Save** button at the bottom.
+> {: .comment}
+>
 > > <question-title></question-title>
 >    >
->    > What dose variantId "EFO:0030069" means? 
+>    > What dose variantId "EFO:0030068" means? 
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > EFO:0030069 is a term used to describe the complete genomic deletion. The term was set by the CNV community.
+>    > > EFO:0030069 is a term used to describe the low-level loss. The term was set by the CNV community.
 >    > > For more information go to the [CNV annotation formats](https://cnvar.org/resources/CNV-annotation-standards/#cnv-term-use-comparison-in-computational-fileschema-formats)
 >    > >
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
+
 
 
 # Conclusion
@@ -497,6 +501,7 @@ Now, you have a general knowledge of Beacon and MongoDB and how to create your o
 
 You can apply what you learned in this tutorial to create a Beacon query for your institution's genomic variant data.
 
-For more information about how to query Beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html). Use the documentation steps to query the phenopacket and search for the metadata for our sample `{"id": "HG00096"}`.
+For more information about how to query Beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html).
+
 
 We hope you find this tutorial helpful!
