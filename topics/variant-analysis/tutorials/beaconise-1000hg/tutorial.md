@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons"
 zenodo_link: 'https://zenodo.org/records/10658688'
-subtopic: ''
+subtopic: 'data-management'
 questions:
 - What does the term "Beacon" refer to?
 - How can MongoDB be employed to establish a Beacon tailored for your institution?
@@ -35,7 +35,7 @@ key_points:
 - Efficiently querying Beacons for variants involves mastering diverse querying methods, leveraging MongoDB's capabilities to enhance search precision,
   and emphasizing the necessity for precise and efficient queries within Beacon structures.
 contributors:
-- Khaled196
+- khaled196
 - kkamieniecka
 - poterlowicz-lab
 ---
@@ -90,13 +90,13 @@ We will use docker and docker-compose for this step. If you don't have it instal
 
 
 > <hands-on-title>Create Beacon Database on MongoDB</hands-on-title>
-> 1. Create a directory in your local environment and name it as `mongo-init`
+> 1. Create a directory in your local environment and name it as `beacon`
 > ```bash
-> mkdir mongo-init
+> mkdir beacon
 > ```
 > 2. Change your location to the created directory
 > ```bash
-> cd mongo-init
+> cd beacon
 > ```
 > 3. Use any text editor you are comfortable with to create a new YAML file and name it `docker-compose.yaml`
 > ```bash
@@ -185,29 +185,30 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > ```bash
 > docker-compose up -d
 > ```
-> 11. Check the created docker containers and test if your docker container is running
+> This will create an empty MongoDB server where we can add the Beacon database or any additional databases. 
+>
+> 11. Check the created docker containers and test if the created docker container is running
 > ```bash
 > docker ps
 > ```
-> This will give you a massage similar to this
+> This will generate a message similar to the text below
 > ```
 > CONTAINER ID   IMAGE           COMMAND                  CREATED       STATUS                         PORTS                                           NAMES
 > 96d7886f9cdb   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     27017/tcp                                       mongo-init_mongo-init_1
 > 1bb520888fbf   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     0.0.0.0:27017->27017/tcp, :::27017->27017/tcp   mongo-init_mongo-client_1
 > a148fb3db385   mongo-express   "/sbin/tini -- /dock…"   5 weeks ago   Restarting (1) 9 seconds ago                                                   mongo-init_mongo-express_1
 > ```
-> 12. Test your docker to see if it is running by using `$docker exec` command
+> 12. Test docker to see if it is running by using `$docker exec` command
 > ```bash
 > docker exec -it <mongo-client> bash #If the docker image for the Mongo was installed with a different name, Change the name in <mongo-client>
 > ```
-> This will take you into the docker container. You can exit that by prising `ctrl + d` from your keyboard.
-> This will create an empty MongoDB server where we can add the Beacon database or any additional databases. 
+> This will take lunsh the docker container. Use `ctrl + d` to quit.
+>
 {: .hands_on}
 
 
 > <comment-title>Create B2RI V2 Beacon Protocole</comment-title>
-> - Clone to the [beacon2-ri-tools-v2](https://github.com/EGA-archive/beacon2-ri-tools-v2) GitHub repository and follow the instructions to build the beacon protocols 
-> - , and use additional tools needed for preprocessing the data and metadata
+> Clone to the [beacon2-ri-tools-v2](https://github.com/EGA-archive/beacon2-ri-tools-v2) GitHub repository and follow the instructions to build the beacon protocols, and use additional tools needed for preprocessing the data and metadata
 {: .comment}
 
 
@@ -403,21 +404,21 @@ Now that the data are in the Beacon proper format and with creating the Beacon M
 
 We will use the Beacon2 import tool to import the data into the created Beacon database. 
 
+> <comment-title>Use Credentials to Access Specific Beacon</comment-title>
+> 1. Make sure you are logged in to Galaxy.
+> 2. Go to **User > Preferences** in the top menu bar.
+> 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
+> 4. Make the changes and click on the **Save** button at the bottom.
+{: .comment}
 
 > <hands-on-title>Import data into Beacon MongoDB</hands-on-title>
 > 1. Use {% tool [Beacon2 Import](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0) %} to import genomic variant file Beacon database
->   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'HG00096' from {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.0.4+galaxy0) %}`
+>   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'HG00096'` from {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.1.o+galaxy0.1) %}
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `Beacon`
 >   - *"COLLECTION"*: `genomicVariations`
 >
-> > <comment-title>Use Credentials to Access Specific Beacon</comment-title>
-> > 1. Make sure you are logged in to Galaxy.
-> > 2. Go to **User > Preferences** in the top menu bar.
-> > 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
-> > 4. Make the changes and click on the **Save** button at the bottom.
-> {: .comment}
 >
 >
 >   - When you run the tool for the first time, it will create a new database named Beacon and a collection named genomicVariations on MongoDB. It will then upload the data from the HG00096 JSON file into the genomicVariations collection.
@@ -425,7 +426,7 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 >   - Always remember to back up important data before making any deletions.
 >
 > 2. Use {% tool [Beacon2 Import](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0) %} to import phenopacket file into the created Beacon database
->   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'Phenopacket' from {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %}`
+>   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'Phenopacket'` from {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %}
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `Beacon`
@@ -473,12 +474,6 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 >
 > When sharing a Beacon protocol, it is important to provide users with read-only access to query the Beacon database. Creating read-only users for Beacon-providing institutions helps prevent unwanted data overwrites that can occur by mistake.
 > 
-> > <comment-title>Use Credentials to Access Specific Beacon</comment-title>
-> > 1. Make sure you are logged in to Galaxy.
-> > 2. Go to **User > Preferences** in the top menu bar.
-> > 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
-> > 4. Make the changes and click on the **Save** button at the bottom.
-> {: .comment}
 >
 > > <question-title></question-title>
 >    >
