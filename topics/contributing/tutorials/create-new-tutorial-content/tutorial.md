@@ -984,7 +984,7 @@ Note that it links to a specific workflow, on any Galaxy server. When this tutor
 
 ### Dockstore
 
-Please note that the dockstore ID should be provided without the `#` character.
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
 
 {% raw %}
 ```markdown

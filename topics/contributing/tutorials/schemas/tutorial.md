@@ -46,6 +46,10 @@ contributors:
 {% assign kid_val = site.data['schema-event'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
 
+{% assign kid_key = "Events (External)" %}
+{% assign kid_val = site.data['schema-event-external'] %}
+{% include _includes/schema-render.html key=kid_key value=kid_val %}
+
 ## Contributors
 
 {% assign kid_key = "Contributor Schema" %}

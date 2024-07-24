@@ -3,6 +3,8 @@ layout: page
 title: Data Privacy
 ---
 
+Tip: [Looking for language settings?]({% link faqs/gtn/translations.md %})
+
 The GTN is invested in preserving your privacy. We attempt to balance your
 rights and needs to private access of the GTN resources, with our needs to
 continue receiving funding and provide a good experience for you, the user.

@@ -72,9 +72,17 @@ function search(params){
 	const filter_all = params.get('all')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
 	const filter_any = params.get('any')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
 	const filter_none = params.get('none')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_server = params.get('server');
 
 	var to_hide = rows.filter(row => {
 		var text = clean(row.children[0].innerText + " " + row.children[1].innerText);
+		if (filter_server) {
+			// Every term in filter_all must be present
+			// Immediately reject if not all present.
+			if (row.children[3].innerText.indexOf(server) == -1) {
+				return true;
+			}
+		}
 		if (filter_all) {
 			// Every term in filter_all must be present
 			// Immediately reject if not all present.

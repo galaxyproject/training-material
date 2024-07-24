@@ -5,6 +5,7 @@ area: contributors
 layout: faq
 box_type: tip
 contributors: [hexylena]
+description: "If you have a snippet of knowledge that is reusable, we recommend you to share with the GTN community, and we encourage you to create an FAQ for it!"
 ---
 
 If you have a snippet of knowledge that is reusable, we recommend you to share with the GTN community, and we encourage you to create an FAQ for it!

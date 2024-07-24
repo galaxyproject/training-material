@@ -81,7 +81,7 @@ Tu “Historial” está en el panel de la derecha.
 > 1. Ve al panel **History** (a la derecha)
 > 2. Haz clic en el nombre del historial (que por defecto es "Unnamed history")
 >
->    ![name history](../../../../shared/images/rename_history.png){:width="320px"}
+>    ![name history]({% link shared/images/rename_history.png %}){:width="320px"}
 >
 > 3. Teclea el nuevo nombre, por ejemplo, "Mi-Analisis"
 > 4. Presiona <kbd>Enter</kbd> en tu teclado para guardar
