@@ -1,0 +1,262 @@
+---
+layout: base
+---
+
+{% assign material = page.material %}
+{% assign workflow = page.workflow %}
+
+<style>
+hgroup {margin-bottom: 2rem; border-bottom: 1px solid var(--border-light);}
+hgroup p { font-family: monospace; font-size: 0.8rem;}
+.meta ul { padding-left: 1em;}
+</style>
+
+<section>
+	<hgroup>
+		<h1 data-toc-skip>{{ workflow.title }}</h1>
+		<p>{{ workflow.wfid }}/{{ workflow.wfname }}</p>
+	</hgroup>
+	{% if workflow.annotation %}
+	<p>{{ workflow.annotation }}</p>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-3 meta">
+			{% if workflow.creators %}
+			<b>Author(s)</b>
+			<br/>
+			{% for entity in workflow.creators %}
+			{{ entity.name }}{% if forloop.last == false %}, {% endif %}
+			{% endfor %}
+			{% endif %}
+			<br/>
+
+			{% icon version %}
+			<b>Version</b>
+			<br/>
+			{{ workflow.version }}
+
+			<br/>
+
+			{% icon last_modification %}
+			<b>Last updated</b>
+			<br/>
+			{{ workflow.path | gtn_mod_date | date: "%b %-d, %Y" }}
+
+			<br/>
+
+			{% icon license %}
+			<b>License</b>
+			<br/>
+
+			{% if workflow.license %}
+			<a href="https://spdx.org/licenses/{{ workflow.license }}">{{ workflow.license }}</a>
+			{% else %}
+			None Specified, defaults to
+			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+			{% endif %}
+			<br/>
+
+			{% if workflow.tags %}
+			{% icon galaxy-tags %}
+			<b>Tags</b>
+			<br/>
+
+			{% for tag in workflow.tags %}
+			<div class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</div>
+			{% endfor %}
+			</br>
+			{% endif %}
+
+
+			<b>Features</b>
+			<ul>
+			{% if workflow.features.tests %}
+				<li>Includes <a href="https://training.galaxyproject.org/training-material/faqs/gtn/workflow_run_test.html">Galaxy Workflow Tests</a></li>
+			{% endif %}
+			{% if workflow.features.report %}
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			{% endif %}
+			{% if workflow.features.comments %}
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
+			{% endif %}
+			{% if workflow.features.subworkflows %}
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_subworkflows.html">subworkflows</a></li>
+			{% endif %}
+			</ul>
+
+			<hr/>
+
+
+			<b>Tutorial</b>
+			<br/>
+			{% icon hands_on %} <a href="../tutorial.html">{{ material.title }}</a>
+			</br>
+
+			{% assign workflow_count = material.workflows | size %}
+			{% if workflow_count > 1 %}
+			{% icon workflow %} <a href="index.html">Other workflows associated with this material</a>
+			{% endif %}
+
+
+			<hr/>
+			<b>Workflow Testing</b>
+			<br/>
+
+			Tests: {% if workflow.tests %}✅{% else %}❌{% endif %} <br/>
+			Results: {% if workflow.test_results == nil %}Not yet automated{% endif %}
+
+			<hr/>
+
+			<b>FAIRness</b>
+
+			{% icon purl %}
+			<b><abbr title="Persistent URL">PURL</abbr></b>
+			<br/>
+			<a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+			<br/>
+
+			{% if jekyll.environment == "production" %}
+			<a style="margin-bottom: 0.2rem" href="{{ site.baseurl }}/api/workflows/{{ material.topic_name }}/{{ material.tutorial_name }}/{{ workflow.wfname }}/rocrate.zip" class="btn btn-secondary"><img src="{% link assets/images/ro-crate.png %}" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			{% endif %}
+
+			{% if workflow.workflowhub_id %}
+			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/{{ workflow.workflowhub_id }}" class="btn btn-secondary"><img src="{% link assets/images/workflowhub-icon.svg %}" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
+			{% endif %}
+
+		</div>
+		<div class="col-md-9">
+			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="{{ workflow.trs_endpoint }}">Launch in Tutorial Mode</span>
+			<a href="{% link faqs/galaxy/tutorial_mode.md %}" class="show-when-galaxy-proxy-active">{% icon question %}</a>
+			<br/>
+
+			<span class="dropdown">
+				<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+					<img src="{% link assets/images/galaxylogo.png %}" style="height: 16px" alt="galaxy logo"/> 
+					Run Workflow in Galaxy
+				</button>
+				<ul class="dropdown-menu">
+					{% assign servers = nil | list_usegalaxy_servers_shuffle %}
+					{% for server in servers %}
+					<li class="dropdown-item"><a href="{{ server.url }}/workflows/trs_import?run_form=true&trs_url={{ workflow.trs_endpoint }}">{{ server.human }}</a></li>
+					{% endfor %}
+					<li class="dropdown-item hide-when-galaxy-proxy-active">
+						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url={{ workflow.trs_endpoint }}">Import to another server (≥23.0+ only!)</a>
+					</li>
+				</ul>
+			</span>
+			<a class="btn btn-primary" href="{{ site.url }}{{ site.baseurl }}/{{ workflow.path }}">
+				{% icon galaxy-download %}
+				Download
+			</a>
+			<pre class="mermaid">{{ workflow.mermaid }}</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for input in workflow.inputs %}
+				<tr>
+					<td>{{ input.name }}</td>
+					<td>{{ input.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for output in workflow.outputs %}
+				<tr>
+					<td>{{ output.tool_id }}</td>
+					<td>{{ output.name }}</td>
+					<td>{{ output.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			{% for tool in workflow.workflow_tools %}
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id={{ tool }}">{{ tool }}</a></td>
+				<td>
+					{% if site.data['toolshed-revisions'][tool] %}
+					{% assign tsdata = site.data['toolshed-revisions'][tool] %}
+					<a href="https://toolshed.g2.bx.psu.edu/view/{{tsdata[0]}}/{{tsdata[1]}}/{{tsdata[2]}}">
+						View in ToolShed
+					</a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+
+
+			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+
+
+			<h2>Importing into Galaxy</h2>
+			Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+
+			{% snippet faqs/galaxy/workflows_import.md box_type="hands_on" %}
+
+			<h2>Version History</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Version</th>
+						<th>Commit</th>
+						<th>Time</th>
+						<th>Comments</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for version in workflow.history %}
+					<tr>
+						<td>{{ version.num }}</td>
+						<td><a href="{{ site.github_repository }}/commit/{{ version.hash }}">{{ version.short_hash }}</a></td>
+						<td>{{ version.unix |unix_time_to_date }}</td>
+						<td>{{ version.message }}</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+
+			<h2>For Admins</h2>
+			<h3>Installing the workflow tools</h3>
+
+			<pre>
+wget {{ site.url }}{{ site.baseurl }}/{{ workflow.path }} -O workflow.ga
+workflow-to-tools -w workflow.ga -o tools.yaml
+shed-tools install -g GALAXY -a API_KEY -t tools.yaml
+workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
+			</pre>
+		</div>
+	</div>
+</section>
+
+
+</section>

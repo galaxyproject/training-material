@@ -39,6 +39,26 @@ requirements:
       - cvmfs
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
+
+recordings:
+- captioners:
+  - hexylena
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 1H28M
+  youtube_id: f0QdF8NDhsM
+  speakers:
+  - slugger70
+- captioners:
+  - simonbray
+  - slugger70
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 57M
+  youtube_id: a7fKJT4Fs9k
+  speakers:
+  - slugger70
+
 ---
 
 

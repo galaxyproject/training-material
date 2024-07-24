@@ -50,6 +50,12 @@ layout: base
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    {% if event.external %}
+       <p class="alert alert-primary">
+       For details about the course, please vist the <a class="btn btn-primary" href="{{event.external}}">Course Page</a>
+       </p>
+    {% endif %}
+
     <p>{{ event.description | markdownify }}</p>
     <p>{{ content | markdownify }}</p>
 
@@ -84,6 +90,7 @@ layout: base
 		.bindPopup('{{ event.title }}')
 		.openPopup();
 	</script>
+	<p>Geocoding via <a href="https://nominatim.org/">Nominatim</a>, Map data from <a href="https://openstreetmap.org">OpenStreetMap</a></p>
 	{% endif %}
 
 
@@ -103,29 +110,32 @@ layout: base
 
   <!-- Programme Tab -->
   <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
-    <h2> Program </h2>
+
+
     {% if event.external %}
        For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
     {% else %}
 
-    {% if event.infrastructure %}
-    Before starting the course, make sure to follow the setup instructions
-    <br><br>
+     {% if event.infrastructure %}
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
 
     <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
     {% endif %}
 
+
     {% for section in event.program %}
         {% if section.subsection %}
         <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
-        {% else %}
+        {% elsif section.section != nil %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
         {% endif %}
         <p>{{ section.description | markdownify }}</p>
 
 	{% if section.tutorials %}
+        {% assign hidetimes= section.async | default: page.async %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false %}
+	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
 	{% endif %}
     {% endfor %}
     {% endif %}
@@ -222,7 +232,7 @@ layout: base
 
 
             <ol>
-              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite }}">Invite Link</a></li>
+              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite_link }}">Invite Link</a></li>
               <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "#general"}}</a></li>
               <li>Introduce yourself here!</li>
             </ol>
@@ -382,6 +392,9 @@ subsites: [all]
         <img class="event-image" src="{{site.baseurl}}/{{event.cover-image | default: '/assets/images/GTN-event-logo.png' }}" alt="{{event.cover-image-alt | default: 'event logo' }}">
         {% assign enddate = event.date_end | default: event.date_start %}
 		{% assign passed = enddate | is_date_passed %}
+
+        {% unless event.external %}
+
 		{% if passed %}
 		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
 		{% else %}
@@ -393,12 +406,12 @@ subsites: [all]
 		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
           {% endif %}
 		{% endif %}
-
+        {% endunless %}
 		<hr/>
 
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
-			<tr><td>{% icon event-location %}</td><td>{{ event.location | format_location }}</td></tr>
+			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% else %}Please set a location{% endif %}</td></tr>
 			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
 			{% if event.contact_email %}
 			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>
@@ -416,6 +429,14 @@ subsites: [all]
 		{% for org in event.contributions.organisers %}
 			{% include _includes/contributor-badge-inline.html id=org %}
 		{% endfor %}
+
+        {% if event.contributions.instructors.size < 10 %}
+        <br/><br/><b>Instructors</b><br/>
+            {% for instructor in event.contributions.instructors %}
+			{% include _includes/contributor-badge-inline.html id=instructor %}
+		{% endfor %}
+
+        {% endif %}
 
         {% if event.contributions.funding %}
 		<hr />
@@ -467,11 +488,6 @@ $('#myTab button[data-target="' + hash + '"]').tab('show');
 </script>
 
 <style>
-:target {
-    scroll-margin-top: 24em;
-}
-
-
 .zrow {
 	display: grid;
 	grid-template-rows: 1fr;

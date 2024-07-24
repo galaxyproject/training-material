@@ -19,22 +19,22 @@ jobs:
           - 5002:5002
     steps:
       # Shallow should be fine for video
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 5000
 
       # BEGIN Dependencies
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.7'
+          python-version: '3.11'
           architecture: 'x64'
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/setup-node@v2
+          ruby-version: "3.2"
+      - uses: actions/setup-node@v4
         with:
           node-version: '19'
-      - uses: actions/cache@v2
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle

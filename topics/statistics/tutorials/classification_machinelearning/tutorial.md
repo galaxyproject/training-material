@@ -21,6 +21,17 @@ contributors:
 - khanteymoori
 - anuprulez
 - simonbray
+
+recordings:
+- captioners:
+  - anuprulez
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H50M
+  youtube_id: Gz2OdRPS2Nk
+  speakers:
+  - anuprulez
+
 ---
 
 

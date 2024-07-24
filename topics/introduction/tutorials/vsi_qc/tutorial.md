@@ -20,6 +20,8 @@ draft: true
 
 ---
 
+In this tutorial we will look at assessing quality of data from two short read technologies: [Illumina](http://www.nature.com/doifinder/10.1038/nature07517) and [Element Biosciences](http://dx.doi.org/10.1038/s41587-023-01750-7). 
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -29,9 +31,6 @@ draft: true
 >
 {: .agenda}
 
-# Introduction
-
-In this tutorial we will look at assessing quality of data from two short read technologies: [Illumina](http://www.nature.com/doifinder/10.1038/nature07517) and [Element Biosciences](http://dx.doi.org/10.1038/s41587-023-01750-7). 
 
 ## FASTQ format
 
@@ -200,7 +199,7 @@ This tutorial provides two sample datasets: one generated with Illumina and the 
 >
 > 4. Create a paired collection from your data (relevant part beging at 0:57 and and the case of this tutorial we have 4 datasets): 
 >
->    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/uZUt9XIHUQo?si=F0qUj76L_lrM7R2j&amp;start=57" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+>    {% include _includes/youtube.html id="uZUt9XIHUQo" title="Create a paired collection tutorial" start=57 %}
 >
 {: .hands_on}
 

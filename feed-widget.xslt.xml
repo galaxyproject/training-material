@@ -1,0 +1,201 @@
+<xsl:stylesheet
+  version="1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  exclude-result-prefixes="atom"
+>
+  <xsl:output method="html" version="1.0" encoding="UTF-8" indent="yes"/>
+  <xsl:template match="/">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+      <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+        <title><xsl:value-of select="atom:feed/atom:title"/> • GTN News </title>
+        <link rel="icon" type="image/png">
+          <xsl:attribute name="href">
+            <xsl:value-of select="atom:feed/atom:logo"/>
+          </xsl:attribute>
+        </link>
+        <link href="https://fonts.googleapis.com/css2?family=Recursive:slnt,wght,CASL,CRSV,MONO@-15..0,300..800,0..1,0..1,1&amp;display=swap" rel="stylesheet"/>
+        <style type="text/css">
+:root {--step--2: clamp(0.7813rem, 0.7747rem + 0.0326vi, 0.8rem);--step--1: clamp(0.9375rem, 0.9158rem + 0.1087vi, 1rem);--step-0: clamp(1.125rem, 1.0815rem + 0.2174vi, 1.25rem);--step-1: clamp(1.35rem, 1.2761rem + 0.3696vi, 1.5625rem);--step-2: clamp(1.62rem, 1.5041rem + 0.5793vi, 1.9531rem);--step-3: clamp(1.944rem, 1.771rem + 0.8651vi, 2.4414rem);--step-4: clamp(2.3328rem, 2.0827rem + 1.2504vi, 3.0518rem);--step-5: clamp(2.7994rem, 2.4462rem + 1.7658vi, 3.8147rem);--brand: #782760;--secondary: #b970a3;--brand-contrast: white;--background: #fff;--shadow: #ccc}
+@media (prefers-color-scheme: dark) { :root {--background: #000;--brand: #f3adde;--shadow: #666}}
+h1{font-size:var(--step-1);line-height:1.125em;margin:0; weight: 900; text-transform: capitalize;font-variation-settings: "wght" 900, "CRSV" 0.5, "CASL" 0;}
+h2{margin:0;font-size:var(--step-0); font-weight: 500; font-variation-settings: "CRSV" 0.5, "CASL" 1;}
+p { margin: 0; }
+a{text-decoration:none; color: var(--brand);}
+div.entry { position: relative; pointer: cursor; margin-bottom: 0.6rem; padding: 0.4rem; border: 1px solid var(--brand);}
+div.entry[data-has-link="true"]:hover { box-shadow: 4px 4px 0px #782760; }
+div.entry[data-has-link="true"]:active{ box-shadow: 2px 2px 0px #782760; }
+div a.cover {position: absolute;width: 100%;height: 100%;top: 0;left: 0;text-decoration: none;z-index: 10;}
+div small {display: none;}
+div.entry:nth-child(2n) { --brand: white; --brand-contrast: #782760; color: var(--brand); background: var(--brand-contrast); }
+.authors{font-style: italic;}
+.meta{font-variation-settings: "wght" 300, "CRSV" 1, "CASL" 1; margin-bottom: 0.4rem; display: flex; justify-content: space-between;}
+@media(max-width: 600px) { .meta { flex-direction: column;}} 
+body {max-width:768px; margin: 0 auto; font-family: 'Recursive', serif; color: var(--brand); background: var(--background);display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; grid-template-areas: 'header' 'main' 'footer'; height: 100vh; }
+header {grid-area: header; padding: 0.5em; border-bottom: 2px solid var(--secondary); display: flex; align-items: center; justify-content: space-between;}
+header img {margin-right: 0.5em}
+main { grid-area: main; padding: 15px 5px 10px 5px;}
+footer { grid-area: footer; padding: 0.5em; border-top: 2px solid var(--secondary); }
+div.entry ul a { text-decoration: underline; }
+div.entry ul a:hover{ text-decoration: underline; font-weight: 700;}
+footer a { text-decoration: underline; }
+footer a:hover{ font-weight:700; }
+main { overflow-y: auto; overflow-x: hidden; }
+
+        </style>
+      </head>
+      <body>
+        <header>
+          <hgroup>
+            <h1>
+              <a class="head_link" target="_blank">
+                <xsl:attribute name="href">
+                  <xsl:value-of select="concat(atom:feed/atom:link[@rel='alternate']/@href, '?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss')"/>
+                </xsl:attribute>
+                <xsl:value-of select="atom:feed/atom:title"/>
+              </a>
+            </h1>
+            <p><xsl:value-of select="atom:feed/atom:subtitle"/></p>
+          </hgroup>
+          <a class="head_link" target="_blank" href="https://training.galaxyproject.org?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">
+            <img width="30px" alt="gtn logo">
+              <xsl:attribute name="src">
+                <xsl:value-of select="atom:feed/atom:logo"/>
+              </xsl:attribute>
+            </img>
+          </a>
+        </header>
+        <main>
+          <xsl:apply-templates select="atom:feed/atom:entry" />
+          <!-- if there are no entries, only applies to Events. -->
+          <xsl:if test="count(atom:feed/atom:entry) = 0">
+            <div class="entry">
+              No upcoming events
+            </div>
+          </xsl:if>
+        </main>
+        <footer>
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/news/2024/06/04/gtn-standards-rss.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">GTN RSS</a>
+           •
+          <a target="_blank" href="https://spdx.org/licenses/CC-BY-4.0">CC-BY 4.0</a>
+           •
+          <a target="_blank" href="https://training.galaxyproject.org/training-material/faqs/gtn/fair_training.html?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss">FAIR</a>
+           •
+          <a target="_blank">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat(atom:feed/atom:link[@rel='self']/@href, '?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss')"/>
+            </xsl:attribute>
+           🔗
+          </a>
+        </footer>
+        <script data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+        <script>
+        if(localStorage.getItem('plausible-opt-out') !== 'opt-out' &amp;&amp; navigator.doNotTrack !== "1") {
+            localStorage.removeItem("plausible_ignore")
+            console.log("Plausible: opt-in");
+            window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+        } else {
+            // if they're opting-out, or DNT
+            // we might get one page by accident but we won't get future ones.
+            localStorage.setItem("plausible_ignore", "true")
+        }
+        </script>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:template match="atom:entry">
+    <div class="entry">
+      <xsl:attribute name="data-has-link">
+        <xsl:choose>
+        <xsl:when test="atom:link/@href">true</xsl:when>
+        <xsl:otherwise>false</xsl:otherwise>
+        </xsl:choose>
+      </xsl:attribute>
+      <xsl:attribute name="id">
+        <xsl:value-of select="atom:id"/>
+      </xsl:attribute>
+      <h2>
+        <xsl:choose>
+          <xsl:when test="atom:link/@href">
+          <a target="_blank">
+            <xsl:attribute name="href">
+              <xsl:value-of select="concat(atom:link/@href, '?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss')"/>
+            </xsl:attribute>
+            <xsl:value-of select="atom:title"/>
+          </a>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="atom:title"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </h2>
+      <div class="meta">
+        <!-- If author isn't "GTN" -->
+        <xsl:if test="atom:author/atom:name != 'GTN'">
+          <span class="authors">
+           <i>By: </i><xsl:for-each select="atom:author">
+               <a href="{atom:uri}">
+                 <xsl:value-of select="atom:name" />
+               </a>
+               <xsl:if test="position() != last()">
+                 <xsl:text>, </xsl:text>
+               </xsl:if>
+             </xsl:for-each>
+          </span>
+        </xsl:if>
+        <xsl:choose>
+          <xsl:when test="atom:posted">
+            <time>
+              <xsl:attribute name="datetime">
+                <xsl:value-of select="atom:posted"/>
+              </xsl:attribute>
+              <xsl:value-of select="atom:posted"/>
+            </time>
+          </xsl:when>
+          <xsl:otherwise>
+            <time>
+              <xsl:attribute name="datetime">
+                <xsl:value-of select="atom:updated"/>
+              </xsl:attribute>
+              <xsl:value-of select="atom:updated"/>
+            </time>
+          </xsl:otherwise>
+        </xsl:choose>
+      </div>
+      <!-- if summary -->
+      <p class="summary">
+        <xsl:choose>
+          <xsl:when test="atom:summary">
+            <xsl:value-of select="atom:summary"  disable-output-escaping="yes" />
+          </xsl:when>
+          <xsl:when test="atom:content">
+            <xsl:copy-of select="atom:content" />
+          </xsl:when>
+        </xsl:choose>
+      </p>
+      <small>
+        Published: <xsl:value-of select="atom:updated" /> <br/>
+        Tags:
+        <xsl:for-each select="atom:category">
+          <xsl:value-of select="@term" />
+          <xsl:if test="position() != last()">
+            <xsl:text>, </xsl:text>
+          </xsl:if>
+        </xsl:for-each>
+      </small>
+
+      <!-- https://stackoverflow.com/questions/796087/make-a-div-into-a-link -->
+      <!-- check if it has a link at all -->
+      <xsl:if test="atom:link/@href">
+        <a target="_blank" class="cover">
+          <xsl:attribute name="href">
+            <xsl:value-of select="concat(atom:link/@href, '?utm_source=embed&amp;utm_medium=rss-widget&amp;utm_campaign=rss')"/>
+          </xsl:attribute>
+        </a>
+       </xsl:if>
+    </div>
+  </xsl:template>
+</xsl:stylesheet>

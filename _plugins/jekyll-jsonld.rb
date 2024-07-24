@@ -281,25 +281,34 @@ module Jekyll
       end
 
       materials = []
-      page['program'].each do |section|
-        if !section.key? 'tutorials'
-          next
-        end
-
-        section['tutorials'].each do |tutorial|
-          if tutorial.key?('custom')
+      if page['program']
+        page['program'].each do |section|
+          if !section.key? 'tutorials'
             next
           end
 
-          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
-          materials.push(material)
+          section['tutorials'].each do |tutorial|
+            if tutorial.key?('custom')
+              next
+            end
+
+            material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+            materials.push(material)
+          end
         end
       end
       materials.compact!
 
       # Extract EDAM terms from all materials
       edam_terms = materials.map do |material|
-        material.fetch('edam_ontology', [])
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
       end.flatten.uniq
 
       learning_objectives = materials.map do |material|
@@ -315,12 +324,14 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].map do |section|
-        {
-          '@type': 'Syllabus',
-          name: section['title'],
-          description: section.fetch('description', nil),
-        }
+      if page['program']
+        syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
+          {
+            '@type': 'Syllabus',
+            name: section['section'],
+            description: section.fetch('description', nil),
+          }
+        end
       end
 
       data = {
@@ -341,7 +352,7 @@ module Jekyll
         endDate: page['date_end'],
         organizer: organisers, # TeSS only, US spelling, non-standard
 
-        # location: nil, # TODO, TeSS location
+        location: page['location'], # TODO, TeSS location
         teaches: learning_objectives, # TeSS, "learning objectives"
         # timeRequired: 'P1D', # TeSS, "duration", TODO: calculate from start/end date, not implemented in scraper currently.
 
@@ -393,7 +404,7 @@ module Jekyll
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
-      if page['cost'].downcase == 'free'
+      if page['cost'] and page['cost'].downcase == 'free'
         data['isAccessibleForFree'] = true
         offer = {
           '@type': 'Offer',
@@ -402,7 +413,7 @@ module Jekyll
           category: 'Free',
           isAccessibleForFree: true,
         }
-      else
+      elsif page['cost']
         data['isAccessibleForFree'] = false
         offer = {
           '@type': 'Offer',
@@ -459,6 +470,145 @@ module Jekyll
     end
 
     ##
+    # Generate the JSON-LD metadata for a learning pathway
+    # Parameters:
+    # +page+:: The page object.
+    # +site+:: The +Jekyll::Site+ site object.
+    # Returns:
+    # +Hash+:: The JSON-LD metadata.
+    def generate_learning_pathway_jsonld(page, site)
+      materials = []
+      page['pathway'].each do |section|
+        if !section.key? 'tutorials'
+          next
+        end
+
+        section['tutorials'].each do |tutorial|
+          if tutorial.key?('custom')
+            next
+          end
+
+          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+          materials.push(material)
+        end
+      end
+      materials.compact!
+
+      # Extract EDAM terms from all materials
+      edam_terms = materials.map do |material|
+        material.fetch('edam_ontology', []).map do |term|
+          {
+            '@type': 'DefinedTerm',
+            '@id': "http://edamontology.org/#{term}",
+            inDefinedTermSet: 'http://edamontology.org',
+            termCode: term,
+          }
+        end
+      end.flatten.uniq
+
+      learning_objectives = materials.map do |material|
+        material.fetch('objectives', [])
+      end.flatten.compact
+
+      # TODO: add topic edam terms too? Not sure.
+      parts = []
+      materials.each do |material|
+        mat = generate_material_jsonld(material, site['data'][material['topic_name']], site)
+        if !mat.nil? && !mat.empty?
+          parts.push(mat)
+        end
+      end
+
+      syllab = page['pathway'].reject { |s| s['section'].nil? }.map do |section|
+        {
+          '@type': 'Syllabus',
+          name: section['section'],
+          description: section.fetch('description', nil),
+        }
+      end
+
+      data = {
+        '@context': 'https://schema.org',
+        '@type': 'Course',
+        url: "#{site['url']}#{site['baseurl']}#{page['url']}",
+        name: "Learning Pathway #{page['title']}",
+        keywords: page['tags'] || [],
+        description: page['description'],
+        about: edam_terms, # TeSS, "scientific topics".
+        audience: page['audience'], # TeSS: target audience
+        teaches: learning_objectives, # TeSS, "learning objectives"
+        availableLanguage: ['en'], # TODO: support other languages
+        inLanguage: ['en'], # TODO: support other languages
+        # courseCode
+        # coursePrerequisites
+        # educationalCredentialAwarded
+        # financialAidEligible
+        # hasCourseInstance
+        # numberOfCredits
+        # occupationalCredentialAwarded
+        # syllabusSections
+        # totalHistoricalEnrollment
+
+        # assesses
+        # competencyRequired
+        # educationalAlignment
+        # educationalLevel
+        # educationalUse
+        # learningResourceType
+        # teaches
+
+        # funder: funders, # Org or person
+        # funding: funding, # Grant
+        publisher: GTN,
+        provider: GTN,
+        syllabusSections: syllab,
+        # Session materials
+        # TODO: not currently parsed by TeSS, google just complains about it, so we're leaving it out.
+        # hasPart: parts,
+      }
+
+      begin
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page.path)
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page.path)
+      rescue StandardError
+        data['dateModified'] = Gtn::ModificationTimes.obtain_time(page['path'])
+        data['datePublished'] = Gtn::PublicationTimes.obtain_time(page['path'])
+      end
+
+      if page['cover']
+        data['image'] = if page['cover'] =~ /^http/
+                          [page['cover']]
+                        else
+                          ["#{site['url']}#{site['baseurl']}#{page['cover']}"]
+                        end
+      end
+
+      # We CANNOT guarantee A11Y
+      # data.update(A11Y)
+      data['isAccessibleForFree'] = true
+      offer = {
+        '@type': 'Offer',
+        price: 0,
+        priceCurrency: 'EUR',
+        category: 'Free',
+        isAccessibleForFree: true,
+      }
+      data['offers'] = [offer]
+
+      # TODO: this is basically just wrong.
+      data['hasCourseInstance'] = [
+        {
+          '@type': 'CourseInstance',
+          courseMode: 'online',
+          offers: offer,
+          isAccessibleForFree: data['isAccessibleForFree'],
+        }
+      ]
+
+      JSON.pretty_generate(data)
+    end
+
+    ##
     # Convert a material to JSON-LD, intended to be used in Jekyll Liquid templates.
     # Parameters:
     # +material+:: The material object.
@@ -482,8 +632,9 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_material_jsonld(material, topic, site)
       langCodeMap = {
-        en: 'English',
-        es: 'Español',
+        "en" => 'English',
+        "es" => 'Español',
+        "fr" => 'Français',
       }
 
       eduLevel = {
@@ -632,6 +783,8 @@ module Jekyll
 
       data.update(A11Y)
 
+      actual_material = TopicFilter.fetch_tutorial_material(site, material['topic_name'], material['tutorial_name'])
+
       # info depending if tutorial, hands-on or slide level
       # parts = []
       # data['hasPart'] = parts
@@ -676,13 +829,31 @@ module Jekyll
         # Keywords
         data['keywords'] = [topic['title']] + (material['tags'] || [])
         # Zenodo links
-        if material.key?('zenodo_link')
-          mentions.push({
-                          '@type': 'Thing',
-                          url: (material['zenodo_link']).to_s,
-                          name: "Training data for #{material['title']} tutorial"
-                        })
-        end
+      end
+
+      # Mentions are 'external resources' in TeSS.
+      # This could be expanded with
+      # - supported servers
+      # - tools and resources used (e.g. Galaxy) or tools linked to the TS.
+      # - slides (if tutorial) and tutorial (if slides)
+      # - other materials in the same topic?
+      if actual_material.key?('workflows')
+        mentions.push({
+                        '@type': 'Thing',
+                        url: "#{site['url']}#{site['baseurl']}#{material['dir']}workflows/",
+                        name: "Associated Workflows"
+                      })
+      end
+      if actual_material.key?('zenodo_link')
+        mentions.push({
+                        '@type': 'Thing',
+                        url: (actual_material['zenodo_link']).to_s,
+                        name: "Associated Training Datasets"
+                      })
+      end
+
+      if description.empty?
+        description.push(material.fetch('content', '').strip.split("\n").first)
       end
       data['description'] = description.join("\n")
 
@@ -818,9 +989,9 @@ module Jekyll
 
       data['about'] = about
 
-      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
-      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material.fetch('content', '').split("\n").first
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
+      data['mentions'] = mentions
+      data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
     end

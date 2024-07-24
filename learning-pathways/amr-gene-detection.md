@@ -8,6 +8,7 @@ tags: [amr, bacteria, microgalaxy, one-health]
 
 editorial_board:
 - bebatut
+- clsiguret
 funding:
 - abromics
 
@@ -21,10 +22,10 @@ pathway:
 
   - section: "Module: Species and contamination checking"
     description: |
-      Taxonomic assignation is useful in AMR detection to check contamination and confirm species
+      Quality control and taxonomic assignation is useful in AMR detection to verify the quality of the data but also to check contamination and confirm species
     tutorials:
-      - name: bacterial-isolate-species-contamination-checking
-        topic: ecology
+      - name: quality-contamination-control
+        topic: sequence-analysis
 
   - section: "Module: Assembly"
     description: |

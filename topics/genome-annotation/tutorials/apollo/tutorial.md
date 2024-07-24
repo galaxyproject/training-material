@@ -55,6 +55,17 @@ edam_ontology:
 - topic_0080 # Sequence analysis
 abbreviations:
   OGS: Official Gene Set
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: ywK1fhM-QFU
+  speakers:
+  - abretaud
+
 ---
 
 

@@ -1,0 +1,180 @@
+---
+layout: base
+---
+
+{% comment %}
+ These variables are set in _plugins/generator-recordings.rb
+{% endcomment %}
+
+{% assign material = page.material %}
+
+<section class="tutorial">
+  <h1 data-toc-skip>Recordings - {{ material.title }} </h1>
+
+  <div class="row">
+  <div class="col-md-10">
+  <p>This is a collection of recordings from various training events where the  <b>{{ material.title }}</b> tutorial was taught by members of the GTN community. The tutorial may have changed after the recording was made; below each video you will find a link to the tutorial as it appeared at the time of recording.</p>
+
+  <p><b>Want to add your own recording?</b> We would love to have it to our library!</p>
+
+  [Add your Recording!]({% link faqs/gtn/recordings_add.md %}){: .btn.btn-info}
+
+  </div>
+
+  <div class="col-md-2">
+  <img src="{% link assets/images/gtn-videolibrary-logo.png %}" style="float: right" alt="GTN video library logo" />
+  </div>
+
+  </div>
+
+  {% if material.recordings %}
+    {% assign recordings = material.recordings %}
+    {% if material.slides_recordings %}
+      {% assign recordings =  recordings | concat: material.slides_recordings %}
+    {% endif %}
+  {% else if material.slides_recordings %}
+    {% assign recordings = material.slides_recordings %}
+  {% endif %}
+
+  {% if recordings %}
+  {% assign recordings =  recordings | uniq | sort: 'date' | reverse %}
+
+<!-- an index for when list of recordings becomes very long?
+  Available Recordings:
+  <ul>
+  {% for recording in recordings %}
+
+    {% if material.slides_recordings contains recording %}
+      {% assign default_type = "Lecture" %}
+    {% else %}
+      {% assign default_type = "Tutorial" %}
+    {% endif %}
+    <li> <a href="#{{recording.type | default: default_type | downcase }}-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}">{{ recording.date | date: "%-d %B %Y"  }}</a></li>
+  {% endfor %}
+    </ul>
+-->
+
+  {% for recording in recordings %}
+
+  {% if material.slides_recordings contains recording %}
+      {% assign default_type = "Lecture" %}
+    {% else %}
+      {% assign default_type = "Tutorial" %}
+    {% endif %}
+  {% assign recording-type = recording.type | default: default_type %}
+  <h2 id="{{recording-type | downcase }}-recording-{{ recording.date | date: "%-d %B %Y" | slugify }}"> {{recording-type }} {% if recording.youtube_id contains 'videoseries' %}Playlist{% else %}Recording{% endif %} - {{ recording.date | date: "%-d %B %Y"  }} </h2>
+  <div class="row recording">
+
+    <div class="col-md-6 recording-video">
+    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" nofigure=true%}
+    </div>
+
+    <div class="col-md-6 recording-metadata">
+    <table class="table table-striped">
+    <tbody>
+    <tr>
+      <th colspan="2" style="text-align: center"> About this Recording </th>
+    </tr>
+
+    <!-- description -->
+    {% if recording.description %}
+    <tr>
+      <td><strong>Description</strong></td>
+      <td>{{ recording.description | markdownify }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- type of video, e.g. 'demo', 'lecture & video', 'background' -->
+    {% if recording.type %}
+    <tr>
+      <td><strong>Type</strong></td>
+      <td>{{ recording.type }}</td>
+    </tr>
+    {% endif %}
+
+    <!-- speakers -->
+    <tr>
+      <td><strong>Speaker{% if recording.speakers.size > 1 %}s{% endif %}</strong></td>
+      <td>{% for speaker in recording.speakers %}{% include _includes/contributor-badge-inline.html id=speaker %}{% endfor %}</td>
+    </tr>
+
+    <!-- captioners -->
+    <tr>
+      <td><strong>Captioner{% if recording.captioners.size > 1 %}s{% endif %}</strong></td>
+      <td>{% for captioner in recording.captioners %}{% include _includes/contributor-badge-inline.html id=captioner %}{% endfor %}</td>
+    </tr>
+
+    <!-- length -->
+    <tr>
+      <td><strong>Length</strong></td>
+      <td>{{ recording.length | duration_to_human }}</td>
+    </tr>
+
+    <!-- date -->
+    <tr>
+      <td><strong>Created</strong></td>
+      <td>{{ recording.date | date: "%-d %B %Y" }}</td>
+    </tr>
+
+      <!-- link tutorial at time of recording -->
+      <!-- determine the first archived version after date of the video -->
+      {% assign archivemonth = recording.date | date: "%m" | plus: 1 | modulo: 12 | prepend: '00' | slice: -2, 2 %}
+      {% assign archiveyear = recording.date | date: "%Y" %}
+      {% if archivemonth == '01' %}{% assign archiveyear = archiveyear | plus: 1 %}{% endif %}
+      {%- capture archive -%}{{archiveyear}}-{{archivemonth}}-01{%- endcapture -%}
+
+     <!-- Check if url exists in archive, else check the redirect_from metadata to find url of tutorial at time of archive -->
+
+     {% capture tutorial_url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/tutorial.html{% endcapture %}
+
+     {% capture slides_url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}/topics/{{ page.topic_name }}/tutorials/{{page.tutorial_name}}/slides.html{% endcapture %}
+
+     {% if material.slides_recordings contains recording %}
+       {% assign url = slides_url %}
+       {% assign t = "slides" %}
+     {% else %}
+       {% assign url = tutorial_url %}
+       {% assign t = "tutorial" %}
+     {% endif %}
+
+     {% if jekyll.environment == "production "%}
+
+     {% assign exists = url | url_exists %}
+     {% if exists %}
+       {% assign archiveurl = url %}
+     {% else %}
+       {% for r in material.redirect_from %}
+         {% capture url %}https://training.galaxyproject.org/archive/{{recording.archive-id| default: archive }}{{r}}.html{% endcapture %}
+         {% assign exists = url | url_exists %}
+         {% if exists %}
+           {% assign archiveurl = url %}
+           {% break %}
+         {% endif %}
+       {% endfor %}
+     {% endif %}
+
+     {% endif %}
+
+     <tr>
+      <td><strong>Archive</strong></td>
+      <td><a href="{{archiveurl | default: url }}">View {{t}} at time of recording</a></td>
+    </tr>
+
+    <tr>
+      <td><strong>License</strong></td>
+      <td><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a></td>
+    </tr>
+
+    </tbody>
+    </table>
+    </div> <!-- end metadata table div -->
+
+  </div> <!-- end row div -->
+  <br><br>
+
+  {% endfor %}
+
+{% endif %}
+</section>
+
+

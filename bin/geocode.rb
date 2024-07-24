@@ -9,6 +9,7 @@ def request(url)
   uri = URI.parse(url)
   request = Net::HTTP::Get.new(uri)
   request['Accept'] = 'application/json'
+  request['User-Agent'] = 'GTN-geocode/1.0 (+https://github.com/galaxyproject/training-material)'
   req_options = {
     use_ssl: uri.scheme == 'https',
   }
@@ -26,8 +27,21 @@ events.each do |event|
   rescue StandardError
     event_data = YAML.load_file(event)
   end
+
+  # Check if it is external, no need to show a map then
+  if event_data.key?('external') or event_data['layout'] == 'event-external'
+    STDERR.puts "Skipping external event: #{event}"
+    next
+  end
+
+  if event_data['layout'] != 'event'
+    STDERR.puts "Skipping non-event: #{event}"
+    next
+  end
+
   # Check if it is already geocoded
   if !event_data.key?('location')
+    STDERR.puts "Skipping geocoded event: #{event}"
     next
   end
 
@@ -40,8 +54,13 @@ events.each do |event|
       'postcode' => event_data['location'].fetch('postcode', nil),
     }
 
+    if event_data['location'].fetch('name', "").downcase == "online"
+      STDERR.puts "Skipping online event: #{event}"
+      next
+    end
+
     if loc.values.compact.empty?
-      # Online event
+      STDERR.puts "Skipping location-less event: #{event}"
       next
     end
 
