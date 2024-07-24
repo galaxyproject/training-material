@@ -879,7 +879,7 @@ To export your notebook to your Galaxy history, you can use the following. Chang
 
 ```python
 put("name_of_jupyter_notebook.ipynb")
-```    
+```
 
 Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
 
