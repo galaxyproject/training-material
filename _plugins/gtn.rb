@@ -4,6 +4,7 @@ require 'English'
 require './_plugins/gtn/contributors'
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
+require './_plugins/gtn/ro-crate'
 require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
@@ -710,6 +711,10 @@ module Jekyll
       array.shuffle
     end
 
+    def unix_time_to_date(time)
+      Time.at(time.to_i).strftime('%Y-%m-%d %H:%M:%S')
+    end
+
     def is_date_passed(date)
       if date.nil?
         false
@@ -932,6 +937,11 @@ Jekyll::Hooks.register :site, :post_read do |site|
 
   Jekyll.logger.info '[GTN] Annotating events'
   site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
+
+    unless page.data['date_start']
+      # if no date set, use a mock date to prevent build from failihng
+      page.data['date_start'] = Date.parse('2121-01-01')
+    end
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
 

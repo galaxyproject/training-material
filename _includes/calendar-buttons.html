@@ -2,7 +2,11 @@
 {% assign enddate = include.end | default: page.date_end | default: page.date_start %}
 {% assign eventurl = include.url | default: page.url | prepend: site.baseurl | prepend: site.url %}
 {% assign eventname = include.name | default: page.title | default: ""%}
-{% assign location = include.location | default: page.location | format_location_simple  %}
+
+{% assign location = "unspecified" %}
+{% if include.location or page.location %}
+{% assign location = include.location | default: page.location | format_location_simple %}
+{% endif %}
 
 <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates={{startdate | date: '%Y%m%d'}}%2F{{enddate | date: '%Y%m%d'}}&details=Event%20Information%20{{eventurl}}&location={{location}}&text={{eventname}}" class="btn btn-info btn-sm" alt="Add to Google Calendar">Google</a>
 

@@ -8,7 +8,7 @@
 > from ._framework import ApiTestCase
 > 
 > 
-> class MyTutorialApiTestCase(ApiTestCase):
+> class TestMyTutorialApiTestCase(ApiTestCase):
 >
 >     def setUp(self):
 >         super().setUp()

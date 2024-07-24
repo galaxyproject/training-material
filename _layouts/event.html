@@ -50,6 +50,12 @@ layout: base
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    {% if event.external %}
+       <p class="alert alert-primary">
+       For details about the course, please vist the <a class="btn btn-primary" href="{{event.external}}">Course Page</a>
+       </p>
+    {% endif %}
+
     <p>{{ event.description | markdownify }}</p>
     <p>{{ content | markdownify }}</p>
 
@@ -84,6 +90,7 @@ layout: base
 		.bindPopup('{{ event.title }}')
 		.openPopup();
 	</script>
+	<p>Geocoding via <a href="https://nominatim.org/">Nominatim</a>, Map data from <a href="https://openstreetmap.org">OpenStreetMap</a></p>
 	{% endif %}
 
 
@@ -225,7 +232,7 @@ layout: base
 
 
             <ol>
-              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite }}">Invite Link</a></li>
+              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite_link }}">Invite Link</a></li>
               <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "#general"}}</a></li>
               <li>Introduce yourself here!</li>
             </ol>
@@ -404,7 +411,7 @@ subsites: [all]
 
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
-			<tr><td>{% icon event-location %}</td><td>{{ event.location | format_location }}</td></tr>
+			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% else %}Please set a location{% endif %}</td></tr>
 			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
 			{% if event.contact_email %}
 			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>

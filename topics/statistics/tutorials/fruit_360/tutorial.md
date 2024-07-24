@@ -202,7 +202,7 @@ Orange:8, Peach:9.
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >   ![Renaming history]({% link shared/images/rename_history.png %})
 >    >
 >    > * Type `Galaxy Introduction` as the name
 >    > * Press <kbd>Enter</kbd>
@@ -255,7 +255,7 @@ train_y_10 file has 3 columns: Label_name (string representation of label), file
 image file), and Label (integer representation of label). We extract Label from train_y_10, and then calcuate
 its OHE representation.
 
-### **Extract the Label column from train_y_10**
+### Extract the Label column from train_y_10
 
 > <hands-on-title>Advanced Cut</hands-on-title>
 >
@@ -269,7 +269,7 @@ its OHE representation.
 >
 {: .hands_on}
 
-### **Create One-Hot Encoding (OHE) representation of training labels**
+### Create One-Hot Encoding (OHE) representation of training labels
 
 > <hands-on-title>One-Hot Encoding</hands-on-title>
 >
@@ -281,7 +281,7 @@ its OHE representation.
 >
 {: .hands_on}
 
-### **Create a deep learning model architecture**
+### Create a deep learning model architecture
 
 > <hands-on-title>Model config</hands-on-title>
 >
@@ -344,7 +344,7 @@ nodes and relu activation function. Finally, we add a fully connected layers wit
 softmax activation function to get the probability of each fruit/vegetable. Fruit/vegetable with the
 highest probability is predicted by CNN. The model config can be downloaded as a JSON file.
 
-### **Create a deep learning model**
+### Create a deep learning model
 
 > <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
@@ -369,7 +369,7 @@ weights/biases after all the training data is feed to the network, the training 
 in our dataset). To speed up the training, we present only a subset of the training examples to the network, after which we update
 the weights/biases. *batch_size* decides the size of this subset. The model builder can be downloaded as a zip file.
 
-### **Deep learning training and evaluation**
+### Deep learning training and evaluation
 
 > <hands-on-title>Training the model</hands-on-title>
 >
@@ -389,7 +389,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and
 3) the trained model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.
 
-### **Model Prediction**
+### Model Prediction
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
@@ -407,7 +407,7 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 The prediction step generates 1 dataset. It's a file that has predictions (0 to 9 for the predicted fruit/vegetable) for every image
 in the test dataset.
 
-### **Machine Learning Visualization Extension**
+### Machine Learning Visualization Extension
 
 > <hands-on-title>Creating the confusion matrix</hands-on-title>
 >

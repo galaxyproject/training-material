@@ -4,6 +4,7 @@ layout: base
 
 {% assign topic = site.data[page.topic_name] | default: page.topic %}
 {% assign topic_material = site | list_materials_structured:topic.name %}
+{% assign topic_material_flat = site | list_materials_flat:topic.name %}
 
 <h1>{{ topic.title }} Editorial Board Home</h1>
 
@@ -59,6 +60,34 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		</tr>
 	</tbody>
 </table>
+
+<h2>Topic Workflows</h2>
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Material</th>
+			<th>Workflow</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for material in topic_material_flat %}
+	{% for workflow in material['workflows'] %}
+		<tr>
+			<td><a href="{{ site.baseurl }}{{ material.url }}">{{ material.title }}</a></td>
+			<td><a href="{{ workflow.url_html }}">{{ workflow.name }}</a></td>
+			<td>{% if workflow.tests %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if workflow.features.report %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if workflow.features.comments %} ✅ {% else %} ❌ {% endif %}</td>
+		</tr>
+	{% endfor %}
+{% endfor %}
+	</tbody>
+</table>
+
 
 <h2>Your topic's Workflow Testing Results</h2>
 
