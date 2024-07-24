@@ -27,17 +27,11 @@ requirements:
      - ansible-galaxy
 ---
 
-> <warning-title>switching object store types will cause issues</warning-title>
-> Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.
-{: .warning}
-
-# Expanding Storage
-
-
-
 You may find that your Galaxy files directory has run out of space, but you don't want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy's hierarchical object store to add an additional file space for Galaxy.
 
 Alternatively, you may wish to write new datasets to more than one filesystem. For this, you can use Galaxy's distributed object store.
+
+# Expanding Storage
 
 This tutorial assumes you have done the "Ansible for installing Galaxy" tutorial, it references the base configuration set up in that tutorial in numerous places.
 
@@ -48,6 +42,9 @@ This tutorial assumes you have done the "Ansible for installing Galaxy" tutorial
 >
 {: .agenda}
 
+> <warning-title>switching object store types will cause issues</warning-title>
+> Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.
+{: .warning}
 
 # Hierarchical Object Store
 

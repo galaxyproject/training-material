@@ -141,11 +141,9 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 > 2. Import occurrence data file from GBIF [GBIF](https://doi.org/10.15468/dl.wjrk2b), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
 >
 >    ```
->    [https://zenodo.org/record/5932108/files/wolf_tutorial.zip](https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip)
->    ```
+>    https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip : "occurrence.txt"
 >    ```
 >    https://data.indores.fr/api/access/datafile/9777 : "ceamarc_env.tab"
->    ```
 >    ```
 >    https://data.indores.fr/api/access/datafile/9756 : "pivot_wider_jupytool_notebook.ipynb"
 >    ```

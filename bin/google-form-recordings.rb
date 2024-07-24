@@ -5,6 +5,7 @@ require 'yaml'
 require 'net/http'
 require 'csv'
 require 'date'
+require './_plugins/util'
 
 # Fetch data from a google sheet
 url = 'https://docs.google.com/spreadsheets/d/1iXjLlMEH5QMAMyUMHi1c_Lb7OiJhL_9hgJrtAsBoZ-Y/export?format=tsv'
@@ -61,7 +62,7 @@ data.each do |row|
                         "bot-timestamp" => bot_timestamp }
 
   # append metadata into GTN material
-  material_metadata = YAML.load_file(material_file)
+  material_metadata = safe_load_yaml(material_file)
 
   if material_metadata["recordings"]
     # check the "bot_timestamp"

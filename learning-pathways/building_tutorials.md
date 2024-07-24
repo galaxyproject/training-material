@@ -16,7 +16,7 @@ description: |
 pathway:
   - section: "Module 1: What is Github and why do I have to use it?"
     description: |
-      Galaxy training material is hosted on Github. Finding these materials and getting used to the ideas of submitting a 'Pull request' is a crucial starting point for developing training material in Galaxy. You may find that [searching Github on our training materials](../search2?query=github) will also provide further resources on this topic after the following module.
+      Galaxy training material is hosted on Github. Finding these materials and getting used to the ideas of submitting a 'Pull request' is a crucial starting point for developing training material in Galaxy. You may find that [searching Github on our training materials](../search2.html?query=github) will also provide further resources on this topic after the following module.
     tutorials:
       - name: github-interface-contribution
         topic: contributing
