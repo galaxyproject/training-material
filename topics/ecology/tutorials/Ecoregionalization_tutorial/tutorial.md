@@ -30,6 +30,7 @@ contributions:
   testing:
     - yvanlebras
     - Marie59
+    - Rassine
 ---
 
 This tutorial is designed to guide you through the Ecoregionalization Galaxy workflow, demonstrating how to create an ecoregionalization map from occurrences and environmental data using a boosted regression trees model for predictions.
@@ -47,13 +48,13 @@ This workflow is therefore composed of 6 tools:
 - ClaraClust
 - EcoMap
 
-And in this tutorial we will be using 5 more tools to formatting data before run the ecoregionalization workflow:
+And in this tutorial we will be using 5 more tools to format data before running the ecoregionalization workflow:
 
 - Advanced cut
 - Column Regex Find And Replace
 - Filter Tabular
 - Merge Columns
-- Interactive JupyTool and notebook
+- Interactive JupyterLab and notebook
 
 Let's delve into the tutorial, outlining each step and tool to manage the creation of ecoregionalization maps. 
 
@@ -69,7 +70,7 @@ Let's delve into the tutorial, outlining each step and tool to manage the creati
 > 
 > Clustering: Clustering is a machine learning method of grouping data points by similarity or distance.
 >
-> CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for “Partition Around Medoids”, the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.
+> CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for "Partition Around Medoids", the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.
 {: .details}
 
 > <agenda-title></agenda-title>
@@ -87,9 +88,9 @@ This part will present the type of data you need to run the ecoregionalization w
 
 ## Environmental data
 
-The first data you will need to run this workflow is environmental data. As defined above, environmental data are any measurement or information that describe environmental processes, location or conditions. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv), and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
+To run this workflow, you will first need environmental data. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv), and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
 
-In the Dumont D'Urville sea region use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D’Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. And finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.  
+In the use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D'Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. Finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.  
 
 Here an example of environmental file input: 
 
@@ -125,9 +126,9 @@ Here an example of occurrences data file input:
 
 For this tutorial, occurrences data from the Dumont d'Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census {% cite Hosie_2011 %}) between December 2007 and January 2008 {% cite bea09 %}. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN" which correspond to the CEAMARC expedition.
 
-## Jupyter notebook for the interactive JupyTool and notebook tool
+## Jupyter notebook for the interactive JupyerLab and notebook tool
 
-To switch from the occurrence data download from GBIF to the occurrence data supported by the ecoregionalisation workflow, the final step of data preparation use the Interactive JupyTool and notebook tool who need a jupyter notebook to work. In this Jupyter notebook, we used the pivot_wider function of the tidyr R package to transform our data into a wider format and adapted to subsequent analyses as part of the Galaxy workflow for ecoregionalization. This transformation allowed us to convert our data to a format where each taxon becomes a separate column. We also took care to fill in the missing values with zeros and to sum the individual counts in case of duplications. Then all data >= 1 are replaced by 1 to have only presence (1) or abscence (0) data.
+To switch from the occurrence data download from GBIF to the occurrence data supported by the ecoregionalisation workflow, the final step of data preparation use the "Interactive JupyterLab and notebook" tool who needs a jupyter notebook to work. In this Jupyter notebook, we used the pivot_wider function of the tidyr R package to transform our data into a wider format and adapt it to subsequent analyses as part of the Galaxy workflow for ecoregionalization. This transformation allowed us to convert our data to a format where each taxon becomes a separate column. We also took care to fill in the missing values with zeros and to sum the individual counts in case of duplications. Then all data >= 1 are replaced by 1 to have only presence (1) or abscence (0) data.
 
 ## Get data
 
@@ -139,26 +140,34 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import occurrence data file from GBIF [GBIF](https://doi.org/10.15468/dl.wjrk2b), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
+> 2. Import occurrence data file from [GBIF](https://doi.org/10.15468/dl.wjrk2b), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
 >
+>    Occurrence data file as a zip file where you will find "occurrence.txt"
 >    ```
->    https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip : "occurrence.txt"
+>    https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip
 >    ```
->    https://data.indores.fr/api/access/datafile/9777 : "ceamarc_env.tab"
+>    Environemental data : "ceamarc_env.tab"
 >    ```
->    https://data.indores.fr/api/access/datafile/9756 : "pivot_wider_jupytool_notebook.ipynb"
+>    https://data.indores.fr/api/access/datafile/9777 
+>    ```
+>    Jupyter notebook : "pivot_wider_jupytool_notebook.ipynb"
+>    ```
+>    https://data.indores.fr/api/access/datafile/9756 
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_remote_files.md %}
 >
->
 > 3. The GBIF link allows you to download a zip file containing multiple information files about the dataset. The file that you need is the 'occurrence.txt' file that we will specifically extract on Galaxy in the following step.
 > 
 > 4. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all GBIF archive files will be unzipped
 >
-> 5. Unhide the "occurence" data file then modify datatype to select the "tabular" one
+> 5. Unhide the "occurence.txt" data file then modify datatype to select the "tabular" one
+>
+>    {% snippet faqs/galaxy/datasets_unhidden.md %}
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 > 6. Rename the datasets if needed, notably "9756" by "pivot_wider_jupytool_notebook.ipynb" and "9777" by "ceamarc_env.tab". 
 >
@@ -172,15 +181,14 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 
 # Data formating
 
-The first step of this tutorial is data formatting because the Ecoregionalisation workflow, as said before, needs specific data format to be run. The GBIF species occurrence file is not ready yet to 
-be included in the workflow so this part is used to format it.
+The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
 
 ## Keep data columns that we need with **Advanced Cut**
 
 > <hands-on-title> Select the columns we need </hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `occurrence.txt` (Input dataset)
+>    - {% icon param-file %} *"File to cut"*: `occurrence` (Input dataset)
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >    - *"Delimited by"*: `Tab`
@@ -201,11 +209,11 @@ be included in the workflow so this part is used to format it.
 >
 {: .question}
 
-## Replace blank space with NAs with **Column Regex Find And Replace**
+## Replace empty space with NAs with **Column Regex Find And Replace**
 
-This step is used to add NAs to replace blank space in the file. We will do that for the four first columns and then remove lines with NA to have a complete dataset.
+This step is used to add NAs to replace empty space in the file. We will do that for the four first columns and then remove lines with NA to have a complete dataset.
 
-> <hands-on-title> Relace blank space by NAs for the fisrt column </hands-on-title>
+> <hands-on-title> Relace empty space by NAs for the fisrt column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `output` (output of **Advanced Cut** {% icon tool %})
@@ -215,9 +223,15 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >            - *"Find Regex"*: `^$`
 >            - *"Replacement"*: `NA`
 >
+> > <warning-title>Pay attention to the regex parameter</warning-title>
+> >
+> > The regular expression ("^$") is used to capture empty cells in the dataframe so that they can be replaced by NA (Not Available). It is not advised to modify this regular expression nor its replacement, as you will encounter problems while running the next parts of the workflow.
+> >
+> {: .warning}
+>
 {: .hands_on}
 
-> <hands-on-title> Replace blank space by NAs for the second column </hands-on-title>
+> <hands-on-title> Replace empty space by NAs for the second column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on the fisrt column** {% icon tool %})
@@ -229,7 +243,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-> <hands-on-title> Replace blank space by NAs for the third column </hands-on-title>
+> <hands-on-title> Replace empty space by NAs for the third column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file2` (output of **Column Regex Find And Replace on the second column** {% icon tool %})
@@ -241,7 +255,7 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >
 {: .hands_on}
 
-> <hands-on-title> Replace blank space by NAs for the fourth column </hands-on-title>
+> <hands-on-title> Replace empty space by NAs for the fourth column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `out_file3` (output of **Column Regex Find And Replace on the third column** {% icon tool %})
@@ -250,7 +264,9 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^$`
 >            - *"Replacement"*: `NA`
-> 2. Check your output. At the end of this step you must have NA instead of blank space.
+> 2. Check your output. At the end of this step you must have NA instead of empty space. See example below. 
+>
+>![Output of Regex find and replace example](./Images/NA_example.png "Output of Regex find and replace example")
 >
 {: .hands_on}
 
@@ -267,11 +283,12 @@ This step is used to add NAs to replace blank space in the file. We will do that
 >                - *"action for regex match"*: `exclude line if pattern found`
 >
 > 2. Check your output. All the lines with NAs must have been deleted. 
+>
 {: .hands_on}
 
 ### Prepare column merging with **Column Regex Find And Replace**
 
-This manipulation is made in order to merge properly columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" with a separation. 
+This manipulation is made in order to merge properly columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" with a separation.
 
 > <hands-on-title> Add "_" at the end of the phylum column </hands-on-title>
 >
@@ -283,6 +300,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
 > 2. Check your output. All phylum must have "_" at the end.
+>
 {: .hands_on}
 
 > <hands-on-title> Add "_" at the end of the class column </hands-on-title>
@@ -295,6 +313,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
 > 2. Check your output. All class must have "_" at the end.
+>
 {: .hands_on}
 
 > <hands-on-title> Add "_" at the end of the order column </hands-on-title>
@@ -307,6 +326,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
 > 2. Check your output. All order must have "_" at the end.
+>
 {: .hands_on}
 
 > <hands-on-title> Add "_" at the end of the family column </hands-on-title>
@@ -319,6 +339,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
 > 2. Check your output. All family must have "_" at the end.
+>
 {: .hands_on}
 
 > <hands-on-title> Add "_" at the end of the genus column </hands-on-title>
@@ -330,7 +351,9 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
-> 2. Check your output. All genus must have "_" at the end.
+> 2. Check your output. All genus must have "_" at the end. See example below. 
+>
+> ![Output of Regex Find And Replace example](./Images/_example.png "Output of Regex Find And Replace example")
 >
 {: .hands_on}
 
@@ -366,15 +389,20 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >    - *"Delimited by"*: `Tab`
 >        - *"Is there a header for the data's columns ?"*: `Yes`
 >            - *"List of Fields"*: `c['4', '5', '6', '7', '8', '9']`
-> 2. Check your output. Columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" must have been deleted and your table must have four columns : "individualCount", "decimalLatitude", "DecimalLongitude" and "phylum_class_order_family_genus_specificEpithet".
+> 2. Check your output. Columns “phylum”, “class”, "order", "family", "genus" and "specificEpithet" must have been deleted and your table must have four columns : "individualCount", "decimalLatitude", "DecimalLongitude" and "phylum_class_order_family_genus_specificEpithet". See example below.
+>
+> ![Output of Advanced cut example](./Images/advanced_out_example.png "Output of Advanced cut example")
 >
 {: .hands_on}
 
-## Obtain final data file with **Interactive JupyTool and notebook**
+## Obtain final data file with **Interactive JupyterLab Notebook**
+
+The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like. 
+Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.ipynb" that you downloaded earlier) and run the code in it to get the final file that is needed for ecoregionalization workflow.
 
 > <hands-on-title> Pivot_wider with Jupytool </hands-on-title>
 >
-> 1. {% tool [Interactive JupyterLab and notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
+> 1. {% tool ["Interactive JupyterLab and notebook"](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Load a previous notebook`
 >        - {% icon param-file %} *"IPython Notebook"*: `pivot_wider_jupytool_notebook.ipynb` (Input dataset)
 >        - *"Execute notebook and return a new one."*: `Yes`
@@ -384,7 +412,22 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Choose the input type"*: `Dataset`
 >                - {% icon param-file %} *"Select value"*: `output` (output of previous step **Advanced Cut** {% icon tool %})
 >
-> 2. Check your output. You must have a tabular file with latitude and longitude in first two columns and the others columns must be taxa.
+> > <tip-title>How to launch the notebook</tip-title>
+> >
+> >   - The first parameter allows you to specify that you want to use a previous notebook ("pivot_wider_jupytool_notebook.ipynb") rather than create a new one. 
+> >   - Then you need to insert your ready to use jupyter notebook ("pivot_wider_jupytool_notebook.ipynb").
+> >   - The third parameter is important to specify that you just want to execute a notebook and not dive into the web frontend (in this case).
+> >   - Then you need to clik on "+ Insert User inputs"" button to add the next parameters.
+> >   - After, you need to give a name to your input and choose its type.
+> >   - Finally you have to input the occurrence data file that will be treated in the Jupyter Notebook. 
+> > 
+> > ![Interactive JupyterLab Notebook parameters example](./Images/JLN_param_example.png "Interactive JupyterLab Notebook parameters example")
+> >
+>{: .tip}
+> 
+> 2. Check your output ("Intercative JupyterLab Notebook on data (pivot_file)") in your galaxy history. You must have a tabular file with latitude and longitude in first two columns and the others columns must be taxa. See example below. 
+>
+> ![Interactive JupyterLab Notebook output example](./Images/pivot_file_example.png "Interactive JupyterLab Notebook output example")
 >
 {: .hands_on}
 
@@ -591,7 +634,7 @@ clustering process and makes the calculation more efficient.
 >    - {% icon param-file %} *"Environmental file (tabular only)"*: `ceamarc_env.tsv` (Input dataset)
 >    - {% icon param-file %} *"Prediction matrix (file 'data to cluster' from Cluster Estimate tool)"*: `Data_to_cluster` (output of **ClusterEstimate** {% icon tool %})
 >    - {% icon param-file %} *"Prediction table (file 'data.bio table' from Cluster Estimate tool)"*: `Data.bio_table` (output of **ClusterEstimate** {% icon tool %})
->    - *"Number of Cluster wanted"*: `7` (Number of cluster determined at the previous step of the workflow)
+>    - *"Number of Cluster wanted"*: `7` (Number of cluster determined at the previous step of the workflow in "SIH index plot")
 >
 >    > <comment-title> Two other parameters </comment-title>
 >    > 
@@ -642,4 +685,4 @@ This is the output map with our seven clusters representing ecoregions that you 
 
 # Conclusion
 
-Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming at explaining the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data. This tutorial shows how to use this workflow, step by step, or all in one using the Dumont D'Urville sea region use case with related datasets. It allows you to understand ecoregions construction. You learned the use of the BRT algorithm for modeling species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don't hesitate to contact us if you have any questions.
+Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming to explain the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data. This tutorial shows how to use this workflow, step by step, or all in one using the Dumont D'Urville sea region use case with related datasets. It allows you to understand ecoregions construction. You learned the use of the BRT algorithm for modeling species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions, or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don't hesitate to contact us if you have any questions.
