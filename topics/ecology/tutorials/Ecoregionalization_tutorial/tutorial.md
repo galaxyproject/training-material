@@ -13,12 +13,9 @@ objectives:
 - Create an ecoregionalization map
 time_estimation: 2H
 key_points:
-- GeoNearestNeighbor
-- BRT tool
-- TaxaSeeker tool
-- ClusterEstimate tool
-- ClaraClust tool
-- EcoMap tool
+- Get raw data from research data wharehouse
+- Clean data content to be used by an existing workflow
+- Evaluate the best number of cluster to cut a dataset
 tags:
 - ecology
 - EBV workflow
