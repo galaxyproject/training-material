@@ -402,7 +402,7 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 
 > <hands-on-title> Pivot_wider with Jupytool </hands-on-title>
 >
-> 1. {% tool ["Interactive JupyterLab and notebook"](interactive_tool_jupyter_notebook) %} with the following parameters:
+> 1. {% tool [Interactive JupyterLab and notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Load a previous notebook`
 >        - {% icon param-file %} *"IPython Notebook"*: `pivot_wider_jupytool_notebook.ipynb` (Input dataset)
 >        - *"Execute notebook and return a new one."*: `Yes`
