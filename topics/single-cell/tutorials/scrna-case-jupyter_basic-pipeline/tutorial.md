@@ -85,7 +85,7 @@ import pandas as pd
 
 # Load Data
 
-You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #4 in your history, then you import it with the following:
+You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #1 in your history, then you import it with the following:
 
 ```python
 mito_counted_anndata = get(1)
