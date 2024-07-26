@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9022987a761d136b173cb5716ade07a1202e86d8",
+		release: "galaxy-training-network@dae5db31457308dc69b4fdcfbb549329410fc23d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-07 13:05:35 +0000">
+<meta name="DC.date" content="2024-07-26 17:21:12 +0000">
 <meta name="DC.creator" content="Morgan Howells">
 <meta name="DC.creator" content="Wendi Bacon"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-07 13:05:35 +0000",
+  "dateModified": "2024-07-26 17:21:12 +0000",
   "datePublished": "2023-08-25 05:00:35 +0000",
   "identifier": "https://gxy.io/GTN:T00358",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.html",
-  "version": 8,
+  "version": 9,
   "timeRequired": "PT3H",
   "teaches": "Interpret quality control plots to direct parameter decisions\n - Repeat analysis from matrix to clustering\n - Identify decision-making points\n - Appraise data outputs and decisions\n - Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process",
   "keywords": [
@@ -1029,7 +1029,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 25, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 7, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 26, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1047,7 +1047,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
 
     </blockquote>
     </section>
@@ -1103,9 +1103,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h1 id="load-data">Load Data</h1>
 
-<p>You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #4 in your history, then you import it with the following:</p>
+<p>You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #1 in your history, then you import it with the following:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mito_counted_anndata</span> <span class="o">=</span> <span class="nf">get</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mito_counted_anndata</span> <span class="o">=</span> <span class="nf">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>You now need to read it in as a h5ad object.</p>
@@ -2028,22 +2028,25 @@ If we look at the differences between genotypes alone (so the pseudo-bulk), we c
 
 <p>It’s now time to export your data! First, we need to get Jupyter to see it as a file.</p>
 
-<pre><code class="language-adata.write('markers_cluster_copy')```">
-Now you can export it.
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="nf">write</span><span class="p">(</span><span class="sh">'</span><span class="s">MarkersCluster.h5ad</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div>
 
-```put("MarkersCluster.h5ad")```
+<p>Now you can export it.</p>
 
-To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">MarkersCluster.h5ad</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
 
-```put("yourtitlehere.ipynb")```    
+<p>To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!</p>
 
-Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">name_of_jupyter_notebook.ipynb</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
 
-```python
-put("figures/plotname.png")
-put("figures/plotname.png")
-put("figures/plotname.png")
-</code></pre>
+<p>Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/plotname.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/plotname.png</span><span class="sh">"</span><span class="p">)</span>
+<span class="nf">put</span><span class="p">(</span><span class="sh">"</span><span class="s">figures/plotname.png</span><span class="sh">"</span><span class="p">)</span>
+</code></pre></div></div>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -2485,7 +2488,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9022987a761d136b173cb5716ade07a1202e86d8">9022987</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/dae5db31457308dc69b4fdcfbb549329410fc23d">dae5db3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

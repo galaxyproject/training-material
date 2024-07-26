@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: Importing and Launching a Dockstore workflow</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>FAQ: Importing and Launching a Dockstore Workflow</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9022987a761d136b173cb5716ade07a1202e86d8",
+		release: "galaxy-training-network@dae5db31457308dc69b4fdcfbb549329410fc23d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,13 +68,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="Importing and Launching a Dockstore workflow">
+<meta name="DC.title" content="Importing and Launching a Dockstore Workflow">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 10:00:49 +0000">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="{% if include.dockstore_id %}    Launch {{ include.title }}  (View on Dockstore)       Launch {{ include.title }}  (View on Dockstore)    {% snippet faqs/galaxy/workflows_import_from_dockstore.md override_title= If this does not work  dockstore_id=include.dockstore_id %}  {% else %}  1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy 2. Switch tabs to TRS ID 3. Ensure the TRS server is set to  dockstore.org  4. Provide your workflow hub ID  {% endif %} ">
+<meta name="DC.date" content="2024-07-26 07:10:40 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="  {% if include.dockstore_id %} {% capture external_page %}https://dockstore.org/workflows/{{ include.dockstore_id }}:{{ include.version }}{% endcapture %}       Launch {{ include.title }} ({{ include.version }})   (View on Dockstore)         Launch {{ include.title }} ({{ include.version }})   (View on Dockstore)    {% snippet faqs/galaxy/workflows_import_from_dockstore.md override_title= If this does not work  dockstore_id=include.dockstore_id %}  {% else %}  1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy 2. Switch tabs to TRS ID 3. Ensure the TRS server is set to  dockstore.org  4. Provide your workflow hub ID  {% endif %} ">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="FAQ: Importing and Launching a Dockstore workflow">
-        <meta property="og:description" content="{% if include.dockstore_id %}    Launch {{ include.title }}  (View on Dockstore)       Launch {{ include.title }}  (View on Dockstore)    {% snippet faqs/galaxy/workflows_import_from_dockstore.md override_title= If this does not work  dockstore_id=include.dockstore_id %}  {% else %}  1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy 2. Switch tabs to TRS ID 3. Ensure the TRS server is set to  dockstore.org  4. Provide your workflow hub ID  {% endif %} ">
+	<meta property="og:title" content="FAQ: Importing and Launching a Dockstore Workflow">
+        <meta property="og:description" content="  {% if include.dockstore_id %} {% capture external_page %}https://dockstore.org/workflows/{{ include.dockstore_id }}:{{ include.version }}{% endcapture %}       Launch {{ include.title }} ({{ include.version }})   (View on Dockstore)         Launch {{ include.title }} ({{ include.version }})   (View on Dockstore)    {% snippet faqs/galaxy/workflows_import_from_dockstore.md override_title= If this does not work  dockstore_id=include.dockstore_id %}  {% else %}  1. Go to [Workflow → Import](https://my.galaxy.training/?path=/workflows/import) in your Galaxy 2. Switch tabs to TRS ID 3. Ensure the TRS server is set to  dockstore.org  4. Provide your workflow hub ID  {% endif %} ">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -224,7 +224,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     </ol>
   </nav>
-  <h1 itemprop="name">Importing and Launching a Dockstore workflow</h1>
+  <h1 itemprop="name">Importing and Launching a Dockstore Workflow</h1>
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
@@ -239,6 +239,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
            
+
+<!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->
 
 <ol>
   <li>Go to <a href="https://my.galaxy.training/?path=/workflows/import">Workflow → Import</a> in your Galaxy</li>
@@ -327,9 +329,11 @@ add a button, include configuration options:
 	  <h5>Optional Parameters</h5>
 	  <ul>
 	  
-	  <li><code>dockstore_id</code>: The Dockstore ID of the workflow you want to import</li>
+	  <li><code>dockstore_id</code>: The Dockstore ID of the workflow you want to import, minus the "#workflow/" portion</li>
 	  
 	  <li><code>title</code>: The title of the workflow you want to import, can be any text</li>
+	  
+	  <li><code>version</code>: Version of the workflow you want to pin</li>
 	  
 	  </ul>
 	  
@@ -339,6 +343,10 @@ add a button, include configuration options:
 
 Load a workflow by Dockstore ID:
 <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet faqs/galaxy/workflows_run_ds.md dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" title="My Cool Workflow"  %}
+</code></pre></div></div>
+
+Load a v0.1.3 of a specific IWC workflow:
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% snippet faqs/galaxy/workflows_run_ds.md dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" title="Kmer Profiling HiFi VGP1" version="v0.1.3"  %}
 </code></pre></div></div>
 
 
@@ -415,7 +423,7 @@ Load a workflow by Dockstore ID:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9022987a761d136b173cb5716ade07a1202e86d8">9022987</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/dae5db31457308dc69b4fdcfbb549329410fc23d">dae5db3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
