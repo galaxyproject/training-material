@@ -140,7 +140,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
-> 2. Import occurrence data file from [GBIF](https://doi.org/10.15468/dl.wjrk2b), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
+> 2. Import occurrence data file from [GBIF](https://www.gbif.org/occurrence/download/0030809-240506114902167), environment file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&version=1.0#) and Jupyter notebook file from [InDoRES](https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&version=1.0#)
 >
 >    Occurrence data file as a zip file where you will find "occurrence.txt"
 >    ```
