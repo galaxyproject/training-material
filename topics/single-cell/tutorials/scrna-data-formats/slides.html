@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Single-cell Formats and Resources</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@f428f08047b0d52cf408c61a1f3f9fa06de498b7",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-formats/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.20cf1f17.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Single-cell Formats and Resources">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-07-26 17:22:16 +0000">
+<meta name="DC.creator" content="Morgan Howells">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Katarzyna Kamieniecka">
+
+        
+        
+        
+        
+        <meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Single-cell Formats and Resources">
+        <meta property="og:description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!
+
+What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).
+ {: .alert.alert-success}
+">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material//assets/images/GTNLogo1000.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Single-cell Formats and Resources",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-07-26 17:22:16 +0000",
+  "datePublished": "2024-07-26 17:22:16 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Single Cell",
+    "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+  },
+  "learningResourceType": "slides",
+  "name": "Single-cell Formats and Resources",
+  "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-data-formats/slides.html",
+  "version": 1,
+  "teaches": "Learn the basic structure of single-cell data\n - Be able to recognise different types of single-cell metadata\n - Learn the common data formats used for storing single-cell data\n - Become familiar with some popular sources for public single-cell data",
+  "keywords": [
+    "Single Cell"
+  ],
+  "description": "The questions this  addresses are:\n - What does single-cell data look like?\n - What are the common single-cell formats?\n - Where can public single-cell data be found?\n\n\nThe objectives are:\n - Learn the basic structure of single-cell data\n - Be able to recognise different types of single-cell metadata\n - Learn the common data formats used for storing single-cell data\n - Become familiar with some popular sources for public single-cell data\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-intro/slides.html",
+      "name": "An introduction to scRNA-seq data analysis",
+      "description": "Slides for 'An introduction to scRNA-seq data analysis' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+      "name": "Morgan Howells",
+      "image": "https://avatars.githubusercontent.com/hexhowells",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0008-9422-6380",
+      "orcid": "https://orcid.org/0009-0008-9422-6380"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Senior Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "name": "Katarzyna Kamieniecka",
+      "image": "https://avatars.githubusercontent.com/kkamieniecka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0004-2454-5950",
+      "orcid": "https://orcid.org/0009-0004-2454-5950"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Single Cell",
+      "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+
+  ],
+  "abstract": "# Breakdown of single-cell data\r"
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/single-cell" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/single-cell/tutorials/scrna-data-formats/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" class="cover-logo"/>
+
+<br/>
+<br/>
+
+# Single-cell Formats and Resources
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		<a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Katarzyna Kamieniecka</a>
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+        
+        
+            
+        
+- [Single Cell](/training-material/topics/single-cell)
+    - An introduction to scRNA-seq data analysis: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/single-cell/tutorials/scrna-intro/slides.html)
+    
+
+
+
+
+---
+
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What does single-cell data look like?
+
+- What are the common single-cell formats?
+
+- Where can public single-cell data be found?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Learn the basic structure of single-cell data
+
+- Be able to recognise different types of single-cell metadata
+
+- Learn the common data formats used for storing single-cell data
+
+- Become familiar with some popular sources for public single-cell data
+
+
+---
+
+
+# Breakdown of single-cell data
+
+.pull-center[
+
+*How is single-cell data structured?*
+
+]
+
+---
+
+### Overview of single-cell data
+
+.pull-left[
+
+- Single-cell data consists of 4 main components:
+  - Gene expression matrix
+  - Cell metadata (barcodes)
+  - Gene metadata (features)
+
+  - Unstructured metadata
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/gene-expression-diagram.png)
+
+]
+
+???
+
+Single-cell data consists of 4 main components:
+- gene expression data 
+- metadata about each cell
+- metadata about each gene
+- unstructured metadata about the data collected
+
+All complex single-cell data formats will contain these 4 main sections, it&apos;s important to understand what these components are, how to identify them, and their importance in single-cell analysis
+
+---
+
+### Gene expression matrix (Matrix)
+
+.pull-left[
+
+- 2D matrix of expression values
+  - Rows represent genes
+  - Columns represent cells
+  - Values represent gene expression per cell
+
+- Can be in a full or sparse matrix form
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data with the matrix section highlighted](../../images/scrna-data-formats/gene-expression-diagram-matrix.png)
+
+]
+
+???
+
+The core component of single-cell data is the gene expression matrix. This is a 2D matrix representing the gene expression values for each gene in the sequenced cells.
+
+Typically each row of the matrix represents the genes and the columns represent the cells. However, it is important to note that this is not always the case and some matrices may need to be transposed before further processing.
+
+The matrix can come in two different forms: full or sparse. 
+
+Full matrices act as one large table where every entry contains a value, including genes that were not sequenced (in which case their value will be 0). This is the simplest format but can be inefficient to store as many of the values in the matrix are redundant. 
+
+A more compact method to store these values is with a sparse matrix. This is a compressed representation of the matrix that removes all values that contain no useful information whilst keeping track of the overall structure of the matrix.
+
+---
+
+### Cell metadata (Barcodes)
+
+
+.pull-left[
+
+- Cell identifiers/barcodes
+
+- Patient/sample metadata
+
+- Quality control metrics
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **Example barcodes:**
+  - AAACCTGAGTCT
+  - TGCATTAGGGA
+  - CCGTTGACCTAC-0
+  - GATCGATCGTCA-0
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data with the cells section highlighted](../../images/scrna-data-formats/gene-expression-diagram-cells.png)
+
+]
+
+???
+
+The first section of metadata that will be explored is the cell metadata, commonly referred to as barcodes when stored in a file. This contains metadata on each cell. This metadata includes the cell identifiers/barcodes, data on the origin of each cell, and quality control metrics generated with further analysis tools.
+
+Cell barcodes consist of the 4 nucleotide letters and occasionally suffixed with a dash and a number (which has various meanings). If a file contains a column containing data in this format, then you are likely looking at cell metadata!
+
+---
+
+### Gene metadata (Features)
+
+.pull-left[
+
+- Gene identifiers/Ensembl IDs
+
+- Expression metrics
+
+- Quality control metrics
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **Example gene identifiers:**
+
+Gene Symbol | Ensembl ID
+---		      | ---
+AIF1        | ENSG00000204472
+ACOXL-AS1	  | ENSG00000204581
+RPS27P25	  | ENSG00000233247
+AGR2	      | ENSG00000106541
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data with the genes section highlighted](../../images/scrna-data-formats/gene-expression-diagram-genes.png)
+
+]
+
+???
+
+The next section of metadata to explore is the gene metadata. Commonly referred to as features when stored in a file. This contains metadata about each gene that was sequenced. This metadata includes gene identifiers/ensembl IDs, expression metrics and quality control metrics, both generated with additional analysis tools. 
+
+Gene identifiers typically consist of a sequence of letters and numbers. If a column in your file contains these types of values then your likely looking at the gene metadata! (If you&apos;re unsure, performing an internet search on one of the potential gene names will likely reveal whether that string represents a gene)
+
+---
+
+### Unstructured metadata
+
+.pull-left[
+
+- Batch/replicate information
+
+- Sequencing platform
+
+- Data / time
+
+- Tissue source
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **Example sequencing platforms:**
+  - 10X Chromium
+
+  - Smart-Seq
+
+  - inDrop
+
+  - Cell-Seq
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data with the other metadata section highlighted](../../images/scrna-data-formats/gene-expression-diagram-metadata.png)
+
+]
+
+???
+
+The last section of metadata to explore is the unstructured metadata. This is data that is not associated with an individual cell or gene but instead the data as a whole. Because of this, the metadata contained here can vary, but may include information such as when the cells were sequenced, what sequencing platform was used, the source of the cell samples, etc.
+
+---
+
+# Common single-cell data formats
+
+.pull-center[
+
+*What are the different formats for storing single-cell data?*
+
+]
+
+---
+
+### Overview of the most common single-cell data formats
+
+- Tabular
+
+- Matrix Market (MTX)
+
+- AnnData
+
+- Loom
+
+- Seurat
+
+- Single Cell Experiment (SCE)
+
+- CellDataSet (CDS)
+
+---
+
+## Basic single-cell formats
+
+???
+
+The following formats are fairly basic and only store sections of single-cell data (expression matrix, metadata, etc.)
+
+---
+
+### Tabular
+
+.pull-left[
+
+- Most basic format
+
+- Stores all data in a single file
+
+- Contains:
+  - Gene identifiers
+  - Cell identifiers
+  - Expression values
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .csv
+  - .tsv
+  - .txt
+
+]
+
+.pull-right[
+
+![Example of some single-cell data in tabular format](../../images/scrna-data-formats/tabular-example.png)
+
+]
+
+???
+
+Tabular files are the most basic format for storing single-cell data. This format stores: expression matrix, cell identifiers, and gene identifiers in a single file. The data is separated with either commas (for .csv) or tabs (for .tsv/Tabular).
+
+Whilst being simplistic and easy to read, the tabular format does have limitations, mainly its inability to store any additional metadata outside of the gene or cell identifiers.
+
+---
+
+### Matrix Market (MTX)
+
+.pull-left[
+
+- Sparse matrix format
+
+- More compact way to store larger matrices with many 0 values
+
+- Doesn&apos;t include any metadata
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .mtx
+  - .mm
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data with the matrix section highlighted](../../images/scrna-data-formats/gene-expression-diagram-matrix.png)
+
+]
+
+???
+
+The Matrix Market format (MTX) is common for storing the gene expression matrix. This stores the expression data in the more compressed sparse matrix form. This type of file will likely be found alongside two additional files for the cell metadata (barcodes) and the gene metadata (features).
+
+---
+
+## Complex single-cell formats
+
+???
+
+The following formats/objects are more complex and can all support storing all 4 core sections of single-cell data:
+- Gene expression matrix
+- Cell metadata
+- Gene metadata
+- Unstructured metadata
+
+---
+
+### AnnData
+
+
+.pull-left[
+
+- Python-based single-cell format
+
+- Cell metadata (obs)
+
+- Gene metadata (var)
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .h5ad
+
+]
+
+.pull-right[
+
+![Diagram showing an overview of the AnnData format](../../images/scrna-data-formats/anndata-object.png)
+
+]
+
+???
+
+The AnnData format is a Python-based single-cell object built upon the HDF5 format. The primary library for performing single-cell analysis with AnnData objects is Scanpy.
+
+It&apos;s important to note that AnnData does not support sparse matrices, therefore large single-cell files with many expression values of zero will not be very efficient to store in memory.
+
+**Supported languages:** Python
+
+**Supported packages:** anndata
+
+---
+
+### Loom
+
+.pull-left[
+
+- Based on HDF5 standard
+
+
+- Efficient for large datasets
+
+- Supports sparse matrices and hierarchical data
+
+- Graph objects for graphs and clusters
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .loom
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/gene-expression-diagram.png)
+
+]
+
+???
+
+Loom is another format based on HDF5. Loom objects are supported in various different programming languages and supports sparse matrices making it efficient for large data files.
+
+**Supported languages:** 
+- Python
+- R
+- MATLAB
+- Mathematica
+- C
+- C++
+- Java
+- Ruby
+
+**Supported packages:**
+- LoomPy (Python)
+- LoomR (R)
+
+---
+
+### Seurat
+
+.pull-left[
+
+- R-based format used by the Seurat package
+
+- Allows for easy integration with the suite of Seurat tools
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .rds
+  - .rda
+  - .rdata
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/gene-expression-diagram.png)
+
+]
+
+???
+
+Seurat is an R-based format that is commonly used with the Seurat package (the naming convention is a bit confusing!). This is a software package that contains various processing and analysis tools for single-cell data.
+
+**Supported languages:** R
+
+**Supported packages:** seurat
+
+---
+
+### Single Cell Experiment (SCE)
+
+.pull-left[
+
+- R-based format provided by the Bioconductor package SingleCellExperiment
+
+- Integrates well with the Bioconductor ecosystem
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .rds
+  - .rda
+  - .rdata
+
+]
+
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/gene-expression-diagram.png)
+
+]
+
+???
+
+Single Cell Experiment (SCE) is another R-based format that is widely used within the Bioconductor ecosystem of tools for both processing and analysis of single-cell data.
+
+**Supported languages:** R
+
+**Supported packages:** SingleCellExperiment
+
+---
+
+### CellDataSet (CDS)
+
+.pull-left[
+
+- R-based format used by the Monocle package
+
+- Integrates well with the Monocle package for various types of analysis
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .rds
+  - .rda
+  - .rdata
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/gene-expression-diagram.png)
+
+]
+
+???
+
+CellDataSet (CDS) is the last of the R-based formats that is commonly used within the Monocle package which contains tools for performing various types of analysis.
+
+**Supported languages:** R
+
+**Supported packages:** monocle
+
+---
+
+# Sources of single-cell data
+
+.pull-center[
+
+*Where are some sources to acquire public single-cell data?*
+
+]
+
+---
+
+### Data sources
+
+Repository | Link to resource
+--- | ---
+NCBI | https://www.ncbi.nlm.nih.gov/
+Human Cell Atlas: Data Explorer | https://explore.data.humancellatlas.org/projects
+CellXGene Collection | https://cellxgene.cziscience.com/datasets 
+Single Cell Portal | https://singlecell.broadinstitute.org/single_cell
+EBI Single Cell Expression Atlas | https://www.ebi.ac.uk/gxa/sc/home
+
+???
+
+There are many publicly available sources for reusable single-cell data. The table shows some common sources for acquiring this data.
+
+This table is not extensive and there are many other resources available!
+
+---
+
+### Compressed Files
+
+.pull-left[
+
+- Some files may be compressed/archived
+
+- Requires decompression/extraction to process the data
+
+- May receive errors if left compressed
+
+&lt;br/&gt;&lt;br/&gt;
+
+- **File extensions:**
+  - .zip
+  - .gz
+  - .tar
+  - .tar.gz
+
+]
+
+.pull-right[
+
+![Basic structure of single-cell data](../../images/scrna-data-formats/unzip-tool.png)
+
+]
+
+???
+
+It is common for single-cell data to be stored in a compressed format in order to reduce filesizes and make transferring the data simpler. It is important to recognise when a file is compressed as using compressed data in downstream tools may cause errors to occur.
+
+There are two forms of compression that are common:
+
+- Individual file compression
+- Archive of multiple files
+
+Individual files are typically compressed with zip (.zip) or gzip (.gz) and should be unzipped prior to processing.
+
+When data is stored in multiple files/folders they may be archived into a single file (commonly called a tarball), this is done with the TAR tool (.tar). Like individual file compression, you will need to untar/extract the .tar file before further processing.
+
+Finally, it is also common for multiple files/folders to both be compressed and archived into a single file, this is indicated with the extension .tar.gz. In this case the data will need to be **both** unzipped and then extracted before the data is available in it&apos;s original form.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Single-cell data consists of four main sections
+
+- Single-cell data can come in a variety of formats
+
+- Different data formats are required for different languages and packages
+
+- There are various public single-cell atlases that consist of useful data
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Katarzyna Kamieniecka</a>
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.20cf1f17.js'></script>
+        
+    </body>
+</html>
