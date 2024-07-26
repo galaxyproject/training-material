@@ -85,10 +85,10 @@ import pandas as pd
 
 # Load Data
 
-You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #4 in your history, then you import it with the following:
+You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #1 in your history, then you import it with the following:
 
 ```python
-mito_counted_anndata = get(4)
+mito_counted_anndata = get(1)
 ```
 
 You now need to read it in as a h5ad object.
@@ -865,15 +865,21 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 It’s now time to export your data! First, we need to get Jupyter to see it as a file.
 
-```adata.write('markers_cluster_copy')```
+```python
+adata.write('MarkersCluster.h5ad')
+```
 
 Now you can export it.
 
-```put("MarkersCluster.h5ad")```
+```python
+put("MarkersCluster.h5ad")
+```
 
 To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
 
-```put("yourtitlehere.ipynb")```    
+```python
+put("name_of_jupyter_notebook.ipynb")
+```
 
 Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
 
