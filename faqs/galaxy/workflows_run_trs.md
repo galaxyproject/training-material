@@ -16,7 +16,9 @@ examples:
 {% if include.path %}
 
 <div class="show-when-galaxy-proxy-active">
-<span class="workflow" data-workflow="{{ site.url }}{{ site.baseurl }}{{ include.path | convert_workflow_path_to_trs }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
+<span class="workflow" data-workflow="{{ site.url }}{{ site.baseurl }}{{ include.path | convert_workflow_path_to_trs }}">
+  Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+</span>
 (<a href="https://github.com/galaxyproject/training-material/blob/main/{{ include.path }}">View on GitHub</a>, <a href="https://training.galaxyproject.org/training-material/{{ include.path }}">Download workflow</a>)
 workflow.
 </div>

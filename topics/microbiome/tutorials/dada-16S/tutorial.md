@@ -229,7 +229,7 @@ Once demultiplexed FASTQ files without non-biological nucleotides are in hand, t
 
 <div class="Workflow" markdown="1">
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="dada2/main" wfhub_id="790" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="dada2/main" wfhub_id="790" version="2"%}
 
 > <hands-on-title>Define DADA2 workflow parameters</hands-on-title>
 >
