@@ -350,7 +350,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >            - *"Replacement"*: `\1_`
 > 2. Check your output. All genus must have "_" at the end. See example below. 
 >
-> ![Output of Regex Find And Replace example](./Images/_example.png "Output of Regex Find And Replace example")
+> ![Output of Regex Find And Replace example](./Images/2_example.png "Output of Regex Find And Replace example")
 >
 {: .hands_on}
 
