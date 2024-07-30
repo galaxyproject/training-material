@@ -30,7 +30,7 @@ contributors:
 
 tags:
   - plants
-  - microbial
+  - prokaryote
 
 ---
 
