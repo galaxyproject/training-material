@@ -143,7 +143,7 @@ We will now run a comparison between *Mycoplasma hyopneumoniae 232* and *Mycopla
 We will now use additional tools to post-process our alignments. Consider the case where you are interested in a set of DNA repeats located at a given position in the sequences.
 
 > <comment-title>Note about interactive exploration of alignments</comment-title>
-> In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use `GECKO-MGV` to ease the process. `GECKO-MGV`generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the `GECKO-MGV` article ({% cite diaz2019combining %}) or run it with a dockerized container from [here](https://github.com/estebanpw/docker-geckomgv).
+> In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use `GECKO-MGV` to ease the process. `GECKO-MGV`generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the `GECKO-MGV` article ({% cite diaz2019combining %}) or run it with a dockerized container, as described in the [GitHub repository](https://github.com/estebanpw/docker-geckomgv).
 {: .comment}
 
 
