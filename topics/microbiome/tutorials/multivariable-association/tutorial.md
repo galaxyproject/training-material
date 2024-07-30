@@ -15,7 +15,7 @@ questions:
 objectives:
 - Identify statistically significant associations between microbial features and metadata variables (such as clinical conditions, environmental factors, or demographic information) in microbiome data.
 - Uncover potential biomarkers associated with specific disease states.
-time_estimation: 15 minutes
+time_estimation: 15M
 contributors:
 - renu-pal
 - paulzierep
