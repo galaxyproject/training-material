@@ -21,7 +21,7 @@ contributions:
     - deeptivarshney
   funding:
     - madland
-    - dataplant
+    - nfdi4plants
 
 tags:
   - plants
