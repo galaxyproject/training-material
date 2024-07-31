@@ -62,11 +62,11 @@ MongoDB databases are created with different security levels. This controls acce
 | Registered     | Only known users can access the data                |
 | Controlled     | Only specifically granted users can access the data |
 
-The Beacon data is divided into two parts. The Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
+The Beacon data is divided into two parts: the Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
 So, before creating a Beacon database for them, the Beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the Beacon schemas. 
-The Beacon providers can use already developed tools such as in the [B2RI tools](https://github.com/EGA-archive/Beacon2-ri-tools) or develop their own tools. 
+The Beacon providers can use already developed tools such as the [B2RI tools](https://github.com/EGA-archive/Beacon2-ri-tools) or develop their own tools. 
 
-For this tutorial we will show the steps to create a Beacon and query it for the [HG00096](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/HG00096/&showversions=false) 
+For this tutorial, we will show the steps to create a Beacon and query it for the [HG00096](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/HG00096/&showversions=false) 
 biosample structural variants VCF file obtained from the [1000 Genome project](https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&tab=objects) using scripts created by The University of 
 Bradford Computational and Data-Driven Science research team.
 
@@ -238,7 +238,7 @@ Upload the data into Galaxy and prepare it to be imported into the Beacon databa
 >    https://zenodo.org/records/10658688/files/HG00096.cnv.vcf
 >    https://zenodo.org/records/10658688/files/igsr-1000-genomes-30x-on-grch38.tsv
 >    ```
->   This will download the strucral varient and the metadata file.
+>   This will download the structural variant and the metadata file.
 > 
 >    In some cases, the same datasets are available in the Galaxy shared data library. Please consult the instructor for further details.
 >
@@ -248,7 +248,7 @@ Upload the data into Galaxy and prepare it to be imported into the Beacon databa
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 4. Give the data meaningful names (HG00096 for VCF file and Metadata to igsr-1000-genomes-30x-on-grch38.tsv) and tags to facilitate analysis.
+> 4. Provide meaningful names for the data (HG00096 for VCF file and Metadata to igsr-1000-genomes-30x-on-grch38.tsv) and tags to facilitate analysis.
 >     
 >
 >    When uploading data from a link, Galaxy names the files after the link address.
@@ -260,7 +260,7 @@ Upload the data into Galaxy and prepare it to be imported into the Beacon databa
 > 5. To track the data in the history, it is recommended to tag the datasets by attaching a meaningful tag '#'
 >    to them. The tagging will automatically be attached to any file generated
 >    from the original tagged dataset.
->   *e.g.*, `#genomicVariations` for structural varients VCF file and
+>   *e.g.*, `#genomicVariations` for structural variants VCF file and
 >   *e.g.*, `#individuals` metadata tsv file.
 >
 >
@@ -283,7 +283,7 @@ This step is to preprocess the genomic variant data and convert it from VCF to J
 >
 >    > <question-title></question-title>
 >    >
->    > In the inpected JSON file, what are the key variables and why are they important for genomic analysis?
+>    > In the inspected JSON file, what are the key variables and why are they important for genomic analysis?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
@@ -324,9 +324,6 @@ This step is to preprocess the genomic variant data and convert it from VCF to J
 {: .hands_on}
 
 
-
-
-
 ## Phenopacket Schema
 
 The Phenopacket Schema is an open standard for exchanging disease and phenotypic data. It helps us understand, diagnose, and treat both common and unusual diseases. By using Phenopackets, physicians, 
@@ -339,7 +336,7 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 ![v2.0 phenopacket schema](../../images/phenopacket-schema-v2-overview.png "Overview of v2.0 of the schema optained from Phenopacket Schema Documentation")
 
 
-> <hands-on-title>Create Phenopacket Schema json file from Metadata</hands-on-title>
+> <hands-on-title>Create Phenopacket Schema JSON file from Metadata</hands-on-title>
 > 1. Run {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %} on the structural variants VCF file
 >       - {% icon param-files %} *"Metadata file"*: `Metadata` file
 >
@@ -349,12 +346,12 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 >
 >    > <question-title></question-title>
 >    >
->    > In the inpected JSON file, what are the key variables and why are they important for genomic analysis?
+>    > In the inspected JSON file, what are the key variables and why are they important for genomic analysis?
 >    >
 >    > > <solution-title></solution-title>
 >    > >
 >    > > 1. **id**: The id field serves as a unique identifier for the individual described in the Phenopacket. This 
->    > >    identifier allows researchers to track and reference specific individuals across different datasets 
+>    > >    Identifier allows researchers to track and reference specific individuals across different datasets 
 >    > >    and analyses.
 >    > >
 >    > > 2. **individualId**: This variable represents the individual's unique identifier within the dataset or 
@@ -397,7 +394,6 @@ few examples. The same Biosample may be referred to by many instances (e.g., tec
 {: .hands_on}
 
 
-
 # Import data into Beacon MongoDB
 
 Now that the data are in the Beacon proper format and with creating the Beacon MongoDB server, we are ready to import the data we have into Beacon.
@@ -408,7 +404,7 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 > 1. Make sure you are logged in to Galaxy.
 > 2. Go to **User > Preferences** in the top menu bar.
 > 3. To add beacon database credentials, click on **Manage Information** and fill in the Beacon2 Account empty fields `db_auth_source`, `db_user` and `db_password`.
-> 4. Make the changes and click on the **Save** button at the bottom.
+> 4. Make the changes and click the **Save** button at the bottom.
 {: .comment}
 
 > <hands-on-title>Import data into Beacon MongoDB</hands-on-title>
@@ -433,8 +429,6 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 >   - *"COLLECTION"*: `individuals`
 >
 {: .hands_on}
-
-
 
 
 # Search Beacon MongoDB for CNVs
@@ -488,15 +482,13 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 >    {: .question}
 {: .hands_on}
 
-
-
 # Conclusion
 
 Now, you have a general knowledge of Beacon and MongoDB and how to create your own Beacon and upload your data. 
 
 You can apply what you learned in this tutorial to create a Beacon query for your institution's genomic variant data.
 
-For more information about how to query Beacon databases, please look into [pymongo documantation](https://pymongo.readthedocs.io/en/stable/tutorial.html).
+For more information about how to query Beacon databases, please look into [pymongo documentation](https://pymongo.readthedocs.io/en/stable/tutorial.html).
 
 
 We hope you find this tutorial helpful!
