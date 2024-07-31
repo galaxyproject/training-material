@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@81d1a6c4b222cfc2b79a6f5504ca4c1e592dd9ed",
+		release: "galaxy-training-network@cf973af85ee0d9f7cdf7e7f80e67cd908355b467",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Large genome assembly and polishing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-07-31 11:26:06 +0000">
 <meta name="DC.creator" content="Anna Syme"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Assembly / Large genome assembly and polishing / Hands-on: Large genome assembly and polishing">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-07-31 11:26:06 +0000",
   "datePublished": "2023-03-06 16:02:30 +0000",
   "identifier": "https://gxy.io/GTN:T00331",
   "accessMode": [
@@ -236,14 +236,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Large genome assembly and polishing",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT2H",
   "teaches": "Assemble a large genome from long reads\n - Polish the assembly\n - Assess the quality of the assembly",
   "keywords": [
     "Assembly",
     "assembly",
     "polishing",
-    "nanopore"
+    "nanopore",
+    "plants"
   ],
   "description": "The questions this  addresses are:\n - How can we assemble a large plant or animal genome?\n\n\nThe objectives are:\n - Assemble a large genome from long reads\n - Polish the assembly\n - Assess the quality of the assembly\n\n",
   "inLanguage": {
@@ -429,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "Associated Training Datasets"
     }
   ],
-  "abstract": "*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.* "
+  "abstract": "*Note: We recommend running this tutorial on either the Galaxy Europe or Galaxy Australia servers. Other servers (such as Galaxy main) have not yet been configured fully for all the tools in this analysis.*"
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -856,7 +857,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 6, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -876,7 +877,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (2 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -1560,7 +1561,7 @@ These coverages are very high but are ok to use with tutorial data. With a typic
 
 <h2 id="assembly-results">Assembly results</h2>
 
-<p>The assembled contigs are in the “Flye assembly on data X (consensus)” (X is a number that will vary depending on where it sits in your history).<br />
+<p>The assembled contigs are in the “Flye assembly on data X (consensus)” (X is a number that will vary depending on where it sits in your history).
 Open the Quast tabular report to see the assembly statistics:</p>
 
 <p><a href="images/quast.png" rel="noopener noreferrer"><img src="images/quast.png" alt="&quot;Image of the Quast tabular report, showing various assembly statistics.&quot;. " width="753" height="597" loading="lazy" /></a></p>
@@ -2265,7 +2266,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81d1a6c4b222cfc2b79a6f5504ca4c1e592dd9ed">81d1a6c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf973af85ee0d9f7cdf7e7f80e67cd908355b467">cf973af</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

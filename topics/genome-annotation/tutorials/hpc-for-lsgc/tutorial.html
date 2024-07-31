@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@81d1a6c4b222cfc2b79a6f5504ca4c1e592dd9ed",
+		release: "galaxy-training-network@cf973af85ee0d9f7cdf7e7f80e67cd908355b467",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="From small to large-scale genome comparison">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2024-07-31 11:26:06 +0000">
 <meta name="DC.creator" content="Esteban Perez-Wohlfeil"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Genome Annotation / From small to large-scale genome comparison / Hands-on: From small to large-scale genome comparison">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "dateModified": "2024-07-31 11:26:06 +0000",
   "datePublished": "2021-02-08 01:33:47 +0000",
   "identifier": "https://gxy.io/GTN:T00176",
   "accessMode": [
@@ -238,11 +238,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "From small to large-scale genome comparison",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT2H",
   "teaches": "Learn the basics of pairwise sequence comparison\n - Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels\n - Learn how to post-process your sequence comparisons",
   "keywords": [
-    "Genome Annotation"
+    "Genome Annotation",
+    "plants",
+    "prokaryote"
   ],
   "description": "The questions this  addresses are:\n - How can we run pairwise genome comparisons using Galaxy?\n - How can we run massive chromosome comparisons in Galaxy?\n - How can we quickly visualize genome comparisons in Galaxy?\n\n\nThe objectives are:\n - Learn the basics of pairwise sequence comparison\n - Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels\n - Learn how to post-process your sequence comparisons\n\n",
   "inLanguage": {
@@ -773,6 +775,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
+		</a>
+	</li>
+    
     
     
 	<li class="dropdown-header">
@@ -811,7 +819,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 8, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 31, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -831,7 +839,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1009,7 +1017,7 @@ https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note-about-interactive-exploration-of-alignments"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note about interactive exploration of alignments</div>
-  <p>In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> to ease the process. <code class="language-plaintext highlighter-rouge">GECKO-MGV</code>generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> article (<span class="citation"><a href="#diaz2019combining">Diaz-del-Pino <i>et al.</i> 2019</a></span>) or run it with a dockerized container from <a href="https://github.com/estebanpw/docker-geckomgv">here</a>.</p>
+  <p>In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> to ease the process. <code class="language-plaintext highlighter-rouge">GECKO-MGV</code>generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> article (<span class="citation"><a href="#diaz2019combining">Diaz-del-Pino <i>et al.</i> 2019</a></span>) or run it with a dockerized container, as described in the <a href="https://github.com/estebanpw/docker-geckomgv">GitHub repository</a>.</p>
 </blockquote>
 
 <p>For our current experiment, we will be looking for the following set of repeats:</p>
@@ -1092,7 +1100,7 @@ sequence@_19610_25551_      TTTCTCGCCACCCGATAAATCTTTGACTTGTTGATTTAGTTTTTCATTTT
 sequence@_19610_31252_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
 sequence@_19610_28814_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
 sequence@_19610_25551_      CAATATTAAGAAAATTTGCTCTTTTTTCAAGCAAATTTTGATCAAATTCT
-                            * ***** ** ******** *********** **   *** ******** 
+                            * ***** ** ******** *********** **   *** ********
 
 sequence@_19610_31252_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
 sequence@_19610_28814_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
@@ -1107,7 +1115,7 @@ sequence@_19610_25551_      TTCAATTAGGTTAAAATCCTGAAAAACTACATCAATTAAAGGATTTTTTT
 sequence@_19610_31252_      CTTCTTTACCTT
 sequence@_19610_28814_      CTTCTTTACCTT
 sequence@_19610_25551_      CTTCTTT-----
-                            *******     
+                            *******
 
 </code></pre></div></div>
 <p>We can see that there are several locus along the duplicated repeats where single point mutations have taken place, and that the ending of the last repeat is missing.</p>
@@ -1605,7 +1613,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81d1a6c4b222cfc2b79a6f5504ca4c1e592dd9ed">81d1a6c</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf973af85ee0d9f7cdf7e7f80e67cd908355b467">cf973af</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
