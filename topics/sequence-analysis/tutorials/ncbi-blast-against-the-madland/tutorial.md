@@ -15,8 +15,13 @@ key_points:
 
   - Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a "database diamond".
   - MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.
-contributors:
-  - deeptivarshney
+
+contributions:
+  authorship:
+    - deeptivarshney
+  funding:
+    - madland
+    - dataplant
 
 tags:
   - plants
