@@ -33,7 +33,7 @@ In various fields, diversity indexes are employed to understand and compare the 
 
 To study microbiome data, indirect methods like **metagenomics** can be used. Metagenomic samples contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
 
-Once we know which taxons are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data]({% link topics/metagenomics/tutorials/taxonomic-profiling/tutorial.md %}])), we can do diversity analyses.
+Once we know which taxons are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data]({% link topics/microbiome/tutorials/taxonomic-profiling/tutorial.md %})), we can do diversity analyses.
 
 Related to ecology, the term **diversity** describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:
 
@@ -58,9 +58,9 @@ Here we will use 2 datasets:
 - `JP4D`: a microbiome sample collected from the Lagunita Fertilized Pond
 - `JC1A`: a **control** samples from a control mesocosm.
 
-The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.md %}).
+The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/microbiome/tutorials/taxonomic-profiling/tutorial.md %}).
 
-In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1). For this tutorial, we will use the output file of Bracken.
+In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](https://ccb.jhu.edu/software/kraken2/) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](https://ccb.jhu.edu/software/bracken/). For this tutorial, we will use the output file of Bracken.
 
 To get an overview, you can find a Krona chart visualizing the different species present in the two samples.
 
