@@ -95,7 +95,7 @@ We will perform a simple query to identify reads that match the *"VARIANT STATE"
 
 
 
-# Querying the Entire Database Collection for CNVs in Specifying Genomic Location
+# Querying the Entire Database Collection for CNVs at a Specific Genomic Location
 
 We will perform a targeted query to identify reads that match the *"VARIANT STATE"*: `copy number gain` on **Chromosome** `20`starting at position `29313239` and ending at `29340136`
 
