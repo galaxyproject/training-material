@@ -131,26 +131,6 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 We need now to import the data
 
-<!-- > <hands-on-title>Import datasets</hands-on-title>
->
-> 1. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
->
->    ```text
->    {{ page.zenodo_link }}/files/xxx
->    {{ page.zenodo_link }}/files/xxx
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 2. Create a paired collection.
->
->    {% snippet faqs/galaxy/collections_build_list_paired.md %}
->
-{: .hands_on} -->
-
-
 # Calculating α diversity
 
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
