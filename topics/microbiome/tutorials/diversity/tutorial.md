@@ -169,10 +169,12 @@ Metrics of alpha diversity can be grouped into different classes:
    - $$n$$ the total number of individuals in the sample                                                                                                                                                          
 - **Chao1**, which estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness ({% cite Chao.1992 %}).
   
-   $$ S_{chao1} = S_{obs} + \frac{n_{1}(n_{1} - 1)}{2(n_2 + 1)} $$
+   $$ 
+   S_{chao1} = S_{obs} + \frac{n_{1}(n_{1} - 1)}{2(n_2 + 1)} 
+   $$
   
    With:
-   - $$S_{obs}$$ the observed species richness, 
+   - \\(S_{obs}\\) the observed species richness, 
    - $$n_{1}$$ the number of species represented by a single individual (singletons), 
    - $$n_2$$ the number of species represented by two individuals (doubletons).
   
