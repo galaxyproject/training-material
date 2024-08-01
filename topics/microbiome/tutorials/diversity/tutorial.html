@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@78088f92a4b0e7605ce6a884a7b17715b798ff50",
+		release: "galaxy-training-network@1d5f31cf6fe7ad01072cb26c9a0318acd5376586",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Calculating α and β diversity from microbiome taxonomic data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-01 10:44:27 +0000">
+<meta name="DC.date" content="2024-08-01 12:21:20 +0000">
 <meta name="DC.creator" content="Sophia Hampe">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -209,8 +209,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "workTranslation": [
 
   ],
-  "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-01 10:44:27 +0000",
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2024-08-01 12:21:20 +0000",
   "datePublished": "2024-08-01 10:44:27 +0000",
   "identifier": "https://gxy.io/GTN:",
   "accessMode": [
@@ -239,13 +239,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Calculating α and β diversity from microbiome taxonomic data",
   "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html",
-  "version": 1,
+  "version": 2,
   "timeRequired": "PT20M",
   "teaches": "Explain what taxonomic diversity is\n - Explain different metrics to calculate α and β diversity\n - Apply Krakentools to calculate α and β diversity and understand the output",
   "keywords": [
     "Microbiome",
     "metagenomics",
-    "diversity"
+    "diversity",
+    "work-in-progress"
   ],
   "description": "The questions this  addresses are:\n - How many different taxons are present in my sample? How do I additionally take their relative abundance into account?\n - How similar or how dissimilar are my samples in term of taxonomic diversity?\n - What are the different metrics used to calculate the taxonomic diversity of my samples?\n\n\nThe objectives are:\n - Explain what taxonomic diversity is\n - Explain different metrics to calculate α and β diversity\n - Apply Krakentools to calculate α and β diversity and understand the output\n\n",
   "inLanguage": {
@@ -437,11 +438,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "educationalLevel": "Beginner",
   "mentions": [
-    {
-      "@type": "Thing",
-      "url": "xxx",
-      "name": "Associated Training Datasets"
-    }
+
   ],
   "abstract": "# Introduction"
 }</script></head>
@@ -610,6 +607,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <article class="tutorial topic-microbiome">
     <h1 data-toc-skip>Calculating α and β diversity from microbiome taxonomic data</h1>
     
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
     <div markdown="0">
@@ -731,15 +734,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
 
             
-                <li class="btn btn-default supporting_material">
-
-
-<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="xxx">
-    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
-</a>
-
-</li>
-            
 
             
 
@@ -819,7 +813,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
 
     </blockquote>
     </section>
@@ -842,7 +836,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>To study microbiome data, indirect methods like <strong>metagenomics</strong> can be used. Metagenomic samples contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.</p>
 
-<p>Once we know which taxons are present in a metagenomic sample (<a href="/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html]">Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data</a>), we can do diversity analyses.</p>
+<p>Once we know which taxons are present in a metagenomic sample (<a href="/training-material/topics/microbiome/tutorials/taxonomic-profiling/tutorial.html">Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data</a>), we can do diversity analyses.</p>
 
 <p>Related to ecology, the term <strong>diversity</strong> describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:</p>
 
@@ -853,11 +847,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p>It considers the number of different species in an environment (also referred to as species <strong>richness</strong>). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species <strong>evenness</strong>).</p>
   </li>
   <li>
-    <ul>
-      <li><strong>β diversity</strong> compare the diversity between different communities by measuring their distance</li>
-    </ul>
+    <p><strong>β diversity</strong> compare the diversity between different communities by measuring their distance</p>
   </li>
-  <li><strong>γ diversity</strong> is a measure of the overall diversity for the different ecosystems within a region.</li>
+  <li>
+    <p><strong>γ diversity</strong> is a measure of the overall diversity for the different ecosystems within a region.</p>
+  </li>
 </ul>
 
 <p><a href="./images/diversity_differences.png" rel="noopener noreferrer"><img src="./images/diversity_differences.png" alt="α, β and γ diversity. " width="1232" height="585" loading="lazy" /></a></p>
@@ -874,9 +868,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><code class="language-plaintext highlighter-rouge">JC1A</code>: a <strong>control</strong> samples from a control mesocosm.</li>
 </ul>
 
-<p>The datasets differ in size, but according to the authors this doesn’t matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the <a href="/training-material/topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.html">Taxonomic profiling tutorial</a>.</p>
+<p>The datasets differ in size, but according to the authors this doesn’t matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the <a href="/training-material/topics/microbiome/tutorials/taxonomic-profiling/tutorial.html">Taxonomic profiling tutorial</a>.</p>
 
-<p>In a nutshell, taxonomic labels have been assigned to the metagenomics data using <a href="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1">Kraken2</a> to find out which species are present in the samples. Finally, species abundance was estimated using <a href="toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1">Bracken</a>. For this tutorial, we will use the output file of Bracken.</p>
+<p>In a nutshell, taxonomic labels have been assigned to the metagenomics data using <a href="https://ccb.jhu.edu/software/kraken2/">Kraken2</a> to find out which species are present in the samples. Finally, species abundance was estimated using <a href="https://ccb.jhu.edu/software/bracken/">Bracken</a>. For this tutorial, we will use the output file of Bracken.</p>
 
 <p>To get an overview, you can find a Krona chart visualizing the different species present in the two samples.</p>
 
@@ -884,14 +878,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.</p>
 
-<p><code class="language-plaintext highlighter-rouge">name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
 Paracoccus sp. MC1862	2760307	S	98	4	102	0.00169
 Paracoccus sp. AK26	2589076	S	85	8	93	0.00154
 Paracoccus sp. Arc7-R13	2500532	S	67	13	80	0.00133
 Paracoccus sp. BM15	1529068	S	27	1	28	0.00046
 Paracoccus sanguinis	1545044	S	142	37	179	0.00297
 Paracoccus contaminans	1945662	S	87	18	105	0.00174
-Paracoccus aminovorans	34004	S	86	26	112	0.00186</code></p>
+Paracoccus aminovorans	34004	S	86	26	112	0.00186
+</code></pre></div></div>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
@@ -918,9 +913,6 @@ Paracoccus aminovorans	34004	S	86	26	112	0.00186</code></p>
   <div class="box-title details-title" id="details-more-details-on-using-input-other-than-bracken"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-using-input-other-than-bracken" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on using input other than Bracken</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank “species”. This step is not necessary when using Bracken output as already only the species level is listed.</p>
-
-  <p>xxx hands on: filter on specific taxonomic level using filter on column tool in galaxy
-xxx show example of kraken and metaphlan output file</p>
 
 </blockquote>
 
@@ -973,33 +965,6 @@ xxx show example of kraken and metaphlan output file</p>
 </blockquote>
 
 <p>We need now to import the data</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import datasets</div>
-
-  <ol>
-    <li>
-      <p>Import the following samples via link from <a href="xxx">Zenodo</a> or Galaxy shared data libraries:</p>
-
-      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xxx/files/xxx
-xxx/files/xxx
-</code></pre></div>      </div>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-      <p><!--END_SNIPPET-->
-<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-data-from-a-data-library"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:&lt;/p&gt;   &lt;ol&gt;   &lt;li&gt;Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong>&lt;/li&gt;   &lt;li&gt;Navigate to  the correct folder as indicated by your instructor.     &lt;ul&gt;       &lt;li&gt;On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Select the desired files&lt;/li&gt;   &lt;li&gt;Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;In the pop-up window, choose&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;<em>“Select history”</em>: the history you want to import the data to (or create a new one)&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click on <strong>Import</strong>&lt;/li&gt; &lt;/ol&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p>Create a paired collection.</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a paired collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-  </ol>
-
-</blockquote>
 
 <h1 id="calculating-α-diversity">Calculating α diversity</h1>
 
@@ -1662,7 +1627,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/78088f92a4b0e7605ce6a884a7b17715b798ff50">78088f9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1d5f31cf6fe7ad01072cb26c9a0318acd5376586">1d5f31c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
