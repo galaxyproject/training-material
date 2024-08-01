@@ -4,6 +4,7 @@ layout: tutorial_hands_on
 title: "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons"
 zenodo_link: 'https://zenodo.org/records/10658688'
 subtopic: 'data-management'
+priority: 2
 questions:
 - What does the term "Beacon" refer to?
 - How can MongoDB be employed to establish a Beacon tailored for your institution?
@@ -416,7 +417,7 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 >   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'HG00096'` from {% tool [ CNV VCF2JSON](toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.1.o+galaxy0.1) %}
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
->   - *"DATABASE"*: `Beacon`
+>   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `genomicVariations`
 >
 >
@@ -429,7 +430,7 @@ We will use the Beacon2 import tool to import the data into the created Beacon d
 >   - {% icon param-file %} *"INPUT JSON FILE"*: `Output dataset 'Phenopacket'` from {% tool [ CNV Phenopacket](toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0) %}
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
->   - *"DATABASE"*: `Beacon`
+>   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `individuals`
 >
 {: .hands_on}
@@ -449,7 +450,7 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 > 2. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to perform a range query on Beacon **genomicVariations** collection
 >   - *"DATABASE HOST"*: `The Hostname/IP of the Beacon database` for example `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
->   - *"DATABASE"*: `Beacon`
+>   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `genomicVariations`
 >   - *"CHROMOSOME"*: `1`
 >   - *"START"*: `243618689`
