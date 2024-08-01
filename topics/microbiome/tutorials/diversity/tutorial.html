@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Calculating α and β diversity from microbiome taxonomic data / Calculating α and β diversity from microbiome taxonomic data / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@2ba33512fd41fa90567331471056f48032728e82",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.20cf1f17.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Calculating α and β diversity from microbiome taxonomic data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-08-01 10:44:27 +0000">
+<meta name="DC.creator" content="Sophia Hampe">
+<meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Calculating α and β diversity from microbiome taxonomic data / Hands-on: Calculating α and β diversity from microbiome taxonomic data">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Calculating α and β diversity from microbiome taxonomic data",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-08-01 10:44:27 +0000",
+  "datePublished": "2024-08-01 10:44:27 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Microbiome",
+    "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Calculating α and β diversity from microbiome taxonomic data",
+  "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT20M",
+  "teaches": "Explain what taxonomic diversity is\n - Explain different metrics to calculate α and β diversity\n - Apply Krakentools to calculate α and β diversity and understand the output",
+  "keywords": [
+    "Microbiome",
+    "metagenomics",
+    "diversity"
+  ],
+  "description": "The questions this  addresses are:\n - How many different taxons are present in my sample? How do I additionally take their relative abundance into account?\n - How similar or how dissimilar are my samples in term of taxonomic diversity?\n - What are the different metrics used to calculate the taxonomic diversity of my samples?\n\n\nThe objectives are:\n - Explain what taxonomic diversity is\n - Explain different metrics to calculate α and β diversity\n - Apply Krakentools to calculate α and β diversity and understand the output\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sophia120199/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sophia120199/",
+      "name": "Sophia Hampe",
+      "image": "https://avatars.githubusercontent.com/sophia120199",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/",
+      "name": "Bérénice Batut",
+      "image": "https://avatars.githubusercontent.com/bebatut",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/ifb/",
+          "name": "Institut Français de Bioinformatique",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.france-bioinformatique.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9852-1987",
+      "orcid": "https://orcid.org/0000-0001-9852-1987"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Microbiome",
+      "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3697"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "xxx",
+      "name": "Associated Training Datasets"
+    }
+  ],
+  "abstract": "# Introduction"
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/microbiome" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Microbiome
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/diversity/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/diversity/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-microbiome">
+    <h1 data-toc-skip>Calculating α and β diversity from microbiome taxonomic data</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/sophia120199/" class="contributor-badge contributor-sophia120199"><img src="https://avatars.githubusercontent.com/sophia120199?s=36" alt="Sophia Hampe avatar" width="36" class="avatar" />
+    Sophia Hampe</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+    Bérénice Batut</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How many different taxons are present in my sample? How do I additionally take their relative abundance into account?</p>
+</li>
+        
+        <li><p>How similar or how dissimilar are my samples in term of taxonomic diversity?</p>
+</li>
+        
+        <li><p>What are the different metrics used to calculate the taxonomic diversity of my samples?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Explain what taxonomic diversity is</p>
+</li>
+        
+        <li><p>Explain different metrics to calculate α and β diversity</p>
+</li>
+        
+        <li><p>Apply Krakentools to calculate α and β diversity and understand the output</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 20 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="xxx">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/microbiome/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 1, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 1, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>A <strong>diversity index</strong> is a quantitative measure that is used to assess the level of diversity or variety within a particular system, such as a biological community, a population, or a workplace. It provides a way to capture and quantify the distribution of different types or categories within a system.</p>
+
+<p>In various fields, diversity indexes are employed to understand and compare the composition and richness of various elements. Apart from ecology, fields such as social and cultural science are interested in the diversity within a population or workplace. In these cases, the indexes may consider factors like age, gender, ethnicity, or other relevant characteristics to assess the diversity and inclusiveness of a group or organization.</p>
+
+<p>To study microbiome data, indirect methods like <strong>metagenomics</strong> can be used. Metagenomic samples contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.</p>
+
+<p>Once we know which taxons are present in a metagenomic sample (<a href="/training-material/topics/metagenomics/tutorials/taxonomic-profiling/tutorial.html]">Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data</a>), we can do diversity analyses.</p>
+
+<p>Related to ecology, the term <strong>diversity</strong> describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:</p>
+
+<ul>
+  <li>
+    <p><strong>α diversity</strong> describes the diversity within a community</p>
+
+    <p>It considers the number of different species in an environment (also referred to as species <strong>richness</strong>). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species <strong>evenness</strong>).</p>
+  </li>
+  <li>
+    <ul>
+      <li><strong>β diversity</strong> compare the diversity between different communities by measuring their distance</li>
+    </ul>
+  </li>
+  <li><strong>γ diversity</strong> is a measure of the overall diversity for the different ecosystems within a region.</li>
+</ul>
+
+<p><a href="./images/diversity_differences.png" rel="noopener noreferrer"><img src="./images/diversity_differences.png" alt="α, β and γ diversity. " width="1232" height="585" loading="lazy" /></a></p>
+
+<p>In this analysis we will use Galaxy for calculating different alpha diversity indexes and the Bray-Curtis dissimilarity index for β diversity.</p>
+
+<h1 id="background-on-data">Background on data</h1>
+
+<p>The dataset we will use for this tutorial comes from an oasis in the Mexican desert called Cuatro Ciénegas (<span class="citation"><a href="#Okie.2020">Okie <i>et al.</i> 2020</a></span>). The researchers were interested in genomic traits that affect the rates and costs of biochemical information processing within cells. They performed a whole-ecosystem experiment, thus fertilizing the pond to achieve nutrient enriched conditions.</p>
+
+<p>Here we will use 2 datasets:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">JP4D</code>: a microbiome sample collected from the Lagunita Fertilized Pond</li>
+  <li><code class="language-plaintext highlighter-rouge">JC1A</code>: a <strong>control</strong> samples from a control mesocosm.</li>
+</ul>
+
+<p>The datasets differ in size, but according to the authors this doesn’t matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the <a href="/training-material/topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.html">Taxonomic profiling tutorial</a>.</p>
+
+<p>In a nutshell, taxonomic labels have been assigned to the metagenomics data using <a href="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1">Kraken2</a> to find out which species are present in the samples. Finally, species abundance was estimated using <a href="toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1">Bracken</a>. For this tutorial, we will use the output file of Bracken.</p>
+
+<p>To get an overview, you can find a Krona chart visualizing the different species present in the two samples.</p>
+
+<iframe id="krona" src="krona-kraken.html" frameborder="0" width="100%" height="900px"> <a href="./images/krona-kraken.png" rel="noopener noreferrer"><img src="./images/krona-kraken.png" alt="Krona chart with multi-layered pie chart representing the community profile with in the center the higher taxonomy levels (i.e. domain) and on the exterior the more detailed ones (i.e. species). " loading="lazy" /></a> </iframe>
+
+<p>The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.</p>
+
+<p><code class="language-plaintext highlighter-rouge">name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Paracoccus sp. MC1862	2760307	S	98	4	102	0.00169
+Paracoccus sp. AK26	2589076	S	85	8	93	0.00154
+Paracoccus sp. Arc7-R13	2500532	S	67	13	80	0.00133
+Paracoccus sp. BM15	1529068	S	27	1	28	0.00046
+Paracoccus sanguinis	1545044	S	142	37	179	0.00297
+Paracoccus contaminans	1945662	S	87	18	105	0.00174
+Paracoccus aminovorans	34004	S	86	26	112	0.00186</code></p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <p>What information do the different columns contain?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>species name</li>
+      <li>taxonomy ID</li>
+      <li>taxonomic level: K_kingdom, P_phylum, C_class, O_order, F_family, G_genus, and S_species</li>
+      <li>reads assigned by Kraken</li>
+      <li>additional reads added by Bracken: In order to estimate species abundance, Bracken reestimates the reads assigned by Kraken using bayesian reestimation. For details on the procedure, have a look into the <a href="https://peerj.com/articles/cs-104/">Bracken publication</a>.</li>
+      <li>sum of column 4 and column 5</li>
+      <li>fraction of the reads assigned to the particular species and the total reads</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-on-using-input-other-than-bracken"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-using-input-other-than-bracken" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on using input other than Bracken</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank “species”. This step is not necessary when using Bracken output as already only the species level is listed.</p>
+
+  <p>xxx hands on: filter on specific taxonomic level using filter on column tool in galaxy
+xxx show example of kraken and metaphlan output file</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#background-on-data" id="markdown-toc-background-on-data">Background on data</a></li>
+  <li><a href="#prepare-galaxy-and-data" id="markdown-toc-prepare-galaxy-and-data">Prepare Galaxy and data</a></li>
+  <li><a href="#calculating-α-diversity" id="markdown-toc-calculating-α-diversity">Calculating α diversity</a></li>
+  <li><a href="#calculating-β-diversity" id="markdown-toc-calculating-β-diversity">Calculating β diversity</a></li>
+  <li><a href="#evaluation-of-different-diversity-metrics" id="markdown-toc-evaluation-of-different-diversity-metrics">Evaluation of different diversity metrics</a>    <ol>
+      <li><a href="#multidimensional-diversity-metrics-and-parameter-q" id="markdown-toc-multidimensional-diversity-metrics-and-parameter-q">Multidimensional diversity metrics and Parameter q</a></li>
+    </ol>
+  </li>
+  <li><a href="#hill-numbers" id="markdown-toc-hill-numbers">Hill numbers</a></li>
+  <li><a href="#rényi-entropy" id="markdown-toc-rényi-entropy">Rényi entropy</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="prepare-galaxy-and-data">Prepare Galaxy and data</h1>
+
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this analysis</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>We need now to import the data</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-datasets"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import datasets</div>
+
+  <ol>
+    <li>
+      <p>Import the following samples via link from <a href="xxx">Zenodo</a> or Galaxy shared data libraries:</p>
+
+      <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xxx/files/xxx
+xxx/files/xxx
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET-->
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-importing-data-from-a-data-library"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;p&gt;As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:&lt;/p&gt;   &lt;ol&gt;   &lt;li&gt;Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong>&lt;/li&gt;   &lt;li&gt;Navigate to  the correct folder as indicated by your instructor.     &lt;ul&gt;       &lt;li&gt;On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Select the desired files&lt;/li&gt;   &lt;li&gt;Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu&lt;/li&gt;   &lt;li&gt;     &lt;p&gt;In the pop-up window, choose&lt;/p&gt;     &lt;ul&gt;       &lt;li&gt;<em>“Select history”</em>: the history you want to import the data to (or create a new one)&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click on <strong>Import</strong>&lt;/li&gt; &lt;/ol&gt; &lt;/blockquote&gt; <!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Create a paired collection.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a paired collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="calculating-α-diversity">Calculating α diversity</h1>
+
+<p><strong>α diversity</strong> describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity.</p>
+
+<p><a href="./images/alphadiversity_metrics.png" rel="noopener noreferrer"><img src="./images/alphadiversity_metrics.png" alt="α diversity. " width="1400" height="1090" loading="lazy" /></a>(https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36)</p>
+
+<p>Metrics of alpha diversity can be grouped into different classes:
+<strong>richness</strong>: estimate the quantity of distinct species within a sample</p>
+<ul>
+  <li>
+    <p><strong>Margalef’s richness</strong>, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species (<span class="citation"><a href="#Margalef.1969">Margalef 1969</a></span>)</p>
+
+\[D = \frac{(S - 1)}{\Log(n)}\]
+
+    <p>With</p>
+    <ul>
+      <li>\(S\) the total number of species,</li>
+      <li>\(n\) the total number of individuals in the sample</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Chao1</strong>, which estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness (<span class="citation"><a href="#Chao.1992">Chao and Lee 1992</a></span>).</p>
+
+\[S&lt;sub&gt;chao1&lt;/sub&gt; = S&lt;sub&gt;obs&lt;/sub&gt; + \frac{n&lt;sub&gt;1&lt;/sub&gt;(n&lt;sub&gt;1&lt;/sub&gt; - 1)}{2(n&lt;sub&gt;2&lt;/sub&gt; + 1)}\]
+
+    <p>With:</p>
+    <ul>
+      <li>\(S&lt;sub&gt;obs&lt;/sub&gt;\) the observed species richness,</li>
+      <li>\(n&lt;sub&gt;1&lt;/sub&gt;\) the number of species represented by a single individual (singletons),</li>
+      <li>\(n&lt;sub&gt;2&lt;/sub&gt;\) the number of species represented by two individuals (doubletons).</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>ACE</strong> (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.</p>
+  </li>
+</ul>
+
+<p><strong>evenness</strong>: evaluate the relative abundances of species rather than their total count</p>
+
+<ul>
+  <li>
+    <p><strong>Pielou’s evenness</strong>, which quantifies how close the community’s diversity is to the maximum possible diversity. This index is calculated by taking the Shannon Diversity Index (which measures the overall diversity of the community) and dividing it by the maximum possible diversity given the observed species richness (<span class="citation"><a href="#Pielou.1966">Pielou 1966</a></span>).</p>
+
+\[J = \frac{H'}{ln(S)}\]
+
+    <p>With:</p>
+    <ul>
+      <li>\(H'\) Shannon Weiner diversity</li>
+      <li>\(S\) the total number of species in a sample, across all samples in dataset.</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>diversity</strong>: incorporate both the relative abundances and total count of distinct species</p>
+<ul>
+  <li><strong>Shannons</strong> index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community (<span class="citation"><a href="#Shannon.1948">Shannon 1948</a></span>).</li>
+</ul>
+
+\[H' = -∑&lt;sub&gt;i=1&lt;/sub&gt;&lt;sup&gt;S&lt;/sup&gt; p&lt;sub&gt;i&lt;/sub&gt; \* ln(p&lt;sub&gt;i&lt;/sub&gt;)\]
+
+<p>pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.</p>
+<ul>
+  <li>
+    <p><strong>Berger-Parker</strong> index, which expresses the proportional importance of the most abundant type. Highly biased by sample size and richness (<span class="citation"><a href="#Berger.1970">Berger and Parker 1970</a></span> ).</p>
+
+\[D = n&lt;sub&gt;max&lt;/sub&gt;/N\]
+
+    <p><sub>max</sub> is the abundance of the most dominant species, and N is the total number of individuals (sum of all abundances).</p>
+  </li>
+  <li>
+    <p><strong>Simpsons</strong> index, which calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity (<span class="citation"><a href="#SIMPSON.1949">SIMPSON 1949</a></span>).</p>
+
+\[D = ∑&lt;sub&gt;i=1&lt;/sub&gt;&lt;sup&gt;S&lt;/sup&gt; (n&lt;sub&gt;i&lt;/sub&gt;/N)&lt;sup&gt;2&lt;/sup&gt;\]
+
+    <p>ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.</p>
+  </li>
+  <li><strong>Inverse Simpons</strong> index, which is the transformation of Simpsons index that increases with increasing diversity.</li>
+  <li>
+    <p><strong>Fishers alpha</strong> index, which describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a log series distribution (<span class="citation"><a href="#Fisher.1943">Fisher <i>et al.</i> 1943</a></span>).</p>
+
+\[S\=a\*ln(1+n/a)\]
+
+    <p>S is number of taxa, n is number of individuals and a is the Fisher’s alpha.</p>
+  </li>
+</ul>
+
+<p><a href="./images/alpha_diversity_richness_evenness.png" rel="noopener noreferrer"><img src="./images/alpha_diversity_richness_evenness.png" alt="richness and evenness. " width="710" height="578" loading="lazy" /></a></p>
+
+<p><strong>KrakenTools</strong> is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool <strong>Calculate alpha diversity</strong> offers the possibility to calculate five different alpha diversity indexes:</p>
+<ol>
+  <li>Shannon’s alpha diversity</li>
+  <li>Berger Parker’s alpha</li>
+  <li>Simpson’s diversity</li>
+  <li>Inverse Simpson’s diversity</li>
+  <li>Fisher’s index</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-calculate-α-diversity-with-krakentools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate α diversity with Krakentools</div>
+  <ol>
+    <li><span class="tool" data-tool="[toolshed.g2.bx.psu.edu/view/iuc/krakentools_alpha_diversity/9d0330e23bfd)" title="Krakentools: Calculate alpha diversity tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krakentools: Calculate alpha diversity</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9d0330e23bfd))</span> with the following parameters:
+      <ul>
+        <li><em>“Abundance file”</em>: <code class="language-plaintext highlighter-rouge">Dataset Collection</code>: uploaded Bracken output file</li>
+        <li><em>“Specify alpha diversity type”</em>: <code class="language-plaintext highlighter-rouge">Shannon's alpha diversity</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>Calculate the 5 different alpha indexes available in Krakentools and compare the results. What do these numbers tell you?</li>
+    <li>Are the results consistent among the different indexes?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>
+        <p>The five alpha indexes available in Krakentools are: Shannon’s alpha diversity, Berger Parker’s alpha, Simpson’s diversity, Inverse Simpson’s diversity, Fisher’s index. Below you can find a table comparing the different results for both the JC1A and JP4D sample as well as an explanation of the meaning of these values.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th> </th>
+              <th>JC1A</th>
+              <th>JP4D</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shannon</td>
+              <td>5,3441</td>
+              <td>6,4429</td>
+            </tr>
+            <tr>
+              <td>Berger-Parker</td>
+              <td>0,2299</td>
+              <td>0,0581</td>
+            </tr>
+            <tr>
+              <td>Simpson</td>
+              <td>0,9401</td>
+              <td>0,9926</td>
+            </tr>
+            <tr>
+              <td>Inverse Simpson</td>
+              <td>16,6941</td>
+              <td>136,0287</td>
+            </tr>
+            <tr>
+              <td>Fisher</td>
+              <td>3240,0957</td>
+              <td>9163,5027</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>When the <strong>Shannon index</strong> is given as a value of 5, it indicates a <strong>relatively high level of diversity</strong> within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.</p>
+
+        <p>When the <strong>Berger-Parker index</strong> is given as a value of 0.23, it suggests that <strong>a single species dominates the community</strong>, as it represents <strong>23 %</strong> of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only <strong>5 %</strong> of the total individuals, which implies a <strong>more balanced distribution of individuals</strong> among different species compared to a higher Berger-Parker index value.</p>
+
+        <p>When the <strong>Simpson’s index</strong> is given as a value of 0.94, it indicates a <strong>high level of species diversity and evenness</strong> within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson’s index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.</p>
+
+        <p>When the <strong>Inverse Simpson’s index</strong> is given as a value of <strong>16.69</strong>, it suggests a <strong>relatively low level of species diversity</strong> within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson’s index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of <strong>136 indicates a higher diversity compared to a lower index value</strong>. The Inverse Simpson’s index is the reciprocal of the Simpson’s index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson’s index value signifies a community with a greater number of species and a more even distribution of individuals among those species.</p>
+      </li>
+      <li>
+        <p>The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.</p>
+      </li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+
+  <p>Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 (<span class="citation"><a href="#Bolyen.2019">Bolyen <i>et al.</i> 2019</a></span>) and <a href="https://github.com/vegandevs/vegan">Vegan</a>.</p>
+
+  <p>QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.</p>
+
+  <p>Some of the key features and functionalities of QIIME 2 include:</p>
+  <ol>
+    <li>Diversity Analysis: QIIME 2 allows users to explore and quantify microbial diversity within and between samples. It provides metrics for alpha diversity (within-sample diversity) and beta diversity (between-sample diversity).</li>
+    <li>Data Import and Preprocessing</li>
+    <li>Taxonomic Assignments</li>
+    <li>Community Analysis</li>
+    <li>Phylogenetic Analysis</li>
+    <li>Statistical Analysiss.</li>
+    <li>Visualization</li>
+  </ol>
+
+  <p>The vegan package is a community ecology package in the R programming language. It provides a wide range of tools and methods for analyzing and interpreting ecological data, particularly in the context of community ecology. The package is designed to handle multivariate data and offers various statistical techniques for studying species composition, diversity, and community dynamics.</p>
+
+  <p>The vegan package encompasses several functionalities, including:</p>
+
+  <ol>
+    <li>Diversity Analysis: vegan offers numerous diversity indices, such as species richness, Shannon diversity index, Simpson index, and many others. These indices allow researchers to quantify the diversity of species within a community and compare diversity between different samples or groups.</li>
+    <li>Ordination Techniques</li>
+    <li>Community Classification:</li>
+    <li>Ecological Network Analysis</li>
+    <li>Ecological Indices</li>
+    <li>Plotting and Visualization</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="calculating-β-diversity">Calculating β diversity</h1>
+
+<p><strong>β diversity</strong> measures the distance between two or more separate entities. It therefore describes the difference between two communities or ecosystems.</p>
+
+<p>There are <strong>multiple indexes</strong> used to calculate β diversity because different indexes emphasize different aspects of compositional dissimilarity between communities or sites.</p>
+
+<p>These indexes have been developed to address specific research questions, accommodate different data types, or provide insights into different dimensions of β diversity. Below, you can find a list of commonly used indexes to calculate β diversity and their description.</p>
+
+<ul>
+  <li>
+    <p><strong>Jaccard Index</strong>, which measures the proportion of shared species between two samples (<span class="citation"><a href="#Jaccard.1912">Jaccard 1912</a></span>).</p>
+
+\[J(X, Y) =  \|  X ∩ Y\|  / \| X ∪ Y\|\]
+  </li>
+</ul>
+
+<p>With:</p>
+<ul>
+  <li>\(X ∩ Y\) the intersection of sets X and Y (elements common to both sets)</li>
+  <li>
+    <p>\(X ∪ Y\) the union of sets X and Y (all unique elements from both sets combined)</p>
+  </li>
+  <li>
+    <p><strong>Sørensen Index</strong>, which is similar to Jaccard Index, but accounts for species abundance (<span class="citation"><a href="#Srensen.1948">Sørensen 1948</a></span>).</p>
+
+\[DSC = 2\| X ∩ Y\|  / \| X\| + \| Y\|\]
+  </li>
+</ul>
+
+<p>With:</p>
+<ul>
+  <li>\(X ∩ Y\) the intersection of sets X and Y (elements common to both sets)</li>
+  <li>
+    <p>\(\| X\| and \| Y \|\)  the cardinalities of the two sets (i.e. the number of elements in each set)</p>
+  </li>
+  <li>
+    <p><strong>Bray-Curtis Dissimilarity</strong>, which measures the dissimilarity of species abundances between two samples (<span class="citation"><a href="#Bray.1957">Bray and Curtis 1957</a></span>).</p>
+
+\[BC&lt;sub&gt;ij&lt;/sub&gt; = 1 - (2C&lt;sub&gt;ij&lt;/sub&gt; / (S&lt;sub&gt;i&lt;/sub&gt; + S&lt;sub&gt;j&lt;/sub&gt;))\]
+  </li>
+</ul>
+
+<p>With:</p>
+<ul>
+  <li>\(C&lt;sub&gt;ij&lt;/sub&gt;\) the sum of the absolute differences in abundances between corresponding species in samples i and j</li>
+  <li>\(S&lt;sub&gt;i&lt;/sub&gt;\) the total abundance or sum of species abundances in sample i</li>
+  <li>
+    <p>\(S&lt;sub&gt;j&lt;/sub&gt;\) the total abundance or sum of species abundances in sample j</p>
+  </li>
+  <li>
+    <p><strong>Kulczynski Dissimilarity</strong>, which masures the dissimilarity in the proportional abundances of shared species.</p>
+
+\[D = 1 - (S&lt;sub&gt;AB&lt;/sub&gt; / (S&lt;sub&gt;A&lt;/sub&gt; + S&lt;sub&gt;B&lt;/sub&gt; - 2S&lt;sub&gt;AB&lt;/sub&gt;))\]
+  </li>
+</ul>
+
+<p>With:</p>
+<ul>
+  <li>\(S&lt;sub&gt;AB&lt;/sub&gt;\) the number of shared OTUs between communities A and B</li>
+  <li>\(S&lt;sub&gt;A&lt;/sub&gt;\) the number of OTUs in community A</li>
+  <li>
+    <p>\(S&lt;sub&gt;B&lt;/sub&gt;\) the number of OTUs in community B</p>
+  </li>
+  <li>
+    <p><strong>UniFrac</strong>, which incorporates information on phylogenetic distances between observed species in the computation. Can be calculated either weighted (accounts for abundances) or unweighted (accounts only for richness).</p>
+
+    <p><a href="./images/unifrac.png" rel="noopener noreferrer"><img src="./images/unifrac.png" alt="UniFrac. " width="1880" height="1410" loading="lazy" /></a></p>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-calculate-β-diversity-with-krakentools"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Calculate β diversity with Krakentools</div>
+  <ol>
+    <li><span class="tool" data-tool="[https://toolshed.g2.bx.psu.edu/view/iuc/krakentools_beta_diversity/b33f117e9b67]" title="Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version b33f117e9b67])</span> with the following parameters:
+      <ul>
+        <li><em>“Taxonomy file”</em>: <code class="language-plaintext highlighter-rouge">Dataset Collection</code>: uploaded Bracken output file</li>
+        <li><em>“Specify type of input file”</em>: <code class="language-plaintext highlighter-rouge">Bracken species abundance file</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the Bray-Curtis dissimilarity calculated for the two samples?</li>
+    <li>What does this number tell you?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The output file gives you a table comparing sample 0 and 1, respectively. Consequently, comparing 0 to 0 and 1 to 1 results in a dissimilarity of 0, as those are exactly the same. Comparing sample 0 to sample 1 shows a Bray-Curtis dissimilarity of 0.701.</li>
+      <li>The Bray-Curtis dissimilarity  measures the dissimiliraty of two samples. Consequently, an output of 0 represents two samples that are exactly the same, while an output of 1 means they are maximally divergent. In our case, a Bray-Curtis dissimilarity of 0.7 suggests that there is a substantial difference in the species composition or abundances between the two communities being compared. The higher the dissimilarity value, the greater the difference in species composition or abundances.</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="evaluation-of-different-diversity-metrics">Evaluation of different diversity metrics</h1>
+
+<p>Bonilla-Rosso et al. did <strong>performance evaluation</strong> of different diversity metrics using simulated data sets <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span>. For details on the individual metrics, please check their <a href="https://pubmed.ncbi.nlm.nih.gov/22554028/">publication</a>. However, it is important to note that none of the estimated metrics showed statistical similarity to their corresponding parameters in the source communities. Moreover, the results obtained were inconsistent across the samples.</p>
+
+<p>This <strong>inconsistency</strong> can be attributed to the fact that individual metrics only provide a <strong>specific</strong> perspective on diversity and are prone to bias in their estimation, leading to incorrect ranking of the samples.</p>
+
+<p>In summary, <strong>relying solely on single-diversity metrics may not be enough</strong> to accurately compare the diversity between two communities. Instead, we recommend utilizing multi-dimensional metrics to capture diverse rankings across different scales of diversity, which can be affected differently in manipulative studies.</p>
+
+<p><strong>Multidimensional diversity metrics</strong>, also known as multivariate diversity metrics, are quantitative measures that capture multiple dimensions or aspects of diversity simultaneously. These metrics go beyond single-diversity metrics, such as species richness or Shannon entropy, which provide a one-dimensional representation of diversity.</p>
+
+<p>In contrast, multidimensional diversity metrics <strong>take into account various attributes or characteristics</strong> of species or communities to provide a more comprehensive understanding of diversity. These attributes can include species abundances, functional traits, phylogenetic relationships, or spatial distributions.</p>
+
+<p>The choice and composition of dimensions in multidimensional diversity metrics depend on the research context and the specific objectives of the study. Some aspects, multidimensional diversity metrics take into account, include:</p>
+<ol>
+  <li><strong>Functional Diversity</strong>: This metric considers the range and variation of functional traits among species within a community. It assesses the diversity of ecological roles and functional strategies present, contributing to ecosystem functioning and resilience.</li>
+  <li><strong>Phylogenetic Diversity</strong>: This metric incorporates the evolutionary relationships among species within a community. It quantifies the diversity based on the length and topology of the phylogenetic tree, highlighting the evolutionary history and relatedness of species.</li>
+  <li><strong>Spatial Diversity</strong>: This metric incorporates spatial patterns and distributions of species within a landscape or ecosystem. It considers the heterogeneity of habitats, connectivity, and the arrangement of species populations across space.</li>
+</ol>
+
+<p>Multidimensional diversity metrics offer a <strong>more nuanced and holistic perspective</strong> on biodiversity, capturing different facets and dimensions of ecological variation. They provide insights into the ecological processes shaping communities and ecosystems and can be valuable in conservation planning, ecosystem management, and understanding the functional implications of biodiversity patterns.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-on-multidimensional-diversity-metrics-and-parameter-q"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-multidimensional-diversity-metrics-and-parameter-q" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on Multidimensional diversity metrics and Parameter q</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <h2 id="multidimensional-diversity-metrics-and-parameter-q">Multidimensional diversity metrics and Parameter q</h2>
+
+  <p>Expressing the compositional complexity of an assemblage cannot be accomplished with a single numerical value. Traditional measures like diversities (Hill numbers) and entropies (Rényi entropies) vary in their <strong>order q</strong>, which determines <strong>the extent to which rare or common species are emphasized</strong>. The ranking and comparison of assemblages rely on the chosen value of q.</p>
+
+  <p>Instead of selecting a few measures to describe an assemblage, it is preferable to <strong>present a continuous profile</strong> that depicts diversity or entropy as a function of q (where q ≥ 0). This approach enables a visual comparison of the compositional complexities among multiple assemblages and facilitates the assessment of the evenness in the relative abundance distributions of the assemblages. In practice, the profile is typically plotted for values of q ranging from 0 to q = 3 or 4, beyond which there is usually little change.</p>
+
+  <p><a href="./images/hill_numbers.png" rel="noopener noreferrer"><img src="./images/hill_numbers.png" alt="Parameter q. " width="1261" height="695" loading="lazy" /></a>
+https://www.redalyc.org/journal/5117/511766773011/html/</p>
+
+  <h1 id="hill-numbers">Hill numbers</h1>
+
+  <p>Hill numbers, also known as diversity indices or diversity measures, are mathematical metrics used to quantify the diversity or richness of a biological community. They were developed by ecologist Robert H. Whittaker and are widely used in ecology and biodiversity studies.</p>
+
+  <p>Hill numbers provide a way to summarize and compare the diversity of different communities based on the abundance or occurrence of different species within those communities. These numbers take into account both the number of species present and their relative abundances. The higher the Hill number, the greater the diversity or richness of the community.</p>
+
+  <p>Hill numbers are often represented by the symbol “D”, followed by a subscript that indicates the order of diversity. The order of diversity determines the weight given to rare versus common species. Commonly used Hill numbers include:</p>
+
+  <ol>
+    <li>Species richness (D₀): This is the simplest Hill number and represents the total number of species in a community, without considering their abundances. It provides a basic measure of biodiversity based on species count.</li>
+    <li>Shannon diversity index (D₁): This index incorporates both species richness and evenness. It takes into account both the number of species and their relative abundances, providing a more comprehensive measure of diversity.</li>
+    <li>Simpson diversity index (D₂): This index focuses on the dominance or concentration of species within a community. It considers both species richness and the probability that two individuals randomly selected from the community belong to the same species.</li>
+  </ol>
+
+  <h1 id="rényi-entropy">Rényi entropy</h1>
+
+  <p>Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
+The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:</p>
+
+\[Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α)\]
+
+  <p>where P = {p₁, p₂, …, pN} is the probability distribution of N discrete events or states, and pi represents the probability of the ith event.</p>
+
+  <p>The value of α determines the properties of Rényi entropy. When α = 1, Rényi entropy reduces to Shannon entropy, providing a measure of average uncertainty or information content. As α approaches 0, Rényi entropy converges to the minimum value, representing the most certain or least diverse distribution. Conversely, as α approaches infinity, Rényi entropy approaches the maximum value, indicating a uniform or maximally diverse distribution.</p>
+
+  <p>Rényi entropy has applications in various fields, including information theory, statistical physics, and data analysis. It offers a way to quantify the diversity or randomness of a system beyond the traditional Shannon entropy, allowing for a more nuanced understanding of information content and structure.</p>
+
+</blockquote>
+
+<p>For further information on how to choose the best diversity metric also check</p>
+
+<ol>
+  <li><a href="https://academic.oup.com/bib/article/19/4/679/2871295?utm_source=pocket_reader">Measuring the diversity of the human microbiota with targeted next-generation sequencing</a> <span class="citation"><a href="#BonillaRosso.2012">Bonilla-Rosso <i>et al.</i> 2012</a></span></li>
+  <li><a href="https://academic.oup.com/femsec/article/82/1/37/567182?utm_source=pocket_reader">Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets</a> <span class="citation"><a href="#Finotello.2018">Finotello <i>et al.</i> 2018</a></span></li>
+</ol>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we look how to calculate α and β  diversity from microbiome data. We apply <strong>Krakentools</strong> to calculate the α and β  diversity of two microbiome sample datasets.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>There are 2 different types of diversity metrics (α and β diversity)</p>
+</li>
+                        
+                        <li><p>Krakentools can be used in Galaxy for calculating the diversity</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/microbiome/faqs/">FAQ page for the Microbiome topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/microbiome#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Jaccard.1912">Jaccard, P., 1912 <b>THE DISTRIBUTION OF THE FLORA IN THE ALPINE ZONE.1</b>. New Phytologist 11: 37–50. <a href="https://doi.org/10.1111/j.1469-8137.1912.tb05611.x">10.1111/j.1469-8137.1912.tb05611.x</a></li>
+<li id="Fisher.1943">Fisher, R. A., A. S. Corbet, and C. B. Williams, 1943 <b>The Relation Between the Number of Species and the Number of Individuals in a Random Sample of an Animal Population</b>. The Journal of Animal Ecology 12: 42. <a href="https://doi.org/10.2307/1411">10.2307/1411</a></li>
+<li id="Shannon.1948">Shannon, C. E., 1948 <b>A Mathematical Theory of Communication</b>. Bell System Technical Journal 27: 379–423. <a href="https://doi.org/10.1002/j.1538-7305.1948.tb01338.x">10.1002/j.1538-7305.1948.tb01338.x</a></li>
+<li id="Srensen.1948">Sørensen, T., 1948 <b>A method of establishing groups of equal amplitude in plant sociology based on similarity of species and its application to analyses of the vegetation on Danish commons</b>. Kongelige Danske Videnskabernes Selskab. 1–34.</li>
+<li id="SIMPSON.1949">SIMPSON, E. H., 1949 <b>Measurement of Diversity</b>. Nature 163: 688. <a href="https://doi.org/10.1038/163688a0">10.1038/163688a0</a></li>
+<li id="Bray.1957">Bray, J. R., and J. T. Curtis, 1957 <b>An Ordination of the Upland Forest Communities of Southern Wisconsin</b>. Ecological Monographs 27: 325–349. <a href="https://doi.org/10.2307/1942268">10.2307/1942268</a></li>
+<li id="Pielou.1966">Pielou, E. C., 1966 <b>The measurement of diversity in different types of biological collections</b>. Journal of Theoretical Biology 13: 131–144. <a href="https://doi.org/10.1016/0022-5193(66)90013-0">10.1016/0022-5193(66)90013-0</a></li>
+<li id="Margalef.1969">Margalef, R., 1969 <b>Perspectives in Ecological Theory</b>. Oikos 20: 571. <a href="https://doi.org/10.2307/3543237">10.2307/3543237</a></li>
+<li id="Berger.1970">Berger, W. H., and F. L. Parker, 1970 <b>Diversity of planktonic foraminifera in deep-sea sediments</b>. Science (New York, N.Y.) 168: 1345–1347. <a href="https://doi.org/10.1126/science.168.3937.1345.">10.1126/science.168.3937.1345.</a></li>
+<li id="Chao.1992">Chao, A., and S.-M. Lee, 1992 <b>Estimating the Number of Classes via Sample Coverage</b>. Journal of the American Statistical Association 87: 210–217. <a href="https://doi.org/10.1080/01621459.1992.10475194">10.1080/01621459.1992.10475194</a></li>
+<li id="BonillaRosso.2012">Bonilla-Rosso, G., L. E. Eguiarte, D. Romero, M. Travisano, and V. Souza, 2012 <b>Understanding microbial community diversity metrics derived from metagenomes: performance evaluation using simulated data sets</b>. FEMS microbiology ecology 82: 37–49. <a href="https://doi.org/10.1111/j.1574-6941.2012.01405.x">10.1111/j.1574-6941.2012.01405.x</a></li>
+<li id="Finotello.2018">Finotello, F., E. Mastrorilli, and B. Di Camillo, 2018 <b>Measuring the diversity of the human microbiota with targeted next-generation sequencing</b>. Briefings in bioinformatics 19: 679–692. <a href="https://doi.org/10.1093/bib/bbw119">10.1093/bib/bbw119</a></li>
+<li id="Bolyen.2019">Bolyen, E., J. R. Rideout, M. R. Dillon, N. A. Bokulich, C. C. Abnet <i>et al.</i>, 2019 <b>Reproducible, interactive, scalable and extensible microbiome data science using QIIME 2</b>. Nature biotechnology 37: 852–857. <a href="https://doi.org/10.1038/s41587-019-0209-9">10.1038/s41587-019-0209-9</a></li>
+<li id="Okie.2020">Okie, J. G., A. T. Poret-Peterson, Z. M. Lee, A. Richter, L. D. Alcaraz <i>et al.</i>, 2020 <b>Genomic adaptations in information processing underpin trophic strategy in a whole-ecosystem nutrient enrichment experiment</b>. eLife 9: <a href="https://doi.org/10.7554/eLife.49816">10.7554/eLife.49816</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/diversity"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/diversity">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Sophia Hampe, Bérénice Batut,  <b>Calculating α and β diversity from microbiome taxonomic data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html">https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{microbiome-diversity,
+author = "Sophia Hampe and Bérénice Batut",
+	title = "Calculating α and β diversity from microbiome taxonomic data (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/diversity/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/diversity/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+		
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/diversity/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/tutorials/diversity/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/2ba33512fd41fa90567331471056f48032728e82">2ba3351</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.20cf1f17.js'></script>
+
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	
+	
+
+    </body>
+</html>
