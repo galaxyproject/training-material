@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 draft: true
 title: Calculating α and β diversity from microbiome taxonomic data
-zenodo_link: xxx
+# zenodo_link: xxx
 questions:
 - How many different taxons are present in my sample? How do I additionally take their relative abundance into account?
 - How similar or how dissimilar are my samples in term of taxonomic diversity?
