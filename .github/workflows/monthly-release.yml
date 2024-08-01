@@ -93,5 +93,7 @@ jobs:
 
       - name: Create Release
         id: create_release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." --target main --latest
