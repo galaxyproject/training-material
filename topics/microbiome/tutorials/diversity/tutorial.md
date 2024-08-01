@@ -410,7 +410,7 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 > # Rényi entropy
 >
 > Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
-The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
+> The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
 >
 > $$ Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α) $$
 >
