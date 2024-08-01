@@ -41,7 +41,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 
     It considers the number of different species in an environment (also referred to as species **richness**). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species **evenness**). 
 
-- - **β diversity** compare the diversity between different communities by measuring their distance
+- **β diversity** compare the diversity between different communities by measuring their distance
 
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
@@ -68,14 +68,16 @@ To get an overview, you can find a Krona chart visualizing the different species
 
 The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.
 
-``name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+```
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
 Paracoccus sp. MC1862	2760307	S	98	4	102	0.00169
 Paracoccus sp. AK26	2589076	S	85	8	93	0.00154
 Paracoccus sp. Arc7-R13	2500532	S	67	13	80	0.00133
 Paracoccus sp. BM15	1529068	S	27	1	28	0.00046
 Paracoccus sanguinis	1545044	S	142	37	179	0.00297
 Paracoccus contaminans	1945662	S	87	18	105	0.00174
-Paracoccus aminovorans	34004	S	86	26	112	0.00186``
+Paracoccus aminovorans	34004	S	86	26	112	0.00186
+```
 
 > <question-title></question-title>
 >
@@ -99,8 +101,6 @@ Paracoccus aminovorans	34004	S	86	26	112	0.00186``
 >
 > It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank "species". This step is not necessary when using Bracken output as already only the species level is listed.
 >
-> xxx hands on: filter on specific taxonomic level using filter on column tool in galaxy
-> xxx show example of kraken and metaphlan output file
 >
 {: .details}
 
@@ -131,7 +131,7 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 
 We need now to import the data
 
-> <hands-on-title>Import datasets</hands-on-title>
+<!-- > <hands-on-title>Import datasets</hands-on-title>
 >
 > 1. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
 >
@@ -148,7 +148,7 @@ We need now to import the data
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
-{: .hands_on}
+{: .hands_on} -->
 
 
 # Calculating α diversity
