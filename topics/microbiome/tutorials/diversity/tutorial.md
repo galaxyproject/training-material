@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
+draft: true
 title: Calculating α and β diversity from microbiome taxonomic data
-zenodo_link: xxx
+# zenodo_link: xxx
 questions:
 - How many different taxons are present in my sample? How do I additionally take their relative abundance into account?
 - How similar or how dissimilar are my samples in term of taxonomic diversity?
@@ -32,7 +33,7 @@ In various fields, diversity indexes are employed to understand and compare the 
 
 To study microbiome data, indirect methods like **metagenomics** can be used. Metagenomic samples contain DNA from different organisms at a specific site, where the sample was collected. Metagenomic data can be used to find out which organisms coexist in that niche and which genes are present in the different organisms.
 
-Once we know which taxons are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data]({% link topics/metagenomics/tutorials/taxonomic-profiling/tutorial.md %}])), we can do diversity analyses.
+Once we know which taxons are present in a metagenomic sample ([Tutorial on Taxonomic Profiling and Visualization of Metagenomic Data]({% link topics/microbiome/tutorials/taxonomic-profiling/tutorial.md %})), we can do diversity analyses.
 
 Related to ecology, the term **diversity** describes the number of different species present in one particular area and their relative abundance. More specifically, several different metrics of diversity can be calculated. The most common ones are α, β and γ diversity:
 
@@ -40,7 +41,7 @@ Related to ecology, the term **diversity** describes the number of different spe
 
     It considers the number of different species in an environment (also referred to as species **richness**). Additionally, it can take the abundance of each species into account to measure how evenly individuals are distributed across the sample (also referred to as species **evenness**). 
 
-- - **β diversity** compare the diversity between different communities by measuring their distance
+- **β diversity** compare the diversity between different communities by measuring their distance
 
 - **γ diversity** is a measure of the overall diversity for the different ecosystems within a region.
 
@@ -57,9 +58,9 @@ Here we will use 2 datasets:
 - `JP4D`: a microbiome sample collected from the Lagunita Fertilized Pond
 - `JC1A`: a **control** samples from a control mesocosm.
 
-The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/sequence-analysis/tutorials/taxonomic-profiling/tutorial.md %}).
+The datasets differ in size, but according to the authors this doesn't matter for their analysis of genomic traits. Also, they underline that differences between the two samples reflect trait-mediated ecological dynamics instead of microevolutionary changes as the duration of the experiment was only 32 days. This means that depending on available nutrients, specific lineages within the pond grow more successfully than others because of their genomic traits. The samples have been analysed as explained in the [Taxonomic profiling tutorial]({% link topics/microbiome/tutorials/taxonomic-profiling/tutorial.md %}).
 
-In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.1.1+galaxy1) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](toolshed.g2.bx.psu.edu/repos/iuc/bracken/est_abundance/2.7+galaxy1). For this tutorial, we will use the output file of Bracken.
+In a nutshell, taxonomic labels have been assigned to the metagenomics data using [Kraken2](https://ccb.jhu.edu/software/kraken2/) to find out which species are present in the samples. Finally, species abundance was estimated using [Bracken](https://ccb.jhu.edu/software/bracken/). For this tutorial, we will use the output file of Bracken.
 
 To get an overview, you can find a Krona chart visualizing the different species present in the two samples.
 
@@ -67,14 +68,16 @@ To get an overview, you can find a Krona chart visualizing the different species
 
 The dataset we will work with in this tutorial is the output file of Bracken, which estimates species abundance.
 
-``name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+```
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
 Paracoccus sp. MC1862	2760307	S	98	4	102	0.00169
 Paracoccus sp. AK26	2589076	S	85	8	93	0.00154
 Paracoccus sp. Arc7-R13	2500532	S	67	13	80	0.00133
 Paracoccus sp. BM15	1529068	S	27	1	28	0.00046
 Paracoccus sanguinis	1545044	S	142	37	179	0.00297
 Paracoccus contaminans	1945662	S	87	18	105	0.00174
-Paracoccus aminovorans	34004	S	86	26	112	0.00186``
+Paracoccus aminovorans	34004	S	86	26	112	0.00186
+```
 
 > <question-title></question-title>
 >
@@ -98,8 +101,6 @@ Paracoccus aminovorans	34004	S	86	26	112	0.00186``
 >
 > It is possible to use Krakentools to calculate a and b diversity also on other datasets than the Bracken output. Any tool that outputs taxonomy abundances can be used prior to the diversity analysis. Importantly, the respective output file needs to be converted into the correct table format and filtered for the taxonomic rank "species". This step is not necessary when using Bracken output as already only the species level is listed.
 >
-> xxx hands on: filter on specific taxonomic level using filter on column tool in galaxy
-> xxx show example of kraken and metaphlan output file
 >
 {: .details}
 
@@ -129,25 +130,6 @@ Any analysis should get its own Galaxy history. So let's start by creating a new
 {: .hands_on}
 
 We need now to import the data
-
-> <hands-on-title>Import datasets</hands-on-title>
->
-> 1. Import the following samples via link from [Zenodo]({{ page.zenodo_link }}) or Galaxy shared data libraries:
->
->    ```text
->    {{ page.zenodo_link }}/files/xxx
->    {{ page.zenodo_link }}/files/xxx
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 2. Create a paired collection.
->
->    {% snippet faqs/galaxy/collections_build_list_paired.md %}
->
-{: .hands_on}
-
 
 # Calculating α diversity
 
