@@ -20,6 +20,7 @@ contributions:
    authorship:
     - sophia120199
     - bebatut
+    - paulzierep
 tags:
 - metagenomics
 - diversity
@@ -161,19 +162,19 @@ Metrics of alpha diversity can be grouped into different classes:
 **richness**: estimate the quantity of distinct species within a sample
 - **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef.1969 %})
                                        
-   $$ D = \frac{(S - 1)}{\Log(n)} $$
-   
+   $$ D = \frac{(S - 1)}{\log(n)} $$
+
    With
    - $$S$$ the total number of species,
    - $$n$$ the total number of individuals in the sample                                                                                                                                                          
 - **Chao1**, which estimates the true species richness or diversity of a community, particularly when there might be rare or unobserved species. Chao1 estimates the number of unobserved species based on the number of singletons and doubletons. It assumes that there are additional rare species that are likely to exist but have not been observed. The estimation considers the number of unobserved singletons and doubletons and incorporates them into the observed species richness to provide an estimate of the true species richness ({% cite Chao.1992 %}).
   
-   $$ S<sub>chao1</sub> = S<sub>obs</sub> + \frac{n<sub>1</sub>(n<sub>1</sub> - 1)}{2(n<sub>2</sub> + 1)} $$
+   $$ S_{chao1} = S_{obs} + \frac{n_{1}(n_{1} - 1)}{2(n_2 + 1)} $$
   
    With:
-   - $$S<sub>obs</sub>$$ the observed species richness, 
-   - $$n<sub>1</sub>$$ the number of species represented by a single individual (singletons), 
-   - $$n<sub>2</sub>$$ the number of species represented by two individuals (doubletons).
+   - $$S_{obs}$$ the observed species richness, 
+   - $$n_{1}$$ the number of species represented by a single individual (singletons), 
+   - $$n_2$$ the number of species represented by two individuals (doubletons).
   
 - **ACE** (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.    
                                                                              
