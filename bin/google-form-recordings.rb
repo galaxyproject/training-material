@@ -20,6 +20,7 @@ col_material = 3
 col_length = 5
 col_speakers = 6
 col_galaxyversion = 10
+col_prmade = 12
 
 ## recordings metadata definition on tutorials/slides
 #
@@ -45,8 +46,8 @@ data.each do |row|
   speakers = row[col_speakers]
   date = submission_date.strftime('%Y-%m-%d')
 
-  if row[col_material] == 'TESTING'
-    STDERR.puts "Skipping #{filename} as it is a test"
+  if row[col_material] == 'TESTING' or row[col_prmade] == 'yes'
+    STDERR.puts "Skipping recording as it is a test or a PR was already openened"
     next
   end
 
