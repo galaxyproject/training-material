@@ -24,7 +24,12 @@ requirements:
 - type: external
   title: Version Control with Git
   link: "https://swcarpentry.github.io/git-novice/"
+- type: internal
+  topic_name: variant-analysis
+  tutorials:
+      - beacon_cnv_query
 time_estimation: 2H
+level: Advanced
 key_points:
 - Understanding Beacons involves grasping their definition and concept, recognizing their significance in efficient data management, and exploring diverse use cases for these essential data structures.
 - Mastering MongoDB for Beacon Creation entails familiarizing yourself with the MongoDB database system, acquiring the skills to construct Beacons for advancing institutional data management,

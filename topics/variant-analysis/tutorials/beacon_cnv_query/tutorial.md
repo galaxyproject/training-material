@@ -11,7 +11,13 @@ questions:
 objectives:
 - Comprehend the concept of Beacon databases and their role in genomic research.
 - Demonstrate proficiency in querying Beacon databases to identify and analyze specific Copy Number Variants (CNVs).
+follow_up_training:
+- type: internal
+  topic_name: variant-analysis
+  tutorials:
+      - beaconise_1000hg
 time_estimation: 30M
+level: Introductory
 key_points:
 - Understanding Beacon Databases involves grasping their purpose and significance in genomic research and data sharing.
 - Mastering the Beacon2 CNV Tool includes developing skills to effectively query and analyze specific CNVs within the Beacon2 database.
