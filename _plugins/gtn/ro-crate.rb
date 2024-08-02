@@ -79,9 +79,9 @@ module Gtn
       }
 
       mat_contribs = [
+        ['Workflow Author(s)', workflow['creators'].map { |c| c['name'] }],
         ['Tutorial Author(s)', Gtn::Contributors.get_authors(associated_material).map { |n| name2md(site, n) }],
         ['Tutorial Contributor(s)', Gtn::Contributors.get_non_authors(associated_material).map { |n| name2md(site, n) }],
-        ['Workflow Author(s)', workflow['creators'].map { |c| c['name'] }],
         ['Funder(s)', Gtn::Contributors.get_funders(associated_material).map { |n| name2md(site, n) }],
       ].reject { |_, v| v.empty? }
 
@@ -90,7 +90,7 @@ module Gtn
 
 ## Associated Tutorial
 
-This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/topics/#{workflow['topic_id']}/tutorials/#{workflow['tutorial_id']}/tutorial.html), available in the [GTN](https://training.galaxyproject.org)
+This workflows is part of the tutorial [#{associated_material['title']}](#{url}#{baseurl}/topics/#{workflow['topic_id']}/tutorials/#{workflow['tutorial_id']}/tutorial.html), available in the [GTN](https://training.galaxyproject.org)
 
 #{"## Features" if features.values.any?}
 
@@ -100,9 +100,8 @@ This workflows is part of the tutorial [#{workflow['name']}](#{url}#{baseurl}/to
 
 #{mat_contribs.map { |k, v| "**#{k}**: #{v.join(', ')}" }.join("\n\n")}
 
-[![gtn star logo followed by the word workflows](http://galaxy-training.s3-website.us-east-1.amazonaws.com/misc/gtn-workflows.png)](https://training.galaxyproject.org/training-material/)
+[![gtn star logo followed by the word workflows](https://training.galaxyproject.org/training-material/assets/branding/gtn-workflows.png)](https://training.galaxyproject.org/training-material/)
       ).strip
-      # ![gtn star logo followed by the word workflows](https://training.galaxyproject.org/training-material/assets/branding/gtn-workflows.png)
 
       crate = {
         '@context' => ['https://w3id.org/ro/crate/1.1/context'],
