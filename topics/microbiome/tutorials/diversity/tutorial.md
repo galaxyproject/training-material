@@ -255,7 +255,7 @@ Metrics of alpha diversity can be grouped into different classes:
 5. Fisher's index
 
 > <hands-on-title>Calculate α diversity with Krakentools</hands-on-title>
-> 1. {% tool [Krakentools: Calculate alpha diversity]([toolshed.g2.bx.psu.edu/view/iuc/krakentools_alpha_diversity/9d0330e23bfd)) %} with the following parameters:
+> 1. {% tool [Krakentools: Calculate alpha diversity](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_alpha_diversity/krakentools_alpha_diversity/1.2+galaxy1) %} with the following parameters:
 >    - *"Abundance file"*: `Dataset Collection`: uploaded Bracken output file
 >    - *"Specify alpha diversity type"*: `Shannon's alpha diversity`
 >
@@ -267,6 +267,7 @@ Metrics of alpha diversity can be grouped into different classes:
 >
 > 1. Calculate the 5 different alpha indexes available in Krakentools and compare the results. What do these numbers tell you?
 > 2. Are the results consistent among the different indexes?
+> 3. What is the dominant species in the samples. What problem do you see.
 >
 > > <solution-title></solution-title>
 > >
@@ -275,23 +276,24 @@ Metrics of alpha diversity can be grouped into different classes:
 > >     
 > >     |                 | JC1A      | JP4D      |
 > >     | --------------- | --------- | --------- |
-> >     | Shannon         | 5,3441    | 6,4429    |
-> >     | Berger-Parker   | 0,2299    | 0,0581    |
-> >     | Simpson         | 0,9401    | 0,9926    |
-> >     | Inverse Simpson | 16,6941   | 136,0287  |
-> >     | Fisher          | 3240,0957 | 9163,5027 |
+> >     | Shannon         | 2.06    | 3.74    |
+> >     | Berger-Parker   | 0.46    | 0.08    |
+> >     | Simpson         | 0.74    | 0.97    |
+> >     | Inverse Simpson | 3.92   | 28.84  |
+> >     | Fisher          | 209.73 | 456.61 |
 > >      
 > >     
-> >      When the **Shannon index** is given as a value of 5, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.
+> >      When the **Shannon index** is given as a value of ~4, it indicates a **relatively high level of diversity** within the community. The index ranges from 0 to a maximum value that depends on the number of species and their relative abundances. The higher the Shannon index value, the greater the diversity within the community.
 > >      
-> >      When the **Berger-Parker index** is given as a value of 0.23, it suggests that **a single species dominates the community**, as it represents **23 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.23 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **5 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.
+> >      When the **Berger-Parker index** is given as a value of 0.46, it suggests that **a single species dominates the community**, as it represents **46 %** of the total individuals in the community. This indicates a relatively low level of species evenness, meaning that the abundance of individuals is heavily skewed towards one dominant species. In contrast to the Shannon index, which considers both species richness and evenness, the Berger-Parker index emphasizes the dominance of a particular species. A value of 0.46 indicates that the community is heavily influenced by one species, while the other species in the community are less abundant. In the case of JP4D, the dominant species accounts for only **8 %** of the total individuals, which implies a **more balanced distribution of individuals** among different species compared to a higher Berger-Parker index value.
 > >      
-> >       When the **Simpson's index** is given as a value of 0.94, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.94 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.94 indicates that if you were to randomly select two individuals from the community, there is a 94% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
+> >       When the **Simpson's index** is given as a value of 0.97, it indicates a **high level of species diversity and evenness** within the community. The index ranges from 0 to 1, with 1 representing maximum diversity. Therefore, a Simpson's index of 0.97 suggests that the community is highly diverse, with a relatively even distribution of individuals among different species. In other words, the value of 0.97 indicates that if you were to randomly select two individuals from the community, there is a 97% probability that they would belong to different species. This implies a rich and balanced community where multiple species coexist in relatively equal abundance.
 > >  
-> >       When the **Inverse Simpson's index** is given as a value of **16.69**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 16.69 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 136 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **136 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
+> >       When the **Inverse Simpson's index** is given as a value of **3.92**, it suggests a **relatively low level of species diversity** within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating higher diversity. Therefore, a value of 3.92 indicates a lower diversity compared to a higher index value. An Inverse Simpson's index of 28.84 suggests a relatively high level of species diversity within the community. The index ranges from 1 to the total number of species in the community, with higher values indicating greater diversity. Therefore, a value of **28.84 indicates a higher diversity compared to a lower index value**. The Inverse Simpson's index is the reciprocal of the Simpson's index, which quantifies species diversity and evenness within a community. A higher Inverse Simpson's index value signifies a community with a greater number of species and a more even distribution of individuals among those species.
 > >
 > > 
 > > 2. The results are consistent as all indexes show JP4D to be the more diverse sample compared to JC1A.                                                                   
+> > 3. If you look at the bracken files, you will see, that the dominant species in this samples is `Homo sapiens` - so us! This should not be part of the samples and is probably due to contamination. This finding should be used to reanalyze the samples and remove the human contamination. For the sake of simplicity we will continue with the samples as is and assume the `Homo sapiens` to be a species in out samples.                                                     
 > {: .solution}
 >
 {: .question}
@@ -299,7 +301,7 @@ Metrics of alpha diversity can be grouped into different classes:
 
 > <comment-title></comment-title>
 >
-> Apart from Krakentools, there are two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 ({% cite Bolyen.2019 %}) and [Vegan](https://github.com/vegandevs/vegan).
+> Apart from Krakentools, there are at least two more tools available in Galaxy that can be used to calculate diversity indexes, QIIME2 ({% cite Bolyen.2019 %}) and [Vegan](https://github.com/vegandevs/vegan).
 >
 >
 > QIIME 2 (Quantitative Insights Into Microbial Ecology 2) is a powerful open-source bioinformatics software package that provides a comprehensive suite of tools and methods for processing, analyzing, and visualizing microbiome data. It offers a modular approach to microbiome analysis, allowing researchers to build flexible analysis pipelines tailored to their specific research goals. The software supports a wide range of data types, including 16S rRNA gene sequencing, metagenomics, metatranscriptomics, and others.
@@ -328,6 +330,8 @@ Metrics of alpha diversity can be grouped into different classes:
 
 # Calculating β diversity 
 
+## Theory of β diversity
+
 **β diversity** measures the distance between two or more separate entities. It therefore describes the difference between two communities or ecosystems. 
 
 There are **multiple indexes** used to calculate β diversity because different indexes emphasize different aspects of compositional dissimilarity between communities or sites.
@@ -336,46 +340,54 @@ These indexes have been developed to address specific research questions, accomm
 
 - **Jaccard Index**, which measures the proportion of shared species between two samples ({% cite Jaccard.1912 %}).
   
-  $$ J(X, Y) =  \|  X ∩ Y\|  / \| X ∪ Y\| $$
+  $$ 
+  J(X, Y) =  \frac{\|  X ∩ Y\|}{\| X ∪ Y\|} 
+  $$
   
-With:
-- $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
-- $$X ∪ Y$$ the union of sets X and Y (all unique elements from both sets combined)
+   With:
+   - $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
+   - $$X ∪ Y$$ the union of sets X and Y (all unique elements from both sets combined)
   
 - **Sørensen Index**, which is similar to Jaccard Index, but accounts for species abundance ({% cite Srensen.1948 %}).
 
-  $$ DSC = 2\| X ∩ Y\|  / \| X\| + \| Y\| $$
+  $$
+  DSC = \frac{2\| X ∩ Y\|}{\| X\|} + \| Y\| 
+  $$
 
-With:
-- $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
-- $$ \| X\| and \| Y \|$$  the cardinalities of the two sets (i.e. the number of elements in each set)
+   With:
+   - $$X ∩ Y$$ the intersection of sets X and Y (elements common to both sets)
+   - $$ \| X\|$$ and $$\| Y \|$$  the cardinalities of the two sets (i.e. the number of elements in each set)
   
 - **Bray-Curtis Dissimilarity**, which measures the dissimilarity of species abundances between two samples ({% cite Bray.1957 %}).
 
-  $$ BC<sub>ij</sub> = 1 - (2C<sub>ij</sub> / (S<sub>i</sub> + S<sub>j</sub>)) $$
+  $$ 
+  BC_{ij} = 1 - \frac{2C_{ij}}{S_{i} + S_{j}}
+  $$
 
-With:
-- $$C<sub>ij</sub>$$ the sum of the absolute differences in abundances between corresponding species in samples i and j
-- $$S<sub>i</sub>$$ the total abundance or sum of species abundances in sample i
-- $$S<sub>j</sub>$$ the total abundance or sum of species abundances in sample j
+   With:
+   - \\(C_{ij}\\) the sum of the absolute differences in abundances between corresponding species in samples i and j
+   - \\(S_{i}\\) the total abundance or sum of species abundances in sample i
+   - \\(S_{j}\\) the total abundance or sum of species abundances in sample j
   
 - **Kulczynski Dissimilarity**, which masures the dissimilarity in the proportional abundances of shared species.
 
-  $$ D = 1 - (S<sub>AB</sub> / (S<sub>A</sub> + S<sub>B</sub> - 2S<sub>AB</sub>)) $$
+  $$ 
+  D = 1 - \frac{S_{AB}}{S_{A} + S_{B} - 2S_{AB}} 
+  $$
 
-With:
-- $$S<sub>AB</sub>$$ the number of shared OTUs between communities A and B
-- $$S<sub>A</sub>$$ the number of OTUs in community A
-- $$S<sub>B</sub>$$ the number of OTUs in community B
+   With:
+   - \\(S_{AB}\\) the number of shared OTUs between communities A and B
+   - \\(S_{A}\\) the number of OTUs in community A
+   - \\(S_{B}\\) the number of OTUs in community B
   
 - **UniFrac**, which incorporates information on phylogenetic distances between observed species in the computation. Can be calculated either weighted (accounts for abundances) or unweighted (accounts only for richness).
 
    ![UniFrac](./images/unifrac.png)
 
-
+## Computing β diversity using Galaxy   
 
 > <hands-on-title>Calculate β diversity with Krakentools</hands-on-title>
-> 1. {% tool [Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)]([https://toolshed.g2.bx.psu.edu/view/iuc/krakentools_beta_diversity/b33f117e9b67]) %} with the following parameters:
+> 1. {% tool [Krakentools: Calculate beta diversity (Bray-Curtis dissimilarity)](toolshed.g2.bx.psu.edu/repos/iuc/krakentools_beta_diversity/krakentools_beta_diversity/1.2+galaxy1) %} with the following parameters:
 >   - *"Taxonomy file"*: `Dataset Collection`: uploaded Bracken output file 
 >   - *"Specify type of input file"*: `Bracken species abundance file`
 >    
@@ -442,7 +454,9 @@ Multidimensional diversity metrics offer a **more nuanced and holistic perspecti
 > Rényi entropy is a concept in information theory and statistical physics introduced by Alfréd Rényi, a Hungarian mathematician. It is a generalization of the Shannon entropy, which measures the uncertainty or information content of a random variable or probability distribution.
 > The Rényi entropy of a discrete probability distribution is defined by the parameter α, which determines the order of the entropy. The formula for calculating Rényi entropy is:
 >
-> $$ Hα(P) = 1 / (1 - α) * log₂(∑(i=1 to N) pi^α) $$
+> $$ 
+> Hα(P) = \frac{1}{1 - α} \dot log_{2}(\sum{i=1}^{N} pi^α) 
+> $$
 >
 > where P = {p₁, p₂, ..., pN} is the probability distribution of N discrete events or states, and pi represents the probability of the ith event.
 >
