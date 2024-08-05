@@ -154,12 +154,16 @@ We need now to import the data
 
 # Calculating α diversity
 
+## Theory of α diversity
+
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
-![α diversity](./images/alphadiversity_metrics.png)(https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36)
+![α diversity](./images/alphadiversity_metrics.png)(Source: https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36)
 
 Metrics of alpha diversity can be grouped into different classes:
+
 **richness**: estimate the quantity of distinct species within a sample
+
 - **Margalef’s richness**, which indicates the estimated species richness, accounting for the community size. This metric takes into account that a larger community size can support a greater number of species ({% cite Margalef.1969 %})
                                        
    $$ D = \frac{(S - 1)}{\log(n)} $$
@@ -175,12 +179,11 @@ Metrics of alpha diversity can be grouped into different classes:
   
    With:
    - \\(S_{obs}\\) the observed species richness, 
-   - $$n_{1}$$ the number of species represented by a single individual (singletons), 
-   - $$n_2$$ the number of species represented by two individuals (doubletons).
+   - \\(n_{1}\\) the number of species represented by a single individual (singletons), 
+   - \\(n_{2}\\) the number of species represented by two individuals (doubletons).
   
 - **ACE** (Abundance-based Coverage Estimator), which takes into account the abundance distribution of observed species and incorporates the presence of rare or unobserved species. ACE estimates the number of unobserved species based on the abundance distribution and incorporates it into the observed species richness. It takes into account the relative rarity of observed species and uses this information to estimate the true species richness.    
                                                                              
-
 
 **evenness**: evaluate the relative abundances of species rather than their total count
   
@@ -195,32 +198,54 @@ Metrics of alpha diversity can be grouped into different classes:
 
    
 **diversity**: incorporate both the relative abundances and total count of distinct species
-  - **Shannons** index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community ({% cite Shannon.1948 %}).
+  
+- **Shannons** index, which calculates the uncertainty in predicting the species identity of an individual that is selected from a community ({% cite Shannon.1948 %}).
 
-   $$ H' = -∑<sub>i=1</sub><sup>S</sup> p<sub>i</sub> \* ln(p<sub>i</sub>) $$
-    
-   pi = proportion of individuals of species i, and ln is the natural logarithm, and  S = species richness.                                                                                                                                          
+   $$ 
+   H' = - \sum_{i=1}^{S} p_i \cdot ln(p_i) 
+   $$
+   
+   With:
+   - pi the proportion of individuals of species i
+   - and ln the natural logarithm
+                                                                                                                                  
 - **Berger-Parker** index, which expresses the proportional importance of the most abundant type. Highly biased by sample size and richness ({% cite Berger.1970 %} ).
 
-   $$ D = n<sub>max</sub>/N $$
+   $$ 
+   D = \frac{n_{max}}{N} 
+   $$
   
-   <sub>max</sub> is the abundance of the most dominant species, and N is the total number of individuals (sum of all abundances).
+   With:
+   - \\(n_{max}\\) the abundance of the most dominant species
+   - N the total number of individuals (sum of all abundances)
+
 - **Simpsons** index, which calculates the probability that two individuals selected from a community will be of the same species. Obtains small values in datasets of high diversity and large values in datasets of low diversity ({% cite SIMPSON.1949 %}).
 
-  $$ D = ∑<sub>i=1</sub><sup>S</sup> (n<sub>i</sub>/N)<sup>2</sup> $$
+  $$ 
+  D = \sum_{i=1}^{S} \frac{n_i}{N}^2 
+  $$
   
-   ni is the number of individuals in species i, N = total number of individuals of all species, and ni/N = pi (proportion of individuals of species i), and S = species richness.
+  With:
+  - \\(n_i\\) is the number of individuals in species i
+  - N = total number of individuals of all species
+  - and \\(\frac{n_i}{N} = pi\\) (proportion of individuals of species i), and S = species richness.
                                                                     
-- **Inverse Simpons** index, which is the transformation of Simpsons index that increases with increasing diversity.                                                              
+- **Inverse Simpons** index, which is the transformation of Simpsons index that increases with increasing diversity. 
+
 - **Fishers alpha** index, which describes the relationship between the number of species and the number of individuals in those species. Parametric index of diversity that assumes that the abundance of species follows a log series distribution ({% cite Fisher.1943 %}).
 
-   $$ S\=a\*ln(1+n/a) $$
-                                                               
-   S is number of taxa, n is number of individuals and a is the Fisher's alpha. 
+   $$ 
+   S=a \cdot ln(1+\frac{n}{a}) 
+   $$
+
+   With:                                                      
+   - S the number of taxa
+   - n the number of individuals 
+   - a the the Fisher's alpha. 
 
 ![richness and evenness](./images/alpha_diversity_richness_evenness.png)
 
-                                                           
+## Computing α diversity using Galaxy                                                  
 
 **KrakenTools** is a suite of scripts designed to help Kraken users with downstream analysis of Kraken results. The Krakentool **Calculate alpha diversity** offers the possibility to calculate five different alpha diversity indexes:
 1. Shannon's alpha diversity
