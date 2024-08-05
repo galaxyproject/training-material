@@ -57,8 +57,8 @@ In this tutorial, we will perform batch correction on five datasets of {scATAC-s
 > This tutorial is significantly based on ["Multi-sample Pipeline" tutorial from SnapATAC2](https://kzhang.org/SnapATAC2/version/2.5/tutorials/integration.html). 
 > 
 > The data analysis is performed with the same tools shown in the tutorial [Single-cell ATAC-seq standard processing with SnapATAC2]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %} ). 
-> - That tutorial also explains the steps of the ATAC-seq analysis with SnapATAC2 in more detail. 
-> - We recommend completing that tutorial before continuing with this one. 
+> That tutorial also explains the steps of the ATAC-seq analysis with SnapATAC2 in more detail. 
+> We recommend completing that tutorial before continuing with this one. 
 >
 {: .comment}
 
@@ -114,11 +114,10 @@ First we will import all datasets into Galaxy. Then we will build a dataset coll
 >
 >    > <warning-title>Large file sizes!</warning-title>
 >    > - The `colon_multisample` datasets are quite large.
->    > - While uploading those datasets, change the {% icon galaxy-gear %}**Upload Configuration** to *Defer dataset resolution*. 
+>    > - While uploading those datasets, change the {% icon galaxy-gear %} **Upload Configuration** to *Defer dataset resolution*. 
 >    > - This will delete the datasets after the first analysis step and helps in reducing storage. 
 >    > 
->   {: .warning}
->
+>    {: .warning}
 >
 > 3. Rename the datasets
 >    - {% icon galaxy-pencil %} **Rename** the file `gencode.v46.annotation.gtf.gz` to `gene_annotation.gtf.gz`
@@ -143,10 +142,9 @@ The first step is importing the datasets into an AnnData object with the tool *p
 
 > <details-title>AnnData format </details-title>
 >
-> - The [`AnnData`](https://anndata.readthedocs.io/en/latest/) format was initially developed for the [`Scanpy`](https://scanpy.readthedocs.io/en/stable/index.html) package and is now a widely accepted data format to store annotated data matrices in a space-efficient manner.
+> - The [**AnnData**](https://anndata.readthedocs.io/en/latest/) format was initially developed for the [**Scanpy**](https://scanpy.readthedocs.io/en/stable/index.html) package and is now a widely accepted data format to store annotated data matrices in a space-efficient manner.
 > 
-> ![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of
->observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
+> ![Anndata format]({% link topics/single-cell/images/scatac-standard-snapatac2/anndata_schema.svg %} "<code>AnnData</code> format stores a count matrix <code>X</code> together with annotations of observations (i.e. cells) <code>obs</code>, variables (i.e. genes) <code>var</code> and unstructured annotations <code>uns</code>.")
 >
 {: .details}
 
@@ -214,8 +212,9 @@ The {TSSe} distributions show that the sample quality differs substantially betw
 >
 >    > <details-title> Bin size and features </details-title>
 >    >
->    > - *pp.add_tile_matrix* divides the genome into a specified number of bins, depending on the bin-size (f.ex. 5000bp). For each bin, the ATAC-seq reads of individual cells are checked to determine if a read is located in the bin. This is counted as a feature and stored as `n_vars` in the AnnData object.   
+>    > - *pp.add_tile_matrix* divides the genome into a specified number of bins, depending on the bin size (f.ex. 5000bp). For each bin, the ATAC-seq reads of individual cells are checked to determine if a read is located in the bin. This is counted as a feature and stored under `n_vars` in the AnnData object.   
 >    >    - Increasing the bin size greatly reduces compute time at the cost of some biological data. 
+>    >    - For this reason, the bin size 5000bp has been selected for the colon datasets. In the [previous tutorial] ( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}), the lower bin size of 500bp was chosen, since fewer cells were analyzed. 
 >    > - *pp.select_features* uses the previously identified features to select the most accessible features for further analysis. 
 >    >    - The parameter *"Number of features to keep"* determines the upper limit of features which can be selected. 
 >    >    - Similarly too the *bin_size*, the *Number of Features to keep* can also impact downstream clustering. This was visualized in the [previous tutorial] ( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#feature-selection ).
@@ -241,7 +240,7 @@ Then, we will remove that first dataset from the collection through element iden
 
 > <comment-title>  </comment-title>
 > - It is also possible to manually remove a dataset from a collection. 
-> - However, the automatic method shown here can also be implemented in a workflow. Which makes this approach much better scalable. 
+> - However, manually removing datasets can not be implemented in Galaxy workflows. In contrast, the automatic method shown here, can be represented in a workflow and is therefore much better scalable. 
 {: .comment}
 
 > <hands-on-title> Extract datasets </hands-on-title>
@@ -287,12 +286,14 @@ Then, we will remove that first dataset from the collection through element iden
 > > <question-title></question-title>
 > >
 > > 1. How many colon cells are stored in this AnnData object?
-> > 2. What do the different 'count-' and 'selected-' stand for?
+> > 2. What does the 'batch' annotation represent?
+> > 3. What do the different annotations for 'count-' and 'selected-' stand for?
 > >
 > > > <solution-title></solution-title>
 > > >
 > > > 1. There are 34372 cells. 
-> > > 2. 'count' and 'selected' are variable annotations indicating the detected and selected features. The sample number (0-4) specifies the dataset which produced these annotations.
+> > > 2. The cells are marked with the 'batch' annotation according to their sample number (0-4). This annotation will be used later by the batch correction algorithms to produce clusters from multiple samples. 
+> > > 3. 'count' and 'selected' are variable annotations indicating the detected and selected features. The sample number (0-4) specifies the dataset which produced these annotations.
 > > >
 > > {: .solution}
 >  {: .question}
@@ -300,7 +301,7 @@ Then, we will remove that first dataset from the collection through element iden
 {: .hands_on}
 
 # Dimension Reduction
-Through concatenation of all samples, the selected features were lost. To solve this issue, they can just be selected again, for all samples. 
+Now that all samples have been concatenated into a single AnnData object, the most accessible features of the combined count matrix must be selected. The previously selected features were only dependent on the individual samples and can not be utilized for dimensionality reduction. Therefore the most accessible features will be selected once again and then dimensionality reduction through *matrix-free spectral embedding* will be performed. 
 
 > <hands-on-title> Spectral embedding </hands-on-title>
 >
@@ -311,7 +312,7 @@ Through concatenation of all samples, the selected features were lost. To solve 
 > 
 > 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
->        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData Features` (output of **pp.select_features** {% icon tool %})
+>        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData features` (output of **pp.select_features** {% icon tool %})
 >        - *"distance metric"*: `cosine`
 >
 > 3. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData spectral`
@@ -319,6 +320,7 @@ Through concatenation of all samples, the selected features were lost. To solve 
 {: .hands_on}
 
 ## Control without batch correction
+Batch effects can be visualized in an {UMAP} projection of the data. For this, the different samples are colored according to their batch annotation (obs: 'batch'). 
 
 > <hands-on-title> UMAP projection without batch correction </hands-on-title>
 >
@@ -341,13 +343,13 @@ Through concatenation of all samples, the selected features were lost. To solve 
 > 
 > > <question-title></question-title>
 > >
-> > 1. Question1?
-> > 2. Question2?
+> > 1. How are batch effects visible in this plot?
+> > 2. How would a plot without batch effects look like?
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. Answer for question1
-> > > 2. Answer for question2
+> > > 1. Batch effects are visible as parts of the projection where the different samples are not distributed evenly. For example the large group in the left center of the plot consists of seperate groups for each batch. It is very likely, that the differences between these groups are technical artefacts, due to batch effects and do not represent "real" biological differences between the cells of different samples. 
+> > > 2. A plot without batch effects does not exhibit groups of cells from a single sample. Instead, most parts of the projection would consist of evenly distributed cells from all samples.  
 > > >
 > > {: .solution}
 >  {: .question}
@@ -355,15 +357,23 @@ Through concatenation of all samples, the selected features were lost. To solve 
 >
 {: .hands_on}
 
-# Batch correction with Harmony
+# Batch correction
+After confirming that batch effects have affected our samples, we should remove them with correction algorithms. **SnapATAC2** offers three algorithms for batch correction: *Harmony*, *MNC-correct* and *Scanorama*. In order to determine the best-suited algorithm for your specific dataset, the batch correction outputs of different algorithms should be compared. 
 
-We have seen that there are significant batch effects affecting our samples. Now we will correct the technical confounders with *Harmony*. 
-
-> <details-title> Harmony </details-title>
-> - Harmony explanation
-> - Note: other methods also exist in the snapatac2 package
+> <details-title> Batch correction algorithms </details-title>
+> - Batch correction algorithms aim to correct the cell-by-feature count matrix against batch-specific differences between samples. 
+> - Batch effects can arise from many different technical sources: variation in sequencing lanes, plates, protocol, handling. Additionally, biological factors can also be regarded as batch effects, for example tissue types, species and inter-individual variation {% cite Luecken2021 % }. 
+> - Many different correction algorithms have been developed, although most methods for scATAC-seq have been adapted from scRNA-seq batch removal algorithms. 
+> - *Harmony* {% cite Korsunsky2019 % } is a principle component analysis (PCA)-based method which utilizes the previously generated lower-dimensional data, to assign cells into new clusters. The grouping of cells into clusters favors multi-sample clusters, in order to integrate the datasets. Linear correction factors are calculated for each batch and cluster, and the cells are moved to the corrected positions. The preceding steps are iterated, until optimal batch correction is achieved. 
+>   ![Graphical abstract of Harmony batch correction]({% link topics/single-cell/images/harmony-graphical-abstract.png %})
+> - *Scanorama* {% cite Hie2019 % } performs panorama stiching, to find and merge overlapping cell types. 
+>   ![Graphical abstract of Scanorama batch correction]({% link topics/single-cell/images/scanorama-graphical-abstract.png %})
+> - *MNC-correct* {% cite Zhang2024 % } is a modified version of a *mutual nearest neighbor* algorithm {% cite Haghverdi2018 % }. The algorithm calculates centroids for batch-specific clusters and identifies pairs of mutual nearest centroids (MNC) across batches. Correction vectors align the batches in the same plane. Additionally, *MNC-correct* can also be run iteratively, to find the most ideal corrections. 
+>   ![Graphical abstract of MNC-correct batch correction]({% link topics/single-cell/images/mnn-graphical-abstract.png %})
+>
 {: .details}
 
+We will use *Harmony* to correct for batch effects first. The other methods will be tested afterwards. 
 > <hands-on-title> Batch correction and visualization</hands-on-title>
 >
 > 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
@@ -398,13 +408,13 @@ We have seen that there are significant batch effects affecting our samples. Now
 > 
 > > <question-title></question-title>
 > >
-> > 1. Question1?
-> > 2. Question2?
+> > 1. How has *Harmony* changed the appearance of this plot?
+> > 2. Are there still parts of the plot where batch effects weren't removed?
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > 1. Answer for question1
-> > > 2. Answer for question2
+> > > 1. Most of the batch effects have been successfully removed by *Harmony*. Especially the center-left groups have now been merged into a single larger group, consisting of all batches. 
+> > > 2. Yes, for example in the upper-right corner batch-specific colors are not overlapping completely. However, it is possible that some samples simply contain fewer cells and are underrepresented in clusters of rare cell types. Therefore it can not be said for certain, if *Harmony* has removed all batch effects or not. 
 > > >
 > > {: .solution}
 >  {: .question}
