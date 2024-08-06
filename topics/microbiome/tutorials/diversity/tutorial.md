@@ -158,7 +158,7 @@ We need now to import the data
 
 **α diversity** describes the diversity within a community. There are several different indexes used to calculate α diversity because different indexes capture different aspects of diversity and have varying sensitivities to different factors. These indexes have been developed to address specific research questions, account for different ecological or population characteristics, or highlight certain aspects of diversity. 
 
-![α diversity](./images/alphadiversity_metrics.png)(Source: https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36)
+![α diversity](./images/alphadiversity_metrics.png)(Source: [Pedro J Torres](https://medium.com/pjtorres-high-gut-alpha-diversity-and-health/high-alpha-diversity-and-health-65e5eca7fa36))
 
 Metrics of alpha diversity can be grouped into different classes:
 
