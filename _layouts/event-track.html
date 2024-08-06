@@ -1,0 +1,27 @@
+---
+layout: base
+---
+
+{% assign track = page %}
+
+<section class="event-track">
+  <h1>{{track.title}}</h1>
+  <p>{{track.description}}</p>
+
+  <div>
+  {% for section in track.program %}
+    {% if section.subsection %}
+    <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
+    {% elsif section.section != nil %}
+    <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+    {% endif %}
+    <p>{{ section.description | markdownify }}</p>
+
+    {% if section.tutorials %}
+      {% assign hidetimes= section.async | default: page.async %}
+      {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	  {% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
+    {% endif %}
+  {% endfor %}
+  </div>
+</section>

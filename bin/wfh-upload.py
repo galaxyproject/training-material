@@ -113,6 +113,7 @@ def doUpload(crate_path):
     #  'permissions': [{'access': 'manage',
     #                   'resource': {'id': '63', 'type': 'projects'}}]}
     #
+    push = False
     if updated_policy:
         push = True
         permissions_update['data']['attributes']['policy'] = updated_policy
