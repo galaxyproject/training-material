@@ -206,7 +206,7 @@ Metrics of alpha diversity can be grouped into different classes:
    $$
    
    With:
-   - pi the proportion of individuals of species i
+   - \\(p_i\\) the proportion of individuals of species i
    - and ln the natural logarithm
                                                                                                                                   
 - **Berger-Parker** index, which expresses the proportional importance of the most abundant type. Highly biased by sample size and richness ({% cite Berger.1970 %} ).
