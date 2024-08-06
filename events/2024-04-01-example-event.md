@@ -141,7 +141,7 @@ program:
 
   - section: "Wednesday: Track buttons example"
     description: Today we have two different tracks, click on one of the buttons below to view the track program.
-    tracks:
+    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
       - title: Track 1
         link: events/tracks/example-track1.md
       - title: Track 2
