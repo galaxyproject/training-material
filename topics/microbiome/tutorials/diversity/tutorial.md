@@ -16,6 +16,7 @@ key_points:
 - There are 2 different types of diversity metrics (α and β diversity)
 - Krakentools can be used in Galaxy for calculating the diversity
 time_estimation: 20M
+subtopic: metagenomics
 contributions:
    authorship:
     - sophia120199
