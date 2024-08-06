@@ -5,7 +5,7 @@ title: Example Track 1
 description: In this track we focus on ...
 
 program:
-  - section: "Wednesday: Topic"  # section title is optional
+  - section: "Part 1: Topic"  # section title is optional
     description: |
       Short description of the program in this section.
       Markdown formatted
@@ -37,25 +37,9 @@ program:
         description: |
           Time for some well-deserved drinks and socializing!
 
-  - section: "Tuesday: An advanced look at .."
+  - section: "Part 2: An advanced look at .."
     description: |
       Short description of the program for this section.
 
-  - section: "Track 1"
-    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
-    description: "you can further subdivide into multiple subsections/tracks as well"
-    tutorials:
-      - name: galaxy-intro-short
-        topic: introduction
-        time: "09:00 - 10:00"
-      - type: custom
-        name: "Wrap-up"
-
-  - section: "Track 2"
-    subsection: true  # will treat this section as a subsection of the previous (i.e. smaller heading), useful to split day into tracks
-    description: "blabla"
-    tutorials:
-      - name: mothur-miseq-sop-short
-        topic: microbiome
 
 ---
