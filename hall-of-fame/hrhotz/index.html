@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@35df3756de23bd44e6b9485e2e6138bd92b766c4",
+		release: "galaxy-training-network@a6994e6b1b97f7e5710d1d739fb69038ccd90c8f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -331,12 +331,33 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
+						<a href="/training-material/topics/microbiome">
+							Microbiome
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
-						Clustering 3K PBMCs with Scanpy
+						<a href="/training-material//topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
+						Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
+						</a>
+						
+						
+						
+						
+	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
+
+
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/admin">
+							Galaxy Server administration
+						</a>
+						/
+						<a href="/training-material//topics/admin/tutorials/database-schema/tutorial.html">
+						Galaxy Database schema
 						</a>
 						
 						
@@ -363,36 +384,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/admin">
-							Galaxy Server administration
+						<a href="/training-material/topics/single-cell">
+							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/admin/tutorials/database-schema/tutorial.html">
-						Galaxy Database schema
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
+						Clustering 3K PBMCs with Scanpy
 						</a>
 						
 						
-						
-						
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/microbiome">
-							Microbiome
-						</a>
-						/
-						<a href="/training-material//topics/microbiome/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html">
-						Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition
-						</a>
-						
-						
-						
-						
-	<abbr title="This person edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">📝</abbr>
-
-
 						
 						
 					</li>
@@ -437,12 +437,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/single-cell">
-							Single Cell
+						<a href="/training-material/topics/epigenetics">
+							Epigenetics
 						</a>
 						/
-						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
-						Clustering 3K PBMCs with Scanpy
+						<a href="/training-material//topics/epigenetics/tutorials/atac-seq/tutorial.html">
+						ATAC-Seq data analysis
 						</a>
 						
 						
@@ -458,12 +458,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/epigenetics">
-							Epigenetics
+						<a href="/training-material/topics/single-cell">
+							Single Cell
 						</a>
 						/
-						<a href="/training-material//topics/epigenetics/tutorials/atac-seq/tutorial.html">
-						ATAC-Seq data analysis
+						<a href="/training-material//topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.html">
+						Clustering 3K PBMCs with Scanpy
 						</a>
 						
 						
@@ -562,15 +562,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         
         
-<span class="label label-default tutorial_tag" style="--color-primary: #ffbcb0; --color-darker: #ff9b85; --color-dimmed: #ffac9b;">deploying</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #ffa491; --color-darker: #ff8461; --color-dimmed: #ff947b;">deploying</span>
         
         
         
-<span class="label label-default tutorial_tag" style="--color-primary: #cbc6ff; --color-darker: #b4acff; --color-dimmed: #c0b9ff;">maintenance</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #bab3ff; --color-darker: #a59bff; --color-dimmed: #b0a7ff;">maintenance</span>
         
         
         
-<span class="label label-default tutorial_tag" style="--color-primary: #c4c8ff; --color-darker: #a8afff; --color-dimmed: #b6bcff;">survey</span>
+<span class="label label-default tutorial_tag" style="--color-primary: #afb6ff; --color-darker: #959fff; --color-dimmed: #a2abff;">survey</span>
         
         
     <hr/>
@@ -702,11 +702,7 @@ var topics = [
 
 	
 	
-	"Single Cell",
-
-	
-	
-	"Single Cell",
+	"Microbiome",
 
 	
 	
@@ -714,7 +710,11 @@ var topics = [
 
 	
 	
-	"Microbiome",
+	"Single Cell",
+
+	
+	
+	"Single Cell",
 
 
 	
@@ -868,7 +868,7 @@ var chart2 = new Chart(ctx2, {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/35df3756de23bd44e6b9485e2e6138bd92b766c4">35df375</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a6994e6b1b97f7e5710d1d739fb69038ccd90c8f">a6994e6</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
