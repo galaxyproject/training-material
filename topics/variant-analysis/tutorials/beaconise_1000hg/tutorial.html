@@ -1,0 +1,2044 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons / Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons / Variant Analysis</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@35df3756de23bd44e6b9485e2e6138bd92b766c4",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.20cf1f17.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-08-06 10:26:02 +0000">
+<meta name="DC.creator" content="Khaled Jum'ah">
+<meta name="DC.creator" content="Katarzyna Kamieniecka">
+<meta name="DC.creator" content="Krzysztof Poterlowicz"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Variant Analysis / Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons / Hands-on: Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons">
+        <meta property="og:description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-08-06 10:26:02 +0000",
+  "datePublished": "2024-08-06 10:26:02 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Variant Analysis",
+    "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+    "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons",
+  "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "Comprehend the fundamental concepts and applications of Beacons\n - Apply skills in utilizing MongoDB to construct and manage Beacons\n - Analyze and transform variants and metadata into structures compatible with Beacon requirements\n - Execute a step-by-step process to import data into Beacons\n - Develop the ability to query Beacons for variants",
+  "keywords": [
+    "Variant Analysis"
+  ],
+  "description": "The questions this  addresses are:\n - What does the term \"Beacon\" refer to?\n - How can MongoDB be employed to establish a Beacon tailored for your institution?\n - In what manner can variant data and metadata be readied into a format compatible with Beacons?\n - What are the steps involved in importing data into a Beacon seamlessly?\n - How does one perform queries on a Beacon to retrieve information about variants?\n\n\nThe objectives are:\n - Comprehend the fundamental concepts and applications of Beacons\n - Apply skills in utilizing MongoDB to construct and manage Beacons\n - Analyze and transform variants and metadata into structures compatible with Beacon requirements\n - Execute a step-by-step process to import data into Beacons\n - Develop the ability to query Beacons for variants\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "http://swcarpentry.github.io/shell-novice/",
+      "name": "The Unix Shell"
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://swcarpentry.github.io/git-novice/",
+      "name": "Version Control with Git"
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beacon_cnv_query/tutorial.html",
+      "name": "Querying a Beacon Database for Copy Number Variants (CNVs)",
+      "description": "Hands-on for 'Querying a Beacon Database for Copy Number Variants (CNVs)' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/",
+      "name": "Khaled Jum'ah",
+      "image": "https://avatars.githubusercontent.com/khaled196",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-5481-8893",
+      "orcid": "https://orcid.org/0000-0001-5481-8893"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/",
+      "name": "Katarzyna Kamieniecka",
+      "image": "https://avatars.githubusercontent.com/kkamieniecka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0004-2454-5950",
+      "orcid": "https://orcid.org/0009-0004-2454-5950"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/",
+      "name": "Krzysztof Poterlowicz",
+      "image": "https://avatars.githubusercontent.com/poterlowicz-lab",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-6173-5674",
+      "orcid": "https://orcid.org/0000-0001-6173-5674"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Variant Analysis",
+      "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0199",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0199",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0199"
+    }
+  ],
+  "educationalLevel": "Advanced",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/10658688",
+      "name": "Associated Training Datasets"
+    }
+  ],
+  "abstract": "Beacon v2 is a data query protocol and API that allows the researcher to seek information about specific genomic variants of biomedical research and clinical applications from the data providers (Beacon provider) without "
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/variant-analysis" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Variant Analysis
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/variant-analysis/faqs/" title="Check our FAQs for the Variant Analysis topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-variant-analysis">
+    <h1 data-toc-skip>Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/khaled196/" class="contributor-badge contributor-khaled196"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/khaled196?s=36" alt="Khaled Jum'ah avatar" width="36" class="avatar" />
+    Khaled Jum'ah</a><a href="/training-material/hall-of-fame/kkamieniecka/" class="contributor-badge contributor-kkamieniecka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kkamieniecka?s=36" alt="Katarzyna Kamieniecka avatar" width="36" class="avatar" />
+    Katarzyna Kamieniecka</a><a href="/training-material/hall-of-fame/poterlowicz-lab/" class="contributor-badge contributor-poterlowicz-lab"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=36" alt="Krzysztof Poterlowicz avatar" width="36" class="avatar" />
+    Krzysztof Poterlowicz</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What does the term “Beacon” refer to?</p>
+</li>
+        
+        <li><p>How can MongoDB be employed to establish a Beacon tailored for your institution?</p>
+</li>
+        
+        <li><p>In what manner can variant data and metadata be readied into a format compatible with Beacons?</p>
+</li>
+        
+        <li><p>What are the steps involved in importing data into a Beacon seamlessly?</p>
+</li>
+        
+        <li><p>How does one perform queries on a Beacon to retrieve information about variants?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Comprehend the fundamental concepts and applications of Beacons</p>
+</li>
+        
+        <li><p>Apply skills in utilizing MongoDB to construct and manage Beacons</p>
+</li>
+        
+        <li><p>Analyze and transform variants and metadata into structures compatible with Beacon requirements</p>
+</li>
+        
+        <li><p>Execute a step-by-step process to import data into Beacons</p>
+</li>
+        
+        <li><p>Develop the ability to query Beacons for variants</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Quality Control</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Quality Control</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                        
+                            <li>
+                              <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides: Mapping</a>
+                            </li>
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Mapping</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+    
+      <li>
+        <a href="http://swcarpentry.github.io/shell-novice/">The Unix Shell</a>
+      </li>
+    
+
+    
+      <li>
+        <a href="https://swcarpentry.github.io/git-novice/">Version Control with Git</a>
+      </li>
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/variant-analysis/tutorials/beacon_cnv_query/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Querying a Beacon Database for Copy Number Variants (CNVs)</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Advanced <span class="visually-hidden">Advanced</span>
+<span class="level advanced" title="Advanced Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/10658688">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/variant-analysis/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 6, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 6, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Beacon v2 is a data query protocol and API that allows the researcher to seek information about specific genomic variants of biomedical research and clinical applications from the data providers (Beacon provider) without 
+accessing the original or the whole dataset <span class="citation"><a href="#Rambla2022">Rambla <i>et al.</i> 2022</a></span>. The protocol was developed by the <a href="https://www.ga4gh.org/">Global Alliance for Genomics and Health (GA4GH)</a> in 2021 as an update for the former Beacon v1.
+The second version of Beacon comes with additional features that provide users with more detailed information about the queried variants. Unlike the previous version, 
+which only returned a Yes or No response indicating the presence of variants, Beacon v2 presents comprehensive results about the variants being searched. <span class="citation"><a href="#Rueda2022">Rueda <i>et al.</i> 2022</a></span>.</p>
+
+<p>The Beacon v2 comprises two main parts, the framework and the models. The framework specifies how the requests and responses should be formatted, while the models determine the organization of the biological data response 
+<span class="citation"><a href="#Rueda2022">Rueda <i>et al.</i> 2022</a></span>.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/Beacon_framework_and_model.png" alt="Beacon Framework and Model. " width="503" height="326" loading="lazy" /><a target="_blank" href="../../images/Beacon_framework_and_model.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Schematic representation of Beacon v2 API specification from B2RI Documentation</figcaption></figure>
+
+<p>MongoDB is a versatile, document-oriented NoSQL database that provides flexibility and scalability for modern applications, allowing developers to efficiently manage and query unstructured data.</p>
+
+<p>MongoDB databases are created with different security levels. This controls accessing the Beacon through the import and query processes. There are three security levels for Beacon. Public, registered and controlled, in our import and query tools, we have classified them into public and authenticated.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Security Level</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Public</td>
+      <td>Beacon can be accessed by any request</td>
+    </tr>
+    <tr>
+      <td>Registered</td>
+      <td>Only known users can access the data</td>
+    </tr>
+    <tr>
+      <td>Controlled</td>
+      <td>Only specifically granted users can access the data</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The Beacon data is divided into two parts: the Metadata and Genomic variants. The metadata is initially saved in different formats like Excel, CSV, etc., while the Genomic variations are kept in VCF files.
+So, before creating a Beacon database for them, the Beacon providers must prepare the data in JSON, also known as Beacon-friendly format (BFF). This can be done by extracting the required information from those files following the Beacon schemas. 
+The Beacon providers can use already developed tools such as the <a href="https://github.com/EGA-archive/Beacon2-ri-tools">B2RI tools</a> or develop their own tools.</p>
+
+<p>For this tutorial, we will show the steps to create a Beacon and query it for the <a href="https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&amp;bucketType=general&amp;prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/HG00096/&amp;showversions=false">HG00096</a> 
+biosample structural variants VCF file obtained from the <a href="https://s3.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&amp;bucketType=general&amp;tab=objects">1000 Genome project</a> using scripts created by The University of 
+Bradford Computational and Data-Driven Science research team.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#create-beacon-protocol-using-mongodb" id="markdown-toc-create-beacon-protocol-using-mongodb">Create Beacon protocol using MongoDB</a></li>
+  <li><a href="#data-preparation" id="markdown-toc-data-preparation">Data Preparation</a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+      <li><a href="#convert-the-genomic-variants-vcf-file-into-json" id="markdown-toc-convert-the-genomic-variants-vcf-file-into-json">Convert the Genomic Variants VCF file into JSON</a></li>
+      <li><a href="#phenopacket-schema" id="markdown-toc-phenopacket-schema">Phenopacket Schema</a></li>
+    </ol>
+  </li>
+  <li><a href="#import-data-into-beacon-mongodb" id="markdown-toc-import-data-into-beacon-mongodb">Import data into Beacon MongoDB</a></li>
+  <li><a href="#search-beacon-mongodb-for-cnvs" id="markdown-toc-search-beacon-mongodb-for-cnvs">Search Beacon MongoDB for CNVs</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="create-beacon-protocol-using-mongodb">Create Beacon protocol using MongoDB</h1>
+
+<p>The institution that provides the Beacon creates a customized Beacon according to its specific requirements. The Beacon can be made open access or private. For this training, we will create a private access Beacon. 
+This Beacon will have administrative user rights to modify it, and an additional account dedicated solely to querying the database.</p>
+
+<p>We will use docker and docker-compose for this step. If you don’t have it installed, please follow this <a href="https://docs.docker.com/engine/install/">documentation</a> to install it</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-beacon-database-on-mongodb"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create Beacon Database on MongoDB</div>
+  <ol>
+    <li>Create a directory in your local environment and name it as <code class="language-plaintext highlighter-rouge">beacon</code>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>beacon
+</code></pre></div>      </div>
+    </li>
+    <li>Change your location to the created directory
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>beacon
+</code></pre></div>      </div>
+    </li>
+    <li>Use any text editor you are comfortable with to create a new YAML file and name it <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano docker-compose.yaml
+</code></pre></div>      </div>
+    </li>
+    <li>Copy the text below into the <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file
+      <blockquote>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.6'</span>
+<span class="na">services</span><span class="pi">:</span>
+
+ <span class="na">mongo-client</span><span class="pi">:</span>
+   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:3.6</span>
+   <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
+   <span class="na">volumes</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">./mongo/db:/data/db</span>
+     <span class="pi">-</span> <span class="s">./mongo-init:/docker-entrypoint-initdb.d</span>
+   <span class="na">ports</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s2">"</span><span class="s">27017:27017"</span>
+   <span class="na">environment</span><span class="pi">:</span>
+     <span class="na">MONGO_INITDB_ROOT_USERNAME</span><span class="pi">:</span> <span class="s">root</span>
+     <span class="na">MONGO_INITDB_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+
+ <span class="na">mongo-express</span><span class="pi">:</span>
+   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo-express</span>
+   <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
+   <span class="na">environment</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">ME_CONFIG_MONGODB_SERVER=mongo-client</span>
+     <span class="pi">-</span> <span class="s">ME_CONFIG_MONGODB_PORT=27017</span>
+     <span class="pi">-</span> <span class="s">ME_CONFIG_BASICAUTH_USERNAME=root</span>
+     <span class="pi">-</span> <span class="s">ME_CONFIG_BASICAUTH_PASSWORD=example</span>
+   <span class="na">ports</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s2">"</span><span class="s">8081:8081"</span>
+
+ <span class="na">mongo-init</span><span class="pi">:</span>
+   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:3.6</span>
+   <span class="na">restart</span><span class="pi">:</span> <span class="s2">"</span><span class="s">no"</span>
+   <span class="na">depends_on</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">mongo-client</span>
+   <span class="na">environment</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">MONGO_INITDB_DATABASE=admin</span>
+     <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_USERNAME=root</span>
+     <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_PASSWORD=example</span>
+   <span class="na">volumes</span><span class="pi">:</span>
+     <span class="pi">-</span> <span class="s">./mongo-init:/docker-entrypoint-initdb.d</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>Create the path <code class="language-plaintext highlighter-rouge">mongo/db</code> in your directory using <code class="language-plaintext highlighter-rouge">$mkdir</code> tool
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>mongo
+<span class="nb">mkdir </span>mongo/db
+</code></pre></div>      </div>
+      <p>You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
+We have everything ready for creating the MongoDB server hosted in the docker container. This will create a Beacon database with admin access. Next, we will add users.</p>
+    </li>
+    <li>Create another directory in your mongo-init directory and name it as <code class="language-plaintext highlighter-rouge">mongo-init</code>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>mongo-init
+</code></pre></div>      </div>
+    </li>
+    <li>Change your location to the created directory
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>mongo-init
+</code></pre></div>      </div>
+    </li>
+    <li>Use any text editor you are comfortable with to create a new JS file and name it <code class="language-plaintext highlighter-rouge">create-user.js</code>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nano create-user.js
+</code></pre></div>      </div>
+    </li>
+    <li>Copy the text below into the <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file
+      <blockquote>
+        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// create_user.js</span>
+
+<span class="c1">// Connect to the admin database</span>
+<span class="kd">var</span> <span class="nx">adminDB</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">getSiblingDB</span><span class="p">(</span><span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="c1">// Create a new user with read-only access to all databases</span>
+<span class="nx">adminDB</span><span class="p">.</span><span class="nf">createUser</span><span class="p">({</span>
+ <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">query_user</span><span class="dl">"</span><span class="p">,</span>
+ <span class="na">pwd</span><span class="p">:</span> <span class="dl">"</span><span class="s2">querypassword</span><span class="dl">"</span><span class="p">,</span>
+ <span class="na">roles</span><span class="p">:</span> <span class="p">[</span>
+   <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="na">db</span><span class="p">:</span> <span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span> <span class="p">},</span>
+   <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="na">db</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Beacon</span><span class="dl">"</span> <span class="p">},</span> <span class="c1">// Adjust this for your needs</span>
+   <span class="c1">// Add additional read roles as needed</span>
+ <span class="p">]</span>
+<span class="p">});</span>
+</code></pre></div>        </div>
+        <p>This will add a user (user name: <code class="language-plaintext highlighter-rouge">query_user</code> and password:<code class="language-plaintext highlighter-rouge">querypassword</code>) account with read-only permission to the Beacon database. This is important to avoid unwanted modifications to the Beacon database. 
+To know more about MongoDB, please read the <a href="https://www.mongodb.com/docs/">MongoDB documentation</a>.</p>
+      </blockquote>
+    </li>
+    <li>Run the command <code class="language-plaintext highlighter-rouge">$docker-compose</code> in the directory containing the <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file with the specified parameters.
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
+</code></pre></div>      </div>
+      <p>This will create an empty MongoDB server where we can add the Beacon database or any additional databases.</p>
+    </li>
+    <li>Check the created docker containers and test if the created docker container is running
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
+</code></pre></div>      </div>
+      <p>This will generate a message similar to the text below</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID   IMAGE           COMMAND                  CREATED       STATUS                         PORTS                                           NAMES
+96d7886f9cdb   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     27017/tcp                                       mongo-init_mongo-init_1
+1bb520888fbf   mongo:3.6       "docker-entrypoint.s…"   5 weeks ago   Up 5 weeks                     0.0.0.0:27017-&gt;27017/tcp, :::27017-&gt;27017/tcp   mongo-init_mongo-client_1
+a148fb3db385   mongo-express   "/sbin/tini -- /dock…"   5 weeks ago   Restarting (1) 9 seconds ago                                                   mongo-init_mongo-express_1
+</code></pre></div>      </div>
+    </li>
+    <li>Test docker to see if it is running by using <code class="language-plaintext highlighter-rouge">$docker exec</code> command
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">exec</span> <span class="nt">-it</span> &lt;mongo-client&gt; bash <span class="c">#If the docker image for the Mongo was installed with a different name, Change the name in &lt;mongo-client&gt;</span>
+</code></pre></div>      </div>
+      <p>This will take lunsh the docker container. Use <code class="language-plaintext highlighter-rouge">ctrl + d</code> to quit.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-create-b2ri-v2-beacon-protocole"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Create B2RI V2 Beacon Protocole</div>
+  <p>Clone to the <a href="https://github.com/EGA-archive/beacon2-ri-tools-v2">beacon2-ri-tools-v2</a> GitHub repository and follow the instructions to build the beacon protocols, and use additional tools needed for preprocessing the data and metadata</p>
+</blockquote>
+
+<h1 id="data-preparation">Data Preparation</h1>
+<p>Upload the data into Galaxy and prepare it to be imported into the Beacon database. The datasets were obtained from 
+<a href="https://us-west-2.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&amp;bucketType=general&amp;tab=objects">1000genomes-dragen</a>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Format</th>
+      <th>Data size (MB)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>HG00096.cnv.vcf</td>
+      <td>vcf</td>
+      <td>HG00096.cnv.vcf KB</td>
+    </tr>
+    <tr>
+      <td>igsr-1000-genomes-30x-on-grch38.tsv</td>
+      <td>tsv</td>
+      <td>405.7 KB</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data upload</div>
+
+  <ol>
+    <li>
+      <p>For this tutorial, make a new history.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the data files from
+<a href="https://zenodo.org/records/10658688">Zenodo</a>:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/10658688/files/HG00096.cnv.vcf
+https://zenodo.org/records/10658688/files/igsr-1000-genomes-30x-on-grch38.tsv
+</code></pre></div>      </div>
+      <p>This will download the structural variant and the metadata file.</p>
+
+      <p>In some cases, the same datasets are available in the Galaxy shared data library. Please consult the instructor for further details.</p>
+
+      <p>Alternatively, the datasets can be downloaded from local storage.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">json/tabular</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Provide meaningful names for the data (HG00096 for VCF file and Metadata to igsr-1000-genomes-30x-on-grch38.tsv) and tags to facilitate analysis.</p>
+
+      <p>When uploading data from a link, Galaxy names the files after the link address.
+It might be useful to change or modify the name to something more meaningful.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>To track the data in the history, it is recommended to tag the datasets by attaching a meaningful tag ‘#’
+to them. The tagging will automatically be attached to any file generated
+from the original tagged dataset.
+  <em>e.g.</em>, <code class="language-plaintext highlighter-rouge">#genomicVariations</code> for structural variants VCF file and
+  <em>e.g.</em>, <code class="language-plaintext highlighter-rouge">#individuals</code> metadata tsv file.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="convert-the-genomic-variants-vcf-file-into-json">Convert the Genomic Variants VCF file into JSON</h2>
+<p>This step is to preprocess the genomic variant data and convert it from VCF to JSON.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-convert-the-genomic-variants-vcf-file-into-json"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Convert the Genomic Variants VCF file into JSON</div>
+  <ol>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.1.0+galaxy0.1" title=" CNV VCF2JSON tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong> CNV VCF2JSON</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.0+galaxy0.1)</span> on the structural variants VCF file
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“CNV VCF file”</em>: <code class="language-plaintext highlighter-rouge">HG00096</code> file</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the <em>JSON</em> output produced by the tool</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>In the inspected JSON file, what are the key variables and why are they important for genomic analysis?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>
+              <p><strong>biosampleId</strong>: This variable represents the unique identifier for the biological sample being analyzed.
+Understanding the biosample allows researchers to trace the origins of the genetic data and contextualize its
+relevance within a specific study or experiment.</p>
+            </li>
+            <li>
+              <p><strong>assemblyId</strong>: The assemblyId denotes the reference genome assembly against which the genetic variants are aligned. 
+This is crucial for ensuring consistency and accuracy in genomic analyses, as different assemblies may produce varying results.</p>
+            </li>
+            <li>
+              <p><strong>variantInternalId</strong>: This identifier specifies the genomic location and type of the variant, providing a standardized format for 
+referencing genetic variations. It enables researchers to precisely locate and identify specific genetic alterations within the genome.</p>
+            </li>
+            <li>
+              <p><strong>variantType</strong>: The variantType indicates the type of genetic variant being described, such as deletion (DEL), insertion (INS), or substitution (SNP). 
+Understanding the variant type is essential for interpreting its potential impact on gene function and phenotype.</p>
+            </li>
+            <li>
+              <p><strong>variantId</strong>: This variable serves as a unique identifier for the variant, often referencing external databases or ontologies. 
+It facilitates data integration and interoperability across different genomic datasets and analysis platforms.</p>
+            </li>
+            <li>
+              <p><strong>start</strong> and <strong>end</strong>: These values specify the genomic coordinates of the variant, delineating its precise location within the reference genome. 
+Knowing the start and end positions is crucial for accurately defining the boundaries of the variant and assessing its potential functional consequences.</p>
+            </li>
+            <li>
+              <p><strong>referenceName</strong>: The referenceName indicates the chromosome or genomic contig on which the variant is located. It provides crucial 
+contextual information for interpreting the genomic coordinates and understanding the genetic context of the variant.</p>
+            </li>
+            <li>
+              <p><strong>info</strong>: This section contains additional information related to the variant, such as legacy identifiers, copy number counts (cnCount), 
+and copy number values (cnValue). These supplementary details can provide insights into the structural and functional 
+implications of the variant within the genome.</p>
+
+              <p>Understanding these key variables is essential for conducting effective genomic analyses, as they provide critical information 
+about the genetic variants under investigation and enable researchers to interpret their biological significance accurately.</p>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="phenopacket-schema">Phenopacket Schema</h2>
+
+<p>The Phenopacket Schema is an open standard for exchanging disease and phenotypic data. It helps us understand, diagnose, and treat both common and unusual diseases. By using Phenopackets, physicians, 
+biologists, and researchers can build more comprehensive disease models, connecting comprehensive phenotype descriptions with patient, disease, and genetic data. This enables better study of disease and drugs.</p>
+
+<p>We are using the Biosamples phenopacket. A biological material unit from which the substrate molecules (genomic DNA, RNA, proteins, etc.) are extracted for molecular analyses 
+(mass spectrometry, array hybridization, sequencing, etc.). Tissue biopsies, single cells from cultures used for single-cell genome sequencing, and protein fractions from gradient centrifugations are a 
+few examples. The same Biosample may be referred to by many instances (e.g., technical replicates) or types of research (e.g., both RNA-seq and genomic array experiments).</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/phenopacket-schema-v2-overview.png" alt="v2.0 phenopacket schema. " width="2092" height="755" loading="lazy" /><a target="_blank" href="../../images/phenopacket-schema-v2-overview.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Overview of v2.0 of the schema optained from Phenopacket Schema Documentation</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-phenopacket-schema-json-file-from-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create Phenopacket Schema JSON file from Metadata</div>
+  <ol>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0" title=" CNV Phenopacket tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong> CNV Phenopacket</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</span> on the structural variants VCF file
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Metadata file”</em>: <code class="language-plaintext highlighter-rouge">Metadata</code> file</li>
+      </ul>
+    </li>
+    <li>
+      <p>Inspect the <em>JSON</em> output produced by the tool</p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>In the inspected JSON file, what are the key variables and why are they important for genomic analysis?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <ol>
+            <li>
+              <p><strong>id</strong>: The id field serves as a unique identifier for the individual described in the Phenopacket. This 
+Identifier allows researchers to track and reference specific individuals across different datasets 
+and analyses.</p>
+            </li>
+            <li>
+              <p><strong>individualId</strong>: This variable represents the individual’s unique identifier within the dataset or 
+study. It helps maintain data integrity and consistency by ensuring accurate identification of the 
+individual across various analyses and datasets.</p>
+            </li>
+            <li>
+              <p><strong>sex</strong>: The sex field specifies the biological sex of the individual, providing important demographic
+information for genomic analyses. Understanding the individual’s sex is crucial for interpreting 
+genetic variations and assessing their potential relevance to sex-specific traits or diseases.</p>
+            </li>
+            <li>
+              <p><strong>description</strong>: This field provides additional information about the individual, such as their 
+participation in specific genomic projects or studies. It offers context for the individual’s 
+genomic data and helps researchers understand the sources and potential biases of the data.</p>
+            </li>
+            <li>
+              <p><strong>procedure</strong>: The procedure field contains information about the procedures or protocols used to 
+generate the genomic data associated with the individual. This includes codes or identifiers that 
+reference specific methodologies or experimental protocols, ensuring transparency and 
+reproducibility in genomic analyses.</p>
+            </li>
+            <li>
+              <p><strong>files</strong>: This section contains details about the genomic data files associated with the individual. It 
+includes information such as file identifiers and attributes like the data format (htsFormat) and 
+genome assembly (genomeAssembly). Understanding these file attributes is essential for 
+accessing and interpreting the individual’s genomic data effectively.</p>
+            </li>
+            <li>
+              <p><strong>htsFormat</strong>: The htsFormat field specifies the format of the genomic data files, such as Variant 
+Call Format (VCF). Knowing the data format is crucial for selecting appropriate analysis tools 
+and pipelines and ensuring compatibility with downstream analysis workflows.</p>
+            </li>
+            <li>
+              <p><strong>genomeAssembly</strong>: This variable denotes the reference genome assembly used for aligning and
+interpreting the individual’s genomic data. It ensures consistency and accuracy in genomic 
+analyses by specifying the genomic reference against which genetic variants are annotated and interpreted.</p>
+
+              <p>By understanding these key variables in the Phenopacket schema, researchers can effectively interpret and analyze the genomic profile 
+of the individual described, facilitating insights into genetic variations and their potential implications for health and disease.</p>
+            </li>
+          </ol>
+
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="import-data-into-beacon-mongodb">Import data into Beacon MongoDB</h1>
+
+<p>Now that the data are in the Beacon proper format and with creating the Beacon MongoDB server, we are ready to import the data we have into Beacon.</p>
+
+<p>We will use the Beacon2 import tool to import the data into the created Beacon database.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-use-credentials-to-access-specific-beacon"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Use Credentials to Access Specific Beacon</div>
+  <ol>
+    <li>Make sure you are logged in to Galaxy.</li>
+    <li>Go to <strong>User &gt; Preferences</strong> in the top menu bar.</li>
+    <li>To add beacon database credentials, click on <strong>Manage Information</strong> and fill in the Beacon2 Account empty fields <code class="language-plaintext highlighter-rouge">db_auth_source</code>, <code class="language-plaintext highlighter-rouge">db_user</code> and <code class="language-plaintext highlighter-rouge">db_password</code>.</li>
+    <li>Make the changes and click the <strong>Save</strong> button at the bottom.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-import-data-into-beacon-mongodb"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import data into Beacon MongoDB</div>
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0" title="Beacon2 Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Beacon2 Import</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy0)</span> to import genomic variant file Beacon database
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“INPUT JSON FILE”</em>: <code class="language-plaintext highlighter-rouge">Output dataset 'HG00096'</code> from <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/cnv_vcf2json/cnv_vcf2json/1.1.o+galaxy0.1" title=" CNV VCF2JSON tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong> CNV VCF2JSON</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.1.o+galaxy0.1)</span></li>
+        <li><em>“DATABASE HOST”</em>: <code class="language-plaintext highlighter-rouge">The Hostname/IP of the Beacon database</code> for example <code class="language-plaintext highlighter-rouge">20.108.51.167</code></li>
+        <li><em>“DATABASE PORT”</em>: <code class="language-plaintext highlighter-rouge">27017</code></li>
+        <li><em>“DATABASE”</em>: <code class="language-plaintext highlighter-rouge">beacon</code></li>
+        <li><em>“COLLECTION”</em>: <code class="language-plaintext highlighter-rouge">genomicVariations</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <ul>
+    <li>When you run the tool for the first time, it will create a new database named Beacon and a collection named genomicVariations on MongoDB. It will then upload the data from the HG00096 JSON file into the genomicVariations collection.</li>
+    <li>If you use the same database name and collection name again, it will append the data to the collection. There is an option to clear all or specific collections before uploading the data, but be careful, as deleting is permanent.</li>
+    <li>Always remember to back up important data before making any deletions.</li>
+  </ul>
+
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/beacon2_import/beacon2_import/2.1.1+galaxy0" title="Beacon2 Import tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Beacon2 Import</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy0)</span> to import phenopacket file into the created Beacon database
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“INPUT JSON FILE”</em>: <code class="language-plaintext highlighter-rouge">Output dataset 'Phenopacket'</code> from <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/cnv_phenopacket/cnv_phenopacket/1.0.2+galaxy0" title=" CNV Phenopacket tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong> CNV Phenopacket</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2+galaxy0)</span></li>
+        <li><em>“DATABASE HOST”</em>: <code class="language-plaintext highlighter-rouge">The Hostname/IP of the Beacon database</code> for example <code class="language-plaintext highlighter-rouge">20.108.51.167</code></li>
+        <li><em>“DATABASE PORT”</em>: <code class="language-plaintext highlighter-rouge">27017</code></li>
+        <li><em>“DATABASE”</em>: <code class="language-plaintext highlighter-rouge">beacon</code></li>
+        <li><em>“COLLECTION”</em>: <code class="language-plaintext highlighter-rouge">individuals</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="search-beacon-mongodb-for-cnvs">Search Beacon MongoDB for CNVs</h1>
+
+<p>In the last step, we imported the data into the Beacon. Now, we will query the database to look for the samples that match our query.</p>
+
+<p>We are looking to see if there is a deletion mutation in the gene <strong>located</strong> in <code class="language-plaintext highlighter-rouge">chromosome 1</code>, which <strong>starts</strong> at <code class="language-plaintext highlighter-rouge">58278107</code> and <strong>ends</strong> at <code class="language-plaintext highlighter-rouge">58279217</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-query-the-beacon-mongodb"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Query the Beacon MongoDB</div>
+
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0" title="Beacon2 CNV tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Beacon2 CNV</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.1.1+galaxy0)</span> to perform a range query on Beacon <strong>genomicVariations</strong> collection
+      <ul>
+        <li><em>“DATABASE HOST”</em>: <code class="language-plaintext highlighter-rouge">The Hostname/IP of the Beacon database</code> for example <code class="language-plaintext highlighter-rouge">20.108.51.167</code></li>
+        <li><em>“DATABASE PORT”</em>: <code class="language-plaintext highlighter-rouge">27017</code></li>
+        <li><em>“DATABASE”</em>: <code class="language-plaintext highlighter-rouge">beacon</code></li>
+        <li><em>“COLLECTION”</em>: <code class="language-plaintext highlighter-rouge">genomicVariations</code></li>
+        <li><em>“CHROMOSOME”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“START”</em>: <code class="language-plaintext highlighter-rouge">243618689</code></li>
+        <li><em>“END”</em>: <code class="language-plaintext highlighter-rouge">243620819</code></li>
+        <li><em>“VARIANT STATE ID”</em>: <code class="language-plaintext highlighter-rouge">EFO:0030068</code>
+The srarch function will queiry the Beacon database and print out the resutls that matches our quiery specifications. In this case it will print something like this.
+          <blockquote>
+            <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="p">{</span><span class="err">'_id':</span><span class="w"> </span><span class="err">ObjectId('</span><span class="mi">6690160</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">936e8</span><span class="err">e</span><span class="mi">0</span><span class="err">a</span><span class="mi">7828e2</span><span class="err">')</span><span class="p">,</span><span class="w">
+</span><span class="err">'assemblyId':</span><span class="w"> </span><span class="err">'GRCh</span><span class="mi">38</span><span class="err">'</span><span class="p">,</span><span class="w">
+</span><span class="err">'biosampleId':</span><span class="w"> </span><span class="err">'HG</span><span class="mi">00096</span><span class="err">'</span><span class="p">,</span><span class="w">
+</span><span class="err">'definitions':</span><span class="w"> </span><span class="p">{</span><span class="err">'Location':</span><span class="w"> </span><span class="p">{</span><span class="err">'chromosome':</span><span class="w"> </span><span class="err">'</span><span class="mi">1</span><span class="err">'</span><span class="p">,</span><span class="w">
+                             </span><span class="err">'end':</span><span class="w"> </span><span class="mi">243620819</span><span class="p">,</span><span class="w">
+                             </span><span class="err">'start':</span><span class="w"> </span><span class="mi">243618689</span><span class="p">}},</span><span class="w">
+</span><span class="err">'id':</span><span class="w"> </span><span class="err">'refvar</span><span class="mi">-6690160</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">936e8</span><span class="err">e</span><span class="mi">0</span><span class="err">a</span><span class="mi">7828e2</span><span class="err">'</span><span class="p">,</span><span class="w">
+</span><span class="err">'info':</span><span class="w"> </span><span class="p">{</span><span class="err">'cnCount':</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+         </span><span class="err">'cnValue':</span><span class="w"> </span><span class="mf">0.422353</span><span class="p">,</span><span class="w">
+         </span><span class="err">'legacyId':</span><span class="w"> </span><span class="err">'DRAGEN:LOSS:chr</span><span class="mi">1</span><span class="err">:</span><span class="mi">243618690-243620819</span><span class="err">'</span><span class="p">},</span><span class="w">
+</span><span class="err">'updated':</span><span class="w"> </span><span class="err">'</span><span class="mi">2024-07-11</span><span class="err">T</span><span class="mi">17</span><span class="err">:</span><span class="mi">26</span><span class="err">:</span><span class="mf">27.265115</span><span class="err">'</span><span class="p">,</span><span class="w">
+</span><span class="err">'variantInternalId':</span><span class="w"> </span><span class="err">'chr</span><span class="mi">1</span><span class="err">:</span><span class="mi">243618689-243620819</span><span class="err">:EFO:</span><span class="mi">0030068</span><span class="err">'</span><span class="p">,</span><span class="w">
+</span><span class="err">'variantState':</span><span class="w"> </span><span class="p">{</span><span class="err">'id':</span><span class="w"> </span><span class="err">'EFO:</span><span class="mi">0030068</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'label':</span><span class="w"> </span><span class="err">'low-level</span><span class="w"> </span><span class="err">loss'</span><span class="p">}}</span><span class="w">
+</span></code></pre></div>            </div>
+          </blockquote>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>When sharing a Beacon protocol, it is important to provide users with read-only access to query the Beacon database. Creating read-only users for Beacon-providing institutions helps prevent unwanted data overwrites that can occur by mistake.</p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <p>What dose variantId “EFO:0030068” means?</p>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <p>EFO:0030069 is a term used to describe the low-level loss. The term was set by the CNV community.
+For more information go to the <a href="https://cnvar.org/resources/CNV-annotation-standards/#cnv-term-use-comparison-in-computational-fileschema-formats">CNV annotation formats</a></p>
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Now, you have a general knowledge of Beacon and MongoDB and how to create your own Beacon and upload your data.</p>
+
+<p>You can apply what you learned in this tutorial to create a Beacon query for your institution’s genomic variant data.</p>
+
+<p>For more information about how to query Beacon databases, please look into <a href="https://pymongo.readthedocs.io/en/stable/tutorial.html">pymongo documentation</a>.</p>
+
+<p>We hope you find this tutorial helpful!</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Understanding Beacons involves grasping their definition and concept, recognizing their significance in efficient data management, and exploring diverse use cases for these essential data structures.</p>
+</li>
+                        
+                        <li><p>Mastering MongoDB for Beacon Creation entails familiarizing yourself with the MongoDB database system, acquiring the skills to construct Beacons for advancing institutional data management, and exploring tailored MongoDB features for efficient Beacon development.</p>
+</li>
+                        
+                        <li><p>Effective Data Preparation for Beacons entails mastering techniques for organizing variant data, ensuring proper formatting of metadata to meet Beacon requirements, and acknowledging the crucial role of well-prepared data in optimizing Beacon functionality.</p>
+</li>
+                        
+                        <li><p>Achieve seamless data importation into Beacons by following a comprehensive step-by-step guide, prioritizing data integrity throughout the process, and acquiring skills in effective troubleshooting and error handling.</p>
+</li>
+                        
+                        <li><p>Efficiently querying Beacons for variants involves mastering diverse querying methods, leveraging MongoDB’s capabilities to enhance search precision, and emphasizing the necessity for precise and efficient queries within Beacon structures.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/variant-analysis/faqs/">FAQ page for the Variant Analysis topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/variant-analysis#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Rambla2022">Rambla, J., M. Baudis, R. Ariosa, T. Beck, L. A. Fromont <i>et al.</i>, 2022 <b>Beacon v2 and Beacon networks: A “lingua franca” for federated data discovery in biomedical genomics,  and beyond</b>. Human Mutation. <a href="https://doi.org/10.1002/humu.24369">10.1002/humu.24369</a></li>
+<li id="Rueda2022">Rueda, M., R. Ariosa, M. Moldes, and J. Rambla, 2022 <b>Beacon v2 Reference Implementation: a toolkit to enable federated sharing of genomic and phenotypic data</b> (P. Robinson, Ed.). Bioinformatics 38: 4656–4657. <a href="https://doi.org/10.1093/bioinformatics/btac568">10.1093/bioinformatics/btac568</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=variant-analysis/beaconise_1000hg"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=variant-analysis/beaconise_1000hg">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Khaled Jum'ah, Katarzyna Kamieniecka, Krzysztof Poterlowicz,  <b>Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html">https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{variant-analysis-beaconise_1000hg,
+author = "Khaled Jum'ah and Katarzyna Kamieniecka and Krzysztof Poterlowicz",
+	title = "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: cnv_phenopacket
+  owner: iuc
+  revisions: 61aad58c7b2d
+  tool_panel_section_label: Variant Calling
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+		
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/35df3756de23bd44e6b9485e2e6138bd92b766c4">35df375</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.20cf1f17.js'></script>
+
+	
+	
+
+    </body>
+</html>
