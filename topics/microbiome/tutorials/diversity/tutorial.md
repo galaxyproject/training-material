@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-draft: true
+draft: false
 title: Calculating α and β diversity from microbiome taxonomic data
 zenodo_link: https://zenodo.org/records/13150694
 questions:
