@@ -145,9 +145,9 @@ program:
       - title: Track 1
         link: events/tracks/example-track1.md
       - title: Track 2
-        link: events/tracks/example-track1.md
+        link: events/tracks/example-track2.md
       - title: Ecology
-        link: events/tracks/example-track1.md
+        link: learning-pathways/intro-to-galaxy-and-ecology.md # can also link to learning pathways (or any other GTN page)
       - title: Climate
         link: https://usegalaxy.eu # external links also possible
       - title: Plants
