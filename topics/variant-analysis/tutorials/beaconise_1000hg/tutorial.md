@@ -167,7 +167,7 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > ```bash
 > nano create-user.js
 > ```
-> 9. Copy the text below into the `docker-compose.yaml` file
+> 9. Copy the text below into the `create-user.js` file
 > >```js
 > > // create_user.js
 > >
