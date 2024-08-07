@@ -181,16 +181,15 @@ More on backward learning:
 
 > <question-title>Learning Objectives</question-title>
 > What competences will be gained after successful completing of the learning process?
-
->><tip-title>Be SMART</tip-title>
->>Objectives should be specific, ​measurable, ​attainable, ​relevant and ​time-bound​.
->{: .tip}
-
->><tip-title>Use Blooms Taxonomy</tip-title>
->>Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
->{: .tip}
->[See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
-
+>
+> ><tip-title>Be SMART</tip-title>
+> >Objectives should be specific, ​measurable, ​attainable, ​relevant and ​time-bound​.
+> {: .tip}
+>
+> ><tip-title>Use Blooms Taxonomy</tip-title>
+> >Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
+> {: .tip}
+> [See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Prepare stage....</a>
