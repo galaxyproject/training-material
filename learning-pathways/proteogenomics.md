@@ -30,7 +30,6 @@ pathway:
       - name: proteogenomics-dbsearch
         topic: proteomics  
 
-
   - section: "Module 3: Novel Peptide Analysis"
     description: |
       The last module in the proteogenomics tutorial is to identify "novel peptides" using BlastP and to localize the peptides to their genomic coordinates.
@@ -38,7 +37,6 @@ pathway:
     tutorials:
       - name: proteogenomics-novel-peptide-analysis
         topic: proteomics
-
 
 ---
 
