@@ -41,7 +41,7 @@ recordings:
   - katherine-d21
   date: '2024-06-21'
   galaxy_version: '23.1'
-  length: 20min
+  length: 20M
   youtube_id: uDs9bXAwCHo
   speakers:
   - katherine-d21
