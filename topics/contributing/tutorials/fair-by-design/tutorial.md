@@ -89,6 +89,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 ### Adopt a metadata schema
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
 
+> <hands-on-title>Metadata field categories</hands-on-title>
 > {% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" %} 
 >><div class="Descriptive-info-fields" markdown="1">
 >>- **Title** =	The human readable name of the resource
