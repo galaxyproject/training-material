@@ -627,6 +627,17 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 > 2. {% icon galaxy-eye %} **View** the filtered file.
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many rows contained the string "Summer" in column 11?(Hint: use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. `189843`(this is including the header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands-on }
@@ -663,6 +674,17 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 > 2. {% icon galaxy-eye %} **View** the filtered file.
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many rows contained the string start with "Liu" in column 2?(Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. `324` (this is including the header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands-on}
@@ -696,6 +718,17 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 > 2. {% icon galaxy-eye %} **View** the filtered file.
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many rows contained the string "December" in column 5?(Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    >
+>    > > <solution-title>Answers</solution-title>
+>    > >
+>    > > 1. `18009` (this is including the header line)
+>    > >
+>    > {: .solution}
+>    {: .question}
+> 
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands_on}
