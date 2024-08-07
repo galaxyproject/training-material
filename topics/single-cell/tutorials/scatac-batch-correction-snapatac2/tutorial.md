@@ -113,9 +113,12 @@ First we will import all datasets into Galaxy. Then we will build a dataset coll
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 >    > <warning-title>Large file sizes!</warning-title>
->    > - The `colon_multisample` datasets are quite large.
->    > - While uploading those datasets, change the {% icon galaxy-gear %} **Upload Configuration** to *Defer dataset resolution*. 
->    > - This will delete the datasets after the first analysis step and helps in reducing storage. 
+>    > - The `colon_multisample` datasets are quite large. The entire tutorial requires approximately 50 GB of storage. 
+>    > - To reduce storage you can change the {% icon galaxy-gear %} **Upload Configuration** to *Defer dataset resolution* for the upload of the `colon_multisample` datasets.
+>      > - This will delete the datasets after the first analysis step and helps in reducing storage. 
+>    > - You can also permanently delete datasets, which are no longer required. 
+>    > 
+>    >   {% snippet faqs/galaxy/datasets_deleting.md %}
 >    > 
 >    {: .warning}
 >
@@ -150,12 +153,12 @@ The first step is importing the datasets into an AnnData object with the tool *p
 
 > <hands-on-title> Preprocessing and QC </hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Import data fragment files and compute basic QC metrics, using 'pp.import_data'`
 >        - {% icon param-collection %} *"Fragment file, optionally compressed with gzip or zstd"*: `Colon Multisample Fragments` (Input dataset collection)
 >        - {% icon param-file %} *"A tabular file containing chromosome names and sizes"*: `chrom_sizes.txt` (Input dataset)
 >        - *"Number of unique fragments threshold used to filter cells"*: `1000`
-> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute the TSS enrichment score (TSSe) for each cell, using 'metrics.tsse'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas` (dataset collection output of **pp.import_data** {% icon tool %})
 >        - {% icon param-file %} *"GTF/GFF file containing the gene annotation"*: `gene_annotation` (Input dataset)
@@ -164,7 +167,7 @@ The first step is importing the datasets into an AnnData object with the tool *p
 > 
 >    {% snippet faqs/galaxy/collections_add_tag.md %}
 >
-> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2) %} with the following parameters:
+> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the TSS enrichment vs. number of fragments density figure, using 'pl.tsse'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas TSSe` (output of **metrics.tsse** {% icon tool %})
 > 4. {% icon galaxy-eye %} Inspect a few exemplary `.png` outputs of the collection
@@ -195,17 +198,17 @@ The {TSSe} distributions show that the sample quality differs substantially betw
 
 > <hands-on-title> Filtering </hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Filter cell outliers based on counts and numbers of genes expressed, using 'pp.filter_cells'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas TSSe` (output of **metrics.tsse** {% icon tool %})
 >        - *"Minimum TSS enrichemnt score required for a cell to pass filtering"*: `7.0`
 >
-> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Generate cell by bin count matrix, using 'pp.add_tile_matrix'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas filtered` (output of **pp.filter_cells** {% icon tool %})
 >        - *"The size of consecutive genomic regions used to record the counts"*: `5000`
 >
-> 3. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 3. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas tile_matrix` (output of **pp.add_tile_matrix** {% icon tool %})
 >        - *"Number of features to keep"*: `50000`
@@ -220,11 +223,11 @@ The {TSSe} distributions show that the sample quality differs substantially betw
 >    >    - Similarly too the *bin_size*, the *Number of Features to keep* can also impact downstream clustering. This was visualized in the [previous tutorial] ( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#feature-selection ).
 >    {: .details}
 >
-> 4. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 4. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Compute probability of being a doublet using the scrublet algorithm, using 'pp.scrublet'`
 >        - {% icon param-collection %} *"Annotated data matrix"*: `Colon Multisample AnnDatas features` (output of **pp.select_features** {% icon tool %})
 >
-> 5. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 5. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Remove doublets according to the doublet probability or doublet score, using 'pp.filter_doublets'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Colon Multisample AnnDatas scrublet` (output of **pp.scrublet** {% icon tool %})
 >
@@ -258,7 +261,7 @@ Then, we will remove that first dataset from the collection through element iden
 >    - {% icon param-collection %} *"Input Collection"*: `Colon Multisample AnnDatas filtered_doublets` (output of **pp.filter_doublets** {% icon tool %})
 >    - *"How should the elements to remove be determined?"*: `Remove if identifiers are PRESENT in file`
 >        - {% icon param-file %} *"Filter out identifiers present in"*: `select_first` (output of **Select first** {% icon tool %})
-> 5. {% icon galaxy-pencil %} Rename the filtered collection `Colon Multisample 02-05`
+> 5. {% icon galaxy-pencil %} Rename the filtered collection to `Colon Multisample 02-05`
 >
 {: .hands_on}
 
@@ -272,7 +275,19 @@ Then, we will remove that first dataset from the collection through element iden
 >        - {% icon param-collection %} *"Annotated data matrix to add"*: `Colon Multisample 02-05` (output of **Filter collection** {% icon tool %})
 >        - *"Join method"*: `Intersection of variables`
 >        - *"Key to add the batch annotation to obs"*: `batch`
-> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData`
+>
+>    > <details-title>Issues with the concatenation</details-title>
+>    > - Depending on the size of the datasets, this operation can take a lot of time. With the `colon_multisample` datasets, the concatenation can run for 1h. 
+>    > - For even larger datasets, the allocated memory of the tool might not be enough and the operation fails. In that case, you will receive the following error message: 
+>    >
+>    > ```
+>    >                Fatal error: Exit code 137 ()
+>    > ```
+>    > - In such a case, please report the issue. The administrators can then increase the memory limit and the job will succeed. 
+>    >   {% snippet faqs/galaxy/analysis_troubleshooting_reporting.md %}
+>    {: .details}
+>
+> 2. {% icon galaxy-pencil %} Rename the AnnData output to `Multisample AnnData`
 > 3. {% icon galaxy-eye %} Inspect the general information of `Multisample AnnData`
 >
 >    > ```
@@ -305,17 +320,17 @@ Now that all samples have been concatenated into a single AnnData object, the mo
 
 > <hands-on-title> Spectral embedding </hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Perform feature selection, using 'pp.select_features'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData` (output of **Manipulate AnnData** {% icon tool %})
 >        - *"Number of features to keep"*: `50000`
 > 
-> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Perform dimension reduction using Laplacian Eigenmap, using 'tl.spectral'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData features` (output of **pp.select_features** {% icon tool %})
 >        - *"distance metric"*: `cosine`
 >
-> 3. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData spectral`
+> 3. {% icon galaxy-pencil %} Rename the AnnData output to `Multisample AnnData spectral`
 >
 {: .hands_on}
 
@@ -324,18 +339,18 @@ Batch effects can be visualized in an {UMAP} projection of the data. For this, t
 
 > <hands-on-title> UMAP projection without batch correction </hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData spectral` (output of **tl.spectral** {% icon tool %})
 >
-> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData UMAP`
-> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% icon galaxy-pencil %} Rename the AnnData output to `Multisample AnnData UMAP`
+> 3. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"Color"*: `batch`
 >        - *"Height of the plot"*: `500`
 >
-> 4. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-No Batch correction`
+> 4. {% icon galaxy-pencil %} Rename the generated image to `spectral-UMAP-No Batch correction`
 >
 > 5. {% icon galaxy-eye %} Inspect the `.png` output
 >
@@ -376,31 +391,31 @@ After confirming that batch effects have affected our samples, we should remove 
 We will use *Harmony* to correct for batch effects first. The other methods will be tested afterwards. 
 > <hands-on-title> Batch correction and visualization</hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for preprocessing"*: `Use harmonypy to integrate different experiments,using 'pp.harmony'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData UMAP` (output of **tl.umap** {% icon tool %})
 >
-> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute Umap, using 'tl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony` (output of **pp.harmony** {% icon tool %})
 >        - *"Use the indicated representation in `.obsm`"*: `X_spectral_harmony`
 >        - *"`adata.obs` key under which t add cluster labels"*: `umap_harmony`
 >
-> 2. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData harmony UMAP`
+> 2. {% icon galaxy-pencil %} Rename the AnnData output to `Multisample AnnData harmony UMAP`
 >
 >    > <comment-title> Key for cluster labels </comment-title>
 >    > - If you add the new *UMAP-embeddings* under the key `umap_harmony`, the non-batch corrected embeddings are still stored in the AnnData object. 
 >    >    - Alternatively, by leaving this parameter empty, the old embeddings will be overwritten. 
 >    {: .comment}
 > 
-> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2) %} with the following parameters:
+> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"Color"*: `batch`
 >        - *"Use the indicated representation in .obsm"*: `X_umap_harmony`
 >        - *"Height of the plot"*: `500`
 >
-> 5. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-harmony`
+> 5. {% icon galaxy-pencil %} Rename the generated image to `spectral-UMAP-harmony`
 > 
 > 6. {% icon galaxy-eye %} Inspect the `.png` output
 >
@@ -423,37 +438,50 @@ We will use *Harmony* to correct for batch effects first. The other methods will
 {: .hands_on}
 
 > <details-title>Batch correction with Scanorama and MNC-correct </details-title>
->
+> - Other batch correction methods can also be selected with the tool {% tool [SnapATAC2 Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_preprocessing/snapatac2_preprocessing/2.6.4+galaxy1) %}: *pp.mnc_correct* and *pp.scanorama_integrate* 
+>   - For *MNC-correct* the *Number of iterations* can be specified. In order to identify the optimal algorithm, it is recommended to test the different algorithms and settings.  
 > - Examplary outputs of the methods *Scanorama* and *MNC-correct* are shown here:
->  ![Batch correction UMAP plots of MNC-correct with different settings and Scanorama]({% link topics/single-cell/images/scatac-batch-correction-snapatac2/mnc-correct-scanorama-umap-spectral.png %} "UMAP plots of batch correction with different methods. \(a\) Batch correction with MNC-correct and default settings. \(b\) Batch correction with Scanorama  \(c\) Batch correction with MNC-correct and 30 iterations.")
+>  ![Batch correction UMAP plots of MNC-correct with different settings and Scanorama]({% link topics/single-cell/images/scatac-batch-correction-snapatac2/mnc-correct-scanorama-umap-spectral.png %} "UMAP plots of batch correction with different methods. (a) Batch correction with MNC-correct and default settings. (b) Batch correction with Scanorama  (c) Batch correction with MNC-correct and 30 iterations.")
+> 
+> > > <question-title></question-title>
+> >
+> > - Compare the plots with the output of *Harmony*. Which algorithm is best-suited for the colon datasets?
+> >
+> > > <solution-title></solution-title>
+> > >
+> > > - *Harmony* has performed the best batch integration. In that plot, the fewest single-batch groups are visible. *Scanorama* and *MNC-correct* (with the default settings) did not integrate the batches as well as *Harmony*. *MNC-correct* with 30 iterations, on the other hand, did remove a lot of batch effects and could also be used to continue the analysis. 
+> > >
+> > {: .solution}
+>  {: .question}
 >
 {: .details}
 
 
 # Clustering of the batch corrected samples
+With the analysis can now continue with the same methods, shown in the [standard pathway]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %} ). The batch-corrected embeddings are now clustered and visualized with the *leiden* algorithm. 
 
 > <hands-on-title> Leiden clustering and visualization </hands-on-title>
 >
-> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
+> 1. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Compute a neighborhood graph of observations, using 'pp.knn'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony UMAP` (output of **tl.umap** {% icon tool %})
 >        - *"The key for the matrix"*: `X_spectral_harmony`
 >
-> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.5.3+galaxy2) %} with the following parameters:
+> 2. {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_clustering/snapatac2_clustering/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Dimension reduction and Clustering"*: `Cluster cells into subgroups, using 'tl.leiden'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `Multisample AnnData harmony knn` (output of **pp.knn** {% icon tool %})
 >        - *"Whether to use the Constant Potts Model (CPM) or modularity"*: `modularity` 
 >
-> 3. {% icon galaxy-pencil %} Rename the AnnData output `Multisample AnnData harmony leiden`
+> 3. {% icon galaxy-pencil %} Rename the AnnData output to `Multisample AnnData harmony leiden`
 > 
-> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.5.3+galaxy2) %} with the following parameters:
+> 4. {% tool [SnapATAC2 Plotting](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_plotting/snapatac2_plotting/2.6.4+galaxy1) %} with the following parameters:
 >    - *"Method used for plotting"*: `Plot the UMAP embedding, using 'pl.umap'`
 >        - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **tl.leiden** {% icon tool %})
 >        - *"Color"*: `leiden`
 >        - *"Use the indicated representation in .obsm"*: `X_umap_harmony`
 >        - *"Height of the plot"*: `500`
 >
-> 5. {% icon galaxy-pencil %} Rename the generated image `spectral-UMAP-harmony-leiden`
+> 5. {% icon galaxy-pencil %} Rename the generated image to `spectral-UMAP-harmony-leiden`
 >
 > 6. {% icon galaxy-eye %} Inspect the `.png` output
 >
@@ -474,7 +502,17 @@ We will use *Harmony* to correct for batch effects first. The other methods will
 >
 {: .hands_on}
 
+After integrating the different datasets and clustering the cells, the scATAC-seq analysis can now continue with downstream analysis. As part of the downstream analysis, the clusters can be [annotated]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#Cell-cluster-annotation ) and differential peak analysis can be performed. 
+> <comment-title></comment-title>
+>
+> Differential peak analysis is already available on Galaxy. However, there is no GTN training yet available. Until such a tutorial is available, you can visit the **SnapATAC2** documentation for a [tutorial on Differential peak analysis](https://kzhang.org/SnapATAC2/version/2.6/tutorials/diff.html). 
+>
+> The tools are available in Galaxy under {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %} 
+> 
+{: .comment}
+
 
 # Conclusion
+{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://usegalaxy.eu/u/timonschlegel/h/multisample-batch-correction-with-harmony-and-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/multisample-batch-correction-with-snapatac2-and-harmony) for this tutorial.
 
-In this tutorial we performed batch correction on five {scATAC-seq} samples from human colons. 
+In this tutorial we have integrated five {scATAC-seq} colon samples. To achieve this, we have assembled a scalable Galaxy workflow and have compared different batch integration algorithms, to identify the best-suited method for our data. Finally, we have assigned the cells into clusters, to prepare the data for downstream analysis. 
