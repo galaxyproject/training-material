@@ -115,7 +115,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 
 
-More on the metadata here {% cite hoebelheinrich_2022 %}
+More on the metadata here {% cite xxxx %}
 
 More on FAIR learning objects definition: 
     - [FAIR instructional design skills](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills)
