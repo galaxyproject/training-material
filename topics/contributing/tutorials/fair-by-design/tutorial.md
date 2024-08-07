@@ -66,14 +66,14 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 > <comment-title>Findable</comment-title>
 > The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
-{: .comment title=""}
+{: .comment}
 
 
 > <details-title>Accessible</details-title>
 >
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
 >
-{: .details lang='es'}
+{: .details icon email}
 
 
 > <tip-title>Interoperable</tip-title>
