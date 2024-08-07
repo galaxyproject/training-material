@@ -92,7 +92,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 {% include _includes/cyoa-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" %} 
 
 
-><div class="Descriptive info fields" markdown="1">
+><div class="Descriptive-info-fields" markdown="1">
 >- **Title** =	The human readable name of the resource
 >- **Abstract / Description** =	A brief synopsis about or description of the learning resource
 >- **Author(s)** =	Name of entity(ies) authoring the resource
@@ -101,14 +101,14 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 >- **Version Date** =	Version date for the most recently published or broadcast resource
 ></div>
 
-><div class="Access info fields" markdown="1">
+><div class="Access-info-fields" markdown="1">
 >- **URL to Resource** =	URL that resolves to the learning resource or to a "landing page" for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.
 >- **Resource URL Type**	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle
 >- **License** =	A license document that applies to this content, typically indicated by URL
 >- **Access Cost**	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)
 ></div>
 
-><div class="Educational info fields" markdown="1">
+><div class="Educational-info-fields" markdown="1">
 >- **Target Group (Audience)** =	Principal users(s) for which the resource was designed
 >- **Learning Resource Type** =	The predominant type or kind that characterizes the learning resource
 >- **Learning Outcome** =	Descriptions of what knowledge, skills or abilities a learner should acquire on completion of the resource
