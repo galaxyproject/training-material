@@ -629,7 +629,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 >    > <question-title></question-title>
 >    >
->    > 1. How many rows contained the string "Summer" in column 11?(Hint: use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    > 1. How many rows contained the string "Summer" in column 11? (Hint: use {% tool [Line/Word/Character count]({{version_wc}}) %} )
 >    >
 >    > > <solution-title>Answers</solution-title>
 >    > >
@@ -637,7 +637,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >    > >
 >    > {: .solution}
 >    {: .question}
-> 
+>
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands-on }
@@ -676,7 +676,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 >    > <question-title></question-title>
 >    >
->    > 1. How many rows contained the string start with "Liu" in column 2?(Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    > 1. How many rows contained the string start with "Liu" in column 2? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
 >    >
 >    > > <solution-title>Answers</solution-title>
 >    > >
@@ -684,7 +684,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >    > >
 >    > {: .solution}
 >    {: .question}
-> 
+>
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands-on}
@@ -696,7 +696,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 > For example, if we want to:
 >
-> - Find all athletes born in December, assuming the birthdate could be in either "day-month" or "month-day" format.
+> - Find all athletes born in December, assuming the birth date could be in either "day-month" or "month-day" format.
 >
 > > <question-title></question-title>
 > >
@@ -720,7 +720,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >
 >    > <question-title></question-title>
 >    >
->    > 1. How many rows contained the string "December" in column 5?(Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
+>    > 1. How many rows contained the string "December" in column 5? (Hint: expand the dataset in your history or use {% tool [Line/Word/Character count]({{version_wc}}) %} )
 >    >
 >    > > <solution-title>Answers</solution-title>
 >    > >
@@ -728,7 +728,7 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >    > >
 >    > {: .solution}
 >    {: .question}
-> 
+>
 > 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
 {: .hands_on}
