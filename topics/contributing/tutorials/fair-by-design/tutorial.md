@@ -91,6 +91,8 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 > <question-title>Metadata field categories</question-title>
 > {% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" %} 
+{: .question}
+
 ><div class="Descriptive-info-fields" markdown="1">
 >- **Title** =	The human readable name of the resource
 >- **Abstract / Description** =	A brief synopsis about or description of the learning resource
@@ -112,7 +114,6 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 >- **Expertise (Skill) Level** =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced
 ></div>
 
-{: .question}
 
 ## Stage 2 - Discover
 
