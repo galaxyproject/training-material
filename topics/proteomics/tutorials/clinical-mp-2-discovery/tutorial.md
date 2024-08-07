@@ -105,6 +105,26 @@ This step is to identify proteins based on mass spectrometry data. The algorithm
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
+{: .hands_on} 
+
+# Import Workflow
+
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    https://usegalaxy.eu/u/galaxyp/w/wf2discovery-workflow
+>
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" RAW files"*: `RAW dataset collection`
+>    - {% icon param-file %} *" Human UniProt Microbial Proteins (from MetaNovo) and cRAP"*: `Human_UniProt_Microbial_Proteins_(from_MetaNovo)_and_cRAP.fasta`
+>    - {% icon param-file %} *" Experimental Design Discovery MaxQuant"*: `Experimental-Design_Discovery_MaxQuant.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
 {: .hands_on}
 
 
