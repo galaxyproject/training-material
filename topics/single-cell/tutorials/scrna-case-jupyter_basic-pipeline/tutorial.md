@@ -50,7 +50,7 @@ recordings:
 - youtube_id: TODO
   length: 13M
   galaxy_version: "24.1.2.dev0"
-  date: "'2024-08-06'"
+  date: '2024-08-06'
   speakers: "[hexhowells]"
   captioners: "[hexhowells]"
   bot-timestamp: 1722971660
