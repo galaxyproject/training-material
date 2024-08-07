@@ -99,7 +99,25 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 >
 {: .hands_on}
 
+# Import Workflow
 
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    https://usegalaxy.eu/u/galaxyp/w/wf4quantitationworkflow
+>
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" Quantitation_Database-For-MaxQuant * "*: `Quantitation_Database_for_MaxQuant.fasta`
+>    - {% icon param-file %} *" Experimental-Design Discovery MaxQuant"*: `Experimental-Design_Discovery_MaxQuant.tabular`
+>    - {% icon param-file %} *" Input Raw-files"*: `RAW dataset collection`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
 
 
 # Peptide quantification
