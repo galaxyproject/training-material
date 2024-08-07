@@ -73,7 +73,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 >
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
 >
-{: .details icon=""}
+{: .details icon='spoken'}
 
 
 > <tip-title>Interoperable</tip-title>
@@ -84,7 +84,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 > <question-title>Reusable</question-title>
 >The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
-{: .question}
+{: .question }
 
 
 ## Stage 2 - Discover
