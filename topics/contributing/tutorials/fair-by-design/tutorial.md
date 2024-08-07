@@ -64,22 +64,22 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 ### First things first: What is FAIR?
 
 
-> <comment-title>Findable</comment-title>
+> <question-title>Findable</question-title>
 > The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
-{: .comment}
+{: .question}
 
 
-> <details-title>Accessible</details-title>
+> <question-title>Accessible</question-title>
 >
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
 >
-{: .details icon email}
+{: .question}
 
 
-> <tip-title>Interoperable</tip-title>
+> <question-title>Interoperable</question-title>
 > The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
 > Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.
-{: .tip}
+{: .question}
 
 
 > <question-title>Reusable</question-title>
