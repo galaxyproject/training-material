@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@24f3c2fe7ee52c47d1cf63629d79547128b8f245",
+		release: "galaxy-training-network@763928ab8842c5397cf159241683ee2150ec9cbf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -341,12 +341,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/introduction">
-							Introduction to Galaxy Analyses
+						<a href="/training-material/topics/microbiome">
+							Microbiome
 						</a>
 						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">
-						NGS data logistics
+						<a href="/training-material//topics/microbiome/tutorials/mothur-miseq-sop-short/tutorial.html">
+						16S Microbial Analysis with mothur (short)
 						</a>
 						
 						
@@ -357,28 +357,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/introduction">
-							Introduction to Galaxy Analyses
+						<a href="/training-material/topics/microbiome">
+							Microbiome
 						</a>
 						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
-						Introduction to Genomics and Galaxy
-						</a>
-						
-						
-						
-						
-					</li>
-				
-					<li>
-						
-						
-						<a href="/training-material/topics/introduction">
-							Introduction to Galaxy Analyses
-						</a>
-						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-						Galaxy Basics for everyone
+						<a href="/training-material//topics/microbiome/tutorials/mothur-miseq-sop/tutorial.html">
+						16S Microbial Analysis with mothur (extended)
 						</a>
 						
 						
@@ -410,12 +394,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/microbiome">
-							Microbiome
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
 						</a>
 						/
-						<a href="/training-material//topics/microbiome/tutorials/mothur-miseq-sop-short/tutorial.html">
-						16S Microbial Analysis with mothur (short)
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html">
+						NGS data logistics
 						</a>
 						
 						
@@ -426,12 +410,28 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 					<li>
 						
 						
-						<a href="/training-material/topics/microbiome">
-							Microbiome
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
 						</a>
 						/
-						<a href="/training-material//topics/microbiome/tutorials/mothur-miseq-sop/tutorial.html">
-						16S Microbial Analysis with mothur (extended)
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+						Galaxy Basics for everyone
+						</a>
+						
+						
+						
+						
+					</li>
+				
+					<li>
+						
+						
+						<a href="/training-material/topics/introduction">
+							Introduction to Galaxy Analyses
+						</a>
+						/
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
+						Introduction to Genomics and Galaxy
 						</a>
 						
 						
@@ -510,19 +510,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 							Introduction to Galaxy Analyses
 						</a>
 						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
-						Introduction to Genomics and Galaxy
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
+						Galaxy Basics for everyone
 						</a>
 						
 						
 						
 						
 	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
-
-
-						
-						
-	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
 
 
 						
@@ -536,14 +531,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 							Introduction to Galaxy Analyses
 						</a>
 						/
-						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">
-						Galaxy Basics for everyone
+						<a href="/training-material//topics/introduction/tutorials/galaxy-intro-strands/tutorial.html">
+						Introduction to Genomics and Galaxy
 						</a>
 						
 						
 						
 						
 	<abbr title="These individuals or organisations are responsible for hand curating the captions of a video">💬</abbr>
+
+
+						
+						
+	<abbr title="These individuals produced a video recording of a training material">🗣</abbr>
 
 
 						
@@ -634,15 +634,11 @@ var topics = [
 
 	
 	
-	"Introduction to Galaxy Analyses",
+	"Microbiome",
 
 	
 	
-	"Introduction to Galaxy Analyses",
-
-	
-	
-	"Introduction to Galaxy Analyses",
+	"Microbiome",
 
 	
 	
@@ -650,11 +646,15 @@ var topics = [
 
 	
 	
-	"Microbiome",
+	"Introduction to Galaxy Analyses",
 
 	
 	
-	"Microbiome",
+	"Introduction to Galaxy Analyses",
+
+	
+	
+	"Introduction to Galaxy Analyses",
 
 
 	
@@ -826,7 +826,7 @@ var chart2 = new Chart(ctx2, {
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/24f3c2fe7ee52c47d1cf63629d79547128b8f245">24f3c2f</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/763928ab8842c5397cf159241683ee2150ec9cbf">763928a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
