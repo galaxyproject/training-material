@@ -571,11 +571,12 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >
 {: .hands_on}
 
-> <hands-on-title>Advanced Filtering with Python Syntax</hands-on-title>
->
-> In addition to basic filtering, the Galaxy filtering tool allows for more advanced filtering using Python syntax. This can be particularly useful when you need to apply more complex conditions or manipulate the data in specific ways.
->
->    **Understanding Python Syntax for Filtering**
+## Advanced Filtering with Python Syntax
+
+
+In addition to basic filtering, the Galaxy filtering tool allows for more advanced filtering using Python syntax. This can be particularly useful when you need to apply more complex conditions or manipulate the data in specific ways.
+
+> <comment-title> Understanding Python Syntax for Filtering </comment-title>
 >
 >    Before we dive into specific examples, let's briefly discuss some basic Python concepts that will help you understand how to write these filtering expressions:
 >
@@ -591,7 +592,13 @@ This file contains a lot of data, but we may only be interested in a subset of t
 >   - `find(substring)`: Returns the lowest index of the substring if it is found in the string; otherwise, it returns `-1`.
 >   - `count(substring)`: Returns the number of non-overlapping occurrences of the substring in the string.
 >
-> These concepts will be used in the filtering expressions we write in Galaxy. Let's now explore some specific scenarios where you might use these expressions.
+{: .comment}
+
+These concepts will be used in the filtering expressions we write in Galaxy. Let's now explore some specific scenarios where you might use these expressions.
+
+
+> <hands-on-title>Advanced Filtering with Python Syntax</hands-on-title>
+>
 >
 > 1. **Filtering Based on Substring Occurrence**
 >
