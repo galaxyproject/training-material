@@ -35,6 +35,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-data-verification/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 16min
+  youtube_id: wCVzWMQANGE
+  speakers:
+  - katherine-d21
 ---
 
 
