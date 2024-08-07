@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@763928ab8842c5397cf159241683ee2150ec9cbf",
+		release: "galaxy-training-network@ac737e155586d3471869edd1733b0249df9e2938",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,12 +68,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Introduction to Microbiome Analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-08-07 13:36:14 +0000">
+<meta name="DC.creator" content="Paul Zierep">
 <meta name="DC.creator" content="Bérénice Batut">
-<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="## Microbiome Analysis  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ---  ## Why study the microbiome?  .pull-left[  - Health care research  - Humans are full of microorganisms  - Skin, gut, oral cavity, nasal cavity, eyes, ..  - Affects health, drug efficacy, etc  ] .pull-right[  .image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]  ]  - Sometimes referred to as your **second genome**  - ~10 times more cells than you  - ~100 times more genes than you  - ~1000s different species   --- ## Why study the microbiome?  - Environmental studies   - Microbes in the soil affect plants and animals   - Improve agriculture  .image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudie...">
+<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="## Microbiome Analysis  ???  - Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat. - This analysis aims to understand the composition, diversity, and functions of these microbial communities.  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ???  - Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility. - It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes. - Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications. - DNA-based microbiome analysis is mainly based on two techniques: A...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Microbiome / Introduction to Microbiome Analysis / Slides: Introduction to Microbiome Analysis">
-        <meta property="og:description" content="## Microbiome Analysis  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ---  ## Why study the microbiome?  .pull-left[  - Health care research  - Humans are full of microorganisms  - Skin, gut, oral cavity, nasal cavity, eyes, ..  - Affects health, drug efficacy, etc  ] .pull-right[  .image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]  ]  - Sometimes referred to as your **second genome**  - ~10 times more cells than you  - ~100 times more genes than you  - ~1000s different species   --- ## Why study the microbiome?  - Environmental studies   - Microbes in the soil affect plants and animals   - Improve agriculture  .image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudie...">
+        <meta property="og:description" content="## Microbiome Analysis  ???  - Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat. - This analysis aims to understand the composition, diversity, and functions of these microbial communities.  ---  ## Overview  - Why study the microbiome? - 2 different approaches   - Amplicon sequencing   - Shotgun sequencing - Analysis pipelines - Visualisation options  ???  - Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility. - It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes. - Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications. - DNA-based microbiome analysis is mainly based on two techniques: A...">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -211,7 +212,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
+		Authors: <a href="/training-material/hall-of-fame/paulzierep/" class="contributor-badge contributor-paulzierep"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulzierep?s=36" alt="Paul Zierep avatar" width="36" class="avatar" />
+    Paul Zierep</a><a href="/training-material/hall-of-fame/bebatut/" class="contributor-badge contributor-bebatut"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/bebatut?s=36" alt="Bérénice Batut avatar" width="36" class="avatar" />
     Bérénice Batut</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
     Saskia Hiltemann</a>
 	</div>
@@ -226,12 +228,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jun 22, 2017 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jun 14, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 7, 2024 </div>
 
 	<hr />
 
 
 	<h2 id="microbiome-analysis">Microbiome Analysis</h2>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Microbiome analysis is the examination of the collection of microorganisms (microbes) in a particular environment, such as the human body, soil, water, or any other habitat.</li>
+  <li>This analysis aims to understand the composition, diversity, and functions of these microbial communities.</li>
+</ul>
 
 <hr />
 
@@ -247,6 +256,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </li>
   <li>Analysis pipelines</li>
   <li>Visualisation options</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Studying the microbiome is essential because it plays a crucial role in human health by influencing digestion, immunity, and disease susceptibility.</li>
+  <li>It also helps in understanding and improving agricultural productivity and environmental sustainability through insights into soil and plant microbiomes.</li>
+  <li>Additionally, microbiome research can lead to the development of new medical therapies, diagnostics, and biotechnological applications.</li>
+  <li>DNA-based microbiome analysis is mainly based on two techniques: Amplicon sequencing and Shotgun sequencing.</li>
+  <li>Microbiome analysis required sophisticated analysis pipelines for the processing and the interpretation of the sequence data.</li>
 </ul>
 
 <hr />
@@ -276,6 +295,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>~1000s different species</li>
 </ul>
 
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The term “second genome” refers to the vast collection of microbial genes present in and on the human body, which outnumber human genes by about 100 to 1.</li>
+  <li>This microbial genetic material plays a crucial role in various physiological processes, such as digestion, immunity, and even mental health, making it an integral part of our overall genetic makeup and health.</li>
+</ul>
+
 <hr />
 <h2 id="why-study-the-microbiome-1">Why study the microbiome?</h2>
 
@@ -289,6 +315,32 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </ul>
 
 <p>.image-75[ <img src="../../images/environmentalstudies.png" alt="Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes." /> ]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In environmental studies, the microbiome refers to the diverse communities of microorganisms living in various environments such as soil, water, and plants.</li>
+  <li>These microbial communities are critical for ecosystem functions like nutrient cycling, soil fertility, pollutant degradation, and plant health, thus playing a vital role in maintaining environmental balance and sustainability.</li>
+</ul>
+
+<hr />
+
+<h2 id="types-of-microbiome-analysis">Types of microbiome analysis</h2>
+
+<p>.image-75[ <img src="../../images/Experimental-workflows-for-mainstream-omics-analysis-types-Arrow-colours-indicate-omics.png" alt="Experimental-workflows-for-mainstream-omics" /> ]</p>
+
+<p>.footnote[Image source: <a href="https://doi.org/10.1039/D3MO00089C">10.1039/D3MO00089C</a>]</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Meta-omics refers to a suite of high-throughput techniques used to study various aspects of microbial communities in an integrated way, providing a comprehensive view of their functions, structures, and interactions.</li>
+  <li>Metagenomics involves sequencing the entire genetic material from a microbial community, offering insights into the diversity, composition, and potential functions of the microorganisms.</li>
+  <li>Metatranscriptomics examines RNA transcripts to assess gene expression and microbial responses to environmental changes.</li>
+  <li>Metametabolomics analyzes the small molecules produced by microbial metabolism to understand their metabolic activities and interactions.</li>
+  <li>Metaproteomics focuses on studying microbial proteins to uncover their roles, expression levels, and interactions.</li>
+  <li>Amplicon sequencing, though more targeted, involves sequencing specific genetic regions to profile microbial diversity and abundance.</li>
+</ul>
 
 <hr />
 
@@ -322,15 +374,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p><span>Speaker Notes</span></p>
 
-<p>puzzle analogy: think of each organism as a jigsaw puzzle</p>
-
 <ul>
-  <li>
-    <p>shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.</p>
-  </li>
-  <li>
-    <p>amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).</p>
-  </li>
+  <li>Shotgun sequencing analyzes the entire genetic material in a sample, providing comprehensive and detailed information about microbial community structure and function, but it is complex and costly.</li>
+  <li>Amplicon sequencing targets specific regions of microbial DNA, such as the 16S rRNA gene, offering a cost-effective and simpler method for profiling microbial communities, though it lacks detailed functional insights and is subject to amplification bias.</li>
+  <li>Shotgun sequencing is ideal for detailed metabolic and functional studies, while amplicon sequencing is suitable for assessing microbial composition and diversity.</li>
 </ul>
 
 <hr />
@@ -344,6 +391,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p><img src="../../images/16S_gene.png" alt="left is picture of e. coli ribosome with &quot;so much rna&quot; written, right is the RNA structure in a diagram" /></p>
 
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing is a targeted approach that focuses on sequencing specific genetic regions to identify and analyze microbial communities.</li>
+  <li>For bacteria, the 16S rRNA gene is commonly targeted, while the 18S rRNA gene is used for eukaryotes, and the ITS region is targeted for fungi.</li>
+  <li>This method allows for efficient and cost-effective profiling of microbial composition and diversity by amplifying and sequencing these specific genetic markers.</li>
+</ul>
+
 <hr />
 
 <h2 id="amplicon-1">Amplicon</h2>
@@ -355,8 +410,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p><img src="../../images/16S_variableregions.jpg" alt="line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index." /></p>
 
-<p><span>Speaker Notes</span>
-V1, V2 etc are the variable regions</p>
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The 16S rRNA gene used in amplicon sequencing for bacteria consists of both conserved and variable regions.</li>
+  <li>The conserved regions are highly similar across different bacterial species, providing anchor points for primers used in sequencing.</li>
+  <li>The variable (V) regions, on the other hand, are more diverse and unique to different species, allowing for the differentiation and identification of bacteria within a sample.</li>
+  <li>Sequencing these V regions enables researchers to profile the bacterial community and understand its composition and diversity.</li>
+</ul>
 
 <hr />
 
@@ -374,8 +435,13 @@ V1, V2 etc are the variable regions</p>
   <li>Is based on a very well conserved gene, making it hard to resolve species and strains</li>
 </ul>
 
-<p><span>Speaker Notes</span>
-18S gene also amplifies archaea</p>
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing is cost-effective and simpler than other methods, making it accessible for routine studies and straightforward to analyze due to its focus on specific genetic regions.</li>
+  <li>However, it has limitations, such as only providing information about the targeted regions, which may miss some microbial diversity and functional insights.</li>
+  <li>Additionally, the method can introduce amplification biases and may not differentiate closely related species or strains effective</li>
+</ul>
 
 <hr />
 
@@ -405,6 +471,16 @@ V1, V2 etc are the variable regions</p>
   </li>
 </ul>
 
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Shotgun metagenomics is a comprehensive approach to analyzing microbial communities by sequencing all the genetic material present in a sample, rather than focusing on specific regions.</li>
+  <li>This technique involves fragmenting the entire DNA from a sample, sequencing these fragments, and then using computational tools to assemble and analyze the data.</li>
+  <li>By capturing the complete genetic makeup of all microorganisms, including bacteria, archaea, viruses, and eukaryotes, shotgun metagenomics provides detailed insights into the diversity, composition, and functional potential of microbial communities.</li>
+  <li>This method allows for a broad and deep understanding of microbial interactions and functions, though it is often more complex and costly compared to targeted sequencing approaches.</li>
+  <li>Additionally, shotgun metagenomics can be affected by host contamination, which may complicate the interpretation of microbial data.</li>
+</ul>
+
 <hr />
 
 <h2 id="end-to-end">End-to-End</h2>
@@ -412,6 +488,18 @@ V1, V2 etc are the variable regions</p>
 <p><img src="../../images/16S_end-to-end.png" alt="graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)" /></p>
 
 <p>Every step in this process can have serious impact on the results</p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In end-to-end metagenomic workflows, every step—from sample collection to data analysis—can significantly impact the final results.</li>
+  <li>Sample collection methods can introduce biases or contaminants, affecting the accuracy of microbial representation.</li>
+  <li>During DNA extraction, variations in protocols or efficiencies can alter the quantity and quality of genetic material obtained.</li>
+  <li>Sequencing technologies and their associated errors can introduce noise or gaps in the data.</li>
+  <li>Data processing, including assembly and annotation, relies on computational tools and databases that may -influence the interpretation of microbial diversity and functions.</li>
+  <li>Finally, the integration and analysis of results can be affected by the algorithms used and the quality of the reference databases.</li>
+  <li>Each of these steps must be carefully controlled and standardized to ensure reliable and reproducible outcomes in metagenomic studies.</li>
+</ul>
 
 <hr />
 
@@ -423,6 +511,15 @@ V1, V2 etc are the variable regions</p>
 Illumina MiSeq:  ~ 25.000.000 reads
 Shotgun:             ~ ? reads
 </code></pre></div></div>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In metagenomics, “drowning in NGS data” refers to the overwhelming volume of data generated by next-generation sequencing technologies.</li>
+  <li>This issue arises because NGS can produce vast amounts of sequence reads from complex microbial communities in a single experiment, creating challenges in data management, processing, and interpretation.</li>
+  <li>Managing and organizing this massive data set requires substantial computational resources, while analyzing it involves quality control, read assembly, taxonomic classification, and functional annotation, all of which add complexity and computational demands.</li>
+  <li>Extracting meaningful biological insights from such extensive data requires advanced bioinformatics expertise to navigate potential noise and errors and to ensure that findings are robust and reproducible.</li>
+</ul>
 
 <hr />
 
@@ -437,6 +534,15 @@ Shotgun:             ~ ? reads
   <li>ASV: amplicon sequence variants</li>
 </ul>
 
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Amplicon sequencing focuses on specific genetic regions, such as the 16S rRNA gene for bacteria, offering a cost-effective and simpler pipeline that provides insights into microbial community composition but may miss broader diversity and functional details.</li>
+  <li>In contrast, shotgun metagenomics sequences all genetic material, delivering a comprehensive view of microbial diversity and functional potential, though it requires more complex and expensive analysis.</li>
+  <li>Operational Taxonomic Units (OTUs) group sequences based on similarity, which can obscure finer taxonomic distinctions and is often used in amplicon pipelines.</li>
+  <li>Amplicon Sequence Variants (ASVs) represent exact sequences without grouping, offering higher resolution and more accurate taxonomic identification, and are increasingly used in modern amplicon pipelines for greater precision in microbial profiling.</li>
+</ul>
+
 <hr />
 
 <h2 id="pre-processing">Pre-processing</h2>
@@ -446,6 +552,17 @@ Shotgun:             ~ ? reads
 <ul>
   <li>There are a lot of ways to filter and trim your data</li>
   <li>Trade-off between quality and amount of information retained</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Preprocessing in metagenomics involves a series of steps to prepare raw sequencing data for analysis, including quality control, trimming of low-quality sequences, removal of contaminants, and filtering out redundant or erroneous data.</li>
+  <li>This stage is crucial for ensuring that the data used for downstream analysis is accurate and reliable.</li>
+  <li>The trade-off between quality and amount of information retained is a key consideration in preprocessing.</li>
+  <li>On one hand, stringent quality control measures improve the accuracy of the data by removing errors and contaminants, but this can also lead to the loss of some useful information, particularly from low-abundance or poorly sequenced organisms.</li>
+  <li>On the other hand, retaining more data might include lower-quality sequences or noise, which can complicate data analysis and interpretation.</li>
+  <li>Balancing these factors involves optimizing preprocessing steps to retain the most informative and accurate data while minimizing errors and maintaining sufficient coverage for meaningful analysis.</li>
 </ul>
 
 <hr />
@@ -476,10 +593,14 @@ ASV Denoising:</p>
 
 <p>]</p>
 
-<p><span>Speaker Notes</span>
-ASV stands for “Amplicon Sequence Variants”</p>
+<p><span>Speaker Notes</span></p>
 
-<h2 id="todo-expand-on-otu-vs-asv-a-bit-more">TODO: expand on OTU vs ASV a bit more</h2>
+<ul>
+  <li>OTU clustering groups similar sequence reads into Operational Taxonomic Units based on a predefined similarity threshold, which can simplify the data but may mask finer taxonomic differences and reduce resolution by lumping closely related species together.</li>
+  <li>In contrast, ASV denoising involves identifying and retaining exact sequence variants without grouping, providing higher resolution and more precise taxonomic identification by distinguishing unique sequences and reducing errors, though it requires more sophisticated algorithms and computational resources.</li>
+</ul>
+
+<hr />
 
 <h2 id="chimera-removal">Chimera Removal</h2>
 
@@ -489,6 +610,14 @@ ASV stands for “Amplicon Sequence Variants”</p>
 </ul>
 
 <p><img src="../../images/chimeras.png" alt="aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Chimera removal is a crucial step in microbiome data processing that involves identifying and eliminating chimeric sequences—artificial DNA sequences that arise from the incorrect joining of two or more distinct sequences during PCR amplification.</li>
+  <li>These chimeras can distort the representation of microbial communities by introducing erroneous sequences that do not reflect actual biological entities.</li>
+  <li>The removal of chimeric sequences is essential for ensuring accurate and reliable results in downstream analyses, such as taxonomic classification and diversity assessment.</li>
+</ul>
 
 <hr />
 
@@ -513,6 +642,14 @@ ASV stands for “Amplicon Sequence Variants”</p>
   </li>
   <li>Accuracy depends on quality and completeness of database used</li>
   <li>Databases are inevitable incomplete</li>
+</ul>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>In microbiome studies, searching a marker database involves comparing sequencing data to a reference database to identify microbial sequences.</li>
+  <li>For example, in amplicon sequencing, sequences might be compared to the SILVA database, which contains rRNA gene sequences, to classify microorganisms based on known genetic markers.</li>
+  <li>In shotgun metagenomics, the MetaPhlAn database can be used, which contains unique marker genes for various microorganisms, enabling precise taxonomy assignment and detailed profiling of the microbial community.</li>
 </ul>
 
 <hr />
@@ -540,11 +677,30 @@ ASV stands for “Amplicon Sequence Variants”</p>
   <li>Pathway reconstruction</li>
 </ul>
 
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>For functional analysis, researchers can use databases like UniRef50 and UniRef90, which cluster sequences into representative sets to help identify proteins and their functions.</li>
+  <li>MetaCyc Reactions provides detailed information on metabolic pathways and enzymatic reactions, allowing the identification of metabolic capabilities within the microbiome.</li>
+  <li>EggNOG offers orthologous group annotations, helping to predict gene functions and evolutionary relationships.</li>
+  <li>These functional databases provide deeper insights into the biological roles and potential activities of the microbial community, complementing the taxonomic data.</li>
+</ul>
+
 <hr />
 
 <h2 id="results-otu-table">Results: OTU table</h2>
 
 <p><img src="../../images/otutable.png" alt="screenshot of an excel table" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>The results of microbiome studies are typically compiled into a comprehensive summary such as an OTU table or a similar data structures.</li>
+  <li>In this table, each row represents an OTU, while each column represents a different sample analyzed.</li>
+  <li>The cells within the table contain values indicating the abundance of each OTU in each sample, often presented as counts or relative frequencies.</li>
+  <li>This format provides a detailed overview of the microbial community composition across multiple samples, allowing researchers to compare diversity and abundance patterns, and perform statistical analyses to assess differences between sample groups, microbial diversity, and correlations with environmental or health-related variables.</li>
+  <li>Comparable tables for other modality of microbiome studies are taxonomy tables, gene tables and pathway tables.</li>
+</ul>
 
 <hr />
 
@@ -559,6 +715,18 @@ ASV stands for “Amplicon Sequence Variants”</p>
 </ul>
 
 <p><img src="../../images/krona_lacto.png" alt="doughnut plot with bands for each kingdom, down to genus, species" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Visualizations of microbiome data are crucial for several reasons.</li>
+  <li>They transform complex, high-dimensional data into interpretable and accessible formats, allowing researchers to quickly grasp the composition and diversity of microbial communities.</li>
+  <li>Krona is a visualization tool used to explore microbiome data from an OTU table interactively.</li>
+  <li>First, the OTU table, with taxonomic classifications and abundance data, is formatted into a compatible file for Krona.</li>
+  <li>The software then processes this file to create an interactive, multi-layered pie chart where each layer represents different taxonomic levels, such as phylum, class, order, family, genus, and species.</li>
+  <li>Users can click on segments to drill down into lower taxonomic levels, with the segment sizes indicating the relative abundance of each taxon.</li>
+  <li>This allows for intuitive and interactive exploration of the microbial community structure, making it easy to identify patterns and differences across samples.</li>
+</ul>
 
 <hr />
 
@@ -575,6 +743,66 @@ ASV stands for “Amplicon Sequence Variants”</p>
 </ul>
 
 <p><img src="../../../../shared/images/phinch_overviewpage.png" alt="screenshot of phinch website showing multiple plot types" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Phinch is another powerful tool for visualizing microbiome data, offering interactive and customizable charts that help in exploring complex datasets.</li>
+</ul>
+
+<hr />
+
+<h2 id="differential-analyses">Differential analyses</h2>
+
+<p><img src="../../images/maaslin2.jpg" alt="Maaslin2 Example" /></p>
+
+<p>.footnote[<em>Figure taken from: https://doi.org/10.1101/2021.01.20.427420</em>]
+<span>Speaker Notes</span></p>
+
+<ul>
+  <li>Differential microbiome analysis using tools like MaAsLin2 involves comparing microbial community profiles between different groups or conditions to identify significant differences in microbial abundance or diversity.</li>
+  <li>MaAsLin2 uses linear models to handle complex, high-dimensional data and adjust for potential confounders, providing robust statistical insights into which microbes are differentially abundant.</li>
+  <li>This analysis helps in understanding how microbial shifts correlate with various factors, such as disease states or environmental changes, thereby uncovering potential biomarkers and functional implications.</li>
+</ul>
+
+<hr />
+
+<h2 id="diversity">Diversity</h2>
+
+<p><img src="../../images/diversity_differences.png" alt="Diversity Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Alpha diversity measures the diversity within a single sample, reflecting the number of species and their relative abundances.</li>
+  <li>Beta diversity compares microbial communities between samples, highlighting differences in species composition and abundance.</li>
+  <li>Together, these metrics provide insights into both the internal diversity of communities and how they vary across different conditions.</li>
+</ul>
+
+<hr />
+
+<h2 id="assembly">Assembly</h2>
+
+<p><img src="../../images/individual-assembly.png" alt="Assembly Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>Microbiome assembly involves reconstructing the complete genomes of microorganisms from sequencing data to understand their functional potential and diversity.</li>
+</ul>
+
+<hr />
+
+<h2 id="binning">Binning</h2>
+
+<p><img src="../../images/binning.png" alt="Binning Example" /></p>
+
+<p><span>Speaker Notes</span></p>
+
+<ul>
+  <li>After the initial assembly of contigs from sequencing data, binning helps to differentiate and categorize these contigs based on their genetic similarity, coverage, and other characteristics, effectively reconstructing individual microbial genomes from the mixed sample.</li>
+</ul>
+
 
 
 	<hr />
@@ -664,7 +892,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/763928ab8842c5397cf159241683ee2150ec9cbf">763928a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ac737e155586d3471869edd1733b0249df9e2938">ac737e1</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
