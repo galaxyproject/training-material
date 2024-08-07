@@ -163,51 +163,35 @@ More on backward learning:
     [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
 
 
-<div class="grid cards" markdown>
+> <question-title>Purpose</question-title>
+> When and how the learning materials can be used and for what purposes?
+{: .question }
 
--   :material-flag-checkered:{ .lg .middle } __Purpose__
+> <question-title>Target Audience</question-title>
+> Is there anything specific that needs to be taken into account, such as cultural context?
+{: .question }
 
-    ---
+> <question-title>Prerequisites</question-title>
+> What does the target audience need to know or understand before starting the learning process?
+{: .question }
 
-    When and how the learning materials can be used and for what purposes?
+> <question-title>Scope</question-title>
+> Is it going to be a single learning unit, or a group such as a course?
+{: .question }
 
--   :material-target-account:{ .lg .middle } __Target Audience__
+> <question-title>Learning Objectives</question-title>
+> What competences will be gained after successful completing of the learning process?
 
-    ---
+>><tip-title>Be SMART</tip-title>
+>>Objectives should be specific, ​measurable, ​attainable, ​relevant and ​time-bound​.
+>{: .tip}
 
-    Is there anything specific that needs to be taken into account, such as cultural context?
+>><tip-title>Use Blooms Taxonomy</tip-title>
+>>Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
+>{: .tip}
+>[See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 
--   :material-history:{ .lg .middle } __Prerequisites__
-
-    ---
-
-    What does the target audience need to know or understand before starting the learning process?
-
-
--   :material-target-account:{ .lg .middle } __Scope__
-
-    ---
-
-    Is it going to be a single learning unit, or a group such as a course?
-
--   :material-bullseye-arrow:{ .lg .middle } __Learning Objectives__
-
-    ---
-
-    What competences will be gained after successful completing of the learning process?
-
-    ??? info "Be SMART"
-
-        Objectives should be specific, ​measurable, ​attainable, ​relevant and ​time-bound​.
-
-    ??? hint "Use Blooms Taxonomy"
-    
-        Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
-
-    [:octicons-arrow-right-24: See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
-
-</div>
-
+{: .question }
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Prepare stage....</a>
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Prepare stage....</a>
