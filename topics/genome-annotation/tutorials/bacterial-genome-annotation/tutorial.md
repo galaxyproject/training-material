@@ -56,7 +56,7 @@ recordings:
   length: 51M
   galaxy_version: 24.0.4.dev0
   date: "'2024-08-02'"
-  speakers: "[bebatut]"
+  speakers: [bebatut]
   captioners: "[bebatut]"
   bot-timestamp: 1722609201
 
