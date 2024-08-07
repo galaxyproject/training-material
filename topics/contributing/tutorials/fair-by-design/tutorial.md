@@ -113,6 +113,8 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 - **Expertise (Skill) Level** =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced
 </div>
 
+
+
 More on the metadata here {% cite hoebelheinrich_2022_6769695 %}
 
 More on FAIR learning objects definition: 
