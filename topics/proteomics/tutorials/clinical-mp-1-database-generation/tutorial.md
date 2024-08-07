@@ -116,7 +116,7 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="(https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow)" title="Pretreatments" %}
+>    https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
