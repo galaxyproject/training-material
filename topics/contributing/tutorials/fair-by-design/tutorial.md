@@ -5,7 +5,6 @@ abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: https://zenodo.org/records/11548062
 questions:
-  - What do the FAIR principles stand for [Wilkinson et al. 2016](https://www.nature.com/articles/sdata201618)?
   - How to develop FAIR learning materials?
 objectives:
   - Define FAIR learning objects
@@ -23,12 +22,12 @@ key_points:
   - FAIR data are as open as possible, and as closed as necessary.
   - The main objective of FAIR data is to increase data reuse by researchers.
 tags:
-  - fair
+  - FAIR-by-Design Learning Materials
+  - FAIR Learning Objects
   - FAIR
-  - by
-  - design
-  - Learning
-  - objects
+  - Metadata
+  - Learning objectives
+  - Blooms taxonomy
 priority: 1
 contributions:
   authorship:
@@ -55,9 +54,38 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 >
 {: .agenda}
 
+
 # Main stages
 
 ## Stage 1 - Prepare
+> Before anything else, preparation is the key to success!
+{: .quote author="Alexander Graham Bell"}
+
+### First things first: What is FAIR?
+
+
+> <comment-title>Findable</comment-title>
+> The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
+{: .comment }
+
+
+> <details-title>Accessible</details-title>
+>
+> The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
+>
+{: .details}
+
+
+> <tip-title>Interoperable</tip-title>
+> The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
+> Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.
+{: .tip}
+
+
+> <question-title>Reusable</question-title>
+>The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
+{: .question}
+
 
 ## Stage 2 - Discover
 
