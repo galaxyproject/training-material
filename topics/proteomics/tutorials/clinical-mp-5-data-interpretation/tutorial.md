@@ -93,6 +93,27 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >
 {: .hands_on}
 
+# Import Workflow
+
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    https://usegalaxy.eu/u/galaxyp/w/wf5datainterpretationworklow
+>
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" Quantified Peptides * "*: `Quantified-Peptides.tabular`
+>    - {% icon param-file %} *" MaxQuant Protein Groups"*: `MaxQuant_Protein_Groups.tabular`
+>    - {% icon param-file %} *" MaxQuant Evidence"*: `MaxQuant_Evidence.tabular`
+>    - {% icon param-file %} *" Annotation.txt "*: `Annotation.tabular`
+>    - {% icon param-file %} *" Comparison Matrix "*: `Comparison_Matrix.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
 
 ## Taxonomic analysis with **Unipept**
 Unipept serves as a vital bioinformatics platform for the analysis of mass spectrometry-based shotgun proteomics data, especially in the study of microbial communities. Its primary utility lies in taxonomic and functional analyses, enabling researchers to identify and quantify microorganisms within diverse environments. The platform facilitates comparative studies across samples, conditions, or time points, shedding light on the dynamic responses of microbial communities to environmental changes. Unipept integrates with public databases like UniProt, ensuring access to comprehensive and updated information for annotations. Being community-driven and open source, Unipept fosters collaboration and transparency, with a user-friendly web interface that accommodates researchers of varying bioinformatics expertise. In essence, Unipept is an invaluable resource, offering tools for the exploration of metaproteomic data and contributing to advancements in our understanding of microbial ecology.
