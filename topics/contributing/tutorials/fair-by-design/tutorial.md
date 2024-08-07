@@ -73,7 +73,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 >
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
 >
-{: .details }
+{: .details lang="es"}
 
 
 > <tip-title>Interoperable</tip-title>
