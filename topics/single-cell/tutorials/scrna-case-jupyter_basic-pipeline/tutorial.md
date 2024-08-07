@@ -52,7 +52,7 @@ recordings:
   galaxy_version: "24.1.2.dev0"
   date: '2024-08-06'
   speakers: [hexhowells]
-  captioners: "[hexhowells]"
+  captioners: [hexhowells]
   bot-timestamp: 1722971660
 
 
