@@ -24,6 +24,7 @@ key_points:
 contributions:
   authorship:
     - shiltemann
+    - lybCNU
   editing:
     - hexylena
   funding:
