@@ -41,7 +41,7 @@ recordings:
   length: 34M
   galaxy_version: 24.0.4.dev0
   date: '2024-08-01'
-  speakers: "[clsiguret]"
+  speakers: [clsiguret]
   captioners: "[clsiguret]"
   bot-timestamp: 1722527209
 
