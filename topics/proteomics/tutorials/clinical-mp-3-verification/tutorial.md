@@ -105,6 +105,28 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 >
 {: .hands_on}
 
+# Import Workflow
+
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow
+>
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" Input MGFs Dataset Collection "*: `MGF dataset collection`
+>    - {% icon param-file %} *" SGPS_peptide-report"*: `SGPS_Peptide_Report.tabular`
+>    - {% icon param-file %} *" Distinct Peptides for PepQuery"*: `Distinct_Peptides_for_PepQuery.tabular`
+>    - {% icon param-file %} *" MaxQuant-peptide-report "*: `MaxQuant_Peptide_Report.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
+
+
 # Extraction of Microbial Peptides from SearchGUI/PeptideShaker and MaxQuant
 Now that we have identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant, we need to extract the microbial peptide sequences and group them to obtain a list of distinct microbial peptides. This list of distinct peptides will be used as input for PepQuery2 to verify confident microbial peptides.
 
