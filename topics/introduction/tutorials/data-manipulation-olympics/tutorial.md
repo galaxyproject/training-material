@@ -597,10 +597,7 @@ In addition to basic filtering, the Galaxy filtering tool allows for more advanc
 These concepts will be used in the filtering expressions we write in Galaxy. Let's now explore some specific scenarios where you might use these expressions.
 
 
-> <hands-on-title>Advanced Filtering with Python Syntax</hands-on-title>
->
->
-> 1. **Filtering Based on Substring Occurrence**
+> <hands-on-title>Filtering Based on Substring Occurrence</hands-on-title>
 >
 >    We want to filter rows where a particular column contains a specific substring using the `cX.find()` method, where `X` is the column number.
 >
@@ -615,90 +612,92 @@ These concepts will be used in the filtering expressions we write in Galaxy. Let
 >    >
 >    > > <solution-title>Answers</solution-title>
 >    > >
->    > > 1.
->    > >    `c11.find('Summer') != -1`
->    > > 2.
->    > >    `c11.find('Summer') == -1`
+>    > > 1. `c11.find('Summer') != -1`
+>    > > 2. `c11.find('Summer') == -1`
 >    > >
 >    > {: .solution}
 >    {: .question}
 >
 >    Ok, great, now that you've got the hang of writing expressions for this tool, let's filter the file for rows where column 11 contains "Summer":
 >
->    a. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
->       - {% icon param-file %} *"Filter"*: `olympics.tsv`
->       - {% icon param-text %} *"With the following condition"*: `c11.find('Summer') != -1`
->       - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> 1. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+>    - {% icon param-text %} *"With the following condition"*: `c11.find('Summer') != -1`
+>    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
->    b.  {% icon galaxy-eye %} **View** the filtered file.
+> 2. {% icon galaxy-eye %} **View** the filtered file.
 >
->    c. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
+> 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
-> 2. **Filtering Rows that Start or End with a Specific Value**
+{: .hands-on }
+
+
+> <hands-on-title>Filtering Rows that Start or End with a Specific Value</hands-on-title>
 >
->    Filter rows based on whether a column starts or ends with a particular value using `cX.startswith()` or `cX.endswith()`.
+> Filter rows based on whether a column starts or ends with a particular value using `cX.startswith()` or `cX.endswith()`.
 >
->    For example, if we want to:
+> For example, if we want to:
 >
->    - Find all athletes whose names start with "Liu".
->    - Find all teams whose names end with "China".
+>  - Find all athletes whose names start with "Liu".
+>  - Find all teams whose names end with "China".
 >
->    > <question-title></question-title>
->    >
->    > 1. How would you filter rows where the 2nd column starts with "Liu"?
->    > 2. How would you filter rows where the 9th column ends with "China"?
->    >
->    > > <solution-title>Answers</solution-title>
->    > >
->    > > 1.
->    > >    `c2.startswith('Liu')`
->    > > 2.
->    > >    `c9.endswith('China')`
->    > >
->    > {: .solution}
->    {: .question}
+> > <question-title></question-title>
+> >
+> > 1. How would you filter rows where the 2nd column starts with "Liu"?
+> > 2. How would you filter rows where the 9th column ends with "China"?
+> >
+> > > <solution-title>Answers</solution-title>
+> > >
+> > > 1. `c2.startswith('Liu')`
+> > > 2. `c9.endswith('China')`
+> > >
+> > {: .solution}
+> {: .question}
 >
->    Ok, great, now that you've got the hang of writing expressions for this tool, let's filter the file to find all athletes whose names start with "Liu":
+> Ok, great, now that you've got the hang of writing expressions for this tool, let's filter the file to find all athletes whose names start with "Liu":
 >
->    a. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
->       - {% icon param-file %} *"Filter"*: `olympics.tsv`
->       - {% icon param-text %} *"With the following condition"*: `c2.startswith('Liu')`
->       - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> 1. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+>    - {% icon param-text %} *"With the following condition"*: `c2.startswith('Liu')`
+>    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
->    b. {% icon galaxy-eye %} **View** the filtered file.
+> 2. {% icon galaxy-eye %} **View** the filtered file.
 >
->    c. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
+> 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
 >
-> 3. **Filtering Based on the Count of Substring Occurrences**
+{: .hands-on}
+
+
+> <hands-on-title>Filtering Based on the Count of Substring Occurrences </hands-on-title>
 >
->    Sometimes, you may need to filter rows based on how many times a certain substring appears in a column. This can be done using the `cX.count()` method.
+> Sometimes, you may need to filter rows based on how many times a certain substring appears in a column. This can be done using the `cX.count()` method.
 >
->    For example, if we want to:
+> For example, if we want to:
 >
->    - Find all athletes born in December, assuming the birthdate could be in either "day-month" or "month-day" format.
+> - Find all athletes born in December, assuming the birthdate could be in either "day-month" or "month-day" format.
 >
->    > <question-title></question-title>
->    >
->    > 1. How would you filter rows where the 5th column contains "December"?
->    >
->    > > <solution-title>Answers</solution-title>
->    > >
->    > > 1.
->    > >    `c5.count('December') == 1`
->    > >
->    > {: .solution}
->    {: .question}
+> > <question-title></question-title>
+> >
+> > 1. How would you filter rows where the 5th column contains "December"?
+> >
+> > > <solution-title>Answers</solution-title>
+> > >
+> > > 1. `c5.count('December') == 1`
+> > >
+> > {: .solution}
+> {: .question}
 >
->    Ok, great, now that you've got the hang of writing expressions for this tool, let's filter the file to find all athletes born in December:
+> Ok, great, now that you've got the hang of writing expressions for this tool, let's filter the file to find all athletes born in December:
 >
->    a. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
->       - {% icon param-file %} *"Filter"*: `olympics.tsv`
->       - {% icon param-text %} *"With the following condition"*: `c5.count('December') == 1`
->       - {% icon param-text %} *"Number of header lines to skip"*: `1`
+> 1. {% tool [**Filter** data on any column using simple expressions]({{version_filter}}) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `olympics.tsv`
+>    - {% icon param-text %} *"With the following condition"*: `c5.count('December') == 1`
+>    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
->    b. {% icon galaxy-eye %} **View** the filtered file.
+> 2. {% icon galaxy-eye %} **View** the filtered file.
 >
->    c. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
+> 3. **Rename** {% icon galaxy-pencil %} both outputs to something descriptive.
+>
 {: .hands_on}
 
 ## Exercises
