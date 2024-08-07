@@ -36,6 +36,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 15min
+  youtube_id: FEAEyqcjxkE
+  speakers:
+  - katherine-d21
 ---
 
 Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; [{% cite Jagtap2015 %} .
