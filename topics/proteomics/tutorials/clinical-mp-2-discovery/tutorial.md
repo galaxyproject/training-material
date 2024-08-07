@@ -37,6 +37,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-discovery/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 16min
+  youtube_id: 5Pg9LLfFGX4
+  speakers:
+  - katherine-d21
 ---
 
 
