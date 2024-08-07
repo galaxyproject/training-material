@@ -49,7 +49,7 @@ notebook:
 recordings:
 - youtube_id: TODO
   length: 13M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: "24.1.2.dev0"
   date: "'2024-08-06'"
   speakers: "[hexhowells]"
   captioners: "[hexhowells]"
