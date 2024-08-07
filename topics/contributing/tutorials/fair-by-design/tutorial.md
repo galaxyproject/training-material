@@ -188,6 +188,7 @@ More on backward learning:
 >
 > ><tip-title>Use Blooms Taxonomy</tip-title>
 > >Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
+> >
 > >[See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 > {: .tip}
 {: .question }
