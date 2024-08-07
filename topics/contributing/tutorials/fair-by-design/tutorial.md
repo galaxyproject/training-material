@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: FAIR-by-design
+title: FAIR-by-design methodology
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: https://zenodo.org/records/11548062
@@ -22,8 +22,8 @@ key_points:
   - FAIR data are as open as possible, and as closed as necessary.
   - The main objective of FAIR data is to increase data reuse by researchers.
 tags:
-  - FAIR-by-Design Learning Materials
-  - FAIR Learning Objects
+  - 'FAIR-by-Design Learning Materials'
+  - "FAIR Learning Objects"
   - FAIR
   - Metadata
   - Learning objectives
@@ -66,14 +66,14 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 > <comment-title>Findable</comment-title>
 > The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
-{: .comment }
+{: .comment title=""}
 
 
 > <details-title>Accessible</details-title>
 >
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
 >
-{: .details}
+{: .details icon=""}
 
 
 > <tip-title>Interoperable</tip-title>
