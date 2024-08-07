@@ -124,6 +124,43 @@ More on FAIR learning objects definition:
 
 ### Start Ideating...
 
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 1</h5>
+        <p class="card-text">What are your desired effects, i.e. learning outcomes...</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card bg-light mb-3" >
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 2</h5>
+        <p class="card-text">How are you going to assess their achievement....</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card bg-light mb-3" >
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 3</h5>
+        <p class="card-text">How should you structure the material to reach them...</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+More on backward learning:
+    [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
 
 
 ## Stage 2 - Discover
