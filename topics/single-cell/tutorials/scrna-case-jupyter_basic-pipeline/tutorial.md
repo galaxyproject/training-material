@@ -47,7 +47,7 @@ notebook:
   language: python
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
 recordings:
-- youtube_id: TODO
+- youtube_id: 40w0WVohv4E
   length: 13M
   galaxy_version: "24.1.2.dev0"
   date: '2024-08-06'
