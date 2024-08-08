@@ -201,7 +201,7 @@ More on backward learning:
 {: .quote author="John Jacob Abel"}
 ### Get inspired
 Reusable materials can be found anywhere. These are just some examples:
-> <code-in-title>OER_</code-in-title>
+> <code-in-title>OER</code-in-title>
 > [DOAB](https://directory.doabooks.org/)
 > [MERLOT](https://www.merlot.org/merlot/index.htm)
 > [OASIS](https://oasis.geneseo.edu/index.php)
@@ -211,8 +211,20 @@ Reusable materials can be found anywhere. These are just some examples:
 > [FORRT](https://forrt.org/)
 {: .code-in}
 
+> <code-in-title>EOSC</code-in-title>
+> [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*)
+> 
+> Most EOSC projects have their own training catalogues and/or platforms...
+{: .code-in}
+
+> <code-in-title>General</code-in-title>
+> [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
+> [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
+> [OSF](https://osf.io/) - a free, open research platform
+{: .code-in}
+
 ### Potential for reuse
-> <warning-title>Danger "Respect the licenses, to be respected!</warning-title>
+> <warning-title> Respect the licenses, to be respected!</warning-title>
 > Materials with non-permissible licenses can be used for inspiration only. Materials with permissible licenses should be reused based on the license rules.
 {: .warning}
 
@@ -222,13 +234,36 @@ Different learners have different learning modalities (read/write, auditory, vis
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Discover stage....</a>
 
 ## Stage 3 - Design
-
+> Design is intelligence made visible.
+{: .quote author="Alina Wheeler"}
 ### Time to brainstorm
 
 ### Structure is everything
 
 ### How to develop the learning content
 
+### Stage 4 - Produce
 
-# Conclusion
+
+### Stage 5 - Publish
+
+### Stage 6 - Verify
+
+### Stage 7 - Continuous Improvement
+> To improve is to change; to be perfect is to change often
+{: .quote author="Winston Churchill"}
+
+#### {% icon galaxy-download } Gather
+Gather feedback from all available internal & external sources.
+
+Potential sources:  
+- Feedback form   
+- QA recommendations   
+- self-reflection after training   
+- Survey   
+- Direct mail contact   
+- Other means of communication
+
+
+# About
 
