@@ -395,7 +395,7 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 
 
 
-# **Conclusion**
+# Conclusion
 
 
 This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to performing database searching with mass spectrometry files and having peptides ready for Blast-P analysis, you can perform follow-up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
