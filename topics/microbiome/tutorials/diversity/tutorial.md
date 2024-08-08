@@ -29,7 +29,7 @@ tags:
 recordings:
 - youtube_id: TODO
   length: 23M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: 24.1.2.dev0
   date: '2024-08-08'
   speakers:
   - paulzierep
