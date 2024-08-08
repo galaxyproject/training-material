@@ -254,16 +254,21 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 ### Structure is everything
 
 ><comment-title></comment-title>
->{%icon galaxy-gear %}Create an intuitive logical organisation of all learning materials.
+>{%icon galaxy-gear %} Create an intuitive logical organisation of all learning materials.
 {: .comment}
 
 ><comment-title></comment-title>
->The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, ...).
+>{%icon trophy %} The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, ...).
 {: .comment}
 
 ><comment-title></comment-title>
->Use a hierarchical structure to combine learning units into larger compositions.
+>{%icon galaxy-dataset-map %} Use a hierarchical structure to combine learning units into larger compositions.
 {: .comment}
+
+
+><warning-title>How to organise the files</warning-title>
+> The diagram shows how to organise all files in folders and subfolders. Click on the links to discover and use pre-prepared templates.
+{: .warning}
 
 
 
