@@ -286,7 +286,6 @@ Different learners have different learning modalities (read/write, auditory, vis
         A README is a text file that introduces and explains the contents of your learning materials. It usually describes the context and defines how the materials may be reused or co-created. It is usually written in a plain text format.
         <br>
         [{% icon point-right %}  Make a README](https://www.makeareadme.com/)
-         Plaintext file that defines the license of your learning materials. Just copy paste it from the official CC website. CC-BY-4.0 is the recommended license. 
         </p>
       </div>
     </div>
@@ -331,7 +330,9 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         A release note is a report published alongside new or updated version of your learning materials that details the changes in the new version. 
         <br>
-[{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
+        <span>
+        [{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
+        </spam>
 		</p>
       </div>
     </div>
