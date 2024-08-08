@@ -90,7 +90,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
 
 
-{% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" icon="notebook" %} 
+{% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" title="Metadata fields categories" %} 
 
 <div class="Descriptive-info-fields" markdown="1">
 - **Title** =	The human readable name of the resource
@@ -264,6 +264,23 @@ Different learners have different learning modalities (read/write, auditory, vis
 {: .tip}
 
 ### FAIR or not FAIR, that is the question...
+
+{% include _includes/tab-choices.html option1="Essential requirements" option2="Optional requirements"  default="Essential requirements" title="Measure FAIRness" text="Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
+<br>
+The questions marked as essential achieve bare minimum FAIRness." %} 
+
+<div class="Essential-requirements" markdown="1">
+- **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository?</br>Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
+- **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? </br> Are access rules (authentication & authorisation) implemented for the learning resource?
+- **Interoperable** =	Is the RDA minimal (or domain specific) metadata schema used for the learning material description?</br> Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
+- **Resuable** =	Is there clear attribution for all reused resources with compatible licenses? </br> Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
+</div>
+<div class="Optional-requirements" markdown="1">
+- **URL to Resource** =	URL that resolves to the learning resource or to a "landing page" for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.
+- **Resource URL Type**	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle
+- **License** =	A license document that applies to this content, typically indicated by URL
+- **Access Cost**	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)
+</div>
 
 
 ### Feedback QA 
