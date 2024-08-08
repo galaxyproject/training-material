@@ -313,7 +313,7 @@ Potential sources:
    <div class="card bg-light mb-3" >
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
-        <h5 class="card-title">{% icongalaxy-history-refresh %} Repeat</h5>
+        <h5 class="card-title">{% icon galaxy-history-refresh %} Repeat</h5>
         <p class="card-text">Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. <br>After the Verify stage, you will reenter continuous improvement with newly gathered information....  </p>
       </div>
     </div>
