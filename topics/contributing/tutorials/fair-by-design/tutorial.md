@@ -296,7 +296,8 @@ Potential sources:
       </div>
     </div>
   </div>
-  
+</div>
+<div class="row">  
 <div class="col-sm-4">
    <!-- <div class="card text-white bg-secondary mb-3" > -->
    <div class="card bg-light mb-3" >
