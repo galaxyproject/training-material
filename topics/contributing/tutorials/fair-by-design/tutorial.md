@@ -276,14 +276,53 @@ Potential sources:
 		<li> Feedback form   </li>
 		<li>QA recommendations   </li>
 		<li> self-reflection after training </li>   
-		<li> Survey   </li>
-		<li> Direct mail contact   </li>
+		<li> Survey </li>
+		<li> Direct mail contact </li>
 		<li>Other means of communication </li>
 		</ul>
       </div>
     </div>
   </div>
+
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon galaxy-barchart %} Analyse</h5>
+        <p class="card-text">Analyse the gathered information in a structured way. <br>
+        Create a list of potential improvements with impact level (high, moderate, low).
+         </p>
+      </div>
+    </div>
+  </div>
+  
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon galaxy-wf-edit %} Improve</h5>
+        <p class="card-text">Select items from the list that will be part of a new version. <br> Choose items that make sense to be in the same new release  </p>
+      </div>
+    </div>
+  </div>
+
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icongalaxy-history-refresh %} Repeat</h5>
+        <p class="card-text">Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. <br>After the Verify stage, you will reenter continuous improvement with newly gathered information....  </p>
+      </div>
+    </div>
+  </div>
 </div>
+
+​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20%E2%80%93%20Verify/20-Continuous%20Improvement/20-CI/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Continuous Improvement stage....</a>
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Continuous Improvement stage....</a>
 
 # About
 
