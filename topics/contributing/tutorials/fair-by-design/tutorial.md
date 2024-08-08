@@ -276,7 +276,7 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 {% include _includes/tab-choices.html option1="I want to reuse it as a whole" option2="I want to reuse a small part of it"  option3="Learn more about IPR" default="I want to reuse it as a whole" title="Check the license" disambiguation="fourth" text="The existing material is available under a CC license, but it is different than the one you plan to use for your materials..." %} 
 
-<div class="I-want-to-reuse-it-as-a-whole" markdown="1">
+<div class="I-want-to-reuse-it-as-a-whole" markdown="1" border="1px" >
 You can't use something that is licensed with ND (no derivatives). In this case you must follow the rules on combining and adapting CC material. [Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 </div>
 <div class="I-want-to-reuse-a-small-part-of-it" markdown="1">
