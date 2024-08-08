@@ -116,7 +116,7 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    https://usegalaxy.eu/u/galaxyp/w/wf1databasegenerationworkflow
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-1-database-generation/workflows/WF1_Database_Generation_Workflow.ga" title="Database Generation" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
@@ -221,7 +221,7 @@ Once generated, the Species UniProt database (~3.38 million sequences) will be m
 >                - {% icon param-file %} *"FASTA File"*: `Protein Database Contaminants (cRAP)` (output of **Protein Database Downloader** {% icon tool %})
 >
 > 2. Rename out as "Human UniProt Microbial Proteins cRAP for MetaNovo".
->                  
+>
 {: .hands_on}
 
 # Reducing Database size
