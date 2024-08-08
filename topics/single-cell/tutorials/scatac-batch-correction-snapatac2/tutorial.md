@@ -526,3 +526,5 @@ After integrating the different datasets and clustering the cells, the scATAC-se
 {% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://usegalaxy.eu/u/timonschlegel/h/multisample-batch-correction-with-harmony-and-snapatac2), or check out the [full workflow](https://usegalaxy.eu/u/timonschlegel/w/multisample-batch-correction-with-snapatac2-and-harmony) for this tutorial.
 
 In this tutorial we have integrated five {scATAC-seq} colon samples. To achieve this, we have assembled a well-scalable Galaxy workflow and have compared different batch integration algorithms, to identify the best-suited method for our data. Finally, we have assigned the cells into clusters, to prepare the data for downstream analysis. 
+
+![SnapATAC2 batch correction pipeline]({% link topics/single-cell/images/scatac-batch-correction-snapatac2/Batch-correction-pipeline-overview.png %})
