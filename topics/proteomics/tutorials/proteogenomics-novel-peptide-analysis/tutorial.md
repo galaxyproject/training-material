@@ -385,7 +385,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 {: .hands_on}
 
-### Conclusion
+## Conclusion
 
 This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism, the data, tool parameters and workflow will need to be modified accordingly. This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/). All the tools are in the most stable version here (published in 2018), the tools are subject to changes and upgrades, hence there could be minor formatting that would be required.
 
