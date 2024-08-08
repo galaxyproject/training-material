@@ -246,6 +246,23 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 
 ## Stage 5 - Publish
+> Publishing is the art of working on a creative idea and turning it into a masterpiece​!
+{: .quote author="Unknown"}
+
+><warning-title>Publishing closed FAIR materials</warning-title>
+> Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:
+>  1. Syllabus - that contains all metadata that describe the materials and metadata should always be open
+>  2. Accompanying files - optional - augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective 
+> Another alternative is to publish the materials in a closed repository where the corresponding access rules can be implemented.
+{: .warning}
+
+### Final preparations
+><tip-title>Time to create the accompanying files</tip-title>
+>These are <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20–%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/'>files</a> that are provided in the root of your learning materials and describe the content and define the rules of reuse.
+{: .tip}
+
+
+### Store in a repository
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
@@ -295,7 +312,6 @@ The questions marked as essential achieve bare minimum FAIRness." %}
 -  Does the resource adopt an open community approach regarding its quality and reachability?
 -  Has the learning resource been checked by a third party regarding its learning experience quality?
 </div>
-
 
 ### Feedback QA 
 
