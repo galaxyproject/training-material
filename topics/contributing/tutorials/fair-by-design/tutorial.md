@@ -250,6 +250,21 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 ### Plan to reuse existing material? 
 
+{% include _includes/tab-choices.html option1="I want to reuse it as a whole" option2="I want to reuse a small part of it"  option3="Learn more about IPR" default="I want to reuse it as a whole" title="Check the license" disambiguation="fourth" text="The existing material is available under a CC license, but it is different than the one you plan to use for your materials..." %} 
+
+<div class="I-want-to-reuse-it-as-a-whole" markdown="1">
+You can't use something that is licensed with ND (no derivatives). In this case you must follow the rules on combining and adapting CC material. [Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
+</div>
+<div class="I-want-to-reuse-a-small-part-of-it" markdown="1">
+No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work. If the work is licensed with ND, do not modify it while reusing.
+</div>
+<div class="Learn more about IPR" markdown="1">
+[How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr)
+</div>
+
+[{% icon point-right %} Go to CC licensing FAQ](https://creativecommons.org/faq/#before-using-cc-licensed-material)
+
+
 ### Accessibility
 ><tip-title></tip-title>
 >The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
