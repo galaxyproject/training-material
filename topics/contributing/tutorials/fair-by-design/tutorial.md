@@ -266,7 +266,7 @@ No problem, you can reuse any existing CC licensed material in your learning mat
 
 
 {% include _includes/tab-choices.html option1="Use the authors recommended attribution" option2="Use TASL"  option3="Examples" option4="Learn more" default="Use the authors recommended attribution" title="Attribute" disambiguation="fifth" text="All CC licenses require that you attribute the author, and this rule is recommended even if the license is public domain CC-0.
-If the work you are reusing has a copyright notice ("© some text") you need to reproduce it while you credit the work.
+If the work you are reusing has a copyright notice ('© some text') you need to reproduce it while you credit the work.
 You should also be able to remove attribution upon request." %} 
 
 <div class="Use-the-authors-recommended-attribution" markdown="1">
