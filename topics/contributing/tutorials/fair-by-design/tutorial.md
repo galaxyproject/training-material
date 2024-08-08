@@ -358,8 +358,43 @@ Deposit your editable learning materials set to make available to other designer
 1. Create an archive of all the files in your logical hierarchical structure.
 2. Create a new Zenodo record with the archive.
 3. Provide a rich metadata description and link to any related resources.
+
 <a href="https://help.zenodo.org/docs/deposit/create-new-upload/" class="btn btn-primary stretched-link">How to deposit in Zenodo</a>
 
+><tip-title>Automated publishing to Zenodo</tip-title>
+>If you are working on GitHub using the provided templates repository then the "publish to Zenodo" step is fully automated for you. Just follow the [guide to publishing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/17-Zenodo%20Publishing/17-Zenodo%20Publishing/).
+{: .tip}
+
+><tip-title>To training catalogue</tip-title>
+>You are at the point when you should also consider making a record in a relevant training catalogue such as the EOSC training catalogue.
+{: .tip}
+
+### Provide to learners
+
+![Moodle logo](../../images/Moodle_logo.svg.png)
+<small>
+<br>
+<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Moodle-logo.svg/320px-Moodle-logo.svg.png">Moodle logo</a> by <a href="https://moodle.org/">Moodle.org</a> from <a href="https://en.m.wikipedia.org/wiki/File:Moodle-logo.svg">Wikipedia</a> licensed under the <a href="https://en.wikipedia.org/wiki/en:GNU_General_Public_License">GNU General Public License</a>. </small>
+</small>
+#### To LMS
+Generate the final versions from your editable content and add it to a course on the Skills4EOSC Learning Platform to make it available for learners.
+
+0. Provide the course metadata.
+
+1. Add the learning content in general non-editable file formats.
+
+2. Add assessments such as quizzes or assignments.
+
+3. Setup feedback gathering.
+
+4. Define recognition mechanism such as open digital badges for successful completion.
+
+<a href="https://docs.moodle.org/403/en/Table_of_Contents#Managing_a_Moodle_course" class="btn btn-primary stretched-link">Managing a Moodle course</a>
+
+
+​​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Publish stage....</a>
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Publish stage....</a>
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
