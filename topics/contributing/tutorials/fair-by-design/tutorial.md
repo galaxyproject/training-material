@@ -271,14 +271,15 @@ Potential sources:
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-download %} Gather</h5>
-        <p class="card-text">Potential sources:  
-- Feedback form   
-- QA recommendations   
-- self-reflection after training   
-- Survey   
-- Direct mail contact   
-- Other means of communication
-		</p>
+        <p class="card-text">Potential sources:  </p>
+        <ul>
+		<li> Feedback form   </li>
+		<li>QA recommendations   </li>
+		<li> self-reflection after training </li>   
+		<li> Survey   </li>
+		<li> Direct mail contact   </li>
+		<li>Other means of communication </li>
+		</ul>
       </div>
     </div>
   </div>
