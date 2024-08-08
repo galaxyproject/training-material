@@ -265,7 +265,7 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 ### FAIR or not FAIR, that is the question...
 
-{% include _includes/tab-choices.html option1="Essential requirements" option2="Optional requirements"  default="Essential requirements" title="Measure FAIRness" text="Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
+{% include _includes/tab-choices.html option1="Essential requirements" option2="Optional requirements"  default="Essential requirements" title="Measure FAIRness"  disambiguation="second" text="Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
 <br>
 The questions marked as essential achieve bare minimum FAIRness." %} 
 
