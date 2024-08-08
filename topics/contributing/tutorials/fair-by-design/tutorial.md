@@ -347,9 +347,9 @@ Different learners have different learning modalities (read/write, auditory, vis
 </div>
 
 ### Store in a repository
-![Zenodo logo](../images/Zenodo_logo.png  "Example of an image with a caption")
+![Zenodo logo](../../images/Zenodo_logo.png  "Example of an image with a caption")
 
-![Zenodot logo](../images/Zenodo_logo.png "Logo ")
+![Zenodo logo](../../images/Zenodo_logo.png "Logo ")
 
 
 ## Stage 6 - Verify
