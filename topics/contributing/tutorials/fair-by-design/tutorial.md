@@ -371,7 +371,7 @@ Deposit your editable learning materials set to make available to other designer
 
 ### Provide to learners
 
-![Moodle logo](../../images/Moodle_logo.svg.png)
+![Moodle logo](../../images/Moodle-logo.svg.png)
 <small>
 <br>
 <a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Moodle-logo.svg/320px-Moodle-logo.svg.png">Moodle logo</a> by <a href="https://moodle.org/">Moodle.org</a> from <a href="https://en.m.wikipedia.org/wiki/File:Moodle-logo.svg">Wikipedia</a> licensed under the <a href="https://en.wikipedia.org/wiki/en:GNU_General_Public_License">GNU General Public License</a>. </small>
