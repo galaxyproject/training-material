@@ -112,8 +112,7 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 >
 > 1. **Import the workflow** into Galaxy:
 >
->     {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-3-verification/workflows/WF3_Verification_Workflow.ga" title="Verification Workflow" %}
->
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-3-verification/workflows/WF3_Verification_Workflow.ga" title="Verification Workflow" %}
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
