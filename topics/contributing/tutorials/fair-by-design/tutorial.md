@@ -264,6 +264,25 @@ Potential sources:
 - Direct mail contact   
 - Other means of communication
 
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon galaxy-download %} Gather</h5>
+        <p class="card-text">Potential sources:  
+- Feedback form   
+- QA recommendations   
+- self-reflection after training   
+- Survey   
+- Direct mail contact   
+- Other means of communication
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 # About
 
