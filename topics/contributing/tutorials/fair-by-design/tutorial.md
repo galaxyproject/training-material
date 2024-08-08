@@ -299,7 +299,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon congratulations %} 1. Set Learning Objectives</h5>
+        <h5 class="card-title">{% icon curriculum %} 1. Set Learning Objectives</h5>
         <p class="card-text">
          ... what is the goal 
         </p>
@@ -309,7 +309,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon pref-list %} 2. Identify Needs</h5>
+        <h5 class="card-title">{% icon pref-identities %} 2. Identify Needs</h5>
         <p class="card-text">
         ... how to get there
         </p>
@@ -319,7 +319,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon solution %} 3. Plan</h5>
+        <h5 class="card-title">{% icon galaxy-panelview %} 3. Plan</h5>
         <p class="card-text">
         ... share the agenda 
         </p>
@@ -332,7 +332,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon congratulations %} 4. Hook</h5>
+        <h5 class="card-title">{% icon version %} 4. Hook</h5>
         <p class="card-text">
          ... why is the content important 
         </p>
@@ -342,7 +342,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon pref-list %} 5. Instruct</h5>
+        <h5 class="card-title">{% icon galaxy-wf-edit %} 5. Instruct</h5>
         <p class="card-text">
         ... watch how I do it
         </p>
@@ -352,7 +352,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon solution %} 6. Practise</h5>
+        <h5 class="card-title">{% icon galaxy-rulebuilder-history %} 6. Practise</h5>
         <p class="card-text">
         ... you help me do it, I'll watch you do it 
         </p>
@@ -365,7 +365,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon congratulations %} 7. Wrap-Up</h5>
+        <h5 class="card-title">{% icon galaxy-barchart %} 7. Wrap-Up</h5>
         <p class="card-text">
          ... foster retention and reinforcement
         </p>
@@ -375,7 +375,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon pref-list %} 8. Evaluate</h5>
+        <h5 class="card-title">{% icon license %} 8. Evaluate</h5>
         <p class="card-text">
         ... monitor progress
         </p>
@@ -385,7 +385,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 <div class="col-sm-4">
    <div class="card bg-light mb-3" >
       <div class="card-body">
-        <h5 class="card-title">{% icon solution %} 9. Reflect</h5>
+        <h5 class="card-title">{% icon galaxy-history-answer %} 9. Reflect</h5>
         <p class="card-text">
         .. how did it go?
         </p>
