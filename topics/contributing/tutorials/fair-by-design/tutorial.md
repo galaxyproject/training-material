@@ -266,9 +266,9 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .comment}
 
 
-><warning-title>How to organise the files</warning-title>
+><hands-on-title>How to organise the files</hands-on-title>
 > The diagram shows how to organise all files in folders and subfolders. Click on the links to discover and use pre-prepared templates.
-{: .warning}
+{: .hands-on}
 
 
 
