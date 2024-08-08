@@ -770,8 +770,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    > AnnData object with n_obs × n_vars = 4430 × 55106
 >    >  obs: 'n_fragment', 'frac_dup', 'frac_mito', 'tsse', 'doublet_probability', 'doublet_score', 'leiden', 'n_genes', 'n_counts'
 >    >  var: 'n_cells', 'n_counts'
->    >  uns: 'reference_sequences'
->    >  obsm: 'log1p'
+>    >  uns: 'log1p'
 >    > ```
 >    >
 >    > 1. How did `n_vars` change, compared to `Anndata 5k PBMC gene_matrix`?
@@ -802,7 +801,7 @@ Since the *cell-by-gene-activity* matrix resembles the *cell-by-gene-expression*
 >    >
 >    > - This tutorial only focuses on producing an **UMAP** plot with marker-genes.
 >    > - If further analysis, with tools requiring more annotations, is intended, these can be added in a similar way as shown above.
->    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.5.3+galaxy2) %} requires annotations from `uns`.
+>    >     - f.ex. *Peak and Motif Analysis* with {% tool [Snapatac2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %} requires annotations from `uns`.
 >    > - It is also possible to leave the input *"Keys from embeddings to copy"* empty, to copy all annotations of a given category such as `obsm`.
 >    {: .comment}
 >
@@ -1019,3 +1018,15 @@ In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnDa
    4. Manually annotating the cell types with selected marker genes
 
 ![SnapATAC2 processing pipeline]({% link topics/single-cell/images/scatac-standard-snapatac2/snapatac2-pipeline.png %})
+
+The {scATAC-seq} analysis can now continue with downstream analysis, for example *differential peak analysis*. 
+
+> <comment-title>Differential peak analysis</comment-title>
+>
+> The **SnapATAC2** tools for differential peak analysis are already accessible on Galaxy. However, there are no GTN trainings available yet. Until such a tutorial is uploaded, you can visit the **SnapATAC2** documentation for a [tutorial on differential peak analysis](https://kzhang.org/SnapATAC2/version/2.6/tutorials/diff.html). 
+>
+> The tools are available in Galaxy under {% tool [SnapATAC2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %}. 
+> - If you want to continue with differential peak analysis, please make sure that the AnnData object with the annotated cell types contains unspecified annotations for the reference sequences (`uns: 'reference_sequences`). 
+>   - The section [Copy-over embeddings]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#copy-over-embeddings ) explains how to copy annotations from one AnnData object to another. 
+>
+{: .comment}
