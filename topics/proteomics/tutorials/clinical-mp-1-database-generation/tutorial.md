@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-1-Database-Generation
+title: "Clinical Metaproteiomics 1: Database-Generation"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to generate a customized database for metaproteomics research?
@@ -36,6 +36,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-database-generation/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 15M
+  youtube_id: FEAEyqcjxkE
+  speakers:
+  - katherine-d21
 ---
 
 Metaproteomics is the large-scale characterization of the entire complement of proteins expressed by microbiota. However, metaproteomics analysis of clinical samples is challenged by the presence of abundant human (host) proteins which hampers the confident detection of lower abundant microbial proteins {% cite Batut2018 %} ; [{% cite Jagtap2015 %} .
@@ -106,7 +116,7 @@ The first workflow for the clinical metaproteomics data analysis is the Database
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-database-generation/workflows/main_workflow.ga" title="Pretreatments" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-1-database-generation/workflows/WF1_Database_Generation_Workflow.ga" title="Database Generation" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
@@ -211,7 +221,7 @@ Once generated, the Species UniProt database (~3.38 million sequences) will be m
 >                - {% icon param-file %} *"FASTA File"*: `Protein Database Contaminants (cRAP)` (output of **Protein Database Downloader** {% icon tool %})
 >
 > 2. Rename out as "Human UniProt Microbial Proteins cRAP for MetaNovo".
->                  
+>
 {: .hands_on}
 
 # Reducing Database size
