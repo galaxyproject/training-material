@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-2-Discovery
+title: "Clinical Metaproteomics 2: Discovery"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform database searching?

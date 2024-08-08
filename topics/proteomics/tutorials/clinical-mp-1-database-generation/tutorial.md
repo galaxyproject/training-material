@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-1-Database-Generation
+title: "Clinical Metaproteiomics 1: Database-Generation"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to generate a customized database for metaproteomics research?

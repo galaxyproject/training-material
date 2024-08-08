@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Clinical-MP-5-Data Interpretation
+title: "Clinical Metaproteomics 5: Data Interpretation"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - Why do we need to interpret the data?

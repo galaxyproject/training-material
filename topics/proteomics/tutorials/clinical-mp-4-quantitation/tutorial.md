@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-4-Quantitation
+title: "Clinical Metaproteomics 4: Quantitation"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform quantitation?
