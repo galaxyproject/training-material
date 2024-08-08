@@ -271,7 +271,7 @@ PDF document accessibility is measured with a separate technical specification <
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/" class="btn btn-primary stretched-link">Learn more</a>
 
 
-{% include _includes/tab-choices.html option1="Slides" option2=""Web content"  option3=""PDF document" default="Slides" title="Use accessibility evaluation tools!" disambiguation="third" text="Accessibility evaluation tools are not perfect. Even if they say that all is ok, it does not mean that your content is truly accessible. But they are a very good starting point." %} 
+{% include _includes/tab-choices.html option1="Slides" option2="Web content"  option3="PDF document" default="Slides" title="Use accessibility evaluation tools!" disambiguation="third" text="Accessibility evaluation tools are not perfect. Even if they say that all is ok, it does not mean that your content is truly accessible. But they are a very good starting point." %} 
 
 <div class="Slides" markdown="1">
 Use the integrated accessibility checker in Power Point:
