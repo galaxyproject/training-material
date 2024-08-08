@@ -253,7 +253,7 @@ Different learners have different learning modalities (read/write, auditory, vis
 > To improve is to change; to be perfect is to change often
 {: .quote author="Winston Churchill"}
 
-#### {% icon galaxy-download } Gather
+#### {% icon galaxy-download %} Gather
 Gather feedback from all available internal & external sources.
 
 Potential sources:  
