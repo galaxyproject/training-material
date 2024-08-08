@@ -265,6 +265,42 @@ No problem, you can reuse any existing CC licensed material in your learning mat
 [{% icon point-right %} Go to CC licensing FAQ](https://creativecommons.org/faq/#before-using-cc-licensed-material)
 
 
+{% include _includes/tab-choices.html option1="Use the authors recommended attribution" option2="Use TASL"  option3="Examples" option4="Learn more" default="Use the authors recommended attribution" title="Attribute" disambiguation="fifth" text="All CC licenses require that you attribute the author, and this rule is recommended even if the license is public domain CC-0.
+If the work you are reusing has a copyright notice ("© some text") you need to reproduce it while you credit the work.
+You should also be able to remove attribution upon request." %} 
+
+<div class="Use-the-authors-recommended-attribution" markdown="1">
+If the original author has provided a cite-as information, use it to attribute the work.
+</div>
+<div class="Use-TASL" markdown="1">
+Provide the Title, Author, Source and License of the work that you are reusing. 
+Source is the URL to the original work.
+If there is a URL to the author personal pages, provide it together with the name.
+Provide the name of the license and a URL to the license. 
+</div>
+<div class="Examples" markdown="1">
+> Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/) 
+> - Webpage/Blog - Title (with link to original work), author (or username) (with link to author's website), and license (with link).
+> 	[Undercover Vampire Policeman](https://chriszabriskie.bandcamp.com/album/undercover-vampire-policeman) by [Chris Zabriskie](https://chriszabriskie.bandcamp.com/), available under a [Creative Commons Attribution 4.0 License](http://creativecommons.org/licenses/by/4.0/)
+> - Book – Title, author, license written somewhere near the title and author if it’s a hard copy or if it’s an online book you should include a link to the licensed terms.
+> 	[From Dust to Digital: Ten Years of the Endangered Archives Programme](https://books.google.com/books?id=ImO3BgAAQBAJ&pg=PR4&dq=creative+commons+4.0&hl=en&sa=X&ved=0CEoQ6AEwCGoVChMIspCXhPPxxgIVSF0eCh27NA5X#v=onepage&q=creative%20commons%204.0&f=false) by Maja Kominko under a Creative Commons Attribution Non-commercial Non-Derivative 4.0 International license (CC BY-NC-ND 4.0)
+
+> - Online Video - Title, author, license written into credits at end of video.  Ideally make the text clickable to the original work.  Put links to the original work and the license terms in the information section for the particular work (i.e. on the right in YouTube).
+> 	 [http://www.youtube.com/watch?v=fDbbdeIXO0w#t=3m0s](http://www.youtube.com/watch?v=fDbbdeIXO0w#t=3m0s)
+> - Podcast/Audio - Title, author, license read at the end of the entire work.
+> 	[“Je Suis Rick Springfield”](http://www.jonathancoulton.com/wiki/Je_Suis_Rick_Springfield) from the album [Artificial Heart](http://www.jonathancoulton.com/wiki/Artificial_Heart_(album)), by Jonathan Coulton, used under a [Creative Commons Attribution-Noncommercial 3.0 Unported License](http://creativecommons.org/licenses/by-nc/3.0/)
+
+>- Photo/Drawing/Illustration – Title, author, license (with link online) or in close proximity to the tangible work (either in the border or directly on the work, if applicable).
+> 	“[Comcast protest](http://www.flickr.com/photos/ari/8503459/in/set-214952/)” by Flikr user [Steve Rhodes](http://www.flickr.com/photos/ari/) used under [Creative Commons Attribution 2.0 license](http://creativecommons.org/licenses/by/2.0/deed.en)
+</div>
+<div class="Learn-more" markdown="1">
+[{% icon point-right %}  Attribution and Citing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#attribution-and-citing)
+</div>
+
+[{% icon point-right %} How to handle attribution?](https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/)
+
+
+
 ### Accessibility
 ><tip-title></tip-title>
 >The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
