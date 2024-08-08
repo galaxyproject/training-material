@@ -251,6 +251,25 @@ Different learners have different learning modalities (read/write, auditory, vis
 ### Plan to reuse existing material? 
 
 ### Accessibility
+><tip-title></tip-title>
+>The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
+{: .tip}
+
+![Universal access logo](../../images/universal-access-6602642_640.png)
+<small>
+<br>
+<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
+</small>
+
+#### Standards
+There are several standards that govern the rules on level of accessibility. Three conformance levels exist, you should aim for AA which is the middle one.
+
+Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>.
+
+PDF document accessibility is measured with a separate technical specification <a href="https://pdfua.foundation/en/why-pdf-ua/">PDF/UA (Universal Accessibility)</a>.
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/" class="btn btn-primary stretched-link">Learn more</a>
+
 
 ### Internal QA
 
