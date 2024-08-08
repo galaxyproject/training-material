@@ -517,7 +517,7 @@ After integrating the different datasets and clustering the cells, the scATAC-se
 >
 > The **SnapATAC2** tools for differential peak analysis are already accessible on Galaxy. However, there are no GTN trainings available yet. Until such a tutorial is uploaded, you can visit the **SnapATAC2** documentation for a [tutorial on differential peak analysis](https://kzhang.org/SnapATAC2/version/2.6/tutorials/diff.html). 
 >
-> The tools are available in Galaxy under {% tool [SnapATAC2 Clustering](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %}. 
+> The tools are available in Galaxy under {% tool [SnapATAC2 Peaks and Motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %}. 
 > 
 {: .comment}
 
