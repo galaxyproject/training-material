@@ -237,8 +237,35 @@ Different learners have different learning modalities (read/write, auditory, vis
 > Design is intelligence made visible.
 {: .quote author="Alina Wheeler"}
 ### Time to brainstorm
+![Brain image](../../images/brain-3829057_640.jpg)
+<small>
+<br>
+<a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3829057">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3829057">Pixabay</a>
+</small>
+#### Concept map
+Build a concept map of your learning materials aligning with the MVS profiles.
+
+The aligned MVS profile can help you cristalize the learning objectives using MVS taxonomy.
+
+Each MVS profile defines a list of technical and soft skills required for the profile. Think on how to incorporate both aspects in your learning materials.
+
+<a href="https://fair-by-design-methodology.github.io/MVS/latest/MVS%20Profiles/Civil%20Servant/civil_servant/" class="btn btn-primary stretched-link">Go to MVS profiles catalogue</a>
 
 ### Structure is everything
+
+><comment-title></comment-title>
+>{%icon galaxy-gear %}Create an intuitive logical organisation of all learning materials.
+{: .comment}
+
+><comment-title></comment-title>
+>The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, ...).
+{: .comment}
+
+><comment-title></comment-title>
+>Use a hierarchical structure to combine learning units into larger compositions.
+{: .comment}
+
+
 
 ### How to develop the learning content
 
@@ -276,7 +303,7 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 {% include _includes/tab-choices.html option1="I want to reuse it as a whole" option2="I want to reuse a small part of it"  option3="Learn more about IPR" default="I want to reuse it as a whole" title="Check the license" disambiguation="fourth" text="The existing material is available under a CC license, but it is different than the one you plan to use for your materials..." %} 
 
-<div class="I-want-to-reuse-it-as-a-whole" markdown="1" border="thin">
+<div class="I-want-to-reuse-it-as-a-whole" markdown="1">
 You can't use something that is licensed with ND (no derivatives). In this case you must follow the rules on combining and adapting CC material. [Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 </div>
 <div class="I-want-to-reuse-a-small-part-of-it" markdown="1">
