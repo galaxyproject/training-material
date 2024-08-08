@@ -287,11 +287,112 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 > All templates are readily available for use in the specialised [templates repository](https://github.com/FAIR-by-Design-Methodology/templates). See the detailed training on how to use it step by step.
 {: .tip}
 
-><question-title></question-title>
+><question-title>What about instructor notes?</question-title>
 >  Need to be detailed enough so that anyone can reuse the slides properly. Don't put them in the slide deck. This is what the learning content file is for.
 {: .question}
 
 ### How to develop the learning content
+
+<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Use the Hunter Model</a>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon congratulations %} 1. Set Learning Objectives</h5>
+        <p class="card-text">
+         ... what is the goal 
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon pref-list %} 2. Identify Needs</h5>
+        <p class="card-text">
+        ... how to get there
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon solution %} 3. Plan</h5>
+        <p class="card-text">
+        ... share the agenda 
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon congratulations %} 4. Hook</h5>
+        <p class="card-text">
+         ... why is the content important 
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon pref-list %} 5. Instruct</h5>
+        <p class="card-text">
+        ... watch how I do it
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon solution %} 6. Practise</h5>
+        <p class="card-text">
+        ... you help me do it, I'll watch you do it 
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon congratulations %} 7. Wrap-Up</h5>
+        <p class="card-text">
+         ... foster retention and reinforcement
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon pref-list %} 8. Evaluate</h5>
+        <p class="card-text">
+        ... monitor progress
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3" >
+      <div class="card-body">
+        <h5 class="card-title">{% icon solution %} 9. Reflect</h5>
+        <p class="card-text">
+        .. how did it go?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
