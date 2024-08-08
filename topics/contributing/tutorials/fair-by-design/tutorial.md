@@ -90,7 +90,7 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
 
 
-{% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" %} 
+{% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" text="Metadata fields categories" icon="notebook" %} 
 
 <div class="Descriptive-info-fields" markdown="1">
 - **Title** =	The human readable name of the resource
@@ -242,14 +242,41 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 ### How to develop the learning content
 
-### Stage 4 - Produce
+## Stage 4 - Produce
 
 
-### Stage 5 - Publish
+## Stage 5 - Publish
 
-### Stage 6 - Verify
+## Stage 6 - Verify
+> You will find it a very good practice always to verify your references, sir!
+{: .quote author="Martin Routh"}
+### External QA
+> <tip-title> A fresh set of eyes</tip-title>
+> Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.
+{: .tip}
 
-### Stage 7 - Continuous Improvement
+> <tip-title> Don't forget to QA the LMS</tip-title>
+>  The reviewer should play the role of a new learner in the LMS and check everything from the learner perspective.
+{: .tip}
+
+> <tip-title> Go through the QA checklists</tip-title>
+> In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials.
+{: .tip}
+
+### FAIR or not FAIR, that is the question...
+
+
+### Feedback QA 
+
+> <comment-title>Regularly gather feedback from learners and instructors</comment-title>
+> Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
+{: .comment}
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20%E2%80%93%20Verify/19-Final%20QA%20check/19-finalQA/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Verify stage....</a>
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Verify stage....</a>
+
+## Stage 7 - Continuous Improvement
 > To improve is to change; to be perfect is to change often
 {: .quote author="Winston Churchill"}
 
