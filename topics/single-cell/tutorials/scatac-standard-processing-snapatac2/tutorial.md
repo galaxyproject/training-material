@@ -1021,12 +1021,12 @@ In this tutorial, we produced a count matrix of {scATAC-seq} reads in the `AnnDa
 
 The {scATAC-seq} analysis can now continue with downstream analysis, for example *differential peak analysis*. 
 
-> <comment-title>Differential peak analysis</comment-title>
+> <details-title>Differential peak analysis</details-title>
 >
-> The **SnapATAC2** tools for differential peak analysis are already accessible on Galaxy. However, there are no GTN trainings available yet. Until such a tutorial is uploaded, you can visit the **SnapATAC2** documentation for a [tutorial on differential peak analysis](https://kzhang.org/SnapATAC2/version/2.6/tutorials/diff.html). 
+> The **SnapATAC2** tools for differential peak analysis are already accessible on Galaxy. However, there are no GTN trainings available yet. Until such a tutorial is uploaded, you can visit the **SnapATAC2** documentation for a [tutorial on differential peak analysis](https://kzhang.org/SnapATAC2/version/2.6/tutorials/diff.html). And check out our [example history](https://usegalaxy.eu/u/timonschlegel/h/differential-peak-analysis-with-snapatac2) and the exemplary [workflow](https://usegalaxy.eu/u/timonschlegel/w/copy-of-differential-peak-analysissnapatac2). 
 >
-> The tools are available in Galaxy under {% tool [SnapATAC2 peaks and motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %}. 
-> - If you want to continue with differential peak analysis, please make sure that the AnnData object with the annotated cell types contains unspecified annotations for the reference sequences (`uns: 'reference_sequences`). 
+> The tools are available in Galaxy under {% tool [SnapATAC2 Peaks and Motif](toolshed.g2.bx.psu.edu/repos/iuc/snapatac2_peaks_and_motif/snapatac2_peaks_and_motif/2.6.4+galaxy1) %}. 
+> - If you want to continue with differential peak analysis, please make sure that the AnnData object with the annotated cell types contains unspecified annotations for the reference sequences (`uns: 'reference_sequences'`). 
 >   - The section [Copy-over embeddings]( {% link topics/single-cell/tutorials/scatac-standard-processing-snapatac2/tutorial.md %}#copy-over-embeddings ) explains how to copy annotations from one AnnData object to another. 
 >
-{: .comment}
+{: .details}
