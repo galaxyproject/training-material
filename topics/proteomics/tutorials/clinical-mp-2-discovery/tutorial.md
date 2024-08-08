@@ -105,7 +105,7 @@ This step is to identify proteins based on mass spectrometry data. The algorithm
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
-{: .hands_on} 
+{: .hands_on}
 
 # Import Workflow
 
@@ -114,8 +114,7 @@ This step is to identify proteins based on mass spectrometry data. The algorithm
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    https://usegalaxy.eu/u/galaxyp/w/wf2discovery-workflow
->
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-2-discovery/workflows/WF2_Discovery-Workflow.ga" title="Discovery Workflow" %}
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -445,7 +444,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - *"Group by column"*: `c1`
 >
->    
+>
 {: .hands_on}
 
 

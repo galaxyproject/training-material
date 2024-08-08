@@ -75,7 +75,7 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >    https://zenodo.org/records/10105821/files/MaxQuant_Evidence.tabular
 >    https://zenodo.org/records/10105821/files/MaxQuant_Protein_Groups.tabular
 >    https://zenodo.org/records/10105821/files/Quantified-Peptides.tabular
->    
+>
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -100,8 +100,7 @@ The final workflow in the array of clinical metaproteomics tutorials is the data
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    https://usegalaxy.eu/u/galaxyp/w/wf5datainterpretationworklow
->
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-5-data-interpretaion/workflows/WF5_Data_Interpretation_Worklow.ga" title="Data Interpretation Workflow" %}
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -121,7 +120,7 @@ Unipept serves as a vital bioinformatics platform for the analysis of mass spect
 
 > <hands-on-title> Unipept 5.0 </hands-on-title>
 >
-> 
+>
 > 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.5.1) %} with the following parameters:
 >    - *"Unipept application"*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
 >    - *"Peptides input format"*: `tabular`
@@ -171,7 +170,7 @@ Unipept serves as a vital bioinformatics platform for the analysis of mass spect
 
 
 # MSstats TMT
-MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust statistical analysis of mass spectrometry-based quantitative proteomics data using TMT labeling. TMT is a widely used method for multiplexed quantitative proteomics, enabling simultaneous identification and quantification of proteins across multiple samples. MSstats TMT plays a crucial role in this process by providing a statistical framework for analyzing TMT data, and facilitating accurate and reliable protein abundance measurements. The tool offers a range of features, including quality control, normalization, and statistical modeling, allowing researchers to identify differentially expressed proteins with confidence. MSstats TMT is particularly valuable in large-scale studies where quantifying protein expression across multiple conditions is essential for understanding complex biological processes. Its application contributes to advancing our understanding of proteomic changes in response to various experimental conditions or perturbations. 
+MSstats TMT(Tandem Mass Tag) is a computational tool designed for the robust statistical analysis of mass spectrometry-based quantitative proteomics data using TMT labeling. TMT is a widely used method for multiplexed quantitative proteomics, enabling simultaneous identification and quantification of proteins across multiple samples. MSstats TMT plays a crucial role in this process by providing a statistical framework for analyzing TMT data, and facilitating accurate and reliable protein abundance measurements. The tool offers a range of features, including quality control, normalization, and statistical modeling, allowing researchers to identify differentially expressed proteins with confidence. MSstats TMT is particularly valuable in large-scale studies where quantifying protein expression across multiple conditions is essential for understanding complex biological processes. Its application contributes to advancing our understanding of proteomic changes in response to various experimental conditions or perturbations.
 
 ## Statistical Analysis of Microbial proteins with **MSstatsTMT**
 

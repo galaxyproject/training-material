@@ -50,7 +50,7 @@ recordings:
 
 # Introduction
 
-In proteomic research, the primary goal is to obtain accurate and meaningful insights into the proteome of a biological system. Verifying the presence of peptides or proteins is a critical step in achieving this goal, ensuring the quality and reliability of the data and the biological relevance of the findings. This tutorial is a sequel to the clinical metaproteomics discovery workflow. Once you have identified microbial peptides, the next step is to verify these peptides, for which we use PepQuery. 
+In proteomic research, the primary goal is to obtain accurate and meaningful insights into the proteome of a biological system. Verifying the presence of peptides or proteins is a critical step in achieving this goal, ensuring the quality and reliability of the data and the biological relevance of the findings. This tutorial is a sequel to the clinical metaproteomics discovery workflow. Once you have identified microbial peptides, the next step is to verify these peptides, for which we use PepQuery.
 
 The PepQuery tool is used to validate the identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant, to ensure that they are indeed of microbial origin and that human peptides were not misassigned. To do this, all confident microbial peptides from the two database search algorithms were merged and searched against the Human UniProt Reference proteome (with Isoforms) and cRAP databases.
 
@@ -112,7 +112,7 @@ Interestingly, the PepQuery tool does not rely on searching peptides against a r
 >
 > 1. **Import the workflow** into Galaxy:
 >
->    https://usegalaxy.eu/u/galaxyp/w/wf3verificationworkflow
+>     {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-3-verification/workflows/WF3_Verification_Workflow.ga" title="Verification Workflow" %}
 >
 >
 > 2. Run **Workflow** {% icon workflow %} using the following parameters:
@@ -155,7 +155,7 @@ First, we will use the Cut tool to select the peptide and protein columns from t
 {: .hands_on}
 
 
-## Concatenate peptides from MaxQuant and SGPS for PepQuery2 
+## Concatenate peptides from MaxQuant and SGPS for PepQuery2
 
 We will now concatenate the peptide and protein datasets from SearchGUI/PeptideShaker and MaxQuant. Later, we will generate a list of confident peptides using PepQuery2. The list of confident peptides will be searched against the concatenated peptide-protein datasets from SearchGUI/PeptideShaker and MaxQuant to generate a list of verified peptides.
 
@@ -186,7 +186,7 @@ We generate and merge Human UniProt (with Isoforms) and contaminants (cRAP) to m
 
 
 
-## Peptide verification 
+## Peptide verification
 The PepQuery2 tool will be used to validate the identified microbial peptides from SearchGUI/PeptideShaker and MaxQuant to ensure that they are indeed of microbial origin and that human peptides were not misassigned. We will use the list of `Distinct Peptides` (from the [Discovery Module](https://github.com/subinamehta/training-material/blob/main/topics/proteomics/tutorials/clinical-mp-discovery/tutorial.md)), `Human UniProt+Isoforms+cRAP database`, and our `MGF file collection` as inputs for PepQuery2. The outputs we are interested in are the four PSM Rank (txt) files (one for each MGF file).
 
 Interestingly, the PepQuery2 tool does not rely on searching peptides against a reference protein sequence database as “traditional” shotgun proteomics does, which enables it to identify novel, disease-specific sequences with sensitivity and specificity in its protein validation. More information about PepQuery is available, including the first {% cite Wen2019 %} and second iterations {% cite Wen2023 %}.
@@ -243,7 +243,7 @@ Remember that PepQuery2 generates a PSM Rank file for each input MGF file, so we
 
 
 
-## Filtering out confident peptides 
+## Filtering out confident peptides
 
 Now, we want to filter for confident peptides from PepQuery2 and prepare them for the Query Tabular tool.
 
@@ -305,7 +305,7 @@ We will use the Query Tabular tool {% cite Johnson2019 %} to search the PepQuery
 > > <comment-title>SQL Query information</comment-title>
 > >  The query input files are the list of peptides and the peptide report we obtained from MaxQuant and SGPS. The query is matching each peptide (m.pep) from the PepQuery results to the peptide reports so that each verified peptide has its protein/protein group assigned to it.
 > {: .comment}
-> 
+>
 > <hands-on-title> Remove Header with Remove beginning </hands-on-title>
 >
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
@@ -363,7 +363,7 @@ Again, we will use the Query Tabular tool to retrieve UniProt IDs (accession num
 >                - *"Specify Name for Table"*: `t1`
 >                - *"Use first line as column names"*: `Yes`
 >                - *"Specify Column Names (comma-separated list)"*: `pep,prot`
->    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession 
+>    ` *"SQL Query to generate tabular output"*: `SELECT distinct(prot) AS Accession
 >     from t1`
 >     *"include query result column headers"*: `No`
 >
