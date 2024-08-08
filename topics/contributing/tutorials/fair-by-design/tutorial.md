@@ -261,6 +261,82 @@ Different learners have different learning modalities (read/write, auditory, vis
 >These are <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20–%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/'>files</a> that are provided in the root of your learning materials and describe the content and define the rules of reuse.
 {: .tip}
 
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon text-document %} LICENSE</h5>
+        <p class="card-text">
+         Plaintext file that defines the license of your learning materials. Just copy paste it from the official CC website. CC-BY-4.0 is the recommended license. 
+         <br>
+         [{% icon point-right %} CC license](https://creativecommons.org/licenses/by/4.0/legalcode.txt)       
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon sticky-note %} README</h5>
+        <p class="card-text">
+        A README is a text file that introduces and explains the contents of your learning materials. It usually describes the context and defines how the materials may be reused or co-created. It is usually written in a plain text format.
+        <br>
+        [{% icon point-right %}  Make a README](https://www.makeareadme.com/)
+         Plaintext file that defines the license of your learning materials. Just copy paste it from the official CC website. CC-BY-4.0 is the recommended license. 
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon references %} CITATION.cff</h5>
+        <p class="card-text">
+        Citation files are plain text files with human- and machine-readable citation information that tells others how to cite or attribute your work. 
+        <br>
+         [{% icon point-right %} Create a citation file](https://citation-file-format.github.io/)
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon license %} CODE_OF_CONDUCT</h5>
+        <p class="card-text">
+        A code of conduct defines the rules for how to engage in a co-creation community. It is based on a premise of an inclusive environment that respects all contributions.
+         <br>
+         [{% icon point-right %} Code of conduct template](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon comment %} RELEASE NOTES</h5>
+        <p class="card-text">
+        A release note is a report published alongside new or updated version of your learning materials that details the changes in the new version. 
+        <br>
+        [{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 
 ### Store in a repository
 
