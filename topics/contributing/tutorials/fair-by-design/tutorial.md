@@ -270,16 +270,30 @@ Different learners have different learning modalities (read/write, auditory, vis
 The questions marked as essential achieve bare minimum FAIRness." %} 
 
 <div class="Essential-requirements" markdown="1">
-- **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository?</br>Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
-- **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? </br> Are access rules (authentication & authorisation) implemented for the learning resource?
-- **Interoperable** =	Is the RDA minimal (or domain specific) metadata schema used for the learning material description?</br> Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
-- **Resuable** =	Is there clear attribution for all reused resources with compatible licenses? </br> Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
+- **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository? Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
+- **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? Are access rules (authentication & authorisation) implemented for the learning resource?
+- **Interoperable** = Is the RDA minimal (or domain specific) metadata schema used for the learning material description?</br> Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
+- **Resuable** = Is there clear attribution for all reused resources with compatible licenses? Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
 </div>
 <div class="Optional-requirements" markdown="1">
-- **URL to Resource** =	URL that resolves to the learning resource or to a "landing page" for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.
-- **Resource URL Type**	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle
-- **License** =	A license document that applies to this content, typically indicated by URL
-- **Access Cost**	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)
+-  Did you follow the stages of the backward instructional design process while developing the learning resource?
+-  Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?
+-  Does the learning resource represent a complete learning object defined around minimum one learning objective?
+-  Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
+    -  facilitator guide
+    -  activities description
+    -  assessment activities and strategy to assess
+    -  general learning content or instructor notes
+    -  lesson unit plan
+    -  syllabus
+-  Have you employed a versioning system to track and control changes in your materials?
+-  Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?
+-  Is the learning resource searchable in at least one relevant catalogue? 
+    -  Is it FAIR (can be searched based on metadata)?
+-  Does the course include the possibility to provide feedback or comments from users and-or trainers/designers? 
+    -  If so, do you regularly gather and analyse that feedback?
+-  Does the resource adopt an open community approach regarding its quality and reachability?
+-  Has the learning resource been checked by a third party regarding its learning experience quality?
 </div>
 
 
