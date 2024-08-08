@@ -502,7 +502,7 @@ Check that the file is in netcdf !
 ## Use DIVAnd
 > <hands-on-title> Create a climatology </hands-on-title>
 >
-> 1. {% tool [DIVAnd](toolshed.g2.bx.psu.edu/) %} with the following parameters:
+> 1. {% tool [DIVAnd](toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input your netcdf data"*: `ODV netcdf outputs` (output of **Ocean Data View** {% icon tool %}) 
 >    - {% icon param-file %} *"Input your bathymetry netcdf file"*: `bathymetry.nc` 
 >    - *"Input longitude min (+east/-west)"*: `19.0` 
@@ -519,7 +519,7 @@ Check that the file is in netcdf !
 > 3. After a couple minutes an `DIVAnd netcdf output` output will appear green in your history.
 > 4. Check that your data are in netcdf format with {% icon galaxy-pencil %}, it should be `netcdf`
 >
-{% snippet faqs/galaxy/datasets_change_datatype.md datatype="nectdf" box_type="tip" %}
+> {% snippet faqs/galaxy/datasets_change_datatype.md datatype="nectdf" box_type="tip" %}
 {: .hands_on}
 </div>
 
