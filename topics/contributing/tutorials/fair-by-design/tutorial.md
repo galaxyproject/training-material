@@ -331,8 +331,8 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         A release note is a report published alongside new or updated version of your learning materials that details the changes in the new version. 
         <br>
-        [{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
-        </p>
+[{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
+		</p>
       </div>
     </div>
   </div>
