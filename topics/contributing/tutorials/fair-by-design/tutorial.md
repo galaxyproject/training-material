@@ -271,7 +271,8 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
          Plaintext file that defines the license of your learning materials. Just copy paste it from the official CC website. CC-BY-4.0 is the recommended license. 
          <br>
-         [{% icon point-right %} CC license](https://creativecommons.org/licenses/by/4.0/legalcode.txt)       
+         <a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt" > {% icon point-right %} CC license
+         </a>       
         </p>
       </div>
     </div>
