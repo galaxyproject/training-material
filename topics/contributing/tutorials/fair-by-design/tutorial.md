@@ -286,7 +286,9 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         A README is a text file that introduces and explains the contents of your learning materials. It usually describes the context and defines how the materials may be reused or co-created. It is usually written in a plain text format.
         <br>
-        [{% icon point-right %}  Make a README](https://www.makeareadme.com/)
+		<a href="https://www.makeareadme.com/">
+        {% icon point-right %}  Make a README
+        </a>
         </p>
       </div>
     </div>
@@ -300,7 +302,9 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         Citation files are plain text files with human- and machine-readable citation information that tells others how to cite or attribute your work. 
         <br>
-         [{% icon point-right %} Create a citation file](https://citation-file-format.github.io/)
+        <a href="https://citation-file-format.github.io/">
+         {% icon point-right %} Create a citation file
+         </a>
         </p>
       </div>
     </div>
@@ -317,7 +321,9 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         A code of conduct defines the rules for how to engage in a co-creation community. It is based on a premise of an inclusive environment that respects all contributions.
          <br>
-         [{% icon point-right %} Code of conduct template](https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md)
+         <a href="https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md">
+         {% icon point-right %} Code of conduct template
+         </a>
         </p>
       </div>
     </div>
@@ -331,7 +337,9 @@ Different learners have different learning modalities (read/write, auditory, vis
         <p class="card-text">
         A release note is a report published alongside new or updated version of your learning materials that details the changes in the new version. 
         <br>
-        [{% icon point-right %} Creating Release Notes](https://slite.com/templates/release-notes)
+        <a href="https://slite.com/templates/release-notes">
+        {% icon point-right %} Creating Release Notes
+        </a>
 		</p>
       </div>
     </div>
@@ -339,6 +347,8 @@ Different learners have different learning modalities (read/write, auditory, vis
 </div>
 
 ### Store in a repository
+![Zenodo logo](../images/Zenodo_logo.png  "Example of an image with a caption")
+
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
