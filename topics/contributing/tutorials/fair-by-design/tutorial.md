@@ -350,8 +350,15 @@ Different learners have different learning modalities (read/write, auditory, vis
 
 ![Zenodo logo](../../images/Zenodo_logo.png)
 <small>
+<br>
 <a href="https://upload.wikimedia.org/wikipedia/commons/5/58/Zenodo_logo.png">Zenodo logo</a> by <a href="https://twitter.com">a Twitter user</a> from <a href="https://commons.m.wikimedia.org/wiki/File:Zenodo_logo.png">Wikimedia</a> licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-Share Alike 4.0 International license</a>
 </small>
+#### To Zenodo
+Deposit your editable learning materials set to make available to other designers and instructors.
+1. Create an archive of all the files in your logical hierarchical structure.
+2. Create a new Zenodo record with the archive.
+3. Provide a rich metadata description and link to any related resources.
+<a href="https://help.zenodo.org/docs/deposit/create-new-upload/" class="btn btn-primary stretched-link">How to deposit in Zenodo</a>
 
 
 ## Stage 6 - Verify
