@@ -275,17 +275,18 @@ PDF document accessibility is measured with a separate technical specification <
 
 <div class="Slides" markdown="1">
 Use the integrated accessibility checker in Power Point:
-        1. Open an existing presentation in PowerPoint and review the content. 
-        2. Select the Review tab. 
-        3. Select Check Accessibility.
-        4. An Accessibility Checker pane will appear on the right with 'Inspection Results' displayed.
+1. Open an existing presentation in PowerPoint and review the content. 
+2. Select the Review tab. 
+3. Select Check Accessibility.
+4. An Accessibility Checker pane will appear on the right with 'Inspection Results' displayed.
 </div>
 <div class="Web-content" markdown="1">
-- Choose from the [Web Accessibility Evaluation Tools List](https://www.w3.org/WAI/test-evaluate/tools/list/) developed by W3C.
+Choose from the [Web Accessibility Evaluation Tools List](https://www.w3.org/WAI/test-evaluate/tools/list/) developed by W3C.
 </div>
 <div class="PDF-document" markdown="1">
-- Check accessibility in Adobe Acrobat Pro.
-- Open the PDF and then from the All tools menu on the left, select View more and then select Prepare for accessibility.
+Check accessibility in Adobe Acrobat Pro.
+
+Open the PDF and then from the All tools menu on the left, select View more and then select Prepare for accessibility.
 </div>
 
 
