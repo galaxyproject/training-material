@@ -70,7 +70,7 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 >    - **Mz to sqlite**
 >    - **Genomic mapping sqlite**
 >
-> If you do not have these files from the previous tutorials in this series, you can import them from Zenodo:
+> If you do not have these files from the previous tutorials in this series, you can import them from [Zenodo](https://doi.org/10.5281/zenodo.13270741)
 > ```
 > https://zenodo.org/record/1489208/files/Peptides_for_Blast-P_analysis.tabular
 > https://zenodo.org/record/1489208/files/PeptideShaker_PSM.tabular
@@ -83,9 +83,9 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 
 # Peptide Selection
 
-[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.
+[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) is a web-based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for the identification of known proteins or for the identification of potential peptides associated with novel proteoforms.
 
-The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.
+The first step in this tutorial is to perform BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.
 
 > <hands-on-title>NCBI BLAST+ blastp</hands-on-title>
 >
@@ -200,15 +200,15 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 # Multiomics Visualization Platform (MVP)
 
-The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide which is subjected to change, so while you are running this tool please take a look at the "Novel Peptide" output from the previous steps).
+The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user-defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step-by-step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide that is subjected to change, so while you are running this tool please take a look at the "Novel Peptide" output from the previous steps).
 
 > <hands-on-title>Guide to MVP</hands-on-title>
 >
-> The spectra belonging to these "Novel peptides" can be viewed using MVP,this can be achieved by selecting the output from the `mz to sqlite tool` (Generated in the second workflow).
-> Here is a step by step guide to obtain the proteogenomic view of the "Novel peptides".
+> The spectra belonging to these "Novel peptides" can be viewed using MVP, this can be achieved by selecting the output from the `mz to sqlite tool` (Generated in the second workflow).
+> Here is a step-by-step guide to obtain the proteogenomic view of the "Novel peptides".
 >
 >
-> 1) Click on the **Visualize in MVP application**, it will open up options for visualization application in the center pane, Select **MVP Application** from the options (or Right click to open in a new window).
+> 1) Click on the **Visualize in MVP application**, it will open up options for visualization application in the center pane, Select **MVP Application** from the options (or Right-click to open in a new window).
 >
 > ![mz to sqlite](../../images/Visualize.png){:width="20%"}
 >
@@ -333,7 +333,7 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 >
 {: .hands_on}
 
-The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.
+The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, the chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.
 
 
 # Final Summary Output
@@ -377,7 +377,7 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 >     - *"include query result column headers"*: `Yes`
 >
-> 2. Click **Run Tool** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+> 2. Click **Run Tool** and inspect the query results file after it turns green. If everything goes well, it should look similar:
 >
 >    ![Final Summary](../../images/final_summary.png){:width="100%"}
 >
@@ -385,9 +385,9 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 {: .hands_on}
 
-### Conclusion
+## Conclusion
 
-This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/).
+This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism, the data, tool parameters and workflow will need to be modified accordingly. This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/). All the tools are in the most stable version here (published in 2018), the tools are subject to changes and upgrades, hence there could be minor formatting that would be required.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)
