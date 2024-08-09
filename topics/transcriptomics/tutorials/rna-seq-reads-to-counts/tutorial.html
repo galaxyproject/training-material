@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0b7ce45efc306f3e5e549128640871511531de25",
+		release: "galaxy-training-network@1dc2547d2b957ca2a48f82220c30800d729ca33b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="1: RNA-Seq reads to counts">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-13 11:06:26 +0000">
+<meta name="DC.date" content="2024-08-09 08:51:50 +0000">
 <meta name="DC.creator" content="Maria Doyle">
 <meta name="DC.creator" content="Belinda Phipson">
 <meta name="DC.creator" content="Harriet Dashnow"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-02-13 11:06:26 +0000",
+  "dateModified": "2024-08-09 08:51:50 +0000",
   "datePublished": "2018-09-23 10:38:20 +0000",
   "identifier": "https://gxy.io/GTN:T00301",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "1: RNA-Seq reads to counts",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
-  "version": 32,
+  "version": 33,
   "timeRequired": "PT3H",
   "teaches": "Learn how RNA-seq reads are converted into counts\n - Understand QC steps that can be performed on RNA-seq reads\n - Generate interactive reports to summarise QC information with MultiQC\n - Use the Galaxy Rule-based Uploader to import FASTQs from URLs\n - Make use of Galaxy Collections for a tidy analysis\n - Create a Galaxy Workflow that converts RNA-seq reads into counts",
   "keywords": [
@@ -1347,7 +1347,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 23, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1367,7 +1367,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.5</a> (2 recent ratings, 31 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 32 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 33 </div>
 
     </blockquote>
     </section>
@@ -1440,7 +1440,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="import-data-from-urls">Import data from URLs</h2>
 
-<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>.</p>
+<p>Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 (<span class="citation"><a href="#kim2015hisat">Kim <i>et al.</i> 2015</a></span>), STAR (<span class="citation"><a href="#dobin2013star">Dobin <i>et al.</i> 2013</a></span>) and Subread (<span class="citation"><a href="#Liao2013">Liao <i>et al.</i> 2013</a></span>). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don’t have access to a server you can try to use one of the publically available Galaxies e.g. <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>.</p>
 
 <p>The raw reads used in this tutorial were obtained from SRA from the link in GEO for the the mouse mammary gland dataset (e.g <code class="language-plaintext highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://zenodo.org/record/4249555">Zenodo</a> and the links to the FASTQ files are provided below.</p>
 
@@ -2196,7 +2196,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h2 id="strandness">Strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tools, a reference bed file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">RNA-seq ref-based tutorial</a>. This is done through comparing the “strandness of reads” with the “strandness of transcripts”. For this tool, and many of the other RSeQC (<span class="citation"><a href="#wang2012rseqc">Wang <i>et al.</i> 2012</a></span>) tools, a reference bed file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference BED files for model organisms. You can import the RSeQC mm10 RefSeq BED file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Data if provided. Alternatively, you can provide your own BED file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to BED12</strong> tool can be used to convert a GTF into a BED file.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-strandness-with-b-infer-experiment-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check strandness with <b>Infer Experiment</b></div>
@@ -3091,7 +3091,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b7ce45efc306f3e5e549128640871511531de25">0b7ce45</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1dc2547d2b957ca2a48f82220c30800d729ca33b">1dc2547</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
