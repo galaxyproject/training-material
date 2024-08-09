@@ -70,7 +70,7 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 >    - **Mz to sqlite**
 >    - **Genomic mapping sqlite**
 >
-> If you do not have these files from the previous tutorials in this series, you can import them from Zenodo (https://doi.org/10.5281/zenodo.13270741)
+> If you do not have these files from the previous tutorials in this series, you can import them from [Zenodo](https://doi.org/10.5281/zenodo.13270741)
 > ```
 > https://zenodo.org/record/1489208/files/Peptides_for_Blast-P_analysis.tabular
 > https://zenodo.org/record/1489208/files/PeptideShaker_PSM.tabular
