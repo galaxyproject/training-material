@@ -270,6 +270,19 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 > The diagram shows how to organise all files in folders and subfolders. Click on the links to discover and use pre-prepared templates.
 {: .hands-on}
 
+```
+├── README
+├── CITATION.cff
+├── LICENCE
+├── resources
+├───├── attachments 
+│   ├── Learning Unit1
+├───├───├── attachments
+│   │   ├── assesment
+│   │   ├── activities
+│   ├── Learning Unit2
+
+```
 
 ><comment-title>Syllabus is ready</comment-title>
 > You should by now have the first draft of your <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/04-Conceptualisation/04-Conceptualisation/'>syllabus</a>. It contains all the fields from the RDA min metadata set plus the high level topics covered by the learning material.
