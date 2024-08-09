@@ -60,7 +60,7 @@ Observations will be interpolated/analyzed on a curvilinear grid in 1, 2, 3 or m
 >
 {: .details}
 
-{% include _includes/cyoa-choices.html option1="Tools" option2="Workflow" default="tools"
+{% include _includes/cyoa-choices.html option1="Tools" option2="Workflow" default="tools" disambiguation="tutorialstyle"
        text="Do you want to run the workflow or to discover the tools one by one ?" %}
 
 <div class="Workflow" markdown="1">
@@ -483,7 +483,7 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 > {% snippet  faqs/galaxy/datasets_change_datatype.md %}
 {: .tip}
 
-{% include _includes/cyoa-choices.html option1="New user" option2="Experimented user" default="New user"
+{% include _includes/cyoa-choices.html option1="New user" option2="Experimented user" default="New user" disambiguation="userlevel"
        text="If you want the easiest tutorial possible choose New user. If you feel that you need more flexibility on the DIVAnd parameters choose Experimented user." %}
 
 <div class="New user" markdown="1">
