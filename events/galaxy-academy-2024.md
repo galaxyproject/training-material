@@ -5,7 +5,7 @@ title: Galaxy Academy 2024
 description: |
   The Galaxy Academy is a online training event for Beginners as well as learners who would like to improve there Galaxy data analysis skills. Over the course of one week we will have a different topic and focus every day. 
 
-draft: true
+#draft: true
 
 contributions:
     organisers:
