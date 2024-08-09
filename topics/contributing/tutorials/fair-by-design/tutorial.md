@@ -64,9 +64,9 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 ### First things first: What is FAIR?
 
 
-> <question-title>Findable</question-title>
+> <answer-title>Findable</answer-title>
 > The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
-{: .question}
+{: .answer}
 
 
 > <question-title>Accessible</question-title>
