@@ -49,7 +49,7 @@ infrastructure:
 program:
   - section: "Monday: Galaxy introduction"
     description: |
-      On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don’t need this introduction. Please enjoy this introduction and prepare for the upcoming days.
+      On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don't need this introduction. Please enjoy this introduction and prepare for the upcoming days.
     tutorials:
       - name: galaxy-intro-101-everyone
         topic: introduction
