@@ -42,37 +42,41 @@ contributions:
 
 Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
 
-Below are the main stages of the FAIR-by-Design Methodology that will help guide you on your journey of creating FAIR learning materials.
-
-The FAIR-by-Design Methodology is defined into [a number of stages](#main-stages) that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:
-
-1. [Prepare](#stage-1---prepare)
-	- Do you understand FAIR and its implications
-	- Define purpose, learning objectives, target audience
-2. Discover
-	- Find existing resources
-	- Identify potential for reuse
-3. Design
-	- Define the syllabus and structure
-	- Identify granularity
-	- Define facilitation materials
-4. Produce
-	- Develop content using common apps and file formats
-	- Define machine readable metadata
-	- Perform internal QA check
-5. Publish
-	- Define license and other related info
-	- Release for instructors and learners
-	- Enable feedback gathering
-6. Verify
-	- Final QA check
-	- Use gathered feedback for continuous improvement
-7. Continuous Improvement
-	- Create a list of potential improvements
-	- Choose a set of improvements to be implemented 
-	- Start a new release cycle
-
-Review each stage and the essential steps that it includes.
+> <agenda-title></agenda-title>
+>
+>Below are the main stages of the FAIR-by-Design Methodology that will help guide you on your journey of creating FAIR learning materials.
+>
+>The FAIR-by-Design Methodology is defined into [a number of stages](#main-stages) that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:
+>
+>1. [Prepare](#stage-1---prepare)
+>	- Do you understand FAIR and its implications
+>	- Define purpose, learning objectives, target audience
+>2. Discover
+>	- Find existing resources
+>	- Identify potential for reuse
+>3. Design
+>	- Define the syllabus and structure
+>	- Identify granularity
+>	- Define facilitation materials
+>4. Produce
+>	- Develop content using common apps and file formats
+>	- Define machine readable metadata
+>	- Perform internal QA check
+>5. Publish
+>	- Define license and other related info
+>	- Release for instructors and learners
+>	- Enable feedback gathering
+>6. Verify
+>	- Final QA check
+>	- Use gathered feedback for continuous improvement
+>7. Continuous Improvement
+>	- Create a list of potential improvements
+>	- Choose a set of improvements to be implemented 
+>	- Start a new release cycle
+>
+>Review each stage and the essential steps that it includes.
+>
+{: .agenda}
 
 If you have any questions at any stage on your journey do not hesitate to <a href="mailto:sonja.filiposka@finki.ukim.mk">contact the FAIR-by-Design methodology team</a>.
 
