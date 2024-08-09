@@ -63,4 +63,20 @@ program:
 
 ---
 
-some text
+# Wellcome to the Galaxy Training Academy 
+
+Do you want to learn how to use Galaxy, a open source data analysis platform. Than you are at the right place. We offer here a 5-day Global Online and Asynchronous learining event. 
+
+## Program
+on the first day you can make your self familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton. 
+
+
+## What you need
+You only need a prowser and an account at a galaxy instance registerd for this event. Please have a look at the setup tab
+
+
+## Event style
+You can follow our porvieded leraning pathes in your own past using our provieded self-learining materials. Next to the programm you will find Slack channels you can join to exchange with othe and other participants during the event. Here you will also find help if you have qustions or run into an issue during the training. We try to cover all time zoons with helpers for each topic, but pleses be pacient if you do not get an emediat respons.
+
+## Code of conduct
+During we will follow our coude of conduct and also ask all particpants to do so.
