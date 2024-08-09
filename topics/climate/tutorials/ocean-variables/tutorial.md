@@ -197,7 +197,7 @@ To get in the interactive tool do the folowing
 
 ### Save Data
 
-{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png"
+{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png" disambiguation="savedata"
        text="Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy." %}
 
 <div class="xview" markdown="1">
@@ -421,7 +421,7 @@ the "Project" Menu tab.
 
 ## Save Data
 
-{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png" disambiguation="savedata"
+{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png" disambiguation="savedata2"
        text="Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy." %}
 
 <div class="xview" markdown="1">
@@ -483,10 +483,10 @@ Now, if you have finished with your analysis you can exit ODV. To do so you need
 > {% snippet  faqs/galaxy/datasets_change_datatype.md %}
 {: .tip}
 
-{% include _includes/cyoa-choices.html option1="New user" option2="Experimented user" default="New user" disambiguation="userlevel"
+{% include _includes/cyoa-choices.html option1="New-user" option2="Experimented-user" default="New-user" disambiguation="userlevel"
        text="If you want the easiest tutorial possible choose New user. If you feel that you need more flexibility on the DIVAnd parameters choose Experimented user." %}
 
-<div class="New user" markdown="1">
+<div class="New-user" markdown="1">
 
 You chose New user ! Thus, you'll be running a batch tool, you just have to fill in the input like explained below.
 
@@ -523,7 +523,7 @@ Check that the file is in netcdf !
 {: .hands_on}
 </div>
 
-<div class="Experimented user" markdown="1">
+<div class="Experimented-user" markdown="1">
 
 You chose Experimented user ! Thus, you'll be launching a Jupyterlab and you'll need to interact with it.
 
