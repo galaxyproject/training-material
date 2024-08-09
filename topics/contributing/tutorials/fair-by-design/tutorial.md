@@ -723,36 +723,39 @@ Accessibility evaluation tools are not perfect. Even if they say that all is ok,
 
 ### FAIR or not FAIR, that is the question...
 
-{% include _includes/tab-choices.html option1="Essential requirements" option2="Optional requirements"  default="Essential requirements" title="Measure FAIRness"  disambiguation="second" text="Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
-<br>
-The questions marked as essential achieve bare minimum FAIRness." %} 
+#### Measure FAIRness
 
-<div class="Essential-requirements" markdown="1">
-- **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository? Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
-- **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? Are access rules (authentication & authorisation) implemented for the learning resource?
-- **Interoperable** = Is the RDA minimal (or domain specific) metadata schema used for the learning material description?</br> Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
-- **Resuable** = Is there clear attribution for all reused resources with compatible licenses? Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
-</div>
-<div class="Optional-requirements" markdown="1">
--  Did you follow the stages of the backward instructional design process while developing the learning resource?
--  Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?
--  Does the learning resource represent a complete learning object defined around minimum one learning objective?
--  Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
-    -  facilitator guide
-    -  activities description
-    -  assessment activities and strategy to assess
-    -  general learning content or instructor notes
-    -  lesson unit plan
-    -  syllabus
--  Have you employed a versioning system to track and control changes in your materials?
--  Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?
--  Is the learning resource searchable in at least one relevant catalogue? 
-    -  Is it FAIR (can be searched based on metadata)?
--  Does the course include the possibility to provide feedback or comments from users and-or trainers/designers? 
-    -  If so, do you regularly gather and analyse that feedback?
--  Does the resource adopt an open community approach regarding its quality and reachability?
--  Has the learning resource been checked by a third party regarding its learning experience quality?
-</div>
+Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
+
+The questions marked as essential achieve bare minimum FAIRness. 
+
+><details-title>Essential requirements</details-title>
+> - **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository? Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
+> - **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? Are access rules (authentication & authorisation) implemented for the learning resource?
+> - **Interoperable** = Is the RDA minimal (or domain specific) metadata schema used for the learning material description? Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
+> - **Reusable** = Is there clear attribution for all reused resources with compatible licenses? Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
+{: .details}
+
+><details-title>Optional requirements</details-title>
+> -  Did you follow the stages of the backward instructional design process while developing the learning resource?
+> -  Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?
+> -  Does the learning resource represent a complete learning object defined around minimum one learning objective?
+> -  Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
+>    -  facilitator guide
+>    -  activities description
+>    -  assessment activities and strategy to assess
+>    -  general learning content or instructor notes
+>    -  lesson unit plan
+>    -  syllabus
+> -  Have you employed a versioning system to track and control changes in your materials?
+> -  Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?
+> -  Is the learning resource searchable in at least one relevant catalogue? 
+>    -  Is it FAIR (can be searched based on metadata)?
+> -  Does the course include the possibility to provide feedback or comments from users and-or trainers/designers? 
+>    -  If so, do you regularly gather and analyse that feedback?
+> -  Does the resource adopt an open community approach regarding its quality and reachability?
+> -  Has the learning resource been checked by a third party regarding its learning experience quality?
+{: .details}
 
 ### Feedback QA 
 
@@ -769,6 +772,7 @@ The questions marked as essential achieve bare minimum FAIRness." %}
 {: .quote author="Winston Churchill"}
 
 #### {% icon galaxy-download %} Gather
+
 Gather feedback from all available internal & external sources.
 
 Potential sources:  
@@ -779,62 +783,23 @@ Potential sources:
 - Direct mail contact   
 - Other means of communication
 
-<div class="row">
-  <div class="col-sm-4">
-   <!-- <div class="card text-white bg-secondary mb-3" > -->
-   <div class="card bg-light mb-3" >
-      <!-- <div class="card-header text-white"> -->
-      <div class="card-body">
-        <h5 class="card-title">{% icon galaxy-download %} Gather</h5>
-        <p class="card-text">Potential sources:  </p>
-        <ul>
-		<li> Feedback form   </li>
-		<li>QA recommendations   </li>
-		<li> self-reflection after training </li>   
-		<li> Survey </li>
-		<li> Direct mail contact </li>
-		<li>Other means of communication </li>
-		</ul>
-      </div>
-    </div>
-  </div>
+#### {% icon galaxy-barchart %} Analyse
 
-<div class="col-sm-4">
-   <!-- <div class="card text-white bg-secondary mb-3" > -->
-   <div class="card bg-light mb-3" >
-      <!-- <div class="card-header text-white"> -->
-      <div class="card-body">
-        <h5 class="card-title">{% icon galaxy-barchart %} Analyse</h5>
-        <p class="card-text">Analyse the gathered information in a structured way. <br>
-        Create a list of potential improvements with impact level (high, moderate, low).
-         </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="row">  
-<div class="col-sm-4">
-   <!-- <div class="card text-white bg-secondary mb-3" > -->
-   <div class="card bg-light mb-3" >
-      <!-- <div class="card-header text-white"> -->
-      <div class="card-body">
-        <h5 class="card-title">{% icon galaxy-wf-edit %} Improve</h5>
-        <p class="card-text">Select items from the list that will be part of a new version. <br> Choose items that make sense to be in the same new release  </p>
-      </div>
-    </div>
-  </div>
+Analyse the gathered information in a structured way.
 
-<div class="col-sm-4">
-   <!-- <div class="card text-white bg-secondary mb-3" > -->
-   <div class="card bg-light mb-3" >
-      <!-- <div class="card-header text-white"> -->
-      <div class="card-body">
-        <h5 class="card-title">{% icon galaxy-history-refresh %} Repeat</h5>
-        <p class="card-text">Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. <br>After the Verify stage, you will reenter continuous improvement with newly gathered information....  </p>
-      </div>
-    </div>
-  </div>
-</div>
+Create a list of potential improvements with impact level (high, moderate, low).
+
+#### {% icon galaxy-wf-edit %} Improve
+
+Select items from the list that will be part of a new version.
+
+Choose items that make sense to be in the same new release.
+
+#### {% icon galaxy-history-refresh %} Repeat
+
+Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. 
+
+After the Verify stage, you will reenter continuous improvement with newly gathered information....
 
 ​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20%E2%80%93%20Verify/20-Continuous%20Improvement/20-CI/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Continuous Improvement stage....</a>
 
