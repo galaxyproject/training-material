@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c52a51d808b100cbf76e7f4aee52b4741202422c",
+		release: "galaxy-training-network@62d550f5751351152d454c3827405148dfe56550",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>Ocean's variables</h1>
+		<h1 data-toc-skip>Ocean's variables 2.0</h1>
 		<p>climate-ocean-variables/main-workflow</p>
 	</hgroup>
 	
@@ -239,14 +239,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Mar 25, 2024
+			Aug 9, 2024
 
 			<br/>
 
@@ -265,9 +265,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #c4e3ff; --color-darker: #89ceff; --color-dimmed: #a8d9ff;">earth-system</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #64c5ff; --color-darker: #00b2f4; --color-dimmed: #2cbcff;">earth-system</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #87fb00; --color-darker: #78df00; --color-dimmed: #80ed00;">Ocean</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #70d300; --color-darker: #64bc00; --color-dimmed: #6ac700;">Ocean</div>
 			
 			</br>
 			
@@ -277,6 +277,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<ul>
 			
 			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
+			
+			
+				<li>Uses <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_comments.html">Galaxy Workflow Comments</a></li>
 			
 			
 			</ul>
@@ -332,13 +336,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy Main</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -350,14 +354,36 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ODV"];
-  0 -->|output| 1;
-  2["Interactive DIVAnd Notebooks"];
-  1 -->|outputs_netcdf| 2;
-  3["ODV"];
-  2 -->|output_netcdf| 3;</pre>
+  0["ℹ️ Input Parameter\nWorflow fully interactive"];
+  style 0 fill:#ded,stroke:#393,stroke-width:4px;
+  1["ℹ️ Input Dataset\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"];
+  style 1 stroke:#2c3143,stroke-width:4px;
+  2["ℹ️ Input Parameter\nWorkflow semi automatic"];
+  style 2 fill:#ded,stroke:#393,stroke-width:4px;
+  3["ℹ️ Input Dataset\ngebco_30sec_8.nc"];
+  style 3 stroke:#2c3143,stroke-width:4px;
+  4["Ocean Data View"];
+  1 -->|output| 4;
+  5["Interactive DIVAnd jupyterlab"];
+  4 -->|outputs_netcdf| 5;
+  0 -->|output| 5;
+  6["DIVAnd create a climatology"];
+  3 -->|output| 6;
+  4 -->|outputs_netcdf| 6;
+  2 -->|output| 6;
+  59963282-87bf-4432-a777-8a9b61dea03c["Output\nWater_body_Phosphate_Mediterranean.nc"];
+  6 --> 59963282-87bf-4432-a777-8a9b61dea03c;
+  style 59963282-87bf-4432-a777-8a9b61dea03c stroke:#2c3143,stroke-width:4px;
+  7["ODV visualisation interactive"];
+  5 -->|output_netcdf| 7;
+  dc8316a4-e57c-476b-b885-bbe4fb84d8c7["Output\nOcean variables visualisation interactive"];
+  7 --> dc8316a4-e57c-476b-b885-bbe4fb84d8c7;
+  style dc8316a4-e57c-476b-b885-bbe4fb84d8c7 stroke:#2c3143,stroke-width:4px;
+  8["ODV visualisation"];
+  6 -->|output_netcdf| 8;
+  7b072253-5bf9-434f-b06a-70b375ddaa03["Output\nOcean variables visualisation"];
+  8 --> 7b072253-5bf9-434f-b06a-70b375ddaa03;
+  style 7b072253-5bf9-434f-b06a-70b375ddaa03 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -369,8 +395,23 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 				
 				<tr>
+					<td>Input parameter</td>
+					<td>Worflow fully interactive</td>
+				</tr>
+				
+				<tr>
 					<td>Input dataset</td>
 					<td>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</td>
+				</tr>
+				
+				<tr>
+					<td>Input parameter</td>
+					<td>Workflow semi automatic</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset</td>
+					<td>gebco_30sec_8.nc</td>
 				</tr>
 				
 				</tbody>
@@ -386,6 +427,24 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+				
+				<tr>
+					<td>toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0</td>
+					<td>DIVAnd</td>
+					<td>DIVAnd (create a climatology)</td>
+				</tr>
+				
+				<tr>
+					<td>interactive_tool_odv</td>
+					<td>ODV</td>
+					<td>ODV (visualisation) interactive</td>
+				</tr>
+				
+				<tr>
+					<td>interactive_tool_odv</td>
+					<td>ODV</td>
+					<td>ODV (visualisation)</td>
+				</tr>
 				
 				</tbody>
 			</table>
@@ -415,6 +474,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				</td>
 			</tr>
 			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0">toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0</a></td>
+				<td>
+					
+				</td>
+			</tr>
+			
 				</tbody>
 			</table>
 
@@ -438,6 +504,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>2</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/1c6ee9c0d6c08affe5e54d71b4488147396ba5aa">1c6ee9c0d</a></td>
+						<td>2024-08-08 09:56:12</td>
+						<td>Add new version of workflow</td>
+					</tr>
 					
 					<tr>
 						<td>1</td>
@@ -527,7 +600,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c52a51d808b100cbf76e7f4aee52b4741202422c">c52a51d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/62d550f5751351152d454c3827405148dfe56550">62d550f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

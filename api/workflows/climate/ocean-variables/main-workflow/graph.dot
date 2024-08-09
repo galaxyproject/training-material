@@ -1,11 +1,27 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Dataset\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"]
-  1[label="ODV"]
-  0 -> 1 [label="output"]
-  2[label="Interactive DIVAnd Notebooks"]
-  1 -> 2 [label="outputs_netcdf"]
-  3[label="ODV"]
-  2 -> 3 [label="output_netcdf"]
+  0[color=lightgreen,label="ℹ️ Input Parameter\nWorflow fully interactive"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nWorkflow semi automatic"]
+  3[color=lightblue,label="ℹ️ Input Dataset\ngebco_30sec_8.nc"]
+  4[label="Ocean Data View"]
+  1 -> 4 [label="output"]
+  5[label="Interactive DIVAnd jupyterlab"]
+  4 -> 5 [label="outputs_netcdf"]
+  0 -> 5 [label="output"]
+  6[label="DIVAnd create a climatology"]
+  3 -> 6 [label="output"]
+  4 -> 6 [label="outputs_netcdf"]
+  2 -> 6 [label="output"]
+  k5996328287bf4432a7778a9b61dea03c[color=lightseagreen,label="Output\nWater_body_Phosphate_Mediterranean.nc"]
+  6 -> k5996328287bf4432a7778a9b61dea03c
+  7[label="ODV visualisation interactive"]
+  5 -> 7 [label="output_netcdf"]
+  kdc8316a4e57c476bb885bbe4fb84d8c7[color=lightseagreen,label="Output\nOcean variables visualisation interactive"]
+  7 -> kdc8316a4e57c476bb885bbe4fb84d8c7
+  8[label="ODV visualisation"]
+  6 -> 8 [label="output_netcdf"]
+  k7b0722535bf9434fb06a70b375ddaa03[color=lightseagreen,label="Output\nOcean variables visualisation"]
+  8 -> k7b0722535bf9434fb06a70b375ddaa03
 }

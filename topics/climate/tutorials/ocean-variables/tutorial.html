@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c52a51d808b100cbf76e7f4aee52b4741202422c",
+		release: "galaxy-training-network@62d550f5751351152d454c3827405148dfe56550",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Ocean's variables study">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-29 04:27:25 +0000">
+<meta name="DC.date" content="2024-08-09 12:26:18 +0000">
 <meta name="DC.creator" content="Marie Josse"><meta name="description" content="Learn to analyze climate data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Climate / Ocean's variables study / Hands-on: Ocean's variables study">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-29 04:27:25 +0000",
+  "dateModified": "2024-08-09 12:26:18 +0000",
   "datePublished": "2023-11-29 17:38:31 +0000",
   "identifier": "https://gxy.io/GTN:T00376",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Ocean's variables study",
   "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT1H",
   "teaches": "Deals with ODV collection with data originating from Emodnet chemistry\n - Visualise ocean variables to study climate changes",
   "keywords": [
@@ -737,7 +737,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 29, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 29, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -755,7 +755,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -788,99 +788,31 @@ Observations will be interpolated/analyzed on a curvilinear grid in 1, 2, 3 or m
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#managing-odv-galaxy-interactive-tool" id="markdown-toc-managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</a></li>
-  <li><a href="#ocean-data-view" id="markdown-toc-ocean-data-view">Ocean Data View</a>    <ol>
-      <li><a href="#visualise-your-data" id="markdown-toc-visualise-your-data">Visualise your Data</a></li>
-      <li><a href="#subset-data" id="markdown-toc-subset-data">Subset Data</a></li>
-      <li><a href="#save-data" id="markdown-toc-save-data">Save Data</a></li>
+  <li><a href="#manage-your-data" id="markdown-toc-manage-your-data">Manage your data</a></li>
+  <li><a href="#import-and-launch-the-workflow" id="markdown-toc-import-and-launch-the-workflow">Import and launch the workflow</a></li>
+  <li><a href="#workflow-human-in-the-loop" id="markdown-toc-workflow-human-in-the-loop">Workflow human in the loop</a>    <ol>
+      <li><a href="#ocean-data-view-managing-an-interactive-tool" id="markdown-toc-ocean-data-view-managing-an-interactive-tool">Ocean Data view: Managing an interactive tool</a></li>
+      <li><a href="#divand-data-interpolating-variational-analysis-in-n-dimensions" id="markdown-toc-divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</a></li>
+      <li><a href="#bonus-even-more-odv" id="markdown-toc-bonus-even-more-odv">BONUS: Even more ODV</a></li>
     </ol>
   </li>
-  <li><a href="#divand-data-interpolating-variational-analysis-in-n-dimensions" id="markdown-toc-divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</a>    <ol>
+  <li><a href="#managing-odv-galaxy-interactive-tool" id="markdown-toc-managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</a></li>
+  <li><a href="#ocean-data-view" id="markdown-toc-ocean-data-view">Ocean Data View</a>    <ol>
+      <li><a href="#visualise-your-data-1" id="markdown-toc-visualise-your-data-1">Visualise your Data</a></li>
+      <li><a href="#subset-data-1" id="markdown-toc-subset-data-1">Subset Data</a></li>
+      <li><a href="#save-data-1" id="markdown-toc-save-data-1">Save Data</a></li>
+    </ol>
+  </li>
+  <li><a href="#divand-data-interpolating-variational-analysis-in-n-dimensions-1" id="markdown-toc-divand-data-interpolating-variational-analysis-in-n-dimensions-1">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</a>    <ol>
+      <li><a href="#get-the-bathymetry" id="markdown-toc-get-the-bathymetry">Get the Bathymetry</a></li>
+      <li><a href="#use-divand" id="markdown-toc-use-divand">Use DIVAnd</a></li>
       <li><a href="#launch-divand" id="markdown-toc-launch-divand">Launch DIVAnd</a></li>
     </ol>
   </li>
-  <li><a href="#bonus-even-more-odv" id="markdown-toc-bonus-even-more-odv">BONUS: Even more ODV</a></li>
+  <li><a href="#bonus-even-more-odv-1" id="markdown-toc-bonus-even-more-odv-1">BONUS: Even more ODV</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
   <li><a href="#extra-information" id="markdown-toc-extra-information">Extra information</a></li>
 </ol>
-
-</blockquote>
-
-<h1 id="managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</h1>
-
-<p>ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
-This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
-
-<p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your history you want to use in ODV,
-then press the <strong>execute</strong> button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
-Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on
-the tool in the history.</p>
-
-<p>Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
-the “Project” Menu tab.</p>
-
-<blockquote class="details">
-  <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-  <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
-
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in to Galaxy</div>
-    <ol>
-      <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
-      <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
-      <li>On the top panel go to <strong>Login or Register</strong></li>
-    </ol>
-
-  </blockquote>
-
-  <p>The Galaxy homepage is divided into three panels:</p>
-  <ul>
-    <li>Tools on the left</li>
-    <li>Viewing panel in the middle</li>
-    <li>History of analysis and files on the right</li>
-  </ul>
-
-  <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
-
-  <p>The first time you use Galaxy, there will be no files in your history panel.</p>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-deploy-your-own-odv-instance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deploy your own ODV instance</div>
-
-  <ol>
-    <li>
-      <p>Create a new history for this tutorial and give it a name (for example “Ocean’s variables”) for you to find it again later if needed.</p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p>Import an ODV collection as a zip folder.</p>
-
-      <p>Use this link <code class="language-plaintext highlighter-rouge">https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code> in the following instructions.
-And <strong>Name</strong> it <strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:
-      <ul>
-        <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are an ODV collection in a zip folder</code></li>
-        <li><em>“ODV collection in a zip folder.”</em>: <code class="language-plaintext highlighter-rouge">Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code></li>
-      </ul>
-
-      <p><a href="../../images/ocean_var/launching_odv.png" rel="noopener noreferrer"><img src="../../images/ocean_var/launching_odv.png" alt="Screenshot of what parameters to input in ODV before running the tool. " width="1920" height="804" loading="lazy" /></a></p>
-    </li>
-    <li>Click on <strong>Run Tool</strong></li>
-  </ol>
-
-  <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
-  <p><!--END_SNIPPET--></p>
 
 </blockquote>
 
@@ -897,103 +829,21 @@ EMODnet Chemistry aims to provide access to marine chemistry datasets and derive
 
 </blockquote>
 
-<h1 id="ocean-data-view">Ocean Data View</h1>
-<h2 id="visualise-your-data">Visualise your Data</h2>
-
-<blockquote class="tip">
-  <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
-
-  <p><a href="../../images/coastal_water_dyn/clipboard.png" rel="noopener noreferrer"><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
-</blockquote>
-
-<blockquote class="tip">
-  <div class="box-title tip-title" id="tip-odv-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-loading-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Loading data</div>
-
-  <ol>
-    <li>Click on close of the pop-up screen for the check for Updates</li>
-    <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
-    <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>. 
-You should see a folder open it (double clicking)</li>
-    <li>Select the file with a .odv extension 
- <a href="../../images/ocean_var/select_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_data.png" alt="Screenshot of what your pop-up screen should be like when selecting the right data. " width="632" height="439" loading="lazy" /></a></li>
-    <li>Click on <strong>Open</strong> in the bottom right</li>
-  </ol>
-
-  <p>There your data should be opening an you can now visualise them!</p>
-</blockquote>
-<p><a href="../../images/ocean_var/visualise_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/visualise_data.png" alt="Visualistation on an ODV map of the ODV collection. " width="1917" height="1032" loading="lazy" /></a></p>
-
-<blockquote class="question">
-  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
-
-  <ol>
-    <li>What are the longitude and latitude of the red dot?</li>
-  </ol>
-
-  <blockquote class="solution">
-    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-
-    <ol>
-      <li>On the to right window you can read Longitude 34°E and Latitude 32.332°N.</li>
-    </ol>
-
-  </blockquote>
-
-</blockquote>
-
-<h2 id="subset-data">Subset Data</h2>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-subset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a subset</div>
-  <ol>
-    <li>On the left smaller map right click and select <strong>Zoom</strong></li>
-    <li>Then move your cursor on the map you should see a red rectangle moving along</li>
-    <li>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
- <a href="../../images/ocean_var/select_subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_subset.png" alt="Selection on the map of the part of the data that you want to analyse. " width="1073" height="932" loading="lazy" /></a></li>
-    <li>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.
- <a href="../../images/ocean_var/subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/subset.png" alt="Result of the subsetting and how the maps should look now. " width="1918" height="1035" loading="lazy" /></a></li>
-  </ol>
-
-  <p>Here you have created a a subset of your data.</p>
-</blockquote>
-
-<blockquote class="tip">
-  <div class="box-title tip-title" id="tip-change-your-visualisation-properties"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <ol>
-    <li>Go to the central map</li>
-    <li>Click right and select <strong>Properties…</strong></li>
-    <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 50, and click <strong>OK</strong>
-<a href="../../images/ocean_var/size_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/size_dots.png" alt="Image on how to change the size of your dots. " width="658" height="653" loading="lazy" /></a></li>
-  </ol>
-
-  <p>You can now see bigger dots representing your data.
-<a href="../../images/ocean_var/big_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/big_dots.png" alt="Image of your maps after the increase of the dots' size. " width="1916" height="965" loading="lazy" /></a></p>
-
-  <p>If you already saved it once you just have to click left on the save icon (top left) when it’s red.</p>
-</blockquote>
-
-<h2 id="save-data">Save Data</h2>
-<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoatutorialstyle">
 	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
 	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
 	
 	<p>
-		Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy.
+		Do you want to run the workflow or to discover the tools one by one ?
 	</p>
 	
 	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="xview" onclick="cyoaChoice('xview', 'gtn-cyoa')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">xview</label>
+		<input id="cyoa-opt1tutorialstyle" type="radio" name="cyoatutorialstyle" value="Tools" onclick="cyoaChoice('Tools', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt1tutorialstyle" class="select btn btn-secondary">Tools</label>
 	
 	
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="png" onclick="cyoaChoice('png', 'gtn-cyoa')" />
-		<label for="cyoa-opt2" class="select btn btn-secondary">png</label>
+		<input id="cyoa-opt2tutorialstyle" type="radio" name="cyoatutorialstyle" value="Workflow" onclick="cyoaChoice('Workflow', 'gtn-cyoatutorialstyle')" />
+		<label for="cyoa-opt2tutorialstyle" class="select btn btn-secondary">Workflow</label>
 	
 	
 	
@@ -1008,193 +858,808 @@ You should see a folder open it (double clicking)</li>
 			}
 		}
 		ready(function() {
-			cyoaDefault("png", "gtn-cyoa");
+			cyoaDefault("tools", "gtn-cyoatutorialstyle");
 		})
 	</script>
 	
 </blockquote>
 
-<div class="xview">
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-save-your-subset-view"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset view</div>
-    <ol>
-      <li>On the top left of your screen, you can see a red save button. Right-click on it.</li>
-      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
-      <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and <strong>Save</strong>.</li>
-    </ol>
-  </blockquote>
-</div>
-<div class="png">
-  <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-save-your-subset-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset map</div>
-    <ol>
-      <li>Click right on the map and select <strong>Save Plot As…</strong></li>
-      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
-      <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)</li>
-      <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
-    </ol>
-  </blockquote>
-</div>
+<div class="Workflow">
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-your-variables-in-netcdf-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract your variables in netcdf data</div>
-  <p>Now we want to extract and save the right parameters of your data in netcdf format.</p>
-  <ol>
-    <li>Go to the the left and click on <strong>Export</strong>, <strong>Data</strong> and <strong>NetCDF File…</strong></li>
-    <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
-    <li>Click <strong>Save</strong></li>
-    <li>A new pop-up window opens “Select Extended Metadata Variables for Export” Let the 56 items selected and click <strong>OK</strong></li>
-    <li>“Select Data Variables for Export”  <code class="language-plaintext highlighter-rouge">here you need to select 1: Depth[m]</code>, ̀<code class="language-plaintext highlighter-rouge">4: Water body dissolved oxygen concentration [umol/l]</code>, <code class="language-plaintext highlighter-rouge">6: Water body phosphate [umol/l]</code> and click <strong>OK</strong>
- <a href="../../images/ocean_var/select_var.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_var.png" alt="Screenshot of the variables one needs to select. " width="911" height="812" loading="lazy" /></a></li>
-    <li>“NetCDF File Properties” change the <strong>Longitude range</strong> to <code class="language-plaintext highlighter-rouge">[-180 ... 180] degrees_E</code>, then select <code class="language-plaintext highlighter-rouge">Export metadata quality flags</code> and <code class="language-plaintext highlighter-rouge">Export data quality flags</code> and <strong>OK</strong>.</li>
-    <li>And <strong>OK</strong> again</li>
-  </ol>
+  <h1 id="manage-your-data">Manage your data</h1>
 
-  <p>You now know how to export and save the right variables on ODV to netCDF data.</p>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-prepare-your-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Prepare your history</div>
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial and give it a name (for example “Ocean’s variables”) for you to find it again later if needed.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Import an ODV collection as a zip folder.</p>
+
+        <p>Use this link <code class="language-plaintext highlighter-rouge">https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code> in the folowing instructions.
+And <strong>Name</strong> it <strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Get the Bathymetry
+First you need to download a bathymetry file you can use this link <a href="https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download">https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download</a> with the folowing Hands-on box where you can name this dataset <strong>bathymetry.nc</strong></p>
+      </li>
+    </ol>
+
+    <!--SNIPPET-->
+    <blockquote class="hands-on">   <div class="box-title hands-on-title" id="hands-on-importing-via-links"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing via links</div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <p>Check that the file is in netcdf !</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+  </blockquote>
+
+  <h1 id="import-and-launch-the-workflow">Import and launch the workflow</h1>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-import-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Import the workflow</div>
+    <ul>
+      <li>Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+      <li>Option 1: use the URL
+  	- Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import at the top-right of the screen
+  	- Paste the URL of the workflow into the box labelled “Archived Workflow URL” <code class="language-plaintext highlighter-rouge">https://earth-system.usegalaxy.eu/u/marie.josse/w/oceans-var-v2</code></li>
+      <li>Option 2: use the workflow name
+  	- Click on <strong>Public workflows</strong> at the top-right of the screen
+        <ul>
+          <li>Search for <strong>Ocean’s variables 2.0</strong></li>
+          <li>In the workflow preview box click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Import</li>
+        </ul>
+      </li>
+      <li>Click the Import workflow button</li>
+    </ul>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-run-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run the workflow</div>
+    <ul>
+      <li>Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.</li>
+      <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (Run workflow) button next to your workflow</li>
+      <li>/!\ Select <strong>Yes</strong> for <strong>Workflow semi automatic</strong></li>
+      <li>Configure the workflow as needed with the 2 datasets you uploaded right before (<strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong> and <strong>gebco_30sec_8.nc</strong></li>
+      <li>Click the Run Workflow button at the top-right of the screen</li>
+      <li>You may have to refresh your history to see the queued jobs</li>
+    </ul>
+  </blockquote>
+
+  <h1 id="workflow-human-in-the-loop">Workflow human in the loop</h1>
+
+  <p>Now you’ve got your workflow running, however this workflow is composed of both interactive and non interactive tools. Thus, for the interactive tools we need you !</p>
+
+  <h2 id="ocean-data-view-managing-an-interactive-tool">Ocean Data view: Managing an interactive tool</h2>
+  <p>ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
+This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
+
+  <p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your history you want to use in ODV,
+then press the <strong>execute</strong> button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
+Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on
+the tool in the history.</p>
+
+  <p>Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
+the “Project” Menu tab.</p>
+
+  <p>To get in the interactive tool do the folowing</p>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+  <h3 id="visualise-your-data">Visualise your Data</h3>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+    <p><a href="../../images/coastal_water_dyn/clipboard.png" rel="noopener noreferrer"><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-odv-disconnected"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-loading-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Loading data</div>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a folder open it (double clicking)</li>
+      <li>Select the file with a .odv extension
+ <a href="../../images/ocean_var/select_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_data.png" alt="Screenshot of what your pop-up screen should be like when selecting the right data. " width="632" height="439" loading="lazy" /></a></li>
+      <li>Click on <strong>Open</strong> in the bottom right</li>
+    </ol>
+
+    <p>There your data should be opening an you can now visualise them!</p>
+  </blockquote>
+  <p><a href="../../images/ocean_var/visualise_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/visualise_data.png" alt="Visualistation on an ODV map of the ODV collection. " width="1917" height="1032" loading="lazy" /></a></p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>What are the longitude and latitude of the red dot?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>On the to right window you can read Longitude 34°E and Latitude 32.332°N.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <h3 id="subset-data">Subset Data</h3>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-subset"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a subset</div>
+    <ol>
+      <li>On the left smaller map right click and select <strong>Zoom</strong></li>
+      <li>Then move your cursor on the map you should see a red rectangle moving along</li>
+      <li>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
+ <a href="../../images/ocean_var/select_subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_subset.png" alt="Selection on the map of the part of the data that you want to analyse. " width="1073" height="932" loading="lazy" /></a></li>
+      <li>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.
+ <a href="../../images/ocean_var/subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/subset.png" alt="Result of the subsetting and how the maps should look now. " width="1918" height="1035" loading="lazy" /></a></li>
+    </ol>
+
+    <p>Here you have created a a subset of your data.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-change-your-visualisation-properties"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Go to the central map</li>
+      <li>Click right and select <strong>Properties…</strong></li>
+      <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 50, and click <strong>OK</strong>
+<a href="../../images/ocean_var/size_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/size_dots.png" alt="Image on how to change the size of your dots. " width="658" height="653" loading="lazy" /></a></li>
+    </ol>
+
+    <p>You can now see bigger dots representing your data.
+<a href="../../images/ocean_var/big_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/big_dots.png" alt="Image of your maps after the increase of the dots' size. " width="1916" height="965" loading="lazy" /></a></p>
+
+    <p>If you already saved it once you just have to click left on the save icon (top left) when it’s red.</p>
+  </blockquote>
+
+  <h3 id="save-data">Save Data</h3>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoasavedata">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy.
+	</p>
+	
+	
+		<input id="cyoa-opt1savedata" type="radio" name="cyoasavedata" value="xview" onclick="cyoaChoice('xview', 'gtn-cyoasavedata')" />
+		<label for="cyoa-opt1savedata" class="select btn btn-secondary">xview</label>
+	
+	
+		<input id="cyoa-opt2savedata" type="radio" name="cyoasavedata" value="png" onclick="cyoaChoice('png', 'gtn-cyoasavedata')" />
+		<label for="cyoa-opt2savedata" class="select btn btn-secondary">png</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("png", "gtn-cyoasavedata");
+		})
+	</script>
+	
 </blockquote>
 
-<p>Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly.</p>
+  <div class="xview">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-view"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset view</div>
+      <ol>
+        <li>On the top left of your screen, you can see a red save button. Right-click on it.</li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and <strong>Save</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+  <div class="png">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-map"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset map</div>
+      <ol>
+        <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)</li>
+        <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-exit-odv-and-go-back-on-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exit ODV and go back on Galaxy</div>
-  <ol>
-    <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
-    <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
-  </ol>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extract-your-variables-in-netcdf-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract your variables in netcdf data</div>
+    <p>Now we want to extract and save the right parameters of your data in netcdf format.</p>
+    <ol>
+      <li>Go to the the left and click on <strong>Export</strong>, <strong>Data</strong> and <strong>NetCDF File…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>Click <strong>Save</strong></li>
+      <li>A new pop-up window opens “Select Extended Metadata Variables for Export” Let the 56 items selected and click <strong>OK</strong></li>
+      <li>“Select Data Variables for Export”  <code class="language-plaintext highlighter-rouge">here you need to select 1: Depth[m]</code>, ̀<code class="language-plaintext highlighter-rouge">4: Water body dissolved oxygen concentration [umol/l]</code>, <code class="language-plaintext highlighter-rouge">6: Water body phosphate [umol/l]</code> and click <strong>OK</strong>
+ <a href="../../images/ocean_var/select_var.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_var.png" alt="Screenshot of the variables one needs to select. " width="911" height="812" loading="lazy" /></a></li>
+      <li>“NetCDF File Properties” change the <strong>Longitude range</strong> to <code class="language-plaintext highlighter-rouge">[-180 ... 180] degrees_E</code>, then select <code class="language-plaintext highlighter-rouge">Export metadata quality flags</code> and <code class="language-plaintext highlighter-rouge">Export data quality flags</code> and <strong>OK</strong>.</li>
+      <li>And <strong>OK</strong> again</li>
+    </ol>
 
-  <p>You can now go back to your Galaxy instance.
+    <p>You now know how to export and save the right variables on ODV to netCDF data.</p>
+  </blockquote>
+
+  <p>Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-exit-odv-and-go-back-on-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exit ODV and go back on Galaxy</div>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+
+    <p>You can now go back to your Galaxy instance.</p>
+  </blockquote>
+
+  <h2 id="divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</h2>
+  <p>You can see now in your Galaxy history that ODV turned green and that the folowing step launched itself.
+This tool DIVAnd is not interactive. It will create a climatology in netcdf that will then be used as input in the next step which is ODV again.
+Once, DIVAnd finished ODV get started and there we need you again !</p>
+
+  <h2 id="bonus-even-more-odv">BONUS: Even more ODV</h2>
+
+  <p>Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))</p>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-open-your-netcdf-data-in-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Open your Netcdf data in ODV</div>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a file open it (double clicking)</li>
+      <li>Click on <strong>Open</strong> in the bottom right. Then click on <strong>Next</strong> until you can click on <strong>Finish</strong> you can keep everything by default.</li>
+    </ol>
+
+    <p>There your data should be opening and you can now visualise them!
+<a href="../../images/ocean_var/med_view.png" rel="noopener noreferrer"><img src="../../images/ocean_var/med_view.png" alt="Image of what the netcdf files look like when opening with ODV. " width="1838" height="936" loading="lazy" /></a></p>
+
+  </blockquote>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-your-phosphate-variable"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise your Phosphate variable</div>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 SURFACE Window”
+ <a href="../../images/ocean_var/surface_window.png" rel="noopener noreferrer"><img src="../../images/ocean_var/surface_window.png" alt="Create a surface plot for the phosphate. " width="591" height="598" loading="lazy" /></a></li>
+      <li>Press right on the new plot and select <strong>Properties…</strong>
+ <a href="../../images/ocean_var/properties.png" rel="noopener noreferrer"><img src="../../images/ocean_var/properties.png" alt="Going to the properties of the plot. " width="1538" height="914" loading="lazy" /></a></li>
+      <li>In the tab “Display Style” increase the “Symbol size” to 22 for instance</li>
+      <li>In the tab “Color Mapping” increase the level of the “Median” part and lower the “Nonlinearity” such as in the following picture
+ <a href="../../images/ocean_var/colors.png" rel="noopener noreferrer"><img src="../../images/ocean_var/colors.png" alt="Balance the colors of the map to better visualise the Phosphate repartition. " width="659" height="652" loading="lazy" /></a></li>
+      <li>
+        <p>Then, click on <strong>OK</strong>, and you can see the Phosphate repartition.</p>
+      </li>
+      <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+    </ol>
+
+    <p>If you want to have a visualisation of the Phosphate according to the depth, you can do the following.</p>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 STATION Window” in the new tab, in the plot press enter on your keyboard.</li>
+      <li>Same as before to save it, click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+    </ol>
+
+    <p>You can now safely exit ODV.</p>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+  </blockquote>
+</div>
+
+<div class="Tools">
+  <h1 id="managing-odv-galaxy-interactive-tool">Managing ODV Galaxy interactive tool</h1>
+
+  <p>ODV is now integrated in Galaxy as an interactive tool. This kind of tool works differently than classical tools as it allows the user to interact interactively with your data.
+This kind of tool is used to give access to Jupyter Notebooks, RStudio or R Shiny apps for example.</p>
+
+  <p>To use ODV, you need to use the <span class="tool" data-tool="interactive_tool_odv" title="dedicated form tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>dedicated form</strong></span>, you can specify input datasets from your history you want to use in ODV,
+then press the <strong>execute</strong> button to launch an ODV instance. When the graphical user interface of ODV is ready to be used, a URL will be displayed at the top of the
+Galaxy center panel. If you don’t see it, you can see and access it through the “Active InteractiveTools” space of the “User” menu or you can click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> on
+the tool in the history.</p>
+
+  <p>Once you finish your work on ODV, if you want to retrieve data and/or the entire project, you need to save files in ODV/galaxy/outputs, then quit ODV properly through
+the “Project” Menu tab.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-short-introduction-on-how-galaxy-works"><button class="gtn-boxify-button details" type="button" aria-controls="details-short-introduction-on-how-galaxy-works" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Short introduction on how Galaxy works</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>You can come back to where you left off the tutorial anytime by clicking <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-log-in-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Log in to Galaxy</div>
+      <ol>
+        <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
+        <li>Browse to your <a href="https://earth-system.usegalaxy.eu/">Galaxy instance</a></li>
+        <li>On the top panel go to <strong>Login or Register</strong></li>
+      </ol>
+
+    </blockquote>
+
+    <p>The Galaxy homepage is divided into three panels:</p>
+    <ul>
+      <li>Tools on the left</li>
+      <li>Viewing panel in the middle</li>
+      <li>History of analysis and files on the right</li>
+    </ul>
+
+    <figure id="figure-1" style="max-width: 90%;"><img src="/training-material/shared/images/galaxy_interface.png" alt="Screenshot of the Galaxy interface, the tools panel is on the left, the main panel is in the center, and the history is on the right." width="2009" height="969" loading="lazy" /><a target="_blank" href="/training-material/shared/images/galaxy_interface.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Galaxy interface explanation</figcaption></figure>
+
+    <p>The first time you use Galaxy, there will be no files in your history panel.</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-deploy-your-own-odv-instance"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Deploy your own ODV instance</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial and give it a name (for example “Ocean’s variables”) for you to find it again later if needed.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Import an ODV collection as a zip folder.</p>
+
+        <p>Use this link <code class="language-plaintext highlighter-rouge">https://github.com/fair-ease/Data-for-Galaxy-/raw/main/Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code> in the folowing instructions.
+And <strong>Name</strong> it <strong>Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</strong></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:
+        <ul>
+          <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are an ODV collection in a zip folder</code></li>
+          <li><em>“ODV collection in a zip folder.”</em>: <code class="language-plaintext highlighter-rouge">Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip</code></li>
+        </ul>
+
+        <p><a href="../../images/ocean_var/launching_odv.png" rel="noopener noreferrer"><img src="../../images/ocean_var/launching_odv.png" alt="Screenshot of what parameters to input in ODV before running the tool. " width="1920" height="804" loading="lazy" /></a></p>
+      </li>
+      <li>Click on <strong>Run Tool</strong></li>
+    </ol>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+  </blockquote>
+
+  <h1 id="ocean-data-view">Ocean Data View</h1>
+  <h2 id="visualise-your-data-1">Visualise your Data</h2>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-copy-pasting-between-computer-and-odv-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-pasting-between-computer-and-odv-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copy pasting between computer and ODV</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>You can expand the ODV left panel (where there are 3 dots, vertically) to access the “clipboard” menu and paste the content you want to paste on an ODV form. From there you can copy-paste everything from one side to the other. Then, click outside of this panel to collapse it.</p>
+
+    <p><a href="../../images/coastal_water_dyn/clipboard.png" rel="noopener noreferrer"><img src="../../images/coastal_water_dyn/clipboard.png" alt="Image showing in transparent on the left of the ODV interface the clipboard. " width="1918" height="1029" loading="lazy" /></a></p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-odv-disconnected-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-odv-disconnected-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: ODV - Disconnected</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>If at one point your ODV interface becomes grey with a red panel on the top “X ODV - Disconnected”, do NOT panic ;) you just need to reload your tab (circular arrow top left)</p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-loading-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Loading data</div>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
+You should see a folder open it (double clicking)</li>
+      <li>Select the file with a .odv extension
+ <a href="../../images/ocean_var/select_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_data.png" alt="Screenshot of what your pop-up screen should be like when selecting the right data. " width="632" height="439" loading="lazy" /></a></li>
+      <li>Click on <strong>Open</strong> in the bottom right</li>
+    </ol>
+
+    <p>There your data should be opening an you can now visualise them!</p>
+  </blockquote>
+  <p><a href="../../images/ocean_var/visualise_data.png" rel="noopener noreferrer"><img src="../../images/ocean_var/visualise_data.png" alt="Visualistation on an ODV map of the ODV collection. " width="1917" height="1032" loading="lazy" /></a></p>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>What are the longitude and latitude of the red dot?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>On the to right window you can read Longitude 34°E and Latitude 32.332°N.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+  <h2 id="subset-data-1">Subset Data</h2>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-create-a-subset-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create a subset</div>
+    <ol>
+      <li>On the left smaller map right click and select <strong>Zoom</strong></li>
+      <li>Then move your cursor on the map you should see a red rectangle moving along</li>
+      <li>Reduce the rectangular to have the selection you want on the map. It can be something similar to the following image (no need to be exactly the same)
+ <a href="../../images/ocean_var/select_subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_subset.png" alt="Selection on the map of the part of the data that you want to analyse. " width="1073" height="932" loading="lazy" /></a></li>
+      <li>Once you’re happy with your selection click on <strong>Enter</strong> on your keyboard.
+ <a href="../../images/ocean_var/subset.png" rel="noopener noreferrer"><img src="../../images/ocean_var/subset.png" alt="Result of the subsetting and how the maps should look now. " width="1918" height="1035" loading="lazy" /></a></li>
+    </ol>
+
+    <p>Here you have created a a subset of your data.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-change-your-visualisation-properties-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-change-your-visualisation-properties-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Change your visualisation properties</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <ol>
+      <li>Go to the central map</li>
+      <li>Click right and select <strong>Properties…</strong></li>
+      <li>For example, make your data dots bigger in “Display Style” increase the number below “Symbol Size” to 50, and click <strong>OK</strong>
+<a href="../../images/ocean_var/size_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/size_dots.png" alt="Image on how to change the size of your dots. " width="658" height="653" loading="lazy" /></a></li>
+    </ol>
+
+    <p>You can now see bigger dots representing your data.
+<a href="../../images/ocean_var/big_dots.png" rel="noopener noreferrer"><img src="../../images/ocean_var/big_dots.png" alt="Image of your maps after the increase of the dots' size. " width="1916" height="965" loading="lazy" /></a></p>
+
+    <p>If you already saved it once you just have to click left on the save icon (top left) when it’s red.</p>
+  </blockquote>
+
+  <h2 id="save-data-1">Save Data</h2>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoasavedata2">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy.
+	</p>
+	
+	
+		<input id="cyoa-opt1savedata2" type="radio" name="cyoasavedata2" value="xview" onclick="cyoaChoice('xview', 'gtn-cyoasavedata2')" />
+		<label for="cyoa-opt1savedata2" class="select btn btn-secondary">xview</label>
+	
+	
+		<input id="cyoa-opt2savedata2" type="radio" name="cyoasavedata2" value="png" onclick="cyoaChoice('png', 'gtn-cyoasavedata2')" />
+		<label for="cyoa-opt2savedata2" class="select btn btn-secondary">png</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("png", "gtn-cyoasavedata2");
+		})
+	</script>
+	
+</blockquote>
+
+  <div class="xview">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-view-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset view</div>
+      <ol>
+        <li>On the top left of your screen, you can see a red save button. Right-click on it.</li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44), and <strong>Save</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+  <div class="png">
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-save-your-subset-map-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save your subset map</div>
+      <ol>
+        <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+        <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+        <li>In <strong>File name</strong> rename your view (for example Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44)</li>
+        <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
+      </ol>
+    </blockquote>
+  </div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-extract-your-variables-in-netcdf-data-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Extract your variables in netcdf data</div>
+    <p>Now we want to extract and save the right parameters of your data in netcdf format.</p>
+    <ol>
+      <li>Go to the the left and click on <strong>Export</strong>, <strong>Data</strong> and <strong>NetCDF File…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>Click <strong>Save</strong></li>
+      <li>A new pop-up window opens “Select Extended Metadata Variables for Export” Let the 56 items selected and click <strong>OK</strong></li>
+      <li>“Select Data Variables for Export”  <code class="language-plaintext highlighter-rouge">here you need to select 1: Depth[m]</code>, ̀<code class="language-plaintext highlighter-rouge">4: Water body dissolved oxygen concentration [umol/l]</code>, <code class="language-plaintext highlighter-rouge">6: Water body phosphate [umol/l]</code> and click <strong>OK</strong>
+ <a href="../../images/ocean_var/select_var.png" rel="noopener noreferrer"><img src="../../images/ocean_var/select_var.png" alt="Screenshot of the variables one needs to select. " width="911" height="812" loading="lazy" /></a></li>
+      <li>“NetCDF File Properties” change the <strong>Longitude range</strong> to <code class="language-plaintext highlighter-rouge">[-180 ... 180] degrees_E</code>, then select <code class="language-plaintext highlighter-rouge">Export metadata quality flags</code> and <code class="language-plaintext highlighter-rouge">Export data quality flags</code> and <strong>OK</strong>.</li>
+      <li>And <strong>OK</strong> again</li>
+    </ol>
+
+    <p>You now know how to export and save the right variables on ODV to netCDF data.</p>
+  </blockquote>
+
+  <p>Now, if you have finished with your analysis you can exit ODV. To do so you need to do it properly.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-exit-odv-and-go-back-on-galaxy-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Exit ODV and go back on Galaxy</div>
+    <ol>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+
+    <p>You can now go back to your Galaxy instance.
 Now, after waiting for everything to turn green in your history, you can see 2 new outputs
 <a href="../../images/ocean_var/history.png" rel="noopener noreferrer"><img src="../../images/ocean_var/history.png" alt="Screenshot of the 2 new outputs present in your galaxy History. " width="301" height="430" loading="lazy" /></a></p>
 
-  <p>In the history panel in the output <strong>ODV all outputs</strong> click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of your output.</p>
+    <p>In the history panel in the output <strong>ODV all outputs</strong> click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of your output.</p>
 
-  <p>You can now visualize the outputs in Galaxy middle panel.</p>
+    <p>You can now visualize the outputs in Galaxy middle panel.</p>
 
-  <p><a href="../../images/ocean_var/text.png" rel="noopener noreferrer"><img src="../../images/ocean_var/text.png" alt="Screenshot of the text output showing the variables selected. " width="1915" height="691" loading="lazy" /></a>
+    <p><a href="../../images/ocean_var/text.png" rel="noopener noreferrer"><img src="../../images/ocean_var/text.png" alt="Screenshot of the text output showing the variables selected. " width="1915" height="691" loading="lazy" /></a>
 <a href="../../images/ocean_var/galaxy_output.png" rel="noopener noreferrer"><img src="../../images/ocean_var/galaxy_output.png" alt="Image in the middle pannel of the map. " width="1614" height="1026" loading="lazy" /></a></p>
+  </blockquote>
+
+  <h1 id="divand-data-interpolating-variational-analysis-in-n-dimensions-1">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</h1>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-check-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Check Datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Go to your output ‘data_from_Eutrophication_Med_profiles_2022_unrestricted’</p>
+
+    <p>Check if the datatype is <strong>netcdf</strong> if not :</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select  your desired datatype  from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+  </blockquote>
+
+  <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoauserlevel">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		If you want the easiest tutorial possible choose New user. If you feel that you need more flexibility on the DIVAnd parameters choose Experimented user.
+	</p>
+	
+	
+		<input id="cyoa-opt1userlevel" type="radio" name="cyoauserlevel" value="New-user" onclick="cyoaChoice('New-user', 'gtn-cyoauserlevel')" />
+		<label for="cyoa-opt1userlevel" class="select btn btn-secondary">New-user</label>
+	
+	
+		<input id="cyoa-opt2userlevel" type="radio" name="cyoauserlevel" value="Experimented-user" onclick="cyoaChoice('Experimented-user', 'gtn-cyoauserlevel')" />
+		<label for="cyoa-opt2userlevel" class="select btn btn-secondary">Experimented-user</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("New-user", "gtn-cyoauserlevel");
+		})
+	</script>
+	
 </blockquote>
 
-<h1 id="divand-data-interpolating-variational-analysis-in-n-dimensions">DIVAnd: Data-Interpolating Variational Analysis in n dimensions</h1>
+  <div class="New-user">
 
-<blockquote class="tip">
-  <div class="box-title tip-title" id="tip-check-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Check Datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>Go to your output ‘data_from_Eutrophication_Med_profiles_2022_unrestricted’</p>
+    <p>You chose New user ! Thus, you’ll be running a batch tool, you just have to fill in the input like explained below.</p>
 
-  <p>Check if the datatype is <strong>netcdf</strong> if not :</p>
+    <h2 id="get-the-bathymetry">Get the Bathymetry</h2>
+    <p>First you need to download a bathymetry file you can use this link <a href="https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download">https://dox.ulg.ac.be/index.php/s/U0pqyXhcQrXjEUX/download</a> with the folowing Hands-on box where you can name this dataset <strong>bathymetry.nc</strong></p>
 
-  <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select  your desired datatype  from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-  <p><!--END_SNIPPET--></p>
-</blockquote>
+    <!--SNIPPET-->
+    <blockquote class="hands-on">   <div class="box-title hands-on-title" id="hands-on-importing-via-links-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing via links</div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
 
-<h2 id="launch-divand">Launch DIVAnd</h2>
-<p>Use ODV outputs as DIVAnd input.</p>
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-divannd"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run DIVANnd</div>
+    <p>Check that the file is in netcdf !</p>
 
-  <ol>
-    <li>Use <span class="tool" data-tool="interactive_tool_divand" title="DIVAnd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DIVAnd</strong></span> with the following parameters:
-      <ul>
-        <li><em>“Do you already have a notebook”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
-        <li><em>“Include data into the environment”</em>: <code class="language-plaintext highlighter-rouge">ODV netcdf outputs</code> (output of <strong>Ocean Data View</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-      </ul>
-    </li>
-    <li><strong>Run tool</strong></li>
-    <li>
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <h2 id="use-divand">Use DIVAnd</h2>
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-create-a-climatology"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create a climatology</div>
+
+      <ol>
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0" title="DIVAnd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DIVAnd</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your netcdf data”</em>: <code class="language-plaintext highlighter-rouge">ODV netcdf outputs</code> (output of <strong>Ocean Data View</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your bathymetry netcdf file”</em>: <code class="language-plaintext highlighter-rouge">bathymetry.nc</code></li>
+            <li><em>“Input longitude min (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">19.0</code></li>
+            <li><em>“Input longitude max (+east/-west)”</em>: <code class="language-plaintext highlighter-rouge">30.0</code></li>
+            <li><em>“Input latitude min (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">32.0</code></li>
+            <li><em>“Input latitude max (+north/-south)”</em>: <code class="language-plaintext highlighter-rouge">38.0</code></li>
+            <li><em>“Input starting date”</em>: <code class="language-plaintext highlighter-rouge">1950-01-01</code></li>
+            <li><em>“Input ending date”</em>: <code class="language-plaintext highlighter-rouge">2017-12-31</code></li>
+            <li><em>“Write the name of the variable of the analysis”</em>: <code class="language-plaintext highlighter-rouge">phosphate</code></li>
+            <li><em>“Minimum of the salinity”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Maximum of the salinity”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
+          </ul>
+        </li>
+        <li><strong>Run Tool</strong></li>
+        <li>After a couple minutes an <code class="language-plaintext highlighter-rouge">DIVAnd netcdf output</code> output will appear green in your history.</li>
+        <li>Check that your data are in netcdf format with <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span>, it should be <code class="language-plaintext highlighter-rouge">netcdf</code></li>
+      </ol>
+
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the DIVAnd to be running (Job Info)</li>   <li>Click on DIVAnd</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">nectdf</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <p><!--END_SNIPPET--></p>
-    </li>
-  </ol>
-</blockquote>
+    </blockquote>
+  </div>
 
-<blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-navigate-the-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Navigate the jupyterlab</div>
-  <ol>
-    <li>Once in the Jupyterlab, go to the <strong>Notebooks</strong> folder.</li>
-    <li>There open a terminal window and write :
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
-</code></pre></div>      </div>
-    </li>
-    <li>Run the entire notebook.</li>
-  </ol>
+  <div class="Experimented-user">
 
-  <p>In the first ‘outputs’ folder (at the root of the Jupyterlab folders), you should now have one netcdf file “Water_body_Phosphate_Mediterranean”.</p>
+    <p>You chose Experimented user ! Thus, you’ll be launching a Jupyterlab and you’ll need to interact with it.</p>
 
-  <p>So, you can now properly close the Jupyter notebook.</p>
+    <h2 id="launch-divand">Launch DIVAnd</h2>
 
-  <ol>
-    <li>On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.</li>
-    <li>Go back to your Galaxy instance.</li>
-  </ol>
-</blockquote>
+    <p>Use ODV outputs as DIVAnd input.</p>
+    <blockquote class="notranslate hands_on">
+      <div class="box-title hands-on-title" id="hands-on-run-divannd"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run DIVANnd</div>
 
-<p>After a couple of minutes, your outputs should appear in your Galaxy history.</p>
+      <ol>
+        <li>Use <span class="tool" data-tool="interactive_tool_divand" title="DIVAnd tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>DIVAnd</strong></span> with the following parameters:
+          <ul>
+            <li><em>“Do you already have a notebook”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
+            <li><em>“Include data into the environment”</em>: <code class="language-plaintext highlighter-rouge">ODV netcdf outputs</code> (output of <strong>Ocean Data View</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Run tool</strong></p>
 
-<h1 id="bonus-even-more-odv">BONUS: Even more ODV</h1>
+          <!--SNIPPET-->
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the DIVAnd to be running (Job Info)</li>   <li>Click on DIVAnd</li> </ol> </blockquote>
+          <p><!--END_SNIPPET--></p>
+        </li>
+      </ol>
+    </blockquote>
 
-<p>Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))</p>
+    <blockquote class="hands-on">
+      <div class="box-title hands-on-title" id="hands-on-navigate-the-jupyterlab"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Navigate the jupyterlab</div>
+      <ol>
+        <li>Once in the Jupyterlab, go to the <strong>Notebooks</strong> folder.</li>
+        <li>There open a terminal window and write :
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/fair-ease/Divand-Galaxy-ext/main/90-analysis-shorten.ipynb
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p><strong>Run the entire notebook.</strong></p>
 
-<blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-open-your-netcdf-data-in-odv"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Open your Netcdf data in ODV</div>
-  <p><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:</p>
-  <ul>
-    <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are Netcdf or text tabular files</code></li>
-    <li><em>“Netcdf or tabular text file. For text file, odv format is recommanded.”</em>: <code class="language-plaintext highlighter-rouge">DIVAnd netcdf outputs</code> (output of <strong>DIVAnd</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-  </ul>
+          <p>In the first ‘outputs’ folder (at the root of the Jupyterlab folders), you should now have one netcdf file “Water_body_Phosphate_Mediterranean”.</p>
 
-  <p>Click on <strong>Run Tool</strong></p>
+          <p>So, you can now properly close the Jupyter notebook.</p>
+        </li>
+        <li>On the top left click on <strong>files</strong> and then on <strong>Shut down</strong>.</li>
+        <li>Go back to your Galaxy instance.</li>
+      </ol>
+    </blockquote>
 
-  <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
-  <p><!--END_SNIPPET--></p>
+    <p>After a couple of minutes, your outputs should appear in your Galaxy history.</p>
+  </div>
 
-  <ol>
-    <li>Click on close of the pop-up screen for the check for Updates</li>
-    <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
-    <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>. 
+  <h1 id="bonus-even-more-odv-1">BONUS: Even more ODV</h1>
+
+  <p>Do you want to go even further and visualise your new netcdf data? (Because this tutorial is fascinating and you want to keep reading ;))</p>
+
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-open-your-netcdf-data-in-odv-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Open your Netcdf data in ODV</div>
+    <p><span class="tool" data-tool="interactive_tool_odv" title="Ocean Data View tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ocean Data View</strong></span> with the following parameters:</p>
+    <ul>
+      <li><em>“Select if you are using an ODV collection in a zip folder or if you have your own raw data”</em>: <code class="language-plaintext highlighter-rouge">The data you are using are Netcdf or text tabular files</code></li>
+      <li><em>“Netcdf or tabular text file. For text file, odv format is recommanded.”</em>: <code class="language-plaintext highlighter-rouge">DIVAnd netcdf outputs</code> (output of <strong>DIVAnd</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    </ul>
+
+    <p>Click on <strong>Run Tool</strong></p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-open-interactive-tool-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-interactive-tool-4" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Open interactive tool</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Go to User &gt; Active InteractiveTools</li>   <li>Wait for the ODV to be running (Job Info)</li>   <li>Click on ODV</li> </ol> </blockquote>
+    <p><!--END_SNIPPET--></p>
+
+    <ol>
+      <li>Click on close of the pop-up screen for the check for Updates</li>
+      <li>Go the top left and click on <strong>File</strong>, then on <strong>Open…</strong></li>
+      <li>On the pop-up screen on the left panel select <strong>ODV</strong>, then the folder <strong>galaxy</strong>, then <strong>data</strong>.
 You should see a file open it (double clicking)</li>
-    <li>Click on <strong>Open</strong> in the bottom right. Then click on <strong>Next*$ until you can click on **Finish</strong> you can keep everything by default.</li>
-  </ol>
+      <li>Click on <strong>Open</strong> in the bottom right. Then click on <strong>Next</strong> until you can click on <strong>Finish</strong> you can keep everything by default.</li>
+    </ol>
 
-  <p>There your data should be opening and you can now visualise them!
+    <p>There your data should be opening and you can now visualise them!
 <a href="../../images/ocean_var/med_view.png" rel="noopener noreferrer"><img src="../../images/ocean_var/med_view.png" alt="Image of what the netcdf files look like when opening with ODV. " width="1838" height="936" loading="lazy" /></a></p>
 
-</blockquote>
+  </blockquote>
 
-<blockquote class="hands-on">
-  <div class="box-title hands-on-title" id="hands-on-visualise-your-phosphate-variable"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise your Phosphate variable</div>
-  <ol>
-    <li>Go on the big <strong>+</strong> on the top left</li>
-    <li>Select “1 SURFACE Window”
+  <blockquote class="hands-on">
+    <div class="box-title hands-on-title" id="hands-on-visualise-your-phosphate-variable-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Visualise your Phosphate variable</div>
+    <ol>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 SURFACE Window”
  <a href="../../images/ocean_var/surface_window.png" rel="noopener noreferrer"><img src="../../images/ocean_var/surface_window.png" alt="Create a surface plot for the phosphate. " width="591" height="598" loading="lazy" /></a></li>
-    <li>Press right on the new plot and select <strong>Properties…</strong>
+      <li>Press right on the new plot and select <strong>Properties…</strong>
  <a href="../../images/ocean_var/properties.png" rel="noopener noreferrer"><img src="../../images/ocean_var/properties.png" alt="Going to the properties of the plot. " width="1538" height="914" loading="lazy" /></a></li>
-    <li>In the tab “Display Style” increase the “Symbol size” to 22 for instance</li>
-    <li>In the tab “Color Mapping” increase the level of the “Median” part and lower the “Nonlinearity” such as in the following picture
+      <li>In the tab “Display Style” increase the “Symbol size” to 22 for instance</li>
+      <li>In the tab “Color Mapping” increase the level of the “Median” part and lower the “Nonlinearity” such as in the following picture
  <a href="../../images/ocean_var/colors.png" rel="noopener noreferrer"><img src="../../images/ocean_var/colors.png" alt="Balance the colors of the map to better visualise the Phosphate repartition. " width="659" height="652" loading="lazy" /></a></li>
-    <li>
-      <p>Then, click on <strong>OK</strong>, and you can see the Phosphate repartition.</p>
-    </li>
-    <li>Click right on the map and select <strong>Save Plot As…</strong></li>
-    <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
-    <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
-  </ol>
+      <li>
+        <p>Then, click on <strong>OK</strong>, and you can see the Phosphate repartition.</p>
+      </li>
+      <li>Click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>In the pop-up screen go to the folder <strong>ODV</strong>, <strong>galaxy</strong>, <strong>outputs</strong>.</li>
+      <li>
+        <p>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</p>
 
-  <p>If you want to have a visualisation of the Phosphate according to the depth, you can do the following.</p>
-  <ol>
-    <li>Go on the big <strong>+</strong> on the top left</li>
-    <li>Select “1 STATION Window” in the new tab, in the plot press enter on your keyboard.</li>
-    <li>Same as before to save it, click right on the map and select <strong>Save Plot As…</strong></li>
-    <li>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</li>
-  </ol>
+        <p>If you want to have a visualisation of the Phosphate according to the depth, you can do the following.</p>
+      </li>
+      <li>Go on the big <strong>+</strong> on the top left</li>
+      <li>Select “1 STATION Window” in the new tab, in the plot press enter on your keyboard.</li>
+      <li>Same as before to save it, click right on the map and select <strong>Save Plot As…</strong></li>
+      <li>
+        <p>In <strong>Files of type</strong> select <code class="language-plaintext highlighter-rouge">PNG (*.png *.PNG)</code> and <strong>Save</strong> then <strong>OK</strong> and <strong>OK</strong>.</p>
 
-  <p>You can now safely exit ODV.</p>
-  <ol>
-    <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
-    <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
-  </ol>
-</blockquote>
+        <p>You can now safely exit ODV.</p>
+      </li>
+      <li>On the top left click on <strong>File</strong> select <strong>Exit</strong></li>
+      <li>If you want to save the other window also click on <strong>Yes</strong>. Here we don’t need it so click <strong>No</strong>.</li>
+    </ol>
+  </blockquote>
+
+</div>
 
 <h1 id="conclusion">Conclusion</h1>
 
@@ -1512,7 +1977,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c52a51d808b100cbf76e7f4aee52b4741202422c">c52a51d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/62d550f5751351152d454c3827405148dfe56550">62d550f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
