@@ -9,7 +9,7 @@ contributors: [bebatut,shiltemann,nsoranzo,hexylena,wm75]
 
 As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a *shared data library*:
 
-1. Go into **Shared data** (top panel) then **Data libraries**
+1. Go into **Data** (top panel) then **Data libraries**
 2. Navigate to {% if include.path %}: *{{ include.path }}* or {% endif %} the correct folder as indicated by your instructor.
    {% unless include.path %}- On most Galaxies tutorial data will be provided in a folder named **GTN - Material --> Topic Name -> Tutorial Name**. {% endunless %}
 3. Select the desired files
