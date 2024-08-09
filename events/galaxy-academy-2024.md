@@ -31,6 +31,8 @@ program:
     description: |
       On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don't need this introduction. Please enjoy this introduction and prepare for the upcoming days.
     tutorials:
+      - type: custom
+        name: "Start to get to know Galaxy "
       - name: galaxy-intro-101-everyone
         topic: introduction
       - name: data-manipulation-olympics
@@ -39,6 +41,8 @@ program:
         topic: introduction
       - name: options-for-using-galaxy
         topic: introduction
+      - type: custom
+        name: "Fundamentals of Sequences analysis "
       - name: quality-control
         topic: sequence-analysis
       - name: mapping
