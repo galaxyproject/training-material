@@ -78,6 +78,8 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
 >
 >Review each stage and the essential steps that it includes.
 >
+>Essential information about this microlearning unit can be found in the [About](#about) section.
+>
 {: .agenda}
 
 If you have any questions at any stage on your journey do not hesitate to <a href="mailto:sonja.filiposka@finki.ukim.mk">contact the FAIR-by-Design methodology team</a>.
@@ -824,4 +826,70 @@ After the Verify stage, you will reenter continuous improvement with newly gathe
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Continuous Improvement stage....</a>
 
 # About
+
+## FAIR-by-Design Microlearning
+
+### Self-paced how to FAIR-by-Design guide
+
+### Original Location
+
+- online: [https://fair-by-design-methodology.github.io/microlearning/latest/](https://fair-by-design-methodology.github.io/microlearning/latest/)
+- this tutorial is an adapted version of the original microlearning guide
+
+### Training Description
+
+Short how to guide that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.
+
+### Target audience
+
+All interested parties who need to develop learning materials for any type of project-related training.
+
+### Expertise Level / Skill Level: Beginner
+
+### Primary Language: English
+
+### Access Cost: No
+
+### Prerequisites
+
+No prior knowledge is required.
+
+### Learning Objectives
+
+- Structure FAIR learning materials
+- Create and publish FAIR-by-Design learning materials
+- Assess FAIR-ness of learning objects
+
+### Keywords
+
+FAIR, learning objects, methodology, practical implementation
+
+### Certification Information
+
+This training has no certification or any recognition mechanism included.
+
+### Author(s)
+
+- Sonja Filiposka, Dominique Green, Anastas Mishev, Vojdan Kjorveziroski, Andrea Corleto, Eleornora Napolitano, Gabriella Paolini, Sara di Giorgio, Joanna Janik, Luca Schirru, Arnaud Gingold, Christine Chardosek, Irakleitos Souyioultzoglou, Carolin Leister, Emma Lazzeri
+
+
+### Contact information
+
+- For more information please contact the T2.3 FAIR-by-Design Methodology Task Leader Sonja Filiposka using [sonja.filiposka@finki.ukim.mk](mailto:sonja.filiposka@finki.ukim.mk).
+
+### License
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+### DOI
+
+[https://doi.org/10.5281/zenodo.11548062](https://doi.org/10.5281/zenodo.11548062)
+
+### Accessibility Mission
+
+Skills4EOSC is dedicated to ensuring that all produced learning materials are accessible to as many visitors as possible regardless of their ability or technology. We have an active commitment to increasing our learning materials accessibility. The main standards that we aim to comply with are WCAG v.2.1 Level AA criteria and PDF/UA (ISO 14289).
+
+#### Acknowledgement
+
+These learning materials have been developed by following the [FAIR-by-Design Methodology](https://zenodo.org/records/8305540).
 
