@@ -421,9 +421,9 @@ the "Project" Menu tab.
 
 ## Save Data
 
-{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png"
+{% include _includes/cyoa-choices.html option1="xview" option2="png" default="png" disambiguation="savedata"
        text="Here you can choose if you want to save your view as an ODV view in xview format (you will not able to directly visualise it on Galaxy) or if you want to save it in png which you can visualise on Galaxy." %}
-       
+
 <div class="xview" markdown="1">
 > <hands-on-title>Save your subset view</hands-on-title>
 > 1. On the top left of your screen, you can see a red save button. Right-click on it.
