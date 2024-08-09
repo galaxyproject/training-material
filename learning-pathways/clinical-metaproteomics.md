@@ -8,7 +8,10 @@ title: Clinical metaproteomics workflows within Galaxy
 description: |
   This learning path aims to teach you the basics of how to perform metaproteomics analysis of the clinical data within the Galaxy platform. You will learn how to use Galaxy for analysis, and will be guided through the most common first steps of any metaproteomics database generation to searching the database, verifying the proteins/peptides, and data analysis.
 
-priority: 3
+cover-image: shared/images/proteomics.png
+cover-image-alt: image of a 3D protein folding structure
+
+
 editorial_board:
 - subinamehta
 
@@ -28,12 +31,12 @@ pathway:
       The identified peptides and proteins from various softwares will be combined later to perform verification.
     tutorials:
       - name: clinical-mp-2-discovery
-        topic: proteomics  
+        topic: proteomics
 
 
   - section: "Module 3: Verification"
     description: |
-      Here we use the PepQuery tool to verify the presence of the peptides as well as validate that the peptides/proteins 
+      Here we use the PepQuery tool to verify the presence of the peptides as well as validate that the peptides/proteins
       identified are indeed of microbial origin.
     tutorials:
       - name: clinical-mp-3-verification
@@ -41,11 +44,11 @@ pathway:
 
   - section: "Module 4: Quantitation"
     description: |
-      In this module, we perform quantitative analysis of our data using MaxQuant. Quantitative analysis will help us identify 
+      In this module, we perform quantitative analysis of our data using MaxQuant. Quantitative analysis will help us identify
       differertially abundant proteins present in the sample and their abundance in various conditions.
     tutorials:
       - name: clinical-mp-4-quantitation
-        topic: proteomics  
+        topic: proteomics
 
   - section: "Module 5: Data Interpretation"
     description: |

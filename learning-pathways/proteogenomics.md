@@ -4,11 +4,13 @@ tags: [beginner]
 type: use
 
 
-title: Proteogenomics workflows within Galaxy
+title: Proteogenomics
 description: |
   This learning path aims to teach you the basics of how to perform proteogenomics analysis of the Mass spectrometry data within the Galaxy platform. You will learn how to use Galaxy for analysis and will be guided through the most common first steps of any proteogenomics database generation to searching the database, followed by novel peptide data analysis.
 
-priority: 3
+cover-image: shared/images/proteomics.png
+cover-image-alt: image of a 3D protein folding structure
+
 editorial_board:
 - subinamehta
 
@@ -25,7 +27,7 @@ pathway:
       This section helps to guide the users through an MSMS dataset search against the customized database generated in the first module. The identified peptides and proteins will be then analyzed later in the novel peptide analysis.
     tutorials:
       - name: proteogenomics-dbsearch
-        topic: proteomics  
+        topic: proteomics
 
   - section: "Module 3: Novel Peptide Analysis"
     description: |
