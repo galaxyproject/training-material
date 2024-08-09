@@ -26,7 +26,7 @@ contributions:
 
 cost: free 
 audience: Everyone who would like to get to know Galaxy, learn bioinformatics data analysis, or master a specific new kind of analysis is welcome.
-contact_email: erxleben@informatik.uni-freiburg.de
+contact_email: academy@galaxyproject.org
 async: true
 date_start: 2024-10-07
 date_end: 2024-10-11
@@ -51,9 +51,13 @@ program:
     description: |
       On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don’t need this introduction. Please enjoy this introduction and prepare for the upcoming days.
     tutorials:
-      - name: galaxy-intro-short
+      - name: galaxy-intro-101-everyone
         topic: introduction
-      - name: galaxy-intro-101
+      - name: data-manipulation-olympics
+        topic: introduction
+      - name: galaxy-reproduce
+        topic: introduction
+      - name: options-for-using-galaxy
         topic: introduction
       - name: quality-control
         topic: sequence-analysis
@@ -62,7 +66,9 @@ program:
  
   - section: "Tuesday to Thursday: Pick a track"
     description: Today you will learn all about transcriptomics
-  
+    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
+      - title: Proteomics
+        link: events/tracks/gta2024-proteomics.md
 
   - section: "Friday: Grab bag"
     description: | 
