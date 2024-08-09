@@ -51,25 +51,25 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
 >1. [Prepare](#stage-1---prepare)
 >	- Do you understand FAIR and its implications
 >	- Define purpose, learning objectives, target audience
->2. Discover
+>2. [Discover](#stage-2---discover)
 >	- Find existing resources
 >	- Identify potential for reuse
->3. Design
+>3. [Design](#stage-3---design)
 >	- Define the syllabus and structure
 >	- Identify granularity
 >	- Define facilitation materials
->4. Produce
+>4. [Produce](#stage-4---produce)
 >	- Develop content using common apps and file formats
 >	- Define machine readable metadata
 >	- Perform internal QA check
->5. Publish
+>5. [Publish](#stage-5---publish)
 >	- Define license and other related info
 >	- Release for instructors and learners
 >	- Enable feedback gathering
->6. Verify
+>6. [Verify](#stage-6---verify)
 >	- Final QA check
 >	- Use gathered feedback for continuous improvement
->7. Continuous Improvement
+>7. [Continuous Improvement](#stage-7---continuous-improvement)
 >	- Create a list of potential improvements
 >	- Choose a set of improvements to be implemented 
 >	- Start a new release cycle
