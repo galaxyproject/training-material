@@ -158,10 +158,11 @@ More on the metadata here {% cite hoebelheinrich_2022 %}
   </div>
 
 </div>
+><tip-title>More on backward learning:</tip-title>
+> - [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
+{: .tip }
 
-More on backward learning:
-    [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
-
+### Define.
 
 > <question-title>Purpose</question-title>
 > When and how the learning materials can be used and for what purposes?
@@ -188,9 +189,9 @@ More on backward learning:
 >
 > ><tip-title>Use Blooms Taxonomy</tip-title>
 > >Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
-> >
-> >[See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 > {: .tip}
+> 
+> [See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Prepare stage....</a>
@@ -219,7 +220,9 @@ Reusable materials can be found anywhere. These are just some examples:
 
 > <code-in-title>General</code-in-title>
 > [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
+> 
 > [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
+> 
 > [OSF](https://osf.io/) - a free, open research platform
 {: .code-in}
 
