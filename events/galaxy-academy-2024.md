@@ -34,8 +34,6 @@ date_end: 2024-10-11
 location:
   name: online
 
-
-
 infrastructure:
   servers:
     - server: https://usegalaxy.eu
@@ -63,19 +61,6 @@ program:
         topic: sequence-analysis
       - name: mapping
         topic: sequence-analysis
- 
-  - section: "Tuesday to Thursday: Pick a track"
-    description: Today you will learn all about transcriptomics
-    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
-      - title: Proteomics
-        link: events/tracks/gta2024-proteomics.md
-
-  - section: "Friday: Grab bag"
-    description: | 
-      Can't get enough? Then please pick whichever tutorial you like from the track of the previous days or from the list below.
-    tutorials:
-      - name: troubleshooting
-        topic: admin
 
 ---
 
