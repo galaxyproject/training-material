@@ -87,31 +87,28 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 ### Adopt a metadata schema
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
 
+> <details-title>Descriptive info metadata fields</details-title>
+> - **Title** =	The human readable name of the resource
+> - **Abstract / Description** =	A brief synopsis about or description of the learning resource
+> - **Author(s)** =	Name of entity(ies) authoring the resource
+> - **Primary Language** =	Language in which the resource was originally published or made available
+> - **Keyword(s)** =	Keywords or tags used to describe the resource
+> - **Version Date** =	Version date for the most recently published or broadcast resource
+{: .details}
 
-{% include _includes/tab-choices.html option1="Descriptive info fields" option2="Access info fields" option3="Educational info fields" default="Descriptive info fields" title="Metadata fields categories" %} 
+> <details-title>Access info metadata fields</details-title>
+> - **URL to Resource** =	URL that resolves to the learning resource or to a "landing page" for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.
+> - **Resource URL Type**	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle
+> - **License** =	A license document that applies to this content, typically indicated by URL
+> - **Access Cost**	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)
+{: .details}
 
-<div class="Descriptive-info-fields" markdown="1">
-- **Title** =	The human readable name of the resource
-- **Abstract / Description** =	A brief synopsis about or description of the learning resource
-- **Author(s)** =	Name of entity(ies) authoring the resource
-- **Primary Language** =	Language in which the resource was originally published or made available
-- **Keyword(s)** =	Keywords or tags used to describe the resource
-- **Version Date** =	Version date for the most recently published or broadcast resource
-</div>
-<div class="Access-info-fields" markdown="1">
-- **URL to Resource** =	URL that resolves to the learning resource or to a "landing page" for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.
-- **Resource URL Type**	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle
-- **License** =	A license document that applies to this content, typically indicated by URL
-- **Access Cost**	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)
-</div>
-<div class="Educational-info-fields" markdown="1">
-- **Target Group (Audience)** =	Principal users(s) for which the resource was designed
-- **Learning Resource Type** =	The predominant type or kind that characterizes the learning resource
-- **Learning Outcome** =	Descriptions of what knowledge, skills or abilities a learner should acquire on completion of the resource
-- **Expertise (Skill) Level** =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced
-</div>
-
-
+> <details-title>Educational info metadata fields</details-title>
+> - **Target Group (Audience)** =	Principal users(s) for which the resource was designed
+> - **Learning Resource Type** =	The predominant type or kind that characterizes the learning resource
+> - **Learning Outcome** =	Descriptions of what knowledge, skills or abilities a learner should acquire on completion of the resource
+> - **Expertise (Skill) Level** =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced
+{: .details}
 
 More on the metadata here {% cite hoebelheinrich_2022 %}
 
@@ -261,7 +258,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .comment}
 
 ><comment-title></comment-title>
->{%icon trophy %} The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, ...).
+>{%icon tool-versions %} The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, ...).
 {: .comment}
 
 ><comment-title></comment-title>
@@ -686,48 +683,13 @@ Open the PDF and then from the All tools menu on the left, select View more and 
 
 ### Store in a repository
 
-![Zenodo logo](../../images/Zenodo_logo.png)
-<small>
-<br>
-<a href="https://upload.wikimedia.org/wikipedia/commons/5/58/Zenodo_logo.png">Zenodo logo</a> by <a href="https://twitter.com">a Twitter user</a> from <a href="https://commons.m.wikimedia.org/wiki/File:Zenodo_logo.png">Wikimedia</a> licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.en">Creative Commons Attribution-Share Alike 4.0 International license</a>
-</small>
-#### To Zenodo
-Deposit your editable learning materials set to make available to other designers and instructors.
-1. Create an archive of all the files in your logical hierarchical structure.
-2. Create a new Zenodo record with the archive.
-3. Provide a rich metadata description and link to any related resources.
-
-<a href="https://help.zenodo.org/docs/deposit/create-new-upload/" class="btn btn-primary stretched-link">How to deposit in Zenodo</a>
-
-><tip-title>Automated publishing to Zenodo</tip-title>
+><tip-title>Automated publishing</tip-title>
 >If you are working on GitHub using the provided templates repository then the "publish to Zenodo" step is fully automated for you. Just follow the [guide to publishing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/17-Zenodo%20Publishing/17-Zenodo%20Publishing/).
 {: .tip}
 
 ><tip-title>To training catalogue</tip-title>
 >You are at the point when you should also consider making a record in a relevant training catalogue such as the EOSC training catalogue.
 {: .tip}
-
-### Provide to learners
-
-![Moodle logo](../../images/Moodle-logo.svg.png)
-<small>
-<br>
-<a href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Moodle-logo.svg/320px-Moodle-logo.svg.png">Moodle logo</a> by <a href="https://moodle.org/">Moodle.org</a> from <a href="https://en.m.wikipedia.org/wiki/File:Moodle-logo.svg">Wikipedia</a> licensed under the <a href="https://en.wikipedia.org/wiki/en:GNU_General_Public_License">GNU General Public License</a>
-</small>
-#### To LMS
-Generate the final versions from your editable content and add it to a course on the Skills4EOSC Learning Platform to make it available for learners.
-
-0. Provide the course metadata.
-
-1. Add the learning content in general non-editable file formats.
-
-2. Add assessments such as quizzes or assignments.
-
-3. Setup feedback gathering.
-
-4. Define recognition mechanism such as open digital badges for successful completion.
-
-<a href="https://docs.moodle.org/403/en/Table_of_Contents#Managing_a_Moodle_course" class="btn btn-primary stretched-link">Managing a Moodle course</a>
 
 
 ​​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Publish stage....</a>
@@ -740,10 +702,6 @@ Generate the final versions from your editable content and add it to a course on
 ### External QA
 > <tip-title> A fresh set of eyes</tip-title>
 > Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.
-{: .tip}
-
-> <tip-title> Don't forget to QA the LMS</tip-title>
->  The reviewer should play the role of a new learner in the LMS and check everything from the learner perspective.
 {: .tip}
 
 > <tip-title> Go through the QA checklists</tip-title>
