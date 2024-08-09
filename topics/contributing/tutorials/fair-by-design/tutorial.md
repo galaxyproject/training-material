@@ -69,20 +69,20 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 {: .solution}
 
 
-> <question-title>Accessible</question-title>
+> <solution-title>Accessible</solution-title>
 > The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
-{: .question}
+{: .solution}
 
 
-> <question-title>Interoperable</question-title>
+> <solution-title>Interoperable</solution-title>
 > The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
 > Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.
-{: .question}
+{: .solution}
 
 
-> <question-title>Reusable</question-title>
+> <solution-title>Reusable</solution-title>
 >The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
-{: .question }
+{: .solution }
 
 ### Adopt a metadata schema
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
@@ -115,10 +115,12 @@ Below are the main stages of the FAIR-by-Design Methodology that will help guide
 
 More on the metadata here {% cite hoebelheinrich_2022 %}
 
-More on FAIR learning objects definition: 
-    - [FAIR instructional design skills](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills)
-    - [FAIR guiding principles](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-guiding-principles)
-    - [FAIR learning objects](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects)
+
+><tip-title>More on FAIR learning objects definition:</tip-title>
+>- [FAIR instructional design skills](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills)
+ >- [FAIR guiding principles](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-guiding-principles)
+ >- [FAIR learning objects](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects)
+{: .tip}
 
 ### Start Ideating...
 
