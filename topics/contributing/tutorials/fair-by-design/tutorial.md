@@ -191,8 +191,7 @@ More on the metadata here {% cite hoebelheinrich_2022 %}
 > [See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Prepare stage....</a>
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Prepare stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Prepare stage....</a>
 
 ## Stage 2 - Discover
 > Greater even than the greatest discovery is to keep open the way to future discovery.
@@ -229,9 +228,10 @@ Reusable materials can be found anywhere. These are just some examples:
 {: .warning}
 
 ### Don't forget the multimedia search
+
 Different learners have different learning modalities (read/write, auditory, visual, kinesthetic). You should use all types of multimedia in your learning materials.
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%202%20%E2%80%93%20Discover/03-Existing%20learning%20materials/03-Existing%20learning%20materials/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Discover stage....</a>
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Discover stage....</a>
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Discover stage....</a>
 
 ## Stage 3 - Design
 > Design is intelligence made visible.
@@ -407,12 +407,10 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   </div>
 </div>
 
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Design stage....</a>
 
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20%E2%80%93%20Design/04-Conceptualisation/04-Conceptualisation/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Design stage....</a>
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Design stage....</a>
 ## Stage 4 - Produce
+
 > To contrive is nothing! To construct is something! To produce is everything! 
 {: .quote author="Edward Rickenbacker​"}
 
@@ -589,10 +587,7 @@ Accessibility evaluation tools are not perfect. Even if they say that all is ok,
   </div>
 </div>
 
-
-​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Produce stage....</a>
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Produce stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Produce stage....</a>
 ## Stage 5 - Publish
 > Publishing is the art of working on a creative idea and turning it into a masterpiece​!
 {: .quote author="Unknown"}
@@ -704,10 +699,7 @@ Accessibility evaluation tools are not perfect. Even if they say that all is ok,
 >You are at the point when you should also consider making a record in a relevant training catalogue such as the EOSC training catalogue.
 {: .tip}
 
-
-​​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Publish stage....</a>
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Publish stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Publish stage....</a>
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
@@ -763,9 +755,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
 {: .comment}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20%E2%80%93%20Verify/19-Final%20QA%20check/19-finalQA/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Verify stage....</a>
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Verify stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Verify stage....</a>
 
 ## Stage 7 - Continuous Improvement
 > To improve is to change; to be perfect is to change often
@@ -801,9 +791,7 @@ Start a new cycle of the FAIR-by-Design methodology that will implement the sele
 
 After the Verify stage, you will reenter continuous improvement with newly gathered information....
 
-​<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20%E2%80%93%20Verify/20-Continuous%20Improvement/20-CI/" class="btn btn-dark text-white btn-lg btn-block">Start an in-depth training on the Continuous Improvement stage....</a>
-
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">FAIR-by-Design Methodology: Continuous Improvement stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Continuous Improvement stage....</a>
 
 # About
 
