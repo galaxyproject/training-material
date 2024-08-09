@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@62d550f5751351152d454c3827405148dfe56550",
+		release: "galaxy-training-network@47215d426180fe1709dd22f4683afdcead6af4df",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Proteogenomics 3: Novel peptide analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-08-09 15:41:38 +0000">
 <meta name="DC.creator" content="Subina Mehta">
 <meta name="DC.creator" content="Timothy J. Griffin">
 <meta name="DC.creator" content="Pratik Jagtap">
@@ -212,7 +212,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-08-09 15:41:38 +0000",
   "datePublished": "2018-11-20 19:05:23 +0000",
   "identifier": "https://gxy.io/GTN:T00233",
   "accessMode": [
@@ -241,7 +241,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Proteogenomics 3: Novel peptide analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/proteogenomics-novel-peptide-analysis/tutorial.html",
-  "version": 18,
+  "version": 19,
   "timeRequired": "PT30M",
   "teaches": "How to assign and visualize the genomic localization of these identified novel proteoforms?",
   "keywords": [
@@ -989,7 +989,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 20, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 9, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1009,7 +1009,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.7</a> (0 recent ratings, 3 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 19 </div>
 
     </blockquote>
     </section>
@@ -1043,7 +1043,10 @@ Please look at the following tutorials in this proteogenomics series before star
   <li><a href="#multiomics-visualization-platform-mvp" id="markdown-toc-multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</a></li>
   <li><a href="#obtain-peptide-genomic-coordinates" id="markdown-toc-obtain-peptide-genomic-coordinates">Obtain Peptide genomic Coordinates</a></li>
   <li><a href="#classify-peptides" id="markdown-toc-classify-peptides">Classify Peptides</a></li>
-  <li><a href="#final-summary-output" id="markdown-toc-final-summary-output">Final Summary Output</a></li>
+  <li><a href="#final-summary-output" id="markdown-toc-final-summary-output">Final Summary Output</a>    <ol>
+      <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+    </ol>
+  </li>
 </ol>
 
 </blockquote>
@@ -1066,7 +1069,7 @@ Please look at the following tutorials in this proteogenomics series before star
     </li>
   </ol>
 
-  <p>If you do not have these files from the previous tutorials in this series, you can import them from Zenodo:</p>
+  <p>If you do not have these files from the previous tutorials in this series, you can import them from <a href="https://doi.org/10.5281/zenodo.13270741">Zenodo</a></p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1489208/files/Peptides_for_Blast-P_analysis.tabular
 https://zenodo.org/record/1489208/files/PeptideShaker_PSM.tabular
 https://zenodo.org/record/1489208/files/mz_to_sqlite.mz.sqlite
@@ -1076,9 +1079,9 @@ https://zenodo.org/record/1489208/files/genomic_mapping_sqlite.sqlite
 
 <h1 id="peptide-selection">Peptide Selection</h1>
 
-<p><a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a> is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.</p>
+<p><a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi">BLAST</a> is a web-based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for the identification of known proteins or for the identification of potential peptides associated with novel proteoforms.</p>
 
-<p>The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.</p>
+<p>The first step in this tutorial is to perform BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-ncbi-blast-blastp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: NCBI BLAST+ blastp</div>
@@ -1248,15 +1251,15 @@ ORDER BY psm.Sequence, psm.ID
 
 <h1 id="multiomics-visualization-platform-mvp">Multiomics Visualization Platform (MVP)</h1>
 
-<p>The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide which is subjected to change, so while you are running this tool please take a look at the “Novel Peptide” output from the previous steps).</p>
+<p>The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user-defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step-by-step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide that is subjected to change, so while you are running this tool please take a look at the “Novel Peptide” output from the previous steps).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-guide-to-mvp"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Guide to MVP</div>
 
-  <p>The spectra belonging to these “Novel peptides” can be viewed using MVP,this can be achieved by selecting the output from the <code class="language-plaintext highlighter-rouge">mz to sqlite tool</code> (Generated in the second workflow).
-Here is a step by step guide to obtain the proteogenomic view of the “Novel peptides”.</p>
+  <p>The spectra belonging to these “Novel peptides” can be viewed using MVP, this can be achieved by selecting the output from the <code class="language-plaintext highlighter-rouge">mz to sqlite tool</code> (Generated in the second workflow).
+Here is a step-by-step guide to obtain the proteogenomic view of the “Novel peptides”.</p>
 
-  <p>1) Click on the <strong>Visualize in MVP application</strong>, it will open up options for visualization application in the center pane, Select <strong>MVP Application</strong> from the options (or Right click to open in a new window).</p>
+  <p>1) Click on the <strong>Visualize in MVP application</strong>, it will open up options for visualization application in the center pane, Select <strong>MVP Application</strong> from the options (or Right-click to open in a new window).</p>
 
   <p><a href="../../images/Visualize.png" rel="noopener noreferrer"><img src="../../images/Visualize.png" alt="mz to sqlite. " width="570" height="634" loading="lazy" /></a></p>
 
@@ -1381,7 +1384,7 @@ peptides provided as input. This outputs bed file for peptides.</p>
 
 </blockquote>
 
-<p>The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.</p>
+<p>The final tool for this workflow generates a tabular output that summarizes the information after running these workflows. The final summary output consists of the Peptide sequence, the spectra associated with the peptides, the protein accession number, the chromosome number, Start and Stop of the genomic coordinate, the annotation, the genomic coordinate entry for viewing in Integrative Genomics Viewer (IGV), MVP or UCSC genome browser and the URL for viewing it on UCSC genome browser. This summary is created with the help of the query tabular tool.</p>
 
 <h1 id="final-summary-output">Final Summary Output</h1>
 
@@ -1445,7 +1448,7 @@ GROUP BY psm.Sequence
       </ul>
     </li>
     <li>
-      <p>Click <strong>Run Tool</strong> and inspect the query results file after it turned green. If everything went well, it should look similiar:</p>
+      <p>Click <strong>Run Tool</strong> and inspect the query results file after it turns green. If everything goes well, it should look similar:</p>
 
       <p><a href="../../images/final_summary.png" rel="noopener noreferrer"><img src="../../images/final_summary.png" alt="Final Summary. " width="1784" height="290" loading="lazy" /></a></p>
     </li>
@@ -1455,9 +1458,9 @@ GROUP BY psm.Sequence
 
 </blockquote>
 
-<h3 id="conclusion">Conclusion</h3>
+<h2 id="conclusion">Conclusion</h2>
 
-<p>This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.This workflow is also available at <a href="https://usegalaxy.eu/">usegalaxy.eu</a>.</p>
+<p>This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism, the data, tool parameters and workflow will need to be modified accordingly. This workflow is also available at <a href="https://usegalaxy.eu/">usegalaxy.eu</a>. All the tools are in the most stable version here (published in 2018), the tools are subject to changes and upgrades, hence there could be minor formatting that would be required.</p>
 
 <p>This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at <a href="http://galaxyp.org">galaxyp.org</a></p>
@@ -1924,7 +1927,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/62d550f5751351152d454c3827405148dfe56550">62d550f</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/47215d426180fe1709dd22f4683afdcead6af4df">47215d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
