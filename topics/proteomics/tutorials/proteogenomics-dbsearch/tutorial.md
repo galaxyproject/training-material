@@ -67,7 +67,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 > <hands-on-title>data upload and organization</hands-on-title>
 >
 > 1. Create a **new history** and name it something meaningful (e.g. *Proteogenomics DB search*)
-> 2. Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.[![DOI][https://doi.org/10.5281/zenodo.13270741](https://doi.org/10.5281/zenodo.13270741)
+> 2. Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.[![DOI][https://zenodo.org/badge/DOI/10.5281/zenodo.13270741.svg](https://doi.org/10.5281/zenodo.13270741)
 >    ```
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
