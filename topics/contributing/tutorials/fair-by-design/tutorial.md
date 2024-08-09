@@ -1,33 +1,26 @@
 ---
 layout: tutorial_hands_on
-title: FAIR-by-design methodology
+title: FAIR-by-Design methodology
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
 zenodo_link: https://zenodo.org/records/11548062
 questions:
   - How to develop FAIR learning materials?
+  - How to incorporate the FAIR principles in the instructional design process?
 objectives:
-  - Define FAIR learning objects
-  - Adapt and mix FAIR learning objects
-  - Identify licenses and attribute correspondingly
-  - Structure comprehensive learning materials
-  - Manage file formats and tools
-  - Define metadata using a schema
+  - Design FAIR learning materials
+  - Structure FAIR learning materials
   - Create and publish FAIR-by-Design learning materials
-  - Collaborate with other instructors
-  - Assess FAIR-ness of existing learning objects
-time_estimation: 60M
+  - Assess FAIR-ness of learning objects
+time_estimation: 20M
 key_points:
-  - FAIR data are data which meet principles of findability, accessibility, interoperability, and reusability (FAIR).
-  - FAIR data are as open as possible, and as closed as necessary.
-  - The main objective of FAIR data is to increase data reuse by researchers.
+  - The FAIR-by-Design Methodology ensures that the output of the instructional design process are FAIR learning materials.
+  - Each stage of the FAIR-by-Design Methodology incorporates specific parts of the FAIR principles.
+  - The ouput of the FAIR-by-Design Methodology are FAIR learning materials from both the perspective of instructors and of learners.
 tags:
   - 'FAIR-by-Design Learning Materials'
   - "FAIR Learning Objects"
-  - FAIR
-  - Metadata
-  - Learning objectives
-  - Blooms taxonomy
+  - FAIR-by-Design Methodology
 priority: 1
 contributions:
   authorship:
@@ -856,6 +849,7 @@ No prior knowledge is required.
 
 ### Learning Objectives
 
+- Design FAIR learning materials
 - Structure FAIR learning materials
 - Create and publish FAIR-by-Design learning materials
 - Assess FAIR-ness of learning objects
@@ -877,11 +871,11 @@ This training has no certification or any recognition mechanism included.
 
 - For more information please contact the T2.3 FAIR-by-Design Methodology Task Leader Sonja Filiposka using [sonja.filiposka@finki.ukim.mk](mailto:sonja.filiposka@finki.ukim.mk).
 
-### License
+### Original License
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-### DOI
+### Original microlearning unit DOI
 
 [https://doi.org/10.5281/zenodo.11548062](https://doi.org/10.5281/zenodo.11548062)
 
