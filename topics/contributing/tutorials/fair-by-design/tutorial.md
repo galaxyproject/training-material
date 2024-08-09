@@ -46,6 +46,8 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
 >
 >Below are the main stages of the FAIR-by-Design Methodology that will help guide you on your journey of creating FAIR learning materials.
 >
+>![FAIR-by-Design Methodology Stages](../../images/methodology.png)
+>
 >The FAIR-by-Design Methodology is defined into [a number of stages](#main-stages) that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:
 >
 >1. [Prepare](#stage-1---prepare)
