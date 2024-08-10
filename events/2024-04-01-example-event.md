@@ -139,6 +139,22 @@ program:
       - name: mothur-miseq-sop-short
         topic: microbiome
 
+  - section: "Wednesday: Track buttons example"
+    description: Today we have two different tracks, click on one of the buttons below to view the track program.
+    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
+      - title: Track 1
+        link: events/tracks/example-track1.md
+      - title: Track 2
+        link: events/tracks/example-track2.md
+      - title: Ecology
+        link: learning-pathways/intro-to-galaxy-and-ecology.md # can also link to learning pathways (or any other GTN page)
+      - title: Climate
+        link: https://usegalaxy.eu # external links also possible
+      - title: Plants
+        link: http://example.com
+      - title: CYOA
+      - title: Track 7
+
 ---
 
 Longer description of the course. This will be added to the overview page of your course.

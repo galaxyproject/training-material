@@ -1562,7 +1562,7 @@ Finally, we should repeat the procedure described previously for generating the 
 > 1. {% icon param-file %} *"First set of reads"*: `BAM forward YaHS`
 > 2. {% icon param-file %} *"Second set of reads"*: `BAM reverse YaHS`
 >
->**Step 6**: Rename the output as `BAM Hi-C reads SALSA2`
+>**Step 6**: Rename the output as `BAM Hi-C reads YaHS`
 >
 >**Step 7**: Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
 > 1. {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads YaHS`

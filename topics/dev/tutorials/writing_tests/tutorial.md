@@ -33,15 +33,6 @@ requirements:
 subtopic: core
 ---
 
-> <agenda-title></agenda-title>
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Testing in Galaxy
-
 The Galaxy code base contains thousands of tests that include tests of different types (unit vs. functional vs. end-to-end; client vs. backend, etc.) that are supported by a variety of testing frameworks and libraries. In this tutorial, we will offer a small, yet representative sample of the types of tests you might write, as well as the concepts and issues you may need to be familiar with when writing tests for Galaxy code, whether as part of a new feature you are implementing, or as a standalone contribution to Galaxy's testing code.
 
 A good way to start learning about Galaxy's testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see [Writing Tests for Galaxy](https://docs.galaxyproject.org/en/master/dev/writing_tests.html)).
@@ -55,6 +46,14 @@ To run Galaxy tests, you may also use the `pytest` command directly (except for 
 Another useful resource is the [Debugging Galaxy]({% link topics/dev/tutorials/debugging/tutorial.md %}) tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.
 
 Finally, nothing can substitute studying Galaxy's test code - we encourage you to always look for examples of similar tests and testing scenarios before you write your own.
+
+
+> <agenda-title></agenda-title>
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 # Local development environment setup
 
@@ -137,7 +136,7 @@ Ideally, we'd like to follow the process of test-driven development: write a tes
 
 Let's start by writing a basic test for a very simple API endpoint: `api/version`. The controller for this endpoint is located at `lib/galaxy/webapps/galaxy/api/configuration.py`. You can check the format of the data at `https://usegalaxy.org/api/version`.
 
-First, you need to create a new file at `lib/galaxy_test/api/test_mytutorial.py`. For simplicity, we'll place all new tests in this module. Next, add a class definition for `MyTutorialApiTestCase` that should be a subclass of `ApiTestCase`. Then add a test method, `test_version_is_current`, where you will (1) call the API via the ``_get`` method that returns a response object; and (2) verify that the response contains the "22.09" version number (assuming you have cloned the "dev" branch; otherwise your version may be different).
+First, you need to create a new file at `lib/galaxy_test/api/test_mytutorial.py`. For simplicity, we'll place all new tests in this module. Next, add a class definition for `TestMyTutorialApiTestCase` that should be a subclass of `ApiTestCase`. Then add a test method, `test_version_is_current`, where you will (1) call the API via the ``_get`` method that returns a response object; and (2) verify that the response contains the "24.1" version number (assuming you have cloned the "dev" branch; otherwise your version may be different).
 
 If your test fails, one way to debug it is to insert a `breakpoint()` statement into the body of the test (right after the call to ``_get`` would be a logical spot), and then use [pdb](https://docs.python.org/3/library/pdb.html), Python's interactive debugger, to explore the response at runtime with the test paused (see [Debugging Galaxy]({% link topics/dev/tutorials/debugging/tutorial.md %}) for more details on using pdb to debug Galaxy).
 
@@ -217,7 +216,7 @@ def test_create_role_WRONG(self):
 Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, ***this is the wrong approach***. Try running this together with the previous version of the test - you'll get an assertion error: there's an extra role in the database! 
 
 ```
-FAILED lib/galaxy_test/api/test_mytutorial.py::MyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
+FAILED lib/galaxy_test/api/test_mytutorial.py::TestMyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
 ```
 
 The reason for that is that we are using the same database for both tests, so whatever artifacts are created in one test will affect the following test if we make any kind of assumptions about the state of the database.
@@ -228,7 +227,7 @@ We could generate our own unique name, but we can also simply use an existing me
 
 {% include topics/dev/tutorials/writing_tests/api3.md %}
 
-Can't we destroy and create or re-populate the database for each test? We can, and if you absolutely need to do that, there is infrastructure for that in `test/unit/data/model/testing_utils` - you can see examples of its usage in the mapping and migrations unit tests (check these subdirectories). However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible. 
+Can't we destroy and create or re-populate the database for each test? We can, and there is infrastructure for that in `test/unit/data/model/db`. However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible. 
 
 ## Use Galaxy's populators for setting up database state
 
@@ -258,7 +257,7 @@ There are numerous unit tests in the Galaxy code base. However, existing unit te
 
 We'll start by looking at the module `lib/galaxy/util/bytesize.py`. This module is not covered by unit tests. There are 2 obvious targets for unit tests: the `parse bytesize` function and the `to_unit` method of the `ByteSize` class. Our goal is to come up with a reasonable selection of unit tests that verify essential aspects of this functionality.
 
-We'll start with the `parse_bytesize` function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see [https://docs.pytest.org/en/7.1.x/how-to/assert.html](https://docs.pytest.org/en/7.1.x/how-to/assert.html) for examples)
+We'll start with the `parse_bytesize` function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see [https://docs.pytest.org/en/8.2.x/how-to/assert.html](https://docs.pytest.org/en/8.2.x/how-to/assert.html) for examples)
 
 {% include topics/dev/tutorials/writing_tests/unit1.md %}
 
@@ -288,7 +287,7 @@ Run the tests to verify they pass.
 
 Our tests are looking good for the most part, although code duplication is starting to creep in. It's time to refactor! 
 
-Let's start by factoring out the ByteSize object creation into a fixture (see [https://docs.pytest.org/en/7.1.x/how-to/fixtures.html](https://docs.pytest.org/en/7.1.x/how-to/fixtures.html)). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy's testing code.
+Let's start by factoring out the ByteSize object creation into a fixture (see [https://docs.pytest.org/en/8.2.x/how-to/fixtures.html](https://docs.pytest.org/en/8.2.x/how-to/fixtures.html)). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy's testing code.
 
 {% include topics/dev/tutorials/writing_tests/unit4.md %}
 
@@ -296,7 +295,7 @@ Run the tests to verify they pass.
 
 ## Parametrization of test functions
 
-Finally, our `test_bytesize_to_unit` test has a lot of assert statements of the same form. We can do better! Let's use pytest's test parametrization feature (see [https://docs.pytest.org/en/7.1.x/how-to/parametrize.html](https://docs.pytest.org/en/7.1.x/how-to/parametrize.html)) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy's tool tests, or integration tests for configuration settings).
+Finally, our `test_bytesize_to_unit` test has a lot of assert statements of the same form. We can do better! Let's use pytest's test parametrization feature (see [https://docs.pytest.org/en/8.2.x/how-to/parametrize.html](https://docs.pytest.org/en/8.2.x/how-to/parametrize.html)) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy's tool tests, or integration tests for configuration settings).
 
 {% include topics/dev/tutorials/writing_tests/unit5.md %}
 
@@ -340,7 +339,7 @@ For this, we need to factor out the code that calls the database into its own fu
 
 ## "Monkeypatching" the module under test
 
-Now we can use pytest's "monkeypatch" built-in fixture to replace that function with a stub method and then use it to return `True` or `False` to test both cases. (see [https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch](https://docs.pytest.org/en/7.1.x/how-to/monkeypatch.html?highlight=monkeypatch) for more details).
+Now we can use pytest's "monkeypatch" built-in fixture to replace that function with a stub method and then use it to return `True` or `False` to test both cases. (see [https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch](https://docs.pytest.org/en/8.2.x/how-to/monkeypatch.html?highlight=monkeypatch) for more details).
 
 {% include topics/dev/tutorials/writing_tests/unit8.md %}
 
@@ -376,7 +375,7 @@ Again, run the tests to verify we haven't broken anything.
 
 ## Reformatting for improved readability
 
-Before we add more tests, let's reformat our code to group all the tests that target the `validate_email` function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see [https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class](https://docs.pytest.org/en/7.1.x/getting-started.html#group-multiple-tests-in-a-class)).
+Before we add more tests, let's reformat our code to group all the tests that target the `validate_email` function in one class. Keep in mind that each test gets its own instance of the class - so you cannot share instance state across tests. However, grouping related tests makes the testing module easier to navigate (there are more benefits; see [https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class](https://docs.pytest.org/en/8.2.x/getting-started.html#group-multiple-tests-in-a-class)).
 
 {% include topics/dev/tutorials/writing_tests/unit13.md %}
 

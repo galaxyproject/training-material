@@ -71,7 +71,7 @@ description: Statistics over the GTN
 <div class="col-md-3">
  <div class="gtn-card color-handson">
    <div class="card-title">{{ learning_pathways | size }}</div>
-   <div class="card-text-small">Learning Pathways</div>
+   <div class="card-text">Learning Paths</div>
  </div>
 </div>
 

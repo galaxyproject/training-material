@@ -60,11 +60,11 @@ recordings:
 
 ---
 
-# Background and a user's guide to this training material
-
 Galaxy users who write and share scripts useful for scientific analyses are likely to be reading this material, perhaps after seeing the "Hello Galaxy"
 demonstration. It was written to help you find out about the capabilities and limits of the ToolFactory by experimenting with it yourself.
 It is hoped that this advanced tutorial will introduce some features that potentially make the ToolFactory useful in your work.
+
+# Background and a user's guide to this training material
 
 This training material is unlike most other GTN tutorials. There is no specific tool building curriculum on offer because it is hard to know how
 that might be orgranised. The introductory `Hello Galaxy` demonstrations and

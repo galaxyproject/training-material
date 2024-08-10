@@ -1,7 +1,7 @@
 ---
 title: Viewing a workflow report
 area: workflows
-description: When creating a workflow in Galaxy, you can also define an output report page that should be created. Here you can display certain outputs of the pipeline (e.g. output files, tables, images, etc.) and other information about the run.
+description: You can find the workflow report from the workflow invocation
 box_type: tip
 layout: faq
 contributors: [hexylena,shiltemann]

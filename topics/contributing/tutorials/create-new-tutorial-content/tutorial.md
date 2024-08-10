@@ -972,29 +972,29 @@ You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 
 Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
 
 ### Dockstore
 
-Please note that the dockstore ID should be provided without the `#` character.
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 
 This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 

@@ -88,7 +88,7 @@ Your "History" is in the panel at the right.
 > 1. Go to the **History** panel (on the right)
 > 2. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.](../../../../shared/images/rename_history.png){:width="250px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.]({% link shared/images/rename_history.png %}){:width="250px"}
 >
 >    > <comment-title></comment-title>
 >    >

@@ -20,6 +20,8 @@ draft: true
 
 ---
 
+In this tutorial we will look at assessing quality of data from two short read technologies: [Illumina](http://www.nature.com/doifinder/10.1038/nature07517) and [Element Biosciences](http://dx.doi.org/10.1038/s41587-023-01750-7). 
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -29,9 +31,6 @@ draft: true
 >
 {: .agenda}
 
-# Introduction
-
-In this tutorial we will look at assessing quality of data from two short read technologies: [Illumina](http://www.nature.com/doifinder/10.1038/nature07517) and [Element Biosciences](http://dx.doi.org/10.1038/s41587-023-01750-7). 
 
 ## FASTQ format
 

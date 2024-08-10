@@ -21,6 +21,11 @@ contributors:
   - dpryan79
 ---
 
+We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
+
+This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
+
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
@@ -29,10 +34,6 @@ contributors:
 > {:toc}
 >
 {: .agenda}
-
-We will use a small subset of the original data. If we would do the computation on the orginal data the computation time for a tutorial is too long. To show you all necessary steps for Methyl-Seq we decided to use a subset of the data set. In a second step we use precomputed data from the study to show you different levels of methylation. We will consider samples from normal breast cells (NB), fibroadenoma (noncancerous breast tumor, BT089), two invasive ductal carcinomas (BT126, BT198) and a breast adenocarcinoma cell line (MCF7).
-
-This tutorial is based off of {% cite Lin2015 %}. The data we use in this tutorial is available at [Zenodo](https://zenodo.org/record/557099).
 
 
 # Data upload
