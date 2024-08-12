@@ -374,7 +374,7 @@ You can now {% icon dataset-save %} download the MSP file and open it in your sp
 
 To give you some insight into how well QCxMS can perform, below is the mass spectrum of ethanol resulting from our workflow compared with [experimental spectrum](https://hmdb.ca/spectra/c_ms/28442). Both spectra were compiled using an [online mass spectrum generator](https://www.sisweb.com/mstools/spectrum.htm) which requires only m/z values and intensities – so the values that you can get from our MSP file! As you can see, the predicted peaks nicely correspond to experimental ones. But be careful - there might be slight deviations for molecules with more structural complexity! 
 
-![Upper panel shows the experimental spectrum of ethanol, while the lower panel shows analogical spectrum but predicted with the current workflow. The predicted peaks correspond well to the experimental ones. Intensities of simulated peaks have not been predicted perfectly, but the most important trends are preserved.](../../images/qcxms_predictions_conformers.svg "Comparison between experimental (upper panel) and predicted (lower panel) mass spectra of ethanol.")
+![Upper panel shows the experimental spectrum of ethanol, while the lower panel shows analogical spectrum but predicted with the current workflow. The predicted peaks correspond well to the experimental ones. Intensities of simulated peaks have not been predicted perfectly, but the most important trends are preserved.](../../images/qcxms_predictions_ms_exp_pred.png "Comparison between experimental (upper panel) and predicted (lower panel) mass spectra of ethanol.")
 
 
 # Conclusion
