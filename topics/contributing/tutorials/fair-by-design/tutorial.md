@@ -319,15 +319,15 @@ Now it's time to brainstorm...
 
 ### Concept map
 
-1. Build a concept map of your learning materials.
+Step 1: Build a concept map of your learning materials.
 
 > <details-title>More details on concept maps ...</details-title>
 > [Read about Concept Maps in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#concept-maps %} )
 {: .details}
 
-2. Make sure you align your concept map with the MVS profiles.
+Step 2: Make sure you align your concept map with the MVS profiles.
 
-The aligned MVS profile can help you crystalise the learning objectives using the MVS taxonomy.
+The aligned MVS profile can help you crystallize the learning objectives using the MVS taxonomy.
 
 Each MVS profile defines a list of technical and soft skills required for the profile. Think on how to incorporate both aspects in your learning materials.
 
@@ -336,7 +336,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 ### Structure is everything
 
 ><comment-title></comment-title>
->{%icon galaxy-gear %} Create an intuitive logical organisation of all learning materials.
+>{%icon galaxy-gear %} Use an intuitive logical organisation of all learning materials.
 {: .comment}
 
 ><comment-title></comment-title>
@@ -344,51 +344,60 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .comment}
 
 ><comment-title></comment-title>
->{%icon galaxy-dataset-map %} Use a hierarchical structure to combine learning units into larger compositions.
+>{%icon galaxy-dataset-map %} Take advantage of a hierarchical structure to combine learning units into larger compositions.
 {: .comment}
 
-
 ><hands-on-title>How to organise the files</hands-on-title>
-> The diagram shows how to organise all files in folders and subfolders. Click on the links to discover and use pre-prepared templates.
+>
+> GTN defines a specific hierarchical structure that needs to be followed when developing learning materials.
+> 
+> > <details-title>Check out the following tutorials ...</details-title>
+> > [How to create a skeleton for a new learning topic]( {% link topics/contributing/tutorials/create-new-topic/tutorial.md#creating-a-new-topic-with-its-own-materials %}  )
+> > 
+> > [How to create the skeleton of a new tutorial]( {% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}  )
+> {: .details}
+> 
 {: .hands-on}
 
-```
-├── README
-├── CITATION.cff
-├── LICENCE
-├── resources
-├───├── attachments 
-│   ├── Learning Unit1
-├───├───├── attachments
-│   │   ├── assesment
-│   │   ├── activities
-│   ├── Learning Unit2
-
-```
-
 ><comment-title>Syllabus is ready</comment-title>
-> You should by now have the first draft of your <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/04-Conceptualisation/04-Conceptualisation/'>syllabus</a>. It contains all the fields from the RDA min metadata set plus the high level topics covered by the learning material.
+> You should by now have the first draft of your <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/04-Conceptualisation/04-Conceptualisation/#syllabus/'>syllabus</a>. It contains all the fields from the RDA min metadata set plus the high level topics covered by the learning material.
 {: .comment}
 
 ><tip-title>Available feedback form</tip-title>
-> The <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> feedback form template </a> is ready to be used as is. All you need to do is change the name of the training. It should be shared with training participants after the training, to gather quantitative and qualitative feedback.
+> GTN provides a readily available feedback form that is automatically added at the end of each tutorial. The feedback form is used to gather quantitative and qualitative feedback.
+> 
+> > <details-title> Learn more about feedback in training ...</details-title>
+> > [Follow the Assessment and feedback in training and teachings tutorial available on GTN]( {% link topics/teaching/tutorials/assessment/tutorial.md#dealing-with-feedback %}  )
+> {: .details}
+> 
 {: .tip}
 
-><tip-title>Available facilitation guide kit</tip-title>
-> The <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> facilitation guide </a> should help prepare for the actual training. If you don't want to develop your own, use something that is already available such as the [TRIPLE project TRAINING TOOLKIT](https://project.gotriple.eu/project-deliverables/triple-training-toolkit/).
-{: .tip}
-
-><tip-title>Don't worry, we got you covered with templates</tip-title>
-> All templates are readily available for use in the specialised [templates repository](https://github.com/FAIR-by-Design-Methodology/templates). See the detailed training on how to use it step by step.
+><tip-title>Facilitation guide kit</tip-title>
+> A <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> facilitation guide </a> should help prepare for the actual training. 
+> 
+> The facilitation guide kit includes documentation of the process of organising and running a training. What different people need to have, know and do so that everything runs smoothly.
+> 
+> > <details-title> Learn more about facilitation ...</details-title>
+> > [Follow the Organizing a workshop tutorial available on GTN]( {% link topics/teaching/tutorials/organize-workshop/tutorial.md %}  )
+> > 
+> > [Follow the Running a workshop as instructor tutorial available on GTN]( {% link topics/teaching/tutorials/running-workshop/tutorial.md#Checklists %}  )
+> {: .details}
+> 
+> Another option is to use something like the [TRIPLE project TRAINING TOOLKIT](https://project.gotriple.eu/project-deliverables/triple-training-toolkit/).
+> 
 {: .tip}
 
 ><question-title>What about instructor notes?</question-title>
->  Need to be detailed enough so that anyone can reuse the slides properly. Don't put them in the slide deck. This is what the learning content file is for.
+>  They need to be detailed enough so that anyone can reuse the learning content, especially slides properly. 
+>  
+>  Any specific information relevant for instructors that would like to organise a training based on your GTN tutorial content should be added in Details box. 
+>  
+>  This practice significantly increases the reuse potential of the material.
 {: .question}
 
 ### How to develop the learning content
 
-<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Use the Hunter Model</a>
+<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Read more about the Hunter Model ...</a>
 
 <div class="row">
   <div class="col-sm-4">
@@ -489,7 +498,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Design stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Design stage....</a>
 
 ## Stage 4 - Produce
 
