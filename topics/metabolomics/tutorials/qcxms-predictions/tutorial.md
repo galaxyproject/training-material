@@ -349,7 +349,7 @@ It might be the case that some runs might have failed, therefore it is crucial t
 > <hands-on-title> Filter failed datasets </hands-on-title>
 >
 > 1. {% tool [Filter failed datasets](__FILTER_FAILED_DATASETS__) %} with the following parameters:
->    - {% icon param-file %} *"Input Collection"*: output of **QCxMS production run** {% icon tool %}
+>    - {% icon param-collection %} *"Input Collection"*: output of **QCxMS production run** {% icon tool %}
 >
 {: .hands_on}
 
@@ -361,8 +361,20 @@ The filtered collection contains .res files from the QCxMS production run. This 
 > <hands-on-title> QCxMS get MSP results </hands-on-title>
 >
 > 1. {% tool [QCxMS get results](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_getres/qcxms_getres/5.2.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: output of **QCxMS production run** {% icon tool %})
->    - {% icon param-file %} *"res files [.res]"*: output of **Filter failed datasets** {% icon tool %}
+>    - *"Molecule 3D structure [.xyz]"*: click on {% icon param-collection %} *Dataset collection* and select `Prepared ligands` (output of **Compound conversion** {% icon tool %})
+>    - {% icon param-file %} *"res files [.res]"*: output of **Filter failed datasets** {% icon tool %} (if the collection doesn't appear in the drop-down list, simply drag and drop it from the history panel to the input box)
+>
+{: .hands_on}
+
+The output of this step is a collection of two MSP files - one per each molecule. However, if you want, you can combine those two into one MSP file. 
+
+> <hands-on-title> Combine MSP files into one </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Datasets to concatenate"*: 
+> > * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
+> > * from the datasets list, find the output of **QCxMS get results** {% icon tool %} (should be the latest output dataset) and select it
+> > * {% icon workflow-run %} Run tool! 
 >
 {: .hands_on}
 
