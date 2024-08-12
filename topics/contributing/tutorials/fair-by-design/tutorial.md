@@ -571,6 +571,8 @@ The existing materials you are reusing are available under a CC license, but it 
 >[How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr)
 {: .tip}
 
+Still need help? 
+
 [{% icon point-right %} Go to CC licensing FAQ](https://creativecommons.org/faq/#before-using-cc-licensed-material)
 
 
@@ -618,12 +620,11 @@ You should also be able to remove attribution upon request.
 
 
 ### Accessibility
-><tip-title></tip-title>
->![Universal access logo](../../images/universal-access-6602642_640.png)
-> <small><br><a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a></small>
-> 
->The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
-{: .tip}
+
+The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
+
+![Universal access logo](../../images/universal-access-6602642_640.png)
+<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a> 
 
 
 #### Standards
@@ -636,10 +637,10 @@ PDF document accessibility is measured with a separate technical specification <
 
 #### Accessibility guidelines
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">General guidelines for development of accessible material</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">Review some general guidelines for development of accessible material</a>
 
 ><tip-title>GTN Accessibility</tip-title>
-> GTN has developed an < href="https://training.galaxyproject.org/training-material/accesibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
+> GTN has developed an <a href="https://training.galaxyproject.org/training-material/accesibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
 > 
 {: .tip}
 
