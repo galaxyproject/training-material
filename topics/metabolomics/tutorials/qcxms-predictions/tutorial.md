@@ -26,8 +26,6 @@ contributions:
   authorship:
     - wee-snufkin
     - hechth
-    - xtrojak
-    - maximskorik
 
 requirements :
   - type: "internal"
@@ -131,27 +129,20 @@ You have three options for uploading the data. The first two - importing via his
 > 
 > 1. Create a new history for this tutorial
 > 2. 
-> * Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
-> 
-> * Select {% icon galaxy-wf-edit %} **Paste/Fetch Data** at the bottom
-> 
-> * Paste the contents into the text field, separated by space. First, enter the name of the molecule, then its SMILES. Please note that we are not using headers here. For this tutorial, we’ll use the example of ethanol and ethylene, but feel free to use your own examples. 
-> 
+>    - Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+>    - Select {% icon galaxy-wf-edit %} **Paste/Fetch Data** at the bottom
+>    - Paste the contents into the text field, separated by space. First, enter the name of the molecule, then its SMILES. Please note that we are not using headers here. For this tutorial, we’ll use the example of ethanol and ethylene, but feel free to use your own examples.  
 > ```
 > ethanol CCO
 > ethylene C=C
 > ```
-> 
-> * Change **Type** from "Auto-detect" to `tabular`
-> 
-> * Find the gear symbol ({% icon galaxy-gear %}), deselect any ticked options and select only ({% icon galaxy-gear %}) **Convert spaces to tabs**
-> 
-> * Press **Start** and **Close** the window
->
+>    - Change **Type** from "Auto-detect" to `tabular`
+>    - Find the gear symbol ({% icon galaxy-gear %}), deselect any ticked options and select only ({% icon galaxy-gear %}) **Convert spaces to tabs**
+>    - Press **Start** and **Close** the window
 > 3. You can then rename the dataset as you wish.
 > 4. Check that the datatype is `tabular`.
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -161,13 +152,18 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 
 > <hands-on-title> Cutting out name column </hands-on-title>
 >
-> {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1) %} with the following parameters:
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: the tabular file in your history with the compound name and SMILES
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >    - *"Delimited by"*: `Tab`
 >    - *"Is there a header for the data’s columns"*: `No`
->    - *"List of Fields"*: `1`
+>    - *"List of Fields"*: `Column: 1`
+>
+> 2. You can now rename the resulting dataset or just add a tag in order not to confuse it with subsequent outputs:
+>    - {% icon galaxy-tags %} Add tag: #names
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -175,7 +171,7 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 >
 > {% tool [Split file to dataset collection](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the file type to split"*: `Tabular`
->    - *"Tabular file to split"*: ``
+>    - *"Tabular file to split"*: output of **Advanced Cut** {% icon tool %} (with #names tag)
 >    - *"Number of header lines to transfer to new files"*: `0`
 >    - *"Split by row or by a column?"*: `By row`
 >    - *"Specify number of output files or number of records per file?"*: `Number of records per file (‘chunk mode’)`
@@ -187,8 +183,8 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 
 > <hands-on-title> Parsing out name info </hands-on-title>
 >
->  {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
->    - {% icon param-file %} *"Input file containing parameter to parse out of"*: 
+>  {% tool [Parse parameter value](https://usegalaxy.eu/?tool_id=param_value_from_file) %} with the following parameters:
+>    - *"Input file containing parameter to parse out of"*: * click on {% icon param-collection %} *Dataset collection* and select output of **Split file** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Text`
 >    - *"Remove newlines ?"*: {% icon galaxy-toggle %}  `Yes`
 >
@@ -200,22 +196,27 @@ We will repeat the first two steps, but processing SMILES this time.
 
 > <hands-on-title> Cutting out SMILES column </hands-on-title>
 >
->  {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1) %} with the following parameters:
+>  1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: the tabular file in your history with the compound name and SMILES
 >    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >    - *"Delimited by"*: `Tab`
 >    - *"Is there a header for the data’s columns"*: `No`
->    - *"List of Fields"*: `2`
+>    - *"List of Fields"*: `Column: 2`
+>
+> 2. You can now rename the resulting dataset or just add a tag in order not to confuse it with subsequent outputs:
+>    - {% icon galaxy-tags %} Add tag: #SMILES
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
 
 > <hands-on-title>  Creating dataset collection (SMILES) </hands-on-title>
 >
->  {% tool [Split file to dataset collection](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2) %} with the following parameters:
+>  1. {% tool [Split file to dataset collection](toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2) %} with the following parameters:
 >    - {% icon param-file %} *"Select the file type to split"*: `Tabular`
->    - *"Tabular file to split"*: ``
+>    - *"Tabular file to split"*: output of the latest **Advanced Cut** {% icon tool %} (higher number in your history, with #SMILES tag)
 >    - *"Number of header lines to transfer to new files"*: `0`
 >    - *"Split by row or by a column?"*: `By row`
 >    - *"Specify number of output files or number of records per file?"*: `Number of records per file (‘chunk mode’)`
@@ -223,25 +224,36 @@ We will repeat the first two steps, but processing SMILES this time.
 >    - *"Base name for new files in collection"*: `split_file`
 >    - *"Method to allocate records to new files"*: `Maintain record order`
 >
+> 2. Check that the datatype is `smi`. If it's not, just change it! 
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="smi" %}
+>
 {: .hands_on}
 
-Now, onto format conversion. Let’s convert our SMILES to SDF (Structure Data File), appending the molecule’s name that we have already extracted. 
+Now, onto format conversion. Let’s convert our SMILES to SDF (Structure Data File) and append the molecule’s name that we have already extracted. 
 
 > <hands-on-title> Convert SMILES to SDF </hands-on-title>
 >
 > {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Molecular input file"*: split from SMILES
->    - {% icon param-file %} *"Output format"*: `MDL MOL format (sdf, mol)`
->    - *"Append the specified text after each molecule title"*: parse parameter value from name column
+>    - *"Molecular input file"*: click on {% icon param-collection %} *Dataset collection* and select output of **Split file** {% icon tool %} on SMILES
+>    - *"Output format"*: `MDL MOL format (sdf, mol)`
 >
 {: .hands_on}
 
-We now have two SDF files, each containing the coordinates of the atoms and the name of the investigated molecule. Let’s combine them to make the life easier and work on just one file. 
+<!---
+>    - *"Append the specified text after each molecule title"*: click on {% icon param-collection %} *Dataset collection* and select output of **Parse parameter value** {% icon tool %} which contains the extracted molecules' names
+-->
 
-> <hands-on-title> Concatenating the files  </hands-on-title>
+
+We now have two SDF files, each containing the coordinates of the atoms and the name of the investigated molecule. Let’s combine them to make life easier and work on just one file. 
+
+> <hands-on-title> Concatenating the files </hands-on-title>
 >
-> {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Datasets to concatenate"*: output from the previous step
+> {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Datasets to concatenate"*: 
+> > * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
+> > * from the datasets list, find the output of **Compound conversion** {% icon tool %} (should have the highest number in your history) and select it
+> > * {% icon workflow-run %} Run tool! 
 >
 {: .hands_on}
 
@@ -249,45 +261,54 @@ We now have two SDF files, each containing the coordinates of the atoms and the 
 
 ## Generate conformers
 The next step involves generating three-dimensional (3D) conformers for each molecule from the generated SDF. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
-> <details-title>What are conformers? </details-title>
+
+> <details-title> What are conformers? </details-title>
+>
 > Conformers are different spatial arrangements of a molecule that result from rotations around single bonds. They have different potential energies and hence some are more favourable (local minima on the potential energy surface) than others. 
-![Newman projections of butane conformations & their relative energy differences (not total energies). Conformations form when butane rotates about one of its single covalent bond. Torsional/dihedral angle is shown on x-axis.](../../images/qcxms_predictions_conformers.svg "Conformers of butane and their relative energy differences.")
-Image credit: [Keministi]( https://commons.wikimedia.org/wiki/File:Butane_conformations_and_relative_energies.svg), License: Creative Commons CC0 1.0. 
+> ![Newman projections of butane conformations & their relative energy differences (not total energies). Conformations form when butane rotates about one of its single covalent bond. Torsional/dihedral angle is shown on x-axis.](../../images/qcxms_predictions_conformers.svg "Conformers of butane and their relative energy differences.")
+> Image credit: [Keministi](https://commons.wikimedia.org/wiki/File:Butane_conformations_and_relative_energies.svg), License: Creative Commons CC0 1.0. 
+>
 {: .details}
 
 
 > <hands-on-title> Generate conformers </hands-on-title>
 >
 >  {% tool [Generate conformers](toolshed.g2.bx.psu.edu/repos/bgruening/ctb_im_conformers/ctb_im_conformers/1.1.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output` (Input dataset)
->    - *"Number of conformers to generate"*: `{'id': 1, 'output_name': 'output'}`
+>    - {% icon param-file %} *"Input file"*: output of **Concatenate datasets** {% icon tool %}
+>    - *"Number of conformers to generate"*: `1`
 >
 {: .hands_on}
 
-Once again format conversion! Now we will convert the generated conformers from the SDF format to Cartesian coordinate (XYZ) format. The XYZ format lists the atoms in a molecule and their respective 3D coordinates, which is a common format used in computational chemistry for further processing and analysis.
+Now - once again format conversion! This time we will convert the generated conformers from the SDF format to Cartesian coordinate (XYZ) format. The XYZ format lists the atoms in a molecule and their respective 3D coordinates, which is a common format used in computational chemistry for further processing and analysis.
 
 > <hands-on-title> Molecular Format Conversion </hands-on-title>
 >
-> {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Molecular input file"*: `outfile` (output of **Generate conformers** {% icon tool %})
+> 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: output of **Generate conformers** {% icon tool %}
 >    - *"Output format"*: `XYZ cartesian coordinates format`
 >    - *"Split multi-molecule files into a collection"*: {% icon galaxy-toggle %} `Yes`
 >    - *"Add hydrogens appropriate for pH"*: `7.0`
+>
+> 2. Check that the datatype is `xyz`. If it's not, just change it! 
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="xyz" %}
 >
 {: .hands_on}
 
 
 ## Molecular optimization
 
-As shown in the image in the {% icon details %} Details box, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
+As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
 
 > <hands-on-title> Molecular optimisation with xTB </hands-on-title>
 >
 > {% tool [xtb molecular optimization](toolshed.g2.bx.psu.edu/repos/recetox/xtb_molecular_optimization/xtb_molecular_optimization/6.6.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Atomic coordinates file"*: `file_outputs` (output of **Compound conversion** {% icon tool %})
->    - *"Optimization Levels"*: ``
+>    - *"Atomic coordinates file"*: click on {% icon param-collection %} *Dataset collection* and select `Prepared ligands` (output of **Compound conversion** {% icon tool %})
+>    - *"Optimization Levels"*: `tight`
+>    - *"Keep molecule name"*: {% icon galaxy-toggle %}  `Yes`
 >
 {: .hands_on}
+
 
 # QCxMS Spectra Prediction 
 
@@ -299,24 +320,24 @@ Finally, let’s predict the spectra for our molecules. As mentioned, we will us
 > <hands-on-title> QCxMS neutral run </hands-on-title>
 >
 >  {% tool [QCxMS neutral run](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_neutral_run/qcxms_neutral_run/5.2.1+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: `output` (output of **xtb molecular optimization** {% icon tool %})
->    - *"QC Method"*: ` Specifies the quantum chemical method to use (string, options: GFN1-xTB or GFN2-xTB).`
+>    - *"Molecule 3D structure [.xyz]"*: click on {% icon param-collection %} *Dataset collection* and select output of **xtb molecular optimization** {% icon tool %}
+>    - *"QC Method"*: `GFN2-xTB`
 >
 {: .hands_on}
 
 The outputs of the above step are as follows:
--	.in output: Input file for the QCxMS production run (File).
--	.start output: Start file for the QCxMS production run (File).
--	.xyz output: Cartesian coordinate file for the QCxMS production run (File).
+-	.in output: Input file for the QCxMS production run 
+-	.start output: Start file for the QCxMS production run 
+-	.xyz output: Cartesian coordinate file for the QCxMS production run
 
 We can now use those files as input for the next tool which calculates the mass spectra for each molecule using QCxMS (Quantum Chemistry and Mass Spectrometry). This simulation generates .res files, which contain the raw results of the mass spectra calculations. These results are essential for predicting how the molecules will appear in mass spectrometry experiments.
 
 > <hands-on-title> QCxMS production run </hands-on-title>
 >
 > 1. {% tool [QCxMS production run](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_production_run/qcxms_production_run/5.2.1+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"in files [.in]"*: `coords1` (output of **QCxMS neutral run** {% icon tool %})
->    - {% icon param-file %} *"start files [.start]"*: `coords2` (output of **QCxMS neutral run** {% icon tool %})
->    - {% icon param-file %} *"xyz files [.xyz]"*: `coords3` (output of **QCxMS neutral run** {% icon tool %})
+>    - {% icon param-collection %} *Dataset collection* *"in files [.in]"*: `input in files` generated by **QCxMS neutral run** {% icon tool %}
+>    - {% icon param-collection %} *Dataset collection* *"start files [.start]"*: `input start files` generated by **QCxMS neutral run** {% icon tool %}
+>    - {% icon param-collection %} *Dataset collection* *"xyz files [.xyz]"*: `input xyz files` generated by **QCxMS neutral run** {% icon tool %}
 >
 {: .hands_on}
 
@@ -328,7 +349,7 @@ It might be the case that some runs might have failed, therefore it is crucial t
 > <hands-on-title> Filter failed datasets </hands-on-title>
 >
 > 1. {% tool [Filter failed datasets](__FILTER_FAILED_DATASETS__) %} with the following parameters:
->    - {% icon param-file %} *"Input Collection"*: `res_files` (output of **QCxMS production run** {% icon tool %})
+>    - {% icon param-file %} *"Input Collection"*: output of **QCxMS production run** {% icon tool %}
 >
 {: .hands_on}
 
@@ -340,8 +361,8 @@ The filtered collection contains .res files from the QCxMS production run. This 
 > <hands-on-title> QCxMS get MSP results </hands-on-title>
 >
 > 1. {% tool [QCxMS get results](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_getres/qcxms_getres/5.2.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: `file_outputs` (output of **Compound conversion** {% icon tool %})
->    - {% icon param-file %} *"res files [.res]"*: `output` (output of **Filter failed datasets** {% icon tool %})
+>    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: output of **QCxMS production run** {% icon tool %})
+>    - {% icon param-file %} *"res files [.res]"*: output of **Filter failed datasets** {% icon tool %}
 >
 {: .hands_on}
 
