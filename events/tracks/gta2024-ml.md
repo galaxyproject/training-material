@@ -7,7 +7,7 @@ description: Learn all about
 program:
   - section: "Mashine Learning" 
     description: |
-      Get started
+      If you encounter any issue please ask us in this Slack channel. 
     tutorials:
       - name: regression_machinelearning
         topic: statistics

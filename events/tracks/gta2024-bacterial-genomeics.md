@@ -1,13 +1,13 @@
 ---
 layout: event-track
 
-title: Bacterial genomics
-description: Learn all about 
+title: Bacterial genomics and AMR detection
+description: This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.
 
 program:
-  - section: "Introduction" 
+  - section: "Bacterial genomics and AMR detection" 
     description: |
-      Get started
+      If you encounter any issue please ask us in this Slack channel. 
     tutorials:
       - name: quality-contamination-control
         topic: sequence-analysis
@@ -19,5 +19,5 @@ program:
         topic: genome-annotation
       - name: pathogen-detection-from-nanopore-foodborne-data
         topic: microbiome
-        
+
 ---

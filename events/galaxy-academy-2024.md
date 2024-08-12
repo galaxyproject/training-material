@@ -24,12 +24,32 @@ contributions:
         - jdavcs
         - nekrut
         - delphine-l
+        - annasyme
         - teresa-m
         - erxleben
     instructors:
-        - hexylena
+        - pratikdjagtap
+        - foellmelanie
+        - subinamehta
+        - timothygriffin
+        - wm75
         - bebatut
         - natefoo
+        - teresa-m
+        - erxleben
+        - lldelisle
+        - stephanierobin
+        - rlibouba
+        - abretaud
+        - paulzierep
+        - bernt-matthias
+        - plushz
+        - EngyNasr
+        - clsiguret
+        - pavanvidem
+        - delphine-l
+        - anuprulez
+        - deeptivarshney
     funding:
         - gallantries
 

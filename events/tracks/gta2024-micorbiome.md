@@ -7,7 +7,7 @@ description: Learn all about
 program:
   - section: "Microbiome" 
     description: |
-      Get started
+      If you encounter any issue please ask us in this Slack channel. 
     tutorials:
       - name: introduction
         topic: microbiome
