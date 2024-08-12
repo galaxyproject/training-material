@@ -160,13 +160,13 @@ The following are the fields described in the RDA Minimal Metadata Set divided i
 
 More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 
-> <tip-title>Using metadata in GTN tutorials ...</tip-title>
+> <tip-title>Using metadata in GTN tutorials</tip-title>
 >
 >- When developing materials in GTN, this information should be included in the Tutorial.md file header metadata. 
 >- Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the "extra" field. 
 >
 > > <details-title>More details on the GTN Metadata ...</details-title>
-> > [Follow the GTN Metadata tutorial]( {% link topics/fair/tutorials/contributing/tutorials/schemas/tutorial.md %} )
+> > [Follow the GTN Metadata tutorial]( {% link topics/contributing/tutorials/schemas/tutorial.md %} )
 > {: .details}
 >
 {: .tip}
@@ -198,7 +198,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 2</h5>
-        <p class="card-text">How are you going to assess their achievement....</p>
+        <p class="card-text">How are you going to assess the learners achievement....</p>
       </div>
     </div>
   </div>
@@ -208,17 +208,17 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 3</h5>
-        <p class="card-text">How should you structure the material to reach them...</p>
+        <p class="card-text">How should you structure the material to provide effective learning experience...</p>
       </div>
     </div>
   </div>
 
 </div>
-><tip-title>More on backward learning:</tip-title>
+><tip-title>Learn more about the backward learning process ...</tip-title>
 > - [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
 {: .tip }
 
-### Define.
+### Define:
 
 > <question-title>Purpose</question-title>
 > When and how the learning materials can be used and for what purposes?
@@ -247,10 +247,14 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > >Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
 > {: .tip}
 > 
-> [See more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
+> [Read more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Prepare stage....</a>
+> <details-title>More details on ideating learning outcomes and related information ...</details-title>
+> [Follow the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md %} )
+{: .details}
+
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage....</a>
 
 ## Stage 2 - Discover
 > Greater even than the greatest discovery is to keep open the way to future discovery.
