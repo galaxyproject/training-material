@@ -1,12 +1,12 @@
 ---
 layout: tutorial_hands_on
 title: Predicting EI+ mass spectra with QCxMS
-zenodo_link: ' https://zenodo.org/record/13259853 '
-level: Intermediate
+zenodo_link: 'https://zenodo.org/record/13259853'
+level: Introductory
 
 questions:
 - Can I predict QC-based mass spectra starting from SMILES?
-- Do I need HPC environment to run the predictions? 
+- How can I run those computationally heavy predictions? 
 - Can I take into account different conformers?
 
 objectives: 
@@ -38,34 +38,8 @@ requirements :
 
 ---
 
-Mass spectrometry (MS) is a powerful analytical technique used in many fields (examples & references?). Even though nowadays MS is a standard and popular method, there are still compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful structural information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [Zhu2023, Allen2016Computational]. 
-There have been several methods developed to predict mass spectra, which can be classified as either first-principles physical-based simulation or data-driven statistical methods [Zhu2023]. To the first category we can assign purely statistical theories (quasi-equilibrium theory (QET) or Rice–Ramsperger–Kassel–Marcus (RRKM) theories) [Vetter1994], as well as QCEIMS [Wang2020] and semiempirical GFNn-xTB [Koopman2019] which use Born–Oppenheimer molecular dynamics (MD) combined with fragmentation pathways. Data-driven statistical methods reach back to 1960s when DENDRAL project was started by early AI scientists [Lindsay1980ApplicationsOA] – it applied rule-based heuristic programming. More recently, CFM-ID has been introduced [Allen2014, Allen2014metabolomics, Allen2016Computational, DjoumbouFeunang2019, Wang2021], which uses rule-based fragmentation and employs machine learning methods. Current advancements in machine learning led to recent work using deep neural networks that allow predicting spectra from molecular graphs or fingerprints [Wei2019].
-
-> <question-title></question-title>
->
-> What does QCEIMS stand for?
->
->   > <tip-title>Hint</tip-title>
->   > With a little knowledge of chemistry, you’ll be able to work it out yourself!
->   > Look at the acronym in the following way: QC-EI-MS.
->   {: .tip}
-> > <solution-title></solution-title>
-> >
-> > QC = quantum chemical 
-> >  EI = electron ionisation
-> >   MS = mass spectra
-> >   Hence QCEIMS = quantum-chemical electron ionisation mass spectra
-> >
-> {: .solution}
->
-{: .question}
-
-> <details-title>What is QCxMS?</details-title>
-> QCxMS is a successor of QCEIMS, where the *EI* part is replaced by *x* to take into account other MS methods and improve the applicability of the program. In QCEIMS, *EI* stands for *electron ionisation*, while in QCxMS, *x* refers to *EI* or *CID collision-induced dissociation)* [Koopman2021]. 
-{: .details}
-
-You will be able to test how QCxMS works in practice since we are going to use Galaxy tool suite based on this method [Grimme2013, Bauer2014, Bauer2016]. Beforehand, we will generate conformers of the query molecule with [RDKit](http://www.rdkit.org) and we will use xTB for molecular optimisation [Bannwarth2020]. 
-But first things first, let’s get some toy data to play with and crack on!  
+Mass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compounds identification. Even though nowadays MS is a standard and popular method, there are still compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful structural information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [{% cite Zhu2023 %}, {% cite Allen2016Computational %}]. 
+There have been several methods developed to predict mass spectra, which can be classified as either first-principles physical-based simulation or data-driven statistical methods [{% cite Zhu2023 %}]. To the first category we can assign purely statistical theories (quasi-equilibrium theory (QET) or Rice–Ramsperger–Kassel–Marcus (RRKM) theories) [{% cite Vetter1994 %}], as well as QCEIMS [{% cite Wang2020 %}] and semiempirical GFNn-xTB [{% cite Koopman2019 %}] which use Born–Oppenheimer molecular dynamics (MD) combined with fragmentation pathways. Data-driven statistical methods reach back to 1960s when DENDRAL project was started by early AI scientists [{% cite Lindsay1980ApplicationsOA %}] – it applied rule-based heuristic programming. More recently, CFM-ID has been introduced [{% cite Allen2014 %}, {% cite Allen2014metabolomics %}, {% cite Allen2016Computational %}, {% cite DjoumbouFeunang2019 %}, {% cite Wang2021 %}], which uses rule-based fragmentation and employs machine learning methods. Current advancements in machine learning led to recent work using deep neural networks that allow predicting spectra from molecular graphs or fingerprints [{% cite Wei2019 %}].
 
 > <agenda-title></agenda-title>
 >
@@ -75,6 +49,39 @@ But first things first, let’s get some toy data to play with and crack on!
 > {:toc}
 >
 {: .agenda}
+
+You will be able to check out how QCxMS works in practice since we are going to use Galaxy tool suite based on this method [{% cite Grimme2013 %}, {% cite Bauer2014 %}, {% cite Bauer2016 %}]. Beforehand, we will generate conformers of the query molecule with [RDKit](http://www.rdkit.org) and we will use xTB for molecular optimisation [{% cite Bannwarth2020 %}]. 
+But first things first, let’s get some toy data to play with and crack on! 
+
+> <question-title></question-title>
+>
+> What does QCEIMS stand for?
+>
+>   > <tip-title>Hint</tip-title>
+>   > With a little knowledge of chemistry, you’ll be able to work it out yourself!
+>   >
+>   > Look at the acronym in the following way: **QC-EI-MS**.
+>   {: .tip}
+> > <solution-title></solution-title>
+> >
+> > QC = quantum chemical 
+> >
+> > EI = electron ionisation
+> >
+> > MS = mass spectra
+> >
+> > Hence QCEIMS = quantum-chemical electron ionisation mass spectra
+> >
+> {: .solution}
+>
+{: .question}
+
+> <details-title>What is QCxMS?</details-title>
+> QCxMS is a successor of QCEIMS, where the *EI* part is replaced by *x* to take into account other MS methods and improve the applicability of the program. In QCEIMS, *EI* stands for *electron ionisation*, while in QCxMS, *x* refers to *EI* or *CID (collision-induced dissociation)* [{% cite Koopman2021 %}]. 
+{: .details}
+
+ 
+
 
 # Importing data and pre-processing
 
@@ -88,18 +95,18 @@ consider the figure with SMILES and the corresponding structure
 
 > <details-title>What is SMILES?</details-title>
 >
-> SMILES (.smi) - the simplified molecular-input line-entry system (SMILES) is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. A linear text format which can describe the connectivity and chirality of a molecule [Weininger 1988].
+> SMILES (.smi) - the simplified molecular-input line-entry system (SMILES) is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. A linear text format which can describe the connectivity and chirality of a molecule [{% cite Weininger1988 %}].
 >
 {: .details}
 
 ## Upload data onto Galaxy
 
-In this tutorial, we will work on two simple molecules – ethanol (C<sup>2</sup>H<sup>5</sup> OH) and ethylene (C<sup>2</sup>H<sup>4</sup>). Of course, you might choose any molecule that you want, but be aware that the more complex structure you choose, the more time it will take to complete the analysis since it involves generating conformers, semiempirical methods and molecular optimisation.
-You have three options for uploading the data. The first two - importing via history and Zenodo link will give a file specific to this tutorial, while the last one – “Paste data” uploader gives you more flexibility in terms of the compounds you would like to test with this workflow. 
+In this tutorial, we will work on two simple molecules – ethanol (C<sub>2</sub>H<sub>5</sub> OH) and ethylene (C<sub>2</sub>H<sub>4</sub>). Of course, you might choose any molecule that you want, but be aware that the more complex structure you choose, the more time it will take to complete the analysis since it involves generating conformers, semiempirical methods and molecular optimisation.
+You have three options for uploading the data. The first two - importing via history and Zenodo link will give a file specific to this tutorial, while the last one – “Paste data uploader" gives you more flexibility in terms of the compounds you would like to test with this workflow. 
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
-> 1. You can simply import [history](https://usegalaxy.eu/u/j.jakiela/h/input-file-end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms) with the input table. 
+> 1. You can simply import [this history](https://usegalaxy.eu/u/j.jakiela/h/input-file-end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms) with the input table. 
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
 >
@@ -123,19 +130,26 @@ You have three options for uploading the data. The first two - importing via his
 > <hands-on-title> Option 3: Data Upload  - paste data </hands-on-title>
 > 
 > 1. Create a new history for this tutorial
-> 2. * Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+> 2. 
+> * Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+> 
 > * Select {% icon galaxy-wf-edit %} **Paste/Fetch Data** at the bottom
+> 
 > * Paste the contents into the text field, separated by space. First, enter the name of the molecule, then its SMILES. Please note that we are not using headers here. For this tutorial, we’ll use the example of ethanol and ethylene, but feel free to use your own examples. 
+> 
 > ```
 > ethanol CCO
 > ethylene C=C
 > ```
+> 
 > * Change **Type** from "Auto-detect" to `tabular`
-> * Find the gear symbol ({% icon galaxy-gear %}), and select only **Convert spaces to tabs**
+> 
+> * Find the gear symbol ({% icon galaxy-gear %}), deselect any ticked options and select only ({% icon galaxy-gear %}) **Convert spaces to tabs**
+> 
 > * Press **Start** and **Close** the window
 >
 > 3. You can then rename the dataset as you wish.
-> 4. Check that the datatype is *tabular*.
+> 4. Check that the datatype is `tabular`.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
@@ -176,7 +190,7 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 >  {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
 >    - {% icon param-file %} *"Input file containing parameter to parse out of"*: 
 >    - *"Select type of parameter to parse"*: `Text`
->    - *"Remove newlines ?"*: {% icon toggle %}  `Yes`
+>    - *"Remove newlines ?"*: {% icon galaxy-toggle %}  `Yes`
 >
 {: .hands_on}
 
