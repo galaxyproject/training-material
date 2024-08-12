@@ -29,6 +29,18 @@ requirements:
      - ansible
      - ansible-galaxy
      - tool-management
+
+recordings:
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 22M
+  youtube_id: 6BWu29Oiihw
+  speakers:
+  - shiltemann
+
 ---
 
 Data libraries are a great way to provide structured repositories of data to

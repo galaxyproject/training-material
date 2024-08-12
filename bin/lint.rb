@@ -141,7 +141,7 @@ module GtnLinter
         match_end: selected.end(0) + 1,
         replacement: '',
         message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the ' \
-                 '[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will ' \
+                 'GTN tutorial "recordings" metadata where it will ' \
                  'be more visible for others.',
         code: 'GTN:002'
       )
@@ -390,6 +390,22 @@ module GtnLinter
           replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
           message: 'You have used the full tool URL to a specific server, here we only need the tool ID portion.',
           code: 'GTN:009'
+        )
+      end
+  end
+
+  def self.bad_zenodo_links(contents)
+    find_matching_texts(contents, /https:\/\/zenodo.org\/api\//)
+      .reject { |_idx, _text, selected| _text =~ /files-archive/ }
+      .map do |idx, _text, selected|
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0) + 1,
+          replacement: nil,
+          message: 'Please do not use zenodo.org/api/ links, instead it should look like zenodo.org/records/id/files/<filename>',
+          code: 'GTN:040'
         )
       end
   end
@@ -822,6 +838,7 @@ module GtnLinter
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
+      *bad_zenodo_links(contents),
       *zenodo_api(contents),
       *empty_alt_text(contents),
       *check_bad_trs_link(contents),
@@ -1109,11 +1126,11 @@ module GtnLinter
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-tests?.yml/)
+          if !test_file.match(/-tests.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml ' \
-                                                   'or -tests.yml for this test file.',
+                                          message: 'Please use the extension -tests.yml ' \
+                                                   'for this test file.',
                                           code: 'GTN:032')
             ]
           end

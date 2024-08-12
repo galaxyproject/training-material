@@ -32,6 +32,29 @@ edam_ontology:
 - topic_0637 # Taxonomy
 - topic_0080 # Sequence analysis
 - topic_4038 # Metabarcoding
+
+recordings:
+  - youtube_id:  CGSBeCW3rpA  # request upload to the GTN YouTube channel here
+    date: '2023-05-19'
+    length: 1H37M
+    speakers:
+      - shiltemann
+    captioners:
+      - shiltemann
+    galaxy_version: '23.01'     # galaxy version can be found under Help->About inside Galaxy
+  - youtube_id: mto4Nl-q7Kk
+    date: '2021-02-15'
+    speakers:
+      - shiltemann
+    captioners:
+      - shiltemann
+    galaxy_version: '21.01'
+    length: 1H40M
+    description: This recording was created as part of the Smörgåsbord 2023 event.
+    type: Lecture & Tutorial
+    archive-id: smorgasbord2023
+
+
 ---
 
 {% include topics/microbiome/tutorials/mothur-miseq-sop/content.md short=true %}

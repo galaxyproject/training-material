@@ -62,6 +62,17 @@ contributors:
 notebook:
   language: python
   snippet: topics/climate/tutorials/pangeo-notebook/preamble.md
+
+recordings:
+- captioners:
+  - annefou
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 17M
+  youtube_id: XFF2yRcYGp0
+  speakers:
+  - annefou
+
 ---
 
 

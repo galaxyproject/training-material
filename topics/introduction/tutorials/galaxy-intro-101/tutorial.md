@@ -30,6 +30,16 @@ contributors:
   - bgruening
   - pajanne
   - hexylena
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2021-07-21'
+  length: 13M
+  youtube_id: D5HgJWdfOWw
+  speakers:
+  - nekrut
+
 ---
 
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.

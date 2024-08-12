@@ -13,14 +13,14 @@ mapping:
         required: true
         description: |
             Title of the event
-        examples:
+        _examples:
             - Smörgåsbord 2023
             - MTS Basics Workshop
     contributions:
         required: true
         description: |
             List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
-        examples: |
+        _examples: |
             contributions:
                 organisers:
                     - shiltemann
@@ -106,38 +106,38 @@ mapping:
             - type: str
         description: |
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
-        examples:
+        _examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     cover-image:
         type: str
         pattern: /^\/.*(.png|.jpg|.jpeg)/
         description: |
             link to a picture that will be used as the cover for the article
-        examples:
+        _examples:
             - "/assets/images/BYCOVID_logo_tagline.png"
     cover-image-alt:
         type: str
         description: |
             If a cover is provided, then alt text is Mandatory.
-        examples:
+        _examples:
             - "logo of by covid with subtitle reading beyond covid"
     date_start:
         type: date
         description: |
             When the event starts
-        examples:
+        _examples:
             - 2024-04-01
     date_end:
         type: date
         description: |
             When the event ends
-        examples:
+        _examples:
             - 2024-04-01
     location:
         required: false
         description: |
             Physical location of the event, only required for in-person events
-        examples: |
+        _examples: |
           location:
             name: Zoom
           location:
@@ -173,13 +173,13 @@ mapping:
         pattern: /(free|\d+ [A-Z]{3})/
         description: |
             Price of the event. If the event is free, use the word `free`. If there is a cost, use the currency and amount.
-        examples:
+        _examples:
             - free
             - 123 EUR
             - 456 USD
     audience:
         type: str
-        examples:
+        _examples:
           - This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
     contact_email:
         type: str
@@ -230,6 +230,15 @@ mapping:
                 description: "Treat this section as a subsection of the previous item"
               description:
                 type: str
+              tracks:
+                type: seq
+                sequence:
+                  - type: map
+                    mapping:
+                      title:
+                        type: str
+                      link:
+                        type: str
               tutorials:
                 type: seq
                 sequence:
@@ -311,6 +320,6 @@ mapping:
               required: true
         description: |
             A free form list of tags that are relevant for your tutorial.
-        examples:
+        _examples:
             - covid-19
             - git-gat

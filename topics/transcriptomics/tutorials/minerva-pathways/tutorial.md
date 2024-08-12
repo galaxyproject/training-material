@@ -119,7 +119,7 @@ We'll start by downloading our FASTQ files from the [GEO Dataset GSE182152](http
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.ga" title="Trim and Filter reads" box_type="none" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.ga" title="Trim and Filter reads" version="1" %}
 >
 > 1. **Run the workflow** with the following parameters:
 >
@@ -149,9 +149,7 @@ This workflow produces a set of featureCounts tables, a set of featureLengths (n
 
 > <hands-on-title>Run the Workflow</hands-on-title>
 >
-> 1. **Import the workflow** into Galaxy
->
->    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" box_type="none" %}
+> {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="688" version="1" %}
 >
 > 1. **Run the workflow** with the following parameters:
 >
@@ -281,7 +279,7 @@ Goseq is a tool for gene ontology enrichment analysis, and the MINERVA Platform 
 >
 > 1. Run the workflow with the Factor Data from the first Hands-on, and the datasets from the workflow or Zenodo download, depending on your path:
 >
->    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" box_type="none" %}
+>    {% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="689" version="1" %}
 >
 {: .hands_on}
 

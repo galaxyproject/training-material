@@ -32,6 +32,18 @@ requirements:
       - pulsar
 abbreviations:
   TIaaS: Training Infrastructure as a Service
+
+recordings:
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 24M
+  youtube_id: tz0ZbK_8Vcc
+  speakers:
+  - hexylena
+
 ---
 
 Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed {TIaaS}.

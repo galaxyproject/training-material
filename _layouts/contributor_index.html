@@ -131,7 +131,11 @@ layout: base
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -152,7 +156,11 @@ layout: base
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -167,7 +175,55 @@ layout: base
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.videos_count > 0 %}
+				<h3>Video Recordings</h3>
+				<ul>
+				{% for res in page.videos %}
+					<li>
+						{% assign topic_id = res[0] | get_topic %}
+						{% assign topic = site.data[topic_id] %}
+						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+							{{ topic.title }}
+						</a>
+						/
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.events_count > 0 %}
+				<h3>Events</h3>
+				<ul>
+				{% for res in page.events %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -175,15 +231,13 @@ layout: base
 
 
 				{% if page.news_count > 0 %}
-                <h3>News</h3>
-                <div class="newslist">
-                {% assign news_sorted = page.news | sort: 'date' | reverse %}
-                {% for n in news_sorted %}
-                   {% include _includes/news-card.html news=n %}
-                {% endfor %}
-                </div>
+				<h3>News</h3>
+				<div class="newslist">
+				{% for n in page.news %}
+					{% include _includes/news-card.html news=n %}
+				{% endfor %}
+				</div>
 				{% endif %}
-
 			</div>
 
 			<div class="col-md-3">
@@ -196,6 +250,14 @@ layout: base
 				<div class="contact-items">
 					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
 						Training Philosophy
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.ror %}
+				<div class="contact-items">
+					<a title="ROR" href="https://ror.org/{{ entity.ror }}">
+						ROR:{{ entity.ror }}
 					</a>
 				</div>
 				{% endif %}

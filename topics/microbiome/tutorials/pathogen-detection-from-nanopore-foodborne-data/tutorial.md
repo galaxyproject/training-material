@@ -44,6 +44,17 @@ edam_ontology:
 - topic_0196 # Sequence assembly
 - topic_0634 # Pathology
 - topic_0080 # Sequence analysis
+
+recordings:
+- youtube_id: gQHb_jkj-Z0
+  date: '2023-05-01'
+  galaxy_version: '23.01'
+  length: 1H45M
+  speakers:
+  - EngyNasr
+  captioners:
+  - EngyNasr
+
 ---
 
 
@@ -160,7 +171,7 @@ We will run all these steps using a single workflow, then discuss each step and 
 >    {% snippet faqs/galaxy/workflows_import.md %}
 >
 > 2. Run **Workflow 1: Nanopore Preprocessing** {% icon workflow %} using the following parameters
->    - *"Samples Profile"*: `PacBio/Oxford Nanopore read to reference mapping`
+>    - *"Samples Profile"*: `PacBio/Oxford Nanopore read to reference mapping`, which is the technique used for sequencing the samples.
 >
 >    - {% icon param-files %} *"Collection of all samples"*: `Samples` collection created from the imported Fastq.qz files
 >
@@ -195,9 +206,17 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >            - {% icon param-files %} *"Data input files"*: `Samples` collection created from the imported Fastq.qz files
     >
     >    > <comment-title></comment-title>
-    >    > This step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready
+    >    > The `NanoPlot` step, as it does not require the results of FastQC to run, can be launched even if FastQC is not ready
     >    {: .comment}
     >
+    > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
+    >    - In *"Results"*:
+    >        - {% icon param-repeat %} *"Insert Results"*
+    >            - *"Which tool was used generate logs?"*: `FastQC`
+    >                - In *"FastQC output"*:
+    >                    - {% icon param-repeat %} *"Insert FastQC output"*
+    >                        - *"Type of FastQC output?"*: `Raw data`
+    >                        - {% icon param-files %} *"FastQC output"*: collection of `Raw data` outputs of **FastQC** {% icon tool %}
     {: .hands_on}
 
     </div>
@@ -215,7 +234,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >
     > 2. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
     >    - *"Single-end or paired reads"*: `Single-end`
-    >        - {% icon param-files %} *"Input 1"*: outputs of **Porechop** {% icon tool %}
+    >        - {% icon param-files %} *"Input 1"*: output collection of **Porechop** {% icon tool %}
     >    - In *Output Options*
     >        - *"Output JSON report"*: `Yes`
     >
@@ -232,12 +251,12 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
     > <hands-on-title> Final quality checks </hands-on-title>
     > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
-    >    - {% icon param-files %} *"Raw read data from your current history"*: outputs of **fastp** {% icon tool %}
+    >    - {% icon param-files %} *"Raw read data from your current history"*: output collection of **fastp** {% icon tool %}
     >
     > 2. {% tool [NanoPlot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters:
     >    - *"Select multifile mode"*: `batch`
     >        - *"Type of the file(s) to work on"*: `fastq`
-    >            - {% icon param-files %} *"files"*: outputs of **fastp** {% icon tool %}
+    >            - {% icon param-files %} *"files"*: output collection of **fastp** {% icon tool %}
     >
     > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
     >    - In *"Results"*:
@@ -246,17 +265,17 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
     >                - In *"FastQC output"*:
     >                    - {% icon param-repeat %} *"Insert FastQC output"*
     >                        - *"Type of FastQC output?"*: `Raw data`
-    >                        - {% icon param-files %} *"FastQC output"*: 4 `Raw data` outputs of **FastQC** {% icon tool %}
+    >                        - {% icon param-files %} *"FastQC output"*: collection of `Raw data` output of **FastQC** {% icon tool %} done after **fastp**
     >        - {% icon param-repeat %} *"Insert Results"*
     >            - *"Which tool was used generate logs?"*: `fastp`
-    >                - {% icon param-files %} *"Output of fastp"*: `JSON report` outputs of **fastp** {% icon tool %}
+    >                - {% icon param-files %} *"Output of fastp"*: `JSON report` output of **fastp** {% icon tool %}
     {: .hands_on}
 
     </div>
 
 > <question-title></question-title>
 >
-> Inspect the HTML output of **MultiQC** for `Barcode10`
+> Inspect the HTML two outputs of **MultiQC** for `Barcode10` before and after preprocessing tagged `MultiQC_Before_Preprocessing` and `MultiQC_After_Preprocessing`
 >
 > 1. How many sequences does `Barcode10` contain before and after trimming?
 > 2. What is the quality score over the reads before and after trimming? And the mean score?
@@ -267,7 +286,12 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 > > 1. Before trimming the file has 114,986 sequences and After trimming the file has 91,434 sequences
 > > 2. The "Per base sequence quality" is globally medium: the quality score stays above 20 over the entire length of reads after trimming, while quality below 20 could be seen before trimming specially at the beginning and the end of the reads.
 > >
+> > Sequence quality of Barcode 10 and Barcode 11 before preprocessing:
+> >
 > >    ![Sequence Quality of Barcode 10 and Barcode 11 Before Trimming](./images/multiqc_per_base_sequence_quality_plot_barcode10_barcode11_before_trimming.png)
+> >
+> >
+> > Sequence quality of Barcode 10 and Barcode 11 after preprocessing:
 > >
 > >    ![Sequence Quality of Barcode 10 and Barcode 11 After Trimming](./images/multiqc_per_base_sequence_quality_plot_barcode10_barcode11_after_trimming.png)
 > >
@@ -283,7 +307,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 
 Generally, we are not interested in the food (host) sequences, rather only those originating from the pathogen itself. It is an important to get rid of all host sequences and to only retain sequences that might include a pathogen, both in order to speed up further steps and to avoid host sequences compromising the analysis.
 
-In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen.
+In this tutorial, we know the samples come from __chicken__ meat spiked with **_Salmonella_** so we already know what will we get as the host and the main pathogen. If the host is not known, **Kraken2** with **Kalamari** database can be used to detect it.
 
 In this tutorial we use:
 1. Map reads to __chicken__ reference genome using **Map with minimap2** and **Chicken (Gallus gallus): galGal6** built in reference genome of __chicken__, and we move forward with the unmapped ones.
@@ -297,7 +321,7 @@ In this tutorial we use:
     >        - *"Using reference genome"*: `Chicken (Gallus gallus): galGal6`
     >    - *"Single or Paired-end reads"*: `Single`
     >        - {% icon param-file %} *"Select fastq dataset"*: `out1` (output of **fastp** {% icon tool %})
-    >        - *"Select a profile of preset options"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19) (map-pb)`
+    >        - *"Select a profile of preset options"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19) (map-pb)`, which is the technique used for sequencing the samples.
     >    - In *"Alignment options"*:
     >        - *"Customize spliced alignment mode?"*: `No, use profile setting or leave turned off`
     >
@@ -311,7 +335,7 @@ In this tutorial we use:
     >
     {: .hands_on}
 
-2. Assign filted reads, after mapping (non __chicken__ reads), to taxa using **Kraken2** ({% cite Wood2014 %}) and **Kalamari**, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering
+2. Assign filted reads, after mapping (non __chicken__ reads), to taxa using **Kraken2** ({% cite Wood2014 %}) as a further contamination detection using the **Kalamari** database. The **Kalamari** database includes mitochondrial sequences of various known hosts including food hosts.
 
     <div class="Long-Version" markdown="1">
 
@@ -825,7 +849,7 @@ To identifly VFs, we use again **ABRicate** but this time with the [__VFDB__](ht
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 178
+> > 1. 188
 > > 2. 287
 > >
 > {: .solution}
@@ -887,7 +911,7 @@ In this training, we are testing _Salmonella enterica_, with different strains o
 > <hands-on-title>Allele based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_allele_based_pathogen_identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/allele_based_pathogen_identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
@@ -896,6 +920,9 @@ In this training, we are testing _Salmonella enterica_, with different strains o
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-files %} *"Collection of preprocessed samples"*: `collection of preprocessed samples` collection output from **Krakentools: Extract Kraken Reads By ID** {% icon tool %} from the preprocessing workflow
 >    - *"Samples Profile"*: `Nothing selected`
+>
+>       Samples profile is the technique used for sequencing the samples, it is an optional input, if you choose nothing, the tool will automatically detect it based on the input samples reads.
+>
 >    - {% icon param-file %} *"Reference Genome of Tested Strain"*: `Salmonella_Ref_genome.fna.gz`
 >
 {: .hands_on}

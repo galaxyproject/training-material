@@ -5,6 +5,11 @@ area: datasets
 box_type: tip
 layout: faq
 contributors: [shiltemann,hexylena,lldelisle]
+optional_parameters:
+  conversion: The datatype to convert the dataset to
+examples:
+  Convert to BAM:
+    conversion: BAM
 ---
 
 * Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes

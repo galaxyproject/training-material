@@ -42,6 +42,19 @@ contributions:
   - tobyhodges
   funding:
   - gallantries
+
+recordings:
+- captioners:
+  - s3by01
+  - annefou
+  - kxk302
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 50M
+  youtube_id: MKkQDh5Nguc
+  speakers:
+  - fpsom
+
 ---
 
 This tutorial will introduce R basics, using an RStudio Interactive Tool in Galaxy

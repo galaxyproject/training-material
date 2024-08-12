@@ -281,18 +281,20 @@ module Jekyll
       end
 
       materials = []
-      page['program'].each do |section|
-        if !section.key? 'tutorials'
-          next
-        end
-
-        section['tutorials'].each do |tutorial|
-          if tutorial.key?('custom')
+      if page['program']
+        page['program'].each do |section|
+          if !section.key? 'tutorials'
             next
           end
 
-          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
-          materials.push(material)
+          section['tutorials'].each do |tutorial|
+            if tutorial.key?('custom')
+              next
+            end
+
+            material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+            materials.push(material)
+          end
         end
       end
       materials.compact!
@@ -322,12 +324,14 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
-        {
-          '@type': 'Syllabus',
-          name: section['section'],
-          description: section.fetch('description', nil),
-        }
+      if page['program']
+        syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
+          {
+            '@type': 'Syllabus',
+            name: section['section'],
+            description: section.fetch('description', nil),
+          }
+        end
       end
 
       data = {
@@ -400,7 +404,7 @@ module Jekyll
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
-      if page['cost'].downcase == 'free'
+      if page['cost'] and page['cost'].downcase == 'free'
         data['isAccessibleForFree'] = true
         offer = {
           '@type': 'Offer',
@@ -409,7 +413,7 @@ module Jekyll
           category: 'Free',
           isAccessibleForFree: true,
         }
-      else
+      elsif page['cost']
         data['isAccessibleForFree'] = false
         offer = {
           '@type': 'Offer',
@@ -527,7 +531,7 @@ module Jekyll
         '@context': 'https://schema.org',
         '@type': 'Course',
         url: "#{site['url']}#{site['baseurl']}#{page['url']}",
-        name: "Learning Pathway " + page['title'],
+        name: "Learning Pathway #{page['title']}",
         keywords: page['tags'] || [],
         description: page['description'],
         about: edam_terms, # TeSS, "scientific topics".
@@ -595,7 +599,7 @@ module Jekyll
       data['hasCourseInstance'] = [
         {
           '@type': 'CourseInstance',
-          courseMode: "online",
+          courseMode: 'online',
           offers: offer,
           isAccessibleForFree: data['isAccessibleForFree'],
         }
@@ -628,8 +632,9 @@ module Jekyll
     # +Hash+:: The JSON-LD metadata.
     def generate_material_jsonld(material, topic, site)
       langCodeMap = {
-        en: 'English',
-        es: 'Español',
+        "en" => 'English',
+        "es" => 'Español',
+        "fr" => 'Français',
       }
 
       eduLevel = {
@@ -778,6 +783,8 @@ module Jekyll
 
       data.update(A11Y)
 
+      actual_material = TopicFilter.fetch_tutorial_material(site, material['topic_name'], material['tutorial_name'])
+
       # info depending if tutorial, hands-on or slide level
       # parts = []
       # data['hasPart'] = parts
@@ -822,13 +829,31 @@ module Jekyll
         # Keywords
         data['keywords'] = [topic['title']] + (material['tags'] || [])
         # Zenodo links
-        if material.key?('zenodo_link')
-          mentions.push({
-                          '@type': 'Thing',
-                          url: (material['zenodo_link']).to_s,
-                          name: "Training data for #{material['title']} tutorial"
-                        })
-        end
+      end
+
+      # Mentions are 'external resources' in TeSS.
+      # This could be expanded with
+      # - supported servers
+      # - tools and resources used (e.g. Galaxy) or tools linked to the TS.
+      # - slides (if tutorial) and tutorial (if slides)
+      # - other materials in the same topic?
+      if actual_material.key?('workflows')
+        mentions.push({
+                        '@type': 'Thing',
+                        url: "#{site['url']}#{site['baseurl']}#{material['dir']}workflows/",
+                        name: "Associated Workflows"
+                      })
+      end
+      if actual_material.key?('zenodo_link')
+        mentions.push({
+                        '@type': 'Thing',
+                        url: (actual_material['zenodo_link']).to_s,
+                        name: "Associated Training Datasets"
+                      })
+      end
+
+      if description.empty?
+        description.push(material.fetch('content', '').strip.split("\n").first)
       end
       data['description'] = description.join("\n")
 
@@ -964,9 +989,9 @@ module Jekyll
 
       data['about'] = about
 
-      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Introductory'
-      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x } }
-      data['abstract'] = material.fetch('content', '').split("\n").first
+      data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
+      data['mentions'] = mentions
+      data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
     end

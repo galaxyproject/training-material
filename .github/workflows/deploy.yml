@@ -1,5 +1,9 @@
 name: Deploy Website
 
+concurrency:
+  group: deploy-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
 on:
   push:
     branches:
@@ -63,11 +67,10 @@ jobs:
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
+          curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           rdoc bin _plugins/ --output gtn_rdoc
 
       - name: Build Site

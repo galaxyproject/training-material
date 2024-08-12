@@ -41,6 +41,18 @@ abbreviations:
   CN: copy number
   ASM: assembly
   QV: consensus accuracy quality value
+
+recordings:
+- captioners:
+  - delphine-l
+  date: '2022-03-13'
+  galaxy_version: '21.09'
+  length: 10M
+  youtube_id: 0EoBDiyd-84
+  speakers:
+  - delphine-l
+
+
 ---
 
 
@@ -128,7 +140,7 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 | HiFi + parental + BioNano | Properly phased with improved contiguity | G |
 | HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
-In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. 
+In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
@@ -389,7 +401,7 @@ Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters 
 
 ![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25✕ corresponds to the heterozygous peak. The second peak at coverage 50✕, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean *k*-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of *k*-mer size ('k') and ploidy ('p')."){:width="65%"}
 
-This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%. Some of these parameters can be used later on to parameterize running `purge_dups`. This is covered in the [**solo** contiging section](#solo_hic_switch) section of the tutorial. 
+This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%. Some of these parameters can be used later on to parameterize running `purge_dups`. This is covered in the [**solo** contiging section](#solo_hic_switch) section of the tutorial.
 
 
 # Assembly with **hifiasm**
@@ -535,9 +547,9 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > Scaffold N50                   0
 > Scaffold auN                0.00
 > ```
-> 
+>
 > Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
-> 
+>
 > <br>
 >
 > **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
@@ -557,7 +569,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > # segments          17 16
 > ```
 >
-> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
 > <br>
 >
@@ -574,7 +586,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 {: .hands_on}
 
-Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three columns: 
+Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three columns:
 
   1. Name of statistic
   2. Value for haplotype 1 (hap1)
@@ -599,7 +611,7 @@ According to the report, both assemblies are quite similar; the hap1 assembly in
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
-> 
+>
 > **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
 > 1. {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
 > 2. *"Lineage data source"*: `Use cached lineage data`
@@ -766,9 +778,9 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > Scaffold N50               813311
 > Scaffold auN               913050.77
 > ```
-> 
+>
 > Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
-> 
+>
 > <br>
 >
 > **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
@@ -789,7 +801,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 > # gaps                     0   0
 > ```
 >
-> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs): 
+> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
 > <br>
 >
@@ -806,7 +818,7 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 {: .hands_on}
 
-Take a look at the `gfastats on Pri and Alt contigs` output — it has three columns: 
+Take a look at the `gfastats on Pri and Alt contigs` output — it has three columns:
 
   1. Name of statistic
   2. Value for haplotype 1 (Pri)
@@ -831,7 +843,7 @@ The report makes it clear that the two assemblies are markedly uneven: the prima
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
-> 
+>
 > **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
 > 1. {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
 > 2. *"Lineage data source"*: `Use cached lineage data`
@@ -932,15 +944,15 @@ The first relevant parameter is the `estimated genome size`.
 > k = 31
 > TESTING set to TRUE
 >
-> property                      min               max               
-> Homozygous (aa)               99.4165%          99.4241%          
-> Heterozygous (ab)             0.575891%         0.583546%         
-> Genome Haploid Length         11,739,321 bp     11,747,160 bp     
-> Genome Repeat Length          722,921 bp        723,404 bp        
-> Genome Unique Length          11,016,399 bp     11,023,755 bp     
-> Model Fit                     92.5159%          96.5191%          
-> Read Error Rate               0.000943206%      0.000943206%   
->``` 
+> property                      min               max
+> Homozygous (aa)               99.4165%          99.4241%
+> Heterozygous (ab)             0.575891%         0.583546%
+> Genome Haploid Length         11,739,321 bp     11,747,160 bp
+> Genome Repeat Length          722,921 bp        723,404 bp
+> Genome Unique Length          11,016,399 bp     11,023,755 bp
+> Model Fit                     92.5159%          96.5191%
+> Read Error Rate               0.000943206%      0.000943206%
+>```
 ><br>
 >**Step 2**: Copy the number value for the maximum Genome Haploid Length to your clipboard (CTRL + C on Windows; CMD + C on MacOS).
 >
@@ -1037,7 +1049,7 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
 
-This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**. 
+This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**.
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
 
@@ -1498,7 +1510,7 @@ YaHS is an open source software that makes use of Hi-C to linearly orient and or
 >
 >Optionally considering Hi-C library restriction enzymes, YaHS normalizes contact frequencies by the corresponding number of cutting sites. A scaffolding graph is constructed with contigs as nodes and contig joins as weighted edges. The graph undergoes simplification steps, including edge filtering, tip and blunt end trimming, repeat resolution, transitive edge removal, bubble and ambiguous orientation resolution, weak edge trimming, and ambiguous edge removal.
 >
->Finally, the graph is traversed to assemble scaffolds along continuous paths. Optionally, a second step of assembly error correction breaks scaffolds at positions lacking sufficient Hi-C coverage. YaHS employs a hierarchical joining process with multiple rounds of scaffolding at decreasing resolutions (increasing chunk sizes), using previous round scaffolds as input. 
+>Finally, the graph is traversed to assemble scaffolds along continuous paths. Optionally, a second step of assembly error correction breaks scaffolds at positions lacking sufficient Hi-C coverage. YaHS employs a hierarchical joining process with multiple rounds of scaffolding at decreasing resolutions (increasing chunk sizes), using previous round scaffolds as input.
 >![ An overview of YaHS](../../images/vgp_assembly/yahs.png "Schematic of how Hi-C information is used to scaffold and orient contigs along chromosomes using long-range information, as well as link separated haplotype blocks into chromosome-scale haplotypes (from {% cite Zhou2022 %}")
 >
 >See {% cite Zhou2022 %} for exact details.
@@ -1550,7 +1562,7 @@ Finally, we should repeat the procedure described previously for generating the 
 > 1. {% icon param-file %} *"First set of reads"*: `BAM forward YaHS`
 > 2. {% icon param-file %} *"Second set of reads"*: `BAM reverse YaHS`
 >
->**Step 6**: Rename the output as `BAM Hi-C reads SALSA2`
+>**Step 6**: Rename the output as `BAM Hi-C reads YaHS`
 >
 >**Step 7**: Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
 > 1. {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads YaHS`

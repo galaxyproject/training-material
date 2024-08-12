@@ -115,20 +115,12 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    Initializing the database is necessary because you will be making changes to the database
 >    schema, which cannot be applied to a database that has not been initialized. 
 >
->    To initialize the database, you can either start Galaxy (might take some time when executing
+>    To initialize the database, you can start Galaxy by executing the following script (might take some time when executing
 >    for the first time):
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sh run.sh
->    > ```
->    {: .code-in}
->
->    or you may run the following script (faster):
->
->    > <code-in-title>Bash</code-in-title>
->    > ```bash
->    > sh create_db.sh
 >    > ```
 >    {: .code-in}
 >
@@ -226,7 +218,7 @@ Galaxy's data model is split into the galaxy model and the install model. These 
 We encourage you to read [Galaxy's documentation on migrations](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/model/migrations), as well as relevant [Alembic documentation](https://alembic.sqlalchemy.org/en/latest/tutorial.html#create-a-migration-script).
 
 For this tutorial, you'll need to do the following:
-1. Create a revision template
+1. Create a revision template.
 2. Edit the revision template, filling in the body of the upgrade and downgrade functions. 
 3. Run the migration.
 

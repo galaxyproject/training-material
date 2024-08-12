@@ -31,6 +31,26 @@ contributors:
   - olanag1
   - tnabtaf
   - shiltemann
+
+recordings:
+- captioners:
+  - astrovsky01
+  date: '2023-05-01'
+  length: 20M
+  galaxy_version: '23.0'
+  youtube_id: 64oS5uXVRV0
+  speakers:
+  - astrovsky01
+- captioners:
+  - tnabtaf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H15M
+  youtube_id: dguN6Xw2Azs
+  speakers:
+  - annefou
+  - rwinand
+
 ---
 
 
@@ -387,9 +407,9 @@ In our dataset, we have the following features measured for each sample:
 > 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
 >    - *"Group by fields"*: `5`
+>    - *"Sort input"*: `Yes`
 >    - *"Input file has a header line"*: `Yes`
 >    - *"Print header line"*: `Yes`
->    - *"Sort input"*: `Yes`
 >    - "Print all fields from input file": `No`
 >    - *"Ignore case when grouping"*: `Yes`
 >    - In *"Operation to perform on each group"*:

@@ -7,7 +7,7 @@ mapping:
         pattern: /^[a-z0-9_-]+$/
         description: |
             The internal identifier for a topic, it should be the same as the folder name.
-        examples:
+        _examples:
             - epigenetics
             - sequence-analysis
             - admin
@@ -50,7 +50,7 @@ mapping:
         required: true
         description: |
             Title of the topic, this is displayed for users to see.
-        examples:
+        _examples:
             - Proteomics
             - Variant Analysis
     summary:
@@ -58,13 +58,13 @@ mapping:
         required: true
         description: |
             A longer description of the contents of this topic
-        examples:
+        _examples:
             - Statistical Analyses for omics data and machine learning using Galaxy tools
     docker_image:
         type: str
         description: |
             The image ID for an image which contains all of the tools and data for this topic.
-        examples:
+        _examples:
             - quay.io/galaxy/sequence-analysis-training
     subtopics:
         type: seq
@@ -80,14 +80,14 @@ mapping:
                       pattern: /^[A-Za-z0-9_-]+$/
                       description: |
                           Subtopic ID, this should match what is used in tutorials.
-                      examples:
+                      _examples:
                           - single-cell
                   title:
                       type: str
                       required: true
                       description: |
                           Subtopic title, which is displayed for users to see.
-                      examples:
+                      _examples:
                           - Maintaining a Production Galaxy
                           - Single-cell RNA-seq
                   description:
@@ -95,7 +95,7 @@ mapping:
                       required: true
                       description: |
                           A human readable textual description of a subtopic.
-                      examples: |
+                      _examples: |
                         - "Start here if you are new to RNA-Seq analysis in Galaxy"
                         - "These tutorials take you from raw sequencing reads to pathway analysis"
                         - "Tutorials about analysis of single-cell RNA-seq data"
@@ -121,12 +121,12 @@ mapping:
             pattern: /^topic_[0-9]+$/
             description: |
                 An edam ontology id that describes the resource
-            examples:
+            _examples:
                 - topic_3173
     requirements:
         type: seq
         description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
-        examples:
+        _examples:
             - |
                 type: internal
                 topic_name: statistics
@@ -156,7 +156,7 @@ mapping:
 
     references:
         type: seq
-        examples: |
+        _examples: |
           - |
             authors: "Vaudel M, et al."
             title: "Shedding light on black boxes in protein identification."
@@ -181,7 +181,7 @@ mapping:
         type: str
         description: |
             Link to a gitter channel that is more relevant for this topic than the default. E.g. a single cell topic, you could use `Galaxy-Training-Network/galaxy-single-cell` to link to their specific chat room in all of the child tutorials by default.
-        examples:
+        _examples:
             - Galaxy-Training-Network/galaxy-single-cell
             - galaxy-genome-annotation/Lobby
     draft:
@@ -200,7 +200,7 @@ mapping:
         description: |
             A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
         pattern: /^\/.*/
-        examples:
+        _examples:
             - /assets/images/gat.png
     custom_css:
         type: str
@@ -208,7 +208,7 @@ mapping:
           Any custom CSS you might want to apply to a specific topic. This could be overriding e.g. the masthead colour (beware, will potentially conflict with themes.)
 
           This is generally not a recommended property to set on topics, and something that is only used as part of outreach efforts to import content into the GTN.
-        examples: |
+        _examples: |
           - :root { --brand-color: red; }
 
     logo:
@@ -225,6 +225,6 @@ mapping:
           The specific learning path you wish to reference as a call-to-action for views who aren't sure where to get started.
 
           It must be the name of a file in learning-pathways, without the `.md` suffix. This is not validated so, please make sure it's correct :)
-        examples:
+        _examples:
           - intro-to-galaxy-and-genomics
           - admin-training

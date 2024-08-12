@@ -20,6 +20,17 @@ contributors:
 - mblue9
 - heylf
 
+
+recordings:
+- captioners:
+  - hrhotz
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H50M
+  youtube_id: Zc-bl6ZfcX4
+  speakers:
+  - heylf
+
 ---
 
 

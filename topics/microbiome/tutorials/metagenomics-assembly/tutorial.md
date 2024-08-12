@@ -42,6 +42,18 @@ tags:
   - microgalaxy
 redirect_from:
   - /topics/metagenomics/tutorials/metagenomics-assembly/tutorial
+
+recordings:
+- youtube_id: 1ZYGy85Im7w
+  date: '2023-05-02'
+  speakers:
+  - bebatut
+  galaxy_version: '23.01'
+  length: 1H
+  captioners:
+  - bebatut
+  - sophia120199
+
 ---
 
 

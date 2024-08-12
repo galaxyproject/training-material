@@ -31,6 +31,17 @@ contributors:
   - jmchilton
   - hexylena
 subtopic: upload
+
+recordings:
+- captioners:
+  - assuntad23
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 22M
+  youtube_id: 1MWHVRWXpyA
+  speakers:
+  - assuntad23
+
 ---
 
 

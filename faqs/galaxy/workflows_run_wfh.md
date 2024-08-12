@@ -4,23 +4,40 @@ area: workflows
 box_type: hands_on
 layout: faq
 contributors: [hexylena]
+optional_parameters:
+  wfhub_id: The numeric WorkflowHub ID
+  title: The title of the workflow you want to import, can be any text
+  version: Version of the workflow you want to pin
+examples:
+  Load a workflow by Dockstore ID: {dockstore_id: "github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow", title: "My Cool Workflow"}
+  Load a v0.1.3 of a specific IWC workflow: {dockstore_id: "github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main", title: "Kmer Profiling HiFi VGP1", version: "v0.1.3"}
 ---
 
+<!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->
+
 {% if include.wfhub_id %}
+{% capture external_page %}https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.version }}{% endcapture %}
 
 <div class="show-when-galaxy-proxy-active">
 
-<span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/{{ include.wfhub_id }}/versions/{{ include.wfhub_version | default: 1 }}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span>
-(<a href="https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.wfhub_version | default: 1 }}">View on WorkflowHub</a>)
+<span class="workflow" data-workflow="https://workflowhub.eu/ga4gh/trs/v2/tools/{{ include.wfhub_id }}/versions/{{ include.version }}">
+  Launch <strong>{{ include.title }} (v{{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+</span>
+(<a target="_blank" href="{{ external_page }}">View on WorkflowHub</a>)
 
 </div>
 
 <div class="hide-when-galaxy-proxy-active">
 
-<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ include.wfhub_id }}%26trs_version={{ include.wfhub_version | default: 1}}">Launch <strong>{{ include.title }}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></a>
-(<a href="https://workflowhub.eu/workflows/{{ include.wfhub_id }}?version={{ include.wfhub_version | default: 1 }}">View on WorkflowHub</a>)
+<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ include.wfhub_id }}%26trs_version={{ include.version }}">
+  Launch <strong>{{ include.title }} (v{{ include.version }})</strong> <i class="fas fa-share-alt" aria-hidden="true"></i>
+</a>
+(<a href="{{ external_page }}">View on WorkflowHub</a>)
 
 </div>
+
+{% capture filter %}name:"{{ include.title }}"{% endcapture %}
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md override_title="If this does not work" filter=filter %}
 
 {% else %}
 

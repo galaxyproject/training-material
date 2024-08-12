@@ -44,6 +44,17 @@ key_points:
 contributors:
   - fpsom
   - gallantries
+
+recordings:
+- captioners:
+  - MariaTsayo
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H30M
+  youtube_id: RT-g6KyAGdE
+  speakers:
+  - fpsom
+
 ---
 
 This is an Introduction to Machine Learning in R, in which you'll learn the basics of unsupervised learning for pattern recognition and supervised learning for prediction. At the end of this workshop, we hope that you will:

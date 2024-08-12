@@ -25,6 +25,39 @@ contributors:
   - davebx
   - bernt-matthias
 
+
+recordings:
+- captioners:
+  - gallardoalba
+  - astrovsky01
+  date: '2023-05-18'
+  galaxy_version: '22.01'
+  length: 50M
+  youtube_id: QRoY1pFUY30
+  speakers:
+  - gallardoalba
+  - astrovsky01
+- captioners:
+  - gallardoalba
+  date: '2022-03-11'
+  galaxy_version: '22.01'
+  length: 40M
+  youtube_id: 33L4B9ir0aQ
+  speakers:
+  - gallardoalba
+- captioners:
+  - davebx
+  - astrovsky01
+  - bernt-matthias
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H40M
+  youtube_id: videoseries?list=PLNFLKDpdM3B9GhA0FryVV2YX3YL35rENK
+  speakers:
+  - davebx
+  - astrovsky01
+  - bernt-matthias
+
 ---
 
 

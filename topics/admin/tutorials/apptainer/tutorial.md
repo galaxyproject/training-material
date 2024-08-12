@@ -27,6 +27,27 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+
+recordings:
+- captioners:
+  - gallardoalba
+  - slugger70
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 43M
+  youtube_id: q6Dt7j713tI
+  speakers:
+  - slugger70
+- captioners:
+  - hexylena
+  - cat-bro
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 16M
+  youtube_id: airzg4-ETEs
+  speakers:
+  - hexylena
+
 ---
 
 In this tutorial you will learn how to configure Galaxy to run jobs using [Apptainer](https://apptainer.org) containers provided by the [BioContainers](https://biocontainers.pro/) community.

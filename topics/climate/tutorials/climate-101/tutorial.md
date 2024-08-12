@@ -126,8 +126,7 @@ the climate and gives us an indication of where both the woman and dog are likel
 
 You can also watch an animated illustration of the difference between climate and weather:
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/e0vj-0imOLw" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
+{% include _includes/youtube.html id="e0vj-0imOLw" title="Difference between climate and weather" %}
 
 # What is the weather like in Paris?
 

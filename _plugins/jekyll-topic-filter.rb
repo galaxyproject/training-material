@@ -31,6 +31,10 @@ module TopicFilter
     list_topics_h(site).values
   end
 
+  def self.cache
+    @@cache ||= Jekyll::Cache.new('JekyllTopicFilter')
+  end
+
   ##
   # Fill the cache with all the topics
   # Params:
@@ -199,6 +203,9 @@ module TopicFilter
   # Returns:
   # +Hash+:: The tutorial material
   def self.fetch_tutorial_material(site, topic_name, tutorial_name)
+    if topic_name.nil?
+      return nil
+    end
     fill_cache(site)
     if site.data['cache_topic_filter'][topic_name].nil?
       Jekyll.logger.warn "Cannot fetch tutorial material for #{topic_name}"
@@ -274,6 +281,8 @@ module TopicFilter
       material['type'] = 'rmd'
     elsif parts[4] == 'workflows'
       material['type'] = 'workflow'
+    elsif parts[4] == 'recordings'
+      material['type'] = 'recordings'
     elsif parts[4] == 'tours'
       material['type'] = 'tour'
     elsif parts[-1] == 'index.md'
@@ -450,6 +459,92 @@ module TopicFilter
     "flowchart TD\n" + statements.map { |q| "  #{q}" }.join("\n")
   end
 
+  def self.graph_dot(wf)
+    # We're converting it to Mermaid
+    # flowchart TD
+    #     A[Start] --> B{Is it?}
+    #     B -- Yes --> C[OK]
+    #     C --> D[Rethink]
+    #     D --> B
+    #     B -- No ----> E[End]
+    # digraph test {
+    #
+    #   0[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nBionano_dataset"]
+    #   1[shape=box,style=filled,color=lightblue,label="ℹ️ Input Dataset\nHi-C_dataset_R"]
+    #   3 -> 6 [label="output"]
+    #   7[shape=box,label="Busco"]
+    #   4 -> 7 [label="out_fa"]
+    #   8[shape=box,label="Busco"]
+    #   5 -> 8 [label="out_fa"]
+
+    statements = [
+      'node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];',
+      'edge [fontname="Atkinson Hyperlegible"];',
+    ]
+    wf['steps'].each_key do |id|
+      step = wf['steps'][id]
+      chosen_label = mermaid_safe_label(step['label'] || step['name'])
+
+      case step['type']
+      when 'data_collection_input'
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Collection\\n#{chosen_label}\"]"
+      when 'data_input'
+        statements.append "#{id}[color=lightblue,label=\"ℹ️ Input Dataset\\n#{chosen_label}\"]"
+      when 'parameter_input'
+        statements.append "#{id}[color=lightgreen,label=\"ℹ️ Input Parameter\\n#{chosen_label}\"]"
+      when 'subworkflow'
+        statements.append "#{id}[color=lightcoral,label=\"🛠️ Subworkflow\\n#{chosen_label}\"]"
+      else
+        statements.append "#{id}[label=\"#{chosen_label}\"]"
+      end
+
+      step = wf['steps'][id]
+      step['input_connections'].each do |_, v|
+        # if v is a list
+        if v.is_a?(Array)
+          v.each do |v2|
+            statements.append "#{v2['id']} -> #{id} [label=\"#{mermaid_safe_label(v2['output_name'])}\"]"
+          end
+        else
+          statements.append "#{v['id']} -> #{id} [label=\"#{mermaid_safe_label(v['output_name'])}\"]"
+        end
+      end
+
+      (step['workflow_outputs'] || [])
+        .reject { |wo| wo['label'].nil? }
+        .map do |wo|
+          wo['uuid'] = SecureRandom.uuid.to_s if wo['uuid'].nil?
+          wo
+        end
+        .each do |wo|
+          statements.append "k#{wo['uuid'].gsub('-', '')}[color=lightseagreen,label=\"Output\\n#{wo['label']}\"]"
+          statements.append "#{id} -> k#{wo['uuid'].gsub('-', '')}"
+        end
+    end
+
+    "digraph main {\n" + statements.map { |q| "  #{q}" }.join("\n") + "\n}"
+  end
+
+  def self.git_log(wf_path)
+    if Jekyll.env != 'production'
+      return []
+    end
+
+    cache.getset(wf_path) do
+      require 'shellwords'
+
+      commits = %x[git log --format="%H %at %s" #{Shellwords.escape(wf_path)}]
+        .split("\n")
+        .map { |x| x.split(' ', 3) }
+        .map { |x| { 'hash' => x[0], 'unix' => x[1], 'message' => x[2], 'short_hash' => x[0][0..8] } }
+
+      commits.map.with_index do |c, i|
+        c['num'] = commits.length - i
+        c
+      end
+    end
+  end
+
   def self.resolve_material(site, material)
     # We've already
     # looked in every /topic/*/tutorials/* folder, and turn these disparate
@@ -466,12 +561,14 @@ module TopicFilter
     page = nil
 
     slide_has_video = false
+    slide_has_recordings = false
     slide_translations = []
     page_ref = nil
 
     if slides.length.positive?
       page = slides.min { |a, b| a[1].path <=> b[1].path }[1]
       slide_has_video = page.data.fetch('video', false)
+      slide_has_recordings = page.data.fetch('recordings', false)
       slide_translations = page.data.fetch('translations', [])
       page_ref = page
     end
@@ -493,18 +590,10 @@ module TopicFilter
     page_obj = page.data.dup
     page_obj['id'] = "#{page['topic_name']}/#{page['tutorial_name']}"
     page_obj['ref'] = page_ref
+    page_obj['ref_tutorials'] = tutorials.map { |a| a[1] }
+    page_obj['ref_slides'] = slides.map { |a| a[1] }
 
     id = page_obj['id']
-    page_obj['video_library'] = {}
-
-    if site.data.key?('video-library')
-      page_obj['video_library']['tutorial'] = site.data['video-library']["#{id}/tutorial"]
-      page_obj['video_library']['slides'] = site.data['video-library']["#{id}/slides"]
-      page_obj['video_library']['demo'] = site.data['video-library']["#{id}/demo"]
-      page_obj['video_library']['both'] = site.data['video-library'][id]
-    end
-
-    page_obj['video_library']['session'] = site.data['session-library'][id] if site.data.key?('session-library')
 
     # Sometimes `hands_on` is set to something like `external`, in which
     # case it is important to not override it. So we only do that if the
@@ -560,7 +649,7 @@ module TopicFilter
       workflow_names = workflows.map { |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map do |wf|
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
-        wfname = wf.gsub(/.ga/, '').downcase
+        wfname = wf.gsub(/.ga/, '').downcase.gsub(/[^a-z0-9]/, '-')
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
         wf_path = "#{folder}/workflows/#{wf}"
         wf_json = JSON.parse(File.read(wf_path))
@@ -577,21 +666,42 @@ module TopicFilter
         end
         workflow_test_outputs = nil if workflow_test_outputs.empty?
 
+        wfhkey = [page['topic_name'], page['tutorial_name'], wfname].join('/')
+
         {
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
           'url' => "#{domain}/#{folder}/workflows/#{wf}",
+          'url_html' => "#{domain}/#{folder}/workflows/#{wf.gsub(/.ga$/, '.html')}",
           'path' => wf_path,
           'wfid' => wfid,
           'wfname' => wfname,
           'trs_endpoint' => "#{domain}/#{trs}",
           'license' => license,
+          'parent_id' => page_obj['id'],
+          'topic_id' => page['topic_name'],
+          'tutorial_id' => page['tutorial_name'],
           'creators' => creators,
           'name' => wf_json['name'],
           'title' => wftitle,
+          'version' => Gtn::ModificationTimes.obtain_modification_count(wf_path),
+          'description' => wf_json['annotation'],
+          'tags' => wf_json['tags'],
+          'features' => {
+            'report' => wf_json['report'],
+            'subworkflows' => wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "subworkflow"},
+            'comments' => (wf_json['comments'] || []).length.positive?,
+            'parameters' =>  wf_json['steps'].map{|_, x| x['type']}.any?{|x| x == "parameter_input"},
+          },
+          'workflowhub_id' => (site.data['workflowhub'] || {}).fetch(wfhkey, nil),
+          'history' => git_log(wf_path),
           'test_results' => workflow_test_outputs,
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
+          'graph_dot' => graph_dot(wf_json),
+          'workflow_tools' => extract_workflow_tool_list(wf_json).flatten.uniq.sort,
+          'inputs' => wf_json['steps'].select { |_k, v| ['data_input', 'data_collection_input', 'parameter_input'].include? v['type'] }.map{|_, v| v},
+          'outputs' => wf_json['steps'].select { |_k, v| v['workflow_outputs'] && v['workflow_outputs'].length.positive? }.map{|_, v| v},
         }
       end
     end
@@ -609,8 +719,7 @@ module TopicFilter
     page_obj['workflows']&.each do |wf|
       wf_path = "#{folder}/workflows/#{wf['workflow']}"
 
-      wf_data = JSON.parse(File.read(wf_path))
-      page_obj['tools'] += extract_workflow_tool_list(wf_data)
+      page_obj['tools'] += wf['workflow_tools']
     end
     page_obj['tools'] = page_obj['tools'].flatten.sort.uniq
 
@@ -630,6 +739,7 @@ module TopicFilter
 
     page_obj['tours'] = tours.length.positive?
     page_obj['video'] = slide_has_video
+    page_obj['slides_recordings'] = slide_has_recordings
     page_obj['translations'] = {}
     page_obj['translations']['tutorial'] = tutorial_translations
     page_obj['translations']['slides'] = slide_translations
@@ -969,6 +1079,10 @@ module Jekyll
       TopicFilter.fetch_tutorial_material(site, topic_name, page_name)
     end
 
+    def fetch_tutorial_material_by_id(site, id)
+      TopicFilter.fetch_tutorial_material(site, id.split('/')[0], id.split('/')[1])
+    end
+
     def list_topics_ids(site)
       ['introduction'] + TopicFilter.list_topics(site).filter { |k| k != 'introduction' }
     end
@@ -1015,6 +1129,13 @@ module Jekyll
       TopicFilter.list_materials_structured(site, topic_name)
     end
 
+    def list_materials_flat(site, topic_name)
+      TopicFilter
+        .list_materials_structured(site, topic_name)
+        .map { |k, v| v['materials'] }
+        .flatten
+    end
+
     def list_all_tags(site)
       TopicFilter.list_all_tags(site)
     end
@@ -1033,6 +1154,26 @@ module Jekyll
 
     def identify_funders(materials, site)
       TopicFilter.identify_funders(materials, site)
+    end
+
+    def list_videos(site)
+      TopicFilter.list_all_materials(site)
+        .select { |k, _v| k['recordings'] || k['slides_recordings'] }
+        .map { |k, _v| (k['recordings'] || []) + (k['slides_recordings'] || []) }
+        .flatten
+    end
+
+    def findDuration(duration)
+      if ! duration.nil?
+        eval(duration.gsub(/H/, ' * 3600 + ').gsub(/M/, ' * 60 + ').gsub(/S/, ' + ') + " 0")
+      else
+        0
+      end
+    end
+
+    def list_videos_total_time(site)
+      vids = list_videos(site)
+      vids.map { |v| findDuration(v['length']) }.sum / 3600.0
     end
 
     def list_draft_materials(site)

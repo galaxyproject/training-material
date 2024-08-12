@@ -25,6 +25,17 @@ follow_up_training:
         topic_name: transcriptomics
         tutorials:
           - rna-seq-viz-with-volcanoplot-r
+
+recordings:
+- captioners:
+  - mblue9
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: uNGXIcEGZwA
+  speakers:
+  - mblue9
+
 ---
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: style="float:right;width:60%" }

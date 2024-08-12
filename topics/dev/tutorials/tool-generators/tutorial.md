@@ -48,6 +48,17 @@ follow_up_training:
 contributors:
   - fubar2
   - hexylena
+
+recordings:
+- captioners:
+  - fubar2
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: 8nKBfVM6240
+  speakers:
+  - fubar2
+
 ---
 
 The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using

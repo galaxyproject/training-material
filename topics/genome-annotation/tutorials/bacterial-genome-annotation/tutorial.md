@@ -113,13 +113,13 @@ It is also able to detect and annotate small proteins (sORF). Predicted CDS are 
 
 > <hands-on-title>Contig annotation</hands-on-title>
 >
-> 1. {% tool [Bakta](toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.8.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Bakta](toolshed.g2.bx.psu.edu/repos/iuc/bakta/bakta/1.9.3+galaxy0) %} with the following parameters:
 >    - In *"Input/Output options"*:
->        - *"The bakta database"*: latest one
->        - *"The amrfinderplus database"*: latest one
 >        - {% icon param-file %} *"Select genome in fasta format"*: Contig file
+>        - *"Bakta database"*: latest one
+>        - *"AMRFinderPlus database"*: latest one
 >    - In *"Optional annotation"*:
->        - *"Keep original contig header (--keep-contig-headers)"*: `Yes`
+>        - *"Keep original contig header"*: `Yes`
 >    - In *"Selection of the output files"*:
 >        - *"Output files selection"*: 
 >          - `Annotation file in TSV`
@@ -325,7 +325,7 @@ To detect integrons, we will use **IntegronFinder** ({% cite neron2022integronfi
 
 > <hands-on-title> Integron identification</hands-on-title>
 >
-> 1. {% tool [IntegronFinder](toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.2+galaxy1) %} with the following parameters:
+> 1. {% tool [IntegronFinder](toolshed.g2.bx.psu.edu/repos/iuc/integron_finder/integron_finder/2.0.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Replicon file"*: Contig file
 >    - *"Thorough local detection"*: `Yes`
 >    - *"Search also for promoter and attI sites?"*: `Yes`
@@ -357,7 +357,7 @@ To detect IS elements, we will use **ISEScan** ({% cite xie2017isescan %}). **IS
 
 > <hands-on-title> IS identification </hands-on-title>
 >
-> 1. {% tool [ISEScan](toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy0) %} with the following parameters:
+> 1. {% tool [ISEScan](toolshed.g2.bx.psu.edu/repos/iuc/isescan/isescan/1.7.2.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genome fasta input"*: Contig file
 >
 {: .hands_on}
@@ -435,7 +435,7 @@ We would like to look at the annotation using [JBrowse](https://jbrowse.org/jb2/
 
 > <hands-on-title> Transform PlasmidFinder to GFF </hands-on-title>
 >
-> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `results.tsv` output of **PlasmidFinder**
 >    - In *"Replacement"*:
 >      - In *"1: Replacement"*
@@ -453,7 +453,7 @@ We would like to look at the annotation using [JBrowse](https://jbrowse.org/jb2/
 >
 >        This will remove in the content of column 5 what is after the contig name
 >
-> 2. {% tool [Select last lines from a dataset](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} with the following parameters:
+> 2. {% tool [Select last lines from a dataset](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Text file"*: output of **Replace Text** above
 >    - *"Operation"*: `Keep everything from this line on`
 >    - *"Number of lines"*: `2`
@@ -484,7 +484,7 @@ We would like to look at the annotation using [JBrowse](https://jbrowse.org/jb2/
 > 3. Transform to GFF3
 > 
 > > <hands-on-title> Transform IntegronFinder to GFF </hands-on-title>
-> > 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> > 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/9.3+galaxy1) %} with the following parameters:
 > >    - {% icon param-file %} *"File to process"*: tabular output of **IntegronFinder**
 > >    - In *"Replacement"*:
 > >      - In *"1: Replacement"*
@@ -492,7 +492,7 @@ We would like to look at the annotation using [JBrowse](https://jbrowse.org/jb2/
 > >        - *"Find pattern"*: `NA`
 > >        - *"Replace with"*: `0`
 > >
-> > 2. {% tool [Select last lines from a dataset](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/1.1.0) %} with the following parameters:
+> > 2. {% tool [Select last lines from a dataset](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1) %} with the following parameters:
 > >    - {% icon param-file %} *"Text file"*: output of **Replace Text** above
 > >    - *"Operation"*: `Keep everything from this line on`
 > >    - *"Number of lines"*: `3`

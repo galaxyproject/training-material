@@ -24,6 +24,17 @@ contributors:
 - pavanvidem
 - beatrizserrano
 
+
+recordings:
+- captioners:
+  - gallardoalba
+  date: '2021-07-25'
+  galaxy_version: '21.05'
+  length: 1H10M
+  youtube_id: wS1X_0Mgw7M
+  speakers:
+  - gallardoalba
+
 ---
 
 
@@ -738,7 +749,7 @@ Both AT4G14365 and AT1G26890 are not well characterized genes. In the case of AT
 As additional activity, you can try to repeat the workflow by using the sequences stored in the NCBI GEO database with the accession number `GSE119382`. In that case, we will compare gene expression patterns of mutants overexpressing the brassinosteroid receptor BRL3 under two experimental conditions: control and drought-stress. The required datasets are available in the data library:
 
 > <hands-on-title>Import data from the Data Libraries</hands-on-title>
-> 1. Go into __Shared data__ (top panel) and click on __Data Libraries__
+> 1. Go into __Data__ (top panel) and click on __Data Libraries__
 > 2. In the search box enter the following identifier: `4710649`
 > 3. Select the following files:
 > ```

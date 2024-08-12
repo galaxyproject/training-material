@@ -947,35 +947,54 @@ If you have example input histories for your tutorial, perhaps for specific serv
 
 In some tutorials you aren't as interested in teaching users the individual steps for analysing data, but rather want to focus on some downstream aspects of analysis, or to showcase the best practice workflows that are already available for a user to use! In those cases it can be useful to have a nicer way of inviting the user to execute those steps.
 
+If you are accessing these in tutorial mode, they should function as button that, when clicked, launch the workflow directly. Outside of tutorial mode, they will link to our redirection service which will let you supply which Galaxy you plan to use.
+
+Note that if for some reason the 'fancy' method doesn't work, there are fallback tip boxes to help a user execute a similar procedure manually.
+
+### GTN Workflows
+
+If you've included the workflow in the GTN but haven't uploaded to a repository yet:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+
+
 ### WorkflowHub
 
 You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
 
 Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
 
 ### Dockstore
 
-Please note that the dockstore ID should be provided without the `#` character.
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
 
 {% raw %}
 ```markdown
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 ```
 {% endraw %}
 
 Rendered:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="workflow/github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 
 This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 

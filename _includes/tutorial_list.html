@@ -68,7 +68,7 @@
             {% endif %}
             {% if material.tags %}
               {% for tag in material.tags %}
-              <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
+              <a href="{{site.baseurl}}/search2.html?query={{ tag }}" class="label label-default tutorial_tag" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
               {% endfor %}
             {% endif %}
             </div>
@@ -77,7 +77,7 @@
               <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               {% include _includes/resource-slides.html material=material topic=topic.name %}
               {% include _includes/resource-handson.html material=material topic=topic.name %}
-              {% include _includes/resource-video-library.html material=material topic=topic.name %}
+              {% include _includes/resource-recordings.html material=material topic=topic.name %}
 
               {% if topic.type == "use" %}
                   {% include _includes/resource-zenodo.html material=material topic=topic.name %}
@@ -93,7 +93,7 @@
 
           <td> {% include _includes/resource-slides.html material=material topic=topic.name %} </td>
           <td> {% include _includes/resource-handson.html material=material topic=topic.name %} </td>
-          <td> {% include _includes/resource-video-library.html material=material topic=topic.name %} </td>
+          <td> {% include _includes/resource-recordings.html material=material topic=topic.name %} </td>
 
           {% if topic.type == "use" %}
           <td> {% include _includes/resource-zenodo.html material=material topic=topic.name %} </td>

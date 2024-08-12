@@ -22,6 +22,24 @@ contributors:
   - nekrut
 
 subtopic: manage
+
+recordings:
+- youtube_id: uN6nP3I7QLE
+  captioners:
+  - delphine-l
+  date: '2023-05-09'
+  length: 13M
+  speakers:
+  - delphine-l
+- captioners:
+  - annefou
+  - mariipia10
+  date: '2021-08-09'
+  length: 11M
+  youtube_id: uZUt9XIHUQo
+  speakers:
+  - nekrut
+
 ---
 
 {% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}
@@ -198,7 +216,7 @@ As a result of this operation we now have a collection of four tab delimited fil
 
 We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="ypuFZ1RKMIY" title="Collapsing collections" %}
 
 > <hands-on-title>Collapse a collection</hands-on-title>
 >

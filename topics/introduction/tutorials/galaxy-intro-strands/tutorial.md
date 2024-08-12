@@ -20,6 +20,25 @@ subtopic: next-steps
 contributors:
   - tnabtaf
   - gallardoalba
+
+recordings:
+- youtube_id: P1mEWZ_tAgQ
+  speakers:
+  - nakucher
+  captioners:
+  - nakucher
+  date: '2023-05-18'
+  length: 1H30M
+  galaxy_version: '23.01'
+- captioners:
+  - tnabtaf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H30M
+  youtube_id: 1UPCrQxGwcU
+  speakers:
+  - tnabtaf
+
 ---
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
@@ -291,7 +310,7 @@ You don't have to do this.  Galaxy is quite happy for you to have an infinite nu
 >
 > 1. **Name your history** to be meaningful and easy to find.
 >    - *Click* on the title of the history and enter something like **Intro - Strands** as the name.  Hit the `enter` key on your keyboard to save it.
->   ![Rename the history](../../../../shared/images/rename_history.png)
+>   ![Rename the history]({% link shared/images/rename_history.png %})
 > 1. **Rename your dataset**
 >    - *Click* on the **pencil icon** to edit the dataset attributes.
 >    - In the next screen change the name of the dataset to something like `Genes` or `Genes chr22`.

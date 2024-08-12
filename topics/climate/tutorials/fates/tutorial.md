@@ -39,6 +39,17 @@ contributors:
 - annefou
 - huitang-earth
 
+
+recordings:
+- captioners:
+  - s3by01
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H20M
+  youtube_id: 0LsEx11eLiI
+  speakers:
+  - annefou
+
 ---
 
 

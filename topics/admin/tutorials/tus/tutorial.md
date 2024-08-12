@@ -21,6 +21,17 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+
+recordings:
+- captioners:
+  - hexylena
+  date: '2022-03-11'
+  galaxy_version: '22.01'
+  length: 7M
+  youtube_id: v5sbIqF_0qo
+  speakers:
+  - hexylena
+
 ---
 
 Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading.

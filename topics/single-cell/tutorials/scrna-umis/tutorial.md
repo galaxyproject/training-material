@@ -26,6 +26,17 @@ contributors:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+
+recordings:
+- captioners:
+  - khanteymoori
+  date: '2021-03-18'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: AJ17BicjmYU
+  speakers:
+  - nomadscientist
+
 ---
 
 

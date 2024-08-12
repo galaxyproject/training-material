@@ -24,6 +24,17 @@ contributions:
   - moheydarian
   editing:
   - jxtx
+
+recordings:
+- captioners:
+  - malloryfreeberg
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 48M
+  youtube_id: WrOIpCxba78
+  speakers:
+  - malloryfreeberg
+
 ---
 
 

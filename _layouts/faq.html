@@ -56,6 +56,11 @@ layout: base
 
         </div>
         <div class="col-md-4">
+	  {% if page.short_id %}
+          <h5>Persistent URL</h5>
+	  Resource {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+	  {% endif %}
+
           <h5>Still have questions?</h5>
 
           {% include _includes/button.html link="https://gitter.im/Galaxy-Training-Network/Lobby" label="Gitter Chat Support" colour="yellow" buttonsize="medium" %}
@@ -63,16 +68,10 @@ layout: base
           {% include _includes/button.html link="https://help.galaxyproject.org" label="Galaxy Help Forum" colour="purple" buttonsize="medium" %}
 
 
-          <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% raw %}{% snippet  {% endraw %}{{ page.path }}{% raw %} %}{% endraw %}
-</code></pre></div></div>
-
-	  {% if page.short_id %}
-          <h5>Persistent URL</h5>
-	  Resource {% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
-	  {% endif %}
-
-
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#gtnInfoModal">
+		  Information for GTN Tutorial Authors
+		</button>
 
         </div>
       </div>
@@ -84,4 +83,60 @@ layout: base
     {% endif %}
 
 </section>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal" id="gtnInfoModal" tabindex="-1" role="dialog" aria-labelledby="gtnInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="gtnInfoModalLabel">Details For GTN Tutorial Authors</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+	   <h5>Want to embed this snippet (FAQ) in your GTN Tutorial?</h5>
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% raw %}{% snippet  {% endraw %}{{ page.path }}{% raw %} %}{% endraw %}
+</code></pre></div></div>
+
+	  {% if page.required_parameters %}
+	  <h5>Mandatory Parameters</h5>
+	  <ul>
+	  {% for parameter in page.required_parameters %}
+	  <li><code>{{ parameter[0] }}</code>: {{ parameter[1] }}</li>
+	  {% endfor %}
+	  </ul>
+	  {% endif %}
+
+	  {% if page.optional_parameters %}
+	  <h5>Optional Parameters</h5>
+	  <ul>
+	  {% for parameter in page.optional_parameters %}
+	  <li><code>{{ parameter[0] }}</code>: {{ parameter[1] }}</li>
+	  {% endfor %}
+	  </ul>
+	  {% endif %}
+
+{% if page.examples %}
+<h5>Examples</h5>
+{% for case in page.examples %}
+{{ case[0] }}:
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% raw %}{% snippet {% endraw %}{{ page.path }} {% for pair in case[1] %}{{ pair[0] }}="{{ pair[1] }}" {% endfor %} {% raw %}%}{% endraw %}
+</code></pre></div></div>
+{% endfor %}
+{% endif %}
+
+<h5>See other uses</h5>
+<a href="https://github.com/search?q=repo%3Agalaxyproject%2Ftraining-material+{{ page.path }}&type=code">Search on GitHub (must be logged in)</a>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>

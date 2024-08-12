@@ -28,6 +28,16 @@ contributors:
 - simonbray
 - wm75
 subtopic: workflows
+
+recordings:
+- captioners:
+  - simonbray
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: o39QjVnLG68
+  speakers:
+  - simonbray
 ---
 
 

@@ -29,6 +29,17 @@ contributors:
 subtopic: post-process
 tags: [DDA, human]
 
+
+recordings:
+- captioners:
+  - combesf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: qG7GZc6BeGY
+  speakers:
+  - yvesvdb
+
 ---
 
 

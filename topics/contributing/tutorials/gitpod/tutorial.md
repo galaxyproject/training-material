@@ -13,6 +13,17 @@ key_points:
   - "GitPod can be used to serve the GTN training materials"
 contributors:
   - shiltemann
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 20M
+  youtube_id: _-wnsPttBCo
+  speakers:
+  - shiltemann
+
 ---
 
 

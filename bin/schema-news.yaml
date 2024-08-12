@@ -11,7 +11,7 @@ mapping:
         required: true
         description: |
             Title of the news post
-        examples:
+        _examples:
             - 'BY-COVID and RO-Crate collaboration brings new topic: FAIR Data, Workflows & More'
             - "New Tutorial Feature: Choose Your Own Tutorial"
     tags:
@@ -21,7 +21,7 @@ mapping:
               required: true
         description: |
             A free form list of tags that are relevant for your tutorial.
-        examples:
+        _examples:
             - new topic
             - new tutorial
             - new feature
@@ -38,14 +38,14 @@ mapping:
               - FUNDERS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
-        examples:
+        _examples:
             - hexylena
             - shiltemann
     contributions:
         required: true
         description: |
             List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
-        examples: |
+        _examples: |
             contributions:
                 authorship:
                     - shiltemann
@@ -121,17 +121,26 @@ mapping:
                   enum:
                   - CONTRIBUTORS
                   - ORGANISATIONS
+            data:
+                type: seq
+                description: These entities provided data for this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - FUNDERS
     cover:
         type: str
         description: |
             link to a picture that will be used as the cover for the article
-        examples:
+        _examples:
             - "assets/images/BYCOVID_logo_tagline.png"
     coveralt:
         type: str
         description: |
             If a cover is provided, then alt text is Mandatory.
-        examples:
+        _examples:
             - "logo of by covid with subtitle reading beyond covid"
     abbreviations:
         type: map
@@ -142,7 +151,7 @@ mapping:
                     The expansion of the abbreviated term.
         description: |
             A dictionary of abbreviations and their expansions.
-        examples: |
+        _examples: |
             abbreviations:
                 SQL: Structured Query Language
                 API: Application Programming Interface
@@ -152,19 +161,19 @@ mapping:
             - type: str
         description: |
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
-        examples:
+        _examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     tutorial:
         type: str
         description: |
             Include a link to a specific page as a call to action button at the bottom of the page.
-        examples:
+        _examples:
         - topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html
     link:
         type: str
         description: |
             Basically an alias for tutorial, except requiring a full URL
-        examples:
+        _examples:
           - https://example.org
     external:
         type: bool

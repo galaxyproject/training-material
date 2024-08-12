@@ -17,6 +17,7 @@ jobs:
         with:
           ref: "${{ github.event.inputs.selected_tag }}"
           fetch-depth: 0
+          fetch-tags: true
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -66,11 +67,10 @@ jobs:
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
+          curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/videos.json > metadata/video-library.json
-          curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           SOURCE_TAG: ${{ github.event.inputs.selected_tag }}

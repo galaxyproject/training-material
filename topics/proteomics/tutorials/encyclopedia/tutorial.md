@@ -25,6 +25,17 @@ contributors:
 - timothygriffin
 
 
+
+recordings:
+- captioners:
+  - mtekman
+  date: '2021-06-25'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: eCEjHtbZLVg
+  speakers:
+  - emmaleith
+
 ---
 
 
