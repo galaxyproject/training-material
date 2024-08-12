@@ -78,8 +78,8 @@ The Taxonomy file can contain samples not included in the metadata file (or vice
 >
 >    ```
 >
->    https://zenodo.org/api/records/12614561/files/HMP2_taxonomy.tsv/content
->    https://zenodo.org/api/records/12614561/files/HMP2_metadata.tsv/content
+>    https://zenodo.org/records/12614561/files/HMP2_taxonomy.tsv
+>    https://zenodo.org/records/12614561/files/HMP2_metadata.tsv
 >
 >    ```
 >
