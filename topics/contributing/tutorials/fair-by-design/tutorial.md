@@ -30,10 +30,9 @@ contributions:
   funding:
     - skills4eosc
 follow_up_training:
- - type: internal
-   topic_name: genome-annotation
-   tutorials:
-     - repeatmasker
+ - type: external
+   title: Skill4EOSC FAIR-by-design Methodology Training of Trainers
+   link: "https://learning.skills4eosc.eu/course/view.php?id=19"
 lang: "en"
 level: "Introductory"
 extra: 
