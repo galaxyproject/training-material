@@ -140,12 +140,13 @@ Lets now understand the role of each parameter in the tool.
 2. **Random effects** : In some studies, like those following people over time or studying families, samples from the same group can be similar. MaAsLin2 helps handle this by letting researchers choose a grouping factor. This helps make sure the statistical analysis is more accurate.
 
 3. **Reference** : It allows researchers to establish a baseline or standard category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. In MaAslin2, reference level is must for variables with more than two distinct kind of values.
-> <comment-title></comment-title>
->
-> - Reference for a variable with more than two levels is provided as a string of `variable,reference`.
-> - Reference for more than one variable having more than two levels each is provided as a string of `variable1,reference1,variable2,reference2` .
-> - Example, both diagnosis and site variable have more than two levels hence reference can be provided as `diagnosis,CD,site,Cedars-Sinai`.
-{: .comment}
+
+   > <comment-title></comment-title>
+   >
+   > - Reference for a variable with more than two levels is provided as a string of `variable,reference`.
+   > - Reference for more than one variable having more than two levels each is provided as a string of `variable1,reference1,variable2,reference2` .
+   > - Example, both diagnosis and site variable have more than two levels hence reference can be provided as `diagnosis,CD,site,Cedars-Sinai`.
+   {: .comment}
 
 4. **Additional options** :
 - min_abundance : The minimum abundance for each feature [ Default: 0 ]
