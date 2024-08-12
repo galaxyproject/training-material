@@ -36,7 +36,12 @@ follow_up_training:
 lang: "en"
 level: "Introductory"
 extra:
+  description: "Short how to guide that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats."
   target_audience: "Instructional designers"
+  URL_resource_type: "Permanent URL"
+  learning_resource_type: "self-paced microlearning unit"
+  access_cost: "No"
+  attribution: "This microlearning unit is based on Filiposka, Sonja, Mishev, Anastas. (2024). FAIR-by-Design Microlearning (1.0.0). https://doi.org/10.5281/zenodo.11548062"
 ---
 
 
