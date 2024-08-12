@@ -36,7 +36,7 @@ follow_up_training:
 lang: "en"
 level: "Introductory"
 extra: 
-	- target_audience: "Instructional designers"
+	target_audience: "Instructional designers"
 	
 
 ---
