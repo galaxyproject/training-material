@@ -640,7 +640,7 @@ PDF document accessibility is measured with a separate technical specification <
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">Review some general guidelines for development of accessible material</a>
 
 ><tip-title>GTN Accessibility</tip-title>
-> GTN has developed an <a href="https://training.galaxyproject.org/training-material/accesibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
+> GTN has developed an <a href="https://training.galaxyproject.org/training-material/accessibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
 > 
 {: .tip}
 
