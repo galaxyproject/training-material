@@ -685,8 +685,10 @@ PDF document accessibility is measured with a separate technical specification <
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Produce stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Produce stage....</a>
+
 ## Stage 5 - Publish
+
 > Publishing is the art of working on a creative idea and turning it into a masterpiece​!
 {: .quote author="Unknown"}
 
