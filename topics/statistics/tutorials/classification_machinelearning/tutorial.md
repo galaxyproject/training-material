@@ -408,8 +408,8 @@ One big advantage of random forest is that it can be used for both classificatio
 > What are the advantages of random forest classifier compared with KNN and SVM?
 >
 > > <solution-title></solution-title>
-> > 1. The overfitting problem will never arise when we use the random forest algorithm in any classification problem.
-> > 2. The same random forest algorithm can be used for both classification and regression task.
+> > 1. It is resistant to overfitting as it produces results based on multiple decision trees.
+> > 2. It scales well with large datasets.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
 > {: .solution}
 >
