@@ -3,6 +3,9 @@ layout: tutorial_hands_on
 title: FAIR-by-Design methodology
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
+  OER: Open Educational Repositories
+  EOSC: European Open Science Cloud
+  CC: Creative Commons
 zenodo_link: https://zenodo.org/records/11548062
 questions:
   - How to develop FAIR learning materials?
@@ -257,10 +260,18 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage....</a>
 
 ## Stage 2 - Discover
+
 > Greater even than the greatest discovery is to keep open the way to future discovery.
 {: .quote author="John Jacob Abel"}
 ### Get inspired
+
 Reusable materials can be found anywhere. These are just some examples:
+
+> <code-in-title>GTN</code-in-title>
+> [GTN learning resources](https://training.galaxyproject.org)
+> [TeSS Catalogue by Elixir](https://tess.elixir-europe.com)
+{: .code-in}
+
 > <code-in-title>OER</code-in-title>
 > [DOAB](https://directory.doabooks.org/)
 > [MERLOT](https://www.merlot.org/merlot/index.htm)
@@ -287,14 +298,15 @@ Reusable materials can be found anywhere. These are just some examples:
 
 ### Potential for reuse
 > <warning-title> Respect the licenses, to be respected!</warning-title>
-> Materials with non-permissible licenses can be used for inspiration only. Materials with permissible licenses should be reused based on the license rules.
+> - Materials with non-permissible licenses can be used for inspiration only. 
+> - Materials with permissible licenses should be reused based on the license rules.
 {: .warning}
 
 ### Don't forget the multimedia search
 
-Different learners have different learning modalities (read/write, auditory, visual, kinesthetic). You should use all types of multimedia in your learning materials.
+Different learners have different learning modalities (read/write, auditory, visual, kinesthetic). To elevate the learning experience you should use all types of multimedia in your learning materials.
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Discover stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Discover stage....</a>
 
 ## Stage 3 - Design
 > Design is intelligence made visible.
