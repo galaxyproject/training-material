@@ -626,7 +626,6 @@ You should also be able to remove attribution upon request.
 {: .tip}
 
 
-
 #### Standards
 There are several standards that govern the rules on level of accessibility. Three conformance levels exist, you should aim for AA which is the middle one.
 
@@ -634,30 +633,15 @@ Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/w
 
 PDF document accessibility is measured with a separate technical specification <a href="https://pdfua.foundation/en/why-pdf-ua/">PDF/UA (Universal Accessibility)</a>.
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/" class="btn btn-primary stretched-link">Learn more</a>
 
+#### Accessibility guidelines
 
-#### Use accessibility evaluation tools!
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">General guidelines for development of accessible material</a>
 
-Accessibility evaluation tools are not perfect. Even if they say that all is ok, it does not mean that your content is truly accessible. But they are a very good starting point.
-
-> <details-title>Slides</details-title>
-> Use the integrated accessibility checker in Power Point:
-> 1. Open an existing presentation in PowerPoint and review the content. 
-> 2. Select the Review tab. 
-> 3. Select Check Accessibility.
-> 4. An Accessibility Checker pane will appear on the right with 'Inspection Results' displayed.
-{: .details}
-
-> <details-title>Web content</details-title>
-> Choose from the [Web Accessibility Evaluation Tools List](https://www.w3.org/WAI/test-evaluate/tools/list/) developed by W3C.
-{: .details}
-
-> <details-title>PDF document</details-title>
-> Check accessibility in Adobe Acrobat Pro.
->
-> Open the PDF and then from the All tools menu on the left, select View more and then select Prepare for accessibility.
-{: .details}
+><tip-title>GTN Accessibility</tip-title>
+> GTN has developed an < href="https://training.galaxyproject.org/training-material/accesibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
+> 
+{: .tip}
 
 
 ### Internal QA
