@@ -6,6 +6,7 @@ abbreviations:
   OER: Open Educational Repositories
   EOSC: European Open Science Cloud
   CC: Creative Commons
+  MVS: Minimum Viable Skills
 zenodo_link: https://zenodo.org/records/11548062
 questions:
   - How to develop FAIR learning materials?
@@ -254,7 +255,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 {: .question }
 
 > <details-title>More details on ideating learning outcomes and related information ...</details-title>
-> [Follow the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md %} )
+> [Read about defining intended Learning Outcomes in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#define-intended-learning-outcomes-los %} )
 {: .details}
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage....</a>
@@ -269,6 +270,7 @@ Reusable materials can be found anywhere. These are just some examples:
 
 > <code-in-title>GTN</code-in-title>
 > [GTN learning resources](https://training.galaxyproject.org)
+> 
 > [TeSS Catalogue by Elixir](https://tess.elixir-europe.com)
 {: .code-in}
 
@@ -309,22 +311,27 @@ Different learners have different learning modalities (read/write, auditory, vis
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Discover stage....</a>
 
 ## Stage 3 - Design
+
 > Design is intelligence made visible.
 {: .quote author="Alina Wheeler"}
-### Time to brainstorm
-![Brain image](../../images/brain-3829057_640.jpg)
-<small>
-<br>
-<a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3829057">Gerd Altmann</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=3829057">Pixabay</a>
-</small>
-#### Concept map
-Build a concept map of your learning materials aligning with the MVS profiles.
 
-The aligned MVS profile can help you cristalize the learning objectives using MVS taxonomy.
+Now it's time to brainstorm...
+
+### Concept map
+
+1. Build a concept map of your learning materials.
+
+> <details-title>More details on concept maps ...</details-title>
+> [Read about Concept Maps in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#concept-maps %} )
+{: .details}
+
+2. Make sure you align your concept map with the MVS profiles.
+
+The aligned MVS profile can help you crystalise the learning objectives using the MVS taxonomy.
 
 Each MVS profile defines a list of technical and soft skills required for the profile. Think on how to incorporate both aspects in your learning materials.
 
-<a href="https://fair-by-design-methodology.github.io/MVS/latest/MVS%20Profiles/Civil%20Servant/civil_servant/" class="btn btn-primary stretched-link">Go to MVS profiles catalogue</a>
+<a href="https://fair-by-design-methodology.github.io/MVS/latest/MVS%20Profiles/Civil%20Servant/civil_servant/" class="btn btn-primary stretched-link">Go to the MVS profiles catalogue</a>
 
 ### Structure is everything
 
