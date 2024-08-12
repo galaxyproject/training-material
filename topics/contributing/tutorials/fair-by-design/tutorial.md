@@ -35,10 +35,8 @@ follow_up_training:
    link: "https://learning.skills4eosc.eu/course/view.php?id=19"
 lang: "en"
 level: "Introductory"
-extra: 
-	target_audience: "Instructional designers"
-	
-
+extra:
+  target_audience: "Instructional designers"
 ---
 
 
