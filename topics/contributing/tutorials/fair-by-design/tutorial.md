@@ -128,7 +128,12 @@ May all your materials be FAIR!
 {: .details}
 
 ### Adopt a metadata schema
-  <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
+
+If you are not using a discipline specific metadata schema, then, to ensure that your learning materials are appropriately described using a common approach, you should adopt the:
+
+  <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">Go to the RDA Minimal Metadata Set for Learning Resources description details</a>
+
+The following are the fields described in the RDA Minimal Metadata Set divided into three categories:
 
 > <details-title>Descriptive info metadata fields</details-title>
 > - **Title** =	The human readable name of the resource
@@ -153,14 +158,25 @@ May all your materials be FAIR!
 > - **Expertise (Skill) Level** =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced
 {: .details}
 
-More on the metadata here {% cite hoebelheinrich_2022 %}
+More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
+
+> <tip-title>Using metadata in GTN tutorials ...</tip-title>
+>
+>- When developing materials in GTN, this information should be included in the Tutorial.md file header metadata. 
+>- Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the "extra" field. 
+>
+> > <details-title>More details on the GTN Metadata ...</details-title>
+> > [Follow the GTN Metadata tutorial]( {% link topics/fair/tutorials/contributing/tutorials/schemas/tutorial.md %} )
+> {: .details}
+>
+{: .tip}
 
 
-><tip-title>More on FAIR learning objects definition:</tip-title>
+><details-title>Learn more about FAIR learning objects ...</details-title>
 >- [FAIR instructional design skills](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills)
  >- [FAIR guiding principles](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-guiding-principles)
  >- [FAIR learning objects](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects)
-{: .tip}
+{: .details}
 
 ### Start Ideating...
 
