@@ -790,7 +790,7 @@ PDF document accessibility is measured with a separate technical specification <
   </div>
 </div>
 
-### Store in a repository
+### Storing and indexing
 
 ><tip-title>Automated publishing</tip-title>
 >If you are working on GitHub using the provided templates repository then the "publish to Zenodo" step is fully automated for you. Just follow the [guide to publishing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/17-Zenodo%20Publishing/17-Zenodo%20Publishing/).
@@ -870,7 +870,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 - Potential sources:  
 	- Feedback form   
 	- QA recommendations   
-	- self-reflection after training   
+	- Self-reflection after training   
 	- Git Issues
 	- Gitter Chat
 	- Direct mail contact   
