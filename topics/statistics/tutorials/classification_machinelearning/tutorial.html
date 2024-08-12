@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@88616d9fc98421d7f7b8ab914b400e63c28372b5",
+		release: "galaxy-training-network@9cc53bcb522fc6b7739affd8a51b9fe23f7defcf",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Classification in Machine Learning">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-08-12 15:51:18 +0000">
 <meta name="DC.creator" content="Alireza Khanteymoori">
 <meta name="DC.creator" content="Anup Kumar">
 <meta name="DC.creator" content="Simon Bray"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-08-12 15:51:18 +0000",
   "datePublished": "2020-04-30 14:15:23 +0000",
   "identifier": "https://gxy.io/GTN:T00262",
   "accessMode": [
@@ -238,7 +238,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Classification in Machine Learning",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html",
-  "version": 13,
+  "version": 14,
   "timeRequired": "PT2H",
   "teaches": "Learn classification background\n - Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy\n - Learn to apply logistic regression, k-nearest neighbors, support verctor machines, random forests and bagging algorithms\n - Learn how visualizations can be used to analyze the classification results",
   "keywords": [
@@ -835,18 +835,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		</a>
 	</li>
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main) <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
-			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
     
     
     
@@ -863,6 +851,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<li>
 		<a class="dropdown-item" href="https://usegalaxy.no/" title="">
 			UseGalaxy.no
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main)
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
 		</a>
 	</li>
     
@@ -886,7 +886,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 30, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 12, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -906,7 +906,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 11 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
 
     </blockquote>
     </section>
@@ -1140,7 +1140,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check and visualize the classification</div>
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3)</span>:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels_noheader</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">LogisticRegression_result</code></li>
@@ -1154,7 +1154,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a>: The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, the confusion matrix of the predictions is a colour-coded heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.</p>
 
-    <figure id="figure-2" style="max-width: 90%;"><img src="images/confusion_matrix_linear.png" alt="confusion_matrix. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/confusion_matrix_linear.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Confusion matrix for the logistic regression classifier.</figcaption></figure>
+    <figure id="figure-2" style="max-width: 90%;"><img src="images/confusion_matrix_linear.png" alt="confusion_matrix. " width="874" height="882" loading="lazy" /><a target="_blank" href="images/confusion_matrix_linear.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Confusion matrix for the logistic regression classifier.</figcaption></figure>
   </li>
   <li>
     <p><a href="https://en.wikipedia.org/wiki/Precision_and_recall">Precision, recall and F1 score</a>: Precision, recall and F1 score. These scores determine the robustness of classification. It is important to analyze the plot for any classification task to verify the accuracy across different classes which provides more information about the balanced or imbalanced accuracy across multiple classes present in the dataset.</p>
@@ -1310,7 +1310,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check and visualize the classification</div>
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3)</span>:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">NearestNeighbors_result</code></li>
@@ -1320,7 +1320,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <p>The visualization tool creates diagrams for the Confusion matrix, Precision, recall and F1 score, Receiver operator characteristics (ROC) and area under ROC (AUC) as follows:</p>
 
-<figure id="figure-5" style="max-width: 90%;"><img src="images/confusion_matrix_NN.png" alt="confusion_matrix. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/confusion_matrix_NN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Confusion matrix for the k-nearest neighbor classifier.</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><img src="images/confusion_matrix_NN.png" alt="confusion_matrix. " width="879" height="886" loading="lazy" /><a target="_blank" href="images/confusion_matrix_NN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Confusion matrix for the k-nearest neighbor classifier.</figcaption></figure>
 
 <figure id="figure-6" style="max-width: 90%;"><img src="images/precision_recall_NN.png" alt="prf1_scores. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/precision_recall_NN.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Precision, recall and F1 score for the k-nearest neighbor classifier.</figcaption></figure>
 
@@ -1410,7 +1410,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Check and visualize the classification</div>
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.3)</span>:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4" title="Plot confusion matrix, precision, recall and ROC and AUC curves tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.4)</span>:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code></li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">SVM_result</code></li>
@@ -1474,8 +1474,8 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>The overfitting problem will never arise when we use the random forest algorithm in any classification problem.</li>
-      <li>The same random forest algorithm can be used for both classification and regression task.</li>
+      <li>It is resistant to overfitting as it produces results based on multiple decision trees.</li>
+      <li>It scales well with large datasets.</li>
       <li>The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.</li>
     </ol>
   </blockquote>
@@ -1636,7 +1636,7 @@ We choose <code class="language-plaintext highlighter-rouge">Final Estimator</co
 
 <p>Now we will verify the performance by creating and inspecting the plots:</p>
 
-<figure id="figure-10" style="max-width: 90%;"><img src="images/confusion_matrix_bagging.png" alt="confusion_matrix. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/confusion_matrix_bagging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Confusion matrix for the bagging classifier.</figcaption></figure>
+<figure id="figure-10" style="max-width: 90%;"><img src="images/confusion_matrix_bagging.png" alt="confusion_matrix. " width="861" height="884" loading="lazy" /><a target="_blank" href="images/confusion_matrix_bagging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Confusion matrix for the bagging classifier.</figcaption></figure>
 
 <figure id="figure-11" style="max-width: 90%;"><img src="images/precision_recall_bagging.png" alt="prf1_scores. " width="700" height="450" loading="lazy" /><a target="_blank" href="images/precision_recall_bagging.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Precision, recall and F1 score for the bagging classifier.</figcaption></figure>
 
@@ -1812,6 +1812,11 @@ tools:
 - name: plotly_ml_performance_plots
   owner: bgruening
   revisions: 1c5dcef5ce0f
+  tool_panel_section_label: Graph/Display Data
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: plotly_ml_performance_plots
+  owner: bgruening
+  revisions: f234e2e59d76
   tool_panel_section_label: Graph/Display Data
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: sklearn_build_pipeline
@@ -2046,7 +2051,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/88616d9fc98421d7f7b8ab914b400e63c28372b5">88616d9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9cc53bcb522fc6b7739affd8a51b9fe23f7defcf">9cc53bc</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
