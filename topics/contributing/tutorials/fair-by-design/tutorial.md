@@ -395,7 +395,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 >  This practice significantly increases the reuse potential of the material.
 {: .question}
 
-### How to develop the learning content
+### How to design the learning content
 
 <a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Read more about the Hunter Model ...</a>
 
@@ -507,27 +507,44 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 ### Choose Tools & Formats
 > <tip-title>Collaborative environment for team work</tip-title>
->  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one. Two examples are workplace or GitHub (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>). Replicate the folder tree in the environment and start using the provided templates to generate the content.
+>  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one. 
+>  
+>  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
+>  - GTN is also based on GitHub and defines specific procedures on how one can contribute and collaborate using GitHub
+>  
+>  > <details-title> GTN: collaboration using GitHub ...</details-title>
+> > [Follow the Contributing with GitHub via its interface tutorial available on GTN]( {% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}  )
+> > 
+> > [Follow the Contributing with GitHub via command-line tutorial available on GTN]( {% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %}  )
+> {: .details}
 {: .tip}
 
 > <tip-title>Granular versioning for easy rollback</tip-title>
->    Versioning helps you maintain control over your changes. If the collaborative environment does not provide versioning and history retention then keep a history of the files by adopting a naming convention such as combining the file name with an increasing version number.
+>    - Versioning helps you maintain control over your changes. 
+>    - GitHub natively provides versioning and history retention that help easy roll back to an earlier stable state.
 {: .tip}
 
 > <tip-title>Open file formats to foster reuse</tip-title>
->  For other people to reuse your materials they should be made available using open file formats (docx, pptx, pdf, md, html, etc.). If you use close file formats then you MUST clearly state the tools that have been used for development in your README file.
+> - For other people to reuse the materials they should be made available using open file formats
+> - GTN promotes the use of the MD open file format for the main learning content empowered with open scientific notebooks and workflows. 
+> - If you use close file formats then you MUST clearly state the tools that have been used in more details.
 {: .tip}
 
 > <tip-title>Multimodal content to reach all audience</tip-title>
->  Don't forget to include different types of multimedia to provide support for different learning modalities: read/write, auditory, visual, kinesthetic.
+>  - Don't forget to include different types of multimedia to provide support for different learning modalities: read/write, auditory, visual, kinesthetic.
+>  - In addition to hands-on exercises, GTN also provides support for audio and video modalities.
 {: .tip}
 
 > <tip-title>Two file sets: editable + final</tip-title>
-> Always work with and keep a history of your editable files. These are what matters for you and other instructors. The second set of final files should be obtained from the editable when needed (before distributing them to the learners). The final files should be kept on the learning platform only. In this way you don't need to worry about keeping the versions in sync.
+> - The MD and supporting files are the main files used for development of the content. These files are what matters for you and other instructors. 
+> - Based on the editable files, GTN automatically generates the final (non-editable version) in HTML (and PDF). These  are shared with the learners.
+> - GTN takes care of the revision numbering for you.
 {: .tip}
 
-> <tip-title>Don't forget to support co-creation</tip-title>
-> Truly FAIR learning materials should enable co-creation with external parties. If you don't use a collaborative environment that supports this from the start (such as GitHub), then think how are you going to enable this in the future and how are you going to deal with versioning then.
+> <tip-title>Don't forget to take advantage of co-creation</tip-title>
+> Truly FAIR learning materials enable co-creation with external parties.
+>  GitHub is a collaborative environment that supports co-creation in every step of the learning materials development and revision process. 
+>  The GTN fork-and-pull process of contributing to the learning material is a clear example of co-creation implementation.
 {: .tip}
 
 
@@ -535,20 +552,24 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 #### Check the license
 
-The existing materials is available under a CC license, but it is different than the one you plan to use for your materials...
+The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials...
 
 ><details-title>I want to reuse it as a whole</details-title>
->You can't use something that is licensed with ND (no derivatives). In this case you must follow the rules on combining and adapting CC material. 
+>- You can't use something that is licensed with ND (no derivatives). 
+>- In this case you must follow the rules on combining and adapting CC material. 
+>
 >[Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 {: .details}
 
 ><details-title>I want to reuse a small part of it</details-title>
-> No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work. If the work is licensed with ND, do not modify it while reusing.
+> No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work. 
+> 
+> Remember that if the work is licensed with ND, you can not modify it while reusing.
 {: .details}
 
-><details-title>Learn more about IPR</details-title>
+><tip-title>Learn more about IPR ...</tip-title>
 >[How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr)
-{: .details}
+{: .tip}
 
 [{% icon point-right %} Go to CC licensing FAQ](https://creativecommons.org/faq/#before-using-cc-licensed-material)
 
@@ -556,20 +577,24 @@ The existing materials is available under a CC license, but it is different than
 #### Attribute
 
 All CC licenses require that you attribute the author, and this rule is recommended even if the license is public domain CC-0.
+
 If the work you are reusing has a copyright notice ('© some text') you need to reproduce it while you credit the work.
+
 You should also be able to remove attribution upon request.
 
-> <details-title>Use the authors recommended attribution</details-title>
-> If the original author has provided a cite-as information, use it to attribute the work.
-{: .details}
+##### How to attribute? 
 
-> <details-title>Use TASL</details-title>
+> <solution-title>Use the authors recommended attribution</solution-title>
+> If the original author has provided a cite-as information, use it to attribute the work.
+{: .solution}
+
+> <solution-title>Use TASL</solution-title>
 > Provide the Title, Author, Source and License of the work that you are reusing. 
 >
 >- Source is the URL to the original work.
 >- If there is a URL to the author personal pages, provide it together with the name.
 >- Provide the name of the license and a URL to the license. 
-{: .details}
+{: .solution}
 
 > <details-title>Examples</details-title>
 > Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/) 
@@ -585,24 +610,22 @@ You should also be able to remove attribution upon request.
 > 	- [Comcast protest](http://www.flickr.com/photos/ari/8503459/in/set-214952/)” by Flikr user [Steve Rhodes](http://www.flickr.com/photos/ari/) used under [Creative Commons Attribution 2.0 license](http://creativecommons.org/licenses/by/2.0/deed.en)
 {: .details}
 
-> <details-title>Learn more</details-title>
+> <details-title>Read more about how to attribute ...</details-title>
 > [{% icon point-right %}  Attribution and Citing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#attribution-and-citing)
+> 
+> [{% icon point-right %} How to handle attribution?](https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/)
 {: .details}
-
-[{% icon point-right %} How to handle attribution?](https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/)
-
 
 
 ### Accessibility
 ><tip-title></tip-title>
+>![Universal access logo](../../images/universal-access-6602642_640.png)
+> <small><br><a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a></small>
+> 
 >The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
 {: .tip}
 
-![Universal access logo](../../images/universal-access-6602642_640.png)
-<small>
-<br>
-<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
-</small>
+
 
 #### Standards
 There are several standards that govern the rules on level of accessibility. Three conformance levels exist, you should aim for AA which is the middle one.
