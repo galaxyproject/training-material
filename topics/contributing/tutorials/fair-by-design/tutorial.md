@@ -800,25 +800,26 @@ PDF document accessibility is measured with a separate technical specification <
 >You are at the point when you should also consider making a record in a relevant training catalogue such as the EOSC training catalogue.
 {: .tip}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Publish stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage....</a>
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
 {: .quote author="Martin Routh"}
 ### External QA
 > <tip-title> A fresh set of eyes</tip-title>
-> Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.
+> - Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.
+> - GTN implements this automatically via the fork-and-pull request process. Before publication your new contribution is being reviewed by GTN peers.
 {: .tip}
 
 > <tip-title> Go through the QA checklists</tip-title>
-> In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials.
+> In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials {% cite sanchez_2023_8305482 %}.
 {: .tip}
 
 ### FAIR or not FAIR, that is the question...
 
 #### Measure FAIRness
 
-Use the FAIR-by-Design methodology QA checklist to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
+Use the [FAIR-by-Design methodology QA checklist](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20–%20Verify/19-Final%20QA%20check/19-finalQA/#fair-by-design-methodology-qa-checklist) to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
 
 The questions marked as essential achieve bare minimum FAIRness. 
 
@@ -856,7 +857,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
 {: .comment}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Verify stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Verify stage....</a>
 
 ## Stage 7 - Continuous Improvement
 > To improve is to change; to be perfect is to change often
@@ -864,35 +865,36 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 #### {% icon galaxy-download %} Gather
 
-Gather feedback from all available internal & external sources.
+- Gather feedback from all available internal & external sources.
 
-Potential sources:  
-- Feedback form   
-- QA recommendations   
-- self-reflection after training   
-- Survey   
-- Direct mail contact   
-- Other means of communication
+- Potential sources:  
+	- Feedback form   
+	- QA recommendations   
+	- self-reflection after training   
+	- Git Issues
+	- Gitter Chat
+	- Direct mail contact   
+	- Other means of communication
 
 #### {% icon galaxy-barchart %} Analyse
 
-Analyse the gathered information in a structured way.
+- Analyse the gathered information in a structured way.
 
-Create a list of potential improvements with impact level (high, moderate, low).
+- Create a list of potential improvements with impact level (high, moderate, low).
 
 #### {% icon galaxy-wf-edit %} Improve
 
-Select items from the list that will be part of a new version.
+- Select items from the list that will be part of a new version.
 
-Choose items that make sense to be in the same new release.
+- Choose items that make sense to be in the same new release.
 
 #### {% icon galaxy-history-refresh %} Repeat
 
-Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. 
+- Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. 
 
-After the Verify stage, you will reenter continuous improvement with newly gathered information....
+- After the Verify stage, you will reenter continuous improvement with the newly gathered information....
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to FAIR-by-Design Methodology: Continuous Improvement stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Continuous Improvement ....</a>
 
 # About
 
