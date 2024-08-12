@@ -45,15 +45,15 @@ extra:
 ---
 
 
-Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
+Welcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.
 
 > <agenda-title></agenda-title>
 >
->Below are the main stages of the FAIR-by-Design Methodology that will help guide you on your journey of creating FAIR learning materials.
+>Below are the main stages of the FAIR-by-Design Methodology {% cite filiposka_2023_8305540 %} that will help guide you on your journey of creating FAIR learning materials.
 >
->![FAIR-by-Design Methodology Stages](../../images/methodology.png)
+>![Visual representation of the FAIR-by-Design Methodology flow with its separate stages](../../images/methodology.png)
 >
->The FAIR-by-Design Methodology is defined into [a number of stages](#main-stages) that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:
+>The FAIR-by-Design Methodology is defined in [a number of stages](#main-stages) that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:
 >
 >1. [Prepare](#stage-1---prepare)
 >	- Do you understand FAIR and its implications
@@ -83,7 +83,7 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN tutorial.
 >
 >Review each stage and the essential steps that it includes.
 >
->Essential information about this microlearning unit can be found in the [About](#about) section.
+>Essential information about the original microlearning unit that this adaptation is based on can be found in the [About](#about) section.
 >
 {: .agenda}
 
@@ -120,6 +120,12 @@ May all your materials be FAIR!
 > <solution-title>Reusable</solution-title>
 >The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
 {: .solution }
+
+> <details-title>More details on the FAIR principles ...</details-title>
+> [Follow the FAIR in a nutshell tutorial available on GTN]( {% link topics/fair/tutorials/fair-intro/tutorial.md %} )
+> 
+> [Follow the FAIR Galaxy Training Material tutorial available on GTN]( {% link topics/fair/tutorials/fair-gtn/tutorial.md %} )
+{: .details}
 
 ### Adopt a metadata schema
   <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">The RDA Minimal Metadata Set for Learning Resources</a>
