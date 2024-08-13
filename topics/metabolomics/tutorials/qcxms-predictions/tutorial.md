@@ -183,12 +183,16 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 
 > <hands-on-title> Parsing out name info </hands-on-title>
 >
->  {% tool [Parse parameter value](https://usegalaxy.eu/?tool_id=param_value_from_file) %} with the following parameters:
+>  {% tool [Parse parameter value](param_value_from_file) %} with the following parameters:
 >    - *"Input file containing parameter to parse out of"*: * click on {% icon param-collection %} *Dataset collection* and select output of **Split file** {% icon tool %}
 >    - *"Select type of parameter to parse"*: `Text`
 >    - *"Remove newlines ?"*: {% icon galaxy-toggle %}  `Yes`
 >
 {: .hands_on}
+
+> <tip-title>Can't find Parse parameter value tool? {% icon tool %} </tip-title>
+> If you have any problems with accessing **Parse parameter value** tool, you can open it using a direct [link](https://usegalaxy.eu/root?tool_id=param_value_from_file).
+{: .tip}
 
 
 We will repeat the first two steps, but processing SMILES this time. 
@@ -241,7 +245,7 @@ Now, onto format conversion. Let’s convert our SMILES to SDF (Structure Data F
 {: .hands_on}
 
 <!---
->    - *"Append the specified text after each molecule title"*: click on {% icon param-collection %} *Dataset collection* and select output of **Parse parameter value** {% icon tool %} which contains the extracted molecules' names
+- *"Append the specified text after each molecule title"*: click on {% icon param-collection %} *Dataset collection* and select output of **Parse parameter value** {% icon tool %} which contains the extracted molecules' names
 -->
 
 
@@ -251,9 +255,9 @@ We now have two SDF files, each containing the coordinates of the atoms and the 
 >
 > {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: 
-> > * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
-> > * from the datasets list, find the output of **Compound conversion** {% icon tool %} (should have the highest number in your history) and select it
-> > * {% icon workflow-run %} Run tool! 
+>    * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
+>    * from the datasets list, find the output of **Compound conversion** {% icon tool %} (should have the highest number in your history) and select it
+>    * {% icon workflow-run %} Run tool! 
 >
 {: .hands_on}
 
@@ -372,9 +376,9 @@ The output of this step is a collection of two MSP files - one per each molecule
 >
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: 
-> > * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
-> > * from the datasets list, find the output of **QCxMS get results** {% icon tool %} (should be the latest output dataset) and select it
-> > * {% icon workflow-run %} Run tool! 
+>    * if nothing pops up when you click on {% icon param-collection %} *Dataset collection*, then click on "switch to column select" 
+>    * from the datasets list, find the output of **QCxMS get results** {% icon tool %} (should be the latest output dataset) and select it
+>    * {% icon workflow-run %} Run tool! 
 >
 {: .hands_on}
 
