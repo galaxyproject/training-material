@@ -17,6 +17,22 @@ layout: base
     {% endif %}
     <p>{{ section.description | markdownify }}</p>
 
+    {% if section.tracks %}
+      {% assign buttoncol = "crimson, orangered, darkorange, green, mediumblue, darkmagenta" | split: "," %}
+      {% for track in section.tracks %}
+        {% assign i = forloop.index | minus: 1 | modulo: 6 %}
+        {% if track.link  contains 'https://' or track.link contains 'http://' %}
+           {% assign tracklink = track.link %}
+        {% else %}
+           {% assign tracklink = site.pages | where:"path", track.link  | first %}
+           {% assign tracklink = tracklink.url | relative_url | default: '#' %}
+        {% endif %}
+
+        <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: {{buttoncol[i]}}; color: white" href="{{ tracklink }}" ><span style="width: 100%">{{ track.title }}</span></a>
+      {% endfor %}
+    {% endif %}
+
+
     {% if section.tutorials %}
       {% assign hidetimes= section.async | default: page.async %}
       {% assign material_list = site | convert_to_material_list: section.tutorials %}
