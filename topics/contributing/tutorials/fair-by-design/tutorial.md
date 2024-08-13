@@ -750,7 +750,9 @@ PDF document accessibility is measured with a separate technical specification <
         In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform. 
         <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
         <br>
-		{% icon point-right %} [Add to CONTRIBUTORS.yaml]( {% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %})
+        <a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %}">
+		{% icon point-right %} Add to CONTRIBUTORS.yaml
+		</a>
         </p>
       </div>
     </div>
