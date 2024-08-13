@@ -740,6 +740,24 @@ PDF document accessibility is measured with a separate technical specification <
       </div>
     </div>
   </div>
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon sticky-note %} CONTRIBUTORS</h5>
+        <p class="card-text">
+        In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform. 
+        <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
+        <br>
+		[{% icon point-right %}  Add to CONTRIBUTORS.yaml]( {% link /topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %})
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
 <div class="col-sm-4">
    <!-- <div class="card text-white bg-secondary mb-3" > -->
    <div class="card bg-light mb-3" >
@@ -756,9 +774,6 @@ PDF document accessibility is measured with a separate technical specification <
       </div>
     </div>
   </div>
-</div>
-
-<div class="row">
   <div class="col-sm-4">
    <!-- <div class="card text-white bg-secondary mb-3" > -->
    <div class="card bg-light mb-3" >
@@ -766,7 +781,8 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon license %} CODE OF CONDUCT</h5>
         <p class="card-text">
-        A code of conduct defines the rules for how to engage in a co-creation community. It is based on a premise of an inclusive environment that respects all contributions.
+        A code of conduct defines the rules for how to engage in a co-creation community. 
+        <br>It is based on a premise of an inclusive environment that respects all contributions.
          <br>
          <a href="https://galaxyproject.org/community/coc/">
          {% icon point-right %} Read the Galaxy Project Code of Conduct
@@ -782,7 +798,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon comment %} REVISIONS</h5>
         <p class="card-text">
-        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release. This information combined with the commit message can provide more detailed information about the changes made in the new versions. 
+        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release.  
         <br>
         <a href="https://github.com/galaxyproject/training-material/releases">
         {% icon point-right %} Compare changes between GTN releases
