@@ -191,7 +191,7 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 {: .hands_on}
 
 > <tip-title>Can't find Parse parameter value tool? {% icon tool %} </tip-title>
-> If you have any problems with accessing **Parse parameter value** tool, you can open it using a direct [link](https://usegalaxy.eu/root?tool_id=param_value_from_file).
+> If you have any problems with accessing **Parse parameter value** tool, you can open [the tool](https://usegalaxy.eu/root?tool_id=param_value_from_file) directly using a given link.
 {: .tip}
 
 
