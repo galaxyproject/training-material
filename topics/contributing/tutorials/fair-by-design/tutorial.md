@@ -510,7 +510,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 >  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one. 
 >  
 >  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
->  - GTN is also based on GitHub and defines specific procedures on how one can contribute and collaborate using GitHub
+>  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate]( {% link CONTRIBUTING.md %}) using GitHub
 >  
 >  > <details-title> GTN: collaboration using GitHub ...</details-title>
 > > [Follow the Contributing with GitHub via its interface tutorial available on GTN]( {% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}  )
@@ -696,13 +696,14 @@ PDF document accessibility is measured with a separate technical specification <
 ><warning-title>Publishing closed FAIR materials</warning-title>
 > Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:
 >  1. Syllabus - that contains all metadata that describe the materials and metadata should always be open
->  2. Accompanying files - optional - augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective 
-> Another alternative is to publish the materials in a closed repository where the corresponding access rules can be implemented.
+>  2. Accompanying information - optional - to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective 
+>  
+> The complete learning materials package itself should be published in a closed repository where the corresponding access rules (and costs) can be implemented.
 {: .warning}
 
 ### Final preparations
-><tip-title>Time to create the accompanying files</tip-title>
->These are <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20–%20Publish/16-Publishing%20Preparations/16-Publishing%20Preparations/'>files</a> that are provided in the root of your learning materials and describe the content and define the rules of reuse.
+><tip-title>Time to provide the accompanying information</tip-title>
+> Usually provided at (or near) the root of the learning materials, the purpose of the accompanying information is to further describe the content and define the rules of reuse.
 {: .tip}
 
 <div class="row">
@@ -713,9 +714,11 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon text-document %} LICENSE</h5>
         <p class="card-text">
-         Plaintext file that defines the license of your learning materials. Just copy paste it from the official CC website. CC-BY-4.0 is the recommended license. 
+         The license defines the potential of reuse of your learning materials together with the rules regarding their attribution by others.<br>
+         CC-BY-4.0 is the recommended license, which is default in GTN. <br>
+         If you choose a different license, it must be supplied in the tutorial header as metadata.
          <br>
-         <a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt" > {% icon point-right %} CC license
+         <a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt" > {% icon point-right %} Browse through the available CC license types
          </a>       
         </p>
       </div>
@@ -728,7 +731,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon sticky-note %} README</h5>
         <p class="card-text">
-        A README is a text file that introduces and explains the contents of your learning materials. It usually describes the context and defines how the materials may be reused or co-created. It is usually written in a plain text format.
+        A README is a text file that introduces and explains the contents of the learning topics and materials. It usually describes the context and written in a plain text format. <br> GTN provides a README file on the level of each topic, where context information about the topic and its tutorials can be provided.
         <br>
 		<a href="https://www.makeareadme.com/">
         {% icon point-right %}  Make a README
@@ -742,13 +745,13 @@ PDF document accessibility is measured with a separate technical specification <
    <div class="card bg-light mb-3" >
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
-        <h5 class="card-title">{% icon references %} CITATION.cff</h5>
+        <h5 class="card-title">{% icon references %} CITATION</h5>
         <p class="card-text">
-        Citation files are plain text files with human- and machine-readable citation information that tells others how to cite or attribute your work. 
-        <br>
-        <a href="https://citation-file-format.github.io/">
-         {% icon point-right %} Create a citation file
-         </a>
+	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced to or reused. <br> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
+	        <br>
+		<a href="#citing-this-tutorial">
+        {% icon point-right %}  See an example citation
+        </a>
         </p>
       </div>
     </div>
@@ -761,12 +764,12 @@ PDF document accessibility is measured with a separate technical specification <
    <div class="card bg-light mb-3" >
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
-        <h5 class="card-title">{% icon license %} CODE_OF_CONDUCT</h5>
+        <h5 class="card-title">{% icon license %} CODE OF CONDUCT</h5>
         <p class="card-text">
         A code of conduct defines the rules for how to engage in a co-creation community. It is based on a premise of an inclusive environment that respects all contributions.
          <br>
-         <a href="https://github.com/probot/template/blob/master/CODE_OF_CONDUCT.md">
-         {% icon point-right %} Code of conduct template
+         <a href="https://galaxyproject.org/community/coc/">
+         {% icon point-right %} Read the Galaxy Project Code of Conduct
          </a>
         </p>
       </div>
@@ -777,12 +780,12 @@ PDF document accessibility is measured with a separate technical specification <
    <div class="card bg-light mb-3" >
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
-        <h5 class="card-title">{% icon comment %} RELEASE NOTES</h5>
+        <h5 class="card-title">{% icon comment %} REVISIONS</h5>
         <p class="card-text">
-        A release note is a report published alongside new or updated version of your learning materials that details the changes in the new version. 
+        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release. This information combined with the commit message can provide more detailed information about the changes made in the new versions. 
         <br>
-        <a href="https://slite.com/templates/release-notes">
-        {% icon point-right %} Creating Release Notes
+        <a href="https://github.com/galaxyproject/training-material/releases">
+        {% icon point-right %} Compare changes between GTN releases
         </a>
 		</p>
       </div>
