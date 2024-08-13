@@ -188,11 +188,12 @@ Once your dataset is uploaded, we can do some simple pre-processing to prepare t
 >    - *"Select type of parameter to parse"*: `Text`
 >    - *"Remove newlines ?"*: {% icon galaxy-toggle %}  `Yes`
 >
+>   > <tip-title>Can't find "Parse parameter value" tool? </tip-title>
+>   > If you have any problems with accessing **Parse parameter value** tool, you can open [the tool](https://usegalaxy.eu/root?tool_id=param_value_from_file) directly using a given link.
+>   {: .tip}
+>
 {: .hands_on}
 
-> <tip-title>Can't find Parse parameter value tool? {% icon tool %} </tip-title>
-> If you have any problems with accessing **Parse parameter value** tool, you can open [the tool](https://usegalaxy.eu/root?tool_id=param_value_from_file) directly using a given link.
-{: .tip}
 
 
 We will repeat the first two steps, but processing SMILES this time. 
@@ -241,6 +242,12 @@ Now, onto format conversion. Let’s convert our SMILES to SDF (Structure Data F
 > {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
 >    - *"Molecular input file"*: click on {% icon param-collection %} *Dataset collection* and select output of **Split file** {% icon tool %} on SMILES
 >    - *"Output format"*: `MDL MOL format (sdf, mol)`
+>
+>   > <tip-title>Add name of the molecule</tip-title>
+>   > Another parameter of this tool, *"Append the specified text after each molecule title"*, allows you to add name of the molecule to the title of the generated file. 
+>   > If you are working on a single molecule file, you can simply type the name of that compound into the parameter box.
+>   > However, if your input is a collection of SMILES (like in this case), then you have to add the names (output of **Parse parameter value** {% icon tool %}) at the level of the workflow editor. 
+>   {: .tip}
 >
 {: .hands_on}
 
