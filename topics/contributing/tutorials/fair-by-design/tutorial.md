@@ -31,7 +31,10 @@ contributions:
   authorship:
     - sonjafiliposka
     - amisev1971
+    - CarolinLeister
     - korvoj
+    - domlgreen
+    - isouyioul
   funding:
     - skills4eosc
 follow_up_training:
