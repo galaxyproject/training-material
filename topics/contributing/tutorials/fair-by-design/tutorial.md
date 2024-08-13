@@ -750,7 +750,7 @@ PDF document accessibility is measured with a separate technical specification <
         In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform. 
         <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
         <br>
-		[{% icon point-right %}  Add to CONTRIBUTORS.yaml]( {% link /topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %})
+		{% icon point-right %} [Add to CONTRIBUTORS.yaml]( {% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %})
         </p>
       </div>
     </div>
@@ -812,7 +812,9 @@ PDF document accessibility is measured with a separate technical specification <
 ### Storing and indexing
 
 ><tip-title>Automated publishing</tip-title>
->If you are working on GitHub using the provided templates repository then the "publish to Zenodo" step is fully automated for you. Just follow the [guide to publishing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%205%20%E2%80%93%20Publish/17-Zenodo%20Publishing/17-Zenodo%20Publishing/).
+>If you are working on GTN following the provided rules and procedures, GTN will automatically publish the new tutorial once the full review and release process is completed. 
+>
+>Just follow the [GTN guide to contributing via GitHub]( {% link /topics/contributing/#st-contribute %}).
 {: .tip}
 
 ><tip-title>To training catalogue</tip-title>
