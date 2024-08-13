@@ -4,6 +4,15 @@ layout: event-track
 title: Single Cell
 description: Learn all about 
 
+contributions:
+    organisers:
+        - pavanvidem
+        - nomadscientist
+    instructors:
+        - pavanvidem
+        - nomadscientist
+
+
 program:
   - section: "Single Cell" 
     description: |

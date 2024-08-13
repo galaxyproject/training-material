@@ -4,6 +4,15 @@ layout: event-track
 title: Bacterial genomics and AMR detection
 description: This learning path aims to teach you the basic steps to detect and check Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.
 
+contributions:
+    organisers:
+        - bebatut
+        - clsiguret
+    instructors:
+        - bebatut
+        - clsiguret
+
+
 program:
   - section: "Bacterial genomics and AMR detection" 
     description: |

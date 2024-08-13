@@ -4,6 +4,16 @@ layout: event-track
 title: BY-COVID
 description: Learn all about 
 
+
+
+contributions:
+    organisers:
+        - wm75
+    instructors:
+        - wm75
+
+
+
 program:
   - section: "Viral genomes sequencing data analysis " 
     description: |

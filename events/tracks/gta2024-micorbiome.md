@@ -4,6 +4,18 @@ layout: event-track
 title: Microbiome
 description: Learn all about 
 
+
+contributions:
+    organisers:
+        - paulzierep
+        - bebatut
+    instructors:
+        - bebatut
+        - paulzierep
+        - bernt-matthias
+        - plushz
+        - EngyNasr
+
 program:
   - section: "Microbiome" 
     description: |

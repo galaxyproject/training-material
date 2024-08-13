@@ -4,6 +4,14 @@ layout: event-track
 title: Mashine Learning
 description: Learn all about 
 
+contributions:
+    organisers:
+        - anuprulez
+    instructors:
+        - anuprulez
+
+
+
 program:
   - section: "Mashine Learning" 
     description: |

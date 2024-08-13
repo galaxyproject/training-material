@@ -4,6 +4,13 @@ layout: event-track
 title: Assmebly
 description: Learn all about 
 
+contributions:
+    organisers:
+        - delphine-l
+    instructors:
+        - delphine-l
+
+
 program:
   - section: "Assmebly" 
     description: |

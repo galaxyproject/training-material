@@ -4,6 +4,19 @@ layout: event-track
 title: Proteomics
 description: Learn all about proteomics and how to analyze data in Galaxy
 
+contributions:
+    organisers:
+        - pratikdjagtap
+        - foellmelanie
+        - subinamehta
+        - timothygriffin
+    instructors:
+        - pratikdjagtap
+        - foellmelanie
+        - subinamehta
+        - timothygriffin
+
+
 program:
   - section: "Introduction" 
     description: |

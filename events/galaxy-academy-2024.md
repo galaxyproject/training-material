@@ -46,6 +46,7 @@ contributions:
         - plushz
         - EngyNasr
         - clsiguret
+        - nomadscientist
         - pavanvidem
         - delphine-l
         - anuprulez
@@ -70,7 +71,7 @@ infrastructure:
 program:
   - section: "Monday: Galaxy introduction"
     description: |
-      On the first day, you will get to know Galaxy and some basics of sequence data analysis. Feel free to skip this day if you don't need this introduction. Please enjoy this introduction and prepare for the upcoming days.
+      Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
     tutorials:
       - type: custom
         name: "Start to get to know Galaxy "
