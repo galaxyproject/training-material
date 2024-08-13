@@ -275,7 +275,7 @@ Reusable materials can be found anywhere. These are just some examples:
 > <code-in-title>GTN</code-in-title>
 > [GTN learning resources](https://training.galaxyproject.org)
 > 
-> [TeSS Catalogue by Elixir](https://tess.elixir-europe.com)
+> [TeSS Catalogue by Elixir](https://tess.elixir-europe.org)
 {: .code-in}
 
 > <code-in-title>OER</code-in-title>
@@ -514,7 +514,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 >  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one. 
 >  
 >  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
->  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate]( {% link CONTRIBUTING.md %}) using GitHub
+>  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTING.md) using GitHub
 >  
 >  > <details-title> GTN: collaboration using GitHub ...</details-title>
 > > [Follow the Contributing with GitHub via its interface tutorial available on GTN]( {% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}  )
@@ -722,7 +722,7 @@ PDF document accessibility is measured with a separate technical specification <
          CC-BY-4.0 is the recommended license, which is default in GTN. <br>
          If you choose a different license, it must be supplied in the tutorial header as metadata.
          <br>
-         <a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt" > {% icon point-right %} Browse through the available CC license types
+         <a href="https://creativecommons.org/licenses" > {% icon point-right %} Browse through the available CC license types
          </a>       
         </p>
       </div>
@@ -749,7 +749,7 @@ PDF document accessibility is measured with a separate technical specification <
    <div class="card bg-light mb-3" >
       <!-- <div class="card-header text-white"> -->
       <div class="card-body">
-        <h5 class="card-title">{% icon sticky-note %} CONTRIBUTORS</h5>
+        <h5 class="card-title">{% icon cofest %} CONTRIBUTORS</h5>
         <p class="card-text">
         In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform. 
         <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
@@ -758,6 +758,60 @@ PDF document accessibility is measured with a separate technical specification <
 		{% icon point-right %} Add to CONTRIBUTORS.yaml
 		</a>
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon help %} FAQs</h5>
+        <p class="card-text">
+	        In addition to the learning content the Frequently Asked Questions can further help both learners and instructors with specific information regarding the learning context or practicalities.
+	        <br> Consider adding tutorial specific FAQ to the GTN tutorial where in you can answer questions regarding the challenges when working with the hands on activities, or provide other hints and guidelines to instructors and learners. 
+	        <br>
+		<a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#creating-new-faqssnippets %}">
+        {% icon point-right %}  Create snippets
+        </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon event-cost %} FUNDERS</h5>
+        <p class="card-text">
+        If the creation of the learning materials is funded by an organisation or another body, they should be attributed accordingly. <br>
+        In GTN this can be accomplished by adding the funding information into the special FUNDERS.yaml file. 
+         <br>
+         <a href="https://github.com/galaxyproject/training-material/blob/main/FUNDERS.yaml">
+         {% icon point-right %} Add to the Funders file
+         </a>
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3" >
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title">{% icon new-history %} OTHER</h5>
+        <p class="card-text">
+        Additional miscellaneous information should be provided if possible.  
+        <br> For an example, GTN also supports adding Organisations information. 
+        <br>
+        <a href="https://github.com/galaxyproject/training-material/blob/main/ORGANISATIONS.yaml">
+        {% icon point-right %} Add org info
+        </a>
+		</p>
       </div>
     </div>
   </div>
@@ -820,7 +874,7 @@ PDF document accessibility is measured with a separate technical specification <
 ><tip-title>Automated publishing</tip-title>
 >If you are working on GTN following the provided rules and procedures, GTN will automatically publish the new tutorial once the full review and release process is completed. 
 >
->Just follow the [GTN guide to contributing via GitHub]( {% link /topics/contributing/#st-contribute %}).
+>Just follow the [GTN guide to contributing via GitHub]( {% link topics/contributing/#st-contribute %}).
 {: .tip}
 
 ><tip-title>To training catalogue</tip-title>
