@@ -7,6 +7,9 @@ layout: base
 <section class="event-track">
   <h1>{{track.title}}</h1>
   <p>{{track.description}}</p>
+  {% if page.contributions %}
+    {% include _includes/contributor-list2.html contributors=page.contributions badge=true %}
+  {% endif %}
 
   <div>
   {% for section in track.program %}
