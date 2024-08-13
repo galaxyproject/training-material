@@ -111,11 +111,7 @@ program:
 
   - section: "Friday: Grab bag"
     description: | 
-      Can't get enough? Then please pick whichever tutorial you like from the track of the previous days or from the list below.
-    tutorials:
-      - name: troubleshooting
-        topic: admin
-
+      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that we can only give consider tutorials of the first day or any that is part of a Track of the Galaxy Training Academ 2024.
 ---
 # Wellcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform. Than you are at the right place. We offer here a 5-day Global Online and Asynchronous learining event.
