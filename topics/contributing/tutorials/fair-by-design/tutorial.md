@@ -7,6 +7,7 @@ abbreviations:
   EOSC: European Open Science Cloud
   CC: Creative Commons
   MVS: Minimum Viable Skills
+  TeSS: Training eSupport System
 zenodo_link: https://zenodo.org/records/11548062
 questions:
   - How to develop FAIR learning materials?
@@ -820,7 +821,9 @@ PDF document accessibility is measured with a separate technical specification <
 {: .tip}
 
 ><tip-title>To training catalogue</tip-title>
->You are at the point when you should also consider making a record in a relevant training catalogue such as the EOSC training catalogue.
+>You are at the point when you should also consider making a record in a relevant training catalogue.
+>
+>GTN automatically creates a new record in the [Elixir TeSS training catalogue](https://tess.elixir-europe.org) that is the most relevant catalogue for its community.
 {: .tip}
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage....</a>
