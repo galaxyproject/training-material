@@ -3,7 +3,7 @@ layout: event
 
 title: Galaxy Academy 2024
 description: |
-  The Galaxy Academy is a online training event for Beginners as well as learners who would like to improve there Galaxy data analysis skills. Over the course of one week we will have a different topic and focus every day. 
+  The Galaxy Academy is a online training event for Beginners as well as learners who would like to improve their Galaxy data analysis skills. Over the course of one week, we will have a different topic and focus every day. 
 
 draft: true
 
@@ -97,11 +97,11 @@ program:
         link: events/tracks/gta2024-proteomics.md
       - title: Assembly
         link: events/tracks/gta2024-assembly.md
-      - title: Transciptomics
+      - title: Transcriptomics
         link: events/tracks/gta2024-transcriptomics.md
       - title: Single Cell
         link: events/tracks/gta2024-single-cell.md
-      - title: Microbime
+      - title: Microbiome
         link: events/tracks/gta2024-micorbiome.md
       - title: Bacterial Genomics
         link: events/tracks/gta2024-bacterial-genomeics.md
@@ -112,13 +112,13 @@ program:
 
   - section: "Friday: Grab bag"
     description: | 
-      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that we can only give consider tutorials of the first day or any that is part of a Track of the Galaxy Training Academ 2024.
+      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that we can only give consider tutorials of the first day or any that is part of a Track of the Galaxy Training Academy 2024.
 ---
-# Wellcome to the Galaxy Training Academy
-Do you want to learn how to use Galaxy, a open source data analysis platform. Than you are at the right place. We offer here a 5-day Global Online and Asynchronous learining event.
+# Welcome to the Galaxy Training Academy
+Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a 5-day Global Online and Asynchronous learning event.
 
-On the first day you can make your self familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton. 
+On the first day you can make yourself familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton. 
 
-You can follow our porvieded leraning pathes in your own past using our provieded self-learining materials. Next to the programm you will find Slack channels you can join to exchange with othe and other participants during the event. Here you will also find help if you have qustions or run into an issue during the training. We try to cover all time zoons with helpers for each topic, but pleses be pacient if you do not get an emediat respons.
+You can set your own pace on your learning journey using our provided self-learning materials. Next to the program, you will find Slack channels you can join to exchange with the trainers and other participants during the event. Here you will also find help if you have qustions or run into an issue during the training. We try to cover all time zones with helpers for each topic, but please be patient if you do not get an immediat response.
 
-You only need a browser and an account at a galaxy instance registerd for this event. Please have a look at the setup tab.
+You only need a browser and an account on one of the galaxy instances registered for this event. Please have a look at the setup tab.
