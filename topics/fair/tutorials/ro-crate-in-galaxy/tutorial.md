@@ -83,27 +83,13 @@ Let’s run the workflow and export the RO-Crate.
 >    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
 >
->     > <tip-title> Importing via links </tip-title>
->     >
->     >   - Copy the link location
->     >   - Open the Galaxy Upload Manager (galaxy-upload on the top-right of the tool panel)
->     >   - Select Paste/Fetch Data
->     >   - Paste the link(s) into the text field
->     >   - Press Start
->     >   - Close the window
->     {: .tip}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. Run **GTN Training: Galaxy 101 For Everyone** workflow using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - *"1: Iris Dataset""*: the `iris.csv` file we just uploaded
 >
->     > <tip-title> Running a workflow </tip-title>
->     >   - Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
->     >   - Click on the {% icon workflow-run %} (Run workflow) button into your workflow box
->     >   - Configure the workflow as needed
->     >   - Click the {% icon workflow-run %} Run Workflow button at the top-right of the screen
->     >   - You may have to refresh your history to see the queued jobs
->     {: .tip}
+>    {% snippet faqs/galaxy/workflows_run.md  %}
 >
 > 3. **View the workflow outputs** once the workflow has completed
 >    - The workflow produces several text and tabular outputs, and two plot (image) outputs
