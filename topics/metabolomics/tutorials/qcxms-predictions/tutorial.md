@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Predicting EI+ mass spectra with QCxMS
-zenodo_link: 'https://zenodo.org/record/13259853'
+zenodo_link: 'https://zenodo.org/record/13327051'
 level: Introductory
 
 questions:
@@ -39,15 +39,6 @@ requirements :
 Mass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compounds identification. Even though nowadays MS is a standard and popular method, there are still compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful structural information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [{% cite Zhu2023 %}, {% cite Allen2016Computational %}]. 
 There have been several methods developed to predict mass spectra, which can be classified as either first-principles physical-based simulation or data-driven statistical methods [{% cite Zhu2023 %}]. To the first category we can assign purely statistical theories (quasi-equilibrium theory (QET) or Rice–Ramsperger–Kassel–Marcus (RRKM) theories) [{% cite Vetter1994 %}], as well as QCEIMS [{% cite Wang2020 %}] and semiempirical GFNn-xTB [{% cite Koopman2019 %}] which use Born–Oppenheimer molecular dynamics (MD) combined with fragmentation pathways. Data-driven statistical methods reach back to 1960s when DENDRAL project was started by early AI scientists [{% cite Lindsay1980ApplicationsOA %}] – it applied rule-based heuristic programming. More recently, CFM-ID has been introduced [{% cite Allen2014 %}, {% cite Allen2014metabolomics %}, {% cite Allen2016Computational %}, {% cite DjoumbouFeunang2019 %}, {% cite Wang2021 %}], which uses rule-based fragmentation and employs machine learning methods. Current advancements in machine learning led to recent work using deep neural networks that allow predicting spectra from molecular graphs or fingerprints [{% cite Wei2019 %}].
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
 You will be able to check out how QCxMS works in practice since we are going to use Galaxy tool suite based on this method [{% cite Grimme2013 %}, {% cite Bauer2014 %}, {% cite Bauer2016 %}]. Beforehand, we will generate conformers of the query molecule with [RDKit](http://www.rdkit.org) and we will use xTB for molecular optimisation [{% cite Bannwarth2020 %}]. 
 But first things first, let’s get some toy data to play with and crack on! 
 
@@ -83,13 +74,9 @@ But first things first, let’s get some toy data to play with and crack on!
 
 # Importing data and pre-processing
 
-In this tutorial, we start from molecule’s SMILES, but then we convert it to SDF, so if you already have SDF files to work with, simply jump in the relevant place in the workflow and carry on from there. 
-We will start with a table with the first column being molecule names and the second one – corresponding SMILES. 
+In this tutorial, you can choose whether you want to predict mass spectrum only for one molecule, or if you want to do it for multiple molecules at once. The pre-processing steps will slightly differ depending on your choice. If you are completing this tutorial just to see how QCxMS tools work, feel free to follow the instructions for one molecule to skip some pre-processing steps.  
 
-<!---
-consider the figure with SMILES and the corresponding structure
--->
-
+In both cases, we start from molecule’s SMILES, and then we convert it to SDF, so if you already have SDF files to work with, simply jump in the relevant place in the workflow and carry on from there. 
 
 > <details-title>What is SMILES?</details-title>
 >
@@ -97,9 +84,208 @@ consider the figure with SMILES and the corresponding structure
 >
 {: .details}
 
+<!---
+consider the figure with SMILES and the corresponding structure
+-->
+
+
+{% include _includes/cyoa-choices.html option1="Predict MS for a single molecule" option2="Predict MS for multiple molecules at once" default="Predict MS for a single molecule"
+       text="Choose below if you just want to follow the pipeline for prediting the spectrum for only one molecule or multiple molecules at once!" disambiguation="single_vs_multiple" %}
+
+<div class="Predict-MS-for-a-single-molecule" markdown="1">
+
 ## Upload data onto Galaxy
 
-In this tutorial, we will work on two simple molecules – ethanol (C<sub>2</sub>H<sub>5</sub> OH) and ethylene (C<sub>2</sub>H<sub>4</sub>). Of course, you might choose any molecule that you want, but be aware that the more complex structure you choose, the more time it will take to complete the analysis since it involves generating conformers, semiempirical methods and molecular optimisation.
+Working on a single molecule means that we will work on a dataset and not on a collection of datasets. To simulate the spectrum, we will use ethanol (C<sub>2</sub>H<sub>5</sub> OH) as an example, but you can choose any other molecule that you want, but be aware that the more complex structure you choose, the more time it will take to complete the analysis since the workflow involves generating conformers, semiempirical methods and molecular optimisation.
+We will simply start with molecule’s SMILES. 
+You have three options for uploading the data. The first two - importing via history and Zenodo link will give a file specific to this tutorial, while the last one – “Paste data uploader" gives you more flexibility in terms of the compounds you would like to test with this workflow. 
+
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. You can simply import [this history](https://usegalaxy.eu/u/j.jakiela/h/input-file-ei-mass-spectra-prediction-using-qcxms-1) with the input file. 
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the history to your name of choice.
+>
+{: .hands_on}
+
+><hands-on-title>Option 2: Data upload - Add to history via Zenodo</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the input table from [Zenodo]({{ page.zenodo_link }})
+>
+>    ```
+>    https://zenodo.org/records/13327051/files/ethanol_SMILES.smi
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+{: .hands_on}
+
+> <hands-on-title> Option 3: Data Upload  - paste data </hands-on-title>
+> 
+> 1. Create a new history for this tutorial
+> 2. 
+>    - Click {% icon galaxy-upload %} **Upload Data** at the top of the tool panel
+>    - Select {% icon galaxy-wf-edit %} **Paste/Fetch Data** at the bottom
+>    - Paste the SMILES into the text field:  
+> ```
+> CCO
+> ```
+>    - Change **Type** from "Auto-detect" to `smi`
+>    - Press **Start** and **Close** the window
+> 3. You can then rename the dataset as you wish (here we use `ethanol_SMILES`)
+> 4. Check that the datatype is `smi`.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="smi" %}
+>
+{: .hands_on}
+
+## SMILES to SDF
+
+> <hands-on-title> Convert SMILES to SDF </hands-on-title>
+>
+> {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: `ethanol_SMILES` (your SMILES dataset from your history)
+>    - *"Output format"*: `MDL MOL format (sdf, mol)`
+>    - *"Append the specified text after each molecule title"*: `ethanol`
+>
+{: .hands_on}
+
+We now have an SDF file, containing the atoms' coordinates and the investigated molecule's name. 
+
+# 3D Conformer generation & optimization
+
+## Generate conformers
+The next step involves generating three-dimensional (3D) conformers for our molecule. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
+
+> <details-title> What are conformers? </details-title>
+>
+> Conformers are different spatial arrangements of a molecule that result from rotations around single bonds. They have different potential energies and hence some are more favourable (local minima on the potential energy surface) than others. 
+> ![Newman projections of butane conformations & their relative energy differences (not total energies). Conformations form when butane rotates about one of its single covalent bond. Torsional/dihedral angle is shown on x-axis.](../../images/qcxms_predictions_conformers.svg "Conformers of butane and their relative energy differences.")
+> Image credit: [Keministi](https://commons.wikimedia.org/wiki/File:Butane_conformations_and_relative_energies.svg), License: Creative Commons CC0 1.0. 
+>
+{: .details}
+
+
+> <hands-on-title> Generate conformers </hands-on-title>
+>
+>  {% tool [Generate conformers](toolshed.g2.bx.psu.edu/repos/bgruening/ctb_im_conformers/ctb_im_conformers/1.1.4+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: output of **Convert to sdf** {% icon tool %}
+>    - *"Number of conformers to generate"*: `1`
+>
+{: .hands_on}
+
+Now - once again format conversion! This time we will convert the generated conformers from the SDF format to Cartesian coordinate (XYZ) format. The XYZ format lists the atoms in a molecule and their respective 3D coordinates, which is a common format used in computational chemistry for further processing and analysis.
+
+> <hands-on-title> Molecular Format Conversion </hands-on-title>
+>
+> 1. {% tool [Compound conversion](toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Molecular input file"*: output (sdf) of **Generate conformers** {% icon tool %}
+>    - *"Output format"*: `XYZ cartesian coordinates format`
+>    - *"Add hydrogens appropriate for pH"*: `7.0`
+>
+> 2. Check that the datatype is `xyz`. If it's not, just change it – below is the tip how to do it.
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="xyz" %}
+>
+{: .hands_on}
+
+
+## Molecular optimization
+
+As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
+
+> <hands-on-title> Molecular optimisation with xTB </hands-on-title>
+>
+> {% tool [xtb molecular optimization](toolshed.g2.bx.psu.edu/repos/recetox/xtb_molecular_optimization/xtb_molecular_optimization/6.6.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Atomic coordinates file"*: output of **Convert to xyz** {% icon tool %})
+>    - *"Optimization Levels"*: `tight`
+>    - *"Keep molecule name"*: {% icon galaxy-toggle %}  `Yes`
+>
+{: .hands_on}
+
+
+# QCxMS Spectra Prediction 
+
+## Neutral and production runs
+
+Finally, let’s predict the spectra for our molecule. As mentioned, we will use [QCxMS](https://github.com/qcxms/QCxMS) for this purpose. First, we need to prepare the necessary input files for the QCxMS production runs. These files are required for running the QCxMS simulations, which will predict the mass spectra of the molecule. This step typically formats the optimized molecular data into a format that can be used for the production simulations. 
+
+
+> <hands-on-title> QCxMS neutral run </hands-on-title>
+>
+>  {% tool [QCxMS neutral run](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_neutral_run/qcxms_neutral_run/5.2.1+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: output of **xtb molecular optimization** {% icon tool %}
+>    - *"QC Method"*: `GFN2-xTB`
+>
+{: .hands_on}
+
+The outputs of the above step are as follows:
+-	.in output: Input file for the QCxMS production run 
+-	.start output: Start file for the QCxMS production run 
+-	.xyz output: Cartesian coordinate file for the QCxMS production run
+
+We can now use those files as input for the next tool which calculates the mass spectra using QCxMS. This simulation generates .res files, which contain the raw results of the mass spectra calculations. These results are essential for predicting how the molecules will appear in mass spectrometry experiments.
+
+> <hands-on-title> QCxMS production run </hands-on-title>
+>
+> 1. {% tool [QCxMS production run](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_production_run/qcxms_production_run/5.2.1+galaxy3) %} with the following parameters:
+>    - {% icon param-collection %} *Dataset collection* *"in files [.in]"*: `input in files` generated by **QCxMS neutral run** {% icon tool %}
+>    - {% icon param-collection %} *Dataset collection* *"start files [.start]"*: `input start files` generated by **QCxMS neutral run** {% icon tool %}
+>    - {% icon param-collection %} *Dataset collection* *"xyz files [.xyz]"*: `input xyz files` generated by **QCxMS neutral run** {% icon tool %}
+>
+{: .hands_on}
+
+
+## Filter failed datasets
+
+It might be the case that some runs might have failed, therefore it is crucial to filter out any failed runs from the dataset to ensure only successful results are processed further. This step is important to maintain the integrity and quality of the data being analyzed in subsequent steps. The output is a file containing only the successful mass spectra results.
+
+> <hands-on-title> Filter failed datasets </hands-on-title>
+>
+> 1. {% tool [Filter failed datasets](__FILTER_FAILED_DATASETS__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input Collection"*: `res files generated by QCxMS` (output of **QCxMS production run** {% icon tool %} )
+>
+{: .hands_on}
+
+
+## Get MSP spectra
+
+The filtered collection contains .res files from the QCxMS production run. This final step converts the .res files into simulated mass spectra in MSP (Mass Spectrum Peak) file format. The MSP format is widely used for storing and sharing mass spectrometry data, enabling easy comparison and analysis of the results.
+
+> <hands-on-title> QCxMS get MSP results </hands-on-title>
+>
+> 1. {% tool [QCxMS get results](toolshed.g2.bx.psu.edu/repos/recetox/qcxms_getres/qcxms_getres/5.2.1+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Molecule 3D structure [.xyz]"*: `Convert to xyz` (output of **Compound conversion** {% icon tool %})
+>    - *"res files [.res]"*: output of **Filter failed datasets** {% icon tool %} (if the collection doesn't appear in the drop-down list, simply drag and drop it from the history panel to the input box)
+>
+{: .hands_on}
+
+> <details-title>MSP files </details-title>
+> MSP (Mass Spectrum Peak) file is a text file structured according to the NIST MSSearch spectra format. MSP is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). It can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata (such as name, spectrum type, ion mode, retention time, and the number of m/z peaks) and peaks.
+{: .details}
+
+You can now {% icon dataset-save %} download the MSP file and open it in your spectra processing software for further investigation! 
+
+To give you some insight into how well QCxMS can perform, below is the mass spectrum of ethanol resulting from our workflow compared with [experimental spectrum](https://hmdb.ca/spectra/c_ms/28442). Both spectra were compiled using an [online mass spectrum generator](https://www.sisweb.com/mstools/spectrum.htm) which requires only m/z values and intensities – so the values that you can get from our MSP file! As you can see, the predicted peaks nicely correspond to experimental ones. But be careful - there might be slight deviations for molecules with more structural complexity! 
+
+![Upper panel shows the experimental spectrum of ethanol, while the lower panel shows analogical spectrum but predicted with the current workflow. The predicted peaks correspond well to the experimental ones. Intensities of simulated peaks have not been predicted perfectly, but the most important trends are preserved.](../../images/qcxms_predictions_ms_exp_pred.png "Comparison between experimental (upper panel) and predicted (lower panel) mass spectra of ethanol.")
+
+
+# Conclusion
+{% icon trophy %} Well done, you’ve simulated the mass spectrum! You might want to consult your results with the [key history](https://usegalaxy.eu/u/j.jakiela/h/ms-prediction-qcxms-single-molecule). If you would like to process multiple molecules at once, you can simply use [the workflow](https://usegalaxy.eu/u/hechth/h/end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms-1) or move to “Predict MS for multiple molecules at once” tab of this tutorial to learn how the pipeline differs from the one that we’ve just covered. 
+
+
+</div>
+
+<div class="Predict-MS-for-multiple-molecules-at-once" markdown="1">
+
+## Upload data onto Galaxy
+
+We will work on two simple molecules – ethanol (C<sub>2</sub>H<sub>5</sub> OH) and ethylene (C<sub>2</sub>H<sub>4</sub>). Of course, you might add more and choose any other molecules that you want, but be aware that the more complex structure you choose, the more time it will take to complete the analysis since the workflow involves generating conformers, semiempirical methods and molecular optimisation.
+We will start with a table with the first column being molecule names and the second one – corresponding SMILES. 
 You have three options for uploading the data. The first two - importing via history and Zenodo link will give a file specific to this tutorial, while the last one – “Paste data uploader" gives you more flexibility in terms of the compounds you would like to test with this workflow. 
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
@@ -118,7 +304,7 @@ You have three options for uploading the data. The first two - importing via his
 > 2. Import the input table from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->    https://zenodo.org/records/13259853/files/qcxms_prediction_input.tabular
+>    https://zenodo.org/records/13327051/files/qcxms_prediction_input.tabular
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -401,5 +587,8 @@ To give you some insight into how well QCxMS can perform, below is the mass spec
 
 
 # Conclusion
-{% icon trophy %} Well done, you’ve simulated mass spectra! You might want to consult your results with the [key history](https://usegalaxy.eu/u/hechth/h/end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms-1) or use [the workflow](https://usegalaxy.eu/u/j.jakiela/w/end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms) associated with this tutorial. 
-The prediction of mass spectra might be very useful, particularly for compounds that lack experimental data. Simulating the spectra can also save time and resources. This field has been developing quite rapidly, and recent advancements in new algorithms and packages have led to more and more accurate results. However, one cannot forget that this kind of software should be used to deepen our chemical understanding of the structures of studied compounds and not as a replacement for practical experiments. 
+{% icon trophy %} Well done, you’ve simulated mass spectra! You might want to consult your results with the [key history](https://usegalaxy.eu/u/hechth/h/end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms-1) or use [the workflow](https://usegalaxy.eu/u/hechth/h/end-to-end-ei-mass-spectra-prediction-workflow-using-qcxms-1) associated with this tutorial. 
+
+</div>
+
+The prediction of mass spectra might be very useful, particularly for compounds that lack experimental data. Simulating the spectra can also save time and resources. This field has been developing quite rapidly, and recent advancements in new algorithms and packages have led to more and more accurate results. However, one cannot forget that this kind of software should be used to deepen our chemical understanding of the structures of studied compounds and not as a replacement for practical experiments.
