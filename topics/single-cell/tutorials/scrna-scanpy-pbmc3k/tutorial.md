@@ -39,6 +39,7 @@ contributors:
 - hrhotz
 - mtekman
 - pavanvidem
+- dianichj
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -489,6 +490,28 @@ To create this table, we need to:
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > 12. Inspect the generated file and check if the mitochondrial annotation has been added
+>
+>    > <question-title></question-title>
+>    >
+>    > 1. How can I filter genes like Ribosomal Protein Genes or Non-Protein Coding genes that might interfere with my downstream analysis?
+>    > 2. What steps should I take to identify these genes in my data?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. To filter genes such as Ribosomal Protein Genes or Non-Protein Coding genes, follow these steps:
+>    > >
+>    > >    - Use the Gene annotation file as you did for mitochondrial genes.
+>    > >    - Adjust the expression from `$1 ~ /^MT-/` to `$1 ~ /^RP/` for Ribosomal Protein Genes or `$1 ~ /^LINC/` for Non-Protein Coding genes. 
+>    > >    -  Create a tabular file for the new annotation column, e.g., rpgene. 
+>    > >        ``` 
+>    > >        rpgene 
+>    > >        ```
+>    > >    - Add your new gene annotation to the data matrix using the {% tool [Manipulate Anndata](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} tool, similar to step 7 of the mitochondrial annotation process.
+>    > >    - Inspect your AnnData to confirm the new gene annotations are correctly added.
+>    > > 2. Long Non-Coding RNAs often start with "LINC" followed by a number, while Ribosomal Protein Genes typically start with "RP". Be aware that some non-ribosomal genes also start with "RP" and are associated with conditions like Retinitis Pigmentosa. If these genes are relevant, annotate 'RP' genes carefully.
+>    > > 
+>    > {: .solution}
+>    {: .question}
 {: .hands_on}
 
 We can now compute QC metrics on the `AnnData` object.
