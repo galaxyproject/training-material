@@ -103,6 +103,7 @@ May all your materials be FAIR!
 # Main stages
 
 ## Stage 1 - Prepare
+
 > Before anything else, preparation is the key to success!
 {: .quote author="Alexander Graham Bell"}
 
@@ -309,6 +310,7 @@ Reusable materials can be found anywhere. These are just some examples:
 {: .code-in}
 
 ### Potential for reuse
+
 > <warning-title> Respect the licenses, to be respected!</warning-title>
 > - Materials with non-permissible licenses can be used for inspiration only.
 > - Materials with permissible licenses should be reused based on the license rules.
@@ -516,6 +518,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .quote author="Edward Rickenbacker"}
 
 ### Choose Tools & Formats
+
 > <tip-title>Collaborative environment for team work</tip-title>
 >  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one.
 >  
@@ -713,6 +716,7 @@ PDF document accessibility is measured with a separate technical specification <
 {: .warning}
 
 ### Final preparations
+
 ><tip-title>Time to provide the accompanying information</tip-title>
 > Usually provided at (or near) the root of the learning materials, the purpose of the accompanying information is to further describe the content and define the rules of reuse.
 {: .tip}
