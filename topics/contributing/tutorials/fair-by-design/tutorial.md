@@ -226,7 +226,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > - [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
 {: .tip }
 
-### Define:
+### Define
 
 > <question-title>Purpose</question-title>
 > When and how the learning materials can be used and for what purposes?
