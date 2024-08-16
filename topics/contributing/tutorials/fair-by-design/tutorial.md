@@ -49,7 +49,7 @@ extra:
   URL_resource_type: "Permanent URL"
   learning_resource_type: "self-paced microlearning unit"
   access_cost: "No"
-  attribution: "This microlearning unit is based on Filiposka, Sonja, Mishev, Anastas. (2024). FAIR-by-Design Microlearning (1.0.0). https://doi.org/10.5281/zenodo.11548062"
+  attribution: "This microlearning unit is based on Filiposka, Sonja, Mishev, Anastas. (2024). FAIR-by-Design Microlearning (1.0.0). https://doi.org/10.5281/zenodo.11548062"
 ---
 
 
@@ -248,7 +248,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > What competences will be gained after successful completing of the learning process?
 >
 > ><tip-title>Be SMART</tip-title>
-> >Objectives should be specific, ​measurable, ​attainable, ​relevant and ​time-bound​.
+> >Objectives should be specific, measurable, attainable, relevant and time-bound.
 > {: .tip}
 >
 > ><tip-title>Use Blooms Taxonomy</tip-title>
@@ -295,11 +295,11 @@ Reusable materials can be found anywhere. These are just some examples:
 {: .code-in}
 
 > <code-in-title>General</code-in-title>
-> [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
+> [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
 > 
-> [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
+> [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
 > 
-> [OSF](https://osf.io/) - a free, open research platform
+> [OSF](https://osf.io/) - a free, open research platform
 {: .code-in}
 
 ### Potential for reuse
@@ -507,7 +507,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 ## Stage 4 - Produce
 
 > To contrive is nothing! To construct is something! To produce is everything! 
-{: .quote author="Edward Rickenbacker​"}
+{: .quote author="Edward Rickenbacker"}
 
 ### Choose Tools & Formats
 > <tip-title>Collaborative environment for team work</tip-title>
@@ -694,7 +694,7 @@ PDF document accessibility is measured with a separate technical specification <
 
 ## Stage 5 - Publish
 
-> Publishing is the art of working on a creative idea and turning it into a masterpiece​!
+> Publishing is the art of working on a creative idea and turning it into a masterpiece!
 {: .quote author="Unknown"}
 
 ><warning-title>Publishing closed FAIR materials</warning-title>
@@ -914,24 +914,24 @@ The questions marked as essential achieve bare minimum FAIRness.
 {: .details}
 
 ><details-title>Optional requirements</details-title>
-> -  Did you follow the stages of the backward instructional design process while developing the learning resource?
-> -  Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?
-> -  Does the learning resource represent a complete learning object defined around minimum one learning objective?
-> -  Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
->    -  facilitator guide
->    -  activities description
->    -  assessment activities and strategy to assess
->    -  general learning content or instructor notes
->    -  lesson unit plan
->    -  syllabus
-> -  Have you employed a versioning system to track and control changes in your materials?
-> -  Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?
-> -  Is the learning resource searchable in at least one relevant catalogue? 
->    -  Is it FAIR (can be searched based on metadata)?
-> -  Does the course include the possibility to provide feedback or comments from users and-or trainers/designers? 
->    -  If so, do you regularly gather and analyse that feedback?
-> -  Does the resource adopt an open community approach regarding its quality and reachability?
-> -  Has the learning resource been checked by a third party regarding its learning experience quality?
+> - Did you follow the stages of the backward instructional design process while developing the learning resource?
+> - Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?
+> - Does the learning resource represent a complete learning object defined around minimum one learning objective?
+> - Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
+>    - facilitator guide
+>    - activities description
+>    - assessment activities and strategy to assess
+>    - general learning content or instructor notes
+>    - lesson unit plan
+>    - syllabus
+> - Have you employed a versioning system to track and control changes in your materials?
+> - Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?
+> - Is the learning resource searchable in at least one relevant catalogue?
+>    - Is it FAIR (can be searched based on metadata)?
+> - Does the course include the possibility to provide feedback or comments from users and-or trainers/designers?
+>    - If so, do you regularly gather and analyse that feedback?
+> - Does the resource adopt an open community approach regarding its quality and reachability?
+> - Has the learning resource been checked by a third party regarding its learning experience quality?
 {: .details}
 
 ### Feedback QA 
@@ -951,12 +951,12 @@ The questions marked as essential achieve bare minimum FAIRness.
 - Gather feedback from all available internal & external sources.
 
 - Potential sources:  
-	- Feedback form   
-	- QA recommendations   
-	- Self-reflection after training   
+	- Feedback form  
+	- QA recommendations  
+	- Self-reflection after training  
 	- Git Issues
 	- Gitter Chat
-	- Direct mail contact   
+	- Direct mail contact  
 	- Other means of communication
 
 #### {% icon galaxy-barchart %} Analyse
