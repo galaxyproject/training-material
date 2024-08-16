@@ -86,7 +86,7 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.
 >	- Use gathered feedback for continuous improvement
 >7. [Continuous Improvement](#stage-7---continuous-improvement)
 >	- Create a list of potential improvements
->	- Choose a set of improvements to be implemented 
+>	- Choose a set of improvements to be implemented
 >	- Start a new release cycle
 >
 >Review each stage and the essential steps that it includes.
@@ -170,8 +170,8 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 
 > <tip-title>Using metadata in GTN tutorials</tip-title>
 >
->- When developing materials in GTN, this information should be included in the Tutorial.md file header metadata. 
->- Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the "extra" field. 
+>- When developing materials in GTN, this information should be included in the Tutorial.md file header metadata.
+>- Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the "extra" field.
 >
 > > <details-title>More details on the GTN Metadata ...</details-title>
 > > [Follow the GTN Metadata tutorial]( {% link topics/contributing/tutorials/schemas/tutorial.md %} )
@@ -304,7 +304,7 @@ Reusable materials can be found anywhere. These are just some examples:
 
 ### Potential for reuse
 > <warning-title> Respect the licenses, to be respected!</warning-title>
-> - Materials with non-permissible licenses can be used for inspiration only. 
+> - Materials with non-permissible licenses can be used for inspiration only.
 > - Materials with permissible licenses should be reused based on the license rules.
 {: .warning}
 
@@ -377,7 +377,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .tip}
 
 ><tip-title>Facilitation guide kit</tip-title>
-> A <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> facilitation guide </a> should help prepare for the actual training. 
+> A <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> facilitation guide </a> should help prepare for the actual training.
 > 
 > The facilitation guide kit includes documentation of the process of organising and running a training. What different people need to have, know and do so that everything runs smoothly.
 > 
@@ -392,9 +392,9 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .tip}
 
 ><question-title>What about instructor notes?</question-title>
->  They need to be detailed enough so that anyone can reuse the learning content, especially slides properly. 
+>  They need to be detailed enough so that anyone can reuse the learning content, especially slides properly.
 >  
->  Any specific information relevant for instructors that would like to organise a training based on your GTN tutorial content should be added in Details box. 
+>  Any specific information relevant for instructors that would like to organise a training based on your GTN tutorial content should be added in Details box.
 >  
 >  This practice significantly increases the reuse potential of the material.
 {: .question}
@@ -409,7 +409,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon curriculum %} 1. Set Learning Objectives</h5>
         <p class="card-text">
-         ... what is the goal 
+         ... what is the goal
         </p>
       </div>
     </div>
@@ -429,7 +429,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-panelview %} 3. Plan</h5>
         <p class="card-text">
-        ... share the agenda 
+        ... share the agenda
         </p>
       </div>
     </div>
@@ -442,7 +442,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon version %} 4. Hook</h5>
         <p class="card-text">
-         ... why is the content important 
+         ... why is the content important
         </p>
       </div>
     </div>
@@ -462,7 +462,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-rulebuilder-history %} 6. Practise</h5>
         <p class="card-text">
-        ... you help me do it, I'll watch you do it 
+        ... you help me do it, I'll watch you do it
         </p>
       </div>
     </div>
@@ -506,12 +506,12 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 ## Stage 4 - Produce
 
-> To contrive is nothing! To construct is something! To produce is everything! 
+> To contrive is nothing! To construct is something! To produce is everything!
 {: .quote author="Edward Rickenbacker"}
 
 ### Choose Tools & Formats
 > <tip-title>Collaborative environment for team work</tip-title>
->  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one. 
+>  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one.
 >  
 >  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
 >  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTING.md) using GitHub
@@ -524,13 +524,13 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .tip}
 
 > <tip-title>Granular versioning for easy rollback</tip-title>
->    - Versioning helps you maintain control over your changes. 
+>    - Versioning helps you maintain control over your changes.
 >    - GitHub natively provides versioning and history retention that help easy roll back to an earlier stable state.
 {: .tip}
 
 > <tip-title>Open file formats to foster reuse</tip-title>
 > - For other people to reuse the materials they should be made available using open file formats
-> - GTN promotes the use of the MD open file format for the main learning content empowered with open scientific notebooks and workflows. 
+> - GTN promotes the use of the MD open file format for the main learning content empowered with open scientific notebooks and workflows.
 > - If you use close file formats then you MUST clearly state the tools that have been used in more details.
 {: .tip}
 
@@ -540,33 +540,33 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .tip}
 
 > <tip-title>Two file sets: editable + final</tip-title>
-> - The MD and supporting files are the main files used for development of the content. These files are what matters for you and other instructors. 
+> - The MD and supporting files are the main files used for development of the content. These files are what matters for you and other instructors.
 > - Based on the editable files, GTN automatically generates the final (non-editable version) in HTML (and PDF). These  are shared with the learners.
 > - GTN takes care of the revision numbering for you.
 {: .tip}
 
 > <tip-title>Don't forget to take advantage of co-creation</tip-title>
 > Truly FAIR learning materials enable co-creation with external parties.
->  GitHub is a collaborative environment that supports co-creation in every step of the learning materials development and revision process. 
+>  GitHub is a collaborative environment that supports co-creation in every step of the learning materials development and revision process.
 >  The GTN fork-and-pull process of contributing to the learning material is a clear example of co-creation implementation.
 {: .tip}
 
 
-### Plan to reuse existing material? 
+### Plan to reuse existing material?
 
 #### Check the license
 
 The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials...
 
 ><details-title>I want to reuse it as a whole</details-title>
->- You can't use something that is licensed with ND (no derivatives). 
->- In this case you must follow the rules on combining and adapting CC material. 
+>- You can't use something that is licensed with ND (no derivatives).
+>- In this case you must follow the rules on combining and adapting CC material.
 >
 >[Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 {: .details}
 
 ><details-title>I want to reuse a small part of it</details-title>
-> No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work. 
+> No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work.
 > 
 > Remember that if the work is licensed with ND, you can not modify it while reusing.
 {: .details}
@@ -575,7 +575,7 @@ The existing materials you are reusing are available under a CC license, but it 
 >[How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr)
 {: .tip}
 
-Still need help? 
+Still need help?
 
 [{% icon point-right %} Go to CC licensing FAQ](https://creativecommons.org/faq/#before-using-cc-licensed-material)
 
@@ -588,22 +588,22 @@ If the work you are reusing has a copyright notice ('© some text') you need to 
 
 You should also be able to remove attribution upon request.
 
-##### How to attribute? 
+##### How to attribute?
 
 > <solution-title>Use the authors recommended attribution</solution-title>
 > If the original author has provided a cite-as information, use it to attribute the work.
 {: .solution}
 
 > <solution-title>Use TASL</solution-title>
-> Provide the Title, Author, Source and License of the work that you are reusing. 
+> Provide the Title, Author, Source and License of the work that you are reusing.
 >
 >- Source is the URL to the original work.
 >- If there is a URL to the author personal pages, provide it together with the name.
->- Provide the name of the license and a URL to the license. 
+>- Provide the name of the license and a URL to the license.
 {: .solution}
 
 > <details-title>Examples</details-title>
-> Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/) 
+> Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/)
 > - Webpage/Blog - Title (with link to original work), author (or username) (with link to author's website), and license (with link).
 > 	- [Undercover Vampire Policeman](https://chriszabriskie.bandcamp.com/album/undercover-vampire-policeman) by [Chris Zabriskie](https://chriszabriskie.bandcamp.com/), available under a [Creative Commons Attribution 4.0 License](http://creativecommons.org/licenses/by/4.0/)
 > - Book – Title, author, license written somewhere near the title and author if it’s a hard copy or if it’s an online book you should include a link to the licensed terms.
@@ -628,7 +628,7 @@ You should also be able to remove attribution upon request.
 The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
 
 ![Universal access logo](../../images/universal-access-6602642_640.png)
-<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a> 
+<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
 
 
 #### Standards
@@ -659,7 +659,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon congratulations %} QA Self-assessment</h5>
         <p class="card-text">
-         to check if everything is as it should be. 
+         to check if everything is as it should be.
         </p>
       </div>
     </div>
@@ -683,7 +683,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon solution %} Qualitative</h5>
         <p class="card-text">
-        do all learning units provide materials to reach the learning objectives with different modalities. 
+        do all learning units provide materials to reach the learning objectives with different modalities.
         </p>
       </div>
     </div>
@@ -700,7 +700,7 @@ PDF document accessibility is measured with a separate technical specification <
 ><warning-title>Publishing closed FAIR materials</warning-title>
 > Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:
 >  1. Syllabus - that contains all metadata that describe the materials and metadata should always be open
->  2. Accompanying information - optional - to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective 
+>  2. Accompanying information - optional - to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective
 >  
 > The complete learning materials package itself should be published in a closed repository where the corresponding access rules (and costs) can be implemented.
 {: .warning}
@@ -723,7 +723,7 @@ PDF document accessibility is measured with a separate technical specification <
          If you choose a different license, it must be supplied in the tutorial header as metadata.
          <br>
          <a href="https://creativecommons.org/licenses" > {% icon point-right %} Browse through the available CC license types
-         </a>       
+         </a>
         </p>
       </div>
     </div>
@@ -751,7 +751,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon cofest %} CONTRIBUTORS</h5>
         <p class="card-text">
-        In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform. 
+        In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform.
         <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
         <br>
         <a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %}">
@@ -772,7 +772,7 @@ PDF document accessibility is measured with a separate technical specification <
         <h5 class="card-title">{% icon help %} FAQs</h5>
         <p class="card-text">
 	        In addition to the learning content the Frequently Asked Questions can further help both learners and instructors with specific information regarding the learning context or practicalities.
-	        <br> Consider adding tutorial specific FAQ to the GTN tutorial where in you can answer questions regarding the challenges when working with the hands on activities, or provide other hints and guidelines to instructors and learners. 
+	        <br> Consider adding tutorial specific FAQ to the GTN tutorial where in you can answer questions regarding the challenges when working with the hands on activities, or provide other hints and guidelines to instructors and learners.
 	        <br>
 		<a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#creating-new-faqssnippets %}">
         {% icon point-right %}  Create snippets
@@ -789,7 +789,7 @@ PDF document accessibility is measured with a separate technical specification <
         <h5 class="card-title">{% icon event-cost %} FUNDERS</h5>
         <p class="card-text">
         If the creation of the learning materials is funded by an organisation or another body, they should be attributed accordingly. <br>
-        In GTN this can be accomplished by adding the funding information into the special FUNDERS.yaml file. 
+        In GTN this can be accomplished by adding the funding information into the special FUNDERS.yaml file.
          <br>
          <a href="https://github.com/galaxyproject/training-material/blob/main/FUNDERS.yaml">
          {% icon point-right %} Add to the Funders file
@@ -805,8 +805,8 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon new-history %} OTHER</h5>
         <p class="card-text">
-        Additional miscellaneous information should be provided if possible.  
-        <br> For an example, GTN also supports adding Organisations information. 
+        Additional miscellaneous information should be provided if possible.
+        <br> For an example, GTN also supports adding Organisations information.
         <br>
         <a href="https://github.com/galaxyproject/training-material/blob/main/ORGANISATIONS.yaml">
         {% icon point-right %} Add org info
@@ -841,7 +841,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon license %} CODE OF CONDUCT</h5>
         <p class="card-text">
-        A code of conduct defines the rules for how to engage in a co-creation community. 
+        A code of conduct defines the rules for how to engage in a co-creation community.
         <br>It is based on a premise of an inclusive environment that respects all contributions.
          <br>
          <a href="https://galaxyproject.org/community/coc/">
@@ -858,7 +858,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon comment %} REVISIONS</h5>
         <p class="card-text">
-        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release.  
+        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release.
         <br>
         <a href="https://github.com/galaxyproject/training-material/releases">
         {% icon point-right %} Compare changes between GTN releases
@@ -872,7 +872,7 @@ PDF document accessibility is measured with a separate technical specification <
 ### Storing and indexing
 
 ><tip-title>Automated publishing</tip-title>
->If you are working on GTN following the provided rules and procedures, GTN will automatically publish the new tutorial once the full review and release process is completed. 
+>If you are working on GTN following the provided rules and procedures, GTN will automatically publish the new tutorial once the full review and release process is completed.
 >
 >Just follow the [GTN guide to contributing via GitHub]( {% link topics/contributing/#st-contribute %}).
 {: .tip}
@@ -904,7 +904,7 @@ PDF document accessibility is measured with a separate technical specification <
 
 Use the [FAIR-by-Design methodology QA checklist](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20–%20Verify/19-Final%20QA%20check/19-finalQA/#fair-by-design-methodology-qa-checklist) to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.
 
-The questions marked as essential achieve bare minimum FAIRness. 
+The questions marked as essential achieve bare minimum FAIRness.
 
 ><details-title>Essential requirements</details-title>
 > - **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository? Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
@@ -934,7 +934,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > - Has the learning resource been checked by a third party regarding its learning experience quality?
 {: .details}
 
-### Feedback QA 
+### Feedback QA
 
 > <comment-title>Regularly gather feedback from learners and instructors</comment-title>
 > Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
@@ -950,13 +950,13 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 - Gather feedback from all available internal & external sources.
 
-- Potential sources:  
-	- Feedback form  
-	- QA recommendations  
-	- Self-reflection after training  
+- Potential sources:
+	- Feedback form
+	- QA recommendations
+	- Self-reflection after training
 	- Git Issues
 	- Gitter Chat
-	- Direct mail contact  
+	- Direct mail contact
 	- Other means of communication
 
 #### {% icon galaxy-barchart %} Analyse
@@ -973,7 +973,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 #### {% icon galaxy-history-refresh %} Repeat
 
-- Start a new cycle of the FAIR-by-Design methodology that will implement the selected items. 
+- Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.
 
 - After the Verify stage, you will reenter continuous improvement with the newly gathered information....
 
