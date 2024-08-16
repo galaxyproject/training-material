@@ -498,7 +498,7 @@ To create this table, we need to:
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. To filter genes such as Ribosomal Protein Genes or Non-Protein Coding genes, follow these steps:
+>    > > 1. To filter genes such as ribosomal protein genes or non-protein coding genes, follow these steps:
 >    > >
 >    > >    - Use the gene annotation file as you did for mitochondrial genes.
 >    > >    - Adjust the expression from `$1 ~ /^MT-/` to `$1 ~ /^RP/` for Ribosomal Protein Genes or `$1 ~ /^LINC/` for Non-Protein Coding genes. 
