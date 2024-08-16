@@ -502,7 +502,7 @@ To create this table, we need to:
 >    > >
 >    > >    - Use the gene annotation file as you did for mitochondrial genes.
 >    > >    - Adjust the expression from `$1 ~ /^MT-/` to `$1 ~ /^RP/` for Ribosomal Protein Genes or `$1 ~ /^LINC/` for Non-Protein Coding genes. 
->    > >    -  Create a tabular file for the new annotation column, e.g., rpgene. 
+>    > >    -  Create a tabular file for the new annotation column, e.g., `rpgene` for ribosomal protein genes or `lincrna` for long non-coding RNAs. 
 >    > >        ``` 
 >    > >        rpgene 
 >    > >        ```
