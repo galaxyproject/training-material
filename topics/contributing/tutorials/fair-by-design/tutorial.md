@@ -706,8 +706,8 @@ PDF document accessibility is measured with a separate technical specification <
 
 ><warning-title>Publishing closed FAIR materials</warning-title>
 > Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:
->  1. Syllabus - that contains all metadata that describe the materials and metadata should always be open
->  2. Accompanying information - optional - to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective
+>  1. Syllabus, that contains all metadata that describe the materials. Metadata should always be open.
+>  2. Accompanying information (optional) to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective.
 >  
 > The complete learning materials package itself should be published in a closed repository where the corresponding access rules (and costs) can be implemented.
 {: .warning}
@@ -758,8 +758,8 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon cofest %} CONTRIBUTORS</h5>
         <p class="card-text">
-        In GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform.
-        <br> You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
+        GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform.
+        <br>You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
         <br>
         <a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#listing-contributors %}">
 		{% icon point-right %} Add to CONTRIBUTORS.yaml
@@ -778,8 +778,8 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon help %} FAQs</h5>
         <p class="card-text">
-	        In addition to the learning content the Frequently Asked Questions can further help both learners and instructors with specific information regarding the learning context or practicalities.
-	        <br> Consider adding tutorial specific FAQ to the GTN tutorial where in you can answer questions regarding the challenges when working with the hands on activities, or provide other hints and guidelines to instructors and learners.
+	        In addition to the learning content, the Frequently Asked Questions can further help both learners and instructors with specific information about the learning context or practicalities.
+	        <br> Consider adding a tutorial-specific FAQ to the GTN tutorial where you can answer questions about the challenges of working with the hands on activities, or provide other hints and guidelines to instructors and learners.
 	        <br>
 		<a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#creating-new-faqssnippets %}">
         {% icon point-right %}  Create snippets
@@ -813,7 +813,7 @@ PDF document accessibility is measured with a separate technical specification <
         <h5 class="card-title">{% icon new-history %} OTHER</h5>
         <p class="card-text">
         Additional miscellaneous information should be provided if possible.
-        <br> For an example, GTN also supports adding Organisations information.
+        <br> For example, GTN also supports adding organisations information.
         <br>
         <a href="https://github.com/galaxyproject/training-material/blob/main/ORGANISATIONS.yaml">
         {% icon point-right %} Add org info
@@ -832,7 +832,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon references %} CITATION</h5>
         <p class="card-text">
-	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced to or reused. <br> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
+	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced or reused. <br> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
 	        <br>
 		<a href="#citing-this-tutorial">
         {% icon point-right %}  See an example citation
@@ -849,7 +849,7 @@ PDF document accessibility is measured with a separate technical specification <
         <h5 class="card-title">{% icon license %} CODE OF CONDUCT</h5>
         <p class="card-text">
         A code of conduct defines the rules for how to engage in a co-creation community.
-        <br>It is based on a premise of an inclusive environment that respects all contributions.
+        <br>It is based on the premise of an inclusive environment that respects all contributions.
          <br>
          <a href="https://galaxyproject.org/community/coc/">
          {% icon point-right %} Read the Galaxy Project Code of Conduct
@@ -865,7 +865,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon comment %} REVISIONS</h5>
         <p class="card-text">
-        Information about new or updated version of your learning materials helps others track the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release.
+        Information about new or updated versions of your learning materials helps others keep track of the changes more easily. <br> GTN automatically updates the Revision number of each tutorial after each release.
         <br>
         <a href="https://github.com/galaxyproject/training-material/releases">
         {% icon point-right %} Compare changes between GTN releases
