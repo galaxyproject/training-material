@@ -186,7 +186,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
  >- [FAIR learning objects](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects)
 {: .details}
 
-### Start Ideating...
+### Start Ideating ...
 
 <div class="row">
   <div class="col-sm-4">
@@ -196,7 +196,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 1</h5>
-        <p class="card-text">What are your desired effects, i.e. learning outcomes...</p>
+        <p class="card-text">What are your desired effects, i.e. learning outcomes ...</p>
       </div>
     </div>
   </div>
@@ -206,7 +206,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 2</h5>
-        <p class="card-text">How are you going to assess the learners achievement....</p>
+        <p class="card-text">How are you going to assess the learners achievement ...</p>
       </div>
     </div>
   </div>
@@ -216,7 +216,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 3</h5>
-        <p class="card-text">How should you structure the material to provide effective learning experience...</p>
+        <p class="card-text">How should you structure the material to provide effective learning experience ...</p>
       </div>
     </div>
   </div>
@@ -262,7 +262,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > [Read about defining intended Learning Outcomes in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#define-intended-learning-outcomes-los %} )
 {: .details}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage ...</a>
 
 ## Stage 2 - Discover
 
@@ -297,7 +297,7 @@ Reusable materials can be found anywhere. These are just some examples:
 > <code-in-title>EOSC</code-in-title>
 > [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*)
 > 
-> Most EOSC projects have their own training catalogues and/or platforms...
+> Most EOSC projects have their own training catalogues and/or platforms ...
 {: .code-in}
 
 > <code-in-title>General</code-in-title>
@@ -318,14 +318,14 @@ Reusable materials can be found anywhere. These are just some examples:
 
 Different learners have different learning modalities (read/write, auditory, visual, kinesthetic). To elevate the learning experience you should use all types of multimedia in your learning materials.
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Discover stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Discover stage ...</a>
 
 ## Stage 3 - Design
 
 > Design is intelligence made visible.
 {: .quote author="Alina Wheeler"}
 
-Now it's time to brainstorm...
+Now it's time to brainstorm ...
 
 ### Concept map
 
@@ -508,7 +508,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Design stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Design stage ...</a>
 
 ## Stage 4 - Produce
 
@@ -562,13 +562,13 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 #### Check the license
 
-The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials...
+The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials ...
 
 ><details-title>I want to reuse it as a whole</details-title>
 >- You can't use something that is licensed with ND (no derivatives).
 >- In this case you must follow the rules on combining and adapting CC material.
 >
->[Read more...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
+>[Read more ...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 {: .details}
 
 ><details-title>I want to reuse a small part of it</details-title>
@@ -696,7 +696,7 @@ PDF document accessibility is measured with a separate technical specification <
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Produce stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Produce stage ...</a>
 
 ## Stage 5 - Publish
 
@@ -889,7 +889,7 @@ PDF document accessibility is measured with a separate technical specification <
 >GTN automatically creates a new record in the [Elixir TeSS training catalogue](https://tess.elixir-europe.org) that is the most relevant catalogue for its community.
 {: .tip}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage ...</a>
 
 ## Stage 6 - Verify
 > You will find it a very good practice always to verify your references, sir!
@@ -904,7 +904,7 @@ PDF document accessibility is measured with a separate technical specification <
 > In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials {% cite sanchez_2023_8305482 %}.
 {: .tip}
 
-### FAIR or not FAIR, that is the question...
+### FAIR or not FAIR, that is the question ...
 
 #### Measure FAIRness
 
@@ -946,7 +946,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
 {: .comment}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Verify stage....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Verify stage ...</a>
 
 ## Stage 7 - Continuous Improvement
 > To improve is to change; to be perfect is to change often
@@ -981,9 +981,9 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 - Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.
 
-- After the Verify stage, you will reenter continuous improvement with the newly gathered information....
+- After the Verify stage, you will reenter continuous improvement with the newly gathered information.
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Continuous Improvement ....</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Continuous Improvement ...</a>
 
 # About
 
