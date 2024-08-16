@@ -893,9 +893,12 @@ PDF document accessibility is measured with a separate technical specification <
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage ...</a>
 
 ## Stage 6 - Verify
+
 > You will find it a very good practice always to verify your references, sir!
 {: .quote author="Martin Routh"}
+
 ### External QA
+
 > <tip-title> A fresh set of eyes</tip-title>
 > - Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.
 > - GTN implements this automatically via the fork-and-pull request process. Before publication your new contribution is being reviewed by GTN peers.
@@ -914,10 +917,18 @@ Use the [FAIR-by-Design methodology QA checklist](https://fair-by-design-methodo
 The questions marked as essential achieve bare minimum FAIRness.
 
 ><details-title>Essential requirements</details-title>
-> - **Findable** =	Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository? Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML?
-> - **Accessible** =	Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)? Are access rules (authentication & authorisation) implemented for the learning resource?
-> - **Interoperable** = Is the RDA minimal (or domain specific) metadata schema used for the learning material description? Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
-> - **Reusable** = Is there clear attribution for all reused resources with compatible licenses? Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
+> - **Findable**
+>   - Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository?
+>   - Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML)?
+> - **Accessible**
+>   - Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)?
+>   - Are access rules (authentication & authorisation) implemented for the learning resource?
+> - **Interoperable**
+>   - Is the RDA minimal (or domain specific) metadata schema used for the learning material description?
+>   - Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?
+> - **Reusable**
+>   - Is there clear attribution for all reused resources with compatible licenses?
+>   - Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?
 {: .details}
 
 ><details-title>Optional requirements</details-title>
