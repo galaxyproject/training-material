@@ -16,6 +16,7 @@ contributions:
         - bernt-matthias
         - plushz
         - EngyNasr
+        - RZ9082
 
 program:
   - section: "Basics" 
@@ -47,9 +48,8 @@ program:
       - name: taxonomic-profiling
         topic: microbiome
       - type: custom
-        name: "[Calculating α and β diversity from microbiome taxonomic data](https://github.com/galaxyproject/training-material/pull/4282)"
-        description: |
-          Tutorial (will come soon)
+        name: diversity
+        topic: microbiome
       - name: metatranscriptomics
         topic: microbiome
 

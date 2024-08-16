@@ -11,6 +11,7 @@ contributions:
     instructors:
         - bebatut
         - clsiguret
+        - SaimMomin12
 
 
 program:

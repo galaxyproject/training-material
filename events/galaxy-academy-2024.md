@@ -19,6 +19,7 @@ async: true
 contributions:
     organisers:
         - shiltemann
+        - natalie-wa
         - dannon
         - nakucher
         - jdavcs
@@ -51,8 +52,18 @@ contributions:
         - delphine-l
         - anuprulez
         - deeptivarshney
+        - dianichj
+        - SaimMomin12
+        - natalie-wa
+        - RZ9082
     funding:
-        - gallantries
+        - EuroScienceGateway
+        - biont
+        - nfdi4plants
+        - deNBI
+        - by-covid
+        - elixir-europe
+        - mwk
 
 
 location:
