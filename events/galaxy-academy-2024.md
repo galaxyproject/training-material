@@ -112,7 +112,7 @@ program:
 
   - section: "Friday: Grab bag"
     description: | 
-      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that we can only give consider tutorials of the first day or any that is part of a Track of the Galaxy Training Academy 2024.
+      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
 ---
 # Welcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a 5-day Global Online and Asynchronous learning event.
