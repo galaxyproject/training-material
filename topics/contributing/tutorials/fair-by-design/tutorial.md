@@ -248,7 +248,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > What competences will be gained after successful completing of the learning process?
 >
 > ><tip-title>Be SMART</tip-title>
-> >Objectives should be specific, measurable, attainable, relevant and time-bound.
+> >Objectives should be **s**pecific, **m**easurable, **a**ttainable, **r**elevant and **t**ime-bound.
 > {: .tip}
 >
 > ><tip-title>Use Blooms Taxonomy</tip-title>
