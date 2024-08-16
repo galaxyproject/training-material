@@ -967,7 +967,6 @@ The questions marked as essential achieve bare minimum FAIRness.
 #### {% icon galaxy-download %} Gather
 
 - Gather feedback from all available internal & external sources.
-
 - Potential sources:
 	- Feedback form
 	- QA recommendations
@@ -980,19 +979,16 @@ The questions marked as essential achieve bare minimum FAIRness.
 #### {% icon galaxy-barchart %} Analyse
 
 - Analyse the gathered information in a structured way.
-
 - Create a list of potential improvements with impact level (high, moderate, low).
 
 #### {% icon galaxy-wf-edit %} Improve
 
 - Select items from the list that will be part of a new version.
-
 - Choose items that make sense to be in the same new release.
 
 #### {% icon galaxy-history-refresh %} Repeat
 
 - Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.
-
 - After the Verify stage, you will reenter continuous improvement with the newly gathered information.
 
 <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Continuous Improvement ...</a>
