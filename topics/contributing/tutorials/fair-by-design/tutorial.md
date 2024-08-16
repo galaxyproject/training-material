@@ -535,7 +535,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 {: .tip}
 
 > <tip-title>Open file formats to foster reuse</tip-title>
-> - For other people to reuse the materials they should be made available using open file formats
+> - For other people to reuse the materials they should be made available using open file formats.
 > - GTN promotes the use of the MD open file format for the main learning content empowered with open scientific notebooks and workflows.
 > - If you use close file formats then you MUST clearly state the tools that have been used in more details.
 {: .tip}
@@ -633,14 +633,15 @@ You should also be able to remove attribution upon request.
 
 The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
 
-![Universal access logo](../../images/universal-access-6602642_640.png)
-<a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
+![Universal access logo](../../images/universal-access-6602642_640.png)  
+Image by <a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
 
 
 #### Standards
-There are several standards that govern the rules on level of accessibility. Three conformance levels exist, you should aim for AA which is the middle one.
 
-Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>.
+There are several standards that govern the rules on level of accessibility.
+
+Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>. Three conformance levels exist, you should aim for AA which is the middle one.
 
 PDF document accessibility is measured with a separate technical specification <a href="https://pdfua.foundation/en/why-pdf-ua/">PDF/UA (Universal Accessibility)</a>.
 
@@ -665,7 +666,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon congratulations %} QA Self-assessment</h5>
         <p class="card-text">
-         to check if everything is as it should be.
+         Check if everything is as it should be.
         </p>
       </div>
     </div>
@@ -677,7 +678,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon pref-list %} Quantitative</h5>
         <p class="card-text">
-        are all required elements produced
+        Are all required elements produced?
         </p>
       </div>
     </div>
@@ -689,7 +690,7 @@ PDF document accessibility is measured with a separate technical specification <
       <div class="card-body">
         <h5 class="card-title">{% icon solution %} Qualitative</h5>
         <p class="card-text">
-        do all learning units provide materials to reach the learning objectives with different modalities.
+        Do all learning units provide materials to reach the learning objectives with different modalities?
         </p>
       </div>
     </div>
