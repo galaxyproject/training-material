@@ -612,7 +612,7 @@ You should also be able to remove attribution upon request.
 {: .solution}
 
 > <details-title>Examples</details-title>
-> Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/)
+> Examples are taken from [Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license](https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions) submitted by [New Media Rights](https://www.newmediarights.org/) available under a [CC BY-NC 3.0 US DEED](https://creativecommons.org/licenses/by-nc/3.0/us/).
 > - Webpage/Blog - Title (with link to original work), author (or username) (with link to author's website), and license (with link).
 > 	- [Undercover Vampire Policeman](https://chriszabriskie.bandcamp.com/album/undercover-vampire-policeman) by [Chris Zabriskie](https://chriszabriskie.bandcamp.com/), available under a [Creative Commons Attribution 4.0 License](http://creativecommons.org/licenses/by/4.0/)
 > - Book – Title, author, license written somewhere near the title and author if it’s a hard copy or if it’s an online book you should include a link to the licensed terms.
@@ -783,7 +783,7 @@ PDF document accessibility is measured with a separate technical specification <
         <h5 class="card-title">{% icon help %} FAQs</h5>
         <p class="card-text">
 	        In addition to the learning content, the Frequently Asked Questions can further help both learners and instructors with specific information about the learning context or practicalities.
-	        <br> Consider adding a tutorial-specific FAQ to the GTN tutorial where you can answer questions about the challenges of working with the hands on activities, or provide other hints and guidelines to instructors and learners.
+	        <br> Consider adding a tutorial-specific FAQ to the GTN tutorial, where you can answer questions about the challenges of working with the hands on activities, or provide other hints and guidelines to instructors and learners.
 	        <br>
 		<a href="{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md#creating-new-faqssnippets %}">
         {% icon point-right %}  Create snippets
