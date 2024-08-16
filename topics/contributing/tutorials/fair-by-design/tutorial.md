@@ -130,7 +130,7 @@ May all your materials be FAIR!
 >The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
 {: .solution }
 
-> <details-title>More details on the FAIR principles ...</details-title>
+> <details-title>More details on the FAIR principles</details-title>
 > [Follow the FAIR in a nutshell tutorial available on GTN]( {% link topics/fair/tutorials/fair-intro/tutorial.md %} )
 > 
 > [Follow the FAIR Galaxy Training Material tutorial available on GTN]( {% link topics/fair/tutorials/fair-gtn/tutorial.md %} )
@@ -174,20 +174,20 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 >- When developing materials in GTN, this information should be included in the Tutorial.md file header metadata.
 >- Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the "extra" field.
 >
-> > <details-title>More details on the GTN Metadata ...</details-title>
+> > <details-title>More details on the GTN Metadata</details-title>
 > > [Follow the GTN Metadata tutorial]( {% link topics/contributing/tutorials/schemas/tutorial.md %} )
 > {: .details}
 >
 {: .tip}
 
 
-><details-title>Learn more about FAIR learning objects ...</details-title>
+><details-title>Learn more about FAIR learning objects</details-title>
 >- [FAIR instructional design skills](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills)
  >- [FAIR guiding principles](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-guiding-principles)
  >- [FAIR learning objects](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects)
 {: .details}
 
-### Start Ideating ...
+### Start Ideating
 
 <div class="row">
   <div class="col-sm-4">
@@ -197,7 +197,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 1</h5>
-        <p class="card-text">What are your desired effects, i.e. learning outcomes ...</p>
+        <p class="card-text">What are your desired effects, i.e. learning outcomes?</p>
       </div>
     </div>
   </div>
@@ -207,7 +207,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 2</h5>
-        <p class="card-text">How are you going to assess the learners achievement ...</p>
+        <p class="card-text">How are you going to assess the learners achievement?</p>
       </div>
     </div>
   </div>
@@ -217,13 +217,13 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
       <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
       <div class="card-body">
         <h5 class="card-title">Step 3</h5>
-        <p class="card-text">How should you structure the material to provide effective learning experience ...</p>
+        <p class="card-text">How should you structure the material to provide effective learning experience?</p>
       </div>
     </div>
   </div>
 
 </div>
-><tip-title>Learn more about the backward learning process ...</tip-title>
+><tip-title>Learn more about the backward learning process</tip-title>
 > - [Steps of the backward learning process](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process)
 {: .tip }
 
@@ -259,7 +259,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > [Read more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
-> <details-title>More details on ideating learning outcomes and related information ...</details-title>
+> <details-title>More details on ideating learning outcomes and related information</details-title>
 > [Read about defining intended Learning Outcomes in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#define-intended-learning-outcomes-los %} )
 {: .details}
 
@@ -298,7 +298,7 @@ Reusable materials can be found anywhere. These are just some examples:
 > <code-in-title>EOSC</code-in-title>
 > [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*)
 > 
-> Most EOSC projects have their own training catalogues and/or platforms ...
+> Most EOSC projects have their own training catalogues and/or platforms.
 {: .code-in}
 
 > <code-in-title>General</code-in-title>
@@ -327,13 +327,13 @@ Different learners have different learning modalities (read/write, auditory, vis
 > Design is intelligence made visible.
 {: .quote author="Alina Wheeler"}
 
-Now it's time to brainstorm ...
+Now it's time to brainstorm.
 
 ### Concept map
 
 Step 1: Build a concept map of your learning materials.
 
-> <details-title>More details on concept maps ...</details-title>
+> <details-title>More details on concept maps</details-title>
 > [Read about Concept Maps in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#concept-maps %} )
 {: .details}
 
@@ -363,7 +363,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 >
 > GTN defines a specific hierarchical structure that needs to be followed when developing learning materials.
 > 
-> > <details-title>Check out the following tutorials ...</details-title>
+> > <details-title>Check out the following tutorials</details-title>
 > > [How to create a skeleton for a new learning topic]( {% link topics/contributing/tutorials/create-new-topic/tutorial.md#creating-a-new-topic-with-its-own-materials %}  )
 > > 
 > > [How to create the skeleton of a new tutorial]( {% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}  )
@@ -378,7 +378,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 ><tip-title>Available feedback form</tip-title>
 > GTN provides a readily available feedback form that is automatically added at the end of each tutorial. The feedback form is used to gather quantitative and qualitative feedback.
 > 
-> > <details-title> Learn more about feedback in training ...</details-title>
+> > <details-title> Learn more about feedback in training</details-title>
 > > [Follow the Assessment and feedback in training and teachings tutorial available on GTN]( {% link topics/teaching/tutorials/assessment/tutorial.md#dealing-with-feedback %}  )
 > {: .details}
 > 
@@ -389,7 +389,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 > 
 > The facilitation guide kit includes documentation of the process of organising and running a training. What different people need to have, know and do so that everything runs smoothly.
 > 
-> > <details-title> Learn more about facilitation ...</details-title>
+> > <details-title> Learn more about facilitation</details-title>
 > > [Follow the Organizing a workshop tutorial available on GTN]( {% link topics/teaching/tutorials/organize-workshop/tutorial.md %}  )
 > > 
 > > [Follow the Running a workshop as instructor tutorial available on GTN]( {% link topics/teaching/tutorials/running-workshop/tutorial.md#Checklists %}  )
@@ -409,7 +409,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 ### How to design the learning content
 
-<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Read more about the Hunter Model ...</a>
+<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Read more about the Hunter Model.</a>
 
 <div class="row">
   <div class="col-sm-4">
@@ -417,7 +417,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon curriculum %} 1. Set Learning Objectives</h5>
         <p class="card-text">
-         ... what is the goal
+         What is the goal?
         </p>
       </div>
     </div>
@@ -427,7 +427,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon pref-identities %} 2. Identify Needs</h5>
         <p class="card-text">
-        ... how to get there
+        How to get there?
         </p>
       </div>
     </div>
@@ -437,7 +437,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-panelview %} 3. Plan</h5>
         <p class="card-text">
-        ... share the agenda
+        Share the agenda.
         </p>
       </div>
     </div>
@@ -450,7 +450,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon version %} 4. Hook</h5>
         <p class="card-text">
-         ... why is the content important
+        Why is the content important?
         </p>
       </div>
     </div>
@@ -460,7 +460,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-wf-edit %} 5. Instruct</h5>
         <p class="card-text">
-        ... watch how I do it
+        Watch how I do it.
         </p>
       </div>
     </div>
@@ -470,7 +470,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-rulebuilder-history %} 6. Practise</h5>
         <p class="card-text">
-        ... you help me do it, I'll watch you do it
+        You help me do it, I'll watch you do it.
         </p>
       </div>
     </div>
@@ -483,7 +483,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-barchart %} 7. Wrap-Up</h5>
         <p class="card-text">
-         ... foster retention and reinforcement
+         Foster retention and reinforcement.
         </p>
       </div>
     </div>
@@ -493,7 +493,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon license %} 8. Evaluate</h5>
         <p class="card-text">
-        ... monitor progress
+        Monitor progress.
         </p>
       </div>
     </div>
@@ -503,7 +503,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
       <div class="card-body">
         <h5 class="card-title">{% icon galaxy-history-answer %} 9. Reflect</h5>
         <p class="card-text">
-        .. how did it go?
+        How did it go?
         </p>
       </div>
     </div>
@@ -525,7 +525,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 >  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
 >  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTING.md) using GitHub
 >  
->  > <details-title> GTN: collaboration using GitHub ...</details-title>
+>  > <details-title> GTN: collaboration using GitHub</details-title>
 > > [Follow the Contributing with GitHub via its interface tutorial available on GTN]( {% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}  )
 > > 
 > > [Follow the Contributing with GitHub via command-line tutorial available on GTN]( {% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %}  )
@@ -565,13 +565,13 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 #### Check the license
 
-The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials ...
+The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials. Depending on how you want to reuse the material, you will need to consider the following aspects.
 
 ><details-title>I want to reuse it as a whole</details-title>
 >- You can't use something that is licensed with ND (no derivatives).
 >- In this case you must follow the rules on combining and adapting CC material.
 >
->[Read more ...](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
+>[Read more](https://creativecommons.org/faq/#combining-and-adapting-cc-material)
 {: .details}
 
 ><details-title>I want to reuse a small part of it</details-title>
@@ -580,7 +580,7 @@ The existing materials you are reusing are available under a CC license, but it 
 > Remember that if the work is licensed with ND, you can not modify it while reusing.
 {: .details}
 
-><tip-title>Learn more about IPR ...</tip-title>
+><tip-title>Learn more about IPR</tip-title>
 >[How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr)
 {: .tip}
 
@@ -625,7 +625,7 @@ You should also be able to remove attribution upon request.
 > 	- [Comcast protest](http://www.flickr.com/photos/ari/8503459/in/set-214952/)” by Flikr user [Steve Rhodes](http://www.flickr.com/photos/ari/) used under [Creative Commons Attribution 2.0 license](http://creativecommons.org/licenses/by/2.0/deed.en)
 {: .details}
 
-> <details-title>Read more about how to attribute ...</details-title>
+> <details-title>Read more about how to attribute</details-title>
 > [{% icon point-right %}  Attribution and Citing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#attribution-and-citing)
 > 
 > [{% icon point-right %} How to handle attribution?](https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/)
@@ -912,7 +912,7 @@ PDF document accessibility is measured with a separate technical specification <
 > In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials {% cite sanchez_2023_8305482 %}.
 {: .tip}
 
-### FAIR or not FAIR, that is the question ...
+### FAIR or not FAIR, that is the question
 
 #### Measure FAIRness
 
