@@ -280,11 +280,17 @@ Reusable materials can be found anywhere. These are just some examples:
 
 > <code-in-title>OER</code-in-title>
 > [DOAB](https://directory.doabooks.org/)
+> 
 > [MERLOT](https://www.merlot.org/merlot/index.htm)
+> 
 > [OASIS](https://oasis.geneseo.edu/index.php)
+> 
 > [OER Commons](https://www.oercommons.org/)
+> 
 > [OERTX CORA](https://www.projectcora.org/)
+> 
 > [GALILEO](https://oer.galileo.usg.edu/)
+> 
 > [FORRT](https://forrt.org/)
 {: .code-in}
 
