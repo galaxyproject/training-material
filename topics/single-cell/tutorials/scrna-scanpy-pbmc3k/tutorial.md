@@ -493,7 +493,7 @@ To create this table, we need to:
 >
 >    > <question-title></question-title>
 >    >
->    > 1. How can I filter genes like Ribosomal Protein Genes or Non-Protein Coding genes that might interfere with my downstream analysis?
+>    > 1. How can I filter genes like ribosomal protein genes or non-protein coding genes that might interfere with my downstream analysis?
 >    > 2. What steps should I take to identify these genes in my data?
 >    >
 >    > > <solution-title></solution-title>
