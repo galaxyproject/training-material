@@ -500,7 +500,7 @@ To create this table, we need to:
 >    > >
 >    > > 1. To filter genes such as Ribosomal Protein Genes or Non-Protein Coding genes, follow these steps:
 >    > >
->    > >    - Use the Gene annotation file as you did for mitochondrial genes.
+>    > >    - Use the gene annotation file as you did for mitochondrial genes.
 >    > >    - Adjust the expression from `$1 ~ /^MT-/` to `$1 ~ /^RP/` for Ribosomal Protein Genes or `$1 ~ /^LINC/` for Non-Protein Coding genes. 
 >    > >    -  Create a tabular file for the new annotation column, e.g., rpgene. 
 >    > >        ``` 
