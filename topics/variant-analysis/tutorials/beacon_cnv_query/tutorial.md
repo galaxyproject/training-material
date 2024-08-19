@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Querying a Beacon Database for Copy Number Variants (CNVs)"
+title: "Querying the University of Bradford GDC Beacon Database for Copy Number Variants (CNVs)"
 zenodo_link: 'https://zenodo.org/records/10658688'
 subtopic: 'data-management'
 priority: 1
@@ -40,7 +40,7 @@ Copy number variations (CNVs) are genomic segments with different numbers of cop
 
 Subsequently, The classification of CNV gains and losses into more specific categories: copy number gain, low-level copy number gain, high-level copy number gain, focal genome amplification, copy number loss, low-level copy number loss, high-level copy number loss, and complete genomic deletion. This detailed categorization enhances the precision in identifying and describing CNVs. More information can be found on the [ELIXIR hCNVs resource page](https://cnvar.org/resources/CNV-annotation-standards/).
 
-In this tutorial, we will utilize the Beacon2 Query tool to explore a Beacon built using data from [hg38_altaware_nohla-cnv-anchored](https://us-west-2.console.aws.amazon.com/s3/buckets/1000genomes-dragen?region=us-west-2&bucketType=general&prefix=data/dragen-3.5.7b/hg38_altaware_nohla-cnv-anchored/&showversions=false) to identify Copy Number Variants (CNVs). Additionally, we will perform queries on the same dataset using various search terms to locate specific data points, demonstrating the tool's versatility and effectiveness in genomic data exploration.
+In this tutorial, we will use the Beacon2 Query tool to explore a Beacon built from the [GDC Public Access CNVs Data]((https://portal.gdc.cancer.gov/analysis_page?app=Downloads)) to identify Copy Number Variants (CNVs). We will also perform targeted queries on this dataset using various search criteria to pinpoint specific data points. This tutorial will showcase the tool's versatility and effectiveness in exploring and analyzing genomic data.
 
 
 > <agenda-title></agenda-title>
@@ -53,9 +53,13 @@ In this tutorial, we will utilize the Beacon2 Query tool to explore a Beacon bui
 {: .agenda}
 
 
-# Querying the Entire Database Collection for CNVs Without Specifying Genomic Location
+# Querying the Beacon Database to Retrieve and Display CNV Records for Specific Genomic Locations
 
-We will perform a simple query to identify reads that match the *"VARIANT STATE"*: `copy number gain`
+A common use case for querying Copy Number Variation (CNV) records is when researchers are interested in identifying CNVs within a targeted chromosome or at a specific genomic location within that chromosome.
+
+To conduct this type of query, you need to specify parameters that precisely define the desired genomic region in the Beacon database.
+
+Those parametars are, "CHROMOSOME", "Start", and "End".
 
 
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
@@ -65,29 +69,33 @@ We will perform a simple query to identify reads that match the *"VARIANT STATE"
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `genomicVariations`
->   - *"*"VARIANT STATE"*"*: `copy number gain`
+>   - *"CHROMOSOME"*: `1`
+>   - *"START"*: `1574102`
+>   - *"CHROMOSOME"*: `1674102`
 >
-> The search function will query the Beacon database and display the results that match our specified criteria.
->
+> The search function will query the Beacon database to retrieve and display results located on chromosome 1, specifically within the genomic range between positions 1,574,102 and 1,674,102.
+> After the query, review the output file to determine how many records match these specific criteria.
 >
 > > <question-title></question-title>
 >    >
 >    > What dose variantId "EFO:0030070" means? 
 >    >
 >    > > ```json
->    > >{'_id': ObjectId('66ab66797f2ec2a3f3484ed3'),
+>    > >{'_id': ObjectId('66bc9dcb520b66614b58f024'),
 >    > > 'assemblyId': 'GRCh38',
->    > > 'biosampleId': 'HG00103',
->    > > 'definitions': {'Location': {'chromosome': '1',
->    > >                              'end': 16728256,
->    > >                              'start': 16716711}},
->    > > 'id': 'refvar-66ab66797f2ec2a3f3484ed3',
->    > > 'info': {'cnCount': 4,
->    > >          'cnValue': 2.17226,
->    > >          'legacyId': 'DRAGEN:GAIN:chr1:16716712-16728256'},
->    > > 'updated': '2024-08-01T10:42:58.106345',
->    > > 'variantInternalId': 'chr1:16716711-16728256:EFO:0030070',
->    > > 'variantState': {'id': 'EFO:0030070', 'label': 'copy number gain'}}
+>    > > 'biosampleId': 'ENSG00000196433.13',
+>    > > 'definitions': {'Location': {'chromosome': 'X',
+>    > >                              'end': 1643081,
+>    > >                              'start': 1615059}},
+>    > > 'diseaseType': 'adnexal and skin appendage neoplasms',
+>    > > 'gene': 'ASMT',
+>    > > 'id': 'refvar-66bc9dcb520b66614b58f024',
+>    > > 'info': {'cnCount': 3, 'legacyId': 'DUP:chrX:1615059-1643081'},
+>    > > 'primarySite': 'breast',
+>    > > 'updated': '2024-08-14T10:18:40.152888',
+>    > > 'variantInternalId': 'X:1615059-1643081:EFO:0030071',
+>    > > 'variantState': {'id': 'EFO:0030071', 'label': 'low-level gain'},
+>    > > 'variantType': 'DUP'}
 >    > > ```
 >    >
 >    > > <solution-title></solution-title>
@@ -101,9 +109,11 @@ We will perform a simple query to identify reads that match the *"VARIANT STATE"
 
 
 
-# Querying the Entire Database Collection for CNVs at a Specific Genomic Location
+# Querying the Beacon Database Collection for a specific CNVs. 
 
-We will perform a targeted query to identify reads that match the *"VARIANT STATE"*: `copy number gain` on **Chromosome** `20`starting at position `29313239` and ending at `29340136`
+Suppose we are searching for specific variants in the database—for instance, records related to a low-level gain in a particular genomic location.
+
+Building on the previous example, we will add the "VARIANT STATE" parameter to the query filter to refine our search and retrieve the exact variants we are interested in.
 
 
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
@@ -113,16 +123,61 @@ We will perform a targeted query to identify reads that match the *"VARIANT STAT
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `genomicVariations`
->   - *"CHROMOSOME"*: `20`
->   - *"START"*: `29313239`
->   - *"END"*: `29340136`
->   - *"*"VARIANT STATE"*"*: `copy number gain`
+>   - *"CHROMOSOME"*: `X`
+>   - *"START"*: `1574102`
+>   - *"END"*: `1674102`
+>   - *"*"VARIANT STATE"*"*: `low-level gain`
 >
-> This query will generate a list of all reads that meet the specified parameters, matching the *"VARIANT STATE"* of `copy number gain` on **Chromosome** `20`, within the defined range from position `29313239` to `29340136`.
+> This will print out the low-level gain CNV records located on chromosome 1 within the genomic range between positions 1,574,102 and 1,674,102.
 {: .hands_on}
 
 
-In this tutorial, we used our testing Beacon server. To query a specific Beacon, update your credentials in the Galaxy user preferences and enter your server's details by adjusting the "DATABASE HOST" and "DATABASE PORT" fields accordingly.
+# Querying the Beacon Database Collection for Specific CNVs in a Targeted Gene.
+
+Suppose we are interested in identifying specific Copy Number Variations (CNVs) within a particular gene in the Beacon database. For example, we might be looking for records related to deletions or duplications within a gene known to be associated with a specific disease or condition.
+
+To achieve this, we will refine our query by focusing on a targeted gene and using the relevant parameters—such as "GENE NAME" and "VARIANT TYPE"—to filter the database records. This approach will help us retrieve CNV records that match our specific criteria, allowing us to analyze variations within the targeted gene effectively.
+
+
+> <hands-on-title>Query the Beacon MongoDB</hands-on-title>
+>
+> 1. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection
+>   - *"DATABASE HOST"*: `20.108.51.167`
+>   - *"DATABASE PORT"*: `27017`
+>   - *"DATABASE"*: `beacon`
+>   - *"COLLECTION"*: `genomicVariations`
+>   - *"VARIANT STATE"*: `low-level gain`
+>   - *"GENE NAME"*: `ASMT`
+>
+> This query will retrieve and print CNV records associated with low-level gain within the ASMT gene from the Beacon database. By specifying the targeted gene name and variant state, the query will focus on CNVs that are particularly relevant to conditions associated with this gene.
+{: .hands_on}
+
+
+# Querying the Beacon Database Collection for Specific CNVs in a Targeted Gene Based on Primary Site or Disease Type.
+
+In genomic research, it is often essential to focus on specific Copy Number Variations (CNVs) that are not only located within a particular gene but also associated with certain clinical features, such as a primary site of a tumor or a specific disease type. For instance, researchers might be interested in identifying CNVs in the BRCA1 gene that are linked to breast cancer or in the TP53 gene associated with various types of cancers.
+
+To conduct such a detailed analysis, we can query the Beacon database by narrowing down the search to CNVs within a targeted gene, while simultaneously filtering the results based on relevant clinical parameters such as the primary site of the disease or the type of disease. This approach allows us to extract highly specific data that can provide deeper insights into the genetic underpinnings of particular conditions or cancer types, facilitating targeted research and potential clinical applications.
+
+
+> <hands-on-title>Query the Beacon MongoDB</hands-on-title>
+>
+> 1. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection
+>   - *"DATABASE HOST"*: `20.108.51.167`
+>   - *"DATABASE PORT"*: `27017`
+>   - *"DATABASE"*: `beacon`
+>   - *"COLLECTION"*: `genomicVariations`
+>   - *"VARIANT STATE"*: `low-level loss`
+>   - *"GENE NAME"*: `BRCA1`
+>   - *"PRIMARY SITE"*: `breast`
+>   - *"DISEASE TYPE"*: `adnexal and skin appendage neoplasms` *optional*
+>
+> This query will retrieve and print CNV records associated with a low-level loss within the BRCA1 gene from the Beacon database. By specifying the gene name, variant state, and filtering based on the primary site as "breast," the query will focus on CNVs that are highly relevant to breast cancer. Additionally, you can refine the search further by including the disease type, such as adnexal and skin appendage neoplasms, to narrow down the results to those most pertinent to your research objectives.
+{: .hands_on}
+
+
+
+In this tutorial, we used our University of Bradford Beacon server. To query a specific Beacon, update your credentials in the Galaxy user preferences and enter your server's details by adjusting the "DATABASE HOST" and "DATABASE PORT" fields accordingly.
 
 > <comment-title>Use Credentials to Access Specific Beacon</comment-title>
 > 1. Make sure you are logged in to Galaxy.
