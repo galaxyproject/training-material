@@ -58,7 +58,7 @@ recordings:
   - EngyNasr
   captioners:
   - EngyNasr
-- youtube_id: TODO
+- youtube_id: rGP-BKYwUbc
   length: 1H55M
   galaxy_version: '24.1.2.dev0 '
   date: '2024-08-16'
