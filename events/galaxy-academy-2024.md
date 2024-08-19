@@ -11,7 +11,7 @@ date_start: 2024-10-07
 date_end: 2024-10-11
 
 cost: free 
-audience: Everyone who would like to get to know Galaxy, learn bioinformatics data analysis, or master a specific new kind of analysis is welcome.
+audience: Everyone who would like to get to know Galaxy and learn bioinformatics data analysis, whether you want to master a specific analysis or learn a new skill.
 contact_email: academy@galaxyproject.org
 async: true
 
@@ -20,13 +20,13 @@ contributions:
     organisers:
         - erxleben
         - annasyme 
-        - shiltemann
         - nekrut
         - dannon
         - delphine-l
         - jdavcs
         - natalie-wa
         - nakucher
+        - shiltemann
         - teresa-m
     instructors:
         - erxleben
@@ -41,8 +41,8 @@ contributions:
         - lldelisle
         - bernt-matthias
         - foellmelanie
-        - natefoo
         - natalie-wa
+        - natefoo
         - paulzierep
         - pavanvidem
         - plushz
