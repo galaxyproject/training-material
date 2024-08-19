@@ -219,7 +219,7 @@ SanntiS is a tool specifically designed to detect and annotate biosynthetic gene
 
 > <hands-on-title> Identify biosynthetic gene clusters </hands-on-title>
 >
-> 1. {% tool [SanntiS biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/SanntiS_marine/SanntiS_marine/0.9.3.5+galaxy1) %} with the following parameters:
+> 1. {% tool [SanntiS biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/sanntis_marine/sanntis_marine/0.9.3.5+galaxy1) %} with the following parameters:
 >    - *"Do you want to build a genbank or to make a SMBGC Annotation?"*: `Run SanntiS`
 >        - {% icon param-file %} *"Input the tabular file from InterProScan"*: `InterProScan on data **` (output of **InterProScan** {% icon tool %})
 >        - {% icon param-file %} *"Input a Genbank file"*: `SanntiS output data genbank` (output of **SanntiS biosynthetic gene clusters** {% icon tool %})
@@ -230,7 +230,7 @@ SanntiS is a tool specifically designed to detect and annotate biosynthetic gene
 </div>
 
 Finally, you should have one gff3 file in your history under **SanntiS output data**
-![Image of SanntiS output](../../images/marineomics/SanntiS.png "SanntiS output")
+![Image of SanntiS output](../../images/marineomics/sanntis.png "SanntiS output")
 
 
 # Conclusion
