@@ -36,12 +36,12 @@ program:
     tutorials:
       - type: custom
         name: "[An automated SARS-CoV-2 genome surveillance system built around Galaxy](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)"
-      - name: sars-cov-2-variant-discovery
         description: |
           Lecture Video
+      - name: sars-cov-2-variant-discovery
         topic: variant-analysis
+      - name: workflow-automation
         topic: galaxy-interface
-        topic: variant-analysis
       - type: custom
         name: "[The usegalaxy.* SARS-CoV-2 Bot in Action](https://gallantries.github.io/video-library/videos/sars-cov2/usegalaxy-star-bot/)"
         description: |
