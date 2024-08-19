@@ -40,7 +40,7 @@ program:
         description: |
           Lecture Video
         topic: variant-analysis
-      - name: workflow-automation
+        topic: galaxy-interface
         topic: variant-analysis
       - type: custom
         name: "[The usegalaxy.* SARS-CoV-2 Bot in Action](https://gallantries.github.io/video-library/videos/sars-cov2/usegalaxy-star-bot/)"
