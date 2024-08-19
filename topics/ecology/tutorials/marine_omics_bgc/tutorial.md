@@ -66,7 +66,7 @@ The FASTA file used in this example is, intentionally, a very small fraction of 
 
 {% include _includes/cyoa-choices.html option1="Tools" option2="Workflow"
        text="Do you want to run the workflow or to discover the tools one by one ?" %}
-       
+
 <div class="Workflow" markdown="1">
 
 # Import and launch the workflow
@@ -77,7 +77,7 @@ The FASTA file used in this example is, intentionally, a very small fraction of 
 >   	- Paste the URL of the workflow into the box labelled “Archived Workflow URL” `https://earth-system.usegalaxy.eu/u/marie.josse/w/marine-omics-identifying-biosynthetic-gene-clusters`
 >   - Option 2: use the workflow name
 >   	- Click on **Public workflows** at the top-right of the screen
->       - Search for **Marine Omics identifying biosynthetic gene clusters** 
+>       - Search for **Marine Omics identifying biosynthetic gene clusters**
 >       - In the workflow preview box click on {% icon galaxy-upload %} Import
 >   - Click the Import workflow button
 {: .hands_on}
@@ -85,23 +85,23 @@ The FASTA file used in this example is, intentionally, a very small fraction of 
 > <hands-on-title>Run the workflow</hands-on-title>
 >    - Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
 >    - Click on the {% icon workflow-run %} (Run workflow) button next to your workflow
->    - /!\ Select **Yes** for **Workflow semi automatic** 
+>    - /!\ Select **Yes** for **Workflow semi automatic**
 >    - Configure the workflow as needed with the 2 datasets you uploaded right before (**BGC0001472.fna**)
 >    - Click the Run Workflow button at the top-right of the screen
 >    - You may have to refresh your history to see the queued jobs
 {: .hands_on}
 
-Now you don't have to do anything else. You should see all the different steps of the worklow appear in your history.
-When the workflow is fully runned you should have the folowing history.
+Now you don't have to do anything else. You should see all the different steps of the workflow appear in your history.
+When the workflow is fully completed you should have the following history.
 
-![Image of the history with all the steps of the workflow](../../images/marineomics/history.png "History")
+![Image of the history with all the steps of the workflow](../../images/marineomics/history.png "History"){: style="width:50%"}
 
 > <tip-title>Extract a RO-Crate</tip-title>
 > Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to keep provenance of the workflow invocation (an invocation of a workflow means one run or execution of the workflow) it can be exported from Galaxy in the form of a Workflow Run Crate RO-Crate profile.
-> 
+>
 >
 > After the workflow has completed, we can export the RO-Crate. The crate does not appear in your history, but can be accessed from the User -> Workflow Invocations menu on the top bar.
-> 
+>
 > > <hands-on-title> Extract a RO-Crate </hands-on-title>
 > >
 > > 1. In the top right of your history, go to {% icon galaxy-history-options %} -> Show Invocations
@@ -113,18 +113,18 @@ When the workflow is fully runned you should have the folowing history.
 > > 2. Click on it to expand it:
 > >
 > > ![Image of the workflow invocation](../../images/marineomics/workflowinvoc.png "Workflow invocation")
-> > 
+> >
 > > 3. Click on the Export tab in the expanded view of the workflow invocation.
 > > 	You should see a page that contains three download options:
-> >		- Research Object Crate (RO-Crate) 
+> >		- Research Object Crate (RO-Crate)
 > >		- BioCompute Object
 > >		- File
 > > 4. Click on the **Generate** {% icon galaxy-download %} option of the RO-Crate box (1st box)
-> > 
+> >
 > > ![Image of the RO-Crate download](../../images/marineomics/rocrate.png "RO-Crate")
 > {: .hands-on}
-> 
-> 
+>
+>
 > Great work! You have created a Workflow Run Crate. This makes it easy to track the provenance of the executed workflow.
 {: .tip}
 
@@ -157,7 +157,7 @@ You can click on it and then click on the {% icon galaxy-eye %} (eye).
 
 ![Image of the protein fasta file from prodigal and of the new history with all the new outputs](../../images/marineomics/prodigal.png "Prodigal outputs")
 
-You can notice here that at each end of the sequence there's a *. Later on we will need to remove this star. But, first we are going to use this protein file to build the Genbank that SanntiS need to make a SMBGC annotation. 
+You can notice here that at each end of the sequence there's a *. Later on we will need to remove this star. But, first we are going to use this protein file to build the Genbank that SanntiS need to make a SMBGC annotation.
 
 ## SanntiS for building a Genbank file
 
@@ -176,9 +176,9 @@ This step combines the original nucleotide sequences with the cleaned protein se
 ![Image of the Genbank file produces by SanntiS](../../images/marineomics/genbank.png "Genbank file")
 
 ## Regex Find And Replace
-Remember earlier we noticed the star * in the protein fasta file ? 
+Remember earlier we noticed the star * in the protein fasta file ?
 
-Now is the time to remove it ! 
+Now is the time to remove it !
 
 The asterisks at the end of some protein sequences are informative but can cause issues with some analysis tools. In this step, we remove these asterisks to produce a clean protein FASTA file, making it ready for further analysis.
 
@@ -195,7 +195,7 @@ The asterisks at the end of some protein sequences are informative but can cause
 >
 {: .hands_on}
 
-Check if the * were well removed. 
+Check if the * were well removed.
 
 # InterProScan
 
@@ -211,7 +211,7 @@ InterProScan is a tool that helps identify and predict the functions of proteins
 > 2. Click on **Run Tool**
 {: .hands_on}
 
-![Image of InterProScan output in tabular (tsv) in the history](../../images/marineomics/interproscan.png "InterProScan output")
+![Image of InterProScan output in tabular (tsv) in the history](../../images/marineomics/interproscan.png "InterProScan output"){: style="width:50%"}
 
 # SanntiS for annotating biosynthetic gene clusters
 
