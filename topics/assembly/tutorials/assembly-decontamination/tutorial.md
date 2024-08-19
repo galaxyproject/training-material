@@ -12,8 +12,9 @@ objectives:
 time_estimation: 1H30M
 key_points:
 - Assembly decontamination is important to avoid false identification of genes, blast hits...
-contributors:
-- delphine-l
+contributions:
+  authorship:
+    - delphine-l
 
 ---
 
