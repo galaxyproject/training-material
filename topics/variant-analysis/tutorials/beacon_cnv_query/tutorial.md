@@ -26,6 +26,7 @@ key_points:
 - Recognizing the Importance of CNVs highlights the role of CNVs in genetic variation and their relevance in research using Beacon databases.
 contributors:
 - khaled196
+- kkamieniecka
 - poterlowicz-lab
 ---
 
