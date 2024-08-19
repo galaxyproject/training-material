@@ -9,7 +9,7 @@ contributions:
         - anuprulez
     instructors:
         - anuprulez
-        - - hujambo-dunia
+        - hujambo-dunia
 
 
 
