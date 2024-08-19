@@ -9,7 +9,7 @@ questions:
 objectives:
 - Follow a marine omics analysis
 - Learn to conduct a secondary metabolite biosynthetic gene cluster (SMBGC) Annotation
-- Discover Sanntis a tool for identifying BGCs in genomic & metagenomic data
+- Discover SanntiS a tool for identifying BGCs in genomic & metagenomic data
 - Manage fasta files
 time_estimation: 3H
 key_points:
@@ -29,11 +29,11 @@ contributions:
 ---
 
 # Introduction
-Through this tutorial, you will learn in the first part how to produce a protein fasta file from a nucleotide fasta file using Prodigal (Fast, reliable protein-coding gene prediction for prokaryotic genomes).
+Through this tutorial, you will learn in the first part how to produce a protein fasta file from a nucleotide fasta file using Prodigal (it is a tool that predicts protein-coding genes from DNA sequences).
 
-Then, you'll be using InterProscan to create a tabular. Interproscan is a batch tool to query the InterPro database. It provides annotations based on multiple searches of profile and other functional databases.
+Then, you'll be using InterProscan to create a tabular. Interproscan is a batch tool to query the InterPro database. It helps identify and predict the functions of proteins by comparing them to known databases.
 
-And finally, you will discover Sanntis both to build genbank and especially to conduct annotation using Neural Networks Trained on Interpro Signatures.
+And finally, you will discover SanntiS both to build genbank and especially to detect and annotate biosynthetic gene clusters (BGCs).
 
 > <agenda-title></agenda-title>
 >
@@ -45,6 +45,7 @@ And finally, you will discover Sanntis both to build genbank and especially to c
 {: .agenda}
 
 # Get data
+The FASTA file used in this example is, intentionally, a very small fraction of a genome (spanning exactly 1 BGC), and it's main purpose is to quickly check that all the pieces of the workflow are working.
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -52,14 +53,14 @@ And finally, you will discover Sanntis both to build genbank and especially to c
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files
+> 2. Import the file with this link `https://figshare.com/ndownloader/files/48574534`and name it BGC0001472.fna
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >
-> 3. Rename the datasets
+> 3. Rename the datasets BGC0001472.fna
 >
->
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
@@ -137,6 +138,8 @@ When the workflow is fully runned you should have the folowing history.
 
 ## Prodigal Gene Predictor
 
+Prodigal is a tool that predicts protein-coding genes from DNA sequences. It takes a nucleotide FASTA file as input and identifies regions that are likely to code for proteins. The output is a protein FASTA file where each sequence represents a predicted protein. Some of these sequences end with an asterisk (*), which marks the end of a complete protein sequence identified by Prodigal. This asterisk is added when Prodigal detects a full protein-coding region that ends with a stop codon. Sequences without an asterisk either represent partial proteins or do not end in a typical stop codon.
+
 > <hands-on-title> Run prodigal </hands-on-title>
 >
 > 1. {% tool [Prodigal Gene Predictor](toolshed.g2.bx.psu.edu/repos/iuc/prodigal/prodigal/2.6.3+galaxy0) %} with the following parameters:
@@ -154,13 +157,15 @@ You can click on it and then click on the {% icon galaxy-eye %} (eye).
 
 ![Image of the protein fasta file from prodigal and of the new history with all the new outputs](../../images/marineomics/prodigal.png "Prodigal outputs")
 
-You can notice here that at each end of the sequence there's a *. Later on we will need to remove this star. But, first we are going to use this protein file to build the Genbank that Sanntis need to make a SMBGC annotation. 
+You can notice here that at each end of the sequence there's a *. Later on we will need to remove this star. But, first we are going to use this protein file to build the Genbank that SanntiS need to make a SMBGC annotation. 
 
-## Sanntis for building a Genbank file
+## SanntiS for building a Genbank file
+
+This step combines the original nucleotide sequences with the cleaned protein sequences to create a GenBank format file. This format is widely used for storing and organising information about DNA sequences and their annotations. In this step, the DNA sequences and their corresponding coding regions are transformed into a format that is suitable for SanntiS.
 
 > <hands-on-title> Build Genbank </hands-on-title>
 >
-> 1. {% tool [Sanntis biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/sanntis_marine/sanntis_marine/0.9.3.5+galaxy1) %} with the following parameters:
+> 1. {% tool [SanntiS biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/SanntiS_marine/SanntiS_marine/0.9.3.5+galaxy1) %} with the following parameters:
 >    - *"Do you want to build a genbank or to make a SMBGC Annotation?"*: `Build genbank`
 >        - {% icon param-file %} *"Input a nucleotide fasta file"*: `BGC0001472.fna` (Input the nucleotide fasta file)
 >        - {% icon param-file %} *"Input a protein fasta file"*: `Prodigal Gene Predictor on data 1 : protein translations file` (output of **Prodigal Gene Predictor** {% icon tool %})
@@ -168,12 +173,14 @@ You can notice here that at each end of the sequence there's a *. Later on we wi
 >
 {: .hands_on}
 
-![Image of the Genbank file produces by Sanntis](../../images/marineomics/genbank.png "Genbank file")
+![Image of the Genbank file produces by SanntiS](../../images/marineomics/genbank.png "Genbank file")
 
 ## Regex Find And Replace
 Remember earlier we noticed the star * in the protein fasta file ? 
 
-Now is the time to remove it ! This is to simplify the next step with InterProScan.
+Now is the time to remove it ! 
+
+The asterisks at the end of some protein sequences are informative but can cause issues with some analysis tools. In this step, we remove these asterisks to produce a clean protein FASTA file, making it ready for further analysis.
 
 > <hands-on-title> Remove * </hands-on-title>
 >
@@ -192,6 +199,8 @@ Check if the * were well removed.
 
 # InterProScan
 
+InterProScan is a tool that helps identify and predict the functions of proteins by comparing them to known databases. This tool analyses the protein sequences and produces an output file containing detailed information about the possible functions, domains, and families associated with these proteins.
+
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [InterProScan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3) %} with the following parameters:
@@ -204,22 +213,24 @@ Check if the * were well removed.
 
 ![Image of InterProScan output in tabular (tsv) in the history](../../images/marineomics/interproscan.png "InterProScan output")
 
-# Sanntis for annotating biosynthetic gene clusters
+# SanntiS for annotating biosynthetic gene clusters
+
+SanntiS is a tool specifically designed to detect and annotate biosynthetic gene clusters (BGCs). It uses neural networks trained on InterPro signatures to achieve high accuracy in identifying BGCs in both genomic and metagenomic datasets 1. A significant benefit of using SanntiS is that your results will be comparable with a large number of datasets, including over 5,000 marine metagenomic assemblies archived in the [MGnify](https://www.ebi.ac.uk/metagenomics) resource. This tool provides valuable insights into the biosynthetic potential of organisms or environmental samples. The final output is a GFF file containing detailed BGC annotations, which can be used for further analyses or applications.
 
 > <hands-on-title> Identify biosynthetic gene clusters </hands-on-title>
 >
-> 1. {% tool [Sanntis biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/sanntis_marine/sanntis_marine/0.9.3.5+galaxy1) %} with the following parameters:
->    - *"Do you want to build a genbank or to make a SMBGC Annotation?"*: `Run sanntis`
+> 1. {% tool [SanntiS biosynthetic gene clusters](toolshed.g2.bx.psu.edu/repos/ecology/SanntiS_marine/SanntiS_marine/0.9.3.5+galaxy1) %} with the following parameters:
+>    - *"Do you want to build a genbank or to make a SMBGC Annotation?"*: `Run SanntiS`
 >        - {% icon param-file %} *"Input the tabular file from InterProScan"*: `InterProScan on data **` (output of **InterProScan** {% icon tool %})
->        - {% icon param-file %} *"Input a Genbank file"*: `Sanntis output data genbank` (output of **Sanntis biosynthetic gene clusters** {% icon tool %})
+>        - {% icon param-file %} *"Input a Genbank file"*: `SanntiS output data genbank` (output of **SanntiS biosynthetic gene clusters** {% icon tool %})
 >
 > 2. Click on **Run Tool**
 {: .hands_on}
 
 </div>
 
-Finally, you should have one gff3 file in your history under **Sanntis output data**
-![Image of Sanntis output](../../images/marineomics/sanntis.png "Sanntis output")
+Finally, you should have one gff3 file in your history under **SanntiS output data**
+![Image of SanntiS output](../../images/marineomics/SanntiS.png "SanntiS output")
 
 
 # Conclusion
