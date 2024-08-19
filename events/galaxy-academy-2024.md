@@ -18,44 +18,44 @@ async: true
 
 contributions:
     organisers:
+        - erxleben
+        - annasyme 
         - shiltemann
-        - natalie-wa
-        - dannon
-        - nakucher
-        - jdavcs
         - nekrut
+        - dannon
         - delphine-l
-        - annasyme
-        - teresa-m
-        - erxleben
-    instructors:
-        - pratikdjagtap
-        - foellmelanie
-        - subinamehta
-        - timothygriffin
-        - wm75
-        - bebatut
-        - natefoo
-        - teresa-m
-        - erxleben
-        - lldelisle
-        - stephanierobin
-        - rlibouba
-        - abretaud
-        - paulzierep
-        - bernt-matthias
-        - plushz
-        - EngyNasr
-        - clsiguret
-        - nomadscientist
-        - pavanvidem
-        - delphine-l
-        - anuprulez
-        - deeptivarshney
-        - dianichj
-        - SaimMomin12
+        - jdavcs
         - natalie-wa
+        - nakucher
+        - teresa-m
+    instructors:
+        - erxleben
+        - anuprulez
+        - abretaud
+        - bebatut
+        - clsiguret
+        - dianichj
+        - deeptivarshney
+        - delphine-l
+        - EngyNasr
+        - lldelisle
+        - bernt-matthias
+        - foellmelanie
+        - natefoo
+        - natalie-wa
+        - paulzierep
+        - pavanvidem
+        - plushz
+        - pratikdjagtap
         - RZ9082
+        - rlibouba
+        - SaimMomin12
+        - stephanierobin
+        - subinamehta
+        - teresa-m
+        - timothygriffin
+        - nomadscientist
+        - wm75
     funding:
         - EuroScienceGateway
         - biont
