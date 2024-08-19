@@ -28,7 +28,7 @@ mode: online # In-person
 registration:
   link: https://example.org
   deadline: 2024-01-01
-
+  open: false # set this if registration is not open yet
 
 # Location of the event
 # For online events, just the 'name' is enough

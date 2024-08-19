@@ -419,6 +419,8 @@ subsites: [all]
 		  {% assign passed = deadline | is_date_passed %}
           {% if passed %}
           <span class="btn btn-primary btn-lg btn-block disabled">Registration is closed</span>
+          {% elsif event.registration.open == false %}
+          <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Registration opens soon!</a>
           {% else %}
 		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
           {% endif %}
