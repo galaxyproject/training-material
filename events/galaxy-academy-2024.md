@@ -57,7 +57,7 @@ contributions:
         - nomadscientist
         - wm75
     funding:
-        - EuroScienceGateway
+        - eurosciencegateway
         - biont
         - nfdi4plants
         - deNBI
