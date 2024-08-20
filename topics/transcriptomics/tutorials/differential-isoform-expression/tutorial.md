@@ -59,9 +59,9 @@ The datasets consist of twelve FASTQ files, generated through the Illumina NovaS
 
 ## Get data
 
-The first step of our analysis consists of retrieving the RNA-seq datasets from Zenodo and organizing them into collections.
+The first step of our analysis consists of retrieving the paired-end RNA-seq datasets from Zenodo and organizing them into a collection.
 
-> <hands-on-title>Retrieve miRNA-Seq and mRNA-Seq datasets</hands-on-title>
+> <hands-on-title>Retrieve mRNA-Seq datasets</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from Zenodo:
@@ -170,7 +170,7 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >   > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >   >     - *"Input Collection"*: `All samples`
 >   >
->   > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+>   > 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy1) %} with the following parameters:
 >   >    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >   >
 >   >    {% snippet faqs/galaxy/tools_select_collection.md %}
@@ -206,8 +206,6 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >        - {% icon param-collection %} *"Select paired collection(s)"*: `All samples`
->        - In *"Global trimming options"*:
->            - *"Trim front for input 1"*: `10`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
@@ -256,25 +254,26 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 > >    - *"Extract"*: `Introns`
 > >        - {% icon param-file %} *"from"*: `BED12 annotation`
 > >
-> > 4. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
+> > 4. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
 > >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
-> >   - "*AWK Program*": `{print $3-$2}`
+> >   - For "*1: Expressions*":
+> >     - *"Add expression"*: `c3-c2`
+> >     - *"Mode of the operation"*: `Append`
 > >
 > > 5. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
-> >   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
-> >   - "*On column*": `Column 1`
-> >   - "*In*": `Descending order`
-> >   - "*Output unique values*": `Yes`
+> >   - {% icon param-file %} *"Sort Dataset"*: output of **Compute on rows** {% icon tool %}
+> >   - "*on column*": `Column: 7`
+> >   - "*everything in*": `Descending order`
 > >
-> > 6. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
-> >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
-> >   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.9999 - 0.5)]}`
+> > 6. Instead of taking the min value, we will use a quantile approach. We will get the 1/10000 quantile using {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1) %} with awk with the following parameters:
+> >   - {% icon param-file %} *"File to process"*: output of **Sort** {% icon tool %}
+> >   - "*AWK Program*": `{all[NR] = $7} END{print all[int(NR*0.9999 - 0.5)]}`
 > >
 > > 7. Rename the output as `Minimum intron size`
 > >
-> > 8. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
-> >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
-> >   - "*AWK Program*": `{all[NR] = $0} END{print all[int(NR*0.001 - 0.5)]}`
+> > 8. Instead of taking the max value, we will use a quantile approach. We will get the 1/1000 quantile using {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1) %} with awk with the following parameters:
+> >   - {% icon param-file %} *"File to process"*: output of **Sort** {% icon tool %}
+> >   - "*AWK Program*": `{all[NR] = $7} END{print all[int(NR*0.001 - 0.5)]}`
 > >
 > > 9. Rename the output as `Maximum intron size`
 > >
@@ -292,14 +291,14 @@ Now we can perform the mapping step.
 
 > <hands-on-title> Generate intermediate file with RNA STAR</hands-on-title>
 >
-> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
+> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
->            - *"Length of the genomic sequence around annotated junctions*": `150`
+>            - *"Length of the genomic sequence around annotated junctions*": `149`
 >    - *"Would you like to set additional output filters?"*: `Yes`
 >        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
 >        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
@@ -307,7 +306,7 @@ Now we can perform the mapping step.
 >        - *"Maximum ratio of mismatches to read length*": `0.04`
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
->            -  In *"Alignment parameters"*:
+>            - In *"Alignment parameters"*:
 >                - *"Minimum intron size*": `20`
 >                - *"Maximum intron size*": `1000000`
 >                - *"Maximum gap between two mates*": `1000000`
@@ -322,44 +321,53 @@ Now we can perform the mapping step.
 >
 {: .hands_on}
 
-The first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of filtering non-canonical (column 5 > 0), unannotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 > 5).
+The first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of getting a unique list of junctions where we remove non-canonical junctions (column 5 > 0), annotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 > 5).
 
 > <hands-on-title> Pre-processing of splice junction coordinates</hands-on-title>
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} tail-to-head (cat) with the following parameters:
 >   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
 >
-> 2. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with awk with the following parameters:
->   - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
->   - "*AWK Program*": `($5 > 0 && $7 > 2 && $6==0)`
+> 2. {% tool [Filter](Filter1) %} data on any column using simple expressions:
+>   - *"Filter"*: output of **Concatenate datasets** {% icon tool %}
+>   - *"With following condition"*: `c5 > 0 and c6 == 0 and c7 > 5` (here `c` stands for *column*).
 >
 > 3. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
->   - "*Cut columns*": `c1,c2,c3,c4,c5,c6`
->   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
+>   - "*Cut columns*": `c1-c6`
+>   - {% icon param-file %} *"From"*: output of **Filter** {% icon tool %}
 >
 > 4. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
->   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
->   - "*On column*": `Column 1`
+>    - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
+>    - *"on column*": `Column: 1`
+>    - *"with flavor"*: `Alphabetical sort`
+>    - *"everything in"*: `Ascending order`
+>    - {% icon param-repeat %} *"Insert Column selection"*
+>        - *"on column"*: `Column: 2`
+>        - *"everything in"*: `Ascending order`
+>    - {% icon param-repeat %} *"Insert Column selection"*
+>        - *"on column"*: `Column: 3`
+>        - *"everything in"*: `Ascending order`
 >
-> 5. {% tool [Unique lines](sort1) %} assuming sorted input file with the following parameters:
+> 5. {% tool [Unique lines](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_uniq_tool/9.3+galaxy1) %} assuming sorted input file with the following parameters:
 >   - {% icon param-file %} *"File to scan for unique values"*: output of **Sort** {% icon tool %}
+>   - *Only print unique lines*: No
 > 
-> 6. Rename the output as `Splicing database`
+> 6. Rename the output as `Splicing database` and change datatype to `interval` (this was the initial datatype but the `cut` tool changed it to `tabular`.)
 >
 {: .hands_on}
 
 Finally, we will re-run **RNA STAR** in order to integrate the information about the new splicing events in the analysis.
 
 > <hands-on-title> Sequence alignment with STAR</hands-on-title>
-> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters:
+> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
+>            - *"Length of the genomic sequence around annotated junctions*": `149`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
 >       - {% icon param-file %} *"Pregenerated splice junctions datasets of your samples"*: `Splicing database`
->            - *"Length of the genomic sequence around annotated junctions*": `150`
 >    - *"Would you like to set additional output filters?"*: `Yes`
 >        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
 >        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
@@ -401,31 +409,37 @@ We are going to use the following RSeQC modules:
 Once all required outputs have been generated, we will integrate them by using **MultiQC** in order to interpret the results.
 
 > <hands-on-title> Raw reads QC</hands-on-title>
+> 1. Most of RSeQC tools require a BED12 file with gene annotations. If you don't have a `BED12 annotation` dataset, just generate it with {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
+>    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
+>    - *"Advanced options"*: `Set advanced options`
+>        - *"Ignore groups without exons"*: `Yes`
 >
-> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1) %} with the following parameters:
+> 2. Rename the output as `BED12 annotation`
+>
+> 3. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
-> 2. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1) %} with the following parameters:
+> 4. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
-> 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
+> 5. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >    - *"Minimum intron length (bp)"*: `20`
 >    - *"Output R-Script"*: `Yes`
 >
-> 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
+> 6. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >    - *"Minimum intron length (bp)"*: `20`
 >
-> 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
+> 7. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
-> 6. {% tool [Inner Distance](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.1+galaxy2) %} with the following parameters:
+> 8. {% tool [Inner Distance](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_inner_distance/5.0.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input BAM/SAM file"*: `Mapped collection`
 >    - {% icon param-file %} *"Reference gene model"*: `BED12 annotation`
 >
@@ -442,7 +456,7 @@ Now, we will integrate the outputs into **MultiQC**.
 >                - In *"STAR output"*:
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
->                            - {% icon param-collection %} *"STAR log output"*: `log` collection
+>                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection XXX: log` collection
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
@@ -506,11 +520,11 @@ After confirming that the saturation level is good enough, now we will check the
 
 ![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
 
-According to the results, despite the number of new (or partially new) splicing junctions is relatively slow (around 0.5%) (fig. 9.B), a large proportion of reads show novel splicing junction patterns (fig. 9.A).
+According to the results, despite the relatively low (around 0.5%) proportion of reads supporting new (or partially new) splicing events (fig. 9.B), they represent a large proportion of junctions (fig. 9.A).
 
 ![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseqc_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2.") 
 
-Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually veery short inner distances appear in old or degraded samples; in addition and values can be negative if the reads overlap consistently.
+Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually very short inner distances appear in old or degraded samples; in addition values can be negative if the two fragments overlap.
 
 After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.
 
