@@ -88,9 +88,9 @@ program:
   - section: "Monday: Galaxy introduction"
     description: |
       Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
+  - section: Start to get to know Galaxy
+    subsection: true
     tutorials:
-      - type: custom
-        name: "Start to get to know Galaxy "
       - name: galaxy-intro-101-everyone
         topic: introduction
       - name: data-manipulation-olympics
@@ -99,8 +99,9 @@ program:
         topic: introduction
       - name: options-for-using-galaxy
         topic: introduction
-      - type: custom
-        name: "Fundamentals of Sequences analysis "
+  - section: "Fundamentals of Sequences analysis"
+    subsection: true
+    tutorials:
       - name: quality-control
         topic: sequence-analysis
       - name: mapping
