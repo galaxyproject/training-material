@@ -48,7 +48,7 @@ For this tutorial, we are using the genome assembly of the Zebra Finch (*Taeniop
 {: .comment}
 
 
-This analysis descripbed in this tutorial will work with any assembly in FASTA format. If your initial dataset is compressed, use the tool `Convert compressed file to uncompressed.` first.
+The analysis described in this tutorial will work with any assembly in FASTA format. If your initial dataset is compressed, use the tool `Convert compressed file to uncompressed.` first.
 
 
 > <hands-on-title> Data Upload </hands-on-title>
