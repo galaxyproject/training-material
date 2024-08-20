@@ -35,6 +35,7 @@ contributions:
     - korvoj
     - domlgreen
     - isouyioul
+    - achim-kit
   funding:
     - skills4eosc
 follow_up_training:
