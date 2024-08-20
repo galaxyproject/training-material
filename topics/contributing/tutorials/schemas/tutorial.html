@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cad92813615783dc46e61b6660ad1570f16a50ad",
+		release: "galaxy-training-network@25ff61751785b8470409fe045d7463f938f4aaca",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -15728,6 +15728,77 @@ finished making it up to GTN standards.</p>
 		
 	
 		
+			
+			
+			
+
+			<blockquote class="comment">
+
+	<div class="box-title">
+		
+			
+				(Required) <code>mode</code>
+			
+		
+	</div>
+
+<b>Free Text</b>
+
+<p>
+<p>The mode of the event. For some reason the schema.org markup for this provides three separate axes (online/onsite/blended, synchronous/asynchronous, and full-time/part-time), but we’re just going to use the first axis because there is no way to represent choices from each axis. Why, schema.org why‽ If you want to record async/sync please do so in the separate attribute, and we will not record full/part time.</p>
+
+</p>
+
+
+
+
+<p>
+<b>Possible Values:</b>
+<ul>
+
+	<li><code>online</code></li>
+
+	<li><code>onsite</code></li>
+
+	<li><code>hybrid</code></li>
+
+</ul>
+</p>
+
+
+
+
+
+<p>
+	<b>Example(s)</b>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">online"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">onsite"</span>
+</code></pre></div>        </div>
+      </div>
+	
+<div>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">hybrid"</span>
+</code></pre></div>        </div>
+      </div>
+	</p>
+
+
+
+
+
+
+
+
+
+</blockquote>
+
+		
 	
 		
 	
@@ -17534,81 +17605,6 @@ finished making it up to GTN standards.</p>
 		
 	
 		
-			
-			
-			
-
-			<blockquote class="tip">
-
-	<div class="box-title">
-		
-		<button type="button" aria-expanded="true" aria-label="Toggle tip box: mode">
-			<i class="far fa-lightbulb" aria-hidden="true"></i>
-			
-				<code>mode</code>
-			
-			<span role="button" class="fold-unfold fa fa-plus-square"></span>
-		</button>
-		
-	</div>
-
-<b>Free Text</b>
-
-<p>
-<p>The mode of the event. For some reason the schema.org markup for this provides three separate axes (online/onsite/blended, synchronous/asynchronous, and full-time/part-time), but we’re just going to use the first axis because there is no way to represent choices from each axis. Why, schema.org why‽ If you want to record async/sync please do so in the separate attribute, and we will not record full/part time.</p>
-
-</p>
-
-
-
-
-<p>
-<b>Possible Values:</b>
-<ul>
-
-	<li><code>online</code></li>
-
-	<li><code>onsite</code></li>
-
-	<li><code>blended</code></li>
-
-</ul>
-</p>
-
-
-
-
-
-<p>
-	<b>Example(s)</b>
-	
-<div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">online"</span>
-</code></pre></div>        </div>
-      </div>
-	
-<div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">onsite"</span>
-</code></pre></div>        </div>
-      </div>
-	
-<div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">mode</span><span class="pi">:</span> <span class="s2">"</span><span class="s">blended"</span>
-</code></pre></div>        </div>
-      </div>
-	</p>
-
-
-
-
-
-
-
-
-
-</blockquote>
-
-		
 	
 		
 			
@@ -18564,11 +18560,58 @@ finished making it up to GTN standards.</p>
 
 		
 	
+		
+	
 
 	
 	
 		
 	
+		
+	
+		
+			
+			
+			
+
+			<blockquote class="tip">
+
+	<div class="box-title">
+		
+		<button type="button" aria-expanded="true" aria-label="Toggle tip box: open">
+			<i class="far fa-lightbulb" aria-hidden="true"></i>
+			
+				<code>open</code>
+			
+			<span role="button" class="fold-unfold fa fa-plus-square"></span>
+		</button>
+		
+	</div>
+
+<b>Boolean</b>
+
+<p>
+
+
+</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</blockquote>
+
 		
 	
 
@@ -24408,7 +24451,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cad92813615783dc46e61b6660ad1570f16a50ad">cad9281</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/25ff61751785b8470409fe045d7463f938f4aaca">25ff617</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
