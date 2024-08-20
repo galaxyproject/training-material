@@ -64,8 +64,13 @@ Those parametars are, "CHROMOSOME", "Start", and "End".
 
 
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
+> 1. For this tutorial, make a new history.
 >
-> 1. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
+>
+> 2. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection
 >   - *"DATABASE HOST"*: `20.108.51.167`
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `beacon`
@@ -79,30 +84,63 @@ Those parametars are, "CHROMOSOME", "Start", and "End".
 >
 > > <question-title></question-title>
 >    >
->    > What dose variantId "EFO:0030070" means? 
+>    > What types of information can be extracted from records?
 >    >
 >    > > ```json
->    > >{'_id': ObjectId('66bc9dcb520b66614b58f024'),
+>    > >{'_id': ObjectId('66c466431ea6cb4184ee0f2f'),
 >    > > 'assemblyId': 'GRCh38',
->    > > 'biosampleId': 'ENSG00000196433.13',
->    > > 'definitions': {'Location': {'chromosome': 'X',
->    > >                              'end': 1643081,
->    > >                              'start': 1615059}},
->    > > 'diseaseType': 'adnexal and skin appendage neoplasms',
->    > > 'gene': 'ASMT',
->    > > 'id': 'refvar-66bc9dcb520b66614b58f024',
->    > > 'info': {'cnCount': 3, 'legacyId': 'DUP:chrX:1615059-1643081'},
->    > > 'primarySite': 'breast',
->    > > 'updated': '2024-08-14T10:18:40.152888',
->    > > 'variantInternalId': 'X:1615059-1643081:EFO:0030071',
+>    > > 'biosampleId': 'MP2PRT-PARNFH-TMP1-A, MP2PRT-PARNFH-NM1-A',
+>    > > 'definitions': {'Location': {'chromosome': '17',
+>    > >                              'end': 43170245,
+>    > >                              'start': 43044295}},
+>    > > 'diseaseType': 'acute lymphoblastic leukemia',
+>    > > 'gene': 'BRCA1',
+>    > > 'geneID': 'ENSG00000012048.23',
+>    > > 'id': 'refvar-66c466431ea6cb4184ee0f2f',
+>    > > 'info': {'caseID': 'MP2PRT-PARNFH, MP2PRT-PARNFH',
+>    > >          'cnCount': 3,
+>    > >          'fileName': 'f11b7fb7-a610-4978-b5c4-523450a0fd5f.wgs.ASCAT.gene_level.copy_number_variation.tsv',
+>    > >          'legacyId': 'DUP:chr17:43044295-43170245',
+>    > >          'projectID': 'MP2PRT-ALL',
+>    > >          'sampleType': 'Blood Derived Cancer - Bone Marrow, Blood Derived '
+>    > >                        'Cancer - Bone Marrow, Post-treatment'},
+>    > > 'primarySite': 'hematopoietic and reticuloendothelial systems',
+>    > > 'updated': '2024-08-19T21:23:09.374531',
+>    > > 'variantInternalId': '17:43044295-43170245:EFO:0030071',
 >    > > 'variantState': {'id': 'EFO:0030071', 'label': 'low-level gain'},
 >    > > 'variantType': 'DUP'}
 >    > > ```
 >    >
 >    > > <solution-title></solution-title>
->    > >
->    > > EFO:0030069 is a term used to describe the copy number gain. The term was set by the CNV community.
->    > > For more information go to the [CNV annotation formats](https://cnvar.org/resources/CNV-annotation-standards/#cnv-term-use-comparison-in-computational-fileschema-formats)
+>    > > 1. Identifiers and IDs:
+>    > > - _id: The unique identifier for the record, typically used in databases.
+>    > > - assemblyId: The reference genome assembly (e.g., 'GRCh38').
+>    > > - biosampleId: IDs of the biological samples involved.
+>    > > - geneID: Identifier for the gene (e.g., 'ENSG00000012048.23').
+>    > > - id: Another unique identifier, possibly for external reference (e.g., 'refvar-66c466431ea6cb4184ee0f2f').
+>    > > - caseID: Identifier(s) for the case(s) associated with this record.
+>    > > - projectID: Identifier for the project (e.g., 'MP2PRT-ALL').
+>    > > - variantInternalId: Internal identifier for the variant (e.g., '17:43044295-43170245:EFO:0030071').
+>    > > 2. Genomic Information:
+>    > > - gene: The gene involved (e.g., 'BRCA1').
+>    > > - variantType: The type of genetic variant (e.g., 'DUP' for duplication).
+>    > > - variantState: Describes the state of the variant, including an ID and label (e.g., 'low-level gain').
+>    > > 3. Location Information:
+>    > > - Location: Contains the chromosomal location of the variant:
+>    > > - chromosome: Chromosome number (e.g., '17').
+>    > > - start: Start position on the chromosome.
+>    > > - end: End position on the chromosome.
+>    > > 4. Disease and Clinical Information:
+>    > > - diseaseType: The type of disease associated with the record (e.g., 'acute lymphoblastic leukemia').
+>    > > - primarySite: The primary site of the disease (e.g., 'hematopoietic and reticuloendothelial systems').
+>    > > 5. Sample Information:
+>    > > - sampleType: Description of the sample type (e.g., 'Blood Derived Cancer - Bone Marrow').
+>    > > - cnCount: Copy number count, which may indicate the number of copies of the variant.
+>    > > 6. File and Legacy Information:
+>    > > - fileName: Name of the associated file (e.g., 'f11b7fb7-a610-4978-b5c4-523450a0fd5f.wgs.ASCAT.gene_level.copy_number_variation.tsv').
+>    > > - legacyId: A legacy identifier, possibly for reference to previous systems or records (e.g., 'DUP:chr17:43044295-43170245').
+>    > > 7. Metadata:
+>    > > - updated: Timestamp indicating when the record was last updated (e.g., '2024-08-19T21:23:09.374531').
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -124,7 +162,7 @@ Building on the previous example, we will add the "VARIANT STATE" parameter to t
 >   - *"DATABASE PORT"*: `27017`
 >   - *"DATABASE"*: `beacon`
 >   - *"COLLECTION"*: `genomicVariations`
->   - *"CHROMOSOME"*: `X`
+>   - *"CHROMOSOME"*: `1`
 >   - *"START"*: `1574102`
 >   - *"END"*: `1674102`
 >   - *"*"VARIANT STATE"*"*: `low-level gain`
@@ -163,18 +201,28 @@ To conduct such a detailed analysis, we can query the Beacon database by narrowi
 
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
 >
-> 1. Use {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection
->   - *"DATABASE HOST"*: `20.108.51.167`
->   - *"DATABASE PORT"*: `27017`
->   - *"DATABASE"*: `beacon`
->   - *"COLLECTION"*: `genomicVariations`
->   - *"VARIANT STATE"*: `low-level loss`
->   - *"GENE NAME"*: `BRCA1`
->   - *"PRIMARY SITE"*: `breast`
->   - *"DISEASE TYPE"*: `adnexal and skin appendage neoplasms` *optional*
+> 1. **Import the Excel sheet** containing information about the primary sites and diseases from the Beacon database, available at this [Zenodo link](https://zenodo.org/records/13348132/files/Beacon2-list-of-files.xlsx):
 >
-> This query will retrieve and print CNV records associated with a low-level loss within the BRCA1 gene from the Beacon database. By specifying the gene name, variant state, and filtering based on the primary site as "breast," the query will focus on CNVs that are highly relevant to breast cancer. Additionally, you can refine the search further by including the disease type, such as adnexal and skin appendage neoplasms, to narrow down the results to those most pertinent to your research objectives.
+>    Please review this list to identify the primary sites and diseases that have available CNV (Copy Number Variation) records. In some cases, the same dataset can be found in the Galaxy shared data library. Ask the instructor for more details about this. The dataset can also be downloaded to local storage.
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md format="xlsx" %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 2. Use the {% tool [Beacon2 CNV](https://toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} tool to query the Beacon **genomicVariations** collection:
+>
+>    - *"DATABASE HOST"*: `20.108.51.167`
+>    - *"DATABASE PORT"*: `27017`
+>    - *"DATABASE"*: `beacon`
+>    - *"COLLECTION"*: `genomicVariations`
+>    - *"VARIANT STATE"*: `low-level loss`
+>    - *"GENE NAME"*: `BRCA1`
+>    - *"PRIMARY SITE"*: `breast`
+>    - *"DISEASE TYPE"*: `adnexal and skin appendage neoplasms` *(optional)*
+>
+>    This query will retrieve and print CNV records associated with a low-level loss within the BRCA1 gene from the Beacon database. By specifying the gene name, variant state, and filtering based on the primary site as "breast," the query will focus on CNVs that are highly relevant to breast cancer. Additionally, you can refine the search further by including the disease type, such as "adnexal and skin appendage neoplasms," to narrow down the results to those most pertinent to your research objectives.
 {: .hands_on}
+
 
 
 
