@@ -75,7 +75,6 @@ location:
   name: online
 
 infrastructure:
-
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
@@ -84,13 +83,17 @@ infrastructure:
     - server: https://usegalaxy.org.au/
       name: Galaxy AU
 
+  support:
+    platform: Slack
+
+
 program:
   - section: "Monday: Galaxy introduction"
     description: |
       Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
+  - section: Start to get to know Galaxy
+    subsection: true
     tutorials:
-      - type: custom
-        name: "Start to get to know Galaxy "
       - name: galaxy-intro-101-everyone
         topic: introduction
       - name: data-manipulation-olympics
@@ -99,15 +102,19 @@ program:
         topic: introduction
       - name: options-for-using-galaxy
         topic: introduction
-      - type: custom
-        name: "Fundamentals of Sequences analysis "
+  - section: "Fundamentals of Sequences analysis"
+    subsection: true
+    tutorials:
       - name: quality-control
         topic: sequence-analysis
       - name: mapping
         topic: sequence-analysis
 
   - section: "Tuesday to Thursday: Pick a track"
-    description: Today you will learn all about transcriptomics
+    description: |
+      Over the course of these three days, you can choose your preferred track and learn how to use Galaxy for data analysis in this research field. If you find multiple topics interesting, feel free to explore more than one track. Each track will guide you through the process, from basic to more advanced analyses, to accommodate learners of all levels.
+
+      For assistance, you can access support through the Slack channel associated with each track module. Please note that while we strive to accommodate all time zones, responses to specific questions may take a bit longer depending on the availability of experts in your time zone.
     tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
       - title: Proteomics
         link: events/tracks/gta2024-proteomics.md
