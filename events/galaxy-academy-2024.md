@@ -75,7 +75,6 @@ location:
   name: online
 
 infrastructure:
-
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
@@ -83,6 +82,10 @@ infrastructure:
       name: Galaxy Main
     - server: https://usegalaxy.org.au/
       name: Galaxy AU
+
+  support:
+    platform: Slack
+
 
 program:
   - section: "Monday: Galaxy introduction"
