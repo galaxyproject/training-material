@@ -108,7 +108,10 @@ program:
         topic: sequence-analysis
 
   - section: "Tuesday to Thursday: Pick a track"
-    description: Now you can decide your own program. Have a look at the tracks below and pick the one(s) that interest you most!
+    description: |
+      Over the course of these three days, you can choose your preferred track and learn how to use Galaxy for data analysis in this research field. If you find multiple topics interesting, feel free to explore more than one track. Each track will guide you through the process, from basic to more advanced analyses, to accommodate learners of all levels.
+
+      For assistance, you can access support through the Slack channel associated with each track module. Please note that while we strive to accommodate all time zones, responses to specific questions may take a bit longer depending on the availability of experts in your time zone.
     tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
       - title: Proteomics
         link: events/tracks/gta2024-proteomics.md
