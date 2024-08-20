@@ -635,7 +635,7 @@ You should also be able to remove attribution upon request.
 The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
 
 ![Universal access logo](../../images/universal-access-6602642_640.png)  
-Image by <a href="https://pixabay.com/users/inspire-studio-22128832/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">J S</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6602642">Pixabay</a>
+<a href="https://pixabay.com/vectors/universal-access-human-icon-6602642/">"Universal Access Human"</a> by <a href="https://pixabay.com/users/inspire-studio-22128832/">J S</a> from <a href="https://pixabay.com/">Pixabay</a>
 
 
 #### Standards
