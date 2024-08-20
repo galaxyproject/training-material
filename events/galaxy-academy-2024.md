@@ -17,8 +17,9 @@ date_end: 2024-10-11
 cost: free
 audience: Everyone who would like to get to know Galaxy and learn bioinformatics data analysis, whether you want to master a specific analysis or learn a new skill.
 contact_email: academy@galaxyproject.org
-async: true
 
+async: true
+mode: online
 
 contributions:
     organisers:
