@@ -108,7 +108,7 @@ program:
         topic: sequence-analysis
 
   - section: "Tuesday to Thursday: Pick a track"
-    description: Today you will learn all about transcriptomics
+    description: Now you can decide your own program. Have a look at the tracks below and pick the one(s) that interest you most!
     tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
       - title: Proteomics
         link: events/tracks/gta2024-proteomics.md
