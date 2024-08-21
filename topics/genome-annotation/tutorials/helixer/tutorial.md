@@ -186,6 +186,7 @@ The run BUSCO on these protein sequences:
 >    - In *"Advanced Options"*:
 >        - *"Which outputs should be generated"*: select all outputs
 >
+{: .hands_on}
 
 Several output files are generated:
 
@@ -197,7 +198,6 @@ Several output files are generated:
 
 This gives information about the completeness of the Helixer annotation. A good idea is to compare this first result with the one you get on the initial genome sequence, and see if the annotation tool found all the genes that BUSCO finds in the raw genome sequence. So run BUSCO in genome mode:
 
-{: .hands_on}
 > <hands-on-title>BUSCO in genome mode</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
