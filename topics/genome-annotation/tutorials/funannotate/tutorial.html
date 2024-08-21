@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a50aff5ddfd5e8306ff3dd63a31c6e952dd77eae",
+		release: "galaxy-training-network@5262dd96919a457040ca496cba4c7b688c162709",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome annotation with Funannotate">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-08-21 15:23:33 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Genome Annotation / Genome annotation with Funannotate / Hands-on: Genome annotation with Funannotate">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-08-21 15:23:33 +0000",
   "datePublished": "2021-11-29 13:29:30 +0000",
   "identifier": "https://gxy.io/GTN:T00172",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Genome annotation with Funannotate",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html",
-  "version": 22,
+  "version": 23,
   "timeRequired": "PT8H",
   "teaches": "Load genome into Galaxy\n - Annotate genome with Funannotate\n - Perform functional annotation using EggNOG-mapper and InterProScan\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse",
   "keywords": [
@@ -933,6 +933,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
+                    
+                
             
         
     
@@ -1145,7 +1147,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 29, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 21, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1163,7 +1165,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 22 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 23 </div>
 
     </blockquote>
     </section>
@@ -1227,7 +1229,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>To annotate our genome using Funannotate, we will use the following files:</p>
 
 <ul>
-  <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial, we will try to annotate the genome assembled in the <a href="/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html">Flye assembly tutorial</a>.</li>
+  <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial, we will try to annotate the genome assembled in the <a href="/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html">Flye assembly tutorial</a> and already masked for you using RepeatMasker.</li>
   <li>Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.</li>
   <li>A set of <strong>protein sequences</strong>, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that’s why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial, we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.</li>
 </ul>
@@ -2040,6 +2042,8 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 
                     
                 
+                    
+                
             
         
     
@@ -2240,7 +2244,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a50aff5ddfd5e8306ff3dd63a31c6e952dd77eae">a50aff5</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5262dd96919a457040ca496cba4c7b688c162709">5262dd9</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
