@@ -11,6 +11,7 @@ contributions:
     instructors:
         - pavanvidem
         - nomadscientist
+        - dianichj
 
 
 program:

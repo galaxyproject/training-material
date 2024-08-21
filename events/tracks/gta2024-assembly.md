@@ -9,6 +9,9 @@ contributions:
         - delphine-l
     instructors:
         - delphine-l
+        - SaimMomin12
+        - bgruening
+        - clsiguret
 
 
 program:
