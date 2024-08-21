@@ -7,9 +7,9 @@ description: |
 
 
 registration:
-  link: TODO
-  deadline: 2024-10-07
-  open: false
+  link: https://forms.gle/cxzVatt7MAgiMX12A
+  deadline: 2024-09-30
+  open: true
 
 date_start: 2024-10-07
 date_end: 2024-10-11
@@ -94,13 +94,20 @@ program:
   - section: Start to get to know Galaxy
     subsection: true
     tutorials:
-      - name: galaxy-intro-101-everyone
+      - name: galaxy-intro-101
         topic: introduction
+      - name: history
+        topic: galaxy-interface
+      - name: collections
+        topic: galaxy-interface
       - name: data-manipulation-olympics
         topic: introduction
-      - name: galaxy-reproduce
+      - name: galaxy-intro-ngs-data-managment
         topic: introduction
-      - name: options-for-using-galaxy
+  - section: Quick start or fresh up your Galaxy knowledge
+    subsection: true
+    tutorials:
+      - name: galaxy-intro-short
         topic: introduction
   - section: "Fundamentals of Sequences analysis"
     subsection: true
