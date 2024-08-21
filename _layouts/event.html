@@ -424,12 +424,16 @@ subsites: [all]
           {% elsif event.registration.open == false %}
           <a href="#" class="btn btn-primary btn-lg btn-block">Registration opens soon!</a>
           {% else %}
-		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
+		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now!</a>
+            {% if event.registration.deadline %}
+            <p style="margin-top:1em"><b>Deadline:</b> {{event.registration.deadline | date: "%-d %B %Y" }}</p>
+            {% endif %}
           {% endif %}
 		{% endif %}
         {% endunless %}
 		<hr/>
 
+		<b> Event details </b>
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
 			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% else %}Please set a location{% endif %}</td></tr>
