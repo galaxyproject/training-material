@@ -29,6 +29,7 @@ key_points:
 contributions:
   authorship:
     - rlibouba
+    - abretaud
   funding:
     - eurosciencegateway
 abbreviations:
