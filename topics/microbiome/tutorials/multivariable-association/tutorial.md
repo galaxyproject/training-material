@@ -3,10 +3,12 @@ layout: tutorial_hands_on
 
 title: "Determining multivariable association between various meta’omic features using MaAslin2"
 subtopic: metagenomics
-tags:
+tags: 
     - Heatmap
     - metagenomics
     - associations
+    - differential analysis
+    - statistics
 
 level: Introductory
 zenodo_link: https://zenodo.org/records/12614561
@@ -16,9 +18,13 @@ objectives:
 - Identify statistically significant associations between microbial features and metadata variables (such as clinical conditions, environmental factors, or demographic information) in microbiome data.
 - Uncover potential biomarkers associated with specific disease states.
 time_estimation: 15M
-contributors:
-- renu-pal
-- paulzierep
+contributions:
+   authorship:
+    - renu-pal
+    - paulzierep
+   editing:
+    - shiltemann
+
 
 
 ---
