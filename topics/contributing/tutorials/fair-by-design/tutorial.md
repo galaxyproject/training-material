@@ -36,6 +36,8 @@ contributions:
     - domlgreen
     - isouyioul
     - achim-kit
+    - agCleo
+    - CRHAD26
   funding:
     - skills4eosc
 follow_up_training:
