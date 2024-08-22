@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-2-Discovery
+title: "Clinical Metaproteomics 2: Discovery"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform database searching?
@@ -37,6 +37,16 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-discovery/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 16M
+  youtube_id: 5Pg9LLfFGX4
+  speakers:
+  - katherine-d21
 ---
 
 
@@ -94,6 +104,25 @@ This step is to identify proteins based on mass spectrometry data. The algorithm
 > 6. Create a dataset collection of all the raw files and MGF files.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+# Import Workflow
+
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-2-discovery/workflows/WF2_Discovery-Workflow.ga" title="Discovery Workflow" %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" RAW files"*: `RAW dataset collection`
+>    - {% icon param-file %} *" Human UniProt Microbial Proteins (from MetaNovo) and cRAP"*: `Human_UniProt_Microbial_Proteins_(from_MetaNovo)_and_cRAP.fasta`
+>    - {% icon param-file %} *" Experimental Design Discovery MaxQuant"*: `Experimental-Design_Discovery_MaxQuant.tabular`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
 >
 {: .hands_on}
 
@@ -415,7 +444,7 @@ We will generate and merge the Human SwissProt Protein Database and contaminants
 >    - {% icon param-file %} *"Select data"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - *"Group by column"*: `c1`
 >
->    
+>
 {: .hands_on}
 
 

@@ -672,6 +672,7 @@ module TopicFilter
           'workflow' => wf,
           'tests' => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length.positive?,
           'url' => "#{domain}/#{folder}/workflows/#{wf}",
+          'url_html' => "#{domain}/#{folder}/workflows/#{wf.gsub(/.ga$/, '.html')}",
           'path' => wf_path,
           'wfid' => wfid,
           'wfname' => wfname,
@@ -698,7 +699,9 @@ module TopicFilter
           'modified' => File.mtime(wf_path),
           'mermaid' => mermaid(wf_json),
           'graph_dot' => graph_dot(wf_json),
-          'workflow_tools' => extract_workflow_tool_list(wf_json).uniq,
+          'workflow_tools' => extract_workflow_tool_list(wf_json).flatten.uniq.sort,
+          'inputs' => wf_json['steps'].select { |_k, v| ['data_input', 'data_collection_input', 'parameter_input'].include? v['type'] }.map{|_, v| v},
+          'outputs' => wf_json['steps'].select { |_k, v| v['workflow_outputs'] && v['workflow_outputs'].length.positive? }.map{|_, v| v},
         }
       end
     end
@@ -1124,6 +1127,13 @@ module Jekyll
 
     def list_materials_structured(site, topic_name)
       TopicFilter.list_materials_structured(site, topic_name)
+    end
+
+    def list_materials_flat(site, topic_name)
+      TopicFilter
+        .list_materials_structured(site, topic_name)
+        .map { |k, v| v['materials'] }
+        .flatten
     end
 
     def list_all_tags(site)

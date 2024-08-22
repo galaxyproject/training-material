@@ -116,8 +116,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			{% if jekyll.environment == "production" %}
-			<a style="margin-bottom: 0.2rem" href="{{ site.baseurl }}/api/workflows/{{ material.topic_id }}/{{ material.tutorial_id }}/{{ workflow.wfid }}/rocrate.zip" class="btn btn-secondary"><img src="{% link assets/images/ro-crate.png %}" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
+			<a style="margin-bottom: 0.2rem" href="{{ site.baseurl }}/api/workflows/{{ material.topic_name }}/{{ material.tutorial_name }}/{{ workflow.wfname }}/rocrate.zip" class="btn btn-secondary"><img src="{% link assets/images/ro-crate.png %}" style="height: 32px" alt="RO-Crate logo with flask"/> Download Workflow RO-Crate</a>
 			{% endif %}
+
 			{% if workflow.workflowhub_id %}
 			<a style="margin-bottom: 0.2rem" href="https://workflowhub.eu/workflows/{{ workflow.workflowhub_id }}" class="btn btn-secondary"><img src="{% link assets/images/workflowhub-icon.svg %}" style="height: 32px" alt="Workflowhub cloud with gears logo"/> View on WorkflowHub</a>
 			{% endif %}
@@ -148,6 +149,70 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">{{ workflow.mermaid }}</pre>
+			<h2>Inputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Input</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for input in workflow.inputs %}
+				<tr>
+					<td>{{ input.name }}</td>
+					<td>{{ input.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+			<h2>Outputs</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>From</th>
+						<th>Output</th>
+						<th>Label</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for output in workflow.outputs %}
+				<tr>
+					<td>{{ output.tool_id }}</td>
+					<td>{{ output.name }}</td>
+					<td>{{ output.label }}</td>
+				</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+
+
+			<h2>Tools</h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Tool</th>
+						<th>Links</th>
+					</tr>
+				</thead>
+				<tbody>
+			{% for tool in workflow.workflow_tools %}
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id={{ tool }}">{{ tool }}</a></td>
+				<td>
+					{% if site.data['toolshed-revisions'][tool] %}
+					{% assign tsdata = site.data['toolshed-revisions'][tool] %}
+					<a href="https://toolshed.g2.bx.psu.edu/view/{{tsdata[0]}}/{{tsdata[1]}}/{{tsdata[2]}}">
+						View in ToolShed
+					</a>
+					{% endif %}
+				</td>
+			</tr>
+			{% endfor %}
+				</tbody>
+			</table>
+
 
 			<p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
 

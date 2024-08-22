@@ -65,7 +65,7 @@ To process 16S amplicon sequencing data, several tools exist: **QIIME2** ({% cit
 >
 {: .comment}
 
-The output of the dada2 pipeline is a feature table of amplicon sequence variants (an ASV table): A matrix with columms corresponding to samples and rows to ASVs, in which the value of each entry is the number of times that ASV was observed in that sample. This table is analogous to the traditional OTU table, except that one gets the actual sequences of the "true" sequence variants instead of rather anonymous and abstract entities called OTU1, OTU2, etc. 
+The output of the dada2 pipeline is a feature table of amplicon sequence variants (an ASV table): A matrix with columns corresponding to samples and rows to ASVs, in which the value of each entry is the number of times that ASV was observed in that sample. This table is analogous to the traditional OTU table, except that one gets the actual sequences of the "true" sequence variants instead of rather anonymous and abstract entities called OTU1, OTU2, etc. 
 
 The process of amplicon sequencing introduces errors into the sequencing data, and these errors 
 severely complicate the interpretation of the results. **DADA2** implements a novel algorithm that models the errors introduced during amplicon sequencing, and uses that error model to infer the true sample composition. 
@@ -229,7 +229,7 @@ Once demultiplexed FASTQ files without non-biological nucleotides are in hand, t
 
 <div class="Workflow" markdown="1">
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="dada2/main" wfhub_id="790" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="dada2/main" wfhub_id="790" version="2"%}
 
 > <hands-on-title>Define DADA2 workflow parameters</hands-on-title>
 >
@@ -353,7 +353,7 @@ Let's now trim and filter the reads:
    > <question-title></question-title>
    >
    > 1. How many reads were in F3D0 sample before Filter and Trim?
-   > 2. How many readsa are in F3D0 sample before Filter and Trim?
+   > 2. How many reads are in F3D0 sample after Filter and Trim?
    >
    > > <solution-title></solution-title>
    > >
@@ -508,7 +508,7 @@ We can look at the number of true sequence variants from unique sequences have b
 >
 > 1. Click one output collection of **dada2: dada**
 > 2. Click on {% icon details %} *Show Details*
-> 2. Expant *Tool Standard Output*
+> 2. Expand *Tool Standard Output*
 {: .hands_on}
 
 > <question-title></question-title>
@@ -633,7 +633,7 @@ In this step, we construct an amplicon sequence variant table (ASV) table, a hig
    >
    {: .question}
 
-   > <comment-title>Sequences too long or too shrot</comment-title>
+   > <comment-title>Sequences too long or too short</comment-title>
    > 
    > Sequences that are much longer or shorter than expected may be the result of non-specific priming. Non-target-length sequences can be removed directly from the sequence table. This is analogous to "cutting a band" in-silico to get amplicons of the targeted length.
    > 
@@ -710,11 +710,11 @@ As a final check of our progress, we’ll look at the number of reads that made 
 > <question-title></question-title>
 >
 > 1. Have we kept the majority of the raw reads for F3D143?
-> 2. Is there any over-large drop associated with any single step for any sample?
+> 2. Is there any exceptionally large drop associated with any single step for any sample?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
+> > 1. Yes
 > > 2. No
 > >
 > {: .solution}
@@ -761,7 +761,7 @@ DADA2 maintains [formatted training fastas for the RDP training set, GreenGenes 
 >
 > 1. Which kingdom have been identified?
 > 2. Which phyla have been identified? And how many ASVs per phylum?
-> 3. How many ASVs have species assignements?
+> 3. How many ASVs have species assignments?
 >
 > > <solution-title></solution-title>
 > >
@@ -837,7 +837,7 @@ We will construct a simple sample table from the information encoded in the file
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 5. {% tool [Select first lines](cat1) %} to remove the last line
+> 5. {% tool [Select first lines from a dataset (head)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/9.3+galaxy1) %} to remove the last line
 >    - {% icon param-file %} *"File to select"*: output of **Replace Text**
 >    - *"Operation"*: `Remove last lines`
 >    - *"Number of lines"*: `1`

@@ -13,7 +13,7 @@ For a complete list of all Galaxy-related events, please also see the [Galaxy Ev
 
 Anybody is welcome to add their events here.
 
-<a href="{% link faqs/gtn/gtn_event_create.md %}"><button type="button" class="btn btn-success">Add your own event!</button></a>
+[Add your own event!]({% link faqs/gtn/gtn_event_create.md %}){: .btn.btn-success}
 
 {% assign upcoming_events = site.pages| where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'upcoming' " | sort: 'date_start'  %}
 {% assign ongoing_events = site.pages | where_exp: "item", "item.layout == 'event' or item.layout == 'event-external' " | where_exp: "item", "item.event_state == 'ongoing'  " | sort: 'date_start' | reverse %}

@@ -85,7 +85,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >
 >    > <tip-title>Importing data from a data library</tip-title>
 >    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
+>    > * Go into "Data" (top panel) then "Data libraries"
 >    > * Click on "Training data" and then "Analyses of ChIP-Seq data"
 >    > * Select interesting file
 >    > * Click on "Import selected datasets into history"

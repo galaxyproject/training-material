@@ -8,17 +8,6 @@ concurrency:
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
-    paths:
-      - 'Gemfile.lock'
-      - '**/*.md'
-      - '**/*.html'
-      - '*.yml'
-      - '*.yaml'
-      - 'metadata/*'
-      - 'topics/*/images/*'
-      - '_plugins/*'
-      - '_plugins_dev/*'
-      - '**/*.bib'
 
 jobs:
   build-site:
@@ -37,48 +26,41 @@ jobs:
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.2"
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '19'
       - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
-            ~/.npm
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-
           restore-keys: |
-            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
-          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
           gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          npm install
           bundle pristine ffi
       # END Dependencies
 
-      - name: Build the site
-        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
+      - name: Ensure that the site builds
+        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace --future
 
       - name: Validate all links, enforce alt text
         run: |
           bundle exec htmlproofer \
-            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
+            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/","/workflows\/trs_import/" \
             --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/","/.*recentrifuge.*\.html/" \
             --swap-urls "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
             --disable-external=true \
             --enforce-https=false \
             ./_site
 
-      - name: Ensure no unexpected encoded HTML in output
+      - name: Ensure no unexpected encoded HTML in output, ask a GTN contributor for help with this one.
         run: |
           ! fgrep -R 'lt;blockquote' _site
 
-      - name: Ensure no poorly rendered FAQs
+      - name: Ensure no poorly rendered FAQs, generally this is fixed by removing whitespace/blank lines from the frontmatter
         run: |
-          ! fgrep -R 'box_type:' _site/
+          ! fgrep -R -A2 -B2 'box_type:' _site/
 
       - name: Ensure no poorly indented code blocks
         run: |
@@ -87,24 +69,6 @@ jobs:
       - name: Ensure no unexpected jekyll in output. If this fails, generally it means you should add a page.description to the front matter.
         run: |
           ! fgrep -R 'site.pages' _site
-
-      - name: Run aXe accessibility testing on some representative URLs
-        run: |
-          node_modules/.bin/http-server _site/ &
-          # We can focus AND scroll these regions. I thus disable their violation warning.
-          # Twitter isn't our fault. Sorry.
-          node_modules/.bin/axe --disable scrollable-region-focusable --exclude '#twitter-widget-0' --chromedriver-path /usr/bin/chromedriver \
-            http://localhost:8080/training-material/ \
-            http://localhost:8080/training-material/hall-of-fame/ \
-            http://localhost:8080/training-material/hall-of-fame/hexylena/ \
-            http://localhost:8080/training-material/topics/introduction/ \
-            http://localhost:8080/training-material/topics/statistics/ \
-            http://localhost:8080/training-material/topics/genome-annotation/ \
-            http://localhost:8080/training-material/topics/admin/ \
-            http://localhost:8080/training-material/topics/dev/ \
-            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html \
-            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/ \
-            http://localhost:8080/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html
 
       - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
         run: |

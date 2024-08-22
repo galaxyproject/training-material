@@ -51,8 +51,8 @@ data.each do |row|
   end
 
   if row['Optional Cover Image']
-    post_metadata['cover_image'] = row['Optional Cover Image']
-    post_metadata['cover_image_alt'] = row['Cover Image Alternative Text']
+    post_metadata['cover'] = row['Optional Cover Image']
+    post_metadata['coveralt'] = row['Cover Image Alternative Text']
   end
 
   if row['Link to a specific tutorial you wish to push people to view']

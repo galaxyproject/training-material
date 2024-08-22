@@ -1,56 +1,63 @@
 ---
 layout: tutorial_hands_on
-
 title: Filter, plot and explore single-cell RNA-seq data with Scanpy (Python)
 subtopic: single-cell-CS-code
 priority: 2
-zenodo_link: 'https://zenodo.org/record/7053673'
-
+zenodo_link: https://zenodo.org/record/7053673
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
-- How do I pick thresholds and parameters in my analysis? What's a "reasonable" number, and will the world collapse if I pick the wrong one?
+- How do I pick thresholds and parameters in my analysis? What's a "reasonable" number,
+  and will the world collapse if I pick the wrong one?
 objectives:
 - Interpret quality control plots to direct parameter decisions
 - Repeat analysis from matrix to clustering
 - Identify decision-making points
 - Appraise data outputs and decisions
-- Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process
+- Explain why single cell analysis is an iterative (i.e. the first plots you generate
+  are not final, but rather you go back and re-analyse your data repeatedly) process
 time_estimation: 3H
 key_points:
-- Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis
-- Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights
-
+- Single cell data is huge, and must have its many (# genes) dimensions reduced for
+  analysis
+- Analysis is more subjective than we think, and biological understanding of the samples
+  as well as many iterations of analysis are important to give us our best change
+  of attaining real biological insights
 requirements:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-case_alevin
-        - scrna-case_alevin-combine-datasets
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-case_alevin
+  - scrna-case_alevin-combine-datasets
 tags:
 - 10x
 - paper-replication
 - Python
-
 contributions:
   authorship:
-    - hexhowells
-    - nomadscientist
-
+  - hexhowells
+  - nomadscientist
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-case_JUPYTER-trajectories
-        - scrna-case_monocle3-trajectories
-
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-case_JUPYTER-trajectories
+  - scrna-case_monocle3-trajectories
 notebook:
   language: python
   snippet: topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/preamble.md
+recordings:
+- youtube_id: 40w0WVohv4E
+  length: 13M
+  galaxy_version: "24.1.2.dev0"
+  date: '2024-08-06'
+  speakers: [hexhowells]
+  captioners: [hexhowells]
+  bot-timestamp: 1722971660
+
 
 ---
+
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
@@ -85,10 +92,10 @@ import pandas as pd
 
 # Load Data
 
-You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #4 in your history, then you import it with the following:
+You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #1 in your history, then you import it with the following:
 
 ```python
-mito_counted_anndata = get(4)
+mito_counted_anndata = get(1)
 ```
 
 You now need to read it in as a h5ad object.
@@ -865,15 +872,21 @@ Ultimately, there are quite a lot ways to analyse the data, both within the conf
 
 It’s now time to export your data! First, we need to get Jupyter to see it as a file.
 
-```adata.write('markers_cluster_copy')```
+```python
+adata.write('MarkersCluster.h5ad')
+```
 
 Now you can export it.
 
-```put("MarkersCluster.h5ad")```
+```python
+put("MarkersCluster.h5ad")
+```
 
 To export your notebook to your Galaxy history, you can use the following. Change the text to be your notebook name. Do not use spaces!
 
-```put("yourtitlehere.ipynb")```    
+```python
+put("name_of_jupyter_notebook.ipynb")
+```
 
 Want to export some plots? Choose any (or all) of the plots you saved as files in the folder at the left and put their titles in the following. You can run multiple exports at the same time.
 
