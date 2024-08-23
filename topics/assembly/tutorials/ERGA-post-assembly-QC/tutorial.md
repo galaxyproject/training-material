@@ -371,7 +371,7 @@ The blob plot is a two-dimensional scatter plot that helps in visualizing and an
 >
 > > <solution-title></solution-title>
 > >
-> > ![Figure 9: BlobToolKit snailplots comparison](../../images/post-assembly-QC/Blobdir.blob.circle.EchRob_ChoRen.png "Comparison between blob plots from E. robustus (A) and C. reniformis (B).")
+> > ![Figure 9: BlobToolKit snailplots comparison](../../images/post-assembly-QC/Blobdir.blob.circle.EscRob_ChoRen.png "Comparison between blob plots from E. robustus (A) and C. reniformis (B).")
 > >
 > > - (A) The whale (*Eschrichtius robustus*) does have significant contamination. Approximately half of the assembled sequences of the whale does contain contaminants or cosymbionts (total count: 703, Chordata count: 316), however as the foreign sequences are smaller, they make up a small percentage of the total assembly.
 > > - (B) The sponge (*Condrosia reniformis*) doesn't contain any foreign sequences or contaminatio (total count: 15, Chordata count: 15).
