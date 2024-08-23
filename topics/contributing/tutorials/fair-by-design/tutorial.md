@@ -643,7 +643,7 @@ The developed learning materials should cover the widest range of learner variab
 
 #### Standards
 
-There are several standards that govern the rules on level of accessibility.
+There are several standards that govern the rules on the level of accessibility.
 
 Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>. Three conformance levels exist, you should aim for AA which is the middle one.
 
@@ -977,7 +977,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 	- QA recommendations
 	- Self-reflection after training
 	- Git Issues
-	- Gitter Chat
+	- Matrix Chat
 	- Direct mail contact
 	- Other means of communication
 
@@ -1011,7 +1011,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 ### Training Description
 
-Short how to guide that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.
+Short how-to that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.
 
 ### Target audience
 
