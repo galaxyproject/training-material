@@ -395,7 +395,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 > > <details-title> Learn more about facilitation</details-title>
 > > [Follow the Organizing a workshop tutorial available on GTN]( {% link topics/teaching/tutorials/organize-workshop/tutorial.md %}  )
 > > 
-> > [Follow the Running a workshop as instructor tutorial available on GTN]( {% link topics/teaching/tutorials/running-workshop/tutorial.md#Checklists %}  )
+> > [Follow the Running a workshop as instructor tutorial available on GTN]( {% link topics/teaching/tutorials/running-workshop/tutorial.md %}  )
 > {: .details}
 > 
 > Another option is to use something like the [TRIPLE project TRAINING TOOLKIT](https://project.gotriple.eu/project-deliverables/triple-training-toolkit/).
@@ -839,7 +839,7 @@ PDF document accessibility is measured with a separate technical specification <
         <p class="card-text">
 	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced or reused. <br> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
 	        <br>
-		<a href="#citing-this-tutorial">
+		<a href="https://training.galaxyproject.org/training-material/faqs/gtn/gtn_citing.html">
         {% icon point-right %}  See an example citation
         </a>
         </p>
