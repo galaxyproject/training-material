@@ -19,6 +19,10 @@ contributors:
 - tbrown91
 tags:
   - plants
+  - animals
+  - genome
+  - assembly
+  - QC
 ---
 
 ![](../../images/post-assembly-QC/ERGA.logo.jpg){: width="20px"}
