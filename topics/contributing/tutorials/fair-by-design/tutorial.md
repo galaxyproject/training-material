@@ -643,7 +643,7 @@ The developed learning materials should cover the widest range of learner variab
 
 #### Standards
 
-There are several standards that govern the rules on level of accessibility.
+There are several standards that govern the rules on the level of accessibility.
 
 Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>. Three conformance levels exist, you should aim for AA which is the middle one.
 
