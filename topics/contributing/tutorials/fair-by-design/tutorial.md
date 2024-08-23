@@ -977,7 +977,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 	- QA recommendations
 	- Self-reflection after training
 	- Git Issues
-	- Gitter Chat
+	- Matrix Chat
 	- Direct mail contact
 	- Other means of communication
 
