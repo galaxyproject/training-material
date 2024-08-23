@@ -25,7 +25,7 @@ tags:
   - QC
 ---
 
-![](../../images/post-assembly-QC/ERGA.logo.jpg){: width="20px"}
+![ERGA logo, 4 colorful letters on white background, with the European star circle](../../images/post-assembly-QC/ERGA.logo.jpg){: width="20px"}
 
 The European Reference Genome Atlas ([ERGA](https://www.erga-biodiversity.eu/), {% cite Mazzoni2023 %}) is a large-scale network of researchers aiming to generate high-quality reference genomes for all eukaryotic life in Europe and build capacity to allow researchers anywhere to generate reference genomes and use them to answer questions regarding species conservation and biodiversity. ERGA uses state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
 
@@ -207,7 +207,7 @@ In this tutorial we will use **Minimap2** for generation the coverage data. Mini
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReniformis_Pacbio`
 >
 >
-> 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/view/iuc/minimap2/5cc34c3f440d) %} with the following parameters:
+> 2. {% tool [Map with minimap2](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Select the reference genome"*: `CReformitis_assembly`
 >    - *"Single or Paired-end reads"*: `Single`
