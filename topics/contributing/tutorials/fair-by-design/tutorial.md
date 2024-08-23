@@ -568,7 +568,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 #### Check the license
 
-The existing materials you are reusing are available under a CC license, but it is different than the one you plan to use for your materials. Depending on how you want to reuse the material, you will need to consider the following aspects.
+The existing materials you are reusing are available under a [CC license](https://creativecommons.org/share-your-work/cclicenses/), but it is different than the one you plan to use for your materials. Depending on how you want to reuse the material, you will need to consider the following aspects.
 
 ><details-title>I want to reuse it as a whole</details-title>
 >- You can't use something that is licensed with ND (no derivatives).
