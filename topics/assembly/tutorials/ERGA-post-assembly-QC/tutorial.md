@@ -577,7 +577,6 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 
 To understand how chromosomes are arranged in their three-dimensional structure in the nucleus, high resolution and high throughput imaging techniques have been developed. Hi-C is a high throughput method to measure pairwise contacts between pairs of genomic loci. 
 It is based on cross-linking the DNA in the nucleus and its histones (proteins around which the DNA is wrapped). However the DNA gets cut and marked and afterwards the cut parts get ligated together. Then the DNA gets fragmented and sequenced forwards and backwards generating paired reads. The resulting information can be used to assemble the reads to the corresponding chromosome.
-
 ({% cite Pal2018 %})
 
 ## Pre-processing Hi-C data
