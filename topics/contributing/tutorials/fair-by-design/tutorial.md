@@ -969,7 +969,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > To improve is to change; to be perfect is to change often
 {: .quote author="Winston Churchill"}
 
-#### {% icon galaxy-download %} Gather
+### {% icon galaxy-download %} Gather
 
 - Gather feedback from all available internal & external sources.
 - Potential sources:
@@ -981,17 +981,17 @@ The questions marked as essential achieve bare minimum FAIRness.
 	- Direct mail contact
 	- Other means of communication
 
-#### {% icon galaxy-barchart %} Analyse
+### {% icon galaxy-barchart %} Analyse
 
 - Analyse the gathered information in a structured way.
 - Create a list of potential improvements with impact level (high, moderate, low).
 
-#### {% icon galaxy-wf-edit %} Improve
+### {% icon galaxy-wf-edit %} Improve
 
 - Select items from the list that will be part of a new version.
 - Choose items that make sense to be in the same new release.
 
-#### {% icon galaxy-history-refresh %} Repeat
+### {% icon galaxy-history-refresh %} Repeat
 
 - Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.
 - After the Verify stage, you will reenter continuous improvement with the newly gathered information.
