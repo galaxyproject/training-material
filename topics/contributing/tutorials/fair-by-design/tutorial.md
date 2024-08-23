@@ -1011,7 +1011,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 
 ### Training Description
 
-Short how to guide that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.
+Short how-to that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.
 
 ### Target audience
 
