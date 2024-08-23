@@ -207,7 +207,7 @@ In this tutorial we will use **Minimap2** for generation the coverage data. Mini
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReniformis_Pacbio`
 >
 >
-> 2. {% tool [Map with minimap2](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0) %} with the following parameters:
+> 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Select the reference genome"*: `CReformitis_assembly`
 >    - *"Single or Paired-end reads"*: `Single`
