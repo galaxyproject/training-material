@@ -170,7 +170,7 @@ In this tutorial, we can offer 2 versions:
 
 {% include _includes/cyoa-choices.html option1="Short Version" option2="Long Version" default="Short-Version" %}
 
-# Rarefaction Curve
+# Use Case 1: Load your own data and create a Rarefaction Curve
 
 As first exploration of your data, you can start with rarefaction curve.
 Rarefaction curves are a refined version of accumulation curves. They help visualise 
@@ -297,7 +297,7 @@ each metadata attribute has its own column.
 > 
 {: .question}
 
-# Use Case 1: Load your own data and create a rarefaction curve
+## Rarefaction Curve
 Follow this workflow to create a rarefaction curve. You can generate the curve directly using the ampvis_load tool, 
 or you can do so with subsets. Subsets allow you to filter the data, focusing on specific parts that are relevant to 
 a particular research question. 
@@ -507,7 +507,7 @@ The colour intensity represents the abundance of each Phylum within the samples.
 >    >
 >    {: .comment}
 > 
->![Result of the heatmap with 20 cm plot width](./images/heatmap_no_group_total.png "Result of the heatmap")
+>![Result of the heatmap with 20 cm plot width](./images/heatmap_no_group_total.png "Result of the heatmap with 20 cm plot width")
 {: .details}
 
 > <tip-title>Play around with options of output</tip-title>
