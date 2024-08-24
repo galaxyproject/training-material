@@ -29,9 +29,17 @@ contributors:
 
 
 
-Microbiome analysis using amplicon sequencing is central to many ecological studies.
-The produced amplicon sequencing data are converted into OTU tables and represent the input 
-for the ampvis2 tool, where they can be visualised in various ways {% cite Andersen2018 %}.
+Microbiome analysis using amplicon sequencing is central to many ecological studies {% cite Andersen2018 %}.
+This method is crucial for identifying microorganisms within an ecosystem or engineered system, as understanding which 
+microorganisms are present is key to comprehending the communities and their functions. After sequencing, the amplicons 
+can be processed as exact amplicon sequence variants (ASVs) or clustered into operational taxonomic units (OTUs) based on 
+sequence identity {% cite Dueholm2019 %}.
+
+Visualising amplicon data is essential for interpreting the complex relationships within microbial communities. It allows 
+researchers to explore patterns of diversity, abundance, and ecological interactions. Various tools can be used for this purpose, 
+such as FISH-based visualisation (fluorescence in situ hybridisation), Usearch for mapping sequences, or R for analysis and 
+visualisation with packages like ggplot2. Among these tools, ampvis2 stands out for its ability to handle large datasets and 
+provide a range of visualisation options tailored to microbial ecology, making it a wide-ranging choice for many researchers {% cite Dueholm2019 %}.
 
 If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
 using your own data or download the data we used, thus follow this tutorial step-by-step. 
@@ -47,6 +55,10 @@ These OTU tables can be generated using various tools on Galaxy:
 >
 >    > <comment-title></comment-title>
 >    > Alternatively, you can generate an ASV table, which functions similarly to an OTU table and is also accepted in ampvis_load.
+>    >  
+>    > ASVs, with their higher phylogenetic resolution, are often preferred over OTUs because they provide sub-genus and sub-species 
+		classification. However, without taxonomic assignment, ASVs are difficult to compare with other studies. Additionally, 
+		linking microbial identity to functions using ASVs may not yield sufficient results. {% cite Dueholm2019 %}.
 >    {: .comment}
 >
 > 4. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest) %} 
@@ -57,6 +69,10 @@ These OTU tables can be generated using various tools on Galaxy:
 	[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
 >    
 >    {: .comment}
+>
+> 5. Additionally, you can consider using outputs from tools like [Kraken2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html) 
+	and [MetaPhlAn](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/taxonomic-profiling/tutorial.html) 
+	for further microbial analysis, as they can also contribute valuable data that might complement or be used in conjunction with OTU tables. 
 >
 {: .tip}
 
@@ -75,6 +91,8 @@ _dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input fo
 ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
 _taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
 and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
+Note: if you work without taxonomy table, ampvis wouldn't be able to visualise taxonomy hierarchy and other 
+options might be missing.
 
 
 > <tip-title>Upload .biom file; create a phyloseq file</tip-title>
@@ -279,8 +297,10 @@ each metadata attribute has its own column.
 > 
 {: .question}
 
-## Create a rarefaction curve
-Follow this workflow to create a rarefaction curve.
+## Use Case 1: Load your own data and create a rarefaction curve
+Follow this workflow to create a rarefaction curve. You can generate the curve directly using the ampvis_load tool, 
+or you can do so with subsets. Subsets allow you to filter the data, focusing on specific parts that are relevant to 
+a particular research question. 
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a rarefaction curve </hands-on-title>
 >
@@ -314,22 +334,22 @@ Follow this workflow to create a rarefaction curve.
 >    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
 >    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
 >
-> 2.1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+> 2. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
+>    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+>    - *"Step size"*: `5`
+>    - *"Color curves by"*: `sample_id`
+>    - *"Scales of the facets"*: `Free scale`
+>
+> 3.1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
 >    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
 >    - *"Metadata variable"*: `sample_id`
 >    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
 >
-> 3.1. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
+> 3.2. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
 >    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
->    - *"Step size"*: `5`
->    - *"Color curves by"*: `sample_id`
->    - *"Scales of the facets"*: `Free scale`
->
-> 2.2. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
 >    - *"Step size"*: `5`
 >    - *"Color curves by"*: `sample_id`
 >    - *"Scales of the facets"*: `Free scale`
@@ -359,9 +379,9 @@ Follow this workflow to create a rarefaction curve.
 
 > <question-title></question-title>
 > 
-> 1. If you run the workflow "ampvis2 rarefaction v1.1 (with subset)" on Galaxy and use the following metadata for the subset: 
+> 1. If you run the workflow with subset on Galaxy and use the following metadata for the subset: 
 	metadata variable = sample_id and metadata values = (select all possible samples).
-	What is the difference from the rarefaction curve you generated with the workflow without subsets? 
+	What is the difference from the rarefaction curve you generated in the workflow without subsets? 
 > 2. If you consider the output of the rarefaction curve before, one sample has a high curve and the rest are close to each other.
 	Can you make the rest more "visible"?
 >
@@ -382,7 +402,7 @@ Follow this workflow to create a rarefaction curve.
 >
 {: .question}
 
-# Use Case 1: Heatmap, Ordination Plot or Boxploot
+# Use Case 2: Heatmap, Ordination Plot or Boxploot
 
 To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
@@ -475,12 +495,35 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the heatmap created with ungrouped data.
+> Heatmap showing ungrouped data, where each sample is plotted against the identified Phyla. 
+The colour intensity represents the abundance of each Phylum within the samples. The last line shows the remaining taxa.
 > 
->![Result of the heatmap](./images/heatmap_no_group.png "Result of the heatmap")
+>![Result of the heatmap](./images/heatmap_no_group_new.png "Result of the heatmap")
+> 
+>    > <comment-title></comment-title>
+>    >
+>    > Difault pdf output is generating a compressed picture, to make it more visible click on heatmap, go to "output optionts"
+		open it and input a different plot width or height.
+>    >
+>    {: .comment}
+> 
+>![Result of the heatmap with 20 cm plot width](./images/heatmap_no_group_total.png "Result of the heatmap")
 {: .details}
 
+> <tip-title>Play around with options of output</tip-title>
+>
+> * choose a different **The taxonomic level to aggregate the OTUs**, in the Tutorial **Phylum** was used, but you might have different preferences
+> * use **Additional taxonomic level(s) to display** to show more taxa on the plot
+> * select **Plot the values on the heatmap** as **No** to generate a legend for the heatmap, or as **YES** to have the values insede the heatmap
+> * set **Display sum of remaining taxa** to **YES** to have the sum as last row on your plot
+> 
+{: .tip}
+
 ### Heatmap (grouped)
+Subsampling is used to standardise the dataset by reducing it to a manageable size, often resulting in the removal of rare taxa. 
+Grouping involves aggregating data based on specific criteria, which simplifies the heatmap by reducing complexity and noise. 
+As a result, the community structure of the microbiome becomes clearer and easier to interpret.
+
 Follow this workflow to create a heatmap by grouping the data.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
@@ -537,6 +580,8 @@ We used 2 different metadata subsets:
 > Result of the first metadata subset heatmap created with grouped by Plant data.
 > 
 >![Result of the heatmap](./images/heatmap_gr_by_plant.png "Result of the heatmap created with grouped by _Plant_ ")
+> 
+>![Result of the heatmap](./images/heatmap_gr_by_plant_new.png "Result of the heatmap created with grouped by _Plant_ ")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
@@ -620,6 +665,8 @@ We used 2 different metadata subsets:
 > Result of the first metadata subset heatmap created with grouped by Plant data and facet by Period.
 > 
 >![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_ ")
+> 
+>![Result of the heatmap](./images/heatmap_plant_period_new.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_ ")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
@@ -876,7 +923,7 @@ As with heatmaps, the subsets are based on variables we define and are available
 >
 {: .question}
 
-# Use Case 2: Time Series Plot
+# Use Case 3: Time Series Plot
 
 Time series analysis is primarily known for forecasting. A time series can be seen as 
 an example of a random or stochastic process, which we can use to visualise seasonal 
