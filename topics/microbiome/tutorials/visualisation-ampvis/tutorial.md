@@ -297,7 +297,7 @@ each metadata attribute has its own column.
 > 
 {: .question}
 
-## Use Case 1: Load your own data and create a rarefaction curve
+# Use Case 1: Load your own data and create a rarefaction curve
 Follow this workflow to create a rarefaction curve. You can generate the curve directly using the ampvis_load tool, 
 or you can do so with subsets. Subsets allow you to filter the data, focusing on specific parts that are relevant to 
 a particular research question. 
