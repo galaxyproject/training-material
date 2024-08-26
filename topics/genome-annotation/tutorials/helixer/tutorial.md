@@ -95,7 +95,7 @@ We can run [**Helixer**](https://github.com/weberlab-hhu/Helixer) to perform the
 
 We need to input the genome sequence we want to annotate.
 
-We also need to choose between 4 differents lineages: *invertebrate*, *vertebrate*, *land plant* or *fungi*. Select the one that fits the best to the species you're studying: *fungi* in our case. Helixer is shipped with these 4 models that were trained specifically to annotate genes from each lineage lineages. Advanced users can upload their own lineage model in .h5 format with the *"Lineage model"* option.
+We also need to choose between 4 different lineages: *invertebrate*, *vertebrate*, *land plant* or *fungi*. Select the one that fits the best to the species you're studying: *fungi* in our case. Helixer is shipped with these 4 models that were trained specifically to annotate genes from each of these lineages. Advanced users can upload their own lineage model in .h5 format with the *"Lineage model"* option.
 
 As an option, we can also enter a species name.
 
@@ -111,7 +111,7 @@ As an option, we can also enter a species name.
 
 > <comment-title>Advanced parameters</comment-title>
 >
-> Depending on the lineage,the parameters *"Subsequence length"*, *"Overlap offset"* and *"Overlap corelength"* are adjusted to corresponding default values (listed in the help of each option).
+> Depending on the lineage, the parameters *"Subsequence length"*, *"Overlap offset"* and *"Overlap corelength"* are adjusted to corresponding default values (listed in the help of each option).
 >
 > This is due in particular to the size of the genomes. Indeed, it is recommended to increase the value of *"Subsequence length"* for genomes containing large genes. This is particularly important for vertebrates and invertebrates.
 >
@@ -154,7 +154,7 @@ Two output files are generated:
 >
 {: .comment}
 
-These statistics are interesting on their own: you often have a rough idea of the expected number of genes or mean length when annotating a new genome, by comparing with similary already published species. You can also use them to compare the quality of annotations produced by different tools.
+These statistics are interesting on their own: you often have a rough idea of the expected number of genes or mean length when annotating a new genome, by comparing with published similar species. You can also use them to compare the quality of annotations produced by different tools.
 
 ## Evaluation with **Busco**
 
