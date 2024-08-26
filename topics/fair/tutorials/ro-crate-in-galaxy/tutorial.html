@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@106088e770a2b1d6620d4019f21ce27d0638eb33",
+		release: "galaxy-training-network@aadfd717e9220a6ecb2ae523ddd80427d89b6a15",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Exporting Workflow Run RO-Crates from Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-14 13:44:25 +0000">
+<meta name="DC.date" content="2024-08-26 16:25:15 +0000">
 <meta name="DC.creator" content="Paul De Geest"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAIR Data, Workflows, and Research / Exporting Workflow Run RO-Crates from Galaxy / Hands-on: Exporting Workflow Run RO-Crates from Galaxy">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-14 13:44:25 +0000",
+  "dateModified": "2024-08-26 16:25:15 +0000",
   "datePublished": "2023-05-11 12:51:10 +0000",
   "identifier": "https://gxy.io/GTN:T00340",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Exporting Workflow Run RO-Crates from Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT30M",
   "teaches": "Understanding, viewing and creating Galaxy Workflow Run Crates",
   "keywords": [
@@ -966,7 +966,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> May 11, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 26, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -984,7 +984,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1007,6 +1007,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <p>In this tutorial, you will learn how to create a git repo, and begin working with it.</p>
 
 <ol id="markdown-toc">
+  <li><a href="#enable-ro-crate-on-your-local-instance" id="markdown-toc-enable-ro-crate-on-your-local-instance">Enable RO-Crate on your local instance</a></li>
   <li><a href="#import-an-example-workflow" id="markdown-toc-import-an-example-workflow">Import an example workflow</a></li>
   <li><a href="#run-the-workflow" id="markdown-toc-run-the-workflow">Run the workflow</a></li>
   <li><a href="#export-the-workflow-run-crate" id="markdown-toc-export-the-workflow-run-crate">Export the Workflow Run Crate</a></li>
@@ -1019,6 +1020,62 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>This tutorial will guide you through the steps of defining such a report for your workflow, .</p>
 
 <p>This tutorial will show you how to generate Galaxy-based <a href="https://w3id.org/ro/crate/">Workflow Run RO-Crate</a> after running the workflow.</p>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Are you running Galaxy locally ?
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Locally" onclick="cyoaChoice('Locally', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Locally</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Not_locally" onclick="cyoaChoice('Not_locally', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Not_locally</label>
+	
+	
+	
+
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Not_locally", "gtn-cyoa");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Locally">
+
+  <h2 id="enable-ro-crate-on-your-local-instance">Enable RO-Crate on your local instance</h2>
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-update-your-galaxy-configuration"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Update your galaxy configuration</div>
+    <ul>
+      <li>Go to where your Galaxy folder is in your computer</li>
+      <li>In your root Galaxy folder navigate to the <code class="language-plaintext highlighter-rouge">config</code> folder where a the <code class="language-plaintext highlighter-rouge">galaxy.yml</code> should be located. Please open it.</li>
+      <li>(In case you only find a <code class="language-plaintext highlighter-rouge">galaxy.yml.sample</code> file, copy this one and name it <code class="language-plaintext highlighter-rouge">galaxy.yml</code>)</li>
+      <li>make sure the option <code class="language-plaintext highlighter-rouge">enable_celery_tasks</code> is set to <code class="language-plaintext highlighter-rouge">true</code>:
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy:
+    enable_celery_tasks: true
+</code></pre></div>        </div>
+        <p>That’s it ! Now you can launch your local instance as usual.</p>
+      </li>
+    </ul>
+  </blockquote>
+</div>
+
+<div class="Not_locally"></div>
 
 <h2 id="import-an-example-workflow">Import an example workflow</h2>
 
@@ -1423,7 +1480,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/106088e770a2b1d6620d4019f21ce27d0638eb33">106088e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aadfd717e9220a6ecb2ae523ddd80427d89b6a15">aadfd71</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
