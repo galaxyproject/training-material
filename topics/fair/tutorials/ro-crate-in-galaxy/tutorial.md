@@ -53,6 +53,27 @@ This tutorial will guide you through the steps of defining such a report for you
 
 This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate](https://w3id.org/ro/crate/) after running the workflow.
 
+{% include _includes/cyoa-choices.html option1="Locally" option2="Not_locally" default="Not_locally"
+       text="Are you running Galaxy locally ?" %}
+       
+<div class="Locally" markdown="1">
+
+## Enable RO-Crate on your local instance
+> <hands-on-title>Update your galaxy configuration</hands-on-title>
+> - Go to where your Galaxy folder is in your computer
+> - In your root Galaxy folder navigate to the `config` folder where a the `galaxy.yml` should be located. Please open it.
+> - (In case you only find a `galaxy.yml.sample` file, copy this one and name it `galaxy.yml`) 
+> - make sure the option `enable_celery_tasks` is set to `true`:
+> ```
+> galaxy:
+>       enable_celery_tasks: true
+> ```
+> That's it ! Now you can launch your local instance as usual.
+{: .hands_on}
+</div>
+
+<div class="Not_locally" markdown="1">
+</div>
 
 ## Import an example workflow
 
