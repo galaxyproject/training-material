@@ -62,7 +62,7 @@ This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate]
 > <hands-on-title>Update your galaxy configuration</hands-on-title>
 > - Go to where your galaxy folder is in your computer
 > - In galaxy -> config you will find a file galaxy.yml open it 
-> - under the galaxy section add `enable_celery_tasks: true` your file should at least be like that (of course you can other configuration lines under galaxy) :
+> - make sure the option `enable_celery_tasks` is set to `true`:
 > ```
 > galaxy:
 >       enable_celery_tasks: true
