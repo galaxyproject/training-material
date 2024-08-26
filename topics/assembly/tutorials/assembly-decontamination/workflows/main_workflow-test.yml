@@ -1,0 +1,21 @@
+- doc: Test outline for Assembly-decontamination-VGP9
+  job:
+    Scaffolded assembly (fasta):
+      class: File
+      location: https://zenodo.org/records/13327557/files/Scaffolded_assembly.fasta?download=1
+      filetype: fasta
+    Database for Kraken2: viral2019-03
+  outputs:
+    mito_scaff_names:
+      asserts:
+        has_text: 
+          text: "SCAFFOLD_82"
+    final decontaminated assembly:
+      decompress: true
+      asserts:
+        not_has_text: 
+          text: "scaffold_200"
+    contaminants_table:
+      asserts:
+        has_text: 
+          text: "SCAFFOLD_200"
