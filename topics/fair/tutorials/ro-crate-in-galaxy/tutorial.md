@@ -60,8 +60,9 @@ This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate]
 
 ## Enable RO-Crate on your local instance
 > <hands-on-title>Update your galaxy configuration</hands-on-title>
-> - Go to where your galaxy folder is in your computer
-> - In galaxy -> config you will find a file galaxy.yml open it 
+> - Go to where your Galaxy folder is in your computer
+> - In your root Galaxy folder navigate to the `config` folder where a the `galaxy.yml` should be located. Please open it.
+> - (In case you only find a `galaxy.yml.sample` file, copy this one and name it `galaxy.yml`) 
 > - make sure the option `enable_celery_tasks` is set to `true`:
 > ```
 > galaxy:
