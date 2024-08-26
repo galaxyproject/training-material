@@ -32,7 +32,6 @@ contributions:
   - dyusuf
   - sarah-peter
   - hexylena
-editing:
   editing:
   - teresa-m
 
