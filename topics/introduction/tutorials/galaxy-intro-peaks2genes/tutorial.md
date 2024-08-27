@@ -707,7 +707,7 @@ To share a history, click on the {%  icon galaxy-history-options %} history opti
 
 2. **Make History publicly available in Published Histories**
 
-    This will not only create a link, but will also publish your history. This means your history will be listed under ` Data → Histories → Published Histories` in the top menu.
+    This will not only create a link, but will also publish your history. This means your history will be listed under `Data → Histories → Published Histories` in the top menu.
 
 3. **Share with Individual Users**
 
@@ -721,7 +721,7 @@ To share a history, click on the {%  icon galaxy-history-options %} history opti
 > 2. See if you can do the same with your workflow!
 > 3. Find the history and/or workflow shared by your neighbour
 >
->    Histories shared with specific users can be accessed by those users under ` Data → Histories → Histories shared with me`.
+>    Histories shared with specific users can be accessed by those users under `Data → Histories → Histories shared with me`.
 >
 {: .hands_on}
 
