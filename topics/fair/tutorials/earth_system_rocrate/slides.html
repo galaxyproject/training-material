@@ -1,0 +1,177 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "An earth-system RO-Crate"
+video: true
+questions:
+  - "How to generate a RO-Crate"
+  - "How to follow a Marine Omics study"
+  - "How to read a RO-Crate ?"
+objectives:
+  - "Understand RO-Crate in a earth-system context"
+time_estimation: 1H
+tags:
+  - earth-system
+  - ro-crate
+  - ocean
+  - marine omics
+key_points:
+  - "RO-Crate in earth-system analysis"
+  - "Marine omics workflow "
+contributors:
+  - Marie59
+
+---
+
+# Workflow context
+
+
+The workflow used as an example here goes from :
+- First produce a protein fasta file from a nucleotide fasta file using Prodigal (it is a tool that predicts protein-coding genes from DNA sequences).
+- Then, use InterProscan to create a tabular. Interproscan is a batch tool to query the InterPro database. It helps identify and predict the functions of proteins by comparing them to known databases.
+- Finally, discover SanntiS both to build genbank and especially to detect and annotate biosynthetic gene clusters (BGCs).
+---
+
+## The workflow itself
+
+![Marine Omics identifying biosynthetic gene clusters worflow image](./images/workflow_marino.png)
+---
+
+## Run the workflow
+
+Import and run the following workflow https://earth-system.usegalaxy.eu/u/marie.josse/w/marine-omics-identifying-biosynthetic-gene-clusters
+
+To know more on how to do that follow the tutorial https://training.galaxyproject.org/training-material/topics/ecology/tutorials/marine_omics_bgc/tutorial.html
+---
+
+
+## Generate the RO-Crate 
+
+Once you run the workflow you can generate the RO-Crate. To do so follow the tutorial https://training.galaxyproject.org/training-material/topics/fair/tutorials/ro-crate-in-galaxy/tutorial.html
+---
+
+
+### From workflow to RO-Crate 
+
+![From workflow to RO-Crate](./images/workflow_rocrate.png)
+---
+
+### The RO-Crate folder and architecture
+
+![From workflow to RO-Crate](./images/all_tree_structure.png)
+---
+
+### Let's dive into the ro-crate-metadata.json
+
+![Date of RO-Crate creation and other informations](./images/rocrate1.png)
+---
+
+### Description of the RO-Crate structure
+
+![Description of the RO-Crate structure](./images/rocrate2.png)
+---
+
+### Galaxy Provenance
+
+![Date of RO-Crate creation and other informations](./images/rocrate3.png)
+---
+
+### Title and workflow details
+
+![Title and details of the workflow](./images/rocrate4.png)
+---
+
+### Dates 
+
+![Dates of running the workflow and creation of the RO-Crate](./images/rocrate5.png)
+---
+
+### Datas
+
+![Data uploaded for the workflow and produced by it](./images/rocrate6.png)
+---
+
+### First tool Prodigal 
+
+![Details on Prodigal](./images/rocrate7.png)
+---
+
+### Second tool Regex Find and Replace
+
+![Details on Regex Find and Replace](./images/rocrate8.png)
+---
+
+### Third tool InterProScan 
+
+![Details on InterProScan](./images/rocrate9.png)
+---
+
+### Fourth tool SanntiS to build Genbank
+
+![Details on SanntiS to build Genbank](./images/rocrate10.png)
+---
+
+### Fourth tool SanntiS to annotate biosynthetic gene clusters
+
+![Details on SanntiS to annotate biosynthetic gene clusters](./images/rocrate11.png)
+---
+
+### Details on the different files in the RO-Crate
+
+![Details on the different files in the RO-Crate](./images/rocrate12.png)
+---
+
+### End of the ro-crate-metadata.json
+
+![Details on the different files in the RO-Crate and end of the ro-crate-metadata.json](./images/rocrate13.png)
+---
+
+### Thank you !
+
+Try to do the same on your own workflow !
+---
+
+
+## Shortcut Keys
+
+- <kbd>?</kbd> activates help
+- <kbd>Escape</kbd> leaves help
+- <kbd>p</kbd> activates presenter mode
+- <kbd>f</kbd> activates full screen mode
+- <kbd>c</kbd> clones the slides into a popup
+
+???
+
+- The key to close the help isn't shown in the keyboard shortcuts, but it is the escape key.
+- There are a number of other shortcuts which can be useful to know about.
+- The clone window function creates a popup with a copy of the slides, this can be used to show the presenter notes on one screen, and the actual slides on another screen that learners can see.
+
+---
+
+## Videos
+
+.pull-left[
+- Slides with good speaker notes can be turned into videos
+- Enable this in the metadata of the slides:
+
+  ```markdown
+  title: "Creating Slides"
+  video: true
+  questions:
+    - "How to format slides?"
+  ```
+
+- automatically rendered into narrated videos by the GTN
+]
+
+.pull-right[
+.image-100[![Screenshot of GTN video player showing a set of slides with a play icon and a transcript](.././images/slides-to-video.png)]
+]
+
+???
+
+- The GTN automatically creates videos from selected slide decks.
+- Simply by setting video to true to the metadata, slides with sufficiently good speaker notes can be automatically turned into videos.
+- The slides have audio narration spoken from the script of the speaker notes by AWS Polly.
+- The audio clips, and slides are combined into a video which is then available in the GTN Video Library
