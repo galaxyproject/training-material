@@ -349,71 +349,20 @@ As we can see in the report, the results are simplified into four categories: *c
 Despite **BUSCO** being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). `Merqury` provides a complementary approach for assessing assembly quality in a reference-free manner via *k*-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously from our sequencing reads for *k*-mer counts.
 
 By default, `Merqury` generates three collections as output: stats (completeness stats), plots and {QV} stats. Let's first have a look at the copy number (CN) spectrum plot, known as the *spectra-cn* plot. The spectra-cn plot looks at both of your assemblies (here, your two haplotypes) taken *together* (fig. 6a). 
-<br>
+
 ![Figure 6: Merqury spectra-cn plot for initial yeast contigs](../../images/vgp_assembly/yeast_c_merqury_cn.svg "Merqury CN plot for yeast assemblies. The plot tracks the multiplicity of each <i>k</i>-mer found in the read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. <b>a)</b>. <i>K</i>-mer distribution of both haplotypes. <b>b)</b>. <i>K</i>-mer distribution of an individual haplotype (hap2)."){:width="100%"}
-<br>
 
-Our haplotypes look clean! In the spectra-cn plot for both haplotypes, the peaks are where we should expect them. There is a peak of *k*-mers present at 1-copy (so, only in either hap1 or hap2) with *k*-mer multiplicity of ~25, corresponding to heterozygous coverage. These are our heterozygous alleles being represented only once in our diplolid assemblies, which matches with their haploid coverage. We also have a peak of 2-copy *k*-mers present at diploid coverage, around ~50. This looks good so far
+Our haplotypes look clean! In the spectra-cn plot for both haplotypes, the peaks are where we should expect them. There is a peak of *k*-mers present at 1-copy (so, only in either hap1 or hap2) with *k*-mer multiplicity of ~25, corresponding to heterozygous coverage. These are our heterozygous alleles being represented only once in our diplolid assemblies, which matches with their haploid coverage. We also have a peak of 2-copy *k*-mers present at diploid coverage, around ~50. This looks good so far, but we should also look at *k*-mer multiplicity for each individual haplotype separately, not just combined as they were in the previous plot. Figure 6b shows that most of the *k*-mers in our assembly are 1-copy -- we have one copy of all the homozygous regions (the ones with 50x coverage) and of about half the heterozygous regions (the ones with 25x coverage). At the 25x coverage point, there is a "read-only" peak, which is expected, as these are the alternative alleles for those heterozygous loci, and those *k*-mers are likely in the other assembly, since they were not missing from the overall spectra-cn plot.
 
-Thus, we know there is some false duplication (the 3-copy green bump) present as 2-copy in one of our assemblies, but we don't know which one. We can look at the individual copy number spectrum for each haplotype in order to figure out which one contains the 2-copy *k*-mers (*i.e.*, the false duplications). In the Merqury spectra-CN plot for hap2 we can see the small bump of 2-copy *k*-mers (blue) at around the 50 mark on the x-axis (fig. 6b).
-
-Now that we know which haplotype contains the false duplications, we can run the purging workflow to try to get rid of these duplicates.
-
-## Purging duplicates with `purge_dups`
-
-An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the **Purge duplicate contigs (WF6)**, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.
-
-### Launching the workflow
-
-{% snippet faqs/galaxy/workflows_run_ds.md title="Purge duplicate contigs (WF6)" dockstore_id="github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main" version="v0.3.8" %}
-
-> <hands-on-title><b>Launching duplicate purging workflow</b></hands-on-title>
->
->**Identify inputs**
->
->The purging workflow takes the following inputs:
->
-> 1. {HiFi} reads as a collection
-> 2. Primary assembly produced by `hifiasm` in the previous run of assembly workflow (WF4).
-> 3. Alternate assembly produced by `hifiasam` in the previous run of assembly workflow (WF4).
-> 4. `Genomescope` Model Parameters generated by previous (*k*-mer profiling) workflow
-> 5. Estimated genome size parsed from GenoeScope summary by the previous run of assembly workflow (WF4).
-> 6. Meryl *k*-mer database generated by previous (*k*-mer profiling, WF1) workflow
-> 7. Busco lineage
->
->**Launch Purge duplicate contigs workflow (WF6)**
->
-> 1. Click in the **Workflow** menu, located in the top bar
-> 2. Click in the {% icon workflow-run %} **Run workflow** button corresponding to `Purge duplicate contigs (WF6)`
-> 3. In the **Workflow: VGP purge assembly with purge_dups pipeline** menu:
->  - {% icon param-collection %} "*Pacbio Reads Collection - Trimmed*": One of the outputs of the assembly workflow is a trimmed collection of HiFi reads. It has a tag `trimmed_hifi`.
->  - {% icon param-file %} "*Hifiasm Primary assembly*": An output of the assembly workflow (WF4) containing contigs for Hap1 in FASTA format. This dataset has a tag `hifiasm_Assembly_Haplotype_1`.
->  - {% icon param-file %} "*Hifiasm Alternate assembly*": An output of the assembly workflow (WF4) containing contigs for Hap2 in FASTA format. This dataset has a tag `hifiasm_Assembly_Haplotype_2`
->  - {% icon param-file %} "*Meryl database*": Meryl *k*-mer database: one of the outputs of the previous workflow  (contains tag "`MerylDatabase`")
->  - {% icon param-file %} "*GenomeScope Model Parameters*": GenomeScope model parameters: one of the outputs of the previous workflow (contains tag "`GenomeScopeParameters`")
->  - {% icon param-file %} "*Estimated genome size*": A dataset produced with the assembly workflow (WF4). It contains a tag `estimated_genome_size`.
->  - {% icon param-file %} "*Provide lineage for BUSCO (e.g., Vertebrata)*": `Ascomycota`
-> 4. Click in the <kbd>Run workflow</kbd> buttom
-{: .hands_on}
-
-### Interpreting results
-
-The two most important outputs of the purging workflow are purged versions of Primary and Alternate assemblies. These have tags <kbd>PurgedPrimaryAssembly</kbd> and <kbd>PurgedAlternateAssembly</kbd> for Primary and Alternate assemblies, respectively. This step also provides QC metrics for evaluating the effect of purging (Figure below).
-
-<br>
-
-![Comparison of pre- and post-purging](../../images/vgp_assembly/merqury_cn_after_purging.svg "Comparison of pre- (<b>a)</b> and <b>c)</b>) and post-purging (<b>b)</b> and <b>d)</b>) Merqury CN spectra   . The two top plots (<b>a)</b> and <b>b)</b>) for our dataset (yeast) and the two bottom plots (<b>c)</b> and <b>d)</b>) for a Chub mackerel (<i>Scomber japonicus</i>) -- a much larger genome. In the case of yeast the difference is not profound because our training dataset has been downsized and groomed to be as small as possible. In the case of zebra finch the green bump (<i>k</i>-mers appearing in three copies) is smaller after purging (Although potential overpurging can be seen by the new read-only (grey) bump that was not there before). Given the scale of the Y-axis this difference is substantial."){:width="100%"}
-
-<br>
 
 ## Hi-C scaffolding
 
-In this final stage, we will run the **Scaffolding HiC YAHS (WF8)**, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows [**YAHS**](https://github.com/c-zhou/yahs) -- the main tool in this workflow -- to generate scaffolds that are often chromosome-sized.
+In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, which uses the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them (*i.e.*, linear distance on a chromosome). This information allows [**YAHS**](https://github.com/c-zhou/yahs) -- the main tool in this workflow -- to generate scaffolds that are often chromosome-sized.
 
 ### Launching Hi-C scaffolding workflow
 
 > <warning-title>The scaffolding workflow is run on <b>ONE</b> haplotype at a time.</warning-title>
-> Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on hap1 (Primary) assembly only.
+> Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging -- it has to be run independently for each haplotype assembly. In this example (below) we run contiging on the hap1 assembly only.
 {: .warning}
 
 {% snippet faqs/galaxy/workflows_run_ds.md title="Scaffolding HiC (WF8)" dockstore_id="github.com/iwc-workflows/Scaffolding-HiC-VGP8/main" version="v0.2.4" %}
