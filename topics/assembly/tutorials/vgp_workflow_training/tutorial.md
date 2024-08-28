@@ -275,6 +275,14 @@ To generate {contigs} we will use the [**hifiasm**](https://github.com/chhylp123
 > 4. Click on the <kbd>Run workflow</kbd> button
 {: .hands_on}
 
+> <comment-title>A note about "Homozygous Read Coverage"</comment-title>
+>
+>  Hifiasm tries to estimate the homozygous read coverage, but sometimes it can mistake a different peak as the homozygous coverage peak. To get around this, the VGP workflows calculate the homozygous coverage from the haploid coverage estimate from the GenomeScope outputs generated in the *k*-mer profiling workflow. However, sometimes GenomeScope can also misidentify the haploid peak, leading to it feeding an incorrect homozygous read coverage value into hifiasm. *If this is the case, you can run the hifiasm workflows but specify the homozygous read coverage yourself. Otherwise, this parameter is fine to leave blank to let the workflows try to get it right on their own.*
+>
+{: .comment}
+
+
+
 ### Interpreting the results
 
 > <warning-title>There will be two assemblies!</warning-title>
