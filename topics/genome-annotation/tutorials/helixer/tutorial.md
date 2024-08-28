@@ -9,7 +9,7 @@ tags:
   - jbrowse1
 
 edam_ontology:
-- topic_0362 # Genome annotatino
+- topic_0362 # Genome annotation
 
 questions:
     - How to annotate an eukaryotic genome with Helixer?
@@ -18,14 +18,14 @@ questions:
 objectives:
     - Load genome into Galaxy
     - Annotate genome with Helixer
-    - Evaluate annotation quality with BUSCO and Compleasm
+    - Evaluate annotation quality with BUSCO
     - View annotations in JBrowse
 
 time_estimation: 4h
 level: Intermediate
 key_points:
     - Helixer allows to perform structural annotation of an eukaryotic genome
-    - BUSCO and Compleasm allow to inspect the quality of an annotation
+    - BUSCO allows to inspect the quality of an annotation
 contributions:
   authorship:
     - rlibouba
@@ -160,6 +160,8 @@ These statistics are interesting on their own: you often have a rough idea of th
 
 [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
+As an alternative for genomes only one can use [**compleasm**](https://github.com/huangnengCSU/compleasm) with the same BUSCO gene sets, as compleasm is a bit more sensitive and thus allows finding slightly more conserved genes. 
+
 We want to run BUSCO on the protein sequences predicted from gene sequences of the Helixer annotation. So first generate these sequences:
 
 > <hands-on-title>Extract protein sequences</hands-on-title>
@@ -175,7 +177,7 @@ We want to run BUSCO on the protein sequences predicted from gene sequences of t
 >
 {: .hands_on}
 
-The run BUSCO on these protein sequences:
+To run BUSCO on these protein sequences:
 
 > <hands-on-title>BUSCO in proteome mode</hands-on-title>
 >
