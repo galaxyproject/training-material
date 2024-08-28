@@ -41,7 +41,7 @@ abbreviations:
   G10K: Genome 10K
 ---
 
-The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual).
+The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) Bionano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual).
 
 > <agenda-title></agenda-title>
 >
@@ -71,29 +71,29 @@ The {VGP} assembly pipeline has a modular organization, consisting in ten workfl
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
 | HiFi + HiC| Better continuity | B |
-| HiFi + BioNano | Better continuity | C |
-| HiFi + Hi-C + BioNano | Even better continuity | D |
+| HiFi + Bionano | Better continuity | C |
+| HiFi + Hi-C + Bionano | Even better continuity | D |
 | HiFi + parental data| Better haplotype resolution | E |
 | HiFi + parental data + Hi-C| Better haplotype resolution and improved continuity | F |
-| HiFi + parental + BioNano | Better haplotype resolution and improved continuity | G |
-| HiFi + parental data + Hi-C + BioNano | Better haplotype resolution and ultimate continuity | H |
+| HiFi + parental + Bionano | Better haplotype resolution and improved continuity | G |
+| HiFi + parental data + Hi-C + Bionano | Better haplotype resolution and ultimate continuity | H |
 
-In this table, HiFi and Hi-C data are derived from the individual whose genome is being assembled. "Parental data" refers to high coverage whole genome resequencing data from the parents of the individual being assembled. Assemblies utilizing parental data for phasing are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi diploid coverage and 60✕ Hi-C coverage.
+In this table, HiFi and Hi-C data are derived from the individual whose genome is being assembled. "Parental data" refers to high coverage whole genome resequencing data from the parents of the individual being assembled. Assemblies utilizing parental data for phasing are also called "*Trios*". Each combination of input datasets is supported by an *analysis trajectory*: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. 
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
-The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using *k*-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
+The first stage of the pipeline is the generation of a *k*-mer profile of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2). The second stage is contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig-building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as thses assemblies achieve reliable haplotype resolution using *k*-mer set operations based on parental reads. Generally, HiC-phased contigs also do not need to undergo purging, but if so, then there exists Workflow 6b to purge a single haplotype at a time. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with [`Bionano Solve`](https://Bionano.com/software-downloads/) (optional) and Hi-C (Workflow 8) data and [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (*e.g.*, viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used to assemble and annotate a mitogenome.
 
 > <comment-title>A note on data quality</comment-title>
-> We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.
+> We suggest at least 30✕ PacBio HiFi coverage and 60✕ Hi-C coverage (both diploid coverage).
 {: .comment}
 
 # Getting the data
 
 The following steps use PacBio {HiFi} and Illumina {Hi-C} data from baker's yeast ([*Saccharomyces cerevisiae*](https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae)). The tutorial represents trajectory **B** from Fig. 1 above. For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
-1. A set of PacBio {HiFi} reads in `fasta` format
-2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format
+1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space..
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format.
 
 ## Uploading `fasta` datasets from Zenodo
 
