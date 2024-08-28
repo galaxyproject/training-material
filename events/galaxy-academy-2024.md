@@ -136,7 +136,7 @@ program:
       - title: Microbiome
         link: events/tracks/gta2024-micorbiome.md
       - title: Bacterial Genomics
-        link: events/tracks/gta2024-bacterial-genomeics.md
+        link: events/tracks/gta2024-bacterial-genomics.md
       - title: BY-COVID
         link: events/tracks/gta2024-bycovid.md
       - title: Machine Learning
