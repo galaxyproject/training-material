@@ -390,6 +390,7 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, wh
 >  - {% icon param-file %} "*HiC reverse reads*": Reverse Hi-C reads
 >  - {% icon param-file %} "*Estimated genome size - Parameter File*": An output of the contiging workflow (WF4) with a tag `estimated_genome_size`.
 >  - {% icon param-file %} "*Provide lineage for BUSCO (e.g., Vertebrata)*": `Ascomycota`
+>  - {% icon param-file %} "*Restriction enzymes*": `Dovetail Omni-C: enzyme-free prep` For this tutorial, we'll use the Omni-C option as it is the equivalent of not specifying any restriction enzyme cutsites, but for your own data you would want to select the appropriate option. 
 > 4. Click in the <kbd>Run workflow</kbd> button
 {: .hands_on}
 
