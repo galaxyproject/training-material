@@ -312,7 +312,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 # Genome profile analysis
 
-Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
+Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
 > <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
 >
@@ -346,7 +346,7 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 In order to identify some key characteristics of the genome, we do genome profile analysis. To do this, we start by generating a histogram of the *k*-mer distribution in the raw reads (the *k*-mer spectrum). Then, GenomeScope creates a model fitting the spectrum that allows for estimation of genome characteristics. We work in parallel on each set of raw reads, creating a database of each file's *k*-mer counts, and then merge the databases of counts in order to build the histogram.
 
-![Workflow of Kmer counting parallelization, described in the figure caption.](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of count datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
+![Workflow of Kmer counting parallelization, described in the figure caption.](../../images/vgp_assembly/meryl_collections.png "K-mer counting is first done on the collection of FASTA files. Because these data are stored in a collection, a separate `meryl count` job is launched for each FASTA file, thus parallelizing our work. After that, the collection of `meryl count` output datasets is merged into one dataset, which we can use to generate the histogram input needed for GenomeScope.")
 
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
@@ -365,7 +365,7 @@ In order to identify some key characteristics of the genome, we do genome profil
 >**Step 2**: Rename output as `meryldb`
 >
 >**Step 3**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
->  1. *"Operation type selector"*: `Operations on sets of *k*-mers`
+>  1. *"Operation type selector"*: `Operations on sets of k-mers`
 >  2. *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
 >  3. {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
@@ -402,8 +402,8 @@ Genomescope will generate six outputs:
     - Log plot: logarithmic transformation of the previous plot.
     - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). This transformation increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
-- **Model**: this file includes a detailed report about the model fitting.
-- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
+- **Model**: this file includes a detailed report about the model fitting. 
+- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity. It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates.
 
 Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters shown below:
 
@@ -432,21 +432,21 @@ The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files.
 
 Hifiasm can be run in multiple modes depending on data availability
 
-### **Solo** mode
+#### **Solo** mode
 
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
 - _Input: PacBio HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
 ![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates <b>primary</b> and <b>alternate</b> contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
-### **Hi-C** phased mode
+#### **Hi-C** phased mode
 
 **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
 - _Input: PacBio HiFi & Illumina HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces <b>hap1</b> and <b>hap2</b> contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-### **Trio** mode
+#### **Trio** mode
 
 **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
 - _Input: PacBio HiFi reads from child, Illumina reads from both parents._
@@ -475,7 +475,7 @@ There are several tools for assessing various aspects of assembly quality:
 </div>
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then <u>please check out the <i>solo</i> tutorial for details on purging false duplications.</u></b>" %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>.<br><br> <b>NOTE: If you want to learn more about purging, then <u>please check out the <i>solo</i> tutorial for details on purging false duplications.</u></b>" %}
 
 <div class = "hic" markdown="1">
 
@@ -487,7 +487,7 @@ There are several tools for assessing various aspects of assembly quality:
 
 ## HiC-phased assembly with **hifiasm**
 
-If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
+If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the contigs.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
 >**Step 1**: Run {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
