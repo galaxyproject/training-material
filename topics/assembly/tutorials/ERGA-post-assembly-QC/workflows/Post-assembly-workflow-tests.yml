@@ -1,0 +1,120 @@
+- doc: Test outline for Post-assembly-workflow
+  job:
+    Metadata file:
+      class: File
+      path: test-data/Metadata file.yaml
+      filetype: yaml
+    NCBI taxdump directory:
+      class: File
+      path: https://zenodo.org/record/7781236/files/new_taxdump.tar.gz
+      filetype: gz
+    Primary genome assembly file (fasta):
+      class: File
+      path: https://zenodo.org/record/7831298/files/assembly_sponge.fasta.gz
+      filetype: fasta.gz
+    DIAMOND database:
+      class: File
+      path: https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd
+      filetype: dmnd
+    Long-read FASTQ files:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: dataset_01
+        path: https://zenodo.org/record/7786773/files/hifi.fastq.gz
+    Hi-C reverse:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: '0'
+        path: https://zenodo.org/record/7786773/files/hiC_2.fastq.gz
+    Hi-C forward:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: '0'
+        path: https://zenodo.org/record/7786773/files/hiC_1.fastq.gz
+    NCBI taxonomic ID: '121349'
+    Ploidy for model to use: '2'
+  outputs:
+    log_plot (Step 36):
+      path: test-data/log_plot (Step 36).png
+    transformed_linear_plot (Step 36):
+      path: test-data/transformed_linear_plot (Step 36).png
+    transformed_log_plot (Step 36):
+      path: test-data/transformed_log_plot (Step 36).png
+    linear_plot (Step 36):
+      path: test-data/linear_plot (Step 36).png
+    stats (Step 13):
+      path: test-data/stats (Step 13).tabular
+    smudgeplot (Step 21):
+      path: test-data/smudgeplot (Step 21).png
+    smudgeplot_log (Step 21):
+      path: test-data/smudgeplot_log (Step 21).png
+    outfile (Step 23):
+      path: test-data/outfile (Step 23).jpg
+    'Busco on input dataset(s): full table':
+      path: 'test-data/Busco on input dataset(s): full table.tabular'
+    'Busco on input dataset(s): short summary':
+      path: 'test-data/Busco on input dataset(s): short summary.txt'
+    output (Step 28):
+      path: test-data/output (Step 28).tabular
+    'Merqury on input dataset(s): stats':
+      element_tests:
+        output_merqury.completeness:
+          path: 'test-data/Merqury on input dataset(s): stats_output_merqury.completeness.tabular'
+    'Merqury on input dataset(s): plots':
+      element_tests:
+        output_merqury.assembly.spectra-cn.fl:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.assembly.spectra-cn.fl.png'
+        output_merqury.assembly.spectra-cn.ln:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.assembly.spectra-cn.ln.png'
+        output_merqury.assembly.spectra-cn.st:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.assembly.spectra-cn.st.png'
+        output_merqury.spectra-asm.fl:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.spectra-asm.fl.png'
+        output_merqury.spectra-asm.ln:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.spectra-asm.ln.png'
+        output_merqury.spectra-asm.st:
+          path: 'test-data/Merqury on input dataset(s): plots_output_merqury.spectra-asm.st.png'
+    'Merqury on input dataset(s): QV stats':
+      element_tests:
+        output_merqury.assembly:
+          path: 'test-data/Merqury on input dataset(s): QV stats_output_merqury.assembly.tabular'
+        output_merqury:
+          path: 'test-data/Merqury on input dataset(s): QV stats_output_merqury.tabular'
+    pretext_snap_out (Step 42):
+      element_tests:
+        pretext_snapshotENA_OX359189_OX359189.1_chromosome_1:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359189_OX359189.1_chromosome_1.png
+        pretext_snapshotENA_OX359190_OX359190.1_chromosome_2:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359190_OX359190.1_chromosome_2.png
+        pretext_snapshotENA_OX359191_OX359191.1_chromosome_3:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359191_OX359191.1_chromosome_3.png
+        pretext_snapshotENA_OX359192_OX359192.1_chromosome_4:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359192_OX359192.1_chromosome_4.png
+        pretext_snapshotENA_OX359193_OX359193.1_chromosome_5:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359193_OX359193.1_chromosome_5.png
+        pretext_snapshotENA_OX359194_OX359194.1_chromosome_6:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359194_OX359194.1_chromosome_6.png
+        pretext_snapshotENA_OX359195_OX359195.1_chromosome_7:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359195_OX359195.1_chromosome_7.png
+        pretext_snapshotENA_OX359196_OX359196.1_chromosome_8:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359196_OX359196.1_chromosome_8.png
+        pretext_snapshotENA_OX359197_OX359197.1_chromosome_9:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359197_OX359197.1_chromosome_9.png
+        pretext_snapshotENA_OX359198_OX359198.1_chromosome_10:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359198_OX359198.1_chromosome_10.png
+        pretext_snapshotENA_OX359199_OX359199.1_chromosome_11:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359199_OX359199.1_chromosome_11.png
+        pretext_snapshotENA_OX359200_OX359200.1_chromosome_12:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359200_OX359200.1_chromosome_12.png
+        pretext_snapshotENA_OX359201_OX359201.1_chromosome_13:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359201_OX359201.1_chromosome_13.png
+        pretext_snapshotENA_OX359202_OX359202.1_chromosome_14:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotENA_OX359202_OX359202.1_chromosome_14.png
+        pretext_snapshotFullMap:
+          path: test-data/pretext_snap_out (Step 42)_pretext_snapshotFullMap.png
