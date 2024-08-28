@@ -385,23 +385,13 @@ In this final stage, we will run the **Scaffolding HiC YAHS (WF8)** workflow, wh
 > 1. Click in the **Workflow** menu, located in the top bar
 > 2. Click in the {% icon workflow-run %} **Run workflow** button corresponding to `Scaffolding HiC YAHS (WF8)`
 > 3. In the **Scaffolding HiC YAHS (WF8)** menu:
->  - {% icon param-file %} "*input GFA*": Output of purging workflow (WF6) with a tag `PurgedPrimaryAssembly` (or `PurgedPrimaryAssembly` of scaffolding the Alternate assembly).
+>  - {% icon param-file %} "*input GFA*": Output of contiging workflow (WF4) with a tag `hic_hap1_gfa` for hap1 assembly or `hic_hap2_gfa` for hap2 assembly. Let's run it on hap1.
 >  - {% icon param-file %} "*HiC forward reads*": Forward Hi-C reads
 >  - {% icon param-file %} "*HiC reverse reads*": Reverse Hi-C reads
 >  - {% icon param-file %} "*Estimated genome size - Parameter File*": An output of the contiging workflow (WF4) with a tag `estimated_genome_size`.
 >  - {% icon param-file %} "*Provide lineage for BUSCO (e.g., Vertebrata)*": `Ascomycota`
 > 4. Click in the <kbd>Run workflow</kbd> button
 {: .hands_on}
-
-
-> <comment-title>Bypassing purging workflow</comment-title>
-> In some situations (such as assemblies utilizing Trio data (Fig. 1) you do not need to perform purging and can go directly from contiging to scaffolding. In this case you will need to use an output of contiging workflow that has a tag `hic_hap1_gfa` for primary assembly or `hic_hap2_gfa` for alternate assembly:
->
->In other words, the only parameter that you will need to set differently (relative to setting above) is this:
-> <hr>
-> {% icon param-file %} "*input GFA*": Output of contiging workflow (WF4) with a tag `hic_hap1_gfa` for primary assembly or `hic_hap2_gfa` for alternate assembly.
-> <hr>
-{: .comment}
 
 ### Interpreting the results
 
