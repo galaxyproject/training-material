@@ -71,6 +71,8 @@ contributions:
         - by-covid
         - elixir-europe
         - mwk
+        - abromics
+        - ifb
 
 
 location:
