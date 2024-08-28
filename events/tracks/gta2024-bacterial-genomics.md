@@ -1,5 +1,7 @@
 ---
 layout: event-track
+redirect_from:
+- /events/tracks/gta2024-bacterial-genomeics
 
 title: Bacterial genomics and AMR detection
 description: This track explains the basic steps to (1) process, assemble, annotate a bacterial genome and (2) detect Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy.
