@@ -154,7 +154,7 @@ The stages of genome assembly in the VGP-Galaxy pipeline are generally:
 5. **Decontamination**: A final step of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
-> For diploids, we suggest at least 30✕ PacBio HiFi coverage & around 60✕ Hi-C coverage, and up to 60✕ HiFi coverage to accurately assemble highly repetitive regions.
+> We suggest at least 30✕ PacBio HiFi coverage and 60✕ Hi-C coverage (both diploid coverage).
 {: .comment}
 This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contiging or solo w/HiC contiging.
 
