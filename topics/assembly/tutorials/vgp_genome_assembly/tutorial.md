@@ -129,9 +129,9 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 # VGP assembly pipeline overview
 
-The {VGP} assembly pipeline has a modular organization, consisting of ten workflows (Fig. 1). It can used with the following types of input data:
+The {VGP} assembly pipeline has a modular organization, consisting of ten workflows (Fig. 2). It can used with the following types of input data:
 
-|  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
+|  Input data | Effect on assembly quality | Analysis trajectory <br>([Fig. 2)](#figure-2)|
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
 | HiFi + HiC | Better haplotype resolution (fewer switch errors) | B |
@@ -142,7 +142,7 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 | HiFi + parental + BioNano | Properly phased with improved contiguity | G |
 | HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
-In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
+In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage whole genome resequencing data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
 <br>
@@ -457,6 +457,12 @@ There are several tools for assessing various aspects of assembly quality:
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
 - **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the {CN} of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
+
+> <comment-title>How do I pick which assembly trajectory to use?</comment-title>
+> The ideal scenario would be a trio assembly, where you can use parental data as a ground truth for phasing the haplotypes in the child. Unfortunately, attaining parental samples is difficult and often impossible when studying wild-caught organisms. When parental data is absent, the VGP recommends assembling using {Hi-C} phasing, if possible. This requires the Hi-C data to be derived from the same individual as the HiFi data. If this is not possible, then you cannot use the Hi-C data to phase the contigs, but you can still use it for scaffolding the primary assembly. Refer to the following decision tree for a visual representation of this logic. 
+>
+> ![Decision tree for picking workflow trajectory when one does not have parental data.](../../images/vgp_assembly/WF3vsWF4_decisiontree.png "If the HiFi and Hi-C data *do not* come from the same individual, then you can use WF3. After that, if you need to purge the primary, then run WF6 and then scaffolding. If the primary does not need purging, you can continue straight to scaffolding the primary. If the HiFi and Hi-C data *do* come from the same individual, then you can use WF4 to obtain hap1 and hap2 assemblies. If either of the assemblies need to be purged, then you can use WF6B to purge an individual haplotype. Then you can scaffold the assemblies separately. Accordingly, if neither need to be purged, then you can proceed to just scaffolding them separately.")
+{: .comment}
 
 <div id="solo_hic_switch">
 <!-- For use as an anchor -->
