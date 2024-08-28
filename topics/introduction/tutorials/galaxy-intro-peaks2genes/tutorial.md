@@ -713,7 +713,7 @@ To share a history, click on the {%  icon galaxy-history-options %} history opti
 
     This will share the history only with specific users on the Galaxy instance.
 
-![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.png)
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >
