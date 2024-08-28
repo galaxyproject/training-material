@@ -156,7 +156,9 @@ The stages of genome assembly in the VGP-Galaxy pipeline are generally:
 > <comment-title>A note on data quality</comment-title>
 > We suggest at least 30✕ PacBio HiFi coverage and 60✕ Hi-C coverage (both diploid coverage).
 {: .comment}
+
 This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contiging or solo w/HiC contiging.
+
 
 Throughout this tutorial, there will be **detail boxes** with additional background information on the science behind the sequencing technologies and software we use in the pipeline. These boxes are minimized by default, but please expand them to learn more about the data we utilize in this pipeline.
 
@@ -181,8 +183,8 @@ In order to reduce computation time, we will assemble samples from the yeast _Sa
 
 The first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
-1. A set of PacBio {HiFi} reads in `fasta` format
-2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format
+1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space..
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format. 
 
 ## Uploading `fasta` datasets from Zenodo
 
