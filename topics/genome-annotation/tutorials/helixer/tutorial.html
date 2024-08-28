@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@afd0ce92e8719bbd6022129c881c60ff26407a71",
+		release: "galaxy-training-network@95d4e971ca1eb21504c4623751f099e4218c047e",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Genome annotation with Helixer">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-26 11:33:25 +0000">
+<meta name="DC.date" content="2024-08-28 12:31:16 +0000">
 <meta name="DC.creator" content="Romane LIBOUBAN">
 <meta name="DC.creator" content="Anthony Bretaudeau"><meta name="description" content="Genome annotation is a multi-level process that includes prediction of protein-coding genes, as well as other functional genome units such as structural RNAs, tRNAs, small RNAs, pseudogenes, control regions, direct and inverted repeats, insertion sequences, transposons and other mobile elements. ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-26 11:33:25 +0000",
+  "dateModified": "2024-08-28 12:31:16 +0000",
   "datePublished": "2024-08-21 15:23:33 +0000",
   "identifier": "https://gxy.io/GTN:T00451",
   "accessMode": [
@@ -237,16 +237,16 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Genome annotation with Helixer",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/helixer/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT4H",
-  "teaches": "Load genome into Galaxy\n - Annotate genome with Helixer\n - Evaluate annotation quality with BUSCO and Compleasm\n - View annotations in JBrowse",
+  "teaches": "Load genome into Galaxy\n - Annotate genome with Helixer\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse",
   "keywords": [
     "Genome Annotation",
     "eukaryota",
     "helixer",
     "jbrowse1"
   ],
-  "description": "The questions this  addresses are:\n - How to annotate an eukaryotic genome with Helixer?\n - How to evaluate and visualize annotated genomic features?\n\n\nThe objectives are:\n - Load genome into Galaxy\n - Annotate genome with Helixer\n - Evaluate annotation quality with BUSCO and Compleasm\n - View annotations in JBrowse\n\n",
+  "description": "The questions this  addresses are:\n - How to annotate an eukaryotic genome with Helixer?\n - How to evaluate and visualize annotated genomic features?\n\n\nThe objectives are:\n - Load genome into Galaxy\n - Annotate genome with Helixer\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -735,7 +735,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><p>Annotate genome with Helixer</p>
 </li>
         
-        <li><p>Evaluate annotation quality with BUSCO and Compleasm</p>
+        <li><p>Evaluate annotation quality with BUSCO</p>
 </li>
         
         <li><p>View annotations in JBrowse</p>
@@ -934,7 +934,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 21, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 28, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -952,7 +952,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1122,6 +1122,8 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 <p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the annotation.</p>
 
+<p>As an alternative for genomes only one can use <a href="https://github.com/huangnengCSU/compleasm"><strong>compleasm</strong></a> with the same BUSCO gene sets, as compleasm is a bit more sensitive and thus allows finding slightly more conserved genes.</p>
+
 <p>We want to run BUSCO on the protein sequences predicted from gene sequences of the Helixer annotation. So first generate these sequences:</p>
 
 <blockquote class="notranslate hands_on">
@@ -1143,7 +1145,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 
 </blockquote>
 
-<p>The run BUSCO on these protein sequences:</p>
+<p>To run BUSCO on these protein sequences:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-busco-in-proteome-mode"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: BUSCO in proteome mode</div>
@@ -1297,7 +1299,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
                         <li><p>Helixer allows to perform structural annotation of an eukaryotic genome</p>
 </li>
                         
-                        <li><p>BUSCO and Compleasm allow to inspect the quality of an annotation</p>
+                        <li><p>BUSCO allows to inspect the quality of an annotation</p>
 </li>
                         
                     </ul>
@@ -1588,7 +1590,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/afd0ce92e8719bbd6022129c881c60ff26407a71">afd0ce9</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/95d4e971ca1eb21504c4623751f099e4218c047e">95d4e97</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
