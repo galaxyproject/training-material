@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: EncyclopeDIA
-zenodo_link: 'https://doi.org/10.5281/zenodo.4926594'
+zenodo_link: 'https://doi.org/10.5281/zenodo.13505774'
 tags: [DIA]
 questions:
 - How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
@@ -93,16 +93,16 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12%20.raw.raw
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12%20.raw.raw
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12%20.raw.raw
->    https://zenodo.org/record/4926594/files/Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT04_P_1ug_395_505_4%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT05_P_1ug_495_605_4%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT07_P_1ug_695_805_4%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT08_P_1ug_795_905_4%20.raw.raw
->    https://zenodo.org/record/4926594/files/GPF_DIA_Dataset_Collection__191023JAT09_P_1ug_895_1005_4%20.raw.raw
+>    https://zenodo.org/records/13505774/files/191023JAT03_1_Mix_2_1ug_pOT_30k_390_1010_12_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT10_2_Mix_4_1ug_pOT_30k_390_1010_12_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT11_3_Mix_1_1ug_pOT_30k_390_1010_12_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT04_P_1ug_395_505_4_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT05_P_1ug_495_605_4_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT06_P_1ug_595_705_4_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT07_P_1ug_695_805_4_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT08_P_1ug_795_905_4_20.raw
+>    ttps://zenodo.org/records/13505774/files/191023JAT09_P_1ug_895_1005_4_20.raw
 >    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta
 >    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib
 >    ```
@@ -111,15 +111,8 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. For all the datasets that you have just uploaded, please rename them as follows:
->     - The GPF files should be renamed as follows:
->       - From: **GPF_DIA_Dataset_Collection__191023JAT06_P_1ug_595_705_4%20.raw.raw**
->       - To: **191023JAT06_P_1ug_595_705_4.raw**
->       - Note that the "%20" characters were removed.
->     - The Experimental design files should be renamed as follows:
->       - From: **Experimental_DIA_Dataset_Collection__191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12%20.raw.raw**
->       - To: **191023JAT12_4_Mix_3_1ug_pOT_30k_390_1010_12.raw**
->       - Again, the "%20" characters were removed
+> 3. For all the datasets that you have just uploaded, please rename them if "%20" is seen.
+>      
 > 4. Check that the datatype
 >    - For the FASTA file, the datatype should be set as `fasta`
 >    - For the Library files, the datatype should be set as `dlib`
@@ -128,8 +121,8 @@ In a typical the DIA-MS experiment, the precursor scan usually ranges between 40
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="thermo.raw" %}
 >
 > 5. Add to each dataset a tag corresponding to file-type, i.e.
->    - GPF datasets can be labeled as `#gpf`
->    - Experimental DIA datasets as `#experimental`
+>    - GPF datasets (files containing - 395, 495, 595, 695, 795 and 895) can be label as `#gpf`
+>    - Experimental DIA datasets (Mix 1-4) label as `#experimental` 
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
