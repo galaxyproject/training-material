@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: GO Enrichment Analysis on Single-Cell RNA-Seq Data
-zenodo_link: 'https://zenodo.org/records/13343340'
+zenodo_link: 'https://zenodo.org/uploads/13461890'
 
 questions:
 - What is Gene Ontology (GO) enrichment analysis, and why should I perform it on my marker genes?
@@ -23,8 +23,8 @@ requirements:
     tutorials:
         - scrna-case_basic-pipeline
 tags:
-- 10x
-- paper-replication
+- single cell
+- GO enrichment
   
 time_estimation: 3H
 
@@ -52,26 +52,33 @@ However, simply identifying marker genes is just the beginning. To truly underst
 >
 {: .agenda}
 
-## Data description
+# Data description
 
 In this tutorial will use the following datasets:
+
 **Marker Genes:**
+
 We'll start with two input datasets of marker genes (Study sets):
-  *Marker genes per cell cluster: This dataset lists the genes that are significantly different in each cell cluster.
-  *Marker genes per condition (wt and ko): This dataset lists the genes that are significantly different between the wild-type (wt) and knockout (ko) conditions.
+  * **Marker genes per cell cluster:** This dataset lists the genes that are significantly different in each cell cluster.
+  * **Marker genes per condition (wt and ko):** This dataset lists the genes that are significantly different between the wild-type (wt) and knockout (ko) conditions.
+
 **GO Enrichment Files:**
+
 We'll also use three additional files for GO enrichment analysis. 
-  *Gene Ontology: This file contains information about Gene Ontology terms.
-  *GO Annotations: This file maps genes to their corresponding GO terms.
-  *Population set: This file provides a list of genes used as a background gene set for the analysis.
+  * **Gene Ontology file:** This file contains information about Gene Ontology terms.
+  * **GO Annotations file:** This file maps genes to their corresponding GO terms.
+  * **Population set file:** This file provides a list of genes used as a background gene set for the analysis.
+
 *Note:* There are several online databases available for downloading GO and GO Annotations files, including the Gene Ontology website, Ensembl, and the UCSC Genome Browser.
   
-> <comment-title>Concept behind GO Enrichment Analysis</comment-title>
-> The goal of GO enrichment analysis is to interpret the biological significance of long lists of marker genes. By summarizing these genes into a shorter list of enriched GO terms. The analysis works by comparing each GO term between your list of marker genes and a background gene set. Statistical tests are then used to calculate a p-value that indicates whether a particular GO term is significantly enriched in the marker gene list compared to the background.
-The concept of enrichment analysis is well explained in this [youtube video] (https://www.youtube.com/watch?v=H1cUs6pql9s&t=157s) about Pathway Enrichment Analysis, here we use GO terms instead of pathways.
+>  <comment-title>Concept behind GO Enrichment Analysis</comment-title>
+>
+>  The goal of GO enrichment analysis is to interpret the biological significance of long lists of **marker genes**. By summarizing these genes into a shorter list of enriched **GO terms**. The analysis works by comparing each GO term between your list of marker genes and a **background gene set**. Statistical tests are then used to calculate a p-value that indicates whether a particular GO term is significantly enriched in the marker gene list compared to the background.
+
+**Note:** The concept of enrichment analysis is well explained in this [youtube video](https://www.youtube.com/watch?v=H1cUs6pql9s&t=157s) about Pathway Enrichment Analysis, here we use GO terms instead of pathways.
 {: .comment}
 
-## Get data
+# Get data
 
 You can access the data for this tutorial in multiple ways:
 
@@ -87,9 +94,12 @@ You can access the data for this tutorial in multiple ways:
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) 
 >
 >    ```
->   {{ page.zenodo_link }}/files/Markers_clusters.tabular
->   {{ page.zenodo_link }}/files/Markers_genotype.tabular
-    ```
+>    {{ page.zenodo_link }}/files/Galaxy3-[GO].obo
+>    {{ page.zenodo_link }}/files/Galaxy2-[GO_annotations_Mus_musculus].tabular
+>    {{ page.zenodo_link }}/files/Galaxy5-[Markers_-_clusters].tabular
+>    {{ page.zenodo_link }}/files/Galaxy4-[Background_gene_set].tabular
+>    {{ page.zenodo_link }}/files/Galaxy1-[Markers_-_genotype_].tabular
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -102,7 +112,7 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
-# Important tips for easier analysis
+## Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
@@ -125,7 +135,7 @@ To perform GO enrichment analysis on each cell cluster individually, we need to 
 >
 >    > <comment-title> Input Dataset </comment-title>
 >    >
->    > As we have two datasets, one with the marker genes for all the seven clusters and one with the marker genes for the knockout (KO) and wild-type (WT) conditions. Make sure to repeat the analysis twice for the two different datasets. Otherwise you can run this [workflow] (https://usegalaxy.eu/u/mennagamal/w/unnamed-workflow) for parallel analysis of the datasets 
+>    > As we have two datasets, one with the marker genes for all the seven clusters and one with the marker genes for the knockout (KO) and wild-type (WT) conditions. Make sure to repeat the analysis twice for the two different datasets. Otherwise you can run this [workflow](https://usegalaxy.eu/u/mennagamal/w/unnamed-workflow) for parallel analysis of the datasets 
 >    {: .comment}
 >
 {: .hands_on}
@@ -142,8 +152,8 @@ Next, we need to isolate the Ensembl gene IDs column from each file. We'll use t
 >    > <comment-title> The gene format to use </comment-title>
 >    >
 >    In this example we extract column 4 because it contains the Ensembl gene IDs on which the subsequent steps are ideally working. While there are other gene formats like gene symbols, Entrez gene IDs, and more, make sure to check the specific format accepted by the tool you are using. There are also tools available to convert between different gene formats if needed. 
-> 
-> {: .comment}
+>    {: .comment}
+>
 {: .hands_on}
 
 
@@ -154,10 +164,10 @@ Now we will perform the GO Enrichment analysis on the list of ensembl gene IDs.
 > <hands-on-title> GOEnrichment </hands-on-title>
 >
 > 1. {% tool [GOEnrichment](toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Gene Ontology File"*: `output` (Input dataset)
->    - {% icon param-file %} *"Gene Product Annotation File"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Gene Ontology File"*: `GO` (Input dataset)
+>    - {% icon param-file %} *"Gene Product Annotation File"*: `GO annotations Mus musculus` (Input dataset)
 >    - {% icon param-file %} *"Study Set File"*: `out_file1` (output of **Cut** {% icon tool %})
->    - {% icon param-file %} *"Population Set File (Optional)"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Population Set File (Optional)"*: `Background gene set` (Input dataset)
 >
 >
 >    > <comment-title> Population Set File Selection for GO Enrichment </comment-title>
@@ -170,19 +180,19 @@ Now we will perform the GO Enrichment analysis on the list of ensembl gene IDs.
 
 > <question-title></question-title>
 >
-> 1. Take a look at the enriched terms for cluster 7, Can you find any GO terms that are specific to this cluster?
+> 1. Take a look at the enriched terms for cluster 7, Can you find any GO terms that are specific to that cluster?
 > 2. Can we perform manual anntation of the cell cluster based on GO enrichment results?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Cluster 7 is enriched for terms like "regulation of cell death","T cell mediated cytotoxicity", and "peptidase activator activity involved in apoptotic process".
-> > 2. By looking at the most enriched functions and with biological knowledge, we are able to infer the cell types for most of the clusters. We know that data come from thymus tissue, so we have a prior idea of the cell types we would expect. For example, the enrichment for those terms in cluster 7 can confirm our results that the cell type is Macrophages, as they help create a supportive environment for thymocyte maturation by clearing apoptotic cells and debris.
+> > 1. Cluster 7 is enriched for terms like "regulation of cell death", "T cell mediated cytotoxicity", and "peptidase activator activity involved in apoptotic process".
+> > 2. By looking at the most enriched functions and using our biological knowledge, we can figure out the cell types for many clusters. For example, since the data comes from thymus tissue, we already have an idea of the cell types we might find. The enriched terms in cluster 7 confirm that the cell type is macrophages, which support thymocyte maturation by cleaning up dead cells and debris.
 > >
 > {: .solution}
 >
 {: .question}
 
-# GO Analysis **gProfiler GOSt** tool
+# GO Analysis using **gProfiler GOSt** tool
 
 The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool used to perform gene ontology (GO) enrichment analysis. In addition to providing enrichment results for the standard GO categories of Biological Process (BP), Cellular Component (CC), and Molecular Function (MF), the tool also analyzes enrichment across several other functional annotation databases, including: KEGG Pathways, Reactome Pathways, WikiPathways and TF Targets. It also gives a plot to better visualize the results.
 
@@ -206,7 +216,7 @@ The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool us
 
 > <question-title></question-title>
 >
-> 1. Can you find enriched GO terms that are inline with the [published study] (https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2018.02523/full) findings in KO vs WT results files?
+> 1. Can you find enriched GO terms that are inline with the [published study](https://www.frontiersin.org/journals/immunology/articles/10.3389/fimmu.2018.02523/full) findings in KO vs WT results files?
 > 2. What might be happening to the stem cells in the KO mice compared to the WT mice?
 >
 > > <solution-title></solution-title>
@@ -217,8 +227,6 @@ The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool us
 > {: .solution}
 >
 {: .question}
-
-
 
 # Conclusion
 
