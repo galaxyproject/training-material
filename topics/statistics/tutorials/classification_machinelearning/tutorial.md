@@ -1,27 +1,30 @@
 ---
 layout: tutorial_hands_on
-
-title: 'Classification in Machine Learning'
+title: Classification in Machine Learning
 zenodo_link: https://zenodo.org/record/3738729
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
 - Learn classification background
-- Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy
-- Learn to apply logistic regression, k-nearest neighbors, support verctor machines, random forests and bagging algorithms
+- Learn what a quantitative structure-analysis relationship (QSAR) model is and how
+  it can be constructed in Galaxy
+- Learn to apply logistic regression, k-nearest neighbors, support verctor machines,
+  random forests and bagging algorithms
 - Learn how visualizations can be used to analyze the classification results
 key_points:
 - Classification is a supervised approach in machine learning.
 - For classification tasks, data is divided into training and test sets.
-- Using classification, the samples are learned using the training set and predicted using the test set.
-- For each classification algorithm, it parameters should be optimised based on the dataset.
-- Machine learning algorithms can be applied to chemical datasets to predict important properties.
+- Using classification, the samples are learned using the training set and predicted
+  using the test set.
+- For each classification algorithm, it parameters should be optimised based on the
+  dataset.
+- Machine learning algorithms can be applied to chemical datasets to predict important
+  properties.
 time_estimation: 2H
 contributors:
 - khanteymoori
 - anuprulez
 - simonbray
-
 recordings:
 - captioners:
   - anuprulez
@@ -31,8 +34,29 @@ recordings:
   youtube_id: Gz2OdRPS2Nk
   speakers:
   - anuprulez
+- youtube_id: TODO
+  length: 28M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-08-29'
+  speakers:
+  - anuprulez
+  captioners:
+  - anuprulez
+  bot-timestamp: 1724930606
+- youtube_id: TODO
+  length: 1H7M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-08-29'
+  speakers:
+  - anuprulez
+  captioners:
+  - anuprulez
+  bot-timestamp: 1724930690
+
 
 ---
+
+
 
 
 In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
