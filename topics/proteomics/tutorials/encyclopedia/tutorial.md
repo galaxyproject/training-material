@@ -424,7 +424,7 @@ Sample output of the Protein Quantitation Output:
 >
 {: .comment}
 
-# **Conclusion**
+# Conclusion
 
 
 This completes the walkthrough of the EncyclopeDIA Standard workflow.
