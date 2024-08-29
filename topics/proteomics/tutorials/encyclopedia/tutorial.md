@@ -426,7 +426,6 @@ Sample output of the Protein Quantitation Output:
 
 # Conclusion
 
-
 This completes the walkthrough of the EncyclopeDIA Standard workflow.
 
 ![EncyclopeDIA overview](../../images/EncyclopeDIA_Workflow.png "EncyclopeDIA overview")
