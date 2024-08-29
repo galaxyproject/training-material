@@ -137,7 +137,7 @@ Next we will retrieve the remaining datasets.
 > >
 > > 1. {% tool [Convert FASTA to Tabular](CONVERTER_fasta_to_tabular) %} converter with the following parameters:
 > >    - {% icon param-files %} *"Fasta file"*: `GRCh38.p13.genome.fa.gz`
-> > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+> > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
 > >    - {% icon param-files %} *"Select lines from"*: Output of **Convert FASTA to Tabular**
 > >    - *"Regular Expression2"*: `chr5`
 > > 3. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} converter with the following parameters:
@@ -203,12 +203,14 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 
 > <hands-on-title>Pre-process reads with fastp</hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
+> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy1) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >        - {% icon param-collection %} *"Select paired collection(s)"*: `All samples`
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
+>    - In *"Output Options"*:
+>        - *"Output JSON report"*: `Yes`
 > 2. Rename the output `fastp on collection X: Paired-end output` as `Trimmed samples`
 >
 {: .hands_on}
@@ -298,20 +300,21 @@ Now we can perform the mapping step.
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
->            - *"Length of the genomic sequence around annotated junctions*": `149`
+>            - *"Length of the genomic sequence around annotated junctions*": `100`
+>            - *"Per gene/transcript output*": `Per gene read counts (GeneCounts)`
 >    - *"Would you like to set additional output filters?"*: `Yes`
->        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
->        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
->        - *"Maximum number of mismatches to output an alignment, plus 1*": `999`
->        - *"Maximum ratio of mismatches to read length*": `0.04`
+>        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes` (ENCODE option, reduces the number of ”spurious” junctions)
+>        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20` (ENCODE option)
+>        - *"Maximum number of mismatches to output an alignment, plus 1*": `999` (ENCODE option)
+>        - *"Maximum ratio of mismatches to read length*": `0.04` (ENCODE option)
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            - In *"Alignment parameters"*:
->                - *"Minimum intron size*": `20`
->                - *"Maximum intron size*": `1000000`
->                - *"Maximum gap between two mates*": `1000000`
->                - *"Minimum overhang for spliced alignments*": `8`
->                - *"Minimum overhang for annotated spliced alignments*": `1`
+>                - *"Minimum intron size*": `20` (ENCODE option)
+>                - *"Maximum intron size*": `1000000` (ENCODE option)
+>                - *"Maximum gap between two mates*": `1000000` (ENCODE option)
+>                - *"Minimum overhang for spliced alignments*": `8` (ENCODE option)
+>                - *"Minimum overhang for annotated spliced alignments*": `1` (ENCODE option)
 >
 > > <comment-title>Intron size values</comment-title>
 > >
@@ -326,6 +329,13 @@ The first **RNA STAR** run generates three collections: logs, alignments in BAM 
 > <hands-on-title> Pre-processing of splice junction coordinates</hands-on-title>
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} tail-to-head (cat) with the following parameters:
 >   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
+>
+> The output must be a dataset not a collection
+>
+>         > <tip-title>Got a collection instead of a dataset?</tip-title>
+>         > You probably selected **Concatenate datasets** tail-to-head {% icon tool %} instead of the other tool with the same name except that it has a `(cat)` at the end of the name.
+>         > Simply rerun the step above with the good tool.
+>         {: .tip}
 >
 > 2. {% tool [Filter](Filter1) %} data on any column using simple expressions:
 >   - *"Filter"*: output of **Concatenate datasets** {% icon tool %}
@@ -365,22 +375,23 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
 >            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
->            - *"Length of the genomic sequence around annotated junctions*": `149`
+>            - *"Length of the genomic sequence around annotated junctions*": `100`
+>            - *"Per gene/transcript output*": `Per gene read counts (GeneCounts)`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
 >       - {% icon param-file %} *"Pregenerated splice junctions datasets of your samples"*: `Splicing database`
 >    - *"Would you like to set additional output filters?"*: `Yes`
->        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes`
->        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20`
->        - *"Maximum number of mismatches to output an alignment, plus 1*": `999`
->        - *"Maximum ratio of mismatches to read length*": `0.04`
+>        - *"Would you like to keep only reads that contain junctions that passed filtering?*": `Yes` (ENCODE option)
+>        - *"Maximum number of alignments to output a read's alignment results, plus 1*": `20` (ENCODE option)
+>        - *"Maximum number of mismatches to output an alignment, plus 1*": `999` (ENCODE option)
+>        - *"Maximum ratio of mismatches to read length*": `0.04` (ENCODE option)
 >    - In *"Algorithmic settings"*:
 >        - *"Configure seed, alignment and limits options*": `Extended parameter list`
 >            -  In *"Alignment parameters"*:
->                - *"Minimum intron size*": `20`
->                - *"Maximum intron size*": `1000000`
->                - *"Maximum gap between two mates*": `1000000`
->                - *"Minimum overhang for spliced alignments*": `8`
->                - *"Minimum overhang for annotated spliced alignments*": `1`
+>                - *"Minimum intron size*": `20` (ENCODE option)
+>                - *"Maximum intron size*": `1000000` (ENCODE option)
+>                - *"Maximum gap between two mates*": `1000000` (ENCODE option)
+>                - *"Minimum overhang for spliced alignments*": `8` (ENCODE option)
+>                - *"Minimum overhang for annotated spliced alignments*": `1` (ENCODE option)
 >    - *"Compute coverage"*: `Yes in bedgraph format`
 >       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
@@ -399,7 +410,7 @@ In this section we will make use of of the **RSeQC** toolkit in order to generat
 
 We are going to use the following RSeQC modules:
 
-- **Infer Experiment**: inference of RNA-seq configuration
+- **Infer Experiment**: inference of strandedness of RNA-seq library
 - **Gene Body Coverage**: compute read coverage over gene bodies
 - **Junction Saturation**: check junction saturation
 - **Junction Annotation**: compares detected splice junctions to a reference gene model
@@ -457,27 +468,30 @@ Now, we will integrate the outputs into **MultiQC**.
 >                    - {% icon param-repeat %} *"Insert STAR output"*
 >                        - *"Type of STAR output?"*: `Log`
 >                            - {% icon param-collection %} *"STAR log output"*: `RNA STAR on collection XXX: log` collection
+>                    - {% icon param-repeat %} *"Insert STAR output"*
+>                        - *"Type of STAR output?"*: `Gene counts`
+>                            - {% icon param-collection %} *"STAR gene counts output"*: `RNA STAR on collection XXX: reads per gene` collection
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `RSeQC`
 >                - In *"RSeQC output"*:
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-collection %} *"RSeQC infer experiment"*: select **RNA-seq experiment configuration** collection
+>                            - {% icon param-collection %} *"RSeQC infer experiment"*: select `Infer Experiment on collection XXX: RNA-seq experiment configuration` collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Read distribution`
->                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select **stats (TXT)** collection
+>                            - {% icon param-collection %} *"RSeQC read distribution: stats output"*: select `Read Distribution on collection XXX: stats (TXT)` collection
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction saturation`
->                            - {% icon param-collection %} *"RSeQC junction saturation: junction saturation plot Rscript file*: select **Rscript** collections
+>                            - {% icon param-collection %} *"RSeQC junction saturation: junction saturation plot Rscript file*: select `Junction Saturation on collection XXX: junction saturation (Rscript)` collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Junction annotation`
->                            - {% icon param-collection %} *"RSeQC junction annotation: stats file"*: select **stats** collections
+>                            - {% icon param-collection %} *"RSeQC junction annotation: stats file"*: select `Junction Annotation on collection XXX: stats` collections
 >                    - {% icon param-repeat %} *"Insert RSeQC output"*
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
->                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select **stats (TXT)** collections
+>                            - {% icon param-collection %} *"RSeQC gene body coverage: stats file"*: select `Gene Body Coverage (BAM) on collection XXX: stats (TXT)` collections
 >                    - {% icon param-repeat %} *"Inner Distance output"*
 >                        - *"Type of RSeQC output?"*: `Inner distance`
->                            - {% icon param-collection %} *"RSeQC inner distance: frequency file"*: select **frequency (TXT)** collections
+>                            - {% icon param-collection %} *"RSeQC inner distance: frequency file"*: select `Inner Distance on collection XXX: frequency (TXT)` collections
 >
 {: .hands_on}
 
@@ -553,7 +567,7 @@ Then, let's start with the transcriptome assemby.
 
 > <hands-on-title>Transcriptome assembly with StringTie</hands-on-title>
 >
-> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
+> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
@@ -565,19 +579,11 @@ Then, let's start with the transcriptome assemby.
 >
 > 2. Rename the generated collection as `Assembled transcripts coordinates`
 >
-> 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Assembled transcripts`
->    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
->       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
->
-> 4. Rename the collection as `Assembled transcripts sequences`
->
-> 5. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.1+galaxy1) with the following parameters:
->    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts` (output of **StringTie**)
+> 3. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.3+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts coordinates` (output of **StringTie**)
 >    - {% icon param-file %} *"Reference annotation to include in the merging"*: `GRCh38.p13.chrom5.gtf`
 >
-> 6. Rename the output as `Reference transcriptome annotation`
+> 4. Rename the output as `Reference transcriptome annotation`
 >
 {: .hands_on}
 
@@ -585,7 +591,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 
 > <hands-on-title>Isoform quantification with StringTie</hands-on-title>
 >
-> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy1) %} with the following parameters:
+> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
@@ -618,19 +624,6 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 >
 {: .details}
 
-Before starting with the analysis of the isoforms, we will generate a FASTA file that will be used in the next step: the reference transcriptome. This output will be used in the next section.
-
-> <hands-on-title>Extract reference transcriptome</hands-on-title>
->
-> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Reference transcriptome annotation`
->    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
->       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
->
-> 2. Rename the output as `Reference transcriptome sequences`
->
-{: .hands_on}
 
 ## Transcriptome evaluation
 
@@ -655,28 +648,28 @@ The output of GFFCompare includes several files, which can be used to analyze th
 
 - **Annotated transcripts**: contains all the input transcripts annotated with several additional attributes: **xloc**, **tss_id**, **cmp_ref**, and **class_code**.
 - **Loci file**: Lists the loci (locations) of the features in the input files.
-- **RefMap**: Contains a list of input loci with their best matches in the reference annotation.
+- **RefMap**: Contains the list of reference transcripts with the query transcripts which either fully or partially matches.
 - **TMAP**: Lists the most closely matching reference transcript for each query transcript.
 - **Accuracy stats**: Provides statistics on the comparison, including the number of input and reference features, the number of unique input features, and the total number of features.
 - **Tracking file**: Contains the genomic coordinates of the input features and their matching or non-matching reference features.
 
 > <details-title>Details on the GffCompare attributes</details-title>
 >
-> The **xloc** attribute indicates the super-locus to which a particular transcript belongs. The **tss_id** attribute serves as a unique identifier for the transcription start of that transcript. In cases where applicable, the **cmp_ref** attribute provides the nearest reference transcript, and the **class_code** attribute describes the relationship to this reference transcript. Additional information can be found in {% cite Pertea2020 %}.
+> The **xloc** attribute indicates the super-locus to which a particular transcript belongs. The **tss_id** attribute serves as a unique identifier for the transcription start of that transcript. In cases where applicable, the **cmp_ref** attribute provides the nearest reference transcript, and the **class_code** attribute describes the relationship to this reference transcript. Additional information can be found in {% cite Pertea2020 %}. The most present class codes are: '=': complete, exact match of intron chain (TSS and TES may be different); 'c': contained in reference (intron compatible), 'k': the reference is contained, 'm': retained intron(s), all introns matched or retained; 'n': retained intron(s) with at least one new intron; 'j': multi-exon with at least one junction match
 >
 {: .details}
 
-In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be found in the **accuracy stats** file. Sensitivity is defined as the proportion of true positives among the total predicted features, while precision is defined as the proportion of true positives among the total predicted features and false positives. 
+In order to have an overview of the transcriptome, we can have a look at the **sensitivity** and **precision** metrics, which can be found in the **accuracy stats** file. Sensitivity is defined as the proportion of true positives (found in prediction and in reference) among the total features in reference, while precision is defined as the proportion of true positives among the total predicted features. 
 
 > <question-title>Sensitivity and precision</question-title>
 >
-> 1. What are the sensitivity and precission at transcript level?
+> 1. What are the sensitivity and precision at transcript level?
 > 2. How many novel exons have been identified?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. At transcript level, precission is 99.6% and sensitivity 91.3%.
-> > 2. According the stats file, 112 new exons (0.6%) have been identified.
+> > 1. At transcript level, precision is 99.6% and sensitivity 91.2%.
+> > 2. According the stats file, 387 new exons (1.4%) have been identified.
 > > 
 > {: .solution}
 {: .question}
@@ -685,19 +678,19 @@ For a more in-depth analysis of the output, we could use the **TMAP** file and p
 
 > <hands-on-title>Extract novel transcripts information</hands-on-title>
 >
-> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: **TMAP** file
->    - *"AWK Program"*: `$3=="i"{print $0}`
-> 
+> 1. {% tool [Filter](Filter1) %} data on any column using simple expressions:
+>   - *"Filter"*: **TMAP** file
+>   - *"With following condition"*: `c3 == "i"`
+>
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >   - "*Cut columns*": `c4`
->   - {% icon param-file %} *"From"*: output of **Text reformatting** {% icon tool %}
+>   - {% icon param-file %} *"From"*: output of **Filter** {% icon tool %}
 >
 > 3. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
 >   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
 >   - "*Output unique values*": `Yes`
 >
-> 4. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> 4. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} with the following parameters:
 >    - *"Select lines from"*: `Reference transcriptome annotation `
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `\"MSTRG.7\"`(content of the file generated by **Sort** {% icon tool %})
@@ -724,12 +717,19 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 - **BUSCO score**: This metric represents the completeness of the assembly based on conserved orthologs.
 
 > <hands-on-title>Transcriptome evaluation</hands-on-title>
+> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.2.1.4+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Assembled transcripts coordinates` (the output of the first Stringtie)
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
 >
-> 1. {% tool [rnaQUAST](toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1) %} with the following parameters:
+> 2. Rename the collection as `Assembled transcripts sequences`
+>
+> 3. {% tool [rnaQUAST](toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts sequences`
 >    - {% icon param-files %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
 >    - *"Genome annotation"*: `Enabled`
->       - {% icon param-files %} *"GTF/GFF"*: `Reference transcriptome annotation`
+>       - {% icon param-files %} *"GTF/GFF"*: `GRCh38.p13.chrom5.gtf`
 >    - *"Disable infer genes"*: `Yes`
 >    - *"Disable infer transcripts"*: `Yes`
 >
@@ -790,23 +790,23 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - *"Dataset collection"*: `Transcriptomes quantification`
 >
-> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} with the following parameters:
 >    - *"Select lines from"*: `Extract element identifiers on data N` (output of  **Extract element identifiers** {% icon tool %})
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `Cancer`
 >
 > 3. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
->    - *"Input collection"*: `StringTie on collection N: transcript-level expression measurements`
+>    - *"Input collection"*: `Transcriptomes quantification`
 >    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
 >        - *"Filter out identifiers absent from"*: `Search in textfiles on data N` (output of  **Search in textfiles** {% icon tool %})
 >
-> 4. Rename both collections `Health transcriptomes quantification` (the filtered collection) and `Health transcriptomes quantification` (the discarted collection).
+> 4. Rename both collections `Cancer transcriptomes quantification` (the filtered collection) and `Health transcriptomes quantification` (the discarted collection).
 >
 {: .hands_on}
 
 ## Import data
 
-The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets.
+The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets. This step requires to get a fasta file with the reference transcriptome.
 
 > <comment-title>Salmon as source of transcript-expression data</comment-title>
 >
@@ -814,19 +814,32 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >
 {: .comment}
 
+
+> <hands-on-title>Extract reference transcriptome</hands-on-title>
+>
+> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Reference transcriptome annotation`
+>    - *"Reference Genome"*: `From your history`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+>
+> 2. Rename the output as `Reference transcriptome sequences`
+>
+{: .hands_on}
+
 > <hands-on-title>Import data with IsoformSwitchAnalyzeR </hands-on-title>
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Import data`
+>        - *"Quantification data source"*: `StringTie`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Health`
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Health transcriptomes quantification`
 >        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Transcripts Cancer`
->        - *"Quantification data source"*: `StringTie`
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Cancer transcriptomes quantification`
 >            - *"Average read length"*: `140`
->            - From *"Analysis mode"*:
+>            - *"Analysis mode"*:
 >              - {% icon param-file %} *"Annotation generated by StringTie merge"*: `Reference transcriptome annotation`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `GRCh38.p13.chrom5.gtf`
 >        - {% icon param-file %} *"Transcriptome"*: `Reference transcriptome sequences`
@@ -845,7 +858,7 @@ After the pre-processing, **IsoformSwitchAnalyzieR** performs the differential i
 
 > <comment-title>Difference in isoform fraction concept</comment-title>
 >
-> IsoformSwitchAnalyzeR measures isoform usage vian isoform fraction (IF) values which quantifies the fraction of the parent gene expression originating from a specific isoform, (calculated as isoform_exp / gene_exp). Consequently, the difference in isoform usage is quantified as the difference in isoform fraction (dIF) calculated as IF2 - IF1, and these dIF are used to measure the effect size  ({% cite isoformswitchanalyzer %}).
+> IsoformSwitchAnalyzeR measures isoform usage via isoform fraction (IF) values which quantifies the fraction of the parent gene expression originating from a specific isoform, (calculated as isoform_exp / gene_exp). Consequently, the difference in isoform usage is quantified as the difference in isoform fraction (dIF) calculated as IF2 - IF1, and these dIF are used to measure the effect size  ({% cite isoformswitchanalyzer %}).
 >
 {: .comment}
 
@@ -858,7 +871,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 
 > <comment-title>Isoform or gene resolution analysis?</comment-title>
 >
-> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysi, it is recommended to tu use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in {IS}, gene-level analysis is conditioned by higher false positive rates.
+> Despite IsoformSwitchAnalyzeR supports both isoform and gene resolution analysis, it is recommended to use the isoform-level analysis. The reason is that since the analysis is restricted to genes involved in {IS}, gene-level analysis is conditioned by higher false positive rates.
 >
 {: .comment}
 
@@ -866,7 +879,7 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part one: Extract isoform switches and their sequences`
->        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList (RData)` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >   - In *"Sequence extraction parameters"*:
 >       - "*Remove short aminoacid sequences*": `No`
 >       - *"Remove ORFs containint STOP codons*": `No`
@@ -886,7 +899,7 @@ The next step is to use to use generated FASTA files corresponding to the aminoa
 
 > <comment-title>Additional sequence analysis tools</comment-title>
 >
-> Note that **IsoformSwitchAnalyzeR** allows to integrate additional sources, such as prediction of signal peptides (SignalP) and intrinsically disordered regions (IUPred2AIUPred2A or NetSurfP-2). However, those tools are not currenly available in Galaxy, so for this reason we will not make use of them. You can find more information in the [IsoformSwitchAnalyzeR viggette](https://bioconductor.org/packages/release/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html#advice-for-running-external-sequence-analysis-tools-and-downloading-results).
+> Note that **IsoformSwitchAnalyzeR** allows to integrate additional sources, such as prediction of signal peptides (SignalP) and intrinsically disordered regions (IUPred2AIUPred2A or NetSurfP-2). However, those tools are not currenly available in Galaxy, so for this reason we will not make use of them. You can find more information in the [IsoformSwitchAnalyzeR vignette](https://bioconductor.org/packages/release/bioc/vignettes/IsoformSwitchAnalyzeR/inst/doc/IsoformSwitchAnalyzeR.html#advice-for-running-external-sequence-analysis-tools-and-downloading-results).
 >
 {: .comment}
 
@@ -946,16 +959,16 @@ First, we will generate two intermediate files that we will use as input for CPA
 
 > <hands-on-title>Extract lncRNA and protein sequences</hands-on-title>
 >
-> 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+> 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
 >    - *"Regular Expression2"*: `lncRNA`
-> 2. Rename the output as `gencode.v43.annotation.chrm5.lncRNA.gtf`
-> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} converter with the following parameters:
+> 2. Rename the output as `GRCh38.p13.chrom5.lncRNA.gtf`
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
 >    - *"Regular Expression2"*: `protein_coding`
-> 4. Rename the output as `gencode.v43.annotation.chrm5.pc.gtf`
+> 4. Rename the output as `GRCh38.p13.chrom5.pc.gtf`
 > 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `gencode.v43.annotation.chrm5.lncRNA.gtf` and `gencode.v43.annotation.chrm5.pc.gtf`
+>    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `GRCh38.p13.chrom5.lncRNA.gtf` and `GRCh38.p13.chrom5.pc.gtf`
 >    - *"Reference Genome"*: `From your history`
 >       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
@@ -982,32 +995,36 @@ CPAT generates four files:
 - **ORF best probabilities (TSV)**: The information of the best ORF. This file is a subset of the previous one.
 - **ORF sequences (FASTA)**: The top ORF sequences (at least 75 nucleotides long) in FASTA format.
 
-For the downstream analysis, we will use only the `ORF best probabilities`, but it will require some minor modifications in order to be used as input to **IsoformSwitchAnalyzeR**.
+For the downstream analysis, we will use only the `ORF best probabilities`, but it will require some minor modifications in order to be used as input to **IsoformSwitchAnalyzeR**. Indeed IsoformSwitchAnalyzeR expects 8 columns: Data ID (column 2), Sequence Name (column 1), RNA size (column 3), ORF size (column 8), Ficket Score (column 9), Hexamer Score (column 10), Coding Probability (column 11), Coding Label (not present, we will put '-')
 
 > <hands-on-title>Required format modifications on CPAT output</hands-on-title>
 >
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
+>   - "*Cut columns*": `c2,c1,c3,c8-c11`
+>   - {% icon param-file %} *"From"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
+>
+> 2. {% tool [Add column](addValue) %} to an existing dataset with the following parameters:
+>   - "*Add this value*": `-`
+>   - {% icon param-file %} *"to Dataset"*: output of **Cut** {% icon tool %}
+>
+> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
->    - {% icon param-file %} *"From"*: `ORF best probabilities (TSV)` (output of **CPAT** {% icon tool %})
+>    - {% icon param-file %} *"From"*: output of **Add column** {% icon tool %}
 >
-> 2. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: output of **Remove beginning**
->    - *"AWK Program"*: `{print i++"\t"$1"\t"$3"\t"$8"\t"$9"\t"$10"\t"$11"\t""-"}`
->
-> 3. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 4. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"
 >           - In *"1: Dataset"*:
->               - {% icon param-file %} *"Select"*: output of **Text reformatting**
+>               - {% icon param-file %} *"Select"*: output of **Remove beginning**
 >
-> 4. Rename the output as `CPAT_file.tabular`
+> 4. Rename the output as `CPAT_file.tabular` and change the datatype to `tabular`.
 >
 {: .hands_on}
 
 ## Isoform switching analysis
 
-Once the expression data has been integrated and the required auxiliar information has been generated, we can start with the final stage of the analysis. **IsoformSwitchAnalyzeR** will extract the isoforms with significant changes in their isoform usage and the isoform, that compensate for the changes. Then, those isoforms are classified according to their contribution to gene expression (determinated by the dIF values). Finally, the isoforms with increased contribution (dIF values larger than the dIFcutoff) are compared in a pairwise manner to the isoforms with negative contribution.
+Once the expression data has been integrated and the required auxiliar information has been generated, we can start with the final stage of the analysis. **IsoformSwitchAnalyzeR** will extract the isoforms with significant changes in their isoform usage and the isoform(s) that compensate for the changes. Then, those isoforms are classified according to their contribution to gene expression (determinated by the dIF values). Finally, the isoforms with increased contribution (dIF values larger than the dIFcutoff) are compared in a pairwise manner to the isoforms with negative contribution.
 
 IsoformSwitchAnalyzeR allows two analysis modes:
 
@@ -1030,7 +1047,7 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >        - *"Include prediction of coding potential information"*: `CPAT`
 >            - {% icon param-file %} *"CPAT result file"*: `CPAT_file.tabular`
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: output of **PfamScan** {% icon tool %}
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `Pfam_domains.tab` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
@@ -1040,10 +1057,10 @@ Let's have a look at the generated plot (fig. 17).
 
 ![Figure 17. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
-We can appreciate that there exists stringking differences between isoforms:
+We can appreciate that there exists striking differences between isoforms:
 
 - The isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer. This transcript shows statistically significant differential usage.
-- The isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoanid **Repulsive guidance molecule B** is induced.
+- The isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoacid **Repulsive guidance molecule B** is induced.
 - A new isoform has been identified: `MSTRG.905.6` (this is a random ID assigned by **StringTie**).
 
 We will try to confirm this {IS} by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and the annotation generated by **StringTie**, and will use a software called **pyGenomeTracks**
@@ -1107,9 +1124,9 @@ A genome-wide analysis is both useful for getting an overview of the extent of {
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Full analysis`
 >        - *"Include prediction of coding potential information"*: `CPAT`
->            - {% icon param-file %} *"CPAT result file"*: `Concatenate datasets on data ...` (output of **Concatenate datasets** {% icon tool %})
+>            - {% icon param-file %} *"CPAT result file"*: `CPAT_file.tabular`
 >        - *"Include Pfam information"*: `Enabled`
->            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `Pfam_domains.tab` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >     
