@@ -1,42 +1,61 @@
 ---
 layout: tutorial_hands_on
-
-title: "Binning of metagenomic sequencing data"
-zenodo_link: "https://zenodo.org/record/7818827"
+title: Binning of metagenomic sequencing data
+zenodo_link: https://zenodo.org/record/7818827
 extra:
-  zenodo_link_results: "https://zenodo.org/record/7845138" 
+  zenodo_link_results: https://zenodo.org/record/7845138
 level: Introductory
 questions:
-  - "What is metagenomic binning refers to?"
-  - "Which tools should be used for metagenomic binning?"
-  - "How to assess the quality of metagenomic data binning?"
+- What is metagenomic binning refers to?
+- Which tools should be used for metagenomic binning?
+- How to assess the quality of metagenomic data binning?
 objectives:
-  - "Describe what metagenomics binning is"
-  - "Describe common problems in metagenomics binning"
-  - "What software tools are available for metagenomics binning"
-  - "Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT 2 software"
-  - "Evaluation of MAG quality and completeness using CheckM software"
-time_estimation: "2H"
+- Describe what metagenomics binning is
+- Describe common problems in metagenomics binning
+- What software tools are available for metagenomics binning
+- Binning of contigs into metagenome-assembled genomes (MAGs) using MetaBAT 2 software
+- Evaluation of MAG quality and completeness using CheckM software
+time_estimation: 2H
 key_points:
-  - "Metagenomics binning is a computational approach to grouping together DNA sequences from a mixed microbial sample into metagenome-assembled genomes (MAGs)"
-  - "The metagenomics binning workflow involves several steps, including preprocessing of raw sequencing data, assembly of sequencing reads into contigs, binning of contigs into MAGs, quality assessment of MAGs, and annotation of functional genes and metabolic pathways in MAGs"
-  - "The quality and completeness of MAGs can be evaluated using standard metrics, such as completeness, contamination, and genome size"
-  - "Metagenomics binning can be used to gain insights into the composition, diversity, and functional potential of microbial communities, and can be applied to a range of research areas, such as human health, environmental microbiology, and biotechnology"
+- Metagenomics binning is a computational approach to grouping together DNA sequences
+  from a mixed microbial sample into metagenome-assembled genomes (MAGs)
+- The metagenomics binning workflow involves several steps, including preprocessing
+  of raw sequencing data, assembly of sequencing reads into contigs, binning of contigs
+  into MAGs, quality assessment of MAGs, and annotation of functional genes and metabolic
+  pathways in MAGs
+- The quality and completeness of MAGs can be evaluated using standard metrics, such
+  as completeness, contamination, and genome size
+- Metagenomics binning can be used to gain insights into the composition, diversity,
+  and functional potential of microbial communities, and can be applied to a range
+  of research areas, such as human health, environmental microbiology, and biotechnology
 contributions:
   authorship:
-    - npechl
-    - fpsom
+  - npechl
+  - fpsom
 subtopic: metagenomics
 tags:
-  - binning
-  - metagenomics
-  - microgalaxy
+- binning
+- metagenomics
+- microgalaxy
 redirect_from:
-- /topics/metagenomics/tutorials/metagenomics-binning/tutorial
+- "/topics/metagenomics/tutorials/metagenomics-binning/tutorial"
 edam_ontology:
-- topic_3174 # Metagenomics
-- topic_0196 # Sequence assembly
+- topic_3174
+- topic_0196
+recordings:
+- youtube_id: TODO
+  length: 25M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-08-30'
+  speakers:
+  - Nikos Pechlivanis (npechl)
+  captioners:
+  - Nikos Pechlivanis (npechl)
+  bot-timestamp: 1725013820
+
+
 ---
+
 
 Metagenomics is the study of genetic material recovered directly from environmental samples, such as soil, water, or gut contents, without the need for isolation or cultivation of individual organisms. Metagenomics binning is a process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
 
