@@ -11,7 +11,7 @@ questions:
 - Are there statistically significant differences in gene splicing patterns between samples?
 - Are there significant isoform switching events between the experimental conditions?
 objectives:
-- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between cancer and healthy tissues
+- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions
 - Evaluate the differential alternative splicing in specific genes
 time_estimation: 3H
 key_points:
@@ -41,7 +41,7 @@ Alterations in gene splicing has been demonstrated to have significant impact on
 
 Disregulation in {AS} can lead to the activation of {OCGs} or the inactivation of {TSGs}, which can promote or suppress tumorigenesis, respectively ({% cite Bashyam2019 %}). However, the strict classification of cancer genes as either {OCGs} or {TSGs} may be an oversimplification, as some genes can exhibit a dual role in cancer development, often impacting the same facet of tumorigenesis ({% cite Bashyam2019 %}). One of the mechanism that has been proposed to partially explain this apparently contradictory effect is the differential usage of isoforms, often referred to as {IS}. This regulatory phenomenon has been demonstrated to have a substantial biological impact in a diverse range of biological contexts, caused by functional diversity potential of the different isoforms ({% cite VittingSeerup2017 %}). 
 
-In this tutorial, we aim to perform a genome-wide analysis of {IS} in cancer, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on genome-scale.
+In this tutorial, we aim to perform a genome-wide analysis of {IS} driven by an oncogene fusion gene EWS-FLI1, with the objective of identifying genes of potential clinical relevance and gene regulatory networks on genome-scale.
 
 > <agenda-title></agenda-title>
 >
@@ -55,7 +55,9 @@ In this tutorial, we aim to perform a genome-wide analysis of {IS} in cancer, wi
 
 # Background on data
 
-The datasets consist of twelve FASTQ files, generated through the Illumina NovaSeq 6000 sequencing system. Half of the samples were obtained from PANC1 tumour lines, and the rest from control cells. The protocol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. For this training we will use a reduced set of reads, in order to speed up the analysis. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA542693](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA542693).
+Ewing sarcoma is a bone and soft tissue cancer mainly affecting children, adolescents and young adults ({% cite Ewing1921 %}). In most of cases, this sarcoma is induced by a gene fusion between EWRS1 (a RNA-binding protein) and FLI1 (a transcription factor of the ETS family) ({% cite Delattre1992 %}). In order to study the role of this fusion oncogene, Carrilo and colleagues has developed a cell line, derived from an Ewing sarcoma tumor carrying EWS-FLI1 fusion, where the fusion oncoprotein can be knocked-down using doxycycline ({% cite Carrillo2007 %}). In this tutorial, we will use datasets produced by Saulnier and colleagues to study the role of EWS-FLI1 in alternative splicing ({% cite Saulnier2021 %}). They performed RNA sequencing of the inducible cell line after 7 days of doxycycline treatment where EWS-FLI1 is depleted and compared them to RNA sequencing of the same cell line without doxycycline treatment.
+
+The dataset consists of twelve FASTQ files, generated through the Illumina HiSeq 2500 sequencing machine. Three of the samples were obtained from A673/TR/shEF cancer cell line without treatment, and the rest from the same cell line where the EWS-FLI1 fusion oncoprotein is depleted (doxycycline treated). For this training we will use a reduced set of reads, in order to speed up the analysis. The original dataset is available in the NCBI SRA database, with the accession number PRJNA521683.
 
 ## Get data
 
@@ -114,11 +116,11 @@ Next we will retrieve the remaining datasets.
 >
 >      ```
 >      CPAT_header.tab  {{ page.zenodo_link }}/files/CPAT_header.tab
->      active_site.dat.gz	{{ page.zenodo_link }}/files/active_site.dat.gz
->      GRCh38.p13.chrom5.gtf	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.gtf
->      GRCh38.p13.chrom5.fasta.gz	{{ page.zenodo_link }}/files/GRCh38.p13.chrom5.fasta.gz
->      Pfam-A.hmm.dat.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.dat.gz
->      Pfam-A.hmm.gz	{{ page.zenodo_link }}/files/Pfam-A.hmm.gz
+>      gencode.hg19.chr10.gtf	{{ page.zenodo_link }}/files/gencode.hg19.chr10.gtf
+>      hg19.chr10.fasta	{{ page.zenodo_link }}/files/hg19.chr10.fasta
+>      active_site.dat.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/active_site.dat.gz
+>      Pfam-A.hmm.dat.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.hmm.dat.gz
+>      Pfam-A.hmm.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.hmm.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -131,29 +133,7 @@ Next we will retrieve the remaining datasets.
 
 > <details-title>Dataset subsampling</details-title>
 >
-> As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows:
->
-> > <hands-on-title>Dataset subsampling</hands-on-title>
-> >
-> > 1. {% tool [Convert FASTA to Tabular](CONVERTER_fasta_to_tabular) %} converter with the following parameters:
-> >    - {% icon param-files %} *"Fasta file"*: `GRCh38.p13.genome.fa.gz`
-> > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
-> >    - {% icon param-files %} *"Select lines from"*: Output of **Convert FASTA to Tabular**
-> >    - *"Regular Expression2"*: `chr5`
-> > 3. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} converter with the following parameters:
-> >    - {% icon param-files %} *"Tab-delimited file"*: Output of **Search in textfiles**
-> >    - *"Title column(s)"*: `Column: 1`
-> >    - *"Sequence column"*: `Column: 2`
-> > 4. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} converter with the following parameters:
-> >    - In *"Source for the reference genome"*: `Use a genome from history`
-> >         - {% icon param-files %} *"Select the reference genome"*: Output of **Tabular-to-FASTA**
-> >    - In *"Is this a single or paired library"*: `Paired-end Dataset Collection`
-> >         - *"Paired Collection"*: Select the collection of the original datasets
-> >    - In *"Output options"*: `Specify output options`
-> >         - *"Write aligned reads (in fastq format) to separate file(s)"*: `Yes`
-> {: .hands_on}
->
-> It will generate three collections: one with the aligned BAM files, one with the FASTQ files corresponding with the forward reads, and one with the FASTQ files corresponding to the reverse reads. Those FASTQ files are the ones that will be used in this training.
+> As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows, all reads mapping to chromosome 10 were kept and a random fraction of 0.003 were added.
 {: .details}
 
 # Quality assessment
@@ -192,7 +172,7 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >
 >   ![Figure 02. MultiQC initial QC report](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "MultiQC aggregated reports. Mean quality scores.")
 >
->   As we can appreciate in the figure the per base quality of all reads seems to be very good, with values over 30 in all cases. In addition, according the report no samples werefound with adapter contamination higher than 0.1%.
+>   As we can appreciate in the figure the per base quality of all reads seems to be very good, with values over 30 in all cases. In addition, according the report no samples werefound with adapter contamination higher than 1%.
 >
 {: .comment}
 
@@ -212,7 +192,25 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >    - In *"Output Options"*:
 >        - *"Output JSON report"*: `Yes`
 > 2. Rename the output `fastp on collection X: Paired-end output` as `Trimmed samples`
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+>    - In *"Results"*:
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `fastp`
+>                - {% icon param-collection %} *"Output of fastp"*: `fastp on collection XXX: JSON report` (output of **fastp** {% icon tool %})
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. What proportion of reads were written in output file?
+>    > 2. What is the average fragment size?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. All reads passed the filters (see %PF in the general statistics).
+>    >    >
+>    >    > 2. The average fragment size or insert size is about 145 for 5 samples and 135 for ASP14_2.
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 {: .hands_on}
 
 # RNA-seq mapping and evaluation
@@ -246,7 +244,7 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 > > <hands-on-title>Inference of intron size </hands-on-title>
 > >
 > > 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
-> >    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
+> >    - {% icon param-file %} *"GTF File to convert"*: `gencode.hg19.chr10.gtf`
 > >    - *"Advanced options"*: `Set advanced options`
 > >        - *"Ignore groups without exons"*: `Yes`
 > >
@@ -279,6 +277,19 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 > >
 > > 9. Rename the output as `Maximum intron size`
 > >
+> > > <question-title></question-title>
+> > >
+> > > 1. What is the minimum intron size you got, does it makes sense?
+> > > 2. What is the maximum intron size you got?
+> > >
+> > > > <solution-title></solution-title>
+> > > >
+> > > > 1. You may have found 1 as minimum intron size. Indeed, it seems that some annotated introns are 1bp long. This does not really make sense biologically. Piovesan and colleague have shown that no eukaryotic introns were found below 30bp ({ % cite Piovesan2015 %}).
+> > > >
+> > > > 2. You may have found 316825.
+> > > >
+> > > {: .solution}
+> > {: .question}
 > {: .hands_on}
 >
 {: .comment}
@@ -297,9 +308,9 @@ Now we can perform the mapping step.
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
+>        - {% icon param-file %} *"Select a reference genome"*: `hg19.chr10.fasta`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.hg19.chr10.gtf`
 >            - *"Length of the genomic sequence around annotated junctions*": `100`
 >            - *"Per gene/transcript output*": `Per gene read counts (GeneCounts)`
 >    - *"Would you like to set additional output filters?"*: `Yes`
@@ -330,7 +341,7 @@ The first **RNA STAR** run generates three collections: logs, alignments in BAM 
 > 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} tail-to-head (cat) with the following parameters:
 >   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
 >
-> The output must be a dataset not a collection
+>         The output must be a dataset not a collection
 >
 >         > <tip-title>Got a collection instead of a dataset?</tip-title>
 >         > You probably selected **Concatenate datasets** tail-to-head {% icon tool %} instead of the other tool with the same name except that it has a `(cat)` at the end of the name.
@@ -363,6 +374,16 @@ The first **RNA STAR** run generates three collections: logs, alignments in BAM 
 > 
 > 6. Rename the output as `Splicing database` and change datatype to `interval` (this was the initial datatype but the `cut` tool changed it to `tabular`.)
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. In average in how many samples the new splicing events were detected?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. The output of **Sort** {% icon tool %} has 4558 lines and the output of **Uniq** {% icon tool %} has 1608, so in average, it is present in 3 samples.
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 {: .hands_on}
 
 Finally, we will re-run **RNA STAR** in order to integrate the information about the new splicing events in the analysis.
@@ -372,9 +393,9 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >        - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: `Trimmed samples` (output of **fastp** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
+>        - {% icon param-file %} *"Select a reference genome"*: `hg19.chr10.fasta`
 >        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `GRCh38.p13.chrom5.gtf`
+>            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `gencode.hg19.chr10.gtf`
 >            - *"Length of the genomic sequence around annotated junctions*": `100`
 >            - *"Per gene/transcript output*": `Per gene read counts (GeneCounts)`
 >    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, I want to use multi-sample 2-pass mapping and I have obtained splice junctions database of all samples throught previous 1-pass runs of STAR`
@@ -393,7 +414,6 @@ Finally, we will re-run **RNA STAR** in order to integrate the information about
 >                - *"Minimum overhang for spliced alignments*": `8` (ENCODE option)
 >                - *"Minimum overhang for annotated spliced alignments*": `1` (ENCODE option)
 >    - *"Compute coverage"*: `Yes in bedgraph format`
->       - *"Generate a coverage for each strand (stranded coverage)"*: `No`
 >
 > 2. Rename the output `RNA STAR on collection X: mapped.bam` as `Mapped collection`
 >
@@ -421,7 +441,7 @@ Once all required outputs have been generated, we will integrate them by using *
 
 > <hands-on-title> Raw reads QC</hands-on-title>
 > 1. Most of RSeQC tools require a BED12 file with gene annotations. If you don't have a `BED12 annotation` dataset, just generate it with {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `GRCh38.p13.chrom5.gtf`
+>    - {% icon param-file %} *"GTF File to convert"*: `gencode.hg19.chr10.gtf`
 >    - *"Advanced options"*: `Set advanced options`
 >        - *"Ignore groups without exons"*: `Yes`
 >
@@ -572,7 +592,7 @@ Then, let's start with the transcriptome assemby.
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
->            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `GRCh38.p13.chrom5.gtf`
+>            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.hg19.chr10.gtf`
 >        - *"Use Reference transcripts only?"*: `No`
 >    - In *"Advanced options"*:
 >        - "*Minimum junction coverage*": `3`
@@ -581,7 +601,7 @@ Then, let's start with the transcriptome assemby.
 >
 > 3. {% tool [StringTie merge](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie_merge/2.2.3+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts coordinates` (output of **StringTie**)
->    - {% icon param-file %} *"Reference annotation to include in the merging"*: `GRCh38.p13.chrom5.gtf`
+>    - {% icon param-file %} *"Reference annotation to include in the merging"*: `gencode.hg19.chr10.gtf`
 >
 > 4. Rename the output as `Reference transcriptome annotation`
 >
@@ -641,7 +661,7 @@ Two commonly used tools for evaluating assembled transcriptomes are **rnaQUAST**
 >    - {% icon param-file %} *"GTF inputs for comparison"*: `Reference transcriptome annotation` (output of **StringTie merge** {% icon tool %})
 >    - *"Use reference annotation"*: `Yes`
 >       - *"Choose the source for the reference annotation*": `History`
->          - *"Reference annotation*": `GRCh38.p13.chrom5.gtf`
+>          - *"Reference annotation*": `gencode.hg19.chr10.gtf`
 {: .hands_on}
 
 The output of GFFCompare includes several files, which can be used to analyze the results in different ways. Some of the main output files are:
@@ -680,28 +700,7 @@ For a more in-depth analysis of the output, we could use the **TMAP** file and p
 >
 > 1. {% tool [Filter](Filter1) %} data on any column using simple expressions:
 >   - *"Filter"*: **TMAP** file
->   - *"With following condition"*: `c3 == "i"`
->
-> 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
->   - "*Cut columns*": `c4`
->   - {% icon param-file %} *"From"*: output of **Filter** {% icon tool %}
->
-> 3. {% tool [Sort](sort1) %} data in ascending or descending order with the following parameters:
->   - {% icon param-file %} *"Sort Dataset"*: output of **Cut** {% icon tool %}
->   - "*Output unique values*": `Yes`
->
-> 4. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} with the following parameters:
->    - *"Select lines from"*: `Reference transcriptome annotation `
->    - *"that"*: `Match`
->    - *"Regular Expression"*: `\"MSTRG.7\"`(content of the file generated by **Sort** {% icon tool %})
->
-> 5. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: output of **Search in textfiles** {% icon tool %}
->    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
->       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
->
-> 6. Rename the output as `Transcripts fully contained within a reference intron`
+>   - *"With following condition"*: `c3=='i'`
 >
 {: .hands_on}
 
@@ -720,16 +719,16 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 > 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.2.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Assembled transcripts coordinates` (the output of the first Stringtie)
 >    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `hg19.chr10.fasta`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
 >
 > 2. Rename the collection as `Assembled transcripts sequences`
 >
 > 3. {% tool [rnaQUAST](toolshed.g2.bx.psu.edu/repos/iuc/rnaquast/rna_quast/2.2.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Transcripts"*: `Assembled transcripts sequences`
->    - {% icon param-files %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
+>    - {% icon param-files %} *"Reference genome"*: `hg19.chr10.fasta`
 >    - *"Genome annotation"*: `Enabled`
->       - {% icon param-files %} *"GTF/GFF"*: `GRCh38.p13.chrom5.gtf`
+>       - {% icon param-files %} *"GTF/GFF"*: `gencode.hg19.chr10.gtf`
 >    - *"Disable infer genes"*: `Yes`
 >    - *"Disable infer transcripts"*: `Yes`
 >
@@ -820,7 +819,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 > 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Reference transcriptome annotation`
 >    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `hg19.chr10.fasta`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
 >
 > 2. Rename the output as `Reference transcriptome sequences`
@@ -841,7 +840,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >            - *"Average read length"*: `140`
 >            - *"Analysis mode"*:
 >              - {% icon param-file %} *"Annotation generated by StringTie merge"*: `Reference transcriptome annotation`
->        - {% icon param-file %} *"Genome annotation (GTF)"*: `GRCh38.p13.chrom5.gtf`
+>        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.hg19.chr10.gtf`
 >        - {% icon param-file %} *"Transcriptome"*: `Reference transcriptome sequences`
 >        - *"Remove non-conventional chromosomes"*: `Yes`
 >
@@ -880,9 +879,9 @@ This combination is used since a Q-value is only a measure of the statistical ce
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy5) %} with the following parameters:
 >    - *"Tool function mode"*: `Analysis part one: Extract isoform switches and their sequences`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `SwitchList (RData)` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
->   - In *"Sequence extraction parameters"*:
->       - "*Remove short aminoacid sequences*": `No`
->       - *"Remove ORFs containint STOP codons*": `No`
+>    - In *"Sequence extraction parameters"*:
+>        - "*Remove short aminoacid sequences*": `No`
+>        - *"Remove ORFs containint STOP codons*": `No`
 >
 >   > <comment-title>Reduce to switch genes option</comment-title>
 >   >
@@ -960,17 +959,17 @@ First, we will generate two intermediate files that we will use as input for CPA
 > <hands-on-title>Extract lncRNA and protein sequences</hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
->    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
+>    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
 >    - *"Regular Expression2"*: `lncRNA`
 > 2. Rename the output as `GRCh38.p13.chrom5.lncRNA.gtf`
 > 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
->    - {% icon param-files %} *"Select lines from"*: `GRCh38.p13.chrom5.gtf`
+>    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
 >    - *"Regular Expression2"*: `protein_coding`
 > 4. Rename the output as `GRCh38.p13.chrom5.pc.gtf`
 > 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `GRCh38.p13.chrom5.lncRNA.gtf` and `GRCh38.p13.chrom5.pc.gtf`
 >    - *"Reference Genome"*: `From your history`
->       - {% icon param-file %} *"Genome Reference Fasta"*: `GRCh38.p13.chrom5.fasta.gz`
+>       - {% icon param-file %} *"Genome Reference Fasta"*: `hg19.chr10.fasta`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
 > 4. Rename the output as `lncRNA.fasta` and `coding.fasta`
 {: .hands_on}
@@ -982,7 +981,7 @@ As result, we will have two new FASTA files, one of them corresponding to long n
 >
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
->    - {% icon param-file %} *"Reference genome"*: `GRCh38.p13.chrom5.fasta.gz`
+>    - {% icon param-file %} *"Reference genome"*: `hg19.chr10.fasta`
 >    - {% icon param-file %} *"Coding sequences file"*: `coding.fasta`
 >    - {% icon param-file %} *"Non coding sequeces file"*: `lncRNA.fasta`
 >
@@ -1011,7 +1010,7 @@ For the downstream analysis, we will use only the `ORF best probabilities`, but 
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"From"*: output of **Add column** {% icon tool %}
 >
-> 4. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+> 4. {% tool [Concatenate datasets](cat1) %} tail-to-head with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"
