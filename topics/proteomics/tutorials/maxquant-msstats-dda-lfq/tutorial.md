@@ -461,11 +461,11 @@ In addition we retrieve for each Uniprot ID the corresponding protein names from
 
 > <hands-on-title>MSstats visualizations</hands-on-title>
 >
-> 1. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2) %} with the following parameters:
+> 1. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with IDs"*: `metastasized join` (output of **Join** {% icon tool %})
 >    - *"ID column"*: `c1`
 >    - *"Do you want to map IDs or retrieve data from UniProt"*: `Retrieve: request entries by uniprot accession using batch retrieval`
-> 2. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2) %} with the following parameters:
+> 2. {% tool [UniProt ID mapping and retrieval](toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with IDs"*: `rdeb join` (output of **Join** {% icon tool %})
 >    - *"ID column"*: `c1`
 >    - *"Do you want to map IDs or retrieve data from UniProt"*: `Retrieve: request entries by uniprot accession using batch retrieval`
