@@ -43,7 +43,7 @@ edam_ontology:
 - topic_3174
 - topic_0196
 recordings:
-- youtube_id: TODO
+- youtube_id: m8ADGsRVqYI
   length: 25M
   galaxy_version: 24.1.2.dev0
   date: '2024-08-30'
