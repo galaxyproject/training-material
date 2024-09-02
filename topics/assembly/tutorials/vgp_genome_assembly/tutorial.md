@@ -142,11 +142,21 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 | HiFi + parental + BioNano | Properly phased with improved contiguity | G |
 | HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
-In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
+In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage whole genome resequencing data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
-<br>
-The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate. **This is useful for getting an idea of the genome that lies within your reads, and is also useful for necessary for parameterizing downstream workflows.** The generation of *k*-mer counts can be done from HiFi data only (Workflow 1), or include data from parental reads for trio-based phasing (Workflow 2), if one wants to generate *k*-mer spectra for the individual's parents, as well. The second stage is contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases contiguity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as haplotype resolution is attained using set operations done on parental *k*-mers. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7, with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional)) and Hi-C (Workflow 8, with [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms). A final stage of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
+
+The stages of genome assembly in the VGP-Galaxy pipeline are generally:
+
+1. ***K*-mer profiling**: the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate. This is useful for getting an idea of the genome that lies within your reads, and is also useful for necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1), or include data from parental reads for trio-based phasing (Workflow 2), if one wants to generate *k*-mer spectra for the individual's parents, as well.
+
+2. **Contig assembly**: In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required.
+
+3. (*Optional*) **Purging**: Purging duplicates (Workflow 6) using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases contiguity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as haplotype resolution is attained using set operations done on parental *k*-mers.
+
+4. **Scaffolding**: Scaffolding produces chromosome-level scaffolds using information provided by Bionano (Workflow 7, with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional)) and Hi-C (Workflow 8, with [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms).
+
+5. **Decontamination**: A final step of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
 > For diploids, we suggest at least 30✕ PacBio HiFi coverage & around 60✕ Hi-C coverage, and up to 60✕ HiFi coverage to accurately assemble highly repetitive regions.
@@ -176,8 +186,8 @@ In order to reduce computation time, we will assemble samples from the yeast _Sa
 
 The first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
-1. A set of PacBio {HiFi} reads in `fasta` format
-2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format
+1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space.
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format.
 
 ## Uploading `fasta` datasets from Zenodo
 
@@ -242,8 +252,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly your history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly,
-the workflow we will be using for the analysis of our data takes collection as input (it does not access individual datasets). So let's create a collection using steps outlined in the Tip {% icon tip %} "Creating a dataset collection":
+If everything goes smoothly your history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes a collection as input (it does not access individual datasets). So let's create a collection using steps outlined in the Tip {% icon tip %} "Creating a dataset collection":
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
@@ -303,7 +312,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 # Genome profile analysis
 
-Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
+Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
 > <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
 >
@@ -395,7 +404,7 @@ Genomescope will generate six outputs:
     - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). This transformation increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
 - **Model**: this file includes a detailed report about the model fitting.
-- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
+- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity. It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates.
 
 Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters shown below:
 
@@ -424,21 +433,21 @@ The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files.
 
 Hifiasm can be run in multiple modes depending on data availability
 
-### **Solo** mode
+#### **Solo** mode
 
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
 - _Input: PacBio HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
 ![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates <b>primary</b> and <b>alternate</b> contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
-### **Hi-C** phased mode
+#### **Hi-C** phased mode
 
 **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
 - _Input: PacBio HiFi & Illumina HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces <b>hap1</b> and <b>hap2</b> contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-### **Trio** mode
+#### **Trio** mode
 
 **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
 - _Input: PacBio HiFi reads from child, Illumina reads from both parents._
@@ -455,6 +464,12 @@ We use several tools for assessing various aspects of assembly quality:
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
 - **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the {CN} of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
+
+> <comment-title>How do I pick which assembly trajectory to use?</comment-title>
+> The ideal scenario would be a trio assembly, where you can use parental data as a ground truth for phasing the haplotypes in the child. Unfortunately, attaining parental samples is difficult and often impossible when studying wild-caught organisms. When parental data is absent, the VGP recommends assembling using {Hi-C} phasing, if possible. This requires the Hi-C data to be derived from the same individual as the HiFi data. If this is not possible, then you cannot use the Hi-C data to phase the contigs, but you can still use it for scaffolding the primary assembly. Refer to the following decision tree for a visual representation of this logic. 
+>
+> ![Decision tree for picking workflow trajectory when one does not have parental data.](../../images/vgp_assembly/WF3vsWF4_decisiontree.png "If the HiFi and Hi-C data *do not* come from the same individual, then you can use WF3. After that, if you need to purge the primary, then run WF6 and then scaffolding. If the primary does not need purging, you can continue straight to scaffolding the primary. If the HiFi and Hi-C data *do* come from the same individual, then you can use WF4 to obtain hap1 and hap2 assemblies. If either of the assemblies need to be purged, then you can use WF6B to purge an individual haplotype. Then you can scaffold the assemblies separately. Accordingly, if neither need to be purged, then you can proceed to just scaffolding them separately.")
+{: .comment}
 
 <div id="solo_hic_switch">
 <!-- For use as an anchor -->
