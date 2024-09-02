@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: "VGP assembly pipeline: Step by Step"
+title: "Vertebrate genome assembly using HiFi, Bionano and Hi-C data - Step by Step"
 zenodo_link: 'https://zenodo.org/record/5887339'
 level: Intermediate
 tags:
@@ -433,28 +433,28 @@ The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files.
 
 Hifiasm can be run in multiple modes depending on data availability
 
-#### **Solo** mode
+### **Solo** mode
 
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly.
 - _Input: PacBio HiFi reads_
 - _Output: scaffolded primary assembly, and alternate contigs_
 ![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates <b>primary</b> and <b>alternate</b> contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
-#### **Hi-C** phased mode
+### **Hi-C** phased mode
 
 **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual.
 - _Input: PacBio HiFi & Illumina HiC reads_
 - _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces <b>hap1</b> and <b>hap2</b> contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-#### **Trio** mode
+### **Trio** mode
 
 **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents.
 - _Input: PacBio HiFi reads from child, Illumina reads from both parents._
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces <b>maternal</b> and <b>paternal</b> contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality. If you are interested in running the workflows with automatic QC generation, please see our [corresponding workflow tutorial](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html).
+No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality. If you are interested in running the workflows with automatic QC generation, please see our [corresponding workflow tutorial]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}) .
 
 ## Assembly evaluation
 
@@ -1412,10 +1412,10 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
 > 2. Rename the output as `BAM forward`
->
->    > Now let's do the same for reverse Hi-C reads:
->
-> 3. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
+> 
+> Now let's do the same for reverse Hi-C reads:
+> 
+> 1. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Hap1 assembly bionano`
 >    - *"Single or Paired-end reads"*: `Single`
@@ -1424,13 +1424,15 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-> 4. Rename the output as `BAM reverse`
+> 2. Rename the output as `BAM reverse`
 >
-> 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
+> We will now merge the forward and reverse alignments into one Bam file.
+>
+> 3. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `BAM forward`
 >    - {% icon param-file %} *"Second set of reads"*: `BAM  reverse`
 >
-> 6. Rename it as `BAM Hi-C reads`
+> 4. Rename it as `BAM Hi-C reads`
 {: .hands_on}
 
 ## Generate initial Hi-C contact map
