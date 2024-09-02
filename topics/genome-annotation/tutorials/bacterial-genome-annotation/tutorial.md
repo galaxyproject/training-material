@@ -52,7 +52,7 @@ follow_up_training:
   tutorials:
   - history-to-workflow
 recordings:
-- youtube_id: TODO
+- youtube_id: VOwplmv0vNs
   length: 44M
   galaxy_version: " 24.0.4.dev0"
   date: '2024-09-02'
