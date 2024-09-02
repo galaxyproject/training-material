@@ -98,7 +98,7 @@ Welcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.
 >
 {: .agenda}
 
-If you have any questions at any stage on your journey do not hesitate to <a href="mailto:sonja.filiposka@finki.ukim.mk">contact the FAIR-by-Design methodology team</a>.
+If you have any questions at any stage on your journey do not hesitate to [contact the FAIR-by-Design methodology team](mailto:sonja.filiposka@finki.ukim.mk).
 
 May all your materials be FAIR!
 
