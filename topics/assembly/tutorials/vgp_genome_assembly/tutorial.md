@@ -418,7 +418,7 @@ Once we have finished the genome profiling stage, we can start the genome assemb
 >
 {: .details}
 
-The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the GFA contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
+The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the {GFA} contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
 
 ## `hifiasm` assembly modes
 
@@ -445,11 +445,11 @@ Hifiasm can be run in multiple modes depending on data availability
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces <b>maternal</b> and <b>paternal</b> contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality.
+No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality. If you are interested in running the workflows with automatic QC generation, please see our [corresponding workflow tutorial](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html).
 
 ## Assembly evaluation
 
-There are several tools for assessing various aspects of assembly quality:
+We use several tools for assessing various aspects of assembly quality:
 
 - **gfastats**: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
@@ -473,7 +473,7 @@ There are several tools for assessing various aspects of assembly quality:
 
 ## HiC-phased assembly with **hifiasm**
 
-If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
+If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the contigs.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
 > 1. Run {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
@@ -596,7 +596,7 @@ According to the report, both assemblies are quite similar; the hap1 assembly in
 >
 {: .question}
 
-Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+Next, we will use {BUSCO}, which will provide a qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
 >
@@ -620,7 +620,7 @@ Next, we will use {BUSCO}, which will provide quantitative assessment of the com
 >
 {: .hands_on}
 
-We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
+We have asked {BUSCO} to generate two particular outputs: the short summary and a summary image.
 ![BUSCO for hap1 & hap2.](../../images/vgp_assembly/busco_hap1hap2.svg "BUSCO results for hap1 and hap2. Each haplotype is showing the summary image output as well as the short summary output. The summary image gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary lists these as percentages as well. In our case, neither assembly seems to have duplicated BUSCO genes (there is a very low amount of dark blue in the summary images).")
 
 > <question-title></question-title>
@@ -650,7 +650,7 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 >
 {: .hands_on}
 
-By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn.fl* plot:
+By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn.ln* plot:
 
 ![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
@@ -829,7 +829,7 @@ Next, we will use {BUSCO}, which will provide quantitative assessment of the com
 
 We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
 
-![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_alt_solo.svg "BUSCO results for primary and alternate contigs. The summary image (left) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (right) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
+![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_alt_solo.svg "BUSCO results for primary and alternate contigs. The summary image (top) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (bottom) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
 
 The BUSCO results support our hypothesis that the primary assembly is so much larger than expected due to improper purging, resulting in false duplications.
 
@@ -875,7 +875,7 @@ To get an idea of how the *k*-mers have been distributed between our Primary and
 
 ![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it according to which assemblies contain those <i>k</i>-mers. This can tell you which <i>k</i>-mers are found in only one assembly or shared between them."){:width="65%"}
 
-For an idea of what a properly phased spectra-asm plot would look like, **please [go over](#solo_hic_switch) to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50✕), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25✕) and resembling each other in size.
+For an idea of what a properly phased spectra-asm plot would look like, **please [go over](#solo_hic_switch) to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot for a diploid individual should have a large green peak centered around the point of diploid coverage (here ~50✕), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25✕) and resembling each other in size.
 
 The spectra-asm plot we have for our primary & alternate assemblies here does not resemble one that is properly phased. There is a peak of green (shared) *k*-mers around diploid coverage, indicating that some homozygous regions have been properly split between the primary and alternate assemblies; however, there is still a large red peak of primary-assembly-only *k*-mers at that coverage value, too, which means that some homozygous regions are being represented twice in the primary assembly, instead of once in the primary and once in the alternate. Additionally, for the haploid peaks, the primary-only peak (in red) is much larger than the alternate-only peak (in blue), indicating that a lot of heterozygous regions might have both their alternate alleles represented in the primary assembly, which is false duplication.
 
