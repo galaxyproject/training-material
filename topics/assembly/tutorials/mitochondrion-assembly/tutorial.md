@@ -88,9 +88,9 @@ To assemble the mitogenome from our PacBio Data,  MitoHiFi needs a reference mit
 {: .hands_on}
 
 
-## Assemble the  mitochondrial genome with **MitoHiFi**
+## Assemble the mitochondrial genome with **MitoHiFi**
 
-> <hands-on-title> Assemble the mitochondrial genome </hands-on-title>
+> <hands-on-title>Assemble the mitochondrial genome</hands-on-title>
 >
 > 1. Create a collection with your PacBio HiFi Reads
 >
@@ -111,7 +111,7 @@ To assemble the mitogenome from our PacBio Data,  MitoHiFi needs a reference mit
 
 
 Outputs of MitoHiFi:
-- Final mitogenome (FASTA). Mitochondrial genome circularized and rotated to start at tRNA-Phe.
+- Final mitogenome (FASTA). The mitochondrial genome circularized and rotated to start at tRNA-Phe.
 - Final mitogenome (genbank). The final mitogenome annotated in GenBank format.
 - Final mitogenome annotation (png). The predicted genes in the final mitogenome.
 - Final mitogenome coverage (png). The sequencing coverage along the final mitogenome.
