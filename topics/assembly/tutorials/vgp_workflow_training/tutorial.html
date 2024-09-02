@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: VGP assembly pipeline - short version / VGP assembly pipeline - short version / Assembly</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data / Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data / Assembly</title>
         
             <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
 
@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@5fe39b6156174c5a8df581974ab4d5fff4897ccd",
+		release: "galaxy-training-network@ab9dfae97d741fd1ec7b897a05b3a29f156236d2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -66,9 +66,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
 <meta name="DC.type" content="text">
-<meta name="DC.title" content="VGP assembly pipeline - short version">
+<meta name="DC.title" content="Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-07-26 07:10:40 +0000">
+<meta name="DC.date" content="2024-09-02 21:32:28 +0000">
 <meta name="DC.creator" content="Delphine Lariviere">
 <meta name="DC.creator" content="Alex Ostrovsky">
 <meta name="DC.creator" content="Cristóbal Gallardo">
@@ -76,7 +76,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.creator" content="Linelle Abueg">
 <meta name="DC.creator" content="Anton Nekrutenko"><meta name="description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         <meta property="og:site_name" content="Galaxy Training Network">
-	<meta property="og:title" content="Assembly / VGP assembly pipeline - short version / Hands-on: VGP assembly pipeline - short version">
+	<meta property="og:title" content="Assembly / Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data / Hands-on: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
@@ -125,7 +125,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "type": "project"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "VGP assembly pipeline - short version",
+  "headline": "Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data",
   "interactivityType": "mixed",
   "isAccessibleForFree": true,
   "isFamilyFriendly": true,
@@ -212,7 +212,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-07-26 07:10:40 +0000",
+  "dateModified": "2024-09-02 21:32:28 +0000",
   "datePublished": "2022-04-06 05:32:19 +0000",
   "identifier": "https://gxy.io/GTN:T00040",
   "accessMode": [
@@ -239,9 +239,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "url": "https://training.galaxyproject.org/training-material/topics/assembly/"
   },
   "learningResourceType": "hands-on tutorial",
-  "name": "VGP assembly pipeline - short version",
+  "name": "Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data",
   "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html",
-  "version": 20,
+  "version": 21,
   "timeRequired": "PT1H",
   "teaches": "Learn the tools necessary to perform a de novo assembly of a vertebrate genome\n - Evaluate the quality of the assembly",
   "keywords": [
@@ -638,7 +638,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "name": "Associated Training Datasets"
     }
   ],
-  "abstract": "The Vertebrate Genome Project (VGP), a project of the Genome 10K (G10K) Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio high fidelity reads (HiFi), all-versus-all chromatin conformation capture (Hi-C) data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using <abbr title=\"high fidelity reads\">HiFi</abbr> Reads combined with <abbr title=\"all-versus-all chromatin conformation capture\">Hi-C</abbr> data (both generated from the same individual)."
+  "abstract": "The Vertebrate Genome Project (VGP), a project of the Genome 10K (G10K) Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio high fidelity reads (HiFi), all-versus-all chromatin conformation capture (Hi-C) data, and (optionally) Bionano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using <abbr title=\"high fidelity reads\">HiFi</abbr> Reads combined with <abbr title=\"all-versus-all chromatin conformation capture\">Hi-C</abbr> data (both generated from the same individual)."
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -803,7 +803,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 <article class="tutorial topic-assembly">
-    <h1 data-toc-skip>VGP assembly pipeline - short version</h1>
+    <h1 data-toc-skip>Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data</h1>
     
 
     <section aria-labelledby="overview-box" id="tutorial-metadata">
@@ -1091,7 +1091,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 6, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 2, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1111,7 +1111,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (1 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
 
     </blockquote>
     </section>
@@ -1126,7 +1126,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <p>The Vertebrate Genome Project (VGP), a project of the Genome 10K (G10K) Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2020</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio high fidelity reads (HiFi), all-versus-all chromatin conformation capture (Hi-C) data, and (optionally) BioNano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using <abbr title="high fidelity reads">HiFi</abbr> Reads combined with <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> data (both generated from the same individual).</p>
+                <p>The Vertebrate Genome Project (VGP), a project of the Genome 10K (G10K) Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2020</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio high fidelity reads (HiFi), all-versus-all chromatin conformation capture (Hi-C) data, and (optionally) Bionano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using <abbr title="high fidelity reads">HiFi</abbr> Reads combined with <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> data (both generated from the same individual).</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1146,8 +1146,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li><a href="#performing-the-assembly" id="markdown-toc-performing-the-assembly">Performing the assembly</a>    <ol>
       <li><a href="#genome-profile-analysis-wf1" id="markdown-toc-genome-profile-analysis-wf1">Genome profile analysis (WF1)</a></li>
       <li><a href="#assembly-contiging-with-hifiasm-wf4" id="markdown-toc-assembly-contiging-with-hifiasm-wf4">Assembly (contiging) with <code class="language-plaintext highlighter-rouge">hifiasm</code> (WF4)</a></li>
-      <li><a href="#purging-duplicates-with-purge_dups" id="markdown-toc-purging-duplicates-with-purge_dups">Purging duplicates with <code class="language-plaintext highlighter-rouge">purge_dups</code></a></li>
-      <li><a href="#hi-c-scaffolding" id="markdown-toc-hi-c-scaffolding">Hi-C scaffolding</a></li>
+      <li><a href="#hi-c-scaffolding-wf8" id="markdown-toc-hi-c-scaffolding-wf8">Hi-C scaffolding (WF8)</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -1192,12 +1191,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <td>B</td>
     </tr>
     <tr>
-      <td>HiFi + BioNano</td>
+      <td>HiFi + Bionano</td>
       <td>Better continuity</td>
       <td>C</td>
     </tr>
     <tr>
-      <td>HiFi + Hi-C + BioNano</td>
+      <td>HiFi + Hi-C + Bionano</td>
       <td>Even better continuity</td>
       <td>D</td>
     </tr>
@@ -1212,27 +1211,27 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <td>F</td>
     </tr>
     <tr>
-      <td>HiFi + parental + BioNano</td>
+      <td>HiFi + parental + Bionano</td>
       <td>Better haplotype resolution and improved continuity</td>
       <td>G</td>
     </tr>
     <tr>
-      <td>HiFi + parental data + Hi-C + BioNano</td>
+      <td>HiFi + parental data + Hi-C + Bionano</td>
       <td>Better haplotype resolution and ultimate continuity</td>
       <td>H</td>
     </tr>
   </tbody>
 </table>
 
-<p>If this table “HiFi” and “Hi-C” are derived from the individual whose genome is being assembled. “Parental data” is high coverage Illumina data derived from parents of the individual being assembled. Datasets containing parental data are also called “<em>Trios</em>”. Each combination of input datasets is supported by an <em>analysis trajectory</em>: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below. We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.</p>
+<p>In this table, HiFi and Hi-C data are derived from the individual whose genome is being assembled. “Parental data” refers to high coverage whole genome resequencing data from the parents of the individual being assembled. Assemblies utilizing parental data for phasing are also called “<em>Trios</em>”. Each combination of input datasets is supported by an <em>analysis trajectory</em>: a combination of workflows designed for generating assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.</p>
 
 <figure id="figure-1" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/VGP_workflow_modules.svg" type="image/svg+xml" alt="The nine workflows of Galaxy assembly pipeline. "><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="The nine workflows of Galaxy assembly pipeline. " />The nine workflows of Galaxy assembly pipeline.</object></div><a target="_blank" href="../../images/vgp_assembly/VGP_workflow_modules.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).</figcaption></figure>
 <p><br />
-The first stage of the pipeline is the generation of <em>k</em>-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of <em>k</em>-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2; trio is a combination of paternal sequencing data with that from an offspring that is being assembled). The second stage is the phased contig assembly. In addition to using only <abbr title="high fidelity reads">HiFi</abbr> reads (Workflow 3), the contig building (contiging) step can leverage <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using <a href="https://github.com/chhylp123/hifiasm"><code class="language-plaintext highlighter-rouge">hifiasm</code></a>. The contiging workflows also produce a number of critical quality control (QC) metrics such as <em>k</em>-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using <a href="https://github.com/dfguan/purge_dups"><code class="language-plaintext highlighter-rouge">purge_dups</code></a> identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data for which reliable haplotype resolution is performed using <em>k</em>-mer profiles obtained from parental reads. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with <a href="https://bionano.com/software-downloads/"><code class="language-plaintext highlighter-rouge">Bionano Solve</code></a> (optional) and Hi-C (Workflow 8) data and <a href="https://github.com/c-zhou/yahsscaffolding"><code class="language-plaintext highlighter-rouge">YaHS</code></a> algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (e.g., viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.</p>
+The first stage of the pipeline is the generation of a <em>k</em>-mer profile of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate necessary for parameterizing downstream workflows. The generation of <em>k</em>-mer counts can be done from HiFi data only (Workflow 1) or include data from parental reads for trio-based phasing (Workflow 2). The second stage is contig assembly. In addition to using only <abbr title="high fidelity reads">HiFi</abbr> reads (Workflow 3), the contig-building (contiging) step can leverage <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using <a href="https://github.com/chhylp123/hifiasm"><code class="language-plaintext highlighter-rouge">hifiasm</code></a>. The contiging workflows also produce a number of critical quality control (QC) metrics such as <em>k</em>-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using <a href="https://github.com/dfguan/purge_dups"><code class="language-plaintext highlighter-rouge">purge_dups</code></a> identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases continuity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as thses assemblies achieve reliable haplotype resolution using <em>k</em>-mer set operations based on parental reads. Generally, HiC-phased contigs also do not need to undergo purging, but if so, then there exists Workflow 6b to purge a single haplotype at a time. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7), with <a href="https://Bionano.com/software-downloads/"><code class="language-plaintext highlighter-rouge">Bionano Solve</code></a> (optional) and Hi-C (Workflow 8) data and <a href="https://github.com/c-zhou/yahsscaffolding"><code class="language-plaintext highlighter-rouge">YaHS</code></a> algorithms. A final stage of decontamination (Workflow 9) removes exogenous sequences (<em>e.g.</em>, viral and bacterial sequences) from the scaffolded assembly. A separate workflow (WF0) is used to assemble and annotate a mitogenome.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-a-note-on-data-quality"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note on data quality</div>
-  <p>We suggest at least 30✕ PacBio HiFi coverage and 30✕ Hi-C coverage per haplotype (parental genome); and up to 60✕ coverage to accurately assemble highly repetitive regions.</p>
+  <p>We suggest at least 30✕ PacBio HiFi coverage and 60✕ Hi-C coverage (both diploid coverage).</p>
 </blockquote>
 
 <h1 id="getting-the-data">Getting the data</h1>
@@ -1240,16 +1239,16 @@ The first stage of the pipeline is the generation of <em>k</em>-mer profiles of 
 <p>The following steps use PacBio <abbr title="high fidelity reads">HiFi</abbr> and Illumina <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> data from baker’s yeast (<a href="https://en.wikipedia.org/wiki/Saccharomyces_cerevisiae"><em>Saccharomyces cerevisiae</em></a>). The tutorial represents trajectory <strong>B</strong> from Fig. 1 above. For this tutorial, the first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:</p>
 
 <ol>
-  <li>A set of PacBio <abbr title="high fidelity reads">HiFi</abbr> reads in <code class="language-plaintext highlighter-rouge">fasta</code> format</li>
-  <li>A set of Illumina <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> reads in <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> format</li>
+  <li>A set of PacBio <abbr title="high fidelity reads">HiFi</abbr> reads in <code class="language-plaintext highlighter-rouge">fasta</code> format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space..</li>
+  <li>A set of Illumina <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> reads in <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> format.</li>
 </ol>
 
 <h2 id="uploading-fasta-datasets-from-zenodo">Uploading <code class="language-plaintext highlighter-rouge">fasta</code> datasets from Zenodo</h2>
 
-<p>The following two steps demonstrate how to upload three PacBio <abbr title="high fidelity reads">HiFi</abbr> datasets into you Galaxy history.</p>
+<p>The following two steps demonstrate how to upload three PacBio <abbr title="high fidelity reads">HiFi</abbr> datasets into your Galaxy history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-uploading-tt-fasta-tt-datasets-from-zenodo-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Uploading <tt>FASTA</tt> datasets from Zenodo</b></div>
+  <div class="box-title hands-on-title" id="hands-on-uploading-tt-fasta-tt-datasets-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Uploading <tt>FASTA</tt> datasets from Zenodo</div>
 
   <ol>
     <li>
@@ -1262,7 +1261,7 @@ The first stage of the pipeline is the generation of <em>k</em>-mer profiles of 
     <li>
       <p>Copy the following URLs into clipboard.</p>
 
-      <p>you can do this by clicking on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">copy</span> button in the right upper corner of the box below. It will appear if you mouse over the box.)</p>
+      <p>(You can do this by clicking on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">copy</span> button in the right upper corner of the box below. It will appear if you mouse over the box.)</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_01.fasta
 https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_02.fasta
@@ -1292,12 +1291,12 @@ https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fasta
 <p>Illumina <abbr title="all-versus-all chromatin conformation capture">Hi-C</abbr> data is uploaded in essentially the same way as shown in the following two steps.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-danger-make-sure-you-choose-correct-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: DANGER: Make sure you choose correct format!</div>
-  <p>When selecting datatype in “<strong>Type (set all)</strong>” drop-down, make sure you select <code class="language-plaintext highlighter-rouge">fastaqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> BUT NOT <code class="language-plaintext highlighter-rouge">fastqcssanger</code> or anything else!</p>
+  <div class="box-title warning-title" id="warning-make-sure-you-the-choose-correct-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning:  Make sure you the choose correct format!</div>
+  <p>When selecting datatype in “<strong>Type (set all)</strong>” drop-down, make sure you select <code class="language-plaintext highlighter-rouge">fastqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> BUT NOT <code class="language-plaintext highlighter-rouge">fastqcssanger</code> or anything else!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-uploading-tt-fastqsanger-gz-tt-datasets-from-zenodo-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</b></div>
+  <div class="box-title hands-on-title" id="hands-on-uploading-tt-fastqsanger-gz-tt-datasets-from-zenodo"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Uploading <tt>fastqsanger.gz</tt> datasets from Zenodo</div>
 
   <ol>
     <li>Copy the following URLs into clipboard.
@@ -1322,6 +1321,16 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-fastqsanger-datasets-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-fastqsanger-datasets-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Upload fastqsanger datasets via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Uploading <code class="language-plaintext highlighter-rouge">fastqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> datasets via URL.</p>   <ol>   <li>     <p>Click on <strong>Upload Data</strong> on the top of the left panel:</p>     <p><img src="/training-material/faqs/galaxy/images/upload_data_button.png" alt="UploadDataButton" /></p>   </li>   <li>     <p>Click on <strong>Paste/Fetch</strong>:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_button.png" alt="PasteFetchButton" /></p>   </li>   <li>     <p>Paste URL into text box that would appear:</p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_data_modal.png" alt="PasteFetchModal" /></p>   </li>   <li>     <p>Set <strong>Type (set all)</strong> to <code class="language-plaintext highlighter-rouge">fastqsanger</code> or, if your data is compressed as in URLs above (they have <code class="language-plaintext highlighter-rouge">.gz</code> extensions), to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>     <p><img src="/training-material/faqs/galaxy/images/paste_fetch_set_data_type.png" alt="ChangeTypeDropDown" />:</p>   </li> </ol>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-danger-make-sure-you-choose-corect-format"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Danger: Make sure you choose corect format!</div>   <p>When selecting datatype in “<strong>Type (set all)</strong>” dropdown, make sure you select <code class="language-plaintext highlighter-rouge">fastaqsanger</code> or <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> BUT NOT <code class="language-plaintext highlighter-rouge">fastqcssanger</code> or anything else!</p> </blockquote>   <p><img src="/training-material/faqs/galaxy/images/upload_fastqsanger_via_url.png" alt="UploadAnimatedPng" /></p> </blockquote>
       <p><!--END_SNIPPET--></p>
     </li>
+    <li>Rename the datasets as follow:
+      <ul>
+        <li>Rename <code class="language-plaintext highlighter-rouge">SRR7126301_1.fastq.gz</code> as <code class="language-plaintext highlighter-rouge">Hi-C forward reads</code></li>
+        <li>Rename <code class="language-plaintext highlighter-rouge">SRR7126301_2.fastq.gz</code> as <code class="language-plaintext highlighter-rouge">Hi-C reverse reads</code></li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
   </ol>
 
 </blockquote>
@@ -1333,7 +1342,7 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 
 <h2 id="organizing-the-data">Organizing the data</h2>
 
-<p>If everything goes smoothly you history will look like shown in Fig. 4 below. The three <abbr title="high fidelity reads">HiFi</abbr> fasta files are better represented as a collection: Galaxy’s way to represent multiple datasets as a single interface entity (collection). Also, importantly, the workflow we will be using for the analysis of our data takes collection as an input (it does not access individual datasets). So let’s create a collection using steps outlines in the Tip <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> “Creating a dataset collection” that you can find below Fig. 4.</p>
+<p>If everything goes smoothly, your history will look like shown in Fig. 4 below. The three <abbr title="high fidelity reads">HiFi</abbr> fasta files are better represented as a collection: Galaxy’s way to represent multiple datasets as a single interface entity (collection). Also, importantly, the workflow we will be using for the analysis of our data takes a collection as an input (it does not access individual datasets). So let’s create a collection using steps outlines in the Tip <i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> “Creating a dataset collection” that you can find below Fig. 4.</p>
 
 <figure id="figure-2" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/making_list.svg" type="image/svg+xml" alt="AfterUpload. ">AfterUpload.</object></div><a target="_blank" href="../../images/vgp_assembly/making_list.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> History after uploading HiFi and HiC data (left). Creation of a list (collection) combines all HiFi datasets into a single history item called 'HiFi data' (right). See below for instruction on how to make this collection.</figcaption></figure>
 
@@ -1362,53 +1371,58 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 
 <h2 id="genome-profile-analysis-wf1">Genome profile analysis (WF1)</h2>
 
-<p>Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the <em>k</em>-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a <em>k</em>-mer analysis.</p>
+<p>Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the <em>k</em>-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a <em>k</em>-mer analysis.</p>
 
 <h3 id="launching-the-workflow">Launching the workflow</h3>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main&amp;trs_version=v0.1.5">   Launch <strong>Genome profile analysis (WF1) (v0.1.5)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.5">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main%26trs_version=v0.1.5">   Launch <strong>Genome profile analysis (WF1) (v0.1.5)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.5">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main&amp;trs_version=v0.1.7">   Launch <strong>Genome profile analysis (WF1) (v0.1.7)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.7">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main%26trs_version=v0.1.7">   Launch <strong>Genome profile analysis (WF1) (v0.1.7)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main:v0.1.7">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-running-i-k-i-mer-profile-analysis-workflow-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Running <i>K</i>-mer profile analysis workflow</b></div>
-
-  <p><strong>Identify inputs</strong></p>
-
-  <p>The profiling workflow takes the following inputs:</p>
-
-  <ol>
-    <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
-    <li><em>K</em>-mer length</li>
-    <li>Ploidy</li>
-  </ol>
-
-  <p><strong>Launch <em>k</em>-mer profiling workflow</strong></p>
-
-  <ol>
-    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">K-mer profiling and QC (WF1)</code></li>
-    <li>In the <strong>Workflow: VGP genome profile analysis</strong> menu:
-    - <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">7: HiFi_collection</code>
-    - “<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code>
-    - “<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
-    <li>Click on the <kbd>Run workflow</kbd> buttom</li>
-  </ol>
-
-  <p>This should like this:</p>
-
-  <figure id="figure-3" style="max-width: 90%;"><img src="../../images/vgp_assembly/wf1_launch_ui.png" alt="Parameters of *k*-mer profiling workflow. " width="1408" height="744" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/wf1_launch_ui.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
-
-  <blockquote class="comment">
-    <div class="box-title comment-title" id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: K-mer length</div>
-    <p>In this tutorial, we are using a <em>k</em>-mer length of 31. This can vary, but the VGP pipeline tends to use a <em>k</em>-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about <em>k</em>-mer length trade-offs in the extended VGP pipeline tutorial.</p>
-  </blockquote>
+  <div class="box-title hands-on-title" id="hands-on-running-i-k-i-mer-profile-analysis-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Running <i>K</i>-mer profile analysis workflow</div>
 
   <ol>
     <li>
-      <p>Refill your coffee</p>
+      <p><strong>Identify inputs</strong></p>
 
-      <p>Assembly is not exactly an instantaneous type of analysis - this workflow will take approx 15 minutes to complete. The same is true for all analyses in tutorial.</p>
+      <p>The profiling workflow takes the following inputs:</p>
+
+      <ol>
+        <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
+        <li><em>K</em>-mer length</li>
+        <li>Ploidy</li>
+      </ol>
+    </li>
+    <li>
+      <p><strong>Launch <em>k</em>-mer profiling workflow</strong></p>
+
+      <ol>
+        <li>Click on the <strong>Workflow</strong> menu, located in the top bar</li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">kmer-profiling-hifi-VGP1</code></li>
+        <li>In the <strong>Workflow: kmer-profiling-hifi-VGP1</strong> menu:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">HiFi data</code> collection</li>
+            <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
+            <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
+          </ul>
+        </li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button</li>
+      </ol>
+
+      <p>This should look like this:</p>
+
+      <figure id="figure-3" style="max-width: 90%;"><img src="../../images/vgp_assembly/wf1_launch_ui.png" alt="Parameters of *k*-mer profiling workflow. " width="1408" height="744" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/wf1_launch_ui.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-k-mer-length"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: K-mer length</div>
+        <p>In this tutorial, we are using a <em>k</em>-mer length of 31. This can vary, but the VGP pipeline tends to use a <em>k</em>-mer length of 21, which tends to work well for most mammalian-size genomes. There is more discussion about <em>k</em>-mer length trade-offs in the extended VGP pipeline tutorial.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Refill your coffee</strong></p>
+
+      <p>Assembly is not exactly an instantaneous type of analysis - this workflow will take approximately 15 minutes to complete. The same is true for all analyses in tutorial.</p>
     </li>
   </ol>
 
@@ -1416,68 +1430,84 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 
 <h3 id="interpreting-the-results">Interpreting the results</h3>
 
-<p>Once the workflow has finished, we can evaluate the linear plot generated by <a href="https://github.com/schatzlab/Genomescope"><strong>Genomescope</strong></a>, which includes valuable information such as the observed <em>k</em>-mer profile, fitted models and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">15</code> in this <a href="https://usegalaxy.org/u/cartman/h/k-mer-profiling">history</a>.</p>
+<p>Once the workflow has finished, we can evaluate the transformed linear plot generated by <a href="https://github.com/schatzlab/Genomescope"><strong>Genomescope</strong></a>, which includes valuable information such as the observed <em>k</em>-mer profile, fitted models, and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">18</code> in this <a href="https://usegalaxy.org/u/delphinel/h/vertebrate-genome-assembly-training">history</a>.</p>
 
-<figure id="figure-4" style="max-width: 90%;"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Genomescope plot described further in caption. " width="2000" height="2000" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/genomescope_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> GenomeScope2 <i>k</i>-mer profile. The first peak located at about 25&times; corresponds to the heterozygous peak. The second peak at 50&times;, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean <i>k</i>-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and <i>k</i>-mer size (k).</figcaption></figure>
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Genomescope plot described further in caption. " width="2000" height="2000" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/genomescope_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> GenomeScope2 <i>k</i>-mer profile. The first peak located at about 25&times; corresponds to the heterozygous peak. The second peak at 50&times; corresponds to the homozygous peak. The plot also includes information about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean <i>k</i>-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and <i>k</i>-mer size (k).</figcaption></figure>
 
-<p>This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the <em>k</em>-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. Genomescope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size.</p>
+<p>This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the <em>k</em>-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. Genomescope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size. We are using the transformed linear plot because it shows the ploidy better by reducing low ccoverage peaks (like <em>k</em>-mers containing errors) and increasing higher coverage peaks (<span class="citation"><a href="#Ranallo_Benavidez_2020">Ranallo-Benavidez <i>et al.</i> 2020</a></span>).</p>
+
+<p>It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates.</p>
 
 <h2 id="assembly-contiging-with-hifiasm-wf4">Assembly (contiging) with <code class="language-plaintext highlighter-rouge">hifiasm</code> (WF4)</h2>
 
-<p>To generate contiguous sequences in an assembly (contigs) we will use <a href="https://github.com/chhylp123/hifiasm"><strong>hifiasm</strong></a> assembler. It is a part of the “Assembly with HiC (WF4)” workflow . This workflow uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: <a href="https://github.com/vgl-hub/gfastats"><strong>gfastats</strong></a>, <a href="https://busco.ezlab.org/"><strong>BUSCO</strong></a> and <a href="https://github.com/marbl/merqury"><strong>Merqury</strong></a>.</p>
+<p>To generate contiguous sequences in an assembly (contigs) we will use the <a href="https://github.com/chhylp123/hifiasm"><strong>hifiasm</strong></a> assembler. It is a part of the “Assembly with HiC (WF4)” workflow . This workflow uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: <a href="https://github.com/vgl-hub/gfastats"><strong>gfastats</strong></a>, <a href="https://busco.ezlab.org/"><strong>BUSCO</strong></a> and <a href="https://github.com/marbl/merqury"><strong>Merqury</strong></a>.</p>
 
 <h3 id="launching-the-workflow-1">Launching the workflow</h3>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main&amp;trs_version=v0.1.10">   Launch <strong>Assembly HiFi-HiC phasing (WF4) (v0.1.10)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.1.10">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main%26trs_version=v0.1.10">   Launch <strong>Assembly HiFi-HiC phasing (WF4) (v0.1.10)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.1.10">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main&amp;trs_version=v0.2.1">   Launch <strong>Assembly HiFi-HiC phasing (WF4) (v0.2.1)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.2.1">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main%26trs_version=v0.2.1">   Launch <strong>Assembly HiFi-HiC phasing (WF4) (v0.2.1)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main:v0.2.1">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/Assembly-Hifi-HiC-phasing-VGP4/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-launching-assembly-contiging-workflow-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Launching assembly (contiging) workflow</b></div>
-
-  <p><strong>Identify inputs</strong></p>
-
-  <p>The assembly workflow takes the following inputs:</p>
+  <div class="box-title hands-on-title" id="hands-on-launching-assembly-contiging-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launching assembly (contiging) workflow</div>
 
   <ol>
-    <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
-    <li>Forward Hi-C reads</li>
-    <li>Reverse Hi-C reads</li>
-    <li><code class="language-plaintext highlighter-rouge">Genomescope</code> Model Parameters generated by previous (<em>k</em>-mer profiling) workflow</li>
-    <li><code class="language-plaintext highlighter-rouge">Genomescope</code> Summary generated by previous (<em>k</em>-mer profiling) workflow</li>
-    <li>Meryl <em>k</em>-mer database generated by previous (<em>k</em>-mer profiling) workflow</li>
-    <li>Busco lineage
-<br /></li>
-  </ol>
+    <li>
+      <p><strong>Identify inputs</strong></p>
 
-  <p><strong>Launch the workflow</strong></p>
+      <p>The assembly workflow takes the following inputs:</p>
 
-  <ol>
-    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button corresponding to <code class="language-plaintext highlighter-rouge">VGP HiFi phased assembly with hifiasm and HiC data</code></li>
-    <li>In the <strong>Workflow: Assembly with HiC (WF4)</strong> menu fill the following parameters:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio Reads Collection</em>”: Collection with original HiFi data</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Meryl database</em>”: Meryl <em>k</em>-mer database: one of the outputs of the previous workflow  (contains tag “<code class="language-plaintext highlighter-rouge">MerylDatabase</code>”)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward reads</em>”: Forward Hi-C reads</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse reads</em>”: Reverse Hi-C reads</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Provide lineage for BUSCO (e.g., Vertebrata)</em>”: <code class="language-plaintext highlighter-rouge">Ascomycota</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>GenomeScope Summary</em>”: GenomeScope summary: one of the outputs of the previous workflow (contains tag “<code class="language-plaintext highlighter-rouge">GenomeScopeSummary</code>”)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>GenomeScope Model Parameters</em>”: GenomeScope model parameters: one of the outputs of the previous workflow (contains tag “<code class="language-plaintext highlighter-rouge">GenomeScopeParameters</code>”)</li>
-      </ul>
+      <ol>
+        <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
+        <li>Forward Hi-C reads</li>
+        <li>Reverse Hi-C reads</li>
+        <li><code class="language-plaintext highlighter-rouge">Genomescope</code> Model Parameters generated by previous (<em>k</em>-mer profiling) workflow</li>
+        <li><code class="language-plaintext highlighter-rouge">Genomescope</code> Summary generated by previous (<em>k</em>-mer profiling) workflow</li>
+        <li>Meryl <em>k</em>-mer database generated by previous (<em>k</em>-mer profiling) workflow</li>
+        <li>Busco Database</li>
+        <li>Busco lineage</li>
+      </ol>
     </li>
-    <li>Click on the <kbd>Run workflow</kbd> button</li>
+    <li>
+      <p><strong>Launch the workflow</strong></p>
+
+      <ol>
+        <li>Click on the <strong>Workflow</strong> menu, located in the top bar</li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button corresponding to <code class="language-plaintext highlighter-rouge">Assembly-Hifi-HiC-phasing-VGP4</code></li>
+        <li>In the <strong>Workflow: Assembly-Hifi-HiC-phasing-VGP4</strong> menu fill the following parameters:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio Reads Collection</em>”: <code class="language-plaintext highlighter-rouge">HiFi data</code> collection</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward reads</em>”: <code class="language-plaintext highlighter-rouge">Hi-C forward reads</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse reads</em>”: <code class="language-plaintext highlighter-rouge">Hi-C reverse reads</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>GenomeScope Summary</em>”: <code class="language-plaintext highlighter-rouge">GenomeScope on data X Summary</code> (contains tag “<code class="language-plaintext highlighter-rouge">GenomeScopeSummary</code>”)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Meryl database</em>”: <code class="language-plaintext highlighter-rouge">Meryl on data X: read-db.mertyldb</code>: the Meryl <em>k</em>-mer database (contains tag “<code class="language-plaintext highlighter-rouge">MerylDatabase</code>”)</li>
+            <li>“<em>Database for Busco Lineage</em>”: <code class="language-plaintext highlighter-rouge">Busco v5 Lineage Datasets</code> (or the latest version available in the instance)</li>
+            <li>“<em>Provide lineage for BUSCO (e.g., Vertebrata)</em>”: <code class="language-plaintext highlighter-rouge">Ascomycota</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>GenomeScope Model Parameters</em>”: <code class="language-plaintext highlighter-rouge">GenomeScope on data X Model parameters</code> (contains tag “<code class="language-plaintext highlighter-rouge">GenomeScopeParameters</code>”)</li>
+          </ul>
+        </li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button</li>
+      </ol>
+    </li>
   </ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-a-note-about-quot-homozygous-read-coverage-quot"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: A note about &quot;Homozygous Read Coverage&quot;</div>
+
+  <p>Hifiasm tries to estimate the homozygous read coverage, but sometimes it can mistake a different peak as the homozygous coverage peak. To get around this, the VGP workflows calculate the homozygous coverage from the haploid coverage estimate from the GenomeScope outputs generated in the <em>k</em>-mer profiling workflow. However, sometimes GenomeScope can also misidentify the haploid peak, leading to it feeding an incorrect homozygous read coverage value into hifiasm. <em>If this is the case, you can run the hifiasm workflows but specify the homozygous read coverage yourself. Otherwise, this parameter is fine to leave blank to let the workflows try to get it right on their own.</em></p>
+
 </blockquote>
 
 <h3 id="interpreting-the-results-1">Interpreting the results</h3>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-there-will-be-two-assemblies"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: There will be two assemblies!</div>
-  <p>Because we are assembling a diploid organism this workflow will produce two assemblies: hap1 and hap2!</p>
+  <p>Because we are running hifiasm in HiC-phasing mode, it will produce two assemblies: hap1 and hap2!</p>
 </blockquote>
 
-<p>Let’s have a look at the stats generated by <strong>gfastats</strong>. This output summarizes some main assembly statistics, such as contig number, N50, assembly length, etc. Below we provide a partial output of <code class="language-plaintext highlighter-rouge">gfastats</code> in which information about both assemblies is shown side-by-side:</p>
+<p>Let’s have a look at the stats generated by <strong>gfastats</strong>. This output summarizes some main assembly statistics, such as contig number, N50, assembly length, etc. The workflow provide a joined table to display the statistics for both haplotype assemblies side-by-side. Below we provide a partial output of this file called <code class="language-plaintext highlighter-rouge">Assembly statistics for Hap1 and Hap2</code> in your history:</p>
 
 <blockquote class="matrix">
   <table>
@@ -1492,57 +1522,57 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
       <tr>
         <td># contigs</td>
         <td style="text-align: right">16</td>
-        <td style="text-align: right">19</td>
+        <td style="text-align: right">17</td>
       </tr>
       <tr>
         <td>Total contig length</td>
-        <td style="text-align: right">12,050,076</td>
-        <td style="text-align: right">12,360,746</td>
+        <td style="text-align: right">11,304,507</td>
+        <td style="text-align: right">12,160,985</td>
       </tr>
       <tr>
         <td>Average contig length</td>
-        <td style="text-align: right">753,129.75</td>
-        <td style="text-align: right">650,565.58</td>
+        <td style="text-align: right">706,531.69</td>
+        <td style="text-align: right">715,352.06</td>
       </tr>
       <tr>
         <td>Contig N50</td>
-        <td style="text-align: right">923,452</td>
         <td style="text-align: right">922,430</td>
+        <td style="text-align: right">923,452</td>
       </tr>
       <tr>
         <td>Contig N50</td>
-        <td style="text-align: right">923,452</td>
         <td style="text-align: right">922,430</td>
+        <td style="text-align: right">923,452</td>
       </tr>
       <tr>
         <td>Contig auN</td>
-        <td style="text-align: right">909,022.62</td>
-        <td style="text-align: right">891,508.36</td>
+        <td style="text-align: right">895,018.82</td>
+        <td style="text-align: right">904,515.40</td>
       </tr>
       <tr>
         <td>Contig L50</td>
-        <td style="text-align: right">6</td>
+        <td style="text-align: right">5</td>
         <td style="text-align: right">6</td>
       </tr>
       <tr>
         <td>Contig L50</td>
-        <td style="text-align: right">6</td>
+        <td style="text-align: right">5</td>
         <td style="text-align: right">6</td>
       </tr>
       <tr>
         <td>Contig NG50</td>
+        <td style="text-align: right">813,311</td>
         <td style="text-align: right">923,452</td>
-        <td style="text-align: right">922,430</td>
       </tr>
       <tr>
         <td>Contig NG50</td>
+        <td style="text-align: right">813,311</td>
         <td style="text-align: right">923,452</td>
-        <td style="text-align: right">922,430</td>
       </tr>
       <tr>
         <td>Contig auNG</td>
-        <td style="text-align: right">932,462.97</td>
-        <td style="text-align: right">938,074.26</td>
+        <td style="text-align: right">861,278.90</td>
+        <td style="text-align: right">936,364.06</td>
       </tr>
       <tr>
         <td>Contig LG50</td>
@@ -1561,14 +1591,14 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
       </tr>
       <tr>
         <td>Smallest contig</td>
-        <td style="text-align: right">231,313</td>
-        <td style="text-align: right">26,588</td>
+        <td style="text-align: right">185,154</td>
+        <td style="text-align: right">85,850</td>
       </tr>
     </tbody>
   </table>
 </blockquote>
 
-<p>According to the report, both assemblies are quite similar; the primary assembly includes 16 <abbr title="contiguous sequences in an assembly">contigs</abbr>, whose cumulative length is around 12 Mbp. The alternate assembly includes 19 contigs, whose total length is 12.3Mbp. Both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.</p>
+<p>According to the report, both assemblies are quite similar; the hap1 assembly includes 16 <abbr title="contiguous sequences in an assembly">contigs</abbr>, whose cumulative length is around 11.3 Mbp. The hap2 assembly includes 17 contigs, whose total length is 12.1Mbp. Both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies, and this lowers the chance of false duplications that can inflate assembly size.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-are-you-working-with-pri-alt-assemblies"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Are you working with pri/alt assemblies?</div>
@@ -1579,27 +1609,27 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
   <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>What is the longest contig in the primary assembly? And in the alternate one?</li>
-    <li>What is the N50 of the primary assembly?</li>
+    <li>What is the longest contig in the hap1 assembly? And in the hap2 one?</li>
+    <li>What is the N50 of the hap2 assembly?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>The longest contig in the primary assembly is 1,532,843 bp, and 1,531,728 bp in the alternate assembly.</li>
-      <li>The N50 of the primary assembly is 923.452 bp.</li>
+      <li>The longest contig in the hap1 assembly is 1,532,843 bp, and 1,531,728 bp in the hap2 assembly.</li>
+      <li>The N50 of the hap2 assembly is 923,452 bp.</li>
     </ol>
 
   </blockquote>
 
 </blockquote>
 
-<p>Next, we are going to evaluate the outputs generated by <strong>BUSCO</strong>. This tool provides quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
+<p>Next, we are going to evaluate the outputs generated by <strong>BUSCO</strong>. This tool provides qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses (<span class="citation"><a href="#Simo2015">Simão <i>et al.</i> 2015</a></span>).</p>
 
 <p><br /></p>
 
-<figure id="figure-5" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/busco_after_contiging.svg" type="image/svg+xml" alt="BUSCO assessment. ">BUSCO assessment.</object></div><a target="_blank" href="../../images/vgp_assembly/busco_after_contiging.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A composite of BUSCO completeness summaries for hap1 and hap2</figcaption></figure>
+<figure id="figure-5" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/busco_after_contiging.svg" type="image/svg+xml" alt="BUSCO assessment. ">BUSCO assessment.</object></div><a target="_blank" href="../../images/vgp_assembly/busco_after_contiging.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> A composite of BUSCO completeness summaries for hap1 (left) and hap2 (right)</figcaption></figure>
 
 <p><br /></p>
 
@@ -1609,149 +1639,85 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
   <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
 
   <ol>
-    <li>How many complete BUSCO genes have been identified in the primary assembly?</li>
-    <li>How many BUSCOs genes are absent?</li>
+    <li>How many complete BUSCO genes have been identified in the hap1 assembly?</li>
+    <li>How many BUSCOs genes are absent in the hap1 assembly?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>According to the report, our assembly contains the complete sequence of 1,562 complete BUSCO genes.</li>
-      <li>92 BUSCO genes are missing.</li>
+      <li>According to the report, our assembly contains the 1,436 complete BUSCO genes – this includes ones that are single-copy and ones that are duplicated.</li>
+      <li>208 BUSCO genes are missing.</li>
     </ol>
 
   </blockquote>
 
 </blockquote>
 
-<p>Despite <strong>BUSCO</strong> being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in <a href="https://www.orthodb.org/">OrthoDB</a>. <code class="language-plaintext highlighter-rouge">Merqury</code> provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via <em>k</em>-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for <em>k</em>-mer counts.</p>
+<p>Despite <strong>BUSCO</strong> being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in <a href="https://www.orthodb.org/">OrthoDB</a>. <code class="language-plaintext highlighter-rouge">Merqury</code> provides a complementary approach for assessing assembly quality in a reference-free manner via <em>k</em>-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously from our sequencing reads for <em>k</em>-mer counts.</p>
 
-<p>By default, <code class="language-plaintext highlighter-rouge">Merqury</code> generates three collections as output: stats, plots and assembly consensus quality (QV) stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot. The spectra-cn plot looks at both of your assemblies (here, your haplotypes) taken <em>together</em> (fig. 6a).  We can see a small amount of false duplications here: at the 50 mark on the x-axis, there is a small amount of <em>k</em>-mers present at 3-copy across the two assemblies (the green bump).
-<br /></p>
+<p>By default, <code class="language-plaintext highlighter-rouge">Merqury</code> generates three collections as output: stats (completeness stats), plots and assembly consensus quality (QV) stats. Let’s first have a look at the copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot. The spectra-cn plot looks at both of your assemblies (here, your two haplotypes) taken <em>together</em> (fig. 6a).</p>
+
 <figure id="figure-6" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/yeast_c_merqury_cn.svg" width="100%" type="image/svg+xml" alt="Figure 6: Merqury spectra-cn plot for initial yeast contigs. "><img src="../../images/vgp_assembly/yeast_c_merqury_cn.png" alt="Figure 6: Merqury spectra-cn plot for initial yeast contigs. " />Figure 6: Merqury spectra-cn plot for initial yeast contigs.</object></div><a target="_blank" href="../../images/vgp_assembly/yeast_c_merqury_cn.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Merqury CN plot for yeast assemblies. The plot tracks the multiplicity of each <i>k</i>-mer found in the read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve. <b>a)</b>. <i>K</i>-mer distribution of both haplotypes. <b>b)</b>. <i>K</i>-mer distribution of an individual haplotype (hap2).</figcaption></figure>
-<p><br /></p>
 
-<p>Thus, we know there is some false duplication (the 3-copy green bump) present as 2-copy in one of our assemblies, but we don’t know which one. We can look at the individual copy number spectrum for each haplotype in order to figure out which one contains the 2-copy <em>k</em>-mers (<em>i.e.</em>, the false duplications). In the Merqury spectra-CN plot for hap2 we can see the small bump of 2-copy <em>k</em>-mers (blue) at around the 50 mark on the x-axis (fig. 6b).</p>
+<p>Our haplotypes look clean! In the spectra-cn plot for both haplotypes, the peaks are where we should expect them. There is a peak of <em>k</em>-mers present at 1-copy (so, only in either hap1 or hap2) with <em>k</em>-mer multiplicity of ~25, corresponding to heterozygous coverage. These are our heterozygous alleles being represented only once in our diplolid assemblies, which matches with their haploid coverage. We also have a peak of 2-copy <em>k</em>-mers present at diploid coverage, around ~50. This looks good so far, but we should also look at <em>k</em>-mer multiplicity for each individual haplotype separately, not just combined as they were in the previous plot. Figure 6b shows that most of the <em>k</em>-mers in our assembly are 1-copy – we have one copy of all the homozygous regions (the ones with 50x coverage) and of about half the heterozygous regions (the ones with 25x coverage). At the 25x coverage point, there is a “read-only” peak, which is expected, as these are the alternative alleles for those heterozygous loci, and those <em>k</em>-mers are likely in the other assembly, since they were not missing from the overall spectra-cn plot.</p>
 
-<p>Now that we know which haplotype contains the false duplications, we can run the purging workflow to try to get rid of these duplicates.</p>
+<h2 id="hi-c-scaffolding-wf8">Hi-C scaffolding (WF8)</h2>
 
-<h2 id="purging-duplicates-with-purge_dups">Purging duplicates with <code class="language-plaintext highlighter-rouge">purge_dups</code></h2>
-
-<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the <strong>Purge duplicate contigs (WF6)</strong>, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.</p>
-
-<h3 id="launching-the-workflow-2">Launching the workflow</h3>
-
-<!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main&amp;trs_version=v0.3.8">   Launch <strong>Purge duplicate contigs (WF6) (v0.3.8)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main:v0.3.8">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main%26trs_version=v0.3.8">   Launch <strong>Purge duplicate contigs (WF6) (v0.3.8)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main:v0.3.8">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/Purge-duplicate-contigs-VGP6/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
-<p><!--END_SNIPPET--></p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-launching-duplicate-purging-workflow-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Launching duplicate purging workflow</b></div>
-
-  <p><strong>Identify inputs</strong></p>
-
-  <p>The purging workflow takes the following inputs:</p>
-
-  <ol>
-    <li><abbr title="high fidelity reads">HiFi</abbr> reads as a collection</li>
-    <li>Primary assembly produced by <code class="language-plaintext highlighter-rouge">hifiasm</code> in the previous run of assembly workflow (WF4).</li>
-    <li>Alternate assembly produced by <code class="language-plaintext highlighter-rouge">hifiasam</code> in the previous run of assembly workflow (WF4).</li>
-    <li><code class="language-plaintext highlighter-rouge">Genomescope</code> Model Parameters generated by previous (<em>k</em>-mer profiling) workflow</li>
-    <li>Estimated genome size parsed from GenoeScope summary by the previous run of assembly workflow (WF4).</li>
-    <li>Meryl <em>k</em>-mer database generated by previous (<em>k</em>-mer profiling, WF1) workflow</li>
-    <li>Busco lineage</li>
-  </ol>
-
-  <p><strong>Launch Purge duplicate contigs workflow (WF6)</strong></p>
-
-  <ol>
-    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button corresponding to <code class="language-plaintext highlighter-rouge">Purge duplicate contigs (WF6)</code></li>
-    <li>In the <strong>Workflow: VGP purge assembly with purge_dups pipeline</strong> menu:
-      <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio Reads Collection - Trimmed</em>”: One of the outputs of the assembly workflow is a trimmed collection of HiFi reads. It has a tag <code class="language-plaintext highlighter-rouge">trimmed_hifi</code>.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Primary assembly</em>”: An output of the assembly workflow (WF4) containing contigs for Hap1 in FASTA format. This dataset has a tag <code class="language-plaintext highlighter-rouge">hifiasm_Assembly_Haplotype_1</code>.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Alternate assembly</em>”: An output of the assembly workflow (WF4) containing contigs for Hap2 in FASTA format. This dataset has a tag <code class="language-plaintext highlighter-rouge">hifiasm_Assembly_Haplotype_2</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Meryl database</em>”: Meryl <em>k</em>-mer database: one of the outputs of the previous workflow  (contains tag “<code class="language-plaintext highlighter-rouge">MerylDatabase</code>”)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>GenomeScope Model Parameters</em>”: GenomeScope model parameters: one of the outputs of the previous workflow (contains tag “<code class="language-plaintext highlighter-rouge">GenomeScopeParameters</code>”)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Estimated genome size</em>”: A dataset produced with the assembly workflow (WF4). It contains a tag <code class="language-plaintext highlighter-rouge">estimated_genome_size</code>.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Provide lineage for BUSCO (e.g., Vertebrata)</em>”: <code class="language-plaintext highlighter-rouge">Ascomycota</code></li>
-      </ul>
-    </li>
-    <li>Click in the <kbd>Run workflow</kbd> buttom</li>
-  </ol>
-</blockquote>
-
-<h3 id="interpreting-results">Interpreting results</h3>
-
-<p>The two most important outputs of the purging workflow are purged versions of Primary and Alternate assemblies. These have tags <kbd>PurgedPrimaryAssembly</kbd> and <kbd>PurgedAlternateAssembly</kbd> for Primary and Alternate assemblies, respectively. This step also provides QC metrics for evaluating the effect of purging (Figure below).</p>
-
-<p><br /></p>
-
-<figure id="figure-7" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/merqury_cn_after_purging.svg" width="100%" type="image/svg+xml" alt="Comparison of pre- and post-purging. ">Comparison of pre- and post-purging.</object></div><a target="_blank" href="../../images/vgp_assembly/merqury_cn_after_purging.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Comparison of pre- (<b>a)</b> and <b>c)</b>) and post-purging (<b>b)</b> and <b>d)</b>) Merqury CN spectra   . The two top plots (<b>a)</b> and <b>b)</b>) for our dataset (yeast) and the two bottom plots (<b>c)</b> and <b>d)</b>) for a Chub mackerel (<i>Scomber japonicus</i>) -- a much larger genome. In the case of yeast the difference is not profound because our training dataset has been downsized and groomed to be as small as possible. In the case of zebra finch the green bump (<i>k</i>-mers appearing in three copies) is smaller after purging (Although potential overpurging can be seen by the new read-only (grey) bump that was not there before). Given the scale of the Y-axis this difference is substantial.</figcaption></figure>
-
-<p><br /></p>
-
-<h2 id="hi-c-scaffolding">Hi-C scaffolding</h2>
-
-<p>In this final stage, we will run the <strong>Scaffolding HiC YAHS (WF8)</strong>, which exploits the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them. This information allows <a href="https://github.com/c-zhou/yahs"><strong>YAHS</strong></a> – the main tool in this workflow – to generate scaffolds that are often chromosome-sized.</p>
+<p>In this final stage, we will run the <strong>Scaffolding HiC YAHS (WF8)</strong> workflow, which uses the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them (<em>i.e.</em>, linear distance on a chromosome). This information allows <a href="https://github.com/c-zhou/yahs"><strong>YAHS</strong></a> – the main tool in this workflow – to generate scaffolds that are often chromosome-sized.</p>
 
 <h3 id="launching-hi-c-scaffolding-workflow">Launching Hi-C scaffolding workflow</h3>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-the-scaffolding-workflow-is-run-on-b-one-b-haplotype-at-a-time"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: The scaffolding workflow is run on <b>ONE</b> haplotype at a time.</div>
-  <p>Contiging (WF4) and purging (WF6) workflows work with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging – it has to be run independently for each haplotype assembly. In this example (below) we run contiging on hap1 (Primary) assembly only.</p>
+  <p>Contiging (VGP4) works with both (hap1/hap2, primary/alternate) assemblies simultaneously. This is not the case for contiging – it has to be run independently for each haplotype assembly. In this example (below) we run contiging on the hap1 assembly only. You can run the same analysis on the second haplotype by replacing hap1 with hap2.</p>
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow-3"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main&amp;trs_version=v0.2.4">   Launch <strong>Scaffolding HiC (WF8) (v0.2.4)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2.4">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main%26trs_version=v0.2.4">   Launch <strong>Scaffolding HiC (WF8) (v0.2.4)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2.4">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work-3" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-and-launching-a-dockstore-workflow-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing and Launching a Dockstore Workflow</div>   <!-- GTN:IGNORE:011 _blank is used here due to iframeing sites that (can) set x-frame-options. The contexts in which _blank is set are only visible when iframe'd -->   <div class="show-when-galaxy-proxy-active"> <a class="workflow" target="_top" href="/workflows/trs_import?trs_server=dockstore.org&amp;run_form=true&amp;trs_id=%23workflow/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main&amp;trs_version=v0.2.7">   Launch <strong>Scaffolding HiC (WF8) (v0.2.7)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a target="_blank" href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2.7">View on Dockstore</a>) </div>   <div class="hide-when-galaxy-proxy-active"> <a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=dockstore.org%26run_form=true%26trs_id=%2523workflow/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main%26trs_version=v0.2.7">   Launch <strong>Scaffolding HiC (WF8) (v0.2.7)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i> </a> (<a href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main:v0.2.7">View on Dockstore</a>) </div>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-if-this-does-not-work-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-this-does-not-work-2" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: If this does not work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://dockstore.org/">Dockstore</a> is a free and open source platform for sharing reusable and scalable analytical tools and workflows.</p>   <ol>   <li>Ensure that you are logged in to your Galaxy account.</li>   <li>Go to <a href="https://dockstore.org/workflows/github.com/iwc-workflows/Scaffolding-HiC-VGP8/main">DockStore</a></li>   <li>Click on “Galaxy” dropdown within the “Launch with” panel located in the upper right corner.</li>   <li>Select a galaxy instance you want to launch this workflow with.</li>   <li>You will be redirected to Galaxy and presented with a list of workflow versions.</li>   <li>Click the version you want (usually the latest labelled as “main”)</li>   <li>You are done!</li> </ol>   <p>The following short video walks you through this uncomplicated procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/K2wFrSLFpa0" title="Importing from Dockstore" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing from Dockstore</figcaption> </figure> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote>
 <p><!--END_SNIPPET--></p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-b-launching-hi-c-scaffolding-workflow-b"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: <b>Launching Hi-C scaffolding workflow</b></div>
-
-  <p><strong>Identify inputs</strong></p>
-
-  <p>The scaffolding workflow takes the following inputs:</p>
+  <div class="box-title hands-on-title" id="hands-on-launching-hi-c-scaffolding-workflow"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Launching Hi-C scaffolding workflow</div>
 
   <ol>
-    <li>An assembly graph</li>
-    <li>Forward Hi-C reads</li>
-    <li>Reverse Hi-C reads</li>
-    <li>Estimated genome size parsed from GenoeScope summary by the previous run of assembly workflow (WF4).</li>
-    <li>Restriction enzymes used in Hi-C library preparation procedure</li>
-    <li>Busco lineage</li>
-  </ol>
+    <li>
+      <p><strong>Identify inputs</strong></p>
 
-  <p><strong>Launch scaffolding workflow (WF8)</strong></p>
+      <p>The scaffolding workflow takes the following inputs:</p>
 
-  <ol>
-    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button corresponding to <code class="language-plaintext highlighter-rouge">Scaffolding HiC YAHS (WF8)</code></li>
-    <li>In the <strong>Scaffolding HiC YAHS (WF8)</strong> menu:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>input GFA</em>”: Output of purging workflow (WF6) with a tag <code class="language-plaintext highlighter-rouge">PurgedPrimaryAssembly</code> (or <code class="language-plaintext highlighter-rouge">PurgedPrimaryAssembly</code> of scaffolding the Alternate assembly).</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward reads</em>”: Forward Hi-C reads</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse reads</em>”: Reverse Hi-C reads</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Estimated genome size - Parameter File</em>”: An output of the contiging workflow (WF4) with a tag <code class="language-plaintext highlighter-rouge">estimated_genome_size</code>.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Provide lineage for BUSCO (e.g., Vertebrata)</em>”: <code class="language-plaintext highlighter-rouge">Ascomycota</code></li>
-      </ul>
+      <ol>
+        <li>An assembly graph</li>
+        <li>Forward Hi-C reads</li>
+        <li>Reverse Hi-C reads</li>
+        <li>Estimated genome size parsed from GenomeScope summary by the previous run of assembly workflow (VGP4).</li>
+        <li>Restriction enzymes used in Hi-C library preparation procedure</li>
+        <li>Busco Database</li>
+        <li>Busco lineage</li>
+      </ol>
     </li>
-    <li>Click in the <kbd>Run workflow</kbd> button</li>
+    <li>
+      <p><strong>Launch scaffolding workflow (WF8)</strong></p>
+
+      <ol>
+        <li>Click on the <strong>Workflow</strong> menu, located in the top bar</li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button corresponding to <code class="language-plaintext highlighter-rouge">Scaffolding-HiC-VGP8</code></li>
+        <li>In the <strong>Workflow: Scaffolding-HiC-VGP8</strong> menu:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>input GFA</em>”: <code class="language-plaintext highlighter-rouge">usable hap1 gfa</code> Output of the contiging workflow (VGP4) with a tag <code class="language-plaintext highlighter-rouge">hic_hap1_gfa</code> for hap1 assembly.</li>
+            <li>“<em>Database for Busco Lineage</em>”: <code class="language-plaintext highlighter-rouge">Busco v5 Lineage Datasets</code> (or the latest version available in the instance)</li>
+            <li>“<em>Provide lineage for BUSCO (e.g., Vertebrata)</em>”: <code class="language-plaintext highlighter-rouge">Ascomycota</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward reads</em>”: <code class="language-plaintext highlighter-rouge">Hi-C forward reads</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse reads</em>”: <code class="language-plaintext highlighter-rouge">Hi-C reverse reads</code></li>
+            <li>“<em>Restriction enzymes</em>”: <code class="language-plaintext highlighter-rouge">Dovetail Omni-C: enzyme-free prep</code> For this tutorial, we’ll use the Omni-C option as it is the equivalent of not specifying any restriction enzyme cutsites, but for your own data you would want to select the appropriate option.</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Estimated genome size - Parameter File</em>”: <code class="language-plaintext highlighter-rouge">Estimated genome size</code>: An output of the contiging workflow (VGP4) with a tag <code class="language-plaintext highlighter-rouge">estimated_genome_size</code>.</li>
+          </ul>
+        </li>
+        <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> button</li>
+      </ol>
+    </li>
   </ol>
-</blockquote>
-
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-bypassing-purging-workflow"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Bypassing purging workflow</div>
-  <p>In some situations (such as assemblies utilizing Trio data (Fig. 1) you do not need to perform purging and can go directly from contiging to scaffolding. In this case you will need to use an output of contiging workflow that has a tag <code class="language-plaintext highlighter-rouge">hic_hap1_gfa</code> for primary assembly or <code class="language-plaintext highlighter-rouge">hic_hap2_gfa</code> for alternate assembly:</p>
-
-  <p>In other words, the only parameter that you will need to set differently (relative to setting above) is this:</p>
-  <hr />
-
-  <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>input GFA</em>”: Output of contiging workflow (WF4) with a tag <code class="language-plaintext highlighter-rouge">hic_hap1_gfa</code> for primary assembly or <code class="language-plaintext highlighter-rouge">hic_hap2_gfa</code> for alternate assembly.</p>
-  <hr />
-
 </blockquote>
 
 <h3 id="interpreting-the-results-2">Interpreting the results</h3>
@@ -1763,13 +1729,9 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
   <li>After scaffolding: <code class="language-plaintext highlighter-rouge">pretext_s2</code></li>
 </ul>
 
-<p>Below is the comparison of the two maps obtained from our data a more profound “real live” example from assembly of zebra finch (<em>Taeniopygia guttata</em>) genome:</p>
+<p>Below is the comparison of the two maps obtained from the yeast tutorial data versus real example from a zebra finch (<em>Taeniopygia guttata</em>) genome assembly:</p>
 
-<p><br /></p>
-
-<figure id="figure-8" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/hi-c_pretext_final.svg" type="image/svg+xml" alt="Pretext final contact map. "><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Pretext final contact map. " />Pretext final contact map.</object></div><a target="_blank" href="../../images/vgp_assembly/hi-c_pretext_final.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Hi-C maps generated by Pretext before and after scaffolding with Hi-C data. The red circles indicate the differences between the contact maps generated before and after Hi-C hybrid scaffolding. The bottom two panels show results of scaffolding on zebra finch where scaffolding dramatically decreases the number of segments by merging multiple contigs into scaffolds.</figcaption></figure>
-
-<p><br /></p>
+<figure id="figure-7" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/hi-c_pretext_final.svg" type="image/svg+xml" alt="Pretext final contact map. "><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Pretext final contact map. " />Pretext final contact map.</object></div><a target="_blank" href="../../images/vgp_assembly/hi-c_pretext_final.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Hi-C maps generated by Pretext before and after scaffolding with Hi-C data. The red circles indicate the differences between the contact maps generated before and after Hi-C hybrid scaffolding. The bottom two panels show results of scaffolding on zebra finch where scaffolding dramatically decreases the number of segments by merging multiple contigs into scaffolds.</figcaption></figure>
 
 <p>The regions marked with red circles highlight the most notable difference between the two contact maps, where inversion has been fixed.</p>
 
@@ -1777,19 +1739,11 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 
 <p>To sum up, it is worthwhile to compare the final assembly with the <a href="https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/146/045/GCF_000146045.2_R64/GCF_000146045.2_R64_assembly_stats.txt"><em>S. cerevisiae</em> S288C reference genome</a>:</p>
 
-<p><br /></p>
-
-<figure id="figure-9" style="max-width: 90%;"><img src="../../images/vgp_assembly/quast_plot.png" alt="Quast plot. " width="1307" height="763" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/quast_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Cumulative continuity plot comparing assembly generated here (red line) with existing yeast reference (black dotted line). Our assembly is slightly smaller (11,287,131 bp versus 12,071,326. Our assembly is lacking the mitochondrial genome (~86 kb) beacuse the initial data does include mitochondrial reads. This is partially responsible for this discrepancy.</figcaption></figure>
-
-<p><br /></p>
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/vgp_assembly/quast_plot.png" alt="Quast plot. " width="1258" height="679" loading="lazy" /><a target="_blank" href="../../images/vgp_assembly/quast_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Cumulative continuity plot comparing assembly generated here (red line) with existing yeast reference (black dotted line). Our assembly is slightly smaller (11,304,507 bp versus 12,071,326. Our assembly is lacking the mitochondrial genome (~86 kb) because the initial data does not include mitochondrial reads. This is partially responsible for this discrepancy.</figcaption></figure>
 
 <p>With respect to the total sequence length, we can conclude that the size of our genome assembly is very similar to the reference genome. It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. (The above comparison is performed using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1" title="Quast tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Quast</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 5.2.0+galaxy1)</span> using Primary assembly generated with scaffolding workflow (WF8) and yeast reference.)</p>
 
-<p><br /></p>
-
-<figure id="figure-10" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/hi-c_pretext_conclusion.svg" type="image/svg+xml" alt="Comparison reference genome. "><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Comparison reference genome. " />Comparison reference genome.</object></div><a target="_blank" href="../../images/vgp_assembly/hi-c_pretext_conclusion.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Comparison between contact maps generated using the final Primary assembly from this tutorial (left) and the reference genome (right).</figcaption></figure>
-
-<p><br /></p>
+<figure id="figure-9" style="max-width: 90%;"><div style="overflow-x: auto"><object data="../../images/vgp_assembly/hi-c_pretext_conclusion.svg" type="image/svg+xml" alt="Comparison reference genome. "><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Comparison reference genome. " />Comparison reference genome.</object></div><a target="_blank" href="../../images/vgp_assembly/hi-c_pretext_conclusion.svg" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Comparison between contact maps generated using the final Primary assembly from this tutorial (left) and the reference genome (right).</figcaption></figure>
 
 <p>If we compare the contact map of our assembled genome with the reference assembly (Fig. above), we can see that the two are indistinguishable, suggesting that we have generated a chromosome level genome assembly.</p>
 
@@ -1844,7 +1798,7 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Simo2015">Simão, F. A., R. M. Waterhouse, P. Ioannidis, E. V. Kriventseva, and E. M. Zdobnov, 2015 <b>BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</b>. Bioinformatics 31: 3210–3212. <a href="https://doi.org/10.1093/bioinformatics/btv351">10.1093/bioinformatics/btv351</a></li>
-<li id="Guan2019">Guan, D., S. A. McCarthy, J. Wood, K. Howe, Y. Wang <i>et al.</i>, 2019 <b>Identifying and removing haplotypic duplication in primary genome assemblies</b>. <a href="https://doi.org/10.1101/729962">10.1101/729962</a></li>
+<li id="Ranallo_Benavidez_2020">Ranallo-Benavidez, T. R., K. S. Jaron, and M. C. Schatz, 2020 <b>GenomeScope 2.0 and Smudgeplot for reference-free profiling of polyploid genomes</b>. Nature Communications 11: <a href="https://doi.org/10.1038/s41467-020-14998-3">10.1038/s41467-020-14998-3</a></li>
 <li id="Rhie2021">Rhie, A., B. P. Walenz, S. Koren, and A. M. Phillippy, 2020 <b>Merqury: reference-free quality,  completeness,  and phasing assessment for genome assemblies</b>. Genome Biology 21: <a href="https://doi.org/10.1186/s13059-020-02134-9">10.1186/s13059-020-02134-9</a></li></ol>
                 
 
@@ -1909,7 +1863,7 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Delphine Lariviere, Alex Ostrovsky, Cristóbal Gallardo, Brandon Pickett, Linelle Abueg, Anton Nekrutenko,  <b>VGP assembly pipeline - short version (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html</a> Online; accessed TODAY
+                            Delphine Lariviere, Alex Ostrovsky, Cristóbal Gallardo, Brandon Pickett, Linelle Abueg, Anton Nekrutenko,  <b>Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_workflow_training/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
@@ -1936,7 +1890,7 @@ https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz
 
 <code id="citation-code">@misc{assembly-vgp_workflow_training,
 author = "Delphine Lariviere and Alex Ostrovsky and Cristóbal Gallardo and Brandon Pickett and Linelle Abueg and Anton Nekrutenko",
-	title = "VGP assembly pipeline - short version (Galaxy Training Materials)",
+	title = "Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data (Galaxy Training Materials)",
 	year = "",
 	month = "",
 	day = ""
@@ -2122,7 +2076,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5fe39b6156174c5a8df581974ab4d5fff4897ccd">5fe39b6</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ab9dfae97d741fd1ec7b897a05b3a29f156236d2">ab9dfae</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
