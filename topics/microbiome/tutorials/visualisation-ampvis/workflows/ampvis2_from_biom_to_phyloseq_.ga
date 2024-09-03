@@ -1,0 +1,138 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "ampvis2 from biom to phyloseq ",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "BIOM"
+                }
+            ],
+            "label": "BIOM",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 94.49999869127782
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "69495045-dfea-4bad-9f6c-1000186bcf49",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "BIOMfilename": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Create phyloseq object",
+                    "name": "BIOMfilename"
+                },
+                {
+                    "description": "runtime parameter for tool Create phyloseq object",
+                    "name": "refseqfilename"
+                },
+                {
+                    "description": "runtime parameter for tool Create phyloseq object",
+                    "name": "treefilename"
+                }
+            ],
+            "label": null,
+            "name": "Create phyloseq object",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "phyloseq"
+                }
+            ],
+            "position": {
+                "left": 265.96875,
+                "top": 81.49999869127782
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c0101c72b8af",
+                "name": "phyloseq_from_biom",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"BIOMfilename\": {\"__class__\": \"RuntimeValue\"}, \"parseFunction\": \"parse_taxonomy_default\", \"refseqfilename\": {\"__class__\": \"RuntimeValue\"}, \"treefilename\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.46.0+galaxy0",
+            "type": "tool",
+            "uuid": "41ee549a-f268-4bd4-b198-60b949008b8b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "otutable": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ampvis2 load",
+            "outputs": [
+                {
+                    "name": "ampvis",
+                    "type": "ampvis2"
+                },
+                {
+                    "name": "metadata_list_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "taxonomy_list_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 571.2968704025355,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3481feabc54e",
+                "name": "ampvis2_load",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"asv_otu_col_empty\": false, \"asv_sequences\": false, \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"guess_column_types\": true, \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"otutable\": {\"__class__\": \"ConnectedValue\"}, \"pruneSingletons\": false, \"taxonomy\": {\"__class__\": \"ConnectedValue\"}, \"tree\": {\"__class__\": \"ConnectedValue\"}, \"write_lists\": [\"tax\", \"metadata\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "bebcdf75-ebca-4508-a652-4a64abf0c89d",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "d1320204-6f33-48cf-8da7-10203a4ceefa",
+    "version": 3
+}
