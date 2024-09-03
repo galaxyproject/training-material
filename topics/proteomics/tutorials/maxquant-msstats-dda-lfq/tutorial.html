@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0ad1cd19da3f8b293f752cc3a1bc6ce3241cb047",
+		release: "galaxy-training-network@993b1d4c146e043b2c50c55d57e6e27011d668d2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="MaxQuant and MSstats for the analysis of label-free data">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-09-03 08:37:20 +0000">
 <meta name="DC.creator" content="Melanie Föll">
 <meta name="DC.creator" content="Matthias Fahrner"><meta name="description" content="Training material for proteomics workflows in Galaxy">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-09-03 08:37:20 +0000",
   "datePublished": "2021-02-17 12:39:38 +0000",
   "identifier": "https://gxy.io/GTN:T00219",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "MaxQuant and MSstats for the analysis of label-free data",
   "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/maxquant-msstats-dda-lfq/tutorial.html",
-  "version": 13,
+  "version": 14,
   "timeRequired": "PT2H",
   "teaches": "Learn how to use MaxQuant and MSstats for the analysis of label-free shotgun (DDA) data",
   "keywords": [
@@ -917,6 +917,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
 	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org (Main)
+		</a>
+	</li>
+    
+	<li>
 		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
 			UseGalaxy.org.au
 		</a>
@@ -942,7 +948,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 3, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -962,7 +968,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.0</a> (0 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
 
     </blockquote>
     </section>
@@ -980,7 +986,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 <p>Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. Classical statistical approaches and methods from other omics technologies are not ideal because they do not take into account the speciality of mass spectrometry data that include several thousands of proteins but often only a few dozens of samples (referred to as ‘curse of dimensionality’) and stochastic data properties that reflect sample preparation and spectral acquisition (Choi 2014).</p>
 
 <p>In this training we will cover the full analysis workflow from label-free, data dependent acquisition (DDA) raw data to statistical results. We’ll use two popular quantitative proteomics software: MaxQuant and MSstats. MaxQuant allows protein identification and quantification for many different kinds of proteomics data (Cox and Mann 2008).  In case you have no previous experience with MaxQuant, we recommend to go through the <a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">MaxQuant beginners tutorial</a> before. MSstats provides statistical functionalities to find differentially abundant peptides or proteins from data dependent acquisition (DDA), data independent acquisition (DIA) or single reaction monitoring (SRM) proteomic experiments.
-The training dataset consists of a skin cancer cohort of 19 patients, which is a subset of a <a href="https://doi.org/10.1016/j.matbio.2017.11.004">published study</a>. One fifth of all non melanoma skin cancers are cutaneous squamous cell carcinomas (cSCC) that mainly derive from exposure to ultraviolet light. Most cSCC have a good prognosis but the few metastasizing cSCC have dramatically increased mortality. Here, we compare these metastasizing cSCC to cSCC in patients with the genetic disease recessive dystrophic epidermolysis bullosa (RDEB). RDEB is a genetic skin blistering and extracellular matrix disease caused by collagen VII deficiency. To investigate molecular differences between these two aggressive cSCCs with different origin, we used global proteomic analysis of formalin-fixed paraffin-embedded human cSCC tissues.</p>
+The training dataset consists of a skin cancer cohort of 19 patients, which is a subset of a published study <span class="citation"><a href="#Fll2018">Föll <i>et al.</i> 2018</a></span>. One fifth of all non melanoma skin cancers are cutaneous squamous cell carcinomas (cSCC) that mainly derive from exposure to ultraviolet light. Most cSCC have a good prognosis but the few metastasizing cSCC have dramatically increased mortality. Here, we compare these metastasizing cSCC to cSCC in patients with the genetic disease recessive dystrophic epidermolysis bullosa (RDEB). RDEB is a genetic skin blistering and extracellular matrix disease caused by collagen VII deficiency. To investigate molecular differences between these two aggressive cSCCs with different origin, we used global proteomic analysis of formalin-fixed paraffin-embedded human cSCC tissues.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
@@ -1087,7 +1093,7 @@ ftp://ftp.pride.ebi.ac.uk/pride-archive/2017/11/PXD006914/Experiment115_RDEB_cSC
 
 <h1 id="maxquant-analysis">MaxQuant analysis</h1>
 
-<p>The run time of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the <a href="https://pubs.acs.org/doi/10.1021/acs.jproteome.5b00780">PTXQC functionality</a> that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.</p>
+<p>The run time of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> depends on the number and size of the input files and on the chosen parameters. The run of the training datasets will take a few hours, but the training can be directly continued with the MaxQuant result files from Zenodo. We start the MaxQuant run with the default parameters, with a few adjustments. Protein level quantification parameters do not really matter here, because MSstats will use feature quantifications and perform protein summarization based on them. A quality control report is generated with the PTXQC functionality <span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span> that is directly implemented in the MaxQuant Galaxy tool. To continue with statistical analysis in MSstats, the Protein Groups and the Evidence files are needed from MaxQuant.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-optional-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Optional: MaxQuant analysis</div>
@@ -1275,8 +1281,8 @@ https://zenodo.org/record/4896554/files/PTXQC_report.pdf
 
 <h2 id="more-details-on-msstats">More details on MSstats</h2>
 
-<p>MSstats  is designed for statistical modelling of mass spectrometry based proteomic data <a href="https://doi.org/10.1093/bioinformatics/btu305">Choi 2014</a>.
-Proteomic data analysis requires statistical approaches that reduce bias and inefficiencies and distinguish systematic variation from random artifacts <a href="https://doi.org/10.1371/journal.pcbi.1002277">Käll and Vitek 2011</a>.</p>
+<p>MSstats  is designed for statistical modelling of mass spectrometry based proteomic data <span class="citation"><a href="#Choi2014">Choi <i>et al.</i> 2014</a></span>.
+Proteomic data analysis requires statistical approaches that reduce bias and inefficiencies and distinguish systematic variation from random artifacts <span class="citation"><a href="#Kll2011">Käll and Vitek 2011</a></span>.</p>
 
 <p>MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments. A wrong setup of the annotation file is the most common source of errors in MSstats, thus we collected more information in the box below to allow you to adjust the annotation file when analyzing your own experiments.</p>
 
@@ -1598,14 +1604,14 @@ In order to make its IDs compatible with the ones from the comparison result at 
   <div class="box-title hands-on-title" id="hands-on-msstats-visualizations"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: MSstats visualizations</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with IDs”</em>: <code class="language-plaintext highlighter-rouge">metastasized join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“ID column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Do you want to map IDs or retrieve data from UniProt”</em>: <code class="language-plaintext highlighter-rouge">Retrieve: request entries by uniprot accession using batch retrieval</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.2" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.2)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/uniprot_rest_interface/uniprot/0.5" title="UniProt ID mapping and retrieval tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>UniProt ID mapping and retrieval</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.5)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file with IDs”</em>: <code class="language-plaintext highlighter-rouge">rdeb join</code> (output of <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“ID column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
@@ -1682,6 +1688,12 @@ In order to make its IDs compatible with the ones from the comparison result at 
                 
 
 
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Kll2011">Käll, L., and O. Vitek, 2011 <b>Computational Mass Spectrometry–Based Proteomics</b> (F. Lewitter, Ed.). PLoS Computational Biology 7: e1002277. <a href="https://doi.org/10.1371/journal.pcbi.1002277">10.1371/journal.pcbi.1002277</a></li>
+<li id="Choi2014">Choi, M., C.-Y. Chang, T. Clough, D. Broudy, T. Killeen <i>et al.</i>, 2014 <b>MSstats: an R package for statistical analysis of quantitative mass spectrometry-based proteomic experiments</b>. Bioinformatics 30: 2524–2526. <a href="https://doi.org/10.1093/bioinformatics/btu305">10.1093/bioinformatics/btu305</a> <a href="https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:">https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:</a></li>
+<li id="Bielow2015">Bielow, C., G. Mastrobuoni, and S. Kempa, 2015 <b>Proteomics Quality Control: Quality Control Software for MaxQuant Results</b>. Journal of Proteome Research 15: 777–787. <a href="https://doi.org/10.1021/acs.jproteome.5b00780">10.1021/acs.jproteome.5b00780</a></li>
+<li id="Fll2018">Föll, M. C., M. Fahrner, C. Gretzmeier, K. Thoma, M. L. Biniossek <i>et al.</i>, 2018 <b>Identification of tissue damage,  extracellular matrix remodeling and bacterial challenge as common mechanisms associated with high-risk cutaneous squamous cell carcinomas</b>. Matrix Biology 66: 1–21. <a href="https://doi.org/10.1016/j.matbio.2017.11.004">10.1016/j.matbio.2017.11.004</a></li></ol>
                 
 
                 
@@ -1799,6 +1811,11 @@ tools:
 - name: uniprot_rest_interface
   owner: bgruening
   revisions: '054483e27a35'
+  tool_panel_section_label: Convert Formats
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: uniprot_rest_interface
+  owner: bgruening
+  revisions: 468c71dac78a
   tool_panel_section_label: Convert Formats
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: fasta_to_tabular
@@ -1993,7 +2010,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0ad1cd19da3f8b293f752cc3a1bc6ce3241cb047">0ad1cd1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/993b1d4c146e043b2c50c55d57e6e27011d668d2">993b1d4</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
