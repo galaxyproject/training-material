@@ -1,0 +1,26 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Collection\nCollection of Pacbio Data"]
+  1[color=lightgreen,label="ℹ️ Input Parameter\nSpecies name latin name"]
+  2[color=lightgreen,label="ℹ️ Input Parameter\nEmail adress"]
+  3[label="MitoHiFi"]
+  2 -> 3 [label="output"]
+  1 -> 3 [label="output"]
+  4[label="MitoHiFi"]
+  0 -> 4 [label="output"]
+  3 -> 4 [label="fasta_reference"]
+  3 -> 4 [label="genbank_reference"]
+  k31807e4be616474292e0934e6c3c09ae[color=lightseagreen,label="Output\ncontigs_stats"]
+  4 -> k31807e4be616474292e0934e6c3c09ae
+  k8393c665a328469893e5198c6fea52dd[color=lightseagreen,label="Output\nmitogenome_coverage"]
+  4 -> k8393c665a328469893e5198c6fea52dd
+  k85061673df5e480d920aa11c72bf8f56[color=lightseagreen,label="Output\nmitogenome_annotation"]
+  4 -> k85061673df5e480d920aa11c72bf8f56
+  kfe4d1d3d9caa45f6944ec4b101105dd1[color=lightseagreen,label="Output\nmitogenome_genbank"]
+  4 -> kfe4d1d3d9caa45f6944ec4b101105dd1
+  5[label="Compress files"]
+  4 -> 5 [label="mitogenome_fasta"]
+  k6f918a081ca14d6ea4d87e65e13a65ed[color=lightseagreen,label="Output\noutput_file"]
+  5 -> k6f918a081ca14d6ea4d87e65e13a65ed
+}
