@@ -1,5 +1,7 @@
 ---
 layout: event-track
+redirect_from:
+- /events/tracks/gta2024-micorbiome
 
 title: Microbiome analysis
 description: This track explains the capability to analyze microbiome data using Galaxy, covering essential tasks such as amplicon analysis and its visualization. It progresses to more advanced topics, including assembly and binning - the requirements for reconstructing Metagenome-Assembled Genomes (MAGs) from microbiome samples, and finally extends to complex analyses like metatranscriptome studies and pathogen detection.
@@ -19,12 +21,17 @@ contributions:
         - RZ9082
 
 program:
-  - section: "Basics" 
+  - section: "Introduction" 
     description: |
-      Introduction to Microbiome Analysis. If you encounter any issue please ask us in this Slack channel. 
+      Introduction to Microbiome Analysis. 
     tutorials:
       - name: introduction
         topic: microbiome
+
+  - section: "Metabarcoding" 
+    description: |
+      Identify and analyze the diversity of species in environmental samples by amplifying and sequencing specific genetic markers
+    tutorials:
       - name: dada-16S
         topic: microbiome
       - type: custom
@@ -32,30 +39,29 @@ program:
         description: |
           Tutorial (will come soon)
   
-  - section: "Genome recovery" 
+  - section: "Metagenomics" 
     description: |
-      Genome recovery. If you encounter any issue please ask us in this Slack channel. 
+      Assemble, bin, and profile the taxonomic diversity using collective DNA from environmental samples
     tutorials:  
       - name: metagenomics-assembly
         topic: microbiome
       - name: metagenomics-binning
         topic: microbiome
-
-  - section: "Read-based based analysis" 
-    description: |
-      Read-based based analysis. If you encounter any issue please ask us in this Slack channel. 
-    tutorials: 
       - name: taxonomic-profiling
         topic: microbiome
-      - type: custom
-        name: diversity
+      - name: diversity
         topic: microbiome
+
+  - section: "Metatranscriptomics" 
+    description: |
+      Profile the taxonomic diversity and the functional processes from collective RNA from environmental samples
+    tutorials: 
       - name: metatranscriptomics
         topic: microbiome
 
   - section: "Pathogen detection" 
     description: |
-      Pathogen detection. If you encounter any issue please ask us in this Slack channel. 
+      Detect and track pathogens from metagenomic Nanopore sequencing
     tutorials: 
       - name: pathogen-detection-from-nanopore-foodborne-data
         topic: microbiome
