@@ -1,20 +1,36 @@
 digraph main {
   node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
   edge [fontname="Atkinson Hyperlegible"];
-  0[color=lightblue,label="ℹ️ Input Collection\nGPF DIA mzML Files Dataset collection"]
-  1[color=lightblue,label="ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"]
-  2[color=lightblue,label="ℹ️ Input Collection\nEXPERIMENTAL DIA mzML FILES WIDE"]
+  0[color=lightblue,label="ℹ️ Input Collection\nGPF DIA RAW Files Dataset collection"]
+  1[color=lightblue,label="ℹ️ Input Collection\nEXPERIMENTAL DIA RAW FILES WIDE"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"]
   3[color=lightblue,label="ℹ️ Input Dataset\nBACKGROUND PROTEIN FASTA FILE"]
-  4[label="msconvert"]
+  4[label="Converting RAW to mzml "]
   0 -> 4 [label="output"]
+  kee41b00e11e5494396d0bb64a0dd976c[color=lightseagreen,label="Output\nGPF_MZML"]
+  4 -> kee41b00e11e5494396d0bb64a0dd976c
   5[label="msconvert"]
-  2 -> 5 [label="output"]
-  6[label="SearchToLib"]
+  1 -> 5 [label="output"]
+  k982b398874ff4755b03f564fd72adad9[color=lightseagreen,label="Output\nExperimental-dataset-MZML"]
+  5 -> k982b398874ff4755b03f564fd72adad9
+  6[label="Library searching"]
   3 -> 6 [label="output"]
-  1 -> 6 [label="output"]
+  2 -> 6 [label="output"]
   4 -> 6 [label="output"]
+  ka6ae2431c813408eb67f4df16f4d9816[color=lightseagreen,label="Output\nCHROMATOGRAM LIBRARY"]
+  6 -> ka6ae2431c813408eb67f4df16f4d9816
+  k1c3b0d2e87864f818ac5a932fe3759c6[color=lightseagreen,label="Output\nLOG"]
+  6 -> k1c3b0d2e87864f818ac5a932fe3759c6
   7[label="EncyclopeDIA Quantify"]
   3 -> 7 [label="output"]
   6 -> 7 [label="elib"]
   5 -> 7 [label="output"]
+  k6fcebd600aa24833ab18bf3fad5f2e34[color=lightseagreen,label="Output\nQuant-LOG"]
+  7 -> k6fcebd600aa24833ab18bf3fad5f2e34
+  k31f9b9fa9e6c4531b207e6a4547f96a0[color=lightseagreen,label="Output\nQUANT LIBRARY"]
+  7 -> k31f9b9fa9e6c4531b207e6a4547f96a0
+  ka6d58aaffd7b4d1492cec217e2fbad18[color=lightseagreen,label="Output\nPEPTIDE QUANTITATION OUTPUT"]
+  7 -> ka6d58aaffd7b4d1492cec217e2fbad18
+  k5cc9b38b83554367ab3e382333a73eff[color=lightseagreen,label="Output\nPROTEIN QUANTITATION OUTPUT"]
+  7 -> k5cc9b38b83554367ab3e382333a73eff
 }

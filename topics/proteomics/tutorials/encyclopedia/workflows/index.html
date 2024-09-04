@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0b1263e4540b4cf55260ed4d783f383c02f85bcc",
+		release: "galaxy-training-network@fdc75ff4ec95cbb8bb3ec3bcc5cffb271053af3c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -223,13 +223,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">May19 EncyclopeDIA raw inputs</h5>
+			<h5 class="card-title">EncyclopeDIA-GTN</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
+				
+				GalaxyP
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Jun 21, 2021</small>
+				<small class="text-muted">Last updated Sep 4, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Launch in Tutorial Mode</span>
@@ -239,11 +241,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 			License: 
 				
-				None Specified, defaults to
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
 				<br/>
-			Tests: ❌
+			Tests: ✅
 			Results: Not yet automated
 			</p>
 <div class="dropdown">
@@ -254,11 +255,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/encyclopedia/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
@@ -268,26 +269,50 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 </div>
 
 	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nGPF DIA mzML Files Dataset collection"];
+  0["ℹ️ Input Collection\nGPF DIA RAW Files Dataset collection"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"];
+  1["ℹ️ Input Collection\nEXPERIMENTAL DIA RAW FILES WIDE"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Collection\nEXPERIMENTAL DIA mzML FILES WIDE"];
+  2["ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"];
   style 2 stroke:#2c3143,stroke-width:4px;
   3["ℹ️ Input Dataset\nBACKGROUND PROTEIN FASTA FILE"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["msconvert"];
+  4["Converting RAW to mzml "];
   0 -->|output| 4;
+  ee41b00e-11e5-4943-96d0-bb64a0dd976c["Output\nGPF_MZML"];
+  4 --> ee41b00e-11e5-4943-96d0-bb64a0dd976c;
+  style ee41b00e-11e5-4943-96d0-bb64a0dd976c stroke:#2c3143,stroke-width:4px;
   5["msconvert"];
-  2 -->|output| 5;
-  6["SearchToLib"];
+  1 -->|output| 5;
+  982b3988-74ff-4755-b03f-564fd72adad9["Output\nExperimental-dataset-MZML"];
+  5 --> 982b3988-74ff-4755-b03f-564fd72adad9;
+  style 982b3988-74ff-4755-b03f-564fd72adad9 stroke:#2c3143,stroke-width:4px;
+  6["Library searching"];
   3 -->|output| 6;
-  1 -->|output| 6;
+  2 -->|output| 6;
   4 -->|output| 6;
+  a6ae2431-c813-408e-b67f-4df16f4d9816["Output\nCHROMATOGRAM LIBRARY"];
+  6 --> a6ae2431-c813-408e-b67f-4df16f4d9816;
+  style a6ae2431-c813-408e-b67f-4df16f4d9816 stroke:#2c3143,stroke-width:4px;
+  1c3b0d2e-8786-4f81-8ac5-a932fe3759c6["Output\nLOG"];
+  6 --> 1c3b0d2e-8786-4f81-8ac5-a932fe3759c6;
+  style 1c3b0d2e-8786-4f81-8ac5-a932fe3759c6 stroke:#2c3143,stroke-width:4px;
   7["EncyclopeDIA Quantify"];
   3 -->|output| 7;
   6 -->|elib| 7;
   5 -->|output| 7;
+  6fcebd60-0aa2-4833-ab18-bf3fad5f2e34["Output\nQuant-LOG"];
+  7 --> 6fcebd60-0aa2-4833-ab18-bf3fad5f2e34;
+  style 6fcebd60-0aa2-4833-ab18-bf3fad5f2e34 stroke:#2c3143,stroke-width:4px;
+  31f9b9fa-9e6c-4531-b207-e6a4547f96a0["Output\nQUANT LIBRARY"];
+  7 --> 31f9b9fa-9e6c-4531-b207-e6a4547f96a0;
+  style 31f9b9fa-9e6c-4531-b207-e6a4547f96a0 stroke:#2c3143,stroke-width:4px;
+  a6d58aaf-fd7b-4d14-92ce-c217e2fbad18["Output\nPEPTIDE QUANTITATION OUTPUT"];
+  7 --> a6d58aaf-fd7b-4d14-92ce-c217e2fbad18;
+  style a6d58aaf-fd7b-4d14-92ce-c217e2fbad18 stroke:#2c3143,stroke-width:4px;
+  5cc9b38b-8355-4367-ab3e-382333a73eff["Output\nPROTEIN QUANTITATION OUTPUT"];
+  7 --> 5cc9b38b-8355-4367-ab3e-382333a73eff;
+  style 5cc9b38b-8355-4367-ab3e-382333a73eff stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -362,7 +387,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b1263e4540b4cf55260ed4d783f383c02f85bcc">0b1263e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fdc75ff4ec95cbb8bb3ec3bcc5cffb271053af3c">fdc75ff</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

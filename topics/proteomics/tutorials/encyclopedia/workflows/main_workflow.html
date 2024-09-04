@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@0b1263e4540b4cf55260ed4d783f383c02f85bcc",
+		release: "galaxy-training-network@fdc75ff4ec95cbb8bb3ec3bcc5cffb271053af3c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -221,7 +221,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 
 <section>
 	<hgroup>
-		<h1 data-toc-skip>May19 EncyclopeDIA raw inputs</h1>
+		<h1 data-toc-skip>EncyclopeDIA-GTN</h1>
 		<p>proteomics-encyclopedia/main-workflow</p>
 	</hgroup>
 	
@@ -231,20 +231,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
+			GalaxyP
+			
 			
 			<br/>
 
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jun 21, 2021
+			Sep 4, 2024
 
 			<br/>
 
@@ -253,7 +255,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			None Specified, defaults to
 			<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 			
 			<br/>
@@ -264,7 +265,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #c8bbff; --color-darker: #b5a0ff; --color-dimmed: #bfaeff;">proteomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #d0c4ff; --color-darker: #bca9ff; --color-dimmed: #c6b7ff;">proteomics</div>
 			
 			</br>
 			
@@ -273,6 +274,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -294,7 +297,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Workflow Testing</b>
 			<br/>
 
-			Tests: ❌ <br/>
+			Tests: ✅ <br/>
 			Results: Not yet automated
 
 			<hr/>
@@ -329,13 +332,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy Main</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy France</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy Europe</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Galaxy Main</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/proteomics-encyclopedia/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -347,26 +350,50 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				Download
 			</a>
 			<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nGPF DIA mzML Files Dataset collection"];
+  0["ℹ️ Input Collection\nGPF DIA RAW Files Dataset collection"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"];
+  1["ℹ️ Input Collection\nEXPERIMENTAL DIA RAW FILES WIDE"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Collection\nEXPERIMENTAL DIA mzML FILES WIDE"];
+  2["ℹ️ Input Dataset\nSPECTRAL OR PROSIT LIBRARY"];
   style 2 stroke:#2c3143,stroke-width:4px;
   3["ℹ️ Input Dataset\nBACKGROUND PROTEIN FASTA FILE"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["msconvert"];
+  4["Converting RAW to mzml "];
   0 -->|output| 4;
+  ee41b00e-11e5-4943-96d0-bb64a0dd976c["Output\nGPF_MZML"];
+  4 --> ee41b00e-11e5-4943-96d0-bb64a0dd976c;
+  style ee41b00e-11e5-4943-96d0-bb64a0dd976c stroke:#2c3143,stroke-width:4px;
   5["msconvert"];
-  2 -->|output| 5;
-  6["SearchToLib"];
+  1 -->|output| 5;
+  982b3988-74ff-4755-b03f-564fd72adad9["Output\nExperimental-dataset-MZML"];
+  5 --> 982b3988-74ff-4755-b03f-564fd72adad9;
+  style 982b3988-74ff-4755-b03f-564fd72adad9 stroke:#2c3143,stroke-width:4px;
+  6["Library searching"];
   3 -->|output| 6;
-  1 -->|output| 6;
+  2 -->|output| 6;
   4 -->|output| 6;
+  a6ae2431-c813-408e-b67f-4df16f4d9816["Output\nCHROMATOGRAM LIBRARY"];
+  6 --> a6ae2431-c813-408e-b67f-4df16f4d9816;
+  style a6ae2431-c813-408e-b67f-4df16f4d9816 stroke:#2c3143,stroke-width:4px;
+  1c3b0d2e-8786-4f81-8ac5-a932fe3759c6["Output\nLOG"];
+  6 --> 1c3b0d2e-8786-4f81-8ac5-a932fe3759c6;
+  style 1c3b0d2e-8786-4f81-8ac5-a932fe3759c6 stroke:#2c3143,stroke-width:4px;
   7["EncyclopeDIA Quantify"];
   3 -->|output| 7;
   6 -->|elib| 7;
-  5 -->|output| 7;</pre>
+  5 -->|output| 7;
+  6fcebd60-0aa2-4833-ab18-bf3fad5f2e34["Output\nQuant-LOG"];
+  7 --> 6fcebd60-0aa2-4833-ab18-bf3fad5f2e34;
+  style 6fcebd60-0aa2-4833-ab18-bf3fad5f2e34 stroke:#2c3143,stroke-width:4px;
+  31f9b9fa-9e6c-4531-b207-e6a4547f96a0["Output\nQUANT LIBRARY"];
+  7 --> 31f9b9fa-9e6c-4531-b207-e6a4547f96a0;
+  style 31f9b9fa-9e6c-4531-b207-e6a4547f96a0 stroke:#2c3143,stroke-width:4px;
+  a6d58aaf-fd7b-4d14-92ce-c217e2fbad18["Output\nPEPTIDE QUANTITATION OUTPUT"];
+  7 --> a6d58aaf-fd7b-4d14-92ce-c217e2fbad18;
+  style a6d58aaf-fd7b-4d14-92ce-c217e2fbad18 stroke:#2c3143,stroke-width:4px;
+  5cc9b38b-8355-4367-ab3e-382333a73eff["Output\nPROTEIN QUANTITATION OUTPUT"];
+  7 --> 5cc9b38b-8355-4367-ab3e-382333a73eff;
+  style 5cc9b38b-8355-4367-ab3e-382333a73eff stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -379,17 +406,17 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>GPF DIA mzML Files (Dataset collection)</td>
+					<td>GPF DIA RAW Files (Dataset collection)</td>
+				</tr>
+				
+				<tr>
+					<td>Input dataset collection</td>
+					<td>EXPERIMENTAL DIA RAW FILES (WIDE)</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
 					<td>SPECTRAL OR PROSIT LIBRARY</td>
-				</tr>
-				
-				<tr>
-					<td>Input dataset collection</td>
-					<td>EXPERIMENTAL DIA mzML FILES (WIDE)</td>
 				</tr>
 				
 				<tr>
@@ -414,7 +441,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2</td>
 					<td>msconvert</td>
-					<td></td>
+					<td>Converting RAW to mzml </td>
 				</tr>
 				
 				<tr>
@@ -426,7 +453,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/1.2.2+galaxy0</td>
 					<td>SearchToLib</td>
-					<td></td>
+					<td>Library searching</td>
 				</tr>
 				
 				<tr>
@@ -508,6 +535,27 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>7</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/dec1b6f1da6aa47a9d1748f0cbc3406f38653d23">dec1b6f1d</a></td>
+						<td>2024-08-29 21:42:21</td>
+						<td>remove ga</td>
+					</tr>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/cb6a5053b811d2fc5c7cf75af32db15532c2fd61">cb6a5053b</a></td>
+						<td>2024-08-28 15:34:57</td>
+						<td>Update main_workflow.ga</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/3a53b7e1d818adb147f4783f3589a16a6b053f6d">3a53b7e1d</a></td>
+						<td>2024-08-28 15:24:46</td>
+						<td>Update main_workflow.ga</td>
+					</tr>
 					
 					<tr>
 						<td>4</td>
@@ -618,7 +666,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0b1263e4540b4cf55260ed4d783f383c02f85bcc">0b1263e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fdc75ff4ec95cbb8bb3ec3bcc5cffb271053af3c">fdc75ff</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
