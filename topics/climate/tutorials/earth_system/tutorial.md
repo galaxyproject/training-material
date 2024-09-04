@@ -47,12 +47,12 @@ Of course, these components cross over each other thus, we have data that can fi
 
 ![Graphic visualization of an Earth System](../../images/earth_system/earth_system_galaxy.png)
 
-Next we will see for each compartiments which kind of data (and how to get them) are availabe on Galaxy Earth System
+Next we will see for each compartiment which kind of data (and how to get them) are availabe on Galaxy Earth System
 
 
 # 🌊 Ocean 🌊
 
-The ocean is a key component of the Earth’s climate system. It thus needs continuous real-time monitoring to help scientists better understand its dynamics and predict its evolution. 
+The ocean is a key component of the Earth’s climate system. Thus, it needs continuous real-time monitoring to help scientists better understand its dynamics and predict its evolution. 
 
 ## The Argo program
 All around the world, oceanographers have managed to join their efforts and set up a Global Ocean Observing System among which Argo is a key component. Argo is an international program that collects information from inside the ocean using a fleet of robotic instruments that drift with the ocean currents and move up and down between the surface and a mid-water level.
