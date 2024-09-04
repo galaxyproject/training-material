@@ -132,7 +132,7 @@ To perform GO enrichment analysis on each cell cluster individually, we need to 
 >
 >    > <comment-title> Input Dataset </comment-title>
 >    >
->    > As we have two datasets, one with the marker genes for all the seven clusters and one with the marker genes for the knockout (KO) and wild-type (WT) conditions. Make sure to repeat the analysis twice for the two different datasets. Otherwise you can run this [workflow](https://usegalaxy.eu/u/mennagamal/w/unnamed-workflow) for parallel analysis of the datasets 
+>    > As we have two datasets, one with the marker genes for all the seven clusters and one with the marker genes for the knockout (KO) and wild-type (WT) conditions. Make sure to repeat the analysis twice for the two different datasets. Alternatively, you can run this [workflow](https://usegalaxy.eu/u/mennagamal/w/unnamed-workflow) for parallel analysis of the datasets, under Marker genes choose the second icon to select multiple datasets as shown in the below image.
 >    {: .comment}
 > ![Multiple input datasets workflow](../../images/workflow.png "Multiple input datasets workflow")
 >
