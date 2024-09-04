@@ -40,6 +40,7 @@ anyone interested in learning about Earth system.
 > {:toc}
 >
 {: .agenda}
+
 🌍🌏🌎
 
 The Earth System is a complex and dynamic system that encompasses the interactions between the atmosphere, hydrosphere, geoshpere, and biosphere. Understanding and analyzing data from the Earth System Model is essential, for example to predict and mitigate the impacts of climate change. Currently, [Galaxy Earth System](https://earth-system.usegalaxy.eu/) uses 4 usecases to have an overview of an earth System: ocean, land, atmosphere, and biodiversity.
