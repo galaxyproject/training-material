@@ -26,1329 +26,6 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
-      "title": "Analyse Argo data",
-      "questions": [
-        "How to use the Pangeo ecosystem to analyse ocean data?",
-        "How to process Argo data to visualise ocean temperature variations?"
-      ],
-      "objectives": [
-        "How to fetch Argo Data?",
-        "How to get metadata with xarray netcdf tools?",
-        "Learn to get temperature variations.",
-        "Learn to use an interactive tool to visualise Argo temperature variable on an interactive map."
-      ],
-      "time_estimation": "1H",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "introduction",
-          "tutorials": [
-            "galaxy-intro-short"
-          ]
-        }
-      ],
-      "key_points": [
-        "Argo data",
-        "Pangeo Ecosystem",
-        "Galaxy Earth System"
-      ],
-      "tags": [
-        "earth-system",
-        "ocean",
-        "pangeo",
-        "argo"
-      ],
-      "contributions": {
-        "authorship": [
-          "Marie59"
-        ],
-        "funding": [
-          "fairease",
-          "eurosciencegateway"
-        ]
-      },
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00428",
-      "url": "/topics/climate/tutorials/argo_pangeo/tutorial.html",
-      "topic_name": "climate",
-      "tutorial_name": "argo_pangeo",
-      "dir": "topics/climate/tutorials/argo_pangeo",
-      "symlink": null,
-      "id": "climate/argo_pangeo",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-03-24 12:51:07 +0000",
-      "pub_date": "2024-03-24 12:51:07 +0000",
-      "version": 1,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/workflows/main_workflow.ga",
-          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/workflows/main_workflow.html",
-          "path": "topics/climate/tutorials/argo_pangeo/workflows/main_workflow.ga",
-          "wfid": "climate-argo_pangeo",
-          "wfname": "main-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-argo_pangeo/versions/main-workflow",
-          "license": "CC-BY-4.0",
-          "parent_id": "climate/argo_pangeo",
-          "topic_id": "climate",
-          "tutorial_id": "argo_pangeo",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0009-0008-0622-604X",
-              "name": "Marie Jossé",
-              "url": "https://github.com/Marie59"
-            }
-          ],
-          "name": "Analyse Argo data ",
-          "title": "Analyse Argo data ",
-          "version": 1,
-          "description": "Process argo data with the Pangeo Ecosystem and visualise them with Ocean Data View (ODV)",
-          "tags": [
-            "Ocean",
-            "Pangeo",
-            "earth-system"
-          ],
-          "features": {
-            "report": null,
-            "subworkflows": false,
-            "comments": false,
-            "parameters": false
-          },
-          "workflowhub_id": "1193",
-          "history": [
-            {
-              "hash": "54b194630704357541b0a560b2b5e212cbf7fa35",
-              "unix": "1710791150",
-              "message": "add new argo tuto",
-              "short_hash": "54b194630",
-              "num": 1
-            }
-          ],
-          "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
-          "mermaid": "flowchart TD\n  0[\"Argo data access\"];\n  1[\"NetCDF xarray Coordinate Info\"];\n  0 -->|output_argo| 1;\n  2[\"NetCDF xarray Metadata Info\"];\n  0 -->|output_argo| 2;\n  3[\"NetCDF timeseries Extractor\"];\n  0 -->|output_argo| 3;\n  2 -->|output| 3;\n  4[\"ODV\"];\n  3 -->|timeseries_tabular| 4;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Argo data access\"]\n  1[label=\"NetCDF xarray Coordinate Info\"]\n  0 -> 1 [label=\"output_argo\"]\n  2[label=\"NetCDF xarray Metadata Info\"]\n  0 -> 2 [label=\"output_argo\"]\n  3[label=\"NetCDF timeseries Extractor\"]\n  0 -> 3 [label=\"output_argo\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"ODV\"]\n  3 -> 4 [label=\"timeseries_tabular\"]\n}",
-          "workflow_tools": [
-            "interactive_tool_odv",
-            "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
-            "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
-            "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
-            "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0"
-          ],
-          "inputs": [
-
-          ],
-          "outputs": [
-
-          ]
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json",
-      "tools": [
-        "interactive_tool_odv",
-        "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Climate",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "argo_getdata",
-            "owner": "ecology",
-            "revisions": "28c8f085d1b4",
-            "tool_panel_section_label": "Get Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "timeseries_extraction",
-            "owner": "ecology",
-            "revisions": "810820a0d45c",
-            "tool_panel_section_label": "GIS Data Handling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "xarray_coords_info",
-            "owner": "ecology",
-            "revisions": "663e6f115a76",
-            "tool_panel_section_label": "GIS Data Handling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "xarray_metadata_info",
-            "owner": "ecology",
-            "revisions": "00de53d18b99",
-            "tool_panel_section_label": "GIS Data Handling",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: argo_getdata\n  owner: ecology\n  revisions: 28c8f085d1b4\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: timeseries_extraction\n  owner: ecology\n  revisions: 810820a0d45c\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_coords_info\n  owner: ecology\n  revisions: 663e6f115a76\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_metadata_info\n  owner: ecology\n  revisions: 00de53d18b99\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Marie Josse",
-          "joined": "2022-03",
-          "email": "marie.josse@ifremer.fr",
-          "affiliations": [
-            "pndb",
-            "fairease"
-          ],
-          "id": "Marie59",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
-        },
-        {
-          "name": "Fair-Ease",
-          "github": false,
-          "joined": "2023-10",
-          "avatar": "/training-material/assets/images/fair_ease_colour.png",
-          "url": "https://training.galaxyproject.org/training-material/api/funders/fairease.json",
-          "funder": true,
-          "funding_id": "101058785",
-          "funding_system": "cordis",
-          "funding_statement": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.",
-          "members": [
-            "Marie59",
-            "yvanlebras"
-          ],
-          "id": "fairease",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
-        },
-        {
-          "name": "EuroScienceGateway",
-          "github": false,
-          "joined": "2023-10",
-          "avatar": "/training-material/assets/images/eurosciencegateway.png",
-          "url": "https://training.galaxyproject.org/training-material/api/funders/eurosciencegateway.json",
-          "funder": true,
-          "funding_id": "101057388",
-          "funding_system": "cordis",
-          "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
-          "members": [
-            "abretaud",
-            "anuprulez",
-            "bgruening",
-            "erxleben",
-            "pauldg",
-            "rlibouba"
-          ],
-          "id": "eurosciencegateway",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Pangeo Notebook in Galaxy - Introduction to Xarray",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.5805953",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "data-science",
-          "tutorials": [
-            "python-basics"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "data-science",
-          "tutorials": [
-            "python-plotting",
-            "python-advanced-np-pd"
-          ]
-        },
-        {
-          "type": "external",
-          "title": "Data Carpentry Geospatial Workshop",
-          "link": "https://datacarpentry.org/geospatial-workshop/"
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "external",
-          "title": "Pangeo Tutorial Gallery",
-          "link": "http://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/index.html"
-        },
-        {
-          "type": "external",
-          "title": "Pangeo Gallery",
-          "link": "http://gallery.pangeo.io/index.html"
-        }
-      ],
-      "questions": [
-        "What is Pangeo notebook?",
-        "How to start Pangeo Notebook in Galaxy?",
-        "What are the main software components of the Pangeo ecosystem?",
-        "What is Xarray?",
-        "How to manipulate Xarrays?",
-        "How to print metadata information?",
-        "How to make a selection?",
-        "How to visualize?",
-        "How to filter?",
-        "How to make reduction operations (mean, max, min)?",
-        "How to resample my data?",
-        "Where to go next?"
-      ],
-      "objectives": [
-        "Learn to get metadata information using Xarray Galaxy Tools",
-        "Learn to select data",
-        "Learn to visualize data",
-        "Learn to filter, make reduction operations (mean, max, min)",
-        "Learn to resample my data",
-        "Learn to cite and contribute to Pangeo"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Pangeo ecosystem enables big data analysis in geosciences",
-        "Xarray is an important Python package for big data analysis in geosciences",
-        "Xarray can be used to read, select, mask and plot netCDF data",
-        "Xarray can also be used to perform global operations such as mean, max, min or resampling data"
-      ],
-      "tags": [
-        "pangeo",
-        "interactive-tools"
-      ],
-      "contributors": [
-        {
-          "name": "Anne Fouilloux",
-          "twitter": "AnneFouilloux",
-          "joined": "2019-07",
-          "elixir_node": "no",
-          "orcid": "0000-0002-1784-2920",
-          "id": "annefou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
-        }
-      ],
-      "notebook": {
-        "language": "python",
-        "snippet": "topics/climate/tutorials/pangeo-notebook/preamble.md"
-      },
-      "recordings": [
-        {
-          "captioners": [
-            "annefou"
-          ],
-          "date": "2022-03-03",
-          "galaxy_version": "21.09",
-          "length": "17M",
-          "youtube_id": "XFF2yRcYGp0",
-          "speakers": [
-            "annefou"
-          ]
-        }
-      ],
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00045",
-      "url": "/topics/climate/tutorials/pangeo-notebook/tutorial.html",
-      "topic_name": "climate",
-      "tutorial_name": "pangeo-notebook",
-      "dir": "topics/climate/tutorials/pangeo-notebook",
-      "symlink": null,
-      "id": "climate/pangeo-notebook",
-      "hands_on": true,
-      "slides": true,
-      "mod_date": "2024-06-14 09:56:50 +0000",
-      "pub_date": "2022-02-18 23:27:51 +0000",
-      "version": 10,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.ga",
-          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.html",
-          "path": "topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.ga",
-          "wfid": "climate-pangeo-notebook",
-          "wfname": "main-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo-notebook/versions/main-workflow",
-          "license": "MIT",
-          "parent_id": "climate/pangeo-notebook",
-          "topic_id": "climate",
-          "tutorial_id": "pangeo-notebook",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0002-1784-2920",
-              "name": "Anne Fouilloux",
-              "url": "https://github.com/annefou"
-            }
-          ],
-          "name": "Pangeo Jupyter Notebook",
-          "title": "Pangeo Jupyter Notebook",
-          "version": 1,
-          "description": "Workflow for GTN Pangeo Notebook in Galaxy - Introduction to Xarray",
-          "tags": [
-            "pangeo",
-            "climate",
-            "big-data",
-            "geosciences"
-          ],
-          "features": {
-            "report": null,
-            "subworkflows": false,
-            "comments": false,
-            "parameters": false
-          },
-          "workflowhub_id": "1189",
-          "history": [
-            {
-              "hash": "e1474b2a116fe585bb664fa489f11648d12be74f",
-              "unix": "1643364120",
-              "message": "Add missing annotation for pangeo-notebook workflow",
-              "short_hash": "e1474b2a1",
-              "num": 2
-            },
-            {
-              "hash": "1cb326ea7de3765fc5804f168fb4d813a72676b5",
-              "unix": "1640271678",
-              "message": "split pangeo training in two (Galaxy tool and Pangeo notebook)",
-              "short_hash": "1cb326ea7",
-              "num": 1
-            }
-          ],
-          "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
-          "mermaid": "flowchart TD\n  0[\"Pangeo Jupyter for Big Data geoscience\"];",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Pangeo Jupyter for Big Data geoscience\"]\n}",
-          "workflow_tools": [
-            "interactive_tool_pangeo_notebook"
-          ],
-          "inputs": [
-
-          ],
-          "outputs": [
-            {
-              "annotation": "",
-              "content_id": "interactive_tool_pangeo_notebook",
-              "errors": null,
-              "id": 0,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "runtime parameter for tool Interactive Pangeo Notebook",
-                  "name": "input"
-                }
-              ],
-              "label": "Pangeo Jupyter for Big Data geoscience",
-              "name": "Interactive Pangeo Notebook",
-              "outputs": [
-                {
-                  "name": "jupyter_notebook",
-                  "type": "ipynb"
-                }
-              ],
-              "position": {
-                "bottom": 516.90625,
-                "height": 174.734375,
-                "left": 672,
-                "right": 872,
-                "top": 342.171875,
-                "width": 200,
-                "x": 672,
-                "y": 342.171875
-              },
-              "post_job_actions": {
-              },
-              "tool_id": "interactive_tool_pangeo_notebook",
-              "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"mode\": {\"mode_select\": \"scratch\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-              "tool_version": "1c0f66b",
-              "type": "tool",
-              "uuid": "e921fd5a-97f9-4364-8c8a-7f225329016a",
-              "workflow_outputs": [
-                {
-                  "label": null,
-                  "output_name": "jupyter_notebook",
-                  "uuid": "30d1f58a-ace4-4eaf-9efa-c3930d768898"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json",
-      "tools": [
-        "interactive_tool_pangeo_notebook"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Climate",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": true,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": true
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Getting your hands-on climate data",
-      "zenodo_link": "https://zenodo.org/record/3776500",
-      "questions": [
-        "What is climate?",
-        "What type of data is available?"
-      ],
-      "objectives": [
-        "Learn about the terminology",
-        "Learn about the different source of climate data",
-        "Learn about climate observations, reanalysis, climate predictions and climate projections"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Weather versus Climate",
-        "Essential Climate Variables",
-        "Observations, reanalysis, predictions and projections."
-      ],
-      "contributors": [
-        {
-          "name": "Anne Fouilloux",
-          "twitter": "AnneFouilloux",
-          "joined": "2019-07",
-          "elixir_node": "no",
-          "orcid": "0000-0002-1784-2920",
-          "id": "annefou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
-        }
-      ],
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00041",
-      "url": "/topics/climate/tutorials/climate-101/tutorial.html",
-      "topic_name": "climate",
-      "tutorial_name": "climate-101",
-      "dir": "topics/climate/tutorials/climate-101",
-      "symlink": null,
-      "id": "climate/climate-101",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-06-11 11:55:25 +0000",
-      "pub_date": "2020-04-30 09:42:31 +0000",
-      "version": 12,
-      "workflows": [
-        {
-          "workflow": "climate_101_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/workflows/climate_101_workflow.ga",
-          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/workflows/climate_101_workflow.html",
-          "path": "topics/climate/tutorials/climate-101/workflows/climate_101_workflow.ga",
-          "wfid": "climate-climate-101",
-          "wfname": "climate-101-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-climate-101/versions/climate-101-workflow",
-          "license": "MIT",
-          "parent_id": "climate/climate-101",
-          "topic_id": "climate",
-          "tutorial_id": "climate-101",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0002-1784-2920",
-              "name": "Anne Fouilloux"
-            }
-          ],
-          "name": "Climate 101",
-          "title": "Climate 101",
-          "version": 1,
-          "description": "Visualize Climate data with Panoply netCDF viewer",
-          "tags": [
-            "climate"
-          ],
-          "features": {
-            "report": null,
-            "subworkflows": false,
-            "comments": false,
-            "parameters": false
-          },
-          "workflowhub_id": "1138",
-          "history": [
-            {
-              "hash": "3693396f61a109643d15e9bc1b9e21a8def0562d",
-              "unix": "1633427069",
-              "message": "add license, creator information",
-              "short_hash": "3693396f6",
-              "num": 2
-            },
-            {
-              "hash": "969fae434066d9571160c4510b8995e99defd640",
-              "unix": "1633426896",
-              "message": "Add climate workflows from @annefou",
-              "short_hash": "969fae434",
-              "num": 1
-            }
-          ],
-          "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Copernicus Essential Climate Variables\"];\n  3[\"climate stripes\"];\n  0 -->|output| 3;\n  4[\"Select\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  1 -->|output| 5;\n  6[\"Datamash\"];\n  1 -->|output| 6;\n  7[\"Datamash\"];\n  1 -->|output| 7;\n  8[\"Text reformatting\"];\n  1 -->|output| 8;\n  9[\"map plot\"];\n  2 -->|ofilename| 9;\n  10[\"Datamash\"];\n  8 -->|outfile| 10;\n  11[\"Datamash\"];\n  8 -->|outfile| 11;\n  12[\"Datamash\"];\n  10 -->|out_file| 12;\n  13[\"Datamash\"];\n  10 -->|out_file| 13;\n  14[\"Scatterplot w ggplot2\"];\n  11 -->|out_file| 14;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"Copernicus Essential Climate Variables\"]\n  3[label=\"climate stripes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Select\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Datamash\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Datamash\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"Datamash\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"Text reformatting\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"map plot\"]\n  2 -> 9 [label=\"ofilename\"]\n  10[label=\"Datamash\"]\n  8 -> 10 [label=\"outfile\"]\n  11[label=\"Datamash\"]\n  8 -> 11 [label=\"outfile\"]\n  12[label=\"Datamash\"]\n  10 -> 12 [label=\"out_file\"]\n  13[label=\"Datamash\"]\n  10 -> 13 [label=\"out_file\"]\n  14[label=\"Scatterplot w ggplot2\"]\n  11 -> 14 [label=\"out_file\"]\n}",
-          "workflow_tools": [
-            "Grep1",
-            "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
-            "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
-            "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
-            "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
-            "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-            "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1"
-          ],
-          "inputs": [
-            {
-              "annotation": "",
-              "content_id": null,
-              "errors": null,
-              "id": 0,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "",
-                  "name": "ts_cities.csv"
-                }
-              ],
-              "label": null,
-              "name": "Input dataset",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 10,
-                "top": 10
-              },
-              "tool_id": null,
-              "tool_state": "{\"name\": \"ts_cities.csv\"}",
-              "tool_version": null,
-              "type": "data_input",
-              "uuid": "99e7d3bd-74d3-4651-81d0-7a468624d8aa",
-              "workflow_outputs": [
-
-              ]
-            },
-            {
-              "annotation": "",
-              "content_id": null,
-              "errors": null,
-              "id": 1,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "",
-                  "name": "tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv"
-                }
-              ],
-              "label": null,
-              "name": "Input dataset",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 10,
-                "top": 130
-              },
-              "tool_id": null,
-              "tool_state": "{\"name\": \"tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv\"}",
-              "tool_version": null,
-              "type": "data_input",
-              "uuid": "0afa85cd-9b3e-44a1-a528-9e293f86b500",
-              "workflow_outputs": [
-
-              ]
-            }
-          ],
-          "outputs": [
-
-          ]
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json",
-      "tools": [
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
-        "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
-        "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-          {
-            "url": "https://usegalaxy.cz/",
-            "name": "UseGalaxy.cz",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          }
-        ]
-      },
-      "topic_name_human": "Climate",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "text_processing",
-            "owner": "bgruening",
-            "revisions": "9ff72e942410",
-            "tool_panel_section_label": "Text Manipulation",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "cds_essential_variability",
-            "owner": "climate",
-            "revisions": "9ee8db6ffba3",
-            "tool_panel_section_label": "Climate Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "climate_stripes",
-            "owner": "climate",
-            "revisions": "c6f2435d680b",
-            "tool_panel_section_label": "Climate Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "psy_maps",
-            "owner": "climate",
-            "revisions": "706666d912d5",
-            "tool_panel_section_label": "Climate Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "datamash_ops",
-            "owner": "iuc",
-            "revisions": "562f3c677828",
-            "tool_panel_section_label": "Join, Subtract and Group",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          },
-          {
-            "name": "ggplot2_point",
-            "owner": "iuc",
-            "revisions": "9cec81e1b90e",
-            "tool_panel_section_label": "Graph/Display Data",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: 9ff72e942410\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cds_essential_variability\n  owner: climate\n  revisions: 9ee8db6ffba3\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: climate_stripes\n  owner: climate\n  revisions: c6f2435d680b\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: psy_maps\n  owner: climate\n  revisions: 706666d912d5\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 562f3c677828\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ggplot2_point\n  owner: iuc\n  revisions: 9cec81e1b90e\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Ocean's variables study",
-      "questions": [
-        "How to process extract ocean's variables?",
-        "How to use ODV collections?",
-        "How to create climatological estimates?"
-      ],
-      "objectives": [
-        "Deals with ODV collection with data originating from Emodnet chemistry",
-        "Visualise ocean variables to study climate changes"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Manage ODV collection's data.",
-        "Learn to extract data and visualize them on ODV",
-        "Learn to chain ODV and DIVAnd"
-      ],
-      "tags": [
-        "earth-system",
-        "ocean",
-        "netcdf data"
-      ],
-      "contributions": {
-        "authorship": [
-          "Marie59"
-        ],
-        "funding": [
-          "fairease",
-          "eurosciencegateway"
-        ]
-      },
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00376",
-      "url": "/topics/climate/tutorials/ocean-variables/tutorial.html",
-      "topic_name": "climate",
-      "tutorial_name": "ocean-variables",
-      "dir": "topics/climate/tutorials/ocean-variables",
-      "symlink": null,
-      "id": "climate/ocean-variables",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-08-09 12:26:18 +0000",
-      "pub_date": "2023-11-29 17:38:31 +0000",
-      "version": 4,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/workflows/main_workflow.ga",
-          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/workflows/main_workflow.html",
-          "path": "topics/climate/tutorials/ocean-variables/workflows/main_workflow.ga",
-          "wfid": "climate-ocean-variables",
-          "wfname": "main-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow",
-          "license": "CC-BY-4.0",
-          "parent_id": "climate/ocean-variables",
-          "topic_id": "climate",
-          "tutorial_id": "ocean-variables",
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0009-0008-0622-604X",
-              "name": "Marie Jossé",
-              "url": "https://github.com/Marie59"
-            }
-          ],
-          "name": "Ocean's variables 2.0",
-          "title": "Ocean's variables 2.0",
-          "version": 2,
-          "description": "Subset data on the Mediterreanean see and extract and visualise the Phosphate variable",
-          "tags": [
-            "earth-system",
-            "Ocean"
-          ],
-          "features": {
-            "report": {
-              "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
-            },
-            "subworkflows": false,
-            "comments": true,
-            "parameters": true
-          },
-          "workflowhub_id": "1200",
-          "history": [
-            {
-              "hash": "1c6ee9c0d6c08affe5e54d71b4488147396ba5aa",
-              "unix": "1723110972",
-              "message": "Add new version of workflow",
-              "short_hash": "1c6ee9c0d",
-              "num": 2
-            },
-            {
-              "hash": "c51d6ffbc21866df213772767f645a889a23c70f",
-              "unix": "1710854627",
-              "message": "Add workflow",
-              "short_hash": "c51d6ffbc",
-              "num": 1
-            }
-          ],
-          "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nWorflow fully interactive\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nWorkflow semi automatic\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\ngebco_30sec_8.nc\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Ocean Data View\"];\n  1 -->|output| 4;\n  5[\"Interactive DIVAnd jupyterlab\"];\n  4 -->|outputs_netcdf| 5;\n  0 -->|output| 5;\n  6[\"DIVAnd create a climatology\"];\n  3 -->|output| 6;\n  4 -->|outputs_netcdf| 6;\n  2 -->|output| 6;\n  59963282-87bf-4432-a777-8a9b61dea03c[\"Output\\nWater_body_Phosphate_Mediterranean.nc\"];\n  6 --> 59963282-87bf-4432-a777-8a9b61dea03c;\n  style 59963282-87bf-4432-a777-8a9b61dea03c stroke:#2c3143,stroke-width:4px;\n  7[\"ODV visualisation interactive\"];\n  5 -->|output_netcdf| 7;\n  dc8316a4-e57c-476b-b885-bbe4fb84d8c7[\"Output\\nOcean variables visualisation interactive\"];\n  7 --> dc8316a4-e57c-476b-b885-bbe4fb84d8c7;\n  style dc8316a4-e57c-476b-b885-bbe4fb84d8c7 stroke:#2c3143,stroke-width:4px;\n  8[\"ODV visualisation\"];\n  6 -->|output_netcdf| 8;\n  7b072253-5bf9-434f-b06a-70b375ddaa03[\"Output\\nOcean variables visualisation\"];\n  8 --> 7b072253-5bf9-434f-b06a-70b375ddaa03;\n  style 7b072253-5bf9-434f-b06a-70b375ddaa03 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nWorflow fully interactive\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nWorkflow semi automatic\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\ngebco_30sec_8.nc\"]\n  4[label=\"Ocean Data View\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Interactive DIVAnd jupyterlab\"]\n  4 -> 5 [label=\"outputs_netcdf\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"DIVAnd create a climatology\"]\n  3 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"outputs_netcdf\"]\n  2 -> 6 [label=\"output\"]\n  k5996328287bf4432a7778a9b61dea03c[color=lightseagreen,label=\"Output\\nWater_body_Phosphate_Mediterranean.nc\"]\n  6 -> k5996328287bf4432a7778a9b61dea03c\n  7[label=\"ODV visualisation interactive\"]\n  5 -> 7 [label=\"output_netcdf\"]\n  kdc8316a4e57c476bb885bbe4fb84d8c7[color=lightseagreen,label=\"Output\\nOcean variables visualisation interactive\"]\n  7 -> kdc8316a4e57c476bb885bbe4fb84d8c7\n  8[label=\"ODV visualisation\"]\n  6 -> 8 [label=\"output_netcdf\"]\n  k7b0722535bf9434fb06a70b375ddaa03[color=lightseagreen,label=\"Output\\nOcean variables visualisation\"]\n  8 -> k7b0722535bf9434fb06a70b375ddaa03\n}",
-          "workflow_tools": [
-            "interactive_tool_divand",
-            "interactive_tool_odv",
-            "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0"
-          ],
-          "inputs": [
-            {
-              "annotation": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
-              "content_id": null,
-              "errors": null,
-              "id": 0,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
-                  "name": "Worflow fully interactive"
-                }
-              ],
-              "label": "Worflow fully interactive",
-              "name": "Input parameter",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 29.80677214543107,
-                "top": 359.1046708180256
-              },
-              "tool_id": null,
-              "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
-              "tool_version": null,
-              "type": "parameter_input",
-              "uuid": "250d862b-4c3d-462d-9bcd-9a5053c52b5e",
-              "when": null,
-              "workflow_outputs": [
-
-              ]
-            },
-            {
-              "annotation": "The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets EMODnet Chemistry.",
-              "content_id": null,
-              "errors": null,
-              "id": 1,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets EMODnet Chemistry.",
-                  "name": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"
-                }
-              ],
-              "label": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip",
-              "name": "Input dataset",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 314.4,
-                "top": 507.4
-              },
-              "tool_id": null,
-              "tool_state": "{\"optional\": false, \"tag\": null}",
-              "tool_version": null,
-              "type": "data_input",
-              "uuid": "b513664a-1176-4fd9-bb79-439010069177",
-              "when": null,
-              "workflow_outputs": [
-
-              ]
-            },
-            {
-              "annotation": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
-              "content_id": null,
-              "errors": null,
-              "id": 2,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
-                  "name": "Workflow semi automatic"
-                }
-              ],
-              "label": "Workflow semi automatic",
-              "name": "Input parameter",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 34.559982917236994,
-                "top": 738.7586893348329
-              },
-              "tool_id": null,
-              "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
-              "tool_version": null,
-              "type": "parameter_input",
-              "uuid": "6e2ed5ec-3760-44fe-a722-4e44356f9058",
-              "when": null,
-              "workflow_outputs": [
-
-              ]
-            },
-            {
-              "annotation": "A bathymetry file in netcdf.",
-              "content_id": null,
-              "errors": null,
-              "id": 3,
-              "input_connections": {
-              },
-              "inputs": [
-                {
-                  "description": "A bathymetry file in netcdf.",
-                  "name": "gebco_30sec_8.nc"
-                }
-              ],
-              "label": "gebco_30sec_8.nc",
-              "name": "Input dataset",
-              "outputs": [
-
-              ],
-              "position": {
-                "left": 614.0977004616734,
-                "top": 903.4688531054738
-              },
-              "tool_id": null,
-              "tool_state": "{\"optional\": false, \"tag\": null}",
-              "tool_version": null,
-              "type": "data_input",
-              "uuid": "006a3936-6151-4724-9fab-6b41f869e1ee",
-              "when": null,
-              "workflow_outputs": [
-
-              ]
-            }
-          ],
-          "outputs": [
-            {
-              "annotation": "Create a climatology (not interactively)",
-              "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0",
-              "errors": null,
-              "id": 6,
-              "input_connections": {
-                "bathname": {
-                  "id": 3,
-                  "output_name": "output"
-                },
-                "input_netcdf_identifier": {
-                  "id": 4,
-                  "output_name": "outputs_netcdf"
-                },
-                "when": {
-                  "id": 2,
-                  "output_name": "output"
-                }
-              },
-              "inputs": [
-
-              ],
-              "label": "DIVAnd (create a climatology)",
-              "name": "DIVAnd",
-              "outputs": [
-                {
-                  "name": "output_netcdf",
-                  "type": "netcdf"
-                }
-              ],
-              "position": {
-                "left": 958.2529539113443,
-                "top": 679.118779662132
-              },
-              "post_job_actions": {
-                "RenameDatasetActionoutput_netcdf": {
-                  "action_arguments": {
-                    "newname": "Water_body_Phosphate_Mediterranean.nc"
-                  },
-                  "action_type": "RenameDatasetAction",
-                  "output_name": "output_netcdf"
-                }
-              },
-              "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0",
-              "tool_shed_repository": {
-                "changeset_revision": "484930fdc002",
-                "name": "divand_full_analysis",
-                "owner": "ecology",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-              },
-              "tool_state": "{\"__input_ext\": \"input\", \"bathname\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"enddate\": \"2017-01-01\", \"input_netcdf_identifier\": {\"__class__\": \"ConnectedValue\"}, \"input_netcdf_identifier|__identifier__\": \"data_from_Eutrophication_Med_profiles_2022_unrestricted.nc\", \"latmax\": \"38.0\", \"latmin\": \"32.0\", \"longmax\": \"30.0\", \"longmin\": \"19.0\", \"selmax\": \"100\", \"selmin\": \"0\", \"startdate\": \"1950-12-31\", \"varname\": \"phosphate\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-              "tool_version": "0.1.0+galaxy0",
-              "type": "tool",
-              "uuid": "d1c07265-1da0-40d6-9fd5-1041a9d9f658",
-              "when": "$(inputs.when)",
-              "workflow_outputs": [
-                {
-                  "label": "Water_body_Phosphate_Mediterranean.nc",
-                  "output_name": "output_netcdf",
-                  "uuid": "59963282-87bf-4432-a777-8a9b61dea03c"
-                }
-              ]
-            },
-            {
-              "annotation": "Final step to visualize in different way a ocean variable like the phosphate.",
-              "content_id": "interactive_tool_odv",
-              "errors": null,
-              "id": 7,
-              "input_connections": {
-                "method|infiles": {
-                  "id": 5,
-                  "output_name": "output_netcdf"
-                }
-              },
-              "inputs": [
-                {
-                  "description": "runtime parameter for tool ODV",
-                  "name": "method"
-                }
-              ],
-              "label": "ODV (visualisation) interactive",
-              "name": "ODV",
-              "outputs": [
-                {
-                  "name": "outputs_netcdf",
-                  "type": "input"
-                },
-                {
-                  "name": "outputs_all",
-                  "type": "input"
-                }
-              ],
-              "position": {
-                "left": 1315.0326051372172,
-                "top": 398.52546972475403
-              },
-              "post_job_actions": {
-              },
-              "tool_id": "interactive_tool_odv",
-              "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-              "tool_version": "5.6.5.1",
-              "type": "tool",
-              "uuid": "50c35d61-7b8d-4706-9d56-d3bd94a46960",
-              "when": null,
-              "workflow_outputs": [
-                {
-                  "label": "Ocean variables visualisation interactive",
-                  "output_name": "outputs_all",
-                  "uuid": "dc8316a4-e57c-476b-b885-bbe4fb84d8c7"
-                }
-              ]
-            },
-            {
-              "annotation": "Final step to visualize in different way a ocean variable like the phosphate.",
-              "content_id": "interactive_tool_odv",
-              "errors": null,
-              "id": 8,
-              "input_connections": {
-                "method|infiles": {
-                  "id": 6,
-                  "output_name": "output_netcdf"
-                }
-              },
-              "inputs": [
-                {
-                  "description": "runtime parameter for tool ODV",
-                  "name": "method"
-                }
-              ],
-              "label": "ODV (visualisation)",
-              "name": "ODV",
-              "outputs": [
-                {
-                  "name": "outputs_netcdf",
-                  "type": "input"
-                },
-                {
-                  "name": "outputs_all",
-                  "type": "input"
-                }
-              ],
-              "position": {
-                "left": 1313.0264554819623,
-                "top": 737.9220054373203
-              },
-              "post_job_actions": {
-              },
-              "tool_id": "interactive_tool_odv",
-              "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-              "tool_version": "5.6.5.1",
-              "type": "tool",
-              "uuid": "9bff476c-be32-4d87-a655-db241126ae49",
-              "when": null,
-              "workflow_outputs": [
-                {
-                  "label": "Ocean variables visualisation",
-                  "output_name": "outputs_all",
-                  "uuid": "7b072253-5bf9-434f-b06a-70b375ddaa03"
-                }
-              ]
-            }
-          ]
-        }
-      ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json",
-      "tools": [
-        "interactive_tool_divand",
-        "interactive_tool_odv",
-        "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Climate",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-          {
-            "name": "divand_full_analysis",
-            "owner": "ecology",
-            "revisions": "484930fdc002",
-            "tool_panel_section_label": "Climate Analysis",
-            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
-          }
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: divand_full_analysis\n  owner: ecology\n  revisions: 484930fdc002\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Marie Josse",
-          "joined": "2022-03",
-          "email": "marie.josse@ifremer.fr",
-          "affiliations": [
-            "pndb",
-            "fairease"
-          ],
-          "id": "Marie59",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
-        },
-        {
-          "name": "Fair-Ease",
-          "github": false,
-          "joined": "2023-10",
-          "avatar": "/training-material/assets/images/fair_ease_colour.png",
-          "url": "https://training.galaxyproject.org/training-material/api/funders/fairease.json",
-          "funder": true,
-          "funding_id": "101058785",
-          "funding_system": "cordis",
-          "funding_statement": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.",
-          "members": [
-            "Marie59",
-            "yvanlebras"
-          ],
-          "id": "fairease",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
-        },
-        {
-          "name": "EuroScienceGateway",
-          "github": false,
-          "joined": "2023-10",
-          "avatar": "/training-material/assets/images/eurosciencegateway.png",
-          "url": "https://training.galaxyproject.org/training-material/api/funders/eurosciencegateway.json",
-          "funder": true,
-          "funding_id": "101057388",
-          "funding_system": "cordis",
-          "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
-          "members": [
-            "abretaud",
-            "anuprulez",
-            "bgruening",
-            "erxleben",
-            "pauldg",
-            "rlibouba"
-          ],
-          "id": "eurosciencegateway",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools",
       "zenodo_link": "https://doi.org/10.5281/zenodo.5805953",
       "questions": [
@@ -1475,7 +152,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
+          "modified": "2024-09-04 10:21:18 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nplot first time e.g. index=0\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCAMS-PM2_5-20211222.netcdf\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nplot forecast time 2 days 12:00 UTC\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\ntime=5\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Parameter\\ntime=6\"];\n  style 4 fill:#ded,stroke:#393,stroke-width:4px;\n  5[\"ℹ️ Input Parameter\\ntime=3\"];\n  style 5 fill:#ded,stroke:#393,stroke-width:4px;\n  6[\"ℹ️ Input Parameter\\ntime=2\"];\n  style 6 fill:#ded,stroke:#393,stroke-width:4px;\n  7[\"ℹ️ Input Parameter\\ntime=7\"];\n  style 7 fill:#ded,stroke:#393,stroke-width:4px;\n  8[\"ℹ️ Input Parameter\\ntime=1\"];\n  style 8 fill:#ded,stroke:#393,stroke-width:4px;\n  9[\"ℹ️ Input Parameter\\ntime=4\"];\n  style 9 fill:#ded,stroke:#393,stroke-width:4px;\n  10[\"ℹ️ Input Parameter\\ntime=0\"];\n  style 10 fill:#ded,stroke:#393,stroke-width:4px;\n  11[\"NetCDF xarray Coordinate Info\"];\n  1 -->|output| 11;\n  12[\"NetCDF xarray Metadata Info\"];\n  1 -->|output| 12;\n  13[\"extract longitude\"];\n  11 -->|output_dir| 13;\n  14[\"extract latitude\"];\n  11 -->|output_dir| 14;\n  15[\"Extract time from coordinate info\"];\n  11 -->|output_dir| 15;\n  3b4968d7-8984-4e66-87a9-a3ab8fc12ca4[\"Output\\ninput dataset(s) (extracted element)\"];\n  15 --> 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4;\n  style 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4 stroke:#2c3143,stroke-width:4px;\n  16[\"NetCDF xarray operations\"];\n  1 -->|output| 16;\n  14 -->|output| 16;\n  13 -->|output| 16;\n  12 -->|output| 16;\n  17[\"NetCDF xarray operations\"];\n  1 -->|output| 17;\n  15 -->|output| 17;\n  12 -->|output| 17;\n  18[\"NetCDF xarray operations\"];\n  1 -->|output| 18;\n  15 -->|output| 18;\n  14 -->|output| 18;\n  13 -->|output| 18;\n  12 -->|output| 18;\n  19[\"PM2.5 CAMS Europe 0 days 00:00 UTC reference time\"];\n  15 -->|output| 19;\n  0 -->|output| 19;\n  1 -->|output| 19;\n  12 -->|output| 19;\n  42483031-21e2-4d88-8898-4a9aa9bb10e5[\"Output\\nPM2.5 reference date Europe\"];\n  19 --> 42483031-21e2-4d88-8898-4a9aa9bb10e5;\n  style 42483031-21e2-4d88-8898-4a9aa9bb10e5 stroke:#2c3143,stroke-width:4px;\n  20[\"PM2.5 CAMS forecast 2 days 12:00 UTC\"];\n  15 -->|output| 20;\n  2 -->|output| 20;\n  1 -->|output| 20;\n  12 -->|output| 20;\n  07ba8141-bad3-4a61-833d-3b3e82b53fdb[\"Output\\nPM2.5 fc 2 days 12:00 UTC Europe\"];\n  20 --> 07ba8141-bad3-4a61-833d-3b3e82b53fdb;\n  style 07ba8141-bad3-4a61-833d-3b3e82b53fdb stroke:#2c3143,stroke-width:4px;\n  21[\"NetCDF xarray Selection\"];\n  16 -->|output_netcdf| 21;\n  12 -->|output| 21;\n  22[\"NetCDF xarray Coordinate Info\"];\n  17 -->|output_netcdf| 22;\n  23[\"NetCDF xarray Coordinate Info\"];\n  18 -->|output_netcdf| 23;\n  24[\"NetCDF xarray Metadata Info\"];\n  18 -->|output_netcdf| 24;\n  25[\"Column Regex Find And Replace\"];\n  21 -->|simpleoutput| 25;\n  26[\"PM2.5 over Naples 4 days forecast\"];\n  21 -->|simpleoutput| 26;\n  8984beb4-e593-42f8-8de5-0e92631061c7[\"Output\\n1D plot PM2.5 over Naples (4 days forecast)\"];\n  26 --> 8984beb4-e593-42f8-8de5-0e92631061c7;\n  style 8984beb4-e593-42f8-8de5-0e92631061c7 stroke:#2c3143,stroke-width:4px;\n  27[\"Extract times from coordinates\"];\n  22 -->|output_dir| 27;\n  28[\"Extract time\"];\n  23 -->|output_dir| 28;\n  29[\" stripes PM2.5 over Naples 4 days forecast\"];\n  25 -->|out_file1| 29;\n  92cad576-78b5-4e07-9a07-6f05ff8f4a56[\"Output\\nPM2.5 stripes Naples for 4 days forecast from reference date\"];\n  29 --> 92cad576-78b5-4e07-9a07-6f05ff8f4a56;\n  style 92cad576-78b5-4e07-9a07-6f05ff8f4a56 stroke:#2c3143,stroke-width:4px;\n  30[\"NetCDF xarray map plotting\"];\n  27 -->|output| 30;\n  0 -->|output| 30;\n  18 -->|output_netcdf| 30;\n  24 -->|output| 30;\n  31[\"NetCDF xarray map plotting\"];\n  28 -->|output| 31;\n  6 -->|output| 31;\n  18 -->|output_netcdf| 31;\n  24 -->|output| 31;\n  32[\"NetCDF xarray map plotting\"];\n  28 -->|output| 32;\n  8 -->|output| 32;\n  18 -->|output_netcdf| 32;\n  24 -->|output| 32;\n  33[\"NetCDF xarray map plotting\"];\n  28 -->|output| 33;\n  5 -->|output| 33;\n  18 -->|output_netcdf| 33;\n  24 -->|output| 33;\n  34[\"NetCDF xarray map plotting\"];\n  28 -->|output| 34;\n  9 -->|output| 34;\n  18 -->|output_netcdf| 34;\n  24 -->|output| 34;\n  35[\"NetCDF xarray map plotting\"];\n  28 -->|output| 35;\n  4 -->|output| 35;\n  18 -->|output_netcdf| 35;\n  24 -->|output| 35;\n  36[\"NetCDF xarray map plotting\"];\n  28 -->|output| 36;\n  7 -->|output| 36;\n  18 -->|output_netcdf| 36;\n  24 -->|output| 36;\n  37[\"NetCDF xarray map plotting\"];\n  28 -->|output| 37;\n  3 -->|output| 37;\n  18 -->|output_netcdf| 37;\n  24 -->|output| 37;\n  38[\"NetCDF xarray map plotting\"];\n  28 -->|output| 38;\n  3 -->|output| 38;\n  18 -->|output_netcdf| 38;\n  24 -->|output| 38;\n  39[\"NetCDF xarray map plotting\"];\n  28 -->|output| 39;\n  4 -->|output| 39;\n  18 -->|output_netcdf| 39;\n  24 -->|output| 39;\n  40[\"NetCDF xarray map plotting\"];\n  28 -->|output| 40;\n  10 -->|output| 40;\n  18 -->|output_netcdf| 40;\n  24 -->|output| 40;\n  41[\"NetCDF xarray map plotting\"];\n  28 -->|output| 41;\n  5 -->|output| 41;\n  18 -->|output_netcdf| 41;\n  24 -->|output| 41;\n  42[\"NetCDF xarray map plotting\"];\n  28 -->|output| 42;\n  6 -->|output| 42;\n  18 -->|output_netcdf| 42;\n  24 -->|output| 42;\n  43[\"NetCDF xarray map plotting\"];\n  28 -->|output| 43;\n  10 -->|output| 43;\n  18 -->|output_netcdf| 43;\n  24 -->|output| 43;\n  44[\"NetCDF xarray map plotting\"];\n  28 -->|output| 44;\n  7 -->|output| 44;\n  18 -->|output_netcdf| 44;\n  24 -->|output| 44;\n  45[\"NetCDF xarray map plotting\"];\n  28 -->|output| 45;\n  9 -->|output| 45;\n  18 -->|output_netcdf| 45;\n  24 -->|output| 45;\n  46[\"NetCDF xarray map plotting\"];\n  28 -->|output| 46;\n  8 -->|output| 46;\n  18 -->|output_netcdf| 46;\n  24 -->|output| 46;\n  47[\"Merge collections\"];\n  30 -->|output_dir| 47;\n  32 -->|output_dir| 47;\n  31 -->|output_dir| 47;\n  33 -->|output_dir| 47;\n  34 -->|output_dir| 47;\n  37 -->|output_dir| 47;\n  35 -->|output_dir| 47;\n  36 -->|output_dir| 47;\n  48[\"Merge collections\"];\n  43 -->|output_dir| 48;\n  46 -->|output_dir| 48;\n  42 -->|output_dir| 48;\n  41 -->|output_dir| 48;\n  45 -->|output_dir| 48;\n  38 -->|output_dir| 48;\n  39 -->|output_dir| 48;\n  44 -->|output_dir| 48;\n  49[\"PM2.5 forecast 10:00 - 17:00 UTC > 30 um/m3\"];\n  47 -->|output| 49;\n  1c16eeb7-dfe1-40de-9be7-3aa2a8568308[\"Output\\nPM2.5 (values > 30 um/m3)  fc 10:00 - 17:00 UTC over Italy\"];\n  49 --> 1c16eeb7-dfe1-40de-9be7-3aa2a8568308;\n  style 1c16eeb7-dfe1-40de-9be7-3aa2a8568308 stroke:#2c3143,stroke-width:4px;\n  50[\"PM2.5 forecast 10:00 - 17:00 UTC \"];\n  48 -->|output| 50;\n  070fe227-b533-4c77-bed0-4d005b174920[\"Output\\nPM2.5 fc 10:00 - 17:00 UTC over Italy\"];\n  50 --> 070fe227-b533-4c77-bed0-4d005b174920;\n  style 070fe227-b533-4c77-bed0-4d005b174920 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nplot first time e.g. index=0\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nCAMS-PM2_5-20211222.netcdf\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nplot forecast time 2 days 12:00 UTC\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=5\"]\n  4[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=6\"]\n  5[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=3\"]\n  6[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=2\"]\n  7[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=7\"]\n  8[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=1\"]\n  9[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=4\"]\n  10[color=lightgreen,label=\"ℹ️ Input Parameter\\ntime=0\"]\n  11[label=\"NetCDF xarray Coordinate Info\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"NetCDF xarray Metadata Info\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"extract longitude\"]\n  11 -> 13 [label=\"output_dir\"]\n  14[label=\"extract latitude\"]\n  11 -> 14 [label=\"output_dir\"]\n  15[label=\"Extract time from coordinate info\"]\n  11 -> 15 [label=\"output_dir\"]\n  k3b4968d789844e6687a9a3ab8fc12ca4[color=lightseagreen,label=\"Output\\ninput dataset(s) (extracted element)\"]\n  15 -> k3b4968d789844e6687a9a3ab8fc12ca4\n  16[label=\"NetCDF xarray operations\"]\n  1 -> 16 [label=\"output\"]\n  14 -> 16 [label=\"output\"]\n  13 -> 16 [label=\"output\"]\n  12 -> 16 [label=\"output\"]\n  17[label=\"NetCDF xarray operations\"]\n  1 -> 17 [label=\"output\"]\n  15 -> 17 [label=\"output\"]\n  12 -> 17 [label=\"output\"]\n  18[label=\"NetCDF xarray operations\"]\n  1 -> 18 [label=\"output\"]\n  15 -> 18 [label=\"output\"]\n  14 -> 18 [label=\"output\"]\n  13 -> 18 [label=\"output\"]\n  12 -> 18 [label=\"output\"]\n  19[label=\"PM2.5 CAMS Europe 0 days 00:00 UTC reference time\"]\n  15 -> 19 [label=\"output\"]\n  0 -> 19 [label=\"output\"]\n  1 -> 19 [label=\"output\"]\n  12 -> 19 [label=\"output\"]\n  k4248303121e24d8888984a9aa9bb10e5[color=lightseagreen,label=\"Output\\nPM2.5 reference date Europe\"]\n  19 -> k4248303121e24d8888984a9aa9bb10e5\n  20[label=\"PM2.5 CAMS forecast 2 days 12:00 UTC\"]\n  15 -> 20 [label=\"output\"]\n  2 -> 20 [label=\"output\"]\n  1 -> 20 [label=\"output\"]\n  12 -> 20 [label=\"output\"]\n  k07ba8141bad34a61833d3b3e82b53fdb[color=lightseagreen,label=\"Output\\nPM2.5 fc 2 days 12:00 UTC Europe\"]\n  20 -> k07ba8141bad34a61833d3b3e82b53fdb\n  21[label=\"NetCDF xarray Selection\"]\n  16 -> 21 [label=\"output_netcdf\"]\n  12 -> 21 [label=\"output\"]\n  22[label=\"NetCDF xarray Coordinate Info\"]\n  17 -> 22 [label=\"output_netcdf\"]\n  23[label=\"NetCDF xarray Coordinate Info\"]\n  18 -> 23 [label=\"output_netcdf\"]\n  24[label=\"NetCDF xarray Metadata Info\"]\n  18 -> 24 [label=\"output_netcdf\"]\n  25[label=\"Column Regex Find And Replace\"]\n  21 -> 25 [label=\"simpleoutput\"]\n  26[label=\"PM2.5 over Naples 4 days forecast\"]\n  21 -> 26 [label=\"simpleoutput\"]\n  k8984beb4e59342f88de50e92631061c7[color=lightseagreen,label=\"Output\\n1D plot PM2.5 over Naples (4 days forecast)\"]\n  26 -> k8984beb4e59342f88de50e92631061c7\n  27[label=\"Extract times from coordinates\"]\n  22 -> 27 [label=\"output_dir\"]\n  28[label=\"Extract time\"]\n  23 -> 28 [label=\"output_dir\"]\n  29[label=\" stripes PM2.5 over Naples 4 days forecast\"]\n  25 -> 29 [label=\"out_file1\"]\n  k92cad57678b54e079a076f05ff8f4a56[color=lightseagreen,label=\"Output\\nPM2.5 stripes Naples for 4 days forecast from reference date\"]\n  29 -> k92cad57678b54e079a076f05ff8f4a56\n  30[label=\"NetCDF xarray map plotting\"]\n  27 -> 30 [label=\"output\"]\n  0 -> 30 [label=\"output\"]\n  18 -> 30 [label=\"output_netcdf\"]\n  24 -> 30 [label=\"output\"]\n  31[label=\"NetCDF xarray map plotting\"]\n  28 -> 31 [label=\"output\"]\n  6 -> 31 [label=\"output\"]\n  18 -> 31 [label=\"output_netcdf\"]\n  24 -> 31 [label=\"output\"]\n  32[label=\"NetCDF xarray map plotting\"]\n  28 -> 32 [label=\"output\"]\n  8 -> 32 [label=\"output\"]\n  18 -> 32 [label=\"output_netcdf\"]\n  24 -> 32 [label=\"output\"]\n  33[label=\"NetCDF xarray map plotting\"]\n  28 -> 33 [label=\"output\"]\n  5 -> 33 [label=\"output\"]\n  18 -> 33 [label=\"output_netcdf\"]\n  24 -> 33 [label=\"output\"]\n  34[label=\"NetCDF xarray map plotting\"]\n  28 -> 34 [label=\"output\"]\n  9 -> 34 [label=\"output\"]\n  18 -> 34 [label=\"output_netcdf\"]\n  24 -> 34 [label=\"output\"]\n  35[label=\"NetCDF xarray map plotting\"]\n  28 -> 35 [label=\"output\"]\n  4 -> 35 [label=\"output\"]\n  18 -> 35 [label=\"output_netcdf\"]\n  24 -> 35 [label=\"output\"]\n  36[label=\"NetCDF xarray map plotting\"]\n  28 -> 36 [label=\"output\"]\n  7 -> 36 [label=\"output\"]\n  18 -> 36 [label=\"output_netcdf\"]\n  24 -> 36 [label=\"output\"]\n  37[label=\"NetCDF xarray map plotting\"]\n  28 -> 37 [label=\"output\"]\n  3 -> 37 [label=\"output\"]\n  18 -> 37 [label=\"output_netcdf\"]\n  24 -> 37 [label=\"output\"]\n  38[label=\"NetCDF xarray map plotting\"]\n  28 -> 38 [label=\"output\"]\n  3 -> 38 [label=\"output\"]\n  18 -> 38 [label=\"output_netcdf\"]\n  24 -> 38 [label=\"output\"]\n  39[label=\"NetCDF xarray map plotting\"]\n  28 -> 39 [label=\"output\"]\n  4 -> 39 [label=\"output\"]\n  18 -> 39 [label=\"output_netcdf\"]\n  24 -> 39 [label=\"output\"]\n  40[label=\"NetCDF xarray map plotting\"]\n  28 -> 40 [label=\"output\"]\n  10 -> 40 [label=\"output\"]\n  18 -> 40 [label=\"output_netcdf\"]\n  24 -> 40 [label=\"output\"]\n  41[label=\"NetCDF xarray map plotting\"]\n  28 -> 41 [label=\"output\"]\n  5 -> 41 [label=\"output\"]\n  18 -> 41 [label=\"output_netcdf\"]\n  24 -> 41 [label=\"output\"]\n  42[label=\"NetCDF xarray map plotting\"]\n  28 -> 42 [label=\"output\"]\n  6 -> 42 [label=\"output\"]\n  18 -> 42 [label=\"output_netcdf\"]\n  24 -> 42 [label=\"output\"]\n  43[label=\"NetCDF xarray map plotting\"]\n  28 -> 43 [label=\"output\"]\n  10 -> 43 [label=\"output\"]\n  18 -> 43 [label=\"output_netcdf\"]\n  24 -> 43 [label=\"output\"]\n  44[label=\"NetCDF xarray map plotting\"]\n  28 -> 44 [label=\"output\"]\n  7 -> 44 [label=\"output\"]\n  18 -> 44 [label=\"output_netcdf\"]\n  24 -> 44 [label=\"output\"]\n  45[label=\"NetCDF xarray map plotting\"]\n  28 -> 45 [label=\"output\"]\n  9 -> 45 [label=\"output\"]\n  18 -> 45 [label=\"output_netcdf\"]\n  24 -> 45 [label=\"output\"]\n  46[label=\"NetCDF xarray map plotting\"]\n  28 -> 46 [label=\"output\"]\n  8 -> 46 [label=\"output\"]\n  18 -> 46 [label=\"output_netcdf\"]\n  24 -> 46 [label=\"output\"]\n  47[label=\"Merge collections\"]\n  30 -> 47 [label=\"output_dir\"]\n  32 -> 47 [label=\"output_dir\"]\n  31 -> 47 [label=\"output_dir\"]\n  33 -> 47 [label=\"output_dir\"]\n  34 -> 47 [label=\"output_dir\"]\n  37 -> 47 [label=\"output_dir\"]\n  35 -> 47 [label=\"output_dir\"]\n  36 -> 47 [label=\"output_dir\"]\n  48[label=\"Merge collections\"]\n  43 -> 48 [label=\"output_dir\"]\n  46 -> 48 [label=\"output_dir\"]\n  42 -> 48 [label=\"output_dir\"]\n  41 -> 48 [label=\"output_dir\"]\n  45 -> 48 [label=\"output_dir\"]\n  38 -> 48 [label=\"output_dir\"]\n  39 -> 48 [label=\"output_dir\"]\n  44 -> 48 [label=\"output_dir\"]\n  49[label=\"PM2.5 forecast 10:00 - 17:00 UTC > 30 um/m3\"]\n  47 -> 49 [label=\"output\"]\n  k1c16eeb7dfe140de9be73aa2a8568308[color=lightseagreen,label=\"Output\\nPM2.5 (values > 30 um/m3)  fc 10:00 - 17:00 UTC over Italy\"]\n  49 -> k1c16eeb7dfe140de9be73aa2a8568308\n  50[label=\"PM2.5 forecast 10:00 - 17:00 UTC \"]\n  48 -> 50 [label=\"output\"]\n  k070fe227b5334c77bed04d005b174920[color=lightseagreen,label=\"Output\\nPM2.5 fc 10:00 - 17:00 UTC over Italy\"]\n  50 -> k070fe227b5334c77bed04d005b174920\n}",
           "workflow_tools": [
@@ -3021,6 +1698,466 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Analyse Argo data",
+      "questions": [
+        "How to use the Pangeo ecosystem to analyse ocean data?",
+        "How to process Argo data to visualise ocean temperature variations?"
+      ],
+      "objectives": [
+        "How to fetch Argo Data?",
+        "How to get metadata with xarray netcdf tools?",
+        "Learn to get temperature variations.",
+        "Learn to use an interactive tool to visualise Argo temperature variable on an interactive map."
+      ],
+      "time_estimation": "1H",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "introduction",
+          "tutorials": [
+            "galaxy-intro-short"
+          ]
+        }
+      ],
+      "key_points": [
+        "Argo data",
+        "Pangeo Ecosystem",
+        "Galaxy Earth System"
+      ],
+      "tags": [
+        "earth-system",
+        "ocean",
+        "pangeo",
+        "argo"
+      ],
+      "contributions": {
+        "authorship": [
+          "Marie59"
+        ],
+        "funding": [
+          "fairease",
+          "eurosciencegateway"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00428",
+      "url": "/topics/climate/tutorials/argo_pangeo/tutorial.html",
+      "topic_name": "climate",
+      "tutorial_name": "argo_pangeo",
+      "dir": "topics/climate/tutorials/argo_pangeo",
+      "symlink": null,
+      "id": "climate/argo_pangeo",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-03-24 12:51:07 +0000",
+      "pub_date": "2024-03-24 12:51:07 +0000",
+      "version": 1,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/workflows/main_workflow.ga",
+          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/argo_pangeo/workflows/main_workflow.html",
+          "path": "topics/climate/tutorials/argo_pangeo/workflows/main_workflow.ga",
+          "wfid": "climate-argo_pangeo",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-argo_pangeo/versions/main-workflow",
+          "license": "CC-BY-4.0",
+          "parent_id": "climate/argo_pangeo",
+          "topic_id": "climate",
+          "tutorial_id": "argo_pangeo",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0009-0008-0622-604X",
+              "name": "Marie Jossé",
+              "url": "https://github.com/Marie59"
+            }
+          ],
+          "name": "Analyse Argo data ",
+          "title": "Analyse Argo data ",
+          "version": 1,
+          "description": "Process argo data with the Pangeo Ecosystem and visualise them with Ocean Data View (ODV)",
+          "tags": [
+            "Ocean",
+            "Pangeo",
+            "earth-system"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": "1193",
+          "history": [
+            {
+              "hash": "54b194630704357541b0a560b2b5e212cbf7fa35",
+              "unix": "1710791150",
+              "message": "add new argo tuto",
+              "short_hash": "54b194630",
+              "num": 1
+            }
+          ],
+          "test_results": null,
+          "modified": "2024-09-04 10:21:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Argo data access\"];\n  1[\"NetCDF xarray Coordinate Info\"];\n  0 -->|output_argo| 1;\n  2[\"NetCDF xarray Metadata Info\"];\n  0 -->|output_argo| 2;\n  3[\"NetCDF timeseries Extractor\"];\n  0 -->|output_argo| 3;\n  2 -->|output| 3;\n  4[\"ODV\"];\n  3 -->|timeseries_tabular| 4;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Argo data access\"]\n  1[label=\"NetCDF xarray Coordinate Info\"]\n  0 -> 1 [label=\"output_argo\"]\n  2[label=\"NetCDF xarray Metadata Info\"]\n  0 -> 2 [label=\"output_argo\"]\n  3[label=\"NetCDF timeseries Extractor\"]\n  0 -> 3 [label=\"output_argo\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"ODV\"]\n  3 -> 4 [label=\"timeseries_tabular\"]\n}",
+          "workflow_tools": [
+            "interactive_tool_odv",
+            "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
+            "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
+            "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
+            "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0"
+          ],
+          "inputs": [
+
+          ],
+          "outputs": [
+
+          ]
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json",
+      "tools": [
+        "interactive_tool_odv",
+        "toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/timeseries_extraction/timeseries_extraction/2022.3.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/2022.3.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/2022.3.0+galaxy0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Climate",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "argo_getdata",
+            "owner": "ecology",
+            "revisions": "28c8f085d1b4",
+            "tool_panel_section_label": "Get Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "timeseries_extraction",
+            "owner": "ecology",
+            "revisions": "810820a0d45c",
+            "tool_panel_section_label": "GIS Data Handling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "xarray_coords_info",
+            "owner": "ecology",
+            "revisions": "663e6f115a76",
+            "tool_panel_section_label": "GIS Data Handling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "xarray_metadata_info",
+            "owner": "ecology",
+            "revisions": "00de53d18b99",
+            "tool_panel_section_label": "GIS Data Handling",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: argo_getdata\n  owner: ecology\n  revisions: 28c8f085d1b4\n  tool_panel_section_label: Get Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: timeseries_extraction\n  owner: ecology\n  revisions: 810820a0d45c\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_coords_info\n  owner: ecology\n  revisions: 663e6f115a76\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: xarray_metadata_info\n  owner: ecology\n  revisions: 00de53d18b99\n  tool_panel_section_label: GIS Data Handling\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "email": "marie.josse@ifremer.fr",
+          "affiliations": [
+            "pndb",
+            "fairease"
+          ],
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Fair-Ease",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/fair_ease_colour.png",
+          "url": "https://training.galaxyproject.org/training-material/api/funders/fairease.json",
+          "funder": true,
+          "funding_id": "101058785",
+          "funding_system": "cordis",
+          "funding_statement": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.",
+          "members": [
+            "Marie59",
+            "yvanlebras"
+          ],
+          "id": "fairease",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
+        },
+        {
+          "name": "EuroScienceGateway",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/eurosciencegateway.png",
+          "url": "https://training.galaxyproject.org/training-material/api/funders/eurosciencegateway.json",
+          "funder": true,
+          "funding_id": "101057388",
+          "funding_system": "cordis",
+          "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
+          "members": [
+            "abretaud",
+            "anuprulez",
+            "bgruening",
+            "erxleben",
+            "pauldg",
+            "rlibouba"
+          ],
+          "id": "eurosciencegateway",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/argo_pangeo/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Sentinel 5P data visualisation",
+      "questions": [
+        "How to visualise volcanoes with Sentinel 5 data ?",
+        "How can we see the evolution of sulfur dioxide and aerosol index through time?",
+        "How can be used OpenEO ?"
+      ],
+      "objectives": [
+        "Learn to use OpenEO in a jupyterlab",
+        "Learn to handle satellite data",
+        "Practice on how to visualise netcdf data with Panoply",
+        "Handle going from one interactive tool to another",
+        "Learn to visualise gases around a volcano"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Manage satellite data",
+        "Visualise netcdf data",
+        "Study volcano activity"
+      ],
+      "tags": [
+        "earth-system",
+        "volcano",
+        "satellite data"
+      ],
+      "contributions": {
+        "authorship": [
+          "Marie59"
+        ],
+        "funding": [
+          "fairease",
+          "eurosciencegateway"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00396",
+      "url": "/topics/climate/tutorials/sentinel5_data/tutorial.html",
+      "topic_name": "climate",
+      "tutorial_name": "sentinel5_data",
+      "dir": "topics/climate/tutorials/sentinel5_data",
+      "symlink": null,
+      "id": "climate/sentinel5_data",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-01-26 13:11:38 +0000",
+      "pub_date": "2024-01-26 13:11:38 +0000",
+      "version": 1,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/workflows/main_workflow.ga",
+          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/workflows/main_workflow.html",
+          "path": "topics/climate/tutorials/sentinel5_data/workflows/main_workflow.ga",
+          "wfid": "climate-sentinel5_data",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-sentinel5_data/versions/main-workflow",
+          "license": "CC-BY-4.0",
+          "parent_id": "climate/sentinel5_data",
+          "topic_id": "climate",
+          "tutorial_id": "sentinel5_data",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0009-0008-0622-604X",
+              "name": "Marie Jossé",
+              "url": "https://github.com/Marie59"
+            }
+          ],
+          "name": "Sentinel5 volcanic data",
+          "title": "Sentinel5 volcanic data",
+          "version": 1,
+          "description": "From Copernicus Sentinel 5P data to panoply visualization of volcanic activity impact to atmosphere",
+          "tags": [
+
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": "1203",
+          "history": [
+            {
+              "hash": "dc7f440762f8b8c520f88f868a2e4874a473048d",
+              "unix": "1706085833",
+              "message": "Add Sentinel5P tuto",
+              "short_hash": "dc7f44076",
+              "num": 1
+            }
+          ],
+          "test_results": null,
+          "modified": "2024-09-04 10:21:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Panoply\"];\n  0 -->|output_collection| 1;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Panoply\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
+          "workflow_tools": [
+            "interactive_tool_copernicus_notebook",
+            "interactive_tool_panoply"
+          ],
+          "inputs": [
+
+          ],
+          "outputs": [
+
+          ]
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json",
+      "tools": [
+        "interactive_tool_copernicus",
+        "interactive_tool_copernicus_notebook",
+        "interactive_tool_panoply"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Climate",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "email": "marie.josse@ifremer.fr",
+          "affiliations": [
+            "pndb",
+            "fairease"
+          ],
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Fair-Ease",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/fair_ease_colour.png",
+          "url": "https://training.galaxyproject.org/training-material/api/funders/fairease.json",
+          "funder": true,
+          "funding_id": "101058785",
+          "funding_system": "cordis",
+          "funding_statement": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.",
+          "members": [
+            "Marie59",
+            "yvanlebras"
+          ],
+          "id": "fairease",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
+        },
+        {
+          "name": "EuroScienceGateway",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/eurosciencegateway.png",
+          "url": "https://training.galaxyproject.org/training-material/api/funders/eurosciencegateway.json",
+          "funder": true,
+          "funding_id": "101057388",
+          "funding_system": "cordis",
+          "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
+          "members": [
+            "abretaud",
+            "anuprulez",
+            "bgruening",
+            "erxleben",
+            "pauldg",
+            "rlibouba"
+          ],
+          "id": "eurosciencegateway",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
       "zenodo_link": "https://doi.org/10.5281/zenodo.4108341",
       "requirements": [
@@ -3173,7 +2310,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
+          "modified": "2024-09-04 10:21:18 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset for CLM-FATES\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nCLM-FATES restart file\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"CTSM/FATES-EMERALD\"];\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Extract Dataset\"];\n  2 -->|history_files| 3;\n  debf2e31-dbea-46d5-8644-586c9731cdbe[\"Output\\ninput dataset(s) (extracted element)\"];\n  3 --> debf2e31-dbea-46d5-8644-586c9731cdbe;\n  style debf2e31-dbea-46d5-8644-586c9731cdbe stroke:#2c3143,stroke-width:4px;\n  4[\"NetCDF xarray Metadata Info\"];\n  3 -->|output| 4;\n  5[\"NetCDF xarray Selection\"];\n  3 -->|output| 5;\n  4 -->|output| 5;\n  6[\"Replace\"];\n  5 -->|simpleoutput| 6;\n  7[\"Scatterplot with ggplot2\"];\n  6 -->|outfile| 7;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset for CLM-FATES\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nCLM-FATES restart file\"]\n  2[label=\"CTSM/FATES-EMERALD\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Extract Dataset\"]\n  2 -> 3 [label=\"history_files\"]\n  kdebf2e31dbea46d58644586c9731cdbe[color=lightseagreen,label=\"Output\\ninput dataset(s) (extracted element)\"]\n  3 -> kdebf2e31dbea46d58644586c9731cdbe\n  4[label=\"NetCDF xarray Metadata Info\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"NetCDF xarray Selection\"]\n  3 -> 5 [label=\"output\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Replace\"]\n  5 -> 6 [label=\"simpleoutput\"]\n  7[label=\"Scatterplot with ggplot2\"]\n  6 -> 7 [label=\"outfile\"]\n}",
           "workflow_tools": [
@@ -3876,83 +3013,152 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Sentinel 5P data visualisation",
+      "title": "Pangeo Notebook in Galaxy - Introduction to Xarray",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.5805953",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "data-science",
+          "tutorials": [
+            "python-basics"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "data-science",
+          "tutorials": [
+            "python-plotting",
+            "python-advanced-np-pd"
+          ]
+        },
+        {
+          "type": "external",
+          "title": "Data Carpentry Geospatial Workshop",
+          "link": "https://datacarpentry.org/geospatial-workshop/"
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "external",
+          "title": "Pangeo Tutorial Gallery",
+          "link": "http://gallery.pangeo.io/repos/pangeo-data/pangeo-tutorial-gallery/index.html"
+        },
+        {
+          "type": "external",
+          "title": "Pangeo Gallery",
+          "link": "http://gallery.pangeo.io/index.html"
+        }
+      ],
       "questions": [
-        "How to visualise volcanoes with Sentinel 5 data ?",
-        "How can we see the evolution of sulfur dioxide and aerosol index through time?",
-        "How can be used OpenEO ?"
+        "What is Pangeo notebook?",
+        "How to start Pangeo Notebook in Galaxy?",
+        "What are the main software components of the Pangeo ecosystem?",
+        "What is Xarray?",
+        "How to manipulate Xarrays?",
+        "How to print metadata information?",
+        "How to make a selection?",
+        "How to visualize?",
+        "How to filter?",
+        "How to make reduction operations (mean, max, min)?",
+        "How to resample my data?",
+        "Where to go next?"
       ],
       "objectives": [
-        "Learn to use OpenEO in a jupyterlab",
-        "Learn to handle satellite data",
-        "Practice on how to visualise netcdf data with Panoply",
-        "Handle going from one interactive tool to another",
-        "Learn to visualise gases around a volcano"
+        "Learn to get metadata information using Xarray Galaxy Tools",
+        "Learn to select data",
+        "Learn to visualize data",
+        "Learn to filter, make reduction operations (mean, max, min)",
+        "Learn to resample my data",
+        "Learn to cite and contribute to Pangeo"
       ],
       "time_estimation": "1H",
       "key_points": [
-        "Manage satellite data",
-        "Visualise netcdf data",
-        "Study volcano activity"
+        "Pangeo ecosystem enables big data analysis in geosciences",
+        "Xarray is an important Python package for big data analysis in geosciences",
+        "Xarray can be used to read, select, mask and plot netCDF data",
+        "Xarray can also be used to perform global operations such as mean, max, min or resampling data"
       ],
       "tags": [
-        "earth-system",
-        "volcano",
-        "satellite data"
+        "pangeo",
+        "interactive-tools"
       ],
-      "contributions": {
-        "authorship": [
-          "Marie59"
-        ],
-        "funding": [
-          "fairease",
-          "eurosciencegateway"
-        ]
+      "contributors": [
+        {
+          "name": "Anne Fouilloux",
+          "twitter": "AnneFouilloux",
+          "joined": "2019-07",
+          "elixir_node": "no",
+          "orcid": "0000-0002-1784-2920",
+          "id": "annefou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
+        }
+      ],
+      "notebook": {
+        "language": "python",
+        "snippet": "topics/climate/tutorials/pangeo-notebook/preamble.md"
       },
+      "recordings": [
+        {
+          "captioners": [
+            "annefou"
+          ],
+          "date": "2022-03-03",
+          "galaxy_version": "21.09",
+          "length": "17M",
+          "youtube_id": "XFF2yRcYGp0",
+          "speakers": [
+            "annefou"
+          ]
+        }
+      ],
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
       },
-      "short_id": "T00396",
-      "url": "/topics/climate/tutorials/sentinel5_data/tutorial.html",
+      "short_id": "T00045",
+      "url": "/topics/climate/tutorials/pangeo-notebook/tutorial.html",
       "topic_name": "climate",
-      "tutorial_name": "sentinel5_data",
-      "dir": "topics/climate/tutorials/sentinel5_data",
+      "tutorial_name": "pangeo-notebook",
+      "dir": "topics/climate/tutorials/pangeo-notebook",
       "symlink": null,
-      "id": "climate/sentinel5_data",
+      "id": "climate/pangeo-notebook",
       "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-01-26 13:11:38 +0000",
-      "pub_date": "2024-01-26 13:11:38 +0000",
-      "version": 1,
+      "slides": true,
+      "mod_date": "2024-06-14 09:56:50 +0000",
+      "pub_date": "2022-02-18 23:27:51 +0000",
+      "version": 10,
       "workflows": [
         {
           "workflow": "main_workflow.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/workflows/main_workflow.ga",
-          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/sentinel5_data/workflows/main_workflow.html",
-          "path": "topics/climate/tutorials/sentinel5_data/workflows/main_workflow.ga",
-          "wfid": "climate-sentinel5_data",
+          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.ga",
+          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.html",
+          "path": "topics/climate/tutorials/pangeo-notebook/workflows/main_workflow.ga",
+          "wfid": "climate-pangeo-notebook",
           "wfname": "main-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-sentinel5_data/versions/main-workflow",
-          "license": "CC-BY-4.0",
-          "parent_id": "climate/sentinel5_data",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo-notebook/versions/main-workflow",
+          "license": "MIT",
+          "parent_id": "climate/pangeo-notebook",
           "topic_id": "climate",
-          "tutorial_id": "sentinel5_data",
+          "tutorial_id": "pangeo-notebook",
           "creators": [
             {
               "class": "Person",
-              "identifier": "0009-0008-0622-604X",
-              "name": "Marie Jossé",
-              "url": "https://github.com/Marie59"
+              "identifier": "https://orcid.org/0000-0002-1784-2920",
+              "name": "Anne Fouilloux",
+              "url": "https://github.com/annefou"
             }
           ],
-          "name": "Sentinel5 volcanic data",
-          "title": "Sentinel5 volcanic data",
+          "name": "Pangeo Jupyter Notebook",
+          "title": "Pangeo Jupyter Notebook",
           "version": 1,
-          "description": "From Copernicus Sentinel 5P data to panoply visualization of volcanic activity impact to atmosphere",
+          "description": "Workflow for GTN Pangeo Notebook in Galaxy - Introduction to Xarray",
           "tags": [
-
+            "pangeo",
+            "climate",
+            "big-data",
+            "geosciences"
           ],
           "features": {
             "report": null,
@@ -3960,41 +3166,94 @@
             "comments": false,
             "parameters": false
           },
-          "workflowhub_id": "1203",
+          "workflowhub_id": "1189",
           "history": [
             {
-              "hash": "dc7f440762f8b8c520f88f868a2e4874a473048d",
-              "unix": "1706085833",
-              "message": "Add Sentinel5P tuto",
-              "short_hash": "dc7f44076",
+              "hash": "e1474b2a116fe585bb664fa489f11648d12be74f",
+              "unix": "1643364120",
+              "message": "Add missing annotation for pangeo-notebook workflow",
+              "short_hash": "e1474b2a1",
+              "num": 2
+            },
+            {
+              "hash": "1cb326ea7de3765fc5804f168fb4d813a72676b5",
+              "unix": "1640271678",
+              "message": "split pangeo training in two (Galaxy tool and Pangeo notebook)",
+              "short_hash": "1cb326ea7",
               "num": 1
             }
           ],
           "test_results": null,
-          "modified": "2024-09-04 10:06:00 +0000",
-          "mermaid": "flowchart TD\n  0[\"Copernicus Data Space Ecosystem\"];\n  1[\"Panoply\"];\n  0 -->|output_collection| 1;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Copernicus Data Space Ecosystem\"]\n  1[label=\"Panoply\"]\n  0 -> 1 [label=\"output_collection\"]\n}",
+          "modified": "2024-09-04 10:21:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"Pangeo Jupyter for Big Data geoscience\"];",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Pangeo Jupyter for Big Data geoscience\"]\n}",
           "workflow_tools": [
-            "interactive_tool_copernicus_notebook",
-            "interactive_tool_panoply"
+            "interactive_tool_pangeo_notebook"
           ],
           "inputs": [
 
           ],
           "outputs": [
-
+            {
+              "annotation": "",
+              "content_id": "interactive_tool_pangeo_notebook",
+              "errors": null,
+              "id": 0,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "runtime parameter for tool Interactive Pangeo Notebook",
+                  "name": "input"
+                }
+              ],
+              "label": "Pangeo Jupyter for Big Data geoscience",
+              "name": "Interactive Pangeo Notebook",
+              "outputs": [
+                {
+                  "name": "jupyter_notebook",
+                  "type": "ipynb"
+                }
+              ],
+              "position": {
+                "bottom": 516.90625,
+                "height": 174.734375,
+                "left": 672,
+                "right": 872,
+                "top": 342.171875,
+                "width": 200,
+                "x": 672,
+                "y": 342.171875
+              },
+              "post_job_actions": {
+              },
+              "tool_id": "interactive_tool_pangeo_notebook",
+              "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"mode\": {\"mode_select\": \"scratch\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+              "tool_version": "1c0f66b",
+              "type": "tool",
+              "uuid": "e921fd5a-97f9-4364-8c8a-7f225329016a",
+              "workflow_outputs": [
+                {
+                  "label": null,
+                  "output_name": "jupyter_notebook",
+                  "uuid": "30d1f58a-ace4-4eaf-9efa-c3930d768898"
+                }
+              ]
+            }
           ]
         }
       ],
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json",
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json",
       "tools": [
-        "interactive_tool_copernicus",
-        "interactive_tool_copernicus_notebook",
-        "interactive_tool_panoply"
+        "interactive_tool_pangeo_notebook"
       ],
       "supported_servers": {
         "exact": [
-
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          }
         ],
         "inexact": [
 
@@ -4010,6 +3269,747 @@
         ]
       },
       "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": true,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/pangeo-notebook/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Getting your hands-on climate data",
+      "zenodo_link": "https://zenodo.org/record/3776500",
+      "questions": [
+        "What is climate?",
+        "What type of data is available?"
+      ],
+      "objectives": [
+        "Learn about the terminology",
+        "Learn about the different source of climate data",
+        "Learn about climate observations, reanalysis, climate predictions and climate projections"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Weather versus Climate",
+        "Essential Climate Variables",
+        "Observations, reanalysis, predictions and projections."
+      ],
+      "contributors": [
+        {
+          "name": "Anne Fouilloux",
+          "twitter": "AnneFouilloux",
+          "joined": "2019-07",
+          "elixir_node": "no",
+          "orcid": "0000-0002-1784-2920",
+          "id": "annefou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00041",
+      "url": "/topics/climate/tutorials/climate-101/tutorial.html",
+      "topic_name": "climate",
+      "tutorial_name": "climate-101",
+      "dir": "topics/climate/tutorials/climate-101",
+      "symlink": null,
+      "id": "climate/climate-101",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-06-11 11:55:25 +0000",
+      "pub_date": "2020-04-30 09:42:31 +0000",
+      "version": 12,
+      "workflows": [
+        {
+          "workflow": "climate_101_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/workflows/climate_101_workflow.ga",
+          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/climate-101/workflows/climate_101_workflow.html",
+          "path": "topics/climate/tutorials/climate-101/workflows/climate_101_workflow.ga",
+          "wfid": "climate-climate-101",
+          "wfname": "climate-101-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-climate-101/versions/climate-101-workflow",
+          "license": "MIT",
+          "parent_id": "climate/climate-101",
+          "topic_id": "climate",
+          "tutorial_id": "climate-101",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "https://orcid.org/0000-0002-1784-2920",
+              "name": "Anne Fouilloux"
+            }
+          ],
+          "name": "Climate 101",
+          "title": "Climate 101",
+          "version": 1,
+          "description": "Visualize Climate data with Panoply netCDF viewer",
+          "tags": [
+            "climate"
+          ],
+          "features": {
+            "report": null,
+            "subworkflows": false,
+            "comments": false,
+            "parameters": false
+          },
+          "workflowhub_id": "1138",
+          "history": [
+            {
+              "hash": "3693396f61a109643d15e9bc1b9e21a8def0562d",
+              "unix": "1633427069",
+              "message": "add license, creator information",
+              "short_hash": "3693396f6",
+              "num": 2
+            },
+            {
+              "hash": "969fae434066d9571160c4510b8995e99defd640",
+              "unix": "1633426896",
+              "message": "Add climate workflows from @annefou",
+              "short_hash": "969fae434",
+              "num": 1
+            }
+          ],
+          "test_results": null,
+          "modified": "2024-09-04 10:21:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Copernicus Essential Climate Variables\"];\n  3[\"climate stripes\"];\n  0 -->|output| 3;\n  4[\"Select\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  1 -->|output| 5;\n  6[\"Datamash\"];\n  1 -->|output| 6;\n  7[\"Datamash\"];\n  1 -->|output| 7;\n  8[\"Text reformatting\"];\n  1 -->|output| 8;\n  9[\"map plot\"];\n  2 -->|ofilename| 9;\n  10[\"Datamash\"];\n  8 -->|outfile| 10;\n  11[\"Datamash\"];\n  8 -->|outfile| 11;\n  12[\"Datamash\"];\n  10 -->|out_file| 12;\n  13[\"Datamash\"];\n  10 -->|out_file| 13;\n  14[\"Scatterplot w ggplot2\"];\n  11 -->|out_file| 14;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"Copernicus Essential Climate Variables\"]\n  3[label=\"climate stripes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Select\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Datamash\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Datamash\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"Datamash\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"Text reformatting\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"map plot\"]\n  2 -> 9 [label=\"ofilename\"]\n  10[label=\"Datamash\"]\n  8 -> 10 [label=\"outfile\"]\n  11[label=\"Datamash\"]\n  8 -> 11 [label=\"outfile\"]\n  12[label=\"Datamash\"]\n  10 -> 12 [label=\"out_file\"]\n  13[label=\"Datamash\"]\n  10 -> 13 [label=\"out_file\"]\n  14[label=\"Scatterplot w ggplot2\"]\n  11 -> 14 [label=\"out_file\"]\n}",
+          "workflow_tools": [
+            "Grep1",
+            "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+            "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
+            "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+            "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
+            "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1"
+          ],
+          "inputs": [
+            {
+              "annotation": "",
+              "content_id": null,
+              "errors": null,
+              "id": 0,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "",
+                  "name": "ts_cities.csv"
+                }
+              ],
+              "label": null,
+              "name": "Input dataset",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 10,
+                "top": 10
+              },
+              "tool_id": null,
+              "tool_state": "{\"name\": \"ts_cities.csv\"}",
+              "tool_version": null,
+              "type": "data_input",
+              "uuid": "99e7d3bd-74d3-4651-81d0-7a468624d8aa",
+              "workflow_outputs": [
+
+              ]
+            },
+            {
+              "annotation": "",
+              "content_id": null,
+              "errors": null,
+              "id": 1,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "",
+                  "name": "tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv"
+                }
+              ],
+              "label": null,
+              "name": "Input dataset",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 10,
+                "top": 130
+              },
+              "tool_id": null,
+              "tool_state": "{\"name\": \"tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv\"}",
+              "tool_version": null,
+              "type": "data_input",
+              "uuid": "0afa85cd-9b3e-44a1-a528-9e293f86b500",
+              "workflow_outputs": [
+
+              ]
+            }
+          ],
+          "outputs": [
+
+          ]
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json",
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/climate/cds_essential_variability/cds_essential_variability/0.1.4",
+        "toolshed.g2.bx.psu.edu/repos/climate/climate_stripes/climate_stripes/1.0.1",
+        "toolshed.g2.bx.psu.edu/repos/climate/psy_maps/psy_maps/1.2.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          }
+        ]
+      },
+      "topic_name_human": "Climate",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "text_processing",
+            "owner": "bgruening",
+            "revisions": "9ff72e942410",
+            "tool_panel_section_label": "Text Manipulation",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "cds_essential_variability",
+            "owner": "climate",
+            "revisions": "9ee8db6ffba3",
+            "tool_panel_section_label": "Climate Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "climate_stripes",
+            "owner": "climate",
+            "revisions": "c6f2435d680b",
+            "tool_panel_section_label": "Climate Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "psy_maps",
+            "owner": "climate",
+            "revisions": "706666d912d5",
+            "tool_panel_section_label": "Climate Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "datamash_ops",
+            "owner": "iuc",
+            "revisions": "562f3c677828",
+            "tool_panel_section_label": "Join, Subtract and Group",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "ggplot2_point",
+            "owner": "iuc",
+            "revisions": "9cec81e1b90e",
+            "tool_panel_section_label": "Graph/Display Data",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: 9ff72e942410\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: cds_essential_variability\n  owner: climate\n  revisions: 9ee8db6ffba3\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: climate_stripes\n  owner: climate\n  revisions: c6f2435d680b\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: psy_maps\n  owner: climate\n  revisions: 706666d912d5\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: datamash_ops\n  owner: iuc\n  revisions: 562f3c677828\n  tool_panel_section_label: Join, Subtract and Group\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ggplot2_point\n  owner: iuc\n  revisions: 9cec81e1b90e\n  tool_panel_section_label: Graph/Display Data\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/climate-101/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Ocean's variables study",
+      "questions": [
+        "How to process extract ocean's variables?",
+        "How to use ODV collections?",
+        "How to create climatological estimates?"
+      ],
+      "objectives": [
+        "Deals with ODV collection with data originating from Emodnet chemistry",
+        "Visualise ocean variables to study climate changes"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Manage ODV collection's data.",
+        "Learn to extract data and visualize them on ODV",
+        "Learn to chain ODV and DIVAnd"
+      ],
+      "tags": [
+        "earth-system",
+        "ocean",
+        "netcdf data"
+      ],
+      "contributions": {
+        "authorship": [
+          "Marie59"
+        ],
+        "funding": [
+          "fairease",
+          "eurosciencegateway"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00376",
+      "url": "/topics/climate/tutorials/ocean-variables/tutorial.html",
+      "topic_name": "climate",
+      "tutorial_name": "ocean-variables",
+      "dir": "topics/climate/tutorials/ocean-variables",
+      "symlink": null,
+      "id": "climate/ocean-variables",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-08-09 12:26:18 +0000",
+      "pub_date": "2023-11-29 17:38:31 +0000",
+      "version": 4,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/workflows/main_workflow.ga",
+          "url_html": "https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/workflows/main_workflow.html",
+          "path": "topics/climate/tutorials/ocean-variables/workflows/main_workflow.ga",
+          "wfid": "climate-ocean-variables",
+          "wfname": "main-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-ocean-variables/versions/main-workflow",
+          "license": "CC-BY-4.0",
+          "parent_id": "climate/ocean-variables",
+          "topic_id": "climate",
+          "tutorial_id": "ocean-variables",
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0009-0008-0622-604X",
+              "name": "Marie Jossé",
+              "url": "https://github.com/Marie59"
+            }
+          ],
+          "name": "Ocean's variables 2.0",
+          "title": "Ocean's variables 2.0",
+          "version": 2,
+          "description": "Subset data on the Mediterreanean see and extract and visualise the Phosphate variable",
+          "tags": [
+            "earth-system",
+            "Ocean"
+          ],
+          "features": {
+            "report": {
+              "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+            },
+            "subworkflows": false,
+            "comments": true,
+            "parameters": true
+          },
+          "workflowhub_id": "1200",
+          "history": [
+            {
+              "hash": "1c6ee9c0d6c08affe5e54d71b4488147396ba5aa",
+              "unix": "1723110972",
+              "message": "Add new version of workflow",
+              "short_hash": "1c6ee9c0d",
+              "num": 2
+            },
+            {
+              "hash": "c51d6ffbc21866df213772767f645a889a23c70f",
+              "unix": "1710854627",
+              "message": "Add workflow",
+              "short_hash": "c51d6ffbc",
+              "num": 1
+            }
+          ],
+          "test_results": null,
+          "modified": "2024-09-04 10:21:18 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Parameter\\nWorflow fully interactive\"];\n  style 0 fill:#ded,stroke:#393,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nWorkflow semi automatic\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\ngebco_30sec_8.nc\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Ocean Data View\"];\n  1 -->|output| 4;\n  5[\"Interactive DIVAnd jupyterlab\"];\n  4 -->|outputs_netcdf| 5;\n  0 -->|output| 5;\n  6[\"DIVAnd create a climatology\"];\n  3 -->|output| 6;\n  4 -->|outputs_netcdf| 6;\n  2 -->|output| 6;\n  59963282-87bf-4432-a777-8a9b61dea03c[\"Output\\nWater_body_Phosphate_Mediterranean.nc\"];\n  6 --> 59963282-87bf-4432-a777-8a9b61dea03c;\n  style 59963282-87bf-4432-a777-8a9b61dea03c stroke:#2c3143,stroke-width:4px;\n  7[\"ODV visualisation interactive\"];\n  5 -->|output_netcdf| 7;\n  dc8316a4-e57c-476b-b885-bbe4fb84d8c7[\"Output\\nOcean variables visualisation interactive\"];\n  7 --> dc8316a4-e57c-476b-b885-bbe4fb84d8c7;\n  style dc8316a4-e57c-476b-b885-bbe4fb84d8c7 stroke:#2c3143,stroke-width:4px;\n  8[\"ODV visualisation\"];\n  6 -->|output_netcdf| 8;\n  7b072253-5bf9-434f-b06a-70b375ddaa03[\"Output\\nOcean variables visualisation\"];\n  8 --> 7b072253-5bf9-434f-b06a-70b375ddaa03;\n  style 7b072253-5bf9-434f-b06a-70b375ddaa03 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightgreen,label=\"ℹ️ Input Parameter\\nWorflow fully interactive\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nEutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nWorkflow semi automatic\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\ngebco_30sec_8.nc\"]\n  4[label=\"Ocean Data View\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Interactive DIVAnd jupyterlab\"]\n  4 -> 5 [label=\"outputs_netcdf\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"DIVAnd create a climatology\"]\n  3 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"outputs_netcdf\"]\n  2 -> 6 [label=\"output\"]\n  k5996328287bf4432a7778a9b61dea03c[color=lightseagreen,label=\"Output\\nWater_body_Phosphate_Mediterranean.nc\"]\n  6 -> k5996328287bf4432a7778a9b61dea03c\n  7[label=\"ODV visualisation interactive\"]\n  5 -> 7 [label=\"output_netcdf\"]\n  kdc8316a4e57c476bb885bbe4fb84d8c7[color=lightseagreen,label=\"Output\\nOcean variables visualisation interactive\"]\n  7 -> kdc8316a4e57c476bb885bbe4fb84d8c7\n  8[label=\"ODV visualisation\"]\n  6 -> 8 [label=\"output_netcdf\"]\n  k7b0722535bf9434fb06a70b375ddaa03[color=lightseagreen,label=\"Output\\nOcean variables visualisation\"]\n  8 -> k7b0722535bf9434fb06a70b375ddaa03\n}",
+          "workflow_tools": [
+            "interactive_tool_divand",
+            "interactive_tool_odv",
+            "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0"
+          ],
+          "inputs": [
+            {
+              "annotation": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
+              "content_id": null,
+              "errors": null,
+              "id": 0,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
+                  "name": "Worflow fully interactive"
+                }
+              ],
+              "label": "Worflow fully interactive",
+              "name": "Input parameter",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 29.80677214543107,
+                "top": 359.1046708180256
+              },
+              "tool_id": null,
+              "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
+              "tool_version": null,
+              "type": "parameter_input",
+              "uuid": "250d862b-4c3d-462d-9bcd-9a5053c52b5e",
+              "when": null,
+              "workflow_outputs": [
+
+              ]
+            },
+            {
+              "annotation": "The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets EMODnet Chemistry.",
+              "content_id": null,
+              "errors": null,
+              "id": 1,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "The data here are Mediterranean Sea - Eutrophication and Acidity aggregated datasets EMODnet Chemistry.",
+                  "name": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip"
+                }
+              ],
+              "label": "Eutrophication_Med_profiles_2022_unrestricted_SNAPSHOT_2023-10-24T16-39-44.zip",
+              "name": "Input dataset",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 314.4,
+                "top": 507.4
+              },
+              "tool_id": null,
+              "tool_state": "{\"optional\": false, \"tag\": null}",
+              "tool_version": null,
+              "type": "data_input",
+              "uuid": "b513664a-1176-4fd9-bb79-439010069177",
+              "when": null,
+              "workflow_outputs": [
+
+              ]
+            },
+            {
+              "annotation": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
+              "content_id": null,
+              "errors": null,
+              "id": 2,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "Choose whether you want to have only interactive tools (for more experimented user) or if you want a workflow hat combines interactive and non-interactive tools (easier)",
+                  "name": "Workflow semi automatic"
+                }
+              ],
+              "label": "Workflow semi automatic",
+              "name": "Input parameter",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 34.559982917236994,
+                "top": 738.7586893348329
+              },
+              "tool_id": null,
+              "tool_state": "{\"parameter_type\": \"boolean\", \"optional\": false}",
+              "tool_version": null,
+              "type": "parameter_input",
+              "uuid": "6e2ed5ec-3760-44fe-a722-4e44356f9058",
+              "when": null,
+              "workflow_outputs": [
+
+              ]
+            },
+            {
+              "annotation": "A bathymetry file in netcdf.",
+              "content_id": null,
+              "errors": null,
+              "id": 3,
+              "input_connections": {
+              },
+              "inputs": [
+                {
+                  "description": "A bathymetry file in netcdf.",
+                  "name": "gebco_30sec_8.nc"
+                }
+              ],
+              "label": "gebco_30sec_8.nc",
+              "name": "Input dataset",
+              "outputs": [
+
+              ],
+              "position": {
+                "left": 614.0977004616734,
+                "top": 903.4688531054738
+              },
+              "tool_id": null,
+              "tool_state": "{\"optional\": false, \"tag\": null}",
+              "tool_version": null,
+              "type": "data_input",
+              "uuid": "006a3936-6151-4724-9fab-6b41f869e1ee",
+              "when": null,
+              "workflow_outputs": [
+
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "annotation": "Create a climatology (not interactively)",
+              "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0",
+              "errors": null,
+              "id": 6,
+              "input_connections": {
+                "bathname": {
+                  "id": 3,
+                  "output_name": "output"
+                },
+                "input_netcdf_identifier": {
+                  "id": 4,
+                  "output_name": "outputs_netcdf"
+                },
+                "when": {
+                  "id": 2,
+                  "output_name": "output"
+                }
+              },
+              "inputs": [
+
+              ],
+              "label": "DIVAnd (create a climatology)",
+              "name": "DIVAnd",
+              "outputs": [
+                {
+                  "name": "output_netcdf",
+                  "type": "netcdf"
+                }
+              ],
+              "position": {
+                "left": 958.2529539113443,
+                "top": 679.118779662132
+              },
+              "post_job_actions": {
+                "RenameDatasetActionoutput_netcdf": {
+                  "action_arguments": {
+                    "newname": "Water_body_Phosphate_Mediterranean.nc"
+                  },
+                  "action_type": "RenameDatasetAction",
+                  "output_name": "output_netcdf"
+                }
+              },
+              "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0",
+              "tool_shed_repository": {
+                "changeset_revision": "484930fdc002",
+                "name": "divand_full_analysis",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+              },
+              "tool_state": "{\"__input_ext\": \"input\", \"bathname\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"enddate\": \"2017-01-01\", \"input_netcdf_identifier\": {\"__class__\": \"ConnectedValue\"}, \"input_netcdf_identifier|__identifier__\": \"data_from_Eutrophication_Med_profiles_2022_unrestricted.nc\", \"latmax\": \"38.0\", \"latmin\": \"32.0\", \"longmax\": \"30.0\", \"longmin\": \"19.0\", \"selmax\": \"100\", \"selmin\": \"0\", \"startdate\": \"1950-12-31\", \"varname\": \"phosphate\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+              "tool_version": "0.1.0+galaxy0",
+              "type": "tool",
+              "uuid": "d1c07265-1da0-40d6-9fd5-1041a9d9f658",
+              "when": "$(inputs.when)",
+              "workflow_outputs": [
+                {
+                  "label": "Water_body_Phosphate_Mediterranean.nc",
+                  "output_name": "output_netcdf",
+                  "uuid": "59963282-87bf-4432-a777-8a9b61dea03c"
+                }
+              ]
+            },
+            {
+              "annotation": "Final step to visualize in different way a ocean variable like the phosphate.",
+              "content_id": "interactive_tool_odv",
+              "errors": null,
+              "id": 7,
+              "input_connections": {
+                "method|infiles": {
+                  "id": 5,
+                  "output_name": "output_netcdf"
+                }
+              },
+              "inputs": [
+                {
+                  "description": "runtime parameter for tool ODV",
+                  "name": "method"
+                }
+              ],
+              "label": "ODV (visualisation) interactive",
+              "name": "ODV",
+              "outputs": [
+                {
+                  "name": "outputs_netcdf",
+                  "type": "input"
+                },
+                {
+                  "name": "outputs_all",
+                  "type": "input"
+                }
+              ],
+              "position": {
+                "left": 1315.0326051372172,
+                "top": 398.52546972475403
+              },
+              "post_job_actions": {
+              },
+              "tool_id": "interactive_tool_odv",
+              "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+              "tool_version": "5.6.5.1",
+              "type": "tool",
+              "uuid": "50c35d61-7b8d-4706-9d56-d3bd94a46960",
+              "when": null,
+              "workflow_outputs": [
+                {
+                  "label": "Ocean variables visualisation interactive",
+                  "output_name": "outputs_all",
+                  "uuid": "dc8316a4-e57c-476b-b885-bbe4fb84d8c7"
+                }
+              ]
+            },
+            {
+              "annotation": "Final step to visualize in different way a ocean variable like the phosphate.",
+              "content_id": "interactive_tool_odv",
+              "errors": null,
+              "id": 8,
+              "input_connections": {
+                "method|infiles": {
+                  "id": 6,
+                  "output_name": "output_netcdf"
+                }
+              },
+              "inputs": [
+                {
+                  "description": "runtime parameter for tool ODV",
+                  "name": "method"
+                }
+              ],
+              "label": "ODV (visualisation)",
+              "name": "ODV",
+              "outputs": [
+                {
+                  "name": "outputs_netcdf",
+                  "type": "input"
+                },
+                {
+                  "name": "outputs_all",
+                  "type": "input"
+                }
+              ],
+              "position": {
+                "left": 1313.0264554819623,
+                "top": 737.9220054373203
+              },
+              "post_job_actions": {
+              },
+              "tool_id": "interactive_tool_odv",
+              "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"type\": \"own_data\", \"__current_case__\": 0, \"infiles\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+              "tool_version": "5.6.5.1",
+              "type": "tool",
+              "uuid": "9bff476c-be32-4d87-a655-db241126ae49",
+              "when": null,
+              "workflow_outputs": [
+                {
+                  "label": "Ocean variables visualisation",
+                  "output_name": "outputs_all",
+                  "uuid": "7b072253-5bf9-434f-b06a-70b375ddaa03"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json",
+      "tools": [
+        "interactive_tool_divand",
+        "interactive_tool_odv",
+        "toolshed.g2.bx.psu.edu/repos/ecology/divand_full_analysis/divand_full_analysis/0.1.0+galaxy0"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Climate",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "divand_full_analysis",
+            "owner": "ecology",
+            "revisions": "484930fdc002",
+            "tool_panel_section_label": "Climate Analysis",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: divand_full_analysis\n  owner: ecology\n  revisions: 484930fdc002\n  tool_panel_section_label: Climate Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "slides_recordings": false,
@@ -4077,8 +4077,8 @@
         }
       ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/sentinel5_data/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-variables/tutorial.json"
       }
     },
     {
@@ -4298,151 +4298,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.4108341",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "climate",
-          "tutorials": [
-            "fates"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "jupyterlab"
-          ]
-        },
-        {
-          "type": "external",
-          "title": "Programming with Python",
-          "link": "https://swcarpentry.github.io/python-novice-inflammation/"
-        },
-        {
-          "type": "external",
-          "title": "The Unix Shell",
-          "link": "http://swcarpentry.github.io/shell-novice/"
-        }
-      ],
-      "questions": [
-        "Why and when using Galaxy Climate JupyterLab for CLM-FATES?",
-        "How to start Galaxy Climate JupyterLab in Galaxy?",
-        "How to upload input data for running CLM-FATES?",
-        "How to create CLM-FATES case in Galaxy Climate JupyterLab?",
-        "How to customize your run?",
-        "How to analyze your model outputs?",
-        "How to save your model results into a Galaxy history?",
-        "How to share your results?"
-      ],
-      "objectives": [
-        "Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.",
-        "Setting up CLM-FATES case with Galaxy Climate JupyterLab.",
-        "Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.",
-        "Analyzing CLM-FATES results.",
-        "Sharing CLM-FATES simulations.",
-        "Composing, executing and publishing the corresponding Jupyter notebooks."
-      ],
-      "time_estimation": "6H",
-      "key_points": [
-        "Galaxy Climate JupyterLab",
-        "CLM-FATES",
-        "Model analysis"
-      ],
-      "tags": [
-        "interactive-tools"
-      ],
-      "contributors": [
-        {
-          "name": "Anne Fouilloux",
-          "twitter": "AnneFouilloux",
-          "joined": "2019-07",
-          "elixir_node": "no",
-          "orcid": "0000-0002-1784-2920",
-          "id": "annefou",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
-        }
-      ],
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": "T00043",
-      "url": "/topics/climate/tutorials/fates-jupyterlab/tutorial.html",
-      "topic_name": "climate",
-      "tutorial_name": "fates-jupyterlab",
-      "dir": "topics/climate/tutorials/fates-jupyterlab",
-      "symlink": null,
-      "id": "climate/fates-jupyterlab",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2023-12-05 14:44:50 +0000",
-      "pub_date": "2020-10-25 21:05:55 +0000",
-      "version": 15,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json",
-      "tools": [
-        "interactive_tool_jupyter_notebook"
-      ],
-      "supported_servers": {
-        "exact": [
-          {
-            "url": "https://usegalaxy.be/",
-            "name": "UseGalaxy.be",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.eu",
-            "name": "UseGalaxy.eu",
-            "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.fr/",
-            "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.org",
-            "name": "UseGalaxy.org (Main)",
-            "usegalaxy": true
-          }
-        ],
-        "inexact": [
-
-        ]
-      },
-      "topic_name_human": "Climate",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Ocean Data View (ODV)",
       "questions": [
         "How to process Argo's glider data ?",
@@ -4593,6 +4448,146 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-data-view/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/ocean-data-view/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.4108341",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "climate",
+          "tutorials": [
+            "fates"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "jupyterlab"
+          ]
+        },
+        {
+          "type": "external",
+          "title": "Programming with Python",
+          "link": "https://swcarpentry.github.io/python-novice-inflammation/"
+        },
+        {
+          "type": "external",
+          "title": "The Unix Shell",
+          "link": "http://swcarpentry.github.io/shell-novice/"
+        }
+      ],
+      "questions": [
+        "Why and when using Galaxy Climate JupyterLab for CLM-FATES?",
+        "How to start Galaxy Climate JupyterLab in Galaxy?",
+        "How to upload input data for running CLM-FATES?",
+        "How to create CLM-FATES case in Galaxy Climate JupyterLab?",
+        "How to customize your run?",
+        "How to analyze your model outputs?",
+        "How to save your model results into a Galaxy history?",
+        "How to share your results?"
+      ],
+      "objectives": [
+        "Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.",
+        "Setting up CLM-FATES case with Galaxy Climate JupyterLab.",
+        "Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.",
+        "Analyzing CLM-FATES results.",
+        "Sharing CLM-FATES simulations.",
+        "Composing, executing and publishing the corresponding Jupyter notebooks."
+      ],
+      "time_estimation": "6H",
+      "key_points": [
+        "Galaxy Climate JupyterLab",
+        "CLM-FATES",
+        "Model analysis"
+      ],
+      "tags": [
+        "interactive-tools"
+      ],
+      "contributors": [
+        {
+          "name": "Anne Fouilloux",
+          "twitter": "AnneFouilloux",
+          "joined": "2019-07",
+          "elixir_node": "no",
+          "orcid": "0000-0002-1784-2920",
+          "id": "annefou",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/annefou.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/annefou/"
+        }
+      ],
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": "T00043",
+      "url": "/topics/climate/tutorials/fates-jupyterlab/tutorial.html",
+      "topic_name": "climate",
+      "tutorial_name": "fates-jupyterlab",
+      "dir": "topics/climate/tutorials/fates-jupyterlab",
+      "symlink": null,
+      "id": "climate/fates-jupyterlab",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2023-12-05 14:44:50 +0000",
+      "pub_date": "2020-10-25 21:05:55 +0000",
+      "version": 15,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json",
+      "tools": [
+        "interactive_tool_jupyter_notebook"
+      ],
+      "supported_servers": {
+        "exact": [
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          }
+        ],
+        "inexact": [
+
+        ]
+      },
+      "topic_name_human": "Climate",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/climate/tutorials/fates-jupyterlab/tutorial.json"
       }
     }
   ]
