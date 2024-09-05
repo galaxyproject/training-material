@@ -30,24 +30,36 @@ contributions:
         - nekrut
         - dannon
         - delphine-l
+        - GarethPrice-Aus 
         - jdavcs
+        - mschatz
         - natalie-wa
         - nakucher
         - shiltemann
         - teresa-m
     instructors:
+        - Ahmed Awan
         - erxleben
+        - annasyme
         - anuprulez
         - abretaud
         - bebatut
+        - bgruening
         - clsiguret
+        - dannon
         - dianichj
         - deeptivarshney
         - delphine-l
+        - elichad
         - EngyNasr
+        - emmaustin20
+        - GarethPrice-Aus 
+        - igormakunin
+        - jdavcs
         - lldelisle
         - bernt-matthias
         - foellmelanie
+        - mschatz
         - natalie-wa
         - natefoo
         - paulzierep
@@ -61,6 +73,7 @@ contributions:
         - subinamehta
         - teresa-m
         - timothygriffin
+        - tcollins2011
         - nomadscientist
         - wm75
     funding:

@@ -15,6 +15,8 @@ contributions:
         - clsiguret
         - SaimMomin12
         - EngyNasr
+        - meltemktn
+        - paulzierep
 
 
 program:
