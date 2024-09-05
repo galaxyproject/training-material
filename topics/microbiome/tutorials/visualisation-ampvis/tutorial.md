@@ -456,7 +456,7 @@ Normalised data loses information about the original sequencing depth, making it
 
 ## Heatmaps
 Heatmaps show relationships between 2 variables ploted on 2 axis and colour intensity representing the abundance of taxa in 
-relation to what it was ploted to, like sample, specific plant or year ( (A complete guide to heatmaps)[https://www.atlassian.com/data/charts/heatmap-complete-guide] ).
+relation to what it was ploted to, like sample, specific plant or year ([A complete guide to heatmaps](https://www.atlassian.com/data/charts/heatmap-complete-guide)).
 
 Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
 The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
@@ -688,7 +688,7 @@ We used 2 different metadata subsets:
 To plot a multidimensional dataset onto a lower-demensional space, we need ordination techniques. In ecological datasets, similar 
 samples and species are plotted close to each other, while dissimilar samples and species will be found far apart. The dimensions
 on the ordination plot represent enviromental gradients and describe the relationship between species patterns and environmental
-gradient ( (Introduction to ordination)[https://ourcodingclub.github.io/tutorials/ordination/] ).
+gradient ([Introduction to ordination](https://ourcodingclub.github.io/tutorials/ordination/)).
 
 We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
@@ -696,7 +696,7 @@ As with heatmaps, the subsets are based on variables we define and are available
 
 ### Ordination Method: PCA
 PCA (Principal Component Analysis) is an unconstrained ordination technique and a common reduction technique to linear dimensionality 
-( (MDAnalysis User Guide)[https://userguide.mdanalysis.org/stable/examples/analysis/reduced_dimensions/pca.html] ).
+([MDAnalysis User Guide](https://userguide.mdanalysis.org/stable/examples/analysis/reduced_dimensions/pca.html)).
 
 Follow this workflow to create a simple ordination plot.
 <div class="Short-Version" markdown="1">
@@ -807,9 +807,9 @@ were sampled.
 
 ### Ordination Method: CCA
 CCA (Canonical Correspondance Analysis) is a constrained ordination technique derived form CA (Correspondance Analysis) and is
-prefered for most ecological data. CCA maximises the correlation between samples and species scores ( (Ordination Methods)[https://ordination.okstate.edu/overview.htm] ). 
+prefered for most ecological data. CCA maximises the correlation between samples and species scores ([Ordination Methods](https://ordination.okstate.edu/overview.html)). 
 Hellinger transformation is a modified species profile computed from Euclidean distances, organised into a matrix of
-Hellinger distances. Hellinger distances are used to measure clustering or ordination of species abundance ( (Ordination)[https://www.numericalecology.com/Reprints/Legendre_Ordination_chapter_in_Palaeolimnology_book_2012.pdf] ).
+Hellinger distances. Hellinger distances are used to measure clustering or ordination of species abundance ([Ordination](https://www.numericalecology.com/Reprints/Legendre_Ordination_chapter_in_Palaeolimnology_book_2012.pdf)).
 
 Follow this workflow to create an ordination plot with the CCA method and the Hellinger transformation.
 <div class="Short-Version" markdown="1">
@@ -878,7 +878,7 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 
 ## Boxplot
 Boxplots are used to provide high-level information at a glance and make comparisons between mulpiple groups very easy, as they offer
-general information about data symmetry, skew, variance and outliers ( (A complete guide to box plots)[https://www.atlassian.com/data/charts/box-plot-complete-guide] ).
+general information about data symmetry, skew, variance and outliers ([A complete guide to box plots](https://www.atlassian.com/data/charts/box-plot-complete-guide)).
 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
