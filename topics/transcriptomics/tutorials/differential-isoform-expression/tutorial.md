@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Genome-wide alternative splicing analysis
 level: Advanced
-zenodo_link: 'https://zenodo.org/record/7974884'
+zenodo_link: 'https://zenodo.org/records/13692977'
 tags:
     - alternative splicing
     - isoform switching
@@ -74,18 +74,18 @@ The first step of our analysis consists of retrieving the paired-end RNA-seq dat
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050437_Health	{{ page.zenodo_link }}/files/SRR9050437R_health.fastq.gz	fastqsanger.gz	2
->      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050438_Health	{{ page.zenodo_link }}/files/SRR9050438R_health.fastq.gz	fastqsanger.gz	2
->      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439F_health.fastq.gz	fastqsanger.gz	1
->      SRR9050439_Health	{{ page.zenodo_link }}/files/SRR9050439R_health.fastq.gz	fastqsanger.gz	2
->      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440F_cancer.fastq.gz	fastqsanger.gz	1
->      SRR9050440_Cancer	{{ page.zenodo_link }}/files/SRR9050440R_cancer.fastq.gz	fastqsanger.gz	2
->      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441F_cancer.fastq.gz	fastqsanger.gz	1
->      SRR9050441_Cancer	{{ page.zenodo_link }}/files/SRR9050441R_cancer.fastq.gz	fastqsanger.gz	2
->      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442F_cancer.fastq.gz	fastqsanger.gz	1
->      SRR9050442_Cancer	{{ page.zenodo_link }}/files/SRR9050442R_cancer.fastq.gz	fastqsanger.gz	2
+>      ASP14_1	{{ page.zenodo_link }}/files/ASP14_1_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_1	{{ page.zenodo_link }}/files/ASP14_1_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
+>      ASP14_2	{{ page.zenodo_link }}/files/ASP14_2_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_2	{{ page.zenodo_link }}/files/ASP14_2_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
+>      ASP14_3	{{ page.zenodo_link }}/files/ASP14_3_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_3	{{ page.zenodo_link }}/files/ASP14_3_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
+>      ASP14_doxycycline_1	{{ page.zenodo_link }}/files/ASP14_doxycycline_1_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_doxycycline_1	{{ page.zenodo_link }}/files/ASP14_doxycycline_1_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
+>      ASP14_doxycycline_2	{{ page.zenodo_link }}/files/ASP14_doxycycline_2_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_doxycycline_2	{{ page.zenodo_link }}/files/ASP14_doxycycline_2_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
+>      ASP14_doxycycline_3	{{ page.zenodo_link }}/files/ASP14_doxycycline_3_chr10enriched_R1.fastq.gz	fastqsanger.gz	1
+>      ASP14_doxycycline_3	{{ page.zenodo_link }}/files/ASP14_doxycycline_3_chr10enriched_R2.fastq.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -116,7 +116,7 @@ Next we will retrieve the remaining datasets.
 >
 >      ```
 >      CPAT_header.tab  {{ page.zenodo_link }}/files/CPAT_header.tab
->      gencode.hg19.chr10.gtf	{{ page.zenodo_link }}/files/gencode.hg19.chr10.gtf
+>      gencode.hg19.chr10.gtf	{{ page.zenodo_link }}/files/gencode.v19.hg19.chr10.gtf
 >      hg19.chr10.fasta	{{ page.zenodo_link }}/files/hg19.chr10.fasta
 >      active_site.dat.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/active_site.dat.gz
 >      Pfam-A.hmm.dat.gz	https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.hmm.dat.gz
@@ -284,7 +284,7 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 > > >
 > > > > <solution-title></solution-title>
 > > > >
-> > > > 1. You may have found 1 as minimum intron size. Indeed, it seems that some annotated introns are 1bp long. This does not really make sense biologically. Piovesan and colleague have shown that no eukaryotic introns were found below 30bp ({ % cite Piovesan2015 %}).
+> > > > 1. You may have found 1 as minimum intron size. Indeed, it seems that some annotated introns are 1bp long. This does not really make sense biologically. Piovesan and colleague have shown that no eukaryotic introns were found below 30bp ({% cite Piovesan2015 %}).
 > > > >
 > > > > 2. You may have found 316825.
 > > > >
@@ -516,7 +516,7 @@ Now, we will integrate the outputs into **MultiQC**.
 {: .hands_on}
 
 
-First, we will evaluate the plot corresponding to the **RNA STAR** alignment scores (fig. 4), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%.
+First, we will evaluate the plot corresponding to the **RNA STAR** alignment scores (fig. 4), which will allow us to easily compare the samples to get an overview of the quality of the samples. As a general criteria, we can consider that good quality samples should have at least 75% of the reads uniquely mapped. In our case, of samples have unique mapping values over 90%. Most of the reads asigned to 'Unmapped: too short' are in fact mapping to other chromosomes.
 
 ![Figure 04. RNA STAR alignment stats plot](../../images/differential_isoform/star_alignment.png "RNA STAR alignment stats percentage plot. Note that STAR counts a paired-end read as one read.")
 
@@ -524,21 +524,21 @@ Now we can have a look at the **RSeQC** results;  we will evaluate the RSeQC **R
 
 ![Figure 05. RSeQC read distribution plot](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution. This module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions). Distribution of all features (A). Distribution of low frequency features (B).")
 
-According the figure 5.A, all samples show show a similar trend, both in health and cancer samples, with most reads mapping on CDS exons (around 72%), 5'UTR (around 4.5%) and 3'UTR (around 13.5%). We can also evaluate the frequency of less common features by hidding the main ones; it can be done by clicking in the correspoding feature label. According the figure, mapping on the region `TSS_up_1kb` (transcription start site up to 5'kb upstream) seems to be slighly more frequent in cancer samples (fig. 5B).
+According the figure 5.A, all samples show show a similar trend, both in ASP14 (cancer) and ASP13_doxycycline (oncogene-depleted) samples, with most reads mapping on CDS exons (around 66%), 5'UTR (around 2-3%) and 3'UTR (around 20%). We can also evaluate the frequency of less common features by hidding the main ones; it can be done by clicking in the correspoding feature label (fig. 5B). However, we can see that the profile is consistent between replicates but is slightly different between conditions. This is not an ideal case as we cannot rule out if this is biological or technical as the library may have not been prepared at the same time.
 
 Now we will evaluate the results of the **Infer Experiment** module, which allows to speculate the experimental design (whether sequencing is strand-specific, and if so, how reads are stranded) by sampling a subset of reads from the BAM file and comparing their genome coordinates and strands with those of the reference gene model ({% cite Wang2012 %}).
 
 ![Figure 06. RSeQC infer experiment plot](../../images/differential_isoform/rseqc_infer_experiment_plot.png "RSeQC Infer Experiment plot. It counts the percentage of reads and read pairs that match the strandedness of overlapping transcripts. It can be used to infer whether RNA-seq library preps are stranded (sense or antisense).")
 
-As can be appreciated in the image, the proportion of reads assigned as *sense* is similar to the ones assigned as *antisense*, which indicates that in that case our RNA-seq data is non-strand specific.
+As can be appreciated in the image, the proportion of reads assigned as *sense* is close to null and the ones assigned as *antisense* are around 80%, which indicates that in that case our RNA-seq data is strand specific in the reverse orientation. This can be also evaluated with the STAR Gene Counts statistics as in the Reference-based RNA-seq tutorial.
 
 Now, let's evaluate the results generated by the **Gene Body Coverage** module. It scales all transcripts to 100 nt and calculates the number of reads covering each nucleotide position. The plot generated from this information illustrates the coverage profile along the gene body, defined as the entire gene from the transcription start site to the end of the transcript (fig. 7).
 
 ![Figure 07. RSeQC gene body coverage plot](../../images/differential_isoform/rseqc_gene_body_coverage_plot.png "RSeQC gene body coverage plot. It calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.")
 
-The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3' skew in libraries. For example, a skew towards increased 3' coverage can happen in degraded samples prepared with poly-A selection. According the figure 7, there're not bias in our reads as a result of sequencing technical problems.
+The gene body coverage pattern is highly influenced by the RNA-seq protocol, and it is useful for identifying artifacts such as 3' skew in libraries. For example, a skew towards increased 3' coverage can happen in degraded samples prepared with poly-A selection. According the figure 7, there're not big bias in our reads as a result of sequencing technical problems.
 
-Other important metric for {AS} analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform {AS} analyses by comparing the detected splice junctions to reference gene model (fig. 8). Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, we expect the number of known junctions to reach a plateau if the current sequencing depth is almost saturated for known junction detection. Using an unsaturated sequencing depth would miss many rare splice junctions ({% cite Wang2012 %}). As we can appreciate in the plot (fig. 8.A), the known junctions tend to stabilize around 7.000, which indicates that the read sequencing depth is good enough for performing the {AS} analysis.
+Other important metric for {AS} analysis is the one provided by the **Junction Saturation** module, which allows to determine if the current sequencing depth is sufficient to perform {AS} analyses by comparing the detected splice junctions to reference gene model (fig. 8). Since for a well annotated organism both the number of expressed genes and spliced junctions is considered to be almost fixed, we expect the number of known junctions to reach a plateau if the current sequencing depth is almost saturated for known junction detection. Using an unsaturated sequencing depth would miss many rare splice junctions ({% cite Wang2012 %}). As we can appreciate in the plot (fig. 8.A), the known junctions tend to stabilize around 8.000, which indicates that the read sequencing depth is good enough for performing the {AS} analysis.
 
 > <comment-title>RSeQC junction saturation details</comment-title>
 >
@@ -554,11 +554,11 @@ After confirming that the saturation level is good enough, now we will check the
 
 ![Figure 09. RSeQC junction annotation plot](../../images/differential_isoform/rseqc_junction_annotation_junctions_plot.png "RSeQC junction annotation. The detected junctions and events are divided in three exclusive categories: known splicing junctions (blue), partial novel splicing junction (one of the splice site is novel) (grey) and new splicing junctions (green). Splice events refer to the number of times a RNA-read is spliced (A). Splice junctions correspond to multiple splicing events spanning the same intron.") 
 
-According to the results, despite the relatively low (around 0.5%) proportion of reads supporting new (or partially new) splicing events (fig. 9.B), they represent a large proportion of junctions (fig. 9.A).
+According to the results, despite the relatively low (around 0.3%) proportion of reads supporting new (or partially new) splicing events (fig. 9.B), they represent a large proportion of junctions (fig. 9.A).
 
-![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseqc_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2.") 
+![Figure 10. RSeQC inner distance plot](../../images/differential_isoform/rseqc_inner_distance_plot.png "RSeQC inner distance. The plot represents gap sizes between R1 and R2 so the fragment size minus the size of both reads.")
 
-Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually very short inner distances appear in old or degraded samples; in addition values can be negative if the two fragments overlap.
+Finally from the the Inner Distance plot (fig. 10), we can infer some additional information about the degree of degradation of the samples. Usually very short inner distances appear in old or degraded samples; in addition values can be negative if the two fragments overlap. In our case, we can see that most of reads overlap (this was already seen with the fastp report which is more informative) and that the average fragment size is 150bp (-50 inner distance + 100bp read 1 + 100bp read2).
 
 After evaluating the quality of the RNA-seq data, we can start with the transcriptome assembly step.
 
@@ -605,6 +605,22 @@ Then, let's start with the transcriptome assemby.
 >
 > 4. Rename the output as `Reference transcriptome annotation`
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many lines are there in the `Assembled transcripts coordinates`?
+>    > 2. How many lines are there in the original gtf?
+>    > 3. How many lines are there in the `Reference transcriptome annotation`?
+>    > 4. What can you conclude?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. There are about 25k lines.
+>    >    > 2. There are about 93k lines.
+>    >    > 3. There are about 70k lines.
+>    >    > 4. Not much as the number of lines is not informative enough, we need an appropriate tool to compare those GTFs.
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 {: .hands_on}
 
 Now, we can perform the transcriptome quantification in a more accurate way by making use of the new transcriptome annotation.
@@ -688,8 +704,8 @@ In order to have an overview of the transcriptome, we can have a look at the **s
 >
 > > <solution-title></solution-title>
 > >
-> > 1. At transcript level, precision is 99.6% and sensitivity 91.2%.
-> > 2. According the stats file, 387 new exons (1.4%) have been identified.
+> > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original gtf. The sensitivity gives an indication on what is the proportion of new transcript compared to the original gtf.
+> > 2. According the stats file, 962 new exons (4.8%) have been identified.
 > > 
 > {: .solution}
 {: .question}
@@ -702,7 +718,57 @@ For a more in-depth analysis of the output, we could use the **TMAP** file and p
 >   - *"Filter"*: **TMAP** file
 >   - *"With following condition"*: `c3=='i'`
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many transcripts within introns have been detected?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. The output of **Filter** {% icon tool %} has 47 lines so 47 transcripts.
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 {: .hands_on}
+
+It is always good to check visually the findings using the coverage. We will take advantage of the coverage files we generated with **STAR** and the annotation generated by **StringTie**, and will use a software called **pyGenomeTracks**
+
+> <hands-on-title>Check new transcript in intron with pyGenometracks from STAR coverage</hands-on-title>
+>
+> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
+>    - *"Region of the genome to limit the operation"*: `chr10:1,095,478-1,178,237`
+>    - In *"Include tracks in your plot"*:
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+>                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection XXX: Coverage Uniquely mapped strand 2`.
+>                - *"Color of track"*: Choose a color for sense coverage (I choose blue).
+>                - *"Minimum value"*: `0`
+>                - *"height"*: `3`
+>                - *"Show visualization of data range"*: `Yes`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Bedgraph track`
+>                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
+>                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection XXX: Coverage Uniquely mapped strand 1`.
+>                - *"Color of track"*: Choose a color for antisense coverage (I choose red).
+>                - *"Minimum value"*: `0`
+>                - *"height"*: `3`
+>                - *"Show visualization of data range"*: `Yes`
+>                - *"Include spacer at the end of the track"*: `1`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `Gene track / Bed track`
+>                - *"Plot title"*: `Genes`
+>                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Reference transcriptome annotation`
+>                - *"height"*: `5`
+>                - *"Put all labels inside the plotted region"*: `Yes`
+>                - *"Allow to put labels in the right margin "*: `Yes`
+>        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
+>            - *"Choose style of the track"*: `X-axis`
+>
+{: .hands_on}
+
+![Figure 12. Intronic transcript plot](../../images/differential_isoform/pgt_intronic.png "pyGenometracks isoform visualization of coordinates chr10:1,095,478-1,178,237. The plot integrates coverage information along with the annotations.")
+
+We can see that the transcript on top (ENST00000358220.1) has multiple transcripts antisense in his first intron (the name may change).
 
 ### Transcriptome quality assessment with **rnaQUAST**
 
@@ -738,19 +804,19 @@ rnaQUAST generates several metrics to evaluate the quality of transcriptome asse
 >
 {: .hands_on}
 
-By default, **rnaQUAST** generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 12) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.
+By default, **rnaQUAST** generates a user-friendly report in PDF format; it summarizes of the metrics, plots and statistics computed across the different samples. The table (fig. 13) provides various metrics that describe completeness and correctness levels of the assembled transcripts, including NGA50, NGA75, misassemblies, and mismatches.
 
-![Figure 12. rnaQUAST metrics table summary](../../images/differential_isoform/rnaQUAST_summary_table.png "rnaQUAST tabular summary of metrics and statistics.")
+![Figure 13. rnaQUAST metrics table summary](../../images/differential_isoform/rnaQUAST_summary_table.png "rnaQUAST tabular summary of metrics and statistics.")
 
-Let's have a look at the plots. The rnaQUAST cumulative isoform (fig. 13) can help us to identify any trends or patterns in the distribution of transcript and isoform lengths across different abundance levels.
+Let's have a look at the plots. The rnaQUAST cumulative isoform (fig. 14) can help us to identify any trends or patterns in the distribution of transcript and isoform lengths across different abundance levels.
 
-![Figure 13. rnaQUAST cummulative isoform](../../images/differential_isoform/rnaQUAST_cumulative_isoform.png "rnaQUAST cummulative isoform plot. The x-axis of the plot represents the cumulative length of transcripts and isoforms, while the y-axis represents the sequence abundance.")
+![Figure 14. rnaQUAST cummulative isoform](../../images/differential_isoform/rnaQUAST_cumulative_isoform.png "rnaQUAST cummulative isoform plot. The x-axis of the plot represents the cumulative length of transcripts and isoforms, while the y-axis represents the sequence abundance.")
 
-According the plot, the transcripts length distribution is similar for all samples, except for SRR9050441; it suggests that the gene expression pattern this sample differs with respect to the remaining ones. Now, let's evaluate the cumulative substitution errors plot (fig. 13). Finally, we are going to evaluate the NAx plot (fig. 14).
+According the plot, the transcripts length distribution is similar for all samples and the reference seems to have more short transcripts while the new transcriptomes have longer transcripts. Finally, we are going to evaluate the NAx plot (fig. 15).
 
-![Figure 14. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx plot.  The x-axis of the plot represents the NAx metric, while the y-axis represents the contig length.")
+![Figure 15. rnaQUAST NAx](../../images/differential_isoform/rnaQUAST_NAx.png "rnaQUAST NAx plot.  The x-axis of the plot represents the percentile, while the y-axis represents the contig length for this quantile.")
 
-NAx is a metric that represents the length for which the collection of all aligned contigs of that length or longer covers at least x percent of the total length of the aligned assembled contigs, ranging from 0 to 100, per assembler.In that case, we cannot appreciate differences regarding distribution of transcript lengths across the samples.
+NAx is a metric that represents the length for which the collection of all aligned contigs of that length or longer covers at least x percent of the total length of the aligned assembled contigs, ranging from 0 to 100, per assembler. For example, on x = 50, we can get the NA50 = 50% of the total length of the transcripts are covered by transcripts over 4kb. On x = 20, 20% of the total length of the transcripts are covered by transcripts over 6kb... In that case, we cannot appreciate differences regarding distribution of transcript lengths across the samples.
 
 # Isoform switching analysis with **IsoformSwitchAnalyzeR**
 
@@ -776,7 +842,7 @@ In this training, the IsoformSwitchAnalyzeR stage is divided in four steps:
 >
 {: .comment}
 
-![Figure 15. IsoformSwitchAnalyzeR pipeline scheme](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
+![Figure 16. IsoformSwitchAnalyzeR pipeline scheme](../../images/differential_isoform/scheme.jpeg "IsoformSwitchAnalyzeR workflow scheme. The individual steps are indicated by arrows. Please note the boxes marked with “outward sequence analysis” requires to run a set of different tools. Adapted from IsoformSwitchAnalyzeR viggette.")
 
 Now, we can start with the {IS} analysis.
 
@@ -790,16 +856,16 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 >    - *"Dataset collection"*: `Transcriptomes quantification`
 >
 > 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} with the following parameters:
->    - *"Select lines from"*: `Extract element identifiers on data N` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
 >    - *"that"*: `Match`
->    - *"Regular Expression"*: `Cancer`
+>    - *"Regular Expression"*: `doxycycline`
 >
 > 3. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
 >    - *"Input collection"*: `Transcriptomes quantification`
 >    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
->        - *"Filter out identifiers absent from"*: `Search in textfiles on data N` (output of  **Search in textfiles** {% icon tool %})
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
 >
-> 4. Rename both collections `Cancer transcriptomes quantification` (the filtered collection) and `Health transcriptomes quantification` (the discarted collection).
+> 4. Rename both collections `no EWS-FLI1 transcriptomes quantification` (the filtered collection) and `EWS-FLI1 transcriptomes quantification` (the discarted collection).
 >
 {: .hands_on}
 
@@ -832,12 +898,12 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >    - *"Tool function mode"*: `Import data`
 >        - *"Quantification data source"*: `StringTie`
 >        - In *"1: Factor level"*:
->            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Health transcriptomes quantification`
+>            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `EWS-FLI1`
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `EWS-FLI1 transcriptomes quantification`
 >        - In *"2: Factor level"*:
->            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-collection %} *"Transcript-level expression measurements"*: `Cancer transcriptomes quantification`
->            - *"Average read length"*: `140`
+>            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `EWS-FLI1`
+>            - {% icon param-collection %} *"Transcript-level expression measurements"*: `no EWS-FLI1 transcriptomes quantification`
+>            - *"Average read length"*: `100`
 >            - *"Analysis mode"*:
 >              - {% icon param-file %} *"Annotation generated by StringTie merge"*: `Reference transcriptome annotation`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `gencode.hg19.chr10.gtf`
@@ -889,6 +955,16 @@ This combination is used since a Q-value is only a measure of the statistical ce
 >   >
 >   {: .comment}
 >
+>    > <question-title></question-title>
+>    >
+>    > 1. How many genes have at least one differential used isoform?
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. The output named ": summary" gives you 126 genes.
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 {: .hands_on}
 
 
@@ -942,15 +1018,15 @@ Each of those metrics is computed from a set of known protein-coding genes and a
 >
 > CPAT makes use of for predictior variables for performing the coding-potential analysis. The figure 16 shows the scoring distribution between coding and noncoding transcripts for the four metrics.
 >
-> ![Figure 16. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013")
+> ![Figure 17. CPAT predictor score distributions](../../images/differential_isoform/CPAT_distributions.jpg "Example of score distribution between coding (red) and noncoding (blue) sequences for the four CPAT metrics. The different subplots correspond to ORF size (A), ORF coverage (B), Fickett score (TESTCODE statistic) (C) and hexamer usage bias measured by log-likelihood ratio (D). Source: Wang et al., 2013")
 >
-> The maximum length of the ORF (fig. 16.A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
+> The maximum length of the ORF (fig. 17.A) is one of the most fundamental features used to distinguish ncRNA from messenger RNA because a long putative ORF is unlikely to be observed by random chance in noncoding sequences.
 >
-> The ORF coverage (fig. 16.B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
+> The ORF coverage (fig. 17.B)  is the ratio of ORF to transcript lengths. This feature has demonstrated to have good classification power, and it is highly complementary to, and independent of, the ORF length (some large ncRNAs may contain putative long ORFs by random chance, but usually have much lower ORF coverage than protein-coding RNAs).
 >
-> The Fickett TESTCODE (fig. 16.C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
+> The Fickett TESTCODE (fig. 17.C) distinguishes protein-coding RNA and ncRNA according to the combinational effect of nucleotide composition and codon usage bias. It is independent of the ORF, and when the test region is ≥200 nt in length (which includes most lncRNA), this feature alone can achieve 94% sensitivity and 97% specificity.
 >
-> Finally, the fourth metric is the hexamer usage bias (fig. 16.D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
+> Finally, the fourth metric is the hexamer usage bias (fig. 17.D), determines the relative degree of hexamer usage bias in a particular sequence. Positive values indicate a coding sequence, whereas negative values indicate a noncoding sequence.
 >
 {: .details}
 
@@ -960,7 +1036,7 @@ First, we will generate two intermediate files that we will use as input for CPA
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
->    - *"Regular Expression2"*: `lncRNA`
+>    - *"Regular Expression"*: `gene_type \"lincRNA\"|gene_type \"antisense\"|gene_type \"processed_transcript\"|gene_type \"sense_intronic\"|gene_type \"sense_overlapping\"|gene_type \"3prime_overlapping_ncrna\"` (in some gtf all these gene types are grouped under the 'lncRNA' annotation which makes the filter simpler. Here we need to specify all classes of lncRNA).
 > 2. Rename the output as `GRCh38.p13.chrom5.lncRNA.gtf`
 > 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
@@ -1034,7 +1110,9 @@ In the next sections we will illustrate both different use-cases.
 
 ### Gene-specific isoform switching analysis
 
-The gene-specific mode is interesting for those experimental designs which aim to evaluate a pre-selected set of genes of interest. For this purpose, we can analyze the expression pattern of the [gene RGMB](http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=ENSG00000174136;r=5:98768650-98798643) (repulsive guidance molecule BMP co-receptor b), whose aberrant expression is suggested to be associated with cancer cell proliferation through the BMP pathway ({% cite Shi2015 %}).
+The gene-specific mode is interesting for those experimental designs which aim to evaluate a pre-selected set of genes of interest. For this purpose, we can analyze the expression pattern of the gene ADD3 which have been identified in the study where we took the datasets from ({% cite Saulnier2021 %}). The ADD3 gene encodes an EMT-associated protein playing a role in actin cytoskeleton remodeling. The authors confirmed by western-blot the isoform switch.
+
+![Figure 18. ADD3 gene isoform confirmation by western blot](../../images/differential_isoform/ADD3_WB.png "ADD3 isoform switching by western blot (from Figure 7D of {% cite Saulnier2021 %}).")
 
 > <hands-on-title>Gene-specific isoform switching analysis</hands-on-title>
 >
@@ -1042,7 +1120,7 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %} part 1)
 >        - *"Analysis mode"*: `Analyze specific gene`
->        - *"Gene name"*: `RGMB`
+>        - *"Gene name"*: `ADD3`
 >        - *"Include prediction of coding potential information"*: `CPAT`
 >            - {% icon param-file %} *"CPAT result file"*: `CPAT_file.tabular`
 >        - *"Include Pfam information"*: `Enabled`
@@ -1052,54 +1130,44 @@ The gene-specific mode is interesting for those experimental designs which aim t
 >
 {: .hands_on}
 
-Let's have a look at the generated plot (fig. 17).
+Let's have a look at the generated plot (fig. 19).
 
-![Figure 17. RGMB gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "RGMB isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
+![Figure 19. ADD3 gene isoform expression profile plot](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "ADD3 isoform expression profile plot. The plot integrates isoform structures along with the annotations, gene and isoform expression and isoform usage including the result of the isoform switch test.")
 
-We can appreciate that there exists striking differences between isoforms:
+We can appreciate that IsoformSwitchAnalyzeR detects a significant isoform usage with ENST00000277900.8 and ENST00000360162.3 being more expressed when EWS-FLI1 is down (only the first one reaches significance) and ENST00000356080.4 being less expressed when EWS-FLI1 is down.
 
-- The isoform [ENST00000308234.11](https://www.uniprot.org/uniprotkb/J3KNF6/entry), which encodes the 478 aminoacid **Repulsive guidance molecule BMP co-receptor b protein** is repressed in cancer. This transcript shows statistically significant differential usage.
-- The isoform [ENST00000513185.3](https://www.uniprot.org/uniprotkb/Q6NW40/entry), which encodes the 437 aminoacid **Repulsive guidance molecule B** is induced.
-- A new isoform has been identified: `MSTRG.905.6` (this is a random ID assigned by **StringTie**).
+> <question-title></question-title>
+>
+> What is the difference between the isoform ENST00000356080.4 (specific to EWS-FLI1) and the other?
+>
+> > <solution-title></solution-title>
+> >
+> > This isoform uses an additional exon (before last).
+> > 
+> {: .solution}
+{: .question}
 
-We will try to confirm this {IS} by visualising the coverage on this gene and more precisely on the region which is different between the two isoforms. We will take advantage of the coverage we generated with **STAR** and the annotation generated by **StringTie**, and will use a software called **pyGenomeTracks**
+We will again try to confirm this finding by visualization.
 
 > <hands-on-title>Check isoform switching with pyGenometracks from STAR coverage</hands-on-title>
 >
-> 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
->    - *"Region of the genome to limit the operation"*: `chr5:98,762,495-98,803,294`
->    - In *"Include tracks in your plot"*:
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Bedgraph track`
->                - *"Plot title"*: You need to leave this field empty so the title on the plot will be the sample name.
->                - {% icon param-collection %} *"Track file(s) bedgraph format"*: Select `RNA STAR on collection N: Coverage Uniquely mapped strand 1`.
->                - *"Minimum value"*: `0`
->                - *"height"*: `3`
->                - *"Show visualization of data range"*: `Yes`
->                - *"Include spacer at the end of the track"*: `1`
->        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
->            - *"Choose style of the track"*: `Gene track / Bed track`
->                - *"Plot title"*: `Genes`
->                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Reference transcriptome annotation`
->                - *"height"*: `10`
->                - *"Put all labels inside the plotted region"*: `Yes`
->                - *"Bed style"*: `UCSC`
->                   - *"Configure other bed parameters"*:
->                       - *"When using gtf as input"*:
->                           - *"attribute to use as label"*: `transcript_id`
+> 1. Rerun **pyGenomeTracks** but change *"Region of the genome to limit the operation"* to ` chr10:111,767,742-111,895,323`
 >
-> 2. Repeat with *"Region of the genome to limit the operation"*: `chr5:98,767,000-98,775,000` in order to better see the 5' of the gene. 
->
+>    > <question-title></question-title>
+>    >
+>    > 1. Can you confirm the change?
+>    >
+>    > ![Figure 20. ADD3 coverage](../../images/differential_isoform/pgt_ADD3.png "Coverage on ADD3 gene.")
+>    >
+>    >    > <solution-title></solution-title>
+>    >    >
+>    >    > 1. On the right, on the blue coverage we seem to see something. If you rerun and change the region to `chr10:111,890,000-111,895,323`. You will see it much better.
+>    >    > ![Figure 21. ADD3 coverage zoomed](../../images/differential_isoform/pgt_ADD3_zoom.png "Coverage on the last exons of ADD3 gene.")
+>    >    >
+>    >    {: .solution}
+>    {: .question}
 >
 {: .hands_on}
-
-Let's have a look at the plots generated by **pyGenometracks**. The first plot (fig. 18), corresponding with the coordinates `chr5:98,762,495-98,803,294`, allows to evaluate the region corresponding to the whole gene. 
-
-![Figure 18. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_out.png "pyGenometracks isoform visualization of coordinates chr5:98,762,495-98,803,294. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
-
-The second image shows a only the region corresponding to the 5'end (fig. 19). 
-
-![Figure 19. RGMB gene isoform expression profile plot](../../images/differential_isoform/pgt_RGMB_zoom_in.png "pyGenometracks isoform visualization chr5:98,767,000-98,775,000. The plot integrates coverage information of the different RGMB gene isoform structures along with the annotations.")
 
 
 ### IsoformSwitchAnalyzer genome-wide analysis
@@ -1152,14 +1220,15 @@ It generates five tabular files with the results of the different statistical an
 >
 > > <solution-title></solution-title>
 > >
-> > The top three genes are [WDR70](https://www.ncbi.nlm.nih.gov/gene/55100), [STARD4](https://www.ncbi.nlm.nih.gov/gene/134429) and [MGAT1](https://www.ncbi.nlm.nih.gov/gene/4245) (fig. 20).
+> > The top three genes are ITGB1, HECTD2, GPAM(fig. 22).
 > >
-> > ![Figure  20. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
+> > ![Figure  22. Switching gene/isoform tabular dataset](../../images/differential_isoform/list_genes.png "Switching gene/isoform dataset.")
 > >
-> > WDR70 is a protein coding gene predicted to be involved in regulation of DNA double-strand break processing and regulation of histone H2B conserved C-terminal lysine ubiquitination. STARD4 is a protein coding gene probably involved in the metabolism of steroid hormones. MGAT1 is a glycosyltransferase involved in the synthesis of protein-bound and lipid-bound oligosaccharides.
-> > 
 > {: .solution}
 {: .question}
+
+We always recommand to check with pyGenomeTracks the confidence you have into these findings.
+
 
 In addition, it provides a RData object and three collections of plots: {IS} events with predicted functional consequences, {IS} without predicted functional consequences and genome-wide plots.
 
@@ -1169,57 +1238,38 @@ In this section we will assess whether there are differences with respect to the
 
 > <comment-title>Interpretation of splicing events</comment-title>
 >
-> The events are classified by comparing the splicing patterns with a hypothetical pre-RNA (fig. 21).
+> The events are classified by comparing the splicing patterns with a hypothetical pre-RNA (fig. 23).
 >
-> ![Figure 21. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
+> ![Figure 23. Classification of splicing patterns](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns diversity. The observed splice patterns (left column) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
 >
 > Mutually exclusive exon (MEE) is a special case where two isoforms from the same gene contain exons which are not found in any of the other isoforms from that gene.
 >
 {: .comment}
 
-First, we will start analyzing the total number of splicing events (fig. 22).
+First, we will start analyzing the total number of splicing events (fig. 24).
 
-![Figure 22. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event.")
+![Figure 24. Summary of genome-wide total splicing events](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Analysis of splicing enrichment. Number of isoforms significantly differentially used between EWS-FLI1 and no EWS-FLI1 resulting in at least one splice event.")
 
-From the figure 22 , it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 23).
+From the figure 24, it can be hypothesised that some of the {AS} events are not equally used. To formally analyze this type of uneven {AS}, **IsoformSwithAnalyzeR** computes the fraction of events being gains (as opposed to loss) and perform a statistical analysis of this fraction by using a binomial test (fig. 25).
 
-![Figure 24. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence interval) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 25. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Comparison of differential splicing events. The fraction (and 95% confidence interval) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black).")
 
-According to the results (fig. 23), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).
-
-> <comment-title>Results on original full-data</comment-title>
->
-> If we perform the analysis on the original datasets, we can see a more homogeneous distribution of the different splice junction patters (fig. 24.A).
->
-> ![Figure 24. Enrichment/depletion in isoform switch with consequences statistical analysis](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event_fulldata.png "Comparison of differential splicing events. Number of isoforms significantly differentially used between cancer and health resulting in at least one splice event (A). The fraction (and 95% confidence inter-val) of isoform switches (x-axis) resulting in gain of a specific alternative splice event (indicated by y axis) in the switch from health to cancer. The dashed line indicate no enrichment/depletion and the color indicate if FDR < 0.05 (red) or not (black) (B).")
->
-> According the results, there's statistically significant mutually exon skipping events in cancer tissues (fig. 24.B) On the other hand, health tissues utilize alternative 5’ acceptor sites (A5) more than cancer tissues, when compared with the hyphotetical pre-RNA.
->
-{: .comment}
+According to the results (fig. 25), there are not statistically significant differences in specific splicing type events between both experimental conditions. However, this result is affected by the fact that we are using only a fraction of the total data (remember that we subsampled the original datasets in order to speed up the analysis).
 
 #### Analysis of consequence enrichment
 
-To analyze large-scale patterns in predicted {IS} consequences, **IsoformSwitchAnalyzeR** computes all {IS} events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss). According the results, some types of functional consequences seem to be enriched or depleted between health and tumoral samples (e.g. intron retention) (fig. 25).
+To analyze large-scale patterns in predicted {IS} consequences, **IsoformSwitchAnalyzeR** computes all {IS} events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss). According the results, some types of functional consequences seem to be enriched or depleted in one or the other conditions (e.g. intron retention) (fig. 26).
 
-![Figure 25. Summary of genome-wide enrichment/depletion o isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between cancer and health resulting in at least one isoform switch consequence.")
+![Figure 26. Summary of genome-wide enrichment/depletion of isoform switching events](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Analysis of consequence enrichment. Number of isoforms significantly differentially used between EWS-FLI1 and noEWS-FLI1 resulting in at least one isoform switch consequence.")
 
-To assess this observation, **IsoformSwitchAnalyzeR** performs a standard proportion test is performed (fig. 26). The results indicate that differences are not statistically significant.
+To assess this observation, **IsoformSwitchAnalyzeR** performs a standard proportion test is performed (fig. 27). The results indicate that differences are not statistically significant.
 
-![Figure 26. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
+![Figure 27. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from EWS-FLI1 to noEWS-FLI1. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
 
-> <comment-title>Results on original full-data</comment-title>
->
-> Let's have a look at the results corresponding to the complete original dataset analysis.
->
-> ![Figure 27. Enrichment/depletion isoform switch analysis](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform_fulldata.png "Enrichment/depletion in isoform switches consequences. The x-axis shows the fraction (with 95% confidence interval) resulting in the consequence indicated by y axis, in the switches from cancer to control. Dashed line indicate no enrichment/depletion. Color indicate if FDR < 0.05 (red) or not (black).")
->
-> According with the results, despite not being statistically significant, it seems that there is a gain in coding transcript in cancer samples (fig. 27.B). It means that differential isoform translates in the emergence of uncharacterized or unannotated open-reading frames, also known as novel open-reading frames (nORFs), in cancer. This phaenomenon has been reported previously by {% cite Erady2021 %}. According those authors, nORFs are typically smaller than canonical ORFs, the peptides or micro-proteins they encode are particularly attractive as putative allosteric cellular regulators. 
->
-{: .comment}
 
 > <question-title></question-title>
 >
-> What is the adjusted P-value corresponding to the Intron retention gain/lost feature test?
+> What is the adjusted P-value corresponding to the tss downstream/upstream feature test?
 >
 >   > <details-title>Consequences enrichment dataset</details-title>
 >   >
@@ -1241,7 +1291,7 @@ To assess this observation, **IsoformSwitchAnalyzeR** performs a standard propor
 > >
 > > This information can be found in the eighth column of the Consequences enrichment dataset.
 > >
-> > In that case, the adjusted P-value is 0.79052734375.
+> > In that case, the adjusted P-value is 0.37.
 > >
 > {: .solution}
 {: .question}
@@ -1258,29 +1308,19 @@ As expected from the previous results, in that case there are not statistically 
 ![Figure 29. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
 
 Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).
-
-> <comment-title>Results on original full-data</comment-title>
->
-> Let's have a look at the results corresponding to the complete original dataset analysis.
->
-> ![Figure 30. Genome-wide changes violing plot fulldata](../../images/differential_isoform/isoformSwitchAnalyzer_summary_fulldata.png "Genome-wide gene expression plots. The dots in the violin plots above indicate 25th, 50th (median) and 75th percentiles (A). The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (B). The scaterplot represents the dIF vs gene log2 fold change (C)")
->
-> According with results corresponding to the whole dataset (fig. 30.A), the differential isoform usage differences are not homogeneously distributed across the genome. It suggest that there should be some specific regions enriched in MES and alternative 5’ acceptor sites. 
->
-{: .comment}
-
+<!-- 
 # Optional exercise: original data analysis
 
 As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps.
 
 > <warning-title>Significant computational resources and run time</warning-title>
-> When using the full data, the analysis can last for more than 48 hours.
+> When using the full data, the analysis can last for more than 48 hours and uses about 400GB.
 {: .warning}
 
 
 We will start by importing the datasets from Zenodo.
 
-> <hands-on-title>Retrieve miRNA-Seq and mRNA-Seq datasets</hands-on-title>
+> <hands-on-title>Retrieve mRNA-Seq datasets</hands-on-title>
 >
 > 1. Create a new history for this analsyis
 > 2. Import the files from Zenodo:
@@ -1370,10 +1410,10 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 > 4. Click on the <kbd>Run workflow</kbd> buttom
 >
 >
-{: .hands_on}
+{: .hands_on} -->
 
 # Conclusion
 
-Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline (fig. 31) for performing genome-wide alternative splicing analysis. 
+Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline (fig. 30) for performing genome-wide alternative splicing analysis. 
 
-![Figure 31. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/full_workflow.png "Genome-wide isoform switching pipeline scheme.")
+![Figure 30. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/full_workflow.png "Genome-wide isoform switching pipeline scheme.")
