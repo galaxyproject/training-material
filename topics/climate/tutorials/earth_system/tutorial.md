@@ -185,7 +185,7 @@ OBIS is a global open-access data and information clearing-house on marine biodi
 
 For more information follow the tutorial related to it called [OBIS marine indicators](https://training.galaxyproject.org/training-material/topics/ecology/tutorials/obisindicators/tutorial.html) or use the workflow Marine omics visualisation `https://usegalaxy.eu/u/marie.josse/w/marine-omics-visualisation`
 
-## Land biodiveristy 🦤
+## Land biodiversity 🦤
 
 GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion records across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources (OBIS is part of GBIF).
 
