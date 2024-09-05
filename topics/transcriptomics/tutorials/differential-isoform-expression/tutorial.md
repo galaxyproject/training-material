@@ -201,13 +201,13 @@ In order to remove the adaptors we will make use of **fastp**, which is able to 
 >    > <question-title></question-title>
 >    >
 >    > 1. What proportion of reads were written in output file?
->    > 2. What is the average fragment size?
+>    > 2. What is the average insert size?
 >    >
 >    >    > <solution-title></solution-title>
 >    >    >
 >    >    > 1. All reads passed the filters (see %PF in the general statistics).
 >    >    >
->    >    > 2. The average fragment size or insert size is about 145 for 5 samples and 135 for ASP14_2.
+>    >    > 2. The average insert size is about 145 for 5 samples and 135 for ASP14_2.
 >    >    >
 >    >    {: .solution}
 >    {: .question}
@@ -254,7 +254,7 @@ The choice of **RNA STAR** as mapper is also determined by the sequencing techno
 > >    - *"Extract"*: `Introns`
 > >        - {% icon param-file %} *"from"*: `BED12 annotation`
 > >
-> > 4. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+> > 4. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} on rows with the following parameters:
 > >   - {% icon param-file %} *"File to process"*: output of **Gene BED To Exon/Intron/Codon BED** {% icon tool %}
 > >   - For "*1: Expressions*":
 > >     - *"Add expression"*: `c3-c2`
@@ -338,8 +338,8 @@ Now we can perform the mapping step.
 The first **RNA STAR** run generates three collections: logs, alignments in BAM format, and a collection of BED files with splice junction coordinates. Now we will process the collection of BED files with the objective of getting a unique list of junctions where we remove non-canonical junctions (column 5 > 0), annotated junction sites (column 6 == 0) and junctions supported by too few reads (column 7 > 5).
 
 > <hands-on-title> Pre-processing of splice junction coordinates</hands-on-title>
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} tail-to-head (cat) with the following parameters:
->   - {% icon param-collection %} *"Datasets to concatenate"*: `spliced junctions.bed` (output of **RNA STAR** {% icon tool %})
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} tail-to-head **(cat)** with the following parameters:
+>   - {% icon param-collection %} *"Datasets to concatenate"*: `RNA STAR on collection XXX: splice junctions.bed` (output of **RNA STAR** {% icon tool %})
 >
 >         The output must be a dataset not a collection
 >
@@ -590,6 +590,7 @@ Then, let's start with the transcriptome assemby.
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
+>    - *"Specify strand information"*: `Reverse (RF)`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `gencode.hg19.chr10.gtf`
@@ -617,7 +618,10 @@ Then, let's start with the transcriptome assemby.
 >    >    > 1. There are about 25k lines.
 >    >    > 2. There are about 93k lines.
 >    >    > 3. There are about 70k lines.
->    >    > 4. Not much as the number of lines is not informative enough, we need an appropriate tool to compare those GTFs.
+>    >    > 4. Not much as the number of lines is not informative enough, we need an appropriate tool to compare those GTFs. However, a quick way to check why these numbers are different is to use **Count occurences of each record** on column 3 which is the feature type. This would tell you that:
+>    >    >    - The original gtf has 2260 genes, 6503 transcripts and 42758 exons and other coding information.
+>    >    >    - The Assembled transcripts coordinates have 2772-2940 transcripts and 21790-22858 exons and no other information, this is why the number of lines is much lower.
+>    >    >    - The Reference transcriptome annotation has 8310 transcripts and 61795 exons.
 >    >    >
 >    >    {: .solution}
 >    {: .question}
@@ -630,6 +634,7 @@ Now, we can perform the transcriptome quantification in a more accurate way by m
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
 >        - {% icon param-collection %} *"Input short mapped reads"*: `Mapped collection`
+>    - *"Specify strand information"*: `Reverse (RF)`
 >    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
 >        - *"Reference file"*: `Use a file from history`
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Reference transcriptome annotation`
@@ -704,11 +709,17 @@ In order to have an overview of the transcriptome, we can have a look at the **s
 >
 > > <solution-title></solution-title>
 > >
-> > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original gtf. The sensitivity gives an indication on what is the proportion of new transcript compared to the original gtf.
+> > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original gtf. The precision gives an indication on what is the proportion of new transcript compared to the original gtf.
 > > 2. According the stats file, 962 new exons (4.8%) have been identified.
 > > 
 > {: .solution}
 {: .question}
+
+> <details-title>Sensitivity and precision on individual Assembled transcripts</details-title>
+>
+> It can also be of interest to use **GffCompare** on the `Assembled transcripts coordinates` to see what is the sensitivity and precision for each sample. In this mode, the sensitivity at the transcript level is about 30%. This means that only 30% of the reference transcripts are detected. The precision about 70%.
+>
+{: .details}
 
 For a more in-depth analysis of the output, we could use the **TMAP** file and perform some text manipulation. For example, in order to extract the transcripts fully contained within a reference intron, we can filter for the **class_code** `i`.
 
@@ -721,16 +732,18 @@ For a more in-depth analysis of the output, we could use the **TMAP** file and p
 >    > <question-title></question-title>
 >    >
 >    > 1. How many transcripts within introns have been detected?
+>    > 1. How many transcripts are withing exons of ENST00000358220.1 ?
 >    >
 >    >    > <solution-title></solution-title>
 >    >    >
 >    >    > 1. The output of **Filter** {% icon tool %} has 47 lines so 47 transcripts.
+>    >    > 2. The first 3 lines have ENST00000358220.1 in the second columns. There are 3 transcripts.
 >    >    >
 >    >    {: .solution}
 >    {: .question}
 {: .hands_on}
 
-It is always good to check visually the findings using the coverage. We will take advantage of the coverage files we generated with **STAR** and the annotation generated by **StringTie**, and will use a software called **pyGenomeTracks**
+It is always good to check visually the findings using the coverage. We will check if we can validate the three transcripts in the introns of ENST00000358220.1. For this, we will take advantage of the coverage files we generated with **STAR** and the annotation generated by **StringTie**, and will use a software called **pyGenomeTracks**
 
 > <hands-on-title>Check new transcript in intron with pyGenometracks from STAR coverage</hands-on-title>
 >
@@ -768,7 +781,7 @@ It is always good to check visually the findings using the coverage. We will tak
 
 ![Figure 12. Intronic transcript plot](../../images/differential_isoform/pgt_intronic.png "pyGenometracks isoform visualization of coordinates chr10:1,095,478-1,178,237. The plot integrates coverage information along with the annotations.")
 
-We can see that the transcript on top (ENST00000358220.1) has multiple transcripts antisense in his first intron (the name may change).
+We can see that the transcript on top (ENST00000358220.1) has three transcripts annotated antisense in his first intron (the name of the stringtie annotated transcripts may change). However, the coverage does not allow to see the predicted introns.
 
 ### Transcriptome quality assessment with **rnaQUAST**
 
@@ -855,7 +868,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 > 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - *"Dataset collection"*: `Transcriptomes quantification`
 >
-> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} with the following parameters:
+> 2. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
 >    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `doxycycline`
@@ -865,7 +878,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 >    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
 >        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
 >
-> 4. Rename both collections `no EWS-FLI1 transcriptomes quantification` (the filtered collection) and `EWS-FLI1 transcriptomes quantification` (the discarted collection).
+> 4. Rename both collections `no EWS-FLI1 transcriptomes quantification` (the filtered collection) and `EWS-FLI1 transcriptomes quantification` (the discarded collection).
 >
 {: .hands_on}
 
@@ -901,7 +914,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `EWS-FLI1`
 >            - {% icon param-collection %} *"Transcript-level expression measurements"*: `EWS-FLI1 transcriptomes quantification`
 >        - In *"2: Factor level"*:
->            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `EWS-FLI1`
+>            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `no EWS-FLI1`
 >            - {% icon param-collection %} *"Transcript-level expression measurements"*: `no EWS-FLI1 transcriptomes quantification`
 >            - *"Average read length"*: `100`
 >            - *"Analysis mode"*:
@@ -998,7 +1011,7 @@ PfamScan is an open-source tool developed by the EMBL-EBI for identifying protei
 > <hands-on-title> Domain identification with PfamScan </hands-on-title>
 >
 > 1. {% tool [PfamScan](toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Protein sequences FASTA file"*: `aminoacid sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Protein sequences FASTA file"*: `IsoformSwitchAnalyzeR on data XXX: aminoacid sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Pfam-A HMM library"*: `Pfam-A.hmm.gz`
 >    - {% icon param-file %} *"Pfam-A HMM Stockholm file"*: `Pfam-A.hmm.dat.gz`
 >    - *"Predict active site residues"*: `Enabled`
@@ -1037,13 +1050,13 @@ First, we will generate two intermediate files that we will use as input for CPA
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
 >    - *"Regular Expression"*: `gene_type \"lincRNA\"|gene_type \"antisense\"|gene_type \"processed_transcript\"|gene_type \"sense_intronic\"|gene_type \"sense_overlapping\"|gene_type \"3prime_overlapping_ncrna\"` (in some gtf all these gene types are grouped under the 'lncRNA' annotation which makes the filter simpler. Here we need to specify all classes of lncRNA).
-> 2. Rename the output as `GRCh38.p13.chrom5.lncRNA.gtf`
+> 2. Rename the output as `gencode.hg19.chr10.lncRNA.gtf`
 > 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} converter with the following parameters:
 >    - {% icon param-files %} *"Select lines from"*: `gencode.hg19.chr10.gtf`
 >    - *"Regular Expression2"*: `protein_coding`
-> 4. Rename the output as `GRCh38.p13.chrom5.pc.gtf`
+> 4. Rename the output as `gencode.hg19.chr10.pc.gtf`
 > 3. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `GRCh38.p13.chrom5.lncRNA.gtf` and `GRCh38.p13.chrom5.pc.gtf`
+>    - {% icon param-files %} *"Input BED, GFF3 or GTF feature file "*: `gencode.hg19.chr10.lncRNA.gtf` and `gencode.hg19.chr10.pc.gtf`
 >    - *"Reference Genome"*: `From your history`
 >       - {% icon param-file %} *"Genome Reference Fasta"*: `hg19.chr10.fasta`
 >       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
@@ -1056,7 +1069,7 @@ As result, we will have two new FASTA files, one of them corresponding to long n
 > <hands-on-title>Coding prediction with CPAT</hands-on-title>
 >
 > 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Query nucletide sequences"*: `Nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Query nucletide sequences"*: `IsoformSwitchAnalyzeR on data XXX: nucleotide sequences` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >    - {% icon param-file %} *"Reference genome"*: `hg19.chr10.fasta`
 >    - {% icon param-file %} *"Coding sequences file"*: `coding.fasta`
 >    - {% icon param-file %} *"Non coding sequeces file"*: `lncRNA.fasta`
@@ -1138,7 +1151,7 @@ We can appreciate that IsoformSwitchAnalyzeR detects a significant isoform usage
 
 > <question-title></question-title>
 >
-> What is the difference between the isoform ENST00000356080.4 (specific to EWS-FLI1) and the other?
+> What is the difference between the isoform ENST00000356080.4 (specific to EWS-FLI1) and the other two?
 >
 > > <solution-title></solution-title>
 > >
@@ -1308,7 +1321,9 @@ As expected from the previous results, in that case there are not statistically 
 ![Figure 29. Genome-wide changes volcano and scatterplots](../../images/differential_isoform/isoformSwitchAnalyzer_volcano.png "Genome-wide isoform switching overview. The volcanoplot represent the -log(Q-value) vs dIF (change in isoform usage from condition) (A). The scaterplot represents the dIF vs gene log2 fold change (B).")
 
 Here we can see that changes in gene expression and isoform switches are not in any way mutually exclusive, as there are many genes which are both differentially expressed (large gene log2FC) and contain isoform switches (color).
+
 <!-- 
+
 # Optional exercise: original data analysis
 
 As additional activity, you can try to run the pipeline by using the original datasets. In that case we will make use of the Galaxy Workflow System, which will allow us to automatize the analysis by minimizing the number of required manual steps.
@@ -1414,6 +1429,8 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 
 # Conclusion
 
-Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline (fig. 30) for performing genome-wide alternative splicing analysis. 
-
-![Figure 30. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/full_workflow.png "Genome-wide isoform switching pipeline scheme.")
+Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for performing genome-wide alternative splicing analysis. The workflow is composed of 4 main steps:
+- Preprocessing with fastp
+- Mapping with STAR using 2-pass mode
+- Transcriptome assembly and quantification with Stringtie
+- Isoform switching evaluation with IsoformSwitchAnalyzer.
