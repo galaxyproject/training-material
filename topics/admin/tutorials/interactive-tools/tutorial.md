@@ -1007,7 +1007,7 @@ The next step is configuring Galaxy and the Interactive Tool Proxy to use the ne
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
 >        # interactivetools_map: "{{ gie_proxy_sessions_path }}"  # comment, remove or leave this line in place (it will be overridden by the option below)
->        interactivetools_map_sqlalchemy: "{{ gie_proxy_sessions_path }}"
+>        interactivetoolsproxy_map: "{{ gie_proxy_sessions_path }}"
 >        # ... other existing configuration options in the `galaxy` section ...
 >
 >    # ... other existing configurations ... #
