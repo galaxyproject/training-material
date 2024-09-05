@@ -372,7 +372,8 @@ a particular research question.
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the rarefaction curve.
+> Result of the rarefaction curve. We can observe that sample __"COI-B2b"__ has the highest richness, over 150 observed OTUs, while the
+remaining samples fall below 50 observed OTUs.
 > 
 >![Result of the rarefaction curve](./images/rarefaction.png "Result of the rarefaction curve")
 {: .details}
@@ -407,7 +408,10 @@ a particular research question.
 To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
 > <comment-title></comment-title>
-> - we now use normalised data and a different dataset than for the rarefaction curve (as it has more metadata)
+> - we now use normalised data and a different dataset than for the rarefaction curve, as this dataset has more metadata
+> - however, this normalised data cannot be use for rarefaction analysis, which requires raw data. Rarefaction analysis
+examines the distribution of sequencing depth across samples by counting the number of observed species or OTUs. 
+Normalised data loses information about the original sequencing depth, making it impossible to accurately evaluate species richness.
 {: .comment}
 
 ## Get Data
@@ -451,6 +455,9 @@ To create a heatmap, ordination plot, or boxplot you can continue with your data
 ![Running the workflow](./images/choose_parameters.png "Running the workflow, choose the right datasets and mandatory parameters")
 
 ## Heatmaps
+Heatmaps show relationships between 2 variables ploted on 2 axis and colour intensity representing the abundance of taxa in 
+relation to what it was ploted to, like sample, specific plant or year ((A complete guide to heatmaps)[https://www.atlassian.com/data/charts/heatmap-complete-guide]).
+
 Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
 The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
@@ -537,9 +544,12 @@ Follow this workflow to create a heatmap by grouping the data.
 </div>
 
 <div class="Long-Version" markdown="1">
-We used 2 different metadata subsets:
-- 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, grouped by = Plant
-- 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, grouped by = Year
+We used 2 different subsets of metadata to focus on specific aspects of the data:
+- 1) **Plant-based subset**: In this subset, the metadata variable chosen was Plant, with the metadata values being 
+Aalborg East and Aalborg West. This subset focuses on comparing the two different plant locations. The data were 
+grouped according to the variable Plant, which allows us to examine how the microbial communities differ between these two locations
+- 2) **Seasonal subset**: The second subset focused on the Period variable, with the metadata values being Winter and Summer. 
+This subset was grouped by Year and aims to explore how microbial communities vary between the two seasons
 
 > <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
 >
@@ -585,7 +595,7 @@ We used 2 different metadata subsets:
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
->![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by _Year_")
+>![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by _Year_" and also showing additional taxa)
 {: .details}
 
 > <question-title></question-title>
@@ -675,11 +685,19 @@ We used 2 different metadata subsets:
 {: .details}
 
 ## Ordination Plots
+To plot a multidimensional dataset onto a lower-demensional space, we need ordination techniques. In ecological datasets, similar 
+samples and species are plotted close to each other, while dissimilar samples and species will be found far apart. The dimensions
+on the ordination plot represent enviromental gradients and describe the relationship between species patterns and environmental
+gradient ((Introduction to ordination)[https://ourcodingclub.github.io/tutorials/ordination/]).
+
 We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
 
 ### Ordination Method: PCA
+PCA (Principal Component Analysis) is an unconstrained ordination technique and a common reduction technique to linear dimensionality 
+((MDAnalysis User Guide)[https://userguide.mdanalysis.org/stable/examples/analysis/reduced_dimensions/pca.html]).
+
 Follow this workflow to create a simple ordination plot.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a simple ordination plot </hands-on-title>
@@ -718,12 +736,16 @@ Follow this workflow to create a simple ordination plot.
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the PCA method.
+> Result of the ordination plot created with the PCA method. Samples and species with the most similarities in the plant 
+Aalborg East are closer together on the plot, same for Aalborg West plant.
 > 
 >![Result of the ordiantion plot](./images/ordination_pca.png "Result of the ordination plot created with the PCA method")
 {: .details}
 
 ### Ordination Method: PCA plus Trajectory
+Using the PCA method, we can improve the analysis by adding a trajectory. This allows the samples 
+to be visualised following a path over the time points at which they were collected.
+
 Follow this workflow to create an ordination plot with trajectory.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
@@ -765,7 +787,8 @@ Follow this workflow to create an ordination plot with trajectory.
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the PCA method plus using the trajectory date.
+> Result of the ordination plot created with the PCA method plus using the trajectory date. The points are connected in the order they 
+were sampled.
 > 
 >![Result of the ordiantion plot](./images/ordination_pca_date.png "Result of the ordination plot created with the PCA method plus using the trajectory date")
 {: .details}
@@ -783,6 +806,11 @@ Follow this workflow to create an ordination plot with trajectory.
 {: .question}
 
 ### Ordination Method: CCA
+CCA (Canonical Correspondance Analysis) is a constrained ordination technique derived form CA (Correspondance Analysis) and is
+prefered for most ecological data. CCA maximises the correlation between samples and species scores ((Ordination Methods)[https://ordination.okstate.edu/overview.htm]). 
+Hellinger transformation is a modified species profile computed from Euclidean distances, organised into a matrix of
+Hellinger distances. Hellinger distances are used to measure clustering or ordination of species abundance ((Ordination)[https://www.numericalecology.com/Reprints/Legendre_Ordination_chapter_in_Palaeolimnology_book_2012.pdf]).
+
 Follow this workflow to create an ordination plot with the CCA method and the Hellinger transformation.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
@@ -828,7 +856,8 @@ Follow this workflow to create an ordination plot with the CCA method and the He
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the CCA method and the Hellinger transformation.
+> Result of the ordination plot created with the CCA method and the Hellinger transformation. We see the correlation between taxa and seasons
+in the plants Aalborg East and Aalborg West.
 > 
 >![Result of the ordiantion plot](./images/ordination_cca_hellinger.png "Result of the ordination plot created with the CCA method and the Hellinger transformation")
 {: .details}
@@ -848,6 +877,9 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 {: .question}
 
 ## Boxplot
+Boxplots are used to provide high-level information at a glance and make comparisons between mulpiple groups very easy, as they offer
+general information about data symmetry, skew, variance and outliers ((A complete guide to box plots)[https://www.atlassian.com/data/charts/box-plot-complete-guide]).
+
 As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
 
 <div class="Short-Version" markdown="1">
