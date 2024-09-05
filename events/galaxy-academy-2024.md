@@ -159,7 +159,22 @@ program:
 
   - section: "Friday: Grab bag"
     description: |
-      Can't get enough? Then please pick any of the tutorials of the GTN. Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
+      Can't get enough? Then please pick one of our FAIR tutorials or any of the tutorials of the GTN. Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
+  - section: Fair training
+    subsection: true
+    tutorials:
+      - type: custom
+        name: "[An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/)"
+        description: |
+          Lecture Video
+      - name: ro-crate-intro
+        topic: fair
+      - type: custom
+        name: "[Registering Galaxy workflows in WorkflowHub](https://gallantries.github.io/video-library/videos/ro-crates/workflowhub/tutorial/)"
+        description: |
+          Lecture Video
+      - name: ro-crate-galaxy-best-practices
+        topic: fair
 ---
 # Welcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a 5-day Global Online and Asynchronous learning event.
