@@ -79,6 +79,30 @@ For more information follow the tutorial related to it called [Sentinel 5P data 
 
 Once you get into the Jupyterlab go in the left pannel in `samples > openeo > Sentinel_3.ipynb `. Yhis way you have an example on how to get Sentinel 3 data.
 
+## EMODnet Chemistry
+
+[EMODnet Chemistry](https://emodnet.ec.europa.eu/en/chemistry) provides easy access to marine chemical data, standardised, harmonised and validated data collections and data products for visualisation. These are relevant for the European marine environmental policies to assess the status and trends of ecosystems. 
+Numerous substances are considered, most of which are invisible to the naked eye and are monitored using specialised sensors or laboratory analyses. This evidence-based information supports action against environmental changes that pose a threat to marine ecosystems and human health.
+
+### A focus on ODV (Ocean Data View) collections
+
+This [webODV](https://emodnet-chemistry.webodv.awi.de/) service facilitates to explore, subset, visualize, and extract data sets in multiple formats from the harmonized, standardized, validated data collections that EMODnet Chemistry is regularly producing and publishing for all European sea basins for eutrophication and contaminants. 
+You can also find these collections on the [Sextant catalogue](https://sextant.ifremer.fr/eng/Data/Catalogue#/search?isTemplate=n&from=1&to=30&sortBy=dateStamp&sortOrder=desc&languageStrategy=searchInDetectedLanguage&any=EMODnet%20Chemistry)
+
+You can analize thes kind of data through the [Ocean Data View (ODV)](https://usegalaxy.eu/root?tool_id=interactive_tool_odv) tool. 
+
+For more information follow the related tutorials and workflows:
+ - [Ocean's variables study](https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-variables/tutorial.html) and the corresponding workflow  `https://usegalaxy.eu/u/marie.josse/w/oceans-var-v2`
+ - [Ocean Data View (ODV)](https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-data-view/tutorial.html)
+
+
+## Copernicus Marine Data Store
+
+The [Copernicus Marine Data Store](https://marine.copernicus.eu/access-data) offers a ocean product catalogue, to download or visualize data accross nearly 15variables, including hindcast, current and forecast data.
+
+A tool is currently being develop to enable easy access to this data. More information to come.
+
+
 
 # 🏜️ Land 🏞️
 
@@ -161,6 +185,15 @@ OBIS is a global open-access data and information clearing-house on marine biodi
 
 For more information follow the tutorial related to it called [OBIS marine indicators](https://training.galaxyproject.org/training-material/topics/ecology/tutorials/obisindicators/tutorial.html) or use the workflow Marine omics visualisation `https://usegalaxy.eu/u/marie.josse/w/marine-omics-visualisation`
 
+## Land biodiveristy 🦤
+
+GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE most remarkable biodiversity data aggregator worldwide giving access to more than 1 billion records across all taxonomic groups. The data provided via these sources are highly valuable for research. However, some issues exist concerning data heterogeneity, as they are obtained from various collection methods and sources (OBIS is part of GBIF).
+
+
+
+To access those data you can use the [Get species occurrences data](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0) tool. 
+
+For more information follow the tutorial related to it called [Cleaning GBIF data for the use in Ecology](https://training.galaxyproject.org/training-material/topics/ecology/tutorials/gbif_cleaning/tutorial.html#cleaning-gbif-data-for-the-use-in-ecology).
 
 
 
