@@ -11,6 +11,10 @@ contributions:
         - wm75
     instructors:
         - wm75
+        - bgruening
+        - GarethPrice-Aus 
+        - annasyme
+        - mateeullah905
 
 
 

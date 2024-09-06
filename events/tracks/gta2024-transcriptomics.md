@@ -15,6 +15,13 @@ contributions:
         - rlibouba
         - abretaud
         - SaimMomin12
+        - dianichj
+        - deeptivarshney
+        - tcollins2011
+        - meltemktn
+        - Nilchia
+        - MarisaJL
+        - pavanvidem
 
 
 program:
