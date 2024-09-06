@@ -38,7 +38,7 @@ contributions:
         - shiltemann
         - teresa-m
     instructors:
-        - Ahmed Awan
+        - ahmedhamidawan
         - erxleben
         - annasyme
         - anuprulez
