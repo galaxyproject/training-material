@@ -1429,8 +1429,9 @@ Once we have imported the workflow, we can run the pipeline on the [original dat
 
 # Conclusion
 
-Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for performing genome-wide alternative splicing analysis. The workflow is composed of 4 main steps:
-- Preprocessing with fastp
+Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. Here we present a pipeline for performing genome-wide alternative splicing analysis (fig. 30). The workflow is composed of 3 main steps:
 - Mapping with STAR using 2-pass mode
 - Transcriptome assembly and quantification with Stringtie
 - Isoform switching evaluation with IsoformSwitchAnalyzer.
+
+![Figure 30. Genome-wide alternative splicing pipeline scheme](../../images/differential_isoform/galaxyworkflow.drawio.png "Genome-wide isoform switching pipeline scheme.")
