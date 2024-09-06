@@ -149,7 +149,7 @@ program:
       - title: Single Cell
         link: events/tracks/gta2024-single-cell.md
       - title: Microbiome
-        link: events/tracks/gta2024-micorbiome.md
+        link: events/tracks/gta2024-microbiome.md
       - title: Bacterial Genomics
         link: events/tracks/gta2024-bacterial-genomics.md
       - title: BY-COVID
