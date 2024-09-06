@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@39f8349a05a17dcb1e348d31ff9b83cf2cc5d54f",
+		release: "galaxy-training-network@74e8834997592104a8417bbd063be8c36876bb9b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -239,14 +239,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			1
+			2
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Jun 23, 2023
+			Sep 6, 2024
 
 			<br/>
 
@@ -265,6 +265,10 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
+			<div class="label label-default tutorial_tag" style="--color-primary: #00f47b; --color-darker: #00d96d; --color-dimmed: #00e674;">ReferenceGenome</div>
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffc7be; --color-darker: #ffa694; --color-dimmed: #ffb7aa;">name:ERGA</div>
+			
 			</br>
 			
 
@@ -272,6 +276,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Features</b>
 			<ul>
 			
+			
+				<li>Includes a <a href="https://training.galaxyproject.org/training-material/faqs/galaxy/workflows_report_view.html">Galaxy Workflow Report</a></li>
 			
 			
 			
@@ -328,13 +334,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy Europe</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy France</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy Australia</a></li>
+					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-ERGA-post-assembly-QC/versions/main-workflow">Import to another server (≥23.0+ only!)</a>
@@ -352,12 +358,12 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 1 fill:#ded,stroke:#393,stroke-width:4px;
   2["ℹ️ Input Dataset\nNCBI taxdump directory"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Collection\nFASTQ files"];
+  3["ℹ️ Input Collection\nLong-read FASTQ files"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Parameter\nPloidy for model to use"];
-  style 4 fill:#ded,stroke:#393,stroke-width:4px;
-  5["ℹ️ Input Dataset\nPrimary genome assembly file fasta"];
-  style 5 stroke:#2c3143,stroke-width:4px;
+  4["ℹ️ Input Dataset\nPrimary genome assembly file fasta"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Parameter\nPloidy for model to use"];
+  style 5 fill:#ded,stroke:#393,stroke-width:4px;
   6["ℹ️ Input Dataset\nDIAMOND database"];
   style 6 stroke:#2c3143,stroke-width:4px;
   7["ℹ️ Input Collection\nHi-C reverse"];
@@ -369,18 +375,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   10["Collapse Collection"];
   3 -->|output| 10;
   11["Create BlobtoolKit"];
-  5 -->|output| 11;
+  4 -->|output| 11;
   0 -->|output| 11;
   2 -->|output| 11;
   1 -->|output| 11;
   12["gfastats"];
-  5 -->|output| 12;
+  4 -->|output| 12;
   13["Convert compressed file to uncompressed."];
-  5 -->|output| 13;
+  4 -->|output| 13;
   14["gfastats"];
-  5 -->|output| 14;
+  4 -->|output| 14;
   15["Diamond"];
-  5 -->|output| 15;
+  4 -->|output| 15;
   6 -->|output| 15;
   16["Collapse Collection"];
   7 -->|output| 16;
@@ -388,9 +394,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   8 -->|output| 17;
   18["Meryl"];
   9 -->|read_db| 18;
-  19["HISAT2"];
+  19["Map with minimap2"];
   10 -->|output| 19;
-  5 -->|output| 19;
+  4 -->|output| 19;
   20["Smudgeplot"];
   10 -->|output| 20;
   21["Replace"];
@@ -399,34 +405,34 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   14 -->|output| 22;
   23["BWA-MEM2"];
   16 -->|output| 23;
-  5 -->|output| 23;
+  4 -->|output| 23;
   24["BWA-MEM2"];
   17 -->|output| 24;
-  5 -->|output| 24;
+  4 -->|output| 24;
   25["Merqury"];
-  5 -->|output| 25;
+  4 -->|output| 25;
   18 -->|read_db| 25;
-  c2fe83a3-754a-4544-bb87-df16f3537ab4["Output\nMerqury on input dataset(s): stats"];
-  25 --> c2fe83a3-754a-4544-bb87-df16f3537ab4;
-  style c2fe83a3-754a-4544-bb87-df16f3537ab4 stroke:#2c3143,stroke-width:4px;
-  8f08d8f6-7615-420c-8a15-201a61b5d3bb["Output\nMerqury on input dataset(s): plots"];
-  25 --> 8f08d8f6-7615-420c-8a15-201a61b5d3bb;
-  style 8f08d8f6-7615-420c-8a15-201a61b5d3bb stroke:#2c3143,stroke-width:4px;
-  7a8d951a-6a31-4b02-aeba-0eb3061f85ce["Output\nMerqury on input dataset(s): QV stats"];
-  25 --> 7a8d951a-6a31-4b02-aeba-0eb3061f85ce;
-  style 7a8d951a-6a31-4b02-aeba-0eb3061f85ce stroke:#2c3143,stroke-width:4px;
+  d2dbf498-5155-43b2-bf2a-ffed5c45100d["Output\nMerqury on input dataset(s): stats"];
+  25 --> d2dbf498-5155-43b2-bf2a-ffed5c45100d;
+  style d2dbf498-5155-43b2-bf2a-ffed5c45100d stroke:#2c3143,stroke-width:4px;
+  0b43d206-253f-4c0b-a1f4-971402851c6d["Output\nMerqury on input dataset(s): plots"];
+  25 --> 0b43d206-253f-4c0b-a1f4-971402851c6d;
+  style 0b43d206-253f-4c0b-a1f4-971402851c6d stroke:#2c3143,stroke-width:4px;
+  811a77e8-eb99-4dc7-9295-f0000fcb9fe5["Output\nMerqury on input dataset(s): QV stats"];
+  25 --> 811a77e8-eb99-4dc7-9295-f0000fcb9fe5;
+  style 811a77e8-eb99-4dc7-9295-f0000fcb9fe5 stroke:#2c3143,stroke-width:4px;
   26["Meryl"];
   18 -->|read_db| 26;
   27["Samtools stats"];
-  19 -->|output_alignments| 27;
+  19 -->|alignment_output| 27;
   28["Busco"];
   21 -->|outfile| 28;
-  1d4e4542-8bf1-4e32-890b-2e18df95a0de["Output\nBusco on input dataset(s): full table"];
-  28 --> 1d4e4542-8bf1-4e32-890b-2e18df95a0de;
-  style 1d4e4542-8bf1-4e32-890b-2e18df95a0de stroke:#2c3143,stroke-width:4px;
-  680b8177-3653-4630-ab99-c1d2304dc485["Output\nBusco on input dataset(s): short summary"];
-  28 --> 680b8177-3653-4630-ab99-c1d2304dc485;
-  style 680b8177-3653-4630-ab99-c1d2304dc485 stroke:#2c3143,stroke-width:4px;
+  af98aae6-f1a3-493c-9cef-08e0926210d3["Output\nBusco on input dataset(s): full table"];
+  28 --> af98aae6-f1a3-493c-9cef-08e0926210d3;
+  style af98aae6-f1a3-493c-9cef-08e0926210d3 stroke:#2c3143,stroke-width:4px;
+  929439b7-c688-45ea-848a-97c13d3e0028["Output\nBusco on input dataset(s): short summary"];
+  28 --> 929439b7-c688-45ea-848a-97c13d3e0028;
+  style 929439b7-c688-45ea-848a-97c13d3e0028 stroke:#2c3143,stroke-width:4px;
   29["Filter and merge"];
   24 -->|bam_output| 29;
   23 -->|bam_output| 29;
@@ -442,18 +448,22 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   25 -->|png_files| 34;
   35["GenomeScope"];
   26 -->|read_db_hist| 35;
-  4 -->|output| 35;
+  5 -->|output| 35;
   36["BlobToolKit"];
   15 -->|blast_tabular| 36;
   11 -->|blobdir| 36;
   28 -->|busco_table| 36;
-  19 -->|output_alignments| 36;
+  19 -->|alignment_output| 36;
   37["PretextMap"];
   29 -->|outfile| 37;
-  38["Interactive BlobToolKit"];
+  38["BlobToolKit"];
   36 -->|blobdir| 38;
-  39["Pretext Snapshot"];
-  37 -->|pretext_map_out| 39;</pre>
+  39["BlobToolKit"];
+  36 -->|blobdir| 39;
+  40["BlobToolKit"];
+  36 -->|blobdir| 40;
+  41["Pretext Snapshot"];
+  37 -->|pretext_map_out| 41;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -481,17 +491,17 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				
 				<tr>
 					<td>Input dataset collection</td>
-					<td>FASTQ files</td>
-				</tr>
-				
-				<tr>
-					<td>Input parameter</td>
-					<td>Ploidy for model to use</td>
+					<td>Long-read FASTQ files</td>
 				</tr>
 				
 				<tr>
 					<td>Input dataset</td>
 					<td>Primary genome assembly file (fasta)</td>
+				</tr>
+				
+				<tr>
+					<td>Input parameter</td>
+					<td>Ploidy for model to use</td>
 				</tr>
 				
 				<tr>
@@ -522,6 +532,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+				
+				<tr>
+					<td></td>
+					<td>Input parameter</td>
+					<td>NCBI taxonomic ID</td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td>Input parameter</td>
+					<td>Ploidy for model to use</td>
+				</tr>
 				
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0</td>
@@ -600,18 +622,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=interactive_tool_blobtoolkit">interactive_tool_blobtoolkit</a></td>
-				<td>
-					
-				</td>
-			</tr>
-			
-			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1">toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2">toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/4.0.7+galaxy2</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/blobtoolkit/53dd00a4ab68">
+					<a href="https://toolshed.g2.bx.psu.edu/view/bgruening/blobtoolkit/8c2167481e72">
 						View in ToolShed
 					</a>
 					
@@ -751,18 +766,6 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1">toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1</a></td>
-				<td>
-					
-					
-					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/hisat2/f4af63aaf57a">
-						View in ToolShed
-					</a>
-					
-				</td>
-			</tr>
-			
-			<tr>
 				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2">toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2</a></td>
 				<td>
 					
@@ -780,6 +783,18 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					
 					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/meryl/29dabd8db6f2">
+						View in ToolShed
+					</a>
+					
+				</td>
+			</tr>
+			
+			<tr>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0">toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0</a></td>
+				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/iuc/minimap2/5cc34c3f440d">
 						View in ToolShed
 					</a>
 					
@@ -845,6 +860,27 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>6</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/49cec9ea83fb11ba5bbf653257a0723f4ce541fc">49cec9ea8</a></td>
+						<td>2024-09-04 10:06:48</td>
+						<td>Rename post-assembly-workflow.ga to main_workflow.ga</td>
+					</tr>
+					
+					<tr>
+						<td>5</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/cf8e17d6d77d0ae7c26ffe5f83eecab712ed5a94">cf8e17d6d</a></td>
+						<td>2024-08-28 09:16:42</td>
+						<td>Add workflow test</td>
+					</tr>
+					
+					<tr>
+						<td>4</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/93e0f85071edf315b8b1e58830a40fdd0e32b858">93e0f8507</a></td>
+						<td>2024-06-28 10:00:05</td>
+						<td>Change mapping tool to minimap and add more details about the downloaded databases</td>
+					</tr>
 					
 					<tr>
 						<td>3</td>
@@ -948,7 +984,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/39f8349a05a17dcb1e348d31ff9b83cf2cc5d54f">39f8349</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/74e8834997592104a8417bbd063be8c36876bb9b">74e8834</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
