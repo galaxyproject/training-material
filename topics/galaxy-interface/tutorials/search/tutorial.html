@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@398f9b8329ed79e4b78b4526bc25f1bf54b0ede8",
+		release: "galaxy-training-network@400dd5106df910bb6fb742002a24e7f3819ea218",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -791,12 +791,12 @@ any text that a dataset you’d be looking for would contain, including:</p>
 
 <h2 id="clearing-a-search">Clearing a Search</h2>
 
-<p>You can clear a search and show all visible datasets by clicking the round ‘X’ button in the right of the search bar
+<p>You can clear a search and show all visible datasets by clicking the ‘X’ button in the right end of the search bar
 or - while entering text in the search bar - hitting the escape key (‘Esc’).</p>
 
 <h1 id="advanced-searching">Advanced Searching</h1>
 
-<p>You can also specify dataset properties that you want to filter on. If you search with multiple properties, these are connected with ANDs, so datasets must match all provided attributes.</p>
+<p>You can also specify dataset properties that you want to filter on. If you search with multiple properties, these are connected with ANDs, so datasets must match all provided attributes. Here are some examples of filters you can use:</p>
 
 <table>
   <thead>
@@ -819,12 +819,16 @@ or - while entering text in the search bar - hitting the escape key (‘Esc’).
       <td>for searching on (a partial) dataset tag. You can repeat to search for more tags.</td>
     </tr>
     <tr>
+      <td><code class="language-plaintext highlighter-rouge">hid:4</code></td>
+      <td>The specific item with history item ID 4 (based on the ordering in the history) (This is also a ranged filter, so <code class="language-plaintext highlighter-rouge">hid&gt;4</code> will return all history items with ID greater than 4)</td>
+    </tr>
+    <tr>
       <td><code class="language-plaintext highlighter-rouge">related:10</code></td>
-      <td>A specific history item ID (based on the ordering in the history)</td>
+      <td>Datasets “related to” (inputs/outputs for) a dataset with specific history item ID (based on the ordering in the history)</td>
     </tr>
     <tr>
       <td><code class="language-plaintext highlighter-rouge">state:error</code></td>
-      <td>To show only datasets in a given state. Other options include <code class="language-plaintext highlighter-rouge">ok</code>, <code class="language-plaintext highlighter-rouge">running</code>, <code class="language-plaintext highlighter-rouge">paused</code>, and <code class="language-plaintext highlighter-rouge">new</code>.</td>
+      <td>To show only datasets in a given state. Other options include <code class="language-plaintext highlighter-rouge">ok</code>, <code class="language-plaintext highlighter-rouge">running</code>, <code class="language-plaintext highlighter-rouge">paused</code>, <code class="language-plaintext highlighter-rouge">new</code>, etc. (Click on the dropdown to see all options)</td>
     </tr>
   </tbody>
 </table>
@@ -1091,7 +1095,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/398f9b8329ed79e4b78b4526bc25f1bf54b0ede8">398f9b8</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/400dd5106df910bb6fb742002a24e7f3819ea218">400dd51</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
