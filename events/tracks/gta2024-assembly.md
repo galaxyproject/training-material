@@ -12,6 +12,11 @@ contributions:
         - SaimMomin12
         - bgruening
         - clsiguret
+        - mschatz
+        - GarethPrice-Aus
+        - annasyme
+        - trungN
+        - igormakunin
 
 
 program:

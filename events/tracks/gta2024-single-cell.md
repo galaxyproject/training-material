@@ -12,6 +12,8 @@ contributions:
         - pavanvidem
         - nomadscientist
         - dianichj
+        - Nilchia
+        - MarisaJL
 
 
 program:
