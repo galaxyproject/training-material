@@ -30,6 +30,7 @@ contributions:
   - bebatut
   - bgruening
   - hexylena
+  - ahmedhamidawan
 subtopic: histories
 
 recordings:
@@ -44,7 +45,7 @@ recordings:
 
 ---
 
-{% snippet faqs/gtn/galaxy_tested_with.md version="24.0" %}
+{% snippet faqs/gtn/galaxy_tested_with.md version="24.1" %}
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by Galaxy in
@@ -56,7 +57,7 @@ All users have one 'current' history, which can be thought of as **a workspace**
 bioinformatics terms. Your current history is displayed in the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.svg "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
+![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.png "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
 
 The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
