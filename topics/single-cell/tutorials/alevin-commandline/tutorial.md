@@ -256,17 +256,6 @@ Now load the library that we have previously installed in terminal:
 library(tximeta)
 ```
 
-If you get an error saying that "there is no package called ‘tximeta’", try installation using BiocManager as shown below. **Warning:** it may take up to 25 mins!
-
-```bash
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("tximeta")
-
-library(tximeta)
-```
-
 The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
 
 In the *alevin_output* -> *alevin* folder you can find the following files:
@@ -307,17 +296,6 @@ Some sub-populations of small cells may not be distinguished from empty droplets
 
 ```bash
 library(DropletUtils)               # load the library and required packages
-```
-
-Again, if the library is not found, try installation with BiocManager as shown below. **Warning:** it may take another 25 mins!
-
-```bash
-if (!require("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-
-BiocManager::install("DropletUtils")
-
-library(DropletUtils)
 ```
 
 emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
