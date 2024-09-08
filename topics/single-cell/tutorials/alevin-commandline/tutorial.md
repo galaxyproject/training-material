@@ -15,6 +15,11 @@ objectives:
   - Interpret quality control (QC) plots to make informed decisions on cell thresholds
   - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
 
+answer_histories:
+  - label: "Backup Jupyter Notebook for Google Collab"
+    history: https://zenodo.org/records/13732502/files/Alevin_tutorial_Google_Collab.ipynb?download
+    date: 2024-09-08
+
 time_estimation: 2H
 
 key_points:
@@ -74,7 +79,7 @@ tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
 >
 > As mentioned, installing salmon using conda is also an option, and you can do it using the following command in the terminal:
 > ```
-> conda install -c bioconda salmon
+> conda install -c conda-forge -c bioconda salmon
 > ```
 >
 > However, for this tutorial, it would be easier and quicker to use the downloaded pre-compiled binaries, as shown above.
@@ -116,6 +121,13 @@ Why do we need FASTA and GTF files?
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
 
 We will use the murine reference annotation as retrieved from Ensembl (*GRCm38* or *mm10*) in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
+
+Finally, we will download some files for later so that you don't have to switch kernels again - that's an Alevin output folder for another sample!
+
+```bash
+wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
+unzip alevin_output_702.zip
+```
 
 
 # Generate a transcript to gene map and filtered FASTA
@@ -216,10 +228,17 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 
 > <warning-title>Process stopping</warning-title>
 >  
-> The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel and that should help.
+> The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel (in the upper left corner: *Kernel* -> *Restart kernel...*) and that should help. However, if it doesn't, here are the alternatives:
+> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided](https://zenodo.org/records/13732502/files/Alevin_tutorial_Google_Collab.ipynb?download), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
+> - You can download the output folder that you would get as a result of running the code above. Simply run the code below.
 > 
 {: .warning}
 
+```
+# get the output folder from Alevin in case yours crashes
+wget https://zenodo.org/records/13732502/files/alevin_output.zip
+unzip alevin_output.zip
+```
 
 <!---
 check if we can get alevinQC to work - and paste the info from the first Alevin tutorial?
@@ -234,6 +253,17 @@ Let's change gear a little bit. We've done the work in bash, and now we're switc
 Now load the library that we have previously installed in terminal:
 
 ```bash
+library(tximeta)
+```
+
+If you get an error saying that "there is no package called ‘tximeta’", try installation using BiocManager as shown below. **Warning:** it may take up to 25 mins!
+
+```bash
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("tximeta")
+
 library(tximeta)
 ```
 
@@ -277,6 +307,17 @@ Some sub-populations of small cells may not be distinguished from empty droplets
 
 ```bash
 library(DropletUtils)               # load the library and required packages
+```
+
+Again, if the library is not found, try installation with BiocManager as shown below. **Warning:** it may take another 25 mins!
+
+```bash
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("DropletUtils")
+
+library(DropletUtils)
 ```
 
 emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
@@ -545,7 +586,7 @@ You will see the new file in the panel on the left.
 
 ## Analysis of sample 702
 
-Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, but to give you some practise in switching kernels and saving data, we will use bash to unzip the folder with that output data.
+Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, which you have already downloaded and unzipped at the beginning of the tutorial when we were using bash. 
 
 > <warning-title>Switching kernels & losing variables</warning-title>
 >  
@@ -553,23 +594,9 @@ Normally, at this point you would switch kernel to bash to run alevin, and then 
 > 
 {: .warning}
 
-Let's **switch the kernel back to bash** and run the following code to unzip the alevin output for sample 702:
-
-```bash
-# we're in bash again!
-wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
-```
-```bash
-unzip alevin_output_702.zip
-```
-
-The files are there! Now **back to R - switch kernel again**. 
-
 Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
 
 ```bash
-# we're in R now!
-
 ## load libraries again ##
 library(tximeta)
 library(DropletUtils)
@@ -650,7 +677,7 @@ Alright, another sample pre-processed!
 
 # Combining datasets
 
-Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It's equally easy as saving the object:
+Pre-processed sample 702 is there, but keep in mind that if you switched kernels in the meantime, you still need to load sample 701 that was saved before switching kernels. It's equally easy as saving the object:
 
 ```bash
 load("alevin_701.rdata")
@@ -688,7 +715,7 @@ library(SingleCellExperiment)                                 # might need to lo
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
-As you can see, all the embeddings have been successfully transfered during this conversion and believe me, sce object will be more useful for you! 
+As you can see, all the embeddings have been successfully transfered during this conversion and believe me, SCE object will be more useful for you! 
 
 You've already learned how to save and load objects in Jupyter notebook, let's then save the SCE file:
 
@@ -702,6 +729,7 @@ The last thing that might be useful is exporting the files into your Galaxy hist
 # that's Python now! 
 put("alevin_sce.rdata")
 ```
+A new dataset should appear in your Galaxy history now. 
 
 # Conclusion
 
