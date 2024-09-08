@@ -29,6 +29,9 @@ requirements:
   tutorials:
   - scrna-case_alevin
   - scrna-case_alevin-combine-datasets
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/published/history?id=67ff4cea2adc574d
 tags:
 - 10x
 - paper-replication
