@@ -609,7 +609,7 @@ Then, let's start with the transcriptome assemby.
 >    > <question-title></question-title>
 >    >
 >    > 1. How many lines are there in the `Assembled transcripts coordinates`?
->    > 2. How many lines are there in the original gtf?
+>    > 2. How many lines are there in the original GTF?
 >    > 3. How many lines are there in the `Reference transcriptome annotation`?
 >    > 4. What can you conclude?
 >    >
@@ -619,7 +619,7 @@ Then, let's start with the transcriptome assemby.
 >    >    > 2. There are about 93k lines.
 >    >    > 3. There are about 70k lines.
 >    >    > 4. Not much as the number of lines is not informative enough, we need an appropriate tool to compare those GTFs. However, a quick way to check why these numbers are different is to use **Count occurences of each record** on column 3 which is the feature type. This would tell you that:
->    >    >    - The original gtf has 2260 genes, 6503 transcripts and 42758 exons and other coding information.
+>    >    >    - The original GTF has 2260 genes, 6503 transcripts and 42758 exons and other coding information.
 >    >    >    - The Assembled transcripts coordinates have 2772-2940 transcripts and 21790-22858 exons and no other information, this is why the number of lines is much lower.
 >    >    >    - The Reference transcriptome annotation has 8310 transcripts and 61795 exons.
 >    >    >
@@ -709,7 +709,7 @@ In order to have an overview of the transcriptome, we can have a look at the **s
 >
 > > <solution-title></solution-title>
 > >
-> > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original gtf. The precision gives an indication on what is the proportion of new transcript compared to the original gtf.
+> > 1. At transcript level, precision is 77% and sensitivity 99.4%. The sensitivity is always very high as we provided to Stringtie merge the original GTF. The precision gives an indication on what is the proportion of new transcript compared to the original GTF.
 > > 2. According the stats file, 962 new exons (4.8%) have been identified.
 > > 
 > {: .solution}
@@ -899,7 +899,7 @@ The first step of the IsoformSwitchAnalyzeR pipeline is to import the required d
 >    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file "*: `Reference transcriptome annotation`
 >    - *"Reference Genome"*: `From your history`
 >       - {% icon param-file %} *"Genome Reference Fasta"*: `hg19.chr10.fasta`
->       - From *"Select fasta outputs"*: `fasta file with spliced exons for each GFF transcript`
+>       - From *"Select fasta outputs"*: `FASTA file with spliced exons for each GFF transcript`
 >
 > 2. Rename the output as `Reference transcriptome sequences`
 >
@@ -1282,7 +1282,7 @@ To assess this observation, **IsoformSwitchAnalyzeR** performs a standard propor
 
 > <question-title></question-title>
 >
-> What is the adjusted P-value corresponding to the tss downstream/upstream feature test?
+> What is the adjusted P-value corresponding to the TSS downstream/upstream feature test?
 >
 >   > <details-title>Consequences enrichment dataset</details-title>
 >   >
