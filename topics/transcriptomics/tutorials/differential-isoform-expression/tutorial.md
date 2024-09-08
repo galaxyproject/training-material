@@ -57,7 +57,7 @@ In this tutorial, we aim to perform a genome-wide analysis of {IS} driven by an 
 
 Ewing sarcoma is a bone and soft tissue cancer mainly affecting children, adolescents and young adults ({% cite Ewing1921 %}). In most of cases, this sarcoma is induced by a gene fusion between EWRS1 (a RNA-binding protein) and FLI1 (a transcription factor of the ETS family) ({% cite Delattre1992 %}). In order to study the role of this fusion oncogene, Carrilo and colleagues has developed a cell line, derived from an Ewing sarcoma tumor carrying EWS-FLI1 fusion, where the fusion oncoprotein can be knocked-down using doxycycline ({% cite Carrillo2007 %}). In this tutorial, we will use datasets produced by Saulnier and colleagues to study the role of EWS-FLI1 in alternative splicing ({% cite Saulnier2021 %}). They performed RNA sequencing of the inducible cell line after 7 days of doxycycline treatment where EWS-FLI1 is depleted and compared them to RNA sequencing of the same cell line without doxycycline treatment.
 
-The dataset consists of twelve FASTQ files, generated through the Illumina HiSeq 2500 sequencing machine. Three of the samples were obtained from A673/TR/shEF cancer cell line without treatment, and the rest from the same cell line where the EWS-FLI1 fusion oncoprotein is depleted (doxycycline treated). For this training we will use a reduced set of reads, in order to speed up the analysis. The original dataset is available in the NCBI SRA database, with the accession number PRJNA521683.
+The dataset consists of twelve FASTQ files, generated through the Illumina HiSeq 2500 sequencing machine. Three of the samples were obtained from A673/TR/shEF cancer cell line without treatment, and the rest from the same cell line where the EWS-FLI1 fusion oncoprotein is depleted (doxycycline treated). For this training we will use a reduced set of reads enriched in reads mapping on chr10, in order to speed up the analysis. The original dataset is available in the NCBI SRA database, with the accession number PRJNA521683.
 
 ## Get data
 
@@ -131,10 +131,10 @@ Next we will retrieve the remaining datasets.
 >
 {: .hands_on}
 
-> <details-title>Dataset subsampling</details-title>
+<!-- > <details-title>Dataset subsampling</details-title>
 >
 > As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows, all reads mapping to chromosome 10 were kept and a random fraction of 0.003 were added.
-{: .details}
+{: .details} -->
 
 # Quality assessment
 
