@@ -884,7 +884,7 @@ We will generate 2 collections from the Stringtie output, one with the cancer sa
 
 ## Import data
 
-The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets. This step requires to get a fasta file with the reference transcriptome.
+The first step of the IsoformSwitchAnalyzeR pipeline is to import the required datasets. This step requires to get a FASTA file with the reference transcriptome.
 
 > <comment-title>Salmon as source of transcript-expression data</comment-title>
 >
