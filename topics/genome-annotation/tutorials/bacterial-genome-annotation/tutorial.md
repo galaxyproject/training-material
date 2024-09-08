@@ -54,7 +54,7 @@ follow_up_training:
 recordings:
 - youtube_id: VOwplmv0vNs
   length: 44M
-  galaxy_version: " 24.0.4.dev0"
+  galaxy_version: "24.0.4.dev0"
   date: '2024-09-02'
   speakers:
   - bebatut
