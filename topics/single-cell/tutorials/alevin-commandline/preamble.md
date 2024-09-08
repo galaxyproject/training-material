@@ -33,9 +33,9 @@ Welcome to JupyterLab!
 
 You have two options for how to proceed with this JupyterLab tutorial - you can run the tutorial from a pre-populated notebook, or you can copy and paste the code for each step into a fresh notebook and run it. The initial instructions for both options are below.
 
-> <hands-on-title>Option 1: Open the notebook directly in JupyterLab</hands-on-title>
+> <hands-on-title>Option 1 (recommended): Open the notebook directly in JupyterLab</hands-on-title>
 >
-> 1. Open a `Terminal` in JupyterLab with File -> New -> Terminal
+> 1. Open a `Terminal` in JupyterLab with File -> New -> Terminal (you will use terminal in a moment again to install required packages!)
 >
 >   ![Screenshot of the Launcher tab with an arrow indicating where to find Terminal.](../../images/scrna-casestudy-monocle/terminal_choose.jpg "This is how the Launcher tab looks like and where you can find Terminal.")
 >
@@ -53,8 +53,6 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 > <hands-on-title>Option 2: Creating a notebook</hands-on-title>
 >
 > 1. If you are in the Launcher window, Select the **Bash** icon under **Notebook** (to open a new Launcher go to File -> New Launcher).
->
->   ![Bash icon](../../images/scrna-pre-processing/bash.png "Bash Notebook Button")
 >
 > 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
 >
@@ -80,16 +78,16 @@ Before we start working on the tutorial notebook, we need to install required pa
 > 1. Navigate back to the `Terminal` (if you haven't opened it yet, just go to File -> New -> Terminal)
 > 2. In the Terminal tab open, write the following, one line at a time:
 > ```
->conda install -y -c bioconda bioconductor-tximeta                     # install this first to avoid problem with re-installation of rtracklayer
+>conda install -y -c conda-forge -c bioconda bioconductor-tximeta                    # install this first to avoid problem with re-installation of rtracklayer
 >```
 >```
->conda install -y -c bioconda atlas-gene-annotation-manipulation     
+>conda install -y -c conda-forge -c bioconda atlas-gene-annotation-manipulation        
 >```
 >```
->conda install -y -c bioconda bioconductor-dropletutils
+>conda install -y -c conda-forge -c bioconda bioconductor-dropletutils
 >```
 >
 {: .hands_on}
 
 
-Installation will take a long while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
+Installation might take a long while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
