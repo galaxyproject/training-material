@@ -24,6 +24,18 @@ contributions:
   funding:
     - elixir-fair-data
 
+answer_histories:
+  - label: "EBI SCXA retrieval tool (UseGalaxy.eu)"
+    history: https://singlecell.usegalaxy.eu/u/j.jakiela/h/ebi-scxa---anndata-scanpy-or-seurat-object-1
+    date: 2024-01-10
+  - label: "HCA Downloader (UseGalaxy.eu)"
+    history: https://singlecell.usegalaxy.eu/u/j.jakiela/h/hca-downloader---example-files-1
+    date: 2024-09-08
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://singlecell.usegalaxy.eu/u/j.jakiela/h/input-history-ebi-scxa---anndata-scanpy-or-seurat-object
+
 requirements:
   -
     type: "internal"
@@ -46,7 +58,7 @@ tags:
 
 # Introduction
 
-Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find. which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and we will also show how to use the public atlases for your own research. 
+Public single cell datasets seem to accumulate by the second. Well annotated, quality datasets are slightly trickier to find, which is why projects like the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home) (SCXA) exist - to curate datasets for public use. Here, we will guide you through transforming data imported from the SCXA repository into the input file required for the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) and we will also show how to use the public atlases for your own research. 
 
 > <agenda-title></agenda-title>
 >
@@ -59,7 +71,7 @@ Public single cell datasets seem to accumulate by the second. Well annotated, qu
 
 # Getting data from the Single Cell Expression Atlas
 
-Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.04.08.032698 %}), which combines all the preprocessing steps shown in [the previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment ID of `E-MTAB-6945`.
+Galaxy has a specific tool for importing data from the SCXA ({% cite Moreno2020.04.08.032698 %}), which combines all the preprocessing steps shown in [the corresponding tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) into one! For this tutorial, the dataset can be seen [at the EBI](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment ID of `E-MTAB-6945`.
 
 > <details-title> How to access other experiments? </details-title>
 >
@@ -269,7 +281,7 @@ Even though this tutorial was designed specifically to modify the AnnData object
 
 > <hands-on-title> Create the Seurat Object </hands-on-title>
 >
-> 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/3.2.3+galaxy0) %}
+> 1. {% tool [Seurat Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/seurat_read10x/seurat_read10x/4.0.4+galaxy0) %}
 > 2. Set the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
@@ -302,7 +314,7 @@ To use it, simply set the project title, project label or project UUID, which ca
 
 For projects that have more than one organism, one needs to be specified. Otherwise, there is no need to set the species.
 
-Let's use the suggested example of the project *Single cell transcriptome analysis of human pancreas*. If you check this project in HCA, you'll find out that it's actually its label. But it will work the same if you enter the title or UUID! 
+Let's use the suggested example of the project *Single cell transcriptome analysis of human pancreas*. If you check this project in HCA, you'll find out that it's actually its label. But it should work well if you enter the title or UUID! 
 
 > <hands-on-title>Create AnnData object</hands-on-title>
 >
@@ -310,6 +322,13 @@ Let's use the suggested example of the project *Single cell transcriptome analys
 >    - *"Human Cell Atlas project name/label/UUID"*: `Single cell transcriptome analysis of human pancreas`
 >    - *"Choose the format of matrix to download"*:  `Matrix Market`
 {: .hands_on}
+
+> <warning-title>Errors that you might encounter</warning-title>
+>  If your dataset turns red, there might be several reasons for that, for example:
+>    - "There are too many connected users" - please be patient and re-run the step later, as it is advised
+>    - "Project identifier was not found in the database" - double check the spelling, try entering project title, project label or project UUID. 
+>
+{: .warning}
 
 > <details-title>What will be the output?</details-title>
 >
@@ -329,17 +348,17 @@ If you chose **Loom** format and you need to convert your file to other datatype
 
 > <hands-on-title>Create AnnData object</hands-on-title>
 >
-> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy0) %} with the following parameters:
+> {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.8.1+galaxy9) %} with the following parameters:
+>  Make sure you are using version **1.8.1+galaxy9** of the tool (change by clicking on {% icon tool-versions %} Versions button)
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `Human Cell Atlas Matrix Downloader on matrix.mtx`
 >    - *"Gene table"*:  `Human Cell Atlas Matrix Downloader on genes.tsv`
 >    - *"Barcode/cell table"*: `Human Cell Atlas Matrix Downloader on barcodes.tsv`
 >    - *"Cell metadata table"*: `Human Cell Atlas Matrix Downloader on exp_design.tsv`
 {: .hands_on}
 
-
 > <tip-title>Flagging genes by using AnnData Operations</tip-title>
 >
-> After you create AnnData file, you can additionally use the {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`.
+> After you create AnnData file, you can additionally use the {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool (note the version **1.8.1+galaxy9**) before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`.
 >
 > When you use it to flag mitochondrial genes, here are some formatting tips:
 > - Remember to check the name of the column with gene symbols
@@ -348,3 +367,4 @@ If you chose **Loom** format and you need to convert your file to other datatype
 > - Including a dash is important to identify mitochondrial genes (eg. **MT-**)
 {: .tip}
 
+You can have a look at the [answer history](https://singlecell.usegalaxy.eu/u/j.jakiela/h/hca-downloader---example-files-1) of performing those three quick steps. 
