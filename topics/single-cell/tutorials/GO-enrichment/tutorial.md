@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: GO Enrichment Analysis on Single-Cell RNA-Seq Data
-zenodo_link: 'https://zenodo.org/uploads/13461890'
+zenodo_link: 'https://zenodo.org/records/13461890'
 
 questions:
 - What is Gene Ontology (GO) enrichment analysis, and why should I perform it on my marker genes?
