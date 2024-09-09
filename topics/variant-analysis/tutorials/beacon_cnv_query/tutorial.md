@@ -41,7 +41,7 @@ Copy number variations (CNVs) are genomic segments with different numbers of cop
 
 Subsequently, The classification of CNV gains and losses into more specific categories: copy number gain, low-level copy number gain, high-level copy number gain, focal genome amplification, copy number loss, low-level copy number loss, high-level copy number loss, and complete genomic deletion. This detailed categorization enhances the precision in identifying and describing CNVs. More information can be found on the [ELIXIR hCNVs resource page](https://cnvar.org/resources/CNV-annotation-standards/).
 
-In this tutorial, we will use the Beacon2 Query tool to explore a Beacon built from the [GDC Public Access CNVs Data]((https://portal.gdc.cancer.gov/analysis_page?app=Downloads)) to identify Copy Number Variants (CNVs). We will also perform targeted queries on this dataset using various search criteria to pinpoint specific data points. This tutorial will showcase the tool's versatility and effectiveness in exploring and analyzing genomic data.
+In this tutorial, we will use the Beacon2 Query tool to explore a Beacon built from the [GDC Public Access CNVs Data]((https://portal.gdc.cancer.gov)) to identify Copy Number Variants (CNVs). We will also perform targeted queries on this dataset using various search criteria to pinpoint specific data points. This tutorial will showcase the tool's versatility and effectiveness in exploring and analyzing genomic data.
 
 
 > <agenda-title></agenda-title>
