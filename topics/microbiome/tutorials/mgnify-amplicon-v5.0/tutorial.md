@@ -26,7 +26,7 @@ requirements:
       topic_name: microbiome
       tutorials:
         - introduction
-time_estimation: "2H to 3H"
+time_estimation: "2 hours"
 contributions:
    authorship:
     - RZ9082
