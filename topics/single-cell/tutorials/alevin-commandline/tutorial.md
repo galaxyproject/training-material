@@ -17,7 +17,7 @@ objectives:
 
 answer_histories:
   - label: "Backup Jupyter Notebook for Google Collab"
-    history: https://zenodo.org/records/13732502/files/Alevin_tutorial_Google_Collab.ipynb?download
+    history: https://colab.research.google.com/drive/1RQz1aMvBLlhuKN30wyGkrM4m9ZzERZ1N?usp=sharing
     date: 2024-09-08
 
 time_estimation: 2H
@@ -229,7 +229,7 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 > <warning-title>Process stopping</warning-title>
 >  
 > The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel (in the upper left corner: *Kernel* -> *Restart kernel...*) and that should help. However, if it doesn't, here are the alternatives:
-> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided](https://zenodo.org/records/13732502/files/Alevin_tutorial_Google_Collab.ipynb?download), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
+> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided]( https://colab.research.google.com/drive/1RQz1aMvBLlhuKN30wyGkrM4m9ZzERZ1N?usp=sharing), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
 > - You can download the output folder that you would get as a result of running the code above. Simply run the code below.
 > 
 {: .warning}
