@@ -8,13 +8,13 @@ description: |
     This course introduces scientists to the data analysis platform Galaxy. The course is a beginner course; no programming skills are required.
 
 date_start: 2024-07-22
-date_end: 2024-07-26 
+date_end: 2024-07-26
 
-cost: free 
+cost: free
 audience: Scientists with no or little Galaxy experience who want to analyse sequencing data.
 contact_email: erxleben@informatik.uni-freiburg.de
-# async: false 
-mode: In-person
+# async: false
+mode: onsite
 
 registration:
   link: https://docs.google.com/forms/d/e/1FAIpQLSeGHShGhMvFvK0Jf3TNn0xgSMVboabWiTPfP2s3L1iDM0qTzA/viewform
@@ -47,14 +47,14 @@ infrastructure:
 program:
   - section: "Galaxy Freiburg workshop"  # section title is optional
     description: |
-      Next, you see the schedule for the full week. We will do at least one coffee break in the morning, one in the afternoon, and 1h lunch break around noon. 
+      Next, you see the schedule for the full week. We will do at least one coffee break in the morning, one in the afternoon, and 1h lunch break around noon.
     tutorials:
       - type: custom
         name: "Monday "
         time: "09:15 - 16:00"
         description: Introduction and Quality control
       - name: galaxy-intro-peaks2genes
-        topic: introduction  
+        topic: introduction
       - name: quality-control
         topic: sequence-analysis
       - type: custom

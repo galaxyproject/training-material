@@ -189,10 +189,11 @@ mapping:
             `true` for an asynchronous event. If this is true, we will not display any value for `time`s in the columns of the program
     mode:
         type: str
+        required: true
         enum:
             - online
             - onsite
-            - blended
+            - hybrid
         description: |
             The mode of the event. For some reason the schema.org markup for this provides three separate axes (online/onsite/blended, synchronous/asynchronous, and full-time/part-time), but we're just going to use the first axis because there is no way to represent choices from each axis. Why, schema.org why‽ If you want to record async/sync please do so in the separate attribute, and we will not record full/part time.
     registration:
@@ -206,6 +207,9 @@ mapping:
           deadline:
             required: true
             type: date
+          open:
+            required: false
+            type: bool
     feedback:
         description: |
             Link to the feedback form

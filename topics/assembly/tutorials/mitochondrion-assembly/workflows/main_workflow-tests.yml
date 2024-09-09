@@ -1,0 +1,30 @@
+- doc: Test outline for Mitogenome-Assembly-VGP0
+  job:
+    Collection of Pacbio Data:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: pacbio_01.fasta.gz
+        location: https://zenodo.org/records/10454765/files/pacbio_01.fasta.gz?download=1
+    Species name (latin name): Theretra latreillii lucasii
+    Email adress: iwc@galaxyproject.org
+  outputs:
+    contigs_stats:
+      asserts:
+        has_text:
+          text: "15316	36	True"
+    mitogenome_coverage:
+      asserts:
+        has_size:
+          value: 19000
+          delta: 2000
+    mitogenome_annotation:
+      asserts:
+        has_size:
+          value: 68000
+          delta: 5000
+    mitogenome_genbank:
+      assert:
+        has_n_line:
+          n: 480
