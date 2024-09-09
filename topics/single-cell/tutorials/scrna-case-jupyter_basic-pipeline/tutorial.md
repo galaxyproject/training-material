@@ -32,6 +32,10 @@ requirements:
 input_histories:
   - label: "UseGalaxy.eu"
     history: https://usegalaxy.eu/published/history?id=67ff4cea2adc574d
+answer_histories:
+  - label: "Backup Jupyter Notebook for Google Colab"
+    history: https://colab.research.google.com/drive/1DkCysA77iaFAWoKJ1vwE5_qYV8Su7UsX?usp=sharing
+    date: 2024-09-09
 tags:
 - 10x
 - paper-replication
@@ -904,3 +908,5 @@ put("figures/plotname.png")
 {% icon congratulations %} Congratulations! You’ve made it to the end!
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
+
+If, for some reasons anything didn't work in Galaxy JupyterLab environment, please don't get discouraged - we prepared a [Google Colab notebook version](https://colab.research.google.com/drive/1DkCysA77iaFAWoKJ1vwE5_qYV8Su7UsX?usp=sharing) for you as a backup so that you can enjoy the tutorial no matter what! 
