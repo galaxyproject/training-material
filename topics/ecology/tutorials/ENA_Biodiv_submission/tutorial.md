@@ -22,7 +22,7 @@ contributions:
         - PaulineSGN
         - yvanlebras
     funding:
-    - pndb
+        - pndb
 
 ---
 
