@@ -23,6 +23,11 @@ As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnD
 
 > {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
+> <comment-title>JupyterLab Notebook version</comment-title>
+> It is important that you check the version of JupyterLab Notebook tool that you run - do so by clicking on {% icon tool-versions %} Versions button.
+> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but if you encounter any issues, then switch to version **1.0.0** and it should solve your problems (despite longer installation).
+{: .comment}
+
 Welcome to JupyterLab!
 
 > <warning-title>Danger: You can lose data!</warning-title>
