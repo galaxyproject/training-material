@@ -209,8 +209,7 @@ To conduct such a detailed analysis, we can query the Beacon database by narrowi
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 2. Use the {% tool [Beacon2 CNV](https://toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} tool to query the Beacon **genomicVariations** collection:
->
+> 2. Use the {% tool [Beacon2 CNV](toolshed.g2.bx.psu.edu/repos/iuc/beacon2_cnv/beacon2_cnv/2.1.1+galaxy0) %} to query the Beacon **genomicVariations** collection:
 >    - *"DATABASE HOST"*: `20.108.51.167`
 >    - *"DATABASE PORT"*: `27017`
 >    - *"DATABASE"*: `beacon`
