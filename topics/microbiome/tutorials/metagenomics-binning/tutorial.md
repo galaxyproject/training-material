@@ -48,7 +48,7 @@ recordings:
   galaxy_version: 24.1.2.dev0
   date: '2024-08-30'
   speakers:
-  - Nikos Pechlivanis (npechl)
+  - npechl
   captioners:
   - Nikos Pechlivanis (npechl)
   bot-timestamp: 1725013820
