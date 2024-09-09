@@ -50,7 +50,7 @@ recordings:
   speakers:
   - npechl
   captioners:
-  - Nikos Pechlivanis (npechl)
+  - npechl
   bot-timestamp: 1725013820
 
 
