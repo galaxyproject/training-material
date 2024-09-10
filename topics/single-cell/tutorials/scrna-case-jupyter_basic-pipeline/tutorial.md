@@ -102,13 +102,18 @@ import pandas as pd
 You can import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #1 in your history, then you import it with the following:
 
 ```python
-mito_counted_anndata = get(1)
+mito_counted_anndata = get(1)                   # get an object from Galaxy history
+adata = sc.read_h5ad(mito_counted_anndata)      # read in the file as h5ad object
 ```
 
-You now need to read it in as a h5ad object.
+Alternatively, if you don't want to get the dataset from your Galaxy history, you can also download the input file from Zenodo, running the code below:
 
 ```python
-adata = sc.read_h5ad(mito_counted_anndata)
+%%bash
+wget -nv https://zenodo.org/record/7053673/files/Mito-counted_AnnData
+```
+```python
+adata = sc.read_h5ad("Mito-counted_AnnData")
 ```
 
 # Filtering
@@ -753,7 +758,9 @@ Note that the cluster numbering is based on size alone - clusters 0 and 1 are no
 | 0,1,2,6    | Cd8b1, Cd8a, Cd4        | Double positive (middle T-cell)      |
 | 5          | Cd8b1, Cd8a, Cd4 - high | Double positive (late middle T-cell) |
 | 3          | Itm2a                   | Mature T-cell                        |
-| 7          | Aif1                    | Macrophages                          |
+| 7          | Hba-a1                  | RBCs (as impurity here)              |
+| -          | Aif1                    | Macrophages                          |
+
 
 
 The authors weren’t interested in further annotation of the DP cells, so neither are we. Sometimes that just happens. The maths tries to call similar (ish) sized clusters, whether it is biologically relevant or not. Or, the question being asked doesn’t really require such granularity of clusters.
@@ -767,9 +774,12 @@ The authors weren’t interested in further annotation of the DP cells, so neith
 
 ## Annotating Clusters
 
+As mentioned at the beginning of the tutorial, you might not get outputs identical to a tutorial if you are running it in a programming environment, but the outputs should still be pretty close. However, you have to double check if the categories (ie. cell types) in the example below correspond to the identified cluster numbers based on gene expression. You might need to change the order of assigned cell types in the *categories* parameter to match the cluster numbers identified by *louvain*. 
+
 ```python
 # Add meaningful names to each category
-markers_cluster.rename_categories(key='louvain', categories=['DP-M4','DP-M3','T-mat','DN','DP-M2','DP-M1','DP-L','Macrophages'])
+markers_cluster.rename_categories(key='louvain',
+    categories=['DP-M4','DP-M3','T-mat','DN','DP-M2','DP-M1','DP-L','RBCs'])   # categories (cell types) correspond to the identified cluster numbers, ie. [0, 1, 2,...,7]
 
 # Copy AnnData object
 markers_cluster_copy = markers_cluster.copy()
