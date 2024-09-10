@@ -25,7 +25,7 @@ In this tutorial, we will go from raw FASTQ files to a cell x gene data matrix i
 
 > <comment-title>JupyterLab Notebook version</comment-title>
 > It is important that you check the version of JupyterLab Notebook tool that you run - do so by clicking on {% icon tool-versions %} Versions button.
-> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but you may encounter some issues after switching kernel. Don't worry - if this happens, we will explain an alternative way of installation (takes a while though) in the relevant part of the tutorial.
+> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but you may encounter some issues after switching kernel (we will switch from *bash* to *R*) since every kernel has its separated environment. Don't worry - if this happens, we will explain an alternative way of installation (takes a while though) in the relevant part of the tutorial.
 > If you use notebook version **1.0.0**, the conda installation is longer, but after it's done - the libraries should work fine even after switching kernel.
 {: .comment}
 
