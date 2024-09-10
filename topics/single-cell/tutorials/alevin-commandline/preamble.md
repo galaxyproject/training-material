@@ -1,7 +1,7 @@
 # Introduction 
 
 This tutorial is part of [Single-cell RNA-seq: Case Study]({% link topics/single-cell/index.md %}) series and focuses on generating a single cell matrix using Alevin ({% cite srivastava2019alevin %}) in the bash command line. It is a replication of the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) and will guide you through the same steps that you followed in the previous tutorial and will give you more understanding of what is happening ‘behind the scenes’ or ‘inside the tools’ if you will.
-As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnData format. After completing the previous tutorial you should already know what is a data matrix and AnnData format. We will perform the following steps:
+In this tutorial, we will go from raw FASTQ files to a cell x gene data matrix in SCE (SingleCellExperiment) format. We will perform the following steps:
 1.	Getting the appropriate files
 2.	Making a transcript-to-gene ID mapping
 3.	Creating Salmon index
@@ -25,7 +25,8 @@ As a recap, we will go from raw FASTQ files to a cell x gene data matrix in AnnD
 
 > <comment-title>JupyterLab Notebook version</comment-title>
 > It is important that you check the version of JupyterLab Notebook tool that you run - do so by clicking on {% icon tool-versions %} Versions button.
-> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but if you encounter any issues, then switch to version **1.0.0** and it should solve your problems (despite longer installation).
+> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but you may encounter some issues after switching kernel. Don't worry - if this happens, we will explain an alternative way of installation (takes a while though) in the relevant part of the tutorial.
+> If you use notebook version **1.0.0**, the conda installation is longer, but after it's done - the libraries should work fine even after switching kernel.
 {: .comment}
 
 Welcome to JupyterLab!
