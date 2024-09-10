@@ -358,7 +358,7 @@ If you chose **Loom** format and you need to convert your file to other datatype
 
 > <tip-title>Flagging genes by using AnnData Operations</tip-title>
 >
-> After you create AnnData file, you can additionally use the {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool (note the version **1.8.1+galaxy9**) before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`.
+> After you create AnnData file, you can additionally use the {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy92) %} tool (note the version **1.8.1+galaxy92**) before downstream analysis. It's quite a useful tool since not only does it flag mitochondrial genes, but also automatically calculates a bunch of metrics, such as `log1p_mean_counts`, `log1p_total_counts`, `mean_counts`, `n_cells`, `n_cells_by_counts`, `n_counts`, `pct_dropout_by_counts`, and `total_counts`.
 >
 > When you use it to flag mitochondrial genes, here are some formatting tips:
 > - Remember to check the name of the column with gene symbols
