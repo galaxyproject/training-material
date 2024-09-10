@@ -17,7 +17,7 @@ objectives:
 
 answer_histories:
   - label: "Backup Jupyter Notebook for Google Collab"
-    history: https://colab.research.google.com/drive/1RQz1aMvBLlhuKN30wyGkrM4m9ZzERZ1N?usp=sharing
+    history: https://colab.research.google.com/drive/1nRidlpiU-_qUG1zLgpc8mJZewr_EQL0N?usp=sharing
     date: 2024-09-08
 
 time_estimation: 2H
@@ -229,7 +229,7 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 > <warning-title>Process stopping</warning-title>
 >  
 > The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel (in the upper left corner: *Kernel* -> *Restart kernel...*) and that should help. However, if it doesn't, here are the alternatives:
-> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided]( https://colab.research.google.com/drive/1RQz1aMvBLlhuKN30wyGkrM4m9ZzERZ1N?usp=sharing), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
+> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided](https://colab.research.google.com/drive/1nRidlpiU-_qUG1zLgpc8mJZewr_EQL0N?usp=sharing), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
 > - You can download the output folder that you would get as a result of running the code above. Simply run the code below.
 > 
 {: .warning}
@@ -254,6 +254,19 @@ Now load the library that we have previously installed in terminal:
 
 ```bash
 library(tximeta)
+```
+
+> <comment-title>"There is no package called ‘tximeta’"?</comment-title>
+> If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
+> 
+{: .comment}
+
+```bash
+# run the code below only if you cannot load tximeta library
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("tximeta")
 ```
 
 The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
@@ -296,6 +309,19 @@ Some sub-populations of small cells may not be distinguished from empty droplets
 
 ```bash
 library(DropletUtils)               # load the library and required packages
+```
+
+> <comment-title>"There is no package called ‘DropletUtils’"?</comment-title>
+> If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
+> 
+{: .comment}
+
+```bash
+# run the code below only if you cannot load DropletUtils library
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install("DropletUtils")
 ```
 
 emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
@@ -440,7 +466,7 @@ Since gene symbols are much more informative than only gene IDs, we will add the
 library("biomaRt")                                      # load the BioMart library
 ensembl.ids <- gene_ID                               
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", version=100)
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
 
 # The line above connects to a specified BioMart database and dataset within this database.
 # In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38,
@@ -612,7 +638,7 @@ rowData(alevin2)$gene_ID <- gene_ID2
 # get relevant gene names
 ensembl.ids2 <- gene_ID2               
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl", version=100) 	
+ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl") 	
 
 genes2 <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id',
