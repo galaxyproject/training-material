@@ -339,7 +339,7 @@ If you want to run this notebook again, or share it with others, it now exists i
 
 # Conclusion
 
-Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1) or even a backup [Google Colab notebook](https://colab.research.google.com/drive/1-ENlIXM7TAoDGsMam7RyJIusIaBfF9e4?usp=sharing).
+Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1). If, for some reason anything didn't work in Galaxy JupyterLab environment, please don't get discouraged - we prepared a [Google Colab notebook version](https://colab.research.google.com/drive/1-ENlIXM7TAoDGsMam7RyJIusIaBfF9e4?usp=sharing) for you as a backup so that you can enjoy the tutorial no matter what!
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 
