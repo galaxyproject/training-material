@@ -50,6 +50,7 @@ contributors:
 
 In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
 However, simply identifying marker genes is just the beginning. To truly understand what makes each cluster unique, we need to dive deeper into the biological functions these genes are involved in. This is where Gene Ontology (GO) enrichment analysis comes into play.
+We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes beloging to a specific GO term) are expressed more than would be expected in a subset of your data. 
 
 # Data description
 
@@ -60,6 +61,8 @@ In this tutorial will use the following datasets:
 We'll start with two input datasets of marker genes (Study sets):
   * **Marker genes per cell cluster:** This dataset lists the genes that are significantly different in each cell cluster.
   * **Marker genes per condition (wt and ko):** This dataset lists the genes that are significantly different between the wild-type (wt) and knockout (ko) conditions.
+
+*Note:* Marker genes were obtained using Scanpy FindMarkers tool. The top 50 marker genes were included in the downstream GO enrichment analysis. Scanpy FindMarkers tool selects the marker genes based on their log2 fold change and p-values. Focusing on the top-ranked genes helps to filter out less relevant genes, thereby addressing the concern of high false positives that can arise from traditional methods. 
 
 **[B] GO Enrichment Files:**
 
