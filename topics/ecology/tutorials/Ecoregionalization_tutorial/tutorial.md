@@ -178,7 +178,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 
 # Data formating
 
-The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
+The first step of this tutorial is data formating because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
 
 ## Keep data columns that we need with **Advanced Cut**
 
@@ -210,7 +210,7 @@ The first step of this tutorial is data formatting because the GBIF species occu
 
 This step is used to add NAs to replace empty space in the file. We will do that for the four first columns and then remove lines with NA to have a complete dataset.
 
-> <hands-on-title> Relace empty space by NAs for the fisrt column </hands-on-title>
+> <hands-on-title> Replace empty space by NAs for the first column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `output` (output of **Advanced Cut** {% icon tool %})
@@ -231,7 +231,7 @@ This step is used to add NAs to replace empty space in the file. We will do that
 > <hands-on-title> Replace empty space by NAs for the second column </hands-on-title>
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on the fisrt column** {% icon tool %})
+>    - {% icon param-file %} *"Select cells from"*: `out_file1` (output of **Column Regex Find And Replace on the first column** {% icon tool %})
 >    - *"using column"*: `c2`
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
