@@ -528,7 +528,10 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >
 > 1. {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2) %} with the following parameters:
 >    - *"Convert From / To"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object` (if the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - try dragging the dataset from the history panel and dropping it into the input field. If this still doesn't work, then you can change the datatype to rdata.sce)
+>    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object`
+>
+> If the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - try dragging the dataset from the history panel and dropping it into the input field. If this still doesn't work, then you can change the datatype to rdata.sce.
+> 
 > {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`
