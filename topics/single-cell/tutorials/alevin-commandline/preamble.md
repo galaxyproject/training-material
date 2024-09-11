@@ -23,10 +23,9 @@ In this tutorial, we will go from raw FASTQ files to a cell x gene data matrix i
 
 > {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
-> <comment-title>JupyterLab Notebook version</comment-title>
-> It is important that you check the version of JupyterLab Notebook tool that you run - do so by clicking on {% icon tool-versions %} Versions button.
-> To date, the newest version is **1.0.1** - the conda installation is much quicker in this version, but you may encounter some issues after switching kernel (we will switch from *bash* to *R*) since every kernel has its separated environment. Don't worry - if this happens, we will explain an alternative way of installation (takes a while though) in the relevant part of the tutorial.
-> If you use notebook version **1.0.0**, the conda installation is longer, but after it's done - the libraries should work fine even after switching kernel.
+> <comment-title>JupyterLab Notebook version on usegalaxy.eu</comment-title>
+> Please note that there might be slight differences in the performance depending on the notebook version that you use. You can check the version by clicking on {% icon tool-versions %} Versions button.
+> To date, the newest version is **1.0.1** - the conda installation is much quicker there, so we recommend using that version when following this tutorial. 
 {: .comment}
 
 Welcome to JupyterLab!
@@ -74,11 +73,10 @@ Let's crack on!
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
-
+<!---
+we don't need the following anymore - introduced more optimised installation directly from the notebook
 ## Installation
-
 Before we start working on the tutorial notebook, we need to install required packages.
-
 ><hands-on-title>Installing the packages</hands-on-title>
 >
 > 1. Navigate back to the `Terminal` (if you haven't opened it yet, just go to File -> New -> Terminal)
@@ -94,6 +92,5 @@ Before we start working on the tutorial notebook, we need to install required pa
 >```
 >
 {: .hands_on}
-
-
 Installation might take a long while, so in the meantime, when it's running, you can open the notebook and follow the rest of this tutorial there!
+-->
