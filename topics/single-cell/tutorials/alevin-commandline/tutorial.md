@@ -234,7 +234,7 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 > 
 {: .warning}
 
-```
+```bash
 # get the output folder from Alevin in case yours crashes
 wget https://zenodo.org/records/13732502/files/alevin_output.zip
 unzip alevin_output.zip
@@ -256,14 +256,15 @@ Now load the library that we have previously installed in terminal:
 library(tximeta)
 ```
 
-> <comment-title>"There is no package called ‘DropletUtils’"?</comment-title>
+> <comment-title>"There is no package called ‘tximeta’"?</comment-title>
 > If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
 > ```bash
-> # run the code below only if you cannot load tximeta library
+> # run the code below only if you cannot load tximeta library (or using notebook version 1.0.1)
 > if (!require("BiocManager", quietly = TRUE))
 >     install.packages("BiocManager")
 > 
 > BiocManager::install("tximeta")
+> library(tximeta)
 > ```
 {: .comment}
 
@@ -313,11 +314,12 @@ library(DropletUtils)               # load the library and required packages
 > <comment-title>"There is no package called ‘DropletUtils’"?</comment-title>
 > If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
 > ```bash
-> # run the code below only if you cannot load DropletUtils library
+> # run the code below only if you cannot load DropletUtils library (or using notebook version 1.0.1)
 > if (!require("BiocManager", quietly = TRUE))
 >     install.packages("BiocManager")
 > 
 > BiocManager::install("DropletUtils")
+> library(DropletUtils)
 > ```
 {: .comment}
 
