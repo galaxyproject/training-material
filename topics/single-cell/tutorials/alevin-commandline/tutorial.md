@@ -132,7 +132,13 @@ unzip alevin_output_702.zip
 
 # Generate a transcript to gene map and filtered FASTA
 
-You can have a look at the Terminal tab again. Has the package `atlas-gene-annotation-manipulation` been installed yet? If yes, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
+We will now install the package `atlas-gene-annotation-manipulation` to help us generate the files required for Salmon and Alevin. 
+
+```bash
+conda install -y -c conda-forge -c bioconda atlas-gene-annotation-manipulation
+```
+
+After the installation is completed, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
 
 ```bash
 gtf2featureAnnotation.R -g GRCm38_gtf.gff -c GRCm38_cdna.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map -l "transcript_id,gene_id" -r -e filtered_fasta
@@ -250,14 +256,17 @@ Let's change gear a little bit. We've done the work in bash, and now we're switc
 ![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option 'Kernel' -> 'Change Kernel...' and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
 
 
-Now load the library that we have previously installed in terminal:
+Now, when we are in the R environment, let's install the packages required for this part: 
 
 ```bash
-library(tximeta)
+system("conda install -y bioconductor-tximeta", intern=TRUE)
+```
+```bash
+require("tximeta")
 ```
 
-> <comment-title>"There is no package called ‘tximeta’"?</comment-title>
-> If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
+> <details-title>"There is no package called ‘tximeta’"?</details-title>
+> If you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
 > ```bash
 > # run the code below only if you cannot load tximeta library (or using notebook version 1.0.1)
 > if (!require("BiocManager", quietly = TRUE))
@@ -266,7 +275,7 @@ library(tximeta)
 > BiocManager::install("tximeta")
 > library(tximeta)
 > ```
-{: .comment}
+{: .details}
 
 
 The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
@@ -307,12 +316,17 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
 
+Now, again - install the packages into our R environment: 
+
 ```bash
-library(DropletUtils)               # load the library and required packages
+system("conda install -y bioconductor-DropletUtils", intern=TRUE)
+```
+```bash
+require("DropletUtils")
 ```
 
-> <comment-title>"There is no package called ‘DropletUtils’"?</comment-title>
-> If you are using JupyterLab Notebook {% icon tool-versions %} **version 1.0.1** and you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
+> <details-title>"There is no package called ‘DropletUtils’"?</details-title>
+> If you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
 > ```bash
 > # run the code below only if you cannot load DropletUtils library (or using notebook version 1.0.1)
 > if (!require("BiocManager", quietly = TRUE))
@@ -321,7 +335,7 @@ library(DropletUtils)               # load the library and required packages
 > BiocManager::install("DropletUtils")
 > library(DropletUtils)
 > ```
-{: .comment}
+{: .details}
 
 
 emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
