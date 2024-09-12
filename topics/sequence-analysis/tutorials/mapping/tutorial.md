@@ -45,7 +45,7 @@ recordings:
   youtube_id: 1wm-62E2NkY
   speakers:
   - pvanheus
-- youtube_id: TODO
+- youtube_id: B-CFWSkZzRc
   length: 24M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-07'
