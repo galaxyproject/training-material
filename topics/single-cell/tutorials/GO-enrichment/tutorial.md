@@ -182,7 +182,7 @@ Now we will perform the GO Enrichment analysis on the list of ensembl gene IDs.
 
 > <question-title></question-title>
 >
-> 1. Take a look at the enriched terms forthe different clusters, Can you find any GO terms that are specific to cluster 7?
+> 1. Take a look at the enriched terms for the different clusters, Can you find any GO terms that are specific to cluster 7?
 > 2. Can we perform manual anntation of cluster 7 based on GO enrichment results?
 >
 > > <solution-title></solution-title>
