@@ -44,7 +44,7 @@ recordings:
   length: 18M
   date: '2023-05-19'
   galaxy_version: '23.01'
-- youtube_id: TODO
+- youtube_id: InBwrXde-g4
   length: 23m
   galaxy_version: 24.1.2.dev0
   date: '2024-09-07'
