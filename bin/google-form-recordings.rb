@@ -43,7 +43,7 @@ data.each do |row|
   # extract metadata from Google form
   length = row[col_length]
   galaxy_version= row[col_galaxyversion]
-  speakers = row[col_speakers].split(",")
+  speakers = row[col_speakers]&.split(",")
   date = submission_date.strftime('%Y-%m-%d')
 
   if row[col_material] == 'TESTING' or row[col_prmade] == 'yes'
