@@ -1,7 +1,4 @@
 ---
-redirect_from:
-- /topics/transcriptomics/faqs/amplification
-
 title: Why is my tool erroring as 'Above error raised while reading key '/layers' of type <class 'h5py._hl.group.Group'> from /.'
 area: Analysis
 box_type: tip
