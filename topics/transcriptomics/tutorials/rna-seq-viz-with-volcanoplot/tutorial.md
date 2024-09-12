@@ -3,29 +3,26 @@ layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with Volcano Plot
 level: Introductory
 subtopic: visualisation
-zenodo_link: "https://zenodo.org/record/2529117"
+zenodo_link: https://zenodo.org/record/2529117
 questions:
-  - "How to generate a volcano plot from RNA-seq data?"
+- How to generate a volcano plot from RNA-seq data?
 objectives:
-  - "Create a volcano plot of RNA-seq data to visualize significant genes"
-time_estimation: "30m"
+- Create a volcano plot of RNA-seq data to visualize significant genes
+time_estimation: 30m
 key_points:
-  - "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
+- A volcano plot can be used to quickly visualize significant genes in RNA-seq results
 contributors:
-  - mblue9
+- mblue9
 requirements:
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
-          - rna-seq-counts-to-genes
+- type: internal
+  topic_name: transcriptomics
+  tutorials:
+  - rna-seq-counts-to-genes
 follow_up_training:
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
-          - rna-seq-viz-with-volcanoplot-r
-
+- type: internal
+  topic_name: transcriptomics
+  tutorials:
+  - rna-seq-viz-with-volcanoplot-r
 recordings:
 - captioners:
   - mblue9
@@ -35,8 +32,19 @@ recordings:
   youtube_id: uNGXIcEGZwA
   speakers:
   - mblue9
+- youtube_id: TODO
+  length: 13M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-09-06'
+  speakers:
+  - SaimMomin12
+  captioners:
+  - SaimMomin12
+  bot-timestamp: 1725623696
+
 
 ---
+
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: style="float:right;width:60%" }
 Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.
