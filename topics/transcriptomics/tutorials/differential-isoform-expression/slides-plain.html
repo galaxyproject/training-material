@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f350add6fc244cf2a2d8e6b9359d3b0f40f5f763",
+		release: "galaxy-training-network@541df97388092974b3b321073c035d7a5e22ea92",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Identification of non-canonical ORFs and their potential biological function">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-07-11 10:15:34 +0000">
+<meta name="DC.date" content="2024-09-12 09:07:47 +0000">
 <meta name="DC.creator" content="Cristóbal Gallardo"><meta name="description" content="## Index of contents  1. Introduction  2. Galaxy workflow  ---  ## Introduction  - What do we mean by non-canonical ORFs?  - Why study non-canonical ORFs?  - Why have not been yet characterized?  - How identify non-canonical ORFs?  ---  ## What do we mean by non-canonical ORFs?  ![Definition of canonical]({% link topics/transcriptomics/images/differential_isoform/slides/cambridge_dictionary.png %})  .footnote[Source: [Cambridge dictionary](https://dictionary.cambridge.org/dictionary/english/canonical)]  ---  ## What do we mean by non-canonical ORFs?  ![Mean Ribo-Seq expression and Ribo-Seq expression standard deviation (SD) have been plotted for human lymphoblastoid cells from RPFdbV2.]({% link topics/transcriptomics/images/differential_isoform/slides/expression_distribution.png %})  .footnote[Source: {% cite Erady2021 %}]  ---  ## What do we mean by non-canonical ORFs?  ![The dark proteome: translation from noncanonical open reading frames.]({% link topics/transcriptomics/images/di...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Transcriptomics / Genome-wide alternative splicing analysis / Slides: Identification of non-canonical ORFs and their potential biological function">
@@ -210,8 +210,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge contributor-gallardoalba"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/gallardoalba?s=36" alt="Cristóbal Gallardo avatar" width="36" class="avatar" />
     Cristóbal Gallardo</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-lldelisle"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" />
+    Lucille Delisle</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
 	</div>
 
 </div>
@@ -224,7 +260,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jul 11, 2023 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Jul 11, 2023 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Sep 12, 2024 </div>
 
 	<hr />
 
@@ -423,7 +459,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="galaxy-workflow-1">Galaxy Workflow</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/full_workflow.png" alt="Full workflow image." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/full_workflow.png" alt="Full workflow image." /></p>
 
 <p>Full detailed explanation in the <a href="/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html">Genome-wide alternative splicing analysis</a> Galaxy training.</p>
 
@@ -431,13 +467,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="galaxy-workflow-2">Galaxy Workflow</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/simple_workflow.png" alt="Workflow summary." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/galaxyworkflow.drawio.png" alt="Workflow summary." /></p>
 
 <hr />
 
 <h2 id="initial-qc-assessment">Initial QC assessment</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/initial_QC.png" alt="QC step.Identify potential artifacts that may impact the interpretation of downstream analysis." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/fastqc_per_base_sequence_quality.png" alt="QC step.Identify potential artifacts that may impact the interpretation of downstream analysis." /></p>
 
 <p>Identify potential artifacts that may impact the interpretation of downstream analysis.</p>
 
@@ -445,7 +481,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="mapping-and-identication-of-novel-splicing-sites-with-rnastar">Mapping and identication of novel splicing sites with RNASTAR</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.png" alt="Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.drawio.png" alt="Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions." /></p>
 
 <p>Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.</p>
 
@@ -453,7 +489,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="post-mapping-qc-assessment-with-rseqc">Post-mapping QC assessment with RSeQC</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/rseqc_junction_saturation_plot.png" alt="Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/rseqc_junction_saturation_plot.png" alt="Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites." /></p>
 
 <p>RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.</p>
 
@@ -469,7 +505,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="post-assembly-qc-assessment-with-rnaquast">Post-assembly QC assessment with rnaQUAST</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/rnaQUAST_cumulative_isoform.png" alt="Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/rnaQUAST_cumulative_isoform.png" alt="Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot." /></p>
 
 <p>rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.</p>
 
@@ -485,16 +521,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="isoform-switching-and-functional-analysis-with-isoformswitchanalyzer-1">Isoform switching and functional analysis with IsoformSwitchAnalyzeR</h2>
 
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/consequences_plot.png" alt="IsoformSwitchAnalyzeR consequences plot." /></p>
+<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png" alt="IsoformSwitchAnalyzeR consequences plot." /></p>
 
 <p>To analyze large-scale patterns in predicted IS consequences, IsoformSwitchAnalyzeR computes all isoform switching events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss)</p>
-
-<hr />
-
-<h2 id="candidate-non-canonical-orf">Candidate non-canonical ORF</h2>
-
-<p><img src="/training-material/topics/transcriptomics/images/differential_isoform/slides/candidate_gene.png" alt="Candidate non-canonical ORF." /></p>
-
 
 
 	<hr />
@@ -526,6 +555,8 @@ Tutorial Content is licensed under
 <li id="Erady2021">Erady, C., A. Boxall, S. Puntambekar, N. S. Jagannathan, R. Chauhan <i>et al.</i>, 2021 <b>Pan-cancer analysis of transcripts encoding novel open-reading frames (nORFs) and their potential biological functions</b>. npj Genomic Medicine 6: <a href="https://doi.org/10.1038/s41525-020-00167-4">10.1038/s41525-020-00167-4</a></li>
 <li id="Steinberg2021">Steinberg, R., and H.-G. Koch, 2021 <b>The largely unexplored biology of small proteins in pro- and eukaryotes</b>. The FEBS Journal 288: 7002–7024. <a href="https://doi.org/10.1111/febs.15845">10.1111/febs.15845</a></li>
 <li id="Chakrabarti2022">Chakrabarti, P., and D. Chakravarty, 2022 <b>Intrinsically disordered proteins/regions and insight into their biomolecular interactions</b>. Biophysical Chemistry 283: 106769. <a href="https://doi.org/10.1016/j.bpc.2022.106769">10.1016/j.bpc.2022.106769</a></li></ol>
+
+
 
 
 
@@ -590,7 +621,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f350add6fc244cf2a2d8e6b9359d3b0f40f5f763">f350add</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/541df97388092974b3b321073c035d7a5e22ea92">541df97</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

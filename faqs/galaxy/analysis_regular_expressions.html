@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f350add6fc244cf2a2d8e6b9359d3b0f40f5f763",
+		release: "galaxy-training-network@541df97388092974b3b321073c035d7a5e22ea92",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Regular Expressions 101">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-04-11 12:54:58 +0000">
+<meta name="DC.date" content="2024-09-12 09:05:50 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Regular expressions are a standardized way of describing patterns in textual data. They can be extremely useful for tasks such as finding and replacing data. They can be a bit tricky to master, but learning even just a few of the basics can help you get the most out of Galaxy.  **Finding**  Below are just a few examples of basic expressions:  | Regular expression | Matches | |--------------------|-------------| | `abc`              | an occurrence of `abc` within your data | | `(abc|def)`        | `abc` *or* `def` | | `[abc]`            | a single character which is either `a`, `b`, or `c` | | `[^abc]`           | a character that is NOT `a`, `b`, nor `c` | | `[a-z]`            | any lowercase letter | | `[a-zA-Z]`         | any letter (upper or lower case)| | `[0-9]`            | numbers 0-9 | | `\d`               | any digit (same as `[0-9]`) | | `\D`               | any non-digit character | | `\w`               | any alphanumeric character | | `\W`               | any non-alphan...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Regular Expressions 101">
@@ -355,12 +355,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <td><code class="language-plaintext highlighter-rouge">^$</code></td>
       <td>empty line</td>
     </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^&gt;.*</code></td>
+      <td>Line starting with <code class="language-plaintext highlighter-rouge">&gt;</code> (e.g. Fasta header)</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">^[^&gt;].*</code></td>
+      <td>Line not starting with <code class="language-plaintext highlighter-rouge">&gt;</code> (e.g. Fasta sequence)</td>
+    </tr>
   </tbody>
 </table>
 
 <p><strong>Replacing</strong></p>
 
-<p>Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups <code class="language-plaintext highlighter-rouge">(...)</code>, which we can refer to using <code class="language-plaintext highlighter-rouge">\1</code>, <code class="language-plaintext highlighter-rouge">\2</code> etc for the first and second captured values.</p>
+<p>Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups <code class="language-plaintext highlighter-rouge">(...)</code>, which we can refer to using <code class="language-plaintext highlighter-rouge">\1</code>, <code class="language-plaintext highlighter-rouge">\2</code> etc for the first and second captured values. If you want to refer to the whole match, use <code class="language-plaintext highlighter-rouge">&amp;</code>.</p>
 
 <table>
   <thead>
@@ -387,6 +395,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <p>An expression like <code class="language-plaintext highlighter-rouge">s/find/replacement/g</code> indicates a replacement expression, this will search (<code class="language-plaintext highlighter-rouge">s</code>) for any occurrence of <code class="language-plaintext highlighter-rouge">find</code>, and replace it with <code class="language-plaintext highlighter-rouge">replacement</code>. It will do this globally (<code class="language-plaintext highlighter-rouge">g</code>) which means it doesn’t stop after the first match.</p>
 
 <p>Example: <code class="language-plaintext highlighter-rouge">s/chr(\d{1,2})/CHR\1/g</code> will replace <code class="language-plaintext highlighter-rouge">chr14</code> with <code class="language-plaintext highlighter-rouge">CHR14</code> etc.</p>
+
+<p>You can also use replacement modifier such as convert to lower case <code class="language-plaintext highlighter-rouge">\L</code> or upper case <code class="language-plaintext highlighter-rouge">\U</code>. Example: <code class="language-plaintext highlighter-rouge">s/.*/\U&amp;/g</code> will convert the whole text to upper case.</p>
 
 <p>Note: In Galaxy, you are often asked to provide the find and replacement expressions separately, so you don’t have to use the <code class="language-plaintext highlighter-rouge">s/../../g</code> structure.</p>
 
@@ -550,7 +560,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f350add6fc244cf2a2d8e6b9359d3b0f40f5f763">f350add</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/541df97388092974b3b321073c035d7a5e22ea92">541df97</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

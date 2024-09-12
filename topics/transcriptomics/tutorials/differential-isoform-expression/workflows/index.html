@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@f350add6fc244cf2a2d8e6b9359d3b0f40f5f763",
+		release: "galaxy-training-network@541df97388092974b3b321073c035d7a5e22ea92",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -223,15 +223,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<div class="col-md-6">
 		<div class="card">
 		<div class="card-body">
-			<h5 class="card-title">Genome-wide alternative splicing analysis: human</h5>
+			<h5 class="card-title">GTN_differential_isoform_expression</h5>
 			<h6 class="card-subtitle mb-2 text-muted">
 				
-				Cristóbal Gallardo Alba
+				Cristobal Gallardo, 
+				
+				Lucille Delisle
 				
 			</h6>
 
 			<p class="card-text">
-				<small class="text-muted">Last updated Jun 13, 2023</small>
+				<small class="text-muted">Last updated Sep 12, 2024</small>
 			</p>
 			<p class="card-text">
 			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow">Launch in Tutorial Mode</span>
@@ -241,7 +243,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 			License: 
 				
-				<a href="https://spdx.org/licenses/CC-BY-SA-4.0">CC-BY-SA-4.0</a>
+				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
 				<br/>
 			Tests: ✅
@@ -255,13 +257,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -271,168 +273,189 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<pre class="mermaid">flowchart TD
   0["ℹ️ Input Collection\nRNA-seq data collection"];
   style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nReference genome"];
+  1["ℹ️ Input Dataset\nGenome annotation"];
   style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nGenome annotation"];
+  2["ℹ️ Input Dataset\nReference genome"];
   style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nControl IDs"];
+  3["ℹ️ Input Dataset\nPfam-A HMM library"];
   style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Parameter\nFactor 02"];
-  style 4 fill:#ded,stroke:#393,stroke-width:4px;
-  5["ℹ️ Input Parameter\nFactor 01"];
-  style 5 fill:#ded,stroke:#393,stroke-width:4px;
+  4["ℹ️ Input Dataset\nPfam-A HMM Stockholm file"];
+  style 4 stroke:#2c3143,stroke-width:4px;
+  5["ℹ️ Input Dataset\nActive sites dataset"];
+  style 5 stroke:#2c3143,stroke-width:4px;
   6["ℹ️ Input Dataset\nCPAT header"];
   style 6 stroke:#2c3143,stroke-width:4px;
-  7["ℹ️ Input Dataset\nActive sites dataset"];
-  style 7 stroke:#2c3143,stroke-width:4px;
-  8["ℹ️ Input Dataset\nPfam-A HMM Stockholm file"];
-  style 8 stroke:#2c3143,stroke-width:4px;
-  9["ℹ️ Input Dataset\nPfam-A HMM library"];
-  style 9 stroke:#2c3143,stroke-width:4px;
-  10["fastp"];
-  0 -->|output| 10;
-  11["Flatten collection"];
-  0 -->|output| 11;
-  12["Search in textfiles"];
-  2 -->|output| 12;
-  13["Search in textfiles"];
-  2 -->|output| 13;
-  14["Convert GTF to BED12"];
+  7["Flatten collection"];
+  0 -->|output| 7;
+  8["fastp"];
+  0 -->|output| 8;
+  9["Convert GTF to BED12"];
+  1 -->|output| 9;
+  10["Search in textfiles"];
+  1 -->|output| 10;
+  11["Search in textfiles"];
+  1 -->|output| 11;
+  12["FastQC"];
+  7 -->|output| 12;
+  13["gather fastp reports"];
+  8 -->|report_json| 13;
+  14["RNA STAR"];
+  1 -->|output| 14;
   2 -->|output| 14;
-  15["FastQC"];
-  11 -->|output| 15;
+  8 -->|output_paired_coll| 14;
+  15["Gene BED To Exon/Intron/Codon BED"];
+  9 -->|bed_file| 15;
   16["gffread"];
-  12 -->|output| 16;
-  1 -->|output| 16;
-  e34fd125-e860-48a2-9e58-bed5c3600b8d["Output\nlncRNA sequences"];
-  16 --> e34fd125-e860-48a2-9e58-bed5c3600b8d;
-  style e34fd125-e860-48a2-9e58-bed5c3600b8d stroke:#2c3143,stroke-width:4px;
+  10 -->|output| 16;
+  2 -->|output| 16;
   17["gffread"];
-  13 -->|output| 17;
-  1 -->|output| 17;
-  836eeb38-dc67-42df-93fa-2fcd5bbe7a80["Output\nprotein coding sequences"];
-  17 --> 836eeb38-dc67-42df-93fa-2fcd5bbe7a80;
-  style 836eeb38-dc67-42df-93fa-2fcd5bbe7a80 stroke:#2c3143,stroke-width:4px;
-  18["MultiQC"];
-  15 -->|text_file| 18;
-  10 -->|report_json| 18;
-  19["Search in textfiles"];
-  15 -->|text_file| 19;
-  20["Concatenate datasets"];
-  19 -->|output| 20;
-  21["Search in textfiles"];
-  20 -->|out_file1| 21;
-  22["Cut"];
-  21 -->|output| 22;
-  23["Text reformatting"];
-  22 -->|out_file1| 23;
-  24["Parse parameter value"];
-  23 -->|outfile| 24;
-  25["RNA STAR"];
-  2 -->|output| 25;
-  24 -->|integer_param| 25;
-  1 -->|output| 25;
-  10 -->|output_paired_coll| 25;
-  26["Concatenate datasets"];
-  25 -->|splice_junctions| 26;
-  27["Text reformatting"];
+  11 -->|output| 17;
+  2 -->|output| 17;
+  18["gather FastQC reports"];
+  12 -->|text_file| 18;
+  19["Concatenate datasets"];
+  14 -->|splice_junctions| 19;
+  20["Compute"];
+  15 -->|out_file1| 20;
+  21["Filter"];
+  19 -->|out_file1| 21;
+  22["Sort"];
+  20 -->|out_file1| 22;
+  23["Cut"];
+  21 -->|out_file1| 23;
+  24["Text reformatting"];
+  22 -->|out_file1| 24;
+  25["Text reformatting"];
+  22 -->|out_file1| 25;
+  26["Sort"];
+  23 -->|out_file1| 26;
+  27["Unique lines"];
   26 -->|out_file1| 27;
-  28["Cut"];
+  28["RNA STAR"];
+  1 -->|output| 28;
+  2 -->|output| 28;
+  8 -->|output_paired_coll| 28;
   27 -->|outfile| 28;
-  29["Sort"];
-  28 -->|out_file1| 29;
-  30["Unique"];
-  29 -->|out_file1| 30;
-  31["RNA STAR"];
-  2 -->|output| 31;
-  24 -->|integer_param| 31;
-  1 -->|output| 31;
-  10 -->|output_paired_coll| 31;
-  30 -->|outfile| 31;
-  32["StringTie"];
-  2 -->|output| 32;
-  31 -->|mapped_reads| 32;
+  29["StringTie"];
+  1 -->|output| 29;
+  28 -->|mapped_reads| 29;
+  30["Infer Experiment"];
+  28 -->|mapped_reads| 30;
+  9 -->|bed_file| 30;
+  31["Gene Body Coverage BAM"];
+  28 -->|mapped_reads| 31;
+  9 -->|bed_file| 31;
+  32["Junction Saturation"];
+  28 -->|mapped_reads| 32;
+  9 -->|bed_file| 32;
   33["Junction Annotation"];
-  31 -->|mapped_reads| 33;
-  14 -->|bed_file| 33;
-  34["Junction Saturation"];
-  31 -->|mapped_reads| 34;
-  14 -->|bed_file| 34;
-  35["Gene Body Coverage BAM"];
-  31 -->|mapped_reads| 35;
-  14 -->|bed_file| 35;
-  36["Inner Distance"];
-  31 -->|mapped_reads| 36;
-  14 -->|bed_file| 36;
-  37["Infer Experiment"];
-  31 -->|mapped_reads| 37;
-  14 -->|bed_file| 37;
-  38["Read Distribution"];
-  31 -->|mapped_reads| 38;
-  14 -->|bed_file| 38;
-  39["gffread"];
-  32 -->|output_gtf| 39;
-  1 -->|output| 39;
-  40["StringTie merge"];
-  2 -->|output| 40;
-  32 -->|output_gtf| 40;
-  41["MultiQC"];
-  31 -->|output_log| 41;
-  37 -->|output| 41;
-  38 -->|output| 41;
-  34 -->|outputr| 41;
-  33 -->|stats| 41;
-  35 -->|outputtxt| 41;
-  36 -->|outputfreqtxt| 41;
-  42["rnaQUAST"];
+  28 -->|mapped_reads| 33;
+  9 -->|bed_file| 33;
+  34["Inner Distance"];
+  28 -->|mapped_reads| 34;
+  9 -->|bed_file| 34;
+  35["Read Distribution"];
+  28 -->|mapped_reads| 35;
+  9 -->|bed_file| 35;
+  36["StringTie merge"];
+  1 -->|output| 36;
+  29 -->|output_gtf| 36;
+  37["gffread"];
+  29 -->|output_gtf| 37;
+  2 -->|output| 37;
+  38["MultiQC"];
+  28 -->|output_log| 38;
+  28 -->|reads_per_gene| 38;
+  30 -->|output| 38;
+  32 -->|outputr| 38;
+  31 -->|outputtxt| 38;
+  34 -->|outputfreqtxt| 38;
+  35 -->|output| 38;
+  33 -->|stats| 38;
+  39["StringTie"];
+  36 -->|out_gtf| 39;
+  28 -->|mapped_reads| 39;
+  40["GffCompare"];
+  1 -->|output| 40;
+  36 -->|out_gtf| 40;
+  41["Plot a transcript in intron"];
+  28 -->|signal_unique_str2| 41;
+  28 -->|signal_unique_str1| 41;
+  36 -->|out_gtf| 41;
+  42["gffread"];
+  36 -->|out_gtf| 42;
   2 -->|output| 42;
-  1 -->|output| 42;
-  39 -->|output_exons| 42;
-  43["gffread"];
-  40 -->|out_gtf| 43;
-  1 -->|output| 43;
-  44["StringTie"];
-  40 -->|out_gtf| 44;
-  31 -->|mapped_reads| 44;
-  45["Filter collection"];
-  3 -->|output| 45;
-  44 -->|transcript_expression| 45;
-  46["IsoformSwitchAnalyzeR"];
-  2 -->|output| 46;
-  24 -->|integer_param| 46;
-  5 -->|output| 46;
-  45 -->|output_filtered| 46;
-  40 -->|out_gtf| 46;
-  4 -->|output| 46;
-  45 -->|output_discarded| 46;
-  43 -->|output_exons| 46;
-  47["IsoformSwitchAnalyzeR"];
-  46 -->|switchList| 47;
-  48["CPAT"];
-  17 -->|output_exons| 48;
-  47 -->|isoformNT| 48;
-  16 -->|output_exons| 48;
-  1 -->|output| 48;
-  49["PfamScan"];
-  7 -->|output| 49;
-  47 -->|isoformAA| 49;
-  8 -->|output| 49;
-  9 -->|output| 49;
-  50["Remove beginning"];
-  48 -->|orf_seqs_prob_best| 50;
-  51["Text reformatting"];
-  50 -->|out_file1| 51;
-  52["Concatenate datasets"];
-  6 -->|output| 52;
-  51 -->|outfile| 52;
-  53["IsoformSwitchAnalyzeR"];
-  52 -->|out_file1| 53;
-  49 -->|output| 53;
-  47 -->|switchList| 53;
-  54["IsoformSwitchAnalyzeR"];
-  52 -->|out_file1| 54;
-  49 -->|output| 54;
-  47 -->|switchList| 54;
+  43["Plot ADD3"];
+  28 -->|signal_unique_str2| 43;
+  28 -->|signal_unique_str1| 43;
+  36 -->|out_gtf| 43;
+  44["Plot ADD3 zoomed"];
+  28 -->|signal_unique_str2| 44;
+  28 -->|signal_unique_str1| 44;
+  36 -->|out_gtf| 44;
+  45["rnaQUAST"];
+  1 -->|output| 45;
+  2 -->|output| 45;
+  37 -->|output_exons| 45;
+  46["Extract element identifiers"];
+  39 -->|transcript_expression| 46;
+  47["Filter"];
+  40 -->|tmap_output| 47;
+  48["Search in textfiles"];
+  46 -->|output| 48;
+  49["Filter collection"];
+  48 -->|output| 49;
+  39 -->|transcript_expression| 49;
+  50["IsoformSwitchAnalyzeR"];
+  1 -->|output| 50;
+  49 -->|output_discarded| 50;
+  36 -->|out_gtf| 50;
+  49 -->|output_filtered| 50;
+  42 -->|output_exons| 50;
+  51["IsoformSwitchAnalyzeR"];
+  50 -->|switchList| 51;
+  52["PfamScan"];
+  5 -->|output| 52;
+  51 -->|isoformAA| 52;
+  4 -->|output| 52;
+  3 -->|output| 52;
+  53["CPAT"];
+  16 -->|output_exons| 53;
+  51 -->|isoformNT| 53;
+  17 -->|output_exons| 53;
+  2 -->|output| 53;
+  54["Cut"];
+  53 -->|orf_seqs_prob_best| 54;
+  55["Add column"];
+  54 -->|out_file1| 55;
+  56["Remove beginning"];
+  55 -->|out_file1| 56;
+  57["Concatenate datasets"];
+  6 -->|output| 57;
+  56 -->|out_file1| 57;
+  58["IsoformSwitchAnalyzeR"];
+  57 -->|out_file1| 58;
+  52 -->|output| 58;
+  51 -->|switchList| 58;
+  59["IsoformSwitchAnalyzeR"];
+  57 -->|out_file1| 59;
+  52 -->|output| 59;
+  51 -->|switchList| 59;
+  d2f0865b-20ba-43ef-8ebc-ad9f517ec60d["Output\nconsequencesSummary"];
+  59 --> d2f0865b-20ba-43ef-8ebc-ad9f517ec60d;
+  style d2f0865b-20ba-43ef-8ebc-ad9f517ec60d stroke:#2c3143,stroke-width:4px;
+  8dd90968-6ef6-48e1-a104-547cbeaa80c8["Output\nconsequencesEnrichment"];
+  59 --> 8dd90968-6ef6-48e1-a104-547cbeaa80c8;
+  style 8dd90968-6ef6-48e1-a104-547cbeaa80c8 stroke:#2c3143,stroke-width:4px;
+  6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc["Output\nsplicingEnrichment"];
+  59 --> 6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc;
+  style 6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc stroke:#2c3143,stroke-width:4px;
+  9c8369e2-8f86-4984-a47a-a35415ecb9b9["Output\nmostSwitching"];
+  59 --> 9c8369e2-8f86-4984-a47a-a35415ecb9b9;
+  style 9c8369e2-8f86-4984-a47a-a35415ecb9b9 stroke:#2c3143,stroke-width:4px;
+  292b9609-061f-49f7-94fc-7831526bb48b["Output\nsplicingSummary"];
+  59 --> 292b9609-061f-49f7-94fc-7831526bb48b;
+  style 292b9609-061f-49f7-94fc-7831526bb48b stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -507,7 +530,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/f350add6fc244cf2a2d8e6b9359d3b0f40f5f763">f350add</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/541df97388092974b3b321073c035d7a5e22ea92">541df97</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
