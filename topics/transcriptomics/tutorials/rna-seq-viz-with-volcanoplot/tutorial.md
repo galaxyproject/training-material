@@ -32,7 +32,7 @@ recordings:
   youtube_id: uNGXIcEGZwA
   speakers:
   - mblue9
-- youtube_id: TODO
+- youtube_id: ZnvAWAgk7Z4
   length: 13M
   galaxy_version: " 24.1.2.dev0"
   date: '2024-09-06'
