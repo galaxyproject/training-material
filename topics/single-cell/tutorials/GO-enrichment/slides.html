@@ -102,7 +102,6 @@ Now that we understand what does GO mean, let’s explore what is GO Enrichment 
 .center[Enrichment analysis is a type of functional annotation process which is the process of associating biological functions with genes or cells based on the expression data.]
 
 ???
-- scRNA-seq has demonstrated its value in understanding biological processes. By analyzing samples at the individual cell level, it offers a clearer perspective of the underlying biology.
 - Enrichment analysis is a statistical approach used to determine whether certain biological features are overrepresented (enriched) in a subset of genes(i.e., Marker genes) compared to a broader background set.
 
 ---
@@ -115,7 +114,6 @@ Now that we understand what does GO mean, let’s explore what is GO Enrichment 
 ???
 - Each GO term is associated with a set of genes.
 - We try to find out which GO terms or gene sets are enriched in our list of marker genes.
-- Instead of trying to interpret each gene individually, we treat genes as sets, each set is associated with a GO term.
 - These GO terms are functionally assigned to various biological functions and locations, aiding our understanding of the roles of marker genes.
 - Also note that each gene can be assigned to multiple GO terms allowing the capture of various functions, processes, and cellular components associated with a gene.
 
@@ -127,7 +125,7 @@ Now that we understand what does GO mean, let’s explore what is GO Enrichment 
 .image-60[![slide14](../../images/GO-enrichment/slides_images/step1_9.png)
 
 ???
-We start the analysis by selecting a list of marker genes. Marker genes could be a list of differentially expressed genes between 2 different conditions or between different cell types.
+We start the analysis by selecting a list of differentially expressed genes (marker genes). Marker genes could be a list of differentially expressed genes between 2 different conditions or between different cell types.
 
 ---
 
@@ -182,27 +180,23 @@ After we have transformed the long list of marker genes into a short list of bio
 
 ---
 
-### Real-World Example of GO Enrichment Analysis: Platelet Proteins in Early-Stage Cancer
+### Example 1: GO Enrichment Analysis of Platelet Proteins in Early-Stage Cancer
 
-.image-90[![slide19](../../images/GO-enrichment/slides_images/rw_example_16.png)
+.image-90[![slide19](../../images/GO-enrichment/slides_images/example1_16.png)
 
 ???
 - In a study by Zúñiga-León et al. (2018) they explored the differentially expressed platelet proteins in early-stage cancer in comparison to a control group.
-- By identifying which GO terms are enriched among these proteins, we can gain insights into the underlying biological processes and pathways involved in tumor progression. 
 
----
-
-.image-90[![slide20](../../images/GO-enrichment/slides_images/m_17.png)
-
-???
 - The study revealed that out of 4,384 unique proteins expressed in platelets, 85 proteins showed significant differences in abundance in early-stage cancer patients compared to controls. This highlights the potential of platelets as biomarkers for early cancer detection.
+
 - The enrichment analysis identified 19 enriched biological processes, it also uncovered six enriched molecular functions.
+
 
 ---
 
 ### Biological interpretation of the results
 
-.image-100[![slide21](../../images/GO-enrichment/slides_images/interpretation_18.png)
+.image-100[![slide20](../../images/GO-enrichment/slides_images/interpretation_18.png)
 
 ???
 - The 19 biological processes identified primarily relate to inflammatory response, immune response, and cancer annotations.
@@ -211,12 +205,29 @@ After we have transformed the long list of marker genes into a short list of bio
 
 
 ---
-### Purpose and Importance
+### Example 2: Identifying Potential Biomarkers of Non-Small Cell Lung Cancer Through GO Enrichment Analysis of scRNA-Seq Data
 
-.image-90[![slide22](../../images/GO-enrichment/slides_images/purpose_19.png)
+.image-100[![slide21](../../images/GO-enrichment/slides_images/example2.png)
 
 ???
-- GO enrichment analysis helps scientists make sense of large gene lists by pointing out which biological processes, functions, or cellular locations are most relevant. 
+- Non-small cell lung cancer (NSCLC) is the most prevalent lung cancer. This study aims to identify gene biomarkers for NSCLC diagnosis and prognosis using single-cell RNA sequencing (scRNA-seq) data and bioinformatics techniques. 
+
+- 158 differentially expressed genes (DEGs) were identified, comprising 48 upregulated and 110 downregulated genes. 
+
+- Gene Ontology enrichment was then conducted on the differentially expressed genes (Marker genes), statistical testing was performed on each GO term and only GO terms with P-value < 0.01 were selected. 
+
+---
+### Results interpretation
+
+.image-100[![slide22](../../images/GO-enrichment/slides_images/example2_int.png)
+
+---
+### Purpose and Importance
+
+.image-90[![slide23](../../images/GO-enrichment/slides_images/purpose_19.png)
+
+???
+- To conclude, GO enrichment analysis helps scientists make sense of large gene lists by pointing out which biological processes, functions, or cellular locations are most relevant. 
 - Instead of looking at each gene individually, it allows researchers to focus on broader biological themes, making it easier to interpret the data.
 
 
