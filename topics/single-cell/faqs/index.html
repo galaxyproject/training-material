@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@541df97388092974b3b321073c035d7a5e22ea92",
+		release: "galaxy-training-network@ed5ef3a7d275750c94b007fbc432e41ecc3ad05a",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.20cf1f17.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -296,6 +296,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
+
+<h4 class="faq-area"> Why is my tool erroring as 'Above error raised while reading key '/layers' of type <class 'h5py._hl.group.Group'> from /.' <a href="/training-material/topics/single-cell/faqs/sc_version.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-why-is-my-tool-erroring-as-above-error-raised-while-reading-key-layers-of-type-class-h5py-hl-group-group-from"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-is-my-tool-erroring-as-above-error-raised-while-reading-key-layers-of-type-class-h5py-hl-group-group-from" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Why is my tool erroring as 'Above error raised while reading key '/layers' of type &lt;class 'h5py._hl.group.Group'&gt; from /.'</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Are you getting the following error, or similar?</p>   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Traceback (most recent call last):<br>File "/usr/local/lib/python3.9/site-packages/anndata/_io/utils.py", line 177, in func_wrapper<br>return func(elem, *args, **kwargs)<br>File "/usr/local/lib/python3.9/site-packages/anndata/_io/h5ad.py", line 527, in read_group<br>EncodingVersions[encoding_type].check(<br>File "/usr/local/lib/python3.9/enum.py", line 432, in __getitem__<br>return cls._member_map_[name]<br>KeyError: 'dict'<br><br>During handling of the above exception, another exception occurred:<br><br>Traceback (most recent call last):<br>File "/usr/local/bin/scanpy-cli", line 10, in &lt;module&gt;<br>sys.exit(cli())<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 829, in __call__<br>return self.main(*args, **kwargs)<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 782, in main<br>rv = self.invoke(ctx)<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1259, in invoke<br>return _process_result(sub_ctx.command.invoke(sub_ctx))<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1259, in invoke<br>return _process_result(sub_ctx.command.invoke(sub_ctx))<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 1066, in invoke<br>return ctx.invoke(self.callback, **ctx.params)<br>File "/usr/local/lib/python3.9/site-packages/click/core.py", line 610, in invoke<br>return callback(*args, **kwargs)<br>File "/usr/local/lib/python3.9/site-packages/scanpy_scripts/cmd_utils.py", line 45, in cmd<br>adata = _read_obj(input_obj, input_format=input_format)<br>File "/usr/local/lib/python3.9/site-packages/scanpy_scripts/cmd_utils.py", line 87, in _read_obj<br>adata = sc.read(input_obj, **kwargs)<br>File "/usr/local/lib/python3.9/site-packages/scanpy/readwrite.py", line 112, in read<br>return _read(<br>File "/usr/local/lib/python3.9/site-packages/scanpy/readwrite.py", line 713, in _read<br>return read_h5ad(filename, backed=backed)<br>File "/usr/local/lib/python3.9/site-packages/anndata/_io/h5ad.py", line 421, in read_h5ad<br>d[k] = read_attribute(f[k])<br>File "/usr/local/lib/python3.9/functools.py", line 877, in wrapper<br>return dispatch(args[0].__class__)(*args, **kw)<br>File "/usr/local/lib/python3.9/site-packages/anndata/_io/utils.py", line 183, in func_wrapper<br>raise AnnDataReadError(<br>anndata._io.utils.AnnDataReadError: Above error raised while reading key '/layers' of type &lt;class 'h5py._hl.group.Group'&gt; from /.<br></code></pre></div></div>   <p>This is likely a Tool Version error. If you use a newer version of a tool with an AnnData object, and then try and use an older version of the tool or other tool in the same toolsuite (Scanpy) later, this will often fail with the above error message. The Scanpy toolsuite is not ‘backwards compatable’ - few toolsuites are. If this happened while performing a tutorial, we recommend Tutorial Mode as this embeds the correct tool version in each tool button.</p>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using tutorial mode</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>   <p><!--END_SNIPPET--></p>   <p>To fix this in your current history, try re-running the tool with the newer tool version. Or, re-run the prior dataset with an older version.</p>   <!--SNIPPET-->   <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-tool-version"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-tool-version" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the tool version</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool.</p>   <p><strong>Switching to a different version</strong> of a tool:</p>   <ul>   <li>Open the tool</li>   <li>Click on the <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> versions logo at the <strong>top right</strong></li>   <li>Select the desired version from the dropdown list</li> </ul> </blockquote>   <p><!--END_SNIPPET--></p> </blockquote> <!--END_SNIPPET-->
+
+
+
  <br> 
 
 <h3 id="Community"> <a href="#Community"> Community </a></h3>
@@ -460,7 +467,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/541df97388092974b3b321073c035d7a5e22ea92">541df97</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ed5ef3a7d275750c94b007fbc432e41ecc3ad05a">ed5ef3a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -477,7 +484,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.20cf1f17.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
 
 	
 	

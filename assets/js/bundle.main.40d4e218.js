@@ -224,7 +224,7 @@ document.querySelectorAll("article.topic-data-science section#tutorial-content d
 //	// Redirect
 //	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
 //	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
-//
+
 //	window.setTimeout(function(){
 //	window.location.href = redirect;
 //	}, 5000)
