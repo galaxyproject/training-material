@@ -252,7 +252,7 @@ Five files are generated. We will look at the contigs file and the stats file:
 > 2. What is the mean, min and max length of the contigs?
 >
 > > <solution-title></solution-title>
-> > 1. 355
+> > 1. 306
 > > 2. To compute this information, we can use the Datamash tool on the 2nd columns (length). Be careful with the first line, the header. As a result, we obtain approximately: 516 as mean, 1 as min and 8836 as max. It would mean that the smallest contig has a length of 1 bp, even smaller than k. The length on the 2nd column corresponds to length of the contig in k-mers. This means that the smallest contig has a length of 1k = 29. So to obtain the real length, we need to add k-1 to the length. We then obtain a mean contig length of 544 bp, a min contig of 29 bp and a max contig of 8864 bp.
 > {: .solution }
 {: .question}
