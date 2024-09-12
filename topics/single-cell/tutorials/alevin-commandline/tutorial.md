@@ -256,24 +256,26 @@ Let's change gear a little bit. We've done the work in bash, and now we're switc
 ![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option 'Kernel' -> 'Change Kernel...' and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
 
 
-Now, when we are in the R environment, let's install the packages required for this part: 
+Now, when we are in the R environment, let's install the packages required for this part - `tximeta` and `DropletUtils`: 
 
 ```bash
-system("conda install -y bioconductor-tximeta", intern=TRUE)
+system("conda install -y bioconductor-tximeta bioconductor-dropletutils", intern=TRUE)
 ```
+Double check that the installation went fine:
 ```bash
 require("tximeta")
+require("DropletUtils")
 ```
 
-> <details-title>"There is no package called ‘tximeta’"?</details-title>
-> If you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
+> <details-title>"There is no package called ‘tximeta’ or ‘DropletUtils’"?</details-title>
+> If you encounter this error message while loading the library, you can try to install them with BiocManager, as shown below. Just replace "package_name" with either `tximeta` or `DropletUtils`. Beware, it can take up to 25 minutes to run!
 > ```bash
 > # run the code below only if you cannot load tximeta library (or using notebook version 1.0.1)
 > if (!require("BiocManager", quietly = TRUE))
 >     install.packages("BiocManager")
 > 
-> BiocManager::install("tximeta")
-> library(tximeta)
+> BiocManager::install("package_name")
+> library("package_name")
 > ```
 {: .details}
 
@@ -316,29 +318,7 @@ As you can see, *rowData names* and *colData names* are still empty. Before we a
 
 Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
 
-Now, again - install the packages into our R environment: 
-
-```bash
-system("conda install -y bioconductor-DropletUtils", intern=TRUE)
-```
-```bash
-require("DropletUtils")
-```
-
-> <details-title>"There is no package called ‘DropletUtils’"?</details-title>
-> If you encounter this error message while loading the library, you can run the code below. Beware, it can take up to 25 minutes to run!
-> ```bash
-> # run the code below only if you cannot load DropletUtils library (or using notebook version 1.0.1)
-> if (!require("BiocManager", quietly = TRUE))
->     install.packages("BiocManager")
-> 
-> BiocManager::install("DropletUtils")
-> library(DropletUtils)
-> ```
-{: .details}
-
-
-emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
+EmptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
 
 > <details-title>emptyDrops input parameters</details-title>
 >
