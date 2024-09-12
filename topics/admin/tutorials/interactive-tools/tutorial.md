@@ -57,7 +57,7 @@ recordings:
 Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.
 
 > <comment-title>Evolving Topic</comment-title>
-> Galaxy Interactive Tools are a **relatively new and rapidly evolving feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing. Please watch the [Galaxy Release Notes][galaxy-release-notes] for updates, changes, new documentation, and bug fixes. 
+> Galaxy Interactive Tools are a **relatively new and rapidly evolving feature** and there are some rough edges. Work to improve the experience of deploying and using them is ongoing. Please watch the [Galaxy Release Notes][galaxy-release-notes] for updates, changes, new documentation, and bug fixes.
 >
 > This tutorial has not been updated for Galaxy 23.0+ and Gravity. You may find extra information about Interactive Tools on the [Galaxy Documentation][galaxy-docs-interactivetools].
 {: .comment}
@@ -70,15 +70,15 @@ Galaxy Interactive Tools (GxITs) are a method to run containerized tools that ar
 >
 > Galaxy Interactive Tools require a [wildcard SSL certificate][wildcard-cert]. Because the **Galaxy Installation with Ansible** tutorial fetches [Let's Encrypt][lets-encrypt] certificates, this tutorial fetches Let's Encrypt wildcard certificates. However, this process is only valid for Galaxy Admin Training courses, because Let's Encrypt wildcard certificates [can only be fetched using the DNS-01 challenge method][lets-encrypt-faq], which requires control of a [dynamic DNS][ddns] server (which we have preconfigured for use at training courses). Configuring your DNS service for dynamic updates is outside the scope of this tutorial, but it will show you how to request certificates using DNS-01, which can be adapted for your site.
 >
-> If you are using Let's Encrypt, [a list of available DNS plugins for Certbot][certbot-dns-plugins] can be found in the Certbot documentation. If you are not using Let's Encrypt, please consult your certificate vendor's documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the [subject alternative name][san]s `galaxy.example.org` and `*.interactivetoolentrypoint.interactivetool.galaxy.example.org` (where `galaxy.example.org` is the hostname of your Galaxy server).
+> If you are using Let's Encrypt, [a list of available DNS plugins for Certbot][certbot-dns-plugins] can be found in the Certbot documentation. If you are not using Let's Encrypt, please consult your certificate vendor's documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the [subject alternative name][san]s `galaxy.example.org` and `*.ep.interactivetool.galaxy.example.org` (where `galaxy.example.org` is the hostname of your Galaxy server).
 >
-> You will also need a wildcard DNS `CNAME` record for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. You can verify that your Galaxy server has such a record using the `host` or `dig` command line tools like so:
+> You will also need a wildcard DNS `CNAME` record for `*.ep.interactivetool.galaxy.example.org`. You can verify that your Galaxy server has such a record using the `host` or `dig` command line tools like so:
 >
 >    ```console
->    $ host -t cname foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
->    foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
->    $ host -t cname bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
->    bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+>    $ host -t cname foo.ep.interactivetool.live.usegalaxy.eu
+>    foo.ep.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+>    $ host -t cname bar.ep.interactivetool.live.usegalaxy.eu
+>    bar.ep.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
 >    ```
 >
 > Please consult your DNS server software or cloud provider's documentation for information on how to set up a wildcard record.
@@ -407,7 +407,7 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 
 During the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, we acquired an SSL certificate for our Galaxy server from [Let's Encrypt][lets-encrypt]. This certificate was issued for the hostname of your Galaxy server (e.g. `galaxy.example.org`). SSL certificates are valid *only for the name to which they were issued*. This presents a problem for us due to the way that Galaxy Interactive Tools work.
 
-In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`.
+In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.ep.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.ep.interactivetool.galaxy.example.org`.
 
 This process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
 
@@ -438,7 +438,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      ```yaml
 >      certbot_domains:
 >        - "{{ inventory_hostname }}"
->        - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
+>        - "*.ep.interactivetool.{{ inventory_hostname }}"
 >      ```
 >      {% endraw %}
 >
@@ -544,7 +544,7 @@ As we use Let's Encrypt in staging mode, the wildcard certificates generated wit
 >      ```yaml
 >      certbot_domains:
 >        - "{{ inventory_hostname }}"
->        - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
+>        - "*.ep.interactivetool.{{ inventory_hostname }}"
 >      ```
 >      {% endraw %}
 >
