@@ -48,7 +48,7 @@ contributors:
 
 # Introduction
 
-In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
+In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
 However, simply identifying marker genes is just the beginning. To truly understand what makes each cluster unique, we need to dive deeper into the biological functions these genes are involved in. This is where Gene Ontology (GO) enrichment analysis comes into play.
 We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes beloging to a specific GO term) are expressed more than would be expected in a subset of your data. The most commonly used statistical test are Fischer's exact test and hypergeometric test, more details about them are explained in the tutorial slides.
 
@@ -57,7 +57,7 @@ We will perform GO enrichment analysis as a type of over-representation analysis
 
 In this tutorial will use the following datasets:
 
-### [A] Marker Genes:
+## [A] Marker Genes:
 
 We'll start with two input datasets of marker genes (Study sets):
   * **Marker genes per cell cluster:** This dataset lists the genes that are significantly different in each cell cluster.
@@ -65,7 +65,7 @@ We'll start with two input datasets of marker genes (Study sets):
 
 *Note:* Marker genes were obtained using Scanpy FindMarkers tool. The top 50 marker genes were included in the downstream GO enrichment analysis. Scanpy FindMarkers tool selects the marker genes based on their log2 fold change and p-values. Focusing on the top-ranked genes helps to filter out less relevant genes, thereby addressing the concern of high false positives that can arise from traditional methods. 
 
-### [B] GO Enrichment Files:
+## [B] GO Enrichment Files:
 
 We'll also use three additional files for GO enrichment analysis. 
   * **Gene Ontology file:** This file contains information about Gene Ontology terms.
@@ -153,7 +153,7 @@ Next, we need to isolate the Ensembl gene IDs column from each file. We'll use t
 >
 >    > <comment-title> The gene format to use </comment-title>
 >    >
->    In this example we extract column 4 because it contains the Ensembl gene IDs on which the subsequent steps are ideally working. While there are other gene formats like gene symbols, Entrez gene IDs, and more, make sure to check the specific format accepted by the tool you are using. There are also tools available to convert between different gene formats if needed. 
+>    > In this example we extract column 4 because it contains the Ensembl gene IDs on which the subsequent steps are ideally working. While there are other gene formats like gene symbols, Entrez gene IDs, and more, make sure to check the specific format accepted by the tool you are using. There are also tools available to convert between different gene formats if needed. 
 >    {: .comment}
 >
 {: .hands_on}
