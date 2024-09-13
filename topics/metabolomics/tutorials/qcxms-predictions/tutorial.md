@@ -10,17 +10,17 @@ questions:
 - Can I take into account different conformers?
 
 objectives: 
-- To prepare SDF files for downstream analysis, starting from SMILES. 
-- To generate conformers and optimise them using semi-empirical methods.
-- To produce simulated mass spectra for a given molecule in MSP format.  
+- To prepare structure-data format (SDF) files for further operations analysis, starting from chemical structure descriptors in simplified molecular-input line-entry system (SMILES) format. 
+- To generate 3D conformers and optimise them using semi-empirical quantum mechanical (SQM) methods.
+- To produce simulated mass spectra for a given molecule in MSP (text based) format.  
 
 time_estimation: 1H
 
 key_points:
-- Galaxy provides access to HPC resources and hence allows the use of semi-empirical methods and *in silico* prediction of QC-based mass spectra.
+- Galaxy provides access to high-performance computing (HPC) resources and hence allows the use of semi-empirical quantum mechanical (SQM) methods and *in silico* prediction of QC-based mass spectra.
 - The shown workflow allows to simulate mass spectra of a molecule starting from its SMILES. 
-- xTB package is based on a semiempirical quantum mechanical method to optimise the generated conformers. 
-- QCxMS tool suite performs quantum chemistry calculations to simulate mass spectra. 
+- The xTB package is based on a SQM method to optimise the geometry of the generated conformers. 
+- The QCxMS tool suite performs quantum chemistry calculations to simulate mass spectra. 
 
 contributions:
   authorship:
@@ -36,10 +36,10 @@ requirements :
 
 ---
 
-Mass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compounds identification. Even though nowadays MS is a standard and popular method, there are still compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful structural information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [{% cite Zhu2023 %}, {% cite Allen2016Computational %}]. 
-There have been several methods developed to predict mass spectra, which can be classified as either first-principles physical-based simulation or data-driven statistical methods [{% cite Zhu2023 %}]. To the first category we can assign purely statistical theories (quasi-equilibrium theory (QET) or Rice–Ramsperger–Kassel–Marcus (RRKM) theories) [{% cite Vetter1994 %}], as well as QCEIMS [{% cite Wang2020 %}] and semiempirical GFNn-xTB [{% cite Koopman2019 %}] which use Born–Oppenheimer molecular dynamics (MD) combined with fragmentation pathways. Data-driven statistical methods reach back to 1960s when DENDRAL project was started by early AI scientists [{% cite Lindsay1980ApplicationsOA %}] – it applied rule-based heuristic programming. More recently, CFM-ID has been introduced [{% cite Allen2014 %}, {% cite Allen2014metabolomics %}, {% cite Allen2016Computational %}, {% cite DjoumbouFeunang2019 %}, {% cite Wang2021 %}], which uses rule-based fragmentation and employs machine learning methods. Current advancements in machine learning led to recent work using deep neural networks that allow predicting spectra from molecular graphs or fingerprints [{% cite Wei2019 %}].
+Mass spectrometry (MS) is a powerful analytical technique used in many fields, including proteomics, metabolomics, drug discovery and many more areas relying on compound identifications. Even though nowadays MS is a standard and popular method, there are many compounds which lack experimental spectra. In those cases, predicting mass spectra from the chemical structure can reveal useful information, help in compound identification and expand the spectral databases, improving the accuracy and efficiency of database search. [{% cite Zhu2023 %}, {% cite Allen2016Computational %}]. 
+There have been several methods developed to predict mass spectra, which can be classified as either first-principles physical-based simulation or data-driven statistical methods [{% cite Zhu2023 %}]. To the first category we can assign purely statistical theories (quasi-equilibrium theory (QET) or Rice–Ramsperger–Kassel–Marcus (RRKM) theories) [{% cite Vetter1994 %}], as well as QCxMS [{% cite Koopman2021 %}] and semiempirical GFNn-xTB [{% cite Koopman2019 %}] which use Born–Oppenheimer molecular dynamics (MD) combined with fragmentation pathways. Data-driven statistical methods - forming the second category - reach back to 1960s when the DENDRAL project (using rule-based heuristic programming) was started by early artificial intelligence (AI) scientists [{% cite Lindsay1980ApplicationsOA %}]. More recently, CFM-ID has been introduced [{% cite Allen2014 %}, {% cite Allen2014metabolomics %}, {% cite Allen2016Computational %}, {% cite DjoumbouFeunang2019 %}, {% cite Wang2021 %}], which uses rule-based fragmentation and employs machine learning methods. Current advancements in machine learning led to recent work using deep neural networks that allow predicting spectra from molecular graphs or fingerprints [{% cite Wei2019 %}].
 
-You will be able to check out how QCxMS works in practice since we are going to use Galaxy tool suite based on this method [{% cite Grimme2013 %}, {% cite Bauer2014 %}, {% cite Bauer2016 %}]. Beforehand, we will generate conformers of the query molecule with [RDKit](http://www.rdkit.org) and we will use xTB for molecular optimisation [{% cite Bannwarth2020 %}]. 
+You will be able to check out how QCxMS works in practice since we are going to use Galaxy tool suite based on this method [{% cite Grimme2013 %}, {% cite Bauer2014 %}, {% cite Bauer2016 %}, {% cite Koopman2021 %}]. Beforehand, we will generate conformers of the query molecule with [RDKit](http://www.rdkit.org) and we will use xTB for molecular optimisation [{% cite Bannwarth2020 %}].
 But first things first, let’s get some toy data to play with and crack on! 
 
 > <question-title></question-title>
@@ -57,16 +57,16 @@ But first things first, let’s get some toy data to play with and crack on!
 > >
 > > EI = electron ionisation
 > >
-> > MS = mass spectra
+> > MS = mass spectrometry
 > >
-> > Hence QCEIMS = quantum-chemical electron ionisation mass spectra
+> > Hence QCEIMS = quantum-chemical electron ionisation mass spectrometry
 > >
 > {: .solution}
 >
 {: .question}
 
 > <details-title>What is QCxMS?</details-title>
-> QCxMS is a successor of QCEIMS, where the *EI* part is replaced by *x* to take into account other MS methods and improve the applicability of the program. In QCEIMS, *EI* stands for *electron ionisation*, while in QCxMS, *x* refers to *EI* or *CID (collision-induced dissociation)* [{% cite Koopman2021 %}]. 
+> QCxMS is a successor of QCEIMS, where the *EI* part is replaced by *x* to take into account other ionisation methods and improve the applicability of the program. In QCEIMS, *EI* stands for *electron ionisation*, while in QCxMS, *x* refers to *EI* or *CID (collision-induced dissociation)* [{% cite Koopman2021 %}]. Currently, only *EI* simulations are supported - using *CID* with the Galaxy tool wrappers is still under development.
 {: .details}
 
  
@@ -74,13 +74,15 @@ But first things first, let’s get some toy data to play with and crack on!
 
 # Importing data and pre-processing
 
-In this tutorial, you can choose whether you want to predict mass spectrum only for one molecule, or if you want to do it for multiple molecules at once. The pre-processing steps will slightly differ depending on your choice. If you are completing this tutorial just to see how QCxMS tools work, feel free to follow the instructions for one molecule to skip some pre-processing steps.  
+In this tutorial, you can choose whether you want to predict the mass spectrum for one molecule only, or if you want to do it for multiple molecules at once. The pre-processing steps will slightly differ depending on your choice. If you are completing this tutorial just to see how the QCxMS tools work, feel free to follow the instructions for one molecule to skip some pre-processing steps.  
 
-In both cases, we start from molecule’s SMILES, and then we convert it to SDF, so if you already have SDF files to work with, simply jump in the relevant place in the workflow and carry on from there. 
+In both cases, we start from molecule’s SMILES, and then we convert it to SDF, so if you already have SDF files to work with, simply jump in the relevant place in the workflow and carry on from there.
 
 > <details-title>What is SMILES?</details-title>
 >
-> SMILES (.smi) - the simplified molecular-input line-entry system (SMILES) is a specification in the form of a line notation for describing the structure of chemical species using short ASCII strings. A linear text format which can describe the connectivity and chirality of a molecule [{% cite Weininger1988 %}].
+> SMILES (.smi) - the simplified molecular-input line-entry system (SMILES) is a specification in the form of a line notation for describing the structure of a chemical species using short ASCII strings. It is a linear text format which can describe the connectivity and chirality of a molecule [{% cite Weininger1988 %}]. Even though many different forms of SMILES exist, the differences are not relevant for us in this application.
+> ![Depiction of a molecular structure and the corresponding SMILES string. Starts of rings are denoted with a number after the corresponding element (i.e. C1). Non-organic elements need to be written in brackets and isotopic forms need to be denoted before the atom and in brackets as well. Atoms with charges need to be in brackets as well and the charge needs to be denoted behind the atom or the functional group. Hydrogens inside brackets need to be stated explicitly. Double bonds are denoted with a `=` and triple bonds with a `#`.](../../images/qcxms_smiles_explanation.png "A quick explanation of the SMILES system.")
+> Image credit: Helge Hecht, License: MIT
 >
 {: .details}
 
@@ -158,7 +160,7 @@ We now have an SDF file, containing the atoms' coordinates and the investigated 
 # 3D Conformer generation & optimization
 
 ## Generate conformers
-The next step involves generating three-dimensional (3D) conformers for our molecule. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
+The next step involves generating three-dimensional (3D) conformers for our molecule. It crteaes the actual 3D topology of the molecule based on electromagnetic forces. This process might seem trivial for very small and simplistic (meaning no complex structure) molecules, but this can be more challenging for larger molecules with a more flexible geometry. This concerns for example P containing biomolecules, where P often forms a rotational center of the molecule. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
 
 > <details-title> What are conformers? </details-title>
 >
@@ -195,7 +197,7 @@ Now - once again format conversion! This time we will convert the generated conf
 
 ## Molecular optimization
 
-As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
+As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. This is crucial to achieve convergence in the next steps. If the input geometry for the QCxMS method is too crude, the ground state neutral run will not converge and we won't be able to sample the geometry to calculate individual trajectories. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
 
 > <hands-on-title> Molecular optimisation with xTB </hands-on-title>
 >
@@ -211,7 +213,7 @@ As shown in the image in the {% icon details %} *Details box* above, different c
 
 ## Neutral and production runs
 
-Finally, let’s predict the spectra for our molecule. As mentioned, we will use [QCxMS](https://github.com/qcxms/QCxMS) for this purpose. First, we need to prepare the necessary input files for the QCxMS production runs. These files are required for running the QCxMS simulations, which will predict the mass spectra of the molecule. This step typically formats the optimized molecular data into a format that can be used for the production simulations. 
+Finally, let’s predict the spectra for our molecule. As mentioned, we will use [QCxMS](https://github.com/qcxms/QCxMS) for this purpose. First, we need to prepare the necessary input files for the QCxMS production runs. These files are required for running the QCxMS simulations, which will predict the mass spectrum of the molecule. This step typically formats the optimized molecular data into a format that can be used for the production simulations. This step performs the ground state calculations. The resulting geometry trajectory is then sampled and one representation is used for each trajectory.
 
 
 > <hands-on-title> QCxMS neutral run </hands-on-title>
@@ -253,7 +255,7 @@ It might be the case that some runs might have failed, therefore it is crucial t
 
 ## Get MSP spectra
 
-The filtered collection contains .res files from the QCxMS production run. This final step converts the .res files into simulated mass spectra in MSP (Mass Spectrum Peak) file format. The MSP format is widely used for storing and sharing mass spectrometry data, enabling easy comparison and analysis of the results.
+The filtered collection contains .res files from the QCxMS production run. This final step converts the .res files into simulated mass spectra in MSP (Mass Spectrum Peak) file format. The MSP format is widely used for storing and sharing mass spectrometry data, enabling easy comparison and analysis of the results, for example by comparing the spectra using the [matchms](https://github.com/matchms/matchms) package.
 
 > <hands-on-title> QCxMS get MSP results </hands-on-title>
 >
@@ -264,12 +266,12 @@ The filtered collection contains .res files from the QCxMS production run. This 
 {: .hands_on}
 
 > <details-title>MSP files </details-title>
-> MSP (Mass Spectrum Peak) file is a text file structured according to the NIST MSSearch spectra format. MSP is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). It can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata (such as name, spectrum type, ion mode, retention time, and the number of m/z peaks) and peaks.
+> MSP (Mass Spectrum Peak) file is a text file structured according to the NIST MSSearch spectra format. MSP is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, matchms, etc.). It can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata (such as name, spectrum type, ion mode, retention time, and the number of m/z peaks) and peaks, consisting of m/z and intensity tuples.
 {: .details}
 
 You can now {% icon dataset-save %} download the MSP file and open it in your spectra processing software for further investigation! 
 
-To give you some insight into how well QCxMS can perform, below is the mass spectrum of ethanol resulting from our workflow compared with [experimental spectrum](https://hmdb.ca/spectra/c_ms/28442). Both spectra were compiled using an [online mass spectrum generator](https://www.sisweb.com/mstools/spectrum.htm) which requires only m/z values and intensities – so the values that you can get from our MSP file! As you can see, the predicted peaks nicely correspond to experimental ones. But be careful - there might be slight deviations for molecules with more structural complexity! 
+To give you some insight into how well QCxMS can perform, below is the mass spectrum of ethanol resulting from our workflow compared with an [experimental spectrum](https://hmdb.ca/spectra/c_ms/28442). Both spectra were compiled using an [online mass spectrum generator](https://www.sisweb.com/mstools/spectrum.htm) which requires only m/z values and intensities – so the values that you can get from our MSP file! As you can see, the predicted peaks nicely correspond to experimental ones. But be careful - there might be slight deviations for molecules with more structural complexity! 
 
 ![Upper panel shows the experimental spectrum of ethanol, while the lower panel shows analogical spectrum but predicted with the current workflow. The predicted peaks correspond well to the experimental ones. Intensities of simulated peaks have not been predicted perfectly, but the most important trends are preserved.](../../images/qcxms_predictions_ms_exp_pred.png "Comparison between experimental (upper panel) and predicted (lower panel) mass spectra of ethanol.")
 
@@ -457,7 +459,7 @@ We now have two SDF files, each containing the coordinates of the atoms and the 
 # 3D Conformer generation & optimization
 
 ## Generate conformers
-The next step involves generating three-dimensional (3D) conformers for each molecule from the generated SDF. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
+The next step involves generating three-dimensional (3D) conformers for each molecule from the generated SDF. It crteaes the actual 3D topology of the molecules based on electromagnetic forces. This process might seem trivial for very small and simplistic (meaning no complex structure) molecules, but this can be more challenging for larger molecules with a more flexible geometry. This concerns for example P containing biomolecules, where P often forms a rotational center of the molecule. The number of conformers to generate can be specified as an input parameter, with a default value of 1 if not provided. This process is crucial for exploring the possible shapes and energies that a molecule can adopt. The output of this step is a file containing the generated 3D conformers.
 
 > <details-title> What are conformers? </details-title>
 >
@@ -495,7 +497,7 @@ Now - once again format conversion! This time we will convert the generated conf
 
 ## Molecular optimization
 
-As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
+As shown in the image in the {% icon details %} *Details box* above, different conformers have different energies. Therefore, our next step will optimize the geometry of the molecules to find the lowest energy conformation. This is crucial to achieve convergence in the next steps. If the input geometry for the QCxMS method is too crude, the ground state neutral run will not converge and we won't be able to sample the geometry to calculate individual trajectories. We will perform semi-empirical optimization on the molecules using the [Extended Tight-Binding (xTB)](https://github.com/grimme-lab/xtb) method. The level of optimization accuracy to be used can be specified as an input parameter, *"Optimization Levels"*. The default quantum chemical method is GFN2-xTB.
 
 > <hands-on-title> Molecular optimisation with xTB </hands-on-title>
 >
@@ -511,7 +513,7 @@ As shown in the image in the {% icon details %} *Details box* above, different c
 
 ## Neutral and production runs
 
-Finally, let’s predict the spectra for our molecules. As mentioned, we will use [QCxMS](https://github.com/qcxms/QCxMS) for this purpose. First, we need to prepare the necessary input files for the QCxMS production runs. These files are required for running the QCxMS simulations, which will predict the mass spectra of the molecules. This step typically formats the optimized molecular data into a format that can be used for the production simulations. 
+Finally, let’s predict the spectra for our molecules. As mentioned, we will use [QCxMS](https://github.com/qcxms/QCxMS) for this purpose. First, we need to prepare the necessary input files for the QCxMS production runs. These files are required for running the QCxMS simulations, which will predict the mass spectra of the molecules. This step typically formats the optimized molecular data into a format that can be used for the production simulations. This step performs the ground state calculations. The resulting geometry trajectory is then sampled and one representation is used for each trajectory.
 
 
 > <hands-on-title> QCxMS neutral run </hands-on-title>
@@ -553,7 +555,7 @@ It might be the case that some runs might have failed, therefore it is crucial t
 
 ## Get MSP spectra
 
-The filtered collection contains .res files from the QCxMS production run. This final step converts the .res files into simulated mass spectra in MSP (Mass Spectrum Peak) file format. The MSP format is widely used for storing and sharing mass spectrometry data, enabling easy comparison and analysis of the results.
+The filtered collection contains .res files from the QCxMS production run. This final step converts the .res files into simulated mass spectra in MSP (Mass Spectrum Peak) file format. The MSP format is widely used for storing and sharing mass spectrometry data, enabling easy comparison and analysis of the results, for example by comparing the spectra using the [matchms](https://github.com/matchms/matchms) package.
 
 > <hands-on-title> QCxMS get MSP results </hands-on-title>
 >
@@ -576,7 +578,7 @@ The output of this step is a collection of two MSP files - one per each molecule
 {: .hands_on}
 
 > <details-title>MSP files </details-title>
-> MSP (Mass Spectrum Peak) file is a text file structured according to the NIST MSSearch spectra format. MSP is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). It can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata (such as name, spectrum type, ion mode, retention time, and the number of m/z peaks) and peaks.
+> MSP (Mass Spectrum Peak) file is a text file structured according to the NIST MSSearch spectra format. MSP is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, matchms, etc.). It can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata (such as name, spectrum type, ion mode, retention time, and the number of m/z peaks) and peaks, consisting of m/z and intensity tuples.
 {: .details}
 
 You can now {% icon dataset-save %} download the MSP file and open it in your spectra processing software for further investigation! 
