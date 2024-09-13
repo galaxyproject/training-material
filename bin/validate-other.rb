@@ -6,7 +6,7 @@ require 'kwalify'
 require './bin/gtn'
 
 # Any error messages
-
+ec = 0
 learning_pathway_SCHEMA_UNSAFE = YAML.load_file('bin/schema-learning-pathway.yaml')
 learning_pathway_SCHEMA = automagic_loading(learning_pathway_SCHEMA_UNSAFE)
 
@@ -47,6 +47,7 @@ Dir.glob('learning-pathways/*.md').reject { |p| p.match(/index.md/) }.each do |f
     # Otherwise, print errors and exit non-zero
     puts "\e[48;5;09m#{file}  has errors\e[m"
     errs.each { |x| puts "  #{x}" }
+    ec = 1
   end
 end
 
@@ -82,4 +83,5 @@ Dir.glob('events/*.md').reject { |p| p.match(/index.md/) }.each do |file|
     puts "\e[48;5;09m#{file}  has errors\e[m"
     errs.each { |x| puts "  #{x}" }
   end
+  exit ec
 end
