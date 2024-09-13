@@ -218,6 +218,10 @@ Now that we have our diffusion map, we need to re-calculate neighbors using the 
 >
 {: .hands_on}
 
+> <comment-title></comment-title>
+> If you're using the latest versions of these tools (e.g. {% tool [Scanpy ComputeGraph](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.9.3+galaxy0) %}, rather than the ones suggested in the tutorial (e.g. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} then you may need to change one more parameter here to set the `Number of PCs to use` to 15. These are the 15 diffusion components we just calculated, rather than actual PCs.
+{: .comment}
+
 ## Re-draw the FDG
 
 Now that we've re-calculated the nearest neighbours, we can use these new neighbours to re-draw the FDG to see how this changes the plot.
