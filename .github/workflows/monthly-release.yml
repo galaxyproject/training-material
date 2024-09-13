@@ -49,7 +49,7 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
-          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config # for node
+          sudo apt-get install -y build-essential libxi-dev libglu1-mesa-dev libglew-dev pkg-config pandoc # for node, release notes
           gem install bundler
           pip install pyyaml
           bundle config path vendor/bundle
@@ -97,4 +97,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." --target main --latest
+          # Compile release notes
+          echo "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." > /tmp/last-month-on.md
+          echo >> /tmp/last-month-on.md
+          bundle exec ruby bin/last-month-on.rb | pandoc -t markdown -f html >> /tmp/last-month-on.md
+          # Create the release
+          gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes-file /tmp/last-month-on.md  --target main --latest
