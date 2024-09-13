@@ -51,9 +51,17 @@ follow_up_training:
     tutorials:
         - scrna-case_basic-pipeline
 
+recordings:
+  - speakers:
+    - hexhowells
+    date: '2024-09-12'
+    length: 18M54S
+    youtube_id: "Yx7m7Uh4tVg"
+
 tags:
   - data import
   - data management
+
 ---
 
 # Introduction
