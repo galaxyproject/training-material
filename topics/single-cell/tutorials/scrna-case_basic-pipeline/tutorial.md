@@ -19,7 +19,9 @@ answer_histories:
     date: 2024-02-28
 
 input_histories:
-  - label: "UseGalaxy.eu"
+  - label: "UseGalaxy.eu 1"
+    history:  https://usegalaxy.eu/published/history?id=67ff4cea2adc574d
+  - label: "UseGalaxy.eu 2"
     history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input
 
 questions:
