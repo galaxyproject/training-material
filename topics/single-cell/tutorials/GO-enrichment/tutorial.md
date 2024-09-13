@@ -57,7 +57,7 @@ We will perform GO enrichment analysis as a type of over-representation analysis
 
 In this tutorial will use the following datasets:
 
-### **[A] Marker Genes:**
+### [A] Marker Genes:
 
 We'll start with two input datasets of marker genes (Study sets):
   * **Marker genes per cell cluster:** This dataset lists the genes that are significantly different in each cell cluster.
@@ -65,7 +65,7 @@ We'll start with two input datasets of marker genes (Study sets):
 
 *Note:* Marker genes were obtained using Scanpy FindMarkers tool. The top 50 marker genes were included in the downstream GO enrichment analysis. Scanpy FindMarkers tool selects the marker genes based on their log2 fold change and p-values. Focusing on the top-ranked genes helps to filter out less relevant genes, thereby addressing the concern of high false positives that can arise from traditional methods. 
 
-### **[B] GO Enrichment Files:**
+### [B] GO Enrichment Files:
 
 We'll also use three additional files for GO enrichment analysis. 
   * **Gene Ontology file:** This file contains information about Gene Ontology terms.
