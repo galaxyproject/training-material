@@ -34,6 +34,15 @@ contributions:
     - hexylena
 subtopic: fair-data
 
+recordings:
+  - speakers:
+    - GabrielaLopez
+    captioners:
+    - kkamieniecka
+    date: '2024-09-12'
+    length: 1H1M41S
+    youtube_id: "MX-4AWyKP8E"
+
 ---
 
 
