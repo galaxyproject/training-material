@@ -100,6 +100,6 @@ jobs:
           # Compile release notes
           echo "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." > /tmp/last-month-on.md
           echo >> /tmp/last-month-on.md
-          bundle exec ruby bin/last-month-on.rb | pandoc -t markdown -f html >> /tmp/last-month-on.md
+          bundle exec ruby bin/last-month-on.rb | pandoc --wrap none -t markdown -f html >> /tmp/last-month-on.md
           # Create the release
           gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes-file /tmp/last-month-on.md  --target main --latest
