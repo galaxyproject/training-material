@@ -587,15 +587,16 @@ This subset was grouped by Year and aims to explore how microbial communities va
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the first metadata subset heatmap created with grouped by Plant data.
+> Result of the first metadata subset heatmap created with grouped by Plant data. To see the difference, one is ploted with 
+values inside the heatmap itself and the other with a legend instead.
 > 
->![Result of the heatmap](./images/heatmap_gr_by_plant.png "Result of the heatmap created with grouped by _Plant_ ")
+>![Result of the heatmap](./images/heatmap_gr_by_plant.png "Result of the heatmap created with grouped by _Plant_ with values inside the heatmap")
 > 
->![Result of the heatmap](./images/heatmap_gr_by_plant_new.png "Result of the heatmap created with grouped by _Plant_ ")
+>![Result of the heatmap](./images/heatmap_gr_by_plant_new.png "Result of the heatmap created with grouped by _Plant_ with a legend")
 > 
 > Result of the second metadata subset heatmap created with grouped by Year data.
 > 
->![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by _Year_" and also showing additional taxa)
+>![Result of the heatmap](./images/heatmap_gr_by_year.png "Result of the heatmap created with grouped by _Year_" and also showing additional taxa")
 {: .details}
 
 > <question-title></question-title>
@@ -675,12 +676,10 @@ We used 2 different metadata subsets:
 > Result of the first metadata subset heatmap created with grouped by Plant data and facet by Period.
 > 
 >![Result of the heatmap](./images/heatmap_plant_period.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_ ")
+>  
+> Result of the second metadata subset heatmap created with grouped by Year data and facet by Period.
 > 
->![Result of the heatmap](./images/heatmap_plant_period_new.png "Result of the heatmap created with grouped by _Plant_ and facet by _Period_ ")
-> 
-> Result of the second metadata subset heatmap created with grouped by Year data.
-> 
->![Result of the heatmap](./images/heatmap_year_period.png "Result of the heatmap created with grouped by _Year_ and facet by _Period_ ")
+>![Result of the heatmap](./images/heatmap_year_period_new.png "Result of the heatmap created with grouped by _Year_ and facet by _Period_ ")
 > 
 {: .details}
 
