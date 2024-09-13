@@ -26,7 +26,7 @@ Here is the recommended update procedure with ansible:
 
    1. git clone https://github.com/hexylena/git-gat/
    2. cd git-gat
-   3. git checkout step-4
+   3. git checkout c2e7bf6d3584fbf3281fb57d8024a9189f957e0e (this corresponds to the version of the repo after the 23.0 integration without too much customization and after potential bug fixes)
    4. Diff and sync (e.g. `vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml`) for the main configuration files:
 
       - group_vars/all.yml
