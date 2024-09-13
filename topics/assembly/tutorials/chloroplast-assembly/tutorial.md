@@ -31,7 +31,7 @@ recordings:
   youtube_id: eyfCyINTD_E
   speakers:
   - annasyme
-- youtube_id: TODO
+- youtube_id: gIcbY9kXdTo
   length: 16M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-12'
