@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@cd8bbb199891644b95c0ff132537013e576ec191",
+		release: "galaxy-training-network@dff08b22afaa866a8a0fa23247ecc87df2057876",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,8 +70,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Updating from 22.01 to 23.0 with Ansible">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-01 17:37:12 +0000">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
+<meta name="DC.date" content="2024-09-13 13:22:35 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Lucille Delisle"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / FAQ: Updating from 22.01 to 23.0 with Ansible">
         <meta property="og:description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
@@ -244,7 +245,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
-    Helena Rasche</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    Helena Rasche</a><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge contributor-lldelisle"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/lldelisle?s=36" alt="Lucille Delisle avatar" width="36" class="avatar" />
+    Lucille Delisle</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
     <hr>
     
 
@@ -266,22 +268,23 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <li>Update to 22.01 normally</li>
   <li>Change the release to 22.05, and run the upgrade
     <ol>
-      <li>Galaxy will probably not start correctly here, ignore it.</li>
+      <li>Galaxy will probably not start correctly here, ignore it (even if the build fail, this if fine, just ignore).</li>
       <li>
-        <p>Run the database migration manually</p>
+        <p>Run the database migration manually (with the galaxy user with the venv activated)</p>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml sh manage_db.sh -c /srv/galaxy/config/galaxy.yml upgrade
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml sh /srv/galaxy/server/manage_db.sh -c /srv/galaxy/config/galaxy.yml upgrade
 </code></pre></div>        </div>
       </li>
     </ol>
   </li>
-  <li>Update your system’s ansible, you probably need something with a major version greater than 2.</li>
+  <li>Update your system’s ansible, you probably need something with a major version of at least 2.</li>
   <li>
     <p>Set the release to <code class="language-plaintext highlighter-rouge">23.0</code> and make other required changes. There are a lot of useful changes, but the easiest procedure is probably something like:</p>
 
     <ol>
       <li>git clone https://github.com/hexylena/git-gat/</li>
-      <li>git checkout step-4</li>
+      <li>cd git-gat</li>
+      <li>git checkout c2e7bf6d3584fbf3281fb57d8024a9189f957e0e (this corresponds to the version of the repo after the 23.0 integration without too much customization and after potential bug fixes)</li>
       <li>
         <p>Diff and sync (e.g. <code class="language-plaintext highlighter-rouge">vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml</code>) for the main configuration files:</p>
 
@@ -289,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
           <li>group_vars/all.yml</li>
           <li>group_vars/dbservers.yml</li>
           <li>galaxy.yml</li>
-          <li>requirements.yml</li>
+          <li>requirements.yml (and don’t forget to install the new role versions)</li>
           <li>hosts</li>
           <li>templates/nginx/galaxy.j2</li>
         </ul>
@@ -356,6 +359,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li>uchida.miniconda is replaced with galaxyproject.conda</li>
       <li>usegalaxy_eu.systemd is no longer needed</li>
       <li><code class="language-plaintext highlighter-rouge">galaxy_user_name</code> is defined in all.yml in the latest git-gat</li>
+      <li>the <code class="language-plaintext highlighter-rouge">galaxy_job_config</code> needs to have a database <code class="language-plaintext highlighter-rouge">handling</code> specified - assign set to <code class="language-plaintext highlighter-rouge">db-skip-locked</code></li>
       <li>git-gat also separates out the DB serving into a <code class="language-plaintext highlighter-rouge">dbservers.yml</code> host group</li>
     </ul>
   </li>
@@ -369,6 +373,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <li>you’ll have a <code class="language-plaintext highlighter-rouge">galaxy.target</code> and you can instead <code class="language-plaintext highlighter-rouge">systemctl daemon-reload</code> and <code class="language-plaintext highlighter-rouge">systemctl start galaxy.target</code></li>
     </ul>
   </li>
+  <li>You may need to restart galaxy manually with <code class="language-plaintext highlighter-rouge">sudo galaxyctl restart</code></li>
 </ol>
 
         </div>
@@ -523,7 +528,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cd8bbb199891644b95c0ff132537013e576ec191">cd8bbb1</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/dff08b22afaa866a8a0fa23247ecc87df2057876">dff08b2</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
