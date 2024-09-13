@@ -168,9 +168,13 @@ You can access the data for this tutorial in multiple ways:
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.10.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
->    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N702 to N707` (if you imported files from Zenodo, your history may not be in this order, but you can still select them in order from N702 to N707 using the file names)
->
->    > <warning-title>N701 to N701!</warning-title>
+>    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N702 to N707`
+> 
+>    <comment-title></comment-title>
+>     >If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we're adding in metadata later!
+    {: .comment}
+> 
+>    > <warning-title>Don't add N701!</warning-title>
 >    > You are adding files to N701, so do not add N701 to itself!
 >    {: .warning}
 >
