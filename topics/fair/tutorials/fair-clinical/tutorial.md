@@ -40,8 +40,6 @@ requirements:
 recordings:
   - speakers:
     - SNG888
-    captioners:
-    - kkamieniecka
     date: '2024-09-12'
     length: 1H2M54S
     youtube_id: "48hRQM0yvao"

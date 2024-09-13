@@ -51,8 +51,6 @@ follow_up_training:
 recordings:
   - speakers:
     - lcooper
-    captioners:
-    - kkamieniecka
     date: '2024-09-12'
     length: 48M14S
     youtube_id: "QA82MzWle_w"

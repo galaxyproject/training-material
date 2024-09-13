@@ -53,8 +53,6 @@ follow_up_training:
 recordings:
   - speakers:
     - wee-snufkin
-    captioners:
-    - kkamieniecka
     date: '2024-09-12'
     length: 48M1S
     youtube_id: "JWV6IiD6mPE"

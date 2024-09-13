@@ -42,8 +42,6 @@ follow_up_training:
 recordings:
   - speakers:
     - hexhowells
-    captioners:
-    - kkamieniecka
     date: '2024-09-12'
     length: 18M54S
     youtube_id: "Yx7m7Uh4tVg"
