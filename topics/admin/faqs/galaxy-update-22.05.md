@@ -96,7 +96,7 @@ Here is the recommended update procedure with ansible:
    - uchida.miniconda is replaced with galaxyproject.conda
    - usegalaxy_eu.systemd is no longer needed
    - `galaxy_user_name` is defined in all.yml in the latest git-gat
-   - the `galaxy_job_config` needs to have a handling - assign set to `db-skip-locked`
+   - the `galaxy_job_config` needs to have a database `handling` specified - assign set to `db-skip-locked`
    - git-gat also separates out the DB serving into a `dbservers.yml` host group
 
 5. Backup your `venv`, `mv /srv/galaxy/venv/ /srv/galaxy/venv-old/`, as your NodeJS is probably out of date and Galaxy doesn't handle that gracefully
