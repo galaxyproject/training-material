@@ -20,7 +20,7 @@ answer_histories:
 
 input_histories:
   - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input
+    history:  https://usegalaxy.eu/published/history?id=67ff4cea2adc574d
 
 questions:
 - Is my single cell dataset a quality dataset?
