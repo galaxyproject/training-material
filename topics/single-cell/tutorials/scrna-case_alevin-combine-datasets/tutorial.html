@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@331bc52bf0115c1c97e2c4baeb46983027ab0a9f",
+		release: "galaxy-training-network@b5acaf862a6ef65d9660d4ea2d6152029e21f078",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Combining single cell datasets after pre-processing">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-09-14 10:47:57 +0000">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Jonathan Manning"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -208,7 +208,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-09-14 10:47:57 +0000",
   "datePublished": "2022-09-08 14:00:12 +0000",
   "identifier": "https://gxy.io/GTN:T00246",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Combining single cell datasets after pre-processing",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html",
-  "version": 16,
+  "version": 17,
   "timeRequired": "PT1H",
   "teaches": "Combine data matrices from different samples in the same experiment\n - Label the metadata for downstream processing",
   "keywords": [
@@ -1392,7 +1392,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 8, 2022 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 14, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1410,7 +1410,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 16 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
 
     </blockquote>
     </section>
@@ -1540,11 +1540,16 @@ https://zenodo.org/records/10852529/files/N707-400k-AnnData.h5ad
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">N701-400k</code></li>
         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Concatenate along the observations axis</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: <code class="language-plaintext highlighter-rouge">Select all the other matrix files from bottom to top, N707 to N702</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix to add”</em>: <code class="language-plaintext highlighter-rouge">Select all the other matrix files from bottom to top, N702 to N707</code></li>
       </ul>
 
+      <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+      <blockquote class="comment">
+        <p>If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we’re adding in metadata later!</p>
+      </blockquote>
+
       <blockquote class="warning">
-        <div class="box-title warning-title" id="warning-n707-to-n702"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: N707 to N702!</div>
+        <div class="box-title warning-title" id="warning-don-t-add-n701"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Don't add N701!</div>
         <p>You are adding files to N701, so do not add N701 to itself!</p>
       </blockquote>
 
@@ -1570,13 +1575,13 @@ https://zenodo.org/records/10852529/files/N707-400k-AnnData.h5ad
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">General information about the object</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed observations annotation (obs)</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.7.5+galaxy1)</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.10.3+galaxy0" title="Inspect AnnData tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Inspect AnnData</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.10.3+galaxy0)</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Combined object</code></li>
         <li><em>“What to inspect?”</em>: <code class="language-plaintext highlighter-rouge">Key-indexed annotation of variables/features (var)</code></li>
@@ -2173,11 +2178,6 @@ tools:
   revisions: 6f0d0c784f09
   tool_panel_section_label: Single-cell
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
-- name: anndata_inspect
-  owner: iuc
-  revisions: ee98d611afc6
-  tool_panel_section_label: Single-cell
-  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 - name: anndata_manipulate
   owner: iuc
   revisions: ed4996a16f7f
@@ -2286,7 +2286,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/331bc52bf0115c1c97e2c4baeb46983027ab0a9f">331bc52</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b5acaf862a6ef65d9660d4ea2d6152029e21f078">b5acaf8</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

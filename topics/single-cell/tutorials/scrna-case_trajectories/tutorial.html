@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@331bc52bf0115c1c97e2c4baeb46983027ab0a9f",
+		release: "galaxy-training-network@b5acaf862a6ef65d9660d4ea2d6152029e21f078",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories with Scanpy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-13 19:23:20 +0000">
+<meta name="DC.date" content="2024-09-14 10:47:57 +0000">
 <meta name="DC.creator" content="Marisa Loach">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Julia Jakiela">
@@ -210,7 +210,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-13 19:23:20 +0000",
+  "dateModified": "2024-09-14 10:47:57 +0000",
   "datePublished": "2023-12-08 07:20:20 +0000",
   "identifier": "https://gxy.io/GTN:T00379",
   "accessMode": [
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Inferring single cell trajectories with Scanpy",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT3H",
   "teaches": "Execute multiple plotting methods designed to identify lineage relationships between cells\n - Interpret these plots",
   "keywords": [
@@ -1403,55 +1403,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
-        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
-    </a>
-    <ul class="dropdown-menu">
-        
-	<li class="dropdown-header">
-		<b>Known Working</b>
-	</li>
-	
-	
-
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
-			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-		</a>
-	</li>
-    
-    
-    
-    
-	<li class="dropdown-header">
-		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org" title="">
-			UseGalaxy.org (Main)
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
-			UseGalaxy.org.au
-		</a>
-	</li>
-    
-    
-
-    
-    </ul>
-
 </li>
                 
             
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 8, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 13, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 14, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1469,7 +1427,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -1488,13 +1446,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>You’ve done all the hard work of preparing a single-cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells… you can do that here, using the Galaxy interface, or head over to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">Jupyter notebook version of this tutorial</a> to learn how to perform the same analysis using Python.</p>
 
-<p>Traditionally, we thought that differentiating or changing cells jumped between discrete states, so ‘Cell A’ became ‘Cell B’ as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a ‘trajectory’, if you will…) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so ‘pseudotime’ analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same ‘time’.  These cells are sorted accordingly along these pseudotime paths of differentiation to build a continuum of cells from one state to the next.  We therefore ‘assume’ or ‘infer’ relationships between from this continuum of cells.</p>
+<p>Traditionally, we thought that differentiating or changing cells jumped between discrete states, so ‘Cell A’ became ‘Cell B’ as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a ‘trajectory’, if you will…) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so ‘pseudotime’ analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same ‘time’.  These cells are sorted accordingly along these pseudotime paths of differentiation to build a continuum of cells from one state to the next.  We therefore ‘assume’ or ‘infer’ relationships from this continuum of cells.</p>
 
 <p>We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it’s time to look further!</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-tutorial-from-scanpy"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Tutorial from Scanpy</div>
-  <p>Please note, this tutorial is largely based on the trajectories tutorial found <a href="https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html">on the Scanpy site itself</a> (<span class="citation"><a href="#scanpytutorialsTrajectoryInference">Alex Wolf 2023</a></span>).</p>
+  <p>Please note, this tutorial is largely based on the trajectories tutorial found <a href="https://scanpy.readthedocs.io/en/stable/tutorials/trajectories/paga-paul15.html">on the Scanpy site itself</a> (<span class="citation"><a href="#scanpytutorialsTrajectoryInference">Alex Wolf 2023</a></span>).</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -1686,7 +1644,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">FDG object Anndata</code> (output of <strong>Scanpy RunFDG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-        <li><em>“Use raw attributes if present”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use raw attributes”</em>: <i class="fas fa-toggle-on" aria-hidden="true"></i><span class="visually-hidden">galaxy-toggle</span> <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
       </ul>
     </li>
@@ -1757,6 +1715,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 </blockquote>
 
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p>If you’re using the latest versions of these tools (e.g. <span class="tool" data-tool="https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.9.3+galaxy0" title="Scanpy ComputeGraph tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy ComputeGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.9.3+galaxy0)</span>, rather than the ones suggested in the tutorial (e.g. <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9" title="Scanpy ComputeGraph tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy ComputeGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span> then you may need to change one more parameter here to set the <code class="language-plaintext highlighter-rouge">Number of PCs to use</code> to 15. These are the 15 diffusion components we just calculated, rather than actual PCs.</p>
+</blockquote>
+
 <h2 id="re-draw-the-fdg">Re-draw the FDG</h2>
 
 <p>Now that we’ve re-calculated the nearest neighbours, we can use these new neighbours to re-draw the FDG to see how this changes the plot.</p>
@@ -1777,7 +1740,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">FDG object Anndata</code> (output of <strong>Scanpy RunFDG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use raw attributes”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
       </ul>
     </li>
@@ -1815,13 +1778,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     </li>
     <li>Everyone else:
       <ul>
-        <li>you could recluster your cells using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0" title="Scanpy FindCluster tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindCluster</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy0)</span> at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial if you need help with this.)</li>
-      </ul>
-    </li>
-    <li>Please note that in this case, you will want to change the PAGA step <strong>Scanpy PAGA</strong> to group by <code class="language-plaintext highlighter-rouge">louvain</code> rather than <code class="language-plaintext highlighter-rouge">cell_type</code>. You can certainly still plot both, we only didn’t because with using our old Louvain calls, the <code class="language-plaintext highlighter-rouge">cell_type</code> and <code class="language-plaintext highlighter-rouge">louvain</code> categories are identical.
-      <ul>
+        <li>you could recluster your cells using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0" title="Scanpy FindCluster tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindCluster</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy0)</span> at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore</a> tutorial if you need help with this.) Please note that in this case, you will want to change the PAGA step <strong>Scanpy PAGA</strong> to group by <code class="language-plaintext highlighter-rouge">louvain</code> rather than <code class="language-plaintext highlighter-rouge">cell_type</code>. You can certainly still plot both, we only didn’t because with using our old Louvain calls, the <code class="language-plaintext highlighter-rouge">cell_type</code> and <code class="language-plaintext highlighter-rouge">louvain</code> categories are identical.</li>
         <li>you could undo the optional diffusion map step by recalculating the neighbours again using <code class="language-plaintext highlighter-rouge">X_pca</code> instead of <code class="language-plaintext highlighter-rouge">X_diffmap</code></li>
-        <li>you could also try changing the number of neighbors used in that step</li>
+        <li>you could also try changing the number of neighbors used in that step when running <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9" title="Scanpy ComputeGraph tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy ComputeGraph</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy9)</span></li>
       </ul>
     </li>
     <li>Everyone else: You will want to compare FREQUENTLY with your control team member.</li>
@@ -1909,7 +1868,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">FDG object Anndata</code> (output of <strong>Scanpy RunFDG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use raw attributes”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
       </ul>
     </li>
@@ -1953,8 +1912,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">FDG object Anndata</code> (output of <strong>Scanpy RunFDG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">genotype</code></li>
-        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
+        <li><em>“Use raw attributes”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">Right margin</code></li>
       </ul>
     </li>
   </ol>
@@ -1993,7 +1952,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">FDG object Anndata</code> (output of <strong>Scanpy RunFDG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">ENSMUSG00000023274,ENSMUSG00000053977</code></li>
-        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use raw attributes”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
       </ul>
 
@@ -2038,7 +1997,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   <p>If you called new clusters using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0" title="Scanpy FindCluster tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Scanpy FindCluster</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.8.1+galaxy0)</span>, you might want to choose one of those clusters to be your root cell instead, so change the <code class="language-plaintext highlighter-rouge">cell_type</code> for <code class="language-plaintext highlighter-rouge">louvain</code> and then name the cluster number. Use the plots you created to help you pick the number!</p>
 </blockquote>
 
-<p>Onto the <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html">diffusion pseudotime</a>, where we infer multiple time points within the same piece of data!</p>
+<p>On to the <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html">diffusion pseudotime</a>, where we infer multiple time points within the same piece of data!</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-dpt-plot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  DPT Plot</div>
@@ -2056,7 +2015,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in AnnData/Loom format”</em>: <code class="language-plaintext highlighter-rouge">Diffusion pseudotime inference Anndata</code> (output of <strong>Scanpy DPT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“name of the embedding to plot”</em>: <code class="language-plaintext highlighter-rouge">draw_graph_fa</code></li>
         <li><em>“color by attributes, comma separated texts”</em>: <code class="language-plaintext highlighter-rouge">cell_type,dpt_pseudotime</code></li>
-        <li><em>“Use raw attributes if present”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Use raw attributes”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Location of legend”</em>: <code class="language-plaintext highlighter-rouge">On data</code></li>
       </ul>
     </li>
@@ -2151,7 +2110,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Bacon2018">Bacon, W. A., R. S. Hamilton, Z. Yu, J. Kieckbusch, D. Hawkes <i>et al.</i>, 2018 <b>Single-Cell Analysis Identifies Thymic Maturation Delay in Growth-Restricted Neonatal Mice</b>. Frontiers in Immunology 9: <a href="https://doi.org/10.3389/fimmu.2018.02523">10.3389/fimmu.2018.02523</a></li>
-<li id="scanpytutorialsTrajectoryInference">Alex Wolf, S. R., Fidel Ramirez, 2023 <b>Trajectory inference for hematopoiesis in mouse &#x2014; scanpy-tutorials 1.4.7.dev38+g3e4e434 documentation — scanpy-tutorials.readthedocs.io</b>. [Accessed 15-12-2023]. <a href="https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html">https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html</a></li></ol>
+<li id="scanpytutorialsTrajectoryInference">Alex Wolf, S. R., Fidel Ramirez, 2023 <b>Trajectory inference for hematopoiesis in mouse &#x2014; scanpy-tutorials 1.4.7.dev38+g3e4e434 documentation — scanpy-tutorials.readthedocs.io</b>. [Accessed 11-09-2024]. <a href="https://scanpy.readthedocs.io/en/stable/tutorials/trajectories/paga-paul15.html">https://scanpy.readthedocs.io/en/stable/tutorials/trajectories/paga-paul15.html</a></li></ol>
                 
 
                 
@@ -2407,7 +2366,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/331bc52bf0115c1c97e2c4baeb46983027ab0a9f">331bc52</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b5acaf862a6ef65d9660d4ea2d6152029e21f078">b5acaf8</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
