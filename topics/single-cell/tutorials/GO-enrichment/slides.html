@@ -37,7 +37,7 @@ We can break this process down into three main sections:
 - Data Preprocessing: This is the initial step, where we focus on quality control, alignment, and quantification of the data. It’s crucial to ensure that our data is clean and reliable.
 - General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes, or HVGs. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step allows us to make sense of the data and identify distinct cell populations.
 - Exploratory Analyses: Finally, we delve into exploratory analyses. This includes differential expression gene (DEG) analysis, functional enrichment studies, gene set variation analysis (GSVA), and transcription factor (TF) prediction. We also investigate cell trajectories, interactions between cells, cell cycles, and even spatial transcriptomics.
-In this tutorial we will focus on Gene Ontology (GO) Enrichment exploratory analysis.
+This tutorial will focus on Gene Ontology (GO) Enrichment exploratory analysis.
 
 
 ---
@@ -48,7 +48,7 @@ In this tutorial we will focus on Gene Ontology (GO) Enrichment exploratory anal
 .image-100[![slide6](../../images/GO-enrichment/slides_images/ontology_2.png)]
 
 ???
-- Before we introduce “GO enrichment analysis” let us first understand what does it mean by Ontology and Gene Ontology (GO).
+- Before we introduce “GO enrichment analysis” let us first understand what it means by Ontology and Gene Ontology (GO).
 - Ontology is a set of terms with their precise definitions and defined relationships between them. For example, imagine you are organizing a library of books. You want to classify and organize these books so that others can easily find what they are looking for. Ontology in this context would be a structured system for categorizing books. 
 
 ---
@@ -92,7 +92,7 @@ This simple example illustrates how Gene Ontology (GO) adds clarity and standard
 .center[How to use GO to perform **GO Enrichment Analysis** on scRNA-Seq data?]
 
 ???
-Now that we understand what does GO mean, let’s explore what is GO Enrichment analysis in the context of scRNA-Seq data.
+Now that we understand what GO mean, let’s explore what is GO Enrichment analysis in the context of scRNA-Seq data.
 
 ---
 
@@ -141,7 +141,7 @@ Each gene can be "tagged" with one or more GO terms, similar to how books are ca
 .image-60[![slide14](../../images/GO-enrichment/slides_images/step3_11.png)]
 
 ???
-We then count the number of times each GO term shows up in your list of genes. For example GO term A appears in 2 out of 3 genes 
+We then count the number of times each GO term shows up in your list of genes. For example, GO term A appears in 2 out of 3 genes 
 
 ---
 
@@ -159,7 +159,7 @@ We then count the number of times each GO term shows up in your list of genes. F
 
 ???
 - Just because you see GO Term A a lot doesn’t necessarily mean it’s important—it could be by chance. So, we use statistical tests to see if the enrichment is statistically significant.
-- While in this simple example it is obvious that the proportion of genes associated with GO term A in the marker gene set (67%) is higher than the proportion in the background set (30%). This suggests that GO term A is potentially enriched in the marker gene set and we can add it to our purple list of enriched GO terms. 
+- While in this simple example, it is obvious that the proportion of genes associated with GO term A in the marker gene set (67%) is higher than the proportion in the background set (30%). This suggests that GO term A is potentially enriched in the marker gene set and we can add it to our purple list of enriched GO terms. 
 
 ---
 
@@ -167,7 +167,7 @@ We then count the number of times each GO term shows up in your list of genes. F
 .image-60[![slide17](../../images/GO-enrichment/slides_images/step6_14.png)]
 
 ???
-- In real world scenarios where we have hundreds or thousands of genes we need to formally assess whether this difference is statistically significant (i.e., whether GO term A is truly enriched or if this difference is by chance). Fisher's Exact Test and the hypergeometric test are the most commonly used tests in this situation.
+- In real-world scenarios where we have hundreds or thousands of genes we need to formally assess whether this difference is statistically significant (i.e., whether GO term A is truly enriched or if this difference is by chance). Fisher's Exact Test and the hypergeometric test are the most commonly used tests in this situation.
 - Fischer’s Exact test substitutes the values of the contingency table in a formula to calculate the probability (P-value) that corresponds to how likely the observed distribution is by chance. A lower P-value suggests that the GO term is truly enriched in the list of marker genes.
 
 ---
