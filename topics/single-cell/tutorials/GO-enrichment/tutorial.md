@@ -14,7 +14,7 @@ objectives:
 - Understand the Role of GO Enrichment in Single-Cell Analysis.
 - Use marker genes from different cell clusters or conditions for GO enrichment analysis. 
 - Compare enrichment across experimental conditions (e.g., wild type vs. knockout) to uncover functional changes associated with genetic or environmental perturbations.
-- link GO enrichment results with a previously annotated cell clusters, providing a clearer picture of the functional roles of different cell populations.
+- Link GO enrichment results with previously annotated cell clusters, providing a clearer picture of the functional roles of different cell populations.
   
 requirements:
 -
@@ -50,7 +50,7 @@ contributors:
 
 In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
 However, simply identifying marker genes is just the beginning. To truly understand what makes each cluster unique, we need to dive deeper into the biological functions these genes are involved in. This is where Gene Ontology (GO) enrichment analysis comes into play.
-We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes beloging to a specific GO term) are expressed more than would be expected in a subset of your data. The most commonly used statistical test are Fischer's exact test and hypergeometric test, more details about them are explained in the tutorial slides.
+We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes belonging to a specific GO term) are expressed more than would be expected in a subset of your data. The most commonly used statistical tests are Fischer's exact test and hypergeometric test, more details about them are explained in the tutorial slides.
 
 
 # Data description
@@ -183,11 +183,11 @@ Now we will perform the GO Enrichment analysis on the list of ensembl gene IDs.
 > <question-title></question-title>
 >
 > 1. Take a look at the enriched terms for the different clusters, Can you find any GO terms that are specific to cluster 7?
-> 2. Can we perform manual anntation of cluster 7 based on GO enrichment results?
+> 2. Can we perform manual annotation of cluster 7 based on GO enrichment results?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Cluster 7 is enriched for terms like "regulation of cell death", "T cell mediated cytotoxicity", and "peptidase activator activity involved in apoptotic process".
+> > 1. Cluster 7 is enriched for terms like "regulation of cell death", "T cell-mediated cytotoxicity", and "peptidase activator activity involved in the apoptotic process".
 > > 2. By looking at the most enriched functions and using our biological knowledge, we can figure out the cell types for many clusters. For example, since the data comes from thymus tissue, we already have an idea of the cell types we might find. The enriched terms in cluster 7 confirm that the cell type is macrophages, which support thymocyte maturation by cleaning up dead cells and debris.
 > >
 > {: .solution}
@@ -196,7 +196,7 @@ Now we will perform the GO Enrichment analysis on the list of ensembl gene IDs.
 
 # GO Analysis using **gProfiler GOSt** tool
 
-The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool used to perform gene ontology (GO) enrichment analysis. In addition to providing enrichment results for the standard GO categories of Biological Process (BP), Cellular Component (CC), and Molecular Function (MF), the tool also analyzes enrichment across several other functional annotation databases, including: KEGG Pathways, Reactome Pathways, WikiPathways and TF Targets. It also gives a plot to better visualize the results.
+The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool used to perform gene ontology (GO) enrichment analysis. In addition to providing enrichment results for the standard GO categories of Biological Process (BP), Cellular Component (CC), and Molecular Function (MF), the tool also analyzes enrichment across several other functional annotation databases, including KEGG Pathways, Reactome Pathways, WikiPathways and TF Targets. It also gives a plot to better visualize the results.
 
 > <hands-on-title> gProfiler GOSt </hands-on-title>
 >
@@ -232,5 +232,5 @@ The gProfiler GOSt (Gene Ontology Sequential Testing) is another popular tool us
 
 # Conclusion
 
-In this tutorial we have performed GO enrichment analysis on the differentially expressed genes between 2 different conditions and between different cell types. This analysis provided valuable insights into the biological processes, molecular functions, and cellular components associated with the gene sets, enhancing our understanding of the underlying mechanisms involved in the studied conditions.
+In this tutorial, we have performed GO enrichment analysis on the differentially expressed genes between 2 different conditions and between different cell types. This analysis provided valuable insights into the biological processes, molecular functions, and cellular components associated with the gene sets, enhancing our understanding of the underlying mechanisms involved in the studied conditions.
 
