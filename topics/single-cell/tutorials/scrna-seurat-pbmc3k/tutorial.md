@@ -213,9 +213,9 @@ We can visualise the QC metrics to help us decide where to set our thresholds fo
 > If you are re-running the same step again or just want to change a couple of parameters for the same tool, then you can click on a previous dataset to expand it in the history and then click the {% dataset-rerun button %}. The tool you used to create that dataset will open in the main panel, with the settings and inputs you used before. Make any changes and run it again.
 {: .tip}
 
-![Three violin plots each showing most points grouped together in the lower part of the plot with some outliers at higher values](../images/scrna-seurat-pbmc3k/seurat_violin_QC_before.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes (percent.mt) for all cells")
+![Three violin plots each showing most points grouped together in the lower part of the plot with some outliers at higher values](../../images/scrna-seurat-pbmc3k/seurat_violin_QC_before.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes (percent.mt) for all cells")
 
-![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. A small number of cells have very high values of both. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. A small number of cells with low total counts have high values of percent.mt](../images/scrna-seurat-pbmc3k/seurat_QC_scatter_before.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt)")
+![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. A small number of cells have very high values of both. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. A small number of cells with low total counts have high values of percent.mt](../../images/scrna-seurat-pbmc3k/seurat_QC_scatter_before.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt)")
 
 > <question-title></question-title>
 >
@@ -270,9 +270,9 @@ If we produce the same plots again, we can see what has changed in our data.
 >
 {: .hands_on}
 
-![Three violin plots each showing most points grouped together and no extreme outliers](../images/scrna-seurat-pbmc3k/seurat_violin_after.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes for all cells after filtering")
+![Three violin plots each showing most points grouped together and no extreme outliers](../../images/scrna-seurat-pbmc3k/seurat_violin_after.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes for all cells after filtering")
 
-![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. No extreme outliers. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. No extreme outliers.](../images/seurat_QC_scatter_after.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt) after filtering")
+![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. No extreme outliers. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. No extreme outliers.](../../images/seurat_QC_scatter_after.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt) after filtering")
 
 > <question-title></question-title>
 >
@@ -304,7 +304,7 @@ The usual preprocessing steps for single cell data are normalisation, selection 
 - **Selection of highly variable features**
     Rather than use the entire dataset in every stage of the analysis, we can focus on the genes that provide the most information - the highly variable genes that showed the biggest differences in expression between cells. We assume that these bigger differences reflect genuine biological differences, while the smaller differences in expression seen in other genes is down to chance or technical noise. Focusing on the most variable genes can make biological differences clearer in single cell analysis.
     Feature selection can have a big impact on our analysis as we will run downstream analyses (e.g. PCA) on these genes. We will be comparing cells based on the expression of these variable genes. 
-    Seurat's separate `FindVariableGenes` tool selects the 2000 most variable genes by default, while `SCTransform` selects the top 3000 genes. We may need to change this setting for some datasets to ensure we're selecting the most useful genes without including too many others.
+    Seurat's separate `FindVariableFeatures` tool selects the 2000 most variable genes by default, while `SCTransform` selects the top 3000 genes. We may need to change this setting for some datasets to ensure we're selecting the most useful genes without including too many others.
 - **Scaling**
     Scaling is a linear transformation that we apply to prepare our data for dimensional reduction. 
     The default scaling method for the separate `ScaleData` tool in Seurat shifts the expression of each gene so that the mean expression across all the cells is 0. It also scales the expression of each gene so that the variance across all cells is 1. Scaling ensures that highly expressed genes don't dominate the analysis too much - we're interested in differences in expression between cells, not in genes that are always highly expressed in all the cells. The results will be stored in the `scale.data` layer.
@@ -350,7 +350,7 @@ The usual preprocessing steps for single cell data are normalisation, selection 
 >
 {: .hands_on}
 
-![Most genes are shown grouped at the bottom of the plot with low standardized variance. The 2000 selected as variable genes are highlighted in red and have higher standardized variances although most are still quite close to the non variable genes. The top 10 most variable genes are labelled by name at the top of the plot with much higher values: PPBP, S100A9, LYZ, IGLL5, GNLY, FTL, PF4, FTH1, GNG11, and FCER1A](../images/scrna-seurat-pbmc3k/seurat_variable_genes.png "Plot showing the standardized variances of variable and non-variable genes. The top 10 most variable genes are labelled.")
+![Most genes are shown grouped at the bottom of the plot with low standardized variance. The 2000 selected as variable genes are highlighted in red and have higher standardized variances although most are still quite close to the non variable genes. The top 10 most variable genes are labelled by name at the top of the plot with much higher values: PPBP, S100A9, LYZ, IGLL5, GNLY, FTL, PF4, FTH1, GNG11, and FCER1A](../../images/scrna-seurat-pbmc3k/seurat_variable_genes.png "Plot showing the standardized variances of variable and non-variable genes. The top 10 most variable genes are labelled.")
 
 > <question-title></question-title>
 > 1. What are the top 10 most variable genes in this dataset?
@@ -370,7 +370,7 @@ The usual preprocessing steps for single cell data are normalisation, selection 
 > > | 10 | FCER1A |
 > >
 > > > <comment-title></comment-title>
-> > > If you used `SCTransform` for preprocessing, then you'll end up with a slightly sifferent list of highly variable genes. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableGenes`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
+> > > If you used `SCTransform` for preprocessing, then you'll end up with a slightly sifferent list of highly variable genes. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableFeatures`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
 > > {: .comment}
 > >
 > > 2. Single cell datasets contain a lot of information, including expression data for thousands of different genes. Some of these genes don't tell us much about the data, for example they might be housekeeping genes that are expressed at similar levels in most of our cells. We want to find the genes that can tell us most about the differences between our cells, so we want to identify the genes whose expression varies most across the dataset - focusing on these highly variable features should help us to uncover the biological differences we're looking for.
@@ -428,14 +428,14 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 >
 {: .hands_on}
 
-![Three plots with dots for the top 30 genes for each PC. Each plot has dots near the positive and negative ends of the axis and no values close to zero](../images/scrna-seurat-pbmc3k/seurat_vizdimloadings.png "Plots showing the genes with the highest positive and negative loadings for each of the first three PCs")
+![Three plots with dots for the top 30 genes for each PC. Each plot has dots near the positive and negative ends of the axis and no values close to zero](../../images/scrna-seurat-pbmc3k/seurat_vizdimloadings.png "Plots showing the genes with the highest positive and negative loadings for each of the first three PCs")
 
 > <question-title></question-title>
 > 1. What are the top positive and negative genes for the first three PCs?
 > 2. Are any of our top 10 highly variable genes associated with the top PCS? Does this surprise you?
 > 3. When we plot the cells along the PC axes (in the next step) do you expect to see differences in the expression of these genes along the associated axis?
 > > <solution-title></solution-title>
-> > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. The top positively associated genes were MALAT1 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were CST3 for PC1, NKG7 for PC2, and PPBP for PC3, but these genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression. 
+> > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. The top positively associated genes were CST3 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were MALAT1 for PC1, NKG7 for PC2, and PPBP for PC3, but these genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression. 
  > > The [VizDimLoadings plot](#figure-6) shows us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
 > > 2. We can see that some of our highly variable genes are associated with the top PCs. For example, FTL is one of the top genes associated with PC1 and PPBP was the top negative gene for PC3. We should expect to see some of our highly variable genes here as we used the features we selected to perform the PCA. It also makes sense that our top 10 variable genes are strongly associated with PCs, because we know these are the genes that varied most across the dataset and the PCA was looking for these strong differences in expression. However, a gene that varied a lot won't necessarily be associated with a top PC unless its expression correlates with other variable genes - a group of correlated genes is likely to have a stronger impact than a single gene, even if that one gene varies a lot.
 > > 3. Since these are the genes that most are strongly associated with each PC, we should expect to see strong differences in their expression from one end of the associated axis to the other. The genes positively associated with PC 1 should mainly be expressed near the positive end of the PC1 axis while the negatively associated genes should mainly be expressed at the negative end. We would expect to see similar patterns for the other PCs.
@@ -446,10 +446,10 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 
 ><hands-on-title>Visualise the PCA Results</hands-on-title>
 >
-> 1. Feature Plot PC1/2
+> 1. DimPlot PC1/2
 {: .hands_on}
 
-![Three large groups appear in different parts of the plot with a scattering of cells in between them](../images/scrna-seurat-pbmc3k/seurat_PCA_DimPlot.png "PCA plot showing the distribution of cells along the first two principal components")
+![Three large groups appear in different parts of the plot with a scattering of cells in between them](../../images/scrna-seurat-pbmc3k/seurat_PCA_DimPlot.png "PCA plot showing the distribution of cells along the first two principal components")
 
 > <question-title></question-title>
 > 1. Can you see any groups or clusters of cells in the the [PCA Plot](#figure-7)?
@@ -458,7 +458,7 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 > {: .solution}
 {: .question}
 
-We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to plot our data along. We can also use the `FeaturePlot` function to colour the plots by the expression levels of specific genes to see how this relates to the PCs, so let's see how the top genes relate to the top PCs.
+We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to plot our data along. We can also use the `FeaturePlot` function to colour the plots by the expression levels of specific genes to see how this relates to the PCs, so let's see how the top genes relate to the top three PCs.
 
 ><hands-on-title>Visualise the PCA Results</hands-on-title>
 >
@@ -467,15 +467,15 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 > 2. Feature Plot PC 2/3
 {: .hands_on}
 
-![Six versions of the same PCA plot showing three main groups of cells in different parts of the plot. The positively associated genes for each PC are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../images/scrna-seurat-pbmc3k/seurat_PCA_12_featureplots.png "PCA Plots coloured by expression of the top positive and  negative markers for PCs 1 to 3, plotted along the PC1 and PC2 axes")
+![Six versions of the same PCA plot showing three main groups of cells in different parts of the plot. The positively associated genes for each PC are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../../images/scrna-seurat-pbmc3k/seurat_PCA_12_featureplots.png "PCA Plots coloured by expression of the top positive and  negative markers for PCs 1 to 3, plotted along the PC1 and PC2 axes")
 
-![Six versions of the same PCA plot showing two main groups of cells and a smaller third group spread vertically along the middle of the plot. The positively associated genes for each marker are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../images/scrna-seurat-pbmc3k/seurat_PCA_23_featureplots.png "PCA Plots coloured by the expression of the top positive and negative markers for PCs 1 to 3, plotted along the PC2 and PC3 axes")
+![Six versions of the same PCA plot showing two main groups of cells and a smaller third group spread vertically along the middle of the plot. The positively associated genes for each PC are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../../images/scrna-seurat-pbmc3k/seurat_PCA_23_featureplots.png "PCA Plots coloured by the expression of the top positive and negative markers for PCs 1 to 3, plotted along the PC2 and PC3 axes")
 
 > <question-title></question-title>
 > 1. How does the expression of the top positive and negative genes relate to PCs 1 and 2 in [Figure 8](#figure-8)?
 > 2. How does the expression of the top positive and negative genes relate to PCs 2 and 3 in [Figure 9](#figure-9)?
 > > <solution-title></solution-title>
-> > 1. When we look at the expression of our top genes along PCs 1 and 2 in [Figure 8](#figure-8) we see that, as expected, the top negatively associated gene for PC1, CST3, is almost exclusively expressed in cells at the negative end of the PC1 (horizontal) axis. The pattern is less clear for the positively associated MALAT1 as most cells are expressing it, but if we look closely we can see that the expression is higher in cells at the positive end of the PC1 axis. We can see similar patterns for the top genes associated with PC2. The top negatively associated NKG7 is mainly expressed by cells along the lower half of the PC2 (vertical) axis. The top positive gene, CD79A is mainly expressed by the cells closest to the top of this axis.
+> > 1. When we look at the expression of our top genes along PCs 1 and 2 in [Figure 8](#figure-8) we see that, as expected, the top positively associated gene for PC1, CST3, is almost exclusively expressed in cells at the positive end of the PC1 (horizontal) axis. The pattern is less clear for the negatively associated MALAT1 as most cells are expressing it, but if we look closely we can see that the expression is higher in cells at the negative end of the PC1 axis. We can see similar patterns for the top genes associated with PC2. The top positively associated gene, CD79A is mainly expressed by the cells closest to the top of the PC2 (vertical) axis. The top negative gene NKG7 is mainly expressed by cells along the lower half of the PC2 axis.
 > > We don't see similar patterns for the genes associated with PC3 in this figure - although these genes are only expressed in parts of the plot, there is no clear relationship with either the PC1 or PC2 axes. This is exactly what we would expect to see - these genes are associated with PC3 so they shouldn't show any relationship with the axes in Figure 8[#figure-8].
 > > 2. The picture looks very different when we plot our cells along PC2 and PC3 ([Figure 9](#figure-9)). We can see two clumps of cells close together at the top of the plot and another small group of cells spread down the middle of the plot. This is why we have to be careful when interpreting dimensional reduction plots - the data can look very different depending on which of the many axes we choose to visualise.
 > > Now it is the top genes for PC1 that don't show any relationship with the axes. The top genes for PC2 still show differences in expression along the PC2 axis (now the horizontal axis) - and these actually look a bit clearer than in the previous plot. We can also see how the top genes for PC3 relate to the PC3 (vertical) axis. The positively associated HLA-DQA1 is mostly expressed by cells at the top of the axis while the negatively associated PPBP is mostly expressed along the negative part of that axis.
@@ -483,10 +483,10 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 {: .question}
 
 > <comment-title></comment-title>
-> If you've tried the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might notice that our top negative genes for the first three PCs (CST3, NKG7, PPBP) are the top positively associated genes there. This is simply a mathematical quirk - in both cases, these genes are strongly associated with the top PCs, but we're just calculating or drawing our plots in the opposite direction. You should be able to spot some similarities in the plots, especially in PC2/PC3 plot, which looks like it has been flipped upside down!
+> If you've tried the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might notice that there are some differences in the relationships between the genes and PCs. Our top negative genes for PCs 2 and 3 (NKG7 and PPBP) are among the top positively associated genes there. This is simply a mathematical quirk - in both cases, these genes are strongly associated with the top PCs, but we're just calculating or drawing our axes in the opposite direction. You should be able to spot some similarities in the plots between these two tutorials, especially in the PC2/PC3 plot, which looks like it has been flipped upside down!
 {: .comment}
 
-Another option for visualising our PCA results is to use `DimHeatmap` to produce a heatmap of the PCA scores for the top genes in each cell. We can see which genes scored highly in the same cells and get an idea of how the scores varied across the dataset. We can look for groups of cells that had similar scores for a particular PC, suggesting that they share similar expression profiles - these groups of cells might become our clusters. We can also compare the patterns for different PCs. We would expect to see more similarities (genes with similar scores across cells and more cells grouping together) for the top PCs since these explain more of the variation in the data.
+Another option for visualising our PCA results is to use `DimHeatmap` to produce a heatmap of the PCA scores for the top genes in each cell. We can see which genes scored highly in the same cells and get an idea of how the scores varied across the dataset. We can also look for groups of cells that had similar scores for a particular PC, suggesting that they share similar expression profiles - these groups of cells might become our clusters. We can also compare the patterns for different PCs. We would expect to see more similarities (genes with similar scores across cells and more cells grouping together) for the top PCs since these explain more of the variation in the data.
 
 > <hands-on-title>Visualise the PCA Results</hands-on-title>
 >
@@ -495,23 +495,24 @@ Another option for visualising our PCA results is to use `DimHeatmap` to produce
 > 2. DimHeatmap for 15 PCs - change size of plot to 4100 x 4400
 {: .hands_on}
 
-![The heatmap is sharply divided into four quarters. The left side of the plot shows PCA scores for a group of cells that have low values for the genes in the top half of the plot that were negatively associated with PC1 and high values for genes in the bottom half that were positively associated with PC1. Cells on the right side of the plot have high values in the top half of the plot and low values in the bottom half of the plot](../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1.png "Heatmap of PCA scores for the top 30 genes associated with PC1")
+![The heatmap is sharply divided into four quarters. The left side of the plot shows PCA scores for a group of cells that have low values for the genes in the top half of the plot that were negatively associated with PC1 and high values for genes in the bottom half that were positively associated with PC1. Cells on the right side of the plot have high values in the top half of the plot and low values in the bottom half of the plot](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1.png "Heatmap of PCA scores for the top 30 genes associated with PC1")
 
-![15 heatmaps show PCA scores for the top cells and genes for PC1 to PC15. The first two plots are clearly divided into quarters but the pattern becomes less clear in subsequent plots](../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1_15.png "Heatmap of PCA scores for the top 30 genes associated with PCs 1 to 15")
+![15 heatmaps show PCA scores for the top cells and genes for PC1 to PC15. The first two plots are clearly divided into quarters but the pattern becomes less clear in subsequent plots](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1_15.png "Heatmap of PCA scores for the top 30 genes associated with PCs 1 to 15")
 
 > <comment-title></comment-title>
 > Note that the cells aren't plotted in the same order in all of our heatmaps, so we can't compare the same cell (column) across multiple plots - the first column in our heatmap doesn't always represent the same cell. We have plotted the top 500 cells for each PC, which means there are lots of cells that aren't included in these plots. We are probably looking at different cells and/or cell orders on each plot. The cells that showed the strongest variation along PC1 aren't necessarily the ones that varied most along PC2, so they won't appear in the same place on the plots.
 {: .comment}
 
 > <question-title></question-title>
-> 1. What does the [PC1 plot](#figure-10) reveal about the expression of MALAT1 and CST3 in our data?
+> 1. What does the [PC1 plot](#figure-10) reveal about the expression of CST3 and MALAT1 in our data?
 > 2. Why do the plots become messier for lower PCs in [Figure 11](#figure-11)?
 > 3. Which type of PCA visualisation was most useful for understanding the main sources of variation in the data?
 > > <solution-title></solution-title>
-> > 1. The bottom row of the heatmap shows the PCA scores for the top positive gene associated with PC1, MALAT1, in the top cells for this PC. We can see that almost all cells on the left side of the heatmap are coloured yellow in this row, indicating they scored highly for this gene. Almost all of the cells on the right side are purple in this bottom row, indicating lower scores for the gene. Meanwhile, we see the opposite for CST3, which was the gene with the strongest negative correlation with PC1 and appears in the topmost row of the heatmap. Cells that scored highly for MALAT1 had low scores for CST3, while those that had low MALAT1 scores had higher scores for CST3.
+> > 1. The bottom row of the heatmap shows the PCA scores for the top positive gene associated with PC1, CST3, in the top cells for this PC. We can see that almost all cells on the left side of the heatmap are coloured yellow in this row, indicating they scored highly for this gene. Almost all of the cells on the right side are black or pink in this bottom row, indicating lower scores for the gene. Meanwhile, we see the opposite for MALAT1, which was the gene with the strongest negative correlation with PC1 and appears in the topmost row of the heatmap. Cells (columns) that scored highly for MALAT1 had low scores for CST3, while those that had low MALAT1 scores had higher scores for CST3.
 > > Clearly, there is strong variation in these genes across the cells in the plot - and that variation isn't just in these two genes, but also in the 28 other genes in this heatmap. These are the two correlated groups of genes that define the first PC. Half the genes were more highly expressed in cells at one end of the PC while the other half were expressed more at the other end of the PC.
-> > 2. Each of the plots for the top PCs distinguishes very clearly between two groups of cells. For each of the top PCs, one group (the left side of the plot) scored highly for most of the genes positively associated with the PC and usually had low scores for the genes negatively associated with the PC. The second group (the right side of the plot) showed the opposite, with low scores for positively associated genes and high scores for negatively associated genes. The distinction becomes less clear in later PCs, with more cells showing different patterns to the rest and a less obvious distinction between the two sides of the plots. This makes sense, because the top PCs are the ones that explained the greatest amount of variation in the data, so they are linked to very clear patterns of expression across many cells. The later PCs didn't explain much variation because they aren't linked with such obvious patterns.
-> > 3. The most useful plot might depend on your own preferences as well as the data you're analysing, but the DimHeatmap is often best for identifying which PCs will be most interesting for downstream analysis. Both cells and genes are ordered by their PCA scores on these plots, so you can see which PCs have the strongest impact on the most numbers of cells while also identifying the sets of features associated with different PCs. You can also limit the number of cells being plotted if you want to focus on the most extreme cells for each PC. 
+> > 2. Each of the plots for the top PCs distinguishes very clearly between two groups of cells. For each of the top PCs, one group (the left side of the plot) scored highly for most of the genes positively associated with the PC and usually had low scores for the genes negatively associated with the PC. The second group (the right side of the plot) showed the opposite, with low scores for positively associated genes and high scores for negatively associated genes. In the PC3 heatmap, we can see there is only a small group of cells showing high scores for the negatively associated genes (coloured yellow in the top right corner of the plot).
+> > The distinction becomes less clear in later PCs, with more cells showing different patterns to the rest and a less obvious distinction between the two sides of the plots. This makes sense, because the top PCs are the ones that explained the greatest amount of variation in the data, so they are linked to very clear patterns of expression across many cells. The later PCs didn't explain much variation because they aren't linked with such obvious patterns.
+> > 4. The most useful plot might depend on your own preferences as well as the data you're analysing, but the DimHeatmap is often best for identifying which PCs will be most interesting for downstream analysis. Both cells and genes are ordered by their PCA scores on these plots, so you can see which PCs have the strongest impact on the most numbers of cells while also identifying the sets of features associated with different PCs. You can also limit the number of cells being plotted if you want to focus on the most extreme cells for each PC. 
 > {: .solution}
 {: .question}
 
@@ -529,14 +530,14 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 >
 {: .hands_on}
 
-![Dots showing the standard deviation for each PC start high for PC1 then drop substantially for each following PC. A sharp bend appears around PC10 where the drop from one PC to the next becomes very small. The dots from PC10 onwards are close to the bottom axis, with low standard deviations.](../images/scrna-seurat-pbmc3k/seurat_elbowplot.png "Elbow Plot showing the standard deviations for the first 30 PCs")
+![Dots showing the standard deviation for each PC start high for PC1 then drop substantially for each following PC. A sharp bend appears around PC10 where the drop from one PC to the next becomes very small. The dots from PC10 onwards are close to the bottom axis, with low standard deviations.](../../images/scrna-seurat-pbmc3k/seurat_elbowplot.png "Elbow Plot showing the standard deviations for the first 30 PCs")
 
 > <question-title></question-title>
 > 1. How many PCs should we use?
 > > <solution-title></solution-title>
 > > 1. As with many decisions in single cell analysis, there isn't an exact method for deciding how many PCs we should use. The elbow in our plot appears to be around PC9-10, so we'll use 10 dimensions in this tutorial, but you could justifiably choose anywhere between about PC7 to PC12 on the basis of this plot. It is usually better to err on the higher side than to get rid of PCs that might be useful. Sometimes it is worth repeating the analysis with different numbers of PCs to see how it affects the results.
-> > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells(e.g. MZB1 is a marker for plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs.
-> > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead.
+> > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells (e.g. MZB1 is a marker for plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs.
+> > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset (especially after seeing the weaker patterns in those later heatmaps) - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead.
 > {: .solution}
 {: .question}
 
@@ -550,7 +551,7 @@ We will perform graph-based, unsupervised clustering in two steps to find out wh
 
 1. **Computation of a neighborhood graph**
 
-    First, we will build a graph where every cell is a node that is connected to its neighbors by a line or edge. The distances between cells (the lengths of these edges) will be based on a distance metric, which is calculated by comparing the values for our top PCs between each pair of cells. The edges are weighted based on the similarity between the cells, so that more weight is given to the connections between cells that are more similar based on their expression patterns. The cells that share the closest, most heavily weighted connections in the graph are the ones with the most similar expression profiles - they are each others' nearest neighbours. Seurat uses a K-nearest neighbor (KNN) graph, so it will draw edges between each cell and a certain number (k) of its nearest neighbours.
+    First, we will build a graph where every cell is a node that is connected to its neighbors by a line or edge. The distances between cells (the lengths of these edges) will be based on a distance metric, which is calculated by comparing the values for our top PCs between each pair of cells. The edges are weighted based on the similarity between the cells, so that more weight is given to the connections between cells that are more similar based on their expression patterns. The cells that share the closest, most heavily weighted connections in the graph are the ones with the most similar expression profiles - they are each others' nearest neighbours. Seurat uses a K-nearest neighbor (KNN) graph, so it will draw edges (lines) between each cell and a certain number (k) of its nearest neighbours.
     
 2. **Clustering of the neighborhood graph**
 
@@ -592,8 +593,6 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 
 > <comment-title></comment-title>
 > If you have followed the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial, you might notice that this step was performed between construction of the neighborhood graph and finding clusters. In the Seurat pipeline, it is usually performed after clustering, but it shouldn't make any difference to your plots. You should end up with the same result if you run these steps the other way around, except that you won't be able to show your clusters on the plot if you haven't found them yet.
->
-
 {: .comment}
 
 ><hands-on-title>RunUMAP</hands-on-title>
@@ -613,9 +612,9 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 > 2. top PC genes - featurescatter
 {: .hands_on}
 
-![Plot showing three big groups of cells coloured by cluster, from 0 to 8. The smallest of these three main groups only contains cells coloured as cluster 3. The other two groups are made up of cells from different clusters.](../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot.png "UMAP coloured by cluster")
+![Plot showing three big groups of cells coloured by cluster, from 0 to 8. The smallest of these three main groups only contains cells coloured as cluster 3. The other two groups are made up of cells from different clusters.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot.png "UMAP coloured by cluster")
 
-![Six versions of the same UMAP plot, each coloured by the expression of a different gene. MALAT1 shows higher expression in the clusters where CST3 expression is low. CD79A expression is highest in cluster 3 while NKG7 expression is highest in clusters 4 and 6. HLA-DQA1 expression is mainly in clusters 3 and 7 while PPBP expression is mostly in the tiny cluster 8.](../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_top_genes.png "UMAP plots coloured by expression of the top genes associated with PCs 1-3")
+![Six versions of the same UMAP plot, each coloured by the expression of a different gene. MALAT1 shows higher expression in the clusters where CST3 expression is low. CD79A expression is highest in cluster 3 while NKG7 expression is highest in clusters 4 and 6. HLA-DQA1 expression is mainly in clusters 3 and 7 while PPBP expression is mostly in the tiny cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_top_genes.png "UMAP plots coloured by expression of the top genes associated with PCs 1-3")
 
 > <question-title></question-title>
 > 1. How many clusters have we identified? How do they relate to the shapes you can see on the [plot](#figure-13)?
@@ -624,7 +623,7 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 > > <solution-title></solution-title>
 > > 1. We have three main groups of cells in our plot and they are more clearly separated here than the cells in our PCA plot. Since the cells have been coloured by the cluster they were assigned to by the `FindClusters` algorithm, we can see that we have identified 9 clusters in our data - the first cluster is numbered as zero.
 > > Only one of the three main clumps of cells is made up of a single cluster (cluster 3). The other two big groups have been split up into different clusters by the algorithm, suggesting that there are some differences within them - this is one of the reasons we don't just want to rely on our eyes when identifying clusters. The UMAP can give us a quick overview of the data and our clusters, but we must be careful about overinterpreting it. We can't see everything about the data just be looking!
-> > 2. Although this plot looks somewhat different from our PCA plot, we can still see patterns in the expression of the top genes that were associated with our PCs. The top positive and negative genes associated with PCs 1, 2, and 3 are expressed in different parts of the UMAP plot. For example, we can see that for the top positive gene for PC1, MALAT1, expression was lower in the group made up of clusters 1, 5, and 7 than in the rest of the plot - while the opposite was true for the top negative gene, CST3. This makes sense, because we used the PCA to make the UMAP, so the cells that were at different ends of the PC axes should be in different parts of the UMAP plot too. We don't see the same relationships between the genes and the axes, because we're now looking at a UMAP plot not a PCA plot - the UMAP axes are not the same as the PCA axes!
+> > 2. Although this plot looks somewhat different from our PCA plot, we can still see patterns in the expression of the top genes that were associated with our PCs. The top positive and negative genes associated with PCs 1, 2, and 3 are expressed in different parts of the UMAP plot. For example, the top positive gene for PC1, CST3 was mainly expressed in the group made up of clusters 1, 5, and 7 as well as in cluster 8, which is where expression of the top negative gene for PC1, MALAT1, was lowest. This makes sense, because we used the PCA to make the UMAP, so the cells that were at different ends of the PC axes should be in different parts of the UMAP plot too. We don't see the same relationships between the genes and the axes, because we're now looking at a UMAP plot not a PCA plot - the UMAP axes are not the same as the PCA axes!
 > > As well as the broader patterns across the plot, we can also see some relationships between the top genes and specific clusters. The top negative gene for PC2, NKG7, is expressed at the highest level in cluster 6 and at a slightly lower level in the adjacent cluster 4. This must be one of the genes that caused the clustering algorithm to assign these cells into separate clusters even though they are part of the same larger group on the plot. Again, this makes sense because we used the PCA reduction to create the neighborhood graph that we then used to identify our clusters.
 > {: .solution}
 {: .question}
@@ -633,12 +632,12 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 
 UMAP plots aren't the only way to see what is going on with the clusters we've just identified - and they aren't always the best choice when we're interested in which cells express specific genes.
 
-><hands-on-title>Visualise Results from `FindAllMarkers` to compare all clusters</hands-on-title> TODO
+><hands-on-title>Visualise Results to compare all clusters</hands-on-title> TODO
 >
 > 1. violin for the top 6 genes
 {: .hands_on}
 
-![Six violin plots. MALAT1 is expressed across all clusters except 8. CST3 is expressed in clusters 1, 5 and 7. CD79A is expressed in cluster 3. NKG7 is expressed in clusters 4 and 6. HLA-DQA1 is expressed in clusters 3 and 7 with one cell in cluster 1 expressing very high levels. PPBP is expressed in cluster 8.](../images/scrna-seurat-pbmc3k/seurat_allmarkers_violin.png "Violin plots showing expression of the top genes associated with PCs 1-3 in each cluster")
+![Six violin plots. MALAT1 is expressed across all clusters except 8. CST3 is expressed in clusters 1, 5 and 7. CD79A is expressed in cluster 3. NKG7 is expressed in clusters 4 and 6. HLA-DQA1 is expressed in clusters 3 and 7 with one cell in cluster 1 expressing very high levels. PPBP is expressed in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_allmarkers_violin.png "Violin plots showing expression of the top genes associated with PCs 1-3 in each cluster")
 
 > <question-title></question-title>
 > 1. Are the top genes for PCs 1-3 expressed more in the clusters they are markers for?
@@ -860,13 +859,13 @@ The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If
 >
 {: .hands_on}
 
-![Two violin plots both showing expression mainly in cluster 3](../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of MS4A1 and CD79A by cluster")
+![Two violin plots both showing expression mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of MS4A1 and CD79A by cluster")
 
 Both CD79A and MS4A1 are mainly expressed in cluster 3, with very little expression in any of the other clusters. Since most cells in cluster 3 are expressing these two well-known markers of B cells and our DE test showed they were expressed more by this cluster than in the rest of the data, we can say that cluster 3 represents our B cell population.
 
 Sometimes the results aren't quite so clear as markers might be expressed across multiple clusters of the same or different cell types. We might need to use multiple markers to differentiate between these groups.
 
-![First violin plot shows NKG7 expressed at high levels by cluster 6 cells but also at varying levels by cluster 4 cells. Second violin plot shows GNLY expressed by cluster 6. Third violin plot shows CD8A expressed by cluster 4.](../images/scrna-seurat-pbmc3k/.png "Violin plots showing expression of NKG7, GNLY, and CD8A by cluster") TODO - make this plot
+![First violin plot shows NKG7 expressed at high levels by cluster 6 cells but also at varying levels by cluster 4 cells. Second violin plot shows GNLY expressed by cluster 6. Third violin plot shows CD8A expressed by cluster 4.](../../images/scrna-seurat-pbmc3k/.png "Violin plots showing expression of NKG7, GNLY, and CD8A by cluster") TODO - make this plot
 
 NAIVE AND MEMORY CD4+ T Cells could be better example here! TODO
 If we only used NKG7 as a marker for NK cells, we might think that both clusters 4 and 6 were made up of this cell type, although the expression level varies a lot more in cluster 4 and it only appears in the top 10 markers for cluster 6. However, we can use two additional markers, CD8A (expressed by CD8+ T cells) and GNLY (expressed by NK cells) to recognise these clusters as two different cell types. Despite some NKG7 expression, cluster 4 is made up of CD8+ T cells. Cluster 6 expresses both markers of NK cells, so we can assign it to this type. As well as better enabling us to differetiate between cell types, using multiple markers can also give us more confidence in our annotations.
@@ -883,7 +882,7 @@ To continue with the supervised approach, we can check the expression of the cho
 >
 {: .hands_on}
 
-![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2 and part of cluster 4. Plot 2 shows CCR7 expression in cluster 0. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression in clusters 1, 5 and 7. Plot 5 shows high S100A4 expression in clusters 1, 5, and 7 with medium expression in clusters 2, 4 and 6. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5. Plot 10 shows GNLY expression in cluster 6. Plot 11 shows NKG7 expression in clusters 4 and 6. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5 and 7. Plot 14 shows PPBP expression in cluster 8.](../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers.png "UMAP plots showing expression of canonical markers for PBMCs")
+![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2 and part of cluster 4. Plot 2 shows CCR7 expression in cluster 0. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression in clusters 1, 5 and 7. Plot 5 shows high S100A4 expression in clusters 1, 5, and 7 with medium expression in clusters 2, 4 and 6. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5. Plot 10 shows GNLY expression in cluster 6. Plot 11 shows NKG7 expression in clusters 4 and 6. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5 and 7. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers.png "UMAP plots showing expression of canonical markers for PBMCs")
 
 We have produced a series of UMAP plots, each coloured according to the expression level of a different gene. We can look back at the [UMAP plot](#figure-13) we created earlier to see which areas correspond to specific clusters.
 
@@ -908,7 +907,7 @@ TODO - make violin plots for cell type markers
 >
 {: .hands_on}
 
- ![Plot showing three big groups of cells coloured by cluster, from 0 to 8. The smallest of these three main groups only contains cells coloured as cluster 3. The other two groups are made up of cells from different clusters.](../images/scrna-seurat-pbmc3k/.png "UMAP coloured by cluster")
+ ![Plot showing three big groups of cells coloured by cluster, from 0 to 8. The smallest of these three main groups only contains cells coloured as cluster 3. The other two groups are made up of cells from different clusters.](../../images/scrna-seurat-pbmc3k/.png "UMAP coloured by cluster")
 
 > <question-title></question-title>
 > 1. Are the markers clearly associated with one or more clusters?
@@ -960,9 +959,9 @@ We've now annotated our clusters by cell type using the supervised approach, but
 >
 {: .hands_on}
 
-![Heatmap showing expression of IL7R mainly in clusters 0, 2 and 4, expression of CCR7 mainly in clusters 0, 2 and 3, expression of CD14 in cluster 1, expression of LYZ in clusters 1, 4 and 7, expression of S100A4 in clusters 1 and 5, expression of MS4A1 in cluster 3, expression of CD8A in cluster 4, expression of FCGR3A in clusters 5 and 6, expression of MS4A7 in cluster 5, expression of GNLY in cluster 6 and to a lesser extent in cluster 4, expression of NKG7 in clusters 4 and 6, expression of FCER1A in cluster 7, expression of CST3 in clusters 1, 5 and 7, and expression of PPBP in cluster 8.](../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster")
+![Heatmap showing expression of IL7R mainly in clusters 0, 2 and 4, expression of CCR7 mainly in clusters 0, 2 and 3, expression of CD14 in cluster 1, expression of LYZ in clusters 1, 4 and 7, expression of S100A4 in clusters 1 and 5, expression of MS4A1 in cluster 3, expression of CD8A in cluster 4, expression of FCGR3A in clusters 5 and 6, expression of MS4A7 in cluster 5, expression of GNLY in cluster 6 and to a lesser extent in cluster 4, expression of NKG7 in clusters 4 and 6, expression of FCER1A in cluster 7, expression of CST3 in clusters 1, 5 and 7, and expression of PPBP in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster")
 
-![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. Clusters 0, 2 and 4 all show higher expression of the markers for clusters 0 and 2 although the strongest patterns are seen for their own markers.](../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers.png "Heatmap showing expression of the top 10 markers for each cluster")
+![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. Clusters 0, 2 and 4 all show higher expression of the markers for clusters 0 and 2 although the strongest patterns are seen for their own markers.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers.png "Heatmap showing expression of the top 10 markers for each cluster")
 
 Looking at these plots, we can see that there are clear associations between certain genes and clusters. In both cases, we can also see that there is variation in the expression level of these genes within the associated clusters, with some cells expressing little or none of the gene. We can also see cells outside of the associated clusters that are expressing the genes. This is true for both the known cell type markers and the markers we identified through our DE analysis - even when a statistical test has identified a significant association with one cluster, there are still differences between cells.
 
