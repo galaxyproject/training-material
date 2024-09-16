@@ -48,8 +48,7 @@ recordings:
   galaxy_version: 24.1.2.dev0
   date: '2024-09-11'
   speakers:
-  - stephanierobin
-  - " abretaud"
+  - rlibouba
   captioners:
   - stephanierobin
   - " abretaud"
