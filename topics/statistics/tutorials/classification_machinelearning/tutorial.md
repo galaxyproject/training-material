@@ -36,7 +36,7 @@ recordings:
   - anuprulez
 - youtube_id: TODO
   length: 28M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: "24.1.2.dev0"
   date: '2024-08-29'
   speakers:
   - anuprulez
