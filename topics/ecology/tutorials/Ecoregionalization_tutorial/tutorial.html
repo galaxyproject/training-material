@@ -1,0 +1,2324 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Ecoregionalization workflow tutorial / Ecoregionalization workflow tutorial / Ecology</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6a8e422b062b4596d3327140e09f7326890eb24f",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Ecoregionalization workflow tutorial">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-09-16 09:54:51 +0000">
+<meta name="DC.creator" content="Pauline Seguineau"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Ecology / Ecoregionalization workflow tutorial / Hands-on: Ecoregionalization workflow tutorial">
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy.">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Ecoregionalization workflow tutorial",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-09-16 09:54:51 +0000",
+  "datePublished": "2024-09-16 09:54:51 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Ecoregionalization workflow tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT2H",
+  "teaches": "Learning how to use the ecoregionalization workflow.\n - Learning about boosted regression trees algorithm.\n - Learning about Silhouette index and select an appropriate number of cluster\n - Learning about Clara clustering algorithm (PAM for large datasets)\n - Create an ecoregionalization map",
+  "keywords": [
+    "Ecology",
+    "ecology",
+    "EBV workflow",
+    "modeling",
+    "earth-system"
+  ],
+  "description": "The questions this  addresses are:\n - How to use the ecoregionalization workflow?\n - How to construct ecoregions from occurrences species data and environmental data?\n\n\nThe objectives are:\n - Learning how to use the ecoregionalization workflow.\n - Learning about boosted regression trees algorithm.\n - Learning about Silhouette index and select an appropriate number of cluster\n - Learning about Clara clustering algorithm (PAM for large datasets)\n - Create an ecoregionalization map\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/PaulineSGN/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/PaulineSGN/",
+      "name": "Pauline Seguineau",
+      "image": "https://avatars.githubusercontent.com/PaulineSGN",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0009-5969-8478",
+      "orcid": "https://orcid.org/0009-0009-5969-8478"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/gallantries/",
+          "name": "Gallantries: Bridging Training Communities in Life Science, Environment and Health",
+          "description": "This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.\n![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)\n![erasmus plus logo](https://www.erasmusplus.nl/assets/images/logo.png)\n",
+          "url": "https://www.erasmusplus.nl"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.\n",
+          "url": "https://fairease.eu/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fnso2019/",
+          "name": "OpenMetaPaper",
+          "description": "This project ([`AAPFNSO2019OpenMetaPaper-14026`](https://www.ouvrirlascience.fr/submit-your-data-its-published/)) is funded with the support of the national Fund for Open Science programme of the French Minister of Higher Education, Research and Innovation. Their funding has supported development of data/metadata management tools and related tutorial for Ecology and FAIR topics.\n![French research ministry flag with the text: with the support of the National Fund for Open Science programme of french Minister of Higher Education, Research and Innovation](https://lamy-environnement.com/wp-content/uploads/2023/03/Logo-MESR.png)\n![FNSO logo](/training-material/shared/images/fnso.png)\n",
+          "url": "https://www.ouvrirlascience.fr/national-fund-for-open-science/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/pndb/",
+          "name": "Pôle National de Données de Biodiversité",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.pndb.fr/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/",
+          "name": "Fair-Ease",
+          "description": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.\n",
+          "url": "https://fairease.eu/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Rassine/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Rassine/",
+      "name": "Ankerl Yassine",
+      "image": "https://avatars.githubusercontent.com/Rassine",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0007-1538-2303",
+      "orcid": "https://orcid.org/0009-0007-1538-2303"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/workflows/",
+      "name": "Associated Workflows"
+    }
+  ],
+  "abstract": "This tutorial is designed to guide you through the Ecoregionalization Galaxy workflow, demonstrating how to create an ecoregionalization map from occurrences and environmental data using a boosted regression trees model for predictions."
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-ecology">
+    <h1 data-toc-skip>Ecoregionalization workflow tutorial</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/PaulineSGN/" class="contributor-badge contributor-PaulineSGN"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/PaulineSGN?s=36" alt="Pauline Seguineau avatar" width="36" class="avatar" />
+    Pauline Seguineau</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=36" alt="Yvan Le Bras avatar" width="36" class="avatar" />
+    Yvan Le Bras</a><a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=36" alt="Marie Josse avatar" width="36" class="avatar" />
+    Marie Josse</a><a href="/training-material/hall-of-fame/Rassine/" class="contributor-badge contributor-Rassine"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Rassine?s=36" alt="Ankerl Yassine avatar" width="36" class="avatar" />
+    Ankerl Yassine</a></td>
+	</tr>
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to use the ecoregionalization workflow?</p>
+</li>
+        
+        <li><p>How to construct ecoregions from occurrences species data and environmental data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Learning how to use the ecoregionalization workflow.</p>
+</li>
+        
+        <li><p>Learning about boosted regression trees algorithm.</p>
+</li>
+        
+        <li><p>Learning about Silhouette index and select an appropriate number of cluster</p>
+</li>
+        
+        <li><p>Learning about Clara clustering algorithm (PAM for large datasets)</p>
+</li>
+        
+        <li><p>Create an ecoregionalization map</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/workflows/" title="Ecoregionalization workflow tutorial workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 16, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 16, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>This tutorial is designed to guide you through the Ecoregionalization Galaxy workflow, demonstrating how to create an ecoregionalization map from occurrences and environmental data using a boosted regression trees model for predictions.</p>
+
+<p>The workflow, consisting of six tools, is intended for processing occurrence data, which should include latitude, longitude and species presence or absence. The tutorial will provide a detailed explanation of inputs, workflow steps, and outputs. This tutorial gives a practical example, highlighting a use case centered on the Dumont d’Urville sea region and benthic invertebrates.</p>
+
+<p>The primary goal of this workflow is to generate species distribution maps and identify ecoregions within the study area. The project’s objective is to offer accessible, reproducible, and transparent IT solutions for processing and analyzing species occurrence data.</p>
+
+<p>This workflow is therefore composed of 6 tools:</p>
+
+<ul>
+  <li>GeoNearestNeighbor</li>
+  <li>BRT prediction tool</li>
+  <li>TaxaSeeker</li>
+  <li>ClusterEstimate</li>
+  <li>ClaraClust</li>
+  <li>EcoMap</li>
+</ul>
+
+<p>And in this tutorial we will be using 5 more tools to format data before running the ecoregionalization workflow:</p>
+
+<ul>
+  <li>Advanced cut</li>
+  <li>Column Regex Find And Replace</li>
+  <li>Filter Tabular</li>
+  <li>Merge Columns</li>
+  <li>Interactive JupyterLab and notebook</li>
+</ul>
+
+<p>Let’s delve into the tutorial, outlining each step and tool to manage the creation of ecoregionalization maps.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-some-definitions-to-start"><button class="gtn-boxify-button details" type="button" aria-controls="details-some-definitions-to-start" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Some definitions to start</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Ecoregionalization: The process by which a territory is classified into a category of area that respond to the same environmental factors taking into account species information.</p>
+
+  <p>Occurrences data: Data showing the presence of a species at a particular location.</p>
+
+  <p>Environmental data: Environmental data are any measurement or information that describe environmental processes, location, or conditions.</p>
+
+  <p>Boosted regression trees (BRT): Boosted Regression Trees is a kind of regression methodology based on Machine Learning. Unlike conventional regression methods (GLMs, GAMs), BRTs combine numerous basic decision trees to enhance the predictive performance. BRTs can handle complex relationships and interactions among predictors, and it is considered a robust technique that can control outliers and nonlinearity.</p>
+
+  <p>Clustering: Clustering is a machine learning method of grouping data points by similarity or distance.</p>
+
+  <p>CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for “Partition Around Medoids”, the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#before-starting" id="markdown-toc-before-starting">Before starting</a>    <ol>
+      <li><a href="#environmental-data" id="markdown-toc-environmental-data">Environmental data</a></li>
+      <li><a href="#occurrence-data" id="markdown-toc-occurrence-data">Occurrence data</a></li>
+      <li><a href="#jupyter-notebook-for-the-interactive-jupyerlab-and-notebook-tool" id="markdown-toc-jupyter-notebook-for-the-interactive-jupyerlab-and-notebook-tool">Jupyter notebook for the interactive JupyerLab and notebook tool</a></li>
+      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+    </ol>
+  </li>
+  <li><a href="#data-formatting" id="markdown-toc-data-formatting">Data formatting</a>    <ol>
+      <li><a href="#keep-data-columns-that-we-need-with-advanced-cut" id="markdown-toc-keep-data-columns-that-we-need-with-advanced-cut">Keep data columns that we need with <strong>Advanced Cut</strong></a></li>
+      <li><a href="#replace-empty-space-with-nas-with-column-regex-find-and-replace" id="markdown-toc-replace-empty-space-with-nas-with-column-regex-find-and-replace">Replace empty space with NAs with <strong>Column Regex Find And Replace</strong></a></li>
+      <li><a href="#remove-lines-with-nas-with-filter-tabular" id="markdown-toc-remove-lines-with-nas-with-filter-tabular">Remove lines with NAs with <strong>Filter Tabular</strong></a></li>
+      <li><a href="#merge-taxa-columns-with-merge-columns" id="markdown-toc-merge-taxa-columns-with-merge-columns">Merge taxa columns with <strong>Merge Columns</strong></a></li>
+      <li><a href="#remove-columns-no-longer-needed-with-advanced-cut" id="markdown-toc-remove-columns-no-longer-needed-with-advanced-cut">Remove columns no longer needed with <strong>Advanced Cut</strong></a></li>
+      <li><a href="#obtain-final-data-file-with-interactive-jupyterlab-notebook" id="markdown-toc-obtain-final-data-file-with-interactive-jupyterlab-notebook">Obtain final data file with <strong>Interactive JupyterLab Notebook</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#ecoregionalization-workflow" id="markdown-toc-ecoregionalization-workflow">Ecoregionalization workflow</a>    <ol>
+      <li><a href="#merge-environment-and-occurence-file-with-geonearestneighbor" id="markdown-toc-merge-environment-and-occurence-file-with-geonearestneighbor">Merge environment and occurence file with <strong>GeoNearestNeighbor</strong></a></li>
+      <li><a href="#predicting-taxa-distribution-with-brt-tool-prediction" id="markdown-toc-predicting-taxa-distribution-with-brt-tool-prediction">Predicting taxa distribution with <strong>BRT tool prediction</strong></a></li>
+      <li><a href="#collecting-the-list-of-taxa-with-taxaseeker" id="markdown-toc-collecting-the-list-of-taxa-with-taxaseeker">Collecting the list of taxa with <strong>TaxaSeeker</strong></a></li>
+      <li><a href="#determine-the-optimal-number-of-clusters-with-clusterestimate" id="markdown-toc-determine-the-optimal-number-of-clusters-with-clusterestimate">Determine the optimal number of clusters with <strong>ClusterEstimate</strong></a></li>
+      <li><a href="#build-ecoregional-clusters-with-claraclust" id="markdown-toc-build-ecoregional-clusters-with-claraclust">Build ecoregional clusters with <strong>ClaraClust</strong></a></li>
+      <li><a href="#build-a-ecoregionalization-map-with-ecomap" id="markdown-toc-build-a-ecoregionalization-map-with-ecomap">Build a ecoregionalization map with <strong>EcoMap</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="before-starting">Before starting</h1>
+
+<p>This part will present the type of data you need to run the ecoregionalization workflow. This data will be downloaded in the next part of the tutorial.</p>
+
+<h2 id="environmental-data">Environmental data</h2>
+
+<p>To run this workflow, you will first need environmental data. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv), and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.</p>
+
+<p>In the use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D’Urville sea region are used. They were taken from oceanographic models and in situ measurements <span class="citation"><a href="#Hemery2011">Hemery <i>et al.</i> 2011</a></span>. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. Finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.</p>
+
+<p>Here an example of environmental file input:</p>
+
+<p>+——+——+———+——+——+
+| long | lat  |  Carbo  | Grav | …  |
++——+——+———+——+——+
+|139.22|-65.57|   0.88  |28.59 | …  |
++——+——+———+——+——+
+|139.25|-65.63|   0.88  |28.61 | …  |
++——+——+———+——+——+
+| …  | …  |   …   | …  | …  |
++——+——+———+——+——+</p>
+
+<h2 id="occurrence-data">Occurrence data</h2>
+
+<p>The second data file you will need to run this workflow is an occurrences data file. As defined above, occurrences data are showing the presence (1) or absence (0) of a species at a particular location. This data file also needs to be in tabular format (.tsv) and need to be construct as following:</p>
+
+<ul>
+  <li>
+    <p>latitude and longitude columns.</p>
+  </li>
+  <li>
+    <p>One column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent.</p>
+  </li>
+</ul>
+
+<p>Here an example of occurrences data file input:</p>
+
+<p>+———-+———–+————————+———–+—–+
+|   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | … | 
++———-+———–+————————+———–+—–+
+|-65,9     |142,3      |1                       |0          | … |
++———-+———–+————————+———–+—–+
+|-66,3     |141,3      |0                       |1          | … |
++———-+———–+————————+———–+—–+
+|   …    |   …     |…                     |    …    | … | 
++———-+———–+————————+———–+—–+</p>
+
+<p>For this tutorial, occurrences data from the Dumont d’Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census <span class="citation"><a href="#Hosie_2011">Hosie <i>et al.</i> 2011</a></span>) between December 2007 and January 2008 <span class="citation"><a href="#bea09">Beaman <i>et al.</i> 2009</a></span>. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN” which correspond to the CEAMARC expedition.</p>
+
+<h2 id="jupyter-notebook-for-the-interactive-jupyerlab-and-notebook-tool">Jupyter notebook for the interactive JupyerLab and notebook tool</h2>
+
+<p>To switch from the occurrence data download from GBIF to the occurrence data supported by the ecoregionalisation workflow, the final step of data preparation use the “Interactive JupyterLab and notebook” tool who needs a jupyter notebook to work. In this Jupyter notebook, we used the pivot_wider function of the tidyr R package to transform our data into a wider format and adapt it to subsequent analyses as part of the Galaxy workflow for ecoregionalization. This transformation allowed us to convert our data to a format where each taxon becomes a separate column. We also took care to fill in the missing values with zeros and to sum the individual counts in case of duplications. Then all data &gt;= 1 are replaced by 1 to have only presence (1) or abscence (0) data.</p>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a name (example: “Ecoregionalization workflow”) for you to find it again later if needed.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li>   <li>To cancel renaming, click the <i class="fas fa-undo" aria-hidden="true"></i><span class="visually-hidden">galaxy-undo</span> “Cancel” button</li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which can be the case if you are using an older version of Galaxy) do the following:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import occurrence data file from <a href="https://www.gbif.org/occurrence/download/0030809-240506114902167">GBIF</a>, environment file from <a href="https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/CYSKQG&amp;version=1.0#">InDoRES</a> and Jupyter notebook file from <a href="https://data.indores.fr/file.xhtml?persistentId=doi:10.48579/PRO/LQMHX9/GIEAQN&amp;version=1.0#">InDoRES</a></p>
+
+      <p>Occurrence data file as a zip file where you will find “occurrence.txt”</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip
+</code></pre></div>      </div>
+      <p>Environemental data : “ceamarc_env.tab”</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9777 
+</code></pre></div>      </div>
+      <p>Jupyter notebook : “pivot_wider_jupytool_notebook.ipynb”</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9756 
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-remote-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-remote-files" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from remote files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>Choose remote files</em>:</p>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>     <p>Click on <strong>Choose remote files</strong> and scroll down to find your data folder or type the folder name in the <code class="language-plaintext highlighter-rouge">search box</code> on the top.</p>   </li>   <li>click on <strong>OK</strong></li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li>   <li>You can find the dataset has begun loading in you history.</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>The GBIF link allows you to download a zip file containing multiple information files about the dataset. The file that you need is the ‘occurrence.txt’ file that we will specifically extract on Galaxy in the following step.</p>
+    </li>
+    <li>
+      <p>Use  <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0" title="Unzip a file tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Unzip a file</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 6.0+galaxy0)</span> to create a data collection in your history where all GBIF archive files will be unzipped</p>
+    </li>
+    <li>
+      <p>Unhide the “occurence.txt” data file then modify datatype to select the “tabular” one</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-un-hide-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-un-hide-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: How to un-hide datasets?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If your history contains hidden datasets you will see <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span> <strong>“Include hidden”</strong> button directly above the dataset display.</p>   <p>To un-hide datasets:</p>   <ul>   <li>Type <code class="language-plaintext highlighter-rouge">visible:hidden</code> in the search box</li>   <li>Select datasets you want to un-hide</li>   <li>Click the dropdown that would appear at the top of the history;</li>   <li>Select <strong>“Unhide”</strong> option.</li> </ul>   <p><img src="/training-material/shared/images/datasets_unhide.gif" alt="An animated gif showing how to unhide datasets" /></p>   <p>Alternatively, you can:</p>   <ul>   <li>click <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span> <strong>“Include hidden”</strong> button directly above dataset display. This will cause hidden datasets to appear in history along with normal (un-hidden) datasets;</li>   <li>hidden datasets are distinguished by having <i class="fas fa-eye-slash" aria-hidden="true"></i><span class="visually-hidden">galaxy-show-hidden</span> within dataset box. Clicking on this icon will un-hide a given dataset;</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Rename the datasets if needed, notably “9756” by “pivot_wider_jupytool_notebook.ipynb” and “9777” by “ceamarc_env.tab”.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the datatype of the environment file and occurrence file are tabular.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">tabular</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="data-formatting">Data formatting</h1>
+
+<p>The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow.</p>
+
+<h2 id="keep-data-columns-that-we-need-with-advanced-cut">Keep data columns that we need with <strong>Advanced Cut</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-select-the-columns-we-need"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Select the columns we need</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">occurrence</code> (Input dataset)</li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+        <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code>
+          <ul>
+            <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c['27', '98', '99', '158', '159', '160', '162', '166', '170']</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What are the kept columns ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The columns we kept are : indivdualCount, decimalLatitude, decimalLongitude, phylum, class, order, family, genus, specificEpithet.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="replace-empty-space-with-nas-with-column-regex-find-and-replace">Replace empty space with NAs with <strong>Column Regex Find And Replace</strong></h2>
+
+<p>This step is used to add NAs to replace empty space in the file. We will do that for the four first columns and then remove lines with NA to have a complete dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-replace-empty-space-by-nas-for-the-first-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Replace empty space by NAs for the first column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^$</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-pay-attention-to-the-regex-parameter"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Pay attention to the regex parameter</div>
+
+    <p>The regular expression (“^$”) is used to capture empty cells in the dataframe so that they can be replaced by NA (Not Available). It is not advised to modify this regular expression nor its replacement, as you will encounter problems while running the next parts of the workflow.</p>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-replace-empty-space-by-nas-for-the-second-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Replace empty space by NAs for the second column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace on the first column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^$</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-replace-empty-space-by-nas-for-the-third-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Replace empty space by NAs for the third column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file2</code> (output of <strong>Column Regex Find And Replace on the second column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^$</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-replace-empty-space-by-nas-for-the-fourth-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Replace empty space by NAs for the fourth column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file3</code> (output of <strong>Column Regex Find And Replace on the third column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">^$</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. At the end of this step you must have NA instead of empty space. See example below.</li>
+  </ol>
+
+  <figure id="figure-1" style="max-width: 90%;"><img src="./Images/NA_example.png" alt="Output of Regex find and replace example. " width="699" height="405" loading="lazy" /><a target="_blank" href="./Images/NA_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Output of Regex find and replace example</figcaption></figure>
+
+</blockquote>
+
+<h2 id="remove-lines-with-nas-with-filter-tabular">Remove lines with NAs with <strong>Filter Tabular</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-lines-with-nas"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Remove lines with NAs</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0" title="Filter Tabular tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Filter Tabular</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.3.0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset to filter”</em>: <code class="language-plaintext highlighter-rouge">out_file4</code> (output of <strong>Column Regex Find And Replace on the fourth column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li>In <em>“Filter Tabular Input Lines”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter Tabular Input Lines”</em>
+              <ul>
+                <li><em>“Filter By”</em>: <code class="language-plaintext highlighter-rouge">by regex expression matching</code>
+                  <ul>
+                    <li><em>“regex pattern”</em>: <code class="language-plaintext highlighter-rouge">NA</code></li>
+                    <li><em>“action for regex match”</em>: <code class="language-plaintext highlighter-rouge">exclude line if pattern found</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All the lines with NAs must have been deleted.</li>
+  </ol>
+
+</blockquote>
+
+<h3 id="prepare-column-merging-with-column-regex-find-and-replace">Prepare column merging with <strong>Column Regex Find And Replace</strong></h3>
+
+<p>This manipulation is made in order to merge properly columns “phylum”, “class”, “order”, “family”, “genus” and “specificEpithet” with a separation.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-quot-quot-at-the-end-of-the-phylum-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Add &quot;_&quot; at the end of the phylum column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(.$)</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All phylum must have “_” at the end.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-quot-quot-at-the-end-of-the-class-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Add &quot;_&quot; at the end of the class column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace on phylum column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(.$)</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All class must have “_” at the end.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-quot-quot-at-the-end-of-the-order-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Add &quot;_&quot; at the end of the order column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file2</code> (output of <strong>Column Regex Find And Replace on class column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(.$)</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All order must have “_” at the end.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-quot-quot-at-the-end-of-the-family-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Add &quot;_&quot; at the end of the family column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace on order column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c7</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(.$)</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All family must have “_” at the end.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-quot-quot-at-the-end-of-the-genus-column"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Add &quot;_&quot; at the end of the genus column</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3" title="Column Regex Find And Replace tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Column Regex Find And Replace</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace on family column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">c8</code></li>
+        <li>In <em>“Check”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Check”</em>
+              <ul>
+                <li><em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">(.$)</code></li>
+                <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. All genus must have “_” at the end. See example below.</li>
+  </ol>
+
+  <figure id="figure-2" style="max-width: 90%;"><img src="./Images/2_example.png" alt="Output of Regex Find And Replace example. " width="1061" height="188" loading="lazy" /><a target="_blank" href="./Images/2_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Output of Regex Find And Replace example</figcaption></figure>
+
+</blockquote>
+
+<h2 id="merge-taxa-columns-with-merge-columns">Merge taxa columns with <strong>Merge Columns</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-merge-columns-phylum-class-quot-order-quot-quot-family-quot-quot-genus-quot-and-quot-specificepithet-quot"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Merge columns “phylum”, “class”, &quot;order&quot;, &quot;family&quot;, &quot;genus&quot; and &quot;specificEpithet&quot;</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Merge Columns tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Merge Columns</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 1.0.2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Column Regex Find And Replace on genus column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+        <li><em>“with column”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
+        <li>In <em>“Columns”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Columns”</em>
+              <ul>
+                <li><em>“Add column”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Columns”</em>
+              <ul>
+                <li><em>“Add column”</em>: <code class="language-plaintext highlighter-rouge">c7</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Columns”</em>
+              <ul>
+                <li><em>“Add column”</em>: <code class="language-plaintext highlighter-rouge">c8</code></li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Columns”</em>
+              <ul>
+                <li><em>“Add column”</em>: <code class="language-plaintext highlighter-rouge">c9</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. Your table must have a new column filled with the concatenation of “phylum”, “class”, “order”, “family”, “genus” and “specificEpithet” columns.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="remove-columns-no-longer-needed-with-advanced-cut">Remove columns no longer needed with <strong>Advanced Cut</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-remove-columns-that-we-don-t-need-anymore"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Remove columns that we don't need anymore</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1" title="Advanced Cut tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Advanced Cut</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 9.3+galaxy1)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">out_file</code> (output of <strong>Merge Columns</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
+        <li><em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code>
+          <ul>
+            <li><em>“Is there a header for the data’s columns ?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+              <ul>
+                <li><em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">c['4', '5', '6', '7', '8', '9']</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Check your output. Columns “phylum”, “class”, “order”, “family”, “genus” and “specificEpithet” must have been deleted and your table must have four columns : “individualCount”, “decimalLatitude”, “DecimalLongitude” and “phylum_class_order_family_genus_specificEpithet”. See example below.</li>
+  </ol>
+
+  <figure id="figure-3" style="max-width: 90%;"><img src="./Images/advanced_out_example.png" alt="Output of Advanced cut example. " width="971" height="251" loading="lazy" /><a target="_blank" href="./Images/advanced_out_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Output of Advanced cut example</figcaption></figure>
+
+</blockquote>
+
+<h2 id="obtain-final-data-file-with-interactive-jupyterlab-notebook">Obtain final data file with <strong>Interactive JupyterLab Notebook</strong></h2>
+
+<p>The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like. 
+Here you will load an existing jupyter notebook (“pivot_wider_jupytool_notebook.ipynb” that you downloaded earlier) and run the code in it to get the final file that is needed for ecoregionalization workflow.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-pivot-wider-with-jupytool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Pivot_wider with Jupytool</div>
+
+  <ol>
+    <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Interactive JupyterLab and notebook tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Interactive JupyterLab and notebook</strong></span> with the following parameters:
+      <ul>
+        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Load a previous notebook</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“IPython Notebook”</em>: <code class="language-plaintext highlighter-rouge">pivot_wider_jupytool_notebook.ipynb</code> (Input dataset)</li>
+            <li><em>“Execute notebook and return a new one.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“User inputs”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert User inputs”</em>
+              <ul>
+                <li><em>“Name for parameter”</em>: <code class="language-plaintext highlighter-rouge">Input file</code></li>
+                <li><em>“Choose the input type”</em>: <code class="language-plaintext highlighter-rouge">Dataset</code>
+                  <ul>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select value”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of previous step <strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-how-to-launch-the-notebook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-launch-the-notebook" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: How to launch the notebook</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>The first parameter allows you to specify that you want to use a previous notebook (“pivot_wider_jupytool_notebook.ipynb”) rather than create a new one.</li>
+      <li>Then you need to insert your ready to use jupyter notebook (“pivot_wider_jupytool_notebook.ipynb”).</li>
+      <li>The third parameter is important to specify that you just want to execute a notebook and not dive into the web frontend (in this case).</li>
+      <li>Then you need to clik on “+ Insert User inputs”” button to add the next parameters.</li>
+      <li>After, you need to give a name to your input and choose its type.</li>
+      <li>Finally you have to input the occurrence data file that will be treated in the Jupyter Notebook.</li>
+    </ul>
+
+    <figure id="figure-4" style="max-width: 90%;"><img src="./Images/JLN_param_example.png" alt="Interactive JupyterLab Notebook parameters example. " width="1232" height="854" loading="lazy" /><a target="_blank" href="./Images/JLN_param_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Interactive JupyterLab Notebook parameters example</figcaption></figure>
+
+  </blockquote>
+
+  <ol>
+    <li>Check your output (“Intercative JupyterLab Notebook on data (pivot_file)”) in your galaxy history. You must have a tabular file with latitude and longitude in first two columns and the others columns must be taxa. See example below.</li>
+  </ol>
+
+  <figure id="figure-5" style="max-width: 90%;"><img src="./Images/pivot_file_example.png" alt="Interactive JupyterLab Notebook output example. " width="1355" height="264" loading="lazy" /><a target="_blank" href="./Images/pivot_file_example.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Interactive JupyterLab Notebook output example</figcaption></figure>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>How many columns have your data file now?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>It must have 202 columns.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="ecoregionalization-workflow">Ecoregionalization workflow</h1>
+
+<p>Now you have all you need to run the ecoregionalization Workflow :</p>
+<ul>
+  <li>Occurrence formatted file</li>
+  <li>Environment file</li>
+</ul>
+
+<h2 id="merge-environment-and-occurence-file-with-geonearestneighbor">Merge environment and occurence file with <strong>GeoNearestNeighbor</strong></h2>
+
+<h3 id="what-it-does-">What it does ?</h3>
+
+<p>This Galaxy tool allows you to merge two data tables (tabular format only) according to their latitude and longitude coordinates (in WGS84 projection), finding the closest points. This tool is used in the Ecoregionalization workflow to filter the occurence data file so it can be used on the BRT prediction tool.</p>
+
+<h3 id="how-to-use-it-">How to use it ?</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-geonearestneighbor"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run GeoNearestNeighbor</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_geonearestneighbor/ecoregion_GeoNearestNeighbor/0.1.0+galaxy0" title="GeoNearestNeighbor tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>GeoNearestNeighbor</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li>In <em>“Your environment file (or table 1)”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your environment data file (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">ceamarc_env.tsv</code> (Input dataset)</li>
+            <li><em>“Choose columns where your latitude is in your environment data file.”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+            <li><em>“Choose columns where your longitude is in your environment data file.”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Your occurrence file (or table 2)”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your occurrence data file (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">pivot_file</code> (output of <strong>Interactive JupyTool and notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Choose columns where your latitude is in your occurrence data file.”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+            <li><em>“Choose columns where your longitude is in your occurrence data file.”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-coords-precision"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Coords precision</div>
+
+        <p>It is recommended that, for optimal precision, the latitude and longitude values in both files should be of the same precision level. And, for the sake of relevance, the geographical coordinates in both files should be as close as possible to apply the most accurate environmental parameters to the correct species occurrences</p>
+
+      </blockquote>
+    </li>
+    <li>Check your outputs. You must have two files:
+      <ul>
+        <li>Information file conataining the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two.</li>
+        <li>Occurrence and Environment merge file containing occurrence data and environmental data cooresponding.</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="predicting-taxa-distribution-with-brt-tool-prediction">Predicting taxa distribution with <strong>BRT tool prediction</strong></h2>
+
+<p>This step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the boosted regression trees (BRT) method was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on an automatic learning algorithm using iterative classification trees.</p>
+
+<h3 id="what-it-does--1">What it does ?</h3>
+
+<p>Two treatments are performed in this tool: the creation of the taxa distribution model and the use of this model to obtain a prediction index. The prediction index obtained from each BRT model for each pixel of the environmental layers is an approximation of the probability of detection of the presence of the taxon.</p>
+
+<p>This tool gives as output a file containing the predictions of the probability of the presence of each taxon for each “environment pixel” (latitude, longitude), a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We’re gonna go back to this in the following steps.</p>
+
+<h3 id="how-to-use-it--1">How to use it ?</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-the-brt-tool"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run the BRT tool</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_brt_analysis/ecoregion_brt_analysis/0.1.0+galaxy0" title="BRT tool prediction tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>BRT tool prediction</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your environment data file of your study area (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">ceamarc_env.tsv</code> (Input dataset)</li>
+        <li>
+          <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input your occurrences data file(s) containing also the environmental characteristics where the species has been observe (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">Merge table</code> (output of <strong>GeoNearestNeighbor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
+
+          <!--SNIPPET-->
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-select-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-select-multiple-datasets" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Select multiple datasets</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>   <li>Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li> </ol> </blockquote>
+          <p><!--END_SNIPPET--></p>
+        </li>
+        <li><em>“Choose column(s) where your abiotic parameter are in your environment data file.”</em>: <code class="language-plaintext highlighter-rouge">c['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Check your outputs. You must have four outputs collections.</p>
+
+      <ul>
+        <li>Prediction files</li>
+        <li>Validation files (Taxa, AUC, Tree complexity, Total deviance explained)</li>
+        <li>Species distribution prediction maps</li>
+        <li>Partial dependence plots</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>In the ‘Prediction files’ collection there must be a file containing predictions of the probability of the presence of each taxon for each “environmental pixel” (latitude, longitude) for each occurrence file you entered.</p>
+
+<p>In the ‘Validation files’ collection there must be a file containing for each taxon the validation metrics of the associated model.</p>
+
+<p>In the ‘Species distribution prediction maps’ collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
+Here is an example:</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png" alt="Species distribution map. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Florometra mawsoni distribution from BRT</figcaption></figure>
+
+<p>In the ‘Partial dependence plots’ collection there should be graphs showing the percentage explanation of the model for each environmental parameter.
+Here is an example:</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni.pdf" alt="Partial dependence plots. " loading="lazy" /><a target="_blank" href="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni.pdf" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Percentage of explanation of the model for each environmental parameter</figcaption></figure>
+
+<h2 id="collecting-the-list-of-taxa-with-taxaseeker">Collecting the list of taxa with <strong>TaxaSeeker</strong></h2>
+
+<h3 id="what-it-does--2">What it does ?</h3>
+
+<p>This tool does three things:</p>
+
+<ul>
+  <li>
+    <p>It allows obtaining a summary file for each taxon indicating whether a BRT model was obtained and the number of occurrences per taxon.</p>
+  </li>
+  <li>
+    <p>It provides a list of taxa that obtained cleaned BRT models (without “_”, “_sp”, etc.) to propose the list to WoRMS (World Register of Marine Species) or another taxonomic database and obtain more information about the taxa.</p>
+  </li>
+  <li>
+    <p>It generates a list of taxa for which a BRT model was obtained, needed as input of following steps.</p>
+    <h3 id="how-to-use-it--2">How to use it ?</h3>
+  </li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-taxaseeker"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run TaxaSeeker</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_taxa_seeker/ecoregion_taxa_seeker/0.1.0+galaxy0" title="TaxaSeeker tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>TaxaSeeker</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Environment file (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">ceamarc_env.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Occurences file(s) (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">Merged table</code> (output of <strong>GeoNearestNeighbor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Predictions file(s)”</em>: <code class="language-plaintext highlighter-rouge">Prediction files collection</code> (output of <strong>BRT tool prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Selecting a dataset collection as input</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <ol>
+        <li>Check your outputs. You must have three files:</li>
+      </ol>
+
+      <ul>
+        <li>Summary of taxa model</li>
+        <li>List of taxa</li>
+        <li>List of taxa clean</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="determine-the-optimal-number-of-clusters-with-clusterestimate">Determine the optimal number of clusters with <strong>ClusterEstimate</strong></h2>
+
+<h3 id="what-it-does--3">What it does ?</h3>
+
+<p>This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the following anlaysis steps.</p>
+
+<p>The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned. 
+The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. Thus the optimal number of clusters is the one that maximizes the value of the SIH index.</p>
+
+<h3 id="how-to-use-it--3">How to use it ?</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-clusterestimate"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run ClusterEstimate</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_cluster_estimate/ecoregion_cluster_estimate/0.1.0+galaxy0" title="ClusterEstimate tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ClusterEstimate</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Environment file (tabular format only)”</em>: <code class="language-plaintext highlighter-rouge">ceamarc_env.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Taxa selected file (File ‘List of taxa’ from TaxaSeeker tool)”</em>: <code class="language-plaintext highlighter-rouge">List_of_taxa</code> (output of <strong>TaxaSeeker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction files”</em>: <code class="language-plaintext highlighter-rouge">Prediction files collection</code> (output of <strong>BRT tool prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Selecting a dataset collection as input</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <ul>
+        <li><em>“Number of Cluster to test”</em>: <code class="language-plaintext highlighter-rouge">10</code> (You can choose any number, but remember that the more cluster numbers to test the longer it will take)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-two-other-parameters"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Two other parameters</div>
+
+        <p>The other two parameters can be left as is. If you need to change them here is a short description of what they do:</p>
+
+        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)</p>
+
+        <p>The second one is the sample size that will be used to perform clustering. 
+Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
+more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
+entire data set.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Check your outputs. You must have three files:</p>
+
+      <ul>
+        <li>SIH index plot (See example below)</li>
+        <li>Data to cluster (Containing the data to be partitioned)</li>
+        <li>Data.bio table (Containing four pieces of information, latitude, longitude, presence prediction and corresponding taxon)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+  <ol>
+    <li>What is the optimal number of clusters in this use case ?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>The optimal number of cluster is seven because it maximizes the value of the SIH index.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Here is the SIH index plot you must obtained :</p>
+
+<figure id="figure-8" style="max-width: 90%;"><img src="./Images/SIH_index_plot.png" alt="SIH index plot. " width="480" height="480" loading="lazy" /><a target="_blank" href="./Images/SIH_index_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> SIH index plot</figcaption></figure>
+
+<p>With this graph you will be able to determine the optimal number of clusters retained for the construction of ecoregions. As said before, the optimal number of cluster is the one that maximizes the SIH index. In this example, the number of clusters that optimizes the SIH index is seven.</p>
+
+<h2 id="build-ecoregional-clusters-with-claraclust">Build ecoregional clusters with <strong>ClaraClust</strong></h2>
+
+<h3 id="what-it-does--4">What it does ?</h3>
+
+<p>After choosing an optimal number of clusters with the ClusterEstimate tool, we can now partition each latitude and longitude point according to their associated values of the BRT prediction index. Due to 
+the large size of the datasets, the Clara function of the Cluster package is used here to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the 
+clustering process and makes the calculation more efficient.</p>
+
+<h3 id="how-to-use-it--4">How to use it ?</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-claraclust"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run ClaraClust</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_clara_cluster/ecoregion_clara_cluster/0.1.0+galaxy0" title="ClaraClust tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>ClaraClust</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Environmental file (tabular only)”</em>: <code class="language-plaintext highlighter-rouge">ceamarc_env.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction matrix (file ‘data to cluster’ from Cluster Estimate tool)”</em>: <code class="language-plaintext highlighter-rouge">Data_to_cluster</code> (output of <strong>ClusterEstimate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction table (file ‘data.bio table’ from Cluster Estimate tool)”</em>: <code class="language-plaintext highlighter-rouge">Data.bio_table</code> (output of <strong>ClusterEstimate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Number of Cluster wanted”</em>: <code class="language-plaintext highlighter-rouge">7</code> (Number of cluster determined at the previous step of the workflow in “SIH index plot”)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-two-other-parameters-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Two other parameters</div>
+
+        <p>The other two parameters can be left as is. If you need to change them here is a short description of what they do:</p>
+
+        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)</p>
+
+        <p>The second one is the sample size that will be used to perform clustering. 
+Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
+more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
+entire data set.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Check your outputs. You must have three files:</p>
+
+      <ul>
+        <li>SIH index plot (See example below.)</li>
+        <li>Cluster points (Contains the latitude and longitude of each “environmental pixel” and the associated cluster number. We will use it in the next step of the workflow)</li>
+        <li>Cluster info (Contains all the information related to the clusters created, that is, in column: the latitude, the longitude, the corresponding cluster number and for each taxon the prediction value)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The tool will produce a silhouette plot that you can see below. A silhouette graph is a representation used to visualize the silhouette index of each observation in a clustered data set. It makes it possible to 
+assess the quality of clusters and determine their coherence and separation. In a silhouette graph, each observation is represented by a horizontal bar whose length is proportional to its silhouette index. The longer
+the bar, the better the consistency of the observation with its cluster and the separation from other clusters. As mentioned above, the silhouette index ranges from -1 to 1. Values close to 1 indicate that objects 
+are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are 
+located at the border between two clusters. Here, in the graph below, there is a good distribution of the observations because the majority of the bars are above the average value of the silhouette index.</p>
+
+<figure id="figure-9" style="max-width: 90%;"><img src="./Images/SIH_plot.png" alt="SIH plot. " width="480" height="480" loading="lazy" /><a target="_blank" href="./Images/SIH_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> SIH plot</figcaption></figure>
+
+<h2 id="build-a-ecoregionalization-map-with-ecomap">Build a ecoregionalization map with <strong>EcoMap</strong></h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-ecomap"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Run EcoMap</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/ecoregion_eco_map/ecoregion_eco_map/0.1.0+galaxy0" title="EcoMap tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>EcoMap</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.1.0+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file (File ‘cluster points’ from previous step)”</em>: <code class="language-plaintext highlighter-rouge">cluster_points</code> (output of <strong>ClaraClust</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>This tool simply need the previous step “Cluster points” output file to generate a map representing ecoregions.</p>
+
+  <ol>
+    <li>Check output. You must have one Map representing ecoregions.</li>
+  </ol>
+
+</blockquote>
+
+<p>This is the output map with our seven clusters representing ecoregions that you must have obtained.</p>
+
+<figure id="figure-10" style="max-width: 90%;"><img src="./Images/Map.png" alt="Ecoregion map. " width="2787" height="1582" loading="lazy" /><a target="_blank" href="./Images/Map.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Ecoregion map</figcaption></figure>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Congratulations! You have successfully completed the ecoregionalization workflow. Here is the end of this tutorial aiming to explain the purpose of the ecoregionalization workflow and how to use it. This workflow provides a systematic and reproducible approach to ecoregionalization, allowing researchers to identify distinct ecological regions based on species occurrences and environmental data. This tutorial shows how to use this workflow, step by step, or all in one using the Dumont D’Urville sea region use case with related datasets. It allows you to understand ecoregions construction. You learned the use of the BRT algorithm for modeling species distribution as well as the cluster construction with the k-medoid clustering algorithms (CLARA/PAM). Feel free to explore and adapt this workflow for your specific research needs. If you have any questions, or encounter issues during the workflow, refer to the provided documentation or seek assistance from the Galaxy community. Don’t hesitate to contact us if you have any questions.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Get raw data from research data wharehouse</p>
+</li>
+                        
+                        <li><p>Clean data content to be used by an existing workflow</p>
+</li>
+                        
+                        <li><p>Evaluate the best number of cluster to cut a dataset</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="bea09">Beaman, R. J., P. E. O’Brien, E. Philip, and G. Australia, 2009 <b>Collaborative East Antarctic Marine Census (CEAMARC): post-survey report, RSV Aurora Australis Voyage 3, December 2007-January 2008</b>. <i>Geoscience Australia</i>. <a href="https://www.deepreef.org/wp-content/uploads/2009/12/CEAMARCReport_Beaman2009.pdf">https://www.deepreef.org/wp-content/uploads/2009/12/CEAMARCReport_Beaman2009.pdf</a></li>
+<li id="Hemery2011">Hemery, L. G., B. Galton-Fenzi, N. Améziane, M. J. Riddle, S. R. Rintoul <i>et al.</i>, 2011 <b>Predicting habitat preferences for Anthometrina adriani (Echinodermata) on the East Antarctic continental shelf</b>. Marine Ecology Progress Series 441: 105–116. <a href="https://doi.org/10.3354/meps09330">10.3354/meps09330</a></li>
+<li id="Hosie_2011">Hosie, G., P. Koubbi, M. Riddle, C. Ozouf-Costaz, M. Moteki <i>et al.</i>, 2011 <b>CEAMARC, the Collaborative East Antarctic Marine Census for the Census of Antarctic Marine Life (IPY # 53): An overview</b>. Polar Science 5: 75–87. <a href="https://doi.org/10.1016/j.polar.2011.04.009">10.1016/j.polar.2011.04.009</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ecology/Ecoregionalization_tutorial"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=ecology/Ecoregionalization_tutorial">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Pauline Seguineau,  <b>Ecoregionalization workflow tutorial (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{ecology-Ecoregionalization_tutorial,
+author = "Pauline Seguineau",
+	title = "Ecoregionalization workflow tutorial (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+                
+                
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: text_processing
+  owner: bgruening
+  revisions: fbf99087e067
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: merge_cols
+  owner: devteam
+  revisions: dd40b1e9eebe
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_brt_analysis
+  owner: ecology
+  revisions: 2129484beb61
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_clara_cluster
+  owner: ecology
+  revisions: 844b5bf84164
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_cluster_estimate
+  owner: ecology
+  revisions: 001d7d101915
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_eco_map
+  owner: ecology
+  revisions: c6b1bf7b0ac6
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_geonearestneighbor
+  owner: ecology
+  revisions: 36637718c51d
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: ecoregion_taxa_seeker
+  owner: ecology
+  revisions: 18c4cd785a74
+  tool_panel_section_label: Ecoregionalization
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: regex_find_replace
+  owner: galaxyp
+  revisions: 503bcd6ebe4b
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: unzip
+  owner: imgteam
+  revisions: 57f0914ddb7b
+  tool_panel_section_label: Collection Operations
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: filter_tabular
+  owner: iuc
+  revisions: 557ec8d7087d
+  tool_panel_section_label: Text Manipulation
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+		
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6a8e422b062b4596d3327140e09f7326890eb24f">6a8e422</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
