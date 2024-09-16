@@ -45,7 +45,7 @@ recordings:
   bot-timestamp: 1724930606
 - youtube_id: l4LCy6Zci4g
   length: 1H7M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: "24.1.2.dev0"
   date: '2024-08-29'
   speakers:
   - anuprulez
