@@ -176,9 +176,9 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 {: .hands_on}
 
-# Data formating
+# Data formatting
 
-The first step of this tutorial is data formating because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
+The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
 
 ## Keep data columns that we need with **Advanced Cut**
 
