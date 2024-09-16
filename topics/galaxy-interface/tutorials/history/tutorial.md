@@ -45,7 +45,7 @@ recordings:
   date: '2023-05-19'
   galaxy_version: '23.01'
 - youtube_id: InBwrXde-g4
-  length: 23m
+  length: 23M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-07'
   speakers:
