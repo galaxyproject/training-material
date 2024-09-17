@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Slides: GO Enrichment Analysis on Single-Cell RNA-Seq Data / GO Enrichment Analysis on Single-Cell RNA-Seq Data / Single Cell</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@0bf34ca0a9e6669bd5a16fa08f795064733d075e",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/GO-enrichment/slides-plain.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="GO Enrichment Analysis on Single-Cell RNA-Seq Data">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-09-17 07:09:29 +0000">
+<meta name="DC.creator" content="Wendi Bacon">
+<meta name="DC.creator" content="Menna Gamal"><meta name="description" content="### scRNA-Seq data analysis roadmap  .image-100[![slide5](../../images/GO-enrichment/slides_images/roadmap_1.png)]   ??? Here is a typical workflow for analyzing single-cell RNA sequencing data. We can break this process down into three main sections: - Data Preprocessing: This is the initial step, where we focus on quality control, alignment, and quantification of the data. It’s crucial to ensure that our data is clean and reliable. - General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes, or HVGs. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step allows us to make sense of the data and identify distinct cell populations. - Exploratory Analyses: Finally, we delve into exploratory analyses. This includes differential expression gene (DEG) analysis, functional enrichment studies, gene set variation analysis (GSVA), and transcription factor (TF) prediction. We al...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Single Cell / GO Enrichment Analysis on Single-Cell RNA-Seq Data / Slides: GO Enrichment Analysis on Single-Cell RNA-Seq Data">
+        <meta property="og:description" content="### scRNA-Seq data analysis roadmap  .image-100[![slide5](../../images/GO-enrichment/slides_images/roadmap_1.png)]   ??? Here is a typical workflow for analyzing single-cell RNA sequencing data. We can break this process down into three main sections: - Data Preprocessing: This is the initial step, where we focus on quality control, alignment, and quantification of the data. It’s crucial to ensure that our data is clean and reliable. - General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes, or HVGs. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step allows us to make sense of the data and identify distinct cell populations. - Exploratory Analyses: Finally, we delve into exploratory analyses. This includes differential expression gene (DEG) analysis, functional enrichment studies, gene set variation analysis (GSVA), and transcription factor (TF) prediction. We al...">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/./topics/single-cell/tutorials/GO-enrichment/slides.html">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/single-cell/tutorials/GO-enrichment/slides-plain.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section class="tutorial">
+	<a href="https://github.com/galaxyproject/training-material/blob/main//topics/single-cell/tutorials/GO-enrichment/slides.html">View markdown source on GitHub</a>
+	<h1>GO Enrichment Analysis on Single-Cell RNA-Seq Data</h1>
+		<h2>Contributors</h2>
+<div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/MennaGamal/" class="contributor-badge contributor-MennaGamal"><img src="https://avatars.githubusercontent.com/MennaGamal?s=36" alt="Menna Gamal avatar" width="36" class="avatar" />
+    Menna Gamal</a>
+	</div>
+
+</div>
+
+
+		
+		<h2>Questions</h2>
+		<ul>
+		
+		<li><p>What is Gene Ontology (GO) enrichment analysis, and why should I perform it on my marker genes?</p>
+</li>
+		
+		<li><p>How can I use GO enrichment analysis to better understand the biological functions of the genes in my clusters?</p>
+</li>
+		
+		<li><p>Can GO enrichment analysis help me confirm that my clusters represent distinct cell types or states?</p>
+</li>
+		
+		</ul>
+		
+
+		
+		<h2>Objectives</h2>
+		<ul>
+		
+		<li><p>Aim to identify enriched GO terms associated with the DEGs.</p>
+</li>
+		
+		<li><p>Enhance understanding of biological processes, molecular functions, and cellular components involved.</p>
+</li>
+		
+		</ul>
+		
+
+		
+
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Sep 17, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Sep 17, 2024 </div>
+
+	<hr />
+
+
+	<h3 id="scrna-seq-data-analysis-roadmap">scRNA-Seq data analysis roadmap</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/roadmap_1.png" alt="slide5" />]</p>
+
+<p><span>Speaker Notes</span>
+Here is a typical workflow for analyzing single-cell RNA sequencing data.
+We can break this process down into three main sections:</p>
+<ul>
+  <li>Data Preprocessing: This is the initial step, where we focus on quality control, alignment, and quantification of the data. It’s crucial to ensure that our data is clean and reliable.</li>
+  <li>General Analyses: In this phase, we filter out low-quality cells, normalize the data, and select highly variable genes, or HVGs. We then perform dimensionality reduction, cluster the cells, and annotate the different cell types. This step allows us to make sense of the data and identify distinct cell populations.</li>
+  <li>Exploratory Analyses: Finally, we delve into exploratory analyses. This includes differential expression gene (DEG) analysis, functional enrichment studies, gene set variation analysis (GSVA), and transcription factor (TF) prediction. We also investigate cell trajectories, interactions between cells, cell cycles, and even spatial transcriptomics.
+This tutorial will focus on Gene Ontology (GO) Enrichment exploratory analysis.</li>
+</ul>
+
+<hr />
+
+<h3 id="ontology">Ontology</h3>
+
+<p>.center[A standardized vocabulary for expressing knowledge within a specific domain.]
+.image-100[<img src="../../images/GO-enrichment/slides_images/ontology_2.png" alt="slide6" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Before we introduce “GO enrichment analysis” let us first understand what it means by Ontology and Gene Ontology (GO).</li>
+  <li>Ontology is a set of terms with their precise definitions and defined relationships between them. For example, imagine you are organizing a library of books. You want to classify and organize these books so that others can easily find what they are looking for. Ontology in this context would be a structured system for categorizing books.</li>
+</ul>
+
+<hr />
+
+<h3 id="gene-ontology-go-unifying-biology">Gene Ontology (GO): Unifying Biology</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/go_3.png" alt="slide7" />]</p>
+
+<p><span>Speaker Notes</span>
+Gene Ontology has 3 main classifications (Biological process, Molecular function, and Cellular component) this allows scientists to precisely describe what a gene does, how it does it, and where it happens in the cell.</p>
+
+<hr />
+
+<h3 id="go-hierarchy">GO Hierarchy</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/hierarchy_4.png" alt="slide8" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The structure of Gene Ontology is hierarchical, meaning that terms at lower levels are more specific, while those higher up are more general.
+We can visualize the structure of GO as a graph, where each term represents a node, and the relationships between these terms are represented as edges connecting the nodes. This organization helps in understanding the connections and relationships among various gene functions, these relationships are either is_a, part_of, has_part, or regulates.</li>
+  <li>
+    <h2 id="note-that-it-is-possible-for-a-term-to-have-multiple-parents">Note that it is possible for a term to have multiple parents. </h2>
+  </li>
+</ul>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/components_5.png" alt="slide9" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>“GO terms” are the unified vocabulary used within the Gene Ontology framework. Each GO term is accompanied by detailed information, and the GO list provides insights into these terms.</li>
+  <li>Additionally, GO annotations illustrate the relationships between each GO term and the genes associated with them.</li>
+</ul>
+
+<hr />
+
+<h3 id="example-describing-gene-functions-before-and-after-gene-ontology">Example describing gene functions before and after Gene Ontology</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/example_6.png" alt="slide10" />]</p>
+
+<p><span>Speaker Notes</span>
+This simple example illustrates how Gene Ontology (GO) adds clarity and standardization when describing gene functions.</p>
+
+<hr />
+
+<p>.center[How to use GO to perform <strong>GO Enrichment Analysis</strong> on scRNA-Seq data?]</p>
+
+<p><span>Speaker Notes</span>
+Now that we understand what GO mean, let’s explore what is GO Enrichment analysis in the context of scRNA-Seq data.</p>
+
+<hr />
+
+<h3 id="enrichment-analysis-of-scrna-seq-data">Enrichment analysis of scRNA-Seq data</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/enrichment_7.png" alt="slide12" />]
+.center[Enrichment analysis is a type of functional annotation process which is the process of associating biological functions with genes or cells based on the expression data.]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Enrichment analysis is a statistical approach used to determine whether certain biological features are overrepresented (enriched) in a subset of genes(i.e., Marker genes) compared to a broader background set.</li>
+</ul>
+
+<hr />
+
+<h3 id="go-enrichment-analysis">GO Enrichment Analysis</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/go_enrichment_8.png" alt="slide13" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Each GO term is associated with a set of genes.</li>
+  <li>We try to find out which GO terms or gene sets are enriched in our list of marker genes.</li>
+  <li>These GO terms are functionally assigned to various biological functions and locations, aiding our understanding of the roles of marker genes.</li>
+  <li>Also note that each gene can be assigned to multiple GO terms allowing the capture of various functions, processes, and cellular components associated with a gene.</li>
+</ul>
+
+<hr />
+
+<h3 id="steps-of-go-enrichment-analysis">Steps of GO enrichment analysis</h3>
+
+<p>.left[1- Select the marker genes for each cell cluster / condition]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step1_9.png" alt="slide14" />]</p>
+
+<p><span>Speaker Notes</span>
+We start the analysis by selecting a list of differentially expressed genes (marker genes). Marker genes could be a list of differentially expressed genes between 2 different conditions or between different cell types.</p>
+
+<hr />
+
+<p>.left[2- Tag the genes with GO terms]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step2_10.png" alt="slide14" />]</p>
+
+<p><span>Speaker Notes</span>
+Each gene can be “tagged” with one or more GO terms, similar to how books are categorized by genre or topic.</p>
+
+<hr />
+
+<p>.left[3- Count How Many Times Each GO Term Appears]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step3_11.png" alt="slide14" />]</p>
+
+<p><span>Speaker Notes</span>
+We then count the number of times each GO term shows up in your list of genes. For example, GO term A appears in 2 out of 3 genes</p>
+
+<hr />
+
+<p>.left[4- Compare to the whole background gene set]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step4_12.png" alt="slide15" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Next, we compare how often each GO term appears in our gene list compared to how often it appears across the background gene set, this background may list all genes in the genome or all genes involved in the experiment.</li>
+  <li>This comparison tells you whether certain GO terms are “enriched” or more common in the marker genes than you would expect by chance.</li>
+</ul>
+
+<hr />
+
+<p>.left[5- Is It Significant? Basic interpretation:]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step5_13.png" alt="slide16" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>Just because you see GO Term A a lot doesn’t necessarily mean it’s important—it could be by chance. So, we use statistical tests to see if the enrichment is statistically significant.</li>
+  <li>While in this simple example, it is obvious that the proportion of genes associated with GO term A in the marker gene set (67%) is higher than the proportion in the background set (30%). This suggests that GO term A is potentially enriched in the marker gene set and we can add it to our purple list of enriched GO terms.</li>
+</ul>
+
+<hr />
+
+<p>.left[6- Statistical testing:]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step6_14.png" alt="slide17" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>In real-world scenarios where we have hundreds or thousands of genes we need to formally assess whether this difference is statistically significant (i.e., whether GO term A is truly enriched or if this difference is by chance). Fisher’s Exact Test and the hypergeometric test are the most commonly used tests in this situation.</li>
+  <li>Fischer’s Exact test substitutes the values of the contingency table in a formula to calculate the probability (P-value) that corresponds to how likely the observed distribution is by chance. A lower P-value suggests that the GO term is truly enriched in the list of marker genes.</li>
+</ul>
+
+<hr />
+
+<p>.left[7- Interpret the results:]
+.image-60[<img src="../../images/GO-enrichment/slides_images/step7_15.png" alt="slide18" />]</p>
+
+<p><span>Speaker Notes</span>
+After we have transformed the long list of marker genes into a short list of biological themes in the form of GO terms we can proceed with the interpretation of the results through visualization of the most common themes to identify patterns or relationships between GO terms, we can also analyze the GO hierarchy where higher-level categories (parent terms) provide broader biological contexts, while lower-level categories (child terms) offer more specific insights, in addition to relating the enriched GO terms to existing biological knowledge.</p>
+
+<hr />
+
+<h3 id="example-1-go-enrichment-analysis-of-platelet-proteins-in-early-stage-cancer">Example 1: GO Enrichment Analysis of Platelet Proteins in Early-Stage Cancer</h3>
+
+<p>.image-90[<img src="../../images/GO-enrichment/slides_images/example1_16.png" alt="slide19" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>
+    <p>In a study by Zúñiga-León et al. (2018) they explored the differentially expressed platelet proteins in early-stage cancer in comparison to a control group.</p>
+  </li>
+  <li>
+    <p>The study revealed that out of 4,384 unique proteins expressed in platelets, 85 proteins showed significant differences in abundance in early-stage cancer patients compared to controls. This highlights the potential of platelets as biomarkers for early cancer detection.</p>
+  </li>
+  <li>
+    <p>The enrichment analysis identified 19 enriched biological processes, it also uncovered six enriched molecular functions.</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="biological-interpretation-of-the-results">Biological interpretation of the results</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/interpretation_18.png" alt="slide20" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>The 19 biological processes identified primarily relate to inflammatory response, immune response, and cancer annotations.</li>
+  <li>Among the enriched GO terms, one notable member is protein (P06702), which has been found to be differentially expressed in several cancer types, including breast, colon, liver, gastric, and non-small cell lung cancer. This protein plays a crucial role in promoting cancer growth.</li>
+  <li>Additionally, the analysis revealed five proteins that are directly associated with the GO term angiogenesis (GO:0001525). Angiogenesis is essential for tumor development, as it supplies the necessary blood flow for delivering nutrients and oxygen.</li>
+</ul>
+
+<hr />
+<h3 id="example-2-identifying-potential-biomarkers-of-non-small-cell-lung-cancer-through-go-enrichment-analysis-of-scrna-seq-data">Example 2: Identifying Potential Biomarkers of Non-Small Cell Lung Cancer Through GO Enrichment Analysis of scRNA-Seq Data</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/example2.png" alt="slide21" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>
+    <p>Non-small cell lung cancer (NSCLC) is the most prevalent lung cancer. This study aims to identify gene biomarkers for NSCLC diagnosis and prognosis using single-cell RNA sequencing (scRNA-seq) data and bioinformatics techniques.</p>
+  </li>
+  <li>
+    <p>158 differentially expressed genes (DEGs) were identified, comprising 48 upregulated and 110 downregulated genes.</p>
+  </li>
+  <li>
+    <p>Gene Ontology enrichment was then conducted on the differentially expressed genes (Marker genes), statistical testing was performed on each GO term and only GO terms with P-value &lt; 0.01 were selected.</p>
+  </li>
+</ul>
+
+<hr />
+<h3 id="results-interpretation">Results interpretation</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/example2_int.png" alt="slide22" />]</p>
+
+<hr />
+<h3 id="purpose-and-importance">Purpose and Importance</h3>
+
+<p>.image-100[<img src="../../images/GO-enrichment/slides_images/purpose_19.png" alt="slide23" />]</p>
+
+<p><span>Speaker Notes</span></p>
+<ul>
+  <li>To conclude, GO enrichment analysis helps scientists make sense of large gene lists by pointing out which biological processes, functions, or cellular locations are most relevant.</li>
+  <li>Instead of looking at each gene individually, it allows researchers to focus on broader biological themes, making it easier to interpret the data.</li>
+</ul>
+
+
+
+	<hr />
+
+
+<h2>Key Points</h2>
+
+<ul>
+
+<li>GO enrichment analysis helps identify which biological processes, molecular functions, and cellular components are significantly represented in a set of genes.</li>
+
+<li>The analysis employs statistical methods to determine whether the observed enrichment of GO terms is greater than what would be expected by chance.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Thank you!</h2>
+
+This material is the result of a collaborative work. Thanks to the <a href="https://training.galaxyproject.org" aria-label="Visit the GTN">Galaxy Training Network</a> and all the contributors!
+
+
+<img src="/training-material/assets/images/GTNLogo1000.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+Tutorial Content is licensed under
+
+  <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+</section>
+
+
+
+
+
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/./topics/single-cell/tutorials/GO-enrichment/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/./topics/single-cell/tutorials/GO-enrichment/slides.html">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/0bf34ca0a9e6669bd5a16fa08f795064733d075e">0bf34ca</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
