@@ -12,6 +12,7 @@ time_estimation: 30m
 key_points:
   - Circos is incredibly customisable
   - Not all customisations have to be done with rules, but they can be a useful method
+level: Intermediate
 
 requirements:
   - type: "internal"
