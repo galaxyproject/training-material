@@ -11,7 +11,7 @@ Tools are frequently updated to new versions. Your Galaxy may have multiple vers
 
   - Open your Galaxy server
   - Click on the {% icon curriculum %} icon on the top menu, this will open the GTN inside Galaxy.
-  - Navigate to your tutorial via **Single-cell** (Underneath the *Methodologies* section) | **Case Study** | Select your tutorial
+  - Navigate to your tutorial via **Single-cell** (Underneath the *Methodologies* section), then **Case Study**, then Select your tutorial
   - Tool names in tutorials will be blue buttons that open the correct tool for you
   - **Note:** this does not work for all tutorials (yet)
   ![gif showing how GTN-in-Galaxy works]({% link topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif %})
