@@ -35,7 +35,8 @@ module Jekyll
 
       subset_pages = site.pages
         .reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}
-        .reject { |t| t.fetch('layout', 'page') =~ /external/}
+        .reject { |t| t.data.fetch('layout', 'page') =~ /external/}
+        .reject { |t| t.data.fetch('hands_on', '') == 'external'}
 
       subset_pages.each do |t|
         begin

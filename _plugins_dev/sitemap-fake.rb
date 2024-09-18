@@ -1,6 +1,6 @@
 module Jekyll
   # Fake sitemap generator.
-  class SitemapGenerator < Generator
+ class SitemapGenerator2 < Generator
     safe true
 
     def generate(site)
@@ -14,7 +14,8 @@ module Jekyll
 
       subset_pages = site.pages
         .reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}
-        .reject { |t| t.fetch('layout', 'page') =~ /external/}
+        .reject { |t| t.data.fetch('layout', 'page') =~ /external/}
+        .reject { |t| t.data.fetch('hands_on', '') == 'external'}
 
       subset_pages.each do |t|
         result += "<url><loc>#{site.config['url'] + site.config['baseurl'] + t.url}</loc>" \
