@@ -93,15 +93,16 @@ In the use case presented in this tutorial, seventeen abiotic and physical param
 
 Here an example of environmental file input: 
 
-+------+------+---------+------+------+
+
+|------|------|---------|------|------|
 | long | lat  |  Carbo  | Grav | ...  |
-+------+------+---------+------+------+
+|------|------|---------|------|------|
 |139.22|-65.57|   0.88  |28.59 | ...  |
-+------+------+---------+------+------+
+|------|------|---------|------|------|
 |139.25|-65.63|   0.88  |28.61 | ...  |
-+------+------+---------+------+------+
+|------|------|---------|------|------|
 | ...  | ...  |   ...   | ...  | ...  |
-+------+------+---------+------+------+
+|------|------|---------|------|------|
 
 ## Occurrence data
 
@@ -113,15 +114,15 @@ The second data file you will need to run this workflow is an occurrences data f
 
 Here an example of occurrences data file input:
 
-+----------+-----------+------------------------+-----------+-----+
+|----------|-----------|------------------------|-----------|-----|
 |   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | ... | 
-+----------+-----------+------------------------+-----------+-----+
+|----------|-----------|------------------------|-----------|-----|
 |-65,9     |142,3      |1                       |0          | ... |
-+----------+-----------+------------------------+-----------+-----+
+|----------|-----------|------------------------|-----------|-----|
 |-66,3     |141,3      |0                       |1          | ... |
-+----------+-----------+------------------------+-----------+-----+
+|----------|-----------|------------------------|-----------|-----|
 |   ...    |   ...     |...                     |    ...    | ... | 
-+----------+-----------+------------------------+-----------+-----+
+|----------|-----------|------------------------|-----------|-----|
 
 For this tutorial, occurrences data from the Dumont d'Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census {% cite Hosie_2011 %}) between December 2007 and January 2008 {% cite bea09 %}. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN" which correspond to the CEAMARC expedition.
 
