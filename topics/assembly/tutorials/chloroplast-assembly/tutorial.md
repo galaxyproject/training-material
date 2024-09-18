@@ -35,8 +35,10 @@ recordings:
   length: 16M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-12'
-  speakers: 
-  captioners: 
+  speakers:
+  - hannahkimincompbio
+  captioners:
+  - hannahkimincompbio
   bot-timestamp: 1726113532
 
 
