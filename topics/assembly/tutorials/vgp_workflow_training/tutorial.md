@@ -58,15 +58,6 @@ recordings:
   captioners:
   - abueg
   bot-timestamp: 1726177737
-- youtube_id: TODO
-  length: 1H57M
-  galaxy_version: 24.1.2.dev0
-  date: '2024-09-13'
-  speakers:
-  - abueg
-  captioners:
-  - abueg
-  bot-timestamp: 1726201073
 
 
 ---
