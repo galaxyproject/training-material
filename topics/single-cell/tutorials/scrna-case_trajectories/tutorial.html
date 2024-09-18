@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6c8c121339d1f6da06b3f51e80803ad2e88d26d2",
+		release: "galaxy-training-network@049a0e7bcb10e799c5e4a4a9beb0dd9f3962b176",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories with Scanpy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-14 10:47:57 +0000">
+<meta name="DC.date" content="2024-09-18 15:22:02 +0000">
 <meta name="DC.creator" content="Marisa Loach">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Julia Jakiela">
@@ -210,7 +210,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-14 10:47:57 +0000",
+  "dateModified": "2024-09-18 15:22:02 +0000",
   "datePublished": "2023-12-08 07:20:20 +0000",
   "identifier": "https://gxy.io/GTN:T00379",
   "accessMode": [
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Inferring single cell trajectories with Scanpy",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_trajectories/tutorial.html",
-  "version": 6,
+  "version": 7,
   "timeRequired": "PT3H",
   "teaches": "Execute multiple plotting methods designed to identify lineage relationships between cells\n - Interpret these plots",
   "keywords": [
@@ -1050,6 +1050,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
+                
+                    
                         
                         
                             
@@ -1058,8 +1060,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
-                    
-                
                     
                 
                     
@@ -1155,8 +1155,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                     
                 
                     
-                
-                    
                         
                         
                             
@@ -1165,6 +1163,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
+                    
+                
                     
                 
                     
@@ -1415,7 +1415,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 8, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 18, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1433,7 +1433,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
 
     </blockquote>
     </section>
@@ -1522,56 +1522,95 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). You can find the final dataset in this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a> or download from Zenodo below.</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Data upload - Import history</div>
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Importing via History is quickest. Works only on Galaxy EU for now.
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="History_import" onclick="cyoaChoice('History_import', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">History_import</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Zenodo_import" onclick="cyoaChoice('Zenodo_import', 'gtn-cyoa')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Zenodo_import</label>
+	
+	
+	
 
-  <ol>
-    <li>
-      <p>Import history from: <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a></p>
-
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <em>Import this history</em> button on the top left</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Copy History</strong></li> </ol> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>
-    </li>
-  </ol>
-
+	
+	<script>
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("History-import", "gtn-cyoa");
+		})
+	</script>
+	
 </blockquote>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Data upload - Add to history</div>
+<div class="History_import">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Data upload - Import history</div>
 
-  <ol>
-    <li>Create a new history for this tutorial</li>
-    <li>
-      <p>Import the AnnData object from <a href="https://zenodo.org/record/7075718">Zenodo</a></p>
+    <ol>
+      <li>
+        <p>Import history from: <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
-</code></pre></div>      </div>
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <em>Import this history</em> button on the top left</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Copy History</strong></li> </ol> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>
+      </li>
+    </ol>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the .h5ad object as <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></p>
+  </blockquote>
+</div>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-    <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+<div class="Zenodo_import">
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Data upload - Add to history</div>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-      <p><!--END_SNIPPET--></p>
-    </li>
-  </ol>
+    <ol>
+      <li>Create a new history for this tutorial</li>
+      <li>
+        <p>Import the AnnData object from <a href="https://zenodo.org/record/7075718">Zenodo</a></p>
 
-</blockquote>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the .h5ad object as <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Renaming a dataset</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">h5ad</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+</div>
 
 <h2 id="filtering-for-t-cells">Filtering for T-cells</h2>
 
@@ -2372,7 +2411,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6c8c121339d1f6da06b3f51e80803ad2e88d26d2">6c8c121</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/049a0e7bcb10e799c5e4a4a9beb0dd9f3962b176">049a0e7</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
