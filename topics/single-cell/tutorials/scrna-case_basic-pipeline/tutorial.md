@@ -106,7 +106,7 @@ You can access the data for this tutorial in multiple ways:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input)
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/published/history?id=67ff4cea2adc574d)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
