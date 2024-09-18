@@ -29,15 +29,6 @@ tags:
 contributors:
 - anuprulez
 recordings:
-- youtube_id: TODO
-  length: 24M
-  galaxy_version: " 24.1.2.dev0"
-  date: '2024-08-29'
-  speakers:
-  - anuprulez
-  captioners:
-  - anuprulez
-  bot-timestamp: 1724930757
 - youtube_id: QTXdcsYaLlE
   length: 35M
   galaxy_version: " 24.1.2.dev0"
