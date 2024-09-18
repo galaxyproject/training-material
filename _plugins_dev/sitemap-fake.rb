@@ -11,7 +11,12 @@ module Jekyll
                 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" ' \
                 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
-      site.pages.each do |t|
+
+      subset_pages = site.pages
+        .reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}
+        .reject { |t| t.fetch('layout', 'page') =~ /external/}
+
+      subset_pages.each do |t|
         result += "<url><loc>#{site.config['url'] + site.config['baseurl'] + t.url}</loc>" \
                   '<lastmod>2016-06-30T18:00:00-07:00</lastmod></url>'
       end

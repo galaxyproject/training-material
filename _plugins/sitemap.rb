@@ -33,7 +33,11 @@ module Jekyll
                 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" ' \
                 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
-      site.pages.reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}.each do |t|
+      subset_pages = site.pages
+        .reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}
+        .reject { |t| t.fetch('layout', 'page') =~ /external/}
+
+      subset_pages.each do |t|
         begin
           d = Gtn::ModificationTimes.obtain_time(t.path)
           d.format = '%FT%T%:z'
