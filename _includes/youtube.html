@@ -10,7 +10,7 @@
     csp="sandbox allow-scripts allow-same-origin;"
     width="{{include.width | default: 560 }}"
     height="{{include.height| default: 315 }}"
-    src="https://www.youtube-nocookie.com/embed/{{ include.id }}{% if include.start %}?start={{ include.start }}{% endif %}"
+    src="https://www.youtube{% unless include.cyoa %}-nocookie{% endunless%}.com/embed/{{ include.id }}{% if include.start %}?start={{ include.start }}{% endif %}"
     title="{{ include.title }}"
     frameborder="0"
     loading="lazy"
