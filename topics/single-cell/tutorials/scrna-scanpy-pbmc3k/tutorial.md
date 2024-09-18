@@ -1534,6 +1534,7 @@ The assumption should be even more true for the top marker genes. The first way 
 >      - *"Swap axes?"*: `Yes`
 >      - In *"Violin plot attributes"*:
 >        - *"Add a stripplot on top of the violin plot"*: `No`
+>      - *"Colors to use in each of the stacked violin plots"*: `Accent`
 >
 {: .hands_on}
 
@@ -1853,7 +1854,7 @@ With the annotated cell types, we can also visualize the expression of their can
 >            - *"Start"*: `13`
 >            - *"End"*: `13`
 >            - *"Label"*: `FCGR3A+`
->
+>        - *"Color palette"*: `viridis (Perceptually Uniform Sequential)`
 {: .hands_on}
 
 ![Dotplot plot with annotated clusters](../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png)
