@@ -15,7 +15,7 @@ questions:
 objectives:
 - Learn the tools necessary to perform a de novo assembly of a vertebrate genome
 - Evaluate the quality of the assembly
-time_estimation: 1h
+time_estimation: 2h
 key_points:
 - The VGP pipeline allows to generate error-free, near gapless reference-quality genome
   assemblies
