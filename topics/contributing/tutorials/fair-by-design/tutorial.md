@@ -145,7 +145,7 @@ May all your materials be FAIR!
 
 If you are not using a discipline specific metadata schema, then, to ensure that your learning materials are appropriately described using a common approach, you should adopt the:
 
-  <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary btn-lg btn-block">Go to the RDA Minimal Metadata Set for Learning Resources description details</a>
+  <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary stretched-link">Go to the RDA Minimal Metadata Set for Learning Resources description details</a>
 
 The following are the fields described in the RDA Minimal Metadata Set divided into three categories:
 
@@ -268,7 +268,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > [Read about defining intended Learning Outcomes in the Design and plan session, course, materials tutorial available on GTN]( {% link topics/contributing/tutorials/design/tutorial.md#define-intended-learning-outcomes-los %} )
 {: .details}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Prepare stage ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white stretched-link">Go to the full description of FAIR-by-Design Methodology: Prepare stage ...</a>
 
 ## Stage 2 - Discover
 
@@ -414,7 +414,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 ### How to design the learning content
 
-<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary btn-lg btn-block">Read more about the Hunter Model.</a>
+<a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary stretched-link">Read more about the Hunter Model.</a>
 
 <div class="row">
   <div class="col-sm-4">
@@ -515,7 +515,7 @@ Each MVS profile defines a list of technical and soft skills required for the pr
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white btn-lg btn-block">Go to the full description of FAIR-by-Design Methodology: Design stage ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white stretched-link">Go to the full description of FAIR-by-Design Methodology: Design stage ...</a>
 
 ## Stage 4 - Produce
 
@@ -703,7 +703,7 @@ PDF document accessibility is measured with a separate technical specification <
   </div>
 </div>
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Produce stage ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Produce stage ...</a>
 
 ## Stage 5 - Publish
 
@@ -897,7 +897,7 @@ PDF document accessibility is measured with a separate technical specification <
 >GTN automatically creates a new record in the [Elixir TeSS training catalogue](https://tess.elixir-europe.org) that is the most relevant catalogue for its community.
 {: .tip}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Publish stage ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Publish stage ...</a>
 
 ## Stage 6 - Verify
 
@@ -965,7 +965,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 > Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.
 {: .comment}
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Verify stage ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Verify stage ...</a>
 
 ## Stage 7 - Continuous Improvement
 > To improve is to change; to be perfect is to change often
@@ -998,7 +998,7 @@ The questions marked as essential achieve bare minimum FAIRness.
 - Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.
 - After the Verify stage, you will reenter continuous improvement with the newly gathered information.
 
-<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white btn-lg btn-block">Go to the full FAIR-by-Design Methodology: Continuous Improvement ...</a>
+<a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Continuous Improvement ...</a>
 
 # About
 
