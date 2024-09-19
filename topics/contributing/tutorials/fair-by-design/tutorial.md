@@ -112,26 +112,28 @@ May all your materials be FAIR!
 
 ### First things first: What is FAIR?
 
-
-> <solution-title>Findable</solution-title>
-> The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
-{: .solution}
-
-
-> <solution-title>Accessible</solution-title>
-> The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
-{: .solution}
-
-
-> <solution-title>Interoperable</solution-title>
-> The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
-> Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.
-{: .solution}
-
-
-> <solution-title>Reusable</solution-title>
->The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
-{: .solution }
+><question-title> What is FAIR? </question-title>
+>
+>> <solution-title>Findable</solution-title>
+>> The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.
+>{: .solution}
+>
+>
+>> <solution-title>Accessible</solution-title>
+>> The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.
+>{: .solution}
+>
+>
+>> <solution-title>Interoperable</solution-title>
+>> The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
+>> Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.
+>{: .solution}
+>
+>
+>> <solution-title>Reusable</solution-title>
+>>The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.
+>{: .solution }
+{: .question }
 
 > <details-title>More details on the FAIR principles</details-title>
 > [Follow the FAIR in a nutshell tutorial available on GTN]( {% link topics/fair/tutorials/fair-intro/tutorial.md %} )
