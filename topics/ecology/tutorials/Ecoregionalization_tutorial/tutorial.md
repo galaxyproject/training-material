@@ -441,7 +441,7 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 >
 > >  <warning-title>Galaxy can't display properly file with too many columns</warning-title>
 > >
-> > Too avoid having web interface issues, Galaxy is not displaying tabulated files with "beautifull" columns visualization when number of clumns is big. That's why here we are showing the preview of the datzaset from the history.
+> > Too avoid having web interface issues, Galaxy is not displaying tabulated files with "beautifull" columns visualization when number of clumns is big. That's why here we are showing the preview of the dataset from the history.
 > >
 > {: .warning}
 > 
