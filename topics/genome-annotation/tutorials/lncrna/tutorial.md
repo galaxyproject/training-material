@@ -51,7 +51,7 @@ recordings:
   - rlibouba
   captioners:
   - stephanierobin
-  - " abretaud"
+  - abretaud
   bot-timestamp: 1726077703
 
 
