@@ -148,7 +148,7 @@ Those parametars are, "CHROMOSOME", "Start", and "End".
 
 
 
-# Querying the Beacon Database Collection for a specific CNVs. 
+# Querying the Beacon Database Collection for a specific CNVs.
 
 Suppose we are searching for specific variants in the database—for instance, records related to a low-level gain in a particular genomic location.
 
@@ -202,6 +202,10 @@ To conduct such a detailed analysis, we can query the Beacon database by narrowi
 > <hands-on-title>Query the Beacon MongoDB</hands-on-title>
 >
 > 1. **Import the Excel sheet** containing information about the primary sites and diseases from the Beacon database, available at this [Zenodo link](https://zenodo.org/records/13348132/files/Beacon2-list-of-files.xlsx):
+>
+>    ```
+>    https://zenodo.org/records/13348132/files/Beacon2-list-of-files.xlsx
+>    ```
 >
 >    Please review this list to identify the primary sites and diseases that have available CNV (Copy Number Variation) records. In some cases, the same dataset can be found in the Galaxy shared data library. Ask the instructor for more details about this. The dataset can also be downloaded to local storage.
 >
