@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@397f5fe389763bd5b163813edc4f05ed81e1b066",
+		release: "galaxy-training-network@3c72caad27cf3a8407a493a4dff986bcbd23e2cb",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Visualization of RNA-Seq results with Volcano Plot">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-09-19 09:17:43 +0000">
 <meta name="DC.creator" content="Maria Doyle"><meta name="description" content="Training material for all kinds of transcriptomics analysis.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Transcriptomics / Visualization of RNA-Seq results with Volcano Plot / Hands-on: Visualization of RNA-Seq results with Volcano Plot">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-09-19 09:17:43 +0000",
   "datePublished": "2018-12-31 10:26:01 +0000",
   "identifier": "https://gxy.io/GTN:T00304",
   "accessMode": [
@@ -236,7 +236,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Visualization of RNA-Seq results with Volcano Plot",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
-  "version": 14,
+  "version": 15,
   "timeRequired": "PT30M",
   "teaches": "Create a volcano plot of RNA-seq data to visualize significant genes",
   "keywords": [
@@ -981,6 +981,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
       
       
+    <li><a class="dropdown-item" href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/recordings/index.html#tutorial-recording-6-september-2024" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (September 2024) - 13m</a>
+    </li>
+      
+    
+      
+      
+      
     <li><a class="dropdown-item" href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
                 <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 10m</a>
     </li>
@@ -1082,6 +1090,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		</a>
 	</li>
     
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
+			UseGalaxy.be
+		</a>
+	</li>
+    
     
 
     
@@ -1102,7 +1116,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Dec 31, 2018 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 19, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1122,7 +1136,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (3 recent ratings, 53 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 15 </div>
 
     </blockquote>
     </section>
@@ -1311,7 +1325,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <h2 id="create-volcano-plot-labelling-genes-of-interest">Create volcano plot labelling genes of interest</h2>
 
-<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">here</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="language-plaintext highlighter-rouge">volcano_genes</code> file and shown below. We will label these genes in the volcano plot. We’ll add boxes around the labels to highlight the gene names.</p>
+<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (have a look at this <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">visualization tutorial</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="language-plaintext highlighter-rouge">volcano_genes</code> file and shown below. We will label these genes in the volcano plot. We’ll add boxes around the labels to highlight the gene names.</p>
 
 <p><a href="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" rel="noopener noreferrer"><img src="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" alt="Volcano genes. " height="560" width="62" loading="lazy" /></a></p>
 
@@ -1926,7 +1940,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/397f5fe389763bd5b163813edc4f05ed81e1b066">397f5fe</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3c72caad27cf3a8407a493a4dff986bcbd23e2cb">3c72caa</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
