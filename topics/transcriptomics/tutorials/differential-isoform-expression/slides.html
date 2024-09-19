@@ -3,8 +3,11 @@ layout: tutorial_slides
 logo: "GTN"
 
 title: "Identification of non-canonical ORFs and their potential biological function"
-contributors:
-  - gallardoalba
+contributions:
+  authorship:
+    - gallardoalba
+  editing:
+    - lldelisle
 
 priority: 4
 
@@ -183,7 +186,7 @@ Full detailed explanation in the [Genome-wide alternative splicing analysis]({% 
 
 ## Galaxy Workflow
 
-![Full workflow image.]({% link topics/transcriptomics/images/differential_isoform/slides/full_workflow.png %})
+![Full workflow image.]({% link topics/transcriptomics/images/differential_isoform/full_workflow.png %})
 
 Full detailed explanation in the [Genome-wide alternative splicing analysis]({% link topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.md %}) Galaxy training.
 
@@ -191,13 +194,13 @@ Full detailed explanation in the [Genome-wide alternative splicing analysis]({% 
 
 ## Galaxy Workflow
 
-![Workflow summary.]({% link topics/transcriptomics/images/differential_isoform/slides/simple_workflow.png %})
+![Workflow summary.]({% link topics/transcriptomics/images/differential_isoform/galaxyworkflow.drawio.png %})
 
 ---
 
 ## Initial QC assessment
 
-![QC step.Identify potential artifacts that may impact the interpretation of downstream analysis.]({% link topics/transcriptomics/images/differential_isoform/slides/initial_QC.png %})
+![QC step.Identify potential artifacts that may impact the interpretation of downstream analysis.]({% link topics/transcriptomics/images/differential_isoform/fastqc_per_base_sequence_quality.png %})
 
 Identify potential artifacts that may impact the interpretation of downstream analysis.
 
@@ -205,7 +208,7 @@ Identify potential artifacts that may impact the interpretation of downstream an
 
 ## Mapping and identication of novel splicing sites with RNASTAR
 
-![Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.]({% link topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.png  %})
+![Mapping step with RNASTAR. Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.]({% link topics/transcriptomics/images/differential_isoform/slides/STAR_pipeline.drawio.png  %})
 
 Two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, conferring greater read depth and providing significantly more accurate quantification of novel splice junctions.
 
@@ -213,7 +216,7 @@ Two-pass alignment enables sequence reads to span novel splice junctions by fewe
 
 ## Post-mapping QC assessment with RSeQC
 
-![Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.]({% link topics/transcriptomics/images/differential_isoform/slides/rseqc_junction_saturation_plot.png %})
+![Post-mapping QC. RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.]({% link topics/transcriptomics/images/differential_isoform/rseqc_junction_saturation_plot.png %})
 
 RSeQC is a toolkit for generating RNA-seq-specific quality control metrics. The figure corresponds to RSeQC junction saturation of known (A) and novel (B) splicing sites.
 
@@ -229,7 +232,7 @@ StringTie is a fast and highly efficient assembler of RNA-seq alignments into po
 
 ## Post-assembly QC assessment with rnaQUAST
 
-![Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.]({% link topics/transcriptomics/images/differential_isoform/slides/rnaQUAST_cumulative_isoform.png %})
+![Post-assembly QC. rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.]({% link topics/transcriptomics/images/differential_isoform/rnaQUAST_cumulative_isoform.png %})
 
 rnaQUAST, which will provide us diverse completeness/correctness statistics very useful in order to identify and address potential errors or gaps in the assembly process. The figure is a rnaQUAST cummulative isoform plot.
 
@@ -245,13 +248,6 @@ IsoformSwitchAnalyzieR performs the differential isoform usage analysis by using
 
 ## Isoform switching and functional analysis with IsoformSwitchAnalyzeR
 
-![IsoformSwitchAnalyzeR consequences plot.]({% link topics/transcriptomics/images/differential_isoform/slides/consequences_plot.png %})
+![IsoformSwitchAnalyzeR consequences plot.]({% link topics/transcriptomics/images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png %})
 
 To analyze large-scale patterns in predicted IS consequences, IsoformSwitchAnalyzeR computes all isoform switching events resulting in a gain/loss of a specific consequence (e.g. protein domain gain/loss)
-
----
-
-## Candidate non-canonical ORF
-
-![Candidate non-canonical ORF.]({% link topics/transcriptomics/images/differential_isoform/slides/candidate_gene.png %})
-

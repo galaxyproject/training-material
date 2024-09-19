@@ -58,6 +58,21 @@ program:
       - name: metatranscriptomics
         topic: microbiome
 
+  - section: "Metaproteomics" 
+    description: |
+      Generation and search of any metaproteomics database, verification and quantification of the proteins/peptides, statistical analysis of the quantified peptides
+    tutorials:
+      - name: clinical-mp-1-database-generation
+        topic: proteomics
+      - name: clinical-mp-2-discovery
+        topic: proteomics
+      - name: clinical-mp-3-verification
+        topic: proteomics
+      - name: clinical-mp-4-quantitation
+        topic: proteomics
+      - name: clinical-mp-5-data-interpretation
+        topic: proteomics
+
   - section: "Pathogen detection" 
     description: |
       Detect and track pathogens from metagenomic Nanopore sequencing

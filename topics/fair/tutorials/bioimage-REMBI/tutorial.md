@@ -47,6 +47,14 @@ requirements:
 follow_up_training:
   - type: "internal"
     topic_name: imaging
+
+recordings:
+  - speakers:
+    - lcooper
+    date: '2024-09-12'
+    length: 48M14S
+    youtube_id: "QA82MzWle_w"
+
 ---
 
 # Metadata guidelines for bioimaging data
