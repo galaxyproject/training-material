@@ -18,9 +18,13 @@ key_points:
 - Evaluate the best number of cluster to cut a dataset
 tags:
 - ecology
+- taxonomic data
 - EBV workflow
 - modeling
+- gbif
+- ocean
 - earth-system
+- interactive-tools
 contributions:
   authorship:
     - PaulineSGN
@@ -412,6 +416,12 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 >            - *"Choose the input type"*: `Dataset`
 >                - {% icon param-file %} *"Select value"*: `output` (output of previous step **Advanced Cut** {% icon tool %})
 >
+> > <warning-title>Pay attention to the tool version</warning-title>
+> >
+> > It is possible to have specific troubleshoots with using interactive tools as, for now, we can't redirect to a specific version of the tool (as for classical tool) from the tutorial page. Here, if you encounter errors, you maybe need to specify the 1.0.0 version (the one used for the tuto) !
+> >
+> {: .warning}
+>
 > > <tip-title>How to launch the notebook</tip-title>
 > >
 > >   - The first parameter allows you to specify that you want to use a previous notebook ("pivot_wider_jupytool_notebook.ipynb") rather than create a new one. 
@@ -476,7 +486,7 @@ This Galaxy tool allows you to merge two data tables (tabular format only) accor
 >    {: .comment}
 >
 > 2. Check your outputs. You must have two files:
->       - Information file conataining the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two. 
+>       - Information file containing the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two. 
 >       - Occurrence and Environment merge file containing occurrence data and environmental data cooresponding.
 >
 {: .hands_on}
@@ -503,6 +513,12 @@ This tool gives as output a file containing the predictions of the probability o
 >
 >    - *"Choose column(s) where your abiotic parameter are in your environment data file."*: `c['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']`
 >
+> > > <warning-title>You maybe can here prepare a cup of tea ;)</warning-title>
+> >
+> > This step is a first "long" one, and you have to wait something like 18 minutes and 34 sec to obtain the result. It is maybe the good moment to have a break and go outside to admirate biodiversity around you?
+> >
+> {: .warning}
+> 
 > 2. Check your outputs. You must have four outputs collections.
 >
 >    - Prediction files
