@@ -11,11 +11,11 @@ While most GTN tutorials include their associated workflow directly in the GTN, 
 
 We've added two snippets which make that easier than ever:
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="gromacs-mmgbsa/main" wfhub_id="248" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="gromacs-mmgbsa/main" wfhub_id="248" version="4" %}
 
 And one for Dockstore:
 
-{% snippet faqs/galaxy/workflows_run_ds.md title="My Cool Workflow" dockstore_id="github.com/jmchilton/galaxy-workflow-dockstore-example-1/mycoolworkflow" %}
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
 
 And one for workflows hosted natively in the GTN:
 

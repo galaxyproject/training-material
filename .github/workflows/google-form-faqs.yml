@@ -2,7 +2,7 @@ name: "[Cron] Update FAQs from Google Form"
 on:
   workflow_dispatch:
   schedule:
-    - cron: '38 9 * * *'
+    - cron: '0 9 * * 1-5'
 jobs:
   runner-job:
     runs-on: ubuntu-latest
@@ -35,12 +35,12 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - name: Update news from Google Form
+      - name: Update FAQs from Google Form
         id: generate
         run: |
           echo "new_ids=$(bundle exec ruby bin/google-form-faq.rb)" >> $GITHUB_OUTPUT
 
-      - name: Create Pull Request for News
+      - name: Create Pull Request for FAQs
         # If it's not a Pull Request then commit any changes as a new PR.
         if: |
           github.event_name != 'pull_request' &&
@@ -50,4 +50,4 @@ jobs:
           commit-message: Import FAQs from Google Form
           branch-suffix: timestamp
           title: "[Google Form] New FAQ!"
-          add-paths: news/_posts/
+          add-paths: faqs/

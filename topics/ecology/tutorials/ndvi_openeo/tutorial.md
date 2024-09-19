@@ -26,6 +26,8 @@ contributions:
   funding:
     - fairease
     - eurosciencegateway
+   
+subtopic: ecologyanalysis
 ---
 
 
@@ -76,7 +78,7 @@ Interactive tools work differently than classical tools as it allows the user to
 
 > <hands-on-title> Launch the interactive tool </hands-on-title>
 >
-> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus) %} with the following parameters:
+> 1. {% tool [Copernicus Data Space Ecosystem](interactive_tool_copernicus_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >    - *"Include data into the environment - optional "*: You don't need anything
 > 2. Click on **Run Tool**
@@ -101,9 +103,9 @@ Interactive tools work differently than classical tools as it allows the user to
 > ![Image of the successful connection](../../images/ndvi_openeo_holoviz/connection_ok.png)
 > 8. Now, you can go back on your jupyterlab and execute the rest of the notebook.
 > 9. Once you executed the entire notebook you should have a new folder in the left pannel named **ndvi-results** go in it.
-> 10. Select the 3 files there and click right, and then copy
+> 10. Select the 3 files (timeseries-basic.csv, timeseries-masked.csv, timeseries-smoothed.csv) there and click right, and then copy
 > ![The copy command on the 3 files in the ndvi-results folder](../../images/ndvi_openeo_holoviz/copy_paste.png)
-> 11. Then go back to the root of your path and go in the **ouputs** folder. There you can click right and paste the 3 NDVI files. 
+> 11. Then go back to the root of your path and go in the **ouputs** folder. There you can click right and paste the 3 NDVI files (timeseries-basic.csv, timeseries-masked.csv, timeseries-smoothed.csv). 
 > ![The resulting 3 files in the outputs folder](../../images/ndvi_openeo_holoviz/outputs.png)
 > 12. This part is now finished you just have to correctly close this notebook. On the top left click on **files** and then on **Shut down**.
 > ![The shut down button to correctly close the jupyterlab](../../images/ndvi_openeo_holoviz/shut_down.png)

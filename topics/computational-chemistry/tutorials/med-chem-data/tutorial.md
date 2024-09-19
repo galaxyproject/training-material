@@ -49,6 +49,13 @@ follow_up_training:
   -
     type: "internal"
     topic_name: computational-chemistry
+
+recordings:
+  - speakers:
+    - wee-snufkin
+    date: '2024-09-12'
+    length: 48M1S
+    youtube_id: "JWV6IiD6mPE"
 ---
 
 The development of medicinal chemistry is advancing very rapidly. Big pharmaceutical companies, research institutes and universities are working on ground-breaking solutions to help patients combat all kinds of diseases. During that development process, tons of data are generated – not only from the lab environment but also from clinical trials. Given that the discovery of more potent, safer and cheaper drugs is the ultimate goal of all research bodies, we should all focus on making the data we gather FAIR: **F**indable, **A**ccessible, **I**nteroperable, and **R**eusable to push the boundaries of drug development even further. 

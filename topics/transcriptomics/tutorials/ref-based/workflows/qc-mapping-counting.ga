@@ -484,7 +484,12 @@
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Cutadapt",
+                                "name": "library"
+                            }
+                        ],
                         "label": "Cutadapt: remove bad quality bp",
                         "name": "Cutadapt",
                         "outputs": [
@@ -738,7 +743,12 @@
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool RNA STAR",
+                                "name": "singlePaired"
+                            }
+                        ],
                         "label": "STAR: map reads",
                         "name": "RNA STAR",
                         "outputs": [
@@ -1135,7 +1145,7 @@
                             "owner": "devteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"assume_sorted\": true, \"barcode_tag\": \"\", \"comments\": [], \"duplicate_scoring_strategy\": \"SUM_OF_BASE_QUALITIES\", \"inputFile\": {\"__class__\": \"ConnectedValue\"}, \"optical_duplicate_pixel_distance\": \"100\", \"read_name_regex\": \"\", \"remove_duplicates\": false, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_state": "{\"assume_sorted\": true, \"barcode_tag\": \"\", \"duplicate_scoring_strategy\": \"SUM_OF_BASE_QUALITIES\", \"inputFile\": {\"__class__\": \"ConnectedValue\"}, \"optical_duplicate_pixel_distance\": \"100\", \"read_name_regex\": \"\", \"remove_duplicates\": false, \"validation_stringency\": \"LENIENT\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
                         "tool_version": "2.18.2.4",
                         "type": "tool",
                         "uuid": "71f83b88-974b-4852-94c1-30d6101844f3",
@@ -1200,7 +1210,12 @@
                                 "output_name": "bed_file"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Gene Body Coverage (BAM)",
+                                "name": "batch_mode"
+                            }
+                        ],
                         "label": "Get gene body coverage",
                         "name": "Gene Body Coverage (BAM)",
                         "outputs": [
@@ -1438,24 +1453,24 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "multiqc_reads_per_chrom_html",
-                    "output_name": "multiqc_reads_per_chrom_html",
-                    "uuid": "b306cb12-a275-4c6d-b609-47fdc208864b"
-                },
-                {
-                    "label": "multiqc_dup_html",
-                    "output_name": "multiqc_dup_html",
-                    "uuid": "3ea82568-5698-49a7-88fe-91381070aac2"
-                },
-                {
                     "label": "multiqc_read_distrib_html",
                     "output_name": "multiqc_read_distrib_html",
                     "uuid": "f2eed352-ca21-4d65-8810-f5a1d3c282b4"
                 },
                 {
+                    "label": "multiqc_reads_per_chrom_html",
+                    "output_name": "multiqc_reads_per_chrom_html",
+                    "uuid": "b306cb12-a275-4c6d-b609-47fdc208864b"
+                },
+                {
                     "label": "multiqc_gene_body_cov_html",
                     "output_name": "multiqc_gene_body_cov_html",
                     "uuid": "3375d63c-cdc3-4fbb-8a55-6f504c934918"
+                },
+                {
+                    "label": "multiqc_dup_html",
+                    "output_name": "multiqc_dup_html",
+                    "uuid": "3ea82568-5698-49a7-88fe-91381070aac2"
                 }
             ]
         },
@@ -1891,6 +1906,11 @@
             "when": null,
             "workflow_outputs": [
                 {
+                    "label": "inferexperiment",
+                    "output_name": "inferexperiment",
+                    "uuid": "fb810859-f2d0-43f8-ac7c-5c714c5c6805"
+                },
+                {
                     "label": "pgt",
                     "output_name": "pgt",
                     "uuid": "9727824a-3eb2-4430-92d1-b3c40c3041d1"
@@ -1899,11 +1919,6 @@
                     "label": "multiqc_star_counts_html",
                     "output_name": "multiqc_star_counts_html",
                     "uuid": "105313d8-e31a-405d-8fcd-cc5fd93275e2"
-                },
-                {
-                    "label": "inferexperiment",
-                    "output_name": "inferexperiment",
-                    "uuid": "fb810859-f2d0-43f8-ac7c-5c714c5c6805"
                 }
             ]
         },
@@ -2093,7 +2108,12 @@
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Gene length and GC content",
+                                "name": "gtf_file"
+                            }
+                        ],
                         "label": "Get gene length",
                         "name": "Gene length and GC content",
                         "outputs": [
@@ -2229,9 +2249,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "Gene length",
-                    "output_name": "gene_length",
-                    "uuid": "7b7c698b-4808-4b45-adf1-686f8d273d18"
+                    "label": "counts_from_star",
+                    "output_name": "counts_from_star",
+                    "uuid": "5fee8aff-4023-43f1-a653-f5af5357d798"
                 },
                 {
                     "label": "counts_from_star_sorted",
@@ -2239,9 +2259,9 @@
                     "uuid": "bd3388e6-5b45-4fdc-9780-3efd1c34ebf8"
                 },
                 {
-                    "label": "counts_from_star",
-                    "output_name": "counts_from_star",
-                    "uuid": "5fee8aff-4023-43f1-a653-f5af5357d798"
+                    "label": "Gene length",
+                    "output_name": "gene_length",
+                    "uuid": "7b7c698b-4808-4b45-adf1-686f8d273d18"
                 }
             ]
         },
@@ -2396,7 +2416,12 @@
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool featureCounts",
+                                "name": "anno"
+                            }
+                        ],
                         "label": "count fragments per gene",
                         "name": "featureCounts",
                         "outputs": [
@@ -2547,14 +2572,9 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "featureCounts",
-                    "output_name": "featureCounts",
-                    "uuid": "46c7a2e8-7819-4715-a028-7ad1de9ed605"
-                },
-                {
-                    "label": "multiqc_featureCounts_html",
-                    "output_name": "multiqc_featureCounts_html",
-                    "uuid": "152ba01e-d4f2-4227-8812-87648a1c19ea"
+                    "label": "featureCounts_sorted",
+                    "output_name": "featureCounts_sorted",
+                    "uuid": "f0de4714-4df8-4506-90d9-384537ad663e"
                 },
                 {
                     "label": "featureCounts_gene_length",
@@ -2562,9 +2582,14 @@
                     "uuid": "8b9d6c76-6e82-4691-b8bc-9996d6ae1594"
                 },
                 {
-                    "label": "featureCounts_sorted",
-                    "output_name": "featureCounts_sorted",
-                    "uuid": "f0de4714-4df8-4506-90d9-384537ad663e"
+                    "label": "multiqc_featureCounts_html",
+                    "output_name": "multiqc_featureCounts_html",
+                    "uuid": "152ba01e-d4f2-4227-8812-87648a1c19ea"
+                },
+                {
+                    "label": "featureCounts",
+                    "output_name": "featureCounts",
+                    "uuid": "46c7a2e8-7819-4715-a028-7ad1de9ed605"
                 }
             ]
         }

@@ -25,9 +25,9 @@ As part of the work of [BeYond COVID](https://by-covid.org/), we have developed 
 
 This work generated a number of brand new WorkflowHub Workflows, which can now be launched more easily than ever in the GTN:
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline: Counts" wfhub_id="688" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline: Counts" wfhub_id="688" version="1" %}
 
-{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline: Analysis" wfhub_id="689" %}
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline: Analysis" wfhub_id="689" version="1" %}
 
 And a few new GTN features like the ability to embed a workflow visualisation directly into a tutorial.
 Go check it out!

@@ -57,6 +57,7 @@ contributions:
     - lldelisle
   editing:
     - hexylena
+    - clsiguret
 
 recordings:
 - youtube_id: AeiW3IItO_c
@@ -67,6 +68,7 @@ recordings:
   date: '2023-05-15'
   galaxy_version: '23.01'
   length: 2H50M
+  cyoa: true
 - captioners:
   - hexylena
   - shiltemann
@@ -181,8 +183,8 @@ We will first need to transform our the list of pairs to a simple list.
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -263,14 +265,14 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
->    - In *"Filter Options"*
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
 >       - *"Minimum length (R1)"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - In *"Outputs selector"*
+>    - In *"Additional outputs to generate"*
 >       - Select: `Report: Cutadapt's per-adapter statistics. You can use this file with MultiQC.`
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
@@ -367,7 +369,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    {: .comment}
 >
-> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters to map your reads on the reference genome:
+> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0) %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
@@ -376,8 +378,8 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
->               This parameter should be length of reads - 1
->    - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
+>             This parameter should be length of reads - 1
+>                - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >    - *"Compute coverage"*:
 >       - `Yes in bedgraph format`
 >
@@ -739,7 +741,7 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >    {: .tip}
     >
     > 2. **IGV** {% icon tool %}
-    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
+    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 3 between 9,445 kb to 9,448 kb), on the `mapped.bam` track
     >    2. Right click and then select `Color Aligments by` -> `first-in-pair strand`
     >    3. Right click and select `Squished`
     >
@@ -770,8 +772,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
     > <hands-on-title>Estimate strandness with pyGenometracks from STAR coverage</hands-on-title>
     >
-    > 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
-    >    - *"Region of the genome to limit the operation"*: `chr4:540,000-560,000`
+    > 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy2) %}:
+    >    - *"Region of the genome to plot"*: `chr4:540,000-560,000`
     >    - In *"Include tracks in your plot"*:
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Bedgraph track`
@@ -792,8 +794,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Gene track / Bed track`
     >                - *"Plot title"*: `Genes`
-    >                - *"height"*: `5`
     >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
+    >                - *"height"*: `5`
     {: .hands_on}
 
     > <question-title></question-title>
@@ -873,13 +875,13 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >
     >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
     >
-    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2) %} to determine the library strandness with the following parameters:
+    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0) %} to determine the library strandness with the following parameters:
     >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
     >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
-    >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
+    >    - *"Number of reads sampled"*: `200000`
     {: .hands_on}
 
-    {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
+    {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0) %} tool generates one file with information on:
     - Paired-end or single-end library
     - Fraction of reads failed to determine
     - 2 lines
@@ -963,10 +965,10 @@ As you chose to use the featureCounts flavor of the tutorial, we now run **featu
 
 > <hands-on-title>Counting the number of reads per annotated gene</hands-on-title>
 >
-> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1) %} with the following parameters to count the number of reads per gene:
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy2) %} with the following parameters to count the number of reads per gene:
 >    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 >    - *"Specify strand information"*: `Unstranded`
->    - *"Gene annotation file"*: `in your history`
+>    - *"Gene annotation file"*: `A GFF/GTF file in your history`
 >        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >    - *"GFF feature type filter"*: `exon`
 >    - *"GFF gene identifier"*: `gene_id`
@@ -1161,7 +1163,10 @@ To be able to identify differential gene expression induced by PS depletion, all
 
 > <hands-on-title>Import all count files</hands-on-title>
 >
-> 1. Create a new empty history
+> 1. Create a **new empty history**
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
 >
 >    - `GSM461176_untreat_single_featureCounts.counts`
@@ -1463,7 +1468,7 @@ We can now run **DESeq2**:
 
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
-> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2) %} with the following parameters:
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
 >    - *"how"*: `Select datasets per level`
 >        - In *"Factor"*:
 >           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
@@ -1506,14 +1511,14 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >
 >    We will now extract from the names the factors:
 >
-> 3. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+> 3. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1) %}
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
 >            - *"Find pattern"*: `(.*)_(.*)_(.*)`
 >            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
->     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
+>     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements](__TAG_FROM_FILE__) %} tool
 >
 > 4. Change the datatype to `tabular`
 >
@@ -1537,7 +1542,7 @@ We can now run **DESeq2**:
 
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
-> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2) %} with the following parameters:
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
 >        - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
 >        - In *"Factor"*:
@@ -1859,7 +1864,7 @@ We now have a table with 114 lines (the 113 most differentially expressed genes 
 
 > <hands-on-title>Plot the heatmap of the normalized counts of these genes for the samples</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3.1+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Log2(value+1) transform my data`
 >    - *"Enable data clustering"*: `Yes`
@@ -1964,7 +1969,7 @@ We would like now to plot a heatmap for the Z-scores:
 
 > <hands-on-title>Plot the Z-score of the most differentially expressed genes</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3.1+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Plot the data as it is`
 >    - *"Compute z-scores prior to clustering"*: `Compute on rows`
@@ -2051,7 +2056,7 @@ We have now the two required input files for goseq.
 
 > <hands-on-title>Perform GO analysis</hands-on-title>
 >
-> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0) %} with
+> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0) %} with
 >    - *"Differentially expressed genes file"*: `Gene IDs and differential expression`
 >    - *"Gene lengths file"*: `Gene IDs and length`
 >    - *"Gene categories"*: `Get categories`
@@ -2130,7 +2135,7 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
 
 > <hands-on-title>Perform KEGG pathway analysis</hands-on-title>
 >
-> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0) %} with
+> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0) %} with
 >    - *"Differentially expressed genes file"*: `Gene IDs and differential expression`
 >    - *"Gene lengths file"*: `Gene IDs and length`
 >    - *"Gene categories"*: `Get categories`
@@ -2287,7 +2292,10 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 
 > <hands-on-title></hands-on-title>
 >
-> 1. Create a new history
+> 1. Create a **new empty history**
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`

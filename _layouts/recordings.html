@@ -17,7 +17,8 @@ layout: base
 
   <p><b>Want to add your own recording?</b> We would love to have it to our library!</p>
 
-  <a href="{% link faqs/gtn/recordings_add.md %}"><button type="button" class="btn btn-info">Add your Recording!</button></a>
+  <a href="{% link faqs/gtn/recordings_add.md %}" class="btn btn-info">Add your recordings!</a>
+
   </div>
 
   <div class="col-md-2">
@@ -65,7 +66,7 @@ layout: base
   <div class="row recording">
 
     <div class="col-md-6 recording-video">
-    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" nofigure=true%}
+    {% include _includes/youtube.html id=recording.youtube_id width="100%" height="100%" nofigure=true cyoa=recording.cyoa %}
     </div>
 
     <div class="col-md-6 recording-metadata">
@@ -163,6 +164,13 @@ layout: base
       <td><strong>License</strong></td>
       <td><a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a></td>
     </tr>
+
+    {% if recording.cyoa %}
+    <tr>
+      <td><strong>Note</strong></td>
+      <td>This is a <b>Choose-your-own-adventure</b> video. This means the recording consists of multiple videos, and you will be able to choose your next video at the end of each segment.</td>
+    </tr>
+    {% endif %}
 
     </tbody>
     </table>

@@ -1,0 +1,110 @@
+- doc: Test for genome-wide alternative splicing analysis workflow
+  job:
+    Reference genome:
+      class: File
+      location: https://zenodo.org/records/13692977/files/hg19.chr10.fasta
+    Genome annotation:
+      class: File
+      location: https://zenodo.org/records/13692977/files/gencode.v19.hg19.chr10.gtf
+    RNA-seq data collection:
+      class: Collection
+      collection_type: "list:paired"
+      elements:
+        - class: Collection
+          type: paired
+          identifier: ASP14_1
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_1_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_1_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: ASP14_2
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_2_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_2_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: ASP14_3
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_3_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_3_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: ASP14_doxycycline_1
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_1_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_1_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: ASP14_doxycycline_2
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_2_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_2_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+        - class: Collection
+          type: paired
+          identifier: ASP14_doxycycline_3
+          elements:
+            - identifier: forward
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_3_chr10enriched_R1.fastq.gz
+              filetype: fastqsanger.gz
+            - identifier: reverse
+              class: File
+              location: https://zenodo.org/records/13692977/files/ASP14_doxycycline_3_chr10enriched_R2.fastq.gz
+              filetype: fastqsanger.gz
+    CPAT header:
+      class: File
+      location: https://zenodo.org/records/13692977/files/CPAT_header.tab
+    Pfam-A HMM Stockholm file:
+      class: File
+      location: https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.hmm.dat.gz
+      filetype: stockholm
+    Active sites dataset:
+      class: File
+      location: https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/active_site.dat.gz
+      filetype: txt
+    Pfam-A HMM library:
+      class: File
+      location: https://ftp.ebi.ac.uk/pub/databases/Pfam/releases/Pfam37.0/Pfam-A.hmm.gz
+      filetype: hmm3
+  outputs:
+      mostSwitching:
+        file: test-data/switching_gene_isoforms.tabular
+      consequencesSummary:
+        file: test-data/consequences_summary.tabular
+      consequencesEnrichment:
+        file: test-data/consequences_enrichment.tabular
+      splicingSummary:
+        file: test-data/splicing_summary.tabular
+      splicingEnrichment:
+        file: test-data/splicing_enrichment.tabular

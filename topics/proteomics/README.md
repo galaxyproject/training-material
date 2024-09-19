@@ -13,7 +13,7 @@ topic | features
 [Label-free versus Labelled - How to Choose Your Quantitation Method](tutorials/labelfree-vs-labelled/tutorial.md)| [:book:](tutorials/labelfree-vs-labelled/tutorial.md)
 [Metaproteomics](tutorials/metaproteomics/tutorial.md)| [:book:](tutorials/metaproteomics/tutorial.md)
 [metaQuantome Data creation](tutorials/metaquantome-data-creation/tutorial.md)| [:book:](tutorials/metaquantome-data-creation/tutorial.md)
-[RNA-seq Database creation](tutorials/proteogenomics-dbcreation/tutorial.md)| [:book:](tutorials/proteogenomics-dbcreation/tutorial.md)
+[Proteogenomics RNA-seq Database creation](tutorials/proteogenomics-dbcreation/tutorial.md)| [:book:](tutorials/proteogenomics-dbcreation/tutorial.md)
 [Proteogenomics Database searching](tutorials/proteogenomics-dbsearch/tutorial.md)| [:book:](tutorials/proteogenomics-dbsearch/tutorial.md)
 [Proteogenomics Novel Peptide Analysis](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)| [:book:](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)
 [metaQuantome-Taxonomy](tutorials/metaquantome-taxonomy/tutorial.md) | [:book:](tutorials/metaquantome-taxonomy/tutorial.md)

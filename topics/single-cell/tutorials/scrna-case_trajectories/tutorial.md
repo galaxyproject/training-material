@@ -53,12 +53,12 @@ contributions:
 
 You've done all the hard work of preparing a single-cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells... you can do that here, using the Galaxy interface, or head over to the [Jupyter notebook version of this tutorial]({% link topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md %}) to learn how to perform the same analysis using Python.
 
-Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'.  These cells are sorted accordingly along these pseudotime paths of differentiation to build a continuum of cells from one state to the next.  We therefore 'assume' or 'infer' relationships between from this continuum of cells.
+Traditionally, we thought that differentiating or changing cells jumped between discrete states, so 'Cell A' became 'Cell B' as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a 'trajectory', if you will...) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so 'pseudotime' analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same 'time'.  These cells are sorted accordingly along these pseudotime paths of differentiation to build a continuum of cells from one state to the next.  We therefore 'assume' or 'infer' relationships from this continuum of cells.
 
 We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cells. Now it's time to look further!
 
 > <comment-title>Tutorial from Scanpy</comment-title>
-> Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html) ({% cite scanpytutorialsTrajectoryInference %}).
+> Please note, this tutorial is largely based on the trajectories tutorial found [on the Scanpy site itself](https://scanpy.readthedocs.io/en/stable/tutorials/trajectories/paga-paul15.html) ({% cite scanpytutorialsTrajectoryInference %}).
 {: .comment}
 
 > <agenda-title></agenda-title>
@@ -84,6 +84,10 @@ We will use the same sample from the previous three tutorials, which contains la
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input) or download from Zenodo below.
 
+{% include _includes/cyoa-choices.html option1="History_import" option2="Zenodo_import" default="History_import"
+       text="Importing via History is quickest. Works only on Galaxy EU for now." %}
+
+<div class="History_import" markdown="1">
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
 > 1. Import history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input)
@@ -94,7 +98,9 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
 >
 {: .hands_on}
+</div>
 
+<div class="Zenodo_import" markdown="1">
 > <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
@@ -115,6 +121,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
+</div>
 
 ## Filtering for T-cells
 
@@ -168,7 +175,7 @@ And now time to plot it!
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
->    - *"Use raw attributes if present"*: {% icon galaxy-toggle %} `No`
+>    - *"Use raw attributes"*: {% icon galaxy-toggle %} `No`
 >    - *"Location of legend"*: `On data`
 {: .hands_on}
 
@@ -218,6 +225,10 @@ Now that we have our diffusion map, we need to re-calculate neighbors using the 
 >
 {: .hands_on}
 
+> <comment-title></comment-title>
+> If you're using the latest versions of these tools (e.g. {% tool [Scanpy ComputeGraph](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.9.3+galaxy0) %}, rather than the ones suggested in the tutorial (e.g. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %} then you may need to change one more parameter here to set the `Number of PCs to use` to 15. These are the 15 diffusion components we just calculated, rather than actual PCs.
+{: .comment}
+
 ## Re-draw the FDG
 
 Now that we've re-calculated the nearest neighbours, we can use these new neighbours to re-draw the FDG to see how this changes the plot.
@@ -234,7 +245,7 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
->    - *"Use raw attributes if present"*: `No`
+>    - *"Use raw attributes"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}
@@ -257,10 +268,9 @@ Now that we've re-calculated the nearest neighbours, we can use these new neighb
 > - Control
 >   - Go straight to the [Partition-based Graph Abstraction (PAGA) section](#partition-based-graph-abstraction-paga)
 > - Everyone else:
->   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.)
-> - Please note that in this case, you will want to change the PAGA step **Scanpy PAGA** to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the `cell_type` and `louvain` categories are identical.
+>   - you could recluster your cells using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} at a different resolution, perhaps lower than the 0.6 we used before (Take a look at the Cell clusters step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial if you need help with this.) Please note that in this case, you will want to change the PAGA step **Scanpy PAGA** to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the `cell_type` and `louvain` categories are identical.
 >   - you could undo the optional diffusion map step by recalculating the neighbours again using `X_pca` instead of `X_diffmap`
->   - you could also try changing the number of neighbors used in that step
+>   - you could also try changing the number of neighbors used in that step when running {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy9) %}
 >
 > - Everyone else: You will want to compare FREQUENTLY with your control team member.
 {: .details}
@@ -326,7 +336,7 @@ Force-directed graphs can be initialised randomly, or we can prod it in the righ
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type`
->    - *"Use raw attributes if present"*: `No`
+>    - *"Use raw attributes"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}
@@ -358,8 +368,8 @@ The easiest way to do this is just to rerun {% icon galaxy-refresh %} the previo
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `genotype`
->    - *"Use raw attributes if present"*: `No`
->    - *"Location of legend"*: `On data`
+>    - *"Use raw attributes"*: `No`
+>    - *"Location of legend"*: `Right margin`
 >
 {: .hands_on}
 
@@ -386,7 +396,7 @@ We're also interested in the expression of the two genes that are known to be ma
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `FDG object Anndata` (output of **Scanpy RunFDG** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `ENSMUSG00000023274,ENSMUSG00000053977`
->    - *"Use raw attributes if present"*: `No`
+>    - *"Use raw attributes"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 >    > <comment-title> Gene Symbols </comment-title>
@@ -420,7 +430,7 @@ We know that our cells are initialising at DN. We can feed that information into
 > If you called new clusters using {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %}, you might want to choose one of those clusters to be your root cell instead, so change the `cell_type` for `louvain` and then name the cluster number. Use the plots you created to help you pick the number!
 {: .details}
 
-Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html), where we infer multiple time points within the same piece of data!
+On to the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html), where we infer multiple time points within the same piece of data!
 
 > <hands-on-title> DPT Plot </hands-on-title>
 >
@@ -434,7 +444,7 @@ Onto the [diffusion pseudotime](https://scanpy.readthedocs.io/en/stable/api/scan
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Diffusion pseudotime inference Anndata` (output of **Scanpy DPT** {% icon tool %})
 >    - *"name of the embedding to plot"*: `draw_graph_fa`
 >    - *"color by attributes, comma separated texts"*: `cell_type,dpt_pseudotime`
->    - *"Use raw attributes if present"*: `No`
+>    - *"Use raw attributes"*: `No`
 >    - *"Location of legend"*: `On data`
 >
 {: .hands_on}

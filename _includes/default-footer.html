@@ -12,62 +12,65 @@
 				<p>
 					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
 				</p>
-
 			</div>
 			<div class="col-sm-3">
-				<p>
-					<span style="font-size: 1.3em">About Us</span>
-					<ul class="no-bullets">
-						<li><a href="{% link faqs/gtn/gtn-what-is-it.md %}">About</a></li>
-						<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
-						<li><a href="{% link accessibility.md %}">Accessibility</a></li>
-						<li><a href="{% link faqs/gtn/fair_training.md %}">100% FAIR Training</a></li>
-						<li><a href="{% link faqs/gtn/collaborative_development.md %}">Collaborative Development</a></li>
-					</ul>
-				</p>
-				<p>
-					<span style="font-size: 1.3em">Contact</span>
-					<ul class="no-bullets">
-						<li><span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
-						<li><span style="fill: var(--hyperlink);">{{ "assets/images/bluesky-logo.svg" | load_svg }}</span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social">Bluesky</a></li>
-						<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">Matrix Channel</a></li>
-					</ul>
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<p>
-					<span style="font-size: 1.3em">Framework</span>
-					<ul class="no-bullets">
-						<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision_short }}</a></li>
-						<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
-						<li><a href="https://jekyllrb.com/">Jekyll({{ jekyll.version }} | {{ jekyll.environment }})</a></li>
-					</ul>
-				</p>
-			</div>
-			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="{% link faqs/gtn/gtn-what-is-it.md %}">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="{% link accessibility.md %}">Accessibility</a></li>
+					<li><a href="{% link faqs/gtn/fair_training.md %}">100% FAIR Training</a></li>
+					<li><a href="{% link faqs/gtn/collaborative_development.md %}">Collaborative Development</a></li>
+				</ul>
 				<span style="font-size: 1.3em">Page</span>
-				<p>
-					<ul class="no-bullets">
-						{% if page.short_id %}
-						<li>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a></li>
-						{% endif %}
-						
-						{% if page.copyright %}
-						<li>{{ page.copyright }}</li>
-						{% endif %}
+				<ul class="no-bullets">
+					{% if page.short_id %}
+					<li>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>: <a href="https://gxy.io/GTN:{{ page.short_id }}">gxy.io/GTN:{{ page.short_id }}</a></li>
+					{% endif %}
 
-						<li>
-							<a rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
-								Content licensed under {% if page.license %}{{ page.license }}{% else %}Creative Commons Attribution 4.0 International License{% endif %}
-							</a>
-						</li>
-						<li>
-							<a href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}" title="Edit on GitHub">
-							{% icon github %} Edit on GitHub
-							</a>
-						</li>
-					</ul>
-				</p>
+					{% if page.copyright %}
+					<li>{{ page.copyright }}</li>
+					{% endif %}
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/{% if page.license %}{{ page.license }}{% else %}CC-BY-4.0{% endif %}">
+							Content licensed under {% if page.license %}{{ page.license }}{% else %}Creative Commons Attribution 4.0 International License{% endif %}
+						</a>
+					</li>
+					<li>
+						<a href="{{ site.github_repository }}/edit/{{ site.github_repository_branch }}/{{ page.path }}">
+						{% icon github %} Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="{{ site.github_repository }}/commits/{{ site.github_repository_branch }}/{{ page.path }}">
+						{% icon github %} View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="{% link faqs/galaxy/ %}">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="{{site.slack.invite_link}}">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/{{ site.git_revision }}">{{ site.git_revision_short }}</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll({{ jekyll.version }} | {{ jekyll.environment }})</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);">{{ "assets/images/bluesky-logo.svg" | load_svg }}</span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
 			</div>
 		</div>
 	</div>

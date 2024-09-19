@@ -13,7 +13,7 @@ Both the GTN tutorial and Galaxy itself change significantly over time, and havi
 
 **Done with your recording?** Check out the instructions for adding it to the GTN:
 
-<a href="{% link faqs/gtn/recordings_add.md %}"><button type="button" class="btn btn-info">Submitting Recordings to the GTN</button></a>
+[Submitting Recordings to the GTN]({% link faqs/gtn/recordings_add.md %}){: .btn.btn-info}
 
 
 #### Video content
