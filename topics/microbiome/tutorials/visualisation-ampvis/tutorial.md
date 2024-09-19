@@ -357,6 +357,9 @@ a particular research question.
 {: .hands_on}
 </div>
 
+Unfortunately multiple parameter selection is still in implementation and you will run into an error. See the box bellow how to handle
+that error.
+
 > <details-title> Error with metadata values while running the workflow </details-title>
 >
 > If a set in history shows red, indicating an error, click on the set to expand it.
@@ -448,11 +451,75 @@ Normalised data loses information about the original sequencing depth, making it
 >
 > 7. The workflow will ask you to input mandatory parameters. After doing so, click the blue button above
 >	 "Run Workflow".
->    See on the next picture how for how it looks.
+>    See on the next picture how it looks like.
 >
 {: .hands_on}
 
 ![Running the workflow](./images/choose_parameters.png "Running the workflow, choose the right datasets and mandatory parameters")
+
+## Create datasets
+First you will need to run these 2 tools ampvis2_load and after that ampvis2_subset. Here is how to run the tools:
+### **ampvis2 load**
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create ampvis2_load datasets </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_use_case_2_3.ga) {% icon workflow %} 
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+> <hands-on-title> Create ampvis2_load datasets </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+{: .hands_on}
+</div>
+
+You will need the output of **ampvis2 load** as input for **ampvis2 subset samples**.
+
+> <comment-title> multiple parameter selection </comment-title>
+>
+> Unfortunately multiple parameter selection is still in implementation and you will run into an error. See the details on how to handle
+the error in the box **Error with metadata values while running the workflow** under the rarefaction curve section.
+{: .comment}
+
+### **ampvis2 subset samples**
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create subsamples datasets </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_use_case_2_3_subset.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+> <hands-on-title> Create subsamples datasets </hands-on-title>
+>
+> 1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
+>    - *"Metadata variable"*: `Plant`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>
+{: .hands_on}
+</div>
+
+Now you can use the output of **ampvis2 subset samples** as input for the rest of use case 2 and for use case 3.
+
+> <details-title> Select the right dataset to continue </details-title>
+>
+> Select the datasets from **ampvis2 subset samples** output. Also you will need to select parameters to group (and facet) 
+the heatmaps. You will find these parameters listed under the corresponding heatmap sections.
+> 
+>![select dataset](./images/select_datasets.png "Select the datasets from **ampvis2 subset samples** output")
+> 
+{: .details}
 
 ## Heatmaps
 Heatmaps show relationships between 2 variables ploted on 2 axis and colour intensity representing the abundance of taxa in 
@@ -466,9 +533,7 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a simple heatmap </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} 
 >
 {: .hands_on}
 </div>
@@ -476,20 +541,9 @@ Follow this workflow to create a simple heatmap without grouping or faceting dat
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create a simple heatmap </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
-> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+> 1. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
 >    - *"Plot the values on the heatmap"*: `Yes`
@@ -531,19 +585,6 @@ Subsampling is used to standardise the dataset by reducing it to a manageable si
 Grouping involves aggregating data based on specific criteria, which simplifies the heatmap by reducing complexity and noise. 
 As a result, the community structure of the microbiome becomes clearer and easier to interpret.
 
-Follow this workflow to create a heatmap by grouping the data.
-<div class="Short-Version" markdown="1">
-> <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
->
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant` or `Period`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
->    - *"Group samples"*: `Plant` or `Year` 
->
-{: .hands_on}
-</div>
-
-<div class="Long-Version" markdown="1">
 We used 2 different subsets of metadata to focus on specific aspects of the data:
 - 1) **Plant-based subset**: In this subset, the metadata variable chosen was Plant, with the metadata values being 
 Aalborg East and Aalborg West. This subset focuses on comparing the two different plant locations. The data were 
@@ -551,30 +592,25 @@ grouped according to the variable Plant, which allows us to examine how the micr
 - 2) **Seasonal subset**: The second subset focused on the Period variable, with the metadata values being Winter and Summer. 
 This subset was grouped by Year and aims to explore how microbial communities vary between the two seasons
 
+Follow this workflow to create a heatmap by grouping the data.
+<div class="Short-Version" markdown="1">
 > <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
 >
->    > <comment-title></comment-title>
->    >
->    > Consider to create a new history (you can use the previous, but if you run multiple workflows, it might 
-		become difficult to find your heatmap later)
->    >
->    {: .comment}
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Group samples"*: `Plant` (Option 1) or  
+>    - *"Group samples"*: `Year` (Option 2)
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+
+> <hands-on-title> Create a heatmap by grouping the data </hands-on-title>
 >
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant` or `Period`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
->
-> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
->    - *"Group samples"*: `Plant` or `Year` 
+> 1. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
+>    - *"Group samples"*: `Plant` (Option 1) or `Year` (Option 2)
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
 >    - *"Plot the values on the heatmap"*: `Yes`
@@ -616,50 +652,33 @@ values inside the heatmap itself and the other with a legend instead.
 {: .question}
 
 ### Heatmap (grouped with facets)
-Follow this workflow to create a heatmap by grouping and faceting the data.
-<div class="Short-Version" markdown="1">
-> <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
->
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant` or `Period`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
->    - *"Group samples"*: `Plant` or `Year` 
->    - *"Facet the samples"*: `Period`
->
-{: .hands_on}
-</div>
-
-<div class="Long-Version" markdown="1">
 We used 2 different metadata subsets:
 - 1) Metadata used for this subset: metadata variable = Plant, metadata values = Aalborg East & Aalborg West, 
 	grouped by = Plant, facet by = Period 
 - 2) Metadata used for this subset: metadata variable = Period, metadata values = Winter & Summer, 
    grouped by = Year, facet by = Period 
    
+Follow this workflow to create a heatmap by grouping and faceting the data.
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
+>
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Metadata variable"*: `Plant` or `Period`
+>    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
+>    - *"Group samples"*: `Plant` (Option 1) or `Year` (Option 2)
+>    - *"Facet the samples"*: `Period`
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
 
 > <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
 >
->    > <comment-title></comment-title>
->    >
->    > Consider to create a new history 
->    >
->    {: .comment}
->
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant` or `Period`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
->
-> 3. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
->    - *"Group samples"*: `Plant` or `Year`
+> 1. {% tool [ampvis2 heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
+>    - *"Group samples"*: `Plant` (Option 1) or `Year` (Option 2)
 >    - *"Facet the samples"*: `Period`
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
@@ -701,9 +720,7 @@ Follow this workflow to create a simple ordination plot.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a simple ordination plot </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} 
 >
 {: .hands_on}
 </div>
@@ -711,20 +728,9 @@ Follow this workflow to create a simple ordination plot.
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create a simple ordination plot </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
-> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+> 1. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"Ordination method"*: `(PCA) Principal Components Analysis`
 >    - *"Color sample points by"*: `Plant`
 >    - *"Label Frame by"*: `Plant`
@@ -749,10 +755,8 @@ Follow this workflow to create an ordination plot with trajectory.
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->    - *"Make a trajectory between sample points by"*: `Date
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
+>    - *"Make a trajectory between sample points by"*: `Date`
 >
 {: .hands_on}
 </div>
@@ -760,20 +764,9 @@ Follow this workflow to create an ordination plot with trajectory.
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
-> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+> 1. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"Ordination method"*: `(PCA) Principal Components Analysis`
 >    - *"Color sample points by"*: `Plant`
 >    - *"Frame the sample points with a polygon by"*: `Plant`
@@ -814,9 +807,7 @@ Follow this workflow to create an ordination plot with the CCA method and the He
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with trajectory </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
 >    - *"Ordination method"*: `(CCA) Canonical Correspondence Analysis (considered the constrained version of CA)`
 >        - *"Transforms the abundances before ordination"*: `square root of method = "total" (hellinger)`
 >        - *"Constrain analysis by"*: `Period`
@@ -827,26 +818,15 @@ Follow this workflow to create an ordination plot with the CCA method and the He
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create an ordination plot with transformation </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
-> 3. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+> 1. {% tool [ampvis2 ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"Ordination method"*: `(CCA) Canonical Correspondence Analysis (considered the constrained version of CA)`
 >        - *"Transforms the abundances before ordination"*: `square root of method = "total" (hellinger)`
 >        - *"Constrain analysis by"*: `Period`
 >    - *"Color sample points by"*: `Period`
 >    - *"Shape sample points by"*: `Plant`
->    - *"Frame the sample points with a polygon by"*: `TRUE`
+>    - *"Frame the sample points with a polygon by"*: `Date`
 >    - *"Label Frame by"*: `Period`
 >    - *"Plot species points"*: `No`
 >
@@ -884,9 +864,7 @@ As with heatmaps, the subsets are based on variables we define and are available
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a boxplot </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap,_ordination,_boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
+>    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
 >    - *"Group samples"*: `Period`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
 >        - *"Number of taxa to show"*: `5`
@@ -897,20 +875,9 @@ As with heatmaps, the subsets are based on variables we define and are available
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create a boxplot </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 2. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
-> 3. {% tool [ampvis2 boxplot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+> 1. {% tool [ampvis2 boxplot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"Group samples"*: `Period`
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
@@ -965,13 +932,15 @@ temporal evolution of the 3 most common microorganisms in the plants Aalborg Eas
 over the entire period data was collected.
 
 ## Create a Time Series Plot
-Follow this workflow to create a time series plot.
+Like in use case 2, you will need the ampvis2_load datasets as well as ampvis2_subset datasets to start of.
+
+So, in the same history where you created heatmaps, ordination plots and boxplots with the **metadata variable**: _Plant_ and 
+**metadata value(s)**: _Aalborg_ _East_ & _Aalborg_ _West_ , select the right datasets and follow this workflow to create a time series plot.
+
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a boxplot </hands-on-title>
 >
 >    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_timeseries_v1.0.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
 >    - *"Time variable"*: `Date
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
 >        - *"Number of taxa to show"*: `3`
@@ -982,20 +951,9 @@ Follow this workflow to create a time series plot.
 <div class="Long-Version" markdown="1">
 > <hands-on-title> Create a time series plot </hands-on-title>
 >
-> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
->    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
->    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
->
-> 1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
->    - *"Metadata variable"*: `Plant`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
->
 > 1. {% tool [ampvis2 timeseries plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
 >    - *"Time variable"*: `Date`
 >    - *"The taxonomic level to aggregate the OTUs"*: `Phylum`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
