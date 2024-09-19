@@ -663,8 +663,6 @@ Follow this workflow to create a heatmap by grouping and faceting the data.
 > <hands-on-title> Create a heatmap by grouping and faceting the data </hands-on-title>
 >
 >    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_heatmap__ordination__boxplot.ga) {% icon workflow %} using the following parameters
->    - *"Metadata variable"*: `Plant` or `Period`
->    - *"Metadata value(s)"*: `Aalborg East & Aalborg West` or `Winter & Summer`
 >    - *"Group samples"*: `Plant` (Option 1) or `Year` (Option 2)
 >    - *"Facet the samples"*: `Period`
 >
@@ -941,7 +939,7 @@ So, in the same history where you created heatmaps, ordination plots and boxplot
 > <hands-on-title> Create a boxplot </hands-on-title>
 >
 >    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_timeseries_v1.0.ga) {% icon workflow %} using the following parameters
->    - *"Time variable"*: `Date
+>    - *"Time variable"*: `Date`
 >    - *"Limit the number of shown taxa"*: `Select a number of taxa to show`
 >        - *"Number of taxa to show"*: `3`
 >
@@ -962,10 +960,6 @@ So, in the same history where you created heatmaps, ordination plots and boxplot
 {: .hands_on}
 </div>
 
-> <comment-title></comment-title>
-> - use the same data set as for heatmaps
-> - the steps from heatmap hands-on boxes remain the same
-{: .comment}
 
 > <details-title> How it will look like </details-title>
 >
