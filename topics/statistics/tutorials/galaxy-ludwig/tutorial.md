@@ -27,7 +27,8 @@ tags:
 > <comment-title>Galaxy-Ludwig Tool</comment-title>
 >
 > The Ludwig tool described in this tutorial is only available at: 
-> ```https://cancer.usegalaxy.org/```
+> [Cancer-Galaxy](https://cancer.usegalaxy.org)
+>
 {:  .comment}
 
 Using the MNIST image dataset of handwritten digits as input, we will build an image recognition model with the Galaxy-Ludwig tool. The goal is to classify the handwritten digit in each image.
@@ -35,17 +36,6 @@ Using the MNIST image dataset of handwritten digits as input, we will build an i
 To accomplish this, three steps are needed: (i) upload Ludwig files and image files to Galaxy (ii) Set up and running the Ludwig experiment function on Galaxy, and (iii) Evaluate the image classification model. As a bonus step, we'll also explore (iv) improving the model's classification performance (Figure 1).
 
 ![schema of the whole process of training model and test.](../../images/galaxy-ludwig/explain_model_schema.png "Overview of the steps process to obtain the handwritten classification model and testing it.")
-<!-- You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.-->
 
 > <agenda-title></agenda-title>
 >
@@ -66,7 +56,7 @@ tutorial.-->
 > The digits have been size normalized and centered in a fixed-size image.
 {:  .comment}
 
-# FILES FORMAT
+# Files Format
 Before starting our hands-on, here is a brief explanation of the three files generated for the Ludwig Experiment tool.
 
 ## Image_Files.zip 
@@ -83,7 +73,7 @@ The MNIST dataset consists of images and their corresponding labels. For the pur
 
 Briefly, the image_path column provides the file paths to the images that will be fed into the deep learning algorithm. The label column contains the correct classifications, ranging from 0 to 9, for the handwritten digits in the images. The split column indicates whether the data should be used for training (0) or testing (2) the model.
 
-![Dataset.csv file format snapshot](../../images/galaxy-ludwig/explain_dataset_format.png "Dataset.csv file format snapshot. features in order: file_path, label, split.")
+![Dataset.csv file format snapshot](../../images/galaxy-ludwig/explain_dataset_format.png "Dataset.csv file format snapshot. features in order: file_path, label, split."){: width="50%"}
  
 ## Config.yaml
 
@@ -95,9 +85,10 @@ ii) It consists of two convolutional layers followed by a fully connected layer,
 iii) The split configuration is used to divide the dataset based on the 'split' column rather than using a random split (which is the default). In this configuration, rows labeled with '0' are included in the training set, while rows labeled with '2' are included in the testing set. If a validation category is needed, rows are labeled with '1'. 
 iv) The model is trained to classify images into categories (e.g., recognizing digits), and it will train for 5 epochs.
 
-![Config.yaml file snapshot](../../images/galaxy-ludwig/explain_config.png "Config.yaml file snapshot.")
+![Config.yaml file snapshot](../../images/galaxy-ludwig/explain_config.png "Config.yaml file snapshot."){: width="50%"}
 
-# GALAXY-LUDWIG TOOL 
+
+# Galaxy-Ludwig Tool
 
 Ludwig simplifies the complexities of machine learning by automating essential steps such as data preprocessing, model architecture selection, hyperparameter tuning, and device management. This streamlined approach is particularly beneficial for Galaxy users who are more interested in addressing their scientific questions than in navigating the intricacies of machine learning workflows.
 
@@ -139,27 +130,22 @@ Ludwig simplifies the complexities of machine learning by automating essential s
 >    - {% icon param-file %} *"Select the dataset containing model configuration"*: `config.yaml`
 >    - {% icon param-file %} *"Input dataset"*: `mnist_dataset.csv`
 >    - {% icon param-file %} *"Raw data"*: `mnist_images.zip`
->
->    > <comment-title> short description </comment-title>
->    >
->    > Once all the inputs are in place, press the 'RUN TOOL' button to start your job.
->    {: .comment}
->
+> Run the tool 
 {: .hands_on}
 
 ## Ludwig Experiment Outputs files
 
 After your model is trained and tested, you should see three new files in your history list:
 
-    > Ludwig Experiment Report: An HTML file containing the evaluation report of the trained model.
-    
-    > Ludwig Experiment Trained Model: A composite dataset of the trained Ludwig model.
-    
-    > Ludwig Experiment Predictions CSV: A CSV file with the prediction results from the model evaluations.
+- Ludwig Experiment Report: An HTML file containing the evaluation report of the trained model.
+ 
+- Ludwig Experiment Trained Model: A composite dataset of the trained Ludwig model.
+ 
+- Ludwig Experiment Predictions CSV: A CSV file with the prediction results from the model evaluations.
 
 To evaluate the model, the Ludwig Experiment Report contains all the necessary information.
 
-# LUDWIG EXPERIMENT REPORT
+# Ludwig Experiment Report
 
 Before we begin, it's crucial to determine the most appropriate metric for a given machine learning problem. While accuracy is a useful metric, other performance measures might be more suitable depending on the specific goal. For instance, an overfitted model might exhibit high accuracy due to class imbalance in the dataset. Therefore, the purpose of building the model should guide the interpretation of various metrics.
 
@@ -262,7 +248,7 @@ Based on the training curve (blue line), we can draw the following conclusions:
 - CONVERGENCE:
     Overall, the graph would depict a rapid increase in performance early on, followed by a plateau as the model approaches optimal performance. This indicates successful training with effective generalization.
 
-# CHANGING MODEL'S CONFIGURATION (Epoch = 15)
+# Changing model's configuration (Epoch = 15)
 
 When designing a neural network, it is unfortunately not possible to determine the optimal number of neurons, layers, or other hyperparameters solely from a problem description. There is limited guidance available for selecting appropriate initial values, making it challenging to identify a starting point.
 
@@ -456,7 +442,7 @@ The F1 score vs. frequency label graph is a valuable tool for diagnosing how wel
 
 Digits like '1' (occurrences > 7800 and F1 score > 0.992) and '0' (occurrences > 6800 and F1 score > 0.980) suggest that the model has learned to accurately identify these digits, despite of the difference when looking the frequency of the digits. Digit '5', with a lower frequency, still achieves a strong F1 score. Although its frequency is the lowest among the digits, the F1 score remains high, indicating that the model maintains a good balance of precision and recall even with fewer examples. This reflects the robustness of the CNN model.
 
-# CONCLUSION
+# Conclusion
 In this tutorial, we demonstrated how to utilize the Galaxy-Ludwig tool to build an image recognition model using the MNIST dataset of handwritten digits. We followed a structured approach consisting of 
 - uploading necessary files, 
 - running the Ludwig experiment, and 
