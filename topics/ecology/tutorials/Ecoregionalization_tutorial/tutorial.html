@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d4c7257f4bbdda9b44cfa0c34ddc8b876d9ad54b",
+		release: "galaxy-training-network@ff33545279e2a5f2438daeecd2ef7b4fcdafaf79",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Ecoregionalization workflow tutorial">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-18 13:08:24 +0000">
+<meta name="DC.date" content="2024-09-19 07:23:43 +0000">
 <meta name="DC.creator" content="Pauline Seguineau"><meta name="description" content="Learn to analyse Ecological data through Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Ecology / Ecoregionalization workflow tutorial / Hands-on: Ecoregionalization workflow tutorial">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-18 13:08:24 +0000",
+  "dateModified": "2024-09-19 07:23:43 +0000",
   "datePublished": "2024-09-16 09:54:51 +0000",
   "identifier": "https://gxy.io/GTN:",
   "accessMode": [
@@ -236,15 +236,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Ecoregionalization workflow tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/ecology/tutorials/Ecoregionalization_tutorial/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT2H",
   "teaches": "Learning how to use the ecoregionalization workflow.\n - Learning about boosted regression trees algorithm.\n - Learning about Silhouette index and select an appropriate number of cluster\n - Learning about Clara clustering algorithm (PAM for large datasets)\n - Create an ecoregionalization map",
   "keywords": [
     "Ecology",
     "ecology",
+    "taxonomic data",
     "EBV workflow",
     "modeling",
-    "earth-system"
+    "gbif",
+    "ocean",
+    "earth-system",
+    "interactive-tools"
   ],
   "description": "## Questions this  will address\n\n - How to use the ecoregionalization workflow?\n - How to construct ecoregions from occurrences species data and environmental data?\n\n\n## Learning Objectives\n\n - Learning how to use the ecoregionalization workflow.\n - Learning about boosted regression trees algorithm.\n - Learning about Silhouette index and select an appropriate number of cluster\n - Learning about Clara clustering algorithm (PAM for large datasets)\n - Create an ecoregionalization map\n\n",
   "inLanguage": {
@@ -943,7 +947,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 16, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 18, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 19, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -959,7 +963,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -1190,10 +1194,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://api.gbif.org/v1/occurrence/download/request/0030809-240506114902167.zip
 </code></pre></div>      </div>
       <p>Environemental data : “ceamarc_env.tab”</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9777 
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9777
 </code></pre></div>      </div>
       <p>Jupyter notebook : “pivot_wider_jupytool_notebook.ipynb”</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9756 
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://data.indores.fr/api/access/datafile/9756
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1631,7 +1635,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <h2 id="obtain-final-data-file-with-interactive-jupyterlab-notebook">Obtain final data file with <strong>Interactive JupyterLab Notebook</strong></h2>
 
-<p>The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like. 
+<p>The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like.
 Here you will load an existing jupyter notebook (“pivot_wider_jupytool_notebook.ipynb” that you downloaded earlier) and run the code in it to get the final file that is needed for ecoregionalization workflow.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1663,6 +1667,13 @@ Here you will load an existing jupyter notebook (“pivot_wider_jupytool_noteboo
       </ul>
     </li>
   </ol>
+
+  <blockquote class="warning">
+    <div class="box-title warning-title" id="warning-pay-attention-to-the-tool-version"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Pay attention to the tool version</div>
+
+    <p>It is possible to have specific troubleshoots with using interactive tools as, for now, we can’t redirect to a specific version of the tool (as for classical tool) from the tutorial page. Here, if you encounter errors, you maybe need to specify the 1.0.0 version (the one used for the tuto) !</p>
+
+  </blockquote>
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-how-to-launch-the-notebook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-launch-the-notebook" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: How to launch the notebook</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1753,7 +1764,7 @@ Here you will load an existing jupyter notebook (“pivot_wider_jupytool_noteboo
     </li>
     <li>Check your outputs. You must have two files:
       <ul>
-        <li>Information file conataining the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two.</li>
+        <li>Information file containing the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two.</li>
         <li>Occurrence and Environment merge file containing occurrence data and environmental data cooresponding.</li>
       </ul>
     </li>
@@ -1789,6 +1800,13 @@ Here you will load an existing jupyter notebook (“pivot_wider_jupytool_noteboo
         </li>
         <li><em>“Choose column(s) where your abiotic parameter are in your environment data file.”</em>: <code class="language-plaintext highlighter-rouge">c['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']</code></li>
       </ul>
+
+      <blockquote class="warning">
+        <div class="box-title warning-title" id="warning-you-maybe-can-here-prepare-a-cup-of-tea"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: You maybe can here prepare a cup of tea ;)</div>
+
+        <p>This step is a first “long” one, and you have to wait something like 18 minutes and 34 sec to obtain the result. It is maybe the good moment to have a break and go outside to admirate biodiversity around you?</p>
+
+      </blockquote>
     </li>
     <li>
       <p>Check your outputs. You must have four outputs collections.</p>
@@ -1808,7 +1826,7 @@ Here you will load an existing jupyter notebook (“pivot_wider_jupytool_noteboo
 
 <p>In the ‘Validation files’ collection there must be a file containing for each taxon the validation metrics of the associated model.</p>
 
-<p>In the ‘Species distribution prediction maps’ collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
+<p>In the ‘Species distribution prediction maps’ collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel.
 Here is an example:</p>
 
 <figure id="figure-6" style="max-width: 90%;"><img src="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png" alt="Species distribution map. " width="2100" height="2100" loading="lazy" /><a target="_blank" href="./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Florometra mawsoni distribution from BRT</figcaption></figure>
@@ -1872,7 +1890,7 @@ Here is an example:</p>
 
 <p>This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the following anlaysis steps.</p>
 
-<p>The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned. 
+<p>The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned.
 The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. Thus the optimal number of clusters is the one that maximizes the value of the SIH index.</p>
 
 <h3 id="how-to-use-it--3">How to use it ?</h3>
@@ -1901,10 +1919,10 @@ The third output corresponds to the main information of the tool, a graph presen
 
         <p>The other two parameters can be left as is. If you need to change them here is a short description of what they do:</p>
 
-        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two
 points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)</p>
 
-        <p>The second one is the sample size that will be used to perform clustering. 
+        <p>The second one is the sample size that will be used to perform clustering.
 Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
 more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 entire data set.</p>
@@ -1952,8 +1970,8 @@ entire data set.</p>
 
 <h3 id="what-it-does--4">What it does ?</h3>
 
-<p>After choosing an optimal number of clusters with the ClusterEstimate tool, we can now partition each latitude and longitude point according to their associated values of the BRT prediction index. Due to 
-the large size of the datasets, the Clara function of the Cluster package is used here to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the 
+<p>After choosing an optimal number of clusters with the ClusterEstimate tool, we can now partition each latitude and longitude point according to their associated values of the BRT prediction index. Due to
+the large size of the datasets, the Clara function of the Cluster package is used here to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the
 clustering process and makes the calculation more efficient.</p>
 
 <h3 id="how-to-use-it--4">How to use it ?</h3>
@@ -1975,10 +1993,10 @@ clustering process and makes the calculation more efficient.</p>
 
         <p>The other two parameters can be left as is. If you need to change them here is a short description of what they do:</p>
 
-        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+        <p>The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two
 points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)</p>
 
-        <p>The second one is the sample size that will be used to perform clustering. 
+        <p>The second one is the sample size that will be used to perform clustering.
 Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
 more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 entire data set.</p>
@@ -1998,10 +2016,10 @@ entire data set.</p>
 
 </blockquote>
 
-<p>The tool will produce a silhouette plot that you can see below. A silhouette graph is a representation used to visualize the silhouette index of each observation in a clustered data set. It makes it possible to 
+<p>The tool will produce a silhouette plot that you can see below. A silhouette graph is a representation used to visualize the silhouette index of each observation in a clustered data set. It makes it possible to
 assess the quality of clusters and determine their coherence and separation. In a silhouette graph, each observation is represented by a horizontal bar whose length is proportional to its silhouette index. The longer
-the bar, the better the consistency of the observation with its cluster and the separation from other clusters. As mentioned above, the silhouette index ranges from -1 to 1. Values close to 1 indicate that objects 
-are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are 
+the bar, the better the consistency of the observation with its cluster and the separation from other clusters. As mentioned above, the silhouette index ranges from -1 to 1. Values close to 1 indicate that objects
+are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are
 located at the border between two clusters. Here, in the graph below, there is a good distribution of the observations because the majority of the bars are above the average value of the silhouette index.</p>
 
 <figure id="figure-9" style="max-width: 90%;"><img src="./Images/SIH_plot.png" alt="SIH plot. " width="480" height="480" loading="lazy" /><a target="_blank" href="./Images/SIH_plot.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> SIH plot</figcaption></figure>
@@ -2356,7 +2374,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4c7257f4bbdda9b44cfa0c34ddc8b876d9ad54b">d4c7257</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ff33545279e2a5f2438daeecd2ef7b4fcdafaf79">ff33545</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
