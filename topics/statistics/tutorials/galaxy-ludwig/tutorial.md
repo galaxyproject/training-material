@@ -275,7 +275,7 @@ Since we have gathered insights from our recent model, we can now begin testing 
 For this new configuration, the file has been modified to adjust the Epoch value, increasing it from 5 to 15. Upload the file using the following link:
 
 ```
-    https://zenodo.org/records/13716147/files/config_test_2.yaml
+https://zenodo.org/records/13716147/files/config_test_2.yaml
 ```
 If you are comfortable using the same history to run and obtain the results, that is fine. Click on the "Upload Data" button in the navigation bar on the left side, then select "Paste/Fetch Data" to paste the link.
 
