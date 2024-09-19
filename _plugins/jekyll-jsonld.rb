@@ -814,16 +814,16 @@ module Jekyll
         # Description with questions, objectives and keypoints
         if material.key?('questions') && !material['questions'].nil? && material['questions'].length.positive?
           questions = material['questions'].join("\n - ")
-          description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
+          description.push("## Questions this #{material['type']} will address\n\n - #{questions}\n\n")
         end
         if material.key?('objectives') && !material['objectives'].nil? && material['objectives'].length.positive?
           objectives = material['objectives'].join("\n - ")
-          description.push("The objectives are:\n - #{objectives}\n\n")
+          description.push("## Learning Objectives\n\n - #{objectives}\n\n")
           data['teaches'] = objectives
         end
         if material.key?('keypoints') && !material['keypoints'].nil? && material['keypoints'].length.positive?
           keypoints = material['keypoints'].join("\n - ")
-          description.push("The keypoints are:\n - #{keypoints}\n\n")
+          description.push("## Key Points\n\n - #{keypoints}\n\n")
         end
 
         # Keywords

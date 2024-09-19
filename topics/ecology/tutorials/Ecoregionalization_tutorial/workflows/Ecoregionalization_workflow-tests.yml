@@ -1,0 +1,73 @@
+- doc: Test outline for Ecoregionalization_Workflow
+  job:
+    ceamarc_env.tsv:
+      class: File
+      path: test-data/ceamarc_env.tsv
+      filetype: tabular
+    occurrence.txt:
+      class: File
+      path: test-data/occurrence.txt
+      filetype: tabular
+    pivot_wider_jupytool_notebook.ipynb:
+      class: File
+      path: test-data/pivot_wider_jupytool_notebook.ipynb
+      filetype: ipynb
+  outputs:
+    occ_out:
+      asserts:
+        has_size: 
+          value: 48864
+          delta: 50
+    occ_env_out:
+      asserts:
+        has_size: 
+          value: 56421
+          delta: 50
+    info_out:
+      asserts:
+        has_n_columns:
+          n: 3
+    coll_pred:
+      element_tests: 
+        1_brts_pred_ceamarc:
+          asserts:
+            has_n_columns:
+              n: 4
+    coll_val:
+      element_tests: 
+        1_brts_validation_ceamarc:
+          asserts:
+            has_n_columns:
+              n: 4
+    summary:
+      asserts:
+        has_n_columns:
+          n: 3
+    taxa:
+      asserts:
+        has_n_columns:
+          n: 1
+    taxa_clean:
+      asserts:
+        has_n_columns:
+          n: 1
+    SIH_index:
+          asserts:
+            has_text:
+              text: PNG
+    databio_table:
+      asserts:
+        has_n_columns:
+          n: 4
+    SIH_plot:
+          asserts:
+            has_text:
+              text: PNG
+    cluster_points:
+      asserts:
+        has_n_columns:
+          n: 3
+    eco_map:
+          asserts:
+            has_text:
+              text: PNG        

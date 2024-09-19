@@ -68,6 +68,7 @@ recordings:
   date: '2023-05-15'
   galaxy_version: '23.01'
   length: 2H50M
+  cyoa: true
 - captioners:
   - hexylena
   - shiltemann
@@ -376,7 +377,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >           - *"Select reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
 >           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
->               
+>
 >             This parameter should be length of reads - 1
 >                - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >    - *"Compute coverage"*:
