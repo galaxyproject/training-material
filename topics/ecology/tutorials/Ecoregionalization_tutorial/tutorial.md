@@ -513,11 +513,12 @@ This tool gives as output a file containing the predictions of the probability o
 >
 >    - *"Choose column(s) where your abiotic parameter are in your environment data file."*: `c['3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19']`
 >
-> > <warning-title>You maybe can here prepare a cup of tea ;)</warning-title>
-> >
-> > This step is a first "long" one, and you have to wait something like 18 minutes and 34 sec to obtain the result. It is maybe the good moment to have a break and go outside to admirate biodiversity around you?
-> >
-> {: .warning}
+>    > <warning-title>You maybe can here prepare a cup of tea ;)</warning-title>
+>    >
+>    > This step is a first "long" one, and you have to wait something like 18 minutes and 34 sec to obtain the result. It is maybe the good moment to have a break and go outside to admirate biodiversity around you?
+>    >
+>    {: .warning}
+>
 >
 > 2. Check your outputs. You must have four outputs collections.
 >
