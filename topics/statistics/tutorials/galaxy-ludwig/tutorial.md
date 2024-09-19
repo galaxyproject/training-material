@@ -29,6 +29,8 @@ tags:
 > The Ludwig tool described in this tutorial is only available at: 
 > [Cancer-Galaxy](https://cancer.usegalaxy.org)
 >
+> Galaxy-ML tools > Ludwig Experiment
+>
 {:  .comment}
 
 Using the MNIST image dataset of handwritten digits as input, we will build an image recognition model with the Galaxy-Ludwig tool. The goal is to classify the handwritten digit in each image.
@@ -73,7 +75,7 @@ The MNIST dataset consists of images and their corresponding labels. For the pur
 
 Briefly, the image_path column provides the file paths to the images that will be fed into the deep learning algorithm. The label column contains the correct classifications, ranging from 0 to 9, for the handwritten digits in the images. The split column indicates whether the data should be used for training (0) or testing (2) the model.
 
-![Dataset.csv file format snapshot](../../images/galaxy-ludwig/explain_dataset_format.png "Dataset.csv file format snapshot. features in order: file_path, label, split."){: width="50%"}
+![Dataset.csv file format snapshot](../../images/galaxy-ludwig/explain_dataset_format.png "Dataset.csv file format snapshot. features in order: file_path, label, split."){: width="50%" height="10%"}
  
 ## Config.yaml
 
@@ -85,7 +87,7 @@ ii) It consists of two convolutional layers followed by a fully connected layer,
 iii) The split configuration is used to divide the dataset based on the 'split' column rather than using a random split (which is the default). In this configuration, rows labeled with '0' are included in the training set, while rows labeled with '2' are included in the testing set. If a validation category is needed, rows are labeled with '1'. 
 iv) The model is trained to classify images into categories (e.g., recognizing digits), and it will train for 5 epochs.
 
-![Config.yaml file snapshot](../../images/galaxy-ludwig/explain_config.png "Config.yaml file snapshot."){: width="50%"}
+![Config.yaml file snapshot](../../images/galaxy-ludwig/explain_config.png "Config.yaml file snapshot."){: width="50%" height="5%"}
 
 
 # Galaxy-Ludwig Tool
