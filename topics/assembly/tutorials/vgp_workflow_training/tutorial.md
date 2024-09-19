@@ -1,22 +1,27 @@
 ---
 layout: tutorial_hands_on
-title: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C data
-zenodo_link: 'https://zenodo.org/record/5887339'
+title: Using the VGP workflows to assemble a vertebrate genome with HiFi and Hi-C
+  data
+zenodo_link: https://zenodo.org/record/5887339
 level: Intermediate
 tags:
- - pacbio
- - eukaryote
- - VGP
+- pacbio
+- eukaryote
+- VGP
 questions:
-- "What combination of tools can produce the highest quality assembly of vertebrate genomes?"
-- "How can we evaluate how good it is?"
+- What combination of tools can produce the highest quality assembly of vertebrate
+  genomes?
+- How can we evaluate how good it is?
 objectives:
-- "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
-- "Evaluate the quality of the assembly"
-time_estimation: '1h'
+- Learn the tools necessary to perform a de novo assembly of a vertebrate genome
+- Evaluate the quality of the assembly
+time_estimation: 2h
 key_points:
-- "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies"
-- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
+- The VGP pipeline allows to generate error-free, near gapless reference-quality genome
+  assemblies
+- 'The assembly can be divided in four main stages: genome profile analysis, HiFi
+  long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid
+  scaffolding'
 contributors:
 - delphine-l
 - astrovsky01
@@ -25,10 +30,14 @@ contributors:
 - abueg
 - nekrut
 abbreviations:
-  primary assembly: homozygous regions of the genome plus one set of alleles for the heterozygous loci
+  primary assembly: homozygous regions of the genome plus one set of alleles for the
+    heterozygous loci
   alternate assembly: alternate loci not represented in the primary assembly
   QV: assembly consensus quality
-  unitig: A uniquely assembleable subset of overlapping fragments. A unitig is an assembly of fragments for which there are no competing internal overlaps. A unitig is either a correctly assembled portion of a contig or a collapsed assembly of several high-fidelity copies of a repeat.
+  unitig: A uniquely assembleable subset of overlapping fragments. A unitig is an
+    assembly of fragments for which there are no competing internal overlaps. A unitig
+    is either a correctly assembled portion of a contig or a collapsed assembly of
+    several high-fidelity copies of a repeat.
   contigs: contiguous sequences in an assembly
   collection: Galaxy's way to represent multiple datasets as a single interface entity
   collections: Galaxy's way to represent multiple datasets as a single interface entity
@@ -39,7 +48,21 @@ abbreviations:
   GWS: Galaxy Workflow System
   VGP: Vertebrate Genome Project
   G10K: Genome 10K
+recordings:
+- youtube_id: LO-migvwcM
+  length: 1H56M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-12'
+  speakers:
+  - abueg
+  captioners:
+  - abueg
+  bot-timestamp: 1726177737
+
+
 ---
+
+
 
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, {Hi-C} data, and (optionally) Bionano optical map data. The pipeline consists of nine distinct workflows. This tutorial provides a quick example of how to run these workflows for one particular scenario, which is, based on our experience, the most common: assembling genomes using {HiFi} Reads combined with {Hi-C} data (both generated from the same individual).
 
