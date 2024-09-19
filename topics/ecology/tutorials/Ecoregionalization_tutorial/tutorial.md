@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: Ecoregionalization workflow tutorial
 questions:
 - How to use the ecoregionalization workflow?
-- How to construct ecoregions from occurrences species data and environmental data? 
+- How to construct ecoregions from occurrences species data and environmental data?
 objectives:
 - Learning how to use the ecoregionalization workflow.
 - Learning about boosted regression trees algorithm.
@@ -59,18 +59,18 @@ And in this tutorial we will be using 5 more tools to format data before running
 - Merge Columns
 - Interactive JupyterLab and notebook
 
-Let's delve into the tutorial, outlining each step and tool to manage the creation of ecoregionalization maps. 
+Let's delve into the tutorial, outlining each step and tool to manage the creation of ecoregionalization maps.
 
 > <details-title>Some definitions to start</details-title>
 >
-> Ecoregionalization: The process by which a territory is classified into a category of area that respond to the same environmental factors taking into account species information. 
+> Ecoregionalization: The process by which a territory is classified into a category of area that respond to the same environmental factors taking into account species information.
 >
 > Occurrences data: Data showing the presence of a species at a particular location.
 >
 > Environmental data: Environmental data are any measurement or information that describe environmental processes, location, or conditions.
-> 
+>
 > Boosted regression trees (BRT): Boosted Regression Trees is a kind of regression methodology based on Machine Learning. Unlike conventional regression methods (GLMs, GAMs), BRTs combine numerous basic decision trees to enhance the predictive performance. BRTs can handle complex relationships and interactions among predictors, and it is considered a robust technique that can control outliers and nonlinearity.
-> 
+>
 > Clustering: Clustering is a machine learning method of grouping data points by similarity or distance.
 >
 > CLARA/PAM : CLARA (Clustering Large Applications), is an extension to k-medoids (PAM) methods to deal with data containing a large number of objects. PAM stands for "Partition Around Medoids", the PAM algorithm searches for k representative objects in a data set (k medoids) and then assigns each object to the closest medoid in order to create clusters.
@@ -85,17 +85,17 @@ Let's delve into the tutorial, outlining each step and tool to manage the creati
 >
 {: .agenda}
 
-# Before starting 
+# Before starting
 
-This part will present the type of data you need to run the ecoregionalization workflow. This data will be downloaded in the next part of the tutorial. 
+This part will present the type of data you need to run the ecoregionalization workflow. This data will be downloaded in the next part of the tutorial.
 
 ## Environmental data
 
 To run this workflow, you will first need environmental data. This workflow accepts several types of environmental parameters like temperature or soil type. However, there is a mandatory file format, the tabular format (.tsv), and each pixel of the study area must be described in this file by associating latitude and longitude with environmental parameters.
 
-In the use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D'Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. Finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.  
+In the use case presented in this tutorial, seventeen abiotic and physical parameters of the Dumont D'Urville sea region are used. They were taken from oceanographic models and in situ measurements {% cite Hemery2011 %}. The physical oceanographic parameters are mean temperature and its standard deviation, mean salinity and its standard deviation, mean current magnitude and its standard deviation, maximum current bearing, maximum current magnitude and sea ice production. Bathymetric parameters are depth, slope, and rugosity. Finally, the seabed substrate composition was characterized by percentages of biogenic carbonate, biogenic silica, gravel, sand, and mud.
 
-Here an example of environmental file input: 
+Here an example of environmental file input:
 
 
 |------|------|---------|------|------|
@@ -110,22 +110,22 @@ Here an example of environmental file input:
 
 ## Occurrence data
 
-The second data file you will need to run this workflow is an occurrences data file. As defined above, occurrences data are showing the presence (1) or absence (0) of a species at a particular location. This data file also needs to be in tabular format (.tsv) and need to be construct as following: 
+The second data file you will need to run this workflow is an occurrences data file. As defined above, occurrences data are showing the presence (1) or absence (0) of a species at a particular location. This data file also needs to be in tabular format (.tsv) and need to be construct as following:
 
 - latitude and longitude columns.
 
-- One column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent. 
+- One column per taxon where each box corresponding to a geographical point is marked 1 if the taxon is present or 0 if the taxon is absent.
 
 Here an example of occurrences data file input:
 
 |----------|-----------|------------------------|-----------|-----|
-|   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | ... | 
+|   lat    |   long    |Acanthorhabdus_fragilis | Acarnidae | ... |
 |----------|-----------|------------------------|-----------|-----|
 |-65,9     |142,3      |1                       |0          | ... |
 |----------|-----------|------------------------|-----------|-----|
 |-66,3     |141,3      |0                       |1          | ... |
 |----------|-----------|------------------------|-----------|-----|
-|   ...    |   ...     |...                     |    ...    | ... | 
+|   ...    |   ...     |...                     |    ...    | ... |
 |----------|-----------|------------------------|-----------|-----|
 
 For this tutorial, occurrences data from the Dumont d'Urville sea region will be downloaded from the GBIF. These data were collected as part of the CEAMARC program (The Collaborative East Antarctic Marine Census {% cite Hosie_2011 %}) between December 2007 and January 2008 {% cite bea09 %}. Prior to its inclusion in GBIF, these data originated from collections at the Muséum national d’Histoire naturelle (MNHN – Paris). A GBIF filter was used to download only the data of interest, namely the data from the CEAMARC expedition from the Aurora Australis icebreaker. The selected occurrences are invertebrates. In the GBIF query, five collections were selected: the cnidarians collection (IK), the echinoderm collection (IE), the crustaceans collection (IU), the molluscs collection (IM), and the tunicates collection (IT), and only occurrences recorded by “IPEV-AAD-MNHN" which correspond to the CEAMARC expedition.
@@ -152,11 +152,11 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >    ```
 >    Environemental data : "ceamarc_env.tab"
 >    ```
->    https://data.indores.fr/api/access/datafile/9777 
+>    https://data.indores.fr/api/access/datafile/9777
 >    ```
 >    Jupyter notebook : "pivot_wider_jupytool_notebook.ipynb"
 >    ```
->    https://data.indores.fr/api/access/datafile/9756 
+>    https://data.indores.fr/api/access/datafile/9756
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -164,7 +164,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >    {% snippet faqs/galaxy/datasets_import_from_remote_files.md %}
 >
 > 3. The GBIF link allows you to download a zip file containing multiple information files about the dataset. The file that you need is the 'occurrence.txt' file that we will specifically extract on Galaxy in the following step.
-> 
+>
 > 4. Use  {% tool [Unzip a file](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to create a data collection in your history where all GBIF archive files will be unzipped
 >
 > 5. Unhide the "occurence.txt" data file then modify datatype to select the "tabular" one
@@ -173,7 +173,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 6. Rename the datasets if needed, notably "9756" by "pivot_wider_jupytool_notebook.ipynb" and "9777" by "ceamarc_env.tab". 
+> 6. Rename the datasets if needed, notably "9756" by "pivot_wider_jupytool_notebook.ipynb" and "9777" by "ceamarc_env.tab".
 >
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
@@ -185,7 +185,7 @@ To switch from the occurrence data download from GBIF to the occurrence data sup
 
 # Data formatting
 
-The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow. 
+The first step of this tutorial is data formatting because the GBIF species occurrence file download needs to be in a specific format to be included inside the Ecoregionalization workflow.
 
 ## Keep data columns that we need with **Advanced Cut**
 
@@ -268,7 +268,7 @@ This step is used to add NAs to replace empty space in the file. We will do that
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `^$`
 >            - *"Replacement"*: `NA`
-> 2. Check your output. At the end of this step you must have NA instead of empty space. See example below. 
+> 2. Check your output. At the end of this step you must have NA instead of empty space. See example below.
 >
 >![Output of Regex find and replace example](./Images/NA_example.png "Output of Regex find and replace example")
 >
@@ -286,7 +286,7 @@ This step is used to add NAs to replace empty space in the file. We will do that
 >                - *"regex pattern"*: `NA`
 >                - *"action for regex match"*: `exclude line if pattern found`
 >
-> 2. Check your output. All the lines with NAs must have been deleted. 
+> 2. Check your output. All the lines with NAs must have been deleted.
 >
 {: .hands_on}
 
@@ -355,7 +355,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `(.$)`
 >            - *"Replacement"*: `\1_`
-> 2. Check your output. All genus must have "_" at the end. See example below. 
+> 2. Check your output. All genus must have "_" at the end. See example below.
 >
 > ![Output of Regex Find And Replace example](./Images/2_example.png "Output of Regex Find And Replace example")
 >
@@ -401,7 +401,7 @@ This manipulation is made in order to merge properly columns “phylum”, “cl
 
 ## Obtain final data file with **Interactive JupyterLab Notebook**
 
-The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like. 
+The interactive JupyterLab Notebook allows to create, run, and share custom Galaxy tools based upon Jupyter Notebooks. Galaxy offers you to use Jupyter Notebooks directly in Galaxy accessing and interacting with Galaxy datasets as you like.
 Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.ipynb" that you downloaded earlier) and run the code in it to get the final file that is needed for ecoregionalization workflow.
 
 > <hands-on-title> Pivot_wider with Jupytool </hands-on-title>
@@ -424,18 +424,18 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 >
 > > <tip-title>How to launch the notebook</tip-title>
 > >
-> >   - The first parameter allows you to specify that you want to use a previous notebook ("pivot_wider_jupytool_notebook.ipynb") rather than create a new one. 
+> >   - The first parameter allows you to specify that you want to use a previous notebook ("pivot_wider_jupytool_notebook.ipynb") rather than create a new one.
 > >   - Then you need to insert your ready to use jupyter notebook ("pivot_wider_jupytool_notebook.ipynb").
 > >   - The third parameter is important to specify that you just want to execute a notebook and not dive into the web frontend (in this case).
 > >   - Then you need to clik on "+ Insert User inputs"" button to add the next parameters.
 > >   - After, you need to give a name to your input and choose its type.
-> >   - Finally you have to input the occurrence data file that will be treated in the Jupyter Notebook. 
-> > 
+> >   - Finally you have to input the occurrence data file that will be treated in the Jupyter Notebook.
+> >
 > > ![Interactive JupyterLab Notebook parameters example](./Images/JLN_param_example.png "Interactive JupyterLab Notebook parameters example")
 > >
 >{: .tip}
-> 
-> 2. Check your output ("Intercative JupyterLab Notebook on data (pivot_file)") in your galaxy history. You must have a tabular file with latitude and longitude in first two columns and the others columns must be taxa. See example below. 
+>
+> 2. Check your output ("Intercative JupyterLab Notebook on data (pivot_file)") in your galaxy history. You must have a tabular file with latitude and longitude in first two columns and the others columns must be taxa. See example below.
 >
 > ![Interactive JupyterLab Notebook output example](./Images/pivot_file_example.png "Interactive JupyterLab Notebook output example")
 >
@@ -447,7 +447,7 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 >
 > > <solution-title></solution-title>
 > >
-> > 1. It must have 202 columns. 
+> > 1. It must have 202 columns.
 > >
 > {: .solution}
 >
@@ -456,7 +456,7 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 # Ecoregionalization workflow
 
 Now you have all you need to run the ecoregionalization Workflow :
- - Occurrence formatted file 
+ - Occurrence formatted file
  - Environment file
 
 ## Merge environment and occurence file with **GeoNearestNeighbor**
@@ -480,26 +480,26 @@ This Galaxy tool allows you to merge two data tables (tabular format only) accor
 >        - *"Choose columns where your longitude is in your occurrence data file."*: `c2`
 >
 >    > <comment-title> Coords precision </comment-title>
->    > 
+>    >
 >    > It is recommended that, for optimal precision, the latitude and longitude values in both files should be of the same precision level. And, for the sake of relevance, the geographical coordinates in both files should be as close as possible to apply the most accurate environmental parameters to the correct species occurrences
->    > 
+>    >
 >    {: .comment}
 >
 > 2. Check your outputs. You must have two files:
->       - Information file containing the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two. 
+>       - Information file containing the coordinates of occurrence data, the coordinates retains from environmental data and the distances between the two.
 >       - Occurrence and Environment merge file containing occurrence data and environmental data cooresponding.
 >
 {: .hands_on}
 
 ## Predicting taxa distribution with **BRT tool prediction**
 
-This step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the boosted regression trees (BRT) method was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on an automatic learning algorithm using iterative classification trees. 
+This step implements a commonly used approach in ecological studies, namely species distribution modelling (SDM). This allows to characterize the distribution of each taxon by giving an indicator of probability of taxon presence for each environmental layer pixel. Here, the boosted regression trees (BRT) method was used to adjust the relationship between the presence of a single taxon and the environmental conditions under which the taxon has been detected. BRT modelling is based on an automatic learning algorithm using iterative classification trees.
 
 ### What it does ?
 
 Two treatments are performed in this tool: the creation of the taxa distribution model and the use of this model to obtain a prediction index. The prediction index obtained from each BRT model for each pixel of the environmental layers is an approximation of the probability of detection of the presence of the taxon.
 
-This tool gives as output a file containing the predictions of the probability of the presence of each taxon for each "environment pixel" (latitude, longitude), a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We're gonna go back to this in the following steps. 
+This tool gives as output a file containing the predictions of the probability of the presence of each taxon for each "environment pixel" (latitude, longitude), a visualization of these pixels for each taxon and graphs showing the percentage of model explanation for each environmental parameter. We're gonna go back to this in the following steps.
 
 ### How to use it ?
 
@@ -518,7 +518,7 @@ This tool gives as output a file containing the predictions of the probability o
 > > This step is a first "long" one, and you have to wait something like 18 minutes and 34 sec to obtain the result. It is maybe the good moment to have a break and go outside to admirate biodiversity around you?
 > >
 > {: .warning}
-> 
+>
 > 2. Check your outputs. You must have four outputs collections.
 >
 >    - Prediction files
@@ -532,13 +532,13 @@ In the 'Prediction files' collection there must be a file containing predictions
 
 In the 'Validation files' collection there must be a file containing for each taxon the validation metrics of the associated model.
 
-In the 'Species distribution prediction maps' collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel. 
+In the 'Species distribution prediction maps' collection there must be for each taxon a map representing their probability of presence at each environmental layer pixel.
 Here is an example:
 
 ![Species distribution map](./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni__pred_plot.png "Florometra mawsoni distribution from BRT")
 
 In the 'Partial dependence plots' collection there should be graphs showing the percentage explanation of the model for each environmental parameter.
-Here is an example: 
+Here is an example:
 
 ![Partial dependence plots](./Images/BRT-Echinodermata_Crinoidea_Comatulida_Antedonidae_Florometra_mawsoni.pdf "Percentage of explanation of the model for each environmental parameter")
 
@@ -578,7 +578,7 @@ This tool does three things:
 
 This tool enables the determination of the optimal number of clusters for partition-based clustering, along with generating files used in the following anlaysis steps.
 
-The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned. 
+The tool will produce three outputs. The first two files that will be used in the following steps of the workflow: a file containing four pieces of information (latitude, longitude, presence prediction and corresponding taxon), and a file containing the data to be partitioned.
 The third output corresponds to the main information of the tool, a graph presenting the value of the SIH index according to the number of clusters. The silhouette index provides a measure of the separation between clusters and the compactness within each cluster. The silhouette index ranges from -1 to 1. Values close to 1 indicate that objects are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are located at the border between two neighboring clusters. Thus the optimal number of clusters is the one that maximizes the value of the SIH index.
 
 ### How to use it ?
@@ -595,17 +595,17 @@ The third output corresponds to the main information of the tool, a graph presen
 >    - *"Number of Cluster to test"*: `10` (You can choose any number, but remember that the more cluster numbers to test the longer it will take)
 >
 >    > <comment-title> Two other parameters </comment-title>
->    > 
+>    >
 >    > The other two parameters can be left as is. If you need to change them here is a short description of what they do:
 >    >
->    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+>    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two
 >    > points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)
 >    >
->    > The second one is the sample size that will be used to perform clustering. 
+>    > The second one is the sample size that will be used to perform clustering.
 >    > Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
 >    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 >    > entire data set.
->    > 
+>    >
 >    {: .comment}
 >
 > 2. Check your outputs. You must have three files:
@@ -618,7 +618,7 @@ The third output corresponds to the main information of the tool, a graph presen
 
 > <question-title></question-title>
 >
-> 1. What is the optimal number of clusters in this use case ? 
+> 1. What is the optimal number of clusters in this use case ?
 >
 > > <solution-title></solution-title>
 > >
@@ -628,7 +628,7 @@ The third output corresponds to the main information of the tool, a graph presen
 >
 {: .question}
 
-Here is the SIH index plot you must obtained : 
+Here is the SIH index plot you must obtained :
 
 ![SIH index plot](./Images/SIH_index_plot.png "SIH index plot")
 
@@ -638,8 +638,8 @@ With this graph you will be able to determine the optimal number of clusters ret
 
 ### What it does ?
 
-After choosing an optimal number of clusters with the ClusterEstimate tool, we can now partition each latitude and longitude point according to their associated values of the BRT prediction index. Due to 
-the large size of the datasets, the Clara function of the Cluster package is used here to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the 
+After choosing an optimal number of clusters with the ClusterEstimate tool, we can now partition each latitude and longitude point according to their associated values of the BRT prediction index. Due to
+the large size of the datasets, the Clara function of the Cluster package is used here to apply the Partitioning Around Medoids (PAM) algorithm on a representative sample of the data. This speeds up the
 clustering process and makes the calculation more efficient.
 
 ### How to use it ?
@@ -653,17 +653,17 @@ clustering process and makes the calculation more efficient.
 >    - *"Number of Cluster wanted"*: `7` (Number of cluster determined at the previous step of the workflow in "SIH index plot")
 >
 >    > <comment-title> Two other parameters </comment-title>
->    > 
+>    >
 >    > The other two parameters can be left as is. If you need to change them here is a short description of what they do:
 >    >
->    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two 
+>    > The first one is metric used to calculate the dissimilarities between the observations: Manhattan (distance between two real-valued vectors), Euclidean (shortest distance between two
 >    > points) and Jaccard (defined as the size of the intersection divided by the size of the union of the sample sets)
 >    >
->    > The second one is the sample size that will be used to perform clustering. 
+>    > The second one is the sample size that will be used to perform clustering.
 >    > Indeed, the clara function is used to cluster large data using a representative sample rather than the entire data set. This will speed up the clustering process and make the calculation
 >    > more efficient. A fairly high value representative of the data is recommended. It is important to note that using a too small sample size may result in loss of information compared to using the
 >    > entire data set.
->    > 
+>    >
 >    {: .comment}
 >
 > 2. Check your outputs. You must have three files:
@@ -674,10 +674,10 @@ clustering process and makes the calculation more efficient.
 >
 {: .hands_on}
 
-The tool will produce a silhouette plot that you can see below. A silhouette graph is a representation used to visualize the silhouette index of each observation in a clustered data set. It makes it possible to 
+The tool will produce a silhouette plot that you can see below. A silhouette graph is a representation used to visualize the silhouette index of each observation in a clustered data set. It makes it possible to
 assess the quality of clusters and determine their coherence and separation. In a silhouette graph, each observation is represented by a horizontal bar whose length is proportional to its silhouette index. The longer
-the bar, the better the consistency of the observation with its cluster and the separation from other clusters. As mentioned above, the silhouette index ranges from -1 to 1. Values close to 1 indicate that objects 
-are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are 
+the bar, the better the consistency of the observation with its cluster and the separation from other clusters. As mentioned above, the silhouette index ranges from -1 to 1. Values close to 1 indicate that objects
+are well grouped and separated from other clusters, while values close to -1 indicate that objects are poorly grouped and may be closer to other clusters. A value close to 0 indicates a situation where objects are
 located at the border between two clusters. Here, in the graph below, there is a good distribution of the observations because the majority of the bars are above the average value of the silhouette index.
 
 ![SIH plot](./Images/SIH_plot.png "SIH plot")
