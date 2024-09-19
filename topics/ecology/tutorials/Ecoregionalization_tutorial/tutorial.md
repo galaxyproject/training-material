@@ -439,6 +439,12 @@ Here you will load an existing jupyter notebook ("pivot_wider_jupytool_notebook.
 >
 > ![Interactive JupyterLab Notebook output example](./Images/pivot_file_example.png "Interactive JupyterLab Notebook output example")
 >
+> >  <warning-title>Galaxy can't display properly file with too many columns</warning-title>
+> >
+> > That's why here we are showing the preview of the datzaset from the history.
+> >
+> {: .warning}
+> 
 {: .hands_on}
 
 > <question-title></question-title>
