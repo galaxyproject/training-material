@@ -278,41 +278,31 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 
 Reusable materials can be found anywhere. These are just some examples:
 
-> <code-in-title>GTN</code-in-title>
-> [GTN learning resources](https://training.galaxyproject.org)
-> 
-> [TeSS Catalogue by Elixir](https://tess.elixir-europe.org)
-{: .code-in}
+**GTN**
 
-> <code-in-title>OER</code-in-title>
-> [DOAB](https://directory.doabooks.org/)
-> 
-> [MERLOT](https://www.merlot.org/merlot/index.htm)
-> 
-> [OASIS](https://oasis.geneseo.edu/index.php)
-> 
-> [OER Commons](https://www.oercommons.org/)
-> 
-> [OERTX CORA](https://www.projectcora.org/)
-> 
-> [GALILEO](https://oer.galileo.usg.edu/)
-> 
-> [FORRT](https://forrt.org/)
-{: .code-in}
+- [GTN learning resources](https://training.galaxyproject.org) 
+- [TeSS Catalogue by Elixir](https://tess.elixir-europe.org)
 
-> <code-in-title>EOSC</code-in-title>
-> [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*)
-> 
-> Most EOSC projects have their own training catalogues and/or platforms.
-{: .code-in}
+**OER**
 
-> <code-in-title>General</code-in-title>
-> [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
-> 
-> [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
-> 
-> [OSF](https://osf.io/) - a free, open research platform
-{: .code-in}
+- [DOAB](https://directory.doabooks.org/) 
+- [MERLOT](https://www.merlot.org/merlot/index.htm) 
+- [OASIS](https://oasis.geneseo.edu/index.php) 
+- [OER Commons](https://www.oercommons.org/) 
+- [OERTX CORA](https://www.projectcora.org/) 
+- [GALILEO](https://oer.galileo.usg.edu/) 
+- [FORRT](https://forrt.org/)
+
+**EOSC**
+
+- [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*) 
+- Most EOSC projects have their own training catalogues and/or platforms.
+
+**General**
+
+- [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license 
+- [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository 
+- [OSF](https://osf.io/) - a free, open research platform
 
 ### Potential for reuse
 
