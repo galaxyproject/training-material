@@ -232,7 +232,7 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2, but will also work with the versions named in the Hands-on sections.
 
 
 > <hands-on-title>Running Alevin</hands-on-title>
@@ -528,7 +528,11 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >
 > 1. {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2) %} with the following parameters:
 >    - *"Convert From / To"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object` (if the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - just drag the dataset from the history panel and drop into the input field)
+>    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object`
+>
+> If the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - try dragging the dataset from the history panel and dropping it into the input field. If this still doesn't work, then you can change the datatype to rdata.sce.
+> 
+> {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`
 >

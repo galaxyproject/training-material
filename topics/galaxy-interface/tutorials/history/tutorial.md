@@ -1,24 +1,27 @@
 ---
 layout: tutorial_hands_on
 redirect_from:
-  - /topics/galaxy-ui/tutorials/history/tutorial
-
-title: "Understanding Galaxy history system"
-zenodo_link: ""
+- "/topics/galaxy-ui/tutorials/history/tutorial"
+title: Understanding Galaxy history system
+zenodo_link: ''
 level: Introductory
 questions:
-  - "How do Galaxy histories work?"
+- How do Galaxy histories work?
 objectives:
-  - "Gain understanding on navigating and manipulating histories"
-time_estimation: "30m"
+- Gain understanding on navigating and manipulating histories
+time_estimation: 30m
 key_points:
-  - "In Galaxy, data is stored in datasets and organized in histories"
-  - "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it"
-  - "The datasets are shown differently depending on their status: queued, running, ok, error, or paused"
-  - "The summary view for each dataset can be expanded to show additional information"
-  - "Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored"
-  - "Histories can also be deleted and purged, similar to datasets"
-  - "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
+- In Galaxy, data is stored in datasets and organized in histories
+- The right pane shows the current history. It displays the name of the history, the
+  tags and annotations assigned to it, and the size of the data in it
+- 'The datasets are shown differently depending on their status: queued, running,
+  ok, error, or paused'
+- The summary view for each dataset can be expanded to show additional information
+- Datasets deleted are hidden from history. They can be restored to the history, or
+  permanently deleted from the server, or purged. Purged files cannot be restored
+- Histories can also be deleted and purged, similar to datasets
+- Datasets can be organized into collections within a history with search and multi-select.
+  Jobs applied to collections use the same settings for each dataset in the collection
 contributions:
   authorship:
   - nekrut
@@ -32,7 +35,6 @@ contributions:
   - hexylena
   - ahmedhamidawan
 subtopic: histories
-
 recordings:
 - youtube_id: C3_HSgbbDWc
   speakers:
@@ -42,8 +44,19 @@ recordings:
   length: 18M
   date: '2023-05-19'
   galaxy_version: '23.01'
+- youtube_id: InBwrXde-g4
+  length: 23M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-07'
+  speakers:
+  - ahmedhamidawan
+  captioners:
+  - ahmedhamidawan
+  bot-timestamp: 1725682847
+
 
 ---
+
 
 {% snippet faqs/gtn/galaxy_tested_with.md version="24.1" %}
 
