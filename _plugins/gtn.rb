@@ -702,9 +702,13 @@ module Jekyll
     # Example:
     #  {{ site | get_upcoming_events }}
     def get_upcoming_events_for_this(site, material)
-      get_upcoming_events(site)
-        .select { |_p, materials| materials.include? material['id'] }
-        .map { |p, _materials| p }
+      if material.nil?
+        []
+      else
+        get_upcoming_events(site)
+          .select { |_p, materials| materials.include? material['id'] }
+          .map { |p, _materials| p }
+      end
     end
 
     def shuffle(array)
