@@ -16,7 +16,7 @@ contributions:
   authorship:
   - delphine-l
 recordings:
-- youtube_id: TODO
+- youtube_id: -5oxfNnNwoA
   length: 29M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-20'
