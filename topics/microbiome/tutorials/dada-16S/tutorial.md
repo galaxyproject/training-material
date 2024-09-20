@@ -54,7 +54,7 @@ edam_ontology:
 - topic_0080 # Sequence analysis
 - topic_4038 # Metabarcoding
 recordings:
-- youtube_id: TODO
+- youtube_id: ISocxcJZEjw
   length: 1H36M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-20'
