@@ -18,7 +18,7 @@ contributions:
 recordings:
 - youtube_id: TODO
   length: 29M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: 24.1.2.dev0
   date: '2024-09-20'
   speakers:
   - delphine-l
