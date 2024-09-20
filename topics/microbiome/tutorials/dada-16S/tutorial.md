@@ -49,10 +49,10 @@ contributions:
   - bernt-matthias
   - clsiguret
 edam_ontology:
-- topic_3697
-- topic_0637
-- topic_0080
-- topic_4038
+- topic_3697 # Microbial ecology
+- topic_0637 # Taxonomy
+- topic_0080 # Sequence analysis
+- topic_4038 # Metabarcoding
 recordings:
 - youtube_id: TODO
   length: 1H36M
