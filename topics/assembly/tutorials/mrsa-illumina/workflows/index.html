@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d5391e24150fd5e4cf5f3af05e52c8cbc0892bc5",
+		release: "galaxy-training-network@256380f3d31f6c988d3b9aaeaae86f8cb841573b",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -257,13 +257,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-illumina/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
 			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -280,29 +280,29 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   3["fastp"];
   1 -->|output| 3;
   0 -->|output| 3;
-  d6526e47-49fe-47db-8860-4a176c60eeb9["Output\nfastp_json"];
-  3 --> d6526e47-49fe-47db-8860-4a176c60eeb9;
-  style d6526e47-49fe-47db-8860-4a176c60eeb9 stroke:#2c3143,stroke-width:4px;
+  718be3d9-d3dd-4492-9844-8e49beccde16["Output\nfastp_json"];
+  3 --> 718be3d9-d3dd-4492-9844-8e49beccde16;
+  style 718be3d9-d3dd-4492-9844-8e49beccde16 stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   5["Shovill"];
   3 -->|out1| 5;
   3 -->|out2| 5;
-  902db75c-76cd-4e61-9085-286a7a486781["Output\nshovill_log"];
-  5 --> 902db75c-76cd-4e61-9085-286a7a486781;
-  style 902db75c-76cd-4e61-9085-286a7a486781 stroke:#2c3143,stroke-width:4px;
+  6bd637bd-8ee5-42be-b05a-d3d903eb5a75["Output\nshovill_log"];
+  5 --> 6bd637bd-8ee5-42be-b05a-d3d903eb5a75;
+  style 6bd637bd-8ee5-42be-b05a-d3d903eb5a75 stroke:#2c3143,stroke-width:4px;
   6["Quast"];
   5 -->|contigs| 6;
-  f448a3a9-5fb7-48d1-9b08-ca35e2878efe["Output\nquast_output"];
-  6 --> f448a3a9-5fb7-48d1-9b08-ca35e2878efe;
-  style f448a3a9-5fb7-48d1-9b08-ca35e2878efe stroke:#2c3143,stroke-width:4px;
+  d8468017-dfe3-4023-911c-c7ddc197b09b["Output\nquast_output"];
+  6 --> d8468017-dfe3-4023-911c-c7ddc197b09b;
+  style d8468017-dfe3-4023-911c-c7ddc197b09b stroke:#2c3143,stroke-width:4px;
   7["Bandage Image"];
   5 -->|contigs_graph| 7;
   8["Bandage Info"];
   5 -->|contigs_graph| 8;
-  b52b8ece-5d8d-4b07-98e2-b8cf52fc2bf7["Output\nbandage_info_output"];
-  8 --> b52b8ece-5d8d-4b07-98e2-b8cf52fc2bf7;
-  style b52b8ece-5d8d-4b07-98e2-b8cf52fc2bf7 stroke:#2c3143,stroke-width:4px;
+  a8fc4259-f11d-4f0d-89ab-da0629007b8c["Output\nbandage_info_output"];
+  8 --> a8fc4259-f11d-4f0d-89ab-da0629007b8c;
+  style a8fc4259-f11d-4f0d-89ab-da0629007b8c stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -377,7 +377,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d5391e24150fd5e4cf5f3af05e52c8cbc0892bc5">d5391e2</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/256380f3d31f6c988d3b9aaeaae86f8cb841573b">256380f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
