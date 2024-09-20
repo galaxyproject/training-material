@@ -5,5 +5,5 @@
 2. Describe your changes in detail, list anything you still need some help with or things that are still TODO
 3. Check that your images are allowed to be re-hosted by the GTN!
 4. Not ready for review yet? Make it a **Draft** pull request
-   - Once your are done making changes, choose **Ready for Review**
+   - Once you are done making changes, choose **Ready for Review**
    - Then the automated tests will run and we will know to review and merge it
