@@ -56,7 +56,7 @@ edam_ontology:
 recordings:
 - youtube_id: TODO
   length: 1H36M
-  galaxy_version: " 24.1.2.dev0"
+  galaxy_version: 24.1.2.dev0
   date: '2024-09-20'
   speakers:
   - bernt-matthias
