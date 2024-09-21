@@ -1,8 +1,7 @@
 ---
 layout: tutorial_hands_on
-
 title: Assembly of the mitochondrial genome from PacBio HiFi reads
-zenodo_link: 'https://zenodo.org/records/13345315'
+zenodo_link: https://zenodo.org/records/13345315
 questions:
 - How to assemble the mitochondrial genome from PacBio Hifi Reads
 objectives:
@@ -10,11 +9,24 @@ objectives:
 - Understand the outputs of MitoHifi
 time_estimation: 1H
 key_points:
-- MitoHifi generates the assembly and annotation of the Mitochondrial Genome using a reference sequence.
+- MitoHifi generates the assembly and annotation of the Mitochondrial Genome using
+  a reference sequence.
 contributors:
 - delphine-l
+recordings:
+- youtube_id: TODO
+  length: 11M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-09-20'
+  speakers:
+  - delphine-l
+  captioners:
+  - delphine-l
+  bot-timestamp: 1726861719
+
 
 ---
+
 
 
 # Introduction
