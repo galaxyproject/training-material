@@ -50,6 +50,7 @@ recordings:
   galaxy_version: 24.1.2.dev0
   date: '2024-09-07'
   speakers: 
+  - DinithiRajapaksha
   captioners: 
   bot-timestamp: 1725707919
 
