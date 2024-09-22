@@ -52,6 +52,7 @@ recordings:
   speakers: 
   - DinithiRajapaksha
   captioners: 
+  - DinithiRajapaksha
   bot-timestamp: 1725707919
 
 
