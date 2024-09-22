@@ -14,7 +14,7 @@ key_points:
 contributors:
 - delphine-l
 recordings:
-- youtube_id: TODO
+- youtube_id: 0ehAZ0DZsFU
   length: 11M
   galaxy_version: " 24.1.2.dev0"
   date: '2024-09-20'
