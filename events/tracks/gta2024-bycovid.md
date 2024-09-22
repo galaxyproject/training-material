@@ -2,7 +2,7 @@
 layout: event-track
 
 title: BY-COVID
-description: Learn all about 
+description: Learn all about BY-COVID. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
 
 
 
@@ -21,7 +21,7 @@ contributions:
 program:
   - section: "Viral genomes sequencing data analysis " 
     description: |
-      Sequencing data analysis for a spectrum of viral genomes with Galaxy. If you encounter any issue please ask us in this Slack channel. 
+      Sequencing data analysis for a spectrum of viral genomes with Galaxy. If you encounter any issue please ask us on Slack. 
     tutorials:
       - type: custom
         name: "[Sequencing spectrum viral genomes](https://gallantries.github.io/video-library/videos/virology/sequencing-spectrum-viral-genomes)"
@@ -36,7 +36,7 @@ program:
 
   - section: "SARS-CoV-2 genome surveillance system"
     description: |
-      An automated SARS-CoV-2 genome surveillance system built around Galaxy. If you encounter any issue please ask us in this Slack channel. 
+      An automated SARS-CoV-2 genome surveillance system built around Galaxy. If you encounter any issue please ask us on Slack. 
     tutorials:
       - type: custom
         name: "[An automated SARS-CoV-2 genome surveillance system built around Galaxy](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)"
