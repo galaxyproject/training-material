@@ -4,7 +4,7 @@
 {% assign supported_inexactly = own_material.supported_servers.inexact | size %}
 {% assign supported = supported_exactly | plus: supported_inexactly %}
 
-{% if supported > 0 or include.docker %}
+{% if supported > 0 %}
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         {% icon instances %}{% if include.label %}&nbsp;{{ locale['supporting-galaxies'] | default: "Available on these Galaxies" }} {% endif %}
     </a>
@@ -44,6 +44,7 @@
     {% endfor %}
     {% endif %}
 
+    <!--
     {% if include.docker %}
 	<li class="dropdown-header">
 		Containers
@@ -54,5 +55,6 @@
             </a>
         </li>
     {% endif %}
+    -->
     </ul>
 {% endif %}
