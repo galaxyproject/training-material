@@ -11,6 +11,14 @@ layout: base
     {% include _includes/contributor-list2.html contributors=page.contributions badge=true %}
   {% endif %}
 
+  {% if track.slack_channel %}
+  <div>
+    <h4> Need help with these tutorials?</h4>
+    Open Slack support channel for this track: <a href="https://gtnsmrgsbord.slack.com
+/channels/{{track.slack_channel}}" class="btn btn-success"> {% icon comment %} &nbsp; #{{track.slack_channel}}</a>
+  </div>
+  {% endif %}
+
   <div>
   {% for section in track.program %}
     {% if section.subsection %}
