@@ -42,9 +42,33 @@ The importance of identifying associations between microbial features and metada
 
 - **Advancing Microbiome Research:** Building a comprehensive understanding of microbial associations with various factors enhances microbiome research. This knowledge can contribute to broader insights into microbial ecology, evolution, and interactions within the human body and the environment.
 
+In addition to MaAslin2, Galaxy offers several other differential analysis tools that are widely used in both transcriptomics and microbiome studies. These tools are designed to handle different types of data (e.g., RNA-seq, microbial count data), with varying strengths in terms of statistical power, handling of sparsity, and treatment of compositional data. Some of them are mentioned below: 
+
+
+| Tool                | Strengths                                    | Weaknesses                               | Comparison to MaAsLin2                          |
+|---------------------|----------------------------------------------|------------------------------------------|------------------------------------------------|
+| **ANCOM-BC**        | Compositionality and bias correction          | Computationally intensive for large datasets | ANCOM-BC is good for simpler designs, but MaAsLin2 handles complex metadata better. |
+| **LEfSe**           | Easy to interpret, focuses on effect size     | No covariates, may overfit               | LEfSe is simpler but lacks the flexibility and multivariable depth of MaAsLin2. |
+| **ALDEx2**          | Robust to sparsity, small sample sizes        | Limited handling of complex metadata     | ALDEx2 is suitable for small datasets, but MaAsLin2 is superior in handling multivariable data and covariates. |
+| **MetagenomeSeq**   | Handles zero-inflation, sparse data           | Computationally heavy for large datasets | MetagenomeSeq is great for zero-inflated data, but lacks MaAsLin2's multivariable modeling capacity. |
+| **Corncob**         | Models both abundance and variability        | Complex to use, requires R expertise     | Corncob excels at overdispersion analysis, but MaAsLin2 is easier for broader multivariable models. |
+| **Phyloseq + DESeq2**| Strong for RNA-seq and transcriptomics; integrates with Phyloseq | Lacks compositionality awareness         | While DESeq2 works for microbiome data, MaAsLin2 offers more suitable options for compositional data and covariate handling. |
+| **Limma-Voom**      | Effective for RNA-seq and microarray data, handles low counts | Not tailored for compositional microbiome data | Limma-Voom is well-suited for gene expression, but MaAsLin2 better accounts for the unique characteristics of microbiome data. |
+
+- ANCOM-BC and MaAsLin2, outperform general-purpose tools like DESeq2 and limma-voom when it comes to microbiome data. This is due to their handling of the compositional nature of microbiome data and the sparsity typical of microbial datasets.[PMID: 36617187](https://pubmed.ncbi.nlm.nih.gov/36617187/)
+- While general methods like DESeq2 and limma-voom are reliable for gene expression analysis, they do not handle the unique properties of microbiome data as effectively as MaAsLin2. The latter provides a more accurate estimation of differential abundance in the presence of metadata confounders.
+[PMID: 1009442](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442 )
+
+![sensitivity and false discovery rate (FDR) across different tools](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1009442.g004 "Source: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442#pcbi-1009442-g004">sensitivity and false discovery rate (FDR) across different tools</a>"){:width="60%"}
+
+- The above figure compares various tools for differential abundance detection (Panel A) and multivariable association detection (Panel B) in microbiome studies, based on sensitivity and false discovery rate (FDR).
+- **Sensitivity** measures how well the methods detect true signals ,higher values leads to better performance.
+- **False discovery rate (FDR)** measures the proportion of false positives among detected signals (lower FDR is better).
+- MaAsLin2 is the clear standout for both differential abundance detection and multivariable association detection, showing high sensitivity and maintaining a low FDR.
+
 > <comment-title></comment-title>
 >
-> For more information about MaAslin2, [click here](https://huttenhower.sph.harvard.edu/maaslin/).
+> For more information on MaAslin2, [click here](https://huttenhower.sph.harvard.edu/maaslin/).
 {: .comment}
 
 MaAsLin2 requires the following input files:
@@ -75,7 +99,7 @@ In this tutorial, the two input files used are:
 -  `HMP2_taxonomy.tsv` or taxonomy file
 -  `HMP2_metadata.tsv` or metadata file
 
-The files provided were generated from the HMP2 data which can be downloaded from [here](https://ibdmdb.org/)
+The files provided were generated from the HMP2 data. To download [Click here](https://ibdmdb.org/)
  
  **Origin** : \
 The **HMP2_taxonomy.tsv** and **HMP2_metadata.tsv** files are part of the **Human Microbiome Project 2 (HMP2)**, which is a key component of the Inflammatory Bowel Disease Multi'omics Database [**(IBDMDB)**](https://ibdmdb.org/). The IBDMDB is a large-scale, multi-omic research initiative aimed at understanding the microbiome's role in IBD progression by integrating various omics data like metagenomics, metabolomics, and host genetics. 
@@ -188,9 +212,8 @@ Lets now understand the role of each parameter in the tool.
 - Options:\
         1. <u> Total Sum Scaling (TSS) </u>: Each count is divided by the total count for that sample, often multiplied by a constant to transform it into a percentage or proportion. 
         2. <u> Centered Log-Ratio (CLR) </u>: Each feature count is divided by the geometric mean of the counts in the same sample, and then the logarithm is taken. Useful for data where ratios between features are of interest, and it helps deal with the compositional nature of microbiome data.
-        3.<u> Cumulative Sum Scaling (CSS) </u>: Does the same basic conversion as TSS but it might include extra adjustments to deal with specific data
-patterns, giving a potentially more accurate normalization.
-        4. <u>Trimmed Mean of M-values(TMM) </u>: TMM normalizes data so you can accurately compare gene or feature counts across samples that may have
+        3. <u> Cumulative Sum Scaling (CSS) </u>: Does the same basic conversion as TSS but it might include extra adjustments to deal with specific data patterns, giving a potentially more accurate normalization.
+        4. <u> Trimmed Mean of M-values(TMM) </u>: TMM normalizes data so you can accurately compare gene or feature counts across samples that may have
 different total counts or distributions.\
 For each feature (like a gene), TMM computes the log-fold change (M-value) between each sample and  a metadata sample.\
 It then removes extreme values (outliers) that could skew the results. This trimming helps focus on more  typical values and reduces the impact of any unusual data points.\
