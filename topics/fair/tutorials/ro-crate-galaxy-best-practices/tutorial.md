@@ -31,7 +31,8 @@ One of the most useful additions to a workflow is a suite of tests, which help c
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, you will learn how to create a git repo, and begin working with it.
+> In this tutorial, you will learn about the best practices that the Galaxy community 
+has created for workflows.
 >
 > 1. TOC
 > {:toc}
@@ -41,7 +42,19 @@ One of the most useful additions to a workflow is a suite of tests, which help c
 
 ## Community best practices
 
-Though the practices listed above can be considered general enough to be applicable to any kind of software, individual communities usually add their own specific sets of rules and conventions that help users quickly find their way around software projects, understand them more easily and reuse them more effectively. The Galaxy community, for instance, has a [guide on best practices for maintaining workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html).
+Though the practices listed above can be considered general enough to be applicable to any kind of software, individual communities usually add their own specific sets of rules and conventions that help users quickly find their way around software projects, understand them more easily and reuse them more effectively. The Galaxy community, for instance, has a [guide on best practices for maintaining workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html). These best practices include:
+
+* all workflow inputs and outputs are explicit and labelled
+* tools used in the workflow are packaged with Galaxy by default or are available from the Galaxy ToolShed
+* the workflow creator and license are specified
+* the workflow has tests
+* the workflow is published on GitHub, a public GitLab server, or another public version-controlled repository
+* the workflow is registered with a workflow registry such as WorkflowHub or Dockstore
+
+> <hands-on-title>Apply best practices for workflow structure</hands-on-title>
+>
+> Read through the "Workflow Structure" section of the [guide on best practices for maintaining workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html#workflow-structure) and update your workflow so that it meets the recommendations.
+{: .hands_on}
 
 The [Intergalactic Workflow Commission (IWC)](https://github.com/galaxyproject/iwc) is a collection of highly curated Galaxy workflows that follow best practices and conform to a specific GitHub directory layout, as specified in the [guide on adding workflows](https://github.com/galaxyproject/iwc/blob/main/workflows/README.md#adding-workflows). In particular, the workflow file must be accompanied by a [Planemo test file](https://planemo.readthedocs.io/en/latest/test_format.html) with the same name but a `-test.yml` extension, and a `test-data` directory that contains the datasets used by the tests described in the test file. The guide also specifies how to fulfill other requirements such as setting a license, a creator and a version tag. A new workflow can be proposed for inclusion in the collection by opening a pull request to the [IWC repository](https://github.com/galaxyproject/iwc): if it passes the review and is merged, it will be published to [iwc-workflows](https://github.com/iwc-workflows). The publication process also generates a metadata file that turns the repository into a [Workflow Testing RO-Crate](https://crs4.github.io/life_monitor/workflow_testing_ro_crate), which can be registered to [WorkflowHub](https://workflowhub.eu/) and [LifeMonitor](https://www.lifemonitor.eu/).
 
