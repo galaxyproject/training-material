@@ -91,6 +91,9 @@ pip install igraph
 pip install louvain
 ```
 ```python
+pip install fa2-modified
+```
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pl
@@ -98,25 +101,6 @@ from matplotlib import rcParams
 import scanpy as sc
 ```
 
-And lastly, the trickiest one: ForceAtlas2. The original `fa2` only runs on Python <3.8, but there is another, maintained version - `fa2_modified` which can be installed on Python 3.9+. 
-```python
-pip install fa2-modified
-```
-
-The source code for `fa2_modified` is same as `fa2`, but Scanpy doesn't know that - we need to tell it! First, check the location and copy the displayed path:
-```python
-pip show fa2_modified
-```
-
-Then, rename `fa2_modified` to `fa2` and `fa2_modified-0.3.10.dist-info` to `fa2-0.3.10.dist-info` by pasting the found path to the command below. In this case, it's `/opt/conda/lib/python3.11/site-packages`. Check yours and adjust accordingly! 
-
-![Screenshot showing the location of the path to fa2_modified and where to paste it.](../../images/scrna-casestudy/fa2_modified.png "The path to locate fa2_modified files should be copied and pasted in the command below")
-
-```python
-%%bash
-mv /opt/conda/lib/python3.11/site-packages/fa2_modified /opt/conda/lib/python3.11/site-packages/fa2
-mv /opt/conda/lib/python3.11/site-packages/fa2_modified-0.3.10.dist-info /opt/conda/lib/python3.11/site-packages/fa2-0.3.10.dist-info
-```
 
 ## Import dataset
 
@@ -131,6 +115,18 @@ You now you need to read it in as an h5ad object.
 ```python
 adata = sc.read_h5ad(thymusobject)
 ```
+
+> <details-title>Any problems with *get()* function?</details-title>
+> There shouldn't be any issues with fetching data from your Galaxy history using *get()* function. However, if you experience any problems, you can use the code below to download the input data and be able to follow the tutorial. 
+> ```python
+> %%bash
+> wget -nv https://zenodo.org/records/13743145/files/Filtered_anndata.h5ad
+> ```
+> ```python
+> adata = sc.read_h5ad("Filtered_anndata.h5ad")
+> ```
+{: .details}
+
 
 ## Draw force-directed graph
 
