@@ -6,17 +6,23 @@ redirect_from:
 title: Bacterial genomics and AMR detection
 description: This track explains the basic steps to (1) process, assemble, annotate a bacterial genome and (2) detect Antimicrobial resistance (AMR) genes in bacterial genomes using Galaxy. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [#gta_bacterial_genomics](https://gtnsmrgsbord.slack.com/archives/C07NE0FHM6H).
 
+slack_channel: gta_bacterial_genomics
+
 contributions:
     organisers:
         - bebatut
         - clsiguret
     instructors:
+        - annasyme
         - bebatut
         - clsiguret
-        - SaimMomin12
         - EngyNasr
+        - GarethPrice-Aus
+        - igormakunin
         - meltemktn
         - paulzierep
+        - SaimMomin12
+
 
 
 program:

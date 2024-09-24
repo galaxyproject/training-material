@@ -13,10 +13,14 @@ contributions:
         - subinamehta
         - timothygriffin
     instructors:
-        - pratikdjagtap
+        - annasyme
+        - GarethPrice-Aus
+        - igormakunin
         - foellmelanie
+        - pratikdjagtap
         - subinamehta
         - timothygriffin
+
 
 
 program:

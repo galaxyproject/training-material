@@ -4,17 +4,18 @@ layout: event-track
 title: BY-COVID
 description: Learn all about BY-COVID. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
 
-
+slack_channel: gta_BY-COVID
 
 contributions:
     organisers:
         - wm75
     instructors:
-        - wm75
+        - annasyme
         - bgruening
         - GarethPrice-Aus 
-        - annasyme
+        - igormakunin
         - mateeullah905
+        - wm75
 
 
 

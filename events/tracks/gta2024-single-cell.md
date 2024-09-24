@@ -4,16 +4,21 @@ layout: event-track
 title: Single Cell
 description: Learn all about Sigle Cell on Galaxy. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [gta_single-cell](https://gtnsmrgsbord.slack.com/archives/C07NE0B4ZEZ).
 
+slack_channel: gta_single-cell
+
 contributions:
     organisers:
         - pavanvidem
         - nomadscientist
     instructors:
+        - annasyme
+        - Nilchia
+        - dianichj
+        - GarethPrice-Aus
+        - igormakunin
+        - MarisaJL
         - pavanvidem
         - nomadscientist
-        - dianichj
-        - Nilchia
-        - MarisaJL
 
 
 program:
