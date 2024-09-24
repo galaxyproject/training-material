@@ -120,6 +120,22 @@ As an example we will use this [simple workflow](https://github.com/crs4/life_mo
 > 1. Browse the files that have been created - `sort-and-change-case-tests.yml` and `test_data/`
 {: .hands_on}
 
+> <question-title></question-title>
+>
+> 1. How do the files in `test_data/` relate to your Galaxy history?
+> 2. Look at the contents of `sort-and-change-case-tests.yml`. What are the expected outputs of the test?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The files in `test_data/` correspond to the output files in the history, though some of the names are different:
+> >   1. `bed_input.bed` has the same name in the history - this is the input file we uploaded
+> >   2. `sorted_bed.bed` corresponds to the `Sort on data 1` step (you can confirm this by viewing the file contents)
+> >   2. `uppercase_bed.tabular` corresponds to the `Change case on data 2` step (you can confirm this by viewing the file contents)
+> > 2. The expected outputs are `test-data/sorted_bed.bed` and `test-data/uppercase_bed.tabular`. This means that when the workflow is run on the input (`test-data/bed_input.bed`), it is expected to produce two files that look exactly like those outputs.
+> >
+> {: .solution}
+{: .question}
+
 To build up the test suite further, you can invoke the workflow multiple times with different inputs, and use each invocation to generate a test, using the same command as before:
 
 ```bash
