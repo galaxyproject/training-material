@@ -18,6 +18,12 @@ abbreviations:
   sdm: simple demultiplexer
   TSV: tab-separated-values
 
+requirements:  
+- 
+  type: "internal"  
+  topic_name: introduction  
+  tutorials:  
+    - galaxy-intro-101-everyone  
 
 questions:
 - What is the fungal community composition in a given soil sample?
@@ -36,20 +42,13 @@ key_points:
 - LotuS is a metagenomics tool for identifying species and {OTU}s and {ASV}s from sequencing data
 - Galaxy is an easy way to run LotuS2 in the cloud for bioinformatics beginners
 
-contributors:
-- sujaikumar
-- bethanmanley
+contributions:
+  authorship:
+    - sujaikumar
+  editing:
+    - bethanmanley
 
 ---
-
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
 
 # Introduction
 
@@ -60,6 +59,15 @@ We do this by using a specific primer pair that amplifies just the {ITS2} region
 This tutorial concentrates on the bioinformatics part of the process, i.e. the steps we need to do **after** we get data back from the sequencer. Starting from some example fastq files, we demonstrate how to upload data, run LotuS2, and examine the output files. We end with a brief description of what we can do with these output files.
 
 We use LotuS2 at {SPUN} because we have found that it performs best out of all the tools we tried for identifying {MF} from sequencing data {% cite ozkurt2022 %}.
+
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
 ## Pre-requisites for this tutorial
 
@@ -171,7 +179,7 @@ We will briefly look at each type of file to see that it has uploaded correctly.
      3. A line with just `+` on it (indicates that the next line has sequence quality values)
      4. A line with sequence quality values for each nucleotide, in ASCII format
 >
-> You do not need to know more about FASTQ files for this tutorial, or about sequence quality in ASCII format, but if you want to learn more, you can do the [Sequence Analysis: Quality Control tutorial](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
+> You do not need to know more about FASTQ files for this tutorial, or about sequence quality in ASCII format, but if you want to learn more, you can do the [Sequence Analysis: Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 >
 {: .hands_on}
 
