@@ -207,3 +207,5 @@ Replacing `sort-and-change-case.ga` with the name of your actual Galaxy workflow
    * run `planemo test` on the Galaxy workflow
 
 An example of a repository built according to the guidelines given here is [simleo/ccs-bam-to-fastq-qc-crate](https://github.com/simleo/ccs-bam-to-fastq-qc-crate), which realizes the Workflow Testing RO-Crate setup for [BAM-to-FASTQ-QC](https://workflowhub.eu/workflows/220).
+
+Your workflow is now ready to add to GitHub! If you're not familiar with GitHub, follow these instructions to create a repository and upload your workflow files: [Uploading a project to GitHub](https://docs.github.com/en/get-started/start-your-journey/uploading-a-project-to-github).
