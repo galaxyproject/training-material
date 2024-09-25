@@ -3,6 +3,7 @@
 require 'json'
 require './_plugins/gtn'
 require './_plugins/gtn/git'
+require './_plugins/util'
 
 module Jekyll
   # Generate JSON-LD metadata for the GTN.
@@ -794,12 +795,35 @@ module Jekyll
 
       data['isPartOf'] = topic_desc
 
+      data['abstract'] = material
+        .fetch('content', '')
+        .strip
+        .split("\n")
+        .first
+
+      if ! data['abstract'].nil?
+        data['abstract'] = data['abstract']
+          .gsub(/\{\{\s*site.baseurl\s*\}\}/, url_prefix(site))
+          .gsub(/\[{{\s*site.url\s*}}/, '[' + url_prefix(site))
+          .gsub(/{% link (topics[^%]*).md %}/, url_prefix(site) + '\1.html')
+          .gsub(/{% link (topics[^%]*).html %}/, url_prefix(site) + '\1.html')
+          .gsub(/\s*\(?{%\s*cite [^}]+\s*%}\)?/, '')
+          .gsub('{{ site.github_repository }}', safe_site_config(site, 'github_repository', 'https://example.com'))
+          .gsub(/{% snippet ([^%]*) %}/, '')
+          .gsub(/{% include ([^%]*) %}/, '')
+      end
+
+      description.push("## Abstract\n\n#{data['abstract']}\n\n")
+
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
-        data['learningResourceType'] = if material['name'] == 'tutorial.md'
-                                         'hands-on tutorial'
-                                       else
-                                         'slides'
-                                       end
+
+        if material['name'] == 'tutorial.md'
+          data['learningResourceType'] = 'e-learning'
+          description.push("## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n")
+        else
+          data['learningResourceType'] = 'slides'
+        end
+
         data['name'] = material['title']
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
@@ -817,8 +841,8 @@ module Jekyll
           description.push("## Questions this #{material['type']} will address\n\n - #{questions}\n\n")
         end
         if material.key?('objectives') && !material['objectives'].nil? && material['objectives'].length.positive?
-          objectives = material['objectives'].join("\n - ")
-          description.push("## Learning Objectives\n\n - #{objectives}\n\n")
+          objectives = material['objectives'].map{|x| "- #{x}"}.join("\n")
+          description.push("## Learning Objectives\n\n#{objectives}\n\n")
           data['teaches'] = objectives
         end
         if material.key?('keypoints') && !material['keypoints'].nil? && material['keypoints'].length.positive?
@@ -844,12 +868,39 @@ module Jekyll
                         name: "Associated Workflows"
                       })
       end
-      if actual_material.key?('zenodo_link')
+
+      # Notebooks
+      if actual_material.key?('notebook') && actual_material['notebook']['language'] != 'r'
+        # Python, Bash, SQL (all via jupyter)
+        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.ipynb"
         mentions.push({
                         '@type': 'Thing',
-                        url: (actual_material['zenodo_link']).to_s,
-                        name: "Associated Training Datasets"
+                        url: url,
+                        name: "Jupyter Notebook (with Solutions)"
                       })
+        mentions.push({
+                        '@type': 'Thing',
+                        url: url.gsub(/\.ipynb$/, '-course.ipynb'),
+                        name: "Jupyter Notebook (without Solutions)"
+                      })
+      else # Actual R
+        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.Rmd"
+        mentions.push({
+                        '@type': 'Thing',
+                        url: url,
+                        name: "Quarto/RMarkdown Notebook"
+                      })
+      end
+
+      # Zenodo link out
+      if actual_material.key?('zenodo_link') && ! actual_material['zenodo_link'].nil?
+        if actual_material['zenodo_link'].length.positive?
+          mentions.push({
+                          '@type': 'Thing',
+                          url: (actual_material['zenodo_link']).to_s,
+                          name: "Associated Training Datasets"
+                        })
+        end
       end
 
       if description.empty?
@@ -905,7 +956,7 @@ module Jekyll
                             '@context': 'http://schema.org',
                             '@type': 'LearningResource',
                             url: (page['hands_on_url']).to_s,
-                            learningResourceType: 'hands-on tutorial',
+                            learningResourceType: 'e-learning',
                             interactivityType: 'expositive',
                           }
                         )
@@ -921,7 +972,7 @@ module Jekyll
                                "/#{tuto}/tutorial.html",
                           name: (page['title']).to_s,
                           description: "Hands-on for '#{page['title']}' tutorial",
-                          learningResourceType: 'hands-on tutorial',
+                          learningResourceType: 'e-learning',
                           interactivityType: 'expositive',
                           provider: GTN
                         }
@@ -991,7 +1042,6 @@ module Jekyll
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
       data['mentions'] = mentions
-      data['abstract'] = material.fetch('content', '').strip.split("\n").first
 
       data
     end
