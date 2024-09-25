@@ -87,7 +87,7 @@ tests** for your
 workflow]({% link topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.md %}#generating-tests-for-your-workflow) using
 [Planemo](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html#tests),
 as well as configuring a [GitHub Actions
-workflow]({% link topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.md %}#adding-a-github-workflow) to automatically
+workflow]({% link topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.md %}#adding-a-github-workflow-for-running-tests-automatically) to automatically
 run those tests.  Don't worry if this sounds like a lot: the [best
 practices]({% link topics/fair/tutorials/ro-crate-galaxy-best-practices/tutorial.md %}) document provides straightforward
 instructions.
