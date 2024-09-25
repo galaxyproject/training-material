@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -244,6 +244,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material for all kinds of transcriptomics analysis.",
     "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
   },
+  "abstract": "# What is RNA sequencing?",
   "learningResourceType": "slides",
   "name": "Introduction to Transcriptomics",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/slides.html",
@@ -251,7 +252,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "keywords": [
     "Transcriptomics"
   ],
-  "description": "# What is RNA sequencing?",
+  "description": "## Abstract\n\n# What is RNA sequencing?\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -332,7 +333,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -402,7 +403,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -650,9 +651,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "educationalLevel": "Beginner",
   "mentions": [
-
-  ],
-  "abstract": "# What is RNA sequencing?"
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/introduction/transcriptomics-introduction.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    }
+  ]
 }
         </script>
     </head>

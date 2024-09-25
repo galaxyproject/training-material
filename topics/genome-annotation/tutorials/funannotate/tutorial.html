@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -233,19 +233,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
     "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.",
+  "learningResourceType": "e-learning",
   "name": "Genome annotation with Funannotate",
   "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html",
   "version": 23,
   "timeRequired": "PT8H",
-  "teaches": "Load genome into Galaxy\n - Annotate genome with Funannotate\n - Perform functional annotation using EggNOG-mapper and InterProScan\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse",
+  "teaches": "- Load genome into Galaxy\n- Annotate genome with Funannotate\n- Perform functional annotation using EggNOG-mapper and InterProScan\n- Evaluate annotation quality with BUSCO\n- View annotations in JBrowse",
   "keywords": [
     "Genome Annotation",
     "gmod",
     "eukaryote",
     "jbrowse1"
   ],
-  "description": "## Questions this  will address\n\n - How to annotate an eukaryotic genome with Funannotate?\n - How to perform functional annotation?\n - How to evaluate and visualize annotated genomic features?\n - How to format the annotation for submission at NCBI?\n\n\n## Learning Objectives\n\n - Load genome into Galaxy\n - Annotate genome with Funannotate\n - Perform functional annotation using EggNOG-mapper and InterProScan\n - Evaluate annotation quality with BUSCO\n - View annotations in JBrowse\n\n",
+  "description": "## Abstract\n\nGenome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to annotate an eukaryotic genome with Funannotate?\n - How to perform functional annotation?\n - How to evaluate and visualize annotated genomic features?\n - How to format the annotation for submission at NCBI?\n\n\n## Learning Objectives\n\n- Load genome into Galaxy\n- Annotate genome with Funannotate\n- Perform functional annotation using EggNOG-mapper and InterProScan\n- Evaluate annotation quality with BUSCO\n- View annotations in JBrowse\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -291,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html",
       "name": "Masking repeats with RepeatMasker",
       "description": "Hands-on for 'Masking repeats with RepeatMasker' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -600,11 +601,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/genome-annotation-funannotate.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/7867921",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1107,12 +1112,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be
-		</a>
 	</li>
     
 	<li>
@@ -2246,7 +2245,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

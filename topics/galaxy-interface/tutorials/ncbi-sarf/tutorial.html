@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -234,18 +234,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
     "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.",
+  "learningResourceType": "e-learning",
   "name": "SRA Aligned Read Format to Speed Up SARS-CoV-2 data Analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/tutorial.html",
   "version": 12,
   "timeRequired": "PT30M",
-  "teaches": "Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content\n - Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format",
+  "teaches": "- Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content\n- Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format",
   "keywords": [
     "Using Galaxy and Managing your Data",
     "ncbi",
     "covid19"
   ],
-  "description": "## Questions this  will address\n\n - How can I search SRA SARS-CoV-2 metadata from within Galaxy?\n - How can I import SRA aligned read files and extract the data in my format of choice?\n - How can I import vcf files into Galaxy that have been generated for these Runs?\n\n\n## Learning Objectives\n\n - Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content\n - Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format\n\n",
+  "description": "## Abstract\n\nTraditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can I search SRA SARS-CoV-2 metadata from within Galaxy?\n - How can I import SRA aligned read files and extract the data in my format of choice?\n - How can I import vcf files into Galaxy that have been generated for these Runs?\n\n\n## Learning Objectives\n\n- Learn about SRA aligned read format and vcf files for Runs containing SARS-CoV-2 content\n- Understand how to search the metadata for these Runs to find your dataset of interest and then import that data in your preferred format\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -258,7 +259,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
       "name": "Rule Based Uploader",
       "description": "Hands-on for 'Rule Based Uploader' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -382,9 +383,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "educationalLevel": "Beginner",
   "mentions": [
-
-  ],
-  "abstract": "Traditionally, after a list of run accessions has been filtered on the NCBI website, the accessions are used to download and extract fastq using the SRA toolkit to enter into the next steps of the workflow. A newer compressed data type, generated from raw submitted data containing SARS-CoV-2 sequence, is also accessible to Galaxy users from SRA in the Cloud."
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/ncbi-sarf/galaxy-interface-ncbi-sarf.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    }
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -790,12 +794,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	</li>
     
     
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr>
-		</a>
-	</li>
-    
     
     
 	<li class="dropdown-header">
@@ -975,7 +973,7 @@ We hope to include that functionality in a future update.</p>
 
   <ol>
     <li>
-      <p>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a> or any other.</p>
+      <p>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org">UseGalaxy.org</a>, <a href="https://usegalaxy.eu">UseGalaxy.eu</a>, <a href="https://usegalaxy.fr">UseGalaxy.fr</a>, <a href="https://usegalaxy.org.au">UseGalaxy.org.au</a> or any other.</p>
     </li>
     <li>
       <p>Create a new history</p>
@@ -1794,7 +1792,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

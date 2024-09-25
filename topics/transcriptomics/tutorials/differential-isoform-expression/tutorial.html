@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -234,18 +234,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material for all kinds of transcriptomics analysis.",
     "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Discovered over 40 years ago, alternative splicing (AS) formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes. The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average. In humans,  approximately 95% of multi-exon genes show evidence of <abbr title=\"alternative splicing\">AS</abbr> and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions,. Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes,.",
+  "learningResourceType": "e-learning",
   "name": "Genome-wide alternative splicing analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/tutorial.html",
   "version": 9,
   "timeRequired": "PT3H",
-  "teaches": "Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions\n - Evaluate the differential alternative splicing in specific genes",
+  "teaches": "- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions\n- Evaluate the differential alternative splicing in specific genes",
   "keywords": [
     "Transcriptomics",
     "alternative splicing",
     "isoform switching"
   ],
-  "description": "## Questions this  will address\n\n - Are there statistically significant differences in gene splicing patterns between samples?\n - Are there significant isoform switching events between the experimental conditions?\n\n\n## Learning Objectives\n\n - Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions\n - Evaluate the differential alternative splicing in specific genes\n\n",
+  "description": "## Abstract\n\nDiscovered over 40 years ago, alternative splicing (AS) formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes. The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average. In humans,  approximately 95% of multi-exon genes show evidence of <abbr title=\"alternative splicing\">AS</abbr> and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions,. Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes,.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Are there statistically significant differences in gene splicing patterns between samples?\n - Are there significant isoform switching events between the experimental conditions?\n\n\n## Learning Objectives\n\n- Perform genome-wide isoform analysis in order to evaluate differences in expression profiles between two conditions\n- Evaluate the differential alternative splicing in specific genes\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -326,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -396,7 +397,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -619,11 +620,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/transcriptomics-differential-isoform-expression.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/records/13692977",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "Discovered over 40 years ago, alternative splicing (AS) formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes  ({% cite Alt1980 %}). The majority of eukaryote genes have multiple transcriptional isoforms, and recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average ({% cite Piovesan2016 %}). In humans,  approximately 95% of multi-exon genes show evidence of <abbr title=\"alternative splicing\">AS</abbr> and approximately 60% of genes have at least one alternative transcription start site, some of which exert antagonistic functions ({% cite Carninci2006 %}, {% cite Miura2012 %}). Its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %})."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -3692,7 +3697,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

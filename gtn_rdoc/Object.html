@@ -117,6 +117,7 @@
     <li ><a href="#method-i-printableMaterial">#printableMaterial</a>
     <li ><a href="#method-i-request">#request</a>
     <li ><a href="#method-i-safe_load_yaml">#safe_load_yaml</a>
+    <li ><a href="#method-i-safe_site_config">#safe_site_config</a>
     <li ><a href="#method-i-send_news">#send_news</a>
     <li ><a href="#method-i-serialise">#serialise</a>
     <li ><a href="#method-i-short_id">#short_id</a>
@@ -129,6 +130,7 @@
     <li ><a href="#method-i-translate">#translate</a>
     <li ><a href="#method-i-update_data_library">#update_data_library</a>
     <li ><a href="#method-i-update_tutorial">#update_tutorial</a>
+    <li ><a href="#method-i-url_prefix">#url_prefix</a>
     <li ><a href="#method-i-validate_document">#validate_document</a>
     <li ><a href="#method-i-visitAndMarkdownify">#visitAndMarkdownify</a>
     <li ><a href="#method-i-write_data_library">#write_data_library</a>
@@ -2347,6 +2349,33 @@
 
       </div>
 
+      <div id="method-i-safe_site_config" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">safe_site_config</span><span
+              class="method-args">(site, key, default)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="safe_site_config-source">
+            <pre><span class="ruby-comment"># File _plugins/util.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">safe_site_config</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">default</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>[<span class="ruby-identifier">key</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">default</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
       <div id="method-i-send_news" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
@@ -2867,6 +2896,33 @@
   <span class="ruby-identifier">contents</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^zenodo_link:.*/</span>, <span class="ruby-node">&quot;zenodo_link: &#39;https://zenodo.org/record/#{zenodo_id}&#39;&quot;</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">contents</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-url_prefix" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">url_prefix</span><span
+              class="method-args">(site)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="url_prefix-source">
+            <pre><span class="ruby-comment"># File _plugins/util.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">url_prefix</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;url&#39;</span>)
+    <span class="ruby-node">&quot;#{site.config[&#39;url&#39;]}#{site.config[&#39;baseurl&#39;]}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&#39;http://localhost:4000/training-material/&#39;</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

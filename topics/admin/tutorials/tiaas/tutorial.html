@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -234,12 +234,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
     "url": "https://training.galaxyproject.org/training-material/topics/admin/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS).",
+  "learningResourceType": "e-learning",
   "name": "Training Infrastructure as a Service (TIaaS)",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/tutorial.html",
   "version": 37,
   "timeRequired": "PT30M",
-  "teaches": "Setup TIaaS\n - Request and manage trainings\n - Join a training",
+  "teaches": "- Setup TIaaS\n- Request and manage trainings\n- Join a training",
   "keywords": [
     "Galaxy Server administration",
     "ansible",
@@ -247,7 +248,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "jobs",
     "git-gat"
   ],
-  "description": "## Questions this  will address\n\n - How to deploy EU's TIaaS\n\n\n## Learning Objectives\n\n - Setup TIaaS\n - Request and manage trainings\n - Join a training\n\n",
+  "description": "## Abstract\n\nGalaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS).\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to deploy EU's TIaaS\n\n\n## Learning Objectives\n\n- Setup TIaaS\n- Request and manage trainings\n- Join a training\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -295,7 +296,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
       "name": "Ansible",
       "description": "Hands-on for 'Ansible' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -365,7 +366,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
       "name": "Galaxy Installation with Ansible",
       "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -435,7 +436,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
       "name": "Connecting Galaxy to a compute cluster",
       "description": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -470,7 +471,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
       "name": "Mapping Jobs to Destinations using TPV",
       "description": "Hands-on for 'Mapping Jobs to Destinations using TPV' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -540,7 +541,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/pulsar/tutorial.html",
       "name": "Running Jobs on Remote Resources with Pulsar",
       "description": "Hands-on for 'Running Jobs on Remote Resources with Pulsar' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -790,11 +791,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
-      "url": "",
-      "name": "Associated Training Datasets"
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/tiaas/admin-tiaas.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
     }
-  ],
-  "abstract": "Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS)."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -2393,7 +2393,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

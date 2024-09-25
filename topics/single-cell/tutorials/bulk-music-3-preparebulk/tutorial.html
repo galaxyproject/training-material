@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -234,18 +234,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!\n\nWhat else do you want to see? You can submit tool and/or tutorial request on our <i class=\"fa fa-wrench\" aria-hidden=\"true\"></i> [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).\n {: .alert.alert-success}\n",
     "url": "https://training.galaxyproject.org/training-material/topics/single-cell/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "After completing the [MuSiC deconvolution tutorial](https://xuranw.github.io/MuSiC/articles/MuSiC.html), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas.  Let's get started!",
+  "learningResourceType": "e-learning",
   "name": "Bulk matrix to ESet | Creating the bulk RNA-seq dataset for deconvolution",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html",
   "version": 8,
   "timeRequired": "PT1H",
-  "teaches": "You will retrieve raw data from the EMBL-EBI Expression Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.\n - You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset.",
+  "teaches": "- You will retrieve raw data from the EMBL-EBI Expression Atlas.\n- You will manipulate the metadata and matrix files.\n- You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.\n- You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset.",
   "keywords": [
     "Single Cell",
     "transcriptomics",
     "data management"
   ],
-  "description": "## Questions this  will address\n\n - Where can I find good quality RNA-seq datasets?\n - How can I reformat and manipulate these downloads to create the right format for MuSiC?\n\n\n## Learning Objectives\n\n - You will retrieve raw data from the EMBL-EBI Expression Atlas.\n - You will manipulate the metadata and matrix files.\n - You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.\n - You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset.\n\n",
+  "description": "## Abstract\n\nAfter completing the [MuSiC deconvolution tutorial](https://xuranw.github.io/MuSiC/articles/MuSiC.html), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas.  Let's get started!\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Where can I find good quality RNA-seq datasets?\n - How can I reformat and manipulate these downloads to create the right format for MuSiC?\n\n\n## Learning Objectives\n\n- You will retrieve raw data from the EMBL-EBI Expression Atlas.\n- You will manipulate the metadata and matrix files.\n- You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.\n- You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -291,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html",
       "name": "Bulk RNA Deconvolution with MuSiC",
       "description": "Hands-on for 'Bulk RNA Deconvolution with MuSiC' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -326,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/tutorial.html",
       "name": "Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution",
       "description": "Hands-on for 'Matrix Exchange Format to ESet | Creating a single-cell RNA-seq reference dataset for deconvolution' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -528,11 +529,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/single-cell-bulk-music-3-preparebulk.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/7319173",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "After completing the [MuSiC deconvolution tutorial](https://xuranw.github.io/MuSiC/articles/MuSiC.html) ({% cite wang2019bulk %}), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk RNA-seq dataset pulled from a public resource (the EMBL-EBI Expression atlas ({% cite Moreno2021 %}).  Let's get started!"
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1947,7 +1952,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

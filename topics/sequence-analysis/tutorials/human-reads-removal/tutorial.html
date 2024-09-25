@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -233,17 +233,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Analyses of sequences",
     "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Patient samples for pathogen detection are usually \"contaminated\" with human host DNA.",
+  "learningResourceType": "e-learning",
   "name": "Removal of human reads from SARS-CoV-2 sequencing data",
   "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
   "version": 5,
   "timeRequired": "PT1H",
-  "teaches": "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources\n - Organize the data into a collection\n - Preprocess and map the data against the human reference genome\n - Eliminate reads/read pairs that map to the human genome from the original data",
+  "teaches": "- Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources\n- Organize the data into a collection\n- Preprocess and map the data against the human reference genome\n- Eliminate reads/read pairs that map to the human genome from the original data",
   "keywords": [
     "Sequence analysis",
     "covid19"
   ],
-  "description": "## Questions this  will address\n\n - How can you remove traces of human sequence data from a sequenced viral sample?\n\n\n## Learning Objectives\n\n - Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources\n - Organize the data into a collection\n - Preprocess and map the data against the human reference genome\n - Eliminate reads/read pairs that map to the human genome from the original data\n\n",
+  "description": "## Abstract\n\nPatient samples for pathogen detection are usually \"contaminated\" with human host DNA.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can you remove traces of human sequence data from a sequenced viral sample?\n\n\n## Learning Objectives\n\n- Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources\n- Organize the data into a collection\n- Preprocess and map the data against the human reference genome\n- Eliminate reads/read pairs that map to the human genome from the original data\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -324,7 +325,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -394,7 +395,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -429,7 +430,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
       "name": "Using dataset collections",
       "description": "Hands-on for 'Using dataset collections' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -561,9 +562,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/",
       "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/sequence-analysis-human-reads-removal.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
     }
-  ],
-  "abstract": "Patient samples for pathogen detection are usually \"contaminated\" with human host DNA."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1051,12 +1056,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<li>
 		<a class="dropdown-item" href="https://mississippi.sorbonne-universite.fr" title="">
 			MISSISSIPPI
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be
 		</a>
 	</li>
     
@@ -1750,7 +1749,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

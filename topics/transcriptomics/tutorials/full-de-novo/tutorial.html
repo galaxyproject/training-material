@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -236,16 +236,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material for all kinds of transcriptomics analysis.",
     "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "As a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding.",
+  "learningResourceType": "e-learning",
   "name": "De novo transcriptome assembly, annotation, and differential expression analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/full-de-novo/tutorial.html",
   "version": 8,
   "timeRequired": "PT3H",
-  "teaches": "The learning objectives are the goals of the tutorial\n - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course\n - They are single sentences describing what a learner should be able to do once they have completed the tutorial\n - You can use Bloom's Taxonomy to write effective learning objectives",
+  "teaches": "- The learning objectives are the goals of the tutorial\n- They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course\n- They are single sentences describing what a learner should be able to do once they have completed the tutorial\n- You can use Bloom's Taxonomy to write effective learning objectives",
   "keywords": [
     "Transcriptomics"
   ],
-  "description": "## Questions this  will address\n\n - Which biological questions are addressed by the tutorial?\n - Which bioinformatics techniques are important to know for this type of data?\n\n\n## Learning Objectives\n\n - The learning objectives are the goals of the tutorial\n - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course\n - They are single sentences describing what a learner should be able to do once they have completed the tutorial\n - You can use Bloom's Taxonomy to write effective learning objectives\n\n",
+  "description": "## Abstract\n\nAs a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Which biological questions are addressed by the tutorial?\n - Which bioinformatics techniques are important to know for this type of data?\n\n\n## Learning Objectives\n\n- The learning objectives are the goals of the tutorial\n- They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course\n- They are single sentences describing what a learner should be able to do once they have completed the tutorial\n- You can use Bloom's Taxonomy to write effective learning objectives\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -326,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -396,7 +397,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -668,11 +669,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/full-de-novo/transcriptomics-full-de-novo.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/3541678",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "As a result of the development of novel sequencing technologies, the years between 2008 and 2012 saw a large drop in the cost of sequencing. Per megabase and genome, the cost dropped to 1/100,000th and 1/10,000th of the price, respectively. Prior to this, only transcriptomes of organisms that were of broad interest and utility to scientific research were sequenced; however, these developed in 2010s high-throughput sequencing (also called next-generation sequencing) technologies are both cost- and labor- effective, and the range of organisms studied via these methods is expanding."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1082,12 +1087,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     
 	<li class="dropdown-header">
 		<b>Possibly Working</b>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be
-		</a>
 	</li>
     
 	<li>
@@ -2476,7 +2475,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

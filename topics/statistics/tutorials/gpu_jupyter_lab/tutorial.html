@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -233,12 +233,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
     "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.",
+  "learningResourceType": "e-learning",
   "name": "A Docker-based interactive Jupyterlab powered by GPU for artificial intelligence in Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/tutorial.html",
   "version": 8,
   "timeRequired": "PT1H",
-  "teaches": "Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n - Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n - Develop AI algorithms using Tensorflow\n - Send long-running jobs to Galaxy's cluster and save results in its history\n - Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction",
+  "teaches": "- Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n- Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n- Develop AI algorithms using Tensorflow\n- Send long-running jobs to Galaxy's cluster and save results in its history\n- Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction",
   "keywords": [
     "Statistics and machine learning",
     "interactive-tools",
@@ -248,7 +249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "image-segmentation",
     "protein-3D-structure"
   ],
-  "description": "## Questions this  will address\n\n - How to use Jupyterlab and it several features?\n - How to use it for creating input datasets and writing artificial intelligence (AI) algorithms?\n\n\n## Learning Objectives\n\n - Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n - Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n - Develop AI algorithms using Tensorflow\n - Send long-running jobs to Galaxy's cluster and save results in its history\n - Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction\n\n",
+  "description": "## Abstract\n\n[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to use Jupyterlab and it several features?\n - How to use it for creating input datasets and writing artificial intelligence (AI) algorithms?\n\n\n## Learning Objectives\n\n- Learn to use Jupyterlab - an online Python editor designed for developing AI algorithms\n- Explore several of its features such as Git, workflow of jupyter notebook, integration to Galaxy\n- Develop AI algorithms using Tensorflow\n- Send long-running jobs to Galaxy's cluster and save results in its history\n- Reproduce results from recent scientific publications - COVID CT scan segmentation and 3D protein structure prediction\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -294,7 +295,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html",
       "name": "JupyterLab in Galaxy",
       "description": "Hands-on for 'JupyterLab in Galaxy' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -329,7 +330,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html",
       "name": "Introduction to deep learning",
       "description": "Hands-on for 'Introduction to deep learning' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -462,11 +463,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/gpu_jupyter_lab/statistics-gpu_jupyter_lab.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/6091361",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1592,7 +1597,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

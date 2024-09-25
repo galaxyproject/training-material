@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -236,19 +236,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Genetic differences (variants) between healthy and diseased tissue,\nbetween individuals of a population, or between strains of an organism\ncan provide mechanistic insight into disease processes and the natural\nfunction of affected genes.\n\nThe tutorials in this section show how to detect evidence for\ngenetic variants in next-generation sequencing data, a process termed\nvariant calling.\n\nOf equal importance, they also demonstrate how you can interpret, for\na range of different organisms, the resulting sets of variants by\npredicting their molecular effects on genes and proteins, by\nannotating previously observed variants with published knowledge, and\nby trying to link phenotypes of the sequenced samples to their variant\ngenotypes.\n",
     "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "The aim of this tutorial is twofold:",
+  "learningResourceType": "e-learning",
   "name": "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/tutorial.html",
   "version": 16,
   "timeRequired": "PT1H",
-  "teaches": "Understand how Galaxy and the Sequence Read Archive interact\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n - Understand how collections enable processing of sequencing data in batches\n - Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples",
+  "teaches": "- Understand how Galaxy and the Sequence Read Archive interact\n- Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n- Understand how collections enable processing of sequencing data in batches\n- Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples",
   "keywords": [
     "Variant Analysis",
     "covid19",
     "virology",
     "one-health"
   ],
-  "description": "## Questions this  will address\n\n - How can you download public sequencing data deposited in the NCBI Sequence Read Archive (SRA) into a Galaxy history for analysis?\n - How can you process a batch of sequencing data from several samples efficiently/in parallel with Galaxy?\n - Starting from raw sequenced reads of whole-genome sequenced samples of SARS-CoV-2, how can you identify mutations in the genomes of these samples?\n\n\n## Learning Objectives\n\n - Understand how Galaxy and the Sequence Read Archive interact\n - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n - Understand how collections enable processing of sequencing data in batches\n - Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples\n\n",
+  "description": "## Abstract\n\nThe aim of this tutorial is twofold:\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can you download public sequencing data deposited in the NCBI Sequence Read Archive (SRA) into a Galaxy history for analysis?\n - How can you process a batch of sequencing data from several samples efficiently/in parallel with Galaxy?\n - Starting from raw sequenced reads of whole-genome sequenced samples of SARS-CoV-2, how can you identify mutations in the genomes of these samples?\n\n\n## Learning Objectives\n\n- Understand how Galaxy and the Sequence Read Archive interact\n- Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy\n- Understand how collections enable processing of sequencing data in batches\n- Understand the analysis steps required to identify and annotate genomic mutations from sequencing data of SARS-CoV-2 samples\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -329,7 +330,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -399,7 +400,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -701,9 +702,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@type": "Thing",
       "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/workflows/",
       "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/sars-cov-2/variant-analysis-sars-cov-2.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
     }
-  ],
-  "abstract": "The aim of this tutorial is twofold:"
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1182,12 +1187,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	<li>
 		<a class="dropdown-item" href="https://mississippi.sorbonne-universite.fr" title="">
 			MISSISSIPPI
-		</a>
-	</li>
-    
-	<li>
-		<a class="dropdown-item" href="https://usegalaxy.be/" title="">
-			UseGalaxy.be
 		</a>
 	</li>
     
@@ -2285,7 +2284,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

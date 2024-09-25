@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -237,16 +237,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material for all kinds of transcriptomics analysis.",
     "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into \"RDF triples\" and store them in a specific kind of database: an \"RDF triplestore\". Under this form, data can then be queried using a specific language: \"SPARQL\". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.",
+  "learningResourceType": "e-learning",
   "name": "RNA-Seq analysis with AskOmics Interactive Tool",
   "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html",
   "version": 13,
   "timeRequired": "PT2H",
-  "teaches": "Launch an AskOmics Interactive Tool\n - Integrate RNA-Seq and reference datasets into AskOmics\n - Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n - Complete the query to get the human homologs and their location using neXtProt database",
+  "teaches": "- Launch an AskOmics Interactive Tool\n- Integrate RNA-Seq and reference datasets into AskOmics\n- Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n- Complete the query to get the human homologs and their location using neXtProt database",
   "keywords": [
     "Transcriptomics"
   ],
-  "description": "## Questions this  will address\n\n - How to integrate RNA-Seq results with other datasets using AskOmics?\n - How to query these datasets to answer a biological question?\n - How to exploit a distant SPARQL endpoint to retrieve information?\n\n\n## Learning Objectives\n\n - Launch an AskOmics Interactive Tool\n - Integrate RNA-Seq and reference datasets into AskOmics\n - Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n - Complete the query to get the human homologs and their location using neXtProt database\n\n",
+  "description": "## Abstract\n\nAskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into \"RDF triples\" and store them in a specific kind of database: an \"RDF triplestore\". Under this form, data can then be queried using a specific language: \"SPARQL\". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to integrate RNA-Seq results with other datasets using AskOmics?\n - How to query these datasets to answer a biological question?\n - How to exploit a distant SPARQL endpoint to retrieve information?\n\n\n## Learning Objectives\n\n- Launch an AskOmics Interactive Tool\n- Integrate RNA-Seq and reference datasets into AskOmics\n- Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n- Complete the query to get the human homologs and their location using neXtProt database\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -327,7 +328,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
       "name": "Quality Control",
       "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -397,7 +398,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
       "name": "Mapping",
       "description": "Hands-on for 'Mapping' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -432,7 +433,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html",
       "name": "2: RNA-seq counts to genes",
       "description": "Hands-on for '2: RNA-seq counts to genes' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -740,11 +741,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/transcriptomics-rna-seq-analysis-with-askomics-it.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/3925863",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into \"RDF triples\" and store them in a specific kind of database: an \"RDF triplestore\". Under this form, data can then be queried using a specific language: \"SPARQL\". AskOmics hides the complexity of these technologies and allows to perform complex queries using a user-friendly interface."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -2125,7 +2130,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

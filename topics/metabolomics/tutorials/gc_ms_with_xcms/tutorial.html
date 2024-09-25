@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -237,16 +237,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
     "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics' studies based on untargeted mass spectrometry provide the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process.",
+  "learningResourceType": "e-learning",
   "name": "Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)",
   "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gc_ms_with_xcms/tutorial.html",
   "version": 5,
   "timeRequired": "PT2H",
-  "teaches": "To learn about the key steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.\n - To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.\n - To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.",
+  "teaches": "- To learn about the key steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.\n- To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.\n- To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.",
   "keywords": [
     "Metabolomics"
   ],
-  "description": "## Questions this  will address\n\n - What are the main steps of gas chromatography-mass spectrometry (GC-MS) data processing for metabolomic analysis?\n - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?\n - Do you know any alternative tools that can be used in place of the individual steps of this workflow?\n\n\n## Learning Objectives\n\n - To learn about the key steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.\n - To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.\n - To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.\n\n",
+  "description": "## Abstract\n\nThe study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics' studies based on untargeted mass spectrometry provide the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are the main steps of gas chromatography-mass spectrometry (GC-MS) data processing for metabolomic analysis?\n - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?\n - Do you know any alternative tools that can be used in place of the individual steps of this workflow?\n\n\n## Learning Objectives\n\n- To learn about the key steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.\n- To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.\n- To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -327,7 +328,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html",
       "name": "Mass spectrometry: LC-MS preprocessing with XCMS",
       "description": "Hands-on for 'Mass spectrometry: LC-MS preprocessing with XCMS' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -617,11 +618,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     },
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gc_ms_with_xcms/metabolomics-gc_ms_with_xcms.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/7890956",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics' studies based on untargeted mass spectrometry provide the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -2168,7 +2173,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

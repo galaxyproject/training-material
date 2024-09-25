@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -236,18 +236,19 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
     "url": "https://training.galaxyproject.org/training-material/topics/admin/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.",
+  "learningResourceType": "e-learning",
   "name": "Galaxy Interactive Tools",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html",
   "version": 25,
   "timeRequired": "PT2H",
-  "teaches": "Understand what Galaxy Interactive Tools are and how they work\n - Be aware of the security implications of Interactive Tools\n - Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration\n - Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt\n - Configure your Galaxy to serve Interactive Tools using an Ansible Playbook\n - Start, run, and use an Interactive Tool",
+  "teaches": "- Understand what Galaxy Interactive Tools are and how they work\n- Be aware of the security implications of Interactive Tools\n- Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration\n- Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt\n- Configure your Galaxy to serve Interactive Tools using an Ansible Playbook\n- Start, run, and use an Interactive Tool",
   "keywords": [
     "Galaxy Server administration",
     "ansible",
     "interactive-tools"
   ],
-  "description": "## Questions this  will address\n\n - What are Galaxy Interactive Tools?\n - How can I enable Interactive Tools on my Galaxy instance?\n\n\n## Learning Objectives\n\n - Understand what Galaxy Interactive Tools are and how they work\n - Be aware of the security implications of Interactive Tools\n - Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration\n - Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt\n - Configure your Galaxy to serve Interactive Tools using an Ansible Playbook\n - Start, run, and use an Interactive Tool\n\n",
+  "description": "## Abstract\n\nGalaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are Galaxy Interactive Tools?\n - How can I enable Interactive Tools on my Galaxy instance?\n\n\n## Learning Objectives\n\n- Understand what Galaxy Interactive Tools are and how they work\n- Be aware of the security implications of Interactive Tools\n- Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration\n- Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt\n- Configure your Galaxy to serve Interactive Tools using an Ansible Playbook\n- Start, run, and use an Interactive Tool\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -295,7 +296,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
       "name": "Ansible",
       "description": "Hands-on for 'Ansible' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -365,7 +366,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
       "name": "Galaxy Installation with Ansible",
       "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -435,7 +436,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html",
       "name": "Connecting Galaxy to a compute cluster",
       "description": "Hands-on for 'Connecting Galaxy to a compute cluster' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -470,7 +471,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/job-destinations/tutorial.html",
       "name": "Mapping Jobs to Destinations using TPV",
       "description": "Hands-on for 'Mapping Jobs to Destinations using TPV' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -849,11 +850,10 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
-      "url": "",
-      "name": "Associated Training Datasets"
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/admin-interactive-tools.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
     }
-  ],
-  "abstract": "Galaxy Interactive Tools (GxITs) are a method to run containerized tools that are interactive in nature. Interactive Tools typically run a persistent service accessed on a specific port and run until terminated by the user. One common example of such a tool is [Jupyter Notebook][jupyter]. Galaxy Interactive Tools are similar in purpose to [Galaxy Interactive Environments][gie-docs] (GIEs), but are implemented in a significantly different manner. Most notably, instead of directly invoking containers on the Galaxy server, dedicated Docker node, or as a Docker Swarm service (as is done for GIEs), Interactive Tools are submitted through Galaxy's job management system and thus are scheduled the same as any other Galaxy tool - on a Slurm cluster, for instance. Galaxy Interactive Tools were introduced in Galaxy Release 19.09."
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -2972,7 +2972,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

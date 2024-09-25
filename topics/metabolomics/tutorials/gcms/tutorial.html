@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -233,16 +233,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.",
     "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developed to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. ",
+  "learningResourceType": "e-learning",
   "name": "Mass spectrometry : GC-MS analysis with metaMS package",
   "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gcms/tutorial.html",
   "version": 7,
   "timeRequired": "PT2H",
-  "teaches": "To be sure you have already comprehend the diversity of MS pre-processing analysis.\n - To learn the principal functions of metaMS package through Galaxy.\n - To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.",
+  "teaches": "- To be sure you have already comprehend the diversity of MS pre-processing analysis.\n- To learn the principal functions of metaMS package through Galaxy.\n- To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.",
   "keywords": [
     "Metabolomics"
   ],
-  "description": "## Questions this  will address\n\n - What are the main steps of GC-MS datas processing for metabolomic analysis ?\n - How te be able to annotate the maximum of unknowns using Galaxy ?\n\n\n## Learning Objectives\n\n - To be sure you have already comprehend the diversity of MS pre-processing analysis.\n - To learn the principal functions of metaMS package through Galaxy.\n - To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.\n\n",
+  "description": "## Abstract\n\nA lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developed to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. \n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are the main steps of GC-MS datas processing for metabolomic analysis ?\n - How te be able to annotate the maximum of unknowns using Galaxy ?\n\n\n## Learning Objectives\n\n- To be sure you have already comprehend the diversity of MS pre-processing analysis.\n- To learn the principal functions of metaMS package through Galaxy.\n- To evaluate the potential of this new GC-MS workflow for GC-MS metabolomic analysis.\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -288,7 +289,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms/tutorial.html",
       "name": "Mass spectrometry: LC-MS analysis",
       "description": "Hands-on for 'Mass spectrometry: LC-MS analysis' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -380,11 +381,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "mentions": [
     {
       "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/gcms/metabolomics-gcms.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    },
+    {
+      "@type": "Thing",
       "url": "https://zenodo.org/record/3244991",
       "name": "Associated Training Datasets"
     }
-  ],
-  "abstract": "A lot of packages are available for the analysis of GC-MS or LC-MS data. Typically, hardware vendors provide software that is optimized for the instrument and allow a direct interaction of the lab scientist with the data. Some other open-source alternatives such as **XCMS** are also able to be integrated easily in web interfaces, allowing large numbers of files to be processed simultaneously. Because of the generality of packages like **XCMS**, several other packages have been developed to use the functionality of **XCMS** for optimal performance in a particular context. Package **metaMS** does so for the field of untargeted metabolomics, focuses on the GC-MS analysis during this tutorial. One of the goals **metaMS** was to set up a simple system with few user-settable parameters, capable of handling the vast majority of untargeted metabolomics experiments. "
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -1611,7 +1616,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

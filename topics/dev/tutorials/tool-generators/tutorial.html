@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c",
+		release: "galaxy-training-network@bb2096720a599c30a32dd1c3a75a9542bc5f7cd0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -234,16 +234,17 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...",
     "url": "https://training.galaxyproject.org/training-material/topics/dev/"
   },
-  "learningResourceType": "hands-on tutorial",
+  "abstract": "The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using",
+  "learningResourceType": "e-learning",
   "name": "ToolFactory: Generating Tools From Simple Scripts",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/tutorial.html",
   "version": 10,
   "timeRequired": "PT1H",
-  "teaches": "Learn why you might want to use the ToolFactory development server\n - Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!\n - Run it locally in Docker.\n - Install and explore the simple examples provided.\n - Modify and re-generate them to see how the changes affect the tool\n - Generate new simple Galaxy tools using your own scripts",
+  "teaches": "- Learn why you might want to use the ToolFactory development server\n- Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!\n- Run it locally in Docker.\n- Install and explore the simple examples provided.\n- Modify and re-generate them to see how the changes affect the tool\n- Generate new simple Galaxy tools using your own scripts",
   "keywords": [
     "Development in Galaxy"
   ],
-  "description": "## Questions this  will address\n\n - What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?\n - Can any command line script I've written be wrapped as a Galaxy tool?\n - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?\n - What is the difference between a hand-crafted tool and a ToolFactory generated one?\n\n\n## Learning Objectives\n\n - Learn why you might want to use the ToolFactory development server\n - Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!\n - Run it locally in Docker.\n - Install and explore the simple examples provided.\n - Modify and re-generate them to see how the changes affect the tool\n - Generate new simple Galaxy tools using your own scripts\n\n",
+  "description": "## Abstract\n\nThe Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What options exist for new-to-Galaxy developers to convert functioning command line scripts into Galaxy tools?\n - Can any command line script I've written be wrapped as a Galaxy tool?\n - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?\n - What is the difference between a hand-crafted tool and a ToolFactory generated one?\n\n\n## Learning Objectives\n\n- Learn why you might want to use the ToolFactory development server\n- Watch a video demonstration and explore the generated code - Hello Galaxy Training Network!\n- Run it locally in Docker.\n- Install and explore the simple examples provided.\n- Modify and re-generate them to see how the changes affect the tool\n- Generate new simple Galaxy tools using your own scripts\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -291,7 +292,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html",
       "name": "A short introduction to Galaxy",
       "description": "Hands-on for 'A short introduction to Galaxy' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -326,7 +327,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
       "name": "Galaxy Basics for everyone",
       "description": "Hands-on for 'Galaxy Basics for everyone' tutorial",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive",
       "provider": {
         "@type": "Organization",
@@ -394,7 +395,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "@context": "http://schema.org",
       "@type": "LearningResource",
       "url": "http://planemo.readthedocs.io/en/latest/writing_standalone.html",
-      "learningResourceType": "hands-on tutorial",
+      "learningResourceType": "e-learning",
       "interactivityType": "expositive"
     },
     {
@@ -596,9 +597,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   ],
   "educationalLevel": "Beginner",
   "mentions": [
-
-  ],
-  "abstract": "The Toolfactory and these tutorials are for developers and researchers learning about Galaxy, who routinely develop their own analysis scripts using"
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/tool-generators/dev-tool-generators.Rmd",
+      "name": "Quarto/RMarkdown Notebook"
+    }
+  ]
 }</script></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
@@ -2284,7 +2288,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7a7e0aae9e92bbfeb85ca299f0c54ded3cb073c">b7a7e0a</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/bb2096720a599c30a32dd1c3a75a9542bc5f7cd0">bb20967</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
