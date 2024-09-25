@@ -868,12 +868,39 @@ module Jekyll
                         name: "Associated Workflows"
                       })
       end
-      if actual_material.key?('zenodo_link')
+
+      # Notebooks
+      if actual_material.key?('notebook') && actual_material['notebook']['language'] != 'r'
+        # Python, Bash, SQL (all via jupyter)
+        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.ipynb"
         mentions.push({
                         '@type': 'Thing',
-                        url: (actual_material['zenodo_link']).to_s,
-                        name: "Associated Training Datasets"
+                        url: url,
+                        name: "Jupyter Notebook (with Solutions)"
                       })
+        mentions.push({
+                        '@type': 'Thing',
+                        url: url.gsub(/\.ipynb$/, '-course.ipynb'),
+                        name: "Jupyter Notebook (without Solutions)"
+                      })
+      else # Actual R
+        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.Rmd"
+        mentions.push({
+                        '@type': 'Thing',
+                        url: url,
+                        name: "Quarto/RMarkdown Notebook"
+                      })
+      end
+
+      # Zenodo link out
+      if actual_material.key?('zenodo_link') && ! actual_material['zenodo_link'].nil?
+        if actual_material['zenodo_link'].length.positive?
+          mentions.push({
+                          '@type': 'Thing',
+                          url: (actual_material['zenodo_link']).to_s,
+                          name: "Associated Training Datasets"
+                        })
+        end
       end
 
       if description.empty?
