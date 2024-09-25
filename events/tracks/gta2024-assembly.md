@@ -2,21 +2,23 @@
 layout: event-track
 
 title: Assembly
-description: Learn all about Genome assembly. 
+description: Learn all about Genome assembly. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [gta_assembly](https://gtnsmrgsbord.slack.com/archives/C07NGNT0DB5).
+
+slack_channel: gta_assembly
 
 contributions:
     organisers:
         - delphine-l
     instructors:
-        - delphine-l
-        - SaimMomin12
+        - annasyme
         - bgruening
         - clsiguret
-        - mschatz
+        - delphine-l
         - GarethPrice-Aus
-        - annasyme
-        - trungN
         - igormakunin
+        - mschatz
+        - SaimMomin12
+        - trungN
 
 
 program:
