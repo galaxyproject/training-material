@@ -155,7 +155,7 @@ planemo workflow_test_init --galaxy_url https://usegalaxy.eu --from_invocation I
 
 Each invocation should test a different behavior of the workflow. This could mean using different datatypes for inputs, or changing the workflow settings to produce different results.
 
-> <hands-on-title>Repeat for your own workflow</hands-on-title>
+> <hands-on-title>Generate tests for your own workflow</hands-on-title>
 > 1. Create a new folder on your computer to store the workflow.
 > 1. Download the Galaxy workflow you updated to follow best practices earlier in this tutorial. You can do this by going to the Workflow page and clicking {% icon galaxy-download %} **Download workflow in .ga format**.
 > 1. Create a new Galaxy history, and run the workflow on some appropriate input data.
