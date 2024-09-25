@@ -17,6 +17,7 @@ priority: 3
 contributions:
   authorship:
     - simleo
+    - elichad
   funding:
     - by-covid
 license: Apache-2.0
