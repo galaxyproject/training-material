@@ -43,7 +43,7 @@ has created for workflows.
 
 > <tip-title>Using your own workflow</tip-title>
 >
-> This tutorial assumes that you already have a Galaxy workflow that you want to apply best practices to. You can follow along using any workflow you have created or imported during a previous tutorial (such as [A short introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/)).
+> This tutorial assumes that you already have a Galaxy workflow that you want to apply best practices to. You can follow along using any workflow you have created or imported during a previous tutorial (such as [A short introduction to Galaxy]({% link topics/introduction/tutorials/galaxy-intro-short/workflows/index.md %})).
 >
 {: .tip}
 
