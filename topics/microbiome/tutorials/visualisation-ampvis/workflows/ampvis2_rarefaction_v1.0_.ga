@@ -1,0 +1,209 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "",
+    "comments": [],
+    "format-version": "0.1",
+    "name": "ampvis2 rarefaction v1.0 ",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "OTU table"
+                }
+            ],
+            "label": "OTU table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.5,
+                "top": 2.0515721756576766
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "1830ae55-c685-40ae-aae6-3465127792e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "metadata"
+                }
+            ],
+            "label": "metadata",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 85.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "dfad58bd-bccd-484d-b7ec-e4df7dc66b8c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "taxonomy table"
+                }
+            ],
+            "label": "taxonomy table",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 169.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "b189fb82-8c91-4a69-85a2-c3ecf51db0a1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "metadata": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "otutable": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "taxonomy": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ampvis2 load",
+                    "name": "fasta"
+                },
+                {
+                    "description": "runtime parameter for tool ampvis2 load",
+                    "name": "tree"
+                }
+            ],
+            "label": null,
+            "name": "ampvis2 load",
+            "outputs": [
+                {
+                    "name": "ampvis",
+                    "type": "ampvis2"
+                },
+                {
+                    "name": "metadata_list_out",
+                    "type": "tabular"
+                },
+                {
+                    "name": "taxonomy_list_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 302.85948278283536,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3481feabc54e",
+                "name": "ampvis2_load",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"asv_otu_col_empty\": false, \"asv_sequences\": false, \"fasta\": {\"__class__\": \"RuntimeValue\"}, \"guess_column_types\": true, \"metadata\": {\"__class__\": \"ConnectedValue\"}, \"otutable\": {\"__class__\": \"ConnectedValue\"}, \"pruneSingletons\": false, \"taxonomy\": {\"__class__\": \"ConnectedValue\"}, \"tree\": {\"__class__\": \"RuntimeValue\"}, \"write_lists\": [\"tax\", \"metadata\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "6f696fd0-9a28-4c0c-83cc-d001acc84ea8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "data": {
+                    "id": 3,
+                    "output_name": "ampvis"
+                },
+                "metadata_list": {
+                    "id": 3,
+                    "output_name": "metadata_list_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool ampvis2 rarefaction curve",
+                    "name": "data"
+                },
+                {
+                    "description": "runtime parameter for tool ampvis2 rarefaction curve",
+                    "name": "metadata_list"
+                }
+            ],
+            "label": null,
+            "name": "ampvis2 rarefaction curve",
+            "outputs": [
+                {
+                    "name": "plot",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 632,
+                "top": 60
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "2e69edaaa834",
+                "name": "ampvis2_rarecurve",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"color_by\": \"sample_id\", \"data\": {\"__class__\": \"RuntimeValue\"}, \"facet_by\": null, \"facet_scales\": \"free\", \"metadata_list\": {\"__class__\": \"RuntimeValue\"}, \"output_options\": {\"out_format\": \"pdf\", \"plot_width\": null, \"plot_height\": null}, \"stepsize\": \"5\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.8.6+galaxy1",
+            "type": "tool",
+            "uuid": "ae0467e5-f509-4887-b4a0-a4df2f59ff32",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "2c2c0854-8051-4db5-b8ed-e489d20d70ef",
+    "version": 7
+}

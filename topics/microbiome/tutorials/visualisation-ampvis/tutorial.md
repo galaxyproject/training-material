@@ -298,14 +298,15 @@ each metadata attribute has its own column.
 {: .question}
 
 ## Rarefaction Curve
-Follow this workflow to create a rarefaction curve. You can generate the curve directly using the ampvis_load tool, 
-or you can do so with subsets. Subsets allow you to filter the data, focusing on specific parts that are relevant to 
-a particular research question. 
+You can generate the rarefaction curve directly using the ampvis_load tool, or you can do so with subsets. 
+Subsets allow you to filter the data, focusing on specific parts that are relevant to a particular research question. 
+
+Follow this workflow to create a rarefaction curve directly from ampvis_load. 
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a rarefaction curve </hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_rarefaction_v2.0.ga) or download it to your computer
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_rarefaction_v1.0.ga) or download it to your computer
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
@@ -314,12 +315,6 @@ a particular research question.
 >    - *"Step size"*: `5`
 >    - *"Color curves by"*: `sample_id`
 >    - *"Scales of the facets"*: `Free scale`
->
->    or
-> 
-> 3. Run **Workflow: (with subsempling)** {% icon workflow %} using the following additional parameters
->    - *"Metadata variable"*: `sample_id`
->    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
@@ -341,13 +336,79 @@ a particular research question.
 >    - *"Color curves by"*: `sample_id`
 >    - *"Scales of the facets"*: `Free scale`
 >
-> 3.1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 load** {% icon tool %})
->    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 load** {% icon tool %})
+{: .hands_on}
+</div>
+
+Unfortunately multiple parameter selection is not possible at the time of the publication of this tutorial and
+the workflow can not be prepared and run at once. Therefore, we first need to run the both tools **ampvis load** 
+and **ampvis subset samples** before we can run the rest of the workflow with the visualisation tools in it.
+
+### **ampvis2 load**
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create ampvis2_load datasets </hands-on-title>
+>
+>    Run {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.9+galaxy0) %} 
+> 
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+> <hands-on-title> Create ampvis2_load datasets </hands-on-title>
+>
+> 1. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Taxonomy table"*: `output` (Input dataset)
+>
+{: .hands_on}
+</div>
+
+You will need the output of **ampvis2 load** as input for **ampvis2 subset samples**.
+
+### **ampvis2 subset samples**
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create subsamples datasets </hands-on-title>
+>
+>    Run {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.9+galaxy0) %} using the following parameters
 >    - *"Metadata variable"*: `sample_id`
 >    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
 >
-> 3.2. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+> <hands-on-title> Create subsamples datasets </hands-on-title>
+>
+> 1. {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Metadata list"*: `output` (Input dataset)
+>    - *"Metadata variable"*: `sample_id`
+>    - *"Metadata value(s)"*: `COI-B1b COI-B2a COI-B3 COI-B4 COI-B5 COI-B6 COI-B7 COI-B8 COI-B9 COI-B10 COI-B11 COI-B12 COI-B13 COI-B14 COI-B15 COI-B16 COI-B17 COI-B18 COI-B19 COI-B20 COI-B21 COI-B22 COI-B23`
+>
+{: .hands_on}
+</div>
+
+Now you can use the output of **ampvis2 subset samples** as input for the rarefaction curve.
+
+> <details-title> Select the right dataset to continue </details-title>
+>
+> If you are not sure how to select the right datasets, you can scroll down to use case 2, find the details box with the same name as this one
+and look at the picture how it was selected there.
+> 
+{: .details}
+
+<div class="Short-Version" markdown="1">
+> <hands-on-title> Create a rarefaction curve </hands-on-title>
+>
+>   Run {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.9+galaxy0) %} 
+>
+{: .hands_on}
+</div>
+
+<div class="Long-Version" markdown="1">
+> <hands-on-title> Rarefaction curve workflow steps </hands-on-title>
+>
+> 1. {% tool [ampvis2 rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.6+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Ampvis2 RDS dataset"*: `ampvis` (output of **ampvis2 subset samples** {% icon tool %})
 >    - {% icon param-file %} *"Metadata list"*: `metadata_list_out` (output of **ampvis2 subset samples** {% icon tool %})
 >    - *"Step size"*: `5`
@@ -356,22 +417,6 @@ a particular research question.
 >
 {: .hands_on}
 </div>
-
-Unfortunately multiple parameter selection is still in implementation and you will run into an error. See the box bellow how to handle
-that error.
-
-> <details-title> Error with metadata values while running the workflow </details-title>
->
-> If a set in history shows red, indicating an error, click on the set to expand it.
- If it says: "parameter 'vals': an invalid option", then click on the "Run
- job again" button. The 'values' box will be highlighted in blue; simply select the values again from dropdown
- menue and click "Run Tool" button above.
->
-> Additionally, note that the rarefaction curve generation is paused. Once all sets in the history except the heapmap turns
- green, expand the rarefaction curve set and click "Run job again". You may need to choose the metadata
- list again, make sure you choose the recently generated one. Click "Run Tool" again.
-> 
-{: .details}
 
 > <details-title> How it will look like </details-title>
 >
@@ -463,8 +508,8 @@ First you will need to run these 2 tools ampvis2_load and after that ampvis2_sub
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create ampvis2_load datasets </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_use_case_2_3.ga) {% icon workflow %} 
->
+>    Run {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.9+galaxy0) %} 
+> 
 {: .hands_on}
 </div>
 
@@ -481,17 +526,11 @@ First you will need to run these 2 tools ampvis2_load and after that ampvis2_sub
 
 You will need the output of **ampvis2 load** as input for **ampvis2 subset samples**.
 
-> <comment-title> multiple parameter selection </comment-title>
->
-> Unfortunately multiple parameter selection is still in implementation and you will run into an error. See the details on how to handle
-the error in the box **Error with metadata values while running the workflow** under the rarefaction curve section.
-{: .comment}
-
 ### **ampvis2 subset samples**
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create subsamples datasets </hands-on-title>
 >
->    Import and Run [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/ampvis2_use_case_2_3_subset.ga) {% icon workflow %} using the following parameters
+>    Run {% tool [ampvis2 subset samples](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.9+galaxy0) %} using the following parameters
 >    - *"Metadata variable"*: `Plant`
 >    - *"Metadata value(s)"*: `Aalborg East & Aalborg West`
 >
