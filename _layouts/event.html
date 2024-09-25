@@ -488,25 +488,30 @@ subsites: [all]
     }
 
     onDocumentReady(function () {
+        $('#myTab button').click(function(e) {
+          console.log("bla");
+          e.preventDefault();
+          $(this).tab('show');
+        });
 
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > button").on("click", function(e) {
+            var id = $(e.target).attr('data-target').substr(1);
+            window.history.replaceState(null, null, '#'+id);
+        });
 
-$('#myTab button').click(function(e) {
-  console.log("bla");
-  e.preventDefault();
-  $(this).tab('show');
-});
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
 
-// store the currently selected tab in the hash value
-$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
-  var id = $(e.target).attr('data-target').substr(1);
-	window.history.replaceState(null, null, '#'+id);
-});
-
-// on load of the page: switch to the currently selected tab
-var hash = window.location.hash;
-$('#myTab button[data-target="' + hash + '"]').tab('show');
-
-});
+        var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        if (potential_tab.length != 0) {
+            potential_tab.tab('show');
+        } else {
+            var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            $('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            $(hash).get(0).scrollIntoView();
+        }
+    });
 })(window, document);
 
 
