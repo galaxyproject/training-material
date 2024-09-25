@@ -796,7 +796,7 @@ module Jekyll
 
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
         data['learningResourceType'] = if material['name'] == 'tutorial.md'
-                                         'hands-on tutorial'
+                                         'e-learning'
                                        else
                                          'slides'
                                        end
@@ -905,7 +905,7 @@ module Jekyll
                             '@context': 'http://schema.org',
                             '@type': 'LearningResource',
                             url: (page['hands_on_url']).to_s,
-                            learningResourceType: 'hands-on tutorial',
+                            learningResourceType: 'e-learning',
                             interactivityType: 'expositive',
                           }
                         )
@@ -921,7 +921,7 @@ module Jekyll
                                "/#{tuto}/tutorial.html",
                           name: (page['title']).to_s,
                           description: "Hands-on for '#{page['title']}' tutorial",
-                          learningResourceType: 'hands-on tutorial',
+                          learningResourceType: 'e-learning',
                           interactivityType: 'expositive',
                           provider: GTN
                         }
