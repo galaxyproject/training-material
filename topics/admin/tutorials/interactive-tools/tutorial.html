@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a93ad0730a2b2c1c179182a32bff5904fd1e206a",
+		release: "galaxy-training-network@aa9a5836f152ad8e4a3d3ecedfdf7bf2d6d54ad1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-07-26 06:52:02 +0000">
+<meta name="DC.date" content="2024-09-25 07:54:41 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Simon Gladman">
 <meta name="DC.creator" content="Helena Rasche">
@@ -210,7 +210,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-07-26 06:52:02 +0000",
+  "dateModified": "2024-09-25 07:54:41 +0000",
   "datePublished": "2020-02-27 15:21:14 +0000",
   "identifier": "https://gxy.io/GTN:T00010",
   "accessMode": [
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "hands-on tutorial",
   "name": "Galaxy Interactive Tools",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/tutorial.html",
-  "version": 24,
+  "version": 25,
   "timeRequired": "PT2H",
   "teaches": "Understand what Galaxy Interactive Tools are and how they work\n - Be aware of the security implications of Interactive Tools\n - Have a basic understanding of the Interactive Tools (GxIT/GIE) Proxy, its purpose, and configuration\n - Be familiar with wildcard SSL certificates and how to get them from Let's Encrypt\n - Configure your Galaxy to serve Interactive Tools using an Ansible Playbook\n - Start, run, and use an Interactive Tool",
   "keywords": [
@@ -1669,7 +1669,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 27, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jul 26, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 25, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1689,7 +1689,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 24 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 25 </div>
 
     </blockquote>
     </section>
@@ -1719,14 +1719,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   <p>Galaxy Interactive Tools require a <a href="https://en.wikipedia.org/wiki/Wildcard_certificate">wildcard SSL certificate</a>. Because the <strong>Galaxy Installation with Ansible</strong> tutorial fetches <a href="https://letsencrypt.org/">Let’s Encrypt</a> certificates, this tutorial fetches Let’s Encrypt wildcard certificates. However, this process is only valid for Galaxy Admin Training courses, because Let’s Encrypt wildcard certificates <a href="https://letsencrypt.org/docs/faq/">can only be fetched using the DNS-01 challenge method</a>, which requires control of a <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> server (which we have preconfigured for use at training courses). Configuring your DNS service for dynamic updates is outside the scope of this tutorial, but it will show you how to request certificates using DNS-01, which can be adapted for your site.</p>
 
-  <p>If you are using Let’s Encrypt, <a href="https://certbot.eff.org/docs/using.html#dns-plugins">a list of available DNS plugins for Certbot</a> can be found in the Certbot documentation. If you are not using Let’s Encrypt, please consult your certificate vendor’s documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">subject alternative name</a>s <code class="language-plaintext highlighter-rouge">galaxy.example.org</code> and <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.galaxy.example.org</code> (where <code class="language-plaintext highlighter-rouge">galaxy.example.org</code> is the hostname of your Galaxy server).</p>
+  <p>If you are using Let’s Encrypt, <a href="https://certbot.eff.org/docs/using.html#dns-plugins">a list of available DNS plugins for Certbot</a> can be found in the Certbot documentation. If you are not using Let’s Encrypt, please consult your certificate vendor’s documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">subject alternative name</a>s <code class="language-plaintext highlighter-rouge">galaxy.example.org</code> and <code class="language-plaintext highlighter-rouge">*.ep.interactivetool.galaxy.example.org</code> (where <code class="language-plaintext highlighter-rouge">galaxy.example.org</code> is the hostname of your Galaxy server).</p>
 
-  <p>You will also need a wildcard DNS <code class="language-plaintext highlighter-rouge">CNAME</code> record for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.galaxy.example.org</code>. You can verify that your Galaxy server has such a record using the <code class="language-plaintext highlighter-rouge">host</code> or <code class="language-plaintext highlighter-rouge">dig</code> command line tools like so:</p>
+  <p>You will also need a wildcard DNS <code class="language-plaintext highlighter-rouge">CNAME</code> record for <code class="language-plaintext highlighter-rouge">*.ep.interactivetool.galaxy.example.org</code>. You can verify that your Galaxy server has such a record using the <code class="language-plaintext highlighter-rouge">host</code> or <code class="language-plaintext highlighter-rouge">dig</code> command line tools like so:</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>host <span class="nt">-t</span> cname foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
-<span class="go">   foo.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
-</span><span class="gp">   $</span><span class="w"> </span>host <span class="nt">-t</span> cname bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu
-<span class="go">   bar.interactivetoolentrypoint.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>host <span class="nt">-t</span> cname foo.ep.interactivetool.live.usegalaxy.eu
+<span class="go">   foo.ep.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
+</span><span class="gp">   $</span><span class="w"> </span>host <span class="nt">-t</span> cname bar.ep.interactivetool.live.usegalaxy.eu
+<span class="go">   bar.ep.interactivetool.live.usegalaxy.eu is an alias for usegalaxy.eu.
 </span></code></pre></div>  </div>
 
   <p>Please consult your DNS server software or cloud provider’s documentation for information on how to set up a wildcard record.</p>
@@ -2120,7 +2120,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 
 <p>During the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, we acquired an SSL certificate for our Galaxy server from <a href="https://letsencrypt.org/">Let’s Encrypt</a>. This certificate was issued for the hostname of your Galaxy server (e.g. <code class="language-plaintext highlighter-rouge">galaxy.example.org</code>). SSL certificates are valid <em>only for the name to which they were issued</em>. This presents a problem for us due to the way that Galaxy Interactive Tools work.</p>
 
-<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.galaxy.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.galaxy.example.org</code>.</p>
+<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="language-plaintext highlighter-rouge">*.ep.interactivetool.galaxy.example.org</code>.</p>
 
 <p>This process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.</p>
 
@@ -2179,7 +2179,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_domains</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">*.interactivetoolentrypoint.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">*.ep.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>          </div>
         </li>
         <li>
@@ -2319,7 +2319,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/galaxy/var/interactivetools
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_domains</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">*.interactivetoolentrypoint.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">*.ep.interactivetool.{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>          </div>
         </li>
         <li>
@@ -2972,7 +2972,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a93ad0730a2b2c1c179182a32bff5904fd1e206a">a93ad07</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/aa9a5836f152ad8e4a3d3ecedfdf7bf2d6d54ad1">aa9a583</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@a93ad0730a2b2c1c179182a32bff5904fd1e206a",
+		release: "galaxy-training-network@aa9a5836f152ad8e4a3d3ecedfdf7bf2d6d54ad1",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Galaxy Interactive Tools">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2022-06-16 01:07:03 +0000">
+<meta name="DC.date" content="2024-09-25 07:54:41 +0000">
 <meta name="DC.creator" content="Nate Coraor">
 <meta name="DC.creator" content="Estelle Ancelet">
 <meta name="DC.creator" content="Anthony Bretaudeau">
@@ -220,7 +220,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2022-06-16 01:07:03 +0000",
+  "dateModified": "2024-09-25 07:54:41 +0000",
   "datePublished": "2020-03-02 18:20:57 +0000",
   "identifier": "https://gxy.io/GTN:S00014",
   "accessMode": [
@@ -249,7 +249,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "slides",
   "name": "Galaxy Interactive Tools",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/interactive-tools/slides.html",
-  "version": 8,
+  "version": 9,
   "teaches": "Learn the differences between Galaxy Interactive Environments and Galaxy Interactive Tools\n - Have an understanding of what Galaxy Interactive Tools are and how they work",
   "keywords": [
     "Galaxy Server administration"
@@ -654,7 +654,7 @@ You will sometimes see Interactive Tools referred to as Interactive Environments
 - GIEs: Unique path, e.g. `https://galaxy.example.org/gie-proxy/jupyter/...`
   - Pros: Works with existing SSL certificate
   - Cons: Requires Galaxy session cookie (no sharing), can only run one at a time, closing your browser loses your session
-- GxITs: Unique hostname, e.g. `https://&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.galaxy.example.org/`
+- GxITs: Unique hostname, e.g. `https://&lt;unique-id&gt;.ep.interactivetool.galaxy.example.org/`
   - Pros: Needs no special credentials (can be shared)
   - Cons: Requires *wildcard* DNS entry and *wildcard* SSL certificate (not possible at many sites)
 
