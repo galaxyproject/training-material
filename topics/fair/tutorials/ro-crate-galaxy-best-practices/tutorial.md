@@ -163,7 +163,7 @@ Each invocation should test a different behavior of the workflow. This could mea
 {: .hands_on}
 
 
-## Adding a workflow to GitHub
+## Adding a GitHub workflow for running tests automatically
 
 In the previous section, you learned how to generate a test layout for an example Galaxy workflow. This procedure also gives you the file structure you need to populate the GitHub repository in line with community best practices. One thing is still missing though: a GitHub workflow to test the Galaxy workflow automatically. Let's create this now.
 
