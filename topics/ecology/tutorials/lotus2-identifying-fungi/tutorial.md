@@ -57,17 +57,15 @@ This tutorial is for you if you are a mycologist using metabarcoding data to und
 
 We do this by using a specific primer pair that amplifies just the {ITS2} region of the ribosomal DNA present in a soil sample. This tutorial covers data for an {ITS2} amplicon produced using the ITS3F and ITS4R primer set and sequenced using Illumina sequencing, which generates paired-end data. In this case, the example data has been generated using a NextSeq 2000, using 2x300bp chemistry.
 
-<!-- Insert Figure here? With good alt text Alt Text: Step 1 shows DNA being extracted from the soil. Step 2 shows ITS2 primers being used to PCR amplify the ITS2 region. Step 3 shows Illumina sequencing adapters being ligated to the ITS2 sequences. Step 4 shows the sequencing library being run through a MiSeq machine. Step 5 shows the final DNA sequence pairs obtained, and the corresponding regions in the Paired end reads -->
-
 This tutorial concentrates on the bioinformatics part of the process, i.e. the steps we need to do **after** we get data back from the sequencer. Starting from some example fastq files, we demonstrate how to upload data, run LotuS2, and examine the output files. We end with a brief description of what we can do with these output files.
 
 We use LotuS2 at {SPUN} because we have found that it performs best out of all the tools we tried for identifying {MF} from sequencing data {% cite ozkurt2022 %}.
 
 ## Pre-requisites for this tutorial
 
-If you have never used Galaxy before, we highly recommend doing their [interactive tour](https://usegalaxy.org/tours/core.galaxy_ui) first (takes a few minutes). Or, if you have more time (1h 30 min recommended), you can do the [Galaxy Basics for Everyone](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html) tutorial.
+If you have never used Galaxy before, we highly recommend doing their [interactive tour](https://usegalaxy.org/tours/core.galaxy_ui) first (takes a few minutes). Or, if you have more time (1h 30 min recommended), you can do the [Galaxy Basics for Everyone]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md %}) tutorial.
 
-We recommend signing up for a user account at one of the UseGalaxy servers (see the [first part of the Galaxy Basics tutorial](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html#hands-on-log-in-or-register))
+We recommend signing up for a user account at one of the UseGalaxy servers (see the [first part of the Galaxy Basics tutorial]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.md %})
 
 However, if you do not have any extra time, or just want to get started with LotuS2, you can start following the steps below by following each step carefully and using the *Tips* for each *Hands-on* exercise. You can start without even creating a user account, but then you won't be able to save your histories or come back to your analysis.
 
@@ -174,6 +172,7 @@ We will briefly look at each type of file to see that it has uploaded correctly.
      4. A line with sequence quality values for each nucleotide, in ASCII format
 >
 > You do not need to know more about FASTQ files for this tutorial, or about sequence quality in ASCII format, but if you want to learn more, you can do the [Sequence Analysis: Quality Control tutorial](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
+>
 {: .hands_on}
 
 
@@ -259,7 +258,7 @@ In the next subsection we show how to run LotuS2 in Galaxy and how to set the pa
 >
 > Make sure you have the right version (2.32+galaxy0). You can check the version by clicking the {% icon tool-versions %} (blocks) icon.
 >
-> 1. {% tool [LotuS2](https://toolshed.g2.bx.psu.edu/repos/earlhaminst/lotus2/lotus2/2.32+galaxy0) %} with the following parameters:
+> 1. {% tool [LotuS2](.bx.psu.edu/repos/earlhaminst/lotus2/lotus2/2.32+galaxy0) %} with the following parameters:
 >    - *"Single- or Paired-end data?"*: `Paired-end list`
 >        - In *"List of paired reads"*: choose the paired-list you created in the previous section: `Colombia ITS2 fastq pairs` (or whatever name you gave to the collection)
 >    - In *"Mapping file (optional)"*: `Colombia_ITS2_mapping.tsv`
