@@ -1,7 +1,4 @@
-// GTN Javascript: this appears on *every* page.
-//
-/* GTN Boxes
- */
+// make boxes collapsible
 //LEGACY
 $(".solution>h3,.details>h3,.tip>h3,.question>h3,.hands_on>h3,.comment>h3").click(function(event) {
     $(">*:not(h3)", $(this).parent()).toggle(400);
