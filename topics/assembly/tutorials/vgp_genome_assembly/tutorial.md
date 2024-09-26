@@ -548,34 +548,34 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > 2. Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
 >
->    >    > This would generate summary files that look like this (only the first six rows are shown):
->    >    >
->    >    > ```
->    >    > Expected genome size    11747160
->    >    > # scaffolds                    0
->    >    > Total scaffold length          0
->    >    > Average scaffold length      nan
->    >    > Scaffold N50                   0
->    >    > Scaffold auN                0.00
->    >    > ```
->    >    >
->    >    > Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+>    This would generate summary files that look like this (only the first six rows are shown):
+>    
+>    ```
+>    Expected genome size    11747160
+>    # scaffolds                    0
+>    Total scaffold length          0
+>    Average scaffold length      nan
+>    Scaffold N50                   0
+>    Scaffold auN                0.00
+>    ```
+>    
+>    Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 >
 > 3. Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >    - {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other settings as they are.
 >
 > 4. Rename the output as `gfastats on hap1 and hap2 (full)`
 >
->    >    > This would generate a joined summary file that looks like this (only the first five rows are shown):
->    >    > 
->    >    > ```
->    >    > # gaps               0  0
->    >    > # gaps in scaffolds  0  0
->    >    > # paths              0  0
->    >    > # segments          17 16
->    >    > ```
->    >    > 
->    >    > Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
+>    This would generate a joined summary file that looks like this (only the first five rows are shown):
+>    
+>    ```
+>    # gaps               0  0
+>    # gaps in scaffolds  0  0
+>    # paths              0  0
+>    # segments          17 16
+>    ```
+>    
+>    Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
 > 5. Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
@@ -756,35 +756,35 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 > 2. Rename outputs of `gfastats` step to as `Primary stats` and `Alternate stats`
 >
->    >    > This would generate summary files that look like this (only the first six rows are shown):
->    >    > 
->    >    > ```
->    >    > Expected genome size     11747160
->    >    > # scaffolds                    25
->    >    > Total scaffold length    18519764
->    >    > Average scaffold length    740790.56
->    >    > Scaffold N50               813311
->    >    > Scaffold auN               913050.77
->    >    > ```
->    >    > 
->    >    > Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+>    This would generate summary files that look like this (only the first six rows are shown):
+>    
+>    ```
+>    Expected genome size     11747160
+>    # scaffolds                    25
+>    Total scaffold length    18519764
+>    Average scaffold length    740790.56
+>    Scaffold N50               813311
+>    Scaffold auN               913050.77
+>    ```
+>    
+>    Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 >
 > 3. Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
 >    - {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets (these are from **Step 2** above). Keep all other setting as they are.
 >
 > 4. Rename the output as `gfastats on Pri and Alt (full)`
 >
->    >    > This would generate a joined summary file that looks like this (only  five rows are shown):
->    >    > 
->    >    > ```
->    >    > # contigs                 25  10
->    >    > # dead ends                .  16
->    >    > # disconnected components  .   7
->    >    > # edges                    .   6
->    >    > # gaps                     0   0
->    >    > ```
->    >    > 
->    >    > Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
+>    This would generate a joined summary file that looks like this (only  five rows are shown):
+>    
+>    ```
+>    # contigs                 25  10
+>    # dead ends                .  16
+>    # disconnected components  .   7
+>    # edges                    .   6
+>    # gaps                     0   0
+>    ```
+>    
+>    Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
 > 5. Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-files %} *"Input file"*: select `gfastats on Pri and Alt (full)`
@@ -876,7 +876,7 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 >    - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
 >    - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
 > 
->    >    > (REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [earlier](#gfa2fasta_solo))
+>    (REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [earlier](#gfa2fasta_solo))
 >
 {: .hands_on}
 
@@ -913,23 +913,24 @@ The first relevant parameter is the `Estimated genome size`.
 > <hands-on-title>Get estimated genome size</hands-on-title>
 >
 > 1. Look at the `GenomeScope summary` output (generated during *k*-mer profiling [step](#genome-profiling-with-genomescope2)). The file should have content that looks like this (it may not be exactly like this):
->     > ```
->     > GenomeScope version 2.0
->     > input file = ....
->     > output directory = .
->     > p = 2
->     > k = 31
->     > TESTING set to TRUE
->     > 
->     > property                      min               max
->     > Homozygous (aa)               99.4165%          99.4241%
->     > Heterozygous (ab)             0.575891%         0.583546%
->     > Genome Haploid Length         11,739,321 bp     11,747,160 bp
->     > Genome Repeat Length          722,921 bp        723,404 bp
->     > Genome Unique Length          11,016,399 bp     11,023,755 bp
->     > Model Fit                     92.5159%          96.5191%
->     > Read Error Rate               0.000943206%      0.000943206%
->     > ```
+>
+>    ```
+>    GenomeScope version 2.0
+>    input file = ....
+>    output directory = .
+>    p = 2
+>    k = 31
+>    TESTING set to TRUE
+>    
+>    property                      min               max
+>    Homozygous (aa)               99.4165%          99.4241%
+>    Heterozygous (ab)             0.575891%         0.583546%
+>    Genome Haploid Length         11,739,321 bp     11,747,160 bp
+>    Genome Repeat Length          722,921 bp        723,404 bp
+>    Genome Unique Length          11,016,399 bp     11,023,755 bp
+>    Model Fit                     92.5159%          96.5191%
+>    Read Error Rate               0.000943206%      0.000943206%
+>    ```
 >
 > 2. Copy the number value for the maximum Genome Haploid Length to your clipboard (CTRL + C on Windows; CMD + C on MacOS).
 > 3. Click on "Upload Data" in the toolbox on the left.
@@ -992,7 +993,7 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 >    >
 >    {: .question}
 >
->    > Now let's get the transition parameter.
+>    Now let's get the transition parameter.
 >
 > 5. Run {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
@@ -1318,11 +1319,11 @@ Before we begin, we need to upload BioNano data:
 >
 > 1. Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
->    > ```
->    > https://zenodo.org/records/5887339/files/bionano.cmap
->    > ```
+>    ```
+>    https://zenodo.org/records/5887339/files/bionano.cmap
+>    ```
 >
-> 2.  Upload datasets into Galaxy
+> 2. Upload datasets into Galaxy
 >    - set the datatype to `cmap`
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
