@@ -241,7 +241,7 @@ For the suggested batch of early Omicron data we suggest downloading it via URLs
 >
 > - Option 2: Import from a shared data library
 >
->   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" box_type="none" %}
+>   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / Omicron_batch_analysis" box_type="none" %}
 >
 {: .hands_on}
 
