@@ -905,26 +905,28 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Notebooks</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">actual_material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;notebook&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">actual_material</span>[<span class="ruby-string">&#39;notebook&#39;</span>][<span class="ruby-string">&#39;language&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;r&#39;</span>
-    <span class="ruby-comment"># Python, Bash, SQL (all via jupyter)</span>
-    <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;#{site[&#39;url&#39;]}#{site[&#39;baseurl&#39;]}#{material[&#39;dir&#39;]}#{material[&#39;topic_name&#39;]}-#{material[&#39;tutorial_name&#39;]}.ipynb&quot;</span>
-    <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
-                    <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
-                    <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>,
-                    <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jupyter Notebook (with Solutions)&quot;</span>
-                  })
-    <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
-                    <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
-                    <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\.ipynb$/</span>, <span class="ruby-string">&#39;-course.ipynb&#39;</span>),
-                    <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jupyter Notebook (without Solutions)&quot;</span>
-                  })
-  <span class="ruby-keyword">else</span> <span class="ruby-comment"># Actual R</span>
-    <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;#{site[&#39;url&#39;]}#{site[&#39;baseurl&#39;]}#{material[&#39;dir&#39;]}#{material[&#39;topic_name&#39;]}-#{material[&#39;tutorial_name&#39;]}.Rmd&quot;</span>
-    <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
-                    <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
-                    <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>,
-                    <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Quarto/RMarkdown Notebook&quot;</span>
-                  })
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">actual_material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;notebook&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">actual_material</span>[<span class="ruby-string">&#39;notebook&#39;</span>][<span class="ruby-string">&#39;language&#39;</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;r&#39;</span>
+      <span class="ruby-comment"># Python, Bash, SQL (all via jupyter)</span>
+      <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;#{site[&#39;url&#39;]}#{site[&#39;baseurl&#39;]}#{material[&#39;dir&#39;]}#{material[&#39;topic_name&#39;]}-#{material[&#39;tutorial_name&#39;]}.ipynb&quot;</span>
+      <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
+                      <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
+                      <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>,
+                      <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jupyter Notebook (with Solutions)&quot;</span>
+                    })
+      <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
+                      <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
+                      <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\.ipynb$/</span>, <span class="ruby-string">&#39;-course.ipynb&#39;</span>),
+                      <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Jupyter Notebook (without Solutions)&quot;</span>
+                    })
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">actual_material</span>[<span class="ruby-string">&#39;notebook&#39;</span>][<span class="ruby-string">&#39;language&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;r&#39;</span> <span class="ruby-comment"># Actual R</span>
+      <span class="ruby-identifier">url</span> = <span class="ruby-node">&quot;#{site[&#39;url&#39;]}#{site[&#39;baseurl&#39;]}#{material[&#39;dir&#39;]}#{material[&#39;topic_name&#39;]}-#{material[&#39;tutorial_name&#39;]}.Rmd&quot;</span>
+      <span class="ruby-identifier">mentions</span>.<span class="ruby-identifier">push</span>({
+                      <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Thing&#39;</span>,
+                      <span class="ruby-value">url:</span> <span class="ruby-identifier">url</span>,
+                      <span class="ruby-value">name:</span> <span class="ruby-string">&quot;Quarto/RMarkdown Notebook&quot;</span>
+                    })
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># Zenodo link out</span>
