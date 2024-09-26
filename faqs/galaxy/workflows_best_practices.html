@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@9672b69592a53709aaf3e310d5eb0a8506f0d8b8",
+		release: "galaxy-training-network@ced235ff923c0d2e55293aae0fd390c5a8dcce66",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -58,7 +58,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         
         <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
         <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
-<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.5e08e74c.js' as='script'>
         <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
         <link rel="manifest" href="/training-material/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
@@ -70,11 +70,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Ensuring Workflows meet Best Practices">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-04-17 13:24:50 +0000">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="When you are editing a workflow, there are a number of additional steps you can take to ensure that it is a Best Practice workflow and will be more reusable.  1. Open a workflow for editing 1. In the workflow menu bar, you'll find the {% icon galaxy-wf-options %} Workflow Options dropdown menu. 1. Click on it and select  Best Practices  from the dropdown menu.       1. This will take you to a new side panel, which allows you to investigate and correct any issues with your workflow.      ">
+<meta name="DC.date" content="2024-09-26 08:02:48 +0000">
+<meta name="DC.creator" content="Helena Rasche">
+<meta name="DC.creator" content="Eli Chadwick"><meta name="description" content="When you are editing a workflow, there are a number of additional steps you can take to ensure that it is a Best Practice workflow and will be more reusable.  1. Open a workflow for editing 1. In the workflow menu bar, you'll find the {% icon galaxy-wf-options %} **Workflow Options** dropdown menu. 1. Click on it and select {% icon galaxy-wf-best-practices %} **Best Practices** from the dropdown menu.       1. This will take you to a new side panel, which allows you to investigate and correct any issues with your workflow.       The Galaxy community also has a [guide on best practices for maintaining workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html). This guide includes the best practices from the Galaxy workflow panel, plus:  * adding tests to the workflow * publishing the workflow on GitHub, a public GitLab server, or another public version-controlled repository * registering the workflow with a workflow registry such as WorkflowHub or Dockstore ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Ensuring Workflows meet Best Practices">
-        <meta property="og:description" content="When you are editing a workflow, there are a number of additional steps you can take to ensure that it is a Best Practice workflow and will be more reusable.  1. Open a workflow for editing 1. In the workflow menu bar, you'll find the {% icon galaxy-wf-options %} Workflow Options dropdown menu. 1. Click on it and select  Best Practices  from the dropdown menu.       1. This will take you to a new side panel, which allows you to investigate and correct any issues with your workflow.      ">
+        <meta property="og:description" content="When you are editing a workflow, there are a number of additional steps you can take to ensure that it is a Best Practice workflow and will be more reusable.  1. Open a workflow for editing 1. In the workflow menu bar, you'll find the {% icon galaxy-wf-options %} **Workflow Options** dropdown menu. 1. Click on it and select {% icon galaxy-wf-best-practices %} **Best Practices** from the dropdown menu.       1. This will take you to a new side panel, which allows you to investigate and correct any issues with your workflow.       The Galaxy community also has a [guide on best practices for maintaining workflows](https://planemo.readthedocs.io/en/latest/best_practices_workflows.html). This guide includes the best practices from the Galaxy workflow panel, plus:  * adding tests to the workflow * publishing the workflow on GitHub, a public GitLab server, or another public version-controlled repository * registering the workflow with a workflow registry such as WorkflowHub or Dockstore ">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -228,7 +229,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
-    Helena Rasche</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    Helena Rasche</a><a href="/training-material/hall-of-fame/elichad/" class="contributor-badge contributor-elichad"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/elichad?s=36" alt="Eli Chadwick avatar" width="36" class="avatar" />
+    Eli Chadwick</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
     <hr>
     
 
@@ -244,9 +246,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ol>
   <li>Open a workflow for editing</li>
-  <li>In the workflow menu bar, you’ll find the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-options</span> Workflow Options dropdown menu.</li>
+  <li>In the workflow menu bar, you’ll find the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-options</span> <strong>Workflow Options</strong> dropdown menu.</li>
   <li>
-    <p>Click on it and select “Best Practices” from the dropdown menu.</p>
+    <p>Click on it and select <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-best-practices</span> <strong>Best Practices</strong> from the dropdown menu.</p>
 
     <p><img src="/training-material/faqs/galaxy/images/best-practices1.png" alt="screenshot showing the best practices menu item in the gear dropdown." /></p>
   </li>
@@ -256,6 +258,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <p><img src="/training-material/faqs/galaxy/images/best-practices2.png" alt="screenshot showing the best practices side panel. several issues are raised like a missing annotation with a link to add that, and non-optional inputs that are unconnected. Additionally several items already have green checks like the workflow defining creator information and a license." /></p>
   </li>
 </ol>
+
+<p>The Galaxy community also has a <a href="https://planemo.readthedocs.io/en/latest/best_practices_workflows.html">guide on best practices for maintaining workflows</a>. This guide includes the best practices from the Galaxy workflow panel, plus:</p>
+
+<ul>
+  <li>adding tests to the workflow</li>
+  <li>publishing the workflow on GitHub, a public GitLab server, or another public version-controlled repository</li>
+  <li>registering the workflow with a workflow registry such as WorkflowHub or Dockstore</li>
+</ul>
 
         </div>
         <div class="col-md-4">
@@ -409,7 +419,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9672b69592a53709aaf3e310d5eb0a8506f0d8b8">9672b69</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ced235ff923c0d2e55293aae0fd390c5a8dcce66">ced235f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
@@ -426,7 +436,7 @@ add a button, include configuration options:
 </footer>
 
 
-        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        <script  async defer src='/training-material/assets/js/bundle.main.5e08e74c.js'></script>
 
 	
 	
