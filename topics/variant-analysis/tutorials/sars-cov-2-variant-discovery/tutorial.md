@@ -266,7 +266,7 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 >    1. {% tool [Upload](upload1) %} the reference to your history via the link above and make sure the dataset format is set to `fasta`.
 >
 >       {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
->    2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) in entire line %} to simplify the reference sequence name
+>    2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1) in entire line %} to simplify the reference sequence name
 >       - {% icon param-file %} *"File to process"*: the uploaded reference sequence from the ENA
 >       - In {% icon param-repeat %} *"1. Replacement"*:
 >         - *"Find pattern"*: `^>.+`
@@ -866,7 +866,7 @@ Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used
 
 > <hands-on-title>From consensus sequences to clade assignments using Pangolin</hands-on-title>
 >
-> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA File(s)"*: `Multisample consensus FASTA`
 >    - *"Include header line in output file"*: `Yes`
 >
