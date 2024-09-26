@@ -104,7 +104,7 @@ E.g. the workflow could be combined with metagenomic workflows, that allow to sc
 >    > <comment-title> Genome download </comment-title>
 >    >
 >    > This downloads the `Streptomyces coelicolor A3(2) complete genome`, 
-which should be a great source for biosynthetic gene clusters (BGCs).
+>    > which should be a great source for biosynthetic gene clusters (BGCs).
 >    {: .comment}
 >
 {: .hands_on}

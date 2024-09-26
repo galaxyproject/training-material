@@ -462,7 +462,7 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 >    > ```bash
 >    > planemo, version 0.74.3
 >    > ```
->    {: .code-out}
+>    {: .code-in}
 >
 > 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.

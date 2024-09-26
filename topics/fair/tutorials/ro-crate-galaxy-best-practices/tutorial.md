@@ -34,8 +34,7 @@ Providing documentation is also important to help understand the workflow's purp
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, you will learn about the best practices that the Galaxy community 
-has created for workflows.
+> In this tutorial, you will learn about the best practices that the Galaxy community has created for workflows.
 >
 > 1. TOC
 > {:toc}

@@ -188,7 +188,7 @@ To link a Galaxy tool to its corresponding bio.tools entry, we need to first fin
 > 2. Search your tool
 > 3. Expand the row
 > 4. Open the link shown in the `Galaxy wrapper parsed folder` column
-
+>
 {: .hands_on}
 
 Now we have the wrapper, and can add the bio.tools entry.

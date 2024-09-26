@@ -783,6 +783,7 @@ To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for f
 
 <div class="Long-Version" markdown="1">
 
+> <hands-on-title>Antimicrobial Resistance Genes Identification</hands-on-title>
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `report` (output of **ABRicate** {% icon tool %})
 >    - In *"Find and Replace"*:
@@ -803,6 +804,7 @@ To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for f
 >
 > 2. Rename the output collection `AMRs`
 {: .hands-on}
+
 </div>
 
 > <question-title></question-title>
@@ -874,6 +876,7 @@ To prepare the **ABRicate**{% icon tool %} output tabulars of both samples for f
 
 <div class="Long-Version" markdown="1">
 
+> <hands-on-title>Replace Text</hands-on-title>
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `report` (output of **ABRicate** {% icon tool %})
 >    - In *"Find and Replace"*:
