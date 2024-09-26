@@ -123,6 +123,9 @@ As an example we will use this [simple workflow](https://github.com/crs4/life_mo
 > 
 > 1. Run `planemo workflow_test_init --galaxy_url https://usegalaxy.eu --from_invocation INVOCATION_ID --galaxy_user_key API_KEY`, replacing `INVOCATION_ID` with the actual invocation ID and `API_KEY` with the actual API key. If you're not using the Galaxy Europe instance, also replace `https://usegalaxy.eu` with the URL of the instance you're using.
 > 1. Browse the files that have been created - `sort-and-change-case-tests.yml` and `test_data/`
+>
+> Optionally see this tip for more details:
+> {% snippet faqs/gtn/gtn_workflow_testing.md %}
 {: .hands_on}
 
 > <question-title></question-title>
