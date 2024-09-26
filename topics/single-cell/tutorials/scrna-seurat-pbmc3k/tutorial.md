@@ -630,24 +630,26 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 
 ## Other ways to visualise clusters
 
-UMAP plots aren't the only way to see what is going on with the clusters we've just identified - and they aren't always the best choice when we're interested in which cells express specific genes.
+UMAP plots aren't the only way to see what is going on with the clusters we've just identified - and they aren't always the best choice when we're interested in which cells express specific genes. For example, we can create violin plots to show the expression of our top six genes from the PCA across the clusters we've just identified.
 
 ><hands-on-title>Visualise Results to compare all clusters</hands-on-title> TODO
 >
 > 1. violin for the top 6 genes
 {: .hands_on}
 
-![Six violin plots. MALAT1 is expressed across all clusters except 8. CST3 is expressed in clusters 1, 5 and 7. CD79A is expressed in cluster 3. NKG7 is expressed in clusters 4 and 6. HLA-DQA1 is expressed in clusters 3 and 7 with one cell in cluster 1 expressing very high levels. PPBP is expressed in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_allmarkers_violin.png "Violin plots showing expression of the top genes associated with PCs 1-3 in each cluster")
+![Six violin plots. CST3 is expressed in clusters 1, 5 and 7 and in some cells in cluster 8. MALAT1 is expressed across all clusters except 8. CD79A is expressed in cluster 3.  NKG7 is expressed in clusters 4 and 6. HLA-DQA1 is expressed in clusters 3 and 7 with one cell in cluster 1 expressing very high levels. PPBP is expressed in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_allmarkers_violin.png "Violin plots showing expression of the top genes associated with PCs 1-3 in each cluster")
 
 > <question-title></question-title>
-> 1. Are the top genes for PCs 1-3 expressed more in the clusters they are markers for?
+> 1. Are the top genes for PCs 1-3 expressed in the clusters you expected?
 > 2. Do you find it easier to understand gene expression with the violin plots or the [umap plots](#figure-14)?
 > > <solution-title></solution-title>
-> > 1. We can see the same expression patterns in the violin plots as we did in the UMAP feature plots. In most cases, the genes are expressed mostly in the clusters that they were markers for, such as CD79A in cluster 3 and PPBP in cluster 8. However, we can see that MALAT1 is expressed across most of the clusters (except cluster 8), even though it is a marker for clusters 0, 4 and 6. It wasn't at the top of the marker lists for any of these clusters, but it was still significantly associated with them even if it's not obvious to our eyes. 
+> > 1. We can see the same expression patterns in the violin plots as we did in the UMAP feature plots. For example, MALAT1 is expressed across most of the clusters while PPBP is only expressed in cluster 8.
 > > We can also see that there is some expression of these genes outside the clusters they are markers for, although usually at low levels in a small number of cells. The exception is a cell in cluster 1 that expressed very high levels of HLA-DQA1 - perhaps this cell was assigned to the wrong cluster or maybe there was some contamination or error, but it could also just be an unusual cell that really did have higher levels of this gene!
 > > 2. The UMAP plots can give us a good overview of the data that you may find easier to picture and remember, but it can be hard to tell where one cluster ends and another begins. The violin plots can be clearer as each cluster is plotted separately and we can see the whole range of expression - we would have a hard time picking out that outlier in cluster 1 with high levels of HLA-DQA1 from the UMAP plot.
 > {: .solution}
 {: .question}
+
+Looking at the expression of these genes can tell us something about our clusters, but the top genes from the PCA aren't necessarily the ones that will tell us what our clusters represent. Our next step is to find these marker genes.
 
 # Find Marker Genes
 
@@ -655,10 +657,10 @@ We have now identified and plotted our clusters, groups of cells that share simi
 
 Marker genes are usually detected by their differential expression (DE) between clusters. We're looking for the genes that were expressed much more in one cluster than in the other(s). Seurat provides a number of statistical tests for quantifying these differences, with the Wilcoxon rank sum test as the default.
 
-Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters and experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups.
+Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters or experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups.
 
 > <comment-title></comment-title>
-> When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the Seurat Object by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
+> When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original Seurat Object by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
 {: .comment}
 
 ## Find Positive Markers for Every Cluster Compared to the Rest
@@ -675,7 +677,7 @@ We can look for both positive and negative markers, or limit the results to just
 > 2. Rename
 {: .hands_on}
 
-The output is a list of positive markers, genes that were more likely to be expressed by cells in each cluster when compared to all of the other clusters.
+The output is a list of positive markers for each cluster, genes that were significantly more likely to be expressed by cells in that cluster than in the rest of the dataset.
 
 Take a look at the second output, the CSV file. You can click on the dataset to see a quick peek of it in the history panel or use the {% galaxy-eye %} icon to see the full table in the main panel.
 
@@ -688,7 +690,8 @@ The first column is the name of the marker gene. The following columns tell us t
 - **pct.1** - percentage of cells in the cluster that express this gene
 - **pct.2** - percentage of cells in the rest of the dataset that express this gene
 - **p_val_adj** - adjusted p-value (Bonferroni correction using all features in dataset)
-- **cluster** - which cluster the gene is a marker for (the first column is repeated at the end!)
+- **cluster** - which cluster the gene is a marker for
+- (the first column with the gene names is also repeated at the end!)
 
 Although there is a lot of information here, all we need to know for now is that the markers listed for each cluster are the genes that were expressed more by these cells than any of the other clusters. We can search online for these genes to get an idea of what types of cells are in our clusters.
 
@@ -696,9 +699,9 @@ Although there is a lot of information here, all we need to know for now is that
 > 1. Are the top genes associated with PCs 1-3 in our list of markers? Which clusters are they markers for?
 > 2. Do these results match your expectations?
 > > <solution-title></solution-title>
-> > 1. If we search the markers table for our top genes, we can see that MALAT1 is a positive marker for clusters 0, 4 and 6 while CST3 is a positive marker for clusters 1, 5, and 7. CD79A was a marker for cluster 3 while NKG7 was a marker for clusters 4 and 6. HLA-DQA1 was a marker for clusters 3 and 7 while PPBP was a marker for cluster 8.
-> > 2. The results make sense, as we would expect the top positive and negative genes for each PC to be expressed in different clusters. The results also match up fairly well with what we saw on the UMAP plots - although we might have thoughtthat MALAT1 could be a marker for clusters 2 and 3 too as it seems to be highly expressed by them. The apparent difference in expression we saw in the plot wasn't strong enough to show up in this statistical test.
-> > However, the top genes associated with our PCs aren't necessarily the most significant markers for our clusters and they are often markers for more than one cluster. Again, this makes sense, because the PCA was looking for the bigger patterns across the whole dataset, while now we're looking for differences between smaller groups of cells.
+> > 1. If we search the markers table for our top genes (you can use Ctrl+F to do this), we can see that CST3 is a positive marker for clusters 1, 5, and 7 while MALAT1 is a positive marker for clusters 0, 4 and 6. CD79A was a marker for cluster 3 while NKG7 was a marker for clusters 4 and 6. HLA-DQA1 was a marker for clusters 3 and 7 while PPBP was a marker for cluster 8.
+> > 2. The results make sense, as we would expect the top positive and negative genes for each PC to be expressed in different clusters. The results also match up fairly well with what we saw on the UMAP and violin plots - although we might have thoughtthat MALAT1 could be a marker for clusters 2 and 3 too as it seems to be highly expressed by them. The apparent difference in expression we saw in the plot wasn't strong enough to show up in this statistical test.
+> > However, the top genes associated with our PCs aren't necessarily the most significant markers for our clusters (they can appear quite far down the lists) and they are often markers for more than one cluster. Again, this makes sense, because the PCA was looking for the bigger patterns across the whole dataset, while now we're looking for differences between smaller groups of cells.
 > {: .solution}
 {: .question}
 
@@ -723,21 +726,22 @@ The first column is still the name of the marker gene. The following columns tel
 - **pct.1** - percentage of cells in the first group that express this gene (in this case, cluster 2)
 - **pct.2** - percentage of cells in the second group that express this gene (in this case, all other clusters)
 - **p_val_adj** - adjusted p-value (Bonferroni correction using all features in dataset)
+- (again, the gene names are repeated at the end)
 
 We don't have a cluster column this time as we were only testing one group against another (in this case, cluster 2 against all the rest of the clusters).
 
 > <question-title></question-title>
 > 1. What are the top five markers of cluster 2 and are they positive or negative markers?
-> 2. Are these the same as the top five markers for cluster 2 when we ran FindAllMarkers?
+> 2. Are these the same as the top five markers for cluster 2 when we ran `FindAllMarkers`?
 > > <solution-title></solution-title>
 > > 1. When we look at the marker table, we can see that the first five genes listed as markers of cluster 2 are:
-> > | 1  | LTB   |
-> > | 2  | IL32 |
-> > | 3  | LDHB    |
-> > | 4  | CD3D  |
-> > | 5  | TNFRSF4   |
+> > | 1  | IL32   |
+> > | 2  | LTB |
+> > | 3  | CD3D    |
+> > | 4  | IL7R  |
+> > | 5  | LDHB   |
 > > We can look at the third column, avg_log2FC to see if these are positive or negative markers. Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.
-> > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers of cluster 2 won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences here.
+> > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
 >>
 > {: .solution}
 {: .question}
