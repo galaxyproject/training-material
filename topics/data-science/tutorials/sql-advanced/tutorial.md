@@ -343,7 +343,7 @@ this query:
 -- Try solutions here!
 ```
 
-> ## Averaging with NULL
+> <question-title>Averaging with NULL</question-title>
 >
 > The average of a set of values is the sum of the values
 > divided by the number of values.
