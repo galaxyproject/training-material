@@ -4,7 +4,6 @@ layout: tutorial_hands_on
 title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
 subtopic: one-health
 level: Intermediate
-zenodo_link: "https://zenodo.org/record/5036687"
 questions:
 - How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?
 - How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?
