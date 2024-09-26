@@ -735,11 +735,11 @@ We don't have a cluster column this time as we were only testing one group again
 > 2. Are these the same as the top five markers for cluster 2 when we ran `FindAllMarkers`?
 > > <solution-title></solution-title>
 > > 1. When we look at the marker table, we can see that the first five genes listed as markers of cluster 2 are:
-> > | 1  | IL32   |
-> > | 2  | LTB |
-> > | 3  | CD3D    |
-> > | 4  | IL7R  |
-> > | 5  | LDHB   |
+> > > | 1  | IL32 |
+> > > | 2  | LTB  |
+> > > | 3  | CD3D |
+> > > | 4  | IL7R |
+> > > | 5  | LDHB |
 > > We can look at the third column, avg_log2FC to see if these are positive or negative markers. Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.
 > > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
 >>
@@ -756,22 +756,20 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 >
 {: .hands_on}
 
-Visualise - split violin plot? or already have the feature plot for 0 and 3. COULD ALSO CHANGE WHICH CLUSTERS ARE COMPARED TO DIFF BW ONES IN SAME BIG GROUP TODO
-
 > <question-title></question-title>
 > 1. What are the top five markers of cluster 5 compared to clusters 0 and 3?
 > 2. Are these the same as the top five markers for the cluster when we ran FindAllMarkers?
 > > <solution-title></solution-title>
 > > 1. The top five markers in the output table are:
 > >
-> > | 1  | FCGR3A        |
-> > | 2  | CFD           |
-> > | 3  | IFITM3        |
-> > | 4  | RP11-290F20.3 |
-> > | 5  | CD68          |
+> > > | 1  | FCGR3A        |
+> > > | 2  | IFITM3        |
+> > > | 3  | CFD           |
+> > > | 4  | CD68          |
+> > > | 5  | RP11-290F20.3 |
 > >
-> > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset. Only two of the top five markers are the same in both lists, although we can find the other genes further down in the table if we look.
-> > We would'nt expect to see the same results because we're now looking for differences specifically between clusters 0 and 3 - there could be genes expressed by both these clusters that help differentiate them from the rest of the dataset, but not from each other.
+> > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset. Only two of these markers are in the top five of both lists, although we can find the other genes further down in the table if we look.
+> > We would'nt expect to see the same results because we're now looking for differences specifically between cluster 5 and clusters 0 and 3. The genes that `FindAllMarkers` identified as differentiating cluster 5 from all of the other clusters might not be best at differentiating it specifically from clusters 0 and 3 - some of those markers could actually be expressed by all three of these clusters.
 > >
 > {: .solution}
 {: .question}
@@ -792,14 +790,14 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 > > <solution-title></solution-title>
 > > 1. the top five markers in the output table are: 
 > >
-> > | 1  | RPS6  |
-> > | 2  | RPS12 |
-> > | 3  | RPL32 |
-> > | 4  | RPS27 |
-> > | 5  | RPS25 |
+> > > | 1  | RPS12 |
+> > > | 2  | RPS6  |
+> > > | 3  | RPL27 |
+> > > | 4  | RPS32 |
+> > > | 5  | RPS14 |
 > >
-> > Many of the top markers (including all of the top five) have names starting with RP. This indicates that they are ribosomal genes (encoding proteins or RNA that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
-> > However, if we don't expect to see differences in ribosomal content between cells, then we might suspect that we've ended up with a cluster based on ribosomal RNA content rather than on cell type. In this case, we might want to go back to the QC steps. We could score the cells for `percent.ribo` in the same way we did for `percent.mt`. We could then filter out cells with unusually high proportions of ribosomal genes or regress out the variation associated with this characteristic. Just as when we're filtering cells by mitochondrial RNA proportions, we would need to think carefully about this - we wouldn't want to eliminate a cell type just because it has higher proportions of ribosomal genes, which is what we could end up doing if we tried it with this particular dataset.
+> > Many of the top markers (including all of the top five) have names starting with RP. This indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
+> > However, if we don't expect to see differences in ribosomal content between cells, then we might suspect that we've ended up with a cluster based on ribosomal RNA content rather than on cell type. In this case, we might want to go back to the QC steps. We could score the cells for `percent.ribo` in the same way we did for `percent.mt`. We could then filter out cells with unusually high proportions of ribosomal genes or regress out the variation associated with this characteristic during the scaling step. Just as when we're filtering cells by mitochondrial RNA proportions, we would need to think carefully about this - we wouldn't want to eliminate a cell type just because it has higher proportions of ribosomal genes, which is what we could end up doing if we tried it with this particular dataset.
 > >
 > {:.solution}
 {: .question}
@@ -813,9 +811,9 @@ We can take two different approaches when identifying our cells:
 1. **Unsupervised**
     We could start with our list of marker genes and then see if they are known to be expressed in specific cell types. In this case, we are starting with what the data tells us - the list of genes produced by our DE tests.
 2. **Supervised**
-    We could start with a list of known marker genes for each cell type we expect to see in our data, then look to see which clusters are expressing these genes. With this approach, we are starting with our chosen list of genes.
+    We could start with a list of known marker genes for each cell type we expect to see in our data, then look to see which clusters are expressing these genes. With this approach, we are starting with a list of genes selected from previous research and then searching from them in our data - we're choosing or 'supervising' the genes we use.
 
-If we're taking the unsupervised approach, then we might want to limit our markers to the ones that showed the biggest differences in expression. We can do this using some of the extra parametes provided by `FindAllMarkers`.
+If we're taking the unsupervised approach, then we might want to limit our markers to the ones that showed the biggest differences in expression. We can do this using some of the extra parametes provided by `FindAllMarkers`. Let's refine the parameters to find the top 10 positive markers for each cluster that showed a log fold change of at least 1 (meaning their expression was at least twice as high).
 
 ><hands-on-title>Find the top 10 markers</hands-on-title>
 >
@@ -828,14 +826,14 @@ We could now search online or in a database such as [PanglaoDB](https://panglaod
 > <question-title></question-title>
 > 1. Which type of cells express CD79A?
 > > <solution-title></solution-title>
-> > 1. A quick search online or in one of the databases should tell you that CD79A is usually expressed by B cells, which are a type of PBMC, so we would expect to find some in this dataset. This suggests that cluster 3 could be made up of B cells.
+> > 1. A quick search online or in one of the databases should tell you that CD79A is usually expressed by B cells, which are a type of PBMC, so we would expect to find some in this dataset. This suggests that cluster 3 is made up of B cells.
 > > 
 >  {: .solution}
 {: .question}
 
 If we were to continue with this unsupervised approach, we would look at more of the top markers for cluster 3 to check that they are expressed by the same cell type as CD79A. We would then repeat the process for the rest of our nine clusters.
 
-The unsupervised approach might be the only option if we don't know exactly what we're looking for - we might be investigating rare cell types, working with samples from an understudied species, or looking at the changes that happen in a particular disease. However, in many cases, we can use what we already know to begin to understand our dataset. We can look for genes that previous research has identified as markers for the cell types we expect to see. We won't always get all the answers we need from a supervised approach like this, but it can be a quick way to identify known cell types. 
+The unsupervised approach might be the only option if we don't know exactly what we're looking for - we might be investigating rare cell types, working with samples from an understudied species, or looking at the changes that happen in a particular disease. However, in many cases, we can use what we already know to begin to understand our dataset. We can look for genes that previous research has identified as markers for the cell types we expect to see. We won't always get all the answers we need from a supervised approach like this, but it can be a quicker way to identify known cell types. 
 
 A supervised approach should work well for the current dataset because PBMCs have been very well characterised. We know which cell types should be present in a PBMC sample and which genes each of these cell types should be expressing. 
 
@@ -865,7 +863,7 @@ The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If
 
 ![Two violin plots both showing expression mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of MS4A1 and CD79A by cluster")
 
-Both CD79A and MS4A1 are mainly expressed in cluster 3, with very little expression in any of the other clusters. Since most cells in cluster 3 are expressing these two well-known markers of B cells and our DE test showed they were expressed more by this cluster than in the rest of the data, we can say that cluster 3 represents our B cell population.
+Both CD79A and MS4A1 are mainly expressed in cluster 3, with very little expression in any of the other clusters. Since most cells in cluster 3 are expressing these two well-known markers of B cells and our DE test showed they were expressed more by this cluster than in the rest of the data, we can confidently say that cluster 3 represents our B cell population.
 
 Sometimes the results aren't quite so clear as markers might be expressed across multiple clusters of the same or different cell types. We might need to use multiple markers to differentiate between these groups.
 
