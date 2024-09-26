@@ -304,7 +304,7 @@ not have a header.
 {: .hands_on}
 
 
-## **Remove duplicated molecules**
+## Remove duplicated molecules
 
 > <hands-on-title> Remove duplicated molecules </hands-on-title>
 >
