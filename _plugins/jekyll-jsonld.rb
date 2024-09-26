@@ -870,26 +870,28 @@ module Jekyll
       end
 
       # Notebooks
-      if actual_material.key?('notebook') && actual_material['notebook']['language'] != 'r'
-        # Python, Bash, SQL (all via jupyter)
-        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.ipynb"
-        mentions.push({
-                        '@type': 'Thing',
-                        url: url,
-                        name: "Jupyter Notebook (with Solutions)"
-                      })
-        mentions.push({
-                        '@type': 'Thing',
-                        url: url.gsub(/\.ipynb$/, '-course.ipynb'),
-                        name: "Jupyter Notebook (without Solutions)"
-                      })
-      else # Actual R
-        url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.Rmd"
-        mentions.push({
-                        '@type': 'Thing',
-                        url: url,
-                        name: "Quarto/RMarkdown Notebook"
-                      })
+      if actual_material.key?('notebook')
+        if actual_material['notebook']['language'] != 'r'
+          # Python, Bash, SQL (all via jupyter)
+          url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.ipynb"
+          mentions.push({
+                          '@type': 'Thing',
+                          url: url,
+                          name: "Jupyter Notebook (with Solutions)"
+                        })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: url.gsub(/\.ipynb$/, '-course.ipynb'),
+                          name: "Jupyter Notebook (without Solutions)"
+                        })
+        elsif actual_material['notebook']['language'] == 'r' # Actual R
+          url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.Rmd"
+          mentions.push({
+                          '@type': 'Thing',
+                          url: url,
+                          name: "Quarto/RMarkdown Notebook"
+                        })
+        end
       end
 
       # Zenodo link out
