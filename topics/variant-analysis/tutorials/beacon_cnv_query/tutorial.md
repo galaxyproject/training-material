@@ -86,30 +86,30 @@ Those parametars are, "CHROMOSOME", "Start", and "End".
 >    >
 >    > What types of information can be extracted from records?
 >    >
->    > > ```json
->    > >{'_id': ObjectId('66c466431ea6cb4184ee0f2f'),
->    > > 'assemblyId': 'GRCh38',
->    > > 'biosampleId': 'MP2PRT-PARNFH-TMP1-A, MP2PRT-PARNFH-NM1-A',
->    > > 'definitions': {'Location': {'chromosome': '17',
->    > >                              'end': 43170245,
->    > >                              'start': 43044295}},
->    > > 'diseaseType': 'acute lymphoblastic leukemia',
->    > > 'gene': 'BRCA1',
->    > > 'geneID': 'ENSG00000012048.23',
->    > > 'id': 'refvar-66c466431ea6cb4184ee0f2f',
->    > > 'info': {'caseID': 'MP2PRT-PARNFH, MP2PRT-PARNFH',
->    > >          'cnCount': 3,
->    > >          'fileName': 'f11b7fb7-a610-4978-b5c4-523450a0fd5f.wgs.ASCAT.gene_level.copy_number_variation.tsv',
->    > >          'legacyId': 'DUP:chr17:43044295-43170245',
->    > >          'projectID': 'MP2PRT-ALL',
->    > >          'sampleType': 'Blood Derived Cancer - Bone Marrow, Blood Derived '
->    > >                        'Cancer - Bone Marrow, Post-treatment'},
->    > > 'primarySite': 'hematopoietic and reticuloendothelial systems',
->    > > 'updated': '2024-08-19T21:23:09.374531',
->    > > 'variantInternalId': '17:43044295-43170245:EFO:0030071',
->    > > 'variantState': {'id': 'EFO:0030071', 'label': 'low-level gain'},
->    > > 'variantType': 'DUP'}
->    > > ```
+>    > ```json
+>    > {'_id': ObjectId('66c466431ea6cb4184ee0f2f'),
+>    > 'assemblyId': 'GRCh38',
+>    > 'biosampleId': 'MP2PRT-PARNFH-TMP1-A, MP2PRT-PARNFH-NM1-A',
+>    > 'definitions': {'Location': {'chromosome': '17',
+>    >                              'end': 43170245,
+>    >                              'start': 43044295}},
+>    > 'diseaseType': 'acute lymphoblastic leukemia',
+>    > 'gene': 'BRCA1',
+>    > 'geneID': 'ENSG00000012048.23',
+>    > 'id': 'refvar-66c466431ea6cb4184ee0f2f',
+>    > 'info': {'caseID': 'MP2PRT-PARNFH, MP2PRT-PARNFH',
+>    >          'cnCount': 3,
+>    >          'fileName': 'f11b7fb7-a610-4978-b5c4-523450a0fd5f.wgs.ASCAT.gene_level.copy_number_variation.tsv',
+>    >          'legacyId': 'DUP:chr17:43044295-43170245',
+>    >          'projectID': 'MP2PRT-ALL',
+>    >          'sampleType': 'Blood Derived Cancer - Bone Marrow, Blood Derived '
+>    >                        'Cancer - Bone Marrow, Post-treatment'},
+>    > 'primarySite': 'hematopoietic and reticuloendothelial systems',
+>    > 'updated': '2024-08-19T21:23:09.374531',
+>    > 'variantInternalId': '17:43044295-43170245:EFO:0030071',
+>    > 'variantState': {'id': 'EFO:0030071', 'label': 'low-level gain'},
+>    > 'variantType': 'DUP'}
+>    > ```
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. Identifiers and IDs:
