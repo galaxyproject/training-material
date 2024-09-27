@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@29724fbbdf169a9e5b50f145a4fae61cdebf3461",
+		release: "galaxy-training-network@d67b3828c0c09deaa18565bc3dbebc4cbf21e35d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of an interactive Galaxy tools table for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-24 15:32:06 +0000">
+<meta name="DC.date" content="2024-09-27 10:48:07 +0000">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Development in Galaxy / Creation of an interactive Galaxy tools table for your community / Hands-on: Creation of an interactive Galaxy tools table for your community">
@@ -207,7 +207,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-24 15:32:06 +0000",
+  "dateModified": "2024-09-27 10:48:07 +0000",
   "datePublished": "2024-03-13 15:41:48 +0000",
   "identifier": "https://gxy.io/GTN:T00426",
   "accessMode": [
@@ -237,7 +237,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of an interactive Galaxy tools table for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html",
-  "version": 3,
+  "version": 4,
   "timeRequired": "PT1H",
   "teaches": "- Create a community reviewed table for Galaxy tools within a specific scientific domain\n- Embed an interactive table in a community page",
   "keywords": [
@@ -651,7 +651,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 13, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 24, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 27, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -669,7 +669,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 4 </div>
 
     </blockquote>
     </section>
@@ -806,20 +806,34 @@ an example of the file that is used to manually filter the tools for a community
 
 <h2 id="add-a-tools-status-list">Add a tools status list</h2>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-review-tools-in-your-community-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Review tools in your community table</div>
 
   <ol>
     <li>Download the <code class="language-plaintext highlighter-rouge">tools.tsv</code> file in <code class="language-plaintext highlighter-rouge">results/&lt;your community&gt;</code>.</li>
     <li>Open <code class="language-plaintext highlighter-rouge">tools.tsv</code> with a Spreadsheet Software.</li>
-    <li>Review each line corresponding to a tool</li>
+    <li>
+      <p>Review each line corresponding to a tool</p>
+
+      <p>You can also just review some tools. Those tools that are not reviewed will be have <code class="language-plaintext highlighter-rouge">FALSE</code> in the <code class="language-plaintext highlighter-rouge">Reviewed</code> columns the updated table.</p>
+
+      <ol>
+        <li>Change the value in the <code class="language-plaintext highlighter-rouge">Reviewed</code> column from <code class="language-plaintext highlighter-rouge">FALSE</code> to <code class="language-plaintext highlighter-rouge">TRUE</code> (this will be done automatically if an entry of the tool in <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> exists).</li>
+        <li>Add <code class="language-plaintext highlighter-rouge">TRUE</code> to the <code class="language-plaintext highlighter-rouge">To keep</code> column if the tool should be kept, and <code class="language-plaintext highlighter-rouge">FALSE</code> if not.</li>
+        <li>Add <code class="language-plaintext highlighter-rouge">TRUE</code> or <code class="language-plaintext highlighter-rouge">FALSE</code> also to the <code class="language-plaintext highlighter-rouge">Deprecated</code> column.</li>
+      </ol>
+    </li>
+    <li>
+      <p>Copy paste the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code>, <code class="language-plaintext highlighter-rouge">To keep</code>, <code class="language-plaintext highlighter-rouge">Deprecated</code> column in a new table (in that order).</p>
+
+      <p>This can also be done using the reference function of your Spreadsheet Software.</p>
+    </li>
+    <li>Export the new table as TSV (without header).</li>
+    <li>Submit the TSV as <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> in your community folder.</li>
+    <li>Wait for the Pull Request to be merged</li>
   </ol>
+
 </blockquote>
-
-<div class="language-plaintext hands_on highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   You can also just review some tools. Those tools that are not reviewed will be have `FALSE` in the `Reviewed` columns the updated table. &gt;    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists). &gt;    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not. &gt;    3. Add `TRUE` or `FALSE` also to the `Deprecated` column. &gt; 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` column in a new table (in that order).
-
-   This can also be done using the reference function of your Spreadsheet Software. &gt; 5. Export the new table as TSV (without header). &gt; 6. Submit the TSV as `tools_status.tsv` in your community folder. &gt; 7. Wait for the Pull Request to be merged &gt;
-</code></pre></div></div>
 
 <p>You should have now an interactive table reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.</p>
 
@@ -1118,7 +1132,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/29724fbbdf169a9e5b50f145a4fae61cdebf3461">29724fb</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d67b3828c0c09deaa18565bc3dbebc4cbf21e35d">d67b382</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

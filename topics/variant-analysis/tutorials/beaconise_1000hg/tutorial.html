@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@29724fbbdf169a9e5b50f145a4fae61cdebf3461",
+		release: "galaxy-training-network@d67b3828c0c09deaa18565bc3dbebc4cbf21e35d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-07 09:03:19 +0000">
+<meta name="DC.date" content="2024-09-27 10:48:07 +0000">
 <meta name="DC.creator" content="Khaled Jum'ah">
 <meta name="DC.creator" content="Katarzyna Kamieniecka">
 <meta name="DC.creator" content="Krzysztof Poterlowicz"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-08-07 09:03:19 +0000",
+  "dateModified": "2024-09-27 10:48:07 +0000",
   "datePublished": "2024-08-06 10:26:02 +0000",
   "identifier": "https://gxy.io/GTN:T00449",
   "accessMode": [
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Working with Beacon V2: A Comprehensive Guide to Creating, Uploading, and Searching for Variants with Beacons",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beaconise_1000hg/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT2H",
   "teaches": "- Comprehend the fundamental concepts and applications of Beacons\n- Apply skills in utilizing MongoDB to construct and manage Beacons\n- Analyze and transform variants and metadata into structures compatible with Beacon requirements\n- Execute a step-by-step process to import data into Beacons\n- Develop the ability to query Beacons for variants",
   "keywords": [
@@ -1157,7 +1157,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 6, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Aug 7, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 27, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1175,7 +1175,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1278,54 +1278,53 @@ This Beacon will have administrative user rights to modify it, and an additional
 </code></pre></div>      </div>
     </li>
     <li>Copy the text below into the <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file
-      <blockquote>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">3.6'</span>
-<span class="na">services</span><span class="pi">:</span>
+```yaml
+version: ‘3.6’
+services:</li>
+  </ol>
 
- <span class="na">mongo-client</span><span class="pi">:</span>
-   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:3.6</span>
-   <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
-   <span class="na">volumes</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s">./mongo/db:/data/db</span>
-     <span class="pi">-</span> <span class="s">./mongo-init:/docker-entrypoint-initdb.d</span>
-   <span class="na">ports</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s2">"</span><span class="s">27017:27017"</span>
-   <span class="na">environment</span><span class="pi">:</span>
-     <span class="na">MONGO_INITDB_ROOT_USERNAME</span><span class="pi">:</span> <span class="s">root</span>
-     <span class="na">MONGO_INITDB_ROOT_PASSWORD</span><span class="pi">:</span> <span class="s">example</span>
+  <p>mongo-client:
+    image: mongo:3.6
+    restart: unless-stopped
+    volumes:
+      - ./mongo/db:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d
+    ports:
+      - “27017:27017”
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example</p>
 
- <span class="na">mongo-express</span><span class="pi">:</span>
-   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo-express</span>
-   <span class="na">restart</span><span class="pi">:</span> <span class="s">unless-stopped</span>
-   <span class="na">environment</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s">ME_CONFIG_MONGODB_SERVER=mongo-client</span>
-     <span class="pi">-</span> <span class="s">ME_CONFIG_MONGODB_PORT=27017</span>
-     <span class="pi">-</span> <span class="s">ME_CONFIG_BASICAUTH_USERNAME=root</span>
-     <span class="pi">-</span> <span class="s">ME_CONFIG_BASICAUTH_PASSWORD=example</span>
-   <span class="na">ports</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s2">"</span><span class="s">8081:8081"</span>
+  <p>mongo-express:
+    image: mongo-express
+    restart: unless-stopped
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo-client
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_BASICAUTH_USERNAME=root
+      - ME_CONFIG_BASICAUTH_PASSWORD=example
+    ports:
+      - “8081:8081”</p>
 
- <span class="na">mongo-init</span><span class="pi">:</span>
-   <span class="na">image</span><span class="pi">:</span> <span class="s">mongo:3.6</span>
-   <span class="na">restart</span><span class="pi">:</span> <span class="s2">"</span><span class="s">no"</span>
-   <span class="na">depends_on</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s">mongo-client</span>
-   <span class="na">environment</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s">MONGO_INITDB_DATABASE=admin</span>
-     <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_USERNAME=root</span>
-     <span class="pi">-</span> <span class="s">MONGO_INITDB_ROOT_PASSWORD=example</span>
-   <span class="na">volumes</span><span class="pi">:</span>
-     <span class="pi">-</span> <span class="s">./mongo-init:/docker-entrypoint-initdb.d</span>
-</code></pre></div>        </div>
-      </blockquote>
-    </li>
-    <li>Create the path <code class="language-plaintext highlighter-rouge">mongo/db</code> in your directory using <code class="language-plaintext highlighter-rouge">$mkdir</code> tool
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>mongo
-<span class="nb">mkdir </span>mongo/db
-</code></pre></div>      </div>
-      <p>You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
+  <p>mongo-init:
+    image: mongo:3.6
+    restart: “no”
+    depends_on:
+      - mongo-client
+    environment:
+      - MONGO_INITDB_DATABASE=admin
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+    volumes:
+      - ./mongo-init:/docker-entrypoint-initdb.d</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5. Create the path `mongo/db` in your directory using `$mkdir` tool
+```bash
+mkdir mongo
+mkdir mongo/db
+</code></pre></div>  </div>
+  <p>You can change the name of that bath, but you have to change that also from the docker-compose.yaml file. 
 We have everything ready for creating the MongoDB server hosted in the docker container. This will create a Beacon database with admin access. Next, we will add users.</p>
-    </li>
+  <ol>
     <li>Create another directory in your mongo-init directory and name it as <code class="language-plaintext highlighter-rouge">mongo-init</code>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>mongo-init
 </code></pre></div>      </div>
@@ -1339,32 +1338,32 @@ We have everything ready for creating the MongoDB server hosted in the docker co
 </code></pre></div>      </div>
     </li>
     <li>Copy the text below into the <code class="language-plaintext highlighter-rouge">create-user.js</code> file
-      <blockquote>
-        <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// create_user.js</span>
+```js
+// create_user.js</li>
+  </ol>
 
-<span class="c1">// Connect to the admin database</span>
-<span class="kd">var</span> <span class="nx">adminDB</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">getSiblingDB</span><span class="p">(</span><span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span><span class="p">);</span>
+  <p>// Connect to the admin database
+var adminDB = db.getSiblingDB(“admin”);</p>
 
-<span class="c1">// Create a new user with read-only access to all databases</span>
-<span class="nx">adminDB</span><span class="p">.</span><span class="nf">createUser</span><span class="p">({</span>
- <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">query_user</span><span class="dl">"</span><span class="p">,</span>
- <span class="na">pwd</span><span class="p">:</span> <span class="dl">"</span><span class="s2">querypassword</span><span class="dl">"</span><span class="p">,</span>
- <span class="na">roles</span><span class="p">:</span> <span class="p">[</span>
-   <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="na">db</span><span class="p">:</span> <span class="dl">"</span><span class="s2">admin</span><span class="dl">"</span> <span class="p">},</span>
-   <span class="p">{</span> <span class="na">role</span><span class="p">:</span> <span class="dl">"</span><span class="s2">read</span><span class="dl">"</span><span class="p">,</span> <span class="na">db</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Beacon</span><span class="dl">"</span> <span class="p">},</span> <span class="c1">// Adjust this for your needs</span>
-   <span class="c1">// Add additional read roles as needed</span>
- <span class="p">]</span>
-<span class="p">});</span>
-</code></pre></div>        </div>
-        <p>This will add a user (user name: <code class="language-plaintext highlighter-rouge">query_user</code> and password:<code class="language-plaintext highlighter-rouge">querypassword</code>) account with read-only permission to the Beacon database. This is important to avoid unwanted modifications to the Beacon database. 
-To know more about MongoDB, please read the <a href="https://www.mongodb.com/docs/">MongoDB documentation</a>.</p>
-      </blockquote>
-    </li>
-    <li>Run the command <code class="language-plaintext highlighter-rouge">$docker-compose</code> in the directory containing the <code class="language-plaintext highlighter-rouge">docker-compose.yaml</code> file with the specified parameters.
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up <span class="nt">-d</span>
-</code></pre></div>      </div>
-      <p>This will create an empty MongoDB server where we can add the Beacon database or any additional databases.</p>
-    </li>
+  <p>// Create a new user with read-only access to all databases
+adminDB.createUser({
+  user: “query_user”,
+  pwd: “querypassword”,
+  roles: [
+    { role: “read”, db: “admin” },
+    { role: “read”, db: “Beacon” }, // Adjust this for your needs
+    // Add additional read roles as needed
+  ]
+});</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This will add a user (user name: `query_user` and password:`querypassword`) account with read-only permission to the Beacon database. This is important to avoid unwanted modifications to the Beacon database. 
+To know more about MongoDB, please read the [MongoDB documentation](https://www.mongodb.com/docs/).
+10. Run the command `$docker-compose` in the directory containing the `docker-compose.yaml` file with the specified parameters.
+```bash
+docker-compose up -d
+</code></pre></div>  </div>
+  <p>This will create an empty MongoDB server where we can add the Beacon database or any additional databases.</p>
+
+  <ol>
     <li>Check the created docker containers and test if the created docker container is running
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker ps
 </code></pre></div>      </div>
@@ -1701,22 +1700,20 @@ of the individual described, facilitating insights into genetic variations and t
         <li><em>“END”</em>: <code class="language-plaintext highlighter-rouge">243620819</code></li>
         <li><em>“VARIANT STATE ID”</em>: <code class="language-plaintext highlighter-rouge">EFO:0030068</code>
 The srarch function will queiry the Beacon database and print out the resutls that matches our quiery specifications. In this case it will print something like this.
-          <blockquote>
-            <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w">   </span><span class="p">{</span><span class="err">'_id':</span><span class="w"> </span><span class="err">ObjectId('</span><span class="mi">6690160</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">936e8</span><span class="err">e</span><span class="mi">0</span><span class="err">a</span><span class="mi">7828e2</span><span class="err">')</span><span class="p">,</span><span class="w">
+          <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="err">'_id':</span><span class="w"> </span><span class="err">ObjectId('</span><span class="mi">6690160</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">936e8</span><span class="err">e</span><span class="mi">0</span><span class="err">a</span><span class="mi">7828e2</span><span class="err">')</span><span class="p">,</span><span class="w">
 </span><span class="err">'assemblyId':</span><span class="w"> </span><span class="err">'GRCh</span><span class="mi">38</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'biosampleId':</span><span class="w"> </span><span class="err">'HG</span><span class="mi">00096</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'definitions':</span><span class="w"> </span><span class="p">{</span><span class="err">'Location':</span><span class="w"> </span><span class="p">{</span><span class="err">'chromosome':</span><span class="w"> </span><span class="err">'</span><span class="mi">1</span><span class="err">'</span><span class="p">,</span><span class="w">
-                             </span><span class="err">'end':</span><span class="w"> </span><span class="mi">243620819</span><span class="p">,</span><span class="w">
-                             </span><span class="err">'start':</span><span class="w"> </span><span class="mi">243618689</span><span class="p">}},</span><span class="w">
+                      </span><span class="err">'end':</span><span class="w"> </span><span class="mi">243620819</span><span class="p">,</span><span class="w">
+                      </span><span class="err">'start':</span><span class="w"> </span><span class="mi">243618689</span><span class="p">}},</span><span class="w">
 </span><span class="err">'id':</span><span class="w"> </span><span class="err">'refvar</span><span class="mi">-6690160</span><span class="err">a</span><span class="mi">3</span><span class="err">a</span><span class="mi">936e8</span><span class="err">e</span><span class="mi">0</span><span class="err">a</span><span class="mi">7828e2</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'info':</span><span class="w"> </span><span class="p">{</span><span class="err">'cnCount':</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-         </span><span class="err">'cnValue':</span><span class="w"> </span><span class="mf">0.422353</span><span class="p">,</span><span class="w">
-         </span><span class="err">'legacyId':</span><span class="w"> </span><span class="err">'DRAGEN:LOSS:chr</span><span class="mi">1</span><span class="err">:</span><span class="mi">243618690-243620819</span><span class="err">'</span><span class="p">},</span><span class="w">
+  </span><span class="err">'cnValue':</span><span class="w"> </span><span class="mf">0.422353</span><span class="p">,</span><span class="w">
+  </span><span class="err">'legacyId':</span><span class="w"> </span><span class="err">'DRAGEN:LOSS:chr</span><span class="mi">1</span><span class="err">:</span><span class="mi">243618690-243620819</span><span class="err">'</span><span class="p">},</span><span class="w">
 </span><span class="err">'updated':</span><span class="w"> </span><span class="err">'</span><span class="mi">2024-07-11</span><span class="err">T</span><span class="mi">17</span><span class="err">:</span><span class="mi">26</span><span class="err">:</span><span class="mf">27.265115</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'variantInternalId':</span><span class="w"> </span><span class="err">'chr</span><span class="mi">1</span><span class="err">:</span><span class="mi">243618689-243620819</span><span class="err">:EFO:</span><span class="mi">0030068</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'variantState':</span><span class="w"> </span><span class="p">{</span><span class="err">'id':</span><span class="w"> </span><span class="err">'EFO:</span><span class="mi">0030068</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'label':</span><span class="w"> </span><span class="err">'low-level</span><span class="w"> </span><span class="err">loss'</span><span class="p">}}</span><span class="w">
-</span></code></pre></div>            </div>
-          </blockquote>
+</span></code></pre></div>          </div>
         </li>
       </ul>
     </li>
@@ -2029,7 +2026,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/29724fbbdf169a9e5b50f145a4fae61cdebf3461">29724fb</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d67b3828c0c09deaa18565bc3dbebc4cbf21e35d">d67b382</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

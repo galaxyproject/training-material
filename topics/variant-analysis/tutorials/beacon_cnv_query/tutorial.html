@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@29724fbbdf169a9e5b50f145a4fae61cdebf3461",
+		release: "galaxy-training-network@d67b3828c0c09deaa18565bc3dbebc4cbf21e35d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Querying the University of Bradford GDC Beacon Database for Copy Number Variants (CNVs)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-19 09:11:00 +0000">
+<meta name="DC.date" content="2024-09-27 10:48:07 +0000">
 <meta name="DC.creator" content="Khaled Jum'ah">
 <meta name="DC.creator" content="Katarzyna Kamieniecka">
 <meta name="DC.creator" content="Krzysztof Poterlowicz"><meta name="description" content="Genetic differences (variants) between healthy and diseased tissue, between individuals of a population, or between strains of an organism can provide mechanistic insight into disease processes and the natural function of affected genes.  The tutorials in this section show how to detect evidence for genetic variants in next-generation sequencing data, a process termed variant calling.  Of equal importance, they also demonstrate how you can interpret, for a range of different organisms, the resulting sets of variants by predicting their molecular effects on genes and proteins, by annotating previously observed variants with published knowledge, and by trying to link phenotypes of the sequenced samples to their variant genotypes. ">
@@ -209,7 +209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-19 09:11:00 +0000",
+  "dateModified": "2024-09-27 10:48:07 +0000",
   "datePublished": "2024-08-06 10:26:02 +0000",
   "identifier": "https://gxy.io/GTN:T00448",
   "accessMode": [
@@ -239,7 +239,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Querying the University of Bradford GDC Beacon Database for Copy Number Variants (CNVs)",
   "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/beacon_cnv_query/tutorial.html",
-  "version": 2,
+  "version": 3,
   "timeRequired": "PT30M",
   "teaches": "- Comprehend the concept of Beacon databases and their role in genomic research.\n- Demonstrate proficiency in querying Beacon databases to identify and analyze specific Copy Number Variants (CNVs).",
   "keywords": [
@@ -1029,7 +1029,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Aug 6, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 19, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 27, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1047,7 +1047,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 3 </div>
 
     </blockquote>
     </section>
@@ -1133,8 +1133,7 @@ After the query, review the output file to determine how many records match thes
 
     <p>What types of information can be extracted from records?</p>
 
-    <blockquote>
-      <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="err">'_id':</span><span class="w"> </span><span class="err">ObjectId('</span><span class="mi">66</span><span class="err">c</span><span class="mi">466431</span><span class="err">ea</span><span class="mi">6</span><span class="err">cb</span><span class="mi">4184</span><span class="err">ee</span><span class="mi">0</span><span class="err">f</span><span class="mi">2</span><span class="err">f')</span><span class="p">,</span><span class="w">
+    <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="err">'_id':</span><span class="w"> </span><span class="err">ObjectId('</span><span class="mi">66</span><span class="err">c</span><span class="mi">466431</span><span class="err">ea</span><span class="mi">6</span><span class="err">cb</span><span class="mi">4184</span><span class="err">ee</span><span class="mi">0</span><span class="err">f</span><span class="mi">2</span><span class="err">f')</span><span class="p">,</span><span class="w">
 </span><span class="err">'assemblyId':</span><span class="w"> </span><span class="err">'GRCh</span><span class="mi">38</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'biosampleId':</span><span class="w"> </span><span class="err">'MP</span><span class="mi">2</span><span class="err">PRT-PARNFH-TMP</span><span class="mi">1</span><span class="err">-A</span><span class="p">,</span><span class="w"> </span><span class="err">MP</span><span class="mi">2</span><span class="err">PRT-PARNFH-NM</span><span class="mi">1</span><span class="err">-A'</span><span class="p">,</span><span class="w">
 </span><span class="err">'definitions':</span><span class="w"> </span><span class="p">{</span><span class="err">'Location':</span><span class="w"> </span><span class="p">{</span><span class="err">'chromosome':</span><span class="w"> </span><span class="err">'</span><span class="mi">17</span><span class="err">'</span><span class="p">,</span><span class="w">
@@ -1156,8 +1155,7 @@ After the query, review the output file to determine how many records match thes
 </span><span class="err">'variantInternalId':</span><span class="w"> </span><span class="err">'</span><span class="mi">17</span><span class="err">:</span><span class="mi">43044295-43170245</span><span class="err">:EFO:</span><span class="mi">0030071</span><span class="err">'</span><span class="p">,</span><span class="w">
 </span><span class="err">'variantState':</span><span class="w"> </span><span class="p">{</span><span class="err">'id':</span><span class="w"> </span><span class="err">'EFO:</span><span class="mi">0030071</span><span class="err">'</span><span class="p">,</span><span class="w"> </span><span class="err">'label':</span><span class="w"> </span><span class="err">'low-level</span><span class="w"> </span><span class="err">gain'</span><span class="p">},</span><span class="w">
 </span><span class="err">'variantType':</span><span class="w"> </span><span class="err">'DUP'</span><span class="p">}</span><span class="w">
-</span></code></pre></div>      </div>
-    </blockquote>
+</span></code></pre></div>    </div>
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1667,7 +1665,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/29724fbbdf169a9e5b50f145a4fae61cdebf3461">29724fb</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d67b3828c0c09deaa18565bc3dbebc4cbf21e35d">d67b382</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
