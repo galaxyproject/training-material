@@ -48,7 +48,7 @@ recordings:
   youtube_id: nefB35Bi1l4
   speakers:
   - nomadscientist
-- youtube_id: TODO
+- youtube_id: P8AucugNlLc
   length: 1H39
   galaxy_version: 24.1.2.dev0
   date: '2024-09-26'
