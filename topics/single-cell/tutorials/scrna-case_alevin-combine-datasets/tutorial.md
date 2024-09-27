@@ -169,11 +169,11 @@ You can access the data for this tutorial in multiple ways:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N702 to N707`
-> 
->    <comment-title></comment-title>
->     >If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we're adding in metadata later!
-    {: .comment}
-> 
+>
+>    > <comment-title></comment-title>
+>    > If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we're adding in metadata later!
+>    {: .comment}
+>
 >    > <warning-title>Don't add N701!</warning-title>
 >    > You are adding files to N701, so do not add N701 to itself!
 >    {: .warning}

@@ -131,10 +131,12 @@ Next we will retrieve the remaining datasets.
 >
 {: .hands_on}
 
-<!-- > <details-title>Dataset subsampling</details-title>
+<!--
+> <details-title>Dataset subsampling</details-title>
 >
 > As indicated above, for this tutorial the depth of the samples was reduced in order to speed up the time needed to carry out the analysis. This was done as follows, all reads mapping to chromosome 10 were kept and a random fraction of 0.003 were added.
-{: .details} -->
+{: .details} 
+-->
 
 # Quality assessment
 

@@ -502,14 +502,15 @@ subsites: [all]
 
         // on load of the page: switch to the currently selected tab
         var hash = window.location.hash;
-
-        var potential_tab = $('#myTab button[data-target="' + hash + '"]')
-        if (potential_tab.length != 0) {
-            potential_tab.tab('show');
-        } else {
-            var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
-            $('#myTab button[data-target="' + target_tab + '"]').tab('show');
-            $(hash).get(0).scrollIntoView();
+        if (hash){
+        	var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        	if (potential_tab.length != 0) {
+            	potential_tab.tab('show');
+        	} else {
+            	var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            	$('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            	$(hash).get(0).scrollIntoView();
+        	}
         }
     });
 })(window, document);

@@ -1,7 +1,7 @@
 ---
 layout: event
 
-title: Galaxy Academy 2024
+title: Galaxy Training Academy 2024
 description: |
   The Galaxy Academy is a online training event for Beginners as well as learners who would like to improve their Galaxy data analysis skills. Over the course of one week, we will have a different topic and focus every day.
 
@@ -107,7 +107,8 @@ infrastructure:
 program:
   - section: "Monday: Galaxy introduction"
     description: |
-      Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
+      Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics. 
+      In the morning you can take part in the Icebreaker by joining us in the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA). Or you can directly start with the tutorials. If you need support contact us via the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA).
   - section: Start to get to know Galaxy
     subsection: true
     tutorials:
@@ -160,6 +161,7 @@ program:
   - section: "Friday: Grab bag"
     description: |
       Can't get enough? Then please pick one of our FAIR tutorials or any of the tutorials of the GTN. Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
+      You can directly start with you prefered tutorial. If you need support contact us via the Slack Channel [#gta_friday-grab-bag](https://gtnsmrgsbord.slack.com/archives/C07N2A4HQ15).
   - section: Fair training
     subsection: true
     tutorials:

@@ -4,20 +4,25 @@ redirect_from:
 - /events/tracks/gta2024-bacterial-micorbiome
 
 title: Microbiome analysis
-description: This track explains the capability to analyze microbiome data using Galaxy, covering essential tasks such as amplicon analysis and its visualization. It progresses to more advanced topics, including assembly and binning - the requirements for reconstructing Metagenome-Assembled Genomes (MAGs) from microbiome samples, and finally extends to complex analyses like metatranscriptome studies and pathogen detection.
+description: This track explains the capability to analyze microbiome data using Galaxy, covering essential tasks such as amplicon analysis and its visualization. It progresses to more advanced topics, including assembly and binning - the requirements for reconstructing Metagenome-Assembled Genomes (MAGs) from microbiome samples, and finally extends to complex analyses like metatranscriptome studies and pathogen detection. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [#gta_microbiome](https://gtnsmrgsbord.slack.com/archives/C07NA7FSGR4).
 
+slack_channel: gta_microbiome
 
 contributions:
     organisers:
         - paulzierep
         - bebatut
     instructors:
+        - annasyme
         - bebatut
-        - paulzierep
-        - bernt-matthias
-        - plushz
         - EngyNasr
+        - GarethPrice-Aus
+        - igormakunin
+        - bernt-matthias
+        - paulzierep
+        - plushz
         - RZ9082
+
 
 program:
   - section: "Introduction" 
