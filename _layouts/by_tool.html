@@ -9,7 +9,7 @@ layout: base
 		{{ site.data['tool-meta'][tool_id_path].name }}:
 		{{ site.data['tool-meta'][tool_id_path].desc }}
 	</h1>
-	<pre>{{ page.observed_tool_ids[0] }}</pre>
+	<pre>{{ tool_id_path }}</pre>
 </hgroup>
 
 <section>
@@ -17,21 +17,27 @@ layout: base
 		<div class="row">
 			<div class="col-md-3">
 				<h2>Metadata</h2>
-				<h3>Servers Offering this Tool</h3>
-				<a href="https://usegalaxy.eu/?tool_id={{ page.observed_tool_ids[0][0] }}">UseGalaxy.eu ({{ page.observed_tool_ids[0][1] }})</a>
-				<p class="text-muted">This is a guess, we are not currently checking if that is actually present.</p>
 
-				<hgroup>
-					<h3>Observed Tool Versions</h3>
-					<p>Within GTN tutorials</p>
-				</hgroup>
+				<h3>Links</h3>
 				<ul>
-					{% for tool in page.observed_tool_ids %}
-					<li>{{ tool[1] }}</li>
-					{% endfor %}
+					{% if site.data['tool-meta'][tool_id_path]['bio.tools'] %}
+					<li>
+						<a href="https://bio.tools/{{ site.data['tool-meta'][tool_id_path]['bio.tools'] }}">
+						bio.tools: {{ site.data['tool-meta'][tool_id_path]['bio.tools_name'] }}
+						</a>
+					</li>
+					{% endif %}
+					{% if site.data['toolshed-revisions'][tool_id] %}
+					<li>
+						{% assign repo_info = site.data['toolshed-revisions'][tool_id] %}
+						<a href="https://toolshed.g2.bx.psu.edu/view/{{ repo_info[0] }}/{{ repo_info[1] }}/{{ repo_info[2] }}">
+						Galaxy ToolShed Repository
+						</a>
+					</li>
+					{% endif %}
 				</ul>
 
-				{% if site.data['tool-meta'][tool_id_path].edam_operations %}
+				{% if site.data['tool-meta'][tool_id_path].edam_operations | size %}
 				<h3>EDAM Operations</h3>
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_operations %}
@@ -44,7 +50,7 @@ layout: base
 				</ul>
 				{% endif %}
 
-				{% if site.data['tool-meta'][tool_id_path].edam_topics%}
+				{% if site.data['tool-meta'][tool_id_path].edam_topics | size %}
 				<h3>EDAM Topics</h3>
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_topics %}
@@ -56,6 +62,40 @@ layout: base
 				{% endfor %}
 				</ul>
 				{% endif %}
+
+				<hgroup>
+					<h3>Observed Tool Versions</h3>
+					<p>Within GTN tutorials</p>
+				</hgroup>
+				<ul>
+					{% for tool in page.observed_tool_ids %}
+					<li>
+						{{ tool[1] }}
+						{% assign v_id = tool[0] %}
+						{% assign supported = site | tool_version_support: v_id %}
+						{% assign usegalaxy_exact = supported.exact | where: "usegalaxy", "true"   %}
+						{% assign other_exact = supported.exact | where: "usegalaxy", "false"   %}
+
+						<ul>
+							{% for inst in usegalaxy_exact %}
+							<li>
+								<a href="{{ inst.url }}?tool_id={{ tool[0] }}&version={{ tool[1] }}">
+									{{ inst.name }} <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+								</a>
+							</li>
+							{% endfor %}
+							{% for inst in other_exact %}
+							<li>
+									<a href="{{ inst.url }}?tool_id={{ tool[0] }}&version={{ tool[1] }}">
+									{{ inst.name }}
+								</a>
+							</li>
+							{% endfor %}
+						</ul>
+					</li>
+					{% endfor %}
+				</ul>
+
 			</div>
 
 			<div class="col-md-9">

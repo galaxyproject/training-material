@@ -358,7 +358,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > <hands-on-title>Sorting</hands-on-title>
 >
-> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1sort1) %} data in ascending or descending order:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order:
 >
 >    - *"Sort Query"*: Output from **Datamash** {% icon tool %}
 >    - In *"Column selections"* set the following:

@@ -899,7 +899,6 @@ module Jekyll
       (actual_material['tools'] || []).each do |tool|
         toolmeta = site.data['tool-meta'][tool]
         if toolmeta.nil?
-          puts "Cannot find #{tool} in tool-meta.yml"
           next
         end
 
@@ -907,7 +906,7 @@ module Jekyll
           mentions.push({
                           '@type': 'Thing',
                           url: "https://bio.tools/tool/#{toolmeta['bio.tools']}",
-                          name: toolmeta['name']
+                          name: toolmeta.fetch('bio.tools_name', toolmeta['name'])
                         })
         end
         uses_tools = true

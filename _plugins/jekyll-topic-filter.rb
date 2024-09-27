@@ -940,7 +940,7 @@ module TopicFilter
   # short_tool("toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0") => "galaxyp/regex1"
   def self.short_tool(tool)
     if tool.count('/') > 4
-      "#{tool.split('/')[2]}/#{tool.split('/')[4]}"
+      "#{tool.split('/')[2]}/#{tool.split('/')[3]}/#{tool.split('/')[4]}"
     else
       tool
     end
@@ -1191,6 +1191,10 @@ module Jekyll
     def get_workflow(site, page, workflow)
       mat = to_material(site, page)
       mat['workflows'].select { |w| w['workflow'] == workflow }[0]
+    end
+
+    def tool_version_support(site, tool)
+      Gtn::Supported.calculate(site.data['public-server-tools'], [tool])
     end
   end
 end
