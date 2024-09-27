@@ -309,6 +309,14 @@ module Jekyll
         page2.data['short_tool'] = tool
         page2.data['observed_tool_ids'] = tutorials['tool_id']
         page2.data['tutorial_list'] = tutorials['tutorials']
+
+        # Redirect from the older, shorter IDs that have more potential for conflicts.
+        if tool.include?('/')
+          previous_id = tool.split('/')[0] + '/' + tool.split('/')[2]
+        else
+          previous_id = tool # No change
+        end
+        page2.data['redirect_from'] = ["/by-tool/#{previous_id.gsub('%20', ' ')}"]
         site.pages << page2
       end
 
