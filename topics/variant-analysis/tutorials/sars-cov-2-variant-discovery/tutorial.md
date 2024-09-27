@@ -70,7 +70,7 @@ recordings:
   youtube_id: vnFQ2fR_fzw
   speakers:
   - wm75
-- youtube_id: TODO
+- youtube_id: -HQB1zyWWXM
   length: 55M
   galaxy_version: 23.0 + 24.1 (where the UI differences matter most)
   date: '2024-09-27'
