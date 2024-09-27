@@ -894,6 +894,32 @@ module Jekyll
         end
       end
 
+      # Tools
+      uses_tools = false
+      (actual_material['tools'] || []).each do |tool|
+        toolmeta = site.data['tool-meta'][tool]
+        if toolmeta.nil?
+          puts "Cannot find #{tool} in tool-meta.yml"
+          next
+        end
+
+        if toolmeta['bio.tools'].length.positive?
+          mentions.push({
+                          '@type': 'Thing',
+                          url: "https://bio.tools/tool/#{toolmeta['bio.tools']}",
+                          name: toolmeta['name']
+                        })
+        end
+        uses_tools = true
+      end
+      if uses_tools
+        mentions.push({
+                        '@type': 'Thing',
+                        url: "https://bio.tools/tool/galaxy",
+                        name: "Galaxy"
+                      })
+      end
+
       # Zenodo link out
       if actual_material.key?('zenodo_link') && ! actual_material['zenodo_link'].nil?
         if actual_material['zenodo_link'].length.positive?
