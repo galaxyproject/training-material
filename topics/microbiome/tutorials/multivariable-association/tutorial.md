@@ -171,13 +171,14 @@ Now we will find significant associations between microbial features( taxonomy f
 {: .hands_on}
 
 # Understanding parameters in the tool
-Lets now understand the role of each parameter in the tool.
 
-1. **Interactions:Fixed effects**: Fixed effects are the factors in your model that you want to study and draw conclusions about. These are the variables you hypothesize have a direct and consistent influence on the outcome. For example, you are studying how different diets affect gut microbiome composition, then diet would be a fixed effect because you’re specifically interested in understanding how different diets influence the microbiome. You might also include other fixed effects like age and gender to control for their impact.
+Let's now understand the role of each parameter in the tool.
 
-2. **Random effects**: In some studies, like those following people over time or studying families, samples from the same group can be similar. MaAsLin2 helps handle this by letting researchers choose a grouping factor. This helps make sure the statistical analysis is more accurate. For example, setting random_effects = "Subject_ID" helps control for the correlation between samples that come from the same individual.
+1. **Interactions: Fixed effects**: Fixed effects are the factors in your model that you want to study and draw conclusions about. These are the variables you hypothesize have a direct and consistent influence on the outcome. For example, you are studying how different diets affect gut microbiome composition, then diet would be a fixed effect because you’re specifically interested in understanding how different diets influence the microbiome. You might also include other fixed effects like age and gender to control for their impact.
 
-3. **Reference**: It allows researchers to establish a baseline or standard category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. 
+3. **Random effects**: In some studies, like those following people over time or studying families, samples from the same group can be similar. MaAsLin2 helps handle this by letting researchers choose a grouping factor. This helps make sure the statistical analysis is more accurate. For example, setting random_effects = "Subject_ID" helps control for the correlation between samples that come from the same individual.
+
+4. **Reference**: It allows researchers to establish a baseline or standard category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. 
 
    > <comment-title></comment-title>
    > - In MaAslin2, the reference level is must for variables with more than two distinct kinds of values.
@@ -217,7 +218,7 @@ Lets now understand the role of each parameter in the tool.
 different total counts or distributions.\
 For each feature (like a gene), TMM computes the log-fold change (M-value) between each sample and  a metadata sample.\
 It then removes extreme values (outliers) that could skew the results. This trimming helps focus on more  typical values and reduces the impact of any unusual data points.\
-Weighted mean of the remaining M-values is calculated to determine the overall adjustment factor for each sample.\
+The weighted mean of the remaining M-values is calculated to determine the overall adjustment factor for each sample.\
 Finally, this adjustment factor is used to normalize the counts in each sample, making them more comparable.\
                                               
 8. **transform** [ Default: "LOG" ] [Options: "LOG", "LOGIT", "AST", "NONE" ] 
