@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 / Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 / Microbiome</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@4a960af7302920be5cfa14cfe10b14f08ee22e59",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-09-30 13:53:59 +0000">
+<meta name="DC.creator" content="Sujai Kumar"><meta name="description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Microbiome / Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 / Hands-on: Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2">
+        <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
+        
+	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"><script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-09-30 13:53:59 +0000",
+  "datePublished": "2024-09-30 13:53:59 +0000",
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Microbiome",
+    "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+    "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+  },
+  "abstract": "# Introduction",
+  "learningResourceType": "e-learning",
+  "name": "Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2",
+  "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT3H",
+  "teaches": "- Understand the files needed for running LotuS2\n- Learn to use datasets from Zenodo in a Galaxy tool\n- Learn to upload data files to Galaxy\n- Learn to run the Galaxy LotuS2 tool and what the parameters mean\n- Understand the output files from LotuS2\n- Understand the structure of the mapping file needed by LotuS2 to link sample metadata to a pair of fastq files",
+  "keywords": [
+    "Microbiome",
+    "fungi",
+    "ecology"
+  ],
+  "description": "## Abstract\n\n# Introduction\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What is the fungal community composition in a given soil sample?\n\n\n## Learning Objectives\n\n- Understand the files needed for running LotuS2\n- Learn to use datasets from Zenodo in a Galaxy tool\n- Learn to upload data files to Galaxy\n- Learn to run the Galaxy LotuS2 tool and what the parameters mean\n- Understand the output files from LotuS2\n- Understand the structure of the mapping file needed by LotuS2 to link sample metadata to a pair of fastq files\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html",
+      "name": "Galaxy Basics for everyone",
+      "description": "Hands-on for 'Galaxy Basics for everyone' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sujaikumar/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sujaikumar/",
+      "name": "Sujai Kumar",
+      "image": "https://avatars.githubusercontent.com/sujaikumar",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/bethanmanley/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/bethanmanley/",
+      "name": "Bethan Manley",
+      "image": "https://avatars.githubusercontent.com/bethanmanley",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Microbiome",
+      "description": "A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3174",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3174",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3174"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3697",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3697",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3697"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/13710591",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/microbiome" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Microbiome
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/microbiome/faqs/" title="Check our FAQs for the Microbiome topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-microbiome">
+    <h1 data-toc-skip>Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/sujaikumar/" class="contributor-badge contributor-sujaikumar"><img src="https://avatars.githubusercontent.com/sujaikumar?s=36" alt="Sujai Kumar avatar" width="36" class="avatar" />
+    Sujai Kumar</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/bethanmanley/" class="contributor-badge contributor-bethanmanley"><img src="https://avatars.githubusercontent.com/bethanmanley?s=36" alt="Bethan Manley avatar" width="36" class="avatar" />
+    Bethan Manley</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What is the fungal community composition in a given soil sample?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the files needed for running LotuS2</p>
+</li>
+        
+        <li><p>Learn to use datasets from Zenodo in a Galaxy tool</p>
+</li>
+        
+        <li><p>Learn to upload data files to Galaxy</p>
+</li>
+        
+        <li><p>Learn to run the Galaxy LotuS2 tool and what the parameters mean</p>
+</li>
+        
+        <li><p>Understand the output files from LotuS2</p>
+</li>
+        
+        <li><p>Understand the structure of the mapping file needed by LotuS2 to link sample metadata to a pair of fastq files</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: Galaxy Basics for everyone</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 3 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/13710591">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/workflows/" title="Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2---tutorial-example-run">
+              UseGalaxy.eu
+              
+              <br/><span class="text-muted">2024-09-20</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz
+		</a>
+	</li>
+    
+    
+
+    <!--
+    
+	<li class="dropdown-header">
+		Containers
+	</li>
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/microbiome/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    -->
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 30, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 30, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>This tutorial is for you if you are a mycologist using metabarcoding data to understand the fungal composition of soil samples. In particular, this tutorial and its downstream applications will be of most interest to mycorrhizal scientists. <a href="https://www.spun.earth">Society for the Protection of Underground Networks (SPUN)</a> is a research and advocacy organisation that uses Illumina sequencing of environmental environmental DNA (eDNA) from soil samples to identify mycorrhizal fungi. At <abbr title="Society for the Protection of Underground Networks">SPUN</abbr>, we use both Internal Transcribed Spacer 2 (ITS2) and Small Subunit (RNA) (SSU) amplicon sequencing to identify ectomycorrhizal and arbuscular mycorrhizal fungi, respectively. This tutorial focuses on the <abbr title="Internal Transcribed Spacer 2">ITS2</abbr> sequencing used to identify Mycorrhizal fungi (MF).</p>
+
+<p>We do this by using a specific primer pair that amplifies just the <abbr title="Internal Transcribed Spacer 2">ITS2</abbr> region of the ribosomal DNA present in a soil sample. This tutorial covers data for an <abbr title="Internal Transcribed Spacer 2">ITS2</abbr> amplicon produced using the ITS3F and ITS4R primer set and sequenced using Illumina sequencing, which generates paired-end data. In this case, the example data has been generated using a NextSeq 2000, using 2x300bp chemistry.</p>
+
+<p>This tutorial concentrates on the bioinformatics part of the process, i.e. the steps we need to do <strong>after</strong> we get data back from the sequencer. Starting from some example fastq files, we demonstrate how to upload data, run LotuS2, and examine the output files. We end with a brief description of what we can do with these output files.</p>
+
+<p>We use LotuS2 at <abbr title="Society for the Protection of Underground Networks">SPUN</abbr> because we have found that it performs best out of all the tools we tried for identifying <abbr title="Mycorrhizal fungi">MF</abbr> from sequencing data. The LotuS2 publication also includes a benchmark where it outperformed most amplicon tools using default parameters (see <span class="citation"><a href="#ozkurt2022">Özkurt <i>et al.</i> 2022</a></span>).</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#pre-requisites-for-this-tutorial" id="markdown-toc-pre-requisites-for-this-tutorial">Pre-requisites for this tutorial</a></li>
+    </ol>
+  </li>
+  <li><a href="#understanding-the-files-needed-for-running-lotus2" id="markdown-toc-understanding-the-files-needed-for-running-lotus2">Understanding the files needed for running LotuS2</a></li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a>    <ol>
+      <li><a href="#examine-the-input-files" id="markdown-toc-examine-the-input-files">Examine the input files</a></li>
+      <li><a href="#create-a-list-of-pairs-from-the-fastqgz-files" id="markdown-toc-create-a-list-of-pairs-from-the-fastqgz-files">Create a “list of pairs” from the fastq.gz files</a></li>
+    </ol>
+  </li>
+  <li><a href="#run-lotus2" id="markdown-toc-run-lotus2">Run LotuS2</a>    <ol>
+      <li><a href="#run-lotus2-with-the-example-fungal-dataset" id="markdown-toc-run-lotus2-with-the-example-fungal-dataset">Run LotuS2 with the example fungal dataset</a></li>
+    </ol>
+  </li>
+  <li><a href="#examine-the-outputs" id="markdown-toc-examine-the-outputs">Examine the outputs</a></li>
+  <li><a href="#run-lotus2-on-your-own-data" id="markdown-toc-run-lotus2-on-your-own-data">Run LotuS2 on your own data</a>    <ol>
+      <li><a href="#create-your-own-mapping-tsv-file" id="markdown-toc-create-your-own-mapping-tsv-file">Create your own mapping tsv file</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="pre-requisites-for-this-tutorial">Pre-requisites for this tutorial</h2>
+
+<p>If you have never used Galaxy before, we highly recommend doing their <a href="https://usegalaxy.eu/tours/core.galaxy_ui">interactive tour</a> first (takes a few minutes). Or, if you have more time (1h 30 min recommended), you can do the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">Galaxy Basics for Everyone</a> tutorial.</p>
+
+<p>We recommend signing up for a user account at <a href="https://usegalaxy.eu">https://usegalaxy.eu</a>. Although other UseGalaxy servers are available (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">first part of the Galaxy Basics tutorial</a>), LotuS2 is currently fully functional only on this Galaxy server.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-launch-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Launch galaxy</div>
+
+  <ol>
+    <li>Open your favorite browser (preferably Chrome/Chromium or Firefox. Internet Explorer/Edge and Safari sometimes have problems!)</li>
+    <li>Browse to <a href="https://usegalaxy.eu">https://usegalaxy.eu</a></li>
+    <li>We recommend keeping this tutorial open in a separate browser window side-by-side if you have space on your desktop. If you only have one screen, you can also launch tutorial mode on the UseGalaxy server.</li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Using tutorial mode</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+</blockquote>
+
+<h1 id="understanding-the-files-needed-for-running-lotus2">Understanding the files needed for running LotuS2</h1>
+
+<p>At <abbr title="Society for the Protection of Underground Networks">SPUN</abbr>, we run LotuS2 to identify mycorrhizal fungi in a set of samples, using the following input files:</p>
+
+<ol>
+  <li>DNA sequence files for each sample in <strong>gzipped FASTQ</strong> format from the Illumina MiSeq sequencer</li>
+  <li>A mapping file in a <strong>tab-separated-values</strong> format which specifies which FASTQ files correspond to which samples. The file can also provide additional metadata for each sample, such as the primers used for each sample, the location where the sample was collected, and so on.</li>
+  <li>A simple demultiplexer (sdm) file in <strong>text</strong> format which specifies how the sequence FASTQ files should be quality filtered and demultiplexed.</li>
+</ol>
+
+<p>For this tutorial we have already provided a few example files at https://zenodo.org/records/13710591. You can click on this link to see which files are available (there is no need to download them).</p>
+
+<p>These files corresond to the three types of input files above, as shown:</p>
+
+<ul>
+  <li>DNA sequence files:
+    <ol>
+      <li>C_ITS2_S160_R1_001.fastq.gz</li>
+      <li>C_ITS2_S160_R2_001.fastq.gz</li>
+      <li>N5_ITS2_S140_R1_001.fastq.gz</li>
+      <li>N5_ITS2_S140_R2_001.fastq.gz</li>
+      <li>Pcov3_ITS2_S151_R1_001.fastq.gz</li>
+      <li>Pcov3_ITS2_S151_R2_001.fastq.gz</li>
+    </ol>
+  </li>
+  <li>A mapping file:
+    <ol>
+      <li>Colombia_ITS2_Mapping.tsv</li>
+    </ol>
+  </li>
+  <li>An <abbr title="simple demultiplexer">sdm</abbr> file
+    <ol>
+      <li>sdm_miSeq_ITS.txt</li>
+    </ol>
+  </li>
+</ul>
+
+<p>For this tutorial, you do not need to download these files. Galaxy allows you to fetch data from a remote location directly into a tool or workflow without first downloading the files.</p>
+
+<p>In the next section we will get the data in to Galaxy, and after that we will look at the files to see what they look like.</p>
+
+<h1 id="get-data">Get Data</h1>
+
+<p>This section describes two options that will allow you to download and use <abbr title="Society for the Protection of Underground Networks">SPUN</abbr>’s example data files. Select one option and follow the instructions.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-add-to-history"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 1: Data upload - Add to history</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the 6 sequencing read files, 1 mapping file, and 1 sdm parameters file from <a href="https://zenodo.org/records/13710591">Zenodo</a> by pasting the following URLs into the upload window under “Paste/Fetch Data”</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13710591/files/C_ITS2_S160_R1_001.fastq.gz
+https://zenodo.org/records/13710591/files/C_ITS2_S160_R2_001.fastq.gz
+https://zenodo.org/records/13710591/files/N5_ITS2_S140_R1_001.fastq.gz
+https://zenodo.org/records/13710591/files/N5_ITS2_S140_R2_001.fastq.gz
+https://zenodo.org/records/13710591/files/Pcov3_ITS2_S151_R1_001.fastq.gz
+https://zenodo.org/records/13710591/files/Pcov3_ITS2_S151_R2_001.fastq.gz
+https://zenodo.org/records/13710591/files/Colombia_ITS2_Mapping.tsv
+https://zenodo.org/records/13710591/files/sdm_miSeq_ITS.txt
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>The history should be visible in a pane on the right of your window called ‘History’. Here, you can see the files and rename them.</li>
+    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the history to your name of choice. This should be something that helps you to remember the project, such as “SPUN Colombia 24”</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-upload-from-your-own-computer"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Option 2: Data upload - Upload from your own computer</div>
+
+  <ol>
+    <li>This option will take more time, and should not be used if you have a slow internet connection.</li>
+    <li>However, this option will most closely mimic how you will use this tool in your real analysis, i.e. showing you how to upload data from your own computer</li>
+    <li>First download all 8 files from <a href="https://zenodo.org/records/13710591">Zenodo</a> to your own local computer (desktop or laptop). You can do do this by scrolling down to the “Files” list section, and clicking the “Download All” link at the top of this section. This will download a 55 {MB} zip file to your local computer</li>
+    <li>Unzip the file - the folder should have 8 files in it.</li>
+    <li>Create a new history in Galaxy</li>
+    <li>
+      <p>Upload these 8 files to the new history</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-few-files-1-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-few-files-1-10" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Upload few files (1-10)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="examine-the-input-files">Examine the input files</h2>
+
+<p>We will briefly look at each type of file to see that it has uploaded correctly. This doesn’t need to be done for every file each time you use LotuS2 if you have a large number of files, but it is good practice to check some files to see that they have uploaded in the correct format.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-fastq-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the FASTQ file</div>
+
+  <ul>
+    <li>Click on the file name of one of the fastq.gz files in the history
+      <ul>
+        <li>The filename should expand to show you some information such as the size of the file, and the type of the file</li>
+      </ul>
+    </li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to a fastq.gz file in the history</li>
+    <li>You should see 4 lines for each sequence:
+      <ol>
+        <li>A header beginning with <code class="language-plaintext highlighter-rouge">&gt;</code> followed by sequence identifiers</li>
+        <li>The DNA sequence of the read, made up of ATGCN</li>
+        <li>A line with just <code class="language-plaintext highlighter-rouge">+</code> on it (indicates that the next line has sequence quality values)</li>
+        <li>A line with sequence quality values for each nucleotide, in ASCII format</li>
+      </ol>
+    </li>
+  </ul>
+
+  <p>You do not need to know more about FASTQ files for this tutorial, or about sequence quality in ASCII format, but if you want to learn more, you can do the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Sequence Analysis: Quality Control tutorial</a>.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-mapping-tab-separated-values-tsv-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the mapping tab-separated-values (TSV) file</div>
+
+  <ul>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to <em>Colombia_ITS2_Mapping.tsv</em> in your history</li>
+    <li>Each row is a sample</li>
+    <li>The columns tell you information about each sample:
+      <ul>
+        <li>#SampleID is a short name/ID for the sample. Here, “C” stands for “Control” sample, and the other two are called samples “N5” and “Pcov3”</li>
+        <li>fastqFile lists the sequence file names that correspond to each sample. We have two fastq files for paired-end sequencing: first the forward file is listed, followed by a “,” (comma), and then the reverse file name is listed, with no spaces between these.</li>
+        <li>ForwardPrimer: Lists the forward primer sequence used during PCR to produce the sequenced amplicon (ITS3 forward primer here).</li>
+        <li>ReversePrimer: Lists the forward primer sequence used during PCR to produce the sequenced amplicon (ITS4 reverse primer here).</li>
+      </ul>
+    </li>
+    <li>The remaining columns (Latitude, Longitude, Country, Vegetation, etc) are metadata for each sample. LotuS2 does not <strong>need</strong> these columns, but it will copy them to the final R Phyloseq object that it creates. These columns will be needed for doing ecological analyses later. You can add metadata to the phyloseq object that is created through LotuS2 later in R, as long as the sample ID in your metadata sheet matches the sample ID in your mapping file.</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-note"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Note</div>
+
+  <ul>
+    <li>In this case, the ForwardPrimer and ReversePrimer are the same across all samples. This is typical as we usually sequence the same region in all samples using the same primer pair.</li>
+    <li>LotuS2 allows you to specify primer set as a parameter, and if this is done, the primer sequence does not need to be written in the mapping file. In this case, we are including primer sequences in the mapping file. When using different primer sets, if you are following these instructions for your own data, you may need to change the primer sequences to reflect the primer set used for your own sequencing.</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-inspect-the-abbr-title-quot-simple-demultiplexer-quot-sdm-abbr-options-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Inspect the <abbr title=&quot;simple demultiplexer&quot;>sdm</abbr> options file</div>
+
+  <ul>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to <em>sdm_miSeq_ITS.txt</em> in your history</li>
+    <li>This file specifies some of the parameters needed for processing ITS data with Illumina MiSeq paired-end sequencing using the software ‘SDM’ used by LotuS2. It can be also used for our files that were generated using an Illlumina NextSeq 2000.</li>
+    <li>The sdm options file is not needed if you are using default sdm settings, because LotuS2 provides an internal default version of the file. But in this case, specific parameters are required for ITS sequencing, so we provide this file.</li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-check-your-understanding-of-the-inputs"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Check your understanding of the inputs</div>
+
+  <ol>
+    <li>What is the reverse primer for sample “N5”?</li>
+    <li>What is the DNA concentration in ng per µl for sample “Pcov3”?</li>
+    <li>When LotuS2 processes ITS paired-end sequences using these inputs, what is the minimum sequence length (minSeqLength) it will consider, below which it will discard the sequence?</li>
+    <li>Which of the 6 fastq files has the most data? (i.e., is biggest in size?)</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>In <em>Colombia_ITS2_Mapping.tsv</em>: <strong>TCCTCCGCTTATTGATATGC</strong></li>
+      <li>In <em>Colombia_ITS2_Mapping.tsv</em>, under column <em>DNA_concentration_ng_ul</em>: <strong>20.4</strong></li>
+      <li>In <em>sdm_miSeq_ITS.txt</em>, next to <em>minSeqLength</em>: <strong>110</strong></li>
+      <li>Click on the names of each of the fastq.gz files in ths history. The biggest is N5_ITS2_S140_R2_001.fastq.gz: <strong>19.0 MB</strong></li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="create-a-list-of-pairs-from-the-fastqgz-files">Create a “list of pairs” from the fastq.gz files</h2>
+
+<ul>
+  <li>This is a very important step when you first upload the data, because the LotuS2 tool needs our fastq.gz files in pairs.</li>
+  <li>Galaxy has a very handy feature that automatically detects pairs of files from the filenames</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-pairs-of-fastq-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create pairs of fastq files</div>
+
+  <ol>
+    <li>Select ONLY the 6 fastq.gz files in your history (do not select <code class="language-plaintext highlighter-rouge">sdm_miSeq_ITS.txt</code> and <code class="language-plaintext highlighter-rouge">Colombia_ITS2_Mapping.tsv</code>)</li>
+    <li>Choose the “Build List of Dataset Pairs” option for these 6 files <a href="images/history-build-list-of-dataset-pairs.png" rel="noopener noreferrer"><img src="images/history-build-list-of-dataset-pairs.png" alt="Screenshot showing how to select 6 out of 8 items, and then clicking the top right dropdown to choose the &quot;Build List of Dataset Pairs&quot; option. " width="296" height="600" loading="lazy" /></a></li>
+    <li>Galaxy will automatically pair the files for you on the next screen</li>
+    <li>Rename the new collection as “Colombia ITS2 fastq pairs”</li>
+    <li>By default these two options are checked: “Hide original elements” and “Remove file extensions”. You can leave them checked or unchecked. If you leave them checked, the 6 individual fastq.gz files will disappear from your history and be replaced by one collection with 3 pairs of fastq files with the new name “Colombia ITS2 fastq pairs”</li>
+  </ol>
+
+  <!--SNIPPET-->
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a paired collection</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> <strong>Select Items</strong> at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Select Items button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>n of N selected</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+  <p><!--END_SNIPPET--></p>
+
+</blockquote>
+
+<h1 id="run-lotus2">Run LotuS2</h1>
+
+<p>When we run the LotuS2 tool on our data, it runs many steps in the background:</p>
+
+<ol>
+  <li>demultiplexing and filtering raw fastq sequences</li>
+  <li>denoising, removing chimeric sequences and clustering sequences into very high quality Operating Taxonomic Unit (OTU)s/Amplicon Sequence Variant (ASV)s</li>
+  <li>determining taxonomic origin of each OTU using specialized and general purpose databases and statistical algorithms</li>
+  <li>constructing OTU, genus, family, class, order and phylum abundance tables in .txt or .biom format</li>
+  <li>reconstructing the OTU phylogenetic tree</li>
+  <li>generating phyloseq objects for downstream analysis</li>
+</ol>
+
+<p>The figure below with an overview of LotuS2 is taken from <span class="citation"><a href="#ozkurt2022">Özkurt <i>et al.</i> 2022</a></span>.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs40168-022-01365-1/MediaObjects/40168_2022_1365_Fig1_HTML.png" alt="Flowchart image showing the different steps done by LotuS2. " loading="lazy" /><a target="_blank" href="https://media.springernature.com/full/springer-static/image/art%3A10.1186%2Fs40168-022-01365-1/MediaObjects/40168_2022_1365_Fig1_HTML.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Workflow of the LotuS2 pipeline</figcaption></figure>
+
+<p>As LotuS2 is a very powerful, general-purpose tool used in many metabarcoding projects for bacteria, fungi, and eukaryotes, it provides many different parameters (options for running the software) specified for each special use case.</p>
+
+<p>In the next subsection we show how to run LotuS2 in Galaxy and how to set the parameters needed for a fungal dataset.</p>
+
+<h2 id="run-lotus2-with-the-example-fungal-dataset">Run LotuS2 with the example fungal dataset</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-run-lotus2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Run LotuS2</div>
+
+  <p>In the panel on the left, select “Tools”, search for “LotuS2” and then run the tool using the parameters below. Leave the rest of the parameters at their default settings.</p>
+
+  <p>Make sure you have the right version (2.32+galaxy0). You can check the version by clicking the <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> (blocks) icon.</p>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/earlhaminst/lotus2/lotus2/2.32+galaxy0" title="LotuS2 tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>LotuS2</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2.32+galaxy0)</span> with the following parameters:
+      <ul>
+        <li><em>“Single- or Paired-end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end list</code>
+          <ul>
+            <li>In <em>“List of paired reads”</em>: choose the paired-list you created in the previous section: <code class="language-plaintext highlighter-rouge">Colombia ITS2 fastq pairs</code> (or whatever name you gave to the collection)</li>
+          </ul>
+        </li>
+        <li>In <em>“Mapping file (optional)”</em>: <code class="language-plaintext highlighter-rouge">Colombia_ITS2_mapping.tsv</code></li>
+        <li>Forward (and Reverse) Primer: Leave blank</li>
+        <li><em>“Clustering algorithm”</em>: <code class="language-plaintext highlighter-rouge">VSEARCH</code></li>
+        <li><em>“Taxonomy aligner for taxonomic profiling of OTUs”</em>: <code class="language-plaintext highlighter-rouge">Lambda, LCA against custom reference database</code>
+          <ul>
+            <li><em>“Taxonomy reference database”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in taxonomy database</code>
+              <ul>
+                <li><em>“Using reference database”</em>: <code class="language-plaintext highlighter-rouge">ITS fungi specific (UNITE)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>In <em>“Other Clustering Options”</em>:
+          <ul>
+            <li><em>“Minimum size of dereplicated raw reads (optional)”</em>: <code class="language-plaintext highlighter-rouge">10:1,5:2,3:3</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Other Taxonomy Options”</em>:
+          <ul>
+            <li><em>“Amplicon type”</em>: <code class="language-plaintext highlighter-rouge">ITS2</code></li>
+            <li><em>“Tax group”</em>: <code class="language-plaintext highlighter-rouge">fungal 18S/23S/ITS annotation</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Other options”</em>:
+          <ul>
+            <li><em>“SDM option file”</em>: <code class="language-plaintext highlighter-rouge">sdm_miSeq_ITS.txt</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Once all the parameters above are entered, click the <strong>“Run Tool”</strong> button at the end.</li>
+    <li>You should see a green box on the next page saying “Started tool LotuS2 and successfully added 1 job to the queue”. The box lists the 6 outputs that the tool produces.</li>
+    <li>This step can take 5-10 minutes to run or longer depending on how many other jobs are running on the usegalaxy server. While we are waiting for it to finish, you can do the next step on “Creating your own mapping.tsv” file</li>
+    <li>You will know when the tool has finished, because all the outputs in the history will turn green.</li>
+  </ol>
+
+  <blockquote class="comment">
+    <div class="box-title comment-title" id="comment-notes"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Notes</div>
+
+    <ul>
+      <li>Remember to choose <em>Paired-end list</em> in the sequencing read data section. Galaxy will pick up the Paired-end list available in the History, which will have the name you gave it in the <em>Create a list of pairs</em> step</li>
+      <li>In <em>“Forward (and Reverse) Primer”</em>: Leave blank, as we have already provided them in the mapping.tsv file. If you are carrying out an analysis using your own data, you may add here the primer sequences used in your analyses in stead of in the mapping file, if you prefer.</li>
+      <li>In <em>“Other Clustering Options”</em>: <em>“Minimum size of dereplicated raw reads (optional)”</em>: we put <code class="language-plaintext highlighter-rouge">10:1,5:2,3:3</code>. Each “X:Y” pair means “A unique dereplicated read must be seen at least X times in at least Y samples”. So, if a sequence read is only found in 1 sample, it must be present in 10 copies. If a sequence read is found in only 2 samples, it must be found in 5 copies in each, etc. This is a strict parameter, so that sequence errors are not taken as novel biological sequences, reducing the occurrences of false positive OTUs or ASVs. You may want to use more lenient values if you know your data has a high number of real singletons, i.e., sequences that occur only once.</li>
+    </ul>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-examine-the-parameter-options"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Examine the parameter options</div>
+
+  <ol>
+    <li>What other clustering algorithms can you use inside LotuS2?</li>
+    <li>What other amplicon types can LotuS2 classify?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>In the “LotuS2” tool’s parameter page, under <em>“Clustering Algorithms”</em>, click on the drop down. You should see these tools:
+        <ul>
+          <li>DADA2</li>
+          <li>swarm</li>
+          <li>CD-HIT</li>
+          <li>VSEARCH</li>
+        </ul>
+
+        <p>SPUN uses VSEARCH for our <abbr title="Internal Transcribed Spacer 2">ITS2</abbr> amplicon for the identification of fungi from soils.</p>
+      </li>
+      <li>In <em>“Other Taxonomy Options”</em>, click on the drop down under <em>“Amplicon type”</em>:
+        <ul>
+          <li>Default</li>
+          <li>LSU</li>
+          <li>SSU</li>
+          <li>ITS</li>
+          <li>ITS1</li>
+          <li>ITS2</li>
+        </ul>
+
+        <p>Here, we were using general fungal primers that amplify the <abbr title="Internal Transcribed Spacer 2">ITS2</abbr> region. In another tutorial we will see how to use the <abbr title="Small Subunit (RNA)">SSU</abbr> region for specific amplification of arbuscular mycorrhizal fungi (AMF)</p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="examine-the-outputs">Examine the outputs</h1>
+
+<p>The LotuS2 Galaxy tool creates 6 output files that you should see in your history, with names like this (the exact number after each data might be different):</p>
+<ol>
+  <li>LotuS2 on data 8, data 6, and others: main log file</li>
+  <li>LotuS2 on data 8, data 6, and others: mapping file</li>
+  <li>LotuS2 on data 8, data 6, and others: Newick-formatted phylogenetic trees between sequences</li>
+  <li>LotuS2 on data 8, data 6, and others: FASTA-formatted extended OTU seed sequences</li>
+  <li>LotuS2 on data 8, data 6, and others: OTU abundance matrix</li>
+  <li>LotuS2 on data 8, data 6, and others: Complete LotuS2 output</li>
+</ol>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-examine-outputs"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Examine outputs</div>
+  <p>Click on the little <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon next to each output in the history to examine it. An explanation of each file is given below.</p>
+
+  <ol>
+    <li>
+      <p><strong>main log file</strong>: If we had run LotuS on the command line, the contents of the <code class="language-plaintext highlighter-rouge">output/LotuSLogS/LotuS_run.log</code> would be this main LotuS2 run log file.</p>
+
+      <p>It has information on all the parameters actually passed to the tool, and information on the start time of each step in the program, plus the output of each step.</p>
+
+      <p>You should always check this file first to see if LotuS2 completed correctly, and approximately how many reads were used/classified. If this number is much lower than what you expected, that might indicate a problem with the run and the parameters.</p>
+    </li>
+    <li>
+      <p><strong>mapping file</strong>: You can ignore this file as it is a repeat of the mapping tsv file that we used as an input.</p>
+    </li>
+    <li>
+      <p><strong>Newick-formatted phylogenetic trees between sequences</strong>: A phylogenetic tree created from the ITS2 sequences. If you want to see what the tree looks like, you can copy the contents of this file and paste it at this <a href="http://etetoolkit.org/">online tree viewer</a>treeview/</p>
+    </li>
+    <li>
+      <p><strong>FASTA-formatted extended OTU seed sequences</strong>: OTU sequences created by the LotuS2 program after clustering near-identical reads</p>
+    </li>
+    <li>
+      <p><strong>OTU abundance matrix</strong>: A tabular file with rows and columns with tab-separated-values. Each row is an OTU. The first column has the OTU name, and the remaining columns have the OTU abundance (i.e. how many reads were seen for that OTU) in each sample</p>
+    </li>
+    <li>
+      <p><strong>Complete LotuS2 output</strong>: If you try to view this file you will see some unreadable binary characters on the screen. That’s because this is a zip file with the complete LotuS2 output folder in one zip folder. You should download this zip file and unzip it on your local computer if you want to see everything inside this folder. <a href="images/history-download-zip.png" rel="noopener noreferrer"><img src="images/history-download-zip.png" alt="screenshot of how to download the zip file. " width="292" height="314" loading="lazy" /></a></p>
+
+      <p>One of the most useful files in this output folder is the <code class="language-plaintext highlighter-rouge">phyloseq.Rdata</code> file which you can load in R to do further ecological analysis. This is beyond the scope of the current tutorial, but we will cover this topic in future tutorials. If you want to get started on your own, you can look at the last part “Exploration with phyloseq” in the <a href="/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html">Building an amplicon sequence variant (ASV) table from 16S data using DADA2</a> tutorial.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-test-your-understanding-of-the-outputs"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Test your understanding of the outputs</div>
+
+  <p>If for some reason, your LotuS2 run did not complete, you can look at this <a href="https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2---tutorial-example-run">example LotuS2 run</a> that we generated using the steps above.</p>
+
+  <ol>
+    <li>How many total reads were in the OTU abundance matrix? (hint: main log file)</li>
+    <li>What percentage of reads are assigned at the phylum level and at the genus level? (hint: main log file)</li>
+    <li>How long did the entire LotuS2 pipeline take to run? (hint: main log has time stamps at the left of each step in the format hh:mm:ss)</li>
+    <li>Which OTU was most abundant in all samples? (hint: OTU abundance matrix). How many reads were present in each sample?</li>
+    <li>What was the sequence of the least abundant OTU? (hint: FASTA-formatted extended OTU seed sequences)</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-answers"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Answers</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <p>For the first 3 questions, scroll to near the bottom of the <em>“main log file”</em>. Under “Calculating Taxonomic Abundance Tables” the answers in our <a href="https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2---tutorial-example-run">example LotuS2 run</a> were:</p>
+
+    <ol>
+      <li>Total reads in matrix: 132123</li>
+      <li>Phylum	95%, Genus	65%</li>
+      <li>00:02:34 (i.e. 2 minutes 34 seconds)</li>
+      <li>In the <em>“OTU abundance matrix”</em>, the OTUs are arranged in order of greatest-to-least abundance so OTU1 was the most abundant with 0 reads in sample <strong>C</strong> (Control), 25,659 reads in sample <strong>N5</strong>, and 0 reads in sample <strong>Pcov3</strong></li>
+      <li>In the <em>“OTU abundance matrix”</em>, the two least abundant sequences with 6 reads total each were OTU256 and OTU257. We can look up the sequences of these files in the <em>“FASTA-formatted extended OTU seed sequences”</em> at the bottom of the file:</li>
+    </ol>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;OTU256
+GAAATGCGATACGTAATGCGAATTGCAGAACTCAGTGAATCATCAAATCTTTGAACGCAAATTGCGCTTTCGGGATAGGCCTGAAAGCACGTTTCTTTGAGTATCGATTCAACCAACGCTCGATTGCGTGCTTTTTATTTTTCAAAATAAAAGCTTGCATTCGGTTGTAATGAGTTTTCTTTCTCTTTGAAAGTGACTTGAAGAATCGACAGTGAATGAACGATTTTCAAATCGAAACATCTGTCGGCATAAGCAATGCGGTTAAACTATTGCGTTGTGAGCTGATAGGATGTAGGCGATGTAAGAAATCGTTGGATCTTGTAACTGTTCGCAAGTGACAAGAATGACAAAATTTGATTAAGATCTCAAATGAAGCGAGGATACCCGCCGAACTTAA
+&gt;OTU257
+GAAATGCGATAAGTAGTGTGAATTGCAGAATTCAGTGAATCATCGAATCTTTGAACGCAAATGGCGCTCCCTGGCATCCCGGGAAGCATGCCTGTTTGAGAACCGTAGATAGGCCAAGCTCACCAGGTTCCCCGTATCATCATCCAGCCCGGACGATGTTTACCACTCTGGTGGTGATGGGTCACTGGCGCTTTTTCGCTGCCCGTGACCTGCAACCTTTTGTCCCCGGAAGTCGACGGACCCGGATTCCCATGTCAGGTTGACACGGAGAGGGCATCACCCCCCAATCCGATGGTTTTCTGGGGAAAGACGCGGCCATCCTTCCCGGGGCGCCCCTTCAACaaaacaaaaaaaaacaaaaaaaaaCTTGGTCTCAAATCAGGCAAGAGAACCCGCTGAACTTAA
+</code></pre></div>    </div>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="run-lotus2-on-your-own-data">Run LotuS2 on your own data</h1>
+
+<p>To run the LotuS2 workflow on your own fungal data, you only need the sequencing fastq files and some information about what primers were used.</p>
+
+<p>In the example dataset, we used the ITS3/ITS4 primer pair to sequence the ITS2 reqion, so our Forward primer was <code class="language-plaintext highlighter-rouge">GCATCGATGAAGAACGCAGC</code> and the Reverse primer was <code class="language-plaintext highlighter-rouge">TCCTCCGCTTATTGATATGC</code></p>
+
+<p>When you want to process your own sequencing files, you can specify the Forward and Reverse primer in the Galaxy LotuS2 Parameters directly in the options if all your samples have the same forward and reverse primers:</p>
+<ul>
+  <li><em>“Forward primer used to amplify DNA region (optional) - optional”</em>: <code class="language-plaintext highlighter-rouge">GCATCGATGAAGAACGCAGC</code></li>
+  <li><em>“Reverse primer used to amplify DNA region (optional) - optional”</em>: <code class="language-plaintext highlighter-rouge">TCCTCCGCTTATTGATATGC</code></li>
+</ul>
+
+<p>We advise adding metadata to the phyloseq object after running LotuS2, so that a large mapping file with all metadata does not have to be created. We will have future tutorials on adding metadata from a .csv file to a phyloseq object in R.</p>
+
+<h2 id="create-your-own-mapping-tsv-file">Create your own mapping tsv file</h2>
+
+<p>Mapping files for LotuS2 have to be in tab-separated-values format. You can create this file in any spreadsheet sofware, eg: Microsoft Excel or Google Sheets. The important thing to note is that when you save or export the file, you should select the TSV format (called “Tab separated values” in Google Sheets or “Tab-delimited text .txt” in Excel)</p>
+
+<p>LotuS2 allows many columns in the mapping tsv file according to the <a href="https://lotus2.earlham.ac.uk//main.php?site=documentation#mappingfile">specification</a>. However, for simplicity, we recommend this format for sequencing data using the SPUN protocol:</p>
+
+<ul>
+  <li>Only 1 header row that begins with <code class="language-plaintext highlighter-rouge">#SampleID</code></li>
+  <li>One row per sample</li>
+  <li>The only essential columns are <code class="language-plaintext highlighter-rouge">#SampleID</code>, <code class="language-plaintext highlighter-rouge">fastqFile</code></li>
+  <li>If you have the same ForwardPrimer and ReversePrimer in all your samples, then you can provide them in the LotuS2 Galaxy tool and delete the ForwardPrimer and ReversePrimer columns</li>
+  <li>If you have any additional metadata variables that you want to analyse downstream using R, then you can provide them as columns</li>
+  <li>We recommend using “SequencingRun” and labelling with the name of the sequencing run, which is arbitrary. Something like “Scripps run 1”. This is because if samples were run across multiple different sequencing runs it is important for LotuS2 to factor this into analyses. If samples were all run on the same run, write the same for every sample.</li>
+  <li>In the data files for this tutorial, and in most cases, the sequencing provider will separate the data from separate samples into separate pairs of files. This is known as <em>demultiplexing</em>. If all your samples are combined in one pair of files, then you will need to provide the demultiplexing barcodes in the mapping tsv file.</li>
+</ul>
+
+<p>For more information, see the <a href="https://lotus2.earlham.ac.uk/main.php?site=documentation#mappingfile">LotuS2 Mapping File Format Documentation</a></p>
+
+<p>In the exercise below you will create your own mapping tsv file for a new run.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-and-use-your-own-mapping-tsv-file"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create and use your own mapping tsv file</div>
+
+  <p>Steps:</p>
+
+  <ol>
+    <li>
+      <p>Import history from: <a href="https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2--create-mapping">mapping example history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing a history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <em>Import this history</em> button on the top left</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Copy History</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Create a table in your favourite spereadsheet software (eg <em>Google Sheets</em> or <em>Microsoft Excel</em>) with the following columns (you can copy and paste from the example below. We have filled in the first two columns for you #SampleID and fastqFile):</p>
+
+      <table>
+        <tbody>
+          <tr>
+            <td>#SampleID</td>
+            <td>fastqFile</td>
+            <td>ForwardPrimer</td>
+            <td>ReversePrimer</td>
+            <td>Vegetation</td>
+          </tr>
+          <tr>
+            <td>N11</td>
+            <td>N11_ITS2_S134_R1_001.fastq.gz,N11_ITS2_S134_R2_001.fastq.gz</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+          <tr>
+            <td>N16</td>
+            <td>N16_ITS2_S138_R1_001.fastq.gz,N16_ITS2_S138_R2_001.fastq.gz</td>
+            <td> </td>
+            <td> </td>
+            <td> </td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+    <li>Complete the table:
+      <ul>
+        <li>Add the correct ForwardPrimer <code class="language-plaintext highlighter-rouge">GCATCGATGAAGAACGCAGC</code> and the correct ReversePrimer <code class="language-plaintext highlighter-rouge">TCCTCCGCTTATTGATATGC</code> to each row</li>
+        <li>Add the Vegetation <code class="language-plaintext highlighter-rouge">Trigonobalanus excelsa forest</code> to each row</li>
+      </ul>
+    </li>
+    <li>
+      <p>Export or Save the spreadsheet as a new file in tab-separated-values format (Google Sheets: <em>File</em>: <em>Download</em>: <em>Tab separated values (.tsv)</em>; Excel: <em>File</em>: <em>Save as</em>: choose Tab delimited text in the format)</p>
+    </li>
+    <li>
+      <p>Name the file something like “mapping.tsv” or “mapping.txt”</p>
+    </li>
+    <li>
+      <p>Upload this file to your history as a local file</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-upload-few-files-1-10-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-upload-few-files-1-10-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Upload few files (1-10)</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>Click on <strong>Choose local file</strong> and select the files or drop the files in the <strong>Drop files here</strong> part</li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Now you should have all the files you need in this new history to run LotuS2:
+      <ul>
+        <li>4 paired-end fastq files for 2 samples</li>
+        <li>1 mapping tsv file specifying sample IDs, fastqFiles, primers, and metadata for these 2 samples</li>
+        <li>1 sdm_miSeq_ITS.txt</li>
+      </ul>
+    </li>
+    <li>
+      <p>Rerun LotuS2 following the <a href="#run-lotus2">steps above</a></p>
+    </li>
+    <li>If your LotuS2 run finishes - then CONGRATULATIONS! You now know how to create your own mapping tsv file and run LotuS2 on a new set of fastq.gz files</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<ul>
+  <li>LotuS2 is a powerful tool that can be used to identify species present in a DNA sequencing sample</li>
+  <li>You have learnt how to run LotuS2 on example data</li>
+  <li>You have learnt how to create a mapping tsv file for a new set of data</li>
+</ul>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(plausible !== undefined){
+                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
+                          } else {
+                            tutorial_finish_finish();
+                          }
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>LotuS is a metagenomics tool for identifying species and OTUs and ASVs from sequencing data</p>
+</li>
+                        
+                        <li><p>Galaxy is an easy way to run LotuS2 in the cloud for bioinformatics beginners</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/microbiome/faqs/">FAQ page for the Microbiome topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/microbiome#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="ozkurt2022">Özkurt, E., J. Fritscher, N. Soranzo, D. Y. K. Ng, R. P. Davey <i>et al.</i>, 2022 <b>LotuS2: an ultrafast and highly accurate tool for amplicon sequencing analysis</b>. Microbiome 10: <a href="https://doi.org/10.1186/s40168-022-01365-1">10.1186/s40168-022-01365-1</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>AMF</dt>
+                    <dd>arbuscular mycorrhizal fungi</dd>
+                    
+                    <dt>ASV</dt>
+                    <dd>Amplicon Sequence Variant</dd>
+                    
+                    <dt>EcMF</dt>
+                    <dd>ectomycorrhizal fungi</dd>
+                    
+                    <dt>ITS2</dt>
+                    <dd>Internal Transcribed Spacer 2</dd>
+                    
+                    <dt>MF</dt>
+                    <dd>Mycorrhizal fungi</dd>
+                    
+                    <dt>OTU</dt>
+                    <dd>Operating Taxonomic Unit</dd>
+                    
+                    <dt>SPUN</dt>
+                    <dd>Society for the Protection of Underground Networks</dd>
+                    
+                    <dt>SSU</dt>
+                    <dd>Small Subunit (RNA)</dd>
+                    
+                    <dt>TSV</dt>
+                    <dd>tab-separated-values</dd>
+                    
+                    <dt>eDNA</dt>
+                    <dd>environmental DNA</dd>
+                    
+                    <dt>sdm</dt>
+                    <dd>simple demultiplexer</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/lotus2-identifying-fungi"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=microbiome/lotus2-identifying-fungi">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Sujai Kumar,  <b>Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html">https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{microbiome-lotus2-identifying-fungi,
+author = "Sujai Kumar",
+	title = "Identifying Mycorrhizal Fungi from ITS2 sequencing using LotuS2 (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+                
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/societyprotectionundergroundnetworks/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/spun-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Society for the Protection of Underground Networks</div>
+			<div class="description">
+			
+
+            SPUN is a scientific research organization founded to map mycorrhizal fungal communities and advocate for their protection.
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+                
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: lotus2
+  owner: earlhaminst
+  revisions: eb7baf1f72ca
+  tool_panel_section_label: Metagenomic Analysis
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+		
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/microbiome/tutorials/lotus2-identifying-fungi/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4a960af7302920be5cfa14cfe10b14f08ee22e59">4a960af</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
