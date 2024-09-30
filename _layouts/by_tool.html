@@ -42,8 +42,9 @@ layout: base
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_operations %}
 					<li>
+						{% assign edam_info = topic | edamify: site %}
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
-						{{ topic }}
+							{{ edam_info['Preferred Label'] }}
 						</a>
 					</li>
 				{% endfor %}
@@ -55,8 +56,9 @@ layout: base
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_topics %}
 					<li>
+						{% assign edam_info = topic | edamify: site %}
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
-						{{ topic }}
+							{{ edam_info['Preferred Label'] }}
 						</a>
 					</li>
 				{% endfor %}

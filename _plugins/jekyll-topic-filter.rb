@@ -1196,6 +1196,10 @@ module Jekyll
     def tool_version_support(site, tool)
       Gtn::Supported.calculate(site.data['public-server-tools'], [tool])
     end
+
+    def edamify(term, site)
+      site.data['EDAM'].select{|row| row['Class ID'] == "http://edamontology.org/#{term}"}.first.to_h
+    end
   end
 end
 
