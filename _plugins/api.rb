@@ -309,7 +309,15 @@ module Jekyll
         page2.data['short_tool'] = tool
 
         ordered_tool_ids = tutorials['tool_id']
-          .reject{|x| x[0] == x[1]} # Remove Cut1==Cut1
+          .map{|x| 
+            if x[0] == x[1]
+              # TODO: collect versions of builtins.
+              [x[0], '0.0.0'] # Fake version for local only tools
+            else
+              x
+            end
+          }
+          .reject{|x| x[0] == x[1]}
           .map{|x| [x[0], x[1], Gem::Version.new(fix_version(x[1]))]}
           .sort_by{|x| x[2]}
 
