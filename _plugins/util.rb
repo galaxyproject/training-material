@@ -50,3 +50,34 @@ def markdownify(site, text)
     Jekyll::Converters::Markdown
   ).convert(text.to_s)
 end
+
+def fix_version(version)
+  version
+  .gsub('_beta+galaxy', '+galaxy')
+  .gsub(/^([0-9]+)_([0-9]+)_([0-9]+)\+galaxy(.+)/, '\1.\2.\3galaxy\4')
+  .gsub(/^([0-9]+)\+galaxy(.+)/, '\1.0.0galaxy\2')
+  .gsub(/^([0-9.]+)_([0-9]+)/, '\1galaxy\2')
+  .gsub(/_rc(.*)galaxy/, 'rc\1galaxy')
+  .gsub('+', '')
+  .gsub(/^v/, '')
+end
+
+if __FILE__ == $PROGRAM_NAME
+  require 'test/unit'
+    # Testing for the class
+  class IntersectionTest < Test::Unit::TestCase
+    def test_bad_versions
+      # toolshed.g2.bx.psu.edu/repos/wolma/mimodd_main/mimodd_info/0.1.8_1
+      assert_equal(fix_version("0.1.8_1"), "0.1.8galaxy1")
+
+      # toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1
+      assert_equal(fix_version("2013_11_29+galaxy1"), "2013.11.29galaxy1")
+      
+      # toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3
+      assert_equal(fix_version("1.0.0_rc1+galaxy3"), "1.0.0rc1galaxy3")
+
+      #
+      assert_equal(fix_version("3+galaxy0"), "3.0.0galaxy0")
+    end
+  end
+end

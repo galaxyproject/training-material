@@ -179,7 +179,7 @@ The FastQC report pointed out that we have in our data some standard Illumina ad
 
 > <hands-on-title>Task description</hands-on-title>
 >
-> 1. {% tool [Trim Galore!]( https://toolshed.g2.bx.psu.edu/view/bgruening/trim_galore/cd7e644cae1d) %} with the following parameters:
+> 1. {% tool Trim Galore! %} with the following parameters:
 >    - *"Is this library paired- or single-end?"*: `Paired Collection`
 >        - *"Select a paired collection"*: select `2 PE fastqs`
 >    - In *"Adapter sequence to be trimmed"*: `Illumina universal`

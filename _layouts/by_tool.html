@@ -2,7 +2,7 @@
 layout: base
 ---
 
-{% assign tool_id_path = page.observed_tool_ids[0][0] %}
+{% assign tool_id_path = page.latest_tool_id %}
 
 <hgroup>
 	<h1>
@@ -37,28 +37,30 @@ layout: base
 					{% endif %}
 				</ul>
 
-				{% if site.data['tool-meta'][tool_id_path].edam_operations | size %}
+				{% assign edam_op_count = site.data['tool-meta'][tool_id_path].edam_operations | size %}
+				{% if edam_op_count > 0 %}
 				<h3>EDAM Operations</h3>
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_operations %}
 					<li>
 						{% assign edam_info = topic | edamify: site %}
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
-							{{ edam_info['Preferred Label'] }}
+							{{ edam_info['Preferred Label'] | default: topic }}
 						</a>
 					</li>
 				{% endfor %}
 				</ul>
 				{% endif %}
 
-				{% if site.data['tool-meta'][tool_id_path].edam_topics | size %}
+				{% assign edam_topic_count = site.data['tool-meta'][tool_id_path].edam_topics | size %}
+				{% if edam_topic_count > 0 %}
 				<h3>EDAM Topics</h3>
 				<ul>
 				{% for topic in site.data['tool-meta'][tool_id_path].edam_topics %}
 					<li>
 						{% assign edam_info = topic | edamify: site %}
 						<a href="https://www.ebi.ac.uk/ols4/ontologies/edam/classes/http%253A%252F%252Fedamontology.org%252F{{ topic }}">
-							{{ edam_info['Preferred Label'] }}
+							{{ edam_info['Preferred Label'] | default: topic }}
 						</a>
 					</li>
 				{% endfor %}
@@ -69,34 +71,33 @@ layout: base
 					<h3>Observed Tool Versions</h3>
 					<p>Within GTN tutorials</p>
 				</hgroup>
-				<ul>
-					{% for tool in page.observed_tool_ids %}
-					<li>
-						{{ tool[1] }}
-						{% assign v_id = tool[0] %}
-						{% assign supported = site | tool_version_support: v_id %}
-						{% assign usegalaxy_exact = supported.exact | where: "usegalaxy", "true"   %}
-						{% assign other_exact = supported.exact | where: "usegalaxy", "false"   %}
 
-						<ul>
-							{% for inst in usegalaxy_exact %}
-							<li>
+				{% for tool in page.observed_tool_ids %}
+				<details>
+					<summary>{{ tool[1] }}</summary>
+					{% assign v_id = tool[0] %}
+					{% assign supported = site | tool_version_support: v_id %}
+					{% assign usegalaxy_exact = supported.exact | where: "usegalaxy", "true"   %}
+					{% assign other_exact = supported.exact | where: "usegalaxy", "false"   %}
+
+					<ul>
+						{% for inst in usegalaxy_exact %}
+						<li>
+							<a href="{{ inst.url }}?tool_id={{ tool[0] }}&version={{ tool[1] }}">
+								{{ inst.name }} <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+							</a>
+						</li>
+						{% endfor %}
+						{% for inst in other_exact %}
+						<li>
 								<a href="{{ inst.url }}?tool_id={{ tool[0] }}&version={{ tool[1] }}">
-									{{ inst.name }} <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
-								</a>
-							</li>
-							{% endfor %}
-							{% for inst in other_exact %}
-							<li>
-									<a href="{{ inst.url }}?tool_id={{ tool[0] }}&version={{ tool[1] }}">
-									{{ inst.name }}
-								</a>
-							</li>
-							{% endfor %}
-						</ul>
-					</li>
-					{% endfor %}
-				</ul>
+								{{ inst.name }}
+							</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</details>
+				{% endfor %}
 
 			</div>
 
@@ -116,3 +117,21 @@ layout: base
 		</div>
 	</div>
 </section>
+
+<style>
+details {
+	border: 1px solid black;
+	margin-bottom: 0.2rem;
+	cursor: pointer;
+
+	summary {
+		padding: 0.5rem
+	}
+}
+details:hover {
+	box-shadow: 5px 5px var(--brand-color)
+}
+details:active {
+	box-shadow: 3px 3px var(--brand-color)
+}
+</style>

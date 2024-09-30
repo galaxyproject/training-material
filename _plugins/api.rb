@@ -8,6 +8,7 @@ require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
 require './_plugins/gtn/ro-crate'
 require './_plugins/gtn'
+require './_plugins/util'
 
 ##
 # Use Jekyll's Markdown converter to convert text to HTML
@@ -307,8 +308,15 @@ module Jekyll
         page2.content = nil
         page2.data['layout'] = 'by_tool'
         page2.data['short_tool'] = tool
-        page2.data['observed_tool_ids'] = tutorials['tool_id']
+
+        ordered_tool_ids = tutorials['tool_id']
+          .reject{|x| x[0] == x[1]} # Remove Cut1==Cut1
+          .map{|x| [x[0], x[1], Gem::Version.new(fix_version(x[1]))]}
+          .sort_by{|x| x[2]}
+
+        page2.data['observed_tool_ids'] = ordered_tool_ids.map{|x| x[0..1]}.reverse
         page2.data['tutorial_list'] = tutorials['tutorials']
+        page2.data['latest_tool_id'] = ordered_tool_ids.map{|x| x[0]}.last
 
         # Redirect from the older, shorter IDs that have more potential for conflicts.
         if tool.include?('/')

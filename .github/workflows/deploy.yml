@@ -68,6 +68,7 @@ jobs:
           make annotate ACTIVATE_ENV=pwd
           curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
           curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
+          curl -L https://edamontology.org/EDAM.csv > metadata/EDAM.csv
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json

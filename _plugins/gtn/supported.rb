@@ -72,17 +72,17 @@ module Gtn
       # generate a 'false' value when merging sets.
       inexact_support -= exact_support
 
-      usegalaxy_server_urls = Gtn::Usegalaxy.servers.map { |x| x[:url] }
+      usegalaxy_server_urls = Gtn::Usegalaxy.servers.map { |x| x[:url].downcase }
 
       {
         'exact' => (exact_support || []).map do |id|
           data['servers'][id].update(
-            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
+            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url'].downcase) }
           )
         end,
         'inexact' => (inexact_support || []).map do |id|
           data['servers'][id].update(
-            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url']) }
+            { 'usegalaxy' => usegalaxy_server_urls.include?(data['servers'][id]['url'].downcase) }
           )
         end
       }
