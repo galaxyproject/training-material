@@ -10,7 +10,7 @@ cover-image-alt: logo for the Galaxy Academy event consisting of a laptop surrou
 
 registration:
   link: https://forms.gle/cxzVatt7MAgiMX12A
-  deadline: 2024-09-30
+  deadline: 2024-10-04
   open: true
 
 date_start: 2024-10-07
