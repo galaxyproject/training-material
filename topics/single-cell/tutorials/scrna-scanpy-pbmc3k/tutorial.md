@@ -49,7 +49,7 @@ recordings:
   speakers:
   - nomadscientist
 - youtube_id: P8AucugNlLc
-  length: 1H39
+  length: 1H39M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-26'
   speakers:
