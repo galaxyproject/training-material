@@ -176,10 +176,10 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 >    - The filename should expand to show you some information such as the size of the file, and the type of the file
 > * Click on the {% icon galaxy-eye %} (eye) icon next to a fastq.gz file in the history
 > * You should see 4 lines for each sequence:
-     1. A header beginning with `>` followed by sequence identifiers
-     2. The DNA sequence of the read, made up of ATGCN
-     3. A line with just `+` on it (indicates that the next line has sequence quality values)
-     4. A line with sequence quality values for each nucleotide, in ASCII format
+>     1. A header beginning with `>` followed by sequence identifiers
+>     2. The DNA sequence of the read, made up of ATGCN
+>     3. A line with just `+` on it (indicates that the next line has sequence quality values)
+>     4. A line with sequence quality values for each nucleotide, in ASCII format
 >
 > You do not need to know more about FASTQ files for this tutorial, or about sequence quality in ASCII format, but if you want to learn more, you can do the [Sequence Analysis: Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 >
