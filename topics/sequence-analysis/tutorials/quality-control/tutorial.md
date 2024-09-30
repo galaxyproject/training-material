@@ -54,7 +54,7 @@ recordings:
   youtube_id: QJRlX2hWDKM
   speakers:
   - heylf
-- youtube_id: TODO
+- youtube_id: uiWZea53QIA
   length: 51M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-30'
