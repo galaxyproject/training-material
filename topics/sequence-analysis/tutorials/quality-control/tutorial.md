@@ -1,44 +1,41 @@
 ---
 layout: tutorial_hands_on
-
-title: "Quality Control"
-zenodo_link: "https://zenodo.org/records/61771"
+title: Quality Control
+zenodo_link: https://zenodo.org/records/61771
 questions:
-  - How to perform quality control of NGS raw data?
-  - What are the quality parameters to check for a dataset?
-  - How to improve the quality of a dataset?
+- How to perform quality control of NGS raw data?
+- What are the quality parameters to check for a dataset?
+- How to improve the quality of a dataset?
 objectives:
-  - Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC
-  - Assess long reads FASTQ quality using Nanoplot and PycoQC
-  - Perform quality correction with Cutadapt (short reads)
-  - Summarise quality metrics MultiQC
-  - Process single-end and paired-end data
+- "Assess short reads FASTQ quality using FASTQE \U0001F9EC\U0001F60E and FastQC"
+- Assess long reads FASTQ quality using Nanoplot and PycoQC
+- Perform quality correction with Cutadapt (short reads)
+- Summarise quality metrics MultiQC
+- Process single-end and paired-end data
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - mapping
-time_estimation: "1H30M"
+- type: internal
+  topic_name: sequence-analysis
+  tutorials:
+  - mapping
+time_estimation: 1H30M
 level: Introductory
 key_points:
-  - Perform quality control on every dataset before running any other bioinformatics analysis
-  - Assess the quality metrics and improve quality if necessary
-  - Check the impact of the quality control
-  - Different tools are available to provide additional quality metrics
-  - For paired-end reads analyze the forward and reverse reads together
+- Perform quality control on every dataset before running any other bioinformatics
+  analysis
+- Assess the quality metrics and improve quality if necessary
+- Check the impact of the quality control
+- Different tools are available to provide additional quality metrics
+- For paired-end reads analyze the forward and reverse reads together
 contributors:
-  - bebatut
-  - mblue9
-  - alexcorm
-  - abretaud
-  - lleroi
-  - r1corre
-  - stephanierobin
-  - gallantries
-  - neoformit
-
-
+- bebatut
+- mblue9
+- alexcorm
+- abretaud
+- lleroi
+- r1corre
+- stephanierobin
+- gallantries
+- neoformit
 recordings:
 - youtube_id: coaMGvZazoc
   length: 50M
@@ -57,8 +54,17 @@ recordings:
   youtube_id: QJRlX2hWDKM
   speakers:
   - heylf
+- youtube_id: TODO
+  length: 51M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-30'
+  speakers: 
+  captioners: 
+  bot-timestamp: 1727710795
+
 
 ---
+
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
