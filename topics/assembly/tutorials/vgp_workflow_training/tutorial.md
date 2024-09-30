@@ -58,9 +58,21 @@ recordings:
   captioners:
   - abueg
   bot-timestamp: 1726177737
+- youtube_id: TODO
+  length: 1H30M
+  galaxy_version: 24.1.3.dev0
+  date: '2024-09-30'
+  speakers:
+  - mschatz
+  - delphine-l
+  captioners:
+  - mschatz
+  - delphine-l
+  bot-timestamp: 1727666641
 
 
 ---
+
 
 
 
