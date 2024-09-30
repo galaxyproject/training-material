@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@254032e63770555da2b9dd7da1780b14ad7d793a",
+		release: "galaxy-training-network@4e90a3a36c2ec78bbe389db9d44b4a553260bd42",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,11 +70,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Adding workflow tests with Planemo">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-05-16 11:13:26 +0000">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="1. Find a tutorial that you're interested in, that **doesn't currently have tests.**     This tutorial has a workflow (`.ga`) and a test, notice the `-test.yml` that has the same name as the workflow `.ga` file.     ```    machinelearning/workflows/machine_learning.ga    machinelearning/workflows/machine_learning-test.yml    ```     You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.  2. Check if it has a workflow (if it does, skip to step 5.) 3. Follow the tutorial 4. Extract a workflow from the history 5. Run that workflow in a new history to test 6. Obtain the workflow invocation ID, and your API key (User → Preferences → Manage API Key)       7. Install the latest version of `planemo`     ```    # In a virtualenv    pip install planemo    ```  8. Run the command to initialise a workflow test from the `workflows/` subdirectory - if it doesn't exist, you might need to create it first.     ```    planemo workflow_test_init --from_invoca...">
+<meta name="DC.date" content="2024-09-30 07:46:11 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="## Ensuring a Tutorial has a Workflow  1. Find a tutorial that you're interested in, that **doesn't currently have tests.**     This tutorial has a workflow (`.ga`) and a test, notice the `-test.yml` that has the same name as the workflow `.ga` file.     ```    machinelearning/workflows/machine_learning.ga    machinelearning/workflows/machine_learning-test.yml    ```     You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.  2. Check if it has a workflow (if it does, skip to step 5.) 3. Follow the tutorial 4. Extract a workflow from the history 5. Run that workflow in a new history to test  ## Extract Tests (Online Version)  If you are on UseGalaxy.org or another server running 24.2 or later, you can use [PWDK](https://pwdk.apps.galaxyproject.eu/), a version of planemo running online to generate the workflow tests.  However if you are on an older version of Galaxy, or a private Galaxy server, then you'll need to do the following:  ## Extra...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Adding workflow tests with Planemo">
-        <meta property="og:description" content="1. Find a tutorial that you're interested in, that **doesn't currently have tests.**     This tutorial has a workflow (`.ga`) and a test, notice the `-test.yml` that has the same name as the workflow `.ga` file.     ```    machinelearning/workflows/machine_learning.ga    machinelearning/workflows/machine_learning-test.yml    ```     You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.  2. Check if it has a workflow (if it does, skip to step 5.) 3. Follow the tutorial 4. Extract a workflow from the history 5. Run that workflow in a new history to test 6. Obtain the workflow invocation ID, and your API key (User → Preferences → Manage API Key)       7. Install the latest version of `planemo`     ```    # In a virtualenv    pip install planemo    ```  8. Run the command to initialise a workflow test from the `workflows/` subdirectory - if it doesn't exist, you might need to create it first.     ```    planemo workflow_test_init --from_invoca...">
+        <meta property="og:description" content="## Ensuring a Tutorial has a Workflow  1. Find a tutorial that you're interested in, that **doesn't currently have tests.**     This tutorial has a workflow (`.ga`) and a test, notice the `-test.yml` that has the same name as the workflow `.ga` file.     ```    machinelearning/workflows/machine_learning.ga    machinelearning/workflows/machine_learning-test.yml    ```     You want to find tutorials without the `-test.yml` file. The workflow file might also be missing.  2. Check if it has a workflow (if it does, skip to step 5.) 3. Follow the tutorial 4. Extract a workflow from the history 5. Run that workflow in a new history to test  ## Extract Tests (Online Version)  If you are on UseGalaxy.org or another server running 24.2 or later, you can use [PWDK](https://pwdk.apps.galaxyproject.eu/), a version of planemo running online to generate the workflow tests.  However if you are on an older version of Galaxy, or a private Galaxy server, then you'll need to do the following:  ## Extra...">
         
 	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -237,6 +237,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
            
 
+<h2 id="ensuring-a-tutorial-has-a-workflow">Ensuring a Tutorial has a Workflow</h2>
+
 <ol>
   <li>
     <p>Find a tutorial that you’re interested in, that <strong>doesn’t currently have tests.</strong></p>
@@ -253,6 +255,17 @@ machinelearning/workflows/machine_learning-test.yml
   <li>Follow the tutorial</li>
   <li>Extract a workflow from the history</li>
   <li>Run that workflow in a new history to test</li>
+</ol>
+
+<h2 id="extract-tests-online-version">Extract Tests (Online Version)</h2>
+
+<p>If you are on UseGalaxy.org or another server running 24.2 or later, you can use <a href="https://pwdk.apps.galaxyproject.eu/">PWDK</a>, a version of planemo running online to generate the workflow tests.</p>
+
+<p>However if you are on an older version of Galaxy, or a private Galaxy server, then you’ll need to do the following:</p>
+
+<h2 id="extract-tests-manual-version">Extract Tests (Manual Version)</h2>
+
+<ol>
   <li>
     <p>Obtain the workflow invocation ID, and your API key (User → Preferences → Manage API Key)</p>
 
@@ -282,6 +295,11 @@ pip install planemo
 └── testing-openlayer-tests.yml
 </code></pre></div>    </div>
   </li>
+</ol>
+
+<h2 id="adding-your-tests-to-the-gtn">Adding Your Tests to the GTN</h2>
+
+<ol>
   <li>
     <p>You will need to check the <code class="language-plaintext highlighter-rouge">-tests.yml</code> file, it has some automatically generated comparisons. Namely it tests that output data matches the test-data exactly, however, you might want to replace that with assertions that check for e.g. correct file size, or specific text content you expect to see.</p>
   </li>
@@ -321,7 +339,9 @@ pip install planemo
           <span class="na">n</span><span class="pi">:</span> <span class="m">2</span>
 </code></pre></div>    </div>
   </li>
-  <li>Contribute all of those files to the GTN in a PR.</li>
+  <li>
+    <p>Contribute all of those files to the GTN in a PR, adding them to the <code class="language-plaintext highlighter-rouge">workflows/</code> folder of your tutorial.</p>
+  </li>
 </ol>
 
         </div>
@@ -476,7 +496,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/254032e63770555da2b9dd7da1780b14ad7d793a">254032e</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4e90a3a36c2ec78bbe389db9d44b4a553260bd42">4e90a3a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
