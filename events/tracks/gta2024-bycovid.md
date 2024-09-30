@@ -27,7 +27,7 @@ program:
       - type: custom
         name: "[Sequencing spectrum viral genomes](https://gallantries.github.io/video-library/videos/virology/sequencing-spectrum-viral-genomes)"
         description: |
-          Lecture Video
+          [Lecture Video](https://gallantries.github.io/video-library/videos/virology/sequencing-spectrum-viral-genomes)
       - name: sars-cov-2
         topic: variant-analysis
       - name: aiv-analysis
@@ -42,7 +42,7 @@ program:
       - type: custom
         name: "[An automated SARS-CoV-2 genome surveillance system built around Galaxy](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)"
         description: |
-          Lecture Video
+          [Lecture Tutorial](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)
       - name: sars-cov-2-variant-discovery
         topic: variant-analysis
       - name: workflow-automation
@@ -50,9 +50,9 @@ program:
       - type: custom
         name: "[The usegalaxy.* SARS-CoV-2 Bot in Action](https://gallantries.github.io/video-library/videos/sars-cov2/usegalaxy-star-bot/)"
         description: |
-          Demo Video
+          [Demo Video](https://gallantries.github.io/video-library/videos/sars-cov2/usegalaxy-star-bot/)
       - type: custom
         name: "[Upload to ENA](https://gallantries.github.io/video-library/videos/sars-cov2/upload-ena)"
         description: |
-          Demo Video
+          [Demo Video](https://gallantries.github.io/video-library/videos/sars-cov2/upload-ena)
 ---
