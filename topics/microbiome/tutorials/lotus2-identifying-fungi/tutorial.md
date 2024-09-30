@@ -39,7 +39,7 @@ objectives:
 time_estimation: 3H
 
 key_points:
-- LotuS is a metagenomics tool for identifying species and OTUs and ASVs from sequencing data
+- LotuS is a metagenomics tool for identifying OTUs or ASVs from sequencing data
 - Galaxy is an easy way to run LotuS2 in the cloud for bioinformatics beginners
 
 contributions:
