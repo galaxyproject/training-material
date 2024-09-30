@@ -34,7 +34,7 @@ objectives:
 - Learn to upload data files to Galaxy
 - Learn to run the Galaxy LotuS2 tool and what the parameters mean
 - Understand the output files from LotuS2
-- Understand the structure of the mapping file needed by LotuS2 to link sample metadata to a pair of fastq files
+- Understand the structure of the mapping file needed by LotuS2 to link sample metadata to a pair of FASTQ files
 
 time_estimation: 3H
 
@@ -66,7 +66,7 @@ This tutorial is for you if you are a mycologist using metabarcoding data to und
 
 We do this by using a specific primer pair that amplifies just the {ITS2} region of the ribosomal DNA present in a soil sample. This tutorial covers data for an {ITS2} amplicon produced using the ITS3F and ITS4R primer set and sequenced using Illumina sequencing, which generates paired-end data. In this case, the example data has been generated using a NextSeq 2000, using 2x300bp chemistry.
 
-This tutorial concentrates on the bioinformatics part of the process, i.e. the steps we need to do **after** we get data back from the sequencer. Starting from some example fastq files, we demonstrate how to upload data, run LotuS2, and examine the output files. We end with a brief description of what we can do with these output files.
+This tutorial concentrates on the bioinformatics part of the process, i.e. the steps we need to do **after** we get data back from the sequencer. Starting from some example FASTQ files, we demonstrate how to upload data, run LotuS2, and examine the output files. We end with a brief description of what we can do with these output files.
 
 We use LotuS2 at {SPUN} because we have found that it performs best out of all the tools we tried for identifying {MF} from sequencing data. The LotuS2 publication also includes a benchmark where it outperformed most amplicon tools using default parameters (see {% cite ozkurt2022 %}).
 
@@ -103,9 +103,9 @@ At {SPUN}, we run LotuS2 to identify mycorrhizal fungi in a set of samples, usin
 2. A mapping file in a **tab-separated-values** format which specifies which FASTQ files correspond to which samples. The file can also provide additional metadata for each sample, such as the primers used for each sample, the location where the sample was collected, and so on.
 3. A {sdm} file in **text** format which specifies how the sequence FASTQ files should be quality filtered and demultiplexed.
 
-For this tutorial we have already provided a few example files at {{ page.zenodo_link }}. You can click on this link to see which files are available (there is no need to download them).
+For this tutorial, we have already provided a few example files at {{ page.zenodo_link }}. You can click on this link to see which files are available (there is no need to download them).
 
-These files corresond to the three types of input files above, as shown:
+These files correspond to the three types of input files above, as shown:
 
 - DNA sequence files:
     1. C_ITS2_S160_R1_001.fastq.gz
@@ -121,7 +121,7 @@ These files corresond to the three types of input files above, as shown:
 
 For this tutorial, you do not need to download these files. Galaxy allows you to fetch data from a remote location directly into a tool or workflow without first downloading the files.
 
-In the next section we will get the data in to Galaxy, and after that we will look at the files to see what they look like.
+In the next section, we will get the data into Galaxy, and after that, we will look at the files to see what they look like.
 
 # Get Data
 
@@ -157,7 +157,7 @@ This section describes two options that will allow you to download and use {SPUN
 >
 > 1. This option will take more time, and should not be used if you have a slow internet connection.
 > 2. However, this option will most closely mimic how you will use this tool in your real analysis, i.e. showing you how to upload data from your own computer
-> 3. First download all 8 files from [Zenodo]({{ page.zenodo_link }}) to your own local computer (desktop or laptop). You can do do this by scrolling down to the "Files" list section, and clicking the "Download All" link at the top of this section. This will download a 55 {MB} zip file to your local computer
+> 3. First, download all 8 files from [Zenodo]({{ page.zenodo_link }}) to your local computer. You can do this by scrolling down to the "Files" list section and clicking the "Download All" link at the top of this section. This will download a 55 {MB} zip file to your local computer
 > 4. Unzip the file - the folder should have 8 files in it.
 > 5. Create a new history in Galaxy
 > 6. Upload these 8 files to the new history
@@ -168,7 +168,7 @@ This section describes two options that will allow you to download and use {SPUN
 
 ## Examine the input files
 
-We will briefly look at each type of file to see that it has uploaded correctly. This doesn’t need to be done for every file each time you use LotuS2 if you have a large number of files, but it is good practice to check some files to see that they have uploaded in the correct format.
+We will briefly look at each type of file to see that it has been uploaded correctly. This doesn’t need to be done for every file each time you use LotuS2 if you have a large number of files, but it is good practice to check some files to see that they have been uploaded in the correct format.
 
 > <hands-on-title>Inspect the FASTQ file</hands-on-title>
 >
@@ -192,7 +192,7 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 > * Each row is a sample
 > * The columns tell you information about each sample:
 >    - #SampleID is a short name/ID for the sample. Here, "C" stands for "Control" sample, and the other two are called samples "N5" and "Pcov3"
->    - fastqFile lists the sequence file names that correspond to each sample. We have two fastq files for paired-end sequencing: first the forward file is listed, followed by a "," (comma), and then the reverse file name is listed, with no spaces between these.
+>    - fastqFile lists the sequence file names that correspond to each sample. We have two FASTQ files for paired-end sequencing: first, the forward file is listed, followed by a "," (comma), and then the reverse file name is listed, with no spaces between these.
 >    - ForwardPrimer: Lists the forward primer sequence used during PCR to produce the sequenced amplicon (ITS3 forward primer here).
 >    - ReversePrimer: Lists the forward primer sequence used during PCR to produce the sequenced amplicon (ITS4 reverse primer here).
 > * The remaining columns (Latitude, Longitude, Country, Vegetation, etc) are metadata for each sample. LotuS2 does not **need** these columns, but it will copy them to the final R Phyloseq object that it creates. These columns will be needed for doing ecological analyses later. You can add metadata to the phyloseq object that is created through LotuS2 later in R, as long as the sample ID in your metadata sheet matches the sample ID in your mapping file.
@@ -202,7 +202,7 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 > <comment-title>Note</comment-title>
 > 
 > - In this case, the ForwardPrimer and ReversePrimer are the same across all samples. This is typical as we usually sequence the same region in all samples using the same primer pair.
-> - LotuS2 allows you to specify primer set as a parameter, and if this is done, the primer sequence does not need to be written in the mapping file. In this case, we are including primer sequences in the mapping file. When using different primer sets, if you are following these instructions for your own data, you may need to change the primer sequences to reflect the primer set used for your own sequencing.
+> - LotuS2 allows you to specify the primer set as a parameter, and if this is done, the primer sequence does not need to be written in the mapping file. In this case, we are including primer sequences in the mapping file. When using different primer sets, if you are following these instructions for your data, you may need to change the primer sequences to reflect the primer set used for your sequencing.
 > 
 {: .comment}
 
@@ -219,14 +219,14 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 > 1. What is the reverse primer for sample "N5"?
 > 2. What is the DNA concentration in ng per µl for sample "Pcov3"?
 > 3. When LotuS2 processes ITS paired-end sequences using these inputs, what is the minimum sequence length (minSeqLength) it will consider, below which it will discard the sequence?
-> 4. Which of the 6 fastq files has the most data? (i.e., is biggest in size?)
+> 4. Which of the 6 FASTQ files has the most data? (i.e., is the biggest in size?)
 >
 > > <solution-title></solution-title>
 > >
 > >1. In *Colombia_ITS2_Mapping.tsv*: **TCCTCCGCTTATTGATATGC**
 > >2. In *Colombia_ITS2_Mapping.tsv*, under column *DNA_concentration_ng_ul*: **20.4**
 > >3. In *sdm_miSeq_ITS.txt*, next to *minSeqLength*: **110**
-> >4. Click on the names of each of the fastq.gz files in ths history. The biggest is N5_ITS2_S140_R2_001.fastq.gz: **19.0 MB**
+> >4. Click on the names of each of the fastq.gz files in the history. The biggest is N5_ITS2_S140_R2_001.fastq.gz: **19.0 MB**
 > >
 > {: .solution}
 >
@@ -241,10 +241,10 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 > <hands-on-title>Create pairs of fastq files</hands-on-title>
 >
 > 1. Select ONLY the 6 fastq.gz files in your history (do not select `sdm_miSeq_ITS.txt` and `Colombia_ITS2_Mapping.tsv`)
-> 2. Choose the "Build List of Dataset Pairs" option for these 6 files ![Screenshot showing how to select 6 out of 8 items, and then clicking the top right dropdown to choose the "Build List of Dataset Pairs" option](images/history-build-list-of-dataset-pairs.png)
+> 2. Choose the "Build List of Dataset Pairs" option for these 6 files! [Screenshot showing how to select 6 out of 8 items, and then click the top right dropdown to choose the "Build List of Dataset Pairs" option](images/history-build-list-of-dataset-pairs.png)
 > 3. Galaxy will automatically pair the files for you on the next screen
-> 4. Rename the new collection as "Colombia ITS2 fastq pairs"
-> 5. By default these two options are checked: "Hide original elements" and "Remove file extensions". You can leave them checked or unchecked. If you leave them checked, the 6 individual fastq.gz files will disappear from your history and be replaced by one collection with 3 pairs of fastq files with the new name "Colombia ITS2 fastq pairs"
+> 4. Rename the new collection as "Colombia ITS2 FASTQ pairs"
+> 5. By default these two options are checked: "Hide original elements" and "Remove file extensions". You can leave them checked or unchecked. If you leave them checked, the 6 individual fastq.gz files will disappear from your history and be replaced by one collection with 3 pairs of FASTQ files with the new name "Colombia ITS2 FASTQ pairs"
 >
 > {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -254,9 +254,9 @@ We will briefly look at each type of file to see that it has uploaded correctly.
 
 When we run the LotuS2 tool on our data, it runs many steps in the background:
 
-1. demultiplexing and filtering raw fastq sequences
+1. demultiplexing and filtering raw FASTQ sequences
 2. denoising, removing chimeric sequences and clustering sequences into very high quality {OTU}s/{ASV}s
-3. determining taxonomic origin of each OTU using specialized and general purpose databases and statistical algorithms
+3. determining the taxonomic origin of each OTU using specialized and general-purpose databases and statistical algorithms
 4. constructing OTU, genus, family, class, order and phylum abundance tables in .txt or .biom format
 5. reconstructing the OTU phylogenetic tree
 6. generating phyloseq objects for downstream analysis
@@ -267,7 +267,7 @@ The figure below with an overview of LotuS2 is taken from {% cite ozkurt2022 %}.
 
 As LotuS2 is a very powerful, general-purpose tool used in many metabarcoding projects for bacteria, fungi, and eukaryotes, it provides many different parameters (options for running the software) specified for each special use case.
 
-In the next subsection we show how to run LotuS2 in Galaxy and how to set the parameters needed for a fungal dataset.
+In the next subsection, we show how to run LotuS2 in Galaxy and how to set the parameters needed for a fungal dataset.
 
 ## Run LotuS2 with the example fungal dataset
 
@@ -279,7 +279,7 @@ In the next subsection we show how to run LotuS2 in Galaxy and how to set the pa
 >
 > 1. {% tool [LotuS2](toolshed.g2.bx.psu.edu/repos/earlhaminst/lotus2/lotus2/2.32+galaxy0) %} with the following parameters:
 >    - *"Single- or Paired-end data?"*: `Paired-end list`
->        - In *"List of paired reads"*: choose the paired-list you created in the previous section: `Colombia ITS2 fastq pairs` (or whatever name you gave to the collection)
+>        - In *"List of paired reads"*: choose the paired-list you created in the previous section: `Colombia ITS2 FASTQ pairs` (or whatever name you gave to the collection)
 >    - In *"Mapping file (optional)"*: `Colombia_ITS2_mapping.tsv`
 >    - Forward (and Reverse) Primer: Leave blank
 >    - *"Clustering algorithm"*: `VSEARCH`
@@ -296,14 +296,14 @@ In the next subsection we show how to run LotuS2 in Galaxy and how to set the pa
 >
 > 2. Once all the parameters above are entered, click the **"Run Tool"** button at the end.
 > 3. You should see a green box on the next page saying "Started tool LotuS2 and successfully added 1 job to the queue". The box lists the 6 outputs that the tool produces.
-> 4. This step can take 5-10 minutes to run or longer depending on how many other jobs are running on the usegalaxy server. While we are waiting for it to finish, you can do the next step on "Creating your own mapping.tsv" file
-> 5. You will know when the tool has finished, because all the outputs in the history will turn green.
+> 4. This step can take 5-10 minutes to run or longer depending on how many other jobs are running on the Galaxy server. While we are waiting for it to finish, you can do the next step on "Creating your own mapping.tsv" file
+> 5. You will know when the tool has finished because all the outputs in the history will turn green.
 > 
 > 
 >  > <comment-title>Notes</comment-title>
 >  >
 >  > - Remember to choose _Paired-end list_ in the sequencing read data section. Galaxy will pick up the Paired-end list available in the History, which will have the name you gave it in the _Create a list of pairs_ step
->  > - In *"Forward (and Reverse) Primer"*: Leave blank, as we have already provided them in the mapping.tsv file. If you are carrying out an analysis using your own data, you may add here the primer sequences used in your analyses in stead of in the mapping file, if you prefer.
+>  > - In *"Forward (and Reverse) Primer"*: Leave blank, as we have already provided them in the mapping.tsv file. If you are carrying out an analysis using your own data, you may add here the primer sequences used in your analyses instead of in the mapping file, if you prefer.
 >  > - In *"Other Clustering Options"*: *"Minimum size of dereplicated raw reads (optional)"*: we put `10:1,5:2,3:3`. Each "X:Y" pair means "A unique dereplicated read must be seen at least X times in at least Y samples". So, if a sequence read is only found in 1 sample, it must be present in 10 copies. If a sequence read is found in only 2 samples, it must be found in 5 copies in each, etc. This is a strict parameter, so that sequence errors are not taken as novel biological sequences, reducing the occurrences of false positive OTUs or ASVs. You may want to use more lenient values if you know your data has a high number of real singletons, i.e., sequences that occur only once.
 >  >
 >  {: .comment}
@@ -324,7 +324,7 @@ In the next subsection we show how to run LotuS2 in Galaxy and how to set the pa
 > >    - VSEARCH
 > >
 > >    SPUN uses VSEARCH for our {ITS2} amplicon for the identification of fungi from soils.
-> >2. In *"Other Taxonomy Options"*, click on the drop down under *"Amplicon type"*:
+> >2. In *"Other Taxonomy Options"*, click on the drop-down under *"Amplicon type"*:
 > >    - Default
 > >    - LSU
 > >    - SSU
@@ -332,7 +332,7 @@ In the next subsection we show how to run LotuS2 in Galaxy and how to set the pa
 > >    - ITS1
 > >    - ITS2
 > >
-> >    Here, we were using general fungal primers that amplify the {ITS2} region. In another tutorial we will see how to use the {SSU} region for specific amplification of {AMF}
+> >    Here, we were using general fungal primers that amplify the {ITS2} region. In another tutorial, we will see how to use the {SSU} region for specific amplification of {AMF}
 > >
 > {: .solution}
 >
@@ -353,11 +353,11 @@ The LotuS2 Galaxy tool creates 6 output files that you should see in your histor
 >
 > 1. **main log file**: If we had run LotuS on the command line, the contents of the `output/LotuSLogS/LotuS_run.log` would be this main LotuS2 run log file.
 > 
->     It has information on all the parameters actually passed to the tool, and information on the start time of each step in the program, plus the output of each step.
+>     It has information on all the parameters passed to the tool, and information on the start time of each step in the program, plus the output of each step.
 >   
 >     You should always check this file first to see if LotuS2 completed correctly, and approximately how many reads were used/classified. If this number is much lower than what you expected, that might indicate a problem with the run and the parameters.
 > 
-> 2. **mapping file**: You can ignore this file as it is a repeat of the mapping tsv file that we used as an input.
+> 2. **mapping file**: You can ignore this file as it is a repeat of the mapping TSV file (tab-separated-values) that we used as an input.
 > 
 > 3. **Newick-formatted phylogenetic trees between sequences**: A phylogenetic tree created from the ITS2 sequences. If you want to see what the tree looks like, you can copy the contents of this file and paste it at this [online tree viewer](http://etetoolkit.org/)treeview/
 > 
@@ -376,7 +376,7 @@ The LotuS2 Galaxy tool creates 6 output files that you should see in your histor
 >
 > 1. How many total reads were in the OTU abundance matrix? (hint: main log file)
 > 2. What percentage of reads are assigned at the phylum level and at the genus level? (hint: main log file)
-> 3. How long did the entire LotuS2 pipeline take to run? (hint: main log has time stamps at the left of each step in the format hh:mm:ss)
+> 3. How long did the entire LotuS2 pipeline take to run? (hint: the main log has time stamps at the left of each step in the format hh:mm:ss)
 > 4. Which OTU was most abundant in all samples? (hint: OTU abundance matrix). How many reads were present in each sample?
 > 5. What was the sequence of the least abundant OTU? (hint: FASTA-formatted extended OTU seed sequences)  
 >
@@ -404,9 +404,9 @@ The LotuS2 Galaxy tool creates 6 output files that you should see in your histor
 
 # Run LotuS2 on your own data
 
-To run the LotuS2 workflow on your own fungal data, you only need the sequencing fastq files and some information about what primers were used.
+To run the LotuS2 workflow on your own fungal data, you only need the sequencing FASTQ files and some information about what primers were used.
 
-In the example dataset, we used the ITS3/ITS4 primer pair to sequence the ITS2 reqion, so our Forward primer was `GCATCGATGAAGAACGCAGC` and the Reverse primer was `TCCTCCGCTTATTGATATGC`
+In the example dataset, we used the ITS3/ITS4 primer pair to sequence the ITS2 region, so our Forward primer was `GCATCGATGAAGAACGCAGC` and the Reverse primer was `TCCTCCGCTTATTGATATGC`
 
 When you want to process your own sequencing files, you can specify the Forward and Reverse primer in the Galaxy LotuS2 Parameters directly in the options if all your samples have the same forward and reverse primers:
   - *"Forward primer used to amplify DNA region (optional) - optional"*: `GCATCGATGAAGAACGCAGC`
@@ -416,7 +416,7 @@ We advise adding metadata to the phyloseq object after running LotuS2, so that a
 
 ## Create your own mapping tsv file
 
-Mapping files for LotuS2 have to be in tab-separated-values format. You can create this file in any spreadsheet sofware, eg: Microsoft Excel or Google Sheets. The important thing to note is that when you save or export the file, you should select the TSV format (called "Tab separated values" in Google Sheets or "Tab-delimited text .txt" in Excel)
+Mapping files for LotuS2 have to be in tab-separated-values format. You can create this file in any spreadsheet software, eg: Microsoft Excel or Google Sheets. The important thing to note is that when you save or export the file, you should select the TSV format (called "Tab separated values" in Google Sheets or "Tab-delimited text .txt" in Excel)
 
 LotuS2 allows many columns in the mapping tsv file according to the [specification](https://lotus2.earlham.ac.uk//main.php?site=documentation#mappingfile). However, for simplicity, we recommend this format for sequencing data using the SPUN protocol:
 
@@ -436,11 +436,11 @@ In the exercise below you will create your own mapping tsv file for a new run.
 >
 > Steps:
 >
-> 1. Import history from: [mapping example history](https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2--create-mapping)
+> 1. Import history from the [mapping example history](https://usegalaxy.eu/u/sujai_spun_earth/h/identifying-mf-from-its2-sequencing-using-lotus2--create-mapping)
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
 >
-> 2. Create a table in your favourite spereadsheet software (eg *Google Sheets* or *Microsoft Excel*) with the following columns (you can copy and paste from the example below. We have filled in the first two columns for you #SampleID and fastqFile):
+> 2. Create a table in your favourite spreadsheet software (eg *Google Sheets* or *Microsoft Excel*) with the following columns (you can copy and paste from the example below. We have filled in the first two columns for you #SampleID and fastqFile):
 >
 >    | #SampleID | fastqFile | ForwardPrimer | ReversePrimer | Vegetation |
 >    | N11 | N11_ITS2_S134_R1_001.fastq.gz,N11_ITS2_S134_R2_001.fastq.gz | | | |
@@ -459,7 +459,7 @@ In the exercise below you will create your own mapping tsv file for a new run.
 >    {% snippet faqs/galaxy/datasets_upload.md %}
 >
 > 7. Now you should have all the files you need in this new history to run LotuS2:
->    - 4 paired-end fastq files for 2 samples
+>    - 4 paired-end FASTQ files for 2 samples
 >    - 1 mapping tsv file specifying sample IDs, fastqFiles, primers, and metadata for these 2 samples
 >    - 1 sdm_miSeq_ITS.txt
 >
