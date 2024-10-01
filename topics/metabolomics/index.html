@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b7090bcd30881746617fcc90f35a8a3f3f9e1447",
+		release: "galaxy-training-network@851f875c8d22df270ebd86f1aadf29f766e491f4",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -2144,6 +2144,399 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
          </tr>
        
     
+        <!-- MAT: metabolomics/qcxms-predictions -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html">
+                Predicting EI+ mass spectra with QCxMS
+            </a>
+            
+
+
+            <div class="extra">
+            
+              
+
+
+
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+
+            
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+                  
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/13327051">
+    <i class="far fa-copy" aria-hidden="true"></i>
+</a>
+
+
+                  
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/workflows/" title="Predicting EI+ mass spectra with QCxMS workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>
+    </a>
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+<div class="btn-group">
+	<a class="visually-hidden" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides-plain.html" aria-label="more accessible, plain text slides">plain text</a>
+</div>
+    <div class="btn-group">
+        <a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html" title="Slides">
+            <i class="fab fa-slideshare" aria-hidden="true"></i>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="View slides in different languages">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+
+	<li class="dropdown-item">
+		<a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/slides-plain.html" aria-label="more accessible, plain text slides">
+			<i class="fas fa-file-alt" aria-hidden="true"></i> Plain text slides
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/metabolomics/tutorials/qcxms-predictions/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+ </td>
+
+          
+          <td> 
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/record/13327051">
+    <i class="far fa-copy" aria-hidden="true"></i>
+</a>
+
+ </td>
+          <td> 
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/metabolomics/tutorials/qcxms-predictions/workflows/" title="Predicting EI+ mass spectra with QCxMS workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>
+    </a>
+
+ </td>
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
   </tbody>
 </table>
 
@@ -2207,20 +2600,21 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <h2 id="contributors">Contributors</h2>
     <p>This material was contributed to by:</p>
     
-    <a href="/training-material/hall-of-fame/cecilecanlet/" class="contributor-badge contributor-cecilecanlet"><img src="/training-material/assets/images/avatar.png" alt="Cécile Canlet avatar" width="36" class="avatar" />
-    Cécile Canlet</a><a href="/training-material/hall-of-fame/MarenStillger/" class="contributor-badge contributor-MarenStillger"><img src="https://avatars.githubusercontent.com/MarenStillger?s=36" alt="Maren Stillger avatar" width="36" class="avatar" />
-    Maren Stillger</a><a href="/training-material/hall-of-fame/maximskorik/" class="contributor-badge contributor-maximskorik"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/maximskorik?s=36" alt="Maxim Skoryk avatar" width="36" class="avatar" />
-    Maxim Skoryk</a><a href="/training-material/hall-of-fame/xtrojak/" class="contributor-badge contributor-xtrojak"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/xtrojak?s=36" alt="Matej Troják avatar" width="36" class="avatar" />
-    Matej Troják</a><a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge contributor-foellmelanie"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/foellmelanie?s=36" alt="Melanie Föll avatar" width="36" class="avatar" />
-    Melanie Föll</a><a href="/training-material/hall-of-fame/jsaintvanne/" class="contributor-badge contributor-jsaintvanne"><img src="https://avatars.githubusercontent.com/jsaintvanne?s=36" alt="Julien Saint-Vanne avatar" width="36" class="avatar" />
-    Julien Saint-Vanne</a><a href="/training-material/hall-of-fame/yguitton/" class="contributor-badge contributor-yguitton"><img src="https://avatars.githubusercontent.com/yguitton?s=36" alt="Yann Guitton avatar" width="36" class="avatar" />
-    Yann Guitton</a><a href="/training-material/hall-of-fame/hechth/" class="contributor-badge contributor-hechth"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hechth?s=36" alt="Helge Hecht avatar" width="36" class="avatar" />
-    Helge Hecht</a><a href="/training-material/hall-of-fame/workflow4metabolomics/" class="contributor-badge contributor-workflow4metabolomics"><img src="https://avatars.githubusercontent.com/workflow4metabolomics?s=36" alt="Workflow4Metabolomics core team avatar" width="36" class="avatar" />
+    <a href="/training-material/hall-of-fame/hechth/" class="contributor-badge contributor-hechth"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hechth?s=36" alt="Helge Hecht avatar" width="36" class="avatar" />
+    Helge Hecht</a><a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge contributor-foellmelanie"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/foellmelanie?s=36" alt="Melanie Föll avatar" width="36" class="avatar" />
+    Melanie Föll</a><a href="/training-material/hall-of-fame/jfrancoismartin/" class="contributor-badge contributor-jfrancoismartin"><img src="https://avatars.githubusercontent.com/jfrancoismartin?s=36" alt="Jean-François Martin avatar" width="36" class="avatar" />
+    Jean-François Martin</a><a href="/training-material/hall-of-fame/maximskorik/" class="contributor-badge contributor-maximskorik"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/maximskorik?s=36" alt="Maxim Skoryk avatar" width="36" class="avatar" />
+    Maxim Skoryk</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="/training-material/hall-of-fame/MarenStillger/" class="contributor-badge contributor-MarenStillger"><img src="https://avatars.githubusercontent.com/MarenStillger?s=36" alt="Maren Stillger avatar" width="36" class="avatar" />
+    Maren Stillger</a><a href="/training-material/hall-of-fame/yguitton/" class="contributor-badge contributor-yguitton"><img src="https://avatars.githubusercontent.com/yguitton?s=36" alt="Yann Guitton avatar" width="36" class="avatar" />
+    Yann Guitton</a><a href="/training-material/hall-of-fame/jsaintvanne/" class="contributor-badge contributor-jsaintvanne"><img src="https://avatars.githubusercontent.com/jsaintvanne?s=36" alt="Julien Saint-Vanne avatar" width="36" class="avatar" />
+    Julien Saint-Vanne</a><a href="/training-material/hall-of-fame/xtrojak/" class="contributor-badge contributor-xtrojak"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/xtrojak?s=36" alt="Matej Troják avatar" width="36" class="avatar" />
+    Matej Troják</a><a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" />
+    Julia Jakiela</a><a href="/training-material/hall-of-fame/cecilecanlet/" class="contributor-badge contributor-cecilecanlet"><img src="/training-material/assets/images/avatar.png" alt="Cécile Canlet avatar" width="36" class="avatar" />
+    Cécile Canlet</a><a href="/training-material/hall-of-fame/workflow4metabolomics/" class="contributor-badge contributor-workflow4metabolomics"><img src="https://avatars.githubusercontent.com/workflow4metabolomics?s=36" alt="Workflow4Metabolomics core team avatar" width="36" class="avatar" />
     Workflow4Metabolomics core team</a><a href="/training-material/hall-of-fame/melpetera/" class="contributor-badge contributor-melpetera"><img src="https://avatars.githubusercontent.com/melpetera?s=36" alt="Mélanie Petera avatar" width="36" class="avatar" />
     Mélanie Petera</a><a href="/training-material/hall-of-fame/lecorguille/" class="contributor-badge contributor-lecorguille"><img src="https://avatars.githubusercontent.com/lecorguille?s=36" alt="Gildas Le Corguillé avatar" width="36" class="avatar" />
-    Gildas Le Corguillé</a><a href="/training-material/hall-of-fame/jfrancoismartin/" class="contributor-badge contributor-jfrancoismartin"><img src="https://avatars.githubusercontent.com/jfrancoismartin?s=36" alt="Jean-François Martin avatar" width="36" class="avatar" />
-    Jean-François Martin</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
-    Helena Rasche</a>
+    Gildas Le Corguillé</a>
 
 	<h2 id="funding">Funding</h2>
 	<p>These individuals or organisations provided funding support for the development of this resource</p>
@@ -2294,7 +2688,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b7090bcd30881746617fcc90f35a8a3f3f9e1447">b7090bc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/851f875c8d22df270ebd86f1aadf29f766e491f4">851f875</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

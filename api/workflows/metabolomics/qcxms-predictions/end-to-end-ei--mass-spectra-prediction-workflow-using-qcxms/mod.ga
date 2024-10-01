@@ -1,0 +1,959 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "This workflow predict in-silico mass spectra using semi-empirical quantum physics method.",
+  "comments": [
+    {
+      "color": "none",
+      "data": {
+        "size": 2,
+        "text": "Example:<br><br>Ethanol&nbsp;&nbsp;&nbsp; CCO<br>Ethylene&nbsp;&nbsp; C=C<br><br>"
+      },
+      "id": 1,
+      "position": [
+        10,
+        30
+      ],
+      "size": [
+        280,
+        140
+      ],
+      "type": "text"
+    },
+    {
+      "child_steps": [
+        11,
+        12,
+        13
+      ],
+      "color": "yellow",
+      "data": {
+        "title": "3D Conformer Generation &amp; Optimization"
+      },
+      "id": 3,
+      "position": [
+        1000,
+        340
+      ],
+      "size": [
+        341,
+        728
+      ],
+      "type": "frame"
+    },
+    {
+      "child_steps": [
+        14,
+        15,
+        17,
+        16
+      ],
+      "color": "green",
+      "data": {
+        "title": "QCxMS Spectra Prediction"
+      },
+      "id": 4,
+      "position": [
+        1390,
+        340
+      ],
+      "size": [
+        617.9,
+        549.3
+      ],
+      "type": "frame"
+    },
+    {
+      "child_comments": [
+        1
+      ],
+      "child_steps": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "color": "red",
+      "data": {
+        "title": "Workflow Inputs"
+      },
+      "id": 0,
+      "position": [
+        0,
+        0
+      ],
+      "size": [
+        1350,
+        310
+      ],
+      "type": "frame"
+    },
+    {
+      "child_steps": [
+        6,
+        4,
+        5,
+        7,
+        8,
+        9,
+        10
+      ],
+      "color": "orange",
+      "data": {
+        "title": "Input SMILES Parsing and SDF File Generation"
+      },
+      "id": 2,
+      "position": [
+        180,
+        340
+      ],
+      "size": [
+        740,
+        830
+      ],
+      "type": "frame"
+    }
+  ],
+  "format-version": "0.1",
+  "license": "MIT",
+  "name": "End-to-end EI+ mass spectra prediction workflow using QCxMS",
+  "report": {
+    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+  },
+  "steps": {
+    "0": {
+      "annotation": "First column should containe the name of the molecule, the second should contain the SMILES code.",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "First column should containe the name of the molecule, the second should contain the SMILES code.",
+          "name": "Input Molecules with SMILES and NAME without a header."
+        }
+      ],
+      "label": "Input Molecules with SMILES and NAME without a header.",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 10,
+        "top": 180
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"format\": [\"tabular\"], \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "c77610d3-3333-4393-a5c3-8ce3037bdc9c",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "1": {
+      "annotation": "By default one conformer",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "By default one conformer",
+          "name": "Number of conformers to generate"
+        }
+      ],
+      "label": "Number of conformers to generate",
+      "name": "Input parameter",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 660,
+        "top": 70
+      },
+      "tool_id": null,
+      "tool_state": "{\"default\": 1, \"parameter_type\": \"integer\", \"optional\": true}",
+      "tool_version": null,
+      "type": "parameter_input",
+      "uuid": "0d45e43e-3de9-47e9-9b57-8745c433423e",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "2": {
+      "annotation": "Level of accuracy for the optimization",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "Level of accuracy for the optimization",
+          "name": "Optimization Levels"
+        }
+      ],
+      "label": "Optimization Levels",
+      "name": "Input parameter",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 660,
+        "top": 190
+      },
+      "tool_id": null,
+      "tool_state": "{\"restrictOnConnections\": true, \"parameter_type\": \"text\", \"optional\": false}",
+      "tool_version": null,
+      "type": "parameter_input",
+      "uuid": "597e3200-086b-49d6-b814-909c8b8ab2d4",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "3": {
+      "annotation": "Available: GFN1-xTB and GFN2-xTB",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "Available: GFN1-xTB and GFN2-xTB",
+          "name": "QC Method"
+        }
+      ],
+      "label": "QC Method",
+      "name": "Input parameter",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 1050,
+        "top": 190
+      },
+      "tool_id": null,
+      "tool_state": "{\"restrictOnConnections\": true, \"parameter_type\": \"text\", \"optional\": false}",
+      "tool_version": null,
+      "type": "parameter_input",
+      "uuid": "5b88e765-5c74-4348-b4db-311a2fa6fe35",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Cut SMILES column",
+      "name": "Advanced Cut",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 317.15556298565895,
+        "top": 392.9714572813492
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "fbf99087e067",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"N\", \"__current_case__\": 1, \"list\": [\"2\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "9.3+galaxy1",
+      "type": "tool",
+      "uuid": "00b78596-7174-41b3-8237-a6604498a224",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "input": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Cut NAME column",
+      "name": "Advanced Cut",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 317.15556298565895,
+        "top": 682.9714572813493
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "fbf99087e067",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"N\", \"__current_case__\": 1, \"list\": [\"1\"]}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "9.3+galaxy1",
+      "type": "tool",
+      "uuid": "ea9fd6db-486b-4e3b-9f27-f6749758cddf",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "split_parms|input": {
+          "id": 4,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Split file",
+          "name": "split_parms"
+        }
+      ],
+      "label": null,
+      "name": "Split file",
+      "outputs": [
+        {
+          "name": "list_output_tab",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 315.4504706662232,
+        "top": 558.1963373972596
+      },
+      "post_job_actions": {
+        "ChangeDatatypeActionlist_output_tab": {
+          "action_arguments": {
+            "newtype": "smi"
+          },
+          "action_type": "ChangeDatatypeAction",
+          "output_name": "list_output_tab"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2",
+      "tool_shed_repository": {
+        "changeset_revision": "2dae863c8f42",
+        "name": "split_file_to_collection",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"split_parms\": {\"select_ftype\": \"tabular\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"top\": \"0\", \"split_by\": {\"select_split_by\": \"row\", \"__current_case__\": 1, \"select_mode\": {\"mode\": \"chunk\", \"__current_case__\": 0, \"chunksize\": \"1\"}, \"newfilenames\": \"split_file\", \"select_allocate\": {\"allocate\": \"batch\", \"__current_case__\": 1}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.5.2",
+      "type": "tool",
+      "uuid": "7d3613ab-2ef5-44af-b005-bb2a24d70683",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "split_parms|input": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Split file",
+          "name": "split_parms"
+        }
+      ],
+      "label": null,
+      "name": "Split file",
+      "outputs": [
+        {
+          "name": "list_output_tab",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 316.4504706662232,
+        "top": 842.19803150078
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.2",
+      "tool_shed_repository": {
+        "changeset_revision": "2dae863c8f42",
+        "name": "split_file_to_collection",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"split_parms\": {\"select_ftype\": \"tabular\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"top\": \"0\", \"split_by\": {\"select_split_by\": \"row\", \"__current_case__\": 1, \"select_mode\": {\"mode\": \"chunk\", \"__current_case__\": 0, \"chunksize\": \"1\"}, \"newfilenames\": \"split_file\", \"select_allocate\": {\"allocate\": \"batch\", \"__current_case__\": 1}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.5.2",
+      "type": "tool",
+      "uuid": "268aba96-149b-42b3-a23c-9aeb5adacf53",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "param_value_from_file",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "input1": {
+          "id": 7,
+          "output_name": "list_output_tab"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Parse parameter value",
+      "outputs": [
+        {
+          "name": "text_param",
+          "type": "expression.json"
+        }
+      ],
+      "position": {
+        "left": 317.15556298565895,
+        "top": 972.9714572813493
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "param_value_from_file",
+      "tool_state": "{\"input1\": {\"__class__\": \"ConnectedValue\"}, \"param_type\": \"text\", \"remove_newlines\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.0",
+      "type": "tool",
+      "uuid": "5f628678-e39d-4d4c-bd5d-b1582d96debb",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "appendtotitle": {
+          "id": 8,
+          "output_name": "text_param"
+        },
+        "infile": {
+          "id": 6,
+          "output_name": "list_output_tab"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Convert compounds from SMILES to SDF and add the name as title.",
+      "name": "Compound conversion",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "text"
+        }
+      ],
+      "position": {
+        "left": 667.1500351868558,
+        "top": 392.96249153489117
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "e2c36f62e22f",
+        "name": "openbabel_compound_convert",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"appendtotitle\": {\"__class__\": \"ConnectedValue\"}, \"dative_bonds\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"oformat\": {\"oformat_opts_selector\": \"sdf\", \"__current_case__\": 58, \"sdf_exp_h\": false, \"sdf_no_prop\": false, \"sdf_wedge_bonds\": false, \"sdf_alias_out\": false, \"gen2d\": false, \"gen3d\": false}, \"ph\": \"-1.0\", \"remove_h\": false, \"split\": false, \"unique\": {\"unique_opts_selector\": \"\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "3.1.1+galaxy0",
+      "type": "tool",
+      "uuid": "dc1a2bf2-da6a-4b7a-ac90-ea62e2425134",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "inputs": {
+          "id": 9,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Merge the individual SDF files",
+      "name": "Concatenate datasets",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 667.1499820526661,
+        "top": 682.9624694311367
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "fbf99087e067",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "9.3+galaxy1",
+      "type": "tool",
+      "uuid": "523a2b0c-580a-4093-b0de-a9e0777c5452",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "11": {
+      "annotation": "Generate 3D conformers from SDF input for each molecule. It requires the number of conformers as an input parameter. Default parameters value is 1.",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_im_conformers/ctb_im_conformers/1.1.4+galaxy0",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "infile": {
+          "id": 10,
+          "output_name": "out_file1"
+        },
+        "num": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Generate conformers",
+      "name": "Generate conformers",
+      "outputs": [
+        {
+          "name": "outfile",
+          "type": "sdf"
+        },
+        {
+          "name": "logfile",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1052.9,
+        "top": 393.4
+      },
+      "post_job_actions": {
+        "HideDatasetActionlogfile": {
+          "action_arguments": {
+          },
+          "action_type": "HideDatasetAction",
+          "output_name": "logfile"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/ctb_im_conformers/ctb_im_conformers/1.1.4+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "a4b1474efada",
+        "name": "ctb_im_conformers",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"attempts\": \"0\", \"conditional_cluster\": {\"cluster_method_opts\": \"none\", \"__current_case__\": 2}, \"emin\": \"0\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"num\": {\"__class__\": \"ConnectedValue\"}, \"rmsd\": \"1.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.4+galaxy0",
+      "type": "tool",
+      "uuid": "2adae9dd-d0be-4873-83f3-a0268fa3f405",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "conformer_output",
+          "output_name": "outfile",
+          "uuid": "f4f8881e-cd64-42ae-8435-1288e4e473b5"
+        }
+      ]
+    },
+    "12": {
+      "annotation": "Convert the conformer to cartesian coordinate (XYZ) format",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "infile": {
+          "id": 11,
+          "output_name": "outfile"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Molecular format conversion ",
+      "name": "Compound conversion",
+      "outputs": [
+        {
+          "name": "file_outputs",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1052.9,
+        "top": 683.4
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "e2c36f62e22f",
+        "name": "openbabel_compound_convert",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"sdf\", \"appendtotitle\": \"\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dative_bonds\": false, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"oformat\": {\"oformat_opts_selector\": \"xyz\", \"__current_case__\": 68}, \"ph\": \"7.0\", \"remove_h\": false, \"split\": true, \"unique\": {\"unique_opts_selector\": \"\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "3.1.1+galaxy0",
+      "type": "tool",
+      "uuid": "c847197b-8c2e-4e5e-a4ec-13890855abf1",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "XYZ output",
+          "output_name": "file_outputs",
+          "uuid": "5dcb6f02-62c9-4f43-9810-a10052b59b41"
+        }
+      ]
+    },
+    "13": {
+      "annotation": "Semi-empirical optimization",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/xtb_molecular_optimization/xtb_molecular_optimization/6.6.1+galaxy3",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "coordinates": {
+          "id": 12,
+          "output_name": "file_outputs"
+        },
+        "opt_level": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "xTB molecular optimization",
+      "name": "xtb molecular optimization",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1052.8999933509037,
+        "top": 883.3999791720917
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/xtb_molecular_optimization/xtb_molecular_optimization/6.6.1+galaxy3",
+      "tool_shed_repository": {
+        "changeset_revision": "6e1ef071fffc",
+        "name": "xtb_molecular_optimization",
+        "owner": "recetox",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"coordinates\": {\"__class__\": \"ConnectedValue\"}, \"opt_level\": {\"__class__\": \"ConnectedValue\"}, \"replace_second_line\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "6.6.1+galaxy3",
+      "type": "tool",
+      "uuid": "4c4921af-438e-41f4-9621-bb42043bbe6f",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "optimized output",
+          "output_name": "output",
+          "uuid": "01a9a1af-e225-4613-94f9-dfdad37c93a2"
+        }
+      ]
+    },
+    "14": {
+      "annotation": "Produce preparation input files for production runs",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_neutral_run/qcxms_neutral_run/5.2.1+galaxy4",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "QC_Level": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "mol": {
+          "id": 13,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "QCxMS neutral run",
+      "outputs": [
+        {
+          "name": "coords1",
+          "type": "input"
+        },
+        {
+          "name": "coords2",
+          "type": "input"
+        },
+        {
+          "name": "coords3",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1440,
+        "top": 390
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_neutral_run/qcxms_neutral_run/5.2.1+galaxy4",
+      "tool_shed_repository": {
+        "changeset_revision": "8f465c0c3b6c",
+        "name": "qcxms_neutral_run",
+        "owner": "recetox",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"QC_Level\": {\"__class__\": \"ConnectedValue\"}, \"keywords\": {\"tmax\": \"20.0\", \"tinit\": \"500.0\", \"ieeatm\": \"0.6\", \"ntraj\": null}, \"mol\": {\"__class__\": \"ConnectedValue\"}, \"store_extended_output\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "5.2.1+galaxy4",
+      "type": "tool",
+      "uuid": "6aa75cd8-8d14-40b1-8192-f28a6b7ea6d4",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "[.in] output",
+          "output_name": "coords1",
+          "uuid": "e6e6a07b-d478-4a87-b491-42abee9094b1"
+        },
+        {
+          "label": "[.xyz] output",
+          "output_name": "coords3",
+          "uuid": "969b3e2f-fbee-48f9-829a-c0032580e6f8"
+        },
+        {
+          "label": "[.start] output",
+          "output_name": "coords2",
+          "uuid": "dc4811ad-6cff-42cc-a2f8-52ab585f47fe"
+        }
+      ]
+    },
+    "15": {
+      "annotation": "Calculate the mass spectra for a given molecule using QCxMS. It generates .res files, which are collected and converted into MSP format in the last step",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_production_run/qcxms_production_run/5.2.1+galaxy3",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "in_file": {
+          "id": 14,
+          "output_name": "coords1"
+        },
+        "start_file": {
+          "id": 14,
+          "output_name": "coords2"
+        },
+        "xyz_file": {
+          "id": 14,
+          "output_name": "coords3"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "QCxMS production run",
+      "outputs": [
+        {
+          "name": "res_files",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 1740,
+        "top": 390
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_production_run/qcxms_production_run/5.2.1+galaxy3",
+      "tool_shed_repository": {
+        "changeset_revision": "e97bfe7ac906",
+        "name": "qcxms_production_run",
+        "owner": "recetox",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"in_file|__identifier__\": \"TMP.100_qcxms\", \"start_file\": {\"__class__\": \"ConnectedValue\"}, \"start_file|__identifier__\": \"TMP.100_qcxms\", \"store_extended_output\": false, \"xyz_file\": {\"__class__\": \"ConnectedValue\"}, \"xyz_file|__identifier__\": \"TMP.100_start\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "5.2.1+galaxy3",
+      "type": "tool",
+      "uuid": "ad8af72d-c4e6-400f-bcd4-87b5e3ed79ac",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "res output",
+          "output_name": "res_files",
+          "uuid": "fc53168a-99f8-441c-9325-2d812bf03100"
+        }
+      ]
+    },
+    "16": {
+      "annotation": "Remove failed runs",
+      "content_id": "__FILTER_FAILED_DATASETS__",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "input": {
+          "id": 15,
+          "output_name": "res_files"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Filter failed datasets",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1440,
+        "top": 680
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "__FILTER_FAILED_DATASETS__",
+      "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "900b7dd1-329e-4223-bc33-ccadde91db53",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "17": {
+      "annotation": "Produce simulated mass spectra into MSP file format.",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_getres/qcxms_getres/5.2.1+galaxy2",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "mol": {
+          "id": 12,
+          "output_name": "file_outputs"
+        },
+        "res_files": {
+          "id": 16,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "QCxMS get results",
+      "outputs": [
+        {
+          "name": "msp_output",
+          "type": "msp"
+        }
+      ],
+      "position": {
+        "left": 1740,
+        "top": 680
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/recetox/qcxms_getres/qcxms_getres/5.2.1+galaxy2",
+      "tool_shed_repository": {
+        "changeset_revision": "53dce0e49af7",
+        "name": "qcxms_getres",
+        "owner": "recetox",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"mol\": {\"__class__\": \"ConnectedValue\"}, \"mol|__identifier__\": \"molecule1\", \"res_files\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "5.2.1+galaxy2",
+      "type": "tool",
+      "uuid": "3b4e1353-4d54-4e6f-b1f2-ba8e7329b641",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "MSP output",
+          "output_name": "msp_output",
+          "uuid": "d81bf92a-604c-46b9-86a9-bf3c2281ebcb"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "Exposomics",
+    "Qcxms",
+    "Gc-ms",
+    "Metabolomics",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "9589a124-ecd8-455c-b67d-d9cc651e5f64",
+  "version": 2
+}
