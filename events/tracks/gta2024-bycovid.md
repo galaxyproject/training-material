@@ -1,8 +1,11 @@
 ---
 layout: event-track
 
-title: BY-COVID
-description: Learn all about BY-COVID. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
+title: BeYond-COVID
+description: |
+  Learn about viral pathogen data analysis with Galaxy. Content here has been developed over the course of the COVID-19 pandemic and to a large part under the umbrella of the BY-COVID project as explained in a recent [blog post](https://galaxyproject.org/news/2024-09-16-by-covid-eol/).
+
+  Work through the material at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
 
 slack_channel: gta_BY-COVID
 
@@ -22,7 +25,7 @@ contributions:
 program:
   - section: "Viral genomes sequencing data analysis " 
     description: |
-      Sequencing data analysis for a spectrum of viral genomes with Galaxy. If you encounter any issue please ask us on Slack. 
+      Here you find three hands-on tutorials demonstrating sequencing data analysis with Galaxy for three, rather different viral pathogens in increasing order of analysis complexity. Feel free to work through all three of them or just pick the one covering the virus you are most interested in, but consider watching first the introductory video, which explains some of the particularities of each virus and the corresponding analysis challenges.
     tutorials:
       - type: custom
         name: "[Sequencing spectrum viral genomes](https://gallantries.github.io/video-library/videos/virology/sequencing-spectrum-viral-genomes)"
@@ -37,12 +40,12 @@ program:
 
   - section: "SARS-CoV-2 genome surveillance system"
     description: |
-      An automated SARS-CoV-2 genome surveillance system built around Galaxy. If you encounter any issue please ask us on Slack. 
+      Learn about how to scale up your Galaxy-based viral sequencing data analysis to batches of samples and how to automate the processing of such batches for highest sample throughput. Watch the introductory video for an overview of the contents of this section and how the pieces are connected. 
     tutorials:
       - type: custom
-        name: "[An automated SARS-CoV-2 genome surveillance system built around Galaxy](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)"
+        name: "An automated SARS-CoV-2 genome surveillance system built around Galaxy"
         description: |
-          Lecture Video
+          [Lecture Video](https://gallantries.github.io/video-library/videos/one-health/galaxy-pathogen-surveillance); [Showcase page mentioned in the video](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)
       - name: sars-cov-2-variant-discovery
         topic: variant-analysis
       - name: workflow-automation
