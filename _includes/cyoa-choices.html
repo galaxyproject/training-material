@@ -1,6 +1,8 @@
 <blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa{{ include.disambiguation }}">
-	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> {{ include.title | default: "Hands-on: Choose Your Own Tutorial" }}</div>
+	{% unless include.brief %}
 	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	{% endunless %}
 	{% if include.text %}
 	<p>
 		{{ include.text }}
