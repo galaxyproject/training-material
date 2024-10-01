@@ -17,7 +17,7 @@ questions:
 objectives:
 - Identify statistically significant associations between microbial features and metadata variables (such as clinical conditions, environmental factors, or demographic information) in microbiome data.
 - Uncover potential biomarkers associated with specific disease states.
-time_estimation: 15M
+time_estimation: 45M
 contributions:
    authorship:
     - renu-pal
@@ -156,6 +156,23 @@ The **HMP2_taxonomy.tsv** file contains microbiome data (species abundances) col
 >
 {: .hands_on}
 
+Several tools available on Galaxy can generate outputs that are compatible with MaAsLin2, particularly in the context of microbiome data analysis. Following are some Galaxy tools that produce outputs that can be used as input for MaAsLin2:
+1. **QIIME2** is a popular tool for processing microbiome data, and Galaxy offers a suite of QIIME2 tools.\
+**Outputs compatible with MaAsLin2**:\
+    - Feature Table (OTU/ASV table): Generated after steps like DADA2 or Deblur, this table includes the abundance of microbial features in each sample.
+    - Taxonomy Assignment: The feature table can be combined with taxonomy information to link ASVs/OTUs to microbial taxa.
+    - Metadata Files: QIIME2 requires metadata to perform analyses, and the same metadata file can be formatted and used in MaAsLin2.
+    
+2. **Mothur** is another widely used microbiome data analysis tool available in Galaxy, and it can be used to produce inputs for MaAsLin2.\
+**Outputs compatible with MaAsLin2**:
+    - Shared File (OTU Table): Mothur generates a "shared" file that contains the abundance of OTUs across samples, which can be reformatted and used as input to MaAsLin2.
+    - Taxonomy File: Mothur also outputs taxonomy assignments for OTUs, which can be paired with the shared file.
+    - Metadata File: As in QIIME2, metadata is used during the Mothur workflow and can be reused in MaAsLin2.
+3. **MetaPhlAn (Metagenomic Phylogenetic Analysis)** is a tool that provides taxonomic profiling of microbial communities from metagenomic sequencing data. It is available in Galaxy and can generate outputs that are directly compatible with MaAsLin2.\
+**Outputs compatible with MaAsLin2**:
+    - Taxonomic Profiles: MetaPhlAn generates taxonomic abundance tables (e.g., relative abundance of microbial taxa at various taxonomic levels) that can be directly used as the feature table for MaAsLin2.
+    - Metadata File: As with other tools, the sample metadata used in MetaPhlAn analysis can also be reused in MaAsLin2.
+
 
 # Find associations between the two files
 Now we will find significant associations between microbial features( taxonomy file) and metadata variables (metadata file) using the **MaAslin2** tool
@@ -181,7 +198,7 @@ Let's now understand the role of each parameter in the tool.
 4. **Reference**: It allows researchers to establish a baseline or standard category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. 
 
    > <comment-title></comment-title>
-   > - In MaAslin2, the reference level is must for variables with more than two distinct kinds of values.
+   > - In MaAslin2, the reference level is required for variables with more than two levels to avoid errors. 
    > - Reference for a variable with more than two levels is provided as a string of `variable, reference`.
    > - Reference for more than one variable having more than two levels each is provided as a string of `variable1,reference1,variable2,reference2`.
    > - Example, both diagnosis and site variable have more than two levels hence reference can be provided as `diagnosis, CD, site, Cedars-Sinai`.
@@ -235,7 +252,7 @@ Next, it applies the arcsine function (the inverse of the sine function) to the 
 Used when you are working with proportion data, such as relative abundances in microbiome studies, where the values are bounded between 0 and 1. 
                                  
 9. **analysis_method** [ Default: "LM" ] [ Options: "LM", "CPLM", "ZICP", "NEGBIN", "ZINB" ]
-- The analysis method to apply.\
+- The analysis method to apply.
 - Options: \
         1. <u>Linear Model (LM)</u>: Determines how changes in metadata are associated with changes in the taxonomy data. 
         2. <u>Compositional Proportional Linear Model (CPLM)</u>: used for analyzing compositional data, where the taxa abundances are proportions or percentages that sum to 1.
@@ -253,8 +270,9 @@ Used when you are working with proportion data, such as relative abundances in m
       3. <u> Bonferroni correction</u>: Divides the significance threshold (alpha level) by the number of tests performed and then compares each p-value to this adjusted significance level to determine if it is statistically significant. 
       4. <u>Hochberg </u>:  It is similar to the Bonferroni correction but is often more powerful, meaning it has better statistical power to detect true effects while controlling for false positives.
       5. <u>Hommel</u>: controls the Family-Wise Error Rate (FWER) by adjusting p-values in a step-down fashion, starting from the smallest p-value and progressively increasing the threshold. It is more powerful than Bonferroni while maintaining strict error control.
-      6. <u>Holm</u>:  controls the Family-Wise Error Rate (FWER) by sequentially adjusting p-values from smallest to largest, comparing ch step. This stepwise approach is less conservative than the Bonferroni correction, offering greater statistical power.\
-**FWER** is the probability of finding at least one false positive among all the tests performed, assuming all null hypotheses are true.
+      6. <u>Holm</u>:  controls the Family-Wise Error Rate (FWER) by sequentially adjusting p-values from smallest to largest, and then comparing them to adjusted critical value, given by $$ \frac{α}{m−i+1} $$​, where α is the significance level (e.g., 0.05), m is the total number of hypothesis, and i is the rank of the p-value in the ordered list.\
+The corresponding null hypothesis is rejected for p-values less than the adjusted critical value and the process stops as soon as p-values equals or exceeds the corresponding critical value. This stepwise approach is less conservative than the Bonferroni correction, offering greater statistical power.\
+**FWER** is the probability of finding at least one false positive among all the tests performed, assuming all null hypotheses are true.\
 **FWER Control** is used to minimize the risk of incorrectly claiming significant results when there are none, thus maintaining the overall reliability of the results.\
 For more information on correction methods, [click here](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/p.adjust).
 
@@ -264,12 +282,48 @@ For more information on correction methods, [click here](https://www.rdocumentat
 14.  **plot_scatter**: Generate scatter plots for the significant associations [ Default: TRUE ]
 15.   **cores**: The number of R processes to run in parallel [ Default: 1 ]
 
+# Model types in MaAslin2
+MaAsLin2 uses linear models by default, but the statistical model and transformation applied depend on the data type and the configuration of parameters:
+1. **Linear Model (default)**:\
+This is the default modeling approach. A linear model is used when the relationships between the metadata and the taxa abundance are assumed to be linear.\
+- **Example:**\
+Modeling the association between age and the abundance of a specific bacterial taxon, assuming that the abundance changes linearly with age.
+- **When to Use:**
+When the data is continuous and the relationships are likely to be linear.
+
+2. **Mixed-Effects Model:**\
+MaAsLin2 supports mixed-effects models, which can account for **random effects**.\
+- Fixed effects are the primary variables of interest (e.g., age, disease state).
+- Random effects account for variables with inherent grouping structures (e.g., multiple samples from the same patient, geographic region, or experimental batch). To use mixed-effects modeling, specify the random_effects parameter to define variables with random effects. This is important when you expect that variability between subjects is different from the variability within subjects.
+- **Characteristics**:\
+Accounts for both within-group and between-group variability.
+Particularly useful for longitudinal or repeated-measures data where multiple observations are taken from the same subject over time.
+- **Example**:\
+Modeling the association between microbial abundance and disease state, while accounting for multiple samples taken from the same patient as a random effect.
+- **When to Use:**\
+When the data has a hierarchical or grouped structure, and you need to account for subject-specific variability (e.g., repeated measures within patients).
+
+
+3. **Generalized Linear Models (GLMs):**\
+For non-normal distributions of microbiome abundance data, MaAsLin2 supports generalized linear models. For example, logit models or Poisson models can be used depending on the response variable distribution.
+- **GLM Variants in MaAsLin2:**\
+    **Binomial**: For binary outcome data (e.g., presence/absence of a microbe).\
+    **Poisson**: For count data (e.g., counts of a microbe in samples).
+- **Example**:\
+Modeling the presence/absence of a microbe (binary outcome) with predictors like treatment group or environmental exposure using a binomial GLM.
+- **When to Use**:\
+When the response variable is not continuous, such as in the case of binary data (0 or 1) or counts of microbial taxa.
 
 # Reading Output Files
 The tool generates the following five major files:
 - **Data output files**
     1. `residuals.rds`
-            This file contains a data frame with residuals for each feature.
+             Residual output in Maaslin2 refers to the values that remain after fitting a model to the data. It represents the variation in the microbiome data of feature file that cannot be explained by the metadata (predictors like diet, age, or treatment conditions) in metadata file.\
+    **<u>Why is Residual Output Important?</u>**\
+    **Finding Other Influences** : Looking at the residuals can help us spot other factors that might affect the microbiome that we didn’t include in our model.\
+    **Checking Model Fit**: By examining the residuals, we can see if our model is working well. If the residuals show a pattern, it means our model might need some adjustments.\
+    **Exploring Further**: We can analyze these residuals to find new connections or patterns that we might want to study further.
+                
     2. `significant_results.tsv`
             Provides the most important output from MaAsLin2 which is the list of significant associations.
     3.  `all_results.tsv`
@@ -281,33 +335,99 @@ The tool generates the following five major files:
         ![heatmap](../../images/heatmap_maaslin2.png "heatmap of significant associations")
 
     5.  `plots :`
-        A plot is generated for each significant association.
-        Scatter plots are used for continuous metadata.
-        Box plots are for categorical data.
-        Data points plotted are after normalization, filtering, and transformation.
+        A plot is generated for each significant association.\
+        Scatter plots are used for continuous metadata.\
+        Box plots are for categorical data.\
+        Data points plotted are after normalization, filtering, and transformation.\
+        For example, observe the output file diagnosis_3.png located in the 'Plots' directory:  
+        
+        ![Plot1](../../images/Plot-alistipes.shahii-VS-diagnosis-Maaslin2.png "Plot: Alistipes.shahii VS diagnosis ")
+        
+The above plot displays the relative abundance of the microbial species **Alistipes shahii** across different **diagnosis** groups: CD (Crohn's Disease), nonIBD (non-Inflammatory Bowel Disease), and UC (Ulcerative Colitis).\
+**Key Components of the Plot:**
+- **<u>X-axis (Diagnosis)</u>**:\
+        Represents the three diagnostic categories:\
+            - CD: Crohn’s Disease (n = 474 samples)\
+            - nonIBD: Individuals without Inflammatory Bowel Disease (n = 277 samples)\
+            - UC: Ulcerative Colitis (n = 257 samples)
+            
+- **<u>Y-axis (Alistipes shahii)</u>**:\
+        Shows the relative abundance of Alistipes shahii in the samples from each diagnostic group.\
+        The scale goes from 0.00 to 0.06, indicating that most of the abundance values are relatively low.
 
-   > <question-title></question-title>
+- **<u>Boxplots and Scatter Points</u>**:\
+        Each boxplot represents the distribution of Alistipes shahii abundance within each diagnosis group.\
+        The box shows the interquartile range (IQR), with the horizontal line inside the box representing the median abundance value for each group.
+        Whiskers extend to 1.5 times the IQR, showing the spread of the data.\
+        The individual points represent the relative abundance of Alistipes shahii for each sample, giving a more granular view of the data distribution.
+
+- **<u>FDR (False Discovery Rate): 7.642e-02 (or 0.076)</u>**\
+This value indicates the statistical significance of the association between diagnosis and the abundance of Alistipes shahii after adjusting for multiple testing.
+
+- **<u>Coefficient: 4.57e+00 (~4.57)</u>**\
+This is the effect size representing how strongly the abundance of Alistipes shahii differs across the diagnostic categories. The positive coefficient here is associated with the nonIBD group (as indicated by the "Value: nonIBD" label), meaning this group tends to have higher relative abundances compared to the other groups.
+
+- **<u>Diagnosis Groups</u>:**\
+<u>CD (Crohn's Disease)</u>: The boxplot shows a very low abundance of Alistipes shahii in most samples, with the median near zero and very few outliers showing higher values.\
+<u>nonIBD (non-IBD individuals)</u>: This group shows a wider distribution, with a higher median and more spread in the abundance of Alistipes shahii. Some samples have noticeably higher abundance compared to the disease groups.\
+<u>UC (Ulcerative Colitis)</u>: Similar to CD, the UC group shows low median abundance with some variation, but overall the values are lower compared to the nonIBD group.
+
+- **<u>Conclusion:</u>**
+    This plot suggests that Alistipes shahii is more abundant in healthy individuals (nonIBD) compared to those with IBD (CD and UC).
+     
+    > <question-title></question-title>
     >
     > 1. Open the heatmap.pdf output file and observe the heatmap. What do you notice?
     > 2. What do you observe in the significant.tsv file?
-    >
+    > 3. What does residuals.rds output convey?
+    > 4. Try explaining the following plot.
+    > ![Plot1](../../images/Plot-Faecalibacterium prausnitzii-VS-age-Maaslin2.png "Plot: Faecalibacterium prausnitzii VS age ")
+    > >
     > > <solution-title></solution-title>
     > > 1. You will observe the association of the microbes with the fixed effects variables as `age` and `diagnosis`.
     > > - Observe how setting the reference value as `CD` for the categorical variable `diagnosis` in MaAsLin2 implies that this reference level will be used as the baseline for comparison against other levels of the variable, i.e, `nonIBD` and `UC`.
     > > - The effects of other levels will be interpreted relative to this reference level, helping to understand their impact on microbial features.
     > > - The **colors** of the heatmap represent the magnitude and direction of associations between microbial features and metadata variables.
     >       > - **Color Intensity**: The intensity of the color indicates the strength of the association. Darker or more vivid colors usually represent stronger associations.
-    >       > - **Color Hue**: The hue (e.g., red, blue) typically indicates the direction of the association. For instance, red represents positive associations (where an increase in the metadata variable is associated with an increase in the microbial feature) and another color blue represents negative associations (where an increase in the metadata variable is associated with a decrease in the microbial feature).\
+    >       > - **Color Hue**: The hue (e.g., red, blue) typically indicates the direction of the association. For instance, red represents positive associations (where an increase in the metadata variable is associated with an increase in the microbial feature) and another color blue represents negative associations (where an increase in the metadata variable is associated with a decrease in the microbial feature).
     >       >
     >       > For example, if you look for `Bifidobacterium longum` in the heatmap, you'll notice that its occurrence in the human gut is least affected by the individual's age and shows a neutral effect in relation to their diagnosis of UC (Ulcerative Colitis) and non-IBD (non-Inflammatory Bowel Disease).
-    > > 2. The significant.tsv file shows statistically significant associations between microbial features and metadata variables that meet a specified threshold (in our case, the default `Maximum significance = 0.25`). It includes effect sizes, p-values, and adjusted p-values (q-values) to indicate the strength, direction, and reliability of each association. This file helps identify meaningful relationships in the microbiome data.
+    > > 2. The **significant.tsv** file shows statistically significant associations between microbial features and metadata variables that meet a specified threshold (in our case, the default `Maximum significance = 0.25`). It includes effect sizes, p-values, and adjusted p-values (q-values) to indicate the strength, direction, and reliability of each association. This file helps identify meaningful relationships in the microbiome data.
+    > > 3. To read and interpret the **residual.rds** file from Maaslin2, first load the file into R using the **readRDS()** function, which will typically return a matrix or data frame. 
+    > > - The rows of this matrix represent different features, such as taxa or other variables in your microbiome dataset.
+    > > - The columns correspond to individual samples, identified by unique sample IDs (e.g., MSM9VZHN), which are used to match each sample to its metadata (e.g., patient, treatment, or environmental condition).
+    > > - The values in the matrix are the residuals, which show the difference between the observed microbiome abundance and the values predicted by the model for each sample and feature.
+    > > - Positive residuals indicate that the observed value is higher than the model’s prediction, while negative residuals indicate lower observed values. For example, a residual of 0.12 indicates that the observed value was slightly higher than predicted, -0.15 shows it was lower, and 0.02 suggests the observed and predicted values are nearly identical.
+    > > - Maaslin2 applies statistical thresholds (such as q-value for multiple testing correction or p-value) to filter results. If a taxon’s abundance is well predicted by the metadata, it may not meet the criteria for inclusion in the residual output. Essentially, only taxa with residuals large enough to be considered meaningful might be included. Interpreting these residuals allows you to assess how well the model has captured the variability in your data and explore any patterns or deviations not explained by the model's predictors.
+    > > 4. The mentioned plot shows the relationship between **age** (on the x-axis) and the relative abundance of the bacterial species
+    **Faecalibacterium prausnitzii** (on the y-axis).\
+    > > **Key Components:**
+    >   > - **<u>Y-axis (Faecalibacterium prausnitzii)</u>:**\
+    >   > Represents the relative abundance of the species Faecalibacterium prausnitzii across samples.\
+    >   > The range goes from 0 to approximately 0.6, indicating that the abundance values vary, but most are below 0.4.
+    >   > - **<u>X-axis (Age)</u>:**\
+    >   > Represents the age of the individuals from whom the samples were taken. The ages range from about 10 to 70.
+    >   > - **<u>Scatter Points</u>:**\
+    >   > Each green dot represents a single sample, showing the relative abundance of Faecalibacterium prausnitzii for that specific individual's age.\
+    >   > There is considerable variability, with some individuals showing relatively high abundance, while others have low values.
+    >   > - **Trend Line (Blue Line):**\
+    >   > A blue trend line indicates the overall relationship between age and the abundance of Faecalibacterium prausnitzii.\
+    >   > The line shows a slight downward slope, suggesting a negative correlation between age and the abundance of this species. As age increases, the relative abundance of Faecalibacterium prausnitzii tends to decrease slightly.
+    >   > - **FDR (False Discovery Rate): 6.144e-02 (or ~0.061)**\
+    >   > This FDR value (0.061) is slightly above the commonly accepted threshold of 0.05, indicating that the observed association between age and Faecalibacterium prausnitzii is not statistically significant after correcting for multiple comparisons.
+    >   > - **Coefficient: -1.20e+00 (~-1.20)**\
+    >   > The coefficient indicates the effect size of age on the abundance of Faecalibacterium prausnitzii. A negative coefficient (-1.20) implies that as age increases, the abundance of this species tends to decrease.
+    >   > - **N = 1008:**\
+    >   > The number of samples analyzed is 1008, providing a large dataset to examine the relationship.
+    >   > - **Conclusion:**\
+    >   > Faecalibacterium prausnitzii tends to decrease in abundance with age.
     > {: .solution }
     {: .question}
 
 
 # Studies involving MaAslin2 tool for analysis
 
-- [**Integrating Dietary Data into Microbiome Studies: A Step Forward for Nutri-Metaomics**](https://d1wqtxts1xzle7.cloudfront.net/86457398/pdf-libre.pdf?1653486881=&response-content-disposition=inline%3B+filename%3DIntegrating_Dietary_Data_into_Microbiome.pdf&Expires=1724359088&Signature=gX3tWDORon-KCwFoaPZjJSGjlE6zE5QsQLrEPsB5exvs75mlu5Tk0P9T4lMmXO4Yb-8oVApN9SpM3zLLvchssL99Ps4I5wPri-YN-zwen8tcotQa10KYClxmaELe5VeR3qa-d3WIgu3leoM6rlkjk32eO9sjK3uo6enF~MnxB5yKnfvj2onoou~CrbxA~f712ik~c-E6Q3g6~yhtIqawFElMRhMZvUVMiTRnyeA4U8qI8tRpoT05Ng-plQDkcWOV33pUB8jiqM4I1Qkfltz4TBMfd2APn5X3UtSXvZtU3OVv6eGWWfbU6W1TZ2NU2VCnfg5EBt1iI6yNYEOo84iW4g__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) : \
+- [**Instegrating Dietary Data into Microbiome Studies: A Step Forward for Nutri-Metaomics**](https://d1wqtxts1xzle7.cloudfront.net/86457398/pdf-libre.pdf?1653486881=&response-content-disposition=inline%3B+filename%3DIntegrating_Dietary_Data_into_Microbiome.pdf&Expires=1724359088&Signature=gX3tWDORon-KCwFoaPZjJSGjlE6zE5QsQLrEPsB5exvs75mlu5Tk0P9T4lMmXO4Yb-8oVApN9SpM3zLLvchssL99Ps4I5wPri-YN-zwen8tcotQa10KYClxmaELe5VeR3qa-d3WIgu3leoM6rlkjk32eO9sjK3uo6enF~MnxB5yKnfvj2onoou~CrbxA~f712ik~c-E6Q3g6~yhtIqawFElMRhMZvUVMiTRnyeA4U8qI8tRpoT05Ng-plQDkcWOV33pUB8jiqM4I1Qkfltz4TBMfd2APn5X3UtSXvZtU3OVv6eGWWfbU6W1TZ2NU2VCnfg5EBt1iI6yNYEOo84iW4g__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) : \
 The study explores the enhancement of microbiome research through the incorporation of dietary data. The research emphasizes that integrating detailed dietary information with microbiome analyses provides a more comprehensive understanding of how diet influences gut microbiota composition and function. By applying advanced techniques in nutri-metaomics, the study aims to link specific dietary patterns with microbial changes, revealing insights into the interactions between diet, the microbiome, and health outcomes. This approach improves the ability to identify diet-related biomarkers and tailor personalized nutrition interventions based on microbial profiles.\
 MaAsLin2 was used to assess how specific dietary patterns influence the abundance and diversity of gut microbiota by integrating detailed dietary data with microbiome profiles. \
 MaAsLin2 was set up with the following parameters: \
@@ -345,4 +465,15 @@ as antibiotic use and other exposures. Key parameters included CLR normalization
 
 In essence, uncovering associations between microbial features and metadata variables through tools like MaAsLin2 not only deepens our understanding of microbiome dynamics but also holds promise for clinical applications, personalized health strategies, and advancing the field of microbiome research.
 
-Hurray! You have successfully completed the tutorial. Now try to run the tool with some other parameter values and have fun :)
+The results obtained from MaAslin2 can further be visualized using tools like **phyloseq** and **ampvis2**.\
+Tools like phyloseq and ampvis2 require that you prepare your data (OTU/ASV table, metadata) in a structured format before visualizing.\
+Once the data is prepared, you can use phyloseq to create a range of plots, such as:
+
+**Barplots**: Show the relative abundance of significant taxa across different metadata groups (e.g., diagnosis).\
+**Ordination plots**: Show how samples cluster based on beta diversity, focusing on the significant taxa identified.\
+**Heatmaps**: Show the abundance of significant taxa across samples, grouped by metadata variables.
+
+Similary, ampvis2 is another user-friendly visualization tool for microbial data among various other available tools, which allows for easy heatmaps and ordination plots.
+
+
+Hurray! You have successfully completed the tutorial. Now try running the tool with other input files from other galaxy tools and different parameter values and have fun :)
