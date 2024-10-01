@@ -1,38 +1,49 @@
 ---
 layout: tutorial_hands_on
-
-title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+title: Mutation calling, viral genome reconstruction and lineage/clade assignment
+  from SARS-CoV-2 sequencing data
 subtopic: one-health
 level: Intermediate
 questions:
-- How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?
-- How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?
-- What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?
-- How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?
+- How can a complete analysis, including viral consensus sequence reconstruction and
+  lineage assignment be performed?
+- How can such an analysis be kept manageable for lots of samples, yet flexible enough
+  to handle different types of input data?
+- What are key results beyond consensus genomes and lineage assignments that need
+  to be understood to avoid inappropriate conclusions about samples?
+- How can the needs for high-throughput data analysis in an ongoing infectious disease
+  outbreak/pandemic and the need for proper quality control and data inspection be
+  balanced?
 objectives:
-- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries
-- Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms
-- Run a workflow to summarize and visualize the mutation discovery results for a batch of samples
+- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis
+  through public workflow registries
+- Choose and run a workflow to discover mutations in a batch of viral samples from
+  sequencing data obtained through a range of different protocols and platforms
+- Run a workflow to summarize and visualize the mutation discovery results for a batch
+  of samples
 - Run a workflow to construct viral consensus sequences for the samples in a batch
-- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages
-- Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data
+- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade
+  to assign samples to predefined lineages
+- Combine information from different analysis steps to be able to draw appropriate
+  conclusions about individual samples and batches of viral data
 time_estimation: 3H
 key_points:
-- The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.
-- The workflows enable processing of whole batches of samples with rather limited user interaction.
-- They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail.
-
+- The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2
+  genome surveillance, which is freely available through public workflow registries.
+- The workflows enable processing of whole batches of samples with rather limited
+  user interaction.
+- They provide a high-throughput and flexible analysis solution without compromising
+  on accuracy, nor on the possibility to explore intermediate steps and outputs in
+  detail.
 requirements:
-  -
-    type: "internal"
-    topic_name: galaxy-interface
-    tutorials:
-      - collections
-  -
-    type: "internal"
-    topic_name: variant-analysis
-    tutorials:
-      - sars-cov-2
+- type: internal
+  topic_name: galaxy-interface
+  tutorials:
+  - collections
+- type: internal
+  topic_name: variant-analysis
+  tutorials:
+  - sars-cov-2
 contributions:
   authorship:
   - wm75
@@ -44,7 +55,6 @@ tags:
 - covid19
 - virology
 - one-health
-
 recordings:
 - youtube_id: hjlmCWQhBvI
   date: '2023-05-10'
@@ -60,8 +70,19 @@ recordings:
   youtube_id: vnFQ2fR_fzw
   speakers:
   - wm75
+- youtube_id: -HQB1zyWWXM
+  length: 55M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-27'
+  speakers:
+  - wm75
+  captioners:
+  - wm75
+  bot-timestamp: 1727459029
+
 
 ---
+
 
 
 Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
