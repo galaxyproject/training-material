@@ -10,7 +10,7 @@ cover-image-alt: logo for the Galaxy Academy event consisting of a laptop surrou
 
 registration:
   link: https://forms.gle/cxzVatt7MAgiMX12A
-  deadline: 2024-09-30
+  deadline: 2024-10-04
   open: true
 
 date_start: 2024-10-07
@@ -179,10 +179,15 @@ program:
         topic: fair
 ---
 # Welcome to the Galaxy Training Academy
-Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a 5-day Global Online and Asynchronous learning event.
+Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a **5-day Global Online and Asynchronous learning event**.
+
+We provide you with training materials which you can study at your own pace and on your own time throughout the week. Don't worry, asynchronous does not mean that you are alone! If you ever need help, you can contact one of our many trainers worldwide via **Slack chat** .
+
 
 On the first day you can make yourself familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton.
 
 You can set your own pace on your learning journey using our provided self-learning materials. Next to the program, you will find Slack channels you can join to exchange with the trainers and other participants during the event. Here you will also find help if you have qustions or run into an issue during the training. We try to cover all time zones with helpers for each topic, but please be patient if you do not get an immediat response.
 
 You only need a browser and an account on one of the galaxy instances registered for this event. Please have a look at the setup tab.
+
+**Certificates:** You can earn a certificate for the tracks you attended by answering a short questionnaire to verify your participation.

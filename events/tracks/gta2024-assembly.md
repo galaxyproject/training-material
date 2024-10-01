@@ -28,6 +28,10 @@ program:
     tutorials:
       - name: get-started-genome-assembly
         topic: assembly
+      - type: custom
+        name: "[Introduction To Genome Assembly](https://docs.google.com/presentation/d/1TPr6yKrnNj4cUb5We-E7SXAL_1h2Cqogq0tDTkgETgQ/edit?usp=sharing)"
+        description: |
+          [Lecture Slides](https://docs.google.com/presentation/d/1TPr6yKrnNj4cUb5We-E7SXAL_1h2Cqogq0tDTkgETgQ/edit?usp=sharing); [Lecture Video](https://youtu.be/9WZe7VGtr-k)
       - name: ERGA-post-assembly-QC
         topic: assembly
 
