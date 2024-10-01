@@ -45,7 +45,7 @@ program:
       - type: custom
         name: "An automated SARS-CoV-2 genome surveillance system built around Galaxy"
         description: |
-
+          [Lecture Video](https://gallantries.github.io/video-library/videos/one-health/galaxy-pathogen-surveillance); [Showcase page mentioned in the video](https://www.infectious-diseases-toolkit.org/showcase/covid19-galaxy)
       - name: sars-cov-2-variant-discovery
         topic: variant-analysis
       - name: workflow-automation
