@@ -181,7 +181,7 @@ program:
 # Welcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a **5-day Global Online and Asynchronous learning event**.
 
-We provide you with training materials which you can study at your own pace and on your own time throughout the week. Don't worry, asynchronous does not mean that you are alone! If you ever need help, you can contact one of our many trainers worldwide via **Slack**.
+We provide you with training materials which you can study at your own pace and on your own time throughout the week. Don't worry, asynchronous does not mean that you are alone! If you ever need help, you can contact one of our many trainers worldwide via **Slack chat** .
 
 
 On the first day you can make yourself familiar with the Galaxy platform. In the next days you can follow different tracks, please go to the program tab for more informaiton.
