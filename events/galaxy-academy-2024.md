@@ -190,4 +190,4 @@ You can set your own pace on your learning journey using our provided self-learn
 
 You only need a browser and an account on one of the galaxy instances registered for this event. Please have a look at the setup tab.
 
-**Certificats:** You can earn a certificate for the tracks you attended by answering a short questionnaire to verify your participation.
+**Certificates:** You can earn a certificate for the tracks you attended by answering a short questionnaire to verify your participation.
