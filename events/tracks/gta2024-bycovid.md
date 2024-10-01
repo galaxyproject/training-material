@@ -2,9 +2,10 @@
 layout: event-track
 
 title: BeYond-COVID
-description: Learn about viral pathogen data analysis with Galaxy. Content here has been developed over the course of the COVID-19 pandemic and to a large part under the umbrella of the BY-COVID project as explained in a recent [blog post](https://galaxyproject.org/news/2024-09-16-by-covid-eol/).
+description: |
+  Learn about viral pathogen data analysis with Galaxy. Content here has been developed over the course of the COVID-19 pandemic and to a large part under the umbrella of the BY-COVID project as explained in a recent [blog post](https://galaxyproject.org/news/2024-09-16-by-covid-eol/).
 
-Work through the material at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
+  Work through the material at your own pace. If you need support contact us via the Slack Channel [#gta_BY-COVID](https://gtnsmrgsbord.slack.com/archives/C07NGS6BSLA).
 
 slack_channel: gta_BY-COVID
 
