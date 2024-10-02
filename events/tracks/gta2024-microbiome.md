@@ -39,10 +39,6 @@ program:
     tutorials:
       - name: dada-16S
         topic: microbiome
-      - type: custom
-        name: "MGnify amplicon workflow"
-        description: |
-          Tutorial (will come soon)
   
   - section: "Metagenomics" 
     description: |
