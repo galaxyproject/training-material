@@ -59,6 +59,7 @@ recordings:
   galaxy_version: 24.1.2.dev0
   date: '2024-09-30'
   speakers: 
+  - dianichj
   captioners: 
   bot-timestamp: 1727710795
 
