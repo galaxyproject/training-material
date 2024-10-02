@@ -15,10 +15,12 @@ layout: base
       <h1>{{ event.title }}</h1>
       <p>
         {% if event.async %}Asynchronous, {% endif %}
-        {% if event.location.name == "Online" %}
+        {% if event.mode == "online" %}
         Virtual course
-        {% else %}
+        {% elsif event.mode == "onsite" %}
         In-person course
+        {% else %}
+        Hybrid course
         {% endif %}
       </p>
     </hgroup>
@@ -125,20 +127,37 @@ layout: base
 
 
     {% for section in event.program %}
-        {% if section.subsection %}
+      {% if section.subsection %}
         <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
-        {% elsif section.section != nil %}
+      {% elsif section.section != nil %}
         <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
-        {% endif %}
-        <p>{{ section.description | markdownify }}</p>
+      {% endif %}
+      <p>{{ section.description | markdownify }}</p>
 
-	{% if section.tutorials %}
+      {% if section.tracks %}
+        {% assign buttoncol = "crimson, orangered, darkorange, green, mediumblue, darkmagenta" | split: "," %}
+        {% for track in section.tracks %}
+          {% assign i = forloop.index | minus: 1 | modulo: 6 %}
+          {% if track.link  contains 'https://' or track.link contains 'http://' %}
+             {% assign tracklink = track.link %}
+          {% else %}
+             {% assign tracklink = site.pages | where:"path", track.link  | first %}
+             {% assign tracklink = tracklink.url | relative_url | default: '#' %}
+          {% endif %}
+
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: {{buttoncol[i]}}; color: white" href="{{ tracklink }}" ><span style="width: 100%">{{ track.title }}</span></a>
+        {% endfor %}
+      {% endif %}
+
+	  {% if section.tutorials %}
         {% assign hidetimes= section.async | default: page.async %}
         {% assign material_list = site | convert_to_material_list: section.tutorials %}
-	{% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
-	{% endif %}
-    {% endfor %}
-    {% endif %}
+	    {% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
+	  {% endif %}
+
+    {% endfor %} <!-- for each section -->
+  {% endif %} <!-- if event not external -->
+
   </div><!-- end programme tab -->
 
 
@@ -233,7 +252,7 @@ layout: base
 
             <ol>
               <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite_link }}">Invite Link</a></li>
-              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "#general"}}</a></li>
+              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "general"}}</a></li>
               <li>Introduce yourself here!</li>
             </ol>
 
@@ -402,13 +421,19 @@ subsites: [all]
 		  {% assign passed = deadline | is_date_passed %}
           {% if passed %}
           <span class="btn btn-primary btn-lg btn-block disabled">Registration is closed</span>
+          {% elsif event.registration.open == false %}
+          <a href="#" class="btn btn-primary btn-lg btn-block">Registration opens soon!</a>
           {% else %}
-		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now</a>
+		  <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now!</a>
+            {% if event.registration.deadline %}
+            <p style="margin-top:1em"><b>Deadline:</b> {{event.registration.deadline | date: "%-d %B %Y" }}</p>
+            {% endif %}
           {% endif %}
 		{% endif %}
         {% endunless %}
 		<hr/>
 
+		<b> Event details </b>
 		<table>
 			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
 			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% else %}Please set a location{% endif %}</td></tr>
@@ -463,25 +488,31 @@ subsites: [all]
     }
 
     onDocumentReady(function () {
+        $('#myTab button').click(function(e) {
+          console.log("bla");
+          e.preventDefault();
+          $(this).tab('show');
+        });
 
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > button").on("click", function(e) {
+            var id = $(e.target).attr('data-target').substr(1);
+            window.history.replaceState(null, null, '#'+id);
+        });
 
-$('#myTab button').click(function(e) {
-  console.log("bla");
-  e.preventDefault();
-  $(this).tab('show');
-});
-
-// store the currently selected tab in the hash value
-$("ul.nav-tabs > li > button").on("shown.bs.tab", function(e) {
-  var id = $(e.target).attr('data-target').substr(1);
-	window.history.replaceState(null, null, '#'+id);
-});
-
-// on load of the page: switch to the currently selected tab
-var hash = window.location.hash;
-$('#myTab button[data-target="' + hash + '"]').tab('show');
-
-});
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        if (hash){
+        	var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        	if (potential_tab.length != 0) {
+            	potential_tab.tab('show');
+        	} else {
+            	var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            	$('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            	$(hash).get(0).scrollIntoView();
+        	}
+        }
+    });
 })(window, document);
 
 

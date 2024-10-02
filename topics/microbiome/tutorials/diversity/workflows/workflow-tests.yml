@@ -1,0 +1,19 @@
+- doc: Test diversity
+  job:
+    input:
+      class: Collection
+      collection_type: list
+      elements:
+      - class: File
+        identifier: JC1A
+        location: https://zenodo.org/records/13150694/files/JC1A_Estimate_Abundance_at_Species_Level.tsv
+        filetype: tabular
+      - class: File
+        identifier: JP4D
+        location: https://zenodo.org/records/13150694/files/JP4D_Estimate_Abundance_at_Species_Level.tsv
+        filetype: tabular
+  outputs:
+    alpha-div-shannon:
+      asserts:
+        has_text:
+          text: "Shannon's diversity"

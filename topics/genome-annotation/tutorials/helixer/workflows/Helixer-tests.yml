@@ -1,0 +1,34 @@
+- doc: Test outline for Helixer
+  job:
+    Genome:
+      class: File
+      filetype: fasta
+      path: 'test-data/sequence.fasta'
+
+  outputs:
+    Helixer:
+      asserts:
+        has_text:
+          text: '##gff-version 3'
+    compleasm full table:
+      asserts:
+        has_text:
+          text: '10251at4827'
+    compleasm full table busco:
+      asserts:
+        has_text:
+          text: '10251at4827'
+    compleasm miniprot:
+      asserts:
+        has_text:
+          text: '10011at4827'
+    compleasm translated protein:
+      asserts:
+        has_text:
+          text: 'CCTCCCTCCCTCCCTCLINRLYRERLFFLGQEVDTEISNQLISLMIYLSIEKDTKDLYLFINSPGGWVISGMAIYDTMQFVRPDVQTICMGLAASIASFILVGGAITKRIAFPHAWVMIHQPASSFYEAQTGEFILEAEELLKLRETITRVYVQRTGKPIWVVSEDMERDVFMSATEAQAHGIVDLVACCTCCCTCC'
+
+    BUSCO sum:
+      asserts:
+        has_text:
+          text: '2449'
+          text: '5.5.0'

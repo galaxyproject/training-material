@@ -17,6 +17,19 @@ time_estimation: 2H
 key_points:
 - Trajectory analysis is less robust than pure plotting methods, as such 'inferred relationships' are a bigger mathematical leap
 - As always with single-cell analysis, you must know enough biology to deduce if your analysis is reasonable, before exploring or deducing novel insight
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/published/history?id=42cfa5176a883f43
+
+answer_histories:
+  - label: "Figures exported from the notebook to Galaxy history (UseGalaxy.eu)"
+    history: https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key
+    date: 2024-09-08
+  - label: "Backup Jupyter Notebook for Google Colab"
+    history: https://colab.research.google.com/drive/1-ENlIXM7TAoDGsMam7RyJIusIaBfF9e4?usp=sharing
+    date: 2024-09-10
+    
 requirements:
 -
     type: "internal"
@@ -62,7 +75,7 @@ recordings:
 
 # Run the tutorial!
 
-From now on, you can view this tutorial in the Jupyter notebook, which will allow you to read the material and simultaneously execute the code cells! You may have to change certain numbers in the code blocks, so do read carefully. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
+From now on, you can view this tutorial in the Jupyter notebook, which will allow you to read the material and simultaneously execute the code cells! You may have to change certain numbers in the code blocks, so do read carefully. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy.readthedocs.io/en/stable/tutorials/trajectories/paga-paul15.html).
 
 {% snippet topics/single-cell/faqs/notebook_warning.md %}
 
@@ -72,22 +85,22 @@ From now on, you can view this tutorial in the Jupyter notebook, which will allo
 pip install scanpy
 ```
 ```python
-pip install fa2
-```
-```python
 pip install igraph
 ```
 ```python
 pip install louvain
 ```
 ```python
-
+pip install fa2-modified
+```
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pl
 from matplotlib import rcParams
 import scanpy as sc
 ```
+
 
 ## Import dataset
 
@@ -102,6 +115,18 @@ You now you need to read it in as an h5ad object.
 ```python
 adata = sc.read_h5ad(thymusobject)
 ```
+
+> <details-title>Any problems with *get()* function?</details-title>
+> There shouldn't be any issues with fetching data from your Galaxy history using *get()* function. However, if you experience any problems, you can use the code below to download the input data and be able to follow the tutorial. 
+> ```python
+> %%bash
+> wget -nv https://zenodo.org/records/13743145/files/Filtered_anndata.h5ad
+> ```
+> ```python
+> adata = sc.read_h5ad("Filtered_anndata.h5ad")
+> ```
+{: .details}
+
 
 ## Draw force-directed graph
 
@@ -153,12 +178,14 @@ If you are working in a group, you can now divide up a decision here with one *c
 - Control
    - Go straight to the PAGA section
 - Everyone else:
-   - you could re-call clusters `sc.tl.louvain(adata, resolution=0.6` or use other resolutions! (Tip, go low!)
-        - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the cell_type and louvain categories are identical.
+   - you could re-call clusters `sc.tl.louvain(adata, resolution=0.6)` or use other resolutions! (Tip, go low!)
+        - Please note that in this case, you will want to change the PAGA step `sc.pl.paga` to group by `louvain` rather than `cell_type`. You can certainly still plot both, we only didn't because with using our old Louvain calls, the *cell_type* and *louvain* categories are identical.
    - you could undo the diffusion map step by running the following
+
         `sc.pp.neighbors(adata, n_neighbors=15, use_rep='X_pca')`
+     
         `sc.tl.draw_graph(adata)`
-   - you could also change the number of neighbors used in the pp.neighbors step (this is the same as the Galaxy tool **Scanpy ComputeGraph**
+   - you could also change the number of neighbors used in the `pp.neighbors` step (this is the same as the Galaxy tool **Scanpy ComputeGraph**)
 
 - Everyone else: You will want to compare FREQUENTLY with your control team member.
 
@@ -201,7 +228,10 @@ sc.pl.draw_graph(adata, color=['ENSMUSG00000023274', 'ENSMUSG00000053977'], titl
 
 ![Force-Directed + PAGA - Markers](../../images/scrna-casestudy/draw_graph_faPlot7.png "Force-Directed + PAGA - Markers")
 
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!
+<!---
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+-->
+
 
 Well aren't those charts interesting! Using the diffusion map to drive the force-directed graph, we see correct ordering of our cells (from DN to DP to T-mature, which was lost with the diffusion map alone) as well as two apparent branches leaving the mature T-cell population, which is what we'd biologically expect. In terms of our experiment, we're seeing a clear trajectory issue whereby the knockout cells are not found along the trajectory into T-mature (which, well, we kind of already figured out with just the cluster analysis, but we can feel even more confident about our results!) More importantly, we can see the T-mature population dividing itself, which we did not see in the clustering via UMAP/tSNE alone, and we can verify that as the leftmost branch has CD4 but the rightmost branch does not. This is suggesting our branchpoint from to CD4+ and CD8+ single positive cells. Exciting! However, it is important to note, that the branches there are quite small and sparsely populated, which can indicate artifact branches (i.e. trajectory analysis does its best to find branches, particularly diffusion map, so you can pretty easily force branches to appear even if they are not biologically real!). However, to be frank, we were surprised not to find this clearer in the main cluster map, as we know that the T-cells should diverge at that point, so if anything this is a relief that our data is believable!
 
@@ -216,11 +246,13 @@ sc.pl.paga_compare(
 
 ![PAGA Compare](../../images/scrna-casestudy/paga_compare.png "PAGA Compare")
 
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!
+<!---
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+-->
 
 ## Diffusion pseudotime
 
-We know that our cells are initialising at DN. We can use feed that information into our algorithms to then calculate a trajectory.
+We know that our cells are initialising at DN. We can feed that information into our algorithms to then calculate a trajectory.
 
 First, let's name our 'root'.
 
@@ -241,14 +273,14 @@ sc.pl.draw_graph(adata, color=['cell_type', 'dpt_pseudotime'], legend_loc='on da
 
 ![Force-Directed + Pseudotime](../../images/scrna-casestudy/draw_graph_faPlot8.png "Force-Directed + Pseudotime")
 
-This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you're seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm (not all algorithms fit all data!) or the biology.
+This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you're seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm produced the artefacts (not all algorithms fit all data!) or the biology suprised us.
 
 Where might we go from here? We might consider playing with our louvain resolutions, to get the two branches to be called as different clusters, and then comparing them to each other for gene differences or genotype differences. We might also use different objects (for instance, what if we regressed out cell cycle genes?) and see if that changes the results. Perhaps we would eliminate the DN double-branch input. Or perhaps that's real, and we should investigate that. What would you do?
 
 
 
 ## Working in a group? The finale!
-Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the 'Filter, Plot and Explore Single-cell RNA-seq Data', the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
+Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the [Filter, Plot, Explore tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That's why it is a huge field! With analysing scRNA-seq data, it's almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.
 
 # Export your data, figures, and notebook
 
@@ -303,7 +335,7 @@ If you want to run this notebook again, or share it with others, it now exists i
 
 # Conclusion
 
-Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1).
+Congratulations! You've made it to the end! You might be interested in the [Answer Key History](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key) or the [Answer Key Jupyter Notebook](https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1). If, for some reason anything didn't work in Galaxy JupyterLab environment, please don't get discouraged - we prepared a [Google Colab notebook version](https://colab.research.google.com/drive/1-ENlIXM7TAoDGsMam7RyJIusIaBfF9e4?usp=sharing) for you as a backup so that you can enjoy the tutorial no matter what!
 
 In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!
 

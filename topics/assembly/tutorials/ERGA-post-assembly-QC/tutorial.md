@@ -3,33 +3,37 @@ layout: tutorial_hands_on
 
 title: ERGA post-assembly QC
 questions:
-- "what combination of tools can assess the quality of an post-assembly?"
-- "what metrics can help to analyse the quality?"
-- "how to evaluate the outputs?"
+- "What combination of tools can assess the quality of a genome assembly?"
+- "What metrics can help to analyse the quality of an asembly?"
+- "How do we evaluate the outputs?"
 objectives:
-- "apply the post-assembly-QC-workflow using the necessary tools"
-- "analyse and evaluate the results of the workflow"
+- "Apply the post-assembly-QC-workflow using the necessary tools"
+- "Analyse and evaluate the results of the workflow"
 time_estimation: 3H
 key_points:
-- "The ERGA post-assembly pipeline allows to assess and improve the quality of genome assemblies"
-- "The ERGA post-assembly pipeline contains of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics and Hi-C scaffolding."
+- "The ERGA post-assembly pipeline allows users to assess and improve the quality of genome assemblies"
+- "The ERGA post-assembly pipeline consists of three main steps: Genome assembly decontamination and overview with BlobToolKit, providing analysis information and statistics, and Hi-C scaffolding."
 contributors:
 - GitFab93
 - gallardoalba
+- tbrown91
 tags:
   - plants
-
+  - animals
+  - genome
+  - assembly
+  - QC
 ---
 
+![ERGA logo, 4 colorful letters on white background, with the European star circle](../../images/post-assembly-QC/ERGA.logo.jpg){: width="20px"}
 
-The European Reference Genome Atlas (ERGA) is a large-scale project aimed at generating and integrating high-quality reference genomes for a wide range of European organisms. The project will use state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
+The European Reference Genome Atlas ([ERGA](https://www.erga-biodiversity.eu/), {% cite Mazzoni2023 %}) is a large-scale network of researchers aiming to generate high-quality reference genomes for all eukaryotic life in Europe and build capacity to allow researchers anywhere to generate reference genomes and use them to answer questions regarding species conservation and biodiversity. ERGA uses state-of-the-art sequencing technologies and advanced bioinformatics tools to produce high-quality genome assemblies.
 
 Reference genomes provide a baseline for understanding genetic diversity within and among populations, and can be used to identify populations at risk of genetic erosion. This information is crucial for developing effective conservation strategies and management plans for threatened and endangered species ({% cite Shafer2015 %}). Additionally, by better understanding the genetic basis of important traits, such as disease resistance and adaptation to changing environments, researchers can develop targeted interventions to mitigate the effects of environmental change and prevent the loss of genetic diversity ({% cite Frankham2011 %}). The ERGA project has the potential to greatly benefit biodiversity conservation efforts and advance our understanding of the genetic basis of biodiversity.
 
-Genome post-assembly quality control (GPAQC) is a crucial step for evaluating the accuracy and completeness of newly assembled genomes. This involves assessing the contiguity, completeness, accuracy, and consistency of the genome assembly using various bioinformatic tools and methods ({% cite Koren2017 %}, {% cite Hunt2015 %}, {% cite Mikheenko2015 %}, {% cite Vaser2017 %}, {% cite Zimin2017 %}). GPAQC aims to ensure that genomic data is reliable and useful for downstream analyses such as annotation, comparative genomics, and functional studies.
+Genome post-assembly quality control is a crucial step for evaluating the accuracy and completeness of newly assembled genomes. This involves assessing the contiguity, completeness, accuracy, and consistency of the genome assembly using various bioinformatic tools and methods ({% cite Koren2017 %}, {% cite Hunt2015 %}, {% cite Mikheenko2015 %}, {% cite Vaser2017 %}, {% cite Zimin2017 %}). The QC process aims to ensure that genomic data is reliable and useful for downstream analyses such as annotation, comparative genomics, and functional studies.
 
-In this tutorial you will learn how to implement the ERGA GPAQC pipeline, and how to interpretate the potential outcomes.
-
+In this tutorial you will learn how to implement the ERGA Genome Assembly QC pipeline, and how to interpretate the potential outcomes.
 
 > <agenda-title></agenda-title>
 >
@@ -46,25 +50,25 @@ In this tutorial we will evaluate three genome assemblies, belonging to three di
 
 <strong>Case 1: <em>Chondrosia reniformis</em></strong>
 
-*Chondrosia reniformis* is a slow-growing marine sponge cosmopolitan species which can be found in the Mediterranean Sea and the eastern Atlantic Ocean in shallow waters; it is considered to playing an important ecological role in the marine ecosystem by filtering large volumes of water and providing habitat for other species ({% cite Voultsiadou2005 %}). The members of this species are gonochoristic and oviparous, whose physiology and behavious seems to be highly influence for the presence of endosymbiosis heterotrophic bacteria ({% cite sara1997 %}).
+*Chondrosia reniformis* is a slow-growing marine sponge cosmopolitan species which can be found in the Mediterranean Sea and the eastern Atlantic Ocean in shallow waters; it is considered to playing an important ecological role in the marine ecosystem by filtering large volumes of water and providing habitat for other species ({% cite Voultsiadou2005 %}). The members of this species are gonochoristic and oviparous, whose physiology and behavious seems to highly influence the presence of endosymbiosis heterotrophic bacteria ({% cite sara1997 %}). 
 
-![Figure 1: Distribution of data](../../images/post-assembly-QC/chondrosia.jpg "Histories corresponding to the three cases of study.")
+![Figure 1: Chrondosia reniformis](../../images/post-assembly-QC/chondrosia.jpg "Example *Chrondosia reniformis* sponge."
 
-The assembly is based on 70x PacBio HiFi and Arima2 Hi-C data generated by the Aquatic [Symbiosis Genomics Project](https://www.aquaticsymbiosisgenomics.org/). The assembly process included the following sequence of steps: initial PacBio assembly generation with Hifiasm, retained haplotig separation with purge_dups, and Hi-C based scaffolding with YaHS. The mitochondrial genome was assembled using MitoHiFi. Finally, the primary assembly was analysed and manually improved using gEVAL.
+The assembly is based on 70x PacBio HiFi and Arima2 Hi-C data generated by the [Aquatic Symbiosis Genomics Project](https://www.aquaticsymbiosisgenomics.org/). The assembly process included the following sequence of steps: initial PacBio assembly generation with Hifiasm, retained haplotig separation with purge_dups, and Hi-C based scaffolding with YaHS. The mitochondrial genome was assembled using MitoHiFi. Finally, the primary assembly was analysed and manually improved using gEVAL.
 
 <strong>Case 2: <em>Erythrolamprus reginae</em></strong>
 
-*Erythrolamprus reginae* is a species of colubrid snake found in South America. This species has been reported to include triploid individuals with parthenogenic reproduction; this type of seems to be associated with higher mutation rate tandem dupliation ({% cite Bogart1980 %}).
+*Erythrolamprus reginae* is a species of colubrid snake found in South America. This species has been reported to include triploid individuals with parthenogenic reproduction; this type of seems to be associated with higher mutation rates and more tandem duplications in the genome ({% cite Bogart1980 %}). 
 
-![Figure 2: Distribution of data](../../images/post-assembly-QC/erytrocampus.jpg "Histories corresponding to the three cases of study.")
+![Figure 2: Erythrolamprus reginae](../../images/post-assembly-QC/erytrocampus.jpg "Example *Erythrolamprus reginae* snake.")
 
 The assembly used in this tutorial correspond to the curated primary assembly generated by the [VGP project](https://vertebrategenomesproject.org/), based on 34x Pacbio HiFi and Arima2 Hi-C data, by using the [VGP assembly pipeline]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}).
 
 <strong>Case 3: <em>Eschrichtius robustus</em></strong>
 
-*Eschrichtius robustus*, commonly known as the gray whale, is a species of whale found primarily in the North Pacific Ocean. Adult gray whales can reach lengths of up to 14.9 meters and weights of up to 36,000 kilograms. It is a diploid specie, genetically characterized by high homozygosity as a result of inbreeding ({% cite BrnicheOlsen2018 %}).
+*Eschrichtius robustus*, commonly known as the gray whale, is a species of whale found primarily in the North Pacific Ocean. Adult gray whales can reach lengths of up to 14.9 meters and weights of up to 36,000 kilograms. It is a diploid species, genetically characterized by high homozygosity ({% cite BrnicheOlsen2018 %}).
 
-![Figure 3: Distribution of data](../../images/post-assembly-QC/eschrichtius.jpg "Histories corresponding to the three cases of study.")
+![Figure 3: Eschrichtius robustus](../../images/post-assembly-QC/eschrichtius.jpg "Example *Eschrichtius robustus* whale.")
 
 The assembly used in this tutorial correspond to the curated primary assembly generated by the [VGP project](https://vertebrategenomesproject.org/), based on 29x Pacbio HiFi data, by using the [VGP assembly pipeline]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}).
 
@@ -82,7 +86,7 @@ As a first step we will get the data from Zenodo.
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Collections`
+>    - *"Upload type"*: `Collections`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
@@ -96,7 +100,7 @@ As a first step we will get the data from Zenodo.
 >   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
 >   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
 >       ```
->
+>    - Click on `Build`
 >    - From **Rules** menu select `Add / Modify Column Definitions`
 >       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
 >       - Click `Add Definition` button and select `URL`: column `B`
@@ -109,7 +113,7 @@ As a first step we will get the data from Zenodo.
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
->    - *"Upload data as"*: `Datasets`
+>    - *"Upload type"*: `Datasets`
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
@@ -124,7 +128,7 @@ As a first step we will get the data from Zenodo.
 >   EReginae_Hi-C_R_02   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.002   fastq.gz    Hi-C
 >   EReginae_Hi-C_R_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.003   fastq.gz    Hi-C
 >   EReginata_assembly    https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz    fasta.gz    assembly
->   ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  fasta.gz    metadata
+>   ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  yaml    metadata
 >   ERobustus_assembly  https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz  fasta.gz    assembly
 >   ERobustus_metadata  https://zenodo.org/record/7781236/files/metadata_esch.yaml  yaml    metadata
 >   Taxonomy_data   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz  gz  taxonomy
@@ -140,6 +144,9 @@ As a first step we will get the data from Zenodo.
 >
 {: .hands_on}
 
+# What data have we imported?
+
+For each species, we have uploaded the fasta file corresponding to the assembly, the raw sequencing data used to generate each assembly - in these cases PacBio HiFi longreads and Illumina Hi-C reads - and databases necessary to run the QC tools included in this tutorial. We will use the taxonomy database `new_taxdump.tar.gz` and the diamond database of protein sequences from the ncbi nt database to identify any sequence from contaminants or symbiont which are in our assembly using `BlobToolKit`.
 
 Once we have imported all the datasets, we will move each one to its correspondent history.
 
@@ -159,15 +166,13 @@ Once we have imported all the datasets, we will move each one to its corresponde
 >
 {: .hands_on}
 
-
 Once all the datasets have been copied to their correspondent history, we should obtain something similar to this:
 
 ![Figure 4: Distribution of data](../../images/post-assembly-QC/histories_side_by_side.png "Histories corresponding to the three cases of study.")
 
-
 # Genome assembly overview with BlobToolKit
 
-**BlobToolKit** is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
+**BlobToolKit** is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, sequence length, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
 
 In this tutorial, we will use BlobToolKit in order to integrate the following data:
 
@@ -184,11 +189,11 @@ In this tutorial, we will use BlobToolKit in order to integrate the following da
 
 In the next steps, we will generate the data required for generating the visualization plots with BlobToolKit.
 
-## Generate read coverage data with **HISAT2**
+## Generate read coverage data with **Minimap2**
 
 Read coverage is an essential metric for evaluating the quality of genome assemblies, and it provides valuable information for identifying regions of high and low quality, detecting misassemblies, and identifying potential contaminants. Thus, for example, unexpected regions of low coverage suggests potential errors, such as misassemblies, gaps, or low complexity regions ({% cite Koren2017 %}).
 
-In this tutorial we will use **HISAT2** for generation the coverage data. This tool uses a indexing scheme based on the Burrows-Wheeler transform (BWT) and the Ferragina-Manzini (FM) index, which enables efficient and accurate alignment ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit.
+In this tutorial we will use **Minimap2** for generation the coverage data. Minimap2 is a multi-purpose aligner which is particularly efficient at aligning long-reads produced by sequencing machines from PacBio or Oxford Nanopore ({% cite Li2018 %}).
 
 > <comment-title>How is coverage information encoded in the BAM file?</comment-title>
 >
@@ -196,17 +201,18 @@ In this tutorial we will use **HISAT2** for generation the coverage data. This t
 >
 {: .comment}
 
-> <hands-on-title>Generate BAM file with HISAT2</hands-on-title>
+> <hands-on-title>Generate BAM file with Minimap2</hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReniformis_Pacbio`
 >
 >
-> 2. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
->    - *"Source for the reference genome"*: `Use a genome from history`
+> 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.28+galaxy0) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Select the reference genome"*: `CReformitis_assembly`
->    - *"Is this a single or paired library"*: `Single-end`
+>    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"FASTA/Q file"*: output of **Collapse Collection** {% icon tool %}
+>    - *"Select a profile of preset options"*: `PacBio HiFi reads vs reference mapping (-k19 -w19 -U50,500 -g10k -A1 -B4 -O6,26 -E2,1 -s200 ) (map-hifi)`
 >
 > 3. Repeat the prevous steps with the datasets from the two remanining species.
 >
@@ -263,7 +269,7 @@ In this tutorial we will use **HISAT2** for generation the coverage data. This t
 >
 >    > <details-title> Additional information </details-title>
 >    >
->    > BUSCO sets represent 3023 genes for vertebrates, 2675 for arthropods, 843 for metazoans, 1438 for fungi and 429 for eukaryotes. An intuitive metric is provided 	in BUSCO notation - C:complete[D:dublicated], F:fragmented, M:missing, n:number of genes used.
+>    > BUSCO sets represent 3,023 genes for vertebrates, 2,675 for arthropods, 843 for metazoans, 1,438 for fungi and 429 for eukaryotes. An intuitive metric is provided in BUSCO notation - C:complete[S:single, D:duplicated], F:fragmented, M:missing, n:number of genes used.
 >    {: .details}
 >
 > 2. Repeat the prevous steps with the datasets from the two remanining species.
@@ -309,7 +315,7 @@ To get a more meaningful analysis and therefore more useful information about ou
 >        - {% icon param-file %} *"BUSCO full table file"*: `Full table` (output of **Busco** {% icon tool %})
 >        - *"BLAST/Diamond hits"*: `Enabled`
 >           - *"BLAST/Diamond hits dataset"*: output of **Diamond** {% icon tool %}
->        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **HISAT2** {% icon tool %}
+>        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **Minimap2** {% icon tool %}
 >
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
 >    - {% icon param-file %} *"Blobdir file"*: output of **BlobToolKit** {% icon tool %}
@@ -322,7 +328,7 @@ To get a more meaningful analysis and therefore more useful information about ou
 
 Now, we will evaluate three of plots that we can find in the Blobtoolkit interactve interface. First, we will start with the **snailplot**, which provides a holistic view of the assembly.
 
-![Figure 5: BlobToolKit snail plot](../../images/post-assembly-QC/Blobdir.snail.c.png "Chondrosia reniformis snail plot summary. The grey line represents the assembly scaffolds, where the distance to the center of the circle indicates the length of the scaffolds. A scale line in the center of the circle helps to gauge the length. Longest contig: The red line in the plot indicates the longest contig in the assembly. N50 and N90: The dark orange and light orange lines represent the scaffolds contained in the N50 and N90 metrics, respectively. GC/AT content: The outer light and dark blue lines represent the GC and AT content, respectively. In an ideal assembly, the line between the two colors should be consistent, without much fluctuation. Gaps: Gaps in the assembly, if present, are denoted by the percent N in the bottom right of the image.")
+![Figure 5: BlobToolKit snail plot](../../images/post-assembly-QC/Blobdir.snail.choRen.png  "Chondrosia reniformis snail plot summary. The grey line represents the assembly scaffolds, where the distance to the center of the circle indicates the length of the scaffolds. A scale line in the center of the circle helps to gauge the length. Longest contig: The red line in the plot indicates the longest contig in the assembly. N50 and N90: The dark orange and light orange lines represent the scaffolds contained in the N50 and N90 metrics, respectively. GC/AT content: The outer light and dark blue lines represent the GC and AT content, respectively. In an ideal assembly, the line between the two colors should be consistent, without much fluctuation. Gaps: Gaps in the assembly, if present, are denoted by the percent N in the bottom right of the image.")
 
 The main plot is divided into 1,000 size-ordered bins around the circumference with each bin representing 0.1% of the 117,390,217 bp assembly. The **distribution of sequence lengths is shown in dark grey** with the plot radius scaled to the longest sequence present in the assembly (10,413,042 bp, shown in red).
 
@@ -343,9 +349,9 @@ The main plot is divided into 1,000 size-ordered bins around the circumference w
 >
 {: .question}
 
-Now, we are going to analyze the blob plot corresponding to *Erythrolamprus reginae*, which is specially useful for gaining insights into the composition of your genomic data and identify potential contaminants or endosymbionts.
+Now, we are going to analyze the blob plot corresponding to *Erythrolamprus reginae*, which is especially useful for gaining insights into the composition of your genomic data and identify potential contaminants or endosymbionts. 
 
-![Figure 7: BlobToolKit circle plot](../../images/post-assembly-QC/Blobdir.blob.circle.png "Blob plot of base coverage in input against GC proportion for sequences in *E. reginate assembly*. Sequences are coloured by phylum. Circles are sized in proportion to sequence length . Histograms show the distribution of sequence length sum along each axis")
+![Figure 7: BlobToolKit circle plot](../../images/post-assembly-QC/Blobdir.blob.circle.EryReg.png "Blob plot of base coverage in input against GC proportion for sequences in *E. reginate assembly*. Sequences are coloured by phylum. Circles are sized in proportion to sequence length . Histograms show the distribution of sequence length sum along each axis")
 
 The blob plot is a two-dimensional scatter plot that helps in visualizing and analyzing genomic data for quality control, contaminant detection, and filtering. In the circle plot, **each sequence is represented by a circle**, with its diameter proportional to the sequence length. Circles are colored based on their taxonomic affiliation, and their positions on the X and Y axes are determined by their GC content and coverage, respectively. GC content is the proportion of G and C bases in the sequence, which can differ substantially between genomes. Coverage, on the other hand, is a measure of the number of times a particular sequence has been read during the sequencing process. The plot also includes coverage and GC histograms for each taxonomic group, weighted by the total span (cumulative length) of sequences occupying each bin.
 
@@ -361,24 +367,24 @@ The blob plot is a two-dimensional scatter plot that helps in visualizing and an
 
 > <question-title>Blob plot question</question-title>
 >
-> Does exist significant contamination in the *Eschrichtius robustus* and *Chondrosia reniformis* assemblies?
+> Is there significant contamination in the *Eschrichtius robustus* and *Chondrosia reniformis* assemblies?
 >
 > > <solution-title></solution-title>
 > >
-> > ![Figure 9: BlobToolKit snailplots comparison](../../images/post-assembly-QC/Blobdir.blob.circle_comparison.png "Comparison between blob plots from E. robustus (A) and C. reniformis (B).")
+> > ![Figure 9: BlobToolKit snailplots comparison](../../images/post-assembly-QC/Blobdir.blob.circle.EscRob_ChoRen.png "Comparison between blob plots from E. robustus (A) and C. reniformis (B).")
 > >
-> > - (A) The whale (*Eschrichtius robustus*) does have significant contamination. Approximately half of the assembly of the whale does contain contaminants or cosymbionts (total count: 703, Chordata count: 316).
-> > - (B) The sponge (*Condrosia reniformis*) doesn't contain any contamination (total count: 15, Chordata count: 15).
+> > - (A) The whale (*Eschrichtius robustus*) does have significant contamination. Approximately half of the assembled sequences of the whale does contain contaminants or cosymbionts (total count: 703, Chordata count: 316), however as the foreign sequences are smaller, they make up a small percentage of the total assembly.
+> > - (B) The sponge (*Condrosia reniformis*) doesn't contain any foreign sequences or contaminatio (total count: 15, Chordata count: 15).
 > >
 > {: .solution}
 >
 {: .question}
 
-Finally, let's have a look at the accumulative plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the **contribution of the contigs from contaminated reads to the final assembly**. In that case, first we will evaluate all sequences together, and then we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let's start with the accumulative plot corresponding to all sequences (fig. 10).
+Finally, let's have a look at the cumulative sequence length plot, which shows the curves for subsets of scaffolds assigned to each phylum relative to the overall assembly. It is useful for evaluating the **contribution of the contigs from contaminated reads to the final assembly**. In that case, first we will evaluate all sequences together, and then we will remove those correspoding to chordata or not classified (not-hit) in order to be able to evaluate in detail each of the contaminants. So, let's start with the accumulative plot corresponding to all sequences (fig. 10).
 
 In this kind of plot, **the x-axis represent the number of contigs** (sorted by species and length), and **the y-axis correspond to the cumulative length in nucleotides**. The gray line shows the cumulative length of all sequences. As we can appreciate, most sequences corespond to the taxa chordata (1.9Gb, distributed along 151 contigs). In addition, we can see that the final assembly includes 174 contigs corresponding to different taxa, or not classified at all. In order to be able to analyze the contribution of those sequences, we will filter the contigs corresponding to the chordata.
 
-![Figure 10: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative.png "Cumulative sequence length for assembly Blobdir. The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule. Plot axes are scaled to the filtered assembly.")
+![Figure 10: BlobToolKit cumulative plot](../../images/post-assembly-QC/Blobdir.cumulative.png "Cumulative sequence length for assembly Blobdir. The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule. Plot axes are scaled to the filtered assembly.")
 
 > <comment-title> How do I apply filters to a dataset? </comment-title>
 >
@@ -388,10 +394,9 @@ In this kind of plot, **the x-axis represent the number of contigs** (sorted by 
 
 By hidding the contings corresponding to chordata, we can have a detailed view of the contributions of each contaminant (fig. 11).
 
-![Figure 11: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative_filtered.png " The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule and are stacked by cumulative value on the x-axis to show the proportion of each phylum in the overall assembly. The assembly has been filtered to exclude sequences with phylum matches Chordata. Plot axes are scaled to the filtered assembly.")
+![Figure 11: BlobToolKit cumulative plot](../../images/post-assembly-QC/Blobdir.cumulative_filtered.png "The grey line shows cumulative length for all sequences. Coloured lines show cumulative lengths of sequences assigned to each phylum using the bestsum taxrule and are stacked by cumulative value on the x-axis to show the proportion of each phylum in the overall assembly. The assembly has been filtered to exclude sequences with phylum matches Chordata. Plot axes are scaled to the filtered assembly.")
 
- In figure 11 we can appreciate clearly the relative contribution of each contaminant with respect to the total contamination.
-
+In figure 11 we can appreciate clearly the relative contribution of each contaminant with respect to the total contamination. 
 
 # K-mer based genome profiling and evaluation
 
@@ -574,8 +579,8 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 
 # Hi-C scaffolding
 
-To understand how chromosomes are arranged in their three-dimensional structure in the nucleus, high resolution and high throughput imaging techniques have been developed. Hi-C is a high throughput method to measure pairwise contacts between pairs of genomic loci.
-It is based on cross-linking the DNA in the nucleus and its histones(proteins). However the DNA gets cut and marked and afterwards the cutted parts get ligated together. Then the DNA gets fragmented and sequenced forwards and backwards generating paired reads. The resulting information can be used to assemble the reads to the corresponding chromosome.
+To understand how chromosomes are arranged in their three-dimensional structure in the nucleus, high resolution and high throughput imaging techniques have been developed. Hi-C is a high throughput method to measure pairwise contacts between pairs of genomic loci. 
+It is based on cross-linking the DNA in the nucleus and its histones (proteins around which the DNA is wrapped). However the DNA gets cut and marked and afterwards the cut parts get ligated together. Then the DNA gets fragmented and sequenced forwards and backwards generating paired reads. The resulting information can be used to assemble the reads to the corresponding chromosome.
 ({% cite Pal2018 %})
 
 ## Pre-processing Hi-C data
@@ -637,7 +642,7 @@ The contact map of the snake (*Erythrolamprus reginae*) does have a clear diagon
 > >
 > > ![Figure 17: Contact Map Sponge](../../images/post-assembly-QC/pretext_sponge.png "Hi-C contact map of Chondrosia reniformis generated by Pretext.")
 > >
-> > The contact map of the sponge (*Chondrosia reniformis*) does contain widespread interactions all over the genome. Additionally a diagonal pattern can be observed. The widespread interactions all over the genome can be the result of experimental and technical issues or it can have a biological and funcitonal significance.
+> > The contact map of the sponge (*Chondrosia reniformis*) does contain widespread interactions all over the genome. Additionally a diagonal pattern can be observed. The widespread interactions all over the genome can be the result of experimental and technical issues or it can have a biological and functional significance - such as interactions between chromosomes in the nucleus. 
 > {: .solution}
 >
 {: .question}
@@ -646,7 +651,7 @@ The contact map of the snake (*Erythrolamprus reginae*) does have a clear diagon
 
 # Assembly graph
 
-Bandage is a tool to visualise de novo assembly graphs with connections. ({% cite Wick2015 %})
+Bandage is a tool to visualise *de novo* assembly graphs with connections. ({% cite Wick2015 %})
 
 > <hands-on-title> Generate assembly graph </hands-on-title>
 >
@@ -666,7 +671,7 @@ Bandage is a tool to visualise de novo assembly graphs with connections. ({% cit
 
 ![Figure 18: Assembly Graph Sponge](../../images/post-assembly-QC/bandage_sponge.jpg "Assembly graph of the sponge (*Chrondrosia reniformis*). Contigs (nodes) are displayed in different colors and their connections (edges) are displayed as red dotted lines.")
 
-The Assembly graph of *Chondrosia reniformis* is relatively simple and doesn't have a complex structure. The connectivity of the nodes is clear but uncomplete and lacking some indicative regions of overlapping contigs. Repetitive regions can be investigated by searching for multiple paths or connections in the graph.
+The Assembly graph of *Chondrosia reniformis* is relatively simple and doesn't have a complex structure. The connectivity of the nodes is clear but incomplete and lacking some indicative regions of overlapping contigs. Repetitive regions can be investigated by searching for multiple paths or connections in the graph.
 
 > <question-title>Assembly graph question</question-title>
 >
@@ -686,7 +691,7 @@ The Assembly graph of *Chondrosia reniformis* is relatively simple and doesn't h
 
 # Conclusion
 
-In conclusion, it's worth to run the the post-assembly workflow to assess the quality of genome assemblies. The following table contains metrics to sum up the quality control.
+In conclusion, it's worth to run the a post-assembly QC workflow to assess the quality of genome assemblies. The following table contains metrics to sum up the quality control.
 
 
 ![Figure 20:  Final stats](../../images/post-assembly-QC/table_of_metrics.png "This table contains 9 indicators for quality evaluation of three different organisms: Chondrosia reniformis, Eschrichtius robustus and Erythrolamprus reginae.")
