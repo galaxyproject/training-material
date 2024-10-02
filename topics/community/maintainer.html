@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@57b00dc456c300b41ba51ef17460758971bbbd07",
+		release: "galaxy-training-network@8dc4b2141f9c6d379b0fc2a7544bb895081a3000",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -270,12 +270,61 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 	</tbody>
 </table>
 
+<h2>Topic Materials</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th scope="col">Material</th>
+			<th scope="col">Contributions v2 <a href="/training-material/topics/contributing/faqs/new-contributions.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Pre-requisites <a href="/training-material/topics/contributing/faqs/why-prerequisites.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Follow up trainings</th>
+			<th scope="col">Data on Zenodo</th>
+			<th scope="col">Notebook</th>
+			<th scope="col">Server Compatibility</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/community/tutorials/sig_define/tutorial.html">What's a Special Interest Group?</a></th>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#community-sig_define-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/community/tutorials/sig_create/tutorial.html">Creating a Special Interest Group</a></th>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#community-sig_create-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+	</tbody>
+</table>
+
 <h2>Topic Workflows</h2>
-<table  class="table table-striped">
+<table  class="table table-striped scroll-header">
 	<thead>
 		<tr>
 			<th>Material</th>
 			<th>Workflow</th>
+
+			<th>Updated</th>
+			<th>Version</th>
 
 			<th>Tests</th>
 			<th>Reports</th>
@@ -290,6 +339,96 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 
 	</tbody>
 </table>
+
+
+
+<div id="community-sig_define-compat" class="modal" tabindex="-1" aria-labelledby="community-sig_define-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="community-sig_define-label">Current Server Compatibility table for "What's a Special Interest Group?"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="community-sig_create-compat" class="modal" tabindex="-1" aria-labelledby="community-sig_create-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="community-sig_create-label">Current Server Compatibility table for "Creating a Special Interest Group"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+td.exact, td.local {
+	background-color: var(--feedback-color);
+	color: black;
+}
+td.inexact {
+	background-color: var(--solution-color);
+	color: black;
+}
+
+/* https://adrianroselli.com/2020/01/fixed-table-headers.html */
+
+table.compat th[scope=row] {
+  background-color: var(--color-background);
+}
+
+table.scroll-header th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-background);
+}
+table.scroll-row th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: end;
+}
+</style>
 
 
 <h2>Your topic's Workflow Testing Results</h2>
@@ -385,7 +524,7 @@ https://github.com/galaxyproject/training-material/pull/4963
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/57b00dc456c300b41ba51ef17460758971bbbd07">57b00dc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8dc4b2141f9c6d379b0fc2a7544bb895081a3000">8dc4b21</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

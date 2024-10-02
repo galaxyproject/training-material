@@ -120,11 +120,20 @@
 - `site.config[&#39;age&#39;]` - the age of the site in years</pre>
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-environment_variables.rb, line 18</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-environment_variables.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># Add other environment variables to `site.config` here...</span>
   <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Scholar</span>.<span class="ruby-identifier">load_bib</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">update</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
+
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;build&#39;</span>] = {
+    <span class="ruby-string">&#39;today&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>,
+    <span class="ruby-string">&#39;now&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>,
+    <span class="ruby-string">&#39;jekyll&#39;</span> <span class="ruby-operator">=&gt;</span> {
+      <span class="ruby-string">&#39;version&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Jekyll</span><span class="ruby-operator">::</span><span class="ruby-constant">VERSION</span>,
+      <span class="ruby-string">&#39;environment&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">env</span>,
+    }
+  }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

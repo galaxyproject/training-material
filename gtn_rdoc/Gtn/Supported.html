@@ -67,6 +67,7 @@
 
   <ul class="link-list" role="directory">
     <li ><a href="#method-c-calculate">::calculate</a>
+    <li ><a href="#method-c-calculate_matrix">::calculate_matrix</a>
   </ul>
 </div>
 
@@ -199,6 +200,122 @@
       )
     <span class="ruby-keyword">end</span>
   }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-c-calculate_matrix" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">calculate_matrix</span><span
+              class="method-args">(data, tool_list)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Identify the servers that support a given tool list</p>
+
+<p>Params:</p>
+<dl class="rdoc-list note-list"><dt><code>data</code>
+<dd>
+<p>The data from metadata/public-server-tools.json</p>
+</dd><dt><code>tool_list</code>
+<dd>
+<p>The list of tools to check (either ‘upload1’ or</p>
+</dd></dl>
+
+<pre>&#39;toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10&#39; style tools)</pre>
+
+<p>Returns:</p>
+<dl class="rdoc-list note-list"><dt><code>supported</code>
+<dd>
+<p>A hash of supported servers, with the following structure:</p>
+</dd></dl>
+
+<pre>{
+  servers: [a, b, c]
+  tools: [
+    {
+      id: toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10,
+      version: 0.69.8+galaxy10,
+      servers: [
+        [0.69.8+galaxy10],
+        [0.69.8+galaxy11, 0.69.8+galaxy12],
+        nil
+      ]
+    }
+  ]
+}</pre>
+
+          <div class="method-source-code" id="calculate_matrix-source">
+            <pre><span class="ruby-comment"># File _plugins/gtn/supported.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calculate_matrix</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">tool_list</span>)
+  <span class="ruby-identifier">structure</span> = {
+    <span class="ruby-string">&#39;servers&#39;</span> <span class="ruby-operator">=&gt;</span> [],
+    <span class="ruby-string">&#39;tools&#39;</span> <span class="ruby-operator">=&gt;</span> [],
+  }
+  <span class="ruby-comment"># p &quot;Calculating supported servers for this tool list&quot;</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">structure</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">structure</span>[<span class="ruby-string">&#39;servers&#39;</span>] = <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>]
+
+  <span class="ruby-identifier">tool_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tool</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tool_for_server</span> = {
+      <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool</span>,
+      <span class="ruby-string">&#39;servers&#39;</span> <span class="ruby-operator">=&gt;</span> []
+    }
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+      <span class="ruby-comment"># E.g. toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy10</span>
+      <span class="ruby-identifier">tool_id</span> = <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">4</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
+      <span class="ruby-identifier">tool_version</span> = <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">5</span><span class="ruby-operator">..</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>)
+      <span class="ruby-identifier">tool_for_server</span>[<span class="ruby-string">&#39;version&#39;</span>] = <span class="ruby-identifier">tool_version</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">tool_id</span> = <span class="ruby-identifier">tool</span>
+      <span class="ruby-identifier">tool_version</span> = <span class="ruby-string">&#39;local&#39;</span>
+      <span class="ruby-identifier">tool_for_server</span>[<span class="ruby-string">&#39;version&#39;</span>] = <span class="ruby-identifier">tool_version</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;servers&#39;</span>].<span class="ruby-identifier">each</span>.<span class="ruby-identifier">with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">server</span>, <span class="ruby-identifier">s_index</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># If we&#39;ve never seen this tool anywhere</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tools&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">tool_id</span>)
+        <span class="ruby-identifier">res</span> = {<span class="ruby-string">&#39;state&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;missing&#39;</span>}
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># If we&#39;ve seen this exact version on the current server/index</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tools&#39;</span>][<span class="ruby-identifier">tool_id</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">tool_version</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tools&#39;</span>][<span class="ruby-identifier">tool_id</span>][<span class="ruby-identifier">tool_version</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">s_index</span>)
+          <span class="ruby-identifier">res</span> = {<span class="ruby-string">&#39;state&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;exact&#39;</span>, <span class="ruby-string">&#39;version&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tool_version</span>}
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tools&#39;</span>][<span class="ruby-identifier">tool_id</span>]
+          <span class="ruby-identifier">res</span> = {
+            <span class="ruby-string">&#39;state&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;inexact&#39;</span>, 
+            <span class="ruby-string">&#39;versions&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;tools&#39;</span>][<span class="ruby-identifier">tool_id</span>].<span class="ruby-identifier">select</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">s_index</span>)}.<span class="ruby-identifier">keys</span>
+          }
+
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;versions&#39;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;versions&#39;</span>][<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;_&#39;</span>
+            <span class="ruby-identifier">res</span> = {
+              <span class="ruby-string">&#39;state&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;local&#39;</span>
+            }
+          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;versions&#39;</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">res</span> = {<span class="ruby-string">&#39;state&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;missing&#39;</span>}
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">res</span>[<span class="ruby-string">&#39;server&#39;</span>] = <span class="ruby-identifier">server</span>[<span class="ruby-string">&#39;url&#39;</span>]
+      <span class="ruby-identifier">tool_for_server</span>[<span class="ruby-string">&#39;servers&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">res</span>)
+
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">structure</span>[<span class="ruby-string">&#39;tools&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">tool_for_server</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># TODO: would be nice to re-sort the servers by the number of exact matches</span>
+  <span class="ruby-identifier">structure</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

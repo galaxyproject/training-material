@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@57b00dc456c300b41ba51ef17460758971bbbd07",
+		release: "galaxy-training-network@8dc4b2141f9c6d379b0fc2a7544bb895081a3000",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -270,12 +270,131 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 	</tbody>
 </table>
 
+<h2>Topic Materials</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th scope="col">Material</th>
+			<th scope="col">Contributions v2 <a href="/training-material/topics/contributing/faqs/new-contributions.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Pre-requisites <a href="/training-material/topics/contributing/faqs/why-prerequisites.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span></a></th>
+			<th scope="col">Follow up trainings</th>
+			<th scope="col">Data on Zenodo</th>
+			<th scope="col">Notebook</th>
+			<th scope="col">Server Compatibility</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html">Analyse HeLa fluorescence siRNA screen</a></th>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-hela-screen-analysis-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html">End-to-End Tissue Microarray Image Analysis with Galaxy-ME</a></th>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-multiplex-tissue-imaging-TMA-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html">Introduction to image analysis using Galaxy</a></th>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-imaging-introduction-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">Nucleoli segmentation and feature extraction using CellProfiler</a></th>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-tutorial-CP-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">Object tracking using CellProfiler</a></th>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-object-tracking-using-cell-profiler-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/bioimage-metadata/tutorial.html">FAIR Bioimage Metadata</a></th>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-bioimage-metadata-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+		<tr>
+			<th scope="row"><a href="/training-material/topics/imaging/tutorials/bioimage-REMBI/tutorial.html">REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a></th>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#imaging-bioimage-REMBI-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	
+	</tbody>
+</table>
+
 <h2>Topic Workflows</h2>
-<table  class="table table-striped">
+<table  class="table table-striped scroll-header">
 	<thead>
 		<tr>
 			<th>Material</th>
 			<th>Workflow</th>
+
+			<th>Updated</th>
+			<th>Version</th>
 
 			<th>Tests</th>
 			<th>Reports</th>
@@ -288,6 +407,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html">Analyse HeLa fluorescence siRNA screen</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/analyze_screen.html">analyze_screen</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>5 </td>
 			<td> ✅ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -296,6 +417,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/hela-screen-analysis/tutorial.html">Analyse HeLa fluorescence siRNA screen</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/hela-screen-analysis/workflows/feature_extraction.html">feature_extraction</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>5 </td>
 			<td> ✅ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -306,6 +429,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/tutorial.html">End-to-End Tissue Microarray Image Analysis with Galaxy-ME</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/multiplex-tissue-imaging-TMA/workflows/main_workflow.html">GTN_Exemplar_002_TMA_workflow</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>1 </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -316,6 +441,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/imaging-introduction/tutorial.html">Introduction to image analysis using Galaxy</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/imaging-introduction/workflows/Galaxy-Workflow-GTN_Tutorial__Introduction_to_Imaging.html">Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>5 </td>
 			<td> ✅ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -326,6 +453,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/tutorial-CP/tutorial.html">Nucleoli segmentation and feature extraction using CellProfiler</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/tutorial-CP/workflows/main_workflow.html">CP_pipeline_IDR_training</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>3 </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -336,6 +465,8 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 		<tr>
 			<td><a href="/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html">Object tracking using CellProfiler</a></td>
 			<td><a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/workflows/main_workflow.html">CP_object_tracking_example</a></td>
+			<td>Oct 2, 2024 </td>
+			<td>1 </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
 			<td> ❌ </td>
@@ -348,6 +479,12272 @@ This is a new, experimental "Editorial Board Home" for a given topic. It is inte
 
 	</tbody>
 </table>
+
+
+
+<div id="imaging-hela-screen-analysis-compat" class="modal" tabindex="-1" aria-labelledby="imaging-hela-screen-analysis-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-hela-screen-analysis-label">Current Server Compatibility table for "Analyse HeLa fluorescence siRNA screen"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="http://apostl.moffitt.org/">
+				APOSTL
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://smile.hku.hk/SARGs">
+				ARGs-OAP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://iris.angers.inra.fr/galaxypub-cfbp">
+				CIRM-CFBP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://vm-chemflow-francegrille.eu/">
+				ChemFlow
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://hyperbrowser.uio.no/coloc-stats">
+				Coloc-stats
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://coralsnp.science.psu.edu/galaxy/">
+				CoralSNP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://cropgalaxy.excellenceinbreeding.org/">
+				CropGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://dintor.eurac.edu/">
+				Dintor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://www.freebioinfo.org/">
+				FreeBioinfo
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://igg.cloud.ba.infn.it/galaxy">
+				GASLINI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.mesocentre.uca.fr">
+				Galaxy@AuBi
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.pasteur.fr/">
+				Galaxy@Pasteur
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxytrakr.org/">
+				GalaxyTrakr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://hyperbrowser.uio.no/hb/">
+				Genomic Hyperbrowser
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://gigagalaxy.net/">
+				GigaGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.hyphy.org/">
+				HyPhy HIV NGS Tools
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy-web.ipk-gatersleben.de">
+				IPK Galaxy Blast Suite
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://www.immportgalaxy.org/">
+				ImmPort Galaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.interactomix.com/">
+				InteractoMIX
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://mississippi.sorbonne-universite.fr">
+				MISSISSIPPI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://neo.engr.uconn.edu/">
+				Mandoiu Lab
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/">
+				MiModD NacreousMap
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.inf.ethz.ch">
+				Oqtans
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://palfinder.ls.manchester.ac.uk/">
+				Palfinder
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://pepsimili.e-nios.com:8080/">
+				PepSimili
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.bio.di.uminho.pt/">
+				PhagePromotor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be/">
+				UseGalaxy.be
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.cz/">
+				UseGalaxy.cz
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				UseGalaxy.eu
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr/">
+				UseGalaxy.fr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no/">
+				UseGalaxy.no
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				UseGalaxy.org (Main)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				UseGalaxy.org.au
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://viralvariant.anses.fr/">
+				Viral Variant Visualizer (VVV)
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.18.1+galaxy2, 
+						
+						0.0.5-2, 
+						
+						0.18.1+galaxy1, 
+						
+						0.18.1+galaxy3, 
+						
+						0.18.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4, 
+						
+						0.0.5
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.1.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.1.1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.1.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.1-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.12.0+galaxy1, 
+						
+						0.0.3-3, 
+						
+						1.12.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						4.2, 
+						
+						4.0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="exact">
+						5.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-multiplex-tissue-imaging-TMA-compat" class="modal" tabindex="-1" aria-labelledby="imaging-multiplex-tissue-imaging-TMA-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-multiplex-tissue-imaging-TMA-label">Current Server Compatibility table for "End-to-End Tissue Microarray Image Analysis with Galaxy-ME"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="http://apostl.moffitt.org/">
+				APOSTL
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://smile.hku.hk/SARGs">
+				ARGs-OAP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://iris.angers.inra.fr/galaxypub-cfbp">
+				CIRM-CFBP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://vm-chemflow-francegrille.eu/">
+				ChemFlow
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://hyperbrowser.uio.no/coloc-stats">
+				Coloc-stats
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://coralsnp.science.psu.edu/galaxy/">
+				CoralSNP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://cropgalaxy.excellenceinbreeding.org/">
+				CropGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://dintor.eurac.edu/">
+				Dintor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://www.freebioinfo.org/">
+				FreeBioinfo
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://igg.cloud.ba.infn.it/galaxy">
+				GASLINI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.mesocentre.uca.fr">
+				Galaxy@AuBi
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.pasteur.fr/">
+				Galaxy@Pasteur
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxytrakr.org/">
+				GalaxyTrakr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://hyperbrowser.uio.no/hb/">
+				Genomic Hyperbrowser
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://gigagalaxy.net/">
+				GigaGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.hyphy.org/">
+				HyPhy HIV NGS Tools
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy-web.ipk-gatersleben.de">
+				IPK Galaxy Blast Suite
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://www.immportgalaxy.org/">
+				ImmPort Galaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.interactomix.com/">
+				InteractoMIX
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://mississippi.sorbonne-universite.fr">
+				MISSISSIPPI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://neo.engr.uconn.edu/">
+				Mandoiu Lab
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/">
+				MiModD NacreousMap
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.inf.ethz.ch">
+				Oqtans
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://palfinder.ls.manchester.ac.uk/">
+				Palfinder
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://pepsimili.e-nios.com:8080/">
+				PepSimili
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.bio.di.uminho.pt/">
+				PhagePromotor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be/">
+				UseGalaxy.be
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.cz/">
+				UseGalaxy.cz
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				UseGalaxy.eu
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr/">
+				UseGalaxy.fr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no/">
+				UseGalaxy.no
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				UseGalaxy.org (Main)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				UseGalaxy.org.au
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://viralvariant.anses.fr/">
+				Viral Variant Visualizer (VVV)
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.12.3+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.12.3+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.12.3+galaxy2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.3.1+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.17.7+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.17.7+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.17.7+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.17.7+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.0.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.0.4+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.0.4+galaxy5
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.0.4+galaxy5
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4, 
+						
+						6.7.0+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						6.7.0+galaxy2, 
+						
+						6.7.0+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.14.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.14.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.14.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.14.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.0.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.0.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.0.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						2.2.8+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.2.8+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						2.2.8+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						2.2.8+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						1.5.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.5.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.5.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.5.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.5.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						1.5.3+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-imaging-introduction-compat" class="modal" tabindex="-1" aria-labelledby="imaging-imaging-introduction-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-imaging-introduction-label">Current Server Compatibility table for "Introduction to image analysis using Galaxy"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="http://apostl.moffitt.org/">
+				APOSTL
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://smile.hku.hk/SARGs">
+				ARGs-OAP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://iris.angers.inra.fr/galaxypub-cfbp">
+				CIRM-CFBP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://vm-chemflow-francegrille.eu/">
+				ChemFlow
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://hyperbrowser.uio.no/coloc-stats">
+				Coloc-stats
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://coralsnp.science.psu.edu/galaxy/">
+				CoralSNP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://cropgalaxy.excellenceinbreeding.org/">
+				CropGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://dintor.eurac.edu/">
+				Dintor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://www.freebioinfo.org/">
+				FreeBioinfo
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://igg.cloud.ba.infn.it/galaxy">
+				GASLINI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.mesocentre.uca.fr">
+				Galaxy@AuBi
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.pasteur.fr/">
+				Galaxy@Pasteur
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxytrakr.org/">
+				GalaxyTrakr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://hyperbrowser.uio.no/hb/">
+				Genomic Hyperbrowser
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://gigagalaxy.net/">
+				GigaGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.hyphy.org/">
+				HyPhy HIV NGS Tools
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy-web.ipk-gatersleben.de">
+				IPK Galaxy Blast Suite
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://www.immportgalaxy.org/">
+				ImmPort Galaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.interactomix.com/">
+				InteractoMIX
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://mississippi.sorbonne-universite.fr">
+				MISSISSIPPI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://neo.engr.uconn.edu/">
+				Mandoiu Lab
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/">
+				MiModD NacreousMap
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.inf.ethz.ch">
+				Oqtans
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://palfinder.ls.manchester.ac.uk/">
+				Palfinder
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://pepsimili.e-nios.com:8080/">
+				PepSimili
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.bio.di.uminho.pt/">
+				PhagePromotor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be/">
+				UseGalaxy.be
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.cz/">
+				UseGalaxy.cz
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				UseGalaxy.eu
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr/">
+				UseGalaxy.fr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no/">
+				UseGalaxy.no
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				UseGalaxy.org (Main)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				UseGalaxy.org.au
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://viralvariant.anses.fr/">
+				Viral Variant Visualizer (VVV)
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.18.1+galaxy2, 
+						
+						0.0.5-2, 
+						
+						0.18.1+galaxy1, 
+						
+						0.18.1+galaxy3, 
+						
+						0.18.1+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4, 
+						
+						0.0.5
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.14.2+galaxy0, 
+						
+						0.18.1+galaxy0, 
+						
+						0.0.1-2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1-2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1-2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.1-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.12.0+galaxy1, 
+						
+						0.0.3-3, 
+						
+						1.12.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.2
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.2, 
+						
+						1.12.0+galaxy1, 
+						
+						0.0.3-3, 
+						
+						1.12.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						1.12.0+galaxy1, 
+						
+						0.0.3-3, 
+						
+						1.12.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						1.12.0+galaxy1, 
+						
+						0.0.3-3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3, 
+						
+						0.0.2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4, 
+						
+						6.7.0+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						6.7.0+galaxy2, 
+						
+						6.7.0+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						6.7.0+galaxy0, 
+						
+						6.7.0+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.7.0+galaxy2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.4
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.4-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.4, 
+						
+						0.5+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.5-2
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4, 
+						
+						0.0.5
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.5-2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						5.7.1+galaxy1, 
+						
+						5.7.1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4+galaxy0, 
+						
+						0.0.4+galaxy1, 
+						
+						0.0.4+galaxy4, 
+						
+						0.0.4+galaxy3, 
+						
+						0.0.4+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4+galaxy4, 
+						
+						0.0.4+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3-3</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.2, 
+						
+						0.0.3, 
+						
+						0.0.1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.0.3-3
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4+galaxy0, 
+						
+						0.0.4+galaxy1, 
+						
+						0.0.4+galaxy4, 
+						
+						0.0.4+galaxy3, 
+						
+						0.0.4+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.0.4+galaxy4, 
+						
+						0.0.4+galaxy3
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.2
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						6.0+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-tutorial-CP-compat" class="modal" tabindex="-1" aria-labelledby="imaging-tutorial-CP-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-tutorial-CP-label">Current Server Compatibility table for "Nucleoli segmentation and feature extraction using CellProfiler"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="http://apostl.moffitt.org/">
+				APOSTL
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://smile.hku.hk/SARGs">
+				ARGs-OAP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://iris.angers.inra.fr/galaxypub-cfbp">
+				CIRM-CFBP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://vm-chemflow-francegrille.eu/">
+				ChemFlow
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://hyperbrowser.uio.no/coloc-stats">
+				Coloc-stats
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://coralsnp.science.psu.edu/galaxy/">
+				CoralSNP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://cropgalaxy.excellenceinbreeding.org/">
+				CropGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://dintor.eurac.edu/">
+				Dintor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://www.freebioinfo.org/">
+				FreeBioinfo
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://igg.cloud.ba.infn.it/galaxy">
+				GASLINI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.mesocentre.uca.fr">
+				Galaxy@AuBi
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.pasteur.fr/">
+				Galaxy@Pasteur
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxytrakr.org/">
+				GalaxyTrakr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://hyperbrowser.uio.no/hb/">
+				Genomic Hyperbrowser
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://gigagalaxy.net/">
+				GigaGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.hyphy.org/">
+				HyPhy HIV NGS Tools
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy-web.ipk-gatersleben.de">
+				IPK Galaxy Blast Suite
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://www.immportgalaxy.org/">
+				ImmPort Galaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.interactomix.com/">
+				InteractoMIX
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://mississippi.sorbonne-universite.fr">
+				MISSISSIPPI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://neo.engr.uconn.edu/">
+				Mandoiu Lab
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/">
+				MiModD NacreousMap
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.inf.ethz.ch">
+				Oqtans
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://palfinder.ls.manchester.ac.uk/">
+				Palfinder
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://pepsimili.e-nios.com:8080/">
+				PepSimili
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.bio.di.uminho.pt/">
+				PhagePromotor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be/">
+				UseGalaxy.be
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.cz/">
+				UseGalaxy.cz
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				UseGalaxy.eu
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr/">
+				UseGalaxy.fr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no/">
+				UseGalaxy.no
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				UseGalaxy.org (Main)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				UseGalaxy.org.au
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://viralvariant.anses.fr/">
+				Viral Variant Visualizer (VVV)
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_convert_objects_to_image/cp_convert_objects_to_image/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_display_data_on_image/cp_display_data_on_image/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_enhance_or_suppress_features/cp_enhance_or_suppress_features/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_gray_to_color/cp_gray_to_color/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_image_math/cp_image_math/0.1.0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.1.0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_mask_image/cp_mask_image/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_granularity/cp_measure_granularity/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_area_occupied/cp_measure_image_area_occupied/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_intensity/cp_measure_image_intensity/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_image_quality/cp_measure_image_quality/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_texture/cp_measure_texture/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_relate_objects/cp_relate_objects/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/iuc/idr_download_by_ids/idr_download_by_ids/0.41</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.41
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.44
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.41
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.45, 
+						
+						0.44.1
+						
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.43, 
+						
+						0.42, 
+						
+						0.44
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						0.44.1
+						
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-object-tracking-using-cell-profiler-compat" class="modal" tabindex="-1" aria-labelledby="imaging-object-tracking-using-cell-profiler-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-object-tracking-using-cell-profiler-label">Current Server Compatibility table for "Object tracking using CellProfiler"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+			<th scope="col">
+				<a href="http://apostl.moffitt.org/">
+				APOSTL
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://smile.hku.hk/SARGs">
+				ARGs-OAP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://iris.angers.inra.fr/galaxypub-cfbp">
+				CIRM-CFBP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://vm-chemflow-francegrille.eu/">
+				ChemFlow
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://hyperbrowser.uio.no/coloc-stats">
+				Coloc-stats
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://coralsnp.science.psu.edu/galaxy/">
+				CoralSNP
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://cropgalaxy.excellenceinbreeding.org/">
+				CropGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://dintor.eurac.edu/">
+				Dintor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://www.freebioinfo.org/">
+				FreeBioinfo
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://igg.cloud.ba.infn.it/galaxy">
+				GASLINI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.mesocentre.uca.fr">
+				Galaxy@AuBi
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.pasteur.fr/">
+				Galaxy@Pasteur
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxytrakr.org/">
+				GalaxyTrakr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://hyperbrowser.uio.no/hb/">
+				Genomic Hyperbrowser
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://gigagalaxy.net/">
+				GigaGalaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.hyphy.org/">
+				HyPhy HIV NGS Tools
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy-web.ipk-gatersleben.de">
+				IPK Galaxy Blast Suite
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://www.immportgalaxy.org/">
+				ImmPort Galaxy
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.interactomix.com/">
+				InteractoMIX
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://mississippi.sorbonne-universite.fr">
+				MISSISSIPPI
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://neo.engr.uconn.edu/">
+				Mandoiu Lab
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/">
+				MiModD NacreousMap
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://galaxy.inf.ethz.ch">
+				Oqtans
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://palfinder.ls.manchester.ac.uk/">
+				Palfinder
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="http://pepsimili.e-nios.com:8080/">
+				PepSimili
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://galaxy.bio.di.uminho.pt/">
+				PhagePromotor
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.be/">
+				UseGalaxy.be
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.cz/">
+				UseGalaxy.cz
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.eu">
+				UseGalaxy.eu
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.fr/">
+				UseGalaxy.fr
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.no/">
+				UseGalaxy.no
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org">
+				UseGalaxy.org (Main)
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://usegalaxy.org.au">
+				UseGalaxy.org.au
+				</a>
+			</th>
+			
+			<th scope="col">
+				<a href="https://viralvariant.anses.fr/">
+				Viral Variant Visualizer (VVV)
+				</a>
+			</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy1
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						3.1.9+galaxy2
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy1
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						3.1.9+galaxy0
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		<tr>
+			<th scope="row">toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/0.2</th>
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						6.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="inexact">
+						
+						6.0+galaxy0
+						
+					</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+				
+					<td class="exact">
+						0.2
+					</td>
+				
+			
+				
+					<td class="missing">Missing</td>
+				
+			
+		</tr>
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-bioimage-metadata-compat" class="modal" tabindex="-1" aria-labelledby="imaging-bioimage-metadata-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-bioimage-metadata-label">Current Server Compatibility table for "FAIR Bioimage Metadata"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="imaging-bioimage-REMBI-compat" class="modal" tabindex="-1" aria-labelledby="imaging-bioimage-REMBI-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="imaging-bioimage-REMBI-label">Current Server Compatibility table for "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of 2024-10-02 16:01:55 +0000</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			
+		</tr>
+		</thead>
+		<tbody>
+
+		
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+td.exact, td.local {
+	background-color: var(--feedback-color);
+	color: black;
+}
+td.inexact {
+	background-color: var(--solution-color);
+	color: black;
+}
+
+/* https://adrianroselli.com/2020/01/fixed-table-headers.html */
+
+table.compat th[scope=row] {
+  background-color: var(--color-background);
+}
+
+table.scroll-header th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-background);
+}
+table.scroll-row th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: end;
+}
+</style>
 
 
 <h2>Your topic's Workflow Testing Results</h2>
@@ -443,7 +12840,7 @@ https://github.com/galaxyproject/training-material/pull/4963
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/57b00dc456c300b41ba51ef17460758971bbbd07">57b00dc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8dc4b2141f9c6d379b0fc2a7544bb895081a3000">8dc4b21</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
