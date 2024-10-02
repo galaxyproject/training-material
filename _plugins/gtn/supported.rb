@@ -113,13 +113,15 @@ module Gtn
     #  }
     def self.calculate_matrix(data, tool_list)
       structure = {
-        'servers' => data['servers'],
+        'servers' => [],
         'tools' => [],
       }
       # p "Calculating supported servers for this tool list"
       if data.nil? || data.empty? || tool_list.empty? || tool_list.nil?
         return structure
       end
+
+      structure['servers'] = data['servers']
 
       tool_list.each do |tool|
         tool_for_server = {
