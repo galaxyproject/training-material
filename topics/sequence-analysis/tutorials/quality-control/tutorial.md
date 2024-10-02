@@ -61,6 +61,7 @@ recordings:
   speakers: 
   - dianichj
   captioners: 
+  - dianichj
   bot-timestamp: 1727710795
 
 
