@@ -730,6 +730,13 @@ module TopicFilter
                                       []
                                     end
 
+    page_obj['supported_servers_matrix'] = if topic['type'] == 'use' || topic['type'] == 'basics'
+      Gtn::Supported.calculate_matrix(site.data['public-server-tools'], page_obj['tools'])
+    else
+      []
+    end
+
+
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
@@ -1134,6 +1141,7 @@ module Jekyll
         .list_materials_structured(site, topic_name)
         .map { |k, v| v['materials'] }
         .flatten
+        .uniq { |x| x['id'] }
     end
 
     def list_all_tags(site)
