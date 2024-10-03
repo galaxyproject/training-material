@@ -25,7 +25,7 @@ There is a number of situations when simple collections are not sufficient to re
 
 **Nested collections**
 
-Probably the most common example of this is pared end data when each sample is represented by two files: one containing forward reads and another containing reverse reads. In Galaxy you can create **nested** collection that reflects the hierarchy of the data. In the case of paired data Galaxy supports **paired** collections.
+Probably the most common example of this is paired end data when each sample is represented by two files: one containing forward reads and another containing reverse reads. In Galaxy you can create **nested** collection that reflects the hierarchy of the data. In the case of paired data Galaxy supports **paired** collections.
 
 ![A paired collection is a container containing individual datasets and preserving their hierarchy]({% link shared/images/paired_collection.svg %})
 
