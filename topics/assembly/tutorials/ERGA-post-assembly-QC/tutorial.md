@@ -259,11 +259,14 @@ In this tutorial we will use **Minimap2** for generation the coverage data. Mini
 
 > <hands-on-title> Estimate single copy gene representation completeness </hands-on-title>
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.7.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `CReformitis_assembly`
+>    - *"Lineage data source"*: `Use cached lineage Data`
+>    - *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
 >    - *"Mode"*: `Genome assemblies (DNA)`
->        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>        - *"Select a gene predictor"*: `Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Auto-detect`
+>    - *"auto-lineage group"*: `All taxonomic groups (--auto-lineage)`
 >    - *"Which outputs should be generated"*: `Short summary text`
 >
 >
@@ -618,7 +621,7 @@ It is based on cross-linking the DNA in the nucleus and its histones (proteins a
 >
 > 10. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} again with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly` 
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C reverse Reads` (output of **Collapse Collection** {% icon tool %})
 >    - *"Set read groups information?"*: `Do not set`
