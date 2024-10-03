@@ -14,6 +14,11 @@ objectives:
 - Construct a sample consensus genome from mapped reads
 - Generate per-segment phylogenetic trees of AIV consensus sequences
 time_estimation: 4H
+input_histories:
+- label: "UseGalaxy.eu"
+  history: https://usegalaxy.eu/published/history?id=0fc6b637aadbc8a2
+- label: "UseGalaxy.org"
+  history: https://usegalaxy.org/published/history?id=31cb33f8e6126823
 key_points:
 - Reassortment of gene segments makes reference-based mapping of influenza sequencing data challenging
 - An alternative to *de-novo* assembly can be mapping to a dynamically chosen reference genome
