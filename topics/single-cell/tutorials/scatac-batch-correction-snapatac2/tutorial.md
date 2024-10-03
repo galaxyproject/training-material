@@ -388,7 +388,7 @@ After confirming that batch effects have affected our samples, we should remove 
 > - Many different correction algorithms have been developed, although most methods for scATAC-seq have been adapted from scRNA-seq batch removal algorithms. 
 > - *Harmony* {% cite Korsunsky2019 %} is a principle component analysis (PCA)-based method which utilizes the previously generated lower-dimensional data, to assign cells into new clusters. The grouping of cells into clusters favors multi-sample clusters, in order to integrate the datasets. Linear correction factors are calculated for each batch and cluster, and the cells are moved to the corrected positions. The preceding steps are iterated, until optimal batch correction is achieved. 
 >
->   ![Graphical abstract of Harmony batch correction]({% link topics/single-cell/images/harmony-graphical-abstract.png %})
+>   ![Graphical abstract of Harmony batch correction]({% link topics/single-cell/images/scatac-batch-correction-snapatac2/harmony-graphical-abstract.png %})
 >
 > - *Scanorama* {% cite Hie2019 %} performs panorama stiching, to find and merge overlapping cell types. 
 >
