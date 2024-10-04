@@ -5,7 +5,7 @@ questions:
 - What is the Earth System?
 - What type of data is available?
 objectives:
-- Learn about the terminology
+- Learn about the Earth System terminology
 - Learn about the different source of earth data
 - Learn about earth observations, reanalysis, and visualisation
 time_estimation: 1H
