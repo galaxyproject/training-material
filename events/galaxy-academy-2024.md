@@ -213,13 +213,13 @@ program:
       - type: custom
         name: "[An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/)"
         description: |
-          Lecture Video
+          [<i class="fas fa-video" aria-hidden="true"></i> Lecture Video](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/)
       - name: ro-crate-intro
         topic: fair
       - type: custom
         name: "[Registering Galaxy workflows in WorkflowHub](https://gallantries.github.io/video-library/videos/ro-crates/workflowhub/tutorial/)"
         description: |
-          Lecture Video
+          [<i class="fas fa-video" aria-hidden="true"></i> Lecture Video](https://gallantries.github.io/video-library/videos/ro-crates/workflowhub/tutorial/)
       - name: ro-crate-galaxy-best-practices
         topic: fair
 
