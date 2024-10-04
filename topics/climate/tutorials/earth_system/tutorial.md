@@ -65,7 +65,7 @@ The data available here are from the Argo gliders network. They contain the folo
 
 To access those data you can use the ({% tool [Argo data access](toolshed.g2.bx.psu.edu/repos/ecology/argo_getdata/argo_getdata/0.1.15+galaxy0) %})tool. 
 
-For more information follow the tutorial related to it called [Analyse Argo data]({% link topics/climate/tutorials/argo_pangeo/tutorial.html %}) or use the workflow Full Analyse Argo data `https://earth-system.usegalaxy.eu/u/marie.josse/w/full-analyse-argo-data`
+For more information follow the tutorial related to it called [Analyse Argo data]({% link topics/climate/tutorials/argo_pangeo/tutorial.md %}) or use the workflow Full Analyse Argo data `https://earth-system.usegalaxy.eu/u/marie.josse/w/full-analyse-argo-data`
 
 
 ## Copernicus Data Space Ecosystem
@@ -75,7 +75,7 @@ The goal of the **Sentinel-3 mission** is to accurately and reliably measure sea
 
 To access those data you can use the [Copernicus Data Space Ecosystem](https://usegalaxy.eu/root?tool_id=interactive_tool_copernicus_notebook) tool. 
 
-For more information follow the tutorial related to it called [Sentinel 5P data visualisation]({% link topics/climate/tutorials/sentinel5_data/tutorial.html %}). 
+For more information follow the tutorial related to it called [Sentinel 5P data visualisation]({% link topics/climate/tutorials/sentinel5_data/tutorial.md %}). 
 
 Once you get into the Jupyterlab go in the left pannel in `samples > openeo > Sentinel_3.ipynb `. Yhis way you have an example on how to get Sentinel 3 data.
 
@@ -92,7 +92,7 @@ You can also find these collections on the [Sextant catalogue](https://sextant.i
 You can analize thes kind of data through the [Ocean Data View (ODV)](https://usegalaxy.eu/root?tool_id=interactive_tool_odv) tool. 
 
 For more information follow the related tutorials and workflows:
- - [Ocean's variables study]({% link topics/climate/tutorials/ocean-variables/tutorial.html %}) and the corresponding workflow  `https://usegalaxy.eu/u/marie.josse/w/oceans-var-v2`
+ - [Ocean's variables study]({% link topics/climate/tutorials/ocean-variables/tutorial.md %}) and the corresponding workflow  `https://usegalaxy.eu/u/marie.josse/w/oceans-var-v2`
  - [Ocean Data View (ODV)]({% link topics/climate/tutorials/ocean-data-view/tutorial.md %})
 
 
@@ -136,7 +136,7 @@ The NDVI ratio can be determined from the contribution of visible wavelength and
 
 To access those data you can use the [Copernicus Data Space Ecosystem](https://usegalaxy.eu/root?tool_id=interactive_tool_copernicus_notebook) tool. 
 
-For more information follow the tutorial related to it called [From NDVI data with OpenEO to time series visualisation with Holoviews]({% link topics/ecology/tutorials/ndvi_openeo/tutorial.html %}). 
+For more information follow the tutorial related to it called [From NDVI data with OpenEO to time series visualisation with Holoviews]({% link topics/ecology/tutorials/ndvi_openeo/tutorial.md %}). 
 
 
 ## QGIS (Geographical Information System)
@@ -145,7 +145,7 @@ Based on a [QGIS official tutorial](https://docs.qgis.org/2.18/en/docs/training_
 
 In the Geographical Information System landscape, there is existing standards to help users deal with remote data. The most common web services are Web Map Services (WMS) and Web Feature Services (WFS). If WMS allows users only to access and display maps stored remotely, WFS is giving access to the features of data so you can modify it and create your own data and maps.
 
-To learn more on how to do that folow [QGIS Web Feature Services]({% link topics/ecology/tutorials/QGIS_Web_Feature_Services/tutorial.html %})
+To learn more on how to do that folow [QGIS Web Feature Services]({% link topics/ecology/tutorials/QGIS_Web_Feature_Services/tutorial.md %})
 
 # ☁️ Atmosphere 🌫️
 
@@ -162,7 +162,7 @@ To access those data you can use the [Copernicus Data Space Ecosystem](https://u
 
 You can get atmospheric data on volcanic activity by taking a subset of Sentinel 5P L2 data  for instance,  from the 1st of April to the 30th of may 2021 of the Antilles. Especially of the La Soufriere Saint Vincent (Antilles) where a volcaninc erruption occured 9th of April. This dataset is focused on the dioxide sulfur (SO2) and Aerosol index (AI) spread out. Indeed, the knowledge of volcanic activity at a high temporal resolution is crucial for robustly determining large-scale impacts of volcanoes on atmosphere (air quality, air traffic) and climate. As such, this platform will be also of interest for scientists involved in the field of volcanic impacts at large, including institutions in charge of the monitoring of air quality and aviation safety.
  
-For more information follow the tutorial related to it called [Sentinel 5P data visualisation]({% link topics/climate/tutorials/sentinel5_data/tutorial.html %}). 
+For more information follow the tutorial related to it called [Sentinel 5P data visualisation]({% link topics/climate/tutorials/sentinel5_data/tutorial.md %}). 
 
 
 ## Climate Data Store
@@ -183,7 +183,7 @@ of spatial- and time-comparable marine microbial metagenomics data sets for the 
 
 OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to get occurences of marine biodiversity from OBIS you can use the ({% tool [OBIS occurences](toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2) %}) tool.
 
-For more information follow the tutorial related to it called [OBIS marine indicators]({% link topics/ecology/tutorials/obisindicators/tutorial.html %}) or use the workflow Marine omics visualisation `https://usegalaxy.eu/u/marie.josse/w/marine-omics-visualisation`
+For more information follow the tutorial related to it called [OBIS marine indicators]({% link topics/ecology/tutorials/obisindicators/tutorial.md %}) or use the workflow Marine omics visualisation `https://usegalaxy.eu/u/marie.josse/w/marine-omics-visualisation`
 
 ## Land biodiversity 🦤
 
