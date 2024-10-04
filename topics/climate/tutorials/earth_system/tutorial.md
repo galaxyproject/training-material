@@ -193,7 +193,7 @@ GBIF (Global Biodiversity Information Facility, www.gbif.org) is for sure THE mo
 
 To access those data you can use the ({% tool [Get species occurrences data](toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0) %}) tool. 
 
-For more information follow the tutorial related to it called [Cleaning GBIF data for the use in Ecology]({% link topics/ecology/tutorials/gbif_cleaning/tutorial.html#cleaning-gbif-data-for-the-use-in-ecology %}).
+For more information follow the tutorial related to it called [Cleaning GBIF data for the use in Ecology]({% link topics/ecology/tutorials/gbif_cleaning/tutorial.md %}).
 
 
 
