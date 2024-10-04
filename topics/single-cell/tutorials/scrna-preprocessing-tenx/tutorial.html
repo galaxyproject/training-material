@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c4ad059255fb949d6cf861d96de87858743016ea",
+		release: "galaxy-training-network@1d9d2cee0054eb7f4af10e8fcc168e99dc722c6c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Pre-processing of 10X Single-Cell RNA Datasets">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-10-04 16:28:35 +0000">
 <meta name="DC.creator" content="Mehmet Tekman">
 <meta name="DC.creator" content="Hans-Rudolf Hotz">
 <meta name="DC.creator" content="Daniel Blankenberg">
@@ -213,7 +213,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-10-04 16:28:35 +0000",
   "datePublished": "2019-09-11 13:07:03 +0000",
   "identifier": "https://gxy.io/GTN:T00252",
   "accessMode": [
@@ -243,7 +243,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Pre-processing of 10X Single-Cell RNA Datasets",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing-tenx/tutorial.html",
-  "version": 8,
+  "version": 9,
   "timeRequired": "PT1H",
   "teaches": "- Demultiplex single-cell FASTQ data from 10X Genomics\n- Learn about transparent matrix formats\n- Understand the importance of high and low quality cells",
   "keywords": [
@@ -1029,6 +1029,29 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
 
             
+                <li class="btn btn-default supporting_material">
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Answer Histories">
+        <i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span>&nbsp;Answer Histories
+    </a>
+    <ul class="dropdown-menu">
+      
+        <li>
+            <a class="dropdown-item" href="https://usegalaxy.org/u/videmp/h/pre-processing-of-10x-single-cell-rna-datasets">
+              UseGalaxy.org
+              
+              <br/><span class="text-muted">2024-10-04</span>
+              
+            </a>
+        </li>
+      
+      <li class="dropdown-divider"></li>
+      <li>
+        <a class="dropdown-item" href="/training-material/faqs/gtn/gtn_example_histories.html"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> How to Use This</a>
+      </li>
+    </ul>
+
+</li>
+            
 
             
 
@@ -1186,7 +1209,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Sep 11, 2019 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 4, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1206,7 +1229,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.3</a> (3 recent ratings, 22 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
 
     </blockquote>
     </section>
@@ -1872,7 +1895,7 @@ Genes:
 
 <p>In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via <strong>RNA STARsolo</strong>, and have reproduced a <em>Cell Ranger</em> workflow using the <strong>DropletUtils</strong> suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.</p>
 
-<p>A full pipeline which produces both an AnnData and tabular file for inspection is provided <a href="workflows/scRNA-seq-Preprocessing-TenX.ga">in this workflow</a>.</p>
+<p>A full pipeline which produces both an AnnData and tabular file for inspection is provided <a href="workflows/scRNA-seq-Preprocessing-TenX.ga">in this workflow</a></p>
 
 <p>Note that, since version <em>2.7.7a</em> of the tool, the entire <em>Cell Ranger</em> pipeline including the filtering can be performed natively within <strong>RNA STARsolo</strong>. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.</p>
 
@@ -2421,7 +2444,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c4ad059255fb949d6cf861d96de87858743016ea">c4ad059</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1d9d2cee0054eb7f4af10e8fcc168e99dc722c6c">1d9d2ce</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
