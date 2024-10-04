@@ -110,7 +110,7 @@ infrastructure:
 
 program:
   - section: "Monday: Introduction"
-
+    description: When you are ready to start, just work your way through the program below by watching videos and/or following the text-based tutorials. There are no live sessions, so you can determine your own schedule. A large team of instructors is available on Slack to answer your questions 24/7! Enjoy!
   - section: Course introduction
     subsection: true
     tutorials:
