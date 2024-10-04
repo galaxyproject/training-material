@@ -26,8 +26,6 @@ program:
     description: |
       In this section, we will introduce what is a genome assembly, how it works, and the metrics to evaluate the quality of an assembly.
     tutorials:
-      - name: get-started-genome-assembly
-        topic: assembly
       - type: custom
         name: "[Introduction To Genome Assembly](https://youtu.be/9WZe7VGtr-k)"
         description: |
@@ -50,10 +48,8 @@ program:
     description: |
       When sequencing organisms with non-nuclear DNA, the data contain sequencing for both nuclear and non-nuclear DNA. In this section we will learn how to assemble organelles genome.
     tutorials:
-      - type: custom
-        name: "Mitochondrial Genome Assembly"
-        description: |
-          Tutorial (will come soon)
+      - name: mitochondrion-assembly
+        topic: assembly
       - name: chloroplast-assembly
         topic: assembly
 
@@ -61,10 +57,8 @@ program:
     description: |
       In this section we will learn how remove sequences that do not belong to the organism you want to sequence.
     tutorials:
-      - type: custom
-        name: "Assembly decontamination"
-        description: |
-          Tutorial (will come soon)
+      - name: assembly-decontamination
+        topic: assembly
 ---
 
 
