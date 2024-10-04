@@ -30,7 +30,7 @@ contributions:
         - nekrut
         - dannon
         - delphine-l
-        - GarethPrice-Aus 
+        - GarethPrice-Aus
         - jdavcs
         - mschatz
         - natalie-wa
@@ -53,7 +53,7 @@ contributions:
         - elichad
         - EngyNasr
         - emmaustin20
-        - GarethPrice-Aus 
+        - GarethPrice-Aus
         - igormakunin
         - jdavcs
         - lldelisle
@@ -92,6 +92,7 @@ location:
   name: online
 
 infrastructure:
+  tiaas: true
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
@@ -108,7 +109,7 @@ infrastructure:
 program:
   - section: "Monday: Galaxy introduction"
     description: |
-      Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics. 
+      Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
       In the morning you can take part in the Icebreaker by joining us in the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA). Or you can directly start with the tutorials. If you need support contact us via the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA).
   - section: Start to get to know Galaxy
     subsection: true
