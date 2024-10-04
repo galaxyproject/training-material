@@ -512,7 +512,7 @@ The knee and inflection points on the curve mark the transition between two comp
 >
 > > <solution-title></solution-title>
 > > 1. We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as `"knee = 4861"`. This line intersects with the ranked cells near 100 on x-axis. We can expect 100-200 cells with high RNA content.
-> > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`. The vertical drop in the ranked cells at the inflection line is between 100 and 10000 on the x-axis. The axis is log scaled it is close to 100. Hence, we can expect between 200 and 400 cells.  
+> > 1. This threshold is given by the inflection line, which is given at `"inflection = 260"`. The vertical drop in the ranked cells at the inflection line is between 100 and 10000 on the x-axis. The axis is log scaled it is close to 100. Hence, we can expect between 200 and 400 cells.
 > {: .solution}
 {: .question}
 
@@ -544,7 +544,9 @@ Here we recover 282 high quality cells instead of the 272 detected via the defau
 
 In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
 
-A full pipeline which produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scRNA-seq-Preprocessing-TenX.ga).
+You might want to check your results with this [control history](https://usegalaxy.org/u/videmp/h/pre-processing-of-10x-single-cell-rna-datasets), or check out the [workflow](https://usegalaxy.org/u/videmp/w/preprocessing-of-10x-scrna-seq-data) for this tutorial.
+
+A full pipeline which produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scRNA-seq-Preprocessing-TenX.ga)
 
 Note that, since version *2.7.7a* of the tool, the entire *Cell Ranger* pipeline including the filtering can be performed natively within **RNA STARsolo**. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.
 
