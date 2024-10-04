@@ -58,6 +58,10 @@ recordings:
   - pavanvidem
   bot-timestamp: 1727373432
 
+answer_histories:
+    - label: "Scanpy_1.10.2_Anndata_0.10.9"
+    history: https://singlecell.usegalaxy.eu/u/videmp/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024
+    date: 2024-10-04
 
 ---
 
@@ -1880,9 +1884,7 @@ With the annotated cell types, we can also visualize the expression of their can
 {: .question}
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/videmp/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024), or check out the [full workflow](https://usegalaxy.eu/u/videmp/w/clustering-3k-pbmc-with-scanpy-1-10-2) for this tutorial.
-
-In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
+{% icon congratulations %} Well done, you’ve made it to the end! In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
 
 1. Preprocessing with
     1. Selection and filtration of cells and genes based on quality metrics

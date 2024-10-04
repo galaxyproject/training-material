@@ -64,6 +64,11 @@ recordings:
   speakers:
   - nomadscientist
 
+answer_histories:
+    - label: "UseGalaxy.org"
+    history: https://usegalaxy.org/u/videmp/h/pre-processing-of-10x-single-cell-rna-datasets
+    date: 2024-10-04
+
 ---
 
 
@@ -543,8 +548,6 @@ Here we recover 282 high quality cells instead of the 272 detected via the defau
 
 
 In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via **RNA STARsolo**, and have reproduced a *Cell Ranger* workflow using the **DropletUtils** suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.
-
-You might want to check your results with this [control history](https://usegalaxy.org/u/videmp/h/pre-processing-of-10x-single-cell-rna-datasets), or check out the [workflow](https://usegalaxy.org/u/videmp/w/preprocessing-of-10x-scrna-seq-data) for this tutorial.
 
 A full pipeline which produces both an AnnData and tabular file for inspection is provided [in this workflow](workflows/scRNA-seq-Preprocessing-TenX.ga)
 
