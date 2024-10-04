@@ -109,18 +109,30 @@ infrastructure:
 
 
 program:
+  - section: "Monday: Introduction"
+
   - section: Course introduction
+    subsection: true
     tutorials:
       - name: Welcome & Course logistics
         type: custom
         description: |
           [<i class="fas fa-video" aria-hidden="true"></i> Video: Welcome to the course!](https://youtu.be/OyMpSNEDyEA)
+      - type: custom
+        name: Daily Icebreaker
+        description: |
+          **Please take a moment to introduce yourself and tell us one fun fact about yourself!**
+
+          Post your answer to Slack [#social](https://gtnsmrgsbord.slack.com/channels/social) channel. *(See the setup tab for instructions for joining Slack)*.
 
 
-  - section: "Monday: Galaxy introduction"
+  - section: "Galaxy introduction"
+    subsection: true
     description: |
       Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
-      In the morning you can take part in the Icebreaker by joining us in the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA). Or you can directly start with the tutorials. If you need support contact us via the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA).
+      In the morning you can take part in the Icebreaker by joining us in the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA). Or you can directly start with the tutorials.
+
+      **Need help with these tutorials?** Ask your questions via the [Slack introduction channel](https://gtnsmrgsbord.slack.com/archives/C07NKAJ8THA).
   - section: Start to get to know Galaxy
     subsection: true
     tutorials:
@@ -147,7 +159,20 @@ program:
       - name: mapping
         topic: sequence-analysis
 
-  - section: "Tuesday to Thursday: Pick a track"
+  - section: "Tuesday to Thursday: Choose your own Adventure!"
+    tutorials:
+      - type: custom
+        name: Daily Icebreakers
+        description: |
+          **Tuesday:** For today's ice breaker, we would love to know one weird fact that you know for no reason.
+          **Wednesday:** We would love to hear where you find inspiration. Maybe you find inspirtaiton through nature or maybe you have a prominant role model in your life—we'd love to learn more about you!
+          **Thursday:** if you could take any one movie prop from a movie set, what would it be?
+
+          Post your answers each day to Slack [#social](https://gtnsmrgsbord.slack.com/channels/social) channel.
+
+
+  - section: "Pick a track"
+    subsection: true
     description: |
       Over the course of these three days, you can choose your preferred track and learn how to use Galaxy for data analysis in this research field. If you find multiple topics interesting, feel free to explore more than one track. Each track will guide you through the process, from basic to more advanced analyses, to accommodate learners of all levels.
 
@@ -172,23 +197,40 @@ program:
 
   - section: "Friday: Grab bag"
     description: |
-      Can't get enough? Then please pick one of our FAIR tutorials or any of the tutorials of the GTN. Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
-      You can directly start with you prefered tutorial. If you need support contact us via the Slack Channel [#gta_friday-grab-bag](https://gtnsmrgsbord.slack.com/archives/C07N2A4HQ15).
+      Can't get enough? Then please pick one of our FAIR tutorials below, or any of the tutorials of the [GTN](https://training.galaxyproject.org). Please be aware that only trainings that are part of the introduction day or a learning track have been tested on all instances for the event. The trainers present on Slack will do their best to help you if you have a problem and answer questions, but they may not be expert in the topic you selected.
+      You can directly start with you prefered tutorial.
+
+      **Need help with these tutorials?** Ask your questions via the Slack Channel [#gta_friday-grab-bag](https://gtnsmrgsbord.slack.com/archives/C07N2A4HQ15).
   - section: Fair training
     subsection: true
     tutorials:
       - type: custom
+        name: Daily Icebreaker
+        description: |
+          **For the last ice breaker, we would love to know what the most interesting or exciting thing you learned this week is!!**
+
+          Post your answer on Slack [#social](https://gtnsmrgsbord.slack.com/channels/social) channel
+      - type: custom
         name: "[An overview of the RO-Crate concept and its implementations](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/)"
         description: |
-          Lecture Video
+          [<i class="fas fa-video" aria-hidden="true"></i> Lecture Video](https://gallantries.github.io/video-library/videos/ro-crates/intro/slides/)
       - name: ro-crate-intro
         topic: fair
       - type: custom
         name: "[Registering Galaxy workflows in WorkflowHub](https://gallantries.github.io/video-library/videos/ro-crates/workflowhub/tutorial/)"
         description: |
-          Lecture Video
+          [<i class="fas fa-video" aria-hidden="true"></i> Lecture Video](https://gallantries.github.io/video-library/videos/ro-crates/workflowhub/tutorial/)
       - name: ro-crate-galaxy-best-practices
         topic: fair
+
+  - section: Explore the GTN!
+    subsection: true
+    description: |
+      Feel free to try any other tutorials you see on the GTN, and we will do our best to guide you!
+    tracks:
+      - title: Go to the GTN!
+        link: https://training.galaxyproject.org
+
 ---
 # Welcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a **5-day Global Online and Asynchronous learning event**.
