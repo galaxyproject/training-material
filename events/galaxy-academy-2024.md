@@ -107,6 +107,14 @@ infrastructure:
 
 
 program:
+  - section: Course introduction
+    tutorials:
+      - name: Welcome & Course logistics
+        type: custom
+        description: |
+          [<i class="fas fa-video" aria-hidden="true"></i> Video: Welcome to the course!](https://youtu.be/OyMpSNEDyEA)
+
+
   - section: "Monday: Galaxy introduction"
     description: |
       Kick off the week with a hands-on introduction to Galaxy, covering everything from basic navigation and data manipulation to reproducing published analyses, quality control, and mapping sequences to a reference genome. Whether you're new to Galaxy or looking to strengthen your skills, today's sessions will equip you with the foundational knowledge needed for more advanced topics.
