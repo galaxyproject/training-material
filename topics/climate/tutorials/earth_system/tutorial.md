@@ -93,7 +93,7 @@ You can analize thes kind of data through the [Ocean Data View (ODV)](https://us
 
 For more information follow the related tutorials and workflows:
  - [Ocean's variables study]({% link topics/climate/tutorials/ocean-variables/tutorial.html %}) and the corresponding workflow  `https://usegalaxy.eu/u/marie.josse/w/oceans-var-v2`
- - [Ocean Data View (ODV)]({% link https://training.galaxyproject.org/training-material/topics/climate/tutorials/ocean-data-view/tutorial.html %})
+ - [Ocean Data View (ODV)]({% link topics/climate/tutorials/ocean-data-view/tutorial.md %})
 
 
 ## Copernicus Marine Data Store
