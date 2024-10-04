@@ -5,7 +5,7 @@ title: Galaxy Training Academy 2024
 description: |
   The Galaxy Academy is a self-paced online training event for beginners as well as learners who would like to improve their Galaxy data analysis skills. Over the course of one week, we will have a different topic and focus every day.
 
-  <a href="#program" class="btn btn-success">Start the Course!</a>
+  <button id="program-button" class="btn btn-info" onclick="$('#program-tab').tab('show');">Start the Course!</button>
 
 cover-image: events/images/galaxy-academy-logo.png
 cover-image-alt: logo for the Galaxy Academy event consisting of a laptop surrounded by illustrations of DNA molecules
