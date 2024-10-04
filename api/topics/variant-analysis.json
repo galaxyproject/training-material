@@ -462,7 +462,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nraw_child-ds-1.fq\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nraw_child-ds-2.fq\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nraw_mother-ds-1.fq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nraw_mother-ds-2.fq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"FastQC\"];\n  0 -->|output| 4;\n  5[\"FastQC\"];\n  1 -->|output| 5;\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  1 -->|output| 6;\n  7[\"FastQC\"];\n  2 -->|output| 7;\n  8[\"FastQC\"];\n  3 -->|output| 8;\n  9[\"Map with BWA-MEM\"];\n  2 -->|output| 9;\n  3 -->|output| 9;\n  10[\"MergeSamFiles\"];\n  9 -->|bam_output| 10;\n  6 -->|bam_output| 10;\n  11[\"MarkDuplicates\"];\n  10 -->|outFile| 11;\n  12[\"BamLeftAlign\"];\n  11 -->|outFile| 12;\n  13[\"Filter\"];\n  12 -->|output_bam| 13;\n  14[\"FreeBayes\"];\n  13 -->|out_file1| 14;\n  15[\"VCFfilter:\"];\n  14 -->|output_vcf| 15;\n  16[\"VCFtoTab-delimited:\"];\n  15 -->|out_file1| 16;\n  17[\"Cut\"];\n  16 -->|out_file1| 17;\n  f2e84a79-a71f-4b5f-a526-55d8cd472a05[\"Output\\ncut_variants\"];\n  17 --> f2e84a79-a71f-4b5f-a526-55d8cd472a05;\n  style f2e84a79-a71f-4b5f-a526-55d8cd472a05 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nraw_child-ds-1.fq\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nraw_child-ds-2.fq\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nraw_mother-ds-1.fq\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nraw_mother-ds-2.fq\"]\n  4[label=\"FastQC\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"FastQC\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Map with BWA-MEM\"]\n  0 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"FastQC\"]\n  2 -> 7 [label=\"output\"]\n  8[label=\"FastQC\"]\n  3 -> 8 [label=\"output\"]\n  9[label=\"Map with BWA-MEM\"]\n  2 -> 9 [label=\"output\"]\n  3 -> 9 [label=\"output\"]\n  10[label=\"MergeSamFiles\"]\n  9 -> 10 [label=\"bam_output\"]\n  6 -> 10 [label=\"bam_output\"]\n  11[label=\"MarkDuplicates\"]\n  10 -> 11 [label=\"outFile\"]\n  12[label=\"BamLeftAlign\"]\n  11 -> 12 [label=\"outFile\"]\n  13[label=\"Filter\"]\n  12 -> 13 [label=\"output_bam\"]\n  14[label=\"FreeBayes\"]\n  13 -> 14 [label=\"out_file1\"]\n  15[label=\"VCFfilter:\"]\n  14 -> 15 [label=\"output_vcf\"]\n  16[label=\"VCFtoTab-delimited:\"]\n  15 -> 16 [label=\"out_file1\"]\n  17[label=\"Cut\"]\n  16 -> 17 [label=\"out_file1\"]\n  kf2e84a79a71f4b5fa52655d8cd472a05[color=lightseagreen,label=\"Output\\ncut_variants\"]\n  17 -> kf2e84a79a71f4b5fa52655d8cd472a05\n}",
           "workflow_tools": [
@@ -2431,12 +2431,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.67",
                   "0.52",
+                  "0.67",
                   "0.68",
-                  "0.62",
+                  "0.63",
                   "0.64",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -3154,8 +3154,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.18.2.1",
-                  "3.1.1.0"
+                  "3.1.1.0",
+                  "2.18.2.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3728,8 +3728,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.0.0_rc3+galaxy3",
-                  "1.0.0_rc1+galaxy1",
-                  "1.0.0_rc1+galaxy2"
+                  "1.0.0_rc1+galaxy2",
+                  "1.0.0_rc1+galaxy1"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -3955,7 +3955,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSRR1799908_forward\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRR1799908_reverse\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Du Novo: Make families\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Du Novo: Correct barcodes\"];\n  2 -->|output| 3;\n  4[\"Du Novo: Align families\"];\n  3 -->|output| 4;\n  5[\"Du Novo: Make consensus reads\"];\n  4 -->|output| 5;\n  6[\"DCS: Sequence Content Trimmer\"];\n  5 -->|dcs1| 6;\n  5 -->|dcs2| 6;\n  7[\"SSCS: Sequence Content Trimmer\"];\n  5 -->|sscs1| 7;\n  5 -->|sscs2| 7;\n  75dfe52d-711e-4826-ba9b-b4feed30f5bf[\"Output\\n\"];\n  7 --> 75dfe52d-711e-4826-ba9b-b4feed30f5bf;\n  style 75dfe52d-711e-4826-ba9b-b4feed30f5bf stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR1799908_forward\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR1799908_reverse\"]\n  2[label=\"Du Novo: Make families\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Du Novo: Correct barcodes\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Du Novo: Align families\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Du Novo: Make consensus reads\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"DCS: Sequence Content Trimmer\"]\n  5 -> 6 [label=\"dcs1\"]\n  5 -> 6 [label=\"dcs2\"]\n  7[label=\"SSCS: Sequence Content Trimmer\"]\n  5 -> 7 [label=\"sscs1\"]\n  5 -> 7 [label=\"sscs2\"]\n  k75dfe52d711e4826ba9bb4feed30f5bf[color=lightseagreen,label=\"Output\\n\"]\n  7 -> k75dfe52d711e4826ba9bb4feed30f5bf\n}",
           "workflow_tools": [
@@ -4326,7 +4326,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nTrimmed reads mate 1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nTrimmed reads mate 2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Map with BWA-MEM\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"BamLeftAlign\"];\n  2 -->|bam_output| 3;\n  4[\"Naive Variant Caller NVC\"];\n  3 -->|output_bam| 4;\n  5[\"Variant Annotator\"];\n  4 -->|output_vcf| 5;\n  6[\"Filter\"];\n  5 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nTrimmed reads mate 1\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nTrimmed reads mate 2\"]\n  2[label=\"Map with BWA-MEM\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"BamLeftAlign\"]\n  2 -> 3 [label=\"bam_output\"]\n  4[label=\"Naive Variant Caller NVC\"]\n  3 -> 4 [label=\"output_bam\"]\n  5[label=\"Variant Annotator\"]\n  4 -> 5 [label=\"output_vcf\"]\n  6[label=\"Filter\"]\n  5 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -6593,7 +6593,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nReads\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference Genome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Parameter\\nMinimum depth of coverage\"];\n  style 2 fill:#ded,stroke:#393,stroke-width:4px;\n  3[\"ℹ️ Input Parameter\\nMinimum variant allele frequency\"];\n  style 3 fill:#ded,stroke:#393,stroke-width:4px;\n  4[\"ℹ️ Input Parameter\\nAdditional BWA-MEM options\"];\n  style 4 fill:#ded,stroke:#393,stroke-width:4px;\n  5[\"fastp\"];\n  0 -->|output| 5;\n  6[\"seqret\"];\n  1 -->|output| 6;\n  7[\"snippy\"];\n  4 -->|output| 7;\n  2 -->|output| 7;\n  3 -->|output| 7;\n  5 -->|output_paired_coll| 7;\n  1 -->|output| 7;\n  8[\"Kraken2\"];\n  5 -->|output_paired_coll| 8;\n  c7abf2bf-ed4c-433e-a695-9eca61282bb5[\"Output\\nreport_output\"];\n  8 --> c7abf2bf-ed4c-433e-a695-9eca61282bb5;\n  style c7abf2bf-ed4c-433e-a695-9eca61282bb5 stroke:#2c3143,stroke-width:4px;\n  083a0e51-7780-4c91-a071-dc0e4641d060[\"Output\\noutput\"];\n  8 --> 083a0e51-7780-4c91-a071-dc0e4641d060;\n  style 083a0e51-7780-4c91-a071-dc0e4641d060 stroke:#2c3143,stroke-width:4px;\n  9[\"QualiMap BamQC\"];\n  7 -->|snpsbam| 9;\n  10[\"mosdepth\"];\n  2 -->|output| 10;\n  7 -->|snpsbam| 10;\n  11[\"TB Variant Filter\"];\n  7 -->|snpvcf| 11;\n  12[\"TB-Profiler Profile\"];\n  7 -->|snpsbam| 12;\n  335635b4-a4de-4980-ad02-68f0035daeaa[\"Output\\noutput_txt\"];\n  12 --> 335635b4-a4de-4980-ad02-68f0035daeaa;\n  style 335635b4-a4de-4980-ad02-68f0035daeaa stroke:#2c3143,stroke-width:4px;\n  13[\"TB Variant Filter\"];\n  7 -->|snpvcf| 13;\n  14[\"Flatten collection\"];\n  9 -->|raw_data| 14;\n  15[\"Text reformatting\"];\n  10 -->|output_quantized_bed| 15;\n  16[\"Text transformation\"];\n  11 -->|output1| 16;\n  007df8c2-bd13-495f-8904-abf31d4594d0[\"Output\\nFinal annotated VCF\"];\n  16 --> 007df8c2-bd13-495f-8904-abf31d4594d0;\n  style 007df8c2-bd13-495f-8904-abf31d4594d0 stroke:#2c3143,stroke-width:4px;\n  17[\"MultiQC\"];\n  5 -->|report_json| 17;\n  14 -->|output| 17;\n  59528235-7525-4ef9-8810-36f1ed0f01f6[\"Output\\nhtml_report\"];\n  17 --> 59528235-7525-4ef9-8810-36f1ed0f01f6;\n  style 59528235-7525-4ef9-8810-36f1ed0f01f6 stroke:#2c3143,stroke-width:4px;\n  18[\"bcftools consensus\"];\n  13 -->|output1| 18;\n  6 -->|out_file1| 18;\n  15 -->|outfile| 18;\n  c71b135d-35f9-44d0-a20e-f25528e518af[\"Output\\nconsensus_genome\"];\n  18 --> c71b135d-35f9-44d0-a20e-f25528e518af;\n  style c71b135d-35f9-44d0-a20e-f25528e518af stroke:#2c3143,stroke-width:4px;\n  19[\"TB Variant Report\"];\n  16 -->|output| 19;\n  12 -->|results_json| 19;\n  959528d2-f8f2-4440-99cf-44fddd6c5069[\"Output\\ndrug_resistance_report_html\"];\n  19 --> 959528d2-f8f2-4440-99cf-44fddd6c5069;\n  style 959528d2-f8f2-4440-99cf-44fddd6c5069 stroke:#2c3143,stroke-width:4px;\n  4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0[\"Output\\nvariants_report_html\"];\n  19 --> 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0;\n  style 4d9636eb-075b-4fd2-a1e4-1a7c37a17fc0 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nReads\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference Genome\"]\n  2[color=lightgreen,label=\"ℹ️ Input Parameter\\nMinimum depth of coverage\"]\n  3[color=lightgreen,label=\"ℹ️ Input Parameter\\nMinimum variant allele frequency\"]\n  4[color=lightgreen,label=\"ℹ️ Input Parameter\\nAdditional BWA-MEM options\"]\n  5[label=\"fastp\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"seqret\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"snippy\"]\n  4 -> 7 [label=\"output\"]\n  2 -> 7 [label=\"output\"]\n  3 -> 7 [label=\"output\"]\n  5 -> 7 [label=\"output_paired_coll\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"Kraken2\"]\n  5 -> 8 [label=\"output_paired_coll\"]\n  kc7abf2bfed4c433ea6959eca61282bb5[color=lightseagreen,label=\"Output\\nreport_output\"]\n  8 -> kc7abf2bfed4c433ea6959eca61282bb5\n  k083a0e5177804c91a071dc0e4641d060[color=lightseagreen,label=\"Output\\noutput\"]\n  8 -> k083a0e5177804c91a071dc0e4641d060\n  9[label=\"QualiMap BamQC\"]\n  7 -> 9 [label=\"snpsbam\"]\n  10[label=\"mosdepth\"]\n  2 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"snpsbam\"]\n  11[label=\"TB Variant Filter\"]\n  7 -> 11 [label=\"snpvcf\"]\n  12[label=\"TB-Profiler Profile\"]\n  7 -> 12 [label=\"snpsbam\"]\n  k335635b4a4de4980ad0268f0035daeaa[color=lightseagreen,label=\"Output\\noutput_txt\"]\n  12 -> k335635b4a4de4980ad0268f0035daeaa\n  13[label=\"TB Variant Filter\"]\n  7 -> 13 [label=\"snpvcf\"]\n  14[label=\"Flatten collection\"]\n  9 -> 14 [label=\"raw_data\"]\n  15[label=\"Text reformatting\"]\n  10 -> 15 [label=\"output_quantized_bed\"]\n  16[label=\"Text transformation\"]\n  11 -> 16 [label=\"output1\"]\n  k007df8c2bd13495f8904abf31d4594d0[color=lightseagreen,label=\"Output\\nFinal annotated VCF\"]\n  16 -> k007df8c2bd13495f8904abf31d4594d0\n  17[label=\"MultiQC\"]\n  5 -> 17 [label=\"report_json\"]\n  14 -> 17 [label=\"output\"]\n  k5952823575254ef9881036f1ed0f01f6[color=lightseagreen,label=\"Output\\nhtml_report\"]\n  17 -> k5952823575254ef9881036f1ed0f01f6\n  18[label=\"bcftools consensus\"]\n  13 -> 18 [label=\"output1\"]\n  6 -> 18 [label=\"out_file1\"]\n  15 -> 18 [label=\"outfile\"]\n  kc71b135d35f944d0a20ef25528e518af[color=lightseagreen,label=\"Output\\nconsensus_genome\"]\n  18 -> kc71b135d35f944d0a20ef25528e518af\n  19[label=\"TB Variant Report\"]\n  16 -> 19 [label=\"output\"]\n  12 -> 19 [label=\"results_json\"]\n  k959528d2f8f2444099cf44fddd6c5069[color=lightseagreen,label=\"Output\\ndrug_resistance_report_html\"]\n  19 -> k959528d2f8f2444099cf44fddd6c5069\n  k4d9636eb075b4fd2a1e41a7c37a17fc0[color=lightseagreen,label=\"Output\\nvariants_report_html\"]\n  19 -> k4d9636eb075b4fd2a1e41a7c37a17fc0\n}",
           "workflow_tools": [
@@ -8445,8 +8445,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.71",
                   "0.65"
                 ],
@@ -8469,14 +8469,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
                   "0.71",
                   "0.65",
-                  "0.74+galaxy1",
-                  "0.67",
                   "0.52",
+                  "0.67",
+                  "0.74+galaxy1",
                   "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -8487,12 +8487,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.67",
                   "0.52",
+                  "0.67",
                   "0.68",
-                  "0.62",
+                  "0.63",
                   "0.64",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -8574,9 +8574,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.73+galaxy0",
-                  "0.72",
-                  "0.72+galaxy1"
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -8588,8 +8588,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.73+galaxy0",
                   "0.69"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -8641,8 +8641,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.71",
                   "0.65"
                 ],
@@ -8661,14 +8661,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
                   "0.71",
                   "0.65",
-                  "0.74+galaxy1",
-                  "0.67",
                   "0.52",
+                  "0.67",
+                  "0.74+galaxy1",
                   "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -8691,8 +8691,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -9002,11 +9002,11 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "1.9",
+                  "1.9+galaxy1",
                   "1.9+galaxy2",
                   "1.4.0",
-                  "1.10",
-                  "1.9+galaxy1",
-                  "1.9"
+                  "1.10"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -9029,8 +9029,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.10+galaxy1",
-                  "1.10",
-                  "1.9+galaxy1"
+                  "1.9+galaxy1",
+                  "1.10"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -9179,11 +9179,11 @@
                 "versions": [
                   "0.19.5+galaxy1",
                   "0.20.1+galaxy0",
+                  "0.18.0.0",
+                  "0.12.4.0",
                   "0.19.3.2",
                   "0.19.5",
-                  "0.19.3.3",
-                  "0.12.4.0",
-                  "0.18.0.0"
+                  "0.19.3.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -9354,23 +9354,23 @@
                 "versions": [
                   "1.16.9+galaxy0",
                   "1.16.10+galaxy0",
-                  "0.1",
-                  "1.12.5+galaxy1",
                   "1.12.5+galaxy2",
-                  "1.16.5+galaxy5",
-                  "1.16.5+galaxy7",
-                  "1.16.5+galaxy3",
-                  "1.12.5+galaxy0",
+                  "1.16.5+galaxy6",
                   "0.5.2.1",
-                  "1.16.5+galaxy4",
-                  "1.16.8+galaxy1",
-                  "1.12.5+galaxy3",
-                  "1.16.1+galaxy0",
                   "0.7.0.3",
+                  "1.12.5+galaxy3",
+                  "1.16.8+galaxy1",
+                  "1.16.5+galaxy3",
+                  "0.1",
+                  "1.16.4+galaxy2",
+                  "1.12.5+galaxy0",
+                  "1.12.5+galaxy1",
                   "1.16.4+galaxy3",
                   "1.16.8+galaxy0",
-                  "1.16.5+galaxy6",
-                  "1.16.4+galaxy2"
+                  "1.16.5+galaxy7",
+                  "1.16.1+galaxy0",
+                  "1.16.5+galaxy5",
+                  "1.16.5+galaxy4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -9829,8 +9829,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.3.3+galaxy0",
-                  "0.3.4+galaxy0"
+                  "0.3.4+galaxy0",
+                  "0.3.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -9979,8 +9979,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.8+galaxy0",
-                  "1.9"
+                  "1.9",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -10002,14 +10002,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.9+galaxy1",
-                  "1.8+galaxy0",
                   "1.9",
-                  "1.8+galaxy2",
+                  "1.8+galaxy0",
+                  "1.8+galaxy1",
                   "1.7.1",
-                  "1.8+galaxy1"
+                  "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -10313,14 +10313,14 @@
                 "state": "inexact",
                 "versions": [
                   "4.5.0",
-                  "3.2",
-                  "4.4.5+galaxy2",
-                  "4.4.3+galaxy0",
-                  "4.3.6+galaxy2",
                   "4.4.5+galaxy0",
+                  "3.2",
+                  "3.2+galaxy1",
+                  "4.4.5+galaxy2",
                   "4.4.5+galaxy1",
                   "4.3.6+galaxy1",
-                  "3.2+galaxy1"
+                  "4.4.3+galaxy0",
+                  "4.3.6+galaxy2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -10628,13 +10628,13 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.6.1+galaxy0",
                   "2.1.0",
-                  "2.4",
-                  "2.8.14+galaxy1",
+                  "2.6+galaxy0",
                   "2.8.4+galaxy1",
                   "2.8.3+galaxy0",
-                  "2.6+galaxy0"
+                  "2.8.14+galaxy1",
+                  "2.6.1+galaxy0",
+                  "2.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -10657,14 +10657,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.8.14+galaxy1",
                   "2.8.4+galaxy1",
+                  "2.8.14+galaxy1",
+                  "3.0.7+galaxy1",
+                  "3.0.7+galaxy0",
                   "3.0.8+galaxy0",
                   "3.0.6+galaxy0",
-                  "3.0.7+galaxy0",
-                  "4.1.1+galaxy0",
                   "3.0.4+galaxy1",
-                  "3.0.7+galaxy1"
+                  "4.1.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -11459,7 +11459,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRA Manifest\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  2ca7c89b-999f-41dc-8037-e54e25959a7e[\"Output\\nRealigned Alignments with Indel Qualities\"];\n  8 --> 2ca7c89b-999f-41dc-8037-e54e25959a7e;\n  style 2ca7c89b-999f-41dc-8037-e54e25959a7e stroke:#2c3143,stroke-width:4px;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  06259137-eaa5-404a-923c-70ee5f1d89d4[\"Output\\nSnpSift tabular output\"];\n  11 --> 06259137-eaa5-404a-923c-70ee5f1d89d4;\n  style 06259137-eaa5-404a-923c-70ee5f1d89d4 stroke:#2c3143,stroke-width:4px;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n  758ffde5-7ddd-482a-88b2-1504f8335488[\"Output\\nMultiQC Report PE\"];\n  12 --> 758ffde5-7ddd-482a-88b2-1504f8335488;\n  style 758ffde5-7ddd-482a-88b2-1504f8335488 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRA Manifest\"]\n  2[label=\"Faster Download and Extract Reads in FASTQ\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  2 -> 3 [label=\"list_paired\"]\n  4[label=\"Map with BWA-MEM\"]\n  3 -> 4 [label=\"output_paired_coll\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MarkDuplicates\"]\n  4 -> 5 [label=\"bam_output\"]\n  6[label=\"Realign reads\"]\n  5 -> 6 [label=\"outFile\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Samtools stats\"]\n  5 -> 7 [label=\"outFile\"]\n  8[label=\"Insert indel qualities\"]\n  6 -> 8 [label=\"realigned\"]\n  0 -> 8 [label=\"output\"]\n  k2ca7c89b999f41dc8037e54e25959a7e[color=lightseagreen,label=\"Output\\nRealigned Alignments with Indel Qualities\"]\n  8 -> k2ca7c89b999f41dc8037e54e25959a7e\n  9[label=\"Call variants\"]\n  8 -> 9 [label=\"output\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"SnpEff eff:\"]\n  9 -> 10 [label=\"variants\"]\n  11[label=\"SnpSift Extract Fields\"]\n  10 -> 11 [label=\"snpeff_output\"]\n  k06259137eaa5404a923c70ee5f1d89d4[color=lightseagreen,label=\"Output\\nSnpSift tabular output\"]\n  11 -> k06259137eaa5404a923c70ee5f1d89d4\n  12[label=\"MultiQC\"]\n  3 -> 12 [label=\"report_json\"]\n  7 -> 12 [label=\"output\"]\n  5 -> 12 [label=\"metrics_file\"]\n  10 -> 12 [label=\"csvFile\"]\n  k758ffde57ddd482a88b21504f8335488[color=lightseagreen,label=\"Output\\nMultiQC Report PE\"]\n  12 -> k758ffde57ddd482a88b21504f8335488\n}",
           "workflow_tools": [
@@ -12841,8 +12841,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.18.2.1",
-                  "3.1.1.0"
+                  "3.1.1.0",
+                  "2.18.2.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13794,10 +13794,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
-                  "1.11+galaxy1",
-                  "1.6"
+                  "1.11+galaxy0",
+                  "1.6",
+                  "1.11+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13808,8 +13808,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.11+galaxy1",
                   "1.9+galaxy1"
                 ],
@@ -14359,19 +14359,19 @@
                 "versions": [
                   "3.0.5+galaxy3",
                   "3.1.1+galaxy0",
-                  "2.10.4",
                   "2.11.0+galaxy0",
-                  "3.0.5+galaxy0",
+                  "2.10.4",
                   "2.10.8+galaxy0",
                   "3.0.3+galaxy0",
+                  "3.0.5+galaxy0",
                   "2.10.7+galaxy2",
-                  "3.1.0+galaxy0",
-                  "3.1.0+galaxy1",
+                  "3.0.8+galaxy1",
                   "3.1.1+galaxy1",
                   "3.0.8+galaxy0",
                   "3.0.10+galaxy0",
-                  "3.0.8+galaxy1",
                   "2.11.0+galaxy1",
+                  "3.1.0+galaxy1",
+                  "3.1.0+galaxy0",
                   "3.0.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -14394,21 +14394,21 @@
                   "2.10.9+galaxy0",
                   "3.0.5+galaxy3",
                   "3.1.1+galaxy0",
-                  "2.10.4",
                   "2.11.0+galaxy0",
                   "2.10.4+galaxy1",
-                  "3.0.5+galaxy0",
-                  "2.10.8+galaxy0",
-                  "2.10.7+galaxy0",
-                  "3.0.3+galaxy0",
+                  "2.10.4",
                   "2.10.4+galaxy2",
-                  "3.1.0+galaxy0",
-                  "3.1.0+galaxy1",
+                  "2.10.7+galaxy0",
+                  "2.10.8+galaxy0",
+                  "3.0.3+galaxy0",
+                  "3.0.5+galaxy0",
+                  "3.0.8+galaxy1",
                   "3.1.1+galaxy1",
                   "3.0.8+galaxy0",
                   "3.0.10+galaxy0",
-                  "3.0.8+galaxy1",
                   "2.11.0+galaxy1",
+                  "3.1.0+galaxy1",
+                  "3.1.0+galaxy0",
                   "3.0.0+galaxy0",
                   "3.0.5+galaxy1"
                 ],
@@ -14540,10 +14540,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.4",
-                  "2.11.0+galaxy0",
                   "2.10.7+galaxy1",
-                  "2.10.4+galaxy1"
+                  "2.11.0+galaxy0",
+                  "2.10.4+galaxy1",
+                  "2.10.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -14857,9 +14857,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r1_chr5_12_17.fastq\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r2_chr5_12_17.fastq\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r1_chr5_12_17.fastq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r2_chr5_12_17.fastq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nhg19.chr5_12_17.fa\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nhotspots.bed\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\ncgi_variant_positions.bed\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\n01-Feb-2019-CIVic.bed\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\ndbsnp.b147.chr5_12_17.vcf.gz\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nUniprot_Cancer_Genes.13Feb2019.txt\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"ℹ️ Input Dataset\\ncgi_genes.txt\"];\n  style 10 stroke:#2c3143,stroke-width:4px;\n  11[\"ℹ️ Input Dataset\\n01-Feb-2019-GeneSummaries.tsv\"];\n  style 11 stroke:#2c3143,stroke-width:4px;\n  12[\"FastQC\"];\n  0 -->|output| 12;\n  13[\"FastQC\"];\n  1 -->|output| 13;\n  14[\"Trimmomatic\"];\n  0 -->|output| 14;\n  1 -->|output| 14;\n  15[\"FastQC\"];\n  2 -->|output| 15;\n  16[\"FastQC\"];\n  3 -->|output| 16;\n  17[\"Trimmomatic\"];\n  2 -->|output| 17;\n  3 -->|output| 17;\n  18[\"FastQC\"];\n  14 -->|fastq_out_r2_paired| 18;\n  19[\"FastQC\"];\n  14 -->|fastq_out_r1_paired| 19;\n  20[\"Map with BWA-MEM\"];\n  14 -->|fastq_out_r1_paired| 20;\n  14 -->|fastq_out_r2_paired| 20;\n  21[\"MultiQC\"];\n  13 -->|text_file| 21;\n  15 -->|text_file| 21;\n  16 -->|text_file| 21;\n  12 -->|text_file| 21;\n  22[\"FastQC\"];\n  17 -->|fastq_out_r1_paired| 22;\n  23[\"FastQC\"];\n  17 -->|fastq_out_r2_paired| 23;\n  24[\"Map with BWA-MEM\"];\n  17 -->|fastq_out_r1_paired| 24;\n  17 -->|fastq_out_r2_paired| 24;\n  25[\"Filter\"];\n  20 -->|bam_output| 25;\n  26[\"MultiQC\"];\n  19 -->|text_file| 26;\n  22 -->|text_file| 26;\n  23 -->|text_file| 26;\n  18 -->|text_file| 26;\n  27[\"Filter\"];\n  24 -->|bam_output| 27;\n  28[\"RmDup\"];\n  25 -->|out_file1| 28;\n  29[\"RmDup\"];\n  27 -->|out_file1| 29;\n  30[\"BamLeftAlign\"];\n  28 -->|output1| 30;\n  31[\"BamLeftAlign\"];\n  29 -->|output1| 31;\n  32[\"CalMD\"];\n  30 -->|output_bam| 32;\n  33[\"CalMD\"];\n  31 -->|output_bam| 33;\n  34[\"Filter\"];\n  32 -->|calmd_output| 34;\n  35[\"Filter\"];\n  33 -->|calmd_output| 35;\n  36[\"VarScan somatic\"];\n  34 -->|out_file1| 36;\n  35 -->|out_file1| 36;\n  37[\"SnpEff eff:\"];\n  36 -->|output| 37;\n  38[\"GEMINI load\"];\n  37 -->|snpeff_output| 38;\n  39[\"GEMINI annotate\"];\n  36 -->|output| 39;\n  38 -->|outfile| 39;\n  40[\"GEMINI annotate\"];\n  8 -->|output| 40;\n  39 -->|outfile| 40;\n  41[\"GEMINI annotate\"];\n  5 -->|output| 41;\n  40 -->|outfile| 41;\n  42[\"GEMINI annotate\"];\n  7 -->|output| 42;\n  41 -->|outfile| 42;\n  43[\"GEMINI annotate\"];\n  6 -->|output| 43;\n  42 -->|outfile| 43;\n  44[\"GEMINI query\"];\n  43 -->|outfile| 44;\n  45[\"GEMINI query\"];\n  43 -->|outfile| 45;\n  46[\"GEMINI query\"];\n  43 -->|outfile| 46;\n  47[\"GEMINI query\"];\n  43 -->|outfile| 47;\n  48[\"Join\"];\n  47 -->|outfile| 48;\n  9 -->|output| 48;\n  49[\"Join\"];\n  48 -->|output| 49;\n  10 -->|output| 49;\n  50[\"Join\"];\n  49 -->|output| 50;\n  11 -->|output| 50;\n  51[\"Column arrange\"];\n  50 -->|output| 51;\n  57ecf750-61e1-47d7-bbeb-ec8997617849[\"Output\\ngene_report_output\"];\n  51 --> 57ecf750-61e1-47d7-bbeb-ec8997617849;\n  style 57ecf750-61e1-47d7-bbeb-ec8997617849 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r1_chr5_12_17.fastq\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r2_chr5_12_17.fastq\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r1_chr5_12_17.fastq\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r2_chr5_12_17.fastq\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nhg19.chr5_12_17.fa\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nhotspots.bed\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\ncgi_variant_positions.bed\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\n01-Feb-2019-CIVic.bed\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\ndbsnp.b147.chr5_12_17.vcf.gz\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nUniprot_Cancer_Genes.13Feb2019.txt\"]\n  10[color=lightblue,label=\"ℹ️ Input Dataset\\ncgi_genes.txt\"]\n  11[color=lightblue,label=\"ℹ️ Input Dataset\\n01-Feb-2019-GeneSummaries.tsv\"]\n  12[label=\"FastQC\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  1 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  0 -> 14 [label=\"output\"]\n  1 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  2 -> 15 [label=\"output\"]\n  16[label=\"FastQC\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"Trimmomatic\"]\n  2 -> 17 [label=\"output\"]\n  3 -> 17 [label=\"output\"]\n  18[label=\"FastQC\"]\n  14 -> 18 [label=\"fastq_out_r2_paired\"]\n  19[label=\"FastQC\"]\n  14 -> 19 [label=\"fastq_out_r1_paired\"]\n  20[label=\"Map with BWA-MEM\"]\n  14 -> 20 [label=\"fastq_out_r1_paired\"]\n  14 -> 20 [label=\"fastq_out_r2_paired\"]\n  21[label=\"MultiQC\"]\n  13 -> 21 [label=\"text_file\"]\n  15 -> 21 [label=\"text_file\"]\n  16 -> 21 [label=\"text_file\"]\n  12 -> 21 [label=\"text_file\"]\n  22[label=\"FastQC\"]\n  17 -> 22 [label=\"fastq_out_r1_paired\"]\n  23[label=\"FastQC\"]\n  17 -> 23 [label=\"fastq_out_r2_paired\"]\n  24[label=\"Map with BWA-MEM\"]\n  17 -> 24 [label=\"fastq_out_r1_paired\"]\n  17 -> 24 [label=\"fastq_out_r2_paired\"]\n  25[label=\"Filter\"]\n  20 -> 25 [label=\"bam_output\"]\n  26[label=\"MultiQC\"]\n  19 -> 26 [label=\"text_file\"]\n  22 -> 26 [label=\"text_file\"]\n  23 -> 26 [label=\"text_file\"]\n  18 -> 26 [label=\"text_file\"]\n  27[label=\"Filter\"]\n  24 -> 27 [label=\"bam_output\"]\n  28[label=\"RmDup\"]\n  25 -> 28 [label=\"out_file1\"]\n  29[label=\"RmDup\"]\n  27 -> 29 [label=\"out_file1\"]\n  30[label=\"BamLeftAlign\"]\n  28 -> 30 [label=\"output1\"]\n  31[label=\"BamLeftAlign\"]\n  29 -> 31 [label=\"output1\"]\n  32[label=\"CalMD\"]\n  30 -> 32 [label=\"output_bam\"]\n  33[label=\"CalMD\"]\n  31 -> 33 [label=\"output_bam\"]\n  34[label=\"Filter\"]\n  32 -> 34 [label=\"calmd_output\"]\n  35[label=\"Filter\"]\n  33 -> 35 [label=\"calmd_output\"]\n  36[label=\"VarScan somatic\"]\n  34 -> 36 [label=\"out_file1\"]\n  35 -> 36 [label=\"out_file1\"]\n  37[label=\"SnpEff eff:\"]\n  36 -> 37 [label=\"output\"]\n  38[label=\"GEMINI load\"]\n  37 -> 38 [label=\"snpeff_output\"]\n  39[label=\"GEMINI annotate\"]\n  36 -> 39 [label=\"output\"]\n  38 -> 39 [label=\"outfile\"]\n  40[label=\"GEMINI annotate\"]\n  8 -> 40 [label=\"output\"]\n  39 -> 40 [label=\"outfile\"]\n  41[label=\"GEMINI annotate\"]\n  5 -> 41 [label=\"output\"]\n  40 -> 41 [label=\"outfile\"]\n  42[label=\"GEMINI annotate\"]\n  7 -> 42 [label=\"output\"]\n  41 -> 42 [label=\"outfile\"]\n  43[label=\"GEMINI annotate\"]\n  6 -> 43 [label=\"output\"]\n  42 -> 43 [label=\"outfile\"]\n  44[label=\"GEMINI query\"]\n  43 -> 44 [label=\"outfile\"]\n  45[label=\"GEMINI query\"]\n  43 -> 45 [label=\"outfile\"]\n  46[label=\"GEMINI query\"]\n  43 -> 46 [label=\"outfile\"]\n  47[label=\"GEMINI query\"]\n  43 -> 47 [label=\"outfile\"]\n  48[label=\"Join\"]\n  47 -> 48 [label=\"outfile\"]\n  9 -> 48 [label=\"output\"]\n  49[label=\"Join\"]\n  48 -> 49 [label=\"output\"]\n  10 -> 49 [label=\"output\"]\n  50[label=\"Join\"]\n  49 -> 50 [label=\"output\"]\n  11 -> 50 [label=\"output\"]\n  51[label=\"Column arrange\"]\n  50 -> 51 [label=\"output\"]\n  k57ecf75061e147d7bbebec8997617849[color=lightseagreen,label=\"Output\\ngene_report_output\"]\n  51 -> k57ecf75061e147d7bbebec8997617849\n}",
+          "modified": "2024-10-04 16:45:48 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r1_chr5_12_17.fastq\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r2_chr5_12_17.fastq\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r1_chr5_12_17.fastq\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r2_chr5_12_17.fastq\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nhg19.chr5_12_17.fa\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nhotspots.bed\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\ncgi_variant_positions.bed\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\n01-Feb-2019-CIVic.bed\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\ndbsnp.b147.chr5_12_17.vcf.gz\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nUniprot_Cancer_Genes.13Feb2019.txt\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"ℹ️ Input Dataset\\ncgi_genes.txt\"];\n  style 10 stroke:#2c3143,stroke-width:4px;\n  11[\"ℹ️ Input Dataset\\n01-Feb-2019-GeneSummaries.tsv\"];\n  style 11 stroke:#2c3143,stroke-width:4px;\n  12[\"FastQC\"];\n  0 -->|output| 12;\n  13[\"FastQC\"];\n  1 -->|output| 13;\n  14[\"Trimmomatic\"];\n  0 -->|output| 14;\n  1 -->|output| 14;\n  15[\"FastQC\"];\n  2 -->|output| 15;\n  16[\"FastQC\"];\n  3 -->|output| 16;\n  17[\"Trimmomatic\"];\n  2 -->|output| 17;\n  3 -->|output| 17;\n  18[\"FastQC\"];\n  14 -->|fastq_out_r2_paired| 18;\n  19[\"FastQC\"];\n  14 -->|fastq_out_r1_paired| 19;\n  20[\"Map with BWA-MEM\"];\n  14 -->|fastq_out_r1_paired| 20;\n  14 -->|fastq_out_r2_paired| 20;\n  21[\"MultiQC\"];\n  13 -->|text_file| 21;\n  15 -->|text_file| 21;\n  16 -->|text_file| 21;\n  12 -->|text_file| 21;\n  22[\"FastQC\"];\n  17 -->|fastq_out_r1_paired| 22;\n  23[\"FastQC\"];\n  17 -->|fastq_out_r2_paired| 23;\n  24[\"Map with BWA-MEM\"];\n  17 -->|fastq_out_r1_paired| 24;\n  17 -->|fastq_out_r2_paired| 24;\n  25[\"Filter\"];\n  20 -->|bam_output| 25;\n  26[\"MultiQC\"];\n  19 -->|text_file| 26;\n  22 -->|text_file| 26;\n  23 -->|text_file| 26;\n  18 -->|text_file| 26;\n  27[\"Filter\"];\n  24 -->|bam_output| 27;\n  28[\"RmDup\"];\n  25 -->|out_file1| 28;\n  29[\"RmDup\"];\n  27 -->|out_file1| 29;\n  30[\"BamLeftAlign\"];\n  28 -->|output1| 30;\n  31[\"BamLeftAlign\"];\n  29 -->|output1| 31;\n  32[\"CalMD\"];\n  30 -->|output_bam| 32;\n  33[\"CalMD\"];\n  31 -->|output_bam| 33;\n  34[\"Filter\"];\n  32 -->|calmd_output| 34;\n  35[\"Filter\"];\n  33 -->|calmd_output| 35;\n  36[\"VarScan somatic\"];\n  34 -->|out_file1| 36;\n  35 -->|out_file1| 36;\n  37[\"SnpEff eff:\"];\n  36 -->|output| 37;\n  38[\"GEMINI load\"];\n  37 -->|snpeff_output| 38;\n  39[\"GEMINI annotate\"];\n  36 -->|output| 39;\n  38 -->|outfile| 39;\n  40[\"GEMINI annotate\"];\n  8 -->|output| 40;\n  39 -->|outfile| 40;\n  41[\"GEMINI annotate\"];\n  5 -->|output| 41;\n  40 -->|outfile| 41;\n  42[\"GEMINI annotate\"];\n  7 -->|output| 42;\n  41 -->|outfile| 42;\n  43[\"GEMINI annotate\"];\n  6 -->|output| 43;\n  42 -->|outfile| 43;\n  44[\"GEMINI query\"];\n  43 -->|outfile| 44;\n  45[\"GEMINI query\"];\n  43 -->|outfile| 45;\n  46[\"GEMINI query\"];\n  43 -->|outfile| 46;\n  47[\"GEMINI query\"];\n  43 -->|outfile| 47;\n  48[\"Join\"];\n  47 -->|outfile| 48;\n  9 -->|output| 48;\n  49[\"Join\"];\n  48 -->|output| 49;\n  10 -->|output| 49;\n  50[\"Join\"];\n  49 -->|output| 50;\n  11 -->|output| 50;\n  51[\"Column arrange\"];\n  50 -->|output| 51;\n  7a2d736a-0395-4729-929f-f55ad2ccf735[\"Output\\ngene_report_output\"];\n  51 --> 7a2d736a-0395-4729-929f-f55ad2ccf735;\n  style 7a2d736a-0395-4729-929f-f55ad2ccf735 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r1_chr5_12_17.fastq\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-N_231335_r2_chr5_12_17.fastq\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r1_chr5_12_17.fastq\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nSLGFSK-T_231336_r2_chr5_12_17.fastq\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nhg19.chr5_12_17.fa\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nhotspots.bed\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\ncgi_variant_positions.bed\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\n01-Feb-2019-CIVic.bed\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\ndbsnp.b147.chr5_12_17.vcf.gz\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nUniprot_Cancer_Genes.13Feb2019.txt\"]\n  10[color=lightblue,label=\"ℹ️ Input Dataset\\ncgi_genes.txt\"]\n  11[color=lightblue,label=\"ℹ️ Input Dataset\\n01-Feb-2019-GeneSummaries.tsv\"]\n  12[label=\"FastQC\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  1 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  0 -> 14 [label=\"output\"]\n  1 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  2 -> 15 [label=\"output\"]\n  16[label=\"FastQC\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"Trimmomatic\"]\n  2 -> 17 [label=\"output\"]\n  3 -> 17 [label=\"output\"]\n  18[label=\"FastQC\"]\n  14 -> 18 [label=\"fastq_out_r2_paired\"]\n  19[label=\"FastQC\"]\n  14 -> 19 [label=\"fastq_out_r1_paired\"]\n  20[label=\"Map with BWA-MEM\"]\n  14 -> 20 [label=\"fastq_out_r1_paired\"]\n  14 -> 20 [label=\"fastq_out_r2_paired\"]\n  21[label=\"MultiQC\"]\n  13 -> 21 [label=\"text_file\"]\n  15 -> 21 [label=\"text_file\"]\n  16 -> 21 [label=\"text_file\"]\n  12 -> 21 [label=\"text_file\"]\n  22[label=\"FastQC\"]\n  17 -> 22 [label=\"fastq_out_r1_paired\"]\n  23[label=\"FastQC\"]\n  17 -> 23 [label=\"fastq_out_r2_paired\"]\n  24[label=\"Map with BWA-MEM\"]\n  17 -> 24 [label=\"fastq_out_r1_paired\"]\n  17 -> 24 [label=\"fastq_out_r2_paired\"]\n  25[label=\"Filter\"]\n  20 -> 25 [label=\"bam_output\"]\n  26[label=\"MultiQC\"]\n  19 -> 26 [label=\"text_file\"]\n  22 -> 26 [label=\"text_file\"]\n  23 -> 26 [label=\"text_file\"]\n  18 -> 26 [label=\"text_file\"]\n  27[label=\"Filter\"]\n  24 -> 27 [label=\"bam_output\"]\n  28[label=\"RmDup\"]\n  25 -> 28 [label=\"out_file1\"]\n  29[label=\"RmDup\"]\n  27 -> 29 [label=\"out_file1\"]\n  30[label=\"BamLeftAlign\"]\n  28 -> 30 [label=\"output1\"]\n  31[label=\"BamLeftAlign\"]\n  29 -> 31 [label=\"output1\"]\n  32[label=\"CalMD\"]\n  30 -> 32 [label=\"output_bam\"]\n  33[label=\"CalMD\"]\n  31 -> 33 [label=\"output_bam\"]\n  34[label=\"Filter\"]\n  32 -> 34 [label=\"calmd_output\"]\n  35[label=\"Filter\"]\n  33 -> 35 [label=\"calmd_output\"]\n  36[label=\"VarScan somatic\"]\n  34 -> 36 [label=\"out_file1\"]\n  35 -> 36 [label=\"out_file1\"]\n  37[label=\"SnpEff eff:\"]\n  36 -> 37 [label=\"output\"]\n  38[label=\"GEMINI load\"]\n  37 -> 38 [label=\"snpeff_output\"]\n  39[label=\"GEMINI annotate\"]\n  36 -> 39 [label=\"output\"]\n  38 -> 39 [label=\"outfile\"]\n  40[label=\"GEMINI annotate\"]\n  8 -> 40 [label=\"output\"]\n  39 -> 40 [label=\"outfile\"]\n  41[label=\"GEMINI annotate\"]\n  5 -> 41 [label=\"output\"]\n  40 -> 41 [label=\"outfile\"]\n  42[label=\"GEMINI annotate\"]\n  7 -> 42 [label=\"output\"]\n  41 -> 42 [label=\"outfile\"]\n  43[label=\"GEMINI annotate\"]\n  6 -> 43 [label=\"output\"]\n  42 -> 43 [label=\"outfile\"]\n  44[label=\"GEMINI query\"]\n  43 -> 44 [label=\"outfile\"]\n  45[label=\"GEMINI query\"]\n  43 -> 45 [label=\"outfile\"]\n  46[label=\"GEMINI query\"]\n  43 -> 46 [label=\"outfile\"]\n  47[label=\"GEMINI query\"]\n  43 -> 47 [label=\"outfile\"]\n  48[label=\"Join\"]\n  47 -> 48 [label=\"outfile\"]\n  9 -> 48 [label=\"output\"]\n  49[label=\"Join\"]\n  48 -> 49 [label=\"output\"]\n  10 -> 49 [label=\"output\"]\n  50[label=\"Join\"]\n  49 -> 50 [label=\"output\"]\n  11 -> 50 [label=\"output\"]\n  51[label=\"Column arrange\"]\n  50 -> 51 [label=\"output\"]\n  k7a2d736a03954729929ff55ad2ccf735[color=lightseagreen,label=\"Output\\ngene_report_output\"]\n  51 -> k7a2d736a03954729929ff55ad2ccf735\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2",
             "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1",
@@ -15295,7 +15295,7 @@
                 {
                   "output_name": "output",
                   "label": "gene_report_output",
-                  "uuid": "57ecf750-61e1-47d7-bbeb-ec8997617849"
+                  "uuid": "7a2d736a-0395-4729-929f-f55ad2ccf735"
                 }
               ]
             }
@@ -16284,12 +16284,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.67",
                   "0.52",
+                  "0.67",
                   "0.68",
-                  "0.62",
+                  "0.63",
                   "0.64",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -17283,10 +17283,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
-                  "1.11+galaxy1",
-                  "1.6"
+                  "1.11+galaxy0",
+                  "1.6",
+                  "1.11+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -17297,8 +17297,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.11+galaxy1",
                   "1.9+galaxy1"
                 ],
@@ -17758,8 +17758,8 @@
                 "versions": [
                   "0.38.0",
                   "0.38.1",
-                  "0.39+galaxy0",
-                  "0.36.6"
+                  "0.36.6",
+                  "0.39+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -17846,8 +17846,8 @@
                   "0.38.1",
                   "0.36.4",
                   "0.32.3",
-                  "0.32.1",
                   "0.32.2",
+                  "0.32.1",
                   "0.36.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -18196,7 +18196,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNormal_r1.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nNormal_r2.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nTumor_r1.fastq.gz\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Create text file\"];\n  4[\"ℹ️ Input Dataset\\nTumor_r2.fastq.gz\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\ncapture_targets_chr5_12_17.bed\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"FastQC\"];\n  0 -->|output| 6;\n  7[\"Trimmomatic\"];\n  0 -->|output| 7;\n  1 -->|output| 7;\n  8[\"FastQC\"];\n  1 -->|output| 8;\n  9[\"FastQC\"];\n  2 -->|output| 9;\n  10[\"Trimmomatic\"];\n  2 -->|output| 10;\n  4 -->|output| 10;\n  11[\"FastQC\"];\n  4 -->|output| 11;\n  12[\"FastQC\"];\n  7 -->|fastq_out_r2_paired| 12;\n  13[\"Map with BWA-MEM\"];\n  7 -->|fastq_out_r1_paired| 13;\n  7 -->|fastq_out_r2_paired| 13;\n  14[\"FastQC\"];\n  7 -->|fastq_out_r1_paired| 14;\n  15[\"FastQC\"];\n  10 -->|fastq_out_r2_paired| 15;\n  16[\"Map with BWA-MEM\"];\n  10 -->|fastq_out_r1_paired| 16;\n  10 -->|fastq_out_r2_paired| 16;\n  17[\"FastQC\"];\n  10 -->|fastq_out_r1_paired| 17;\n  18[\"MultiQC\"];\n  9 -->|text_file| 18;\n  6 -->|text_file| 18;\n  8 -->|text_file| 18;\n  11 -->|text_file| 18;\n  19[\"Build list\"];\n  13 -->|bam_output| 19;\n  16 -->|bam_output| 19;\n  20[\"MultiQC\"];\n  12 -->|text_file| 20;\n  14 -->|text_file| 20;\n  15 -->|text_file| 20;\n  17 -->|text_file| 20;\n  21[\"Relabel identifiers\"];\n  3 -->|outfile| 21;\n  19 -->|output| 21;\n  22[\"Samtools view\"];\n  21 -->|output| 22;\n  23[\"RmDup\"];\n  22 -->|outputsam| 23;\n  24[\"BamLeftAlign\"];\n  23 -->|output1| 24;\n  25[\"Samtools calmd\"];\n  24 -->|output_bam| 25;\n  26[\"Samtools view\"];\n  25 -->|calmd_output| 26;\n  27[\"Samtools view\"];\n  25 -->|calmd_output| 27;\n  28[\"Select\"];\n  26 -->|outputsam| 28;\n  29[\"Replace Text\"];\n  28 -->|out_file1| 29;\n  30[\"Samtools view\"];\n  27 -->|outputsam| 30;\n  29 -->|outfile| 30;\n  31[\"Extract Tumor read\"];\n  30 -->|outputsam| 31;\n  32[\"Extract normal read\"];\n  30 -->|outputsam| 32;\n  33[\"Control-FREEC\"];\n  5 -->|output| 33;\n  32 -->|output| 33;\n  31 -->|output| 33;\n  2f4f45dd-d145-4078-aed9-5d832c51923b[\"Output\\nout_sample_info\"];\n  33 --> 2f4f45dd-d145-4078-aed9-5d832c51923b;\n  style 2f4f45dd-d145-4078-aed9-5d832c51923b stroke:#2c3143,stroke-width:4px;\n  13edcdd6-d7f6-4e0f-976e-1032084accf1[\"Output\\nout_sample_coord\"];\n  33 --> 13edcdd6-d7f6-4e0f-976e-1032084accf1;\n  style 13edcdd6-d7f6-4e0f-976e-1032084accf1 stroke:#2c3143,stroke-width:4px;\n  ac78da9a-8aa8-45ce-a2d1-3c366783fa60[\"Output\\nout_control_raw\"];\n  33 --> ac78da9a-8aa8-45ce-a2d1-3c366783fa60;\n  style ac78da9a-8aa8-45ce-a2d1-3c366783fa60 stroke:#2c3143,stroke-width:4px;\n  213ea0be-1ec6-469b-9556-69682bba69fe[\"Output\\nout_sample_raw\"];\n  33 --> 213ea0be-1ec6-469b-9556-69682bba69fe;\n  style 213ea0be-1ec6-469b-9556-69682bba69fe stroke:#2c3143,stroke-width:4px;\n  59a99e4f-01ef-4118-8777-63707e8b1696[\"Output\\nout_ratio_log2_circos\"];\n  33 --> 59a99e4f-01ef-4118-8777-63707e8b1696;\n  style 59a99e4f-01ef-4118-8777-63707e8b1696 stroke:#2c3143,stroke-width:4px;\n  75a0f2fc-e9a3-4537-8470-4c1efb5b7be5[\"Output\\nout_chr_sorted_circos\"];\n  33 --> 75a0f2fc-e9a3-4537-8470-4c1efb5b7be5;\n  style 75a0f2fc-e9a3-4537-8470-4c1efb5b7be5 stroke:#2c3143,stroke-width:4px;\n  662d214b-3d22-4f67-a4ef-a77b106d1535[\"Output\\nout_gc_profile\"];\n  33 --> 662d214b-3d22-4f67-a4ef-a77b106d1535;\n  style 662d214b-3d22-4f67-a4ef-a77b106d1535 stroke:#2c3143,stroke-width:4px;\n  02c14e20-cccd-4804-bbb6-13323afeda2e[\"Output\\nout_mg_log2_png\"];\n  33 --> 02c14e20-cccd-4804-bbb6-13323afeda2e;\n  style 02c14e20-cccd-4804-bbb6-13323afeda2e stroke:#2c3143,stroke-width:4px;\n  189dc4ef-a15f-49cc-9c6e-dff3dbd27ad7[\"Output\\nout_mg_png\"];\n  33 --> 189dc4ef-a15f-49cc-9c6e-dff3dbd27ad7;\n  style 189dc4ef-a15f-49cc-9c6e-dff3dbd27ad7 stroke:#2c3143,stroke-width:4px;\n  14aba5a4-1ade-477e-b937-7714038f3fd3[\"Output\\nout_sample_subclones\"];\n  33 --> 14aba5a4-1ade-477e-b937-7714038f3fd3;\n  style 14aba5a4-1ade-477e-b937-7714038f3fd3 stroke:#2c3143,stroke-width:4px;\n  61323e5f-7846-47e9-a0b3-d79f64ca2bd8[\"Output\\nout_sample_ratio\"];\n  33 --> 61323e5f-7846-47e9-a0b3-d79f64ca2bd8;\n  style 61323e5f-7846-47e9-a0b3-d79f64ca2bd8 stroke:#2c3143,stroke-width:4px;\n  34[\"Circos\"];\n  33 -->|out_chr_sorted_circos| 34;\n  33 -->|out_ratio_log2_circos| 34;\n  23ea7d87-b936-4879-bfaa-beb1e141834e[\"Output\\noutput_png\"];\n  34 --> 23ea7d87-b936-4879-bfaa-beb1e141834e;\n  style 23ea7d87-b936-4879-bfaa-beb1e141834e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nNormal_r1.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nNormal_r2.fastq.gz\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nTumor_r1.fastq.gz\"]\n  3[label=\"Create text file\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nTumor_r2.fastq.gz\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\ncapture_targets_chr5_12_17.bed\"]\n  6[label=\"FastQC\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Trimmomatic\"]\n  0 -> 7 [label=\"output\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"FastQC\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"FastQC\"]\n  2 -> 9 [label=\"output\"]\n  10[label=\"Trimmomatic\"]\n  2 -> 10 [label=\"output\"]\n  4 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  4 -> 11 [label=\"output\"]\n  12[label=\"FastQC\"]\n  7 -> 12 [label=\"fastq_out_r2_paired\"]\n  13[label=\"Map with BWA-MEM\"]\n  7 -> 13 [label=\"fastq_out_r1_paired\"]\n  7 -> 13 [label=\"fastq_out_r2_paired\"]\n  14[label=\"FastQC\"]\n  7 -> 14 [label=\"fastq_out_r1_paired\"]\n  15[label=\"FastQC\"]\n  10 -> 15 [label=\"fastq_out_r2_paired\"]\n  16[label=\"Map with BWA-MEM\"]\n  10 -> 16 [label=\"fastq_out_r1_paired\"]\n  10 -> 16 [label=\"fastq_out_r2_paired\"]\n  17[label=\"FastQC\"]\n  10 -> 17 [label=\"fastq_out_r1_paired\"]\n  18[label=\"MultiQC\"]\n  9 -> 18 [label=\"text_file\"]\n  6 -> 18 [label=\"text_file\"]\n  8 -> 18 [label=\"text_file\"]\n  11 -> 18 [label=\"text_file\"]\n  19[label=\"Build list\"]\n  13 -> 19 [label=\"bam_output\"]\n  16 -> 19 [label=\"bam_output\"]\n  20[label=\"MultiQC\"]\n  12 -> 20 [label=\"text_file\"]\n  14 -> 20 [label=\"text_file\"]\n  15 -> 20 [label=\"text_file\"]\n  17 -> 20 [label=\"text_file\"]\n  21[label=\"Relabel identifiers\"]\n  3 -> 21 [label=\"outfile\"]\n  19 -> 21 [label=\"output\"]\n  22[label=\"Samtools view\"]\n  21 -> 22 [label=\"output\"]\n  23[label=\"RmDup\"]\n  22 -> 23 [label=\"outputsam\"]\n  24[label=\"BamLeftAlign\"]\n  23 -> 24 [label=\"output1\"]\n  25[label=\"Samtools calmd\"]\n  24 -> 25 [label=\"output_bam\"]\n  26[label=\"Samtools view\"]\n  25 -> 26 [label=\"calmd_output\"]\n  27[label=\"Samtools view\"]\n  25 -> 27 [label=\"calmd_output\"]\n  28[label=\"Select\"]\n  26 -> 28 [label=\"outputsam\"]\n  29[label=\"Replace Text\"]\n  28 -> 29 [label=\"out_file1\"]\n  30[label=\"Samtools view\"]\n  27 -> 30 [label=\"outputsam\"]\n  29 -> 30 [label=\"outfile\"]\n  31[label=\"Extract Tumor read\"]\n  30 -> 31 [label=\"outputsam\"]\n  32[label=\"Extract normal read\"]\n  30 -> 32 [label=\"outputsam\"]\n  33[label=\"Control-FREEC\"]\n  5 -> 33 [label=\"output\"]\n  32 -> 33 [label=\"output\"]\n  31 -> 33 [label=\"output\"]\n  k2f4f45ddd1454078aed95d832c51923b[color=lightseagreen,label=\"Output\\nout_sample_info\"]\n  33 -> k2f4f45ddd1454078aed95d832c51923b\n  k13edcdd6d7f64e0f976e1032084accf1[color=lightseagreen,label=\"Output\\nout_sample_coord\"]\n  33 -> k13edcdd6d7f64e0f976e1032084accf1\n  kac78da9a8aa845cea2d13c366783fa60[color=lightseagreen,label=\"Output\\nout_control_raw\"]\n  33 -> kac78da9a8aa845cea2d13c366783fa60\n  k213ea0be1ec6469b955669682bba69fe[color=lightseagreen,label=\"Output\\nout_sample_raw\"]\n  33 -> k213ea0be1ec6469b955669682bba69fe\n  k59a99e4f01ef4118877763707e8b1696[color=lightseagreen,label=\"Output\\nout_ratio_log2_circos\"]\n  33 -> k59a99e4f01ef4118877763707e8b1696\n  k75a0f2fce9a3453784704c1efb5b7be5[color=lightseagreen,label=\"Output\\nout_chr_sorted_circos\"]\n  33 -> k75a0f2fce9a3453784704c1efb5b7be5\n  k662d214b3d224f67a4efa77b106d1535[color=lightseagreen,label=\"Output\\nout_gc_profile\"]\n  33 -> k662d214b3d224f67a4efa77b106d1535\n  k02c14e20cccd4804bbb613323afeda2e[color=lightseagreen,label=\"Output\\nout_mg_log2_png\"]\n  33 -> k02c14e20cccd4804bbb613323afeda2e\n  k189dc4efa15f49cc9c6edff3dbd27ad7[color=lightseagreen,label=\"Output\\nout_mg_png\"]\n  33 -> k189dc4efa15f49cc9c6edff3dbd27ad7\n  k14aba5a41ade477eb9377714038f3fd3[color=lightseagreen,label=\"Output\\nout_sample_subclones\"]\n  33 -> k14aba5a41ade477eb9377714038f3fd3\n  k61323e5f784647e9a0b3d79f64ca2bd8[color=lightseagreen,label=\"Output\\nout_sample_ratio\"]\n  33 -> k61323e5f784647e9a0b3d79f64ca2bd8\n  34[label=\"Circos\"]\n  33 -> 34 [label=\"out_chr_sorted_circos\"]\n  33 -> 34 [label=\"out_ratio_log2_circos\"]\n  k23ea7d87b9364879bfaabeb1e141834e[color=lightseagreen,label=\"Output\\noutput_png\"]\n  34 -> k23ea7d87b9364879bfaabeb1e141834e\n}",
           "workflow_tools": [
@@ -20135,12 +20135,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
-                  "0.67",
                   "0.52",
+                  "0.67",
                   "0.68",
-                  "0.62",
+                  "0.63",
                   "0.64",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -20222,9 +20222,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.73+galaxy0",
-                  "0.72",
-                  "0.72+galaxy1"
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -20236,8 +20236,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.73+galaxy0",
                   "0.69"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -20289,8 +20289,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.71",
                   "0.65"
                 ],
@@ -20309,14 +20309,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
                   "0.71",
                   "0.65",
-                  "0.74+galaxy1",
-                  "0.67",
                   "0.52",
+                  "0.67",
+                  "0.74+galaxy1",
                   "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -20339,8 +20339,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -20635,8 +20635,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.3.1",
-                  "1.1.0.46-0",
-                  "1.0.2.29"
+                  "1.0.2.29",
+                  "1.1.0.46-0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -21422,9 +21422,9 @@
                 "versions": [
                   "0.69.8+galaxy7",
                   "0.69.8+galaxy4",
+                  "0.69.8+galaxy1",
                   "0.69.8+galaxy3",
-                  "0.69.8+galaxy2",
-                  "0.69.8+galaxy1"
+                  "0.69.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -21454,8 +21454,8 @@
                   "0.69.8+galaxy12",
                   "0.69.8+galaxy7",
                   "0.69.8+galaxy4",
-                  "0.69.8+galaxy2",
                   "0.69.8+galaxy1",
+                  "0.69.8+galaxy2",
                   "0.69.8+galaxy10"
                 ],
                 "server": "https://usegalaxy.org"
@@ -21896,8 +21896,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.8+galaxy0",
-                  "1.9"
+                  "1.9",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -21919,14 +21919,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.9+galaxy1",
-                  "1.8+galaxy0",
                   "1.9",
-                  "1.8+galaxy2",
+                  "1.8+galaxy0",
+                  "1.8+galaxy1",
                   "1.7.1",
-                  "1.8+galaxy1"
+                  "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -21993,10 +21993,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
-                  "1.11+galaxy1",
-                  "1.6"
+                  "1.11+galaxy0",
+                  "1.6",
+                  "1.11+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22007,8 +22007,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.11+galaxy1",
                   "1.9+galaxy1"
                 ],
@@ -22163,8 +22163,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22190,8 +22190,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy2",
-                  "1.13+galaxy2"
+                  "1.13+galaxy2",
+                  "1.9+galaxy2"
                 ],
                 "server": "https://galaxy.hyphy.org/"
               },
@@ -22329,8 +22329,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22354,8 +22354,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy2",
-                  "1.13+galaxy2"
+                  "1.13+galaxy2",
+                  "1.9+galaxy2"
                 ],
                 "server": "https://galaxy.hyphy.org/"
               },
@@ -22497,8 +22497,8 @@
                 "versions": [
                   "0.38.0",
                   "0.38.1",
-                  "0.39+galaxy0",
-                  "0.36.6"
+                  "0.36.6",
+                  "0.39+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22585,8 +22585,8 @@
                   "0.38.1",
                   "0.36.4",
                   "0.32.3",
-                  "0.32.1",
                   "0.32.2",
+                  "0.32.1",
                   "0.36.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -22769,8 +22769,8 @@
                   "0.38.1",
                   "0.36.4",
                   "0.32.3",
-                  "0.32.1",
                   "0.32.2",
+                  "0.32.1",
                   "0.36.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -23337,7 +23337,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"EGA Download Client\"];\n  85672f3a-1556-49b6-be09-2e6c81721fb3[\"Output\\nEGA Download Client: authorized datasets\"];\n  0 --> 85672f3a-1556-49b6-be09-2e6c81721fb3;\n  style 85672f3a-1556-49b6-be09-2e6c81721fb3 stroke:#2c3143,stroke-width:4px;\n  1[\"EGA Download Client\"];\n  acd2bcf0-4b9d-4743-9034-716e73d4824f[\"Output\\nList of files in EGAD00001008392\"];\n  1 --> acd2bcf0-4b9d-4743-9034-716e73d4824f;\n  style acd2bcf0-4b9d-4743-9034-716e73d4824f stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\npedigree\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Search in textfiles\"];\n  1 -->|dataset_file_list| 3;\n  6d5d135e-a373-4938-9374-019a09f45a51[\"Output\\nList of Case 5 VCFs\"];\n  3 --> 6d5d135e-a373-4938-9374-019a09f45a51;\n  style 6d5d135e-a373-4938-9374-019a09f45a51 stroke:#2c3143,stroke-width:4px;\n  4[\"EGA Download Client\"];\n  3 -->|output| 4;\n  bdce7169-390b-4adb-9305-5550d5d70a73[\"Output\\nCase 5 VCFs.gz\"];\n  4 --> bdce7169-390b-4adb-9305-5550d5d70a73;\n  style bdce7169-390b-4adb-9305-5550d5d70a73 stroke:#2c3143,stroke-width:4px;\n  5[\"Convert compressed file to uncompressed.\"];\n  4 -->|downloaded_file_collection| 5;\n  82b71cdc-d813-4c77-8ff3-fa59e1725709[\"Output\\nCase 5 VCFs\"];\n  5 --> 82b71cdc-d813-4c77-8ff3-fa59e1725709;\n  style 82b71cdc-d813-4c77-8ff3-fa59e1725709 stroke:#2c3143,stroke-width:4px;\n  6[\"Column Regex Find And Replace\"];\n  5 -->|output1| 6;\n  5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27[\"Output\\nCase 5 VCFs (Fixed Header and Chr)\"];\n  6 --> 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27;\n  style 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27 stroke:#2c3143,stroke-width:4px;\n  7[\"bcftools norm\"];\n  6 -->|out_file1| 7;\n  96b34c8d-fa92-48cb-b01f-c05364deba5d[\"Output\\nCase 5 Normalized VCFs\"];\n  7 --> 96b34c8d-fa92-48cb-b01f-c05364deba5d;\n  style 96b34c8d-fa92-48cb-b01f-c05364deba5d stroke:#2c3143,stroke-width:4px;\n  8[\"Filter\"];\n  7 -->|output_file| 8;\n  a8539eb9-8bc3-473b-a27f-201c3acf5539[\"Output\\nCase 5 Normalized VCFs (Removed <NON_REF>)\"];\n  8 --> a8539eb9-8bc3-473b-a27f-201c3acf5539;\n  style a8539eb9-8bc3-473b-a27f-201c3acf5539 stroke:#2c3143,stroke-width:4px;\n  9[\"bcftools merge\"];\n  8 -->|out_file1| 9;\n  b5c479b2-e58a-4fe2-b1cf-fc64476c8192[\"Output\\nCase 5 Merged VCF\"];\n  9 --> b5c479b2-e58a-4fe2-b1cf-fc64476c8192;\n  style b5c479b2-e58a-4fe2-b1cf-fc64476c8192 stroke:#2c3143,stroke-width:4px;\n  10[\"SnpEff eff:\"];\n  9 -->|output_file| 10;\n  cd7b4941-4f4c-4631-8ad5-3411e60fbbd9[\"Output\\nCase 5 SnpEff Annotated vcf\"];\n  10 --> cd7b4941-4f4c-4631-8ad5-3411e60fbbd9;\n  style cd7b4941-4f4c-4631-8ad5-3411e60fbbd9 stroke:#2c3143,stroke-width:4px;\n  11[\"Convert uncompressed file to compressed\"];\n  10 -->|snpeff_output| 11;\n  6e5e1084-b5e1-4daf-8f3b-bd3868a52a25[\"Output\\nSnpEff Annotated vcf_bgzip\"];\n  11 --> 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25;\n  style 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25 stroke:#2c3143,stroke-width:4px;\n  12[\"gene.iobio visualisation\"];\n  11 -->|output1| 12;\n  11 -->|output1| 12;\n  11 -->|output1| 12;\n  0b30f4e0-7328-4479-8a56-bbf828fcfdba[\"Output\\nCase 5 gene.iobio results\"];\n  12 --> 0b30f4e0-7328-4479-8a56-bbf828fcfdba;\n  style 0b30f4e0-7328-4479-8a56-bbf828fcfdba stroke:#2c3143,stroke-width:4px;\n  13[\"Case 5 GEMINI Database\"];\n  11 -->|output1| 13;\n  2 -->|output| 13;\n  8a1964d9-607c-4dd3-a2dc-0f9a68dbb681[\"Output\\nGEMINI Database\"];\n  13 --> 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681;\n  style 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681 stroke:#2c3143,stroke-width:4px;\n  14[\"Case 5 GEMINI Inheritance pattern\"];\n  13 -->|outfile| 14;\n  960ef978-089c-4292-81b5-731965c72a0d[\"Output\\nCase 5 GEMINI results\"];\n  14 --> 960ef978-089c-4292-81b5-731965c72a0d;\n  style 960ef978-089c-4292-81b5-731965c72a0d stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"EGA Download Client\"]\n  k85672f3a155649b6be092e6c81721fb3[color=lightseagreen,label=\"Output\\nEGA Download Client: authorized datasets\"]\n  0 -> k85672f3a155649b6be092e6c81721fb3\n  1[label=\"EGA Download Client\"]\n  kacd2bcf04b9d47439034716e73d4824f[color=lightseagreen,label=\"Output\\nList of files in EGAD00001008392\"]\n  1 -> kacd2bcf04b9d47439034716e73d4824f\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\npedigree\"]\n  3[label=\"Search in textfiles\"]\n  1 -> 3 [label=\"dataset_file_list\"]\n  k6d5d135ea37349389374019a09f45a51[color=lightseagreen,label=\"Output\\nList of Case 5 VCFs\"]\n  3 -> k6d5d135ea37349389374019a09f45a51\n  4[label=\"EGA Download Client\"]\n  3 -> 4 [label=\"output\"]\n  kbdce7169390b4adb93055550d5d70a73[color=lightseagreen,label=\"Output\\nCase 5 VCFs.gz\"]\n  4 -> kbdce7169390b4adb93055550d5d70a73\n  5[label=\"Convert compressed file to uncompressed.\"]\n  4 -> 5 [label=\"downloaded_file_collection\"]\n  k82b71cdcd8134c778ff3fa59e1725709[color=lightseagreen,label=\"Output\\nCase 5 VCFs\"]\n  5 -> k82b71cdcd8134c778ff3fa59e1725709\n  6[label=\"Column Regex Find And Replace\"]\n  5 -> 6 [label=\"output1\"]\n  k5e1ff158cf8a4dc89c22b987a9f5ac27[color=lightseagreen,label=\"Output\\nCase 5 VCFs (Fixed Header and Chr)\"]\n  6 -> k5e1ff158cf8a4dc89c22b987a9f5ac27\n  7[label=\"bcftools norm\"]\n  6 -> 7 [label=\"out_file1\"]\n  k96b34c8dfa9248cbb01fc05364deba5d[color=lightseagreen,label=\"Output\\nCase 5 Normalized VCFs\"]\n  7 -> k96b34c8dfa9248cbb01fc05364deba5d\n  8[label=\"Filter\"]\n  7 -> 8 [label=\"output_file\"]\n  ka8539eb98bc3473ba27f201c3acf5539[color=lightseagreen,label=\"Output\\nCase 5 Normalized VCFs (Removed <NON_REF>)\"]\n  8 -> ka8539eb98bc3473ba27f201c3acf5539\n  9[label=\"bcftools merge\"]\n  8 -> 9 [label=\"out_file1\"]\n  kb5c479b2e58a4fe2b1cffc64476c8192[color=lightseagreen,label=\"Output\\nCase 5 Merged VCF\"]\n  9 -> kb5c479b2e58a4fe2b1cffc64476c8192\n  10[label=\"SnpEff eff:\"]\n  9 -> 10 [label=\"output_file\"]\n  kcd7b49414f4c46318ad53411e60fbbd9[color=lightseagreen,label=\"Output\\nCase 5 SnpEff Annotated vcf\"]\n  10 -> kcd7b49414f4c46318ad53411e60fbbd9\n  11[label=\"Convert uncompressed file to compressed\"]\n  10 -> 11 [label=\"snpeff_output\"]\n  k6e5e1084b5e14daf8f3bbd3868a52a25[color=lightseagreen,label=\"Output\\nSnpEff Annotated vcf_bgzip\"]\n  11 -> k6e5e1084b5e14daf8f3bbd3868a52a25\n  12[label=\"gene.iobio visualisation\"]\n  11 -> 12 [label=\"output1\"]\n  11 -> 12 [label=\"output1\"]\n  11 -> 12 [label=\"output1\"]\n  k0b30f4e0732844798a56bbf828fcfdba[color=lightseagreen,label=\"Output\\nCase 5 gene.iobio results\"]\n  12 -> k0b30f4e0732844798a56bbf828fcfdba\n  13[label=\"Case 5 GEMINI Database\"]\n  11 -> 13 [label=\"output1\"]\n  2 -> 13 [label=\"output\"]\n  k8a1964d9607c4dd3a2dc0f9a68dbb681[color=lightseagreen,label=\"Output\\nGEMINI Database\"]\n  13 -> k8a1964d9607c4dd3a2dc0f9a68dbb681\n  14[label=\"Case 5 GEMINI Inheritance pattern\"]\n  13 -> 14 [label=\"outfile\"]\n  k960ef978089c429281b5731965c72a0d[color=lightseagreen,label=\"Output\\nCase 5 GEMINI results\"]\n  14 -> k960ef978089c429281b5731965c72a0d\n}",
           "workflow_tools": [
@@ -25318,12 +25318,12 @@
                 "state": "inexact",
                 "versions": [
                   "1.10",
-                  "1.9",
                   "1.4.0.0",
+                  "1.9",
                   "1.15.1+galaxy3",
+                  "1.15.1+galaxy0",
                   "1.15.1+galaxy2",
-                  "1.15.1+galaxy4",
-                  "1.15.1+galaxy0"
+                  "1.15.1+galaxy4"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -26302,7 +26302,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPrimer Scheme\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nReference FASTA\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select pool1 primers\"];\n  0 -->|output| 2;\n  3[\"Select pool2 primers\"];\n  0 -->|output| 3;\n  4[\"Compute sequence length\"];\n  1 -->|output| 4;\n  5[\"Datamash\"];\n  2 -->|out_file1| 5;\n  6[\"Datamash\"];\n  3 -->|out_file1| 6;\n  7[\"Cut\"];\n  4 -->|output| 7;\n  8[\"Compute\"];\n  5 -->|out_file| 8;\n  9[\"Get start position of Pool2\"];\n  6 -->|out_file| 9;\n  10[\"Get end position of sequence\"];\n  7 -->|out_file1| 10;\n  11[\"Get end position of Pool1\"];\n  8 -->|out_file1| 11;\n  12[\"Compose text parameter value\"];\n  9 -->|text_param| 12;\n  13[\"Compose text parameter value\"];\n  11 -->|text_param| 13;\n  10 -->|text_param| 13;\n  14[\"Mask Reference for Pool2\"];\n  1 -->|output| 14;\n  12 -->|out1| 14;\n  af755a5e-2b20-49bc-9d52-34781f937f48[\"Output\\nmasked_ref_pool2\"];\n  14 --> af755a5e-2b20-49bc-9d52-34781f937f48;\n  style af755a5e-2b20-49bc-9d52-34781f937f48 stroke:#2c3143,stroke-width:4px;\n  15[\"Mask Reference for Pool1\"];\n  1 -->|output| 15;\n  13 -->|out1| 15;\n  0c3b5b20-c426-428c-a08b-c835a82477c1[\"Output\\nmasked_ref_pool1\"];\n  15 --> 0c3b5b20-c426-428c-a08b-c835a82477c1;\n  style 0c3b5b20-c426-428c-a08b-c835a82477c1 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPrimer Scheme\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nReference FASTA\"]\n  2[label=\"Select pool1 primers\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Select pool2 primers\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Compute sequence length\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Datamash\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Datamash\"]\n  3 -> 6 [label=\"out_file1\"]\n  7[label=\"Cut\"]\n  4 -> 7 [label=\"output\"]\n  8[label=\"Compute\"]\n  5 -> 8 [label=\"out_file\"]\n  9[label=\"Get start position of Pool2\"]\n  6 -> 9 [label=\"out_file\"]\n  10[label=\"Get end position of sequence\"]\n  7 -> 10 [label=\"out_file1\"]\n  11[label=\"Get end position of Pool1\"]\n  8 -> 11 [label=\"out_file1\"]\n  12[label=\"Compose text parameter value\"]\n  9 -> 12 [label=\"text_param\"]\n  13[label=\"Compose text parameter value\"]\n  11 -> 13 [label=\"text_param\"]\n  10 -> 13 [label=\"text_param\"]\n  14[label=\"Mask Reference for Pool2\"]\n  1 -> 14 [label=\"output\"]\n  12 -> 14 [label=\"out1\"]\n  kaf755a5e2b2049bc9d5234781f937f48[color=lightseagreen,label=\"Output\\nmasked_ref_pool2\"]\n  14 -> kaf755a5e2b2049bc9d5234781f937f48\n  15[label=\"Mask Reference for Pool1\"]\n  1 -> 15 [label=\"output\"]\n  13 -> 15 [label=\"out1\"]\n  k0c3b5b20c426428ca08bc835a82477c1[color=lightseagreen,label=\"Output\\nmasked_ref_pool1\"]\n  15 -> k0c3b5b20c426428ca08bc835a82477c1\n}",
           "workflow_tools": [
@@ -27691,8 +27691,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.5",
-                  "1.3.0",
                   "1.2.0",
+                  "1.3.0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -28473,11 +28473,11 @@
                 "versions": [
                   "0.19.5+galaxy1",
                   "0.20.1+galaxy0",
+                  "0.18.0.0",
+                  "0.12.4.0",
                   "0.19.3.2",
                   "0.19.5",
-                  "0.19.3.3",
-                  "0.12.4.0",
-                  "0.18.0.0"
+                  "0.19.3.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -28636,9 +28636,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.1+galaxy0",
+                  "1.2+galaxy0",
                   "1.2.2+galaxy0",
-                  "1.2+galaxy0"
+                  "1.0.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -28736,9 +28736,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.1+galaxy2",
                   "1.3.1+galaxy3",
-                  "1.3.1+galaxy4"
+                  "1.3.1+galaxy4",
+                  "1.3.1+galaxy2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -28801,9 +28801,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.2+galaxy0",
+                  "1.0.1+galaxy0",
                   "1.2.2+galaxy0",
-                  "1.0.1+galaxy0"
+                  "1.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -28825,9 +28825,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.3.1+galaxy2",
                   "1.3.1+galaxy3",
                   "1.3.1+galaxy4",
+                  "1.3.1+galaxy2",
                   "1.3.1+galaxy0",
                   "1.3.1+galaxy1",
                   "1.2.2+galaxy1"
@@ -29207,8 +29207,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -29234,8 +29234,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy2",
-                  "1.13+galaxy2"
+                  "1.13+galaxy2",
+                  "1.9+galaxy2"
                 ],
                 "server": "https://galaxy.hyphy.org/"
               },
@@ -29678,8 +29678,8 @@
                 "state": "inexact",
                 "versions": [
                   "7.221.3",
-                  "7.508+galaxy0",
-                  "7.475+galaxy0"
+                  "7.475+galaxy0",
+                  "7.508+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -30531,7 +30531,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nFather data\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMother data\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nProband data\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nPEDigree data\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Samtools view\"];\n  0 -->|output| 4;\n  5[\"Samtools view\"];\n  1 -->|output| 5;\n  6[\"Samtools view\"];\n  2 -->|output| 6;\n  7[\"RmDup\"];\n  4 -->|outputsam| 7;\n  8[\"RmDup\"];\n  5 -->|outputsam| 8;\n  9[\"RmDup\"];\n  6 -->|outputsam| 9;\n  10[\"FreeBayes\"];\n  7 -->|output1| 10;\n  8 -->|output1| 10;\n  9 -->|output1| 10;\n  11[\"bcftools norm\"];\n  10 -->|output_vcf| 11;\n  12[\"SnpEff eff:\"];\n  11 -->|output_file| 12;\n  974b6b15-ccf7-4fe8-8a71-2b3fe8b45272[\"Output\\nsnpeff_variant_stats\"];\n  12 --> 974b6b15-ccf7-4fe8-8a71-2b3fe8b45272;\n  style 974b6b15-ccf7-4fe8-8a71-2b3fe8b45272 stroke:#2c3143,stroke-width:4px;\n  083b9686-5c6d-495f-9257-7243896e64d7[\"Output\\nnormalized_snpeff_annotated_variants\"];\n  12 --> 083b9686-5c6d-495f-9257-7243896e64d7;\n  style 083b9686-5c6d-495f-9257-7243896e64d7 stroke:#2c3143,stroke-width:4px;\n  13[\"GEMINI load\"];\n  12 -->|snpeff_output| 13;\n  3 -->|output| 13;\n  14[\"GEMINI inheritance pattern\"];\n  13 -->|outfile| 14;\n  c5a64822-3c68-495e-b2fd-4642b1aabb5a[\"Output\\ncandidate_mutations\"];\n  14 --> c5a64822-3c68-495e-b2fd-4642b1aabb5a;\n  style c5a64822-3c68-495e-b2fd-4642b1aabb5a stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nFather data\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nMother data\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nProband data\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nPEDigree data\"]\n  4[label=\"Samtools view\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Samtools view\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"Samtools view\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"RmDup\"]\n  4 -> 7 [label=\"outputsam\"]\n  8[label=\"RmDup\"]\n  5 -> 8 [label=\"outputsam\"]\n  9[label=\"RmDup\"]\n  6 -> 9 [label=\"outputsam\"]\n  10[label=\"FreeBayes\"]\n  7 -> 10 [label=\"output1\"]\n  8 -> 10 [label=\"output1\"]\n  9 -> 10 [label=\"output1\"]\n  11[label=\"bcftools norm\"]\n  10 -> 11 [label=\"output_vcf\"]\n  12[label=\"SnpEff eff:\"]\n  11 -> 12 [label=\"output_file\"]\n  k974b6b15ccf74fe88a712b3fe8b45272[color=lightseagreen,label=\"Output\\nsnpeff_variant_stats\"]\n  12 -> k974b6b15ccf74fe88a712b3fe8b45272\n  k083b96865c6d495f92577243896e64d7[color=lightseagreen,label=\"Output\\nnormalized_snpeff_annotated_variants\"]\n  12 -> k083b96865c6d495f92577243896e64d7\n  13[label=\"GEMINI load\"]\n  12 -> 13 [label=\"snpeff_output\"]\n  3 -> 13 [label=\"output\"]\n  14[label=\"GEMINI inheritance pattern\"]\n  13 -> 14 [label=\"outfile\"]\n  kc5a648223c68495eb2fd4642b1aabb5a[color=lightseagreen,label=\"Output\\ncandidate_mutations\"]\n  14 -> kc5a648223c68495eb2fd4642b1aabb5a\n}",
           "workflow_tools": [
@@ -30860,7 +30860,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nfather_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfather_R2\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nmother_R1\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nmother_R2\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nproband_R1\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nproband_R2\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nPEDigree data\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"FastQC\"];\n  0 -->|output| 7;\n  8[\"FastQC\"];\n  1 -->|output| 8;\n  9[\"Map with BWA-MEM\"];\n  0 -->|output| 9;\n  1 -->|output| 9;\n  10[\"FastQC\"];\n  2 -->|output| 10;\n  11[\"FastQC\"];\n  3 -->|output| 11;\n  12[\"Map with BWA-MEM\"];\n  2 -->|output| 12;\n  3 -->|output| 12;\n  13[\"FastQC\"];\n  4 -->|output| 13;\n  14[\"FastQC\"];\n  5 -->|output| 14;\n  15[\"Map with BWA-MEM\"];\n  4 -->|output| 15;\n  5 -->|output| 15;\n  16[\"Samtools view\"];\n  9 -->|bam_output| 16;\n  17[\"Samtools view\"];\n  12 -->|bam_output| 17;\n  18[\"MultiQC\"];\n  7 -->|text_file| 18;\n  8 -->|text_file| 18;\n  10 -->|text_file| 18;\n  11 -->|text_file| 18;\n  13 -->|text_file| 18;\n  14 -->|text_file| 18;\n  de867748-890a-454c-baf3-6a9313269975[\"Output\\nmultiqc_input_data\"];\n  18 --> de867748-890a-454c-baf3-6a9313269975;\n  style de867748-890a-454c-baf3-6a9313269975 stroke:#2c3143,stroke-width:4px;\n  19[\"Samtools view\"];\n  15 -->|bam_output| 19;\n  20[\"RmDup\"];\n  16 -->|outputsam| 20;\n  21[\"RmDup\"];\n  17 -->|outputsam| 21;\n  22[\"RmDup\"];\n  19 -->|outputsam| 22;\n  23[\"FreeBayes\"];\n  20 -->|output1| 23;\n  21 -->|output1| 23;\n  22 -->|output1| 23;\n  24[\"bcftools norm\"];\n  23 -->|output_vcf| 24;\n  25[\"SnpEff eff:\"];\n  24 -->|output_file| 25;\n  4aab5884-4099-4e41-a82d-c4e1ff19609f[\"Output\\nsnpeff_variant_stats\"];\n  25 --> 4aab5884-4099-4e41-a82d-c4e1ff19609f;\n  style 4aab5884-4099-4e41-a82d-c4e1ff19609f stroke:#2c3143,stroke-width:4px;\n  e5a2fbc7-acdd-4782-822a-91568cb8d5b8[\"Output\\nnormalized_snpeff_annotated_variants\"];\n  25 --> e5a2fbc7-acdd-4782-822a-91568cb8d5b8;\n  style e5a2fbc7-acdd-4782-822a-91568cb8d5b8 stroke:#2c3143,stroke-width:4px;\n  26[\"GEMINI load\"];\n  25 -->|snpeff_output| 26;\n  6 -->|output| 26;\n  27[\"GEMINI inheritance pattern\"];\n  26 -->|outfile| 27;\n  07bd4bba-e7d9-48a8-b812-5dc2b07712bd[\"Output\\ncandidate_mutations\"];\n  27 --> 07bd4bba-e7d9-48a8-b812-5dc2b07712bd;\n  style 07bd4bba-e7d9-48a8-b812-5dc2b07712bd stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nfather_R1\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nfather_R2\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nmother_R1\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nmother_R2\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nproband_R1\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nproband_R2\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nPEDigree data\"]\n  7[label=\"FastQC\"]\n  0 -> 7 [label=\"output\"]\n  8[label=\"FastQC\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"Map with BWA-MEM\"]\n  0 -> 9 [label=\"output\"]\n  1 -> 9 [label=\"output\"]\n  10[label=\"FastQC\"]\n  2 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  3 -> 11 [label=\"output\"]\n  12[label=\"Map with BWA-MEM\"]\n  2 -> 12 [label=\"output\"]\n  3 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  4 -> 13 [label=\"output\"]\n  14[label=\"FastQC\"]\n  5 -> 14 [label=\"output\"]\n  15[label=\"Map with BWA-MEM\"]\n  4 -> 15 [label=\"output\"]\n  5 -> 15 [label=\"output\"]\n  16[label=\"Samtools view\"]\n  9 -> 16 [label=\"bam_output\"]\n  17[label=\"Samtools view\"]\n  12 -> 17 [label=\"bam_output\"]\n  18[label=\"MultiQC\"]\n  7 -> 18 [label=\"text_file\"]\n  8 -> 18 [label=\"text_file\"]\n  10 -> 18 [label=\"text_file\"]\n  11 -> 18 [label=\"text_file\"]\n  13 -> 18 [label=\"text_file\"]\n  14 -> 18 [label=\"text_file\"]\n  kde867748890a454cbaf36a9313269975[color=lightseagreen,label=\"Output\\nmultiqc_input_data\"]\n  18 -> kde867748890a454cbaf36a9313269975\n  19[label=\"Samtools view\"]\n  15 -> 19 [label=\"bam_output\"]\n  20[label=\"RmDup\"]\n  16 -> 20 [label=\"outputsam\"]\n  21[label=\"RmDup\"]\n  17 -> 21 [label=\"outputsam\"]\n  22[label=\"RmDup\"]\n  19 -> 22 [label=\"outputsam\"]\n  23[label=\"FreeBayes\"]\n  20 -> 23 [label=\"output1\"]\n  21 -> 23 [label=\"output1\"]\n  22 -> 23 [label=\"output1\"]\n  24[label=\"bcftools norm\"]\n  23 -> 24 [label=\"output_vcf\"]\n  25[label=\"SnpEff eff:\"]\n  24 -> 25 [label=\"output_file\"]\n  k4aab588440994e41a82dc4e1ff19609f[color=lightseagreen,label=\"Output\\nsnpeff_variant_stats\"]\n  25 -> k4aab588440994e41a82dc4e1ff19609f\n  ke5a2fbc7acdd4782822a91568cb8d5b8[color=lightseagreen,label=\"Output\\nnormalized_snpeff_annotated_variants\"]\n  25 -> ke5a2fbc7acdd4782822a91568cb8d5b8\n  26[label=\"GEMINI load\"]\n  25 -> 26 [label=\"snpeff_output\"]\n  6 -> 26 [label=\"output\"]\n  27[label=\"GEMINI inheritance pattern\"]\n  26 -> 27 [label=\"outfile\"]\n  k07bd4bbae7d948a8b8125dc2b07712bd[color=lightseagreen,label=\"Output\\ncandidate_mutations\"]\n  27 -> k07bd4bbae7d948a8b8125dc2b07712bd\n}",
           "workflow_tools": [
@@ -31713,9 +31713,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.72+galaxy1",
                   "0.73+galaxy0",
-                  "0.72",
-                  "0.72+galaxy1"
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -31727,8 +31727,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.73+galaxy0",
                   "0.69"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -31780,8 +31780,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.71",
                   "0.65"
                 ],
@@ -31800,14 +31800,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
                   "0.71",
                   "0.65",
-                  "0.74+galaxy1",
-                  "0.67",
                   "0.52",
+                  "0.67",
+                  "0.74+galaxy1",
                   "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -31830,8 +31830,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.73+galaxy0"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -31969,8 +31969,8 @@
                 "versions": [
                   "1.3.1",
                   "1.0.2.29--1",
-                  "1.1.0.46-0",
-                  "0.0.2"
+                  "0.0.2",
+                  "1.1.0.46-0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -32277,10 +32277,10 @@
                 "state": "inexact",
                 "versions": [
                   "1.10",
-                  "1.9",
-                  "1.9+galaxy1",
+                  "1.4.0.0",
                   "1.9+galaxy2",
-                  "1.4.0.0"
+                  "1.9+galaxy1",
+                  "1.9"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -32735,8 +32735,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.8+galaxy0",
-                  "1.9"
+                  "1.9",
+                  "1.8+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -32758,14 +32758,14 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy0",
                   "1.7",
+                  "1.11+galaxy0",
                   "1.9+galaxy1",
-                  "1.8+galaxy0",
                   "1.9",
-                  "1.8+galaxy2",
+                  "1.8+galaxy0",
+                  "1.8+galaxy1",
                   "1.7.1",
-                  "1.8+galaxy1"
+                  "1.8+galaxy2"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -32832,8 +32832,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -32859,8 +32859,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy2",
-                  "1.13+galaxy2"
+                  "1.13+galaxy2",
+                  "1.9+galaxy2"
                 ],
                 "server": "https://galaxy.hyphy.org/"
               },
@@ -33654,7 +33654,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nA. thaliana TAIR10 ref genome\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\naligned reads from outcrossed F2 pool\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\naligned reads from Ler mapping strain\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"SnpEff Download\"];\n  4[\"Replace parts of text\"];\n  0 -->|output| 4;\n  5[\"MiModD Variant Calling\"];\n  4 -->|outfile| 5;\n  2 -->|output| 5;\n  1 -->|output| 5;\n  6[\"MiModD Extract Variant Sites\"];\n  5 -->|ofile| 6;\n  7[\"MiModD NacreousMap\"];\n  6 -->|output_vcf| 7;\n  8[\"MiModD VCF Filter\"];\n  6 -->|output_vcf| 8;\n  9[\"SnpEff\"];\n  8 -->|outputfile| 9;\n  3 -->|snpeff_db| 9;\n  10[\"MiModD Report Variants\"];\n  9 -->|snpeff_output| 10;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nA. thaliana TAIR10 ref genome\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\naligned reads from outcrossed F2 pool\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\naligned reads from Ler mapping strain\"]\n  3[label=\"SnpEff Download\"]\n  4[label=\"Replace parts of text\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MiModD Variant Calling\"]\n  4 -> 5 [label=\"outfile\"]\n  2 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  6[label=\"MiModD Extract Variant Sites\"]\n  5 -> 6 [label=\"ofile\"]\n  7[label=\"MiModD NacreousMap\"]\n  6 -> 7 [label=\"output_vcf\"]\n  8[label=\"MiModD VCF Filter\"]\n  6 -> 8 [label=\"output_vcf\"]\n  9[label=\"SnpEff\"]\n  8 -> 9 [label=\"outputfile\"]\n  3 -> 9 [label=\"snpeff_db\"]\n  10[label=\"MiModD Report Variants\"]\n  9 -> 10 [label=\"snpeff_output\"]\n}",
           "workflow_tools": [
@@ -34010,8 +34010,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.3",
-                  "1.1.4"
+                  "1.1.4",
+                  "1.1.3"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -34022,8 +34022,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.3",
-                  "1.1.4"
+                  "1.1.4",
+                  "1.1.3"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -34093,8 +34093,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.3",
                   "1.1.4",
+                  "1.1.3",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -34107,8 +34107,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.1.3",
                   "1.1.4",
+                  "1.1.3",
                   "9.3+galaxy1",
                   "1.1.2",
                   "9.3+galaxy0"
@@ -35473,7 +35473,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
+          "modified": "2024-10-04 16:45:48 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nGIAB-Ashkenazim-Trio-hg19.bam\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"SnpEff Download\"];\n  2[\"ℹ️ Input Dataset\\nGIAB-Ashkenazim-Trio.tabular\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"FreeBayes\"];\n  0 -->|output| 3;\n  4[\"VcfAllelicPrimitives:\"];\n  3 -->|output_vcf| 4;\n  5[\"SnpEff eff:\"];\n  4 -->|out_file1| 5;\n  1 -->|snpeff_db| 5;\n  6[\"GEMINI load\"];\n  5 -->|snpeff_output| 6;\n  2 -->|output| 6;\n  7[\"GEMINI_db_info\"];\n  6 -->|outfile| 7;\n  8[\"GEMINI_query2\"];\n  6 -->|outfile| 8;\n  9[\"GEMINI_query1\"];\n  6 -->|outfile| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nGIAB-Ashkenazim-Trio-hg19.bam\"]\n  1[label=\"SnpEff Download\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nGIAB-Ashkenazim-Trio.tabular\"]\n  3[label=\"FreeBayes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"VcfAllelicPrimitives:\"]\n  3 -> 4 [label=\"output_vcf\"]\n  5[label=\"SnpEff eff:\"]\n  4 -> 5 [label=\"out_file1\"]\n  1 -> 5 [label=\"snpeff_db\"]\n  6[label=\"GEMINI load\"]\n  5 -> 6 [label=\"snpeff_output\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"GEMINI_db_info\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"GEMINI_query2\"]\n  6 -> 8 [label=\"outfile\"]\n  9[label=\"GEMINI_query1\"]\n  6 -> 9 [label=\"outfile\"]\n}",
           "workflow_tools": [
@@ -36589,8 +36589,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.20.1+galaxy2",
-                  "0.20.1",
-                  "0.20.1+galaxy1"
+                  "0.20.1+galaxy1",
+                  "0.20.1"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -36749,8 +36749,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.20.1",
                   "0.20.1+galaxy1",
+                  "0.20.1",
                   "0.20.1+galaxy2"
                 ],
                 "server": "https://usegalaxy.eu"
@@ -37352,9 +37352,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-04 16:29:52 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"snippy\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|output| 5;\n  aa9b0618-5faa-455b-83b0-e440aaa466bd[\"Output\\nsnippy_fasta\"];\n  5 --> aa9b0618-5faa-455b-83b0-e440aaa466bd;\n  style aa9b0618-5faa-455b-83b0-e440aaa466bd stroke:#2c3143,stroke-width:4px;\n  f8d87325-01e7-4a93-ba27-d5319cd0473b[\"Output\\nsnippy_tabular\"];\n  5 --> f8d87325-01e7-4a93-ba27-d5319cd0473b;\n  style f8d87325-01e7-4a93-ba27-d5319cd0473b stroke:#2c3143,stroke-width:4px;\n  6[\"JBrowse\"];\n  5 -->|snpgff| 6;\n  4 -->|output| 6;\n  5 -->|snpsbam| 6;\n  2 -->|output| 6;\n  72695851-6c2d-4cab-93c7-b64878f33a64[\"Output\\njbrowse_html\"];\n  6 --> 72695851-6c2d-4cab-93c7-b64878f33a64;\n  style 72695851-6c2d-4cab-93c7-b64878f33a64 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[label=\"snippy\"]\n  0 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  3 -> 5 [label=\"output\"]\n  kaa9b06185faa455b83b0e440aaa466bd[color=lightseagreen,label=\"Output\\nsnippy_fasta\"]\n  5 -> kaa9b06185faa455b83b0e440aaa466bd\n  kf8d8732501e74a93ba27d5319cd0473b[color=lightseagreen,label=\"Output\\nsnippy_tabular\"]\n  5 -> kf8d8732501e74a93ba27d5319cd0473b\n  6[label=\"JBrowse\"]\n  5 -> 6 [label=\"snpgff\"]\n  4 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"snpsbam\"]\n  2 -> 6 [label=\"output\"]\n  k726958516c2d4cab93c7b64878f33a64[color=lightseagreen,label=\"Output\\njbrowse_html\"]\n  6 -> k726958516c2d4cab93c7b64878f33a64\n}",
+          "modified": "2024-10-04 16:45:48 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"snippy\"];\n  0 -->|output| 5;\n  1 -->|output| 5;\n  3 -->|output| 5;\n  5726f893-4006-4a9a-a804-9ee108bb51cf[\"Output\\nsnippy_fasta\"];\n  5 --> 5726f893-4006-4a9a-a804-9ee108bb51cf;\n  style 5726f893-4006-4a9a-a804-9ee108bb51cf stroke:#2c3143,stroke-width:4px;\n  fb2eb9b1-6a74-4812-b52e-77820390a7b8[\"Output\\nsnippy_tabular\"];\n  5 --> fb2eb9b1-6a74-4812-b52e-77820390a7b8;\n  style fb2eb9b1-6a74-4812-b52e-77820390a7b8 stroke:#2c3143,stroke-width:4px;\n  6[\"JBrowse\"];\n  5 -->|snpgff| 6;\n  4 -->|output| 6;\n  5 -->|snpsbam| 6;\n  2 -->|output| 6;\n  fc4e57a1-e1f6-41d5-a741-afbabddabd1c[\"Output\\njbrowse_html\"];\n  6 --> fc4e57a1-e1f6-41d5-a741-afbabddabd1c;\n  style fc4e57a1-e1f6-41d5-a741-afbabddabd1c stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[label=\"snippy\"]\n  0 -> 5 [label=\"output\"]\n  1 -> 5 [label=\"output\"]\n  3 -> 5 [label=\"output\"]\n  k5726f89340064a9aa8049ee108bb51cf[color=lightseagreen,label=\"Output\\nsnippy_fasta\"]\n  5 -> k5726f89340064a9aa8049ee108bb51cf\n  kfb2eb9b16a744812b52e77820390a7b8[color=lightseagreen,label=\"Output\\nsnippy_tabular\"]\n  5 -> kfb2eb9b16a744812b52e77820390a7b8\n  6[label=\"JBrowse\"]\n  5 -> 6 [label=\"snpgff\"]\n  4 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"snpsbam\"]\n  2 -> 6 [label=\"output\"]\n  kfc4e57a1e1f641d5a741afbabddabd1c[color=lightseagreen,label=\"Output\\njbrowse_html\"]\n  6 -> kfc4e57a1e1f641d5a741afbabddabd1c\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/0.7.0.3",
             "toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/3.2"
@@ -37566,12 +37566,12 @@
                 {
                   "output_name": "snpconsensus",
                   "label": "snippy_fasta",
-                  "uuid": "aa9b0618-5faa-455b-83b0-e440aaa466bd"
+                  "uuid": "5726f893-4006-4a9a-a804-9ee108bb51cf"
                 },
                 {
                   "output_name": "snpsum",
                   "label": "snippy_tabular",
-                  "uuid": "f8d87325-01e7-4a93-ba27-d5319cd0473b"
+                  "uuid": "fb2eb9b1-6a74-4812-b52e-77820390a7b8"
                 }
               ],
               "input_connections": {
@@ -37626,7 +37626,7 @@
                 {
                   "output_name": "output",
                   "label": "jbrowse_html",
-                  "uuid": "72695851-6c2d-4cab-93c7-b64878f33a64"
+                  "uuid": "fc4e57a1-e1f6-41d5-a741-afbabddabd1c"
                 }
               ],
               "input_connections": {
@@ -38024,8 +38024,8 @@
                   "1.16.9+galaxy0",
                   "1.16.11+galaxy1",
                   "1.16.10+galaxy0",
-                  "1.16.5+galaxy7",
-                  "1.16.8+galaxy1"
+                  "1.16.8+galaxy1",
+                  "1.16.5+galaxy7"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -39071,11 +39071,11 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1.2+galaxy0",
-                  "3.1.16+galaxy0",
+                  "4.0.5+galaxy0",
                   "3.0.3+galaxy0",
                   "4.1.1+galaxy0",
-                  "4.0.5+galaxy0"
+                  "4.1.2+galaxy0",
+                  "3.1.16+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -39628,6 +39628,16 @@
         "Generate per-segment phylogenetic trees of AIV consensus sequences"
       ],
       "time_estimation": "4H",
+      "input_histories": [
+        {
+          "label": "UseGalaxy.eu",
+          "history": "https://usegalaxy.eu/published/history?id=0fc6b637aadbc8a2"
+        },
+        {
+          "label": "UseGalaxy.org",
+          "history": "https://usegalaxy.org/published/history?id=31cb33f8e6126823"
+        }
+      ],
       "key_points": [
         "Reassortment of gene segments makes reference-based mapping of influenza sequencing data challenging",
         "An alternative to *de-novo* assembly can be mapping to a dynamically chosen reference genome",
@@ -39670,26 +39680,26 @@
       "id": "variant-analysis/aiv-analysis",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-03-20 20:52:23 +0000",
+      "mod_date": "2024-10-04 16:29:05 +0000",
       "pub_date": "2022-11-21 16:45:21 +0000",
-      "version": 9,
+      "version": 10,
       "api": "https://training.galaxyproject.org/training-material/api/topics/variant-analysis/tutorials/aiv-analysis/tutorial.json",
       "tools": [
         "Grep1",
         "Show beginning1",
         "__RELABEL_FROM_FILE__",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18",
+        "toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.3.6+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.3+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.20+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.4+galaxy0",
         "toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3",
         "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
-        "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.520+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0",
         "upload1"
       ],
       "supported_servers": {
@@ -40294,7 +40304,7 @@
             "version": "local"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4",
+            "id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/9.3+galaxy1",
             "servers": [
               {
                 "state": "missing",
@@ -40337,8 +40347,11 @@
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
-                "state": "exact",
-                "version": "1.1.4",
+                "state": "inexact",
+                "versions": [
+                  "1.1.4",
+                  "1.1.3"
+                ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
               {
@@ -40346,8 +40359,11 @@
                 "server": "https://galaxy.pasteur.fr/"
               },
               {
-                "state": "exact",
-                "version": "1.1.4",
+                "state": "inexact",
+                "versions": [
+                  "1.1.4",
+                  "1.1.3"
+                ],
                 "server": "https://galaxytrakr.org/"
               },
               {
@@ -40359,8 +40375,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
-                "state": "exact",
-                "version": "1.1.4",
+                "state": "inexact",
+                "versions": [
+                  "1.1.4"
+                ],
                 "server": "https://galaxy.hyphy.org/"
               },
               {
@@ -40376,10 +40394,8 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "9.3+galaxy1"
-                ],
+                "state": "exact",
+                "version": "9.3+galaxy1",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -40410,45 +40426,49 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.3",
-                  "1.1.1",
                   "1.1.2",
                   "1.0.0",
-                  "1.1.0"
+                  "1.1.0",
+                  "1.1.1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "1.1.4",
+                "state": "inexact",
+                "versions": [
+                  "1.1.4",
+                  "1.1.3",
+                  "1.1.0"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "1.1.4",
+                "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "1.1.4",
+                "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.fr/"
               },
               {
                 "state": "inexact",
                 "versions": [
                   "1.1.3",
-                  "1.1.1",
-                  "1.1.0"
+                  "1.1.0",
+                  "1.1.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "1.1.4",
+                "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "1.1.4",
+                "version": "9.3+galaxy1",
                 "server": "https://usegalaxy.org.au"
               },
               {
@@ -40456,10 +40476,10 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "1.1.4"
+            "version": "9.3+galaxy1"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+            "id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.18",
             "servers": [
               {
                 "state": "missing",
@@ -40509,15 +40529,17 @@
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "0.7.18"
-                ],
+                "state": "exact",
+                "version": "0.7.18",
                 "server": "https://galaxy.pasteur.fr/"
               },
               {
-                "state": "exact",
-                "version": "0.7.17.2",
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.1",
+                  "0.7.17.2",
+                  "0.7.12.1"
+                ],
                 "server": "https://galaxytrakr.org/"
               },
               {
@@ -40529,8 +40551,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
-                "state": "exact",
-                "version": "0.7.17.2",
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.2"
+                ],
                 "server": "https://galaxy.hyphy.org/"
               },
               {
@@ -40547,7 +40571,7 @@
               },
               {
                 "state": "exact",
-                "version": "0.7.17.2",
+                "version": "0.7.18",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -40583,45 +40607,53 @@
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "0.7.17.2",
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.1",
+                  "0.7.17.2"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "0.7.17.2",
+                "version": "0.7.18",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "0.7.17.2",
+                "version": "0.7.18",
                 "server": "https://usegalaxy.fr/"
               },
               {
-                "state": "exact",
-                "version": "0.7.17.2",
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.1",
+                  "0.7.17.2"
+                ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "0.7.17.2",
+                "version": "0.7.18",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "0.7.17.2",
+                "version": "0.7.18",
                 "server": "https://usegalaxy.org.au"
               },
               {
-                "state": "exact",
-                "version": "0.7.17.2",
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.2"
+                ],
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "0.7.17.2"
+            "version": "0.7.18"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy1",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.2+galaxy2",
             "servers": [
               {
                 "state": "missing",
@@ -40732,13 +40764,15 @@
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "2.5.2+galaxy1",
+                "state": "inexact",
+                "versions": [
+                  "2.5.2+galaxy1"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "2.5.2+galaxy1",
+                "version": "2.5.2+galaxy2",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -40751,7 +40785,7 @@
               },
               {
                 "state": "exact",
-                "version": "2.5.2+galaxy1",
+                "version": "2.5.2+galaxy2",
                 "server": "https://usegalaxy.org"
               },
               {
@@ -40763,10 +40797,10 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "2.5.2+galaxy1"
+            "version": "2.5.2+galaxy2"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.4+galaxy1",
             "servers": [
               {
                 "state": "missing",
@@ -40809,18 +40843,27 @@
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.19.5+galaxy1",
+                  "0.20.1+galaxy0",
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://galaxy.pasteur.fr/"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.20.1+galaxy0",
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://galaxytrakr.org/"
               },
               {
@@ -40832,8 +40875,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://galaxy.hyphy.org/"
               },
               {
@@ -40884,54 +40929,62 @@
                 "versions": [
                   "0.19.5+galaxy1",
                   "0.20.1+galaxy0",
+                  "0.18.0.0",
+                  "0.12.4.0",
                   "0.19.3.2",
                   "0.19.5",
-                  "0.19.3.3",
-                  "0.12.4.0",
-                  "0.18.0.0"
+                  "0.19.3.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "version": "0.23.4+galaxy1",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "version": "0.23.4+galaxy1",
                 "server": "https://usegalaxy.fr/"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.19.5+galaxy1",
+                  "0.20.1+galaxy0",
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "version": "0.23.4+galaxy1",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "version": "0.23.4+galaxy1",
                 "server": "https://usegalaxy.org.au"
               },
               {
-                "state": "exact",
-                "version": "0.23.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "0.23.2+galaxy0"
+                ],
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "0.23.2+galaxy0"
+            "version": "0.23.4+galaxy1"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.3.6+galaxy0",
             "servers": [
               {
                 "state": "missing",
@@ -40974,8 +41027,10 @@
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
-                "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "state": "inexact",
+                "versions": [
+                  "2.1.2+galaxy2"
+                ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
               {
@@ -40983,8 +41038,11 @@
                 "server": "https://galaxy.pasteur.fr/"
               },
               {
-                "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "state": "inexact",
+                "versions": [
+                  "2.1.2+galaxy2",
+                  "1.5.5.3"
+                ],
                 "server": "https://galaxytrakr.org/"
               },
               {
@@ -41046,19 +41104,21 @@
                 "state": "inexact",
                 "versions": [
                   "1.5.5.3",
-                  "1.5.5",
-                  "1.5.5.1"
+                  "1.5.5.1",
+                  "1.5.5"
                 ],
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "state": "inexact",
+                "versions": [
+                  "2.1.2+galaxy2"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "version": "2.3.6+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
@@ -41066,18 +41126,23 @@
                 "server": "https://usegalaxy.fr/"
               },
               {
-                "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "state": "inexact",
+                "versions": [
+                  "2.1.2+galaxy2",
+                  "1.5.5.3",
+                  "2.1.2+galaxy1",
+                  "2.1.2+galaxy0"
+                ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "version": "2.3.6+galaxy0",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "2.1.2+galaxy2",
+                "version": "2.3.6+galaxy0",
                 "server": "https://usegalaxy.org.au"
               },
               {
@@ -41085,10 +41150,10 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "2.1.2+galaxy2"
+            "version": "2.3.6+galaxy0"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.2+galaxy0",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.4.3+galaxy0",
             "servers": [
               {
                 "state": "missing",
@@ -41173,8 +41238,11 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1+galaxy0",
+                  "1.4.2+galaxy0"
+                ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -41204,25 +41272,27 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.1+galaxy0",
+                  "1.2+galaxy0",
                   "1.2.2+galaxy0",
-                  "1.2+galaxy0"
+                  "1.0.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "1.4.2+galaxy0"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "version": "1.4.3+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "version": "1.4.3+galaxy0",
                 "server": "https://usegalaxy.fr/"
               },
               {
@@ -41235,12 +41305,12 @@
               },
               {
                 "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "version": "1.4.3+galaxy0",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "1.4.2+galaxy0",
+                "version": "1.4.3+galaxy0",
                 "server": "https://usegalaxy.org.au"
               },
               {
@@ -41248,7 +41318,7 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "1.4.2+galaxy0"
+            "version": "1.4.3+galaxy0"
           },
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3",
@@ -41407,7 +41477,7 @@
             "version": "2.2.2d+galaxy3"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.20+galaxy3",
             "servers": [
               {
                 "state": "missing",
@@ -41452,8 +41522,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.15.1+galaxy2",
-                  "1.9"
+                  "1.9",
+                  "1.15.1+galaxy2"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -41479,8 +41549,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9+galaxy2",
-                  "1.13+galaxy2"
+                  "1.13+galaxy2",
+                  "1.9+galaxy2"
                 ],
                 "server": "https://galaxy.hyphy.org/"
               },
@@ -41536,33 +41606,43 @@
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "1.15.1+galaxy0"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "version": "1.20+galaxy3",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "version": "1.20+galaxy3",
                 "server": "https://usegalaxy.fr/"
               },
               {
-                "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "1.9+galaxy3",
+                  "1.13+galaxy2",
+                  "1.9+galaxy2",
+                  "1.9+galaxy1",
+                  "1.15.1+galaxy0",
+                  "1.13+galaxy1",
+                  "1.13"
+                ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "version": "1.20+galaxy3",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "1.15.1+galaxy0",
+                "version": "1.20+galaxy3",
                 "server": "https://usegalaxy.org.au"
               },
               {
@@ -41570,10 +41650,10 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "1.15.1+galaxy0"
+            "version": "1.20+galaxy3"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+            "id": "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.4+galaxy0",
             "servers": [
               {
                 "state": "missing",
@@ -41616,8 +41696,10 @@
                 "server": "http://igg.cloud.ba.infn.it/galaxy"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
               {
@@ -41625,8 +41707,10 @@
                 "server": "https://galaxy.pasteur.fr/"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://galaxytrakr.org/"
               },
               {
@@ -41638,8 +41722,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://galaxy.hyphy.org/"
               },
               {
@@ -41655,10 +41741,8 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "inexact",
-                "versions": [
-                  "1.4+galaxy0"
-                ],
+                "state": "exact",
+                "version": "1.4+galaxy0",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -41686,47 +41770,58 @@
                 "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1",
+                  "1.2.0",
+                  "1.3.0",
+                  "1.0-r75-dirty.0"
+                ],
                 "server": "https://usegalaxy.be/"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "exact",
-                "version": "1.3.1",
+                "version": "1.4+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "1.3.1",
+                "version": "1.4+galaxy0",
                 "server": "https://usegalaxy.fr/"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
-                "version": "1.3.1",
+                "version": "1.4+galaxy0",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "1.3.1",
+                "version": "1.4+galaxy0",
                 "server": "https://usegalaxy.org.au"
               },
               {
-                "state": "exact",
-                "version": "1.3.1",
+                "state": "inexact",
+                "versions": [
+                  "1.3.1"
+                ],
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "1.3.1"
+            "version": "1.4+galaxy0"
           },
           {
             "id": "toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3",
@@ -42031,7 +42126,7 @@
             "version": "5.1.0"
           },
           {
-            "id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.520+galaxy0",
+            "id": "toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.526+galaxy0",
             "servers": [
               {
                 "state": "missing",
@@ -42088,8 +42183,8 @@
                 "state": "inexact",
                 "versions": [
                   "7.221.3",
-                  "7.508+galaxy0",
-                  "7.475+galaxy0"
+                  "7.475+galaxy0",
+                  "7.508+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -42121,8 +42216,10 @@
                 "server": "http://galaxy.interactomix.com/"
               },
               {
-                "state": "exact",
-                "version": "7.520+galaxy0",
+                "state": "inexact",
+                "versions": [
+                  "7.520+galaxy0"
+                ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -42169,12 +42266,12 @@
               },
               {
                 "state": "exact",
-                "version": "7.520+galaxy0",
+                "version": "7.526+galaxy0",
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "exact",
-                "version": "7.520+galaxy0",
+                "version": "7.526+galaxy0",
                 "server": "https://usegalaxy.fr/"
               },
               {
@@ -42187,12 +42284,12 @@
               },
               {
                 "state": "exact",
-                "version": "7.520+galaxy0",
+                "version": "7.526+galaxy0",
                 "server": "https://usegalaxy.org"
               },
               {
                 "state": "exact",
-                "version": "7.520+galaxy0",
+                "version": "7.526+galaxy0",
                 "server": "https://usegalaxy.org.au"
               },
               {
@@ -42200,7 +42297,7 @@
                 "server": "https://viralvariant.anses.fr/"
               }
             ],
-            "version": "7.520+galaxy0"
+            "version": "7.526+galaxy0"
           },
           {
             "id": "upload1",
@@ -42355,42 +42452,42 @@
           {
             "name": "text_processing",
             "owner": "bgruening",
-            "revisions": "d698c222f354",
+            "revisions": "86755160afbf",
             "tool_panel_section_label": "Text Manipulation",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "bwa",
             "owner": "devteam",
-            "revisions": "e188dc7a68e6",
+            "revisions": "2477830927ec",
             "tool_panel_section_label": "Mapping",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "bamtools_split_ref",
             "owner": "iuc",
-            "revisions": "9b520009db81",
+            "revisions": "9b8feb118f9e",
             "tool_panel_section_label": "SAM/BAM",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "fastp",
             "owner": "iuc",
-            "revisions": "65b93b623c77",
+            "revisions": "d60c3f704da0",
             "tool_panel_section_label": "FASTA/FASTQ",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "iqtree",
             "owner": "iuc",
-            "revisions": "24d024316465",
+            "revisions": "0878b7fd5260",
             "tool_panel_section_label": "Evolution",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "ivar_consensus",
             "owner": "iuc",
-            "revisions": "40737febe339",
+            "revisions": "3a72fede57ce",
             "tool_panel_section_label": "Virology",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
@@ -42404,14 +42501,14 @@
           {
             "name": "samtools_view",
             "owner": "iuc",
-            "revisions": "5826298f6a73",
+            "revisions": "32dc5f781059",
             "tool_panel_section_label": "SAM/BAM",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
           {
             "name": "seqtk",
             "owner": "iuc",
-            "revisions": "3da72230c066",
+            "revisions": "4b494533146a",
             "tool_panel_section_label": "FASTA/FASTQ",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           },
@@ -42432,13 +42529,13 @@
           {
             "name": "mafft",
             "owner": "rnateam",
-            "revisions": "bf28a8cff401",
+            "revisions": "8e649f27aa0d",
             "tool_panel_section_label": "Multiple Alignments",
             "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
           }
         ]
       },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: d698c222f354\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: e188dc7a68e6\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bamtools_split_ref\n  owner: iuc\n  revisions: 9b520009db81\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: 65b93b623c77\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: iqtree\n  owner: iuc\n  revisions: 24d024316465\n  tool_panel_section_label: Evolution\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ivar_consensus\n  owner: iuc\n  revisions: 40737febe339\n  tool_panel_section_label: Virology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualimap_bamqc\n  owner: iuc\n  revisions: 19ece8afbaab\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 5826298f6a73\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 3da72230c066\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vapor\n  owner: iuc\n  revisions: 244812f5bd1f\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mafft\n  owner: rnateam\n  revisions: bf28a8cff401\n  tool_panel_section_label: Multiple Alignments\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: text_processing\n  owner: bgruening\n  revisions: 86755160afbf\n  tool_panel_section_label: Text Manipulation\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bwa\n  owner: devteam\n  revisions: 2477830927ec\n  tool_panel_section_label: Mapping\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: bamtools_split_ref\n  owner: iuc\n  revisions: 9b8feb118f9e\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: fastp\n  owner: iuc\n  revisions: d60c3f704da0\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: iqtree\n  owner: iuc\n  revisions: '0878b7fd5260'\n  tool_panel_section_label: Evolution\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: ivar_consensus\n  owner: iuc\n  revisions: 3a72fede57ce\n  tool_panel_section_label: Virology\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: qualimap_bamqc\n  owner: iuc\n  revisions: 19ece8afbaab\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: samtools_view\n  owner: iuc\n  revisions: 32dc5f781059\n  tool_panel_section_label: SAM/BAM\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: seqtk\n  owner: iuc\n  revisions: 4b494533146a\n  tool_panel_section_label: FASTA/FASTQ\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: vapor\n  owner: iuc\n  revisions: 244812f5bd1f\n  tool_panel_section_label: Metagenomic Analysis\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: collapse_collections\n  owner: nml\n  revisions: 90981f86000f\n  tool_panel_section_label: Collection Operations\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: mafft\n  owner: rnateam\n  revisions: 8e649f27aa0d\n  tool_panel_section_label: Multiple Alignments\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
       "tours": false,
       "video": false,
       "slides_recordings": false,
@@ -42835,8 +42932,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.3+galaxy0",
                   "2.2.4+galaxy0",
+                  "2.2.3+galaxy0",
                   "2.2.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
@@ -43292,8 +43389,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.2.3+galaxy0",
                   "2.2.4+galaxy0",
+                  "2.2.3+galaxy0",
                   "2.2.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
@@ -43440,8 +43537,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.2.3+galaxy0",
-                  "2.2.4+galaxy0",
-                  "2.2.1+galaxy0"
+                  "2.2.1+galaxy0",
+                  "2.2.4+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -43872,8 +43969,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.4+galaxy0",
-                  "1.1.0+galaxy0.1"
+                  "1.1.0+galaxy0.1",
+                  "1.0.4+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
               },
