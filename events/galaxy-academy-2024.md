@@ -95,6 +95,7 @@ infrastructure:
   servers:
     - server: https://usegalaxy.eu
       name: Galaxy EU
+      tiaas_link: https://usegalaxy.eu/join-training/gta2024
     - server: https://usegalaxy.org
       name: Galaxy Main
     - server: https://usegalaxy.org.au/
