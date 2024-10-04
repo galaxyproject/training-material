@@ -611,19 +611,22 @@ It is based on cross-linking the DNA in the nucleus and its histones (proteins a
 > 8. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly` 
+> 
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C forward Reads` (output of **Collapse Collection** {% icon tool %})
+> 
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
 > 9. Rename the bam dataset `Mapped Hi-C forward Reads`
 >
-> 10. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} again with the following parameters:
+>
+> 10. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly` 
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly`
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C reverse Reads` (output of **Collapse Collection** {% icon tool %})
+>    - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C reverse Reads` (output of **Collapse Collection** {% icon tool %})
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
@@ -643,9 +646,9 @@ PretextMap converts BAM/SAM files into genome contact maps. With those contact m
 
 > <hands-on-title> Generate a contact map with PretextMap and PretextSnapshot </hands-on-title>
 >
-> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
+> 1. {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `outfile` (output of **Filter and merge** {% icon tool %})
->    - *"Sort by"*: `Don't sort`
+>    - *"Sort by"*: `Ascending`
 >
 > 2. {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input Pretext map file"*: `pretext_map_out` (output of **PretextMap** {% icon tool %})
