@@ -59,10 +59,9 @@ recordings:
   bot-timestamp: 1727373432
 
 answer_histories:
-    - label: "Scanpy_1.10.2_Anndata_0.10.9"
+  - label: "Scanpy_1.10.2_Anndata_0.10.9"
     history: https://singlecell.usegalaxy.eu/u/videmp/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024
     date: 2024-10-04
-
 ---
 
 

@@ -65,10 +65,9 @@ recordings:
   - nomadscientist
 
 answer_histories:
-    - label: "UseGalaxy.org"
+  - label: "UseGalaxy.org"
     history: https://usegalaxy.org/u/videmp/h/pre-processing-of-10x-single-cell-rna-datasets
     date: 2024-10-04
-
 ---
 
 
