@@ -123,7 +123,7 @@ program:
         description: |
           **Please take a moment to introduce yourself and tell us one fun fact about yourself!**
 
-          Post your answer to Slack [#social](https://gtnsmrgsbord.slack.com/channels/social) channel.
+          Post your answer to Slack [#social](https://gtnsmrgsbord.slack.com/channels/social) channel. *(See the setup tab for instructions for joining Slack)*.
 
 
   - section: "Galaxy introduction"
@@ -222,6 +222,15 @@ program:
           Lecture Video
       - name: ro-crate-galaxy-best-practices
         topic: fair
+
+  - section: Explore the GTN!
+    subsection: true
+    description: |
+      Feel free to try any other tutorials you see on the GTN, and we will do our best to guide you!
+    tracks:
+      - title: Go to the GTN!
+        link: https://training.galaxyproject.org
+
 ---
 # Welcome to the Galaxy Training Academy
 Do you want to learn how to use Galaxy, a open source data analysis platform? Then you are at the right place. We offer here a **5-day Global Online and Asynchronous learning event**.
