@@ -292,11 +292,11 @@ def send_news(output, options, channel: 'default')
   end
 end
 
-output, newsworthy = build_news(data)
-if newsworthy
-  channel = options[:useTestRoom] ? 'test' : 'default'
-  send_news(output, options, channel: channel)
-end
+#output, newsworthy = build_news(data)
+#if newsworthy
+#  channel = options[:useTestRoom] ? 'test' : 'default'
+#  send_news(output, options, channel: channel)
+#end
 
 # Single Cell
 output, newsworthy = build_news(data, filter: 'single-cell', updates: false)

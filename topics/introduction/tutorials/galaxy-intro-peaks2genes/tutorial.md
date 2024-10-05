@@ -22,7 +22,8 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: next-steps
-contributors:
+contributions:
+  authorship:
   - pajanne
   - blankclemens
   - bebatut
@@ -31,6 +32,9 @@ contributors:
   - dyusuf
   - sarah-peter
   - hexylena
+  editing:
+  - teresa-m
+
 ---
 
 We stumbled upon a paper ({% cite Li2012 %}) called *"The histone acetyltransferase MOF is a key regulator of the embryonic stem cell core transcriptional network"*. The paper contains the analysis of possible target genes of an interesting protein called Mof. The targets were obtained by ChIP-seq in mice and the raw data is available through [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268).
@@ -275,7 +279,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 
 > <hands-on-title>View end of file</hands-on-title>
 >
-> 1. Search for **Select last** {% icon tool %} tool and run **Select last lines from a dataset (tail)** with the following settings:
+> 1. Search for {% tool [Select last lines from a dataset (tail)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tail_tool/9.3+galaxy1) %} tool and run with the following settings:
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
@@ -392,8 +396,8 @@ You might have noticed that the UCSC file is in `BED` format and has a database 
 > <hands-on-title>Change format and database</hands-on-title>
 >
 > 1. Click on the {% icon galaxy-pencil %} (pencil) icon in the history entry of our peak region file
-> 2. Switch to the **Convert** tab
-> 3. Under *"Target datatype"*: `bed (using 'interval-to-bed')`
+> 2. Switch to the **Datatypes** tab
+> 3. In section **Convert to Datatype** under *"Target datatype"* select: `bed (using 'Convert Genomic Interval To Bed')`
 > 4. Press **Create Dataset**
 > 5. Check that the "Database/Build" is `mm9` (the database build for mice used in the paper)
 > 6. Again rename the file to something more recognizable, e.g. `Peak regions BED`
@@ -436,7 +440,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 1992 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
+>    > > The result varies with different settings, for example, the annotation may change due to updates at UCSC. If you followed step by step, with the same annotation, it should be chromosome 11 with 2164 genes. Note that for reproducibility, you should keep all input data used within the analysis. Rerunning the analysis with the same set of parameters, stored Galaxy, can lead to a different result if the inputs changed e.g. the annotation from UCSC.
 >    > {: .solution }
 >    {: .question}
 >
@@ -471,7 +475,7 @@ Great, we are ready to plot things!
 
 > <hands-on-title>Draw barchart</hands-on-title>
 >
-> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Group** tool
+> 1. Click on {% icon galaxy-barchart %} (visualize) icon on the output from the **Sort** tool
 > 2. Select `Bar diagram (NVD3)`
 > 3. Click on the **<<** in the upper right corner
 > 4. Choose a title at **Provide a title**, e.g. `Gene counts per chromosome`
@@ -479,7 +483,7 @@ Great, we are ready to plot things!
 > 6. When you are happy, click the {% icon galaxy-save %} **Save** visualization in the top right of the *main panel*
 >
 >    This will store it to your saved visualisations. Later you can view,
->    download, or share it with others from **User -> Visualizations** in the
+>    download, or share it with others from **Data -> Visualizations** in the
 >    top menu of Galaxy.
 >
 {: .hands_on}
@@ -694,22 +698,22 @@ Congratulations! You should have a file with all the unique gene names and a cou
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
+To share a history, click on the {%  icon galaxy-history-options %} history options and select `Share or Publish`. On this page you can do 3 things:
 
 
 1. **Make accessible via Link**
 
     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
 
-2. **Publish History**
+2. **Make History publicly available in Published Histories**
 
-    This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Published Histories` in the top menu.
+    This will not only create a link, but will also publish your history. This means your history will be listed under `Data → Histories → Published Histories` in the top menu.
 
 3. **Share with Individual Users**
 
     This will share the history only with specific users on the Galaxy instance.
 
-![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.png)
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >
@@ -717,7 +721,7 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 > 2. See if you can do the same with your workflow!
 > 3. Find the history and/or workflow shared by your neighbour
 >
->    Histories shared with specific users can be accessed by those users in their history menu ({% icon galaxy-gear %} (gear) icon) under `Histories shared with me`.
+>    Histories shared with specific users can be accessed by those users under `Data → Histories → Histories shared with me`.
 >
 {: .hands_on}
 

@@ -1,19 +1,19 @@
 ---
 layout: tutorial_hands_on
-
 title: Identification of AMR genes in an assembled bacterial genome
-zenodo_link: 'https://zenodo.org/record/10572227'
+zenodo_link: https://zenodo.org/record/10572227
 questions:
 - Which resistance genes are on a bacterial genome?
 - Where are the genes located on the genome?
 objectives:
 - Run a series of tool to assess the presence of antimicrobial resistance genes (ARG)
-- Get information about ARGs 
+- Get information about ARGs
 - Visualize the ARGs and plasmid genes in their genomic context
 time_estimation: 2h
 key_points:
 - staramr is a powerful tool to predict ARGs and plasmid genes
-- Visualization of the ARGs and plasmid genes in their genomic context helps to make sense of the data
+- Visualization of the ARGs and plasmid genes in their genomic context helps to make
+  sense of the data
 tags:
 - gmod
 - illumina
@@ -31,7 +31,6 @@ edam_ontology:
 - topic_3324 # Infectious disease
 - topic_4013 # Antimicrobial resistance
 level: Introductory
-
 contributions:
   authorship:
   - bazante1
@@ -44,17 +43,29 @@ contributions:
   funding:
   - avans-atgm
   - abromics
-
 follow_up_training:
-- type: "internal"
+- type: internal
   topic_name: visualisation
   tutorials:
   - jbrowse
-- type: "internal"
+- type: internal
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
+recordings:
+- youtube_id: hfiYCIcD0ww
+  length: 26M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-24'
+  speakers:
+  - SaimMomin12
+  captioners:
+  - SaimMomin12
+  bot-timestamp: 1727199012
+
+
 ---
+
 
 Antimicrobial resistance (AMR) is a global phenomenon with no geographical or species boundaries, which poses an important threat to human, animal and environmental health. It is a complex and growing problem that compromises our ability to treat bacterial infections.
 

@@ -222,17 +222,17 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
 	./node_modules/.bin/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_ES.pdf: _site/%/slides_ES.html
 	$(ACTIVATE_ENV) && \
 	./node_modules/.bin/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 	$(ACTIVATE_ENV) && \
 	./node_modules/.bin/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
+	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
 
 video: ## Build all videos
 	bash bin/ari-make.sh

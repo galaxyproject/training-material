@@ -17,6 +17,7 @@ contributors:
   - shiltemann
   - hexylena
   - gallardoalba
+level: Intermediate
 
 recordings:
 - captioners:

@@ -43,11 +43,13 @@ Below are just a few examples of basic expressions:
 | `chr\d{1,2}`         | `chr` followed by 1 or 2 digits |
 | `.*abc$`             | anything with `abc` at the end of the line |
 | `^$`                 | empty line |
+| `^>.*`			   | Line starting with `>` (e.g. Fasta header) |
+| `^[^>].*`			   | Line not starting with `>` (e.g. Fasta sequence) |
 
 
 **Replacing**
 
-Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups `(...)`, which we can refer to using `\1`, `\2` etc for the first and second captured values.
+Sometimes you need to capture the exact value you matched on, in order to use it in your replacement, we do this using capture groups `(...)`, which we can refer to using `\1`, `\2` etc for the first and second captured values. If you want to refer to the whole match, use `&`.
 
 | Regular expression      | Input        | Captures               |
 |-------------------------|--------------|------------------------|
@@ -57,6 +59,8 @@ Sometimes you need to capture the exact value you matched on, in order to use it
 An expression like `s/find/replacement/g` indicates a replacement expression, this will search (`s`) for any occurrence of `find`, and replace it with `replacement`. It will do this globally (`g`) which means it doesn't stop after the first match.
 
 Example: `s/chr(\d{1,2})/CHR\1/g` will replace `chr14` with `CHR14` etc.
+
+You can also use replacement modifier such as convert to lower case `\L` or upper case `\U`. Example: `s/.*/\U&/g` will convert the whole text to upper case.
 
 Note: In Galaxy, you are often asked to provide the find and replacement expressions separately, so you don't have to use the `s/../../g` structure.
 

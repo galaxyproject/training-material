@@ -37,6 +37,13 @@ requirements:
     tutorials:
       - fair-intro
 
+recordings:
+  - speakers:
+    - SNG888
+    date: '2024-09-12'
+    length: 1H2M54S
+    youtube_id: "48hRQM0yvao"
+
 ---
 
 

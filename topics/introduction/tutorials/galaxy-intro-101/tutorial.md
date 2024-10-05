@@ -1,36 +1,36 @@
 ---
 layout: tutorial_hands_on
-
-title: "Galaxy Basics for genomics"
-zenodo_link: "https://doi.org/10.5281/zenodo.4104428"
+title: Galaxy Basics for genomics
+zenodo_link: https://doi.org/10.5281/zenodo.4104428
 level: Introductory
 questions:
-  - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
+- Which coding exon has the highest number of single nucleotide polymorphisms (SNPs)
+  on human chromosome 22?
 objectives:
-  - "Familiarize yourself with the basics of Galaxy"
-  - "Learn how to obtain data from external sources"
-  - "Learn how to run tools"
-  - "Learn how histories work"
-  - "Learn how to create a workflow"
-  - "Learn how to share your work"
-time_estimation: "1H"
+- Familiarize yourself with the basics of Galaxy
+- Learn how to obtain data from external sources
+- Learn how to run tools
+- Learn how histories work
+- Learn how to create a workflow
+- Learn how to share your work
+time_estimation: 1H
 key_points:
-  - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
-  - "Galaxy keeps a full record of your analysis in a history"
-  - "Workflows enable you to repeat your analysis on different data"
-  - "Galaxy can connect to external sources for data import and visualization purposes"
-  - "Galaxy provides ways to share your results and methods with others"
+- Galaxy provides an easy-to-use graphical user interface for often complex command-line
+  tools
+- Galaxy keeps a full record of your analysis in a history
+- Workflows enable you to repeat your analysis on different data
+- Galaxy can connect to external sources for data import and visualization purposes
+- Galaxy provides ways to share your results and methods with others
 subtopic: core
 priority: 2
 contributors:
-  - shiltemann
-  - nsoranzo
-  - blankclemens
-  - nekrut
-  - bgruening
-  - pajanne
-  - hexylena
-
+- shiltemann
+- nsoranzo
+- blankclemens
+- nekrut
+- bgruening
+- pajanne
+- hexylena
 recordings:
 - captioners:
   - shiltemann
@@ -39,8 +39,19 @@ recordings:
   youtube_id: D5HgJWdfOWw
   speakers:
   - nekrut
+- youtube_id: jeRiVGJJgQA
+  length: 18M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-16'
+  speakers:
+  - natalie-wa
+  captioners:
+  - natalie-wa
+  bot-timestamp: 1726511277
+
 
 ---
+
 
 This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 

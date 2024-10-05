@@ -23,12 +23,12 @@ cost: free # Or, e.g. 150 EUR
 audience: This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
 contact_email: organisers@example.com
 async: false # if asynchronous, we will not display the time columns on the program
-mode: online # In-person
+mode: online # online, onsite, or hybrid
 
 registration:
   link: https://example.org
   deadline: 2024-01-01
-
+  open: false # set this if registration is not open yet
 
 # Location of the event
 # For online events, just the 'name' is enough
@@ -138,6 +138,22 @@ program:
     tutorials:
       - name: mothur-miseq-sop-short
         topic: microbiome
+
+  - section: "Wednesday: Track buttons example"
+    description: Today we have two different tracks, click on one of the buttons below to view the track program.
+    tracks:  # instead of tutorials, you can also define tracks, this will create a button per tracks that will lead to a different page
+      - title: Track 1
+        link: events/tracks/example-track1.md
+      - title: Track 2
+        link: events/tracks/example-track2.md
+      - title: Ecology
+        link: learning-pathways/intro-to-galaxy-and-ecology.md # can also link to learning pathways (or any other GTN page)
+      - title: Climate
+        link: https://usegalaxy.eu # external links also possible
+      - title: Plants
+        link: http://example.com
+      - title: CYOA
+      - title: Track 7
 
 ---
 

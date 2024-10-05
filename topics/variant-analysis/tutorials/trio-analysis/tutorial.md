@@ -23,6 +23,7 @@ contributors:
 - wm75
 - hexylena
 - shiltemann
+level: Advanced
 tags:
 - cyoa
 
