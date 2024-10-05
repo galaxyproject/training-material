@@ -597,7 +597,7 @@ If you have only one pair of datasets, skip this step.
 >
 > 2. Do the same with the reverse reads (R) and name it `EReginae Hi-C reverse reads`.
 >
-> 3. For species with more than one set of Hi-C reads, verify that the datasets are ordered the same way in both collections. If not, sort both collections with the tool  {% tool [Sort collection]() %} 
+> 3. For species with more than one set of Hi-C reads, verify that the datasets are ordered the same way in both collections. If not, sort both collections with the tool  {% tool Sort collection %} 
 >
 > 4. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `EReginae Hi-C forward Reads`
