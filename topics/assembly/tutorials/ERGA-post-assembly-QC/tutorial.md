@@ -594,7 +594,6 @@ If you have only one pair of datasets, skip this step.
 
 > <hands-on-title> Merge  <em>Erythrolamprus reginae</em> Hi-C data into single datasets </hands-on-title>
 > 1. Create a collection with the Hi-C forward reads name `EReginae Hi-C forward reads`.
->    > {% snippet faqs/galaxy/collections_build_list.md name="EReginae Hi-C forward Reads" datasets_description="the fastq.gz containing the Hi-C forward reads (F)" n="1" %}
 >
 > 2. Do the same with the reverse reads (R) and name it `EReginae Hi-C reverse reads`.
 >
@@ -604,13 +603,16 @@ If you have only one pair of datasets, skip this step.
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `EReginae Hi-C forward Reads`
 >
 > 5. Rename the dataset `EReginae Hi-C forward Reads`
->    > {% snippet faqs/galaxy/datasets_rename.md name="Hi-C forward Reads" %}
 > 
 > 6. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `EReginae Hi-C reverse reads`
 >
 > 7. Rename the dataset `EReginae Hi-C reverse Reads`
 >
+> {% snippet faqs/galaxy/collections_build_list.md name="EReginae Hi-C forward Reads" datasets_description="the fastq.gz containing the Hi-C forward reads (F)" n="1" %}
+>
+> {% snippet faqs/galaxy/datasets_rename.md name="Hi-C forward Reads" %}
+> 
 {: .hands_on}
 
 > <hands-on-title> Mapping Hi-C reads against a reference genome </hands-on-title>
