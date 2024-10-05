@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: ERGA post-assembly QC
 questions:
 - "What combination of tools can assess the quality of a genome assembly?"
-- "What metrics can help to analyse the quality of an asembly?"
+- "What metrics can help to analyse the quality of an assembly?"
 - "How do we evaluate the outputs?"
 objectives:
 - "Apply the post-assembly-QC-workflow using the necessary tools"
@@ -17,6 +17,7 @@ contributors:
 - GitFab93
 - gallardoalba
 - tbrown91
+- delphine-l
 tags:
   - plants
   - animals
@@ -90,15 +91,15 @@ As a first step we will get the data from Zenodo.
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz   fastq.gz    HiFi    CReniformis_Pacbio
->   dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
->   dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
->   dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
->   dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz   fastq.gz    HiFi    EReginae_PacBio
->   dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
->   dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
->   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
->   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastq.gz    HiFi    ERobustus_PacBio
+>   dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz   fastqsanger.gz    HiFi    CReniformis_Pacbio
+>   dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    EReginae_PacBio
+>   dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    EReginae_PacBio
+>   dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    EReginae_PacBio
+>   dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    EReginae_PacBio
+>   dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    ERobustus_PacBio
+>   dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    ERobustus_PacBio
+>   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    ERobustus_PacBio
+>   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz   fastqsanger.gz    HiFi    ERobustus_PacBio
 >       ```
 >    - Click on `Build`
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -119,16 +120,16 @@ As a first step we will get the data from Zenodo.
 >       ```
 >   CReformitis_assembly    https://zenodo.org/record/7831298/files/assembly_sponge.fasta.gz    fasta.gz    assembly
 >   CReformitis_metadata    https://zenodo.org/record/7781236/files/metadata_chon.yaml  yaml    metadata
->   CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastq.gz    Hi-C
->   CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastq.gz    Hi-C
->   EReginae_Hi-C_F_01   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.001   fastq.gz    Hi-C
->   EReginae_Hi-C_F_02   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.002   fastq.gz    Hi-C
->   EReginae_Hi-C_F_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.003   fastq.gz    Hi-C
->   EReginae_Hi-C_R_01   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.001   fastq.gz    Hi-C
->   EReginae_Hi-C_R_02   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.002   fastq.gz    Hi-C
->   EReginae_Hi-C_R_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.003   fastq.gz    Hi-C
->   EReginata_assembly    https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz    fasta.gz    assembly
->   ERegina_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  yaml    metadata
+>   CReniformis_Hi-C_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz   fastqsanger.gz    Hi-C
+>   CReniformis_Hi-C_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_F_01   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.001   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_F_02   https://zenodo.org/record/7831762/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.002   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_F_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R1.fastq.gz.gz.003   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_R_01   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.001   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_R_02   https://zenodo.org/record/7833514/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.002   fastqsanger.gz    Hi-C
+>   EReginae_Hi-C_R_03   https://zenodo.org/record/7831763/files/rEryReg1_Royal_Ground_Snake_R2.fastq.gz.gz.003   fastqsanger.gz    Hi-C
+>   EReginae_assembly    https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz    fasta.gz    assembly
+>   EReginae_metadata    https://zenodo.org/record/7781236/files/metadata_eryth.yaml  yaml    metadata
 >   ERobustus_assembly  https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz  fasta.gz    assembly
 >   ERobustus_metadata  https://zenodo.org/record/7781236/files/metadata_esch.yaml  yaml    metadata
 >   Taxonomy_data   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz  gz  taxonomy
@@ -156,7 +157,7 @@ Once we have imported all the datasets, we will move each one to its corresponde
 > 2. Rename the histories as  `Case 1: *Chondrosia reniformis*`, `Case 2: *Erythrolamprus reginae*` and  `Case 3: *Eschrichtius robustus*`.
 > 3. Click in **History options** and select `Show Histories Side-by-Side`
 > 4. Click in `Select histories`, and include the histories corresponding to the three species.
-> 5. Move the datasets to its correspondent history.
+> 5. Drag and drop to move the datasets to their correspondent histories.
 >
 >    > <comment-title>Non-unique datasets</comment-title>
 >    > Both the **Taxonomic_data** and the **Diamond_database** should be included in all of them.
@@ -219,7 +220,7 @@ In this tutorial we will use **Minimap2** for generation the coverage data. Mini
 {: .hands_on}
 
 
-## Generate sequence similarity data with DIAMOND
+## Generate sequence similarity data with **DIAMOND**
 
 **DIAMOND** is a sequence alignment tool that utilizes a more efficient algorithm compared to BLAST, allowing for much faster searches of large sequence databases. Specifically, DIAMOND uses a sensitive seed-extension approach that compares a set of small segments (seeds) from the query sequence to a database, and then extends the alignments based on the highest-scoring hits. This approach allows DIAMOND to perform up to 20,000 times faster than BLAST, with comparable or improved sensitivity and accuracy ({% cite Buchfink2014 %}).
 
@@ -265,7 +266,7 @@ In this tutorial we will use **Minimap2** for generation the coverage data. Mini
 >    - *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Select a gene predictor"*: `Metaeuk`
->    - *"Auto-detect or select lineage?"*: `Auto-detect`
+>    - *"Auto-detect or select lineage?"*: `Auto-detect` (For *Erythrolamprus reginae*, select `Select lineage` then `Vertebrata` in *"Lineage"*)
 >    - *"auto-lineage group"*: `All taxonomic groups (--auto-lineage)`
 >    - *"Which outputs should be generated"*: `Short summary text`
 >
@@ -318,6 +319,7 @@ To get a more meaningful analysis and therefore more useful information about ou
 >        - {% icon param-file %} *"BUSCO full table file"*: `Full table` (output of **Busco** {% icon tool %})
 >        - *"BLAST/Diamond hits"*: `Enabled`
 >           - *"BLAST/Diamond hits dataset"*: output of **Diamond** {% icon tool %}
+>           - *"BLAST/Diamond file column order"*: `1=qseqid,7=staxids,6=bitscore,2=sseqid,3=qstart,4=qend,5=evalue` 
 >        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: output of **Minimap2** {% icon tool %}
 >
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
@@ -587,53 +589,60 @@ It is based on cross-linking the DNA in the nucleus and its histones (proteins a
 
 ## Pre-processing Hi-C data
 
-> <hands-on-title> Mapping Hi-C reads against a reference genome </hands-on-title>
-> 1. Create a collection with the Hi-C forward reads name `CReformitis Hi-C forward reads`.
+The following analysis use Hi-C reads in single datasets: one for the forward reads and one for the reverse reads. If you have more than one fastq datasets, as we do for *Erythrolamprus reginae* you will need to merge them into single datasets. 
+If you have only one pair of datasets, skip this step. 
+
+> <hands-on-title> Merge  <em>Erythrolamprus reginae</em> Hi-C data into single datasets </hands-on-title>
+> 1. Create a collection with the Hi-C forward reads name `EReginae Hi-C forward reads`.
 >
->    > {% snippet faqs/galaxy/collections_build_list.md name="CReformitis Hi-C forward Reads" datasets_description="the fastq.gz containing the Hi-C forward reads (F)" n="1" %}
+>    > {% snippet faqs/galaxy/collections_build_list.md name="EReginae Hi-C forward Reads" datasets_description="the fastq.gz containing the Hi-C forward reads (F)" n="1" %}
 >
-> 2. Do the same with the reverse reads (R) and name it `CReformitis Hi-C reverse reads`.
+> 2. Do the same with the reverse reads (R) and name it `EReginae Hi-C reverse reads`.
 >
 > 3. For species with more than one set of Hi-C reads, verify that the datasets are ordered the same way in both collections. If not, sort both collections with the tool  {% tool [Sort collection]() %} 
 >
 > 4. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReformitis Hi-C forward Reads`
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `EReginae Hi-C forward Reads`
 >
-> 5. Rename the dataset `CReformitis Hi-C forward Reads`
+> 5. Rename the dataset `EReginae Hi-C forward Reads`
 >
->    > {% snippet faqs/galaxy/datasets_rename.md name="Mapped Hi-C forward Reads" %}
+>    > {% snippet faqs/galaxy/datasets_rename.md name="Hi-C forward Reads" %}
 > 
 > 6. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `CReformitis Hi-C reverse reads`
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `EReginae Hi-C reverse reads`
 >
-> 7. Rename the dataset `CReformitis Hi-C reverse Reads`
+> 7. Rename the dataset `EReginae Hi-C reverse Reads`
 >
-> 8. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
+{: .hands_on}
+
+> <hands-on-title> Mapping Hi-C reads against a reference genome </hands-on-title>
+> 
+> 1. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly` 
 > 
 >    - *"Single or Paired-end reads"*: `Single`
->        - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C forward Reads` (output of **Collapse Collection** {% icon tool %})
+>        - {% icon param-file %} *"Select fastq dataset"*: `Hi-C forward Reads` (output of **Collapse Collection** {% icon tool %})
 > 
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-> 9. Rename the bam dataset `Mapped Hi-C forward Reads`
+> 2. Rename the bam dataset `Mapped Hi-C forward Reads`
 >
 >
-> 10. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
+> 3. {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy0) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `CReformitis_assembly`
 >    - *"Single or Paired-end reads"*: `Single`
->    - {% icon param-file %} *"Select fastq dataset"*: `CReformitis Hi-C reverse Reads` (output of **Collapse Collection** {% icon tool %})
+>        - {% icon param-file %} *"Select fastq dataset"*: `Hi-C reverse Reads` (output of **Collapse Collection** {% icon tool %})
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
-> 11. Rename the bam dataset `Mapped Hi-C reverse Reads`
+> 4. Rename the bam dataset `Mapped Hi-C reverse Reads`
 >
-> 12. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
+> 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `Mapped Hi-C forward Reads` (output of **BWA-MEM2** {% icon tool %})
 >    - {% icon param-file %} *"Second set of reads"*: `Mapped Hi-C reverse Reads` (output of **BWA-MEM2** {% icon tool %})
 >
