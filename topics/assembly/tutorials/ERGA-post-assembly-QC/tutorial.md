@@ -26,7 +26,7 @@ tags:
 - assembly
 - QC
 recordings:
-- youtube_id: TODO
+- youtube_id: n4PNTTa2d6U
   length: 44M
   galaxy_version: 24.1.3.dev0
   date: '2024-10-06'
