@@ -30,7 +30,7 @@ recordings:
   youtube_id: P1NVYOJrv_4
   speakers:
   - kxk302
-- youtube_id: TODO
+- youtube_id: UZq-5gvRYnA
   length: 45M
   galaxy_version: 24.1.3.dev0
   date: '2024-10-06'
