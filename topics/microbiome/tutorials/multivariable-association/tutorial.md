@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Determining multivariable association between various meta’omic features using MaAslin2"
+title: "Determining multivariable association of various meta’omic features using MaAslin2"
 subtopic: metagenomics
 tags: 
     - Heatmap
@@ -54,36 +54,15 @@ handling of sparsity, and treatment of compositional data. Some of them are ment
 | **Phyloseq + DESeq2**| Strong for RNA-seq and transcriptomics; integrates with Phyloseq | Lacks compositionality awareness         | While DESeq2 works for microbiome data, MaAsLin2 offers more suitable options for compositional data and covariate handling. |
 | **Limma-Voom**      | Effective for RNA-seq and microarray data, handles low counts | Not tailored for compositional microbiome data | Limma-Voom is well-suited for gene expression, but MaAsLin2 better accounts for the unique characteristics of microbiome data. |
 
-- ANCOM-BC and MaAsLin2, outperform general-purpose tools like DESeq2 and limma-voom when it comes to microbiome data. This is due to their handling of the compositional nature of microbiome data and the sparsity typical of microbial datasets.[PMID: 36617187](https://pubmed.ncbi.nlm.nih.gov/36617187/)
+- ANCOM-BC and MaAsLin2, outperform general-purpose tools like DESeq2 and limma-voom when it comes to microbiome data. This is due to their handling of the compositional nature of microbiome data and the sparsity typical of microbial datasets. ({% cite Yang2023 %})
 - While general methods like DESeq2 and limma-voom are reliable for gene expression analysis, they do not handle the unique properties of microbiome data as effectively as MaAsLin2. The latter provides a more accurate estimation of differential abundance in the presence of metadata confounders.
-[PMID: 1009442](https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442 )
 
-![sensitivity and false discovery rate (FDR) across different tools](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1009442.g004 "Source: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442#pcbi-1009442-g004">sensitivity and false discovery rate (FDR) across different tools</a>"){:width="60%"}
+![sensitivity and false discovery rate (FDR) across different tools](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1009442.g004 "Source: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442#pcbi-1009442-g004">sensitivity and false discovery rate (FDR) across different tools</a>"){:width="60%"} 
 
 - The above figure compares various tools for differential abundance detection (Panel A) and multivariable association detection (Panel B) in microbiome studies, based on sensitivity and false discovery rate (FDR).
 - **Sensitivity** measures how well the methods detect true signals, higher values lead to better performance.
 - **False discovery rate (FDR)** measures the proportion of false positives among detected signals (lower FDR is better).
 - MaAsLin2 is the clear standout for both differential abundance detection and multivariable association detection, showing high sensitivity and maintaining a low FDR.
-
-> <comment-title></comment-title>
->
-> For more information on MaAslin2, [click here](https://huttenhower.sph.harvard.edu/maaslin/).
-{: .comment}
-
-MaAsLin2 requires the following input files:
-
-- **Taxonomy (or features) file**: \
-        This file is tab-delimited.\
-        Formatted with features as columns and samples as rows.\
-        The transposition of this format is also okay.\
-        Possible features in this file include microbes, genes, pathways, etc.
-- **Metadata file** : \
-        This file is tab-delimited.\
-        Formatted with features as columns and samples as rows.\
-        The transposition of this format is also okay.
-
-The Taxonomy file can contain samples not included in the metadata file (or vice versa). For both cases, those samples not included in both files will be removed from the analysis.
-Also, the samples do not need to be in the same order in the two files.
 
 > <agenda-title></agenda-title>
 >
@@ -95,17 +74,31 @@ Also, the samples do not need to be in the same order in the two files.
 {: .agenda}
 
 # Get the data
+MaAsLin2 requires the following input files:
+
+- **Features file**: \
+        This file is tab-delimited.\
+        Formatted with features as columns and samples as rows.\
+        Possible features in this file include microbes, genes, pathways, etc.
+- **Metadata file** : \
+        This file is tab-delimited.\
+        Formatted with features as columns and samples as rows.
+    
+The Features file can contain samples not included in the metadata file (or vice versa). For both cases, those samples not included in both files will be removed from the analysis.
+Also, the samples do not need to be in the same order in the two files.
+
 In this tutorial, the two input files used are:
--  `HMP2_taxonomy.tsv` or taxonomy file
+-  `HMP2_taxonomy.tsv` or features file
 -  `HMP2_metadata.tsv` or metadata file
 
 The files provided were generated from the HMP2 data. To download [Click here](https://ibdmdb.org/)
  
  **Origin** : \
-The **HMP2_taxonomy.tsv** and **HMP2_metadata.tsv** files are part of the **Human Microbiome Project 2 (HMP2)**, which is a key component of the Inflammatory Bowel Disease Multi'omics Database [**(IBDMDB)**](https://ibdmdb.org/). The IBDMDB is a large-scale, multi-omic research initiative aimed at understanding the microbiome's role in IBD progression by integrating various omics data like metagenomics, metabolomics, and host genetics. 
+The **HMP2_taxonomy.tsv** and **HMP2_metadata.tsv** files are part of the **Human Microbiome Project 2 (HMP2)**, which is a key component of the Inflammatory Bowel Disease Multi'omics Database ({% cite IBDMDB %}). The IBDMDB is a large-scale, multi-omic research initiative aimed at understanding the microbiome's role in IBD progression by integrating various omics data like metagenomics, metabolomics, and host genetics. 
 
 The **HMP2_taxonomy.tsv** file contains microbiome data (species abundances) collected from IBD patients and healthy controls, while the **HMP2_metadata.tsv** file includes clinical and demographic metadata for these samples, such as IBD diagnosis (non-IBD, ulcerative colitis(UC), or Crohn’s disease(CD)), dysbiosis state, and treatments like antibiotics.
 
+The above two files were utilized prominently in the research study, **"Multivariable Association Discovery in Population-Scale Meta-Omics Studies."** ({% cite Himel2021 %})
 
 > <hands-on-title>Getting the data</hands-on-title>
 > 1. Create and name a new history for this tutorial.
@@ -130,7 +123,7 @@ The **HMP2_taxonomy.tsv** file contains microbiome data (species abundances) col
 >    > * Press **Start**
 >    {: .tip}
 >
-> 3. Change the name of the files to `taxonomy` and `metadata` .
+> 3. Change the name of the files to `feature` and `metadata` .
 >
 >    As a default, Galaxy uses the link as the name of the new dataset. It also does not link the dataset to a database or a reference genome.
 >
@@ -150,32 +143,44 @@ The **HMP2_taxonomy.tsv** file contains microbiome data (species abundances) col
 >    >
 >    >
 >    > > <solution-title></solution-title>
->    > > 1. The metadata file describes sample characteristics (e.g., clinical data, demographics) while the taxonomy or feature file contains microbial data (e.g., taxa abundance) used for analysis in microbiome studies.
+>    > > 1. The metadata file describes sample characteristics (e.g., clinical data, demographics) while the features file contains microbial data (e.g., taxa abundance) used for analysis in microbiome studies.
 >    > {: .solution }
 >    {: .question}
 >
 {: .hands_on}
 
+MaAsLin2 is designed to analyze various types of **tabular data** for multivariable association studies. The following table formats are compatible:
+
+**OTU/ASV Abundance Tables:** These tables represent the abundance of Operational Taxonomic Units (OTUs) or Amplicon Sequence Variants (ASVs) across different samples, allowing for analysis of microbial diversity in relation to metadata.
+
+**MAGs Abundance Matrices:** These matrices reflect the abundance of Metagenome-Assembled Genomes (MAGs) in samples, facilitating the exploration of associations between reconstructed genomes and various metadata.
+
+**Taxonomy Tables:** These tables contain taxonomic classifications of microbes, enabling researchers to investigate how different taxonomic levels relate to associated metadata variables.
+
+**Gene Count Matrices:** These matrices provide counts of specific genes across samples, useful for examining associations between gene abundances and metadata, particularly in metagenomics or transcriptomics studies.
+
 Several tools available on Galaxy can generate outputs that are compatible with MaAsLin2, particularly in the context of microbiome data analysis. Following are some Galaxy tools that produce outputs that can be used as input for MaAsLin2:
-1. **QIIME2** is a popular tool for processing microbiome data, and Galaxy offers a suite of QIIME2 tools.\
+1. [**QIIME2**](https://training.galaxyproject.org/training-material/search2?query=Qiime) is a popular tool for processing microbiome data, and Galaxy offers a suite of QIIME2 tools.\
 **Outputs compatible with MaAsLin2**:\
     - Feature Table (OTU/ASV table): Generated after steps like DADA2 or Deblur, this table includes the abundance of microbial features in each sample.
     - Taxonomy Assignment: The feature table can be combined with taxonomy information to link ASVs/OTUs to microbial taxa.
     - Metadata Files: QIIME2 requires metadata to perform analyses, and the same metadata file can be formatted and used in MaAsLin2.
     
-2. **Mothur** is another widely used microbiome data analysis tool available in Galaxy, and it can be used to produce inputs for MaAsLin2.\
+2. [**Mothur**](https://training.galaxyproject.org/training-material/search2?query=mothur) is another widely used microbiome data analysis tool available in Galaxy, and it can be used to produce inputs for MaAsLin2.\
 **Outputs compatible with MaAsLin2**:
     - Shared File (OTU Table): Mothur generates a "shared" file that contains the abundance of OTUs across samples, which can be reformatted and used as input to MaAsLin2.
-    - Taxonomy File: Mothur also outputs taxonomy assignments for OTUs, which can be paired with the shared file.
+    - Features File: Mothur also outputs taxonomy assignments for OTUs, which can be paired with the shared file.
     - Metadata File: As in QIIME2, metadata is used during the Mothur workflow and can be reused in MaAsLin2.
-3. **MetaPhlAn (Metagenomic Phylogenetic Analysis)** is a tool that provides taxonomic profiling of microbial communities from metagenomic sequencing data. It is available in Galaxy and can generate outputs that are directly compatible with MaAsLin2.\
+3. [**MetaPhlAn (Metagenomic Phylogenetic Analysis)**](https://training.galaxyproject.org/training-material/by-tool/iuc/metaphlan.html) is a tool that provides taxonomic profiling of microbial communities from metagenomic sequencing data. It is available in Galaxy and can generate outputs that are directly compatible with MaAsLin2.\
 **Outputs compatible with MaAsLin2**:
     - Taxonomic Profiles: MetaPhlAn generates taxonomic abundance tables (e.g., relative abundance of microbial taxa at various taxonomic levels) that can be directly used as the feature table for MaAsLin2.
     - Metadata File: As with other tools, the sample metadata used in MetaPhlAn analysis can also be reused in MaAsLin2.
 
 
+
+
 # Find associations between the two files
-Now we will find significant associations between microbial features( taxonomy file) and metadata variables (metadata file) using the **MaAslin2** tool
+Now we will find significant associations between microbial features(features file) and metadata variables (metadata file) using the **MaAslin2** tool
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -195,7 +200,7 @@ Let's now understand the role of each parameter in the tool.
 
 3. **Random effects**: In some studies, like those following people over time or studying families, samples from the same group can be similar. MaAsLin2 helps handle this by letting researchers choose a grouping factor. This helps make sure the statistical analysis is more accurate. For example, setting random_effects = "Subject_ID" helps control for the correlation between samples that come from the same individual.
 
-4. **Reference**: It allows researchers to establish a baseline or standard category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. 
+4. **Reference**: It allows researchers to establish a baseline or standard feature file category against which other categories are compared, helping to interpret and understand the effects of different variables on microbial features. 
 
    > <comment-title></comment-title>
    > - In MaAslin2, the reference level is required for variables with more than two levels to avoid errors. 
@@ -264,7 +269,7 @@ Used when you are working with proportion data, such as relative abundances in m
 - When performing numerous statistical tests simultaneously, like testing the association of many microbial taxa with various metadata variables, the risk of finding false positives increases. 
 - Correction methods help control this risk to ensure that the results are reliable and that significant findings are not due to random chance.
 - This is done by computing the q-value, which is a measure of how many false positives are expected among the significant results. 
-- Options:\
+- Options:
       1. <u>Benjamini & Hochberg(BH)(aka false discovery rate(fdr))</u>: A common method used for FDR correction. It ranks the p-values from smallest to largest and adjusts them based on their rank and the total number of tests.
       2. <u>Benjamini & Yekutieli(BY)</u>: Similar to Benjamini-Hochberg but includes a correction factor that accounts for the correlation between tests.
       3. <u> Bonferroni correction</u>: Divides the significance threshold (alpha level) by the number of tests performed and then compares each p-value to this adjusted significance level to determine if it is statistically significant. 
@@ -381,8 +386,7 @@ This is the effect size representing how strongly the abundance of Alistipes sha
     > 2. What do you observe in the significant.tsv file?
     > 3. What does residuals.rds output convey?
     > 4. Try explaining the following plot.
-    > ![Plot1](../../images/Plot-Faecalibacterium prausnitzii-VS-age-Maaslin2.png "Plot: Faecalibacterium prausnitzii VS age ")
-    > >
+    > ![Plot1](../../images/Plot-Faecalibacterium.prausnitzii-VS-age-Maaslin2.png "Plot: Faecalibacterium prausnitzii VS age ")
     > > <solution-title></solution-title>
     > > 1. You will observe the association of the microbes with the fixed effects variables as `age` and `diagnosis`.
     > > - Observe how setting the reference value as `CD` for the categorical variable `diagnosis` in MaAsLin2 implies that this reference level will be used as the baseline for comparison against other levels of the variable, i.e, `nonIBD` and `UC`.
@@ -427,7 +431,7 @@ This is the effect size representing how strongly the abundance of Alistipes sha
 
 # Studies involving MaAslin2 tool for analysis
 
-- [**Instegrating Dietary Data into Microbiome Studies: A Step Forward for Nutri-Metaomics**](https://d1wqtxts1xzle7.cloudfront.net/86457398/pdf-libre.pdf?1653486881=&response-content-disposition=inline%3B+filename%3DIntegrating_Dietary_Data_into_Microbiome.pdf&Expires=1724359088&Signature=gX3tWDORon-KCwFoaPZjJSGjlE6zE5QsQLrEPsB5exvs75mlu5Tk0P9T4lMmXO4Yb-8oVApN9SpM3zLLvchssL99Ps4I5wPri-YN-zwen8tcotQa10KYClxmaELe5VeR3qa-d3WIgu3leoM6rlkjk32eO9sjK3uo6enF~MnxB5yKnfvj2onoou~CrbxA~f712ik~c-E6Q3g6~yhtIqawFElMRhMZvUVMiTRnyeA4U8qI8tRpoT05Ng-plQDkcWOV33pUB8jiqM4I1Qkfltz4TBMfd2APn5X3UtSXvZtU3OVv6eGWWfbU6W1TZ2NU2VCnfg5EBt1iI6yNYEOo84iW4g__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA) : \
+- **Instegrating Dietary Data into Microbiome Studies: A Step Forward for Nutri-Metaomics** ({% cite Yez2021 %}) : \
 The study explores the enhancement of microbiome research through the incorporation of dietary data. The research emphasizes that integrating detailed dietary information with microbiome analyses provides a more comprehensive understanding of how diet influences gut microbiota composition and function. By applying advanced techniques in nutri-metaomics, the study aims to link specific dietary patterns with microbial changes, revealing insights into the interactions between diet, the microbiome, and health outcomes. This approach improves the ability to identify diet-related biomarkers and tailor personalized nutrition interventions based on microbial profiles.\
 MaAsLin2 was used to assess how specific dietary patterns influence the abundance and diversity of gut microbiota by integrating detailed dietary data with microbiome profiles. \
 MaAsLin2 was set up with the following parameters: \
@@ -443,7 +447,7 @@ MaAsLin2 was set up with the following parameters: \
 All models were adjusted for gender. \
 Results with a false-discovery rate (FDR) lower than 0.25 were considered significant.
 
-- [**Longitudinal profiling of the intestinal microbiome in children with cystic fibrosis treated with elexacaftor-tezacaftor-ivacaftor**](https://journals.asm.org/doi/full/10.1128/mbio.01935-23) :\
+- **Longitudinal profiling of the intestinal microbiome in children with cystic fibrosis treated with elexacaftor-tezacaftor-ivacaftor**( {% cite Reasoner2024 %} ) :\
 The study investigated how the intestinal microbiome of children with cystic fibrosis (CF) evolves over time while being treated with the elexacaftor-tezacaftor-ivacaftor (ETI) combination therapy. MaAsLin2 was employed to detect shifts in microbial abundance associated with this treatment. By performing longitudinal microbiome profiling, the research tracked changes in gut microbial diversity and composition in response to ETI treatment. The findings highlighted significant shifts in the microbiome, which could impact gut health and inform future CF treatment approaches. 
 MaAsLin2 was set up with the following parameters:
 
@@ -455,7 +459,7 @@ MaAsLin2 was set up with the following parameters:
 6. **Correction method**: The Benjamini-Hochberg procedure was used to correct P values
 7. **Normalization method**: A Centered Log-Ratio (CLR) normalization approach was used instead of default normalization methods
 
-- [**The infant gut resistome is associated with E. coli and early-life exposures** ](https://link.springer.com/article/10.1186/s12866-021-02129-x):\
+- **The infant gut resistome is associated with E. coli and early-life exposures** ({% cite Lebeaux2021 %}):\
 The study investigated how the infant gut resistome—the collection of antibiotic resistance genes (ARGs) in the gut microbiome—associates with E. coli and early-life exposures using MaAsLin2.
 The analysis, which utilized additive boosting of generalized linear models for feature reduction, revealed significant associations between ARGs and E. coli presence, as well as early-life factors such
 as antibiotic use and other exposures. Key parameters included CLR normalization of compositional abundance data, no standardization of continuous variables, and a strict significance threshold
@@ -465,15 +469,14 @@ as antibiotic use and other exposures. Key parameters included CLR normalization
 
 In essence, uncovering associations between microbial features and metadata variables through tools like MaAsLin2 not only deepens our understanding of microbiome dynamics but also holds promise for clinical applications, personalized health strategies, and advancing the field of microbiome research.
 
-The results obtained from MaAslin2 can further be visualized using tools like **phyloseq** and **ampvis2**.\
-Tools like phyloseq and ampvis2 require that you prepare your data (OTU/ASV table, metadata) in a structured format before visualizing.\
+The results obtained from MaAslin2 can further be visualized using tools like [**phyloseq**](https://training.galaxyproject.org/training-material/by-tool/interactive_tool_phyloseq.html).\
+Tools like phyloseq require that you prepare your data (OTU/ASV table, metadata) in a structured format before visualizing.\
 Once the data is prepared, you can use phyloseq to create a range of plots, such as:
 
 **Barplots**: Show the relative abundance of significant taxa across different metadata groups (e.g., diagnosis).\
 **Ordination plots**: Show how samples cluster based on beta diversity, focusing on the significant taxa identified.\
 **Heatmaps**: Show the abundance of significant taxa across samples, grouped by metadata variables.
 
-Similary, ampvis2 is another user-friendly visualization tool for microbial data among various other available tools, which allows for easy heatmaps and ordination plots.
 
 
-Hurray! You have successfully completed the tutorial. Now try running the tool with other input files from other galaxy tools and different parameter values and have fun :)
+Congratulations! You have successfully completed the tutorial. Now, feel free to explore the tool further by running it with different input files from other Galaxy tools and experimenting with various parameter settings. Enjoy the process! :)
