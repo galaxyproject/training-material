@@ -32,7 +32,7 @@ recordings:
   - kxk302
 - youtube_id: vp6YF2NRIZk
   length: 45M
-  galaxy_version: " 24.1.3.dev0"
+  galaxy_version: 24.1.3.dev0
   date: '2024-10-05'
   speakers:
   - hujambo-dunia
