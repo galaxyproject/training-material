@@ -28,9 +28,8 @@ contributions:
     - Martin-Kuhl
     - SabrinaZander
     - StellaEggels
-    - shiltemann
   editing:
-    - hexylena
+    - shiltemann
   funding:
     - nfdi4plants
 
