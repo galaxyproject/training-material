@@ -32,7 +32,7 @@ contributions:
   editing:
     - hexylena
   funding:
-    - dataplant
+    - nfdi4plants
 
 subtopic: dataplant
 
