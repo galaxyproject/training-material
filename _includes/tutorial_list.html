@@ -44,7 +44,12 @@
           {% endif %}
 
           {% if material.layout == 'custom' %} <!-- e.g. for events -->
-            <td> {{material.title | markdownify }} </td>
+            <td>
+              {{material.title | markdownify }} 
+              <div class="duplicate" style="display: none;">
+                {{material.description | markdownify }}
+              </div>
+            </td>
             <td colspan="3"> {{material.description | markdownify }}</td>
           {% else %}
           <td class="tutorial_title">

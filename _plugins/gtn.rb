@@ -399,7 +399,7 @@ module Jekyll
 
     def layout_to_human(layout)
       case layout
-      when /slides/
+      when /_slides/ # excludes slides-plain
         'Slides'
       when /tutorial_hands_on/
         'Hands-on'
@@ -407,6 +407,8 @@ module Jekyll
         'FAQs'
       when 'news'
         'News'
+      when 'workflow'
+        'Workflow'
       end
     end
 
@@ -569,6 +571,10 @@ module Jekyll
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
+      elsif page['url'] =~ /^\/faqs\/gtn/
+        'GTN FAQ'
+      elsif page['url'] =~ /^\/faqs\/galaxy/
+        'Galaxy FAQ'
       else
         site.data.fetch(page['url'].split('/')[2], { 'title' => '' })['title']
       end
@@ -937,6 +943,13 @@ Jekyll::Hooks.register :site, :post_read do |site|
 
   site.pages.each do |page|
     page.data['short_id'] = shortlinks_reversed[page.url]
+  end
+
+  # Annotate symlinks
+  site.pages.each do |page|
+    page.data['symlink'] = File.symlink?(page.path) 
+    # Elsewhere we checked more levels deep, maybe enable if needed.
+    # || File.symlink?(File.dirname(page.path)) || File.symlink?(File.dirname(File.dirname(page.path)))
   end
 
   Jekyll.logger.info '[GTN] Annotating events'
