@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@16a1b8b9f76063fcb575b9d7695cbcbe11fbf802",
+		release: "galaxy-training-network@a16fa5c605356eb4f94c875021c80efec2acca3d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -1293,10 +1293,13 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
                         <script>
                         function tutorial_finish() {
                           if(plausible !== undefined){
-                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
-                          } else {
-                            tutorial_finish_finish();
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT), 
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
@@ -1617,7 +1620,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/16a1b8b9f76063fcb575b9d7695cbcbe11fbf802">16a1b8b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a16fa5c605356eb4f94c875021c80efec2acca3d">a16fa5c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

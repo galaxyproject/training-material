@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@16a1b8b9f76063fcb575b9d7695cbcbe11fbf802",
+		release: "galaxy-training-network@a16fa5c605356eb4f94c875021c80efec2acca3d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -734,7 +734,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (6 recent ratings, 26 all time)</div>
+	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (6 recent ratings, 28 all time)</div>
 	
 	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 19 </div>
 
@@ -1446,10 +1446,13 @@ M117C1-ch.fq chrM 16519 T C 36363.0 1061 0.99 6 3,4,691,362
                         <script>
                         function tutorial_finish() {
                           if(plausible !== undefined){
-                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
-                          } else {
-                            tutorial_finish_finish();
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT), 
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
@@ -1632,22 +1635,22 @@ tools:
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">5 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 1.0">19</td>
+				<td style="--size: 1.0">21</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">4 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.21052631578947367">4</td>
+				<td style="--size: 0.19047619047619047">4</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">3 stars</span><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.10526315789473684">2</td>
+				<td style="--size: 0.09523809523809523">2</td>
 			</tr>
 		   
 			<tr>
 				<th scope="row"><span class="sr-only">1 stars</span><i class="fa fa-star" aria-hidden="true"></i></th>
-				<td style="--size: 0.05263157894736842">1</td>
+				<td style="--size: 0.047619047619047616">1</td>
 			</tr>
 		   
 		   </table>
@@ -1845,7 +1848,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/16a1b8b9f76063fcb575b9d7695cbcbe11fbf802">16a1b8b</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/a16fa5c605356eb4f94c875021c80efec2acca3d">a16fa5c</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
