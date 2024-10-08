@@ -4,16 +4,14 @@ import os
 import sys
 import subprocess
 
-if True:
+if False:
     GTN = 'https://training.galaxyproject.org/training-material'
 else:
     GTN = 'http://localhost:4000/training-material'
 
 meta = requests.get(f"{GTN}/api/social-meta.json").json()
 
-
 last_timestamp = int(sys.argv[1])
-
 
 # meta looks like:
 # {
@@ -33,11 +31,14 @@ for path, time in meta.items():
     # download the svg
     out = f'social/{path}'
     os.makedirs(os.path.dirname(out), exist_ok=True)
-    subprocess.check_call(['wget', GTN + path, '-O', out])
+
+    if not os.path.exists(out):
+        subprocess.check_call(['wget', GTN + path, '-O', out])
 
     # Convert to png
-    subprocess.check_call(['magick', '-density', '100', out, out.replace('.svg', '.png')])
+    if not os.path.exists(out.replace('.svg', '.png')):
+        subprocess.check_call(['magick', '-density', '100', out, out.replace('.svg', '.png')])
     max_ts = max(max_ts, time)
 
-with open('social/time.txt', 'w') as f:
+with open('social/timestamp.txt', 'w') as f:
     f.write(str(max_ts))

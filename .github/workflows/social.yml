@@ -6,6 +6,10 @@ on:
     # We'll run this daily at noon.
     - cron:  '0 12 * * *'
   workflow_dispatch:
+    inputs:
+      all_old:
+        type: string
+        description: If you want to re-generate ALL images set to a non-empty value
 
 jobs:
   runner-job:
@@ -39,7 +43,12 @@ jobs:
       - name: Previous build ID
         id: build_id
         run: |
-          echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/archive/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
+          echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
+
+          # Support regenerating all
+          if [[ "${{ github.event.inputs.selected_tag }}" != "" ]]; then
+            echo "timestamp=0" >> $GITHUB_ENV
+          fi
 
       # The actual compilation process deposits everything in the ./social/ folder.
       # And requires fetching metadata from the live website (api/social-meta.json)
@@ -58,4 +67,4 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: './social/'
-          DEST_DIR: 'archive/social/'
+          DEST_DIR: 'social/'

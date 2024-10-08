@@ -2,7 +2,7 @@ require './_plugins/gtn'
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # No need to run this except in prod.
-  if Jekyll.env != 'production'
+  if Jekyll.env == 'production'
     # Build our Images!
     count = 0
     social_start = Time.now
@@ -102,8 +102,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
         tpl = tpl.gsub('TOPIC_NAME', topic_name)
       end
 
-      # Short ID
-      tpl = tpl.gsub(/gxy.io\/GTN:....../, "gxy.io/#{page.data['short_id']}")
+      # Short ID is mandatory
+      if page.data['short_id'].nil?
+        next
+      end
+
+      tpl = tpl.gsub(/gxy.io\/GTN:....../, "gxy.io/GTN:#{page.data['short_id']}")
 
       # Title
       tpl = tpl
