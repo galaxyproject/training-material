@@ -209,6 +209,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
+          puts q['url']
           q['contributors'] = Gtn::Contributors.get_contributors(q).dup.map do |c|
             mapContributor(site, c)
           end
