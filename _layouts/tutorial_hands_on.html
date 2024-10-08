@@ -289,7 +289,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
                         <script>
                         function tutorial_finish() {
-                          if(plausible !== undefined){
+                          if(typeof plausible !== 'undefined'){
                             // Plausible may be undefined (script blocked)
                             // or it may be defined, but opted-out (select box/DNT), 
                             // which means `plausible()` will work but not send data, *nor* execute the callback.
