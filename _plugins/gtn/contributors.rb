@@ -222,6 +222,8 @@ module Gtn
         "https://erasmus-plus.ec.europa.eu/projects/search/details/#{contributor['funding_id']}"
       when 'ukri'
         "https://gtr.ukri.org/projects?ref=#{contributor['funding_id']}"
+      when 'highergov'
+        "https://www.highergov.com/contract/#{contributor['funding_id']}/"
       else
         Jekyll.logger.error "Unknown funding system #{contributor['funding_system']}"
         'ERROR'
