@@ -203,10 +203,10 @@
   <span class="ruby-identifier">instructors</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_instructors</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">funders</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">funders</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">funding</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">funding</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
   <span class="ruby-keyword">end</span>
 
@@ -457,7 +457,7 @@
     <span class="ruby-value">&#39;@context&#39;:</span> <span class="ruby-string">&#39;https://schema.org&#39;</span>,
     <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Grant&#39;</span>,
     <span class="ruby-value">identifier:</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;funding_id&#39;</span>],
-    <span class="ruby-value">url:</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_funding_url</span>(<span class="ruby-identifier">contributor</span>),
+    <span class="ruby-value">url:</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_funding_url</span>(<span class="ruby-identifier">contributor</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;url&#39;</span>],
     <span class="ruby-value">funder:</span> <span class="ruby-identifier">generate_funder_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   }
 
@@ -533,6 +533,18 @@
     <span class="ruby-identifier">material</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;objectives&#39;</span>, [])
   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>
 
+  <span class="ruby-identifier">funders</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">compact</span>
+
+  <span class="ruby-identifier">funding</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">compact</span>
+
   <span class="ruby-comment"># TODO: add topic edam terms too? Not sure.</span>
   <span class="ruby-identifier">parts</span> = []
   <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
@@ -580,8 +592,8 @@
     <span class="ruby-comment"># learningResourceType</span>
     <span class="ruby-comment"># teaches</span>
 
-    <span class="ruby-comment"># funder: funders, # Org or person</span>
-    <span class="ruby-comment"># funding: funding, # Grant</span>
+    <span class="ruby-value">funder:</span> <span class="ruby-identifier">funders</span>, <span class="ruby-comment"># Org or person</span>
+    <span class="ruby-value">funding:</span> <span class="ruby-identifier">funding</span>, <span class="ruby-comment"># Grant</span>
     <span class="ruby-value">publisher:</span> <span class="ruby-constant">GTN</span>,
     <span class="ruby-value">provider:</span> <span class="ruby-constant">GTN</span>,
     <span class="ruby-value">syllabusSections:</span> <span class="ruby-identifier">syllab</span>,
@@ -665,7 +677,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="generate_material_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 634</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 646</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_material_jsonld</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">langCodeMap</span> = {
     <span class="ruby-string">&quot;en&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;English&#39;</span>,
@@ -725,7 +737,8 @@
     <span class="ruby-comment"># &quot;contentRating&quot;:,</span>
     <span class="ruby-comment"># &quot;contentReferenceTime&quot;:,</span>
     <span class="ruby-comment"># &quot;contributor&quot; described below</span>
-    <span class="ruby-value">copyrightHolder:</span> <span class="ruby-constant">GTN</span>,
+    <span class="ruby-comment"># copyrightHolder: GTN,</span>
+    <span class="ruby-comment"># copyrightNotice: m</span>
     <span class="ruby-comment"># &quot;copyrightYear&quot;:,</span>
     <span class="ruby-comment"># &quot;correction&quot;:,</span>
     <span class="ruby-comment"># &quot;creator&quot;:,</span>
@@ -739,7 +752,7 @@
     <span class="ruby-comment"># &quot;encodingFormat&quot;:,</span>
     <span class="ruby-comment"># &quot;exampleOfWork&quot;:,</span>
     <span class="ruby-comment"># &quot;expires&quot;:,</span>
-    <span class="ruby-comment"># &quot;funder&quot;:,</span>
+    <span class="ruby-comment"># &quot;funder&quot;: funding,</span>
     <span class="ruby-comment"># &quot;genre&quot;:,</span>
     <span class="ruby-comment"># &quot;hasPart&quot; described below</span>
     <span class="ruby-value">headline:</span> (<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;title&#39;</span>]).<span class="ruby-identifier">to_s</span>,
@@ -814,6 +827,24 @@
       <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;datePublished&#39;</span>] = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">PublicationTimes</span>.<span class="ruby-identifier">obtain_time</span>(<span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;path&#39;</span>])
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;copyright&#39;</span>)
+    <span class="ruby-comment"># copyrightHolder: GTN,</span>
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;copyrightNotice&#39;</span>] = <span class="ruby-identifier">material</span>[<span class="ruby-string">&#39;copyright&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># I&#39;m not sure this is accurate.</span>
+    <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;copyrightHolder&#39;</span>] = <span class="ruby-constant">GTN</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">funders</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">funding</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funder&#39;</span>] = <span class="ruby-identifier">funders</span>
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funding&#39;</span>] = <span class="ruby-identifier">funding</span>
 
   <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;identifier&#39;</span>] = <span class="ruby-node">&quot;https://gxy.io/GTN:#{material[&#39;short_id&#39;]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;short_id&#39;</span>)
 
@@ -1312,7 +1343,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="to_jsonld-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 621</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 633</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_jsonld</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-identifier">generate_material_jsonld</span>(<span class="ruby-identifier">material</span>, <span class="ruby-identifier">topic</span>, <span class="ruby-identifier">site</span>))
 <span class="ruby-keyword">end</span></pre>
