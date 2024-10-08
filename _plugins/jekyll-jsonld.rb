@@ -184,7 +184,7 @@ module Jekyll
         '@context': 'https://schema.org',
         '@type': 'Grant',
         identifier: contributor['funding_id'],
-        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        url: Gtn::Contributors.fetch_funding_url(contributor) || contributor['url'],
         funder: generate_funder_jsonld(id, contributor, site)
       }
 
@@ -274,10 +274,10 @@ module Jekyll
       instructors = Gtn::Contributors.get_instructors(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
+      funders = Gtn::Contributors.get_funders(site, page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funding = Gtn::Contributors.get_funders(page.to_h).map do |x|
+      funding = Gtn::Contributors.get_grants(site, page.to_h).map do |x|
         generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
       end
 
@@ -511,6 +511,18 @@ module Jekyll
         material.fetch('objectives', [])
       end.flatten.compact
 
+      funders = materials.map do |material|
+        Gtn::Contributors.get_funders(site, material).map do |x|
+          to_pfo_jsonld(x, site, json: false)
+        end
+      end.flatten.uniq.compact
+
+      funding = materials.map do |material|
+        Gtn::Contributors.get_grants(site, material).map do |x|
+          generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+        end
+      end.flatten.uniq.compact
+
       # TODO: add topic edam terms too? Not sure.
       parts = []
       materials.each do |material|
@@ -558,8 +570,8 @@ module Jekyll
         # learningResourceType
         # teaches
 
-        # funder: funders, # Org or person
-        # funding: funding, # Grant
+        funder: funders, # Org or person
+        funding: funding, # Grant
         publisher: GTN,
         provider: GTN,
         syllabusSections: syllab,
@@ -690,7 +702,8 @@ module Jekyll
         # "contentRating":,
         # "contentReferenceTime":,
         # "contributor" described below
-        copyrightHolder: GTN,
+        # copyrightHolder: GTN,
+        # copyrightNotice: m
         # "copyrightYear":,
         # "correction":,
         # "creator":,
@@ -704,7 +717,7 @@ module Jekyll
         # "encodingFormat":,
         # "exampleOfWork":,
         # "expires":,
-        # "funder":,
+        # "funder": funding,
         # "genre":,
         # "hasPart" described below
         headline: (material['title']).to_s,
@@ -779,6 +792,24 @@ module Jekyll
           data['datePublished'] = Gtn::PublicationTimes.obtain_time(material['path'])
         end
       end
+
+      if material.key?('copyright')
+        # copyrightHolder: GTN,
+        data['copyrightNotice'] = material['copyright']
+      else
+        # I'm not sure this is accurate.
+        data['copyrightHolder'] = GTN
+      end
+
+      funders = Gtn::Contributors.get_funders(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      funding = Gtn::Contributors.get_grants(site, material).map do |x|
+        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      end
+
+      data['funder'] = funders
+      data['funding'] = funding
 
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
