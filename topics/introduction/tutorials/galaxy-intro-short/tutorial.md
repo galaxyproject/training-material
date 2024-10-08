@@ -36,10 +36,10 @@ contributions:
   editing:
   - bebatut
   - ahmedhamidawan
- funding:
-    - AustralianBioCommons
-    - elixir-europe
-    - uni-freiburg
+  funding:
+  - AustralianBioCommons
+  - elixir-europe
+  - uni-freiburg
 ---
 
 # Overview
