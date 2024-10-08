@@ -7,7 +7,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
     count = 0
     social_start = Time.now
     templates = {}
-    meta = []
+    meta = {}
 
     # Pre-existing templates
     Dir.glob('assets/branding/social/*.svg').each do |file|
@@ -137,10 +137,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
       end
 
       if page.url.end_with?('.html')
-        svg = File.join(site.dest, page.url.sub('.html', '.svg'))
+        svg_path = page.url.sub('.html', '.svg')
       else
-        svg = File.join(site.dest, page.url, 'index.svg')
+        svg_path = File.join(page.url, 'index.svg')
       end
+      svg = File.join(site.dest, svg_path)
       # if ! File.directory?(File.dirname(svg))
       #   FileUtils.mkdir_p(File.dirname(svg))
       # end
@@ -149,10 +150,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
       end
       # svgs << svg
 
-      meta << {
-        'svg' => svg,
-        'update' => mod_time,
-      }
+      meta[svg_path] = mod_time.to_i
 
       # Convert to PNG
       count += 1
