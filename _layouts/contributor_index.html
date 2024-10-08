@@ -25,6 +25,8 @@ layout: base
 					</h1>
 					{% if entity.funder%}
 					<p>The activities listed below were partially funded by this project.</p>
+				    <p>{{ entity.funding_statement | markdownify }}</p>
+
 					{% endif %}
 				</hgroup>
 
@@ -78,12 +80,9 @@ layout: base
 
 				<h2>Contributions</h2>
 
-				{% if entity.funder %}
-				{{ entity.funding_statement | markdownify }}
-				{% endif %}
 
 				<p class="text-muted">
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
                 {% unless entity.github == false %}
                 <br><br>
