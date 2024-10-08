@@ -82,7 +82,8 @@ module Gtn
         ['Workflow Author(s)', workflow['creators'].map { |c| c['name'] }],
         ['Tutorial Author(s)', Gtn::Contributors.get_authors(associated_material).map { |n| name2md(site, n) }],
         ['Tutorial Contributor(s)', Gtn::Contributors.get_non_authors(associated_material).map { |n| name2md(site, n) }],
-        ['Funder(s)', Gtn::Contributors.get_funders(associated_material).map { |n| name2md(site, n) }],
+        ['Funder(s)', Gtn::Contributors.get_funders(site, associated_material).map { |n| name2md(site, n) }],
+        ['Grants(s)', Gtn::Contributors.get_grants(site, associated_material).map { |n| name2md(site, n) }],
       ].reject { |_, v| v.empty? }
 
       description = %Q(
