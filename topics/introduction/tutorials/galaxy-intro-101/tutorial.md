@@ -23,14 +23,23 @@ key_points:
 - Galaxy provides ways to share your results and methods with others
 subtopic: core
 priority: 2
-contributors:
-- shiltemann
-- nsoranzo
-- blankclemens
-- nekrut
-- bgruening
-- pajanne
-- hexylena
+
+contributions:
+  authorship:
+    - shiltemann
+    - nsoranzo
+    - blankclemens
+    - nekrut
+    - bgruening
+    - pajanne
+    - hexylena
+  funding:
+    - psu
+    - erasmusmc
+    - elixir-europe
+    - uni-freiburg
+    - deNBI
+
 recordings:
 - captioners:
   - shiltemann
