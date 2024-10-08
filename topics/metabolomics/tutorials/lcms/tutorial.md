@@ -874,7 +874,7 @@ to get rid of it.
 >
 {: .hands_on}
 
-**What transformation has this tool done to the ions' intensities?**
+### What transformation has this tool done to the ions' intensities?
 
 For each ion independently, the normalisation process works as described in the following picture:
 
