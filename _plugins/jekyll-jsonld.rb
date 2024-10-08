@@ -664,11 +664,6 @@ module Jekyll
         url: "#{site['url']}#{site['baseurl']}/topics/#{topic['name']}/"
       }
 
-      funding = Gtn::Contributors.get_grants(site, material.to_h).map do |x|
-        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
-      end
-
-
       # aggregate everything
       data = {
         # Properties from Course
@@ -722,7 +717,7 @@ module Jekyll
         # "encodingFormat":,
         # "exampleOfWork":,
         # "expires":,
-        "funder": funding,
+        # "funder": funding,
         # "genre":,
         # "hasPart" described below
         headline: (material['title']).to_s,
