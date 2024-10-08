@@ -2,11 +2,12 @@ require './_plugins/gtn'
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # No need to run this except in prod.
-  if Jekyll.env == 'production'
+  if Jekyll.env != 'production'
     # Build our Images!
     count = 0
     social_start = Time.now
     templates = {}
+    meta = []
 
     # Pre-existing templates
     Dir.glob('assets/branding/social/*.svg').each do |file|
@@ -14,9 +15,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
     end
 
     Jekyll.logger.info "[GTN/Socials] Writing social media cards, #{templates.keys} discovered"
-    svgs = []
+    # svgs = []
 
-    site.pages.each do |page|
+    (site.pages + site.posts).each do |page|
       if page.data['layout'].nil? || page.data['layout'] == ''
         next
       end
@@ -34,6 +35,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         topic_id = nil
         topic_name = ""
       end
+      mod_time = Gtn::ModificationTimes.obtain_time(page.path)
       # Default is usually fine
       authors = Gtn::Contributors.get_authors(page.data).map { |c| Gtn::Contributors.fetch_name(site, c) }
 
@@ -54,6 +56,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         tpl = templates['workflow'].dup
         tpl = tpl.gsub('TOPIC_NAME', site.data[page.data['workflow']['topic_id']]['title'].upcase)
         authors = page.data['workflow']['creators'].map { |c| c['name'] }
+
+        mod_time = page.data['workflow']['modified']
       when 'faq'
         tpl = templates['faq'].dup
         if page.url =~ /faqs\/gtn/
@@ -63,6 +67,11 @@ Jekyll::Hooks.register :site, :post_write do |site|
         end
       when 'recordings'
         tpl = templates['recording'].dup
+
+        mod_time = [
+          Gtn::ModificationTimes.obtain_time(page.path),
+          Gtn::ModificationTimes.obtain_time(page.data['material']['ref'].path)
+        ].max
       when 'tutorial_hands_on'
         tpl = templates['tutorial'].dup
       when 'tutorial_slides'
@@ -78,6 +87,12 @@ Jekyll::Hooks.register :site, :post_write do |site|
         topic = site.data[page.data['topic_name']]
         title_override = topic['title']
         authors = topic['editorial_board'].map { |c| Gtn::Contributors.fetch_name(site, c) }
+
+        mod_time = [
+          Gtn::ModificationTimes.obtain_time(page.path),
+          Gtn::ModificationTimes.obtain_time(page.path.gsub('index.md', 'metadata.yaml')),
+          Gtn::ModificationTimes.obtain_time("metadata/#{page.data['topic_name']}.yaml"),
+        ].max
       else
         Jekyll.logger.debug "[GTN/Socials] Skipping #{page.data['layout']} => #{page.path}"
         next
@@ -132,12 +147,21 @@ Jekyll::Hooks.register :site, :post_write do |site|
       File.open(svg, 'w') do |f|
         f.write(tpl)
       end
-      svgs << svg
+      # svgs << svg
+
+      meta << {
+        'svg' => svg,
+        'update' => mod_time,
+      }
 
       # Convert to PNG
       count += 1
     end
     Jekyll.logger.info "[GTN/Socials] Social media cards written in #{Time.now - social_start} seconds for #{count} pages"
+
+    File.open(File.join(site.dest, 'api', 'social-meta.json'), 'w') do |f|
+      f.write(meta.to_json)
+    end
 
     # This takes on the order of 30 minutes.
     # png_start = Time.now
