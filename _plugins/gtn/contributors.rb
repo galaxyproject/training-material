@@ -94,7 +94,7 @@ module Gtn
     def self.get_funders(site, data)
       if data.key?('contributions') && data['contributions'].key?('funding')
         # The ones specifically in the Grants table
-        data['contributions']['funding'].reject{ |f| site.data['funders'].key?(f) }
+        data['contributions']['funding'].reject{ |f| site.data['grants'].key?(f) }
       else
         []
       end
@@ -110,7 +110,7 @@ module Gtn
     def self.get_grants(site, data)
       if data.key?('contributions') && data['contributions'].key?('funding')
         # The ones specifically in the Grants table
-        data['contributions']['funding'].select{ |f| site.data['funders'].key?(f) }
+        data['contributions']['funding'].select{ |f| site.data['grants'].key?(f) }
       else
         []
       end
@@ -140,8 +140,8 @@ module Gtn
         return ['contributor', site.data['contributors'][c]]
       elsif _load_file(site, 'organisations').key?(c)
         return ['organisation', site.data['organisations'][c]]
-      elsif _load_file(site, 'funders').key?(c)
-        return ['funder', site.data['funders'][c]]
+      elsif _load_file(site, 'grants').key?(c)
+        return ['funder', site.data['grants'][c]]
       else
         if ! warn
           Jekyll.logger.warn "Contributor #{c} not found"
@@ -181,7 +181,7 @@ module Gtn
     # +Hash+ of contributors, funders, organisations merged together
     def self.list(site)
       site.data['contributors']
-          .merge(site.data['funders'])
+          .merge(site.data['grants'])
           .merge(site.data['organisations'])
           .reject { |c| c['halloffame'] == 'no' }
     end
@@ -203,7 +203,7 @@ module Gtn
     # Returns:
     # +Boolean+ of whether the contributor is a funder or not
     def self.funder?(site, c)
-      site.data['funders'].key?(c)
+      site.data['grants'].key?(c)
     end
 
     ##
