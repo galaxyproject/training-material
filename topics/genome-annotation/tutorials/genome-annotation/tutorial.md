@@ -39,19 +39,19 @@ It consists of three main steps:
 
 # Introduction into File Formats
 
-**FASTA**
+## FASTA
 
 DNA and protein sequences are written in FASTA format where you have in the first line a ">" followed by the description. In the second line the sequence starts.
 
 ![FASTA file](../../images/fasta_format.png)
 
-**GFF3**
+## GFF3
 
 The general feature format (gene-finding format, generic feature format, GFF) is a file format used for describing genes and other features of DNA, RNA and protein sequences.
 
 <img src="../../images/gff3_format.png" alt="GFF3 overview" width="70%">
 
-**GENBANK**
+## GENBANK
 
 The genbank sequence format is a rich format for storing sequences and associated annotations.
 
