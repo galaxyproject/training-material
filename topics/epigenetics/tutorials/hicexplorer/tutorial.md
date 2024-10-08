@@ -225,7 +225,7 @@ This is often caused by bins of low counts. Use a more stringent filtering of bi
 
 This can be solved by a more stringent z-score values for the filter threshold or by a look at the plotted matrix. For example, chromosomes with 0 reads in its bins can be excluded from the correction by not defining it for the set of chromosomes that should be corrected (parameter 'Include chromosomes').
 
-### Plotting the corrected Hi-C matrix
+## Plotting the corrected Hi-C matrix
 
 We can now plot chromosome 2L with the corrected matrix.
 
@@ -240,7 +240,7 @@ We can now plot chromosome 2L with the corrected matrix.
 {: .hands_on}
 
 
-### Load new data
+## Load new data
 
 The steps so far would have led to long run times if real data would have been used. We therefore prepared a new matrix for you, `corrected contact matrix dm3 large`. Please load it into your history.
 
