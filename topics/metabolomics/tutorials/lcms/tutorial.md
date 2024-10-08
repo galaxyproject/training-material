@@ -994,8 +994,7 @@ dataset size) and your study design. You should think carefully about what is ap
 In this tutorial, we will take the example of univariate analysis, using the `bmi` column of the **sampleMetadata file** as
 the study's biological factor investigated (body mass index). Since this variable is quantitative, we will chose in this example to measure
 the link between the BMI and the measured ions using a **statistical correlation calculation**. For more examples of
-statistical analysis performed on LC-MS data, you can take a few minutes to watch the [usemetabo.org](https://usemetabo.org) open course video
-[here](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis).
+statistical analysis performed on LC-MS data, you can take a few minutes to watch the [usemetabo.org](https://usemetabo.org) open [course video](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis).
 
 ## Computation of statistical indices
 
