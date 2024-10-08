@@ -290,10 +290,13 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <script>
                         function tutorial_finish() {
                           if(plausible !== undefined){
-                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
-                          } else {
-                            tutorial_finish_finish();
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT), 
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
