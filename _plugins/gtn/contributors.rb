@@ -213,9 +213,9 @@ module Gtn
     # Returns:
     # +Boolean+ of whether the contributor is a funder or not
     def self.fetch_funding_url(contributor)
-      return contributor['funding_id'] if !contributor.key?('funding_system')
+      return contributor['funding_id'] if !contributor.key?('funding_database')
 
-      case contributor['funding_system']
+      case contributor['funding_database']
       when 'cordis'
         "https://cordis.europa.eu/project/id/#{contributor['funding_id']}"
       when 'erasmusplus'
@@ -225,7 +225,7 @@ module Gtn
       when 'highergov'
         "https://www.highergov.com/contract/#{contributor['funding_id']}/"
       else
-        Jekyll.logger.error "Unknown funding system #{contributor['funding_system']}"
+        Jekyll.logger.error "Unknown funding system #{contributor['funding_database']}"
         'ERROR'
       end
     end
