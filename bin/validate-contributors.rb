@@ -11,9 +11,9 @@ CONTRIBUTORS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-contributors.yaml')
 CONTRIBUTORS_SCHEMA = automagic_loading(CONTRIBUTORS_SCHEMA_UNSAFE)
 contribs_validator = Kwalify::Validator.new(CONTRIBUTORS_SCHEMA)
 
-FUNDERS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-funders.yaml')
-FUNDERS_SCHEMA = automagic_loading(FUNDERS_SCHEMA_UNSAFE)
-funders_validator = Kwalify::Validator.new(FUNDERS_SCHEMA)
+GRANTS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-grants.yaml')
+GRANTS_SCHEMA = automagic_loading(GRANTS_SCHEMA_UNSAFE)
+grants_validator = Kwalify::Validator.new(GRANTS_SCHEMA)
 
 ORGANISATIONS_SCHEMA_UNSAFE = YAML.load_file('bin/schema-organisations.yaml')
 ORGANISATIONS_SCHEMA = automagic_loading(ORGANISATIONS_SCHEMA_UNSAFE)
@@ -43,8 +43,8 @@ ec = 0
 # This variable from bin/gtn.rb
 errs = validate_document(CONTRIBUTORS, contribs_validator)
 ec |= show_errors('CONTRIBUTORS.yaml', errs)
-errs = validate_document(FUNDERS, funders_validator)
-ec |= show_errors('FUNDERS.yaml', errs)
+errs = validate_document(GRANTS, grants_validator)
+ec |= show_errors('GRANTS.yaml', errs)
 errs = validate_document(ORGANISATIONS, organisations_validator)
 ec | show_errors('ORGANISATIONS.yaml', errs)
 
