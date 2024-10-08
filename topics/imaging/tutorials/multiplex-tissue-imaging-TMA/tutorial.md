@@ -33,7 +33,7 @@ Find a full [example history](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemp
 ![Aviator screenshot, described in figure caption](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.")
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -233,7 +233,7 @@ The quantification step will produce a CSV cell feature table for every image in
 {: .hands_on}
 
 
-# **Convert McMicro Output to Anndata**
+# Convert McMicro Output to Anndata
 
 Anndata ({% cite Virshup2021 %}) is a Python package and file format schema for working with annotated data matrices that has gained popularity in the single-cell analysis community. Many downstream analysis tools, including Scimap from MCMICRO, Scanpy ({% cite Wolf2018 %}), and Squidpy ({% cite Palla2022 %}) are built around anndata format files (h5ad). This tool splits the marker intensity data into a separate dataframe (`X`), and places all observational data (spatial coordinates, morphological features, etc.) in the cell feature table into a separate dataframe (`obs`) that shares the same indices as `X`. In downstream analyses, new categorical variables, such as phenotype assignments for each cell, are stored in the `obs` dataframe.
 
@@ -256,7 +256,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 {: .hands_on}
 
 
-# Scimap: **Single Cell Phenotyping**
+# Scimap: Single Cell Phenotyping
 
 There are several ways to classify cells available in Galaxy-ME. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO's Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the **GateFinder** tool in Galaxy-ME), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the `log(intensity)` data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a 'Phenotype workflow' to guide the classification of cells (Figure 5.). For more on how to construct a Scimap workflow, see the [Scimap documentation](https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/).
 
@@ -303,7 +303,7 @@ UNetCoreograph outputs each individual core image in `tiff` format. Interactive 
 {: .hands_on}
 
 
-## **Rename OME-TIFF Channels**
+## Rename OME-TIFF Channels
 
 Some tools can cause the channel names in an OME-TIFF image to be lost. To fix this, or to change the channel names to whatever the user prefers, the **Rename OME-TIFF Channels** tool can be invoked using a markers file similar to the one used in previous steps.
 
