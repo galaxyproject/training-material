@@ -117,7 +117,7 @@ At first you need to identify those structures of the genome which code for prot
 
 > <details-title>Aragorn in depth</details-title>
 >
-> read more about **Aragorn** [here](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
+> read more about **Aragorn** [in this publication](https://nar.oxfordjournals.org/content/32/1/11.full.pdf+html).
 {: .details}
 
 # Functional Annotation
@@ -209,7 +209,7 @@ This file will be the input for more detailed analysis:
 
 > <details-title>`vsearch` in depth</details-title>
 >
-> Documentation for vsearch see [here](https://github.com/torognes/vsearch).
+> Documentation for vsearch available via their [GitHub repository](https://github.com/torognes/vsearch).
 {: .details}
 
 * **Diamond**: Diamond is a high-throughput program for aligning a file of short reads against a protein reference database such as NR, at 20,000 times the speed of Blastx, with high sensitivity.
