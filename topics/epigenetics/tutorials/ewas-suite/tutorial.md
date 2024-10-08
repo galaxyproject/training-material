@@ -18,8 +18,8 @@ contributions:
     - kkamieniecka
     - khaled196
     - poterlowicz-lab
-  editing:
-  testing:
+  editing: []
+  testing: []
   funding:
     - elixir-europe
 ---

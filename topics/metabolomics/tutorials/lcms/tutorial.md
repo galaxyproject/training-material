@@ -23,7 +23,7 @@ contributions:
     - jfrancoismartin
     - yguitton
     - workflow4metabolomics
-  editing:
+  editing: []
   funding:
     - elixir-europe
 

@@ -21,7 +21,7 @@ contributions:
   authorship:
     - melpetera
     - workflow4metabolomics
-  editing:
+  editing: []
   funding:
     - elixir-europe
 ---

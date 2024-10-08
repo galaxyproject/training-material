@@ -24,7 +24,7 @@ contributions:
   authorship:
     - foellmelanie
     - MarenStillger
-  editing:
+  editing: []
   funding:
     - elixir-europe
     - uni-freiburg

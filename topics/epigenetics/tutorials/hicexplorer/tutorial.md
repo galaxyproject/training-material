@@ -18,8 +18,8 @@ contributions:
     - fidelram
     - vivekbhr
     - polkhe
-  editing:
-  testing:
+  editing: []
+  testing: []
   funding:
     - elixir-europe
     - deNBI

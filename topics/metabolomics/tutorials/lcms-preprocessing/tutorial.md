@@ -28,7 +28,7 @@ contributions:
     - jfrancoismartin
     - lecorguille
     - workflow4metabolomics
-  editing:
+  editing: []
   funding:
     - elixir-europe
 ---
