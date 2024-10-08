@@ -44,11 +44,13 @@ module Jekyll
           page2 = PageWithoutAFile.new(site, '', '', "#{workflow['path'].gsub(/.ga$/, '.html')}")
           path = File.join('/', workflow['path'].gsub(/.ga$/, '.html'))
           page2.content = nil
+          page2.data['title'] = workflow['title']
           page2.data['layout'] = 'workflow'
           page2.data['material'] = material
           page2.data['workflow'] = workflow
           page2.data['js_requirements'] = {'mathjax' => false, 'mermaid' => true}
           page2.data['short_id'] = shortlinks[path]
+          page2.data['redirect_from'] = ["/short/#{shortlinks[path]}"]
           site.pages << page2
         end
       end

@@ -26,6 +26,10 @@ program:
     description: |
       If you encounter any issue please ask us in this Slack channel. 
     tutorials:
+      - name: scrna-intro
+        topic: single-cell
+      - name: scrna-data-formats
+        topic: single-cell
       - name: scrna-preprocessing-tenx
         topic: single-cell
       - name: scrna-scanpy-pbmc3k

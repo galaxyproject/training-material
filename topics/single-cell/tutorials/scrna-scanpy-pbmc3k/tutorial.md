@@ -1,12 +1,11 @@
 ---
 layout: tutorial_hands_on
-
-title: "Clustering 3K PBMCs with Scanpy"
+title: Clustering 3K PBMCs with Scanpy
 subtopic: firstsc
 priority: 2
 redirect_from:
-  - /topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial
-zenodo_link: 'https://zenodo.org/record/3581213'
+- "/topics/transcriptomics/tutorials/scrna-scanpy-pbmc3k/tutorial"
+zenodo_link: https://zenodo.org/record/3581213
 questions:
 - What are the steps to prepare single-cell RNA-Seq data for clustering?
 - How to cluster cells in single-cell RNA-Seq data?
@@ -14,7 +13,8 @@ questions:
 objectives:
 - Describe an AnnData object to store single-cell data
 - Explain the preprocessing steps for single-cell data
-- Evaluate quality of single-cell data and apply steps to select and filter cells and genes based on QC
+- Evaluate quality of single-cell data and apply steps to select and filter cells
+  and genes based on QC
 - Execute data normalization and scaling
 - Identify highly variable genes
 - Construct and run a dimensionality reduction using Principal Component Analysis
@@ -26,12 +26,11 @@ key_points:
 - scRNA-seq data analysis is complex and exploratory process, still in development
 - Different tools and parameters should be tested for each step of the process
 requirements:
--
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-preprocessing
-        - scrna-preprocessing-tenx
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-preprocessing
+  - scrna-preprocessing-tenx
 tags:
 - 10x
 contributors:
@@ -40,10 +39,7 @@ contributors:
 - mtekman
 - pavanvidem
 - dianichj
-
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
-
 recordings:
 - captioners:
   - hrhotz
@@ -52,8 +48,22 @@ recordings:
   youtube_id: nefB35Bi1l4
   speakers:
   - nomadscientist
+- youtube_id: P8AucugNlLc
+  length: 1H39M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-26'
+  speakers:
+  - pavanvidem
+  captioners:
+  - pavanvidem
+  bot-timestamp: 1727373432
 
+answer_histories:
+  - label: "Scanpy_1.10.2_Anndata_0.10.9"
+    history: https://singlecell.usegalaxy.eu/u/videmp/h/clustering-of-3k-pbmcs-tutorial-from-workflow-october-2024
+    date: 2024-10-04
 ---
+
 
 
 Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells. The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq.
@@ -1873,9 +1883,7 @@ With the annotated cell types, we can also visualize the expression of their can
 {: .question}
 
 # Conclusion
-{% icon congratulations %} Well done, you’ve made it to the end! You might want to consult your results with this [control history](https://singlecell.usegalaxy.eu/u/videmp/h/clustering-3k-pbmcs-with-scanpy-196), or check out the [full workflow](https://singlecell.usegalaxy.eu/u/videmp/w/clustering-3k-pbmc-with-scanpy) for this tutorial.
-
-In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
+{% icon congratulations %} Well done, you’ve made it to the end! In this tutorial, we investigated clustering and annotation of single-cell data from 10x Genomics using Scanpy. This workflow used here was typical for scRNA-seq data analysis:
 
 1. Preprocessing with
     1. Selection and filtration of cells and genes based on quality metrics
