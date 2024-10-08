@@ -13,10 +13,15 @@ objectives:
 key_points:
 - "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology."
 - "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
-contributors:
-  - kkamieniecka
-  - khaled196
-  - poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - khaled196
+    - poterlowicz-lab
+  editing:
+  testing:
+  funding:
+    - elixir-europe
 ---
 
 This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.
@@ -112,7 +117,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >
 >
 > After exporting the reference genome from UCSC, we need to make sure that it is in the right dataset build.
-> 
+>
 > Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it. \
 > Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
 >
@@ -170,7 +175,7 @@ The main goal of the **Infinium Human Methylation BeadChip** analysis is to simp
 >
 {: .hands_on}
 
-> <question-title></question-title>  
+> <question-title></question-title>
 > How do we define phenotype covariate?
 > > <solution-title></solution-title>
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions
@@ -201,11 +206,11 @@ In addition to downstream analysis users can annotate the differentially methyla
 >   - *"Input Type Gene ID"*: `SYMBOL`
 >   - *"Output Type Gene ID"*: `ENTREZID`
 >
-> 5. Run a GO Enrichment Analysis using {% tool  [clusterProfiler go](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0) %} on the output of the {% tool  [Cluster Profiler Bitr](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0) %} 
+> 5. Run a GO Enrichment Analysis using {% tool  [clusterProfiler go](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0) %} on the output of the {% tool  [Cluster Profiler Bitr](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0) %}
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
-  
+
 ID  | Description | pvalue | qvalue | geneID | Count
 --- | ---  | --- | --- | --- | ---
 GO:0048732 | gland development  | 1.38E-58 | 4.23E-55 | PTGS2 / KCNC1 / FZD1 /SLC22A18 /SLC22A3 (...) | 372

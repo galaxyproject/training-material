@@ -12,11 +12,19 @@ key_points:
   - "Hi-C helps to investigate the 3D structure of the genome and to uncover folding principles of chromatin."
   - "In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome."
   - "Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed."
-contributors:
-  - joachimwolff
-  - fidelram
-  - vivekbhr
-  - polkhe
+contributions:
+  authorship:
+    - joachimwolff
+    - fidelram
+    - vivekbhr
+    - polkhe
+  editing:
+  testing:
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
+    - sfb992
 ---
 
 

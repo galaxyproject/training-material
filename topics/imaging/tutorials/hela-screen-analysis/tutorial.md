@@ -34,9 +34,12 @@ follow_up_training:
     tutorials:
       - machinelearning
 time_estimation: "1H"
-contributors:
-  - thomaswollmann
-  - kostrykin
+contributions:
+  authorship:
+    - thomaswollmann
+    - kostrykin
+  funding:
+    - elixir-europe
 tags:
   - HeLa
 

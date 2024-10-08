@@ -11,9 +11,13 @@ objectives:
 time_estimation: "2H"
 level: Introductory
 key_points:
-contributors:
-  - erxleben
-  - bgruening
+contributions:
+  authorship:
+    - erxleben
+    - bgruening
+  funding:
+    - eurosciencegateway
+    - elixir-europe
 subtopic: prokaryote
 ---
 
