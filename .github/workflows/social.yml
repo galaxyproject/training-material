@@ -1,0 +1,61 @@
+name: "[Social] Autogenerate missing social media cards"
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this daily at noon.
+    - cron:  '0 12 * * *'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+    steps:
+      # Shallow should be fine for video
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 500
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y imagemagick
+      # END Dependencies
+
+
+      # We get the previous build ID to know how many videos were changed since
+      # then.
+      #
+      # We *could* fetch the diff in the past N days but if a build fails for
+      # any reason, we'd lose those changes permanently and things would never
+      # get built.
+      #
+      # So instead we just track the last successfully built timestamp
+      - name: Previous build ID
+        id: build_id
+        run: |
+          echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/archive/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
+
+      # The actual compilation process deposits everything in the ./social/ folder.
+      # And requires fetching metadata from the live website (api/social-meta.json)
+      - name: Build Social Media Cards
+        run: |
+          python bin/social-cards.py $PREVIOUS_TIMESTAMP
+        env:
+          PREVIOUS_TIMESTAMP: ${{ env.timestamp }}
+
+      # Deploy step, scary.
+      - uses: jakejarvis/s3-sync-action@v0.5.1
+        with:
+          args: --acl public-read --follow-symlinks
+        env:
+          AWS_S3_BUCKET: galaxy-training
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './social/'
+          DEST_DIR: 'archive/social/'
