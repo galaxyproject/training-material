@@ -21,7 +21,7 @@ registration:
   deadline: 2025-02-14
 
 contributions:
-  organisers: [Sch-Da]
+  organisers: [Sch-Da, teresa-m]
   instructors: [pavanvidem, Nilchia, teresa-m, wm75, EngyNasr, paulzierep]
   funding: [eurosciencegateway, deNBI, nfdi4plants]
 
@@ -89,6 +89,9 @@ Embark on a deep dive into the world of Galaxy, the leading platform for data-in
 harness the full potential of Galaxy in various genomic studies. Whether you're a beginner seeking to understand the basics or an intermediate user looking to refine your skills in specific applications,
 this workshop offers valuable insights and hands-on experiences.
 
+This comprehensive workshop will increase your proficiency in using Galaxy and enhance your ability to conduct sophisticated analyses in various fields of biological research.
+Connect with experts and peers, gain practical skills, and take your research capabilities to the next level.
+
 ## Topics:
 
 - Galaxy Introduction and Quality Control
@@ -111,5 +114,4 @@ Please see the Program tab.
 
 The number of places in this workshop is limited. The course takes place only in person (not online, not hybrid). There are no fees for the workshop but you need to care for your accommodation, travel costs and catering by yourself.
 
-This comprehensive workshop will increase your proficiency in using Galaxy and enhance your ability to conduct sophisticated analyses in various fields of biological research.
-Connect with experts and peers, gain practical skills, and take your research capabilities to the next level.
+
