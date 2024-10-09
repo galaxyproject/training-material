@@ -106,11 +106,6 @@ Jekyll::Hooks.register :site, :post_write do |site|
         tpl = tpl.gsub('TOPIC_NAME', topic_name)
       end
 
-      # Short ID is mandatory
-      if page.data['short_id'].nil?
-        next
-      end
-
       tpl = tpl.gsub(/gxy.io\/GTN:....../, "gxy.io/GTN:#{page.data['short_id']}")
 
       # Title
