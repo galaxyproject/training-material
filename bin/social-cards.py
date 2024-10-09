@@ -4,10 +4,8 @@ import os
 import sys
 import subprocess
 
-if False:
-    GTN = 'https://training.galaxyproject.org/training-material'
-else:
-    GTN = 'http://localhost:4000/training-material'
+GTN = 'https://training.galaxyproject.org/training-material'
+# GTN = 'http://localhost:4000/training-material'
 
 meta = requests.get(f"{GTN}/api/social-meta.json").json()
 
@@ -29,7 +27,7 @@ for path, time in meta.items():
     # Do something with the path
     print(f"New social card: {path}")
     # download the svg
-    out = f'social/{path}'
+    out = f'../gtn-social/{path}'
     os.makedirs(os.path.dirname(out), exist_ok=True)
 
     if not os.path.exists(out):
@@ -41,5 +39,5 @@ for path, time in meta.items():
         subprocess.check_call(['optipng', out.replace('.svg', '.png')])
     max_ts = max(max_ts, time)
 
-with open('social/timestamp.txt', 'w') as f:
+with open('../gtn-social/timestamp.txt', 'w') as f:
     f.write(str(max_ts))

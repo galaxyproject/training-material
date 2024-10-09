@@ -2,7 +2,7 @@ require './_plugins/gtn'
 
 Jekyll::Hooks.register :site, :post_write do |site|
   # No need to run this except in prod.
-  if Jekyll.env == 'production'
+  if Jekyll.env != 'production'
     # Build our Images!
     count = 0
     social_start = Time.now

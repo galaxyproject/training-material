@@ -29,6 +29,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -y imagemagick
+          mkdir -p ~/.fonts/
+          wget https://galaxy-training.s3.amazonaws.com/social/recursive.ttf -O ~/.fonts/recursive.ttf
+          fc-cache -rv
       # END Dependencies
 
 
@@ -54,6 +57,7 @@ jobs:
       # And requires fetching metadata from the live website (api/social-meta.json)
       - name: Build Social Media Cards
         run: |
+          mkdir -p social/
           python bin/social-cards.py $PREVIOUS_TIMESTAMP
         env:
           PREVIOUS_TIMESTAMP: ${{ env.timestamp }}
