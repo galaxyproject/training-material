@@ -1,7 +1,7 @@
 ---
 layout: event-track
 
-title: Transcritomics
+title: Transcriptomics
 description: Welcome to the transcriptomics track. Here you can learn how to map the raw RNA-seq sequencing data to a reference, preform an differential expression analysis, GO analysis. Further you can learn how to plot your processed data. Additionally you can also learn how to perform a differential Isofrom expression analysis, as well as how to annotate lncRNAs. If you want to learn more in the field of transciptomics please also have a look at the single cell track. Start with the tutorial at your own pace. If you need support contact us via the Slack Channel [gta_transcriptomics](https://gtnsmrgsbord.slack.com/archives/C07NGRVEG8J).
 
 slack_channel: gta_transcriptomics
@@ -30,7 +30,7 @@ contributions:
 
 
 program:
-  - section: "Transcritomics introduction" 
+  - section: "Transcriptomics introduction" 
     description: |
       If you are new to transcriptomics please start with the following tutorials. If you encounter any issue please ask us on Slack.  
     tutorials:
