@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c6c9881312345be9aee924d3b4dcd524c6d5914d",
+		release: "galaxy-training-network@81b50cf159929ddfb63ab27f012fd2b88a2b2c3f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -72,8 +72,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Assembly / Genome Assembly of a bacterial genome (MRSA) sequenced using Illumina MiSeq Data / Workflows">
         <meta property="og:description" content="DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.">
-        
-	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -259,9 +258,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-mrsa-illumina/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
@@ -280,29 +279,29 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   3["fastp"];
   1 -->|output| 3;
   0 -->|output| 3;
-  b21d458d-9186-49f8-aad5-d7f423159552["Output\nfastp_json"];
-  3 --> b21d458d-9186-49f8-aad5-d7f423159552;
-  style b21d458d-9186-49f8-aad5-d7f423159552 stroke:#2c3143,stroke-width:4px;
+  47348a4a-a684-4845-93c0-698de7954aac["Output\nfastp_json"];
+  3 --> 47348a4a-a684-4845-93c0-698de7954aac;
+  style 47348a4a-a684-4845-93c0-698de7954aac stroke:#2c3143,stroke-width:4px;
   4["FastQC"];
   1 -->|output| 4;
   5["Shovill"];
   3 -->|out1| 5;
   3 -->|out2| 5;
-  ba0490eb-6360-4feb-a778-2333fb76c074["Output\nshovill_log"];
-  5 --> ba0490eb-6360-4feb-a778-2333fb76c074;
-  style ba0490eb-6360-4feb-a778-2333fb76c074 stroke:#2c3143,stroke-width:4px;
+  40f9cdad-eec1-42ca-ae3d-9f8bd59cd065["Output\nshovill_log"];
+  5 --> 40f9cdad-eec1-42ca-ae3d-9f8bd59cd065;
+  style 40f9cdad-eec1-42ca-ae3d-9f8bd59cd065 stroke:#2c3143,stroke-width:4px;
   6["Quast"];
   5 -->|contigs| 6;
-  9bdec6c1-3f9d-4951-9418-42743559bf94["Output\nquast_output"];
-  6 --> 9bdec6c1-3f9d-4951-9418-42743559bf94;
-  style 9bdec6c1-3f9d-4951-9418-42743559bf94 stroke:#2c3143,stroke-width:4px;
+  2cac20c4-cf1c-49ff-9029-a94aba9e4c40["Output\nquast_output"];
+  6 --> 2cac20c4-cf1c-49ff-9029-a94aba9e4c40;
+  style 2cac20c4-cf1c-49ff-9029-a94aba9e4c40 stroke:#2c3143,stroke-width:4px;
   7["Bandage Image"];
   5 -->|contigs_graph| 7;
   8["Bandage Info"];
   5 -->|contigs_graph| 8;
-  2c742a53-7700-42e2-bdbb-d99cd96099b7["Output\nbandage_info_output"];
-  8 --> 2c742a53-7700-42e2-bdbb-d99cd96099b7;
-  style 2c742a53-7700-42e2-bdbb-d99cd96099b7 stroke:#2c3143,stroke-width:4px;
+  41b33419-af79-441c-a066-e12a7ee251d9["Output\nbandage_info_output"];
+  8 --> 41b33419-af79-441c-a066-e12a7ee251d9;
+  style 41b33419-af79-441c-a066-e12a7ee251d9 stroke:#2c3143,stroke-width:4px;
 	</pre>
 		</div><!-- card-body -->
 	</div><!-- card -->
@@ -377,7 +376,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c6c9881312345be9aee924d3b4dcd524c6d5914d">c6c9881</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81b50cf159929ddfb63ab27f012fd2b88a2b2c3f">81b50cf</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

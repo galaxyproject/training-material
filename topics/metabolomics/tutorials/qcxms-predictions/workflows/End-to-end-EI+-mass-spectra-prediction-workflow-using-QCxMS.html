@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c6c9881312345be9aee924d3b4dcd524c6d5914d",
+		release: "galaxy-training-network@81b50cf159929ddfb63ab27f012fd2b88a2b2c3f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -72,8 +72,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Metabolomics / Predicting EI+ mass spectra with QCxMS / End-to-end EI+ mass spectra prediction workflow using QCxMS">
         <meta property="og:description" content="Training material to analyse Mass spectrometry data in Galaxy: Metabolomics (LCMS, FIAMS, GCMS, NMR) and imaging.">
-        
-	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/metabolomics/tutorials/qcxms-predictions/workflows/End-to-end-EI+-mass-spectra-prediction-workflow-using-QCxMS.png">
+	</head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -265,13 +265,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<br/>
 
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc5d5; --color-darker: #ffa2be; --color-dimmed: #ffb4c9;">Exposomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa8c2; --color-darker: #ff85ad; --color-dimmed: #ff97b8;">Exposomics</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc6ca; --color-darker: #ffa4ab; --color-dimmed: #ffb5ba;">QCxMS</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffaab0; --color-darker: #ff8892; --color-dimmed: #ff9aa1;">QCxMS</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #ffc5d8; --color-darker: #ffa1c3; --color-dimmed: #ffb3cd;">GC-MS</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa8c7; --color-darker: #ff84b4; --color-dimmed: #ff96bd;">GC-MS</div>
 			
-			<div class="label label-default tutorial_tag" style="--color-primary: #afd9ff; --color-darker: #72c5ff; --color-dimmed: #93cfff;">Metabolomics</div>
+			<div class="label label-default tutorial_tag" style="--color-primary: #7ec8ff; --color-darker: #10b7ff; --color-dimmed: #5bc0ff;">Metabolomics</div>
 			
 			</br>
 			
@@ -344,9 +344,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Galaxy Europe</a></li>
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Galaxy Australia</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Galaxy France</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Galaxy Australia</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Import to another server (≥23.0+ only!)</a>
@@ -753,7 +753,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c6c9881312345be9aee924d3b4dcd524c6d5914d">c6c9881</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81b50cf159929ddfb63ab27f012fd2b88a2b2c3f">81b50cf</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c6c9881312345be9aee924d3b4dcd524c6d5914d",
+		release: "galaxy-training-network@81b50cf159929ddfb63ab27f012fd2b88a2b2c3f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -72,8 +72,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Microbiome / Identification of the micro-organisms in a beer using Nanopore sequencing / Workflows">
         <meta property="og:description" content="A microbiome is the community of microorganisms that can usually be found living together in any given habitat. Microbiome research has grown substantially over the past decade in terms of the range of biomes sampled, identified taxa, and the volume of data derived from the samples. ">
-        
-	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -259,13 +258,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/beer-data-analysis/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
 			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-beer-data-analysis/versions/main-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -283,18 +282,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   2 -->|outfile| 3;
   4["Kraken2"];
   3 -->|out1| 4;
-  5a65fa0e-ae32-423a-88cf-f8365af3d168["Output\nkraken_report"];
-  4 --> 5a65fa0e-ae32-423a-88cf-f8365af3d168;
-  style 5a65fa0e-ae32-423a-88cf-f8365af3d168 stroke:#2c3143,stroke-width:4px;
+  c5597e94-a137-492b-aa1e-45707a0c936f["Output\nkraken_report"];
+  4 --> c5597e94-a137-492b-aa1e-45707a0c936f;
+  style c5597e94-a137-492b-aa1e-45707a0c936f stroke:#2c3143,stroke-width:4px;
   5["Filter"];
   4 -->|report_output| 5;
   6["Filter"];
   4 -->|report_output| 6;
   7["Krakentools: Convert kraken report file"];
   4 -->|report_output| 7;
-  f183ce08-85a2-4abe-9922-ea188f6fc9c3["Output\nkrakentool_report"];
-  7 --> f183ce08-85a2-4abe-9922-ea188f6fc9c3;
-  style f183ce08-85a2-4abe-9922-ea188f6fc9c3 stroke:#2c3143,stroke-width:4px;
+  0eabb46b-9ca2-4ba2-8ff4-15e0bb7e2663["Output\nkrakentool_report"];
+  7 --> 0eabb46b-9ca2-4ba2-8ff4-15e0bb7e2663;
+  style 0eabb46b-9ca2-4ba2-8ff4-15e0bb7e2663 stroke:#2c3143,stroke-width:4px;
   8["Krona pie chart"];
   7 -->|output| 8;
 	</pre>
@@ -371,7 +370,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c6c9881312345be9aee924d3b4dcd524c6d5914d">c6c9881</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81b50cf159929ddfb63ab27f012fd2b88a2b2c3f">81b50cf</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

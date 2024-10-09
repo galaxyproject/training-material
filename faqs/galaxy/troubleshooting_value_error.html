@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c6c9881312345be9aee924d3b4dcd524c6d5914d",
+		release: "galaxy-training-network@81b50cf159929ddfb63ab27f012fd2b88a2b2c3f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -76,8 +76,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Understanding ValueError error messages">
         <meta property="og:description" content="The full error is usually a longer message seen only after clicking on the bug icon or by reviewing the job details `stderr`.  How to do both is covered in the Troubleshooting errors [FAQ]({% link faqs/galaxy/analysis_troubleshooting.md %}).   stderr ... Many lines of text, may include parameters ... ... ValueError: invalid literal for int() with base 10: some-sequence-read-name   - Causes:     - MACS2 produces this error the first time it is run. MACS is not the only tool that can produce this issue, but it is the most common. - Solutions:     - Try at least one rerun.     - MACS/2 is not capable of interpreting sequence read names with spaces included. Try following these two:         - Remove unmapped reads from the SAM dataset. There are several filtering tools in the groups **SAMTools** and **Picard** that can do this.         - Convert the SAM input to BAM format with the tool **SAMtools: SAM-to-BAM**. When compressed input is given to MACS, the spaces are no longer an issue. ">
-        
-	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/faqs/galaxy/troubleshooting_value_error.png">
+	</head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -426,7 +426,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c6c9881312345be9aee924d3b4dcd524c6d5914d">c6c9881</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81b50cf159929ddfb63ab27f012fd2b88a2b2c3f">81b50cf</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

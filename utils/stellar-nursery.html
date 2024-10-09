@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c6c9881312345be9aee924d3b4dcd524c6d5914d",
+		release: "galaxy-training-network@81b50cf159929ddfb63ab27f012fd2b88a2b2c3f",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -72,8 +72,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="GTN Stellar Nursery">
         <meta property="og:description" content="Welcome to the Stellar Nursery where brand new baby tutorials and other stellar objects are being born every day. Some of these would like to grow up to be full fledged Galactic Tutorials, no longer the *dark matter* hiding in our Galaxy.   ## You can help!  Are you a new contributor who wants to learn more about how the GTN works? Are you looking for a Hacktoberfest contribution?   Some of these tutorials might be good ones to work on; please reach out to us and we can suggest one for you, and guide you through the changes that are required to bring it up to GTN standards.  ## Dark Matter  {% assign draft_tutorials = site | list_draft_materials %}                             Topic             Title             Links                    {% for tutorial in draft_tutorials %}                      {{ tutorial.topic_name }}             {{ tutorial.title }}             {{ tutorial.url }}          {% endfor %}       ">
-        
-	<meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
         <header>
@@ -238,27 +237,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </tr>
 
         <tr>
-            <td>computational-chemistry</td>
-            <td>Running molecular dynamics simulations using NAMD</td>
-            <td><a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html</a></td>
-        </tr>
-
-        <tr>
             <td>proteomics</td>
             <td>Secretome Prediction</td>
             <td><a href="/training-material/topics/proteomics/tutorials/secretome-prediction/tutorial.html">/topics/proteomics/tutorials/secretome-prediction/tutorial.html</a></td>
         </tr>
 
         <tr>
-            <td>transcriptomics</td>
-            <td>De novo transcriptome assembly, annotation, and differential expression analysis</td>
-            <td><a href="/training-material/topics/transcriptomics/tutorials/full-de-novo/tutorial.html">/topics/transcriptomics/tutorials/full-de-novo/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>epigenetics</td>
-            <td>CUT&amp;RUN data analysis</td>
-            <td><a href="/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html">/topics/epigenetics/tutorials/cut_and_run/tutorial.html</a></td>
+            <td>computational-chemistry</td>
+            <td>Running molecular dynamics simulations using NAMD</td>
+            <td><a href="/training-material/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html">/topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.html</a></td>
         </tr>
 
         <tr>
@@ -268,9 +255,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </tr>
 
         <tr>
-            <td>dev</td>
-            <td>Galaxy Interactive Environments</td>
-            <td><a href="/training-material/topics/dev/tutorials/interactive-environments/slides.html">/topics/dev/tutorials/interactive-environments/slides.html</a></td>
+            <td>epigenetics</td>
+            <td>CUT&amp;RUN data analysis</td>
+            <td><a href="/training-material/topics/epigenetics/tutorials/cut_and_run/tutorial.html">/topics/epigenetics/tutorials/cut_and_run/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>transcriptomics</td>
+            <td>De novo transcriptome assembly, annotation, and differential expression analysis</td>
+            <td><a href="/training-material/topics/transcriptomics/tutorials/full-de-novo/tutorial.html">/topics/transcriptomics/tutorials/full-de-novo/tutorial.html</a></td>
         </tr>
 
         <tr>
@@ -286,39 +279,15 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </tr>
 
         <tr>
+            <td>dev</td>
+            <td>Galaxy Interactive Environments</td>
+            <td><a href="/training-material/topics/dev/tutorials/interactive-environments/slides.html">/topics/dev/tutorials/interactive-environments/slides.html</a></td>
+        </tr>
+
+        <tr>
             <td>admin</td>
             <td>Server: Other</td>
             <td><a href="/training-material/topics/admin/tutorials/stuff/slides.html">/topics/admin/tutorials/stuff/slides.html</a></td>
-        </tr>
-
-        <tr>
-            <td>genome-annotation</td>
-            <td>Creating an Official Gene Set</td>
-            <td><a href="/training-material/topics/genome-annotation/tutorials/official-gene-set/tutorial.html">/topics/genome-annotation/tutorials/official-gene-set/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>genome-annotation</td>
-            <td>Genome Annotation</td>
-            <td><a href="/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html">/topics/genome-annotation/tutorials/genome-annotation/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>metabolomics</td>
-            <td>Mass spectrometry : GC-MS analysis with metaMS package</td>
-            <td><a href="/training-material/topics/metabolomics/tutorials/gcms/tutorial.html">/topics/metabolomics/tutorials/gcms/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>data-science</td>
-            <td>Introduction to sequencing with Python (part two)</td>
-            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">/topics/data-science/tutorials/gnmx-lecture3/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>data-science</td>
-            <td>One protein along the UniProt page</td>
-            <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html">/topics/data-science/tutorials/online-resources-protein/tutorial.html</a></td>
         </tr>
 
         <tr>
@@ -329,14 +298,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <tr>
             <td>data-science</td>
-            <td>Versioning your code and data with git</td>
-            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture7/tutorial.html">/topics/data-science/tutorials/gnmx-lecture7/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>data-science</td>
-            <td>Introduction to sequencing with Python (part one)</td>
-            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">/topics/data-science/tutorials/gnmx-lecture2/tutorial.html</a></td>
+            <td>Introduction to sequencing with Python (part two)</td>
+            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture3/tutorial.html">/topics/data-science/tutorials/gnmx-lecture3/tutorial.html</a></td>
         </tr>
 
         <tr>
@@ -352,21 +315,69 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </tr>
 
         <tr>
+            <td>data-science</td>
+            <td>Versioning your code and data with git</td>
+            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture7/tutorial.html">/topics/data-science/tutorials/gnmx-lecture7/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>data-science</td>
+            <td>One protein along the UniProt page</td>
+            <td><a href="/training-material/topics/data-science/tutorials/online-resources-protein/tutorial.html">/topics/data-science/tutorials/online-resources-protein/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>data-science</td>
+            <td>Introduction to sequencing with Python (part one)</td>
+            <td><a href="/training-material/topics/data-science/tutorials/gnmx-lecture2/tutorial.html">/topics/data-science/tutorials/gnmx-lecture2/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>genome-annotation</td>
+            <td>Genome Annotation</td>
+            <td><a href="/training-material/topics/genome-annotation/tutorials/genome-annotation/tutorial.html">/topics/genome-annotation/tutorials/genome-annotation/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>genome-annotation</td>
+            <td>Creating an Official Gene Set</td>
+            <td><a href="/training-material/topics/genome-annotation/tutorials/official-gene-set/tutorial.html">/topics/genome-annotation/tutorials/official-gene-set/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>introduction</td>
+            <td>Upload data to Galaxy</td>
+            <td><a href="/training-material/topics/introduction/tutorials/dummy/tutorial.html">/topics/introduction/tutorials/dummy/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>introduction</td>
+            <td>IGV Introduction</td>
+            <td><a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">/topics/introduction/tutorials/igv-introduction/tutorial.html</a></td>
+        </tr>
+
+        <tr>
+            <td>introduction</td>
+            <td>Very Short Introductions: QC</td>
+            <td><a href="/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html">/topics/introduction/tutorials/vsi_qc/tutorial.html</a></td>
+        </tr>
+
+        <tr>
             <td>transcriptomics</td>
             <td>Reference-based RNAseq data analysis (long)</td>
             <td><a href="/training-material/topics/transcriptomics/tutorials/rb-rnaseq/tutorial.html">/topics/transcriptomics/tutorials/rb-rnaseq/tutorial.html</a></td>
         </tr>
 
         <tr>
-            <td>teaching</td>
-            <td>Live Coding is a Skill</td>
-            <td><a href="/training-material/topics/teaching/tutorials/live-coding/tutorial.html">/topics/teaching/tutorials/live-coding/tutorial.html</a></td>
+            <td>metabolomics</td>
+            <td>Mass spectrometry : GC-MS analysis with metaMS package</td>
+            <td><a href="/training-material/topics/metabolomics/tutorials/gcms/tutorial.html">/topics/metabolomics/tutorials/gcms/tutorial.html</a></td>
         </tr>
 
         <tr>
             <td>teaching</td>
-            <td>Hybrid training</td>
-            <td><a href="/training-material/topics/teaching/tutorials/hybrid-training/tutorial.html">/topics/teaching/tutorials/hybrid-training/tutorial.html</a></td>
+            <td>Live Coding is a Skill</td>
+            <td><a href="/training-material/topics/teaching/tutorials/live-coding/tutorial.html">/topics/teaching/tutorials/live-coding/tutorial.html</a></td>
         </tr>
 
         <tr>
@@ -382,21 +393,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </tr>
 
         <tr>
-            <td>introduction</td>
-            <td>Upload data to Galaxy</td>
-            <td><a href="/training-material/topics/introduction/tutorials/dummy/tutorial.html">/topics/introduction/tutorials/dummy/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>introduction</td>
-            <td>Very Short Introductions: QC</td>
-            <td><a href="/training-material/topics/introduction/tutorials/vsi_qc/tutorial.html">/topics/introduction/tutorials/vsi_qc/tutorial.html</a></td>
-        </tr>
-
-        <tr>
-            <td>introduction</td>
-            <td>IGV Introduction</td>
-            <td><a href="/training-material/topics/introduction/tutorials/igv-introduction/tutorial.html">/topics/introduction/tutorials/igv-introduction/tutorial.html</a></td>
+            <td>teaching</td>
+            <td>Hybrid training</td>
+            <td><a href="/training-material/topics/teaching/tutorials/hybrid-training/tutorial.html">/topics/teaching/tutorials/hybrid-training/tutorial.html</a></td>
         </tr>
 
     </tbody>
@@ -464,7 +463,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c6c9881312345be9aee924d3b4dcd524c6d5914d">c6c9881</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81b50cf159929ddfb63ab27f012fd2b88a2b2c3f">81b50cf</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
