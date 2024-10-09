@@ -90,7 +90,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         tpl = tpl.gsub('TOPIC_NAME', 'Topic')
         topic = site.data[page.data['topic_name']]
         title_override = topic['title']
-        authors = topic['editorial_board'].map { |c| Gtn::Contributors.fetch_name(site, c) }
+        authors = topic.fetch('editorial_board', []).map { |c| Gtn::Contributors.fetch_name(site, c) }
 
         mod_time = [
           Gtn::ModificationTimes.obtain_time(page.path),
