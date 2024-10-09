@@ -145,9 +145,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         svg_path = File.join(page.url, 'index.svg')
       end
       svg = File.join(site.dest, svg_path)
-      # if ! File.directory?(File.dirname(svg))
-      #   FileUtils.mkdir_p(File.dirname(svg))
-      # end
+      if ! File.directory?(File.dirname(svg))
+        FileUtils.mkdir_p(File.dirname(svg))
+      end
       File.open(svg, 'w') do |f|
         f.write(tpl)
       end
