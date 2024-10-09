@@ -67,6 +67,9 @@ Jekyll::Hooks.register :site, :post_write do |site|
         end
       when 'recordings'
         tpl = templates['recording'].dup
+        authors = page.data['material']['ref'].data.fetch('recordings', [])
+          .reverse.map { |r| r.fetch('speakers', []) + r.fetch('captioners',[]) }.flatten.uniq
+        authors = authors.map { |c| Gtn::Contributors.fetch_name(site, c) }
 
         mod_time = [
           Gtn::ModificationTimes.obtain_time(page.path),
@@ -84,6 +87,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
         authors = page.data['editorial_board'].map { |c| Gtn::Contributors.fetch_name(site, c) }
       when 'topic'
         tpl = templates['topic'].dup
+        tpl = tpl.gsub('TOPIC_NAME', 'Topic')
         topic = site.data[page.data['topic_name']]
         title_override = topic['title']
         authors = topic['editorial_board'].map { |c| Gtn::Contributors.fetch_name(site, c) }

@@ -46,8 +46,10 @@
         {%- elsif page.tags contains "gat" %}{% assign coverimage = "assets/images/gat.png" %}
         {%- else %}{% assign coverimage = "assets/images/GTNLogo1000.png" %}{% endif %}
         {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "assets/images/GTNLogo1000.png" %}
-	{%- if page.layout == "tutorial_hands_on" or page.layout == "tutorial_slies" -%}
-	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/{{ page.url | replace: ".html", ".png" }}">
+	{%- if page.layout == "tutorial_hands_on" or page.layout == "tutorial_slides" or page.layout == "event" or page.layout == "workflow" or page.layout == "faq" or page.layout == "introduction_slides" or page.layout == "learning-pathway"  -%}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url | replace: ".html", ".png" }}">
+	{% elsif page.layout == "topic" or page.layout == "recordings" %}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url }}/index.png">
 	{%- else -%}
 	<meta property="og:image" content="{% if og_image contains 'https://' %}{{ og_image }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ og_image }}{% endif %}">
 	{%- endif -%}
