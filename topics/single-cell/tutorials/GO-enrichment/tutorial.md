@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: GO Enrichment Analysis on Single-Cell RNA-Seq Data
 zenodo_link: 'https://zenodo.org/records/13461890'
+subtopic: exploratory
 
 questions:
 - What is Gene Ontology (GO) enrichment analysis, and why should I perform it on my marker genes?
@@ -33,8 +34,8 @@ key_points:
 - GO enrichment analysis is used to discover new insights about how cells work, which can lead to better understanding of biological processes and diseases.
   
 contributors:
-- nomadscientist
 - MennaGamal
+- nomadscientist
 ---
 
 In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
