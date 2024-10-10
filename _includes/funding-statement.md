@@ -3,7 +3,7 @@
 {% for id in include.funders %}
 	{% assign name = site.data.contributors[id].name | default: id -%}
 	<a href="{{ site.baseurl }}/hall-of-fame/{{ id }}/" class="funder-badge">
-		{% assign pfo = site.data.funders[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
+		{% assign pfo = site.data.grants[id] | default: site.data.organisations[id] | default: site.data.contributors[id] | default: nil %}
 		<div class="avatar">
 			{% if pfo.avatar %}
 			<img class="funder-avatar" src="{{ pfo.avatar }}" alt="Logo">
@@ -17,7 +17,7 @@
 		<div class="info">
 			<div class="name">{{ pfo.short_name | default: pfo.name | default: id }}</div>
 			<div class="description">
-			{{ site.data.funders[id].funding_statement | markdownify | strip_html }}
+			{{ site.data.grants[id].funding_statement | markdownify | strip_html }}
             {{ pfo.description }}
 			</div>
 		</div>

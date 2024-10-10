@@ -17,11 +17,12 @@ objectives:
 time_estimation: 1H
 key_points:
 - CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images
-contributors:
-- sunyi000
-- beatrizserrano
-- jkh1
 
+contributions:
+  authorship:
+    - sunyi000
+    - beatrizserrano
+    - jkh1
 ---
 
 

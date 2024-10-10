@@ -18,9 +18,11 @@ level: Intermediate
 tags:
   - gmod
   - jbrowse1
-contributors:
+contributions:
+  authorship:
   - hexylena
   - shiltemann
+  funding:
   - gallantries
 ---
 

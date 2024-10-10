@@ -17,13 +17,15 @@ level: Intermediate
 key_points:
 - PacBio data allows to perform good quality genome assembly
 - Quast and BUSCO make it easy to compare the quality of assemblies
-contributors:
-- abretaud
-- alexcorm
-- r1corre
-- lleroi
-- stephanierobin
-- gallantries
+contributions:
+  authorship:
+  - abretaud
+  - alexcorm
+  - r1corre
+  - lleroi
+  - stephanierobin
+  funding:
+  - gallantries
 
 follow_up_training:
  - type: internal

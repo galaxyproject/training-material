@@ -13,10 +13,13 @@ time_estimation: "2h"
 key_points:
   - "Circos is an effective tool to make circular visualisation of high-dimensional datasets"
   - "Circos is often used for genomics, but can also be used for other types of data"
-contributors:
+contributions:
+  authorship:
   - shiltemann
   - hexylena
   - gallardoalba
+  funding:
+  - gallantries
 level: Intermediate
 
 recordings:

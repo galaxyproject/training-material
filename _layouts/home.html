@@ -304,47 +304,27 @@ layout: base
     </p>
 
     <div class="logosoup">
-	{% for entity in site.data['funders'] %}
+	{% for entity in site.data['grants'] %}
 	<figure>
-		{% if entity[1].url %}
-			<a class="logo" href="{{ entity[1].url }}">
-				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
-			</a>
-		{% else %}
-			<span class="logo">
-				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
-			</span>
-		{% endif %}
+	  	<a class="logo" href="hall-of-fame/{{entity[0]}}">
+			<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+		</a>
 		<figcaption>
-			{% if entity[1].url %}
-			<a href="{{ entity[1].url }}">
+			<a href="hall-of-fame/{{entity[0]}}">
 				{{ entity[1].short_name | default: entity[1].name }}
 			</a>
-			{% else %}
-				{{ entity[1].short_name | default: entity[1].name }}
-			{% endif %}
 		</figcaption>
 	</figure>
 	{% endfor %}
 	{% for entity in site.data['organisations'] %}
 	<figure>
-		{% if entity[1].url %}
-			<a class="logo" href="{{ entity[1].url }}">
-				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
-			</a>
-		{% else %}
-			<span class="logo">
-				<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
-			</span>
-		{% endif %}
+		<a class="logo" href="hall-of-fame/{{entity[0]}}">
+			<img loading="lazy" src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 170 }}" alt="{{ entity[0] }}">
+		</a>
 		<figcaption>
-			{% if entity[1].url %}
-			<a href="{{ entity[1].url }}">
+			<a href="hall-of-fame/{{entity[0]}}">
 				{{ entity[1].short_name | default: entity[1].name }}
 			</a>
-			{% else %}
-				{{ entity[1].short_name | default: entity[1].name }}
-			{% endif %}
 		</figcaption>
 	</figure>
 	{% endfor %}

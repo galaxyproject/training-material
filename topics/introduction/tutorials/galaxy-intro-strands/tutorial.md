@@ -17,9 +17,15 @@ key_points:
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: next-steps
-contributors:
-  - tnabtaf
-  - gallardoalba
+
+contributions:
+  authorship:
+    - tnabtaf
+    - gallardoalba
+  funding:
+    - elixir-europe
+    - deNBI
+    - uni-freiburg
 
 recordings:
 - youtube_id: P1mEWZ_tAgQ

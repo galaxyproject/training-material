@@ -27,9 +27,11 @@ key_points:
 notebook:
   language: bash
 subtopic: bash
-contributors:
-- hexylena
-- gallantries
+contributions:
+  authorship:
+  - hexylena
+  funding:
+  - gallantries
 tags:
 - game
 - bash

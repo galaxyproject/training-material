@@ -109,8 +109,8 @@ module Gtn
           type: 'counter'
         },
         'gtn_funders_total' => {
-          value: segment(site.data['funders'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
-          help: 'Total number of funders',
+          value: segment(site.data['grants'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
+          help: 'Total number of grants',
           type: 'counter'
         },
         'gtn_tutorials_total' => {
