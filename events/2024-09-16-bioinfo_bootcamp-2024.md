@@ -12,6 +12,8 @@ description: |
 
     We strongly thank the Galaxy-Europe and Galaxy Training Network for their computational and training resources that make this course possible for the first time.
 
+cover-image: events/images/BB_24_logo.png
+cover-image-alt: logo for the Bioinformatics Bootcamp event consisting of a laptop with a DNA helix in it and the letters BB and number '24'
 date_start: 2024-09-16
 date_end: 2024-09-20
 contributions:
