@@ -10,6 +10,8 @@ description: |
 
     We will provide full information on registering for Galaxy and other necessary platforms in the last week in August and will have a drop-in session to troubleshoot any problems on these registrations and any questions you have about the Bootcamp on Monday, 2nd, September from 19:30-20:30.  
 
+    We strongly thank the Galaxy-Europe and Galaxy Training Network for their computational and training resources that make this course possible for the first time.
+
 date_start: 2024-09-16
 date_end: 2024-09-20
 contributions:
