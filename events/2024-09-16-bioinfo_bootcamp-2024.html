@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>2024 Bioinformatics Bootcamp - The Open University</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@1d58839a5fbfc953d236121eefb1f214d00c4764",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="2024 Bioinformatics Bootcamp - The Open University">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-10 15:07:28 +0000"><meta name="description" content="The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study. ">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="2024 Bioinformatics Bootcamp - The Open University">
+        <meta property="og:description" content="The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study. ">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/events/2024-09-16-bioinfo_bootcamp-2024.png">
+	</head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/events/index.html" title="Events">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> GTN Events
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/events/2024-09-16-bioinfo_bootcamp-2024.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "url": "https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html",
+  "name": "2024 Bioinformatics Bootcamp - The Open University",
+  "keywords": [
+    "single-cell",
+    "introductory"
+  ],
+  "description": "The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.\n",
+  "about": [
+
+  ],
+  "audience": null,
+  "courseMode": "online",
+  "startDate": "2024-09-16",
+  "endDate": "2024-09-20",
+  "organizer": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+      "name": "Wendi Bacon",
+      "image": "https://avatars.githubusercontent.com/nomadscientist",
+      "description": "Senior Lecturer at The Open University",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8170-8806",
+      "orcid": "https://orcid.org/0000-0002-8170-8806"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hfraser/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hfraser/",
+      "name": "Heather Fraser",
+      "image": "https://avatars.githubusercontent.com/hfraser",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/mhintze/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/mhintze/",
+      "name": "Mark Hintze",
+      "image": "https://avatars.githubusercontent.com/mhintze",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    }
+  ],
+  "location": {
+    "name": "The Open University - Online",
+    "city": "Milton Keynes",
+    "country": "United Kingdom"
+  },
+  "teaches": [
+
+  ],
+  "availableLanguage": [
+    "en"
+  ],
+  "inLanguage": [
+    "en"
+  ],
+  "funder": [
+
+  ],
+  "funding": [
+
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "syllabusSections": null,
+  "dateModified": "2024-10-10 15:07:28 +0000",
+  "datePublished": "2024-10-10 15:07:28 +0000",
+  "hasCourseInstance": [
+    {
+      "@type": "CourseInstance",
+      "courseMode": "online",
+      "offers": null,
+      "instructor": [
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/",
+          "name": "Julia Jakiela",
+          "image": "https://avatars.githubusercontent.com/wee-snufkin",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ],
+          "identifier": "https://orcid.org/0009-0001-2017-8805",
+          "orcid": "https://orcid.org/0009-0001-2017-8805"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/",
+          "name": "Wendi Bacon",
+          "image": "https://avatars.githubusercontent.com/nomadscientist",
+          "description": "Senior Lecturer at The Open University",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+                "@type": "CreativeWork"
+              },
+              "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+              "name": "ELIXIR Europe",
+              "description": "An organization supporting the Galaxy Training Network",
+              "url": "https://elixir-europe.org"
+            }
+          ],
+          "identifier": "https://orcid.org/0000-0002-8170-8806",
+          "orcid": "https://orcid.org/0000-0002-8170-8806"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/hexhowells/",
+          "name": "Morgan Howells",
+          "image": "https://avatars.githubusercontent.com/hexhowells",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ],
+          "identifier": "https://orcid.org/0009-0008-9422-6380",
+          "orcid": "https://orcid.org/0009-0008-9422-6380"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "url": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/",
+          "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/",
+          "name": "Marisa Loach",
+          "image": "https://avatars.githubusercontent.com/MarisaJL",
+          "description": "A contributor to the GTN project.",
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "http://purl.org/dc/terms/conformsTo": {
+                "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+                "@type": "Organization"
+              },
+              "id": "https://training.galaxyproject.org",
+              "email": "galaxytrainingnetwork@gmail.com",
+              "name": "Galaxy Training Network",
+              "legalName": "Galaxy Training Network",
+              "alternateName": "GTN",
+              "url": "https://training.galaxyproject.org",
+              "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+              "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+              "keywords": [
+                "galaxy",
+                "bioinformatics",
+                "training",
+                "fair",
+                "accessible"
+              ],
+              "status": "active",
+              "foundingDate": "2015-06-29",
+              "socialMedia": "https://mstdn.science/@gtn",
+              "type": "project"
+            }
+          ],
+          "identifier": "https://orcid.org/0000-0001-6979-6930",
+          "orcid": "https://orcid.org/0000-0001-6979-6930"
+        }
+      ],
+      "isAccessibleForFree": null,
+      "courseSchedule": {
+        "@type": "Schedule",
+        "startDate": "2024-09-16",
+        "endDate": "2024-09-20",
+        "repeatCount": 4,
+        "repeatFrequency": "daily"
+      },
+      "courseWorkload": "P4D"
+    }
+  ],
+  "offers": [
+    null
+  ],
+  "location": {
+    "@type": "Place",
+    "name": "The Open University - Online",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": null,
+      "addressLocality": "Milton Keynes",
+      "addressRegion": null,
+      "postalCode": null,
+      "addressCountry": "United Kingdom"
+    }
+  }
+}
+</script>
+
+
+<section class="event">
+    <hgroup>
+      <h1>2024 Bioinformatics Bootcamp - The Open University</h1>
+      <p>
+        
+        
+        Virtual course
+        
+      </p>
+    </hgroup>
+
+    
+
+    <div class="zrow">
+	    <div class="zcol-md-9">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
+  </li>
+  
+  
+  <li class="nav-item" role="presentation">
+     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false" >Setup</button>
+  </li>
+  
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#instructors" type="button" role="tab" aria-controls="instructors" aria-selected="false">Instructor Zone</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    
+
+    <p><p>The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.</p>
+</p>
+    <p><p>This will be a fantastic opportunity to gain hands-on experience of the Galaxy bioinformatics platform and analyse real biological data.  On day 2, you’ll have an option to choose a pathway: an interactive web-based graphical user interface (GUI) pathway to run the bioinformatics analysis, or a coding environment using the Python programming language to perform the analysis. So, if you ever fancied trying computer coding, the second pathway is for you.  You’ll analyse the biological data in exactly the same way in each pathway, and it will be possible to swap between GUI and coding based on your confidence.</p>
+
+<p>Prior knowledge of bioinformatics or computer coding is not required, and you’ll be supported through your study by a dedicated team of experienced researchers and PhD students. The Bioinformatics Bootcamp will run every day approximately from 09:15-17:30 with a break for lunch from 12-13:00 and afternoon break between 15:00-16:00.   There will be a mix of live online Zoom meetings, lectures, and self-directed Galaxy tutorials with online support available from 09:00-18:00 each day. Each day will end with a Key Points Game to summarize outcomes and answer any questions. On Friday, we’ll aim to end early before 15:00.</p>
+
+<p>The Bioinformatics Bootcamp will be “real-time” or synchronous compared to typical OU study, which you can do in your own time, so we request that you ensure you are available to attend all sessions each day.</p>
+
+<p>We will provide full information on registering for Galaxy and other necessary platforms in the last week in August and will have a drop-in session to troubleshoot any problems on these registrations and any questions you have about the Bootcamp on Monday, 2nd, September from 19:30-20:30.</p>
+
+<p>We strongly thank the Galaxy-Europe and Galaxy Training Network for their computational and training resources that make this course possible for the first time.</p>
+</p>
+
+    <h3>Who is this course for?</h3>
+    
+
+    
+
+
+<section>
+	
+
+
+	<!-- Maintained by -->
+	<h3 id="Organisers">Organisers & Instructors</h3>
+	<p>This event is brought to you by:</p>
+	
+<table class="contributions">
+	
+
+	
+
+	
+	<tr>
+		<td><abbr title="These were responsible for organisation of this event">Organisers(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/hfraser/" class="contributor-badge contributor-hfraser"><img src="https://avatars.githubusercontent.com/hfraser?s=36" alt="Heather Fraser avatar" width="36" class="avatar" />
+    Heather Fraser</a><a href="/training-material/hall-of-fame/mhintze/" class="contributor-badge contributor-mhintze"><img src="https://avatars.githubusercontent.com/mhintze?s=36" alt="Mark Hintze avatar" width="36" class="avatar" />
+    Mark Hintze</a>
+		</td>
+	</tr>
+	
+
+	
+	<tr>
+		<td><abbr title="These folks either taught at the event or supported its instruction">Instructor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" />
+    Julia Jakiela</a><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+    Wendi Bacon</a><a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge contributor-hexhowells"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+    Morgan Howells</a><a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge contributor-MarisaJL"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/MarisaJL?s=36" alt="Marisa Loach avatar" width="36" class="avatar" />
+    Marisa Loach</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+
+
+	
+	
+<div class="d-flex flex-wrap">
+
+</div>
+
+
+	
+
+</section>
+
+  </div>
+
+  <!-- Programme Tab -->
+  <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
+
+
+    
+
+     
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
+
+    <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+    
+
+
+     <!-- for each section -->
+   <!-- if event not external -->
+
+  </div><!-- end programme tab -->
+
+
+  <!-- Setup Tab -->
+  
+  <div class="tab-pane " id="setup" role="tabpanel" aria-labelledby="setup-tab">
+
+    <h3>Get set up for the course!</h3>
+    <p>Follow the steps below to get set up with everything you need to participate in the course!</p>
+
+    <!-- Galaxy setup -->
+    
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="/training-material/assets/images/galaxylogo.png" class="card-img" alt="Galaxy logo" style="max-height: 10em">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Create a Galaxy Account</h5>
+			<p class="card-text">
+              Create an account on one of the following Galaxy servers:
+              <ul>
+              
+              <li><a href="https://usegalaxy.eu">Galaxy EU</a></li>
+              
+              </ul>
+            </p>
+            <p class="card-text">
+              You will get an email with <b>activation link</b>. It may end up in your junk folder.
+            </p>
+			<p class="card-text text-muted">
+              Note: If you already have a Galaxy account you can skip this step and just log in to your existing account.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	
+
+    <!-- TIaaS setup -->
+    
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="/training-material/assets/images/galaxy-for-trainers.svg" class="card-img" alt="cartoon of a person standing in front of a blackboard" style="max-height: 10em">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join Galaxy Training Group (TIaaS)</h5>
+			<p class="card-text">
+            Join TIaaS by clicking on the link below matching your Galaxy server:
+            <ul>
+              
+              
+              <li>Galaxy EU is not using TIaaS</li>
+              
+              
+            </ul>
+            </p>
+            <p class="card-text">
+            This will give your analysis jobs <b>priority on Galaxy</b> for the duration of the event. Make sure you are <b>logged in</b> before clicking the link.
+            You should see a <b>green message box</b> if all went well.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    
+
+
+    <!-- Support setup -->
+    
+
+
+    <!-- Custom Setup Instructions -->
+    
+
+
+
+
+
+  </div><!-- end setup tab -->
+  
+
+
+  <div class="tab-pane " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
+<section>
+	<h2>Instructor Zone</h2>
+
+	<p>
+	Check out our checklists for
+	</p>
+	<ul>
+		<li><a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
+		<li><a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">Running a Workshop</a>, helpful reminders closer to your event.</li>
+	</ul>
+
+
+	
+	<h4>Request TIaaS</h4>
+	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="/training-material/topics/teaching/tutorials/setup-tiaas-for-training/tutorial.html">Learn more about TIaaS in our tutorial</a>.</p>
+	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
+	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p><ul>
+	<li>
+			<a href="https://usegalaxy.eu/tiaas/new/?name=Wendi%20Bacon
+&email=wendi.bacon@open.ac.uk
+&title=2024%20Bioinformatics%20Bootcamp%20-%20The%20Open%20University
+&description=The%20School%20of%20Life,%20Health,%20and%20Chemical%20Sciences%20(LHCS)%20at%20The%20Open%20University%20(OU)%20is%20running%20a%20free,%20week-long%20Bioinformatics%20Bootcamp%20from%20the%2016-20th%20September%20aimed%20at%20level%202%20and%20level%203%20OU%20students%20who%20are%20studying%20life,%20health%20and%20chemical%20sciences%20modules%20and%20have%20already%20completed%20120%20credits%20of%20level%201%20study.%0A
+&start=2024-09-16
+&end=2024-09-20
+&website=https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html
+&use_gtn=true&gtn_links=See%20course%20event
+&training_identifier=">Request TIaaS @ https://usegalaxy.eu</a>
+		</li>
+	
+	</ul>
+	
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "2024 Bioinformatics Bootcamp - The Open University"
+date: '2024-09-16'
+days: 5
+tease: The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.
+
+#continent: EU
+location: "The Open University - Online,Milton Keynes"
+external_url: "https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html"
+gtn: true
+contact: ""
+subsites: [all]
+---
+</code></pre></div></div>
+
+
+	<h3>Promote the Event</h3>
+
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2024 Bioinformatics Bootcamp - The Open University! 📢
+
+The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.
+
+
+📅 September 16 – 20, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2024 Bioinformatics Bootcamp - The Open University! 📢
+
+The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.
+
+
+:calendar: September 16 – 20, 2024
+:arrow_right: https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+2024 Bioinformatics Bootcamp - The Open University! 📢
+
+The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study.
+
+
+**Agenda**:
+
+📅 September 16 – 20, 2024
+➡️ https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html
+</code></pre></div>      </div>
+
+
+</section>
+
+  </div>
+</div>
+
+	</div> <!-- col-md-9 -->
+	<div class="zcol-md-3">
+
+        <img class="event-image" src="/training-material/events/images/BB_24_logo.png" alt="logo for the Bioinformatics Bootcamp event consisting of a laptop with a DNA helix in it and the letters BB and number '24'">
+        
+		
+
+        
+
+		
+		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
+		
+        
+		<hr/>
+
+		<b> Event details </b>
+		<table>
+			<tr><td style="min-width: 2rem"><i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">event-date</span></td><td>September 16 – 20, 2024</td></tr>
+			<tr><td><i class="fas fa-location-dot" aria-hidden="true"></i><span class="visually-hidden">event-location</span></td><td><a href="https://www.openstreetmap.org/search?query=The Open University - Online, Milton Keynes, United Kingdom">The Open University - Online, Milton Keynes, United Kingdom</a></td></tr>
+			<tr><td><i class="fas fa-tag" aria-hidden="true"></i><span class="visually-hidden">event-cost</span></td><td></td></tr>
+			
+		</table>
+
+		<hr />
+        <b> Add this event to your calendar </b>
+
+           
+
+
+
+
+
+
+
+<a href="https://calendar.google.com/calendar/render?action=TEMPLATE&dates=20240916%2F20240920&details=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html&location=The Open University - Online, Milton Keynes, United Kingdom&text=2024 Bioinformatics Bootcamp - The Open University" class="btn btn-info btn-sm" alt="Add to Google Calendar">Google</a>
+
+<a href="https://outlook.live.com/calendar/0/deeplink/compose?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html&enddt=2024-09-20&location=The Open University - Online, Milton Keynes, United Kingdom&path=%2Fcalendar%2Faction%2Fcompose&rru=addevent&startdt=2024-09-16&subject=2024 Bioinformatics Bootcamp - The Open University" class="btn btn-info btn-sm">Outlook</a>
+
+<a href="https://outlook.office.com/calendar/0/deeplink/compose/?body=Event%20Information%20https://training.galaxyproject.org/training-material/events/2024-09-16-bioinfo_bootcamp-2024.html&enddt=2024-09-20&allday=true&location=The Open University - Online, Milton Keynes, United Kingdom&path=%2fcalendar%2faction%2fcompose&rru=addevent&startdt=2024-09-16&subject=2024 Bioinformatics Bootcamp - The Open University" class="btn btn-info btn-sm">Office 365</a>
+
+
+		<hr />
+
+		<b>Organisers</b><br/>
+		
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge-inline contributor-nomadscientist">
+  <img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+  Wendi Bacon</a>
+
+		
+			<a href="/training-material/hall-of-fame/hfraser/" class="contributor-badge-inline contributor-hfraser">
+  <img src="https://avatars.githubusercontent.com/hfraser?s=36" alt="Heather Fraser avatar" width="36" class="avatar" />
+  Heather Fraser</a>
+
+		
+			<a href="/training-material/hall-of-fame/mhintze/" class="contributor-badge-inline contributor-mhintze">
+  <img src="https://avatars.githubusercontent.com/mhintze?s=36" alt="Mark Hintze avatar" width="36" class="avatar" />
+  Mark Hintze</a>
+
+		
+
+        
+        <br/><br/><b>Instructors</b><br/>
+            
+			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge-inline contributor-wee-snufkin">
+  <img src="https://avatars.githubusercontent.com/wee-snufkin?s=36" alt="Julia Jakiela avatar" width="36" class="avatar" />
+  Julia Jakiela</a>
+
+		
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge-inline contributor-nomadscientist">
+  <img src="https://avatars.githubusercontent.com/nomadscientist?s=36" alt="Wendi Bacon avatar" width="36" class="avatar" />
+  Wendi Bacon</a>
+
+		
+			<a href="/training-material/hall-of-fame/hexhowells/" class="contributor-badge-inline contributor-hexhowells">
+  <img src="https://avatars.githubusercontent.com/hexhowells?s=36" alt="Morgan Howells avatar" width="36" class="avatar" />
+  Morgan Howells</a>
+
+		
+			<a href="/training-material/hall-of-fame/MarisaJL/" class="contributor-badge-inline contributor-MarisaJL">
+  <img src="https://avatars.githubusercontent.com/MarisaJL?s=36" alt="Marisa Loach avatar" width="36" class="avatar" />
+  Marisa Loach</a>
+
+		
+
+        
+
+        
+		<hr />
+		<b>In collaboration with</b><br/>
+		
+        
+
+	</div>
+</div><!-- row -->
+
+</section>
+
+
+<script>
+(function (window, document) {
+    function onDocumentReady(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    onDocumentReady(function () {
+        $('#myTab button').click(function(e) {
+          console.log("bla");
+          e.preventDefault();
+          $(this).tab('show');
+        });
+
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > button").on("click", function(e) {
+            var id = $(e.target).attr('data-target').substr(1);
+            window.history.replaceState(null, null, '#'+id);
+        });
+
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        if (hash){
+        	var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        	if (potential_tab.length != 0) {
+            	potential_tab.tab('show');
+        	} else {
+            	var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            	$('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            	$(hash).get(0).scrollIntoView();
+        	}
+        }
+    });
+})(window, document);
+
+
+</script>
+
+<style>
+.zrow {
+	display: grid;
+	grid-template-rows: 1fr;
+	gap: 1em 1em;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas:
+	  "Main Main Main Meta";
+}
+@media (max-width: 768px) {
+	.zrow {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+		  "Meta"
+		  "Main";
+	}
+}
+
+.zcol-md-9 { grid-area: Main; }
+.zcol-md-3 { grid-area: Meta; }
+
+
+</style>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/events/2024-09-16-bioinfo_bootcamp-2024.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/events/2024-09-16-bioinfo_bootcamp-2024.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1d58839a5fbfc953d236121eefb1f214d00c4764">1d58839</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
