@@ -1,5 +1,5 @@
 ---
-layout: event-external
+layout: event
 title: 2024 Bioinformatics Bootcamp - The Open University
 description: |
     The School of Life, Health, and Chemical Sciences (LHCS) at The Open University (OU) is running a free, week-long Bioinformatics Bootcamp from the 16-20th September aimed at level 2 and level 3 OU students who are studying life, health and chemical sciences modules and have already completed 120 credits of level 1 study. This will be a fantastic opportunity to gain hands-on experience of the Galaxy bioinformatics platform and analyse real biological data.  On day 2, you’ll have an option to choose a pathway: an interactive web-based graphical user interface (GUI) pathway to run the bioinformatics analysis, or a coding environment using the Python programming language to perform the analysis. So, if you ever fancied trying computer coding, the second pathway is for you.  You’ll analyse the biological data in exactly the same way in each pathway, and it will be possible to swap between GUI and coding based on your confidence.
