@@ -30,4 +30,9 @@ location:
   name:  The Open University - Online
   city: Milton Keynes
   country: United Kingdom
+
+tags:
+ - single-cell
+
+ mode: "online"
 ---
