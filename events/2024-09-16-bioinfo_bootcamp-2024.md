@@ -33,6 +33,7 @@ location:
 
 tags:
  - single-cell
+ - introductory
 
  mode: "online"
 ---
