@@ -38,6 +38,7 @@ tags:
  - introductory
 
 mode: "online"
+async: false
 
 infrastructure:
   tiaas: true    # tiaas = Training Infrastructure as a Service, and can be requested (for free) from all major Galaxies
