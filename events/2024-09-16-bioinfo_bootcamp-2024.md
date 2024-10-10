@@ -35,5 +35,12 @@ tags:
  - single-cell
  - introductory
 
- mode: "online"
+mode: "online"
+
+infrastructure:
+  tiaas: true    # tiaas = Training Infrastructure as a Service, and can be requested (for free) from all major Galaxies
+
+  servers:
+    - server: https://usegalaxy.eu
+      name: Galaxy EU
 ---
