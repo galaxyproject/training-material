@@ -32,9 +32,13 @@ key_points:
 - GO enrichment helps make sense of your data and understand what makes each cell cluster/condition unique.
 - GO enrichment analysis is used to discover new insights about how cells work, which can lead to better understanding of biological processes and diseases.
   
-contributors:
-- nomadscientist
-- MennaGamal
+contributions:
+  authorship:
+    - mennagamal
+  editing:
+    - nomadscientist
+    - bgruening
+    - pcm32
 ---
 
 > <agenda-title></agenda-title>
