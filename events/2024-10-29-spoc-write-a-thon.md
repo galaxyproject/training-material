@@ -13,4 +13,6 @@ contributions:
 location:
   name: Online
 date_start: 2024-10-29
+tags:
+ - single-cell
 ---
