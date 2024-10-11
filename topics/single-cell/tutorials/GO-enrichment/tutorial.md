@@ -41,6 +41,11 @@ contributions:
     - pcm32
 ---
 
+In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
+However, simply identifying marker genes is just the beginning. To truly understand what makes each cluster unique, we need to dive deeper into the biological functions these genes are involved in. This is where Gene Ontology (GO) enrichment analysis comes into play.
+We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes belonging to a specific GO term) are expressed more than would be expected in a subset of your data. The most commonly used statistical tests are Fischer's exact test and hypergeometric test, more details about them are explained in the tutorial slides.
+
+
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -49,13 +54,6 @@ contributions:
 > {:toc}
 >
 {: .agenda}
-
-# Introduction
-
-In the tutorial [Filter, plot and explore single-cell RNA-seq data with Scanpy]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}), we took an important step in our single-cell RNA sequencing analysis by identifying marker genes for each of the clusters in our dataset. These marker genes are crucial, as they help us distinguish between different cell types and states, giving us a clearer picture of the cellular diversity within our samples.
-However, simply identifying marker genes is just the beginning. To truly understand what makes each cluster unique, we need to dive deeper into the biological functions these genes are involved in. This is where Gene Ontology (GO) enrichment analysis comes into play.
-We will perform GO enrichment analysis as a type of over-representation analysis (ORA), ORA is a statistical method that determines whether genes from pre-defined sets (e.g. genes belonging to a specific GO term) are expressed more than would be expected in a subset of your data. The most commonly used statistical tests are Fischer's exact test and hypergeometric test, more details about them are explained in the tutorial slides.
-
 
 # Data description
 

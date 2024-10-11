@@ -4,12 +4,13 @@ draft: false
 title: Calculating α and β diversity from microbiome taxonomic data
 zenodo_link: https://zenodo.org/records/13150694
 questions:
-- How many different taxons are present in my sample? How do I additionally take their relative abundance into account?
+- How many different taxons are present in my sample? How do I additionally take their
+  relative abundance into account?
 - How similar or how dissimilar are my samples in term of taxonomic diversity?
 - What are the different metrics used to calculate the taxonomic diversity of my samples?
 objectives:
 - Explain what taxonomic diversity is
-- Explain different metrics to calculate α and β diversity 
+- Explain different metrics to calculate α and β diversity
 - Apply Krakentools to calculate α and β diversity and understand the output
 level: Introductory
 key_points:
@@ -18,14 +19,27 @@ key_points:
 time_estimation: 20M
 subtopic: metagenomics
 contributions:
-   authorship:
-    - sophia120199
-    - bebatut
-    - paulzierep
+  authorship:
+  - sophia120199
+  - bebatut
+  - paulzierep
 tags:
 - metagenomics
 - diversity
+recordings:
+- youtube_id: e4vlvMsBrhM
+  length: 23M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-08-08'
+  speakers:
+  - paulzierep
+  captioners:
+  - paulzierep
+  bot-timestamp: 1723117037
+
+
 ---
+
 
 # Introduction
 

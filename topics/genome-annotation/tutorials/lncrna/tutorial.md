@@ -1,50 +1,62 @@
 ---
 layout: tutorial_hands_on
-
 title: Long non-coding RNAs (lncRNAs) annotation with FEELnc
 zenodo_link: https://zenodo.org/records/11367439
 tags:
-  - eukaryote
+- eukaryote
 questions:
-  - How to annotate lncRNAs with FEELnc?
-  - How to classify lncRNAs according to their localisation and direction of transcription of proximal RNA transcripts?
-  - How to update genome annotation with these annotated lncRNAs?
-
+- How to annotate lncRNAs with FEELnc?
+- How to classify lncRNAs according to their localisation and direction of transcription
+  of proximal RNA transcripts?
+- How to update genome annotation with these annotated lncRNAs?
 objectives:
-  - Load data (genome assembly, annotation and mapped RNASeq) into Galaxy
-  - Perform a transcriptome assembly with StringTie
-  - Annotate lncRNAs with FEELnc
-  - Classify lncRNAs according to their location
-  - Update genome annotation with lncRNAs
-
+- Load data (genome assembly, annotation and mapped RNASeq) into Galaxy
+- Perform a transcriptome assembly with StringTie
+- Annotate lncRNAs with FEELnc
+- Classify lncRNAs according to their location
+- Update genome annotation with lncRNAs
 time_estimation: 2h
 level: Intermediate
 key_points:
-  - StringTie allows to perform a transcriptome assembly using mapped RNASeq data and provides an annotation file containing trancripts description.
-  - FEELnc pipeline allows to perform annotation of long non-coding RNAs (lncRNAs).
-  - Annotation is based on reconstructed transcripts from RNA-seq data (either with or without a reference genome)
-  - Annotation can be performed without any training set of non-coding RNAs.
-  - FEELnc provides the localisation and the direction of transcription of proximal RNA transcripts of lncRNAs.
+- StringTie allows to perform a transcriptome assembly using mapped RNASeq data and
+  provides an annotation file containing trancripts description.
+- FEELnc pipeline allows to perform annotation of long non-coding RNAs (lncRNAs).
+- Annotation is based on reconstructed transcripts from RNA-seq data (either with
+  or without a reference genome)
+- Annotation can be performed without any training set of non-coding RNAs.
+- FEELnc provides the localisation and the direction of transcription of proximal
+  RNA transcripts of lncRNAs.
 contributions:
   authorship:
-    - stephanierobin
+  - stephanierobin
   editing:
-    - abretaud
-
+  - abretaud
 abbreviations:
   lncRNAs: long non-coding RNAs
   LncRNAs: Long non-coding RNAs
   mRNAs: Messenger RNAs
-
 requirements:
- - type: internal
-   topic_name: genome-annotation
-   tutorials:
-     - funannotate
-
+- type: internal
+  topic_name: genome-annotation
+  tutorials:
+  - funannotate
 subtopic: eukaryote
 priority: 7
+recordings:
+- youtube_id: U5WZMWd-3kk
+  length: 11M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-11'
+  speakers:
+  - rlibouba
+  captioners:
+  - stephanierobin
+  - abretaud
+  bot-timestamp: 1726077703
+
+
 ---
+
 
 {mRNAs} are not the only type of RNAs present in organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vast repertoire of small (miRNAs, snRNAs) and {lncRNAs} are also present. {LncRNAs} are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. They are important because of their major roles in cellular machinery and their presence in large number. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
 

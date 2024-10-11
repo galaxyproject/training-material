@@ -433,8 +433,7 @@ anyone wrapping a tool, a more complete list is available in [the Galaxy tool do
 
 Planemo is an important tool within the Galaxy development workflow. Although it will be covered in greater detail in the
 next section of this tutorial, one of its functions is necessary for the tool wrapper development. `planemo` is available
-via the python package manager `pip`. To that end, before beginning this section, please install `planemo` locally by running
-`planemo`. To that end, before beginning this section, please install planemo locally by running
+via the python package manager `pip`. To that end, before beginning this section, please install planemo locally by running
 
 > <hands-on-title>Installing `planemo` via pip</hands-on-title>
 >
@@ -462,7 +461,7 @@ Note that for using `planemo`from a new shell you will need to activate the pyth
 >    > ```bash
 >    > planemo, version 0.74.3
 >    > ```
->    {: .code-out}
+>    {: .code-in}
 >
 > 2. `planemo --help` will show the available commands with a short desctiption (lint, test, and serve will be part of this tutorial)
 > 3. `planemo SUBCOMMAND --help` will show the usage information for the corresponding subcommand. Try to obtain the information for the `lint` subcommand.

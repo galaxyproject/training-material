@@ -1,0 +1,36 @@
+- doc: Test outline for scRNA-seq-Preprocessing-TenX
+  job:
+    Homo_sapiens.GRCh37.75.gtf:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/Homo_sapiens.GRCh37.75.gtf
+      filetype: gtf
+    subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
+      filetype: fastqsanger.gz
+    subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
+      filetype: fastqsanger.gz
+    subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz
+      filetype: fastqsanger.gz
+    subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
+      filetype: fastqsanger.gz
+    3M-february-2018.txt.gz:
+      class: File
+      location: https://zenodo.org/api/files/ef2cd156-eff7-43b1-91cd-e86f91d5b315/3M-february-2018.txt.gz
+      filetype: txt
+  outputs:
+    barcodes_out:
+      asserts:
+        has_line:
+          line: "AAAGAACCAATGGCAG"
+    genes_out:
+      asserts:
+        has_text:
+          text: 'ENSG00000223972'
+

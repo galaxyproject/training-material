@@ -487,7 +487,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
    > > <solution-title></solution-title>
    > >
    > > 1. 119, as the number of lines
-   > > 2. Staphylococcus, with 99.04%!
+   > > 2. Staphylococcaceae, with 99.06%!
    > {: .solution}
    >
    {: .question}
