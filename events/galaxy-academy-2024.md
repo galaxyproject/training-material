@@ -27,6 +27,9 @@ mode: online
 
 contributions:
     organisers:
+        - teresa-m
+        - natalie-wa
+        - nakucher
         - erxleben
         - annasyme
         - nekrut
@@ -35,10 +38,7 @@ contributions:
         - GarethPrice-Aus
         - jdavcs
         - mschatz
-        - natalie-wa
-        - nakucher
         - shiltemann
-        - teresa-m
     instructors:
         - ahmedhamidawan
         - erxleben

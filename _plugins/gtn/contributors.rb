@@ -91,9 +91,26 @@ module Gtn
     # +data+:: +Hash+ of the YAML frontmatter from a material
     # Returns:
     # +Array+ of contributor IDs
-    def self.get_funders(data)
+    def self.get_funders(site, data)
       if data.key?('contributions') && data['contributions'].key?('funding')
-        data['contributions']['funding']
+        # The ones specifically in the Grants table
+        data['contributions']['funding'].reject{ |f| site.data['funders'].key?(f) }
+      else
+        []
+      end
+    end
+
+    ##
+    # Get the funders of a material.
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of grant IDs
+    def self.get_grants(site, data)
+      if data.key?('contributions') && data['contributions'].key?('funding')
+        # The ones specifically in the Grants table
+        data['contributions']['funding'].select{ |f| site.data['funders'].key?(f) }
       else
         []
       end
