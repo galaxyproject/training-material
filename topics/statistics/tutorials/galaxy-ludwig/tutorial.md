@@ -61,7 +61,7 @@ To accomplish this, three steps are needed: (i) upload Ludwig files and image fi
 # Files Format
 Before starting our hands-on, here is a brief explanation of the three files generated for the Ludwig Experiment tool.
 
-## Image_Files.zip 
+## MNIST Train/Test Image Files
 
 Since our model will learn directly from the PNG files containing the handwritten numbers, we need to upload these files as well. The images are stored in two main folders: one for training and one for testing. Another folder, named after the figure label, is used to store the figures (Figure 2).
 
@@ -69,7 +69,7 @@ Notice that we are going to work with compressed file (.zip), Galaxy-Ludwig know
 
 ![folder tree related to the hand-written digits picture](../../images/galaxy-ludwig/explain_images_file.png "File tree containing the images files used to training and testing the model")
 
-## MNIST_dataset.csv
+## MNIST Tabular Structure 
 
 The MNIST dataset consists of images and their corresponding labels. For the purpose of this tutorial, mnist_dataset.csv file is created and contains three columns: image_path, label and, split.
 
@@ -77,22 +77,31 @@ Briefly, the image_path column provides the file paths to the images that will b
 
 ![Dataset.csv file format snapshot](../../images/galaxy-ludwig/explain_dataset_format.png "Dataset.csv file format snapshot. features in order: file_path, label, split."){: width="50%" height="10%"}
  
-## Config.yaml
+## Configuring Convolutional Neural Networks (CNNs) 
 
 The config.yaml file is crucial as it defines the entire structure of your machine learning experiment. This configuration file tells Ludwig how to process your data, what model to use, how to train it, and what outputs to generate.
 
-The rationale on how this file was constructed for this dataset is the following:
+The rationale behind the construction of this configuration file for the dataset is as follows:
+
 i) The model takes images as input and uses a stacked convolutional neural network (CNN) to extract features.
-ii) It consists of two convolutional layers followed by a fully connected layer, with dropout applied to both the second convolutional layer and the fully connected layer to reduce overfitting. 
-iii) The split configuration is used to divide the dataset based on the 'split' column rather than using a random split (which is the default). In this configuration, rows labeled with '0' are included in the training set, while rows labeled with '2' are included in the testing set. If a validation category is needed, rows are labeled with '1'. 
-iv) The model is trained to classify images into categories (e.g., recognizing digits), and it will train for 5 epochs.
+ii) It consists of two convolutional layers followed by a fully connected layer, with dropout applied to the second convolutional layer. The max pooling settings are defined by pool_size = 2 and pool_stride = 2, which are important for reducing the spatial dimensions of the input volume.
+iii) The fully connected layer helps to reduce overfitting.
+iv) The split configuration is used to divide the dataset based on the 'split' column rather than using a random split (which is the default). In this configuration, rows labeled with '0' are included in the training set, while rows labeled with '2' are included in the testing set. If a validation category is needed, rows are labeled with '1'.
+v) The model is trained to classify images into categories (e.g., recognizing digits) and will train for 5 epochs.
 
 ![Config.yaml file snapshot](../../images/galaxy-ludwig/explain_config.png "Config.yaml file snapshot."){: width="50%" height="5%"}
 
 
 # Galaxy-Ludwig Tool
 
-Ludwig simplifies the complexities of machine learning by automating essential steps such as data preprocessing, model architecture selection, hyperparameter tuning, and device management. This streamlined approach is particularly beneficial for Galaxy users who are more interested in addressing their scientific questions than in navigating the intricacies of machine learning workflows.
+Ludwig simplifies the complexities of machine learning by automating essential steps such as data preprocessing, model architecture selection, hyperparameter tuning, and device management. To properly adapt the configuration for different datasets, users should consider the following parameters:
+
+- Input Features: Ensure the type reflects the nature of the data.
+- Encoder: Depending on the input type, this may need to be changed. For example, for image data, consider varying num_filters and filter_size. For text data, you might switch to type: rnn or type: transformer.
+- Output Features: Adjust the type according to the target variable. For instance, if it's a regression task, use type: numerical instead of category.
+- Trainer Parameters: Users can adjust epochs, batch_size, and learning_rate based on the dataset size, complexity, data behavior, and available computational resources.
+
+These are just a few of the many options that Ludwig provides out-of-the-box, allowing users to easily set and modify parameters. This is particularly beneficial for Galaxy users who are more interested in addressing their scientific questions than in navigating the intricacies of machine learning workflows.
 
 ## Prepare environment and get the data 
 
@@ -211,9 +220,11 @@ In the graph (Figure 9), there is a training curve. When training a model, you'l
 Based on the training curve (blue line), we can draw the following conclusions:
 
 - CONSISTENT IMPROVEMENT:
-    Training loss consistently decrease over the five epochs. This indicates that the model is effectively learning and improving its performance on the dataset.
+    Training loss consistently decreases over the five epochs. This indicates that the model is effectively learning and improving its performance on the dataset.
 - APPROACHING CONVERGENCE:
     By Epoch 5, the training loss has reduced to less than 0.5. The gradual reduction in losses suggests that the model is approaching convergence, where further training may yield diminishing returns in terms of performance improvement.
+- ADDITIONAL INFORMATION: 
+    Looking at the test statistics results {"combined": {"loss": 0.03800534829497337}}, the combined loss indicates that the model is generalizing well to unseen data after training.
 
 ## Accuracy
 
@@ -232,6 +243,8 @@ Based on the training curve (blue line), we can draw the following conclusions:
     The model starts with a relatively high training accuracy of >0.8.
 - CONSISTENT IMPROVEMENT:
     Training accuracies increase steadily across the epochs. This consistent upward trend indicates that the model is learning effectively and becoming more accurate in its predictions with each epoch.
+- ADDITIONAL INFORMATION:
+   The test statistics show an accuracy of {"label": {"accuracy": 0.9885247349739075}} for the model when applied to unseen images. This high accuracy is crucial because it indicates that the model can effectively classify new data that it has not encountered during training. Thus, validates the model's ability to generalize beyond the training data, ensuring that it can make reliable predictions in real-world scenarios. 
 
 ## Hits at K
 
