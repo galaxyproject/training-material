@@ -1,7 +1,7 @@
 ---
 layout: event-external
 google_form_id: 1728584662
-title: "\U0001F596\U0001F3FDSPOC Write-a-thon"
+title: "🖖🏾 SPOC Write-a-thon"
 description: Single-cell & sPatial Omics Community (SPOC) contributors in Galaxy will
   get together online or asynchronously to draft an updates paper on all things SPOC.
   For those unable to make the event live, please add your thoughts and authoring
