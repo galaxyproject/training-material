@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 title: One protein along the UniProt page
 level: Introductory
-draft: true
 zenodo_link: ''
 questions:
 - How can you search for proteins using text, gene, or protein names?
