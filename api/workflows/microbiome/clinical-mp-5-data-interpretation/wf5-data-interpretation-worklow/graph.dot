@@ -1,0 +1,27 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nQuantified Peptides"]
+  1[color=lightblue,label="ℹ️ Input Dataset\nMaxQuant Protein Groups"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nMaxQuant Evidence"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nAnnotation.txt"]
+  4[color=lightblue,label="ℹ️ Input Dataset\nComparison Matrix"]
+  5[label="Unipept"]
+  0 -> 5 [label="output"]
+  6[label="Microbial Proteins"]
+  1 -> 6 [label="output"]
+  7[label="Select"]
+  1 -> 7 [label="output"]
+  8[label="MSstatsTMT"]
+  4 -> 8 [label="output"]
+  3 -> 8 [label="output"]
+  2 -> 8 [label="output"]
+  6 -> 8 [label="out_file1"]
+  9[label="HUMAN-Proteins"]
+  7 -> 9 [label="out_file1"]
+  10[label="MSstatsTMT"]
+  4 -> 10 [label="output"]
+  3 -> 10 [label="output"]
+  2 -> 10 [label="output"]
+  9 -> 10 [label="out_file1"]
+}

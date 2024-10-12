@@ -1,0 +1,1024 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "WF3- Peptide verification/validaiton workflow",
+  "comments": [
+
+  ],
+  "format-version": "0.1",
+  "license": "CC-BY-4.0",
+  "name": "WF3_VERIFICATION_WORKFLOW",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+      "errors": null,
+      "id": 0,
+      "input_connections": {
+      },
+      "inputs": [
+
+      ],
+      "label": "Human UniProt+Isoforms FASTA",
+      "name": "Protein Database Downloader",
+      "outputs": [
+        {
+          "name": "output_database",
+          "type": "fasta"
+        }
+      ],
+      "position": {
+        "left": 0,
+        "top": 0
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput_database": {
+          "action_arguments": {
+            "newname": "Human UniProt+Isoforms FASTA"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_database"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+      "tool_shed_repository": {
+        "changeset_revision": "983bf725dfc2",
+        "name": "dbbuilder",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"data\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"source\": {\"from\": \"uniprot\", \"__current_case__\": 0, \"taxon\": \"9606\", \"taxon_id\": null, \"reviewed\": \"\", \"set\": \"keyword:KW-1185\", \"include_isoform\": true}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.3.4",
+      "type": "tool",
+      "uuid": "ff0bbbc9-35b4-44a6-b6bb-a1969ca01eb6",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "Human UniProt+Isoforms FASTA",
+          "output_name": "output_database",
+          "uuid": "4bdae9fb-eb48-4821-a806-e7dd3a8c7101"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+      },
+      "inputs": [
+
+      ],
+      "label": "cRAP",
+      "name": "Protein Database Downloader",
+      "outputs": [
+        {
+          "name": "output_database",
+          "type": "fasta"
+        }
+      ],
+      "position": {
+        "left": 20.775440205938253,
+        "top": 196.89138890513698
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput_database": {
+          "action_arguments": {
+            "newname": "cRAP"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_database"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+      "tool_shed_repository": {
+        "changeset_revision": "983bf725dfc2",
+        "name": "dbbuilder",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"data\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"source\": {\"from\": \"cRAP\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.3.4",
+      "type": "tool",
+      "uuid": "fa25fdbf-2cec-48fc-94f3-7c47888753b0",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "cRAP",
+          "output_name": "output_database",
+          "uuid": "13ddaf34-d346-4cc4-b5b6-fee2b5e0c1aa"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input MGFs Dataset Collection"
+        }
+      ],
+      "label": "Input MGFs Dataset Collection",
+      "name": "Input dataset collection",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 26.467106653090468,
+        "top": 441.64657624309564
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "4c4f20b4-3fa6-48a2-b4b0-6480a0dd230a",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "SGPS_peptide-report"
+        }
+      ],
+      "label": "SGPS_peptide-report",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 49.219598040314054,
+        "top": 775.0615167366277
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "2d7b777c-8bb9-4de8-af72-4cae64cd5eaf",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "Distinct Peptides for PepQuery"
+        }
+      ],
+      "label": "Distinct Peptides for PepQuery",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 974.964669791108,
+        "top": 210.36937340005647
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "dbc1b4b1-bb63-4c13-8adb-d9a0febc8e17",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "MaxQuant-peptide-report"
+        }
+      ],
+      "label": "MaxQuant-peptide-report",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 29.12351833088178,
+        "top": 1007.203580787368
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "2c07aebc-8b9e-4f4e-9020-9a50664ac648",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "batchmode|input_fastas_0|input_fasta": {
+          "id": 0,
+          "output_name": "output_database"
+        },
+        "batchmode|input_fastas_1|input_fasta": {
+          "id": 1,
+          "output_name": "output_database"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Human UniProt+Isoforms+cRAP FASTA",
+      "name": "FASTA Merge Files and Filter Unique Sequences",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "fasta"
+        }
+      ],
+      "position": {
+        "left": 497.09213191562515,
+        "top": 177.90819833483664
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Human UniProt+Isoforms+cRAP FASTA"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f546e7278f04",
+        "name": "fasta_merge_files_and_filter_unique_sequences",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"fasta\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"accession_parser\": \"^>([^ ]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}]}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"uniqueness_criterion\": \"sequence\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.2.0",
+      "type": "tool",
+      "uuid": "67f1d2d4-d347-49ff-a941-885987a8254e",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "Human UniProt+Isoforms+cRAP FASTA",
+          "output_name": "output",
+          "uuid": "62c376eb-85a3-4976-8024-bd72ac528af3"
+        }
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "Cut1",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input": {
+          "id": 3,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Cut",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 436.9729921443104,
+        "top": 787.605861962579
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Cut1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c6,c2\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "1097d1b3-91d1-4718-a301-f1d6120c5d33",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "Cut1",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "input": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Cut",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 448.2414801728456,
+        "top": 1099.886206236094
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Cut1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c1,c35\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "8b5fcf37-088c-465e-80ce-91736606689f",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "req_inputs|db_type|db_file": {
+          "id": 6,
+          "output_name": "output"
+        },
+        "req_inputs|input_type|multiple|input": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "req_inputs|ms_dataset|spectrum_files": {
+          "id": 2,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "PepQuery2",
+      "outputs": [
+        {
+          "name": "log_txt",
+          "type": "txt"
+        },
+        {
+          "name": "psm_rank_txt",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1200.1863890085322,
+        "top": 479.9317148105498
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pepquery2/pepquery2/2.0.2+galaxy0",
+      "tool_shed_repository": {
+        "changeset_revision": "a07976bbc4d9",
+        "name": "pepquery2",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"digestion\": {\"enzyme\": \"1\", \"max_missed_cleavages\": \"2\"}, \"fast\": false, \"modifications\": {\"fixed_mod\": [\"1\", \"13\", \"14\"], \"var_mod\": [\"2\"], \"max_mods\": null, \"unmodified\": true, \"aa\": true}, \"ms_params\": {\"tolerance_params\": {\"precursor_tolerance\": \"10\", \"precursor_unit\": \"ppm\", \"tolerance\": \"0.6\"}, \"search\": {\"frag_method\": \"1\", \"scoring_method\": \"1\", \"extra_score_validation\": false, \"min_charge\": \"2\", \"max_charge\": \"6\", \"min_peaks\": null, \"isotope_error\": \"\", \"min_score\": null, \"min_length\": null, \"max_length\": null, \"num_random_peptides\": null}}, \"outputs_selected\": \"psm_rank.txt\", \"parameter_set\": \"\", \"req_inputs\": {\"input_type\": {\"input_type_selector\": \"peptide\", \"__current_case__\": 0, \"multiple\": {\"peptide_input_selector\": \"multiple\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}}}, \"db_type\": {\"db_type_selector\": \"history\", \"__current_case__\": 0, \"db_file\": {\"__class__\": \"ConnectedValue\"}}, \"ms_dataset\": {\"ms_dataset_type\": \"history\", \"__current_case__\": 0, \"spectrum_files\": {\"__class__\": \"ConnectedValue\"}}, \"indexType\": \"2\"}, \"validation\": {\"task_type\": \"novel\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.0.2+galaxy0",
+      "type": "tool",
+      "uuid": "8496d1e6-ea76-4856-8066-c5e9a80e3026",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "input": {
+          "id": 7,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 801.3730129932684,
+        "top": 779.6493516759031
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "836aac8c-c489-4dc3-bd8d-4b607ce5c64a",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "input": {
+          "id": 8,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 851.7817140618107,
+        "top": 920.7620488798409
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "776c1a84-741b-4f02-bb15-3ad0868a6d47",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "input_list": {
+          "id": 9,
+          "output_name": "psm_rank_txt"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Collapse Collection",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1488.346878408912,
+        "top": 364.29121937931995
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "90981f86000f",
+        "name": "collapse_collections",
+        "owner": "nml",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"ConnectedValue\"}, \"one_header\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "5.1.0",
+      "type": "tool",
+      "uuid": "ebeef173-74c7-412c-bf48-a40fa7db3a97",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "inputs": [
+          {
+            "id": 10,
+            "output_name": "out_file1"
+          },
+          {
+            "id": 11,
+            "output_name": "out_file1"
+          }
+        ]
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Concatenate datasets",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1271.4098936773632,
+        "top": 1059.406265472264
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+      "tool_shed_repository": {
+        "changeset_revision": "d698c222f354",
+        "name": "text_processing",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "0.1.1",
+      "type": "tool",
+      "uuid": "fa9f7b28-212f-43db-9186-96282a9ed127",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "Filter1",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "input": {
+          "id": 12,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Filter",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1559.7817684575534,
+        "top": 623.6693261138875
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Filter1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c20=='Yes'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.1.1",
+      "type": "tool",
+      "uuid": "8ced4ef8-ca8c-4d73-8566-b4b7b7221f25",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "input": {
+          "id": 14,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1779.7816859216491,
+        "top": 624.5489443634883
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "257db293-a40f-4852-89d5-8e7407c8fe6d",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "Cut1",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "input": {
+          "id": 15,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Cut",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 1999.7817115852936,
+        "top": 625.4286563925251
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Cut1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.2",
+      "type": "tool",
+      "uuid": "38a4cb9a-08c5-4b17-b193-193f9dd082d6",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+      "errors": null,
+      "id": 17,
+      "input_connections": {
+        "tables_0|table": {
+          "id": 16,
+          "output_name": "out_file1"
+        },
+        "tables_1|table": {
+          "id": 13,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Peptide and Protein from Peptide reports",
+      "name": "Query Tabular",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 2219.7817115852936,
+        "top": 625.4286563925251
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Peptide and Protein from Peptide reports"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+      "tool_shed_repository": {
+        "changeset_revision": "cf34c344508d",
+        "name": "query_tabular",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"add_to_database\": {\"withdb\": null}, \"addqueries\": {\"queries\": []}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"\"}, \"save_db\": false, \"sqlquery\": \"select pep.mpep, prot.prot\\nFROM pep\\nINNER JOIN  prot on pep.mpep=prot.pep \", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"pep\", \"column_names_from_first_line\": false, \"col_names\": \"mpep\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"prot\", \"column_names_from_first_line\": false, \"col_names\": \"pep,prot\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "3.3.0",
+      "type": "tool",
+      "uuid": "93abe6e7-0034-460f-b517-418c4ed9d43a",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "Peptide and Protein from Peptide reports",
+          "output_name": "output",
+          "uuid": "bc4e33da-4064-4b78-bb15-5732b08b9316"
+        }
+      ]
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "Remove beginning1",
+      "errors": null,
+      "id": 18,
+      "input_connections": {
+        "input": {
+          "id": 17,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Remove beginning",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 2439.7817115852936,
+        "top": 625.4286563925251
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Remove beginning1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "6f1b6a4f-95a0-43c0-9368-fcc5444179f0",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "19": {
+      "annotation": "",
+      "content_id": "Grouping1",
+      "errors": null,
+      "id": 19,
+      "input_connections": {
+        "input1": {
+          "id": 18,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Group",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 2659.7818389962604,
+        "top": 624.5489443634883
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Grouping1",
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [{\"__index__\": 0, \"optype\": \"cat_uniq\", \"opcol\": \"2\", \"opround\": \"no\", \"opdefault\": null}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.1.4",
+      "type": "tool",
+      "uuid": "2f530aac-e850-4196-96a1-6b320381281e",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "20": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+      "errors": null,
+      "id": 20,
+      "input_connections": {
+        "tables_0|table": {
+          "id": 19,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Uniprot-ID from verified Peptides",
+      "name": "Query Tabular",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 2545.114966014936,
+        "top": 878.0953618681222
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Uniprot-ID from verified Peptides"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+      "tool_shed_repository": {
+        "changeset_revision": "cf34c344508d",
+        "name": "query_tabular",
+        "owner": "iuc",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"tabular\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"add_to_database\": {\"withdb\": null}, \"addqueries\": {\"queries\": []}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": false, \"sqlquery\": \"SELECT distinct(prot) AS Accession \\nfrom t1\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"normalize\", \"__current_case__\": 12, \"columns\": \"2\", \"separator\": \";\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"2\", \"regex_pattern\": \"(tr|sp)[|]\", \"regex_replace\": \"\", \"add\": null}}, {\"__index__\": 2, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"2\", \"regex_pattern\": \"[ ]+\", \"regex_replace\": \"\", \"add\": null}}, {\"__index__\": 3, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"2\", \"regex_pattern\": \"[|].*$\", \"regex_replace\": \"\", \"add\": null}}, {\"__index__\": 4, \"filter\": {\"filter_type\": \"normalize\", \"__current_case__\": 12, \"columns\": \"2\", \"separator\": \",\"}}]}, \"tbl_opts\": {\"table_name\": \"t1\", \"column_names_from_first_line\": true, \"col_names\": \"pep,prot\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "3.3.0",
+      "type": "tool",
+      "uuid": "fcf0a38b-8b4c-4b11-8152-ef3f5375b9e6",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "Uniprot-ID from verified Peptides",
+          "output_name": "output",
+          "uuid": "cd6c81d8-1f44-4129-b505-2ee4dde10cd2"
+        }
+      ]
+    },
+    "21": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/uniprotxml_downloader/uniprotxml_downloader/2.4.0",
+      "errors": null,
+      "id": 21,
+      "input_connections": {
+        "input_method|id_file": {
+          "id": 20,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool UniProt",
+          "name": "input_method"
+        }
+      ],
+      "label": null,
+      "name": "UniProt",
+      "outputs": [
+        {
+          "name": "proteome",
+          "type": "uniprotxml"
+        }
+      ],
+      "position": {
+        "left": 2657.781714061811,
+        "top": 1098.0954229032784
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/uniprotxml_downloader/uniprotxml_downloader/2.4.0",
+      "tool_shed_repository": {
+        "changeset_revision": "a371252a2cf6",
+        "name": "uniprotxml_downloader",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"input\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"format\": \"fasta\", \"input_method\": {\"input_choice\": \"history\", \"__current_case__\": 2, \"id_file\": {\"__class__\": \"ConnectedValue\"}, \"column\": \"1\", \"field\": \"accession\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.4.0",
+      "type": "tool",
+      "uuid": "d646fb57-8674-4ade-8707-e3ff17a1cf26",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "22": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+      "errors": null,
+      "id": 22,
+      "input_connections": {
+        "batchmode|input_fastas_0|input_fasta": {
+          "id": 0,
+          "output_name": "output_database"
+        },
+        "batchmode|input_fastas_1|input_fasta": {
+          "id": 1,
+          "output_name": "output_database"
+        },
+        "batchmode|input_fastas_2|input_fasta": {
+          "id": 21,
+          "output_name": "proteome"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Quantitation Database for MaxQuant",
+      "name": "FASTA Merge Files and Filter Unique Sequences",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "fasta"
+        }
+      ],
+      "position": {
+        "left": 3070.223999018992,
+        "top": 1289.3686346167783
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput": {
+          "action_arguments": {
+            "newname": "Quantitation Database for MaxQuant"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f546e7278f04",
+        "name": "fasta_merge_files_and_filter_unique_sequences",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__input_ext\": \"fasta\", \"__workflow_invocation_uuid__\": \"08a702aa736d11ee91a5001e67d2ec02\", \"accession_parser\": \"^>([^ ]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 2, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}]}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"uniqueness_criterion\": \"sequence\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.2.0",
+      "type": "tool",
+      "uuid": "a6060517-ee4f-4196-991f-6adf06e192c4",
+      "when": null,
+      "workflow_outputs": [
+        {
+          "label": "Quantitation Database for MaxQuant",
+          "output_name": "output",
+          "uuid": "a52b5136-db74-496f-9b66-ec1064f2301d"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "Name:clinicalmp",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "5294c9ec-1427-43f3-a4ba-400a3fb3be92",
+  "version": 2
+}

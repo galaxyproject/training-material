@@ -1,0 +1,23 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[color=lightblue,label="ℹ️ Input Dataset\nHUMAN SwissProt Protein Database"]
+  1[color=lightblue,label="ℹ️ Input Collection\nInput MGF files Dataset Collection"]
+  2[color=lightblue,label="ℹ️ Input Dataset\nSpecies_UniProt_FASTA"]
+  3[color=lightblue,label="ℹ️ Input Dataset\nContaminants cRAP Protein Database "]
+  4[label="Human UniProt Microbial Proteins cRAP for MetaNovo"]
+  0 -> 4 [label="output"]
+  2 -> 4 [label="output"]
+  3 -> 4 [label="output"]
+  k286f5bd4fb0d46498dacf191acc72722[color=lightseagreen,label="Output\nHuman UniProt Microbial Proteins cRAP for MetaNovo"]
+  4 -> k286f5bd4fb0d46498dacf191acc72722
+  5[label="MetaNovo"]
+  4 -> 5 [label="output"]
+  1 -> 5 [label="output"]
+  6[label="FASTA Merge Files and Filter Unique Sequences"]
+  0 -> 6 [label="output"]
+  5 -> 6 [label="output_fasta"]
+  3 -> 6 [label="output"]
+  kde57cd9dac0543979d44e65620913447[color=lightseagreen,label="Output\nHuman UniProt Microbial Proteins (from MetaNovo) and cRAP "]
+  6 -> kde57cd9dac0543979d44e65620913447
+}

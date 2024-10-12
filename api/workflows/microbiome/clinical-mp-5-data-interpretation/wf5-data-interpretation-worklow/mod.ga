@@ -1,0 +1,611 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "Interpreting MaxQuant data using MSstats involves applying a rigorous statistical framework to glean meaningful insights from quantitative proteomic datasets",
+  "comments": [
+
+  ],
+  "format-version": "0.1",
+  "license": "CC-BY-4.0",
+  "name": "WF5_Data_Interpretation_Worklow",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "Quantified Peptides"
+        }
+      ],
+      "label": "Quantified Peptides",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 189.871337890625,
+        "top": 0
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "cd669a99-182a-48db-a2c6-f8d24323e353",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "MaxQuant Protein Groups"
+        }
+      ],
+      "label": "MaxQuant Protein Groups",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 0,
+        "top": 289.65196228027344
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "2ecd2d61-5e94-4dbd-a0cc-c30c343b38b4",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "MaxQuant Evidence"
+        }
+      ],
+      "label": "MaxQuant Evidence",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 221.97045898437503,
+        "top": 568.7156335895269
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "11afae12-7cc4-402b-a0e3-cf6e53276674",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "Annotation.txt"
+        }
+      ],
+      "label": "Annotation.txt",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 293.3940978424075,
+        "top": 851.982536255788
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "4ed9cd3d-2473-4b69-8ac8-3404e5628f85",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "4": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 4,
+      "input_connections": {
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "Comparison Matrix"
+        }
+      ],
+      "label": "Comparison Matrix",
+      "name": "Input dataset",
+      "outputs": [
+
+      ],
+      "position": {
+        "left": 307.5031433105469,
+        "top": 973.9487421100347
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"tag\": null}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "6c47825f-c68c-4f0e-a99b-a961f27c7719",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.5.1",
+      "errors": null,
+      "id": 5,
+      "input_connections": {
+        "peptide_src|input_tsv": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Unipept",
+          "name": "peptide_src"
+        }
+      ],
+      "label": null,
+      "name": "Unipept",
+      "outputs": [
+        {
+          "name": "output_json",
+          "type": "d3_hierarchy"
+        },
+        {
+          "name": "output_ec_json",
+          "type": "d3_hierarchy"
+        },
+        {
+          "name": "output_tsv",
+          "type": "tabular"
+        },
+        {
+          "name": "output_ec_tsv",
+          "type": "tabular"
+        },
+        {
+          "name": "output_go_tsv",
+          "type": "tabular"
+        },
+        {
+          "name": "output_ipr_tsv",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 568.091064453125,
+        "top": 30.44720458984375
+      },
+      "post_job_actions": {
+        "RenameDatasetActionoutput_ec_json": {
+          "action_arguments": {
+            "newname": "MICROBIAL EC PROTEINS TREE"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_ec_json"
+        },
+        "RenameDatasetActionoutput_ec_tsv": {
+          "action_arguments": {
+            "newname": "Microbial EC Terms Output"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_ec_tsv"
+        },
+        "RenameDatasetActionoutput_go_tsv": {
+          "action_arguments": {
+            "newname": "Microbial GO Terms Output"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_go_tsv"
+        },
+        "RenameDatasetActionoutput_ipr_tsv": {
+          "action_arguments": {
+            "newname": "Microbial InterPro Outputs"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_ipr_tsv"
+        },
+        "RenameDatasetActionoutput_json": {
+          "action_arguments": {
+            "newname": "MICROBIAL TAXONOMY TREE"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "output_json"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.5.1",
+      "tool_shed_repository": {
+        "changeset_revision": "21a560af5913",
+        "name": "unipept",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"peptide_match\": \"full\", \"peptide_src\": {\"fmt\": \"tabular\", \"__current_case__\": 1, \"input_tsv\": {\"__class__\": \"ConnectedValue\"}, \"column\": \"c1\"}, \"selected_outputs\": [\"tsv\", \"json\", \"ipr_tsv\", \"go_tsv\", \"ec_tsv\", \"ec_json\"], \"strict\": false, \"unipept\": {\"api\": \"peptinfo\", \"__current_case__\": 7, \"equate_il\": true, \"extra\": true, \"domains\": false, \"names\": true, \"allfields\": false}, \"unmatched_aa\": \"default\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "4.5.1",
+      "type": "tool",
+      "uuid": "f0385dbb-0248-4c41-a3be-29915ec0ec2b",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "Grep1",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "input": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "Microbial Proteins",
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 302.63226318359375,
+        "top": 200.82827758789062
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Microbial-Protein"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Grep1",
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(HUMAN)|(REV)|(CON)|(con)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.4",
+      "type": "tool",
+      "uuid": "1b00f695-2038-46be-891f-dcc645c6c768",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "Grep1",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "input": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": null,
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 211.46368408203125,
+        "top": 407.2231903076172
+      },
+      "post_job_actions": {
+      },
+      "tool_id": "Grep1",
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"\", \"keep_header\": true, \"pattern\": \"(HUMAN)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.4",
+      "type": "tool",
+      "uuid": "b7d94fff-d2f7-4678-90ef-91730e0b7fb6",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "group|use_comp_matrix|comparison_matrix": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "input|annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "input|evidence": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "input|proteinGroups": {
+          "id": 6,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        },
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        },
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "MSstatsTMT",
+      "outputs": [
+        {
+          "name": "out_msstatstmt_sum_log",
+          "type": "txt"
+        },
+        {
+          "name": "out_msstatstmt_sum_ms",
+          "type": "txt"
+        },
+        {
+          "name": "out_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "out_group_comp",
+          "type": "tabular"
+        },
+        {
+          "name": "out_group_volcano_plot",
+          "type": "pdf"
+        },
+        {
+          "name": "out_group_comp_plot",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 945.7402954101562,
+        "top": 341.3545667146792
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_group_comp_plot": {
+          "action_arguments": {
+            "newname": "MICROBIAL PROTEINS COMPARISON"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_group_comp_plot"
+        },
+        "RenameDatasetActionout_group_volcano_plot": {
+          "action_arguments": {
+            "newname": "MICROBIAL PROTEINS VOLCANO PLOT"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_group_volcano_plot"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "bd1535813cfe",
+        "name": "msstatstmt",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"group\": {\"group_comparison\": \"true\", \"__current_case__\": 1, \"use_comp_matrix\": {\"select\": \"true\", \"__current_case__\": 1, \"comparison_matrix\": {\"__class__\": \"ConnectedValue\"}}, \"moderated\": false, \"adj_method\": \"none\", \"remove_norm_channel\": true, \"remove_empty_channel\": true, \"selected_group_outputs\": [\"comparison_result\", \"VolcanoPlot\", \"ComparisonPlot\"], \"comparison_plots_opt\": {\"sig\": \"0.05\", \"FCcutoff\": null, \"logBase_pvalue\": \"10\", \"ylimUp\": null, \"ylimDown\": null, \"xlimUp\": null, \"axis_size\": \"10\", \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"dot_size\": \"3\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"ProteinName\": true, \"colorkey\": true, \"numProtein\": \"100\", \"clustering\": \"protein\", \"width\": \"8\", \"height\": \"5\", \"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"which_Comparison\": {\"select\": \"all\", \"__current_case__\": 0}}}, \"input\": {\"input_src\": \"MaxQuant\", \"__current_case__\": 1, \"evidence\": {\"__class__\": \"ConnectedValue\"}, \"proteinGroups\": {\"__class__\": \"ConnectedValue\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"proteinID\": \"Proteins\", \"input_options\": {\"rmProt_Onlyidentifiedbysite\": false, \"useUniquePeptide\": true, \"rmPSM_withMissing_withinRun\": false, \"rmPSM_withfewMea_withinRun\": true, \"rmProtein_with1Feature\": false, \"summaryforMultipleRows\": \"sum\"}}, \"out_plots_opt\": {\"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"width\": \"10\", \"height\": \"10\", \"adv\": {\"ylimUp\": false, \"ylimDown\": false, \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"dot_size_profile\": \"2\", \"ncol_guide\": \"5\", \"originalPlot\": true, \"summaryPlot\": true}}, \"proteinSummarization\": {\"method\": \"msstats\", \"global_norm\": true, \"reference_norm\": true, \"remove_norm_channel\": true, \"remove_empty_channel\": true, \"MBimpute\": true, \"maxQuantileforCensored\": null}, \"selected_outputs\": [\"msstatstmt_sum_log\", \"msstatstmt_sum_ms\", \"quant\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.0.0+galaxy1",
+      "type": "tool",
+      "uuid": "e58242d9-4047-49fa-9cc5-b383c507a70f",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "Grep1",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "input": {
+          "id": 7,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+
+      ],
+      "label": "HUMAN-Proteins",
+      "name": "Select",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 484.9521484375,
+        "top": 376.8813934326172
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_file1": {
+          "action_arguments": {
+            "newname": "Human-Proteins"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_file1"
+        }
+      },
+      "tool_id": "Grep1",
+      "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(REV)|(con)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.4",
+      "type": "tool",
+      "uuid": "898a2203-5746-465a-aa31-95837eb97a04",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "group|use_comp_matrix|comparison_matrix": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "input|annotation": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "input|evidence": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "input|proteinGroups": {
+          "id": 9,
+          "output_name": "out_file1"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        },
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        },
+        {
+          "description": "runtime parameter for tool MSstatsTMT",
+          "name": "input"
+        }
+      ],
+      "label": null,
+      "name": "MSstatsTMT",
+      "outputs": [
+        {
+          "name": "out_msstatstmt_sum_log",
+          "type": "txt"
+        },
+        {
+          "name": "out_msstatstmt_sum_ms",
+          "type": "txt"
+        },
+        {
+          "name": "out_quant",
+          "type": "tabular"
+        },
+        {
+          "name": "out_group_comp",
+          "type": "tabular"
+        },
+        {
+          "name": "out_group_volcano_plot",
+          "type": "pdf"
+        },
+        {
+          "name": "out_group_comp_plot",
+          "type": "pdf"
+        }
+      ],
+      "position": {
+        "left": 955.3109130859375,
+        "top": 908.3436086325627
+      },
+      "post_job_actions": {
+        "RenameDatasetActionout_group_comp_plot": {
+          "action_arguments": {
+            "newname": "HUMAN PROTEINS COMPARISON"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_group_comp_plot"
+        },
+        "RenameDatasetActionout_group_volcano_plot": {
+          "action_arguments": {
+            "newname": "HUMAN PROTEINS VOLCANO PLOT"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "out_group_volcano_plot"
+        }
+      },
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msstatstmt/msstatstmt/2.0.0+galaxy1",
+      "tool_shed_repository": {
+        "changeset_revision": "bd1535813cfe",
+        "name": "msstatstmt",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"group\": {\"group_comparison\": \"true\", \"__current_case__\": 1, \"use_comp_matrix\": {\"select\": \"true\", \"__current_case__\": 1, \"comparison_matrix\": {\"__class__\": \"ConnectedValue\"}}, \"moderated\": false, \"adj_method\": \"none\", \"remove_norm_channel\": true, \"remove_empty_channel\": true, \"selected_group_outputs\": [\"comparison_result\", \"VolcanoPlot\", \"ComparisonPlot\"], \"comparison_plots_opt\": {\"sig\": \"0.05\", \"FCcutoff\": null, \"logBase_pvalue\": \"10\", \"ylimUp\": null, \"ylimDown\": null, \"xlimUp\": null, \"axis_size\": \"10\", \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"dot_size\": \"3\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"ProteinName\": true, \"colorkey\": true, \"numProtein\": \"100\", \"clustering\": \"protein\", \"width\": \"8\", \"height\": \"5\", \"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"which_Comparison\": {\"select\": \"all\", \"__current_case__\": 0}}}, \"input\": {\"input_src\": \"MaxQuant\", \"__current_case__\": 1, \"evidence\": {\"__class__\": \"ConnectedValue\"}, \"proteinGroups\": {\"__class__\": \"ConnectedValue\"}, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"proteinID\": \"Proteins\", \"input_options\": {\"rmProt_Onlyidentifiedbysite\": false, \"useUniquePeptide\": true, \"rmPSM_withMissing_withinRun\": false, \"rmPSM_withfewMea_withinRun\": true, \"rmProtein_with1Feature\": false, \"summaryforMultipleRows\": \"sum\"}}, \"out_plots_opt\": {\"which_Protein\": {\"select\": \"all\", \"__current_case__\": 0}, \"width\": \"10\", \"height\": \"10\", \"adv\": {\"ylimUp\": false, \"ylimDown\": false, \"x_axis_size\": \"10\", \"y_axis_size\": \"10\", \"text_size\": \"4\", \"text_angle\": \"90\", \"legend_size\": \"7\", \"dot_size_profile\": \"2\", \"ncol_guide\": \"5\", \"originalPlot\": true, \"summaryPlot\": true}}, \"proteinSummarization\": {\"method\": \"msstats\", \"global_norm\": true, \"reference_norm\": true, \"remove_norm_channel\": true, \"remove_empty_channel\": true, \"MBimpute\": true, \"maxQuantileforCensored\": null}, \"selected_outputs\": [\"msstatstmt_sum_log\", \"msstatstmt_sum_ms\", \"quant\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "2.0.0+galaxy1",
+      "type": "tool",
+      "uuid": "c1f844d8-487d-4060-beec-1c283abebd2a",
+      "when": null,
+      "workflow_outputs": [
+
+      ]
+    }
+  },
+  "tags": [
+    "Name:clinicalmp",
+    "GTN",
+    "Galaxy"
+  ],
+  "uuid": "3dd2b87a-5217-4c2b-acbc-e5835097f579",
+  "version": 1
+}
