@@ -26,10 +26,7 @@ contributions:
   funding: [eurosciencegateway, deNBI, nfdi4plants]
 
 location:
-  geo:
-    lat: 47.993460
-    lon: 7.845110
-  name: University Freiburg
+  name: University of Freiburg
   address: Werthmannstrasse 4
   postcode: 79104
   city: Freiburg
