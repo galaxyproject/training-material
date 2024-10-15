@@ -232,8 +232,11 @@ Now we need to separate the output tables for MuSiC and NNLS in the transposed c
 >    - *"Cut by"*: `fields`
 >       - *"Delimited by"*: `Tab`
 >       - *"Is there a header for the data's columns ?"*: `Yes`
->           - *"List of Fields"*: `- c4: NNLS Estimated Proportions of Cell Types
-- c5: NNLS Estimated Proportions of Cell Types`
+>           - *"List of Fields"*: 
+```
+c4: NNLS Estimated Proportions of Cell Types
+c5: NNLS Estimated Proportions of Cell Types
+```
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Results`
 >
@@ -247,8 +250,11 @@ Now we need to separate the output tables for MuSiC and NNLS in the transposed c
 >    - *"Cut by"*: `fields`
 >       - *"Delimited by"*: `Tab`
 >       - *"Is there a header for the data's columns ?"*: `Yes`
->           - *"List of Fields"*: `- c2: Music Estimated Proportions of Cell Types
-- c3: Music Estimated Proportions of Cell Types`
+>           - *"List of Fields"*: 
+```
+c2: Music Estimated Proportions of Cell Types
+c3: Music Estimated Proportions of Cell Types
+```
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `NNLS Results`
 >
