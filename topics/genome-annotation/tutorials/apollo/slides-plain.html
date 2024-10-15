@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c262e1981d2aedbf4218805eda17050c56b4e51e",
+		release: "galaxy-training-network@cfbc2ed4498b854c1946b47f5660f859664b0b58",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,12 +68,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Refining Genome Annotations with Apollo">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-08-08 16:03:22 +0000">
+<meta name="DC.date" content="2024-10-15 12:19:56 +0000">
 <meta name="DC.creator" content="Anthony Bretaudeau">
 <meta name="DC.creator" content="Helena Rasche">
 <meta name="DC.creator" content="Nathan Dunn">
-<meta name="DC.creator" content="Mateo Boudet">
-<meta name="DC.creator" content="Gallantries: Bridging Training Communities in Life Science, Environment and Health"><meta name="description" content="### Genome annotation  - Classifies and describes parts of the genome sequence  - Focusing on genes: their positions, names and functions  - Automatic methods to annotate a newly sequenced and assembled genome      - Prokaryotes: [Prokka]({% link topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.md %}), Augustus     - Eukaryotes: [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}), Braker2, Augustus  .image-50[![JBrowse screenshot showing several genes aligned along a genome](../../images/intro-structural-annotation.png)]  ???  - Annotating a genome means positioning features along the sequence of a genome. - Here we focus on genes. - We are interested in their positions, and functional annotation like their name of their function. - Many software tools and pipelines exist to automatically perform the annotation of a new genome sequence. - For example Prokka or Maker are widely used, and tutorials are available on the GTN to lear...">
+<meta name="DC.creator" content="Mateo Boudet"><meta name="description" content="### Genome annotation  - Classifies and describes parts of the genome sequence  - Focusing on genes: their positions, names and functions  - Automatic methods to annotate a newly sequenced and assembled genome      - Prokaryotes: [Prokka]({% link topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.md %}), Augustus     - Eukaryotes: [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}), Braker2, Augustus  .image-50[![JBrowse screenshot showing several genes aligned along a genome](../../images/intro-structural-annotation.png)]  ???  - Annotating a genome means positioning features along the sequence of a genome. - Here we focus on genes. - We are interested in their positions, and functional annotation like their name of their function. - Many software tools and pipelines exist to automatically perform the annotation of a new genome sequence. - For example Prokka or Maker are widely used, and tutorials are available on the GTN to lear...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Genome Annotation / Refining Genome Annotations with Apollo (prokaryotes) / Slides: Refining Genome Annotations with Apollo">
         <meta property="og:description" content="### Genome annotation  - Classifies and describes parts of the genome sequence  - Focusing on genes: their positions, names and functions  - Automatic methods to annotate a newly sequenced and assembled genome      - Prokaryotes: [Prokka]({% link topics/genome-annotation/tutorials/annotation-with-prokka/tutorial.md %}), Augustus     - Eukaryotes: [Maker]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}), Braker2, Augustus  .image-50[![JBrowse screenshot showing several genes aligned along a genome](../../images/intro-structural-annotation.png)]  ???  - Annotating a genome means positioning features along the sequence of a genome. - Here we focus on genes. - We are interested in their positions, and functional annotation like their name of their function. - Many software tools and pipelines exist to automatically perform the annotation of a new genome sequence. - For example Prokka or Maker are widely used, and tutorials are available on the GTN to lear...">
@@ -213,12 +212,40 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge contributor-abretaud"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/abretaud?s=36" alt="Anthony Bretaudeau avatar" width="36" class="avatar" />
     Anthony Bretaudeau</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
     Helena Rasche</a><a href="/training-material/hall-of-fame/nathandunn/" class="contributor-badge contributor-nathandunn"><img src="https://avatars.githubusercontent.com/nathandunn?s=36" alt="Nathan Dunn avatar" width="36" class="avatar" />
     Nathan Dunn</a><a href="/training-material/hall-of-fame/mboudet/" class="contributor-badge contributor-mboudet"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/mboudet?s=36" alt="Mateo Boudet avatar" width="36" class="avatar" />
-    Mateo Boudet</a><a href="/training-material/hall-of-fame/gallantries/" class="contributor-badge contributor-gallantries"><img src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Gallantries: Bridging Training Communities in Life Science, Environment and Health avatar" width="36" class="avatar" />
-    Gallantries</a>
+    Mateo Boudet</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
 	</div>
 
 </div>
@@ -268,7 +295,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 		
 
 		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Published:</strong> Jun 4, 2021 </div>
-		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Aug 8, 2024 </div>
+		<div><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last Updated:</strong> Oct 15, 2024 </div>
 
 	<hr />
 
@@ -528,6 +555,37 @@ Tutorial Content is licensed under
 
 
 
+<h2 id="funding">Funding</h2>
+<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/gallantries/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="https://gallantries.github.io/assets/images/gallantries-logo.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Gallantries</div>
+			<div class="description">
+			This project (2020-1-NL01-KA203-064717) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+
+
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+
+
+
         </div>
         <footer>
 	<hr />
@@ -587,7 +645,7 @@ Tutorial Content is licensed under
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c262e1981d2aedbf4218805eda17050c56b4e51e">c262e19</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cfbc2ed4498b854c1946b47f5660f859664b0b58">cfbc2ed</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

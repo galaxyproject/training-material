@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c262e1981d2aedbf4218805eda17050c56b4e51e",
+		release: "galaxy-training-network@cfbc2ed4498b854c1946b47f5660f859664b0b58",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Mass spectrometry: LC-MS preprocessing with XCMS">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-11-09 08:55:09 +0000">
+<meta name="DC.date" content="2024-10-15 12:19:56 +0000">
 <meta name="DC.creator" content="Mélanie Petera">
 <meta name="DC.creator" content="Jean-François Martin">
 <meta name="DC.creator" content="Gildas Le Corguillé">
@@ -184,7 +184,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2023-11-09 08:55:09 +0000",
+  "dateModified": "2024-10-15 12:19:56 +0000",
   "datePublished": "2020-02-04 08:04:53 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -213,7 +213,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "type": "project"
   },
   "funder": [
-
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    }
   ],
   "funding": [
 
@@ -246,7 +257,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Mass spectrometry: LC-MS preprocessing with XCMS",
   "url": "https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html",
-  "version": 13,
+  "version": 14,
   "timeRequired": "PT3H",
   "teaches": "- To comprehend the diversity of steps necessary to perform untargeted LC-MS metabolomic preprocessing.\n- To get familiar with the way to use XCMS-based Galaxy modules dedicated to LC-MS data preprocessing.\n- To evaluate the potential of a workflow approach when dealing with LC-MS preprocessing.",
   "keywords": [
@@ -470,6 +481,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         }
       ]
     }
+  ],
+  "contributor": [
+
   ],
   "about": [
     {
@@ -878,7 +892,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Feb 4, 2020 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 15, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -898,7 +912,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">5.0</a> (0 recent ratings, 1 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 13 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 14 </div>
 
     </blockquote>
     </section>
@@ -1196,7 +1210,7 @@ second column called <em>class</em> which is empty for the moment (only ‘.’ 
 
 </blockquote>
 
-<h4 id="prepare-your-samplemetadata-file">Prepare your sampleMetadata file</h4>
+<h3 id="prepare-your-samplemetadata-file">Prepare your sampleMetadata file</h3>
 
 <p>The sampleMetadata file is a tab-separated table, in text format. This table has to be filled by the user. You can use any
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
@@ -1520,12 +1534,12 @@ be uploaded into Galaxy.</p>
   <div class="box-title warning-title" id="warning-the-class-column"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning:  The class column</div>
 
   <p>Depending on further choices, the sampleMetadata file can be decisive.
-It can be used to colour some plots, but also for ion selection (see further in the tutorial). 
+It can be used to colour some plots, but also for ion selection (see further in the tutorial).
 Please note that the information needed for these steps <strong>should be given as the second column of the sampleMetadata file</strong>,
 the first one being the samples’ identifiers.</p>
 </blockquote>
 
-<h4 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h4>
+<h3 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h3>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-upload-the-samplemetada"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Upload the sampleMetada</div>
@@ -2382,7 +2396,7 @@ and create, run and share!</p>
                         function tutorial_finish() {
                           if(typeof plausible !== 'undefined'){
                             // Plausible may be undefined (script blocked)
-                            // or it may be defined, but opted-out (select box/DNT), 
+                            // or it may be defined, but opted-out (select box/DNT),
                             // which means `plausible()` will work but not send data, *nor* execute the callback.
                             plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
@@ -2501,9 +2515,35 @@ author = "Mélanie Petera and Jean-François Martin and Gildas Le Corguillé and
                    </p>
                 </blockquote>
 
+        
 		<h2 id="funding">Funding</h2>
 		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
                 
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
 
 
 <script>
@@ -2627,7 +2667,7 @@ tools:
         
 		</blockquote>
 
-		
+
 
 
 		
@@ -2705,7 +2745,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c262e1981d2aedbf4218805eda17050c56b4e51e">c262e19</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cfbc2ed4498b854c1946b47f5660f859664b0b58">cfbc2ed</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

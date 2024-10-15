@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c262e1981d2aedbf4218805eda17050c56b4e51e",
+		release: "galaxy-training-network@cfbc2ed4498b854c1946b47f5660f859664b0b58",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="FAIR Bioimage Metadata">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-15 12:20:17 +0000">
+<meta name="DC.date" content="2024-10-15 12:31:47 +0000">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Laura Cooper">
 <meta name="DC.creator" content="Katarzyna Kamieniecka">
@@ -184,8 +184,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-15 12:20:17 +0000",
-  "datePublished": "2024-10-15 12:20:17 +0000",
+  "dateModified": "2024-10-15 12:31:47 +0000",
+  "datePublished": "2024-10-15 12:31:47 +0000",
   "copyrightHolder": {
     "@type": "Organization",
     "http://purl.org/dc/terms/conformsTo": {
@@ -213,7 +213,18 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "type": "project"
   },
   "funder": [
-
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+      "name": "ELIXIR Europe",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://elixir-europe.org"
+    }
   ],
   "funding": [
     {
@@ -1445,7 +1456,7 @@ However, this raises further challenges. At the time of data acquisition, you pr
                         function tutorial_finish() {
                           if(typeof plausible !== 'undefined'){
                             // Plausible may be undefined (script blocked)
-                            // or it may be defined, but opted-out (select box/DNT), 
+                            // or it may be defined, but opted-out (select box/DNT),
                             // which means `plausible()` will work but not send data, *nor* execute the callback.
                             plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
@@ -1559,9 +1570,10 @@ author = "Julia Jakiela and Laura Cooper and Katarzyna Kamieniecka and Krzysztof
                    </p>
                 </blockquote>
 
+        
 		<h2 id="funding">Funding</h2>
 		<p>These individuals or organisations provided funding support for the development of this resource</p>
-                
+
                 
 <div class="d-flex flex-wrap">
 
@@ -1583,10 +1595,28 @@ author = "Julia Jakiela and Laura Cooper and Katarzyna Kamieniecka and Krzysztof
 		</div>
 	</a>
 
+	<a href="/training-material/hall-of-fame/elixir-europe/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/elixir.png" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">ELIXIR Europe</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
 </div>
 
 
-                
+        
 
 
 <script>
@@ -1725,7 +1755,7 @@ tools: []
         
 		</blockquote>
 
-		
+
 
 
 		
@@ -1803,7 +1833,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c262e1981d2aedbf4218805eda17050c56b4e51e">c262e19</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cfbc2ed4498b854c1946b47f5660f859664b0b58">cfbc2ed</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

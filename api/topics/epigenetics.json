@@ -324,7 +324,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nwt_H3K4me3_read2.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nwt_H3K4me3_read1.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nwt_input_rep1.bam\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nwt_H3K4me3_rep1.bam\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nwt_CTCF_rep1.bam\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nwt_H3K27me3_rep1.bam\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nwt_input_rep2.bam\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nwt_H3K4me3_rep2.bam\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nwt_CTCF_rep2.bam\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nwt_H3K27me3_rep2.bam\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"FastQC\"];\n  0 -->|output| 10;\n  892e22b2-3194-4076-af80-357530c17186[\"Output\\nwt_H3K4me3_rep1_read2_fastqc\"];\n  10 --> 892e22b2-3194-4076-af80-357530c17186;\n  style 892e22b2-3194-4076-af80-357530c17186 stroke:#2c3143,stroke-width:4px;\n  11[\"Trim Galore!\"];\n  1 -->|output| 11;\n  0 -->|output| 11;\n  a66a6432-690f-4e66-88c0-7eba0a014677[\"Output\\nwt_H3K4me3_rep1_trim_galore\"];\n  11 --> a66a6432-690f-4e66-88c0-7eba0a014677;\n  style a66a6432-690f-4e66-88c0-7eba0a014677 stroke:#2c3143,stroke-width:4px;\n  12[\"FastQC\"];\n  1 -->|output| 12;\n  da453096-fdd9-44ee-b83b-e4eca5c800f9[\"Output\\nwt_H3K4me3_rep1_read1_fastqc\"];\n  12 --> da453096-fdd9-44ee-b83b-e4eca5c800f9;\n  style da453096-fdd9-44ee-b83b-e4eca5c800f9 stroke:#2c3143,stroke-width:4px;\n  13[\"Samtools idxstats\"];\n  2 -->|output| 13;\n  14[\"bamCoverage\"];\n  2 -->|output| 14;\n  15[\"bamCoverage\"];\n  3 -->|output| 15;\n  16[\"bamCoverage\"];\n  3 -->|output| 16;\n  73e2f018-d9e4-4f74-8110-598b9b43a940[\"Output\\nwt_H3K4me3_rep1_bamcoverage\"];\n  16 --> 73e2f018-d9e4-4f74-8110-598b9b43a940;\n  style 73e2f018-d9e4-4f74-8110-598b9b43a940 stroke:#2c3143,stroke-width:4px;\n  17[\"Samtools idxstats\"];\n  3 -->|output| 17;\n  09449d6f-ce88-4448-9928-064c729c32d1[\"Output\\nwt_H3K4me3_rep1_idxstats\"];\n  17 --> 09449d6f-ce88-4448-9928-064c729c32d1;\n  style 09449d6f-ce88-4448-9928-064c729c32d1 stroke:#2c3143,stroke-width:4px;\n  18[\"plotFingerprint\"];\n  3 -->|output| 18;\n  2 -->|output| 18;\n  19[\"bamCompare\"];\n  3 -->|output| 19;\n  2 -->|output| 19;\n  20[\"MACS2 callpeak\"];\n  2 -->|output| 20;\n  3 -->|output| 20;\n  a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd[\"Output\\nwt_H3K4me3_input_rep1_macs2\"];\n  20 --> a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd;\n  style a36b5a6c-d992-4a2d-8fd8-95e8eac74cbd stroke:#2c3143,stroke-width:4px;\n  21[\"bamCompare\"];\n  3 -->|output| 21;\n  2 -->|output| 21;\n  5174d1aa-21f6-4187-8935-70ba8bd0f6e0[\"Output\\nwt_H3K4me3_input_rep1_bamcompare\"];\n  21 --> 5174d1aa-21f6-4187-8935-70ba8bd0f6e0;\n  style 5174d1aa-21f6-4187-8935-70ba8bd0f6e0 stroke:#2c3143,stroke-width:4px;\n  22[\"bamCompare\"];\n  4 -->|output| 22;\n  2 -->|output| 22;\n  23[\"MACS2 callpeak\"];\n  2 -->|output| 23;\n  4 -->|output| 23;\n  24[\"bamCompare\"];\n  4 -->|output| 24;\n  2 -->|output| 24;\n  25[\"bamCompare\"];\n  5 -->|output| 25;\n  2 -->|output| 25;\n  26[\"MACS2 callpeak\"];\n  2 -->|output| 26;\n  5 -->|output| 26;\n  27[\"bamCompare\"];\n  7 -->|output| 27;\n  6 -->|output| 27;\n  28[\"MACS2 callpeak\"];\n  6 -->|output| 28;\n  7 -->|output| 28;\n  29[\"bamCompare\"];\n  8 -->|output| 29;\n  6 -->|output| 29;\n  30[\"MACS2 callpeak\"];\n  6 -->|output| 30;\n  8 -->|output| 30;\n  31[\"multiBamSummary\"];\n  2 -->|output| 31;\n  3 -->|output| 31;\n  4 -->|output| 31;\n  5 -->|output| 31;\n  6 -->|output| 31;\n  7 -->|output| 31;\n  8 -->|output| 31;\n  9 -->|output| 31;\n  32[\"bamCompare\"];\n  9 -->|output| 32;\n  6 -->|output| 32;\n  33[\"MACS2 callpeak\"];\n  6 -->|output| 33;\n  9 -->|output| 33;\n  34[\"Bowtie2\"];\n  11 -->|trimmed_reads_pair1| 34;\n  11 -->|trimmed_reads_pair2| 34;\n  4c3ca5b1-2298-4bb4-8d2f-f62619f35158[\"Output\\nwt_H3K4me3_rep1_bowtie2\"];\n  34 --> 4c3ca5b1-2298-4bb4-8d2f-f62619f35158;\n  style 4c3ca5b1-2298-4bb4-8d2f-f62619f35158 stroke:#2c3143,stroke-width:4px;\n  35[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 35;\n  23 -->|output_narrowpeaks| 35;\n  36[\"plotCorrelation\"];\n  31 -->|outFile| 36;\n  37[\"Concatenate datasets\"];\n  20 -->|output_narrowpeaks| 37;\n  23 -->|output_narrowpeaks| 37;\n  26 -->|output_narrowpeaks| 37;\n  28 -->|output_narrowpeaks| 37;\n  30 -->|output_narrowpeaks| 37;\n  33 -->|output_narrowpeaks| 37;\n  38[\"bedtools SortBED\"];\n  35 -->|out_file1| 38;\n  39[\"bedtools SortBED\"];\n  37 -->|out_file1| 39;\n  40[\"bedtools MergeBED\"];\n  38 -->|output| 40;\n  931eb26a-0e5d-4556-b67f-1c37372aaf28[\"Output\\nwt_H3K4me3_CTCF_rep1_mergebed\"];\n  40 --> 931eb26a-0e5d-4556-b67f-1c37372aaf28;\n  style 931eb26a-0e5d-4556-b67f-1c37372aaf28 stroke:#2c3143,stroke-width:4px;\n  41[\"bedtools MergeBED\"];\n  39 -->|output| 41;\n  9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb[\"Output\\nwt_all_mergebed\"];\n  41 --> 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb;\n  style 9c4c5a1f-f2c1-4e83-b1f9-ff32ee48baeb stroke:#2c3143,stroke-width:4px;\n  42[\"computeMatrix\"];\n  19 -->|outFileName| 42;\n  22 -->|outFileName| 42;\n  40 -->|output| 42;\n  43[\"computeMatrix\"];\n  19 -->|outFileName| 43;\n  22 -->|outFileName| 43;\n  25 -->|outFileName| 43;\n  27 -->|outFileName| 43;\n  29 -->|outFileName| 43;\n  32 -->|outFileName| 43;\n  41 -->|output| 43;\n  44[\"plotHeatmap\"];\n  42 -->|outFileName| 44;\n  45[\"plotHeatmap\"];\n  43 -->|outFileName| 45;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_read2.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_read1.fastq.gz\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_input_rep1.bam\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_rep1.bam\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_CTCF_rep1.bam\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K27me3_rep1.bam\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_input_rep2.bam\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K4me3_rep2.bam\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_CTCF_rep2.bam\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nwt_H3K27me3_rep2.bam\"]\n  10[label=\"FastQC\"]\n  0 -> 10 [label=\"output\"]\n  k892e22b231944076af80357530c17186[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_read2_fastqc\"]\n  10 -> k892e22b231944076af80357530c17186\n  11[label=\"Trim Galore!\"]\n  1 -> 11 [label=\"output\"]\n  0 -> 11 [label=\"output\"]\n  ka66a6432690f4e6688c07eba0a014677[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_trim_galore\"]\n  11 -> ka66a6432690f4e6688c07eba0a014677\n  12[label=\"FastQC\"]\n  1 -> 12 [label=\"output\"]\n  kda453096fdd944eeb83be4eca5c800f9[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_read1_fastqc\"]\n  12 -> kda453096fdd944eeb83be4eca5c800f9\n  13[label=\"Samtools idxstats\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"bamCoverage\"]\n  2 -> 14 [label=\"output\"]\n  15[label=\"bamCoverage\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"bamCoverage\"]\n  3 -> 16 [label=\"output\"]\n  k73e2f018d9e44f748110598b9b43a940[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_bamcoverage\"]\n  16 -> k73e2f018d9e44f748110598b9b43a940\n  17[label=\"Samtools idxstats\"]\n  3 -> 17 [label=\"output\"]\n  k09449d6fce8844489928064c729c32d1[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_idxstats\"]\n  17 -> k09449d6fce8844489928064c729c32d1\n  18[label=\"plotFingerprint\"]\n  3 -> 18 [label=\"output\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"bamCompare\"]\n  3 -> 19 [label=\"output\"]\n  2 -> 19 [label=\"output\"]\n  20[label=\"MACS2 callpeak\"]\n  2 -> 20 [label=\"output\"]\n  3 -> 20 [label=\"output\"]\n  ka36b5a6cd9924a2d8fd895e8eac74cbd[color=lightseagreen,label=\"Output\\nwt_H3K4me3_input_rep1_macs2\"]\n  20 -> ka36b5a6cd9924a2d8fd895e8eac74cbd\n  21[label=\"bamCompare\"]\n  3 -> 21 [label=\"output\"]\n  2 -> 21 [label=\"output\"]\n  k5174d1aa21f64187893570ba8bd0f6e0[color=lightseagreen,label=\"Output\\nwt_H3K4me3_input_rep1_bamcompare\"]\n  21 -> k5174d1aa21f64187893570ba8bd0f6e0\n  22[label=\"bamCompare\"]\n  4 -> 22 [label=\"output\"]\n  2 -> 22 [label=\"output\"]\n  23[label=\"MACS2 callpeak\"]\n  2 -> 23 [label=\"output\"]\n  4 -> 23 [label=\"output\"]\n  24[label=\"bamCompare\"]\n  4 -> 24 [label=\"output\"]\n  2 -> 24 [label=\"output\"]\n  25[label=\"bamCompare\"]\n  5 -> 25 [label=\"output\"]\n  2 -> 25 [label=\"output\"]\n  26[label=\"MACS2 callpeak\"]\n  2 -> 26 [label=\"output\"]\n  5 -> 26 [label=\"output\"]\n  27[label=\"bamCompare\"]\n  7 -> 27 [label=\"output\"]\n  6 -> 27 [label=\"output\"]\n  28[label=\"MACS2 callpeak\"]\n  6 -> 28 [label=\"output\"]\n  7 -> 28 [label=\"output\"]\n  29[label=\"bamCompare\"]\n  8 -> 29 [label=\"output\"]\n  6 -> 29 [label=\"output\"]\n  30[label=\"MACS2 callpeak\"]\n  6 -> 30 [label=\"output\"]\n  8 -> 30 [label=\"output\"]\n  31[label=\"multiBamSummary\"]\n  2 -> 31 [label=\"output\"]\n  3 -> 31 [label=\"output\"]\n  4 -> 31 [label=\"output\"]\n  5 -> 31 [label=\"output\"]\n  6 -> 31 [label=\"output\"]\n  7 -> 31 [label=\"output\"]\n  8 -> 31 [label=\"output\"]\n  9 -> 31 [label=\"output\"]\n  32[label=\"bamCompare\"]\n  9 -> 32 [label=\"output\"]\n  6 -> 32 [label=\"output\"]\n  33[label=\"MACS2 callpeak\"]\n  6 -> 33 [label=\"output\"]\n  9 -> 33 [label=\"output\"]\n  34[label=\"Bowtie2\"]\n  11 -> 34 [label=\"trimmed_reads_pair1\"]\n  11 -> 34 [label=\"trimmed_reads_pair2\"]\n  k4c3ca5b122984bb48d2ff62619f35158[color=lightseagreen,label=\"Output\\nwt_H3K4me3_rep1_bowtie2\"]\n  34 -> k4c3ca5b122984bb48d2ff62619f35158\n  35[label=\"Concatenate datasets\"]\n  20 -> 35 [label=\"output_narrowpeaks\"]\n  23 -> 35 [label=\"output_narrowpeaks\"]\n  36[label=\"plotCorrelation\"]\n  31 -> 36 [label=\"outFile\"]\n  37[label=\"Concatenate datasets\"]\n  20 -> 37 [label=\"output_narrowpeaks\"]\n  23 -> 37 [label=\"output_narrowpeaks\"]\n  26 -> 37 [label=\"output_narrowpeaks\"]\n  28 -> 37 [label=\"output_narrowpeaks\"]\n  30 -> 37 [label=\"output_narrowpeaks\"]\n  33 -> 37 [label=\"output_narrowpeaks\"]\n  38[label=\"bedtools SortBED\"]\n  35 -> 38 [label=\"out_file1\"]\n  39[label=\"bedtools SortBED\"]\n  37 -> 39 [label=\"out_file1\"]\n  40[label=\"bedtools MergeBED\"]\n  38 -> 40 [label=\"output\"]\n  k931eb26a0e5d4556b67f1c37372aaf28[color=lightseagreen,label=\"Output\\nwt_H3K4me3_CTCF_rep1_mergebed\"]\n  40 -> k931eb26a0e5d4556b67f1c37372aaf28\n  41[label=\"bedtools MergeBED\"]\n  39 -> 41 [label=\"output\"]\n  k9c4c5a1ff2c14e83b1f9ff32ee48baeb[color=lightseagreen,label=\"Output\\nwt_all_mergebed\"]\n  41 -> k9c4c5a1ff2c14e83b1f9ff32ee48baeb\n  42[label=\"computeMatrix\"]\n  19 -> 42 [label=\"outFileName\"]\n  22 -> 42 [label=\"outFileName\"]\n  40 -> 42 [label=\"output\"]\n  43[label=\"computeMatrix\"]\n  19 -> 43 [label=\"outFileName\"]\n  22 -> 43 [label=\"outFileName\"]\n  25 -> 43 [label=\"outFileName\"]\n  27 -> 43 [label=\"outFileName\"]\n  29 -> 43 [label=\"outFileName\"]\n  32 -> 43 [label=\"outFileName\"]\n  41 -> 43 [label=\"output\"]\n  44[label=\"plotHeatmap\"]\n  42 -> 44 [label=\"outFileName\"]\n  45[label=\"plotHeatmap\"]\n  43 -> 45 [label=\"outFileName\"]\n}",
           "workflow_tools": [
@@ -1360,6 +1360,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -1501,6 +1506,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -1632,6 +1641,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -1775,11 +1788,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.5.1.1.0",
-                  "3.3.2.0.0",
-                  "3.0.2.0"
+                  "3.0.2.0",
+                  "3.3.2.0.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -1929,12 +1946,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "3.3.0.0.0",
+                  "3.3.2.0.0",
                   "2.5.1.1.0",
-                  "3.0.2.0",
-                  "3.3.2.0.0"
+                  "3.0.2.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2086,6 +2107,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -2244,12 +2269,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "2.5.7.0",
                   "3.0.2.0",
                   "2.5.1.1.0",
-                  "3.3.2.0.0"
+                  "3.3.2.0.0",
+                  "2.5.7.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2400,12 +2429,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "3.3.2.0.0",
-                  "3.0.2.0",
+                  "2.5.1.1.0",
                   "2.5.7.0",
-                  "2.5.1.1.0"
+                  "3.0.2.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2556,12 +2589,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "3.3.2.0.0",
+                  "3.0.2.0",
                   "2.5.7.0",
-                  "2.5.1.1.0",
-                  "3.0.2.0"
+                  "2.5.1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2712,11 +2749,15 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "3.3.2.0.1",
-                  "2.5.1.1.0",
-                  "3.0.2.0"
+                  "3.0.2.0",
+                  "2.5.1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2867,6 +2908,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.6.7+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -2951,8 +2996,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
-                  "2.4.5+galaxy1",
-                  "2.3.4.2"
+                  "2.3.4.2",
+                  "2.4.5+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -2964,10 +3009,10 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
+                  "2.3.4.3+galaxy0",
                   "2.2.6",
-                  "2.3.4.3",
                   "2.3.3.1",
-                  "2.3.4.3+galaxy0"
+                  "2.3.4.3"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -3026,16 +3071,20 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
                   "2.3.4.2",
-                  "2.3.4.3",
                   "2.3.4.3+galaxy0",
+                  "2.3.4.3",
                   "2.5.3+galaxy1",
+                  "2.3.2.2",
                   "0.2",
-                  "2.2.6.2",
-                  "2.3.2.2"
+                  "2.2.6.2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3186,10 +3235,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -3203,15 +3252,22 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
-                  "0.65",
                   "0.71",
+                  "0.65",
                   "0.67",
+                  "0.52",
                   "0.74+galaxy1",
-                  "0.68",
-                  "0.52"
+                  "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3222,11 +3278,11 @@
                   "0.69",
                   "0.65",
                   "0.67",
-                  "0.68",
                   "0.52",
+                  "0.68",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -3372,12 +3428,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.0",
                   "2.0.3",
-                  "2.0.1",
-                  "2.0.2"
+                  "2.0.2",
+                  "2.0.1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3525,6 +3585,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
@@ -3620,8 +3684,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
-                  "2.30.0"
+                  "2.30.0",
+                  "2.29.2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -3676,16 +3740,20 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.27.0.0",
                   "2.27.1",
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.31.1+galaxy0",
-                  "2.19.0",
                   "2.29.0",
-                  "2.24.0"
+                  "2.24.0",
+                  "2.19.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3707,8 +3775,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.19.0"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -3834,13 +3902,17 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.1.1.20160309.5",
-                  "2.1.1.20160309.6",
-                  "2.1.1.20160309.0",
+                  "2.1.1.20160309.4",
                   "2.1.1.20160309.3",
-                  "2.1.1.20160309.4"
+                  "2.1.1.20160309.0",
+                  "2.1.1.20160309.6"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -4274,7 +4346,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nbed file with genes\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nctcf peaks\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nATAC R2 read in fastq.gz format\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nATAC R1 read in fastq.gz format\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Filter\"];\n  1 -->|output| 4;\n  5[\"FastQC\"];\n  2 -->|output| 5;\n  6[\"ATAC remove nextera adapters with cutadapt\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  3 -->|output| 7;\n  8[\"bedtools Intersect intervals\"];\n  4 -->|out_file1| 8;\n  0 -->|output| 8;\n  9[\"FastQC\"];\n  6 -->|out2| 9;\n  10[\"Bowtie2\"];\n  6 -->|out1| 10;\n  6 -->|out2| 10;\n  11[\"FastQC\"];\n  6 -->|out1| 11;\n  12[\"Filter BAM ATAC\"];\n  10 -->|output| 12;\n  13[\"MarkDuplicates\"];\n  12 -->|out_file1| 13;\n  14[\"bedtools BAM to BED\"];\n  13 -->|outFile| 14;\n  15[\"Paired-end histogram\"];\n  13 -->|outFile| 15;\n  16[\"MACS2 callpeak\"];\n  14 -->|output| 16;\n  17[\"Wig/BedGraph-to-bigWig\"];\n  16 -->|output_treat_pileup| 17;\n  18[\"computeMatrix\"];\n  17 -->|out_file1| 18;\n  0 -->|output| 18;\n  19[\"pyGenomeTracks\"];\n  17 -->|out_file1| 19;\n  16 -->|output_narrowpeaks| 19;\n  0 -->|output| 19;\n  1 -->|output| 19;\n  20[\"computeMatrix\"];\n  17 -->|out_file1| 20;\n  8 -->|output| 20;\n  65159c9c-050b-4069-8704-8f66c0563a98[\"Output\\ncomputeMatrix on input dataset(s): Matrix\"];\n  20 --> 65159c9c-050b-4069-8704-8f66c0563a98;\n  style 65159c9c-050b-4069-8704-8f66c0563a98 stroke:#2c3143,stroke-width:4px;\n  21[\"plotHeatmap\"];\n  18 -->|outFileName| 21;\n  22[\"plotHeatmap\"];\n  20 -->|outFileName| 22;\n  74a36643-b88f-4378-8f9c-c1b20ee2651e[\"Output\\nplotHeatmap on input dataset(s): Image\"];\n  22 --> 74a36643-b88f-4378-8f9c-c1b20ee2651e;\n  style 74a36643-b88f-4378-8f9c-c1b20ee2651e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nbed file with genes\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nctcf peaks\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nATAC R2 read in fastq.gz format\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nATAC R1 read in fastq.gz format\"]\n  4[label=\"Filter\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"FastQC\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"ATAC remove nextera adapters with cutadapt\"]\n  3 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"FastQC\"]\n  3 -> 7 [label=\"output\"]\n  8[label=\"bedtools Intersect intervals\"]\n  4 -> 8 [label=\"out_file1\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"FastQC\"]\n  6 -> 9 [label=\"out2\"]\n  10[label=\"Bowtie2\"]\n  6 -> 10 [label=\"out1\"]\n  6 -> 10 [label=\"out2\"]\n  11[label=\"FastQC\"]\n  6 -> 11 [label=\"out1\"]\n  12[label=\"Filter BAM ATAC\"]\n  10 -> 12 [label=\"output\"]\n  13[label=\"MarkDuplicates\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"bedtools BAM to BED\"]\n  13 -> 14 [label=\"outFile\"]\n  15[label=\"Paired-end histogram\"]\n  13 -> 15 [label=\"outFile\"]\n  16[label=\"MACS2 callpeak\"]\n  14 -> 16 [label=\"output\"]\n  17[label=\"Wig/BedGraph-to-bigWig\"]\n  16 -> 17 [label=\"output_treat_pileup\"]\n  18[label=\"computeMatrix\"]\n  17 -> 18 [label=\"out_file1\"]\n  0 -> 18 [label=\"output\"]\n  19[label=\"pyGenomeTracks\"]\n  17 -> 19 [label=\"out_file1\"]\n  16 -> 19 [label=\"output_narrowpeaks\"]\n  0 -> 19 [label=\"output\"]\n  1 -> 19 [label=\"output\"]\n  20[label=\"computeMatrix\"]\n  17 -> 20 [label=\"out_file1\"]\n  8 -> 20 [label=\"output\"]\n  k65159c9c050b406987048f66c0563a98[color=lightseagreen,label=\"Output\\ncomputeMatrix on input dataset(s): Matrix\"]\n  20 -> k65159c9c050b406987048f66c0563a98\n  21[label=\"plotHeatmap\"]\n  18 -> 21 [label=\"outFileName\"]\n  22[label=\"plotHeatmap\"]\n  20 -> 22 [label=\"outFileName\"]\n  k74a36643b88f43788f9cc1b20ee2651e[color=lightseagreen,label=\"Output\\nplotHeatmap on input dataset(s): Image\"]\n  22 -> k74a36643b88f43788f9cc1b20ee2651e\n}",
           "workflow_tools": [
@@ -5918,6 +5990,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -6059,6 +6136,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -6190,6 +6271,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -6327,6 +6412,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -6402,8 +6491,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -6471,6 +6560,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -6625,6 +6718,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.1",
                 "server": "https://usegalaxy.be/"
@@ -6775,6 +6872,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.1",
                 "server": "https://usegalaxy.be/"
@@ -6918,6 +7019,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -7071,6 +7176,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.4.2+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -7079,13 +7188,13 @@
                 "state": "inexact",
                 "versions": [
                   "2.2.6",
+                  "2.3.2.2",
                   "0.2",
                   "2.2.6.2",
-                  "2.3.2.2",
-                  "0.6",
-                  "0.3",
                   "2.5.0+galaxy0",
-                  "0.4"
+                  "0.3",
+                  "0.4",
+                  "0.6"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -7236,6 +7345,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.72+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -7247,11 +7363,11 @@
                   "0.69",
                   "0.65",
                   "0.67",
-                  "0.68",
                   "0.52",
+                  "0.68",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -7329,8 +7445,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1.0",
-                  "2.18.2.1"
+                  "2.18.2.1",
+                  "3.1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -7394,6 +7510,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -7482,8 +7602,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
-                  "2.0.5"
+                  "2.0.5",
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -7552,6 +7672,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -7651,8 +7775,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0+galaxy1",
-                  "2.29.2"
+                  "2.29.2",
+                  "2.30.0+galaxy1"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -7712,6 +7836,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
@@ -7729,8 +7857,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0+galaxy1",
                   "2.29.2",
+                  "2.30.0+galaxy1",
                   "2.30.0+galaxy2",
                   "2.31.1+galaxy0",
                   "2.29.0"
@@ -7869,6 +7997,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -8019,6 +8151,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.1.20160309.6",
                 "server": "https://usegalaxy.be/"
@@ -8161,6 +8297,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -8306,6 +8446,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.6",
                 "server": "https://usegalaxy.be/"
@@ -8391,8 +8535,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
-                  "4.8+galaxy1"
+                  "4.8+galaxy1",
+                  "4.0+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -8406,8 +8550,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.16.8",
-                  "1.16.9"
+                  "1.16.9",
+                  "1.16.8"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -8467,6 +8611,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "4.4+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.16.5",
                 "server": "https://usegalaxy.be/"
@@ -8481,52 +8632,52 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
                   "4.8+galaxy1",
+                  "4.0+galaxy0",
                   "4.9+galaxy1",
                   "4.0+galaxy1",
                   "4.7+galaxy0",
+                  "4.4+galaxy0",
                   "1.16.3",
                   "1.6",
                   "1.16.1",
-                  "4.4+galaxy0",
-                  "1.1.a",
-                  "1.16",
-                  "3.4+galaxy2",
-                  "3.4+galaxy1",
-                  "4.9+galaxy0",
                   "3.5+galaxy1",
-                  "3.7+galaxy0",
-                  "3.4+galaxy0",
-                  "4.6+galaxy0",
-                  "3.5+galaxy0",
                   "4.8+galaxy0",
-                  "3.5+galaxy2",
-                  "4.6+galaxy1"
+                  "3.7+galaxy0",
+                  "4.6+galaxy1",
+                  "3.5+galaxy0",
+                  "1.16",
+                  "4.6+galaxy0",
+                  "3.4+galaxy0",
+                  "3.4+galaxy1",
+                  "3.4+galaxy2",
+                  "4.9+galaxy0",
+                  "1.1.a",
+                  "3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
                   "4.8+galaxy1",
+                  "4.0+galaxy0",
                   "4.9+galaxy1",
                   "1.16.8",
                   "4.0+galaxy1",
                   "4.7+galaxy0",
                   "4.4+galaxy0",
-                  "3.4+galaxy2",
-                  "3.4+galaxy1",
-                  "4.9+galaxy0",
                   "3.5+galaxy1",
-                  "3.7+galaxy0",
-                  "3.4+galaxy0",
-                  "4.6+galaxy0",
-                  "3.5+galaxy0",
                   "4.8+galaxy0",
-                  "3.5+galaxy2",
+                  "3.7+galaxy0",
                   "4.6+galaxy1",
+                  "3.5+galaxy0",
+                  "4.6+galaxy0",
+                  "3.4+galaxy0",
+                  "3.4+galaxy1",
+                  "3.4+galaxy2",
+                  "4.9+galaxy0",
+                  "3.5+galaxy2",
                   "1.16.6"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -8651,6 +8802,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -9001,7 +9156,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"IdxStats\"];\n  0 -->|output| 9;\n  10[\"bamCoverage\"];\n  0 -->|output| 10;\n  11[\"bamCoverage\"];\n  0 -->|output| 11;\n  12[\"plotFingerprint\"];\n  4 -->|output| 12;\n  0 -->|output| 12;\n  13[\"computeGCBias\"];\n  4 -->|output| 13;\n  14[\"IdxStats\"];\n  4 -->|output| 14;\n  15[\"bamCoverage\"];\n  4 -->|output| 15;\n  16[\"bamCoverage\"];\n  4 -->|output| 16;\n  17[\"bamCompare\"];\n  0 -->|output| 17;\n  4 -->|output| 17;\n  18[\"bamCompare\"];\n  0 -->|output| 18;\n  4 -->|output| 18;\n  19[\"MACS2 callpeak\"];\n  4 -->|output| 19;\n  0 -->|output| 19;\n  20[\"multiBamSummary\"];\n  7 -->|output| 20;\n  6 -->|output| 20;\n  5 -->|output| 20;\n  4 -->|output| 20;\n  3 -->|output| 20;\n  2 -->|output| 20;\n  1 -->|output| 20;\n  0 -->|output| 20;\n  21[\"computeMatrix\"];\n  18 -->|outFileName| 21;\n  8 -->|output| 21;\n  22[\"computeMatrix\"];\n  18 -->|outFileName| 22;\n  8 -->|output| 22;\n  23[\"plotCorrelation\"];\n  20 -->|outFile| 23;\n  24[\"plotHeatmap\"];\n  21 -->|outFileName| 24;\n  25[\"plotHeatmap\"];\n  22 -->|outFileName| 25;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"IdxStats\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"bamCoverage\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"bamCoverage\"]\n  0 -> 11 [label=\"output\"]\n  12[label=\"plotFingerprint\"]\n  4 -> 12 [label=\"output\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"computeGCBias\"]\n  4 -> 13 [label=\"output\"]\n  14[label=\"IdxStats\"]\n  4 -> 14 [label=\"output\"]\n  15[label=\"bamCoverage\"]\n  4 -> 15 [label=\"output\"]\n  16[label=\"bamCoverage\"]\n  4 -> 16 [label=\"output\"]\n  17[label=\"bamCompare\"]\n  0 -> 17 [label=\"output\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"bamCompare\"]\n  0 -> 18 [label=\"output\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"MACS2 callpeak\"]\n  4 -> 19 [label=\"output\"]\n  0 -> 19 [label=\"output\"]\n  20[label=\"multiBamSummary\"]\n  7 -> 20 [label=\"output\"]\n  6 -> 20 [label=\"output\"]\n  5 -> 20 [label=\"output\"]\n  4 -> 20 [label=\"output\"]\n  3 -> 20 [label=\"output\"]\n  2 -> 20 [label=\"output\"]\n  1 -> 20 [label=\"output\"]\n  0 -> 20 [label=\"output\"]\n  21[label=\"computeMatrix\"]\n  18 -> 21 [label=\"outFileName\"]\n  8 -> 21 [label=\"output\"]\n  22[label=\"computeMatrix\"]\n  18 -> 22 [label=\"outFileName\"]\n  8 -> 22 [label=\"output\"]\n  23[label=\"plotCorrelation\"]\n  20 -> 23 [label=\"outFile\"]\n  24[label=\"plotHeatmap\"]\n  21 -> 24 [label=\"outFileName\"]\n  25[label=\"plotHeatmap\"]\n  22 -> 25 [label=\"outFileName\"]\n}",
           "workflow_tools": [
@@ -9362,7 +9517,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Trim Galore!\"];\n  0 -->|output| 2;\n  3[\"Bowtie2\"];\n  2 -->|trimmed_reads_single| 3;\n  4[\"BAM-to-SAM\"];\n  3 -->|output| 4;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Trim Galore!\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Bowtie2\"]\n  2 -> 3 [label=\"trimmed_reads_single\"]\n  4[label=\"BAM-to-SAM\"]\n  3 -> 4 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -9572,6 +9727,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -9721,6 +9881,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -9825,9 +9989,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
+                  "3.1.2.0.0",
                   "3.3.0.0.0",
-                  "3.1.2.0.0"
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -9897,6 +10061,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -9917,8 +10085,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
                   "3.3.0.0.0",
+                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
                   "3.3.2.0.0",
                   "3.5.2+galaxy0"
@@ -9936,17 +10104,17 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.3.0.0.0",
                   "3.1.2.0.0",
+                  "3.3.0.0.0",
+                  "3.5.1.0.0",
                   "3.5.4+galaxy0",
-                  "3.0.2.0",
                   "3.3.2.0.0",
+                  "3.0.2.0",
                   "3.5.2+galaxy0",
                   "2.5.0.0",
-                  "3.2.0.0.0",
                   "2.3.5.0",
-                  "3.2.1.0.0"
+                  "3.2.1.0.0",
+                  "3.2.0.0.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -10068,6 +10236,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -10113,8 +10285,8 @@
                   "3.5.2+galaxy0",
                   "2.5.0.0",
                   "3.3.0.0.0",
-                  "3.1.2.0.0",
-                  "2.3.5.0"
+                  "2.3.5.0",
+                  "3.1.2.0.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -10172,8 +10344,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10239,6 +10411,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -10405,6 +10581,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -10579,6 +10759,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -10683,8 +10867,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
-                  "3.5.1.0.0"
+                  "3.5.1.0.0",
+                  "3.1.2.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -10751,6 +10935,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -10790,8 +10978,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
                   "3.5.1.0.0",
+                  "3.1.2.0.0",
                   "3.3.2.0.0",
                   "3.5.4+galaxy0",
                   "3.5.2+galaxy0",
@@ -10921,6 +11109,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -11095,6 +11287,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.4.3.0",
                 "server": "https://usegalaxy.be/"
@@ -11133,8 +11329,8 @@
                   "0.6.3",
                   "0.6.7+galaxy0",
                   "0.4.2",
-                  "0.4.0",
-                  "0.4.1"
+                  "0.4.1",
+                  "0.4.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -11260,6 +11456,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.1",
                 "server": "https://usegalaxy.be/"
@@ -11346,8 +11546,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
-                  "2.4.5+galaxy1",
-                  "2.3.4.2"
+                  "2.3.4.2",
+                  "2.4.5+galaxy1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11359,10 +11559,10 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
+                  "2.3.4.3+galaxy0",
                   "2.2.6",
-                  "2.3.4.3",
                   "2.3.3.1",
-                  "2.3.4.3+galaxy0"
+                  "2.3.4.3"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -11421,6 +11621,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.3.2.2",
                 "server": "https://usegalaxy.be/"
@@ -11439,14 +11643,14 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
-                  "2.4.5+galaxy1",
                   "2.3.4.2",
-                  "2.3.4.3",
+                  "2.4.5+galaxy1",
                   "2.3.4.3+galaxy0",
+                  "2.3.4.3",
                   "2.5.3+galaxy1",
                   "2.5.0+galaxy0",
-                  "2.4.5+galaxy0",
-                  "2.5.3+galaxy0"
+                  "2.5.3+galaxy0",
+                  "2.4.5+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -11471,15 +11675,15 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
-                  "2.4.5+galaxy1",
                   "2.3.4.2",
-                  "2.3.4.3",
+                  "2.4.5+galaxy1",
                   "2.3.4.3+galaxy0",
+                  "2.3.4.3",
                   "2.5.3+galaxy1",
                   "2.5.0+galaxy0",
-                  "2.4.5+galaxy0",
                   "2.3.4.1",
                   "2.5.3+galaxy0",
+                  "2.4.5+galaxy0",
                   "2.3.0.1"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -11533,9 +11737,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11600,10 +11804,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -11613,6 +11817,13 @@
                   "0.74+galaxy0"
                 ],
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -11632,9 +11843,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -11707,8 +11918,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
-                  "2.0.5"
+                  "2.0.5",
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -11782,6 +11993,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.1",
                 "server": "https://usegalaxy.be/"
@@ -11801,8 +12016,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
                   "2.0.5",
+                  "2.0.4",
                   "2.0.3"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -11937,6 +12152,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -12211,7 +12430,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nbed file with genes\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nctcf peaks\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nATAC R2 read in fastq.gz format\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nATAC R1 read in fastq.gz format\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"Filter\"];\n  1 -->|output| 4;\n  5[\"FastQC\"];\n  2 -->|output| 5;\n  6[\"ATAC remove nextera adapters with cutadapt\"];\n  3 -->|output| 6;\n  2 -->|output| 6;\n  7[\"FastQC\"];\n  3 -->|output| 7;\n  8[\"bedtools Intersect intervals\"];\n  4 -->|out_file1| 8;\n  0 -->|output| 8;\n  9[\"FastQC\"];\n  6 -->|out2| 9;\n  10[\"Bowtie2\"];\n  6 -->|out1| 10;\n  6 -->|out2| 10;\n  11[\"FastQC\"];\n  6 -->|out1| 11;\n  12[\"Filter BAM ATAC\"];\n  10 -->|output| 12;\n  13[\"MarkDuplicates\"];\n  12 -->|out_file1| 13;\n  14[\"bedtools BAM to BED\"];\n  13 -->|outFile| 14;\n  15[\"Paired-end histogram\"];\n  13 -->|outFile| 15;\n  16[\"MACS2 callpeak\"];\n  14 -->|output| 16;\n  17[\"Wig/BedGraph-to-bigWig\"];\n  16 -->|output_treat_pileup| 17;\n  18[\"computeMatrix\"];\n  17 -->|out_file1| 18;\n  0 -->|output| 18;\n  19[\"pyGenomeTracks\"];\n  17 -->|out_file1| 19;\n  16 -->|output_narrowpeaks| 19;\n  0 -->|output| 19;\n  1 -->|output| 19;\n  20[\"computeMatrix\"];\n  17 -->|out_file1| 20;\n  8 -->|output| 20;\n  65159c9c-050b-4069-8704-8f66c0563a98[\"Output\\ncomputeMatrix on input dataset(s): Matrix\"];\n  20 --> 65159c9c-050b-4069-8704-8f66c0563a98;\n  style 65159c9c-050b-4069-8704-8f66c0563a98 stroke:#2c3143,stroke-width:4px;\n  21[\"plotHeatmap\"];\n  18 -->|outFileName| 21;\n  22[\"plotHeatmap\"];\n  20 -->|outFileName| 22;\n  74a36643-b88f-4378-8f9c-c1b20ee2651e[\"Output\\nplotHeatmap on input dataset(s): Image\"];\n  22 --> 74a36643-b88f-4378-8f9c-c1b20ee2651e;\n  style 74a36643-b88f-4378-8f9c-c1b20ee2651e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nbed file with genes\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nctcf peaks\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nATAC R2 read in fastq.gz format\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nATAC R1 read in fastq.gz format\"]\n  4[label=\"Filter\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"FastQC\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"ATAC remove nextera adapters with cutadapt\"]\n  3 -> 6 [label=\"output\"]\n  2 -> 6 [label=\"output\"]\n  7[label=\"FastQC\"]\n  3 -> 7 [label=\"output\"]\n  8[label=\"bedtools Intersect intervals\"]\n  4 -> 8 [label=\"out_file1\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"FastQC\"]\n  6 -> 9 [label=\"out2\"]\n  10[label=\"Bowtie2\"]\n  6 -> 10 [label=\"out1\"]\n  6 -> 10 [label=\"out2\"]\n  11[label=\"FastQC\"]\n  6 -> 11 [label=\"out1\"]\n  12[label=\"Filter BAM ATAC\"]\n  10 -> 12 [label=\"output\"]\n  13[label=\"MarkDuplicates\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"bedtools BAM to BED\"]\n  13 -> 14 [label=\"outFile\"]\n  15[label=\"Paired-end histogram\"]\n  13 -> 15 [label=\"outFile\"]\n  16[label=\"MACS2 callpeak\"]\n  14 -> 16 [label=\"output\"]\n  17[label=\"Wig/BedGraph-to-bigWig\"]\n  16 -> 17 [label=\"output_treat_pileup\"]\n  18[label=\"computeMatrix\"]\n  17 -> 18 [label=\"out_file1\"]\n  0 -> 18 [label=\"output\"]\n  19[label=\"pyGenomeTracks\"]\n  17 -> 19 [label=\"out_file1\"]\n  16 -> 19 [label=\"output_narrowpeaks\"]\n  0 -> 19 [label=\"output\"]\n  1 -> 19 [label=\"output\"]\n  20[label=\"computeMatrix\"]\n  17 -> 20 [label=\"out_file1\"]\n  8 -> 20 [label=\"output\"]\n  k65159c9c050b406987048f66c0563a98[color=lightseagreen,label=\"Output\\ncomputeMatrix on input dataset(s): Matrix\"]\n  20 -> k65159c9c050b406987048f66c0563a98\n  21[label=\"plotHeatmap\"]\n  18 -> 21 [label=\"outFileName\"]\n  22[label=\"plotHeatmap\"]\n  20 -> 22 [label=\"outFileName\"]\n  k74a36643b88f43788f9cc1b20ee2651e[color=lightseagreen,label=\"Output\\nplotHeatmap on input dataset(s): Image\"]\n  22 -> k74a36643b88f43788f9cc1b20ee2651e\n}",
           "workflow_tools": [
@@ -13857,6 +14076,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -13998,6 +14222,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -14129,6 +14357,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -14266,6 +14498,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -14397,6 +14633,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -14534,6 +14774,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -14609,8 +14853,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14678,6 +14922,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -14832,6 +15080,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.1",
                 "server": "https://usegalaxy.be/"
@@ -14980,6 +15232,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.4.1",
                 "server": "https://usegalaxy.be/"
@@ -15125,6 +15381,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -15281,6 +15541,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.4.2+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -15289,13 +15553,13 @@
                 "state": "inexact",
                 "versions": [
                   "2.2.6",
+                  "2.3.2.2",
                   "0.2",
                   "2.2.6.2",
-                  "2.3.2.2",
-                  "0.6",
-                  "0.3",
                   "2.5.0+galaxy0",
-                  "0.4"
+                  "0.3",
+                  "0.4",
+                  "0.6"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15383,10 +15647,10 @@
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
+                  "2.3.4.3+galaxy0",
                   "2.2.6",
-                  "2.3.4.3",
                   "2.3.3.1",
-                  "2.3.4.3+galaxy0"
+                  "2.3.4.3"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -15443,16 +15707,20 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.4.2+galaxy0",
                   "2.3.4.2",
-                  "2.3.4.3",
                   "2.3.4.3+galaxy0",
+                  "2.3.4.3",
                   "2.5.3+galaxy1",
+                  "2.3.2.2",
                   "0.2",
-                  "2.2.6.2",
-                  "2.3.2.2"
+                  "2.2.6.2"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -15460,13 +15728,13 @@
                 "state": "inexact",
                 "versions": [
                   "2.2.6",
+                  "2.3.2.2",
                   "0.2",
                   "2.2.6.2",
-                  "2.3.2.2",
-                  "0.6",
-                  "0.3",
                   "2.5.0+galaxy0",
-                  "0.4"
+                  "0.3",
+                  "0.4",
+                  "0.6"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15617,6 +15885,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.72+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -15628,11 +15903,11 @@
                   "0.69",
                   "0.65",
                   "0.67",
-                  "0.68",
                   "0.52",
+                  "0.68",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15771,10 +16046,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -15788,15 +16063,22 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
                   "0.72+galaxy1",
+                  "0.72",
                   "0.69",
-                  "0.65",
                   "0.71",
+                  "0.65",
                   "0.67",
+                  "0.52",
                   "0.74+galaxy1",
-                  "0.68",
-                  "0.52"
+                  "0.68"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -15807,11 +16089,11 @@
                   "0.69",
                   "0.65",
                   "0.67",
-                  "0.68",
                   "0.52",
+                  "0.68",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -15889,8 +16171,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1.0",
-                  "2.18.2.1"
+                  "2.18.2.1",
+                  "3.1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -15954,6 +16236,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -16042,8 +16328,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1.0",
-                  "2.18.2.1"
+                  "2.18.2.1",
+                  "3.1.1.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -16107,6 +16393,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -16209,8 +16499,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0+galaxy1",
-                  "2.29.2"
+                  "2.29.2",
+                  "2.30.0+galaxy1"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -16270,6 +16560,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
@@ -16287,8 +16581,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0+galaxy1",
                   "2.29.2",
+                  "2.30.0+galaxy1",
                   "2.30.0+galaxy2",
                   "2.31.1+galaxy0",
                   "2.29.0"
@@ -16371,8 +16665,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.30.0+galaxy1",
-                  "2.29.2"
+                  "2.29.2",
+                  "2.30.0+galaxy1"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -16427,16 +16721,20 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.27.1",
                   "2.27.0.0",
                   "2.29.2",
                   "2.31.1+galaxy0",
-                  "2.30.0",
-                  "2.19.0",
+                  "2.24.0",
                   "2.29.0",
-                  "2.24.0"
+                  "2.19.0",
+                  "2.30.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -16589,6 +16887,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.30.0",
                 "server": "https://usegalaxy.be/"
@@ -16684,8 +16986,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
-                  "2.30.0"
+                  "2.30.0",
+                  "2.29.2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -16740,17 +17042,21 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.27.1",
                   "2.27.0.2",
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.31.1+galaxy0",
                   "2.27.1+galaxy1",
-                  "2.19.0",
                   "2.24.0",
-                  "2.29.0"
+                  "2.29.0",
+                  "2.19.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -16772,8 +17078,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.19.0"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -16895,6 +17201,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -17035,6 +17345,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -17181,6 +17495,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -17330,13 +17648,17 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.1.1.20160309.5",
-                  "2.1.1.20160309.6",
-                  "2.1.1.20160309.0",
+                  "2.1.1.20160309.4",
                   "2.1.1.20160309.3",
-                  "2.1.1.20160309.4"
+                  "2.1.1.20160309.0",
+                  "2.1.1.20160309.6"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -17478,6 +17800,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.11.2+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -17616,6 +17942,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -17761,6 +18091,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.6",
                 "server": "https://usegalaxy.be/"
@@ -17846,8 +18180,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
-                  "4.8+galaxy1"
+                  "4.8+galaxy1",
+                  "4.0+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -17861,8 +18195,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.16.8",
-                  "1.16.9"
+                  "1.16.9",
+                  "1.16.8"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -17922,6 +18256,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "4.4+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.16.5",
                 "server": "https://usegalaxy.be/"
@@ -17936,52 +18277,52 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
                   "4.8+galaxy1",
+                  "4.0+galaxy0",
                   "4.9+galaxy1",
                   "4.0+galaxy1",
                   "4.7+galaxy0",
+                  "4.4+galaxy0",
                   "1.16.3",
                   "1.6",
                   "1.16.1",
-                  "4.4+galaxy0",
-                  "1.1.a",
-                  "1.16",
-                  "3.4+galaxy2",
-                  "3.4+galaxy1",
-                  "4.9+galaxy0",
                   "3.5+galaxy1",
-                  "3.7+galaxy0",
-                  "3.4+galaxy0",
-                  "4.6+galaxy0",
-                  "3.5+galaxy0",
                   "4.8+galaxy0",
-                  "3.5+galaxy2",
-                  "4.6+galaxy1"
+                  "3.7+galaxy0",
+                  "4.6+galaxy1",
+                  "3.5+galaxy0",
+                  "1.16",
+                  "4.6+galaxy0",
+                  "3.4+galaxy0",
+                  "3.4+galaxy1",
+                  "3.4+galaxy2",
+                  "4.9+galaxy0",
+                  "1.1.a",
+                  "3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.eu"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0+galaxy0",
                   "4.8+galaxy1",
+                  "4.0+galaxy0",
                   "4.9+galaxy1",
                   "1.16.8",
                   "4.0+galaxy1",
                   "4.7+galaxy0",
                   "4.4+galaxy0",
-                  "3.4+galaxy2",
-                  "3.4+galaxy1",
-                  "4.9+galaxy0",
                   "3.5+galaxy1",
-                  "3.7+galaxy0",
-                  "3.4+galaxy0",
-                  "4.6+galaxy0",
-                  "3.5+galaxy0",
                   "4.8+galaxy0",
-                  "3.5+galaxy2",
+                  "3.7+galaxy0",
                   "4.6+galaxy1",
+                  "3.5+galaxy0",
+                  "4.6+galaxy0",
+                  "3.4+galaxy0",
+                  "3.4+galaxy1",
+                  "3.4+galaxy2",
+                  "4.9+galaxy0",
+                  "3.5+galaxy2",
                   "1.16.6"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -18106,6 +18447,10 @@
               {
                 "state": "local",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "local",
@@ -18407,45 +18752,26 @@
         "In order to build a Hi-C contact matrix the reads have to be mapped to the reference genome.",
         "Based on a contact matrix open and closed chromatin (A/B compartments) and topological associating domains (TADs) can be computed."
       ],
-      "contributors": [
-        {
-          "name": "Joachim Wolff",
-          "email": "wolffj@informatik.uni-freiburg.de",
-          "joined": "2017-09",
-          "elixir_node": "de",
-          "former_affiliations": [
-            "uni-freiburg",
-            "elixir-europe"
-          ],
-          "id": "joachimwolff",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
-        },
-        {
-          "name": "Fidel Ramirez",
-          "joined": "2017-09",
-          "id": "fidelram",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/fidelram.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/"
-        },
-        {
-          "name": "Vivek Bhardwaj",
-          "joined": "2017-09",
-          "id": "vivekbhr",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
-        },
-        {
-          "name": "Ekaterina Polkh",
-          "joined": "2017-09",
-          "affiliations": [
-            "uni-freiburg"
-          ],
-          "id": "polkhe",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
-        }
-      ],
+      "contributions": {
+        "authorship": [
+          "joachimwolff",
+          "fidelram",
+          "vivekbhr",
+          "polkhe"
+        ],
+        "editing": [
+
+        ],
+        "testing": [
+
+        ],
+        "funding": [
+          "elixir-europe",
+          "deNBI",
+          "uni-freiburg",
+          "sfb992"
+        ]
+      },
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -18459,9 +18785,9 @@
       "id": "epigenetics/hicexplorer",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2023-11-09 08:55:09 +0000",
+      "mod_date": "2024-10-15 12:19:56 +0000",
       "pub_date": "2018-02-23 11:09:57 +0000",
-      "version": 28,
+      "version": 29,
       "workflows": [
         {
           "workflow": "Galaxy-Workflow-Galaxy_Hi-C.ga",
@@ -18552,7 +18878,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nR1.fastq\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nR2.fastq\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nH3K27me3.bw\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nH3K36me3.bw\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nH4K16ac.bw\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\ndm3_genes.bed\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"Map with BWA-MEM\"];\n  0 -->|output| 6;\n  7[\"Map with BWA-MEM\"];\n  1 -->|output| 7;\n  8[\"hicBuildMatrix\"];\n  7 -->|output| 8;\n  6 -->|output| 8;\n  9[\"hicMergeMatrixBins\"];\n  8 -->|outFileName| 9;\n  10[\"hicCorrectMatrix\"];\n  8 -->|outFileName| 10;\n  11[\"hicCorrectMatrix\"];\n  8 -->|outFileName| 11;\n  12[\"hicPlotMatrix\"];\n  9 -->|outFileName| 12;\n  13[\"hicPlotMatrix\"];\n  11 -->|outFileName| 13;\n  14[\"hicFindTADs\"];\n  11 -->|outFileName| 14;\n  15[\"hicPCA\"];\n  14 -->|matrix_output| 15;\n  16[\"hicPlotTADs\"];\n  14 -->|domains| 16;\n  11 -->|outFileName| 16;\n  14 -->|tad_score| 16;\n  15 -->|pca1| 16;\n  15 -->|pca2| 16;\n  3 -->|output| 16;\n  2 -->|output| 16;\n  4 -->|output| 16;\n  5 -->|output| 16;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nR1.fastq\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nR2.fastq\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nH3K27me3.bw\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nH3K36me3.bw\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nH4K16ac.bw\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\ndm3_genes.bed\"]\n  6[label=\"Map with BWA-MEM\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Map with BWA-MEM\"]\n  1 -> 7 [label=\"output\"]\n  8[label=\"hicBuildMatrix\"]\n  7 -> 8 [label=\"output\"]\n  6 -> 8 [label=\"output\"]\n  9[label=\"hicMergeMatrixBins\"]\n  8 -> 9 [label=\"outFileName\"]\n  10[label=\"hicCorrectMatrix\"]\n  8 -> 10 [label=\"outFileName\"]\n  11[label=\"hicCorrectMatrix\"]\n  8 -> 11 [label=\"outFileName\"]\n  12[label=\"hicPlotMatrix\"]\n  9 -> 12 [label=\"outFileName\"]\n  13[label=\"hicPlotMatrix\"]\n  11 -> 13 [label=\"outFileName\"]\n  14[label=\"hicFindTADs\"]\n  11 -> 14 [label=\"outFileName\"]\n  15[label=\"hicPCA\"]\n  14 -> 15 [label=\"matrix_output\"]\n  16[label=\"hicPlotTADs\"]\n  14 -> 16 [label=\"domains\"]\n  11 -> 16 [label=\"outFileName\"]\n  14 -> 16 [label=\"tad_score\"]\n  15 -> 16 [label=\"pca1\"]\n  15 -> 16 [label=\"pca2\"]\n  3 -> 16 [label=\"output\"]\n  2 -> 16 [label=\"output\"]\n  4 -> 16 [label=\"output\"]\n  5 -> 16 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -18882,6 +19208,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -19025,6 +19356,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.0",
                 "server": "https://usegalaxy.be/"
@@ -19071,8 +19406,8 @@
                   "3.7.2+galaxy0",
                   "3.4.3.0",
                   "3.6+galaxy1",
-                  "3.6+galaxy0",
-                  "3.7.5+galaxy0"
+                  "3.7.5+galaxy0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -19184,6 +19519,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -19344,6 +19683,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.0",
                 "server": "https://usegalaxy.be/"
@@ -19386,8 +19729,8 @@
                   "3.7.2+galaxy0",
                   "3.4.3.0",
                   "3.6+galaxy1",
-                  "3.6+galaxy0",
-                  "3.7.5+galaxy0"
+                  "3.7.5+galaxy0",
+                  "3.6+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -19499,6 +19842,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -19661,6 +20008,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.0",
                 "server": "https://usegalaxy.be/"
@@ -19818,13 +20169,17 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "1.7.1.0",
-                  "2.1.4.0",
-                  "3.4.3.0",
-                  "3.4.2.0",
                   "3.3.1.0",
+                  "3.4.2.0",
+                  "3.4.3.0",
+                  "2.1.4.0",
                   "3.4.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -19986,6 +20341,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.0",
                 "server": "https://usegalaxy.be/"
@@ -20135,6 +20494,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -20242,6 +20605,213 @@
       },
       "license": "CC-BY-4.0",
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Joachim Wolff",
+          "email": "wolffj@informatik.uni-freiburg.de",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "former_affiliations": [
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "joachimwolff",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+        },
+        {
+          "name": "Fidel Ramirez",
+          "joined": "2017-09",
+          "id": "fidelram",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/fidelram.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/"
+        },
+        {
+          "name": "Vivek Bhardwaj",
+          "joined": "2017-09",
+          "id": "vivekbhr",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
+        },
+        {
+          "name": "Ekaterina Polkh",
+          "joined": "2017-09",
+          "affiliations": [
+            "uni-freiburg"
+          ],
+          "id": "polkhe",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/polkhe.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/polkhe/"
+        },
+        {
+          "name": "ELIXIR Europe",
+          "joined": "2017-09",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/elixir-europe.json",
+          "avatar": "/training-material/shared/images/elixir.png",
+          "ror": "044rwnt51",
+          "members": [
+            "abretaud",
+            "anuprulez",
+            "bebatut",
+            "bedroesb",
+            "bgruening",
+            "bfranicevic",
+            "B0r1sD",
+            "cat-bro",
+            "claresloggett",
+            "clsiguret",
+            "colineroyaux",
+            "combesf",
+            "deeptivarshney",
+            "eancelet",
+            "ElectronicBlueberry",
+            "EngyNasr",
+            "erxleben",
+            "fpsom",
+            "frederikcoppens",
+            "hexylena",
+            "hmenager",
+            "hrhotz",
+            "jfaulon",
+            "JasperO98",
+            "khaled196",
+            "kinow",
+            "kikkomep",
+            "kostrykin",
+            "kysrpex",
+            "Lain-inrae",
+            "lecorguille",
+            "lldelisle",
+            "kkamieniecka",
+            "poterlowicz-lab",
+            "mjostaszewski",
+            "martenson",
+            "MattiHoch",
+            "mbaardwijk",
+            "mboudet",
+            "mcmaniou",
+            "mira-miracoli",
+            "martinwolst",
+            "Nilchia",
+            "neoformit",
+            "nomadscientist",
+            "nsoranzo",
+            "odoppelt",
+            "onorvez",
+            "pauldg",
+            "paulzierep",
+            "pavanvidem",
+            "proccaserra",
+            "robertmand",
+            "rlibouba",
+            "SaimMomin12",
+            "sanjaysrikakulam",
+            "sbenateau",
+            "shiltemann",
+            "simleo",
+            "sitjart",
+            "stain",
+            "supernord",
+            "teresa-m",
+            "ThibaudGlinez",
+            "torfinnnome",
+            "tseemann",
+            "TKlingstrom",
+            "willemdek11",
+            "wm75",
+            "yvanlebras"
+          ],
+          "former_members": [
+            "blankclemens",
+            "gallardoalba",
+            "gmauro",
+            "heylf",
+            "joachimwolff",
+            "khanteymoori",
+            "mtekman",
+            "simonbray",
+            "thomaswollmann",
+            "torhou"
+          ],
+          "id": "elixir-europe",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/"
+        },
+        {
+          "name": "de.NBI",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/deNBI.json",
+          "members": [
+            "bgruening",
+            "kostrykin",
+            "mira-miracoli"
+          ],
+          "former_members": [
+            "hexylena",
+            "thomaswollmann"
+          ],
+          "id": "deNBI",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/"
+        },
+        {
+          "short_name": "UFR",
+          "name": "University of Freiburg",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/uni-freiburg.json",
+          "avatar": "https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg",
+          "github": false,
+          "ror": "0245cg223",
+          "members": [
+            "anuprulez",
+            "bgruening",
+            "deeptivarshney",
+            "dmaticzka",
+            "dyusuf",
+            "ElectronicBlueberry",
+            "EngyNasr",
+            "erxleben",
+            "foellmelanie",
+            "kysrpex",
+            "MarenStillger",
+            "matthias313",
+            "mira-miracoli",
+            "mtekman",
+            "Nilchia",
+            "paulzierep",
+            "pavanvidem",
+            "plushz",
+            "polkhe",
+            "SaimMomin12",
+            "sanjaysrikakulam",
+            "shiltemann",
+            "teresa-m",
+            "wm75"
+          ],
+          "former_members": [
+            "blankclemens",
+            "gallardoalba",
+            "gmauro",
+            "heylf",
+            "hexylena",
+            "joachimwolff",
+            "khanteymoori",
+            "simonbray",
+            "stortebecker",
+            "torhou"
+          ],
+          "id": "uni-freiburg",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/"
+        },
+        {
+          "short_name": "CRC992",
+          "name": "Collaborative Research Centre 992",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/sfb992.json",
+          "avatar": "https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg",
+          "github": false,
+          "members": [
+            "bgruening"
+          ],
+          "id": "sfb992",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sfb992/"
+        }
+      ],
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/hicexplorer/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/hicexplorer/tutorial.json"
@@ -20429,9 +20999,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  f0af95f7-7ef6-4acf-8378-45448332f8d2[\"Output\\noutput_overlapping_peaks\"];\n  60 --> f0af95f7-7ef6-4acf-8378-45448332f8d2;\n  style f0af95f7-7ef6-4acf-8378-45448332f8d2 stroke:#2c3143,stroke-width:4px;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  de0641f2-5cb1-490f-ae09-d0d2cf1d8e78[\"Output\\noutput_g1e_peaks\"];\n  61 --> de0641f2-5cb1-490f-ae09-d0d2cf1d8e78;\n  style de0641f2-5cb1-490f-ae09-d0d2cf1d8e78 stroke:#2c3143,stroke-width:4px;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  2965de0d-15f2-402d-ba88-a5e2cbec5106[\"Output\\noutput_megakaryocyte_peaks\"];\n  62 --> 2965de0d-15f2-402d-ba88-a5e2cbec5106;\n  style 2965de0d-15f2-402d-ba88-a5e2cbec5106 stroke:#2c3143,stroke-width:4px;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Trimmomatic\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Trimmomatic\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  2 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"Trimmomatic\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"FastQC\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"Trimmomatic\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"FastQC\"]\n  5 -> 19 [label=\"output\"]\n  20[label=\"Trimmomatic\"]\n  5 -> 20 [label=\"output\"]\n  21[label=\"FastQC\"]\n  6 -> 21 [label=\"output\"]\n  22[label=\"Trimmomatic\"]\n  6 -> 22 [label=\"output\"]\n  23[label=\"FastQC\"]\n  7 -> 23 [label=\"output\"]\n  24[label=\"Trimmomatic\"]\n  7 -> 24 [label=\"output\"]\n  25[label=\"FastQC\"]\n  10 -> 25 [label=\"fastq_out\"]\n  26[label=\"Map with BWA\"]\n  10 -> 26 [label=\"fastq_out\"]\n  27[label=\"FastQC\"]\n  12 -> 27 [label=\"fastq_out\"]\n  28[label=\"Map with BWA\"]\n  12 -> 28 [label=\"fastq_out\"]\n  29[label=\"FastQC\"]\n  14 -> 29 [label=\"fastq_out\"]\n  30[label=\"Map with BWA\"]\n  14 -> 30 [label=\"fastq_out\"]\n  31[label=\"FastQC\"]\n  16 -> 31 [label=\"fastq_out\"]\n  32[label=\"Map with BWA\"]\n  16 -> 32 [label=\"fastq_out\"]\n  33[label=\"FastQC\"]\n  18 -> 33 [label=\"fastq_out\"]\n  34[label=\"Map with BWA\"]\n  18 -> 34 [label=\"fastq_out\"]\n  35[label=\"FastQC\"]\n  20 -> 35 [label=\"fastq_out\"]\n  36[label=\"Map with BWA\"]\n  20 -> 36 [label=\"fastq_out\"]\n  37[label=\"FastQC\"]\n  22 -> 37 [label=\"fastq_out\"]\n  38[label=\"Map with BWA\"]\n  22 -> 38 [label=\"fastq_out\"]\n  39[label=\"FastQC\"]\n  24 -> 39 [label=\"fastq_out\"]\n  40[label=\"Map with BWA\"]\n  24 -> 40 [label=\"fastq_out\"]\n  41[label=\"Samtools idxstats\"]\n  26 -> 41 [label=\"bam_output\"]\n  42[label=\"Samtools idxstats\"]\n  28 -> 42 [label=\"bam_output\"]\n  43[label=\"Samtools idxstats\"]\n  30 -> 43 [label=\"bam_output\"]\n  44[label=\"bamCompare\"]\n  30 -> 44 [label=\"bam_output\"]\n  26 -> 44 [label=\"bam_output\"]\n  45[label=\"Samtools idxstats\"]\n  32 -> 45 [label=\"bam_output\"]\n  46[label=\"plotFingerprint\"]\n  26 -> 46 [label=\"bam_output\"]\n  28 -> 46 [label=\"bam_output\"]\n  30 -> 46 [label=\"bam_output\"]\n  32 -> 46 [label=\"bam_output\"]\n  47[label=\"MACS2 callpeak\"]\n  26 -> 47 [label=\"bam_output\"]\n  28 -> 47 [label=\"bam_output\"]\n  30 -> 47 [label=\"bam_output\"]\n  32 -> 47 [label=\"bam_output\"]\n  48[label=\"bamCompare\"]\n  32 -> 48 [label=\"bam_output\"]\n  28 -> 48 [label=\"bam_output\"]\n  49[label=\"Samtools idxstats\"]\n  34 -> 49 [label=\"bam_output\"]\n  50[label=\"Samtools idxstats\"]\n  36 -> 50 [label=\"bam_output\"]\n  51[label=\"Samtools idxstats\"]\n  38 -> 51 [label=\"bam_output\"]\n  52[label=\"bamCompare\"]\n  38 -> 52 [label=\"bam_output\"]\n  34 -> 52 [label=\"bam_output\"]\n  53[label=\"Samtools idxstats\"]\n  40 -> 53 [label=\"bam_output\"]\n  54[label=\"multiBamSummary\"]\n  26 -> 54 [label=\"bam_output\"]\n  28 -> 54 [label=\"bam_output\"]\n  30 -> 54 [label=\"bam_output\"]\n  32 -> 54 [label=\"bam_output\"]\n  34 -> 54 [label=\"bam_output\"]\n  36 -> 54 [label=\"bam_output\"]\n  38 -> 54 [label=\"bam_output\"]\n  40 -> 54 [label=\"bam_output\"]\n  55[label=\"plotFingerprint\"]\n  34 -> 55 [label=\"bam_output\"]\n  36 -> 55 [label=\"bam_output\"]\n  38 -> 55 [label=\"bam_output\"]\n  40 -> 55 [label=\"bam_output\"]\n  56[label=\"MACS2 callpeak\"]\n  34 -> 56 [label=\"bam_output\"]\n  36 -> 56 [label=\"bam_output\"]\n  38 -> 56 [label=\"bam_output\"]\n  40 -> 56 [label=\"bam_output\"]\n  57[label=\"bamCompare\"]\n  40 -> 57 [label=\"bam_output\"]\n  36 -> 57 [label=\"bam_output\"]\n  58[label=\"computeMatrix\"]\n  44 -> 58 [label=\"outFileName\"]\n  48 -> 58 [label=\"outFileName\"]\n  47 -> 58 [label=\"output_narrowpeaks\"]\n  59[label=\"plotCorrelation\"]\n  54 -> 59 [label=\"outFile\"]\n  60[label=\"bedtools Intersect intervals\"]\n  47 -> 60 [label=\"output_narrowpeaks\"]\n  56 -> 60 [label=\"output_narrowpeaks\"]\n  kf0af95f77ef64acf837845448332f8d2[color=lightseagreen,label=\"Output\\noutput_overlapping_peaks\"]\n  60 -> kf0af95f77ef64acf837845448332f8d2\n  61[label=\"bedtools Intersect intervals\"]\n  47 -> 61 [label=\"output_narrowpeaks\"]\n  56 -> 61 [label=\"output_narrowpeaks\"]\n  kde0641f25cb1490fae09d0d2cf1d8e78[color=lightseagreen,label=\"Output\\noutput_g1e_peaks\"]\n  61 -> kde0641f25cb1490fae09d0d2cf1d8e78\n  62[label=\"bedtools Intersect intervals\"]\n  56 -> 62 [label=\"output_narrowpeaks\"]\n  47 -> 62 [label=\"output_narrowpeaks\"]\n  k2965de0d15f2402dba88a5e2cbec5106[color=lightseagreen,label=\"Output\\noutput_megakaryocyte_peaks\"]\n  62 -> k2965de0d15f2402dba88a5e2cbec5106\n  63[label=\"computeMatrix\"]\n  52 -> 63 [label=\"outFileName\"]\n  57 -> 63 [label=\"outFileName\"]\n  56 -> 63 [label=\"output_narrowpeaks\"]\n  64[label=\"plotHeatmap\"]\n  58 -> 64 [label=\"outFileName\"]\n  65[label=\"plotHeatmap\"]\n  63 -> 65 [label=\"outFileName\"]\n}",
+          "modified": "2024-10-15 12:31:46 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"Trimmomatic\"];\n  0 -->|output| 10;\n  11[\"FastQC\"];\n  1 -->|output| 11;\n  12[\"Trimmomatic\"];\n  1 -->|output| 12;\n  13[\"FastQC\"];\n  2 -->|output| 13;\n  14[\"Trimmomatic\"];\n  2 -->|output| 14;\n  15[\"FastQC\"];\n  3 -->|output| 15;\n  16[\"Trimmomatic\"];\n  3 -->|output| 16;\n  17[\"FastQC\"];\n  4 -->|output| 17;\n  18[\"Trimmomatic\"];\n  4 -->|output| 18;\n  19[\"FastQC\"];\n  5 -->|output| 19;\n  20[\"Trimmomatic\"];\n  5 -->|output| 20;\n  21[\"FastQC\"];\n  6 -->|output| 21;\n  22[\"Trimmomatic\"];\n  6 -->|output| 22;\n  23[\"FastQC\"];\n  7 -->|output| 23;\n  24[\"Trimmomatic\"];\n  7 -->|output| 24;\n  25[\"FastQC\"];\n  10 -->|fastq_out| 25;\n  26[\"Map with BWA\"];\n  10 -->|fastq_out| 26;\n  27[\"FastQC\"];\n  12 -->|fastq_out| 27;\n  28[\"Map with BWA\"];\n  12 -->|fastq_out| 28;\n  29[\"FastQC\"];\n  14 -->|fastq_out| 29;\n  30[\"Map with BWA\"];\n  14 -->|fastq_out| 30;\n  31[\"FastQC\"];\n  16 -->|fastq_out| 31;\n  32[\"Map with BWA\"];\n  16 -->|fastq_out| 32;\n  33[\"FastQC\"];\n  18 -->|fastq_out| 33;\n  34[\"Map with BWA\"];\n  18 -->|fastq_out| 34;\n  35[\"FastQC\"];\n  20 -->|fastq_out| 35;\n  36[\"Map with BWA\"];\n  20 -->|fastq_out| 36;\n  37[\"FastQC\"];\n  22 -->|fastq_out| 37;\n  38[\"Map with BWA\"];\n  22 -->|fastq_out| 38;\n  39[\"FastQC\"];\n  24 -->|fastq_out| 39;\n  40[\"Map with BWA\"];\n  24 -->|fastq_out| 40;\n  41[\"Samtools idxstats\"];\n  26 -->|bam_output| 41;\n  42[\"Samtools idxstats\"];\n  28 -->|bam_output| 42;\n  43[\"Samtools idxstats\"];\n  30 -->|bam_output| 43;\n  44[\"bamCompare\"];\n  30 -->|bam_output| 44;\n  26 -->|bam_output| 44;\n  45[\"Samtools idxstats\"];\n  32 -->|bam_output| 45;\n  46[\"plotFingerprint\"];\n  26 -->|bam_output| 46;\n  28 -->|bam_output| 46;\n  30 -->|bam_output| 46;\n  32 -->|bam_output| 46;\n  47[\"MACS2 callpeak\"];\n  26 -->|bam_output| 47;\n  28 -->|bam_output| 47;\n  30 -->|bam_output| 47;\n  32 -->|bam_output| 47;\n  48[\"bamCompare\"];\n  32 -->|bam_output| 48;\n  28 -->|bam_output| 48;\n  49[\"Samtools idxstats\"];\n  34 -->|bam_output| 49;\n  50[\"Samtools idxstats\"];\n  36 -->|bam_output| 50;\n  51[\"Samtools idxstats\"];\n  38 -->|bam_output| 51;\n  52[\"bamCompare\"];\n  38 -->|bam_output| 52;\n  34 -->|bam_output| 52;\n  53[\"Samtools idxstats\"];\n  40 -->|bam_output| 53;\n  54[\"multiBamSummary\"];\n  26 -->|bam_output| 54;\n  28 -->|bam_output| 54;\n  30 -->|bam_output| 54;\n  32 -->|bam_output| 54;\n  34 -->|bam_output| 54;\n  36 -->|bam_output| 54;\n  38 -->|bam_output| 54;\n  40 -->|bam_output| 54;\n  55[\"plotFingerprint\"];\n  34 -->|bam_output| 55;\n  36 -->|bam_output| 55;\n  38 -->|bam_output| 55;\n  40 -->|bam_output| 55;\n  56[\"MACS2 callpeak\"];\n  34 -->|bam_output| 56;\n  36 -->|bam_output| 56;\n  38 -->|bam_output| 56;\n  40 -->|bam_output| 56;\n  57[\"bamCompare\"];\n  40 -->|bam_output| 57;\n  36 -->|bam_output| 57;\n  58[\"computeMatrix\"];\n  44 -->|outFileName| 58;\n  48 -->|outFileName| 58;\n  47 -->|output_narrowpeaks| 58;\n  59[\"plotCorrelation\"];\n  54 -->|outFile| 59;\n  60[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 60;\n  56 -->|output_narrowpeaks| 60;\n  f7d2cf37-a065-4fd2-9fcb-ab243e43b3bb[\"Output\\noutput_overlapping_peaks\"];\n  60 --> f7d2cf37-a065-4fd2-9fcb-ab243e43b3bb;\n  style f7d2cf37-a065-4fd2-9fcb-ab243e43b3bb stroke:#2c3143,stroke-width:4px;\n  61[\"bedtools Intersect intervals\"];\n  47 -->|output_narrowpeaks| 61;\n  56 -->|output_narrowpeaks| 61;\n  7c86aace-00d9-4a0f-a1b0-91af5804702f[\"Output\\noutput_g1e_peaks\"];\n  61 --> 7c86aace-00d9-4a0f-a1b0-91af5804702f;\n  style 7c86aace-00d9-4a0f-a1b0-91af5804702f stroke:#2c3143,stroke-width:4px;\n  62[\"bedtools Intersect intervals\"];\n  56 -->|output_narrowpeaks| 62;\n  47 -->|output_narrowpeaks| 62;\n  ab5a7469-4212-4da0-b46e-7209dcbe837d[\"Output\\noutput_megakaryocyte_peaks\"];\n  62 --> ab5a7469-4212-4da0-b46e-7209dcbe837d;\n  style ab5a7469-4212-4da0-b46e-7209dcbe837d stroke:#2c3143,stroke-width:4px;\n  63[\"computeMatrix\"];\n  52 -->|outFileName| 63;\n  57 -->|outFileName| 63;\n  56 -->|output_narrowpeaks| 63;\n  64[\"plotHeatmap\"];\n  58 -->|outFileName| 64;\n  65[\"plotHeatmap\"];\n  63 -->|outFileName| 65;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R1_downsampled_SRR507859.fastqsanger\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_input_R2_downsampled_SRR507860.fastqsanger\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R1_downsampled_SRR492444.fastqsanger\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nG1E_Tal1_R2_downsampled_SRR492445.fastqsanger\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R1_downsampled_SRR492453.fastqsanger\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_input_R2_downsampled_SRR492454.fastqsanger\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nMegakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nRefSeq_gene_annotations_mm10.bed\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Trimmomatic\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"FastQC\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Trimmomatic\"]\n  1 -> 12 [label=\"output\"]\n  13[label=\"FastQC\"]\n  2 -> 13 [label=\"output\"]\n  14[label=\"Trimmomatic\"]\n  2 -> 14 [label=\"output\"]\n  15[label=\"FastQC\"]\n  3 -> 15 [label=\"output\"]\n  16[label=\"Trimmomatic\"]\n  3 -> 16 [label=\"output\"]\n  17[label=\"FastQC\"]\n  4 -> 17 [label=\"output\"]\n  18[label=\"Trimmomatic\"]\n  4 -> 18 [label=\"output\"]\n  19[label=\"FastQC\"]\n  5 -> 19 [label=\"output\"]\n  20[label=\"Trimmomatic\"]\n  5 -> 20 [label=\"output\"]\n  21[label=\"FastQC\"]\n  6 -> 21 [label=\"output\"]\n  22[label=\"Trimmomatic\"]\n  6 -> 22 [label=\"output\"]\n  23[label=\"FastQC\"]\n  7 -> 23 [label=\"output\"]\n  24[label=\"Trimmomatic\"]\n  7 -> 24 [label=\"output\"]\n  25[label=\"FastQC\"]\n  10 -> 25 [label=\"fastq_out\"]\n  26[label=\"Map with BWA\"]\n  10 -> 26 [label=\"fastq_out\"]\n  27[label=\"FastQC\"]\n  12 -> 27 [label=\"fastq_out\"]\n  28[label=\"Map with BWA\"]\n  12 -> 28 [label=\"fastq_out\"]\n  29[label=\"FastQC\"]\n  14 -> 29 [label=\"fastq_out\"]\n  30[label=\"Map with BWA\"]\n  14 -> 30 [label=\"fastq_out\"]\n  31[label=\"FastQC\"]\n  16 -> 31 [label=\"fastq_out\"]\n  32[label=\"Map with BWA\"]\n  16 -> 32 [label=\"fastq_out\"]\n  33[label=\"FastQC\"]\n  18 -> 33 [label=\"fastq_out\"]\n  34[label=\"Map with BWA\"]\n  18 -> 34 [label=\"fastq_out\"]\n  35[label=\"FastQC\"]\n  20 -> 35 [label=\"fastq_out\"]\n  36[label=\"Map with BWA\"]\n  20 -> 36 [label=\"fastq_out\"]\n  37[label=\"FastQC\"]\n  22 -> 37 [label=\"fastq_out\"]\n  38[label=\"Map with BWA\"]\n  22 -> 38 [label=\"fastq_out\"]\n  39[label=\"FastQC\"]\n  24 -> 39 [label=\"fastq_out\"]\n  40[label=\"Map with BWA\"]\n  24 -> 40 [label=\"fastq_out\"]\n  41[label=\"Samtools idxstats\"]\n  26 -> 41 [label=\"bam_output\"]\n  42[label=\"Samtools idxstats\"]\n  28 -> 42 [label=\"bam_output\"]\n  43[label=\"Samtools idxstats\"]\n  30 -> 43 [label=\"bam_output\"]\n  44[label=\"bamCompare\"]\n  30 -> 44 [label=\"bam_output\"]\n  26 -> 44 [label=\"bam_output\"]\n  45[label=\"Samtools idxstats\"]\n  32 -> 45 [label=\"bam_output\"]\n  46[label=\"plotFingerprint\"]\n  26 -> 46 [label=\"bam_output\"]\n  28 -> 46 [label=\"bam_output\"]\n  30 -> 46 [label=\"bam_output\"]\n  32 -> 46 [label=\"bam_output\"]\n  47[label=\"MACS2 callpeak\"]\n  26 -> 47 [label=\"bam_output\"]\n  28 -> 47 [label=\"bam_output\"]\n  30 -> 47 [label=\"bam_output\"]\n  32 -> 47 [label=\"bam_output\"]\n  48[label=\"bamCompare\"]\n  32 -> 48 [label=\"bam_output\"]\n  28 -> 48 [label=\"bam_output\"]\n  49[label=\"Samtools idxstats\"]\n  34 -> 49 [label=\"bam_output\"]\n  50[label=\"Samtools idxstats\"]\n  36 -> 50 [label=\"bam_output\"]\n  51[label=\"Samtools idxstats\"]\n  38 -> 51 [label=\"bam_output\"]\n  52[label=\"bamCompare\"]\n  38 -> 52 [label=\"bam_output\"]\n  34 -> 52 [label=\"bam_output\"]\n  53[label=\"Samtools idxstats\"]\n  40 -> 53 [label=\"bam_output\"]\n  54[label=\"multiBamSummary\"]\n  26 -> 54 [label=\"bam_output\"]\n  28 -> 54 [label=\"bam_output\"]\n  30 -> 54 [label=\"bam_output\"]\n  32 -> 54 [label=\"bam_output\"]\n  34 -> 54 [label=\"bam_output\"]\n  36 -> 54 [label=\"bam_output\"]\n  38 -> 54 [label=\"bam_output\"]\n  40 -> 54 [label=\"bam_output\"]\n  55[label=\"plotFingerprint\"]\n  34 -> 55 [label=\"bam_output\"]\n  36 -> 55 [label=\"bam_output\"]\n  38 -> 55 [label=\"bam_output\"]\n  40 -> 55 [label=\"bam_output\"]\n  56[label=\"MACS2 callpeak\"]\n  34 -> 56 [label=\"bam_output\"]\n  36 -> 56 [label=\"bam_output\"]\n  38 -> 56 [label=\"bam_output\"]\n  40 -> 56 [label=\"bam_output\"]\n  57[label=\"bamCompare\"]\n  40 -> 57 [label=\"bam_output\"]\n  36 -> 57 [label=\"bam_output\"]\n  58[label=\"computeMatrix\"]\n  44 -> 58 [label=\"outFileName\"]\n  48 -> 58 [label=\"outFileName\"]\n  47 -> 58 [label=\"output_narrowpeaks\"]\n  59[label=\"plotCorrelation\"]\n  54 -> 59 [label=\"outFile\"]\n  60[label=\"bedtools Intersect intervals\"]\n  47 -> 60 [label=\"output_narrowpeaks\"]\n  56 -> 60 [label=\"output_narrowpeaks\"]\n  kf7d2cf37a0654fd29fcbab243e43b3bb[color=lightseagreen,label=\"Output\\noutput_overlapping_peaks\"]\n  60 -> kf7d2cf37a0654fd29fcbab243e43b3bb\n  61[label=\"bedtools Intersect intervals\"]\n  47 -> 61 [label=\"output_narrowpeaks\"]\n  56 -> 61 [label=\"output_narrowpeaks\"]\n  k7c86aace00d94a0fa1b091af5804702f[color=lightseagreen,label=\"Output\\noutput_g1e_peaks\"]\n  61 -> k7c86aace00d94a0fa1b091af5804702f\n  62[label=\"bedtools Intersect intervals\"]\n  56 -> 62 [label=\"output_narrowpeaks\"]\n  47 -> 62 [label=\"output_narrowpeaks\"]\n  kab5a746942124da0b46e7209dcbe837d[color=lightseagreen,label=\"Output\\noutput_megakaryocyte_peaks\"]\n  62 -> kab5a746942124da0b46e7209dcbe837d\n  63[label=\"computeMatrix\"]\n  52 -> 63 [label=\"outFileName\"]\n  57 -> 63 [label=\"outFileName\"]\n  56 -> 63 [label=\"output_narrowpeaks\"]\n  64[label=\"plotHeatmap\"]\n  58 -> 64 [label=\"outFileName\"]\n  65[label=\"plotHeatmap\"]\n  63 -> 65 [label=\"outFileName\"]\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.3.2.0.0",
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0",
@@ -20775,7 +21345,7 @@
                 {
                   "output_name": "output",
                   "label": "output_overlapping_peaks",
-                  "uuid": "f0af95f7-7ef6-4acf-8378-45448332f8d2"
+                  "uuid": "f7d2cf37-a065-4fd2-9fcb-ab243e43b3bb"
                 }
               ]
             },
@@ -20826,7 +21396,7 @@
                 {
                   "output_name": "output",
                   "label": "output_g1e_peaks",
-                  "uuid": "de0641f2-5cb1-490f-ae09-d0d2cf1d8e78"
+                  "uuid": "7c86aace-00d9-4a0f-a1b0-91af5804702f"
                 }
               ]
             },
@@ -20877,7 +21447,7 @@
                 {
                   "output_name": "output",
                   "label": "output_megakaryocyte_peaks",
-                  "uuid": "2965de0d-15f2-402d-ba88-a5e2cbec5106"
+                  "uuid": "ab5a7469-4212-4da0-b46e-7209dcbe837d"
                 }
               ]
             }
@@ -21057,6 +21627,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -21204,6 +21779,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -21356,6 +21935,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
@@ -21442,8 +22025,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -21511,6 +22094,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -21661,6 +22248,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -21820,6 +22411,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
@@ -21972,6 +22567,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.3.2.0.0",
                 "server": "https://usegalaxy.be/"
@@ -22058,8 +22657,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.2.0.0",
-                  "3.5.1.0.0"
+                  "3.5.1.0.0",
+                  "3.1.2.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22122,6 +22721,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -22274,6 +22877,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -22430,6 +23037,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -22591,6 +23202,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.72+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -22602,11 +23220,11 @@
                   "0.69",
                   "0.65",
                   "0.67",
-                  "0.68",
                   "0.52",
+                  "0.68",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -22684,8 +23302,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.0.4",
-                  "2.0.5"
+                  "2.0.5",
+                  "2.0.4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -22754,6 +23372,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -22853,8 +23475,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
-                  "2.30.0"
+                  "2.30.0",
+                  "2.29.2"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -22914,6 +23536,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.29.0",
                 "server": "https://usegalaxy.be/"
@@ -22936,8 +23562,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.29.2",
                   "2.30.0",
+                  "2.29.2",
                   "2.19.0"
                 ],
                 "server": "https://usegalaxy.no/"
@@ -23066,6 +23692,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.1.20160309.6",
                 "server": "https://usegalaxy.be/"
@@ -23160,8 +23790,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.38.1",
                   "0.39+galaxy0",
+                  "0.38.1",
                   "0.36.4"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -23222,6 +23852,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.38.0",
                 "server": "https://usegalaxy.be/"
@@ -23233,23 +23867,23 @@
                   "0.36.4",
                   "0.32.3",
                   "0.36.0",
-                  "0.32.2",
-                  "0.32.1"
+                  "0.32.1",
+                  "0.32.2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.38.1",
                   "0.39+galaxy0",
+                  "0.38.1",
                   "0.36.4",
                   "0.39+galaxy2",
-                  "0.32.3",
                   "0.36.5",
+                  "0.32.3",
                   "0.36.0",
-                  "0.32.2",
-                  "0.32.1"
+                  "0.32.1",
+                  "0.32.2"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -23537,9 +24171,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"FastQC\"];\n  1 -->|output| 10;\n  11[\"bwameth\"];\n  0 -->|output| 11;\n  1 -->|output| 11;\n  12[\"Replace column\"];\n  3 -->|output| 12;\n  4 -->|output| 12;\n  13[\"metilene\"];\n  2 -->|output| 13;\n  5 -->|output| 13;\n  3 -->|output| 13;\n  8 -->|output| 13;\n  7 -->|output| 13;\n  6 -->|output| 13;\n  14[\"MethylDackel\"];\n  11 -->|output| 14;\n  15[\"MethylDackel\"];\n  11 -->|output| 15;\n  16[\"Select last\"];\n  12 -->|outfile_replace| 16;\n  17[\"Select last\"];\n  15 -->|outFileExtractCpGFraction| 17;\n  18[\"computeMatrix\"];\n  16 -->|outfile| 18;\n  2 -->|output| 18;\n  19[\"Text reformatting\"];\n  17 -->|outfile| 19;\n  20[\"computeMatrix\"];\n  19 -->|outfile| 20;\n  2 -->|output| 20;\n  21[\"plotProfile\"];\n  20 -->|outFileName| 21;\n  53173f2a-7c93-4775-b9fd-418e92f7ee5c[\"Output\\nplot_profile_tabular\"];\n  21 --> 53173f2a-7c93-4775-b9fd-418e92f7ee5c;\n  style 53173f2a-7c93-4775-b9fd-418e92f7ee5c stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"FastQC\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"bwameth\"]\n  0 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Replace column\"]\n  3 -> 12 [label=\"output\"]\n  4 -> 12 [label=\"output\"]\n  13[label=\"metilene\"]\n  2 -> 13 [label=\"output\"]\n  5 -> 13 [label=\"output\"]\n  3 -> 13 [label=\"output\"]\n  8 -> 13 [label=\"output\"]\n  7 -> 13 [label=\"output\"]\n  6 -> 13 [label=\"output\"]\n  14[label=\"MethylDackel\"]\n  11 -> 14 [label=\"output\"]\n  15[label=\"MethylDackel\"]\n  11 -> 15 [label=\"output\"]\n  16[label=\"Select last\"]\n  12 -> 16 [label=\"outfile_replace\"]\n  17[label=\"Select last\"]\n  15 -> 17 [label=\"outFileExtractCpGFraction\"]\n  18[label=\"computeMatrix\"]\n  16 -> 18 [label=\"outfile\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"Text reformatting\"]\n  17 -> 19 [label=\"outfile\"]\n  20[label=\"computeMatrix\"]\n  19 -> 20 [label=\"outfile\"]\n  2 -> 20 [label=\"output\"]\n  21[label=\"plotProfile\"]\n  20 -> 21 [label=\"outFileName\"]\n  k53173f2a7c934775b9fd418e92f7ee5c[color=lightseagreen,label=\"Output\\nplot_profile_tabular\"]\n  21 -> k53173f2a7c934775b9fd418e92f7ee5c\n}",
+          "modified": "2024-10-15 12:31:46 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"FastQC\"];\n  0 -->|output| 9;\n  10[\"FastQC\"];\n  1 -->|output| 10;\n  11[\"bwameth\"];\n  0 -->|output| 11;\n  1 -->|output| 11;\n  12[\"Replace column\"];\n  3 -->|output| 12;\n  4 -->|output| 12;\n  13[\"metilene\"];\n  2 -->|output| 13;\n  5 -->|output| 13;\n  3 -->|output| 13;\n  8 -->|output| 13;\n  7 -->|output| 13;\n  6 -->|output| 13;\n  14[\"MethylDackel\"];\n  11 -->|output| 14;\n  15[\"MethylDackel\"];\n  11 -->|output| 15;\n  16[\"Select last\"];\n  12 -->|outfile_replace| 16;\n  17[\"Select last\"];\n  15 -->|outFileExtractCpGFraction| 17;\n  18[\"computeMatrix\"];\n  16 -->|outfile| 18;\n  2 -->|output| 18;\n  19[\"Text reformatting\"];\n  17 -->|outfile| 19;\n  20[\"computeMatrix\"];\n  19 -->|outfile| 20;\n  2 -->|output| 20;\n  21[\"plotProfile\"];\n  20 -->|outFileName| 21;\n  832ae4f4-e1dd-45df-bd5d-8d34eb8f68cc[\"Output\\nplot_profile_tabular\"];\n  21 --> 832ae4f4-e1dd-45df-bd5d-8d34eb8f68cc;\n  style 832ae4f4-e1dd-45df-bd5d-8d34eb8f68cc stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  9[label=\"FastQC\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"FastQC\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"bwameth\"]\n  0 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"Replace column\"]\n  3 -> 12 [label=\"output\"]\n  4 -> 12 [label=\"output\"]\n  13[label=\"metilene\"]\n  2 -> 13 [label=\"output\"]\n  5 -> 13 [label=\"output\"]\n  3 -> 13 [label=\"output\"]\n  8 -> 13 [label=\"output\"]\n  7 -> 13 [label=\"output\"]\n  6 -> 13 [label=\"output\"]\n  14[label=\"MethylDackel\"]\n  11 -> 14 [label=\"output\"]\n  15[label=\"MethylDackel\"]\n  11 -> 15 [label=\"output\"]\n  16[label=\"Select last\"]\n  12 -> 16 [label=\"outfile_replace\"]\n  17[label=\"Select last\"]\n  15 -> 17 [label=\"outFileExtractCpGFraction\"]\n  18[label=\"computeMatrix\"]\n  16 -> 18 [label=\"outfile\"]\n  2 -> 18 [label=\"output\"]\n  19[label=\"Text reformatting\"]\n  17 -> 19 [label=\"outfile\"]\n  20[label=\"computeMatrix\"]\n  19 -> 20 [label=\"outfile\"]\n  2 -> 20 [label=\"output\"]\n  21[label=\"plotProfile\"]\n  20 -> 21 [label=\"outFileName\"]\n  k832ae4f4e1dd45dfbd5d8d34eb8f68cc[color=lightseagreen,label=\"Output\\nplot_profile_tabular\"]\n  21 -> k832ae4f4e1dd45dfbd5d8d34eb8f68cc\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0",
             "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_profile/deeptools_plot_profile/2.5.1.1.0",
@@ -23884,7 +24518,7 @@
                 {
                   "output_name": "output_outFileNameData",
                   "label": "plot_profile_tabular",
-                  "uuid": "53173f2a-7c93-4775-b9fd-418e92f7ee5c"
+                  "uuid": "832ae4f4-e1dd-45df-bd5d-8d34eb8f68cc"
                 }
               ]
             }
@@ -24049,6 +24683,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -24131,8 +24770,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.5.1.0.0",
-                  "3.1.2.0.0"
+                  "3.1.2.0.0",
+                  "3.5.1.0.0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -24198,6 +24837,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -24364,6 +25007,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.5.1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -24520,6 +25167,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.3.0",
                 "server": "https://usegalaxy.be/"
@@ -24527,8 +25178,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.5.2+galaxy0",
-                  "0.2.1"
+                  "0.2.1",
+                  "0.5.2+galaxy0"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -24676,6 +25327,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -24838,6 +25493,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -24995,6 +25654,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -25078,9 +25741,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
-                  "0.72+galaxy1"
+                  "0.72+galaxy1",
+                  "0.72"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -25149,10 +25812,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.72+galaxy1",
-                  "0.65",
-                  "0.71"
+                  "0.72",
+                  "0.71",
+                  "0.65"
                 ],
                 "server": "https://palfinder.ls.manchester.ac.uk/"
               },
@@ -25162,6 +25825,13 @@
                   "0.74+galaxy0"
                 ],
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -25181,9 +25851,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.74+galaxy1"
                 ],
@@ -25205,9 +25875,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72",
                   "0.73+galaxy0",
                   "0.72+galaxy1",
+                  "0.72",
                   "0.74+galaxy0",
                   "0.69",
                   "0.71",
@@ -25326,10 +25996,14 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
-                  "0.2.0.4",
-                  "0.2.2"
+                  "0.2.2",
+                  "0.2.0.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -25366,8 +26040,8 @@
                 "versions": [
                   "0.2.3+galaxy0",
                   "0.2.2",
-                  "0.2.6+galaxy0",
                   "0.2.2+galaxy1",
+                  "0.2.6+galaxy0",
                   "0.2.7+galaxy0"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -25479,6 +26153,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -25632,47 +26310,22 @@
         "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology.",
         "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
       ],
-      "contributors": [
-        {
-          "name": "Katarzyna Kamieniecka",
-          "twitter": "katemurat",
-          "orcid": "0009-0004-2454-5950",
-          "joined": "2018-08",
-          "elixir_node": "uk",
-          "affiliations": [
-            "elixir-europe"
-          ],
-          "id": "kkamieniecka",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
-        },
-        {
-          "name": "Khaled Jum’ah",
-          "email": "k.jumah@bradford.ac.uk",
-          "orcid": "0000-0001-5481-8893",
-          "joined": "2022-09",
-          "elixir_node": "uk",
-          "affiliations": [
-            "elixir-europe"
-          ],
-          "id": "khaled196",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
-        },
-        {
-          "name": "Krzysztof Poterlowicz",
-          "twitter": "bioinfbrad",
-          "orcid": "0000-0001-6173-5674",
-          "joined": "2017-09",
-          "elixir_node": "uk",
-          "affiliations": [
-            "elixir-europe"
-          ],
-          "id": "poterlowicz-lab",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/poterlowicz-lab.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/"
-        }
-      ],
+      "contributions": {
+        "authorship": [
+          "kkamieniecka",
+          "khaled196",
+          "poterlowicz-lab"
+        ],
+        "editing": [
+
+        ],
+        "testing": [
+
+        ],
+        "funding": [
+          "elixir-europe"
+        ]
+      },
       "js_requirements": {
         "mathjax": null,
         "mermaid": false
@@ -25686,9 +26339,9 @@
       "id": "epigenetics/ewas-suite",
       "hands_on": true,
       "slides": true,
-      "mod_date": "2024-10-12 05:48:25 +0000",
+      "mod_date": "2024-10-15 12:19:56 +0000",
       "pub_date": "2018-08-27 08:04:21 +0000",
-      "version": 20,
+      "version": 21,
       "workflows": [
         {
           "workflow": "Infinium-Human-Methylation-BeadChip.ga",
@@ -25765,7 +26418,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-15 12:20:17 +0000",
+          "modified": "2024-10-15 12:31:46 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nR01C02_Red.idat\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nR02C02_Red.idat\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nR05C02_Red.idat\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"ℹ️ Input Dataset\\nR06C02_Red.idat\"];\n  style 3 stroke:#2c3143,stroke-width:4px;\n  4[\"ℹ️ Input Dataset\\nR01C02_Green.idat\"];\n  style 4 stroke:#2c3143,stroke-width:4px;\n  5[\"ℹ️ Input Dataset\\nR02C02_Green.idat\"];\n  style 5 stroke:#2c3143,stroke-width:4px;\n  6[\"ℹ️ Input Dataset\\nR05C02_Green.idat\"];\n  style 6 stroke:#2c3143,stroke-width:4px;\n  7[\"ℹ️ Input Dataset\\nR06C02_Green.idat\"];\n  style 7 stroke:#2c3143,stroke-width:4px;\n  8[\"ℹ️ Input Dataset\\nphenotype Table txt file\"];\n  style 8 stroke:#2c3143,stroke-width:4px;\n  9[\"ℹ️ Input Dataset\\nUCSC Main on Human\"];\n  style 9 stroke:#2c3143,stroke-width:4px;\n  10[\"Infinium Human Methylation BeadChip\"];\n  4 -->|output| 10;\n  5 -->|output| 10;\n  6 -->|output| 10;\n  7 -->|output| 10;\n  0 -->|output| 10;\n  1 -->|output| 10;\n  2 -->|output| 10;\n  3 -->|output| 10;\n  8 -->|output| 10;\n  9 -->|output| 10;\n  2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a[\"Output\\nSNPInfo Table\"];\n  10 --> 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a;\n  style 2ac7dd5d-ed74-4d58-b1cb-be7dcca9154a stroke:#2c3143,stroke-width:4px;\n  d1732a98-1861-4612-bdaa-f68861c22f56[\"Output\\nDifferentially Methylated Regions\"];\n  10 --> d1732a98-1861-4612-bdaa-f68861c22f56;\n  style d1732a98-1861-4612-bdaa-f68861c22f56 stroke:#2c3143,stroke-width:4px;\n  9aa8b4a9-611e-4a39-864f-400f17866a9e[\"Output\\nDifferentially Methylated Positions\"];\n  10 --> 9aa8b4a9-611e-4a39-864f-400f17866a9e;\n  style 9aa8b4a9-611e-4a39-864f-400f17866a9e stroke:#2c3143,stroke-width:4px;\n  14ddb6f7-637e-4193-bfb5-80aeae4fab64[\"Output\\nQuality Control Report\"];\n  10 --> 14ddb6f7-637e-4193-bfb5-80aeae4fab64;\n  style 14ddb6f7-637e-4193-bfb5-80aeae4fab64 stroke:#2c3143,stroke-width:4px;\n  c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d[\"Output\\nQuality Control Plot\"];\n  10 --> c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d;\n  style c8c37ff8-716d-4c23-a84f-7cebcb4b6c9d stroke:#2c3143,stroke-width:4px;\n  11[\"ChIPpeakAnno annoPeaks\"];\n  10 -->|dmp| 11;\n  bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5[\"Output\\nTable of Annotated Peaks\"];\n  11 --> bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5;\n  style bedf4346-da4d-4e1a-bf3c-a7d20f3ec3c5 stroke:#2c3143,stroke-width:4px;\n  12[\"Cut\"];\n  11 -->|tab| 12;\n  0b54dfe5-f84a-4288-b631-ae4dc2384a17[\"Output\\nCut on Table of Annotated Peaks\"];\n  12 --> 0b54dfe5-f84a-4288-b631-ae4dc2384a17;\n  style 0b54dfe5-f84a-4288-b631-ae4dc2384a17 stroke:#2c3143,stroke-width:4px;\n  13[\"Remove beginning\"];\n  12 -->|out_file1| 13;\n  8f65cf82-7427-4273-ba0b-a6673ee1ff2d[\"Output\\nRemove beginning on the cut output\"];\n  13 --> 8f65cf82-7427-4273-ba0b-a6673ee1ff2d;\n  style 8f65cf82-7427-4273-ba0b-a6673ee1ff2d stroke:#2c3143,stroke-width:4px;\n  14[\"Cluster Profiler Bitr\"];\n  13 -->|out_file1| 14;\n  7989f80a-3e79-4d2f-bbe4-e4d641eebd6a[\"Output\\nTable of Translated Gene ID's\"];\n  14 --> 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a;\n  style 7989f80a-3e79-4d2f-bbe4-e4d641eebd6a stroke:#2c3143,stroke-width:4px;\n  15[\"Cluster Profiler GO\"];\n  14 -->|translation| 15;\n  ff6c7018-b821-4ade-9931-fa99aeb0a86c[\"Output\\nGO Enrichment Analysis of a Gene Set\"];\n  15 --> ff6c7018-b821-4ade-9931-fa99aeb0a86c;\n  style ff6c7018-b821-4ade-9931-fa99aeb0a86c stroke:#2c3143,stroke-width:4px;\n  03b88399-095b-4bd5-9693-528c60338407[\"Output\\nGO Enrichment Analysis Visualization\"];\n  15 --> 03b88399-095b-4bd5-9693-528c60338407;\n  style 03b88399-095b-4bd5-9693-528c60338407 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nR01C02_Red.idat\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nR02C02_Red.idat\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nR05C02_Red.idat\"]\n  3[color=lightblue,label=\"ℹ️ Input Dataset\\nR06C02_Red.idat\"]\n  4[color=lightblue,label=\"ℹ️ Input Dataset\\nR01C02_Green.idat\"]\n  5[color=lightblue,label=\"ℹ️ Input Dataset\\nR02C02_Green.idat\"]\n  6[color=lightblue,label=\"ℹ️ Input Dataset\\nR05C02_Green.idat\"]\n  7[color=lightblue,label=\"ℹ️ Input Dataset\\nR06C02_Green.idat\"]\n  8[color=lightblue,label=\"ℹ️ Input Dataset\\nphenotype Table txt file\"]\n  9[color=lightblue,label=\"ℹ️ Input Dataset\\nUCSC Main on Human\"]\n  10[label=\"Infinium Human Methylation BeadChip\"]\n  4 -> 10 [label=\"output\"]\n  5 -> 10 [label=\"output\"]\n  6 -> 10 [label=\"output\"]\n  7 -> 10 [label=\"output\"]\n  0 -> 10 [label=\"output\"]\n  1 -> 10 [label=\"output\"]\n  2 -> 10 [label=\"output\"]\n  3 -> 10 [label=\"output\"]\n  8 -> 10 [label=\"output\"]\n  9 -> 10 [label=\"output\"]\n  k2ac7dd5ded744d58b1cbbe7dcca9154a[color=lightseagreen,label=\"Output\\nSNPInfo Table\"]\n  10 -> k2ac7dd5ded744d58b1cbbe7dcca9154a\n  kd1732a9818614612bdaaf68861c22f56[color=lightseagreen,label=\"Output\\nDifferentially Methylated Regions\"]\n  10 -> kd1732a9818614612bdaaf68861c22f56\n  k9aa8b4a9611e4a39864f400f17866a9e[color=lightseagreen,label=\"Output\\nDifferentially Methylated Positions\"]\n  10 -> k9aa8b4a9611e4a39864f400f17866a9e\n  k14ddb6f7637e4193bfb580aeae4fab64[color=lightseagreen,label=\"Output\\nQuality Control Report\"]\n  10 -> k14ddb6f7637e4193bfb580aeae4fab64\n  kc8c37ff8716d4c23a84f7cebcb4b6c9d[color=lightseagreen,label=\"Output\\nQuality Control Plot\"]\n  10 -> kc8c37ff8716d4c23a84f7cebcb4b6c9d\n  11[label=\"ChIPpeakAnno annoPeaks\"]\n  10 -> 11 [label=\"dmp\"]\n  kbedf4346da4d4e1abf3ca7d20f3ec3c5[color=lightseagreen,label=\"Output\\nTable of Annotated Peaks\"]\n  11 -> kbedf4346da4d4e1abf3ca7d20f3ec3c5\n  12[label=\"Cut\"]\n  11 -> 12 [label=\"tab\"]\n  k0b54dfe5f84a4288b631ae4dc2384a17[color=lightseagreen,label=\"Output\\nCut on Table of Annotated Peaks\"]\n  12 -> k0b54dfe5f84a4288b631ae4dc2384a17\n  13[label=\"Remove beginning\"]\n  12 -> 13 [label=\"out_file1\"]\n  k8f65cf8274274273ba0ba6673ee1ff2d[color=lightseagreen,label=\"Output\\nRemove beginning on the cut output\"]\n  13 -> k8f65cf8274274273ba0ba6673ee1ff2d\n  14[label=\"Cluster Profiler Bitr\"]\n  13 -> 14 [label=\"out_file1\"]\n  k7989f80a3e794d2fbbe4e4d641eebd6a[color=lightseagreen,label=\"Output\\nTable of Translated Gene ID's\"]\n  14 -> k7989f80a3e794d2fbbe4e4d641eebd6a\n  15[label=\"Cluster Profiler GO\"]\n  14 -> 15 [label=\"translation\"]\n  kff6c7018b8214ade9931fa99aeb0a86c[color=lightseagreen,label=\"Output\\nGO Enrichment Analysis of a Gene Set\"]\n  15 -> kff6c7018b8214ade9931fa99aeb0a86c\n  k03b88399095b4bd59693528c60338407[color=lightseagreen,label=\"Output\\nGO Enrichment Analysis Visualization\"]\n  15 -> k03b88399095b4bd59693528c60338407\n}",
           "workflow_tools": [
@@ -26676,6 +27329,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -26817,6 +27475,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -26951,6 +27613,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -27082,6 +27748,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -27222,6 +27892,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -27356,6 +28030,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -27496,6 +28174,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -27585,6 +28267,140 @@
       },
       "license": "CC-BY-4.0",
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
+        },
+        {
+          "name": "Krzysztof Poterlowicz",
+          "twitter": "bioinfbrad",
+          "orcid": "0000-0001-6173-5674",
+          "joined": "2017-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "poterlowicz-lab",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/poterlowicz-lab.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/poterlowicz-lab/"
+        },
+        {
+          "name": "ELIXIR Europe",
+          "joined": "2017-09",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/elixir-europe.json",
+          "avatar": "/training-material/shared/images/elixir.png",
+          "ror": "044rwnt51",
+          "members": [
+            "abretaud",
+            "anuprulez",
+            "bebatut",
+            "bedroesb",
+            "bgruening",
+            "bfranicevic",
+            "B0r1sD",
+            "cat-bro",
+            "claresloggett",
+            "clsiguret",
+            "colineroyaux",
+            "combesf",
+            "deeptivarshney",
+            "eancelet",
+            "ElectronicBlueberry",
+            "EngyNasr",
+            "erxleben",
+            "fpsom",
+            "frederikcoppens",
+            "hexylena",
+            "hmenager",
+            "hrhotz",
+            "jfaulon",
+            "JasperO98",
+            "khaled196",
+            "kinow",
+            "kikkomep",
+            "kostrykin",
+            "kysrpex",
+            "Lain-inrae",
+            "lecorguille",
+            "lldelisle",
+            "kkamieniecka",
+            "poterlowicz-lab",
+            "mjostaszewski",
+            "martenson",
+            "MattiHoch",
+            "mbaardwijk",
+            "mboudet",
+            "mcmaniou",
+            "mira-miracoli",
+            "martinwolst",
+            "Nilchia",
+            "neoformit",
+            "nomadscientist",
+            "nsoranzo",
+            "odoppelt",
+            "onorvez",
+            "pauldg",
+            "paulzierep",
+            "pavanvidem",
+            "proccaserra",
+            "robertmand",
+            "rlibouba",
+            "SaimMomin12",
+            "sanjaysrikakulam",
+            "sbenateau",
+            "shiltemann",
+            "simleo",
+            "sitjart",
+            "stain",
+            "supernord",
+            "teresa-m",
+            "ThibaudGlinez",
+            "torfinnnome",
+            "tseemann",
+            "TKlingstrom",
+            "willemdek11",
+            "wm75",
+            "yvanlebras"
+          ],
+          "former_members": [
+            "blankclemens",
+            "gallardoalba",
+            "gmauro",
+            "heylf",
+            "joachimwolff",
+            "khanteymoori",
+            "mtekman",
+            "simonbray",
+            "thomaswollmann",
+            "torhou"
+          ],
+          "id": "elixir-europe",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/"
+        }
+      ],
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/epigenetics/tutorials/ewas-suite/tutorial.json"

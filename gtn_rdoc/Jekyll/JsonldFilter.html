@@ -69,7 +69,7 @@
     <li ><a href="#method-i-generate_dublin_core">#generate_dublin_core</a>
     <li ><a href="#method-i-generate_event_jsonld">#generate_event_jsonld</a>
     <li ><a href="#method-i-generate_funder_jsonld">#generate_funder_jsonld</a>
-    <li ><a href="#method-i-generate_funding_jsonld">#generate_funding_jsonld</a>
+    <li ><a href="#method-i-generate_grant_jsonld">#generate_grant_jsonld</a>
     <li ><a href="#method-i-generate_learning_pathway_jsonld">#generate_learning_pathway_jsonld</a>
     <li ><a href="#method-i-generate_material_jsonld">#generate_material_jsonld</a>
     <li ><a href="#method-i-generate_news_jsonld">#generate_news_jsonld</a>
@@ -207,7 +207,7 @@
     <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">funding</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">page</span>.<span class="ruby-identifier">to_h</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
+    <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">materials</span> = []
@@ -438,10 +438,10 @@
 
       </div>
 
-      <div id="method-i-generate_funding_jsonld" class="method-detail ">
+      <div id="method-i-generate_grant_jsonld" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
-            <span class="method-name">generate_funding_jsonld</span><span
+            <span class="method-name">generate_grant_jsonld</span><span
               class="method-args">(id, contributor, site)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -450,9 +450,9 @@
         <div class="method-description">
           
 
-          <div class="method-source-code" id="generate_funding_jsonld-source">
+          <div class="method-source-code" id="generate_grant_jsonld-source">
             <pre><span class="ruby-comment"># File _plugins/jekyll-jsonld.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_funding_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_grant_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">organization</span> = {
     <span class="ruby-value">&#39;@context&#39;:</span> <span class="ruby-string">&#39;https://schema.org&#39;</span>,
     <span class="ruby-value">&#39;@type&#39;:</span> <span class="ruby-string">&#39;Grant&#39;</span>,
@@ -541,7 +541,7 @@
 
   <span class="ruby-identifier">funding</span> = <span class="ruby-identifier">materials</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">material</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
+      <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">compact</span>
 
@@ -839,12 +839,12 @@
   <span class="ruby-identifier">funders</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_funders</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">funding</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">generate_funding_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">x</span>), <span class="ruby-identifier">site</span>)
+  <span class="ruby-identifier">grants</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">material</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">to_pfo_jsonld</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">site</span>, <span class="ruby-value">json:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funder&#39;</span>] = <span class="ruby-identifier">funders</span>
-  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funding&#39;</span>] = <span class="ruby-identifier">funding</span>
+  <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funding&#39;</span>] = <span class="ruby-identifier">grants</span>
 
   <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;identifier&#39;</span>] = <span class="ruby-node">&quot;https://gxy.io/GTN:#{material[&#39;short_id&#39;]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;short_id&#39;</span>)
 
@@ -1209,7 +1209,7 @@
     },
     <span class="ruby-value">id:</span> <span class="ruby-node">&quot;#{site[&#39;url&#39;]}#{site[&#39;baseurl&#39;]}/hall-of-fame/#{id}/&quot;</span>,
     <span class="ruby-value">name:</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_name</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>),
-    <span class="ruby-value">description:</span> <span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;funding_statement&#39;</span>, <span class="ruby-string">&#39;An organization supporting the Galaxy Training Network&#39;</span>),
+    <span class="ruby-value">description:</span> <span class="ruby-string">&#39;An organization supporting the Galaxy Training Network&#39;</span>,
   }
 
   <span class="ruby-identifier">organization</span>[<span class="ruby-string">&#39;url&#39;</span>] = <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;url&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;url&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;url&#39;</span>]
@@ -1367,12 +1367,12 @@
 <dl class="rdoc-list note-list"><dt><code>id</code>
 <dd>
 <p>The id of the person.</p>
-</dd><dt><code>contributor</code>
-<dd>
-<p>The contributor object from CONTRIBUTORS.yaml.</p>
 </dd><dt><code>site</code>
 <dd>
 <p>The site object.</p>
+</dd><dt><code>json</code>
+<dd>
+<p>Should the output be rendered as JSON (only really used in contributor page.)</p>
 </dd></dl>
 
 <p>Returns:</p>
@@ -1387,8 +1387,8 @@
   <span class="ruby-identifier">contributor</span> = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
   <span class="ruby-identifier">d</span> = <span class="ruby-keyword">if</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
         <span class="ruby-identifier">generate_person_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
-      <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">funder?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
-        <span class="ruby-identifier">generate_funder_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
+      <span class="ruby-keyword">elsif</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">grant?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">id</span>)
+        <span class="ruby-identifier">generate_grant_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
       <span class="ruby-keyword">else</span>
         <span class="ruby-identifier">generate_org_jsonld</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">contributor</span>, <span class="ruby-identifier">site</span>)
       <span class="ruby-keyword">end</span>

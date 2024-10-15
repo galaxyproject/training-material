@@ -81,7 +81,7 @@
     <li ><a href="#method-c-git_log">::git_log</a>
     <li ><a href="#method-c-graph_dot">::graph_dot</a>
     <li ><a href="#method-c-identify_contributors">::identify_contributors</a>
-    <li ><a href="#method-c-identify_funders">::identify_funders</a>
+    <li ><a href="#method-c-identify_funders_and_grants">::identify_funders_and_grants</a>
     <li ><a href="#method-c-list_all_materials">::list_all_materials</a>
     <li ><a href="#method-c-list_all_tags">::list_all_tags</a>
     <li ><a href="#method-c-list_materials_by_tool">::list_materials_by_tool</a>
@@ -664,7 +664,7 @@
 <p>Examples: <a href="TopicFilter.html#method-c-get_version"><code>get_version</code></a>(“toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0”) =&gt; “1.0.0”</p>
 
           <div class="method-source-code" id="get_version-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 931</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 936</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_version</span>(<span class="ruby-identifier">tool</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
     <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;/&#39;</span>)[<span class="ruby-value">-1</span>]
@@ -821,7 +821,7 @@
 <p>Returns:</p>
 <dl class="rdoc-list note-list"><dt><code>Array</code>
 <dd>
-<p>An array of contributors as strings.</p>
+<p>An array of individual contributors as strings.</p>
 </dd></dl>
 
           <div class="method-source-code" id="identify_contributors-source">
@@ -830,8 +830,11 @@
   <span class="ruby-identifier">materials</span>
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>] }.<span class="ruby-identifier">flatten</span>
     <span class="ruby-comment"># Not 100% sure why this flatten is needed? Probably due to the map over hash</span>
-    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mat</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">mat</span>) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">shuffle</span>
-    .<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">funder?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
+    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mat</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">mat</span>) }
+    .<span class="ruby-identifier">flatten</span>
+    .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
+    .<span class="ruby-identifier">uniq</span>
+    .<span class="ruby-identifier">shuffle</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -839,10 +842,10 @@
 
       </div>
 
-      <div id="method-c-identify_funders" class="method-detail ">
+      <div id="method-c-identify_funders_and_grants" class="method-detail ">
         <div class="method-header">
           <div class="method-heading">
-            <span class="method-name">identify_funders</span><span
+            <span class="method-name">identify_funders_and_grants</span><span
               class="method-args">(materials, site)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -858,17 +861,19 @@
 <p>Returns:</p>
 <dl class="rdoc-list note-list"><dt><code>Array</code>
 <dd>
-<p>An array of funders as strings.</p>
+<p>An array of funder (organisations that provided support) IDs as strings.</p>
 </dd></dl>
 
-          <div class="method-source-code" id="identify_funders-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 914</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">identify_funders</span>(<span class="ruby-identifier">materials</span>, <span class="ruby-identifier">site</span>)
+          <div class="method-source-code" id="identify_funders_and_grants-source">
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 917</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">identify_funders_and_grants</span>(<span class="ruby-identifier">materials</span>, <span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">materials</span>
     .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;materials&#39;</span>] }.<span class="ruby-identifier">flatten</span>
     <span class="ruby-comment"># Not 100% sure why this flatten is needed? Probably due to the map over hash</span>
-    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mat</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">mat</span>) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">shuffle</span>
-    .<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">funder?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>) }
+    .<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mat</span><span class="ruby-operator">|</span> <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_all_funding</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">mat</span>) }
+    .<span class="ruby-identifier">flatten</span>
+    .<span class="ruby-identifier">uniq</span>
+    .<span class="ruby-identifier">shuffle</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
@@ -963,7 +968,7 @@
 <p>}</p>
 
           <div class="method-source-code" id="list_materials_by_tool-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 965</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 970</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list_materials_by_tool</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">tool_map</span> = {}
 
@@ -1669,7 +1674,7 @@
 <p>Examples: <a href="TopicFilter.html#method-c-short_tool"><code>short_tool</code></a>(“toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0”) =&gt; “galaxyp/regex1”</p>
 
           <div class="method-source-code" id="short_tool-source">
-            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 948</span>
+            <pre><span class="ruby-comment"># File _plugins/jekyll-topic-filter.rb, line 953</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">short_tool</span>(<span class="ruby-identifier">tool</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tool</span>.<span class="ruby-identifier">count</span>(<span class="ruby-string">&#39;/&#39;</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
     <span class="ruby-node">&quot;#{tool.split(&#39;/&#39;)[2]}/#{tool.split(&#39;/&#39;)[4]}&quot;</span>

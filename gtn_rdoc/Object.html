@@ -177,13 +177,13 @@
         <dd><p>The fastimage gem may not be installed, and that is OK, we will fall back to another method</p>
         <dt id="FEED_WIDGET_XSLT">FEED_WIDGET_XSLT
         <dd>
-        <dt id="FUNDERS">FUNDERS
-        <dd>
-        <dt id="FUNDERS_SCHEMA">FUNDERS_SCHEMA
-        <dd>
-        <dt id="FUNDERS_SCHEMA_UNSAFE">FUNDERS_SCHEMA_UNSAFE
-        <dd>
         <dt id="GALAXIES">GALAXIES
+        <dd>
+        <dt id="GRANTS">GRANTS
+        <dd>
+        <dt id="GRANTS_SCHEMA">GRANTS_SCHEMA
+        <dd>
+        <dt id="GRANTS_SCHEMA_UNSAFE">GRANTS_SCHEMA_UNSAFE
         <dd>
         <dt id="GTN_CACHE">GTN_CACHE
         <dd>
@@ -312,14 +312,14 @@
     [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01T12:00:00&quot;</span>, <span class="ruby-string">&#39;content&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;GTN Contributions from #{k}&quot;</span>), <span class="ruby-string">&#39;contributors&#39;</span>, <span class="ruby-identifier">obj</span>, [<span class="ruby-string">&#39;contributor&#39;</span>]]
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;funders&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">bucket</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>].<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">a</span> = {<span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;@#{k}&quot;</span>,
          <span class="ruby-string">&#39;content&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">&quot;GTN Contributions from #{k}&quot;</span>}
     <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">objectify</span>(<span class="ruby-identifier">a</span>, <span class="ruby-node">&quot;/hall-of-fame/#{k}/&quot;</span>, <span class="ruby-identifier">k</span>)
 
-    <span class="ruby-comment"># TODO: backdate funders, organisations</span>
+    <span class="ruby-comment"># TODO: backdate grants, organisations</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>[<span class="ruby-string">&#39;joined&#39;</span>]
-      [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01T12:00:00&quot;</span>), <span class="ruby-string">&#39;funders&#39;</span>, <span class="ruby-identifier">obj</span>, [<span class="ruby-string">&#39;funder&#39;</span>]]
+      [<span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;#{v[&#39;joined&#39;]}-01T12:00:00&quot;</span>), <span class="ruby-string">&#39;grants&#39;</span>, <span class="ruby-identifier">obj</span>, [<span class="ruby-string">&#39;grant&#39;</span>]]
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">compact</span>
 
@@ -372,7 +372,7 @@
         <span class="ruby-identifier">repl</span> = []
         <span class="ruby-comment"># If one of the elements in this array is CONTRIBUTORS, replace it with the same named variable</span>
         <span class="ruby-identifier">repl</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">CONTRIBUTORS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;CONTRIBUTORS&#39;</span> }
-        <span class="ruby-identifier">repl</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">FUNDERS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;FUNDERS&#39;</span> }
+        <span class="ruby-identifier">repl</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">GRANTS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;GRANTS&#39;</span> }
         <span class="ruby-identifier">repl</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">ORGANISATIONS</span>.<span class="ruby-identifier">keys</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;ORGANISATIONS&#39;</span> }
         <span class="ruby-identifier">v</span>.<span class="ruby-identifier">replace</span> <span class="ruby-identifier">repl</span>.<span class="ruby-identifier">flatten</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">repl</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
       <span class="ruby-keyword">end</span>
@@ -451,10 +451,10 @@
     <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:organisations</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">linkify</span>(<span class="ruby-node">&quot;@#{c}&quot;</span>, <span class="ruby-node">&quot;hall-of-fame/#{c}&quot;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:funders</span>].<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">filter</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:grants</span>].<span class="ruby-identifier">length</span>.<span class="ruby-identifier">positive?</span>
     <span class="ruby-identifier">newsworthy</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\n## #{data[:funders].length} new funders!\n\n&quot;</span>
-    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:funders</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">linkify</span>(<span class="ruby-node">&quot;@#{c}&quot;</span>, <span class="ruby-node">&quot;hall-of-fame/#{c}&quot;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;\n\n## #{data[:grants].length} new grants!\n\n&quot;</span>
+    <span class="ruby-identifier">output</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>[<span class="ruby-value">:grants</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">linkify</span>(<span class="ruby-node">&quot;@#{c}&quot;</span>, <span class="ruby-node">&quot;hall-of-fame/#{c}&quot;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^/</span>, <span class="ruby-string">&#39;- &#39;</span>)
   <span class="ruby-keyword">end</span>
 
   [<span class="ruby-identifier">output</span>, <span class="ruby-identifier">newsworthy</span>]
@@ -1162,7 +1162,7 @@
             <pre><span class="ruby-comment"># File _plugins/feeds.rb, line 480</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate_matrix_feed</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">mats</span>, <span class="ruby-value">group_by:</span> <span class="ruby-string">&#39;day&#39;</span>, <span class="ruby-value">filter_by:</span> <span class="ruby-keyword">nil</span>)
   <span class="ruby-comment"># new materials (tut + sli)</span>
-  <span class="ruby-comment"># new funders/contributors/orgs</span>
+  <span class="ruby-comment"># new grants/contributors/orgs</span>
   <span class="ruby-comment"># new news posts(?)</span>
   <span class="ruby-identifier">filter_title</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">filter_by</span>.<span class="ruby-identifier">nil?</span>

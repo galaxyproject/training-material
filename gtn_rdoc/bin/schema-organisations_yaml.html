@@ -92,7 +92,7 @@
       <li><a href="../bin/schema-event-external_yaml.html">schema-event-external.yaml</a>
       <li><a href="../bin/schema-event_yaml.html">schema-event.yaml</a>
       <li><a href="../bin/schema-faq_yaml.html">schema-faq.yaml</a>
-      <li><a href="../bin/schema-funders_yaml.html">schema-funders.yaml</a>
+      <li><a href="../bin/schema-grants_yaml.html">schema-grants.yaml</a>
       <li><a href="../bin/schema-learning-pathway_yaml.html">schema-learning-pathway.yaml</a>
       <li><a href="../bin/schema-news_yaml.html">schema-news.yaml</a>
       <li><a href="../bin/schema-organisations_yaml.html">schema-organisations.yaml</a>
@@ -138,17 +138,30 @@
     description: |
         This ideally is your GitHub handle. If you do not have, or do not wish to provide a GitHub username, you may make up another identifier here, but then you must set `github: false` as described below.
     mapping:
+        short_name:
+            type: str
+            description: |
+                Name of the organisation, as short as possible (e.g. acronyms)
+            _examples:
+                - EBI
+                - UFR
+                - NIH
+
         name:
             type: str
             required: true
             description: |
-                Your preferred name. If you prefer an alias or another name, this is welcome, it does not need to be your legal name.
+                Full name of the organisation (e.g. acronyms expanded).
             _examples:
-                - 张三
-                - Alice
-                - Jane Doe
-                - Madame Tout-le-Monde
-                - Γιάννης Παπαδόπουλος
+                - European Bioinformatics Institute
+                - University of Freiburg
+                - National Institutes of Health
+
+        description:
+            type: str
+            description: |
+                A couple sentences of description about the organisation
+
         email:
             type: str
             pattern: /@/

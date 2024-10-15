@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>schema-funders.yaml - RDoc Documentation</title>
+<title>schema-grants.yaml - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -92,7 +92,7 @@
       <li><a href="../bin/schema-event-external_yaml.html">schema-event-external.yaml</a>
       <li><a href="../bin/schema-event_yaml.html">schema-event.yaml</a>
       <li><a href="../bin/schema-faq_yaml.html">schema-faq.yaml</a>
-      <li><a href="../bin/schema-funders_yaml.html">schema-funders.yaml</a>
+      <li><a href="../bin/schema-grants_yaml.html">schema-grants.yaml</a>
       <li><a href="../bin/schema-learning-pathway_yaml.html">schema-learning-pathway.yaml</a>
       <li><a href="../bin/schema-news_yaml.html">schema-news.yaml</a>
       <li><a href="../bin/schema-organisations_yaml.html">schema-organisations.yaml</a>
@@ -122,7 +122,7 @@
   </div>
 </nav>
 
-<main role="main" aria-label="Page bin/schema-funders.yaml">
+<main role="main" aria-label="Page bin/schema-grants.yaml">
 <hr>
 
 <p>type: map _examples: |</p>
@@ -221,29 +221,25 @@
                 - &quot;2020-01-01&quot;
         avatar:
             type: str
-        funder:
-            type: bool
-            description: Set this to true if this entity is a funding agency.
-            required: true
-            enum:
-              - true
         funding_id:
             type: str
+            required: true
             description: The short identifier for your grant.
             _examples:
                 - 2020-1-NL01-KA203-064717
         url:
             type: str
-            description: associated webpage (NOTE, funders only!)
+            description: associated webpage
             _examples:
               - &quot;https://elixir-europe.org&quot;
-        funding_system:
+        funding_database:
             type: str
             description: Automatically link to the grant&#39;s information in the appropriate funding system site.
             enum:
                 - cordis
                 - erasmusplus
                 - ukri
+                - highergov
         funder_name:
             type: str
             description: A name for the agency providing the funding.

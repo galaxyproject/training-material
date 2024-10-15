@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@c262e1981d2aedbf4218805eda17050c56b4e51e",
+		release: "galaxy-training-network@cfbc2ed4498b854c1946b47f5660f859664b0b58",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Object tracking using CellProfiler">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-05 13:33:11 +0000">
+<meta name="DC.date" content="2024-10-15 12:19:56 +0000">
 <meta name="DC.creator" content="Yi Sun">
 <meta name="DC.creator" content="Beatriz Serrano-Solano">
 <meta name="DC.creator" content="Jean-Karim Hériché"><meta name="description" content="Image analysis using Galaxy">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-03-05 13:33:11 +0000",
+  "dateModified": "2024-10-15 12:19:56 +0000",
   "datePublished": "2021-03-17 18:17:34 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Object tracking using CellProfiler",
   "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/object-tracking-using-cell-profiler/tutorial.html",
-  "version": 7,
+  "version": 8,
   "timeRequired": "PT1H",
   "teaches": "- Segment fluorescent objects using CellProfiler in Galaxy\n- Track objects over multiple frames using CellProfiler in Galaxy",
   "keywords": [
@@ -524,6 +524,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       ]
     }
   ],
+  "contributor": [
+
+  ],
   "about": [
     {
       "@type": "CreativeWork",
@@ -723,10 +726,39 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <div markdown="0">
 
 	<div class="contributors-line">
-		Authors: <a href="/training-material/hall-of-fame/sunyi000/" class="contributor-badge contributor-sunyi000"><img src="https://avatars.githubusercontent.com/sunyi000?s=36" alt="Yi Sun avatar" width="36" class="avatar" />
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/sunyi000/" class="contributor-badge contributor-sunyi000"><img src="https://avatars.githubusercontent.com/sunyi000?s=36" alt="Yi Sun avatar" width="36" class="avatar" />
     Yi Sun</a><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge contributor-beatrizserrano"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/beatrizserrano?s=36" alt="Beatriz Serrano-Solano avatar" width="36" class="avatar" />
     Beatriz Serrano-Solano</a><a href="/training-material/hall-of-fame/jkh1/" class="contributor-badge contributor-jkh1"><img src="https://avatars.githubusercontent.com/jkh1?s=36" alt="Jean-Karim Hériché avatar" width="36" class="avatar" />
     Jean-Karim Hériché</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
 	</div>
 
 </div>
@@ -1090,7 +1122,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 17, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 15, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1108,7 +1140,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 7 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 8 </div>
 
     </blockquote>
     </section>
@@ -1834,7 +1866,7 @@ A common source of errors is not providing the correct information to a module s
                         function tutorial_finish() {
                           if(typeof plausible !== 'undefined'){
                             // Plausible may be undefined (script blocked)
-                            // or it may be defined, but opted-out (select box/DNT), 
+                            // or it may be defined, but opted-out (select box/DNT),
                             // which means `plausible()` will work but not send data, *nor* execute the callback.
                             plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
@@ -1946,9 +1978,7 @@ author = "Yi Sun and Beatriz Serrano-Solano and Jean-Karim Hériché",
                    </p>
                 </blockquote>
 
-		<h2 id="funding">Funding</h2>
-		<p>These individuals or organisations provided funding support for the development of this resource</p>
-                
+        
 
 
 <script>
@@ -2067,7 +2097,7 @@ tools:
         
 		</blockquote>
 
-		
+
 
 
 		
@@ -2145,7 +2175,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/c262e1981d2aedbf4218805eda17050c56b4e51e">c262e19</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cfbc2ed4498b854c1946b47f5660f859664b0b58">cfbc2ed</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
