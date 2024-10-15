@@ -143,7 +143,7 @@ Next we will need to use the single-cell data to build and expression set object
 >
 {: .hands_on}
 
-Similar to the expression data, this object needs to be duplicated 20 times into a collection for later batch processing.
+Similar to the expression data, this ExpressionSet object needs to be duplicated 20 times into a collection for later batch processing.
 
 > <hands-on-title>Generate ESet collection</hands-on-title>
 >
@@ -158,7 +158,7 @@ Similar to the expression data, this object needs to be duplicated 20 times into
 
 # Create pseudo-bulk and actual cell proportions
 
-Here we are going to run our first workflow, this workflow will extract a subsample from the data containing 200 cells. This data will be used to generate our pseudo-bulk data along with the actual cell proportions used to evaluate/compare with the output of the deconvolutional tools.
+We are now going to run our first workflow! This workflow will extract a subsample from the data containing 200 cells. This data will be used to generate our pseudo-bulk data along with the actual cell proportions used to evaluate/compare with the output of the deconvolutional tools.
 
 > <comment-title>Inputting Multiple Datasets</comment-title>
 >
@@ -211,9 +211,123 @@ Need to identify the list of cells first before running the second workflow, thi
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
+# Visualise Results
+
+> <hands-on-title>Transpose output tables</hands-on-title>
+>
+> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input tabular dataset"*: `MuSiC x NNLS`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Transposed - MuSiC x NNLS`
+>
+{: .hands_on}
+
+Now we need to separate the output tables for MuSiC and NNLS in the transposed collection.
+
+> <hands-on-title>Extract MuSiC Table</hands-on-title>
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Transposed - MuSiC x NNLS`
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>       - *"Delimited by"*: `Tab`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>           - *"List of Fields"*: `- c4: NNLS Estimated Proportions of Cell Types
+- c5: NNLS Estimated Proportions of Cell Types`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Results`
+>
+{: .hands_on}
+
+> <hands-on-title>Extract NNLS Table</hands-on-title>
+>
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Transposed - MuSiC x NNLS`
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>       - *"Delimited by"*: `Tab`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>           - *"List of Fields"*: `- c2: Music Estimated Proportions of Cell Types
+- c3: Music Estimated Proportions of Cell Types`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `NNLS Results`
+>
+{: .hands_on}
+
+
+Now instead of having a collection of tables, we need to combine the collections together into a single table for both MuSiC and NNLS.
+
+> <hands-on-title>Combine output tables (MuSiC)</hands-on-title>
+>
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `MuSiC Results`
+>    - *"Keep one header line"*: **Yes**
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Combined Music table`
+>
+> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - *"Remove first"*: `1`
+>    - {% icon param-file %} *"Tabular files"*: `Combined Music table`
+>
+> 4. **Rename** {% icon galaxy-pencil %} output `MuSiC Combined`
+>
+{: .hands_on}
+
+> <hands-on-title>Combine output tables (NNLS)</hands-on-title>
+>
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `NNLS Results`
+>    - *"Keep one header line"*: **Yes**
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Combined NNLS table`
+>
+> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - *"Remove first"*: `1`
+>    - {% icon param-file %} *"Tabular files"*: `Combined NNLS table`
+>
+> 4. **Rename** {% icon galaxy-pencil %} output `NNLS Combined`
+>
+{: .hands_on}
+
+> <hands-on-title>Plot the actual and inferred data</hands-on-title>
+>
+> 1. {% tool [Scatterplot with ggplot2
+](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input in tabular format"*: `Combined output`
+>    - *"Column to plot on x-axis"*: `2`
+>    - *"Column to plot on y-axis"*: `3`
+>    - *"Plot title"*: `Correlation between inferred and actual cell-type proportions`
+>    - *"Label for x axis"*: `Actual proportions`
+>    - *"Label for y axis"*: `Inferred proportions`
+>    - In *"Advanced options"*:
+>       - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>           - *"column differentiating the different groups"*: `1`
+>           - *"Color schemes to differentiate your groups"*: `Paired - predefined color pallete (discrete, max=12 colors)`
+>           - *"Reverse color scheme"*: `Default order of color scheme`
+>    - In *"Output options"*:
+>       - *"width of output"*: `5.0`
+>       - *"height of output"*: `3.0`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Scatterplot`
+>
+{: .hands_on}
+
+
 # Compute Accuracy and Error Metrics
 
-Combine the collection of tables together
+Then plot with scatterplot tool
+
+Then show how it should be more quantitative and can be plotted in different ways
+
+Workflow -> compute error, compute RMSE, compute Pearson coefficient
+
+Use error table, filter for certain cell types, plot violin plot
+
+show the RSME and Pearson coefficient values as quantitative metrics for both error (as seen in the violin plot) and correlation (as shown in the scatter plot)
+
+so plots first, nice and visual, easy to interpret, then more concrete quantitative results
+
+need to do this for both MuSiC and NNLS
 
 > <hands-on-title>Combine output tables</hands-on-title>
 >
@@ -235,4 +349,3 @@ Combine the collection of tables together
 >
 {: .hands_on}
 
-# Visualise outputs
