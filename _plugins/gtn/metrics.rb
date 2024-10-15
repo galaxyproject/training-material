@@ -108,7 +108,7 @@ module Gtn
           help: 'Total number of organisations',
           type: 'counter'
         },
-        'gtn_funders_total' => {
+        'gtn_grants_total' => {
           value: segment(site.data['grants'].values.reject { |x| x['halloffame'] == 'no' }, 'orcid'),
           help: 'Total number of grants',
           type: 'counter'

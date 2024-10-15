@@ -86,31 +86,37 @@ module Gtn
     end
 
     ##
-    # Get the funders of a material.
+    # Get the funders (organisations) of a material.
     # Params:
     # +data+:: +Hash+ of the YAML frontmatter from a material
     # Returns:
     # +Array+ of contributor IDs
     def self.get_funders(site, data)
-      if data.key?('contributions') && data['contributions'].key?('funding')
-        # The ones specifically in the Grants table
-        data['contributions']['funding'].reject{ |f| site.data['grants'].key?(f) }
-      else
-        []
-      end
+      self.get_all_funding(site, data).reject{ |f| site.data['grants'].key?(f) }
     end
 
     ##
-    # Get the funders of a material.
+    # Get the funders (grants) of a material.
     # Params:
     # +site+:: +Jekyll::Site+ object
     # +data+:: +Hash+ of the YAML frontmatter from a material
     # Returns:
     # +Array+ of grant IDs
     def self.get_grants(site, data)
+      self.get_all_funding(site, data).select{ |f| site.data['grants'].key?(f) }
+    end
+
+    ##
+    # Get the funders (grants + organisations) of a material.
+    # Params:
+    # +site+:: +Jekyll::Site+ object
+    # +data+:: +Hash+ of the YAML frontmatter from a material
+    # Returns:
+    # +Array+ of funder IDs mixing grants + organisations
+    def self.get_all_funding(site, data)
       if data.key?('contributions') && data['contributions'].key?('funding')
         # The ones specifically in the Grants table
-        data['contributions']['funding'].select{ |f| site.data['grants'].key?(f) }
+        data['contributions']['funding']
       else
         []
       end
@@ -134,14 +140,14 @@ module Gtn
     # +c+:: +String+ of contributor ID
     # Returns:
     # +Hash+ of contributor information
-    # +String+ type of contributor (e.g. 'contributor', 'organisation', 'funder')
+    # +String+ type of contributor (e.g. 'contributor', 'organisation', 'grant')
     def self.fetch(site, c, warn: false)
       if _load_file(site, 'contributors').key?(c)
         return ['contributor', site.data['contributors'][c]]
       elsif _load_file(site, 'organisations').key?(c)
         return ['organisation', site.data['organisations'][c]]
       elsif _load_file(site, 'grants').key?(c)
-        return ['funder', site.data['grants'][c]]
+        return ['grant', site.data['grants'][c]]
       else
         if ! warn
           Jekyll.logger.warn "Contributor #{c} not found"
@@ -178,7 +184,7 @@ module Gtn
     # Params:
     # +site+:: +Jekyll::Site+ object
     # Returns:
-    # +Hash+ of contributors, funders, organisations merged together
+    # +Hash+ of contributors, grants, organisations merged together
     def self.list(site)
       site.data['contributors']
           .merge(site.data['grants'])
@@ -197,12 +203,12 @@ module Gtn
     end
 
     ##
-    # Check if a specific contributor is a funder or not
+    # Check if a specific contributor is a grant or not
     # Params:
     # +c+:: +String+ of contributor ID
     # Returns:
-    # +Boolean+ of whether the contributor is a funder or not
-    def self.funder?(site, c)
+    # +Boolean+ of whether the contributor is a grant or not
+    def self.grant?(site, c)
       site.data['grants'].key?(c)
     end
 
@@ -225,7 +231,7 @@ module Gtn
       when 'highergov'
         "https://www.highergov.com/contract/#{contributor['funding_id']}/"
       else
-        Jekyll.logger.error "Unknown funding system #{contributor['funding_database']}"
+        Jekyll.logger.error "Unknown funding system #{contributor['funding_database']}. Please let us know so we can add support for it!"
         'ERROR'
       end
     end
