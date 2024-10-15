@@ -320,7 +320,6 @@ In the final step, we will create a pipeline learner with the **Pipeline builder
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
 >            - *"Type in parameter settings if different from default"*: `random_state=42`
->        - In *"Output parameters for searchCV?"*: `Yes`
 > 
 >      `random_state` could be set to any arbitrary integer number; its purpose is to ensure a determistic and therefore reproducible result.
 >
