@@ -213,6 +213,8 @@ Need to identify the list of cells first before running the second workflow, thi
 
 # Visualise Results
 
+## Pre-process the output results
+
 > <hands-on-title>Transpose output tables</hands-on-title>
 >
 > 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1) %} with the following parameters:
@@ -295,10 +297,12 @@ Now instead of having a collection of tables, we need to combine the collections
 >
 {: .hands_on}
 
+## Plot scatter plots of the results
+
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
 > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input in tabular format"*: `Combined output`
+>    - {% icon param-file %} *"Input in tabular format"*: `MuSiC Combined`
 >    - *"Column to plot on x-axis"*: `2`
 >    - *"Column to plot on y-axis"*: `3`
 >    - *"Plot title"*: `Correlation between inferred and actual cell-type proportions`
@@ -314,6 +318,24 @@ Now instead of having a collection of tables, we need to combine the collections
 >       - *"height of output"*: `3.0`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Scatterplot`
+>
+> 3. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input in tabular format"*: `NNLS Combined`
+>    - *"Column to plot on x-axis"*: `2`
+>    - *"Column to plot on y-axis"*: `3`
+>    - *"Plot title"*: `Correlation between inferred and actual cell-type proportions`
+>    - *"Label for x axis"*: `Actual proportions`
+>    - *"Label for y axis"*: `Inferred proportions`
+>    - In *"Advanced options"*:
+>       - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
+>           - *"column differentiating the different groups"*: `1`
+>           - *"Color schemes to differentiate your groups"*: `Paired - predefined color pallete (discrete, max=12 colors)`
+>           - *"Reverse color scheme"*: `Default order of color scheme`
+>    - In *"Output options"*:
+>       - *"width of output"*: `5.0`
+>       - *"height of output"*: `3.0`
+>
+> 4. **Rename** {% icon galaxy-pencil %} output `NNLS Scatterplot`
 >
 {: .hands_on}
 
