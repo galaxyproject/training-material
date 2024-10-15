@@ -51,7 +51,7 @@ The next step of the clinical metaproteomics workflow is the quantification work
 
 In this current workflow, we perform Quantification using the MaxQuant tool and the output will be interpreted in our next module.
 
-![Quantitation workflow](../../images/clinical-mp/clinical-mp-quantification.JPG)
+![Quantitation workflow]({% link topics/proteomics/images/clinical-mp/clinical-mp-quantification.JPG %})
 
 
 
