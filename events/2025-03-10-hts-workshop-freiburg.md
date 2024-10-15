@@ -30,8 +30,8 @@ location:
     lat: 47.993460
     lon: 7.845110
   name: University Freiburg
-  # address: Werthmannstrasse 4
-  # postcode: 79104
+  address: Werthmannstrasse 4
+  postcode: 79104
   city: Freiburg
   country: Germany
 
