@@ -150,7 +150,7 @@ if not os.path.exists(out):
 
 # Convert to png
 if not os.path.exists(out.replace(&#39;.svg&#39;, &#39;.png&#39;)):
-    subprocess.check_call([&#39;magick&#39;, &#39;-density&#39;, &#39;100&#39;, out, out.replace(&#39;.svg&#39;, &#39;.png&#39;)])
+    subprocess.check_call([&#39;convert&#39;, &#39;-density&#39;, &#39;100&#39;, out, out.replace(&#39;.svg&#39;, &#39;.png&#39;)])
     subprocess.check_call([&#39;optipng&#39;, out.replace(&#39;.svg&#39;, &#39;.png&#39;)])
 max_ts = max(max_ts, time)</pre>
 
