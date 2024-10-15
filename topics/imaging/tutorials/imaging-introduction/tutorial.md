@@ -24,10 +24,13 @@ follow_up_training:
     topic_name: imaging
     tutorials:
       - hela-screen-analysis
-contributors:
-  - thomaswollmann
-  - shiltemann
-  - kostrykin
+contributions:
+  authorship:
+    - thomaswollmann
+    - shiltemann
+    - kostrykin
+  funding:
+    - elixir-europe
 tags:
   - HeLa
 

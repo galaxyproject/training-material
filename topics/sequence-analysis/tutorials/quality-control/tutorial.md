@@ -26,16 +26,19 @@ key_points:
 - Check the impact of the quality control
 - Different tools are available to provide additional quality metrics
 - For paired-end reads analyze the forward and reverse reads together
-contributors:
-- bebatut
-- mblue9
-- alexcorm
-- abretaud
-- lleroi
-- r1corre
-- stephanierobin
-- gallantries
-- neoformit
+contributions:
+  authorship:
+  - bebatut
+  - mblue9
+  - alexcorm
+  - abretaud
+  - lleroi
+  - r1corre
+  - stephanierobin
+  - neoformit
+  funding:
+  - gallantries
+
 recordings:
 - youtube_id: coaMGvZazoc
   length: 50M
@@ -58,9 +61,9 @@ recordings:
   length: 51M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-30'
-  speakers: 
+  speakers:
   - dianichj
-  captioners: 
+  captioners:
   - dianichj
   bot-timestamp: 1727710795
 

@@ -41,8 +41,10 @@ tags:
 - interactive-tools
 key_points:
 - To be added
-contributors:
+contributions:
+  authorship:
   - fpsom
+  funding:
   - gallantries
 
 recordings:

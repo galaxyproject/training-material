@@ -17,9 +17,12 @@ key_points:
   - "Galaxy provides ways to inspect and re-use Galaxy histories"
   - "Galaxy provides an easy way to re-run tasks from histories"
 subtopic: next-steps
-contributors:
-  - foellmelanie
-  - annefou
+contributions:
+  authorship:
+    - foellmelanie
+    - annefou
+  funding:
+    - uni-freiburg
 ---
 
 This training will demonstrate how to reproduce analyses performed in the Galaxy framework. Before we start with the hands-on part, we would like to give you some information about Galaxy.
