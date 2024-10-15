@@ -111,7 +111,26 @@ TODO: a few sentences about the demo data (what kind of data, where did it come 
 >
 {: .hands_on}
 
-https://git.nfdi4plants.org/]
+
+### Install ARCitect
+
+Now we will install the ARCitect tool.
+
+TODO: make this a choose-your-own adventure section, instructions per OS
+
+
+> <hands-on-title> Install the ARCitect tool on Linux  </hands-on-title>
+>
+> 1. Follow the installation instructions on the [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/) for your OS:
+>    - [Windows Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_windows.html)
+>    - [macOS Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_macos.html)
+>    - [Linux Installation Instructions](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_linux.html)
+>
+> 2. Start ARCitect to verify that everything is installed correctly. You should see a screen like this:
+>
+>
+{: .hands_on}
+
 
 ## ARCitect: Structure your data
 
