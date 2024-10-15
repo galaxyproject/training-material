@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: "VGP assembly pipeline: Step by Step"
+title: "Vertebrate genome assembly using HiFi, Bionano and Hi-C data - Step by Step"
 zenodo_link: 'https://zenodo.org/record/5887339'
 level: Intermediate
 tags:
@@ -41,6 +41,8 @@ abbreviations:
   CN: copy number
   ASM: assembly
   QV: consensus accuracy quality value
+  TE: transposable elements
+  TR: tandem repeats
 
 recordings:
 - captioners:
@@ -56,13 +58,13 @@ recordings:
 ---
 
 
-Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produced highly accurate but short (up to 800bp) reads. Those read extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
+Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to perform *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produced highly accurate but short (up to 800bp) reads. These read lengths were not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, also known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). In 2020, PacBio introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial, you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 
 Deciphering the structural organization of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
 
-Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR) that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
+Repetitive elements can be grouped into two categories: interspersed repeats, such as {TE} that occur at multiple loci throughout the genome, and {TR} that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). {TE} content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, {TR} usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor impacting genome assembly. Haplotype phasing, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
+Heterozygosity is also an important factor impacting genome assembly. Haplotype phasing, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the state-of-the-art strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
 The {G10K} launched the Vertebrate Genome Project ({VGP}), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline, including multiple {QC} evaluations.
 
@@ -87,11 +89,11 @@ Before getting into the thick of things, let's go over some terms you will often
 
 **Pseudohaplotype assembly**: A genome assembly that consists of long-phased haplotype blocks separated by regions where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", when the parental haplotypes alternate along the same sequence. These types of assemblies are usually represented by a _primary assembly_ and an _alternate assembly_. (This definition is largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
 
-**Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the _alternate assambly_ which often reports only the other set of loci for heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
+**Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the _alternate assambly_ which often reports only the other allele for heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
 
-**Alternate assembly**: The alternate assembly consists of the alternate loci not represented in the _primary assembly_ (heterozygous loci from the other haplotype). These types of sequences are often referred to as haplotigs. Traditionally, the alternate assembly is less complete compared to the primary assembly since homozygous regions are not represented.
+**Alternate assembly**: The alternate assembly consists of the alternate alleles not represented in the _primary assembly_ (heterozygous loci from the other haplotype). These types of sequences are often referred to as haplotigs. Traditionally, the alternate assembly is less complete compared to the primary assembly since homozygous regions are not represented.
 
-**Phasing**: Phasing aims to partition the contigs for an individual according to the haplotype they are derived from. When possible, this is done by identifying parental alleles using read data from the parents. Locally, this is achieved using linkage information in long read datasets. Recent approaches have managed to phase using long-range Hi-C linkage information from the same individual ({% cite Cheng2021 %}).
+**Phasing**: Phasing aims to partition the contigs for an individual according to the haplotype they are derived from. When parental data is available, this is done by identifying parental alleles using read data from the parents. Locally, this is achieved using linkage information in long read datasets. Recent approaches have managed to phase using long-range {Hi-C} linkage information from the same individual ({% cite Cheng2021 %}).
 
 **Assembly graph**: A representation of the genome inferred from sequencing reads. Sequencing captures the genome as many fragmented pieces, instead of whole entire chromosomes at once (we eagerly await the day when this statement will be outdated!). The start of the assembly process pieces together these genome fragments to generate an assembly graph, which is a representation of the sequences and their overlaps. Visualizing assembly graphs can show where homozygous regions branch off into alternate paths on different haplotypes.
 
@@ -107,9 +109,9 @@ False duplications via **overlaps** result from unresolved overlaps in the assem
 
 ![Types of false duplication.](../../images/vgp_assembly/falseduplications.png "Schematic of types of false duplication. Image adapted from {% cite Rhie2021 %}.")
 
-**Purging**: Purging aims to remove false duplications, collapsed repeats, and very low support/coverage regions from an assembly. When performed on a primary assembly, the haplotigs are retained and typically placed in the alternate assembly.
+**Purging**: Purging aims to remove false duplications, collapsed repeats, and very low support/coverage regions from an assembly. When performed on a primary assembly, the haplotigs are removed from the primary and typically placed in the alternate assembly.
 
-**Scaffold**: A scaffold refers to one or more contigs separated by gap (unknown) sequence. Contigs are usually generated with the aid of additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by sequences of _N_'s. Gaps length in the sequence can be sized or arbitrary, depending on the technology used for scaffolding (*e.g.*, optical maps can introduce sized gaps).
+**Scaffold**: A scaffold refers to one or more contigs separated by gap (unknown) sequence. Scaffolds are usually generated with the aid of additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by sequences of _N_'s. Gap length in the sequence can be sized or arbitrary, depending on the technology used for scaffolding (*e.g.*, optical maps can introduce sized gaps, while scaffolding software using {Hi-C} information usually uses an arbitrary number of N's, such as 500 or 200).
 
 For more about the specific scaffolding technologies used in the VGP pipeline (currently Bionano optical maps and Hi-C chromatin conformation data), please refer to those specific sections within this tutorial.
 
@@ -119,7 +121,7 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 **Manual curation**: This term refers to manually evaluating and manipulating an assembly based on the raw supporting evidence (*e.g.*, using Hi-C contact map information). The user takes into account the original sequencing data to resolve potential _misassemblies_ and _missed joins_.
 
-**Misassembly**: Misassemblies are a type of assembly error that usually refers to any structural error in the genome reconstruction, *.e.g.*, sequences that are not adjacent in the genome being placed next to each other in the sequence. Misassemblies can be potentially identified and remedied by manual curation.
+**Misassembly**: Misassemblies are a type of assembly error that usually refers to any structural error in the genome reconstruction, *e.g.*, sequences that are not adjacent in the genome being placed next to each other in the sequence. Misassemblies can be potentially identified and remedied by manual curation.
 
 **Missed join**: A missed join happens when two sequences are adjacent to each other in the genome but are not represented contiguously in the final sequence. Missed joins can be identified and remedied in manual curation with Hi-C data.
 
@@ -132,7 +134,7 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 |  Input data | Assembly quality  | Analysis trajectory <br>([Fig. 2)](#figure-2)|
 |------|---------------|-----|
 | HiFi | The minimum requirement | A |
-| HiFi + HiC | Better haplotype resolution (less haplotype switches) | B |
+| HiFi + HiC | Better haplotype resolution (fewer switch errors) | B |
 | HiFi + BioNano | Better contiguity | C |
 | HiFi + Hi-C + BioNano | Even better contiguity | D |
 | HiFi + parental data | Properly phased | E |
@@ -140,11 +142,21 @@ The {VGP} assembly pipeline has a modular organization, consisting of ten workfl
 | HiFi + parental + BioNano | Properly phased with improved contiguity | G |
 | HiFi + parental data + Hi-C + BioNano | Properly phased with even more improved contiguity | H |
 
-In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** *HiFi* and *Hi-C* are derived from the individual whose genome is being assembled. (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage Illumina data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
+In this table, *HiFi* and *Hi-C* refer to HiFi and Hi-C data derived from the individual whose genome is being assembled. **This tutorial assumes you are assembling the genome of one individual; there are special considerations necessary for pooled data that are not covered in this tutorial.** (Note: you can use Hi-C data from another individual of the same species to scaffold, but you *cannot* use that data to phase the contigs in hifiasm.) *Parental data* is high-coverage whole genome resequencing data derived from the parents of the individual being assembled, and is the key component of trio-based genome assembly. Each combination of input datasets is demonstrated in Fig. 2 by an *analysis trajectory*: a combination of workflows designed for generating the best assembly given a particular combination of inputs. These trajectories are listed in the table above and shown in the figure below.
 
 ![The nine workflows of Galaxy assembly pipeline](../../images/vgp_assembly/VGP_workflow_modules.svg "Eight analysis trajectories are possible depending on the combination of input data. A decision on whether or not to invoke Workflow 6 is based on the analysis of QC output of workflows 3, 4, or 5. Thicker lines connecting Workflows 7, 8, and 9 represent the fact that these workflows are invoked separately for each phased assembly (once for maternal and once for paternal).")
-<br>
-The first stage of the pipeline is the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate. **This is useful for getting an idea of the genome that lies within your reads, and is also useful for necessary for parameterizing downstream workflows.** The generation of *k*-mer counts can be done from HiFi data only (Workflow 1), or include data from parental reads for trio-based phasing (Workflow 2), if one wants to generate *k*-mer spectra for the individual's parents, as well. The second stage is contig assembly. In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required. Purging (Workflow 6), using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases contiguity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as haplotype resolution is attained using set operations done on parental *k*-mers. The fourth stage, scaffolding, produces chromosome-level scaffolds using information provided by Bionano (Workflow 7, with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional)) and Hi-C (Workflow 8, with [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms). A final stage of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
+
+The stages of genome assembly in the VGP-Galaxy pipeline are generally:
+
+1. ***K*-mer profiling**: the generation of *k*-mer profiles of the raw reads to estimate genome size, heterozygosity, repetitiveness, and error rate. This is useful for getting an idea of the genome that lies within your reads, and is also useful for necessary for parameterizing downstream workflows. The generation of *k*-mer counts can be done from HiFi data only (Workflow 1), or include data from parental reads for trio-based phasing (Workflow 2), if one wants to generate *k*-mer spectra for the individual's parents, as well.
+
+2. **Contig assembly**: In addition to using only {HiFi} reads (Workflow 3), the contig building (contiging) step can leverage {Hi-C} (Workflow 4) or parental read data (Workflow 5) to produce fully-phased haplotypes (hap1/hap2 or parental/maternal assigned haplotypes), using [`hifiasm`](https://github.com/chhylp123/hifiasm). The contiging workflows also produce a number of critical quality control (QC) metrics such as *k*-mer multiplicity profiles. Inspection of these profiles provides information to decide whether the third stage—purging of false duplication—is required.
+
+3. (*Optional*) **Purging**: Purging duplicates (Workflow 6) using [`purge_dups`](https://github.com/dfguan/purge_dups) identifies and resolves haplotype-specific assembly segments incorrectly labeled as primary contigs, as well as heterozygous contig overlaps. This increases contiguity and the quality of the final assembly. The purging stage is generally unnecessary for trio data, as haplotype resolution is attained using set operations done on parental *k*-mers.
+
+4. **Scaffolding**: Scaffolding produces chromosome-level scaffolds using information provided by Bionano (Workflow 7, with [`Bionano Solve`](https://bionano.com/software-downloads/) (optional)) and Hi-C (Workflow 8, with [`YaHS`](https://github.com/c-zhou/yahsscaffolding) algorithms).
+
+5. **Decontamination**: A final step of decontamination (Workflow 9) removes non-target sequences (e.g., contamination as well as mitochondrial sequences) from the scaffolded assembly. A separate workflow (WF0) is used for mitochondrial assembly.
 
 > <comment-title>A note on data quality</comment-title>
 > For diploids, we suggest at least 30✕ PacBio HiFi coverage & around 60✕ Hi-C coverage, and up to 60✕ HiFi coverage to accurately assemble highly repetitive regions.
@@ -174,8 +186,8 @@ In order to reduce computation time, we will assemble samples from the yeast _Sa
 
 The first step is to get the datasets from Zenodo. Specifically, we will be uploading two datasets:
 
-1. A set of PacBio {HiFi} reads in `fasta` format
-2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format
+1. A set of PacBio {HiFi} reads in `fasta` format. Please note that your HiFi reads received from a sequencing center will usually be fastqsanger.gz format, but the dataset used in this tutorial has been converted to fasta for space.
+2. A set of Illumina {Hi-C} reads in `fastqsanger.gz` format.
 
 ## Uploading `fasta` datasets from Zenodo
 
@@ -228,6 +240,10 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 >
 >    {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
 >
+> 3. Rename the datasets as follow: 
+>     -  Rename `SRR7126301_1.fastq.gz` as `Hi-C_dataset_F`. It contains the forward reads.
+>     -  Rename `SRR7126301_2.fastq.gz` as `Hi-C_dataset_R`. It contains the reverse reads.
+>
 {: .hands_on}
 
 > <warning-title>These datasets are large!</warning-title>
@@ -236,8 +252,7 @@ Illumina {Hi-C} data is uploaded in essentially the same way as shown in the fol
 
 ## Organizing the data
 
-If everything goes smoothly your history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly,
-the workflow we will be using for the analysis of our data takes collection as input (it does not access individual datasets). So let's create a collection using steps outlined in the Tip {% icon tip %} "Creating a dataset collection":
+If everything goes smoothly your history will look like shown in the figure below. The three {HiFi} fasta files are better represented as a collection: {collection}. Also, importantly, the workflow we will be using for the analysis of our data takes a collection as input (it does not access individual datasets). So let's create a collection using steps outlined in the Tip {% icon tip %} "Creating a dataset collection":
 
 {% snippet faqs/galaxy/collections_build_list.md %}
 
@@ -267,44 +282,37 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 > <hands-on-title>Primer removal with Cutadapt</hands-on-title>
 >
->**Step 1**: Run {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0) %} with the following parameters:
-> 1. *"Single-end or Paired-end reads?"*: `Single-end`
-> 2. {% icon param-collection %} *"FASTQ/A file"*: `HiFi_collection`
-> 3. In *"Read 1 Options"*:
->    - In *"5' or 3' (Anywhere) Adapters"*:
->       - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->          - *"Source"*: `Enter custom sequence`
->             - *"Enter custom 5' or 3' adapter name"*: `First adapter`
->             - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
->       - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
->          - *"Source"*: `Enter custom sequence`
->             - *"Enter custom 5' or 3' adapter name"*: `Second adapter`
->             - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
-> 4. In *"Adapter Options"*:
->     - *"Maximum error rate"*: `0.1`
->     - *"Minimum overlap length"*: `35`
->     - *"Look for adapters in the reverse complement"*: `Yes`
-> 5. In *"Filter Options"*:
->     - *"Discard Trimmed Reads"*: `Yes`
+> 1. Run {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.4+galaxy0) %} with the following parameters:
+>    - *"Single-end or Paired-end reads?"*: `Single-end`
+>    - {% icon param-collection %} *"FASTQ/A file"*: `HiFi_collection`
+>    - In *"Read 1 Options"*:
+>        - In *"5' or 3' (Anywhere) Adapters"*:
+>            - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>                - *"Source"*: `Enter custom sequence`
+>                - *"Enter custom 5' or 3' adapter name"*: `First adapter`
+>                - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCAACAACAACAACGGAGGAGGAGGAAAAGAGAGAGAT`
+>            - {% icon param-repeat %} *"Insert 5' or 3' (Anywhere) Adapters"*
+>                - *"Source"*: `Enter custom sequence`
+>                - *"Enter custom 5' or 3' adapter name"*: `Second adapter`
+>                - *"Enter custom 5' or 3' adapter sequence"*: `ATCTCTCTCTTTTCCTCCTCCTCCGTTGTTGTTGTTGAGAGAGAT`
+>    - In *"Adapter Options"*:
+>        - *"Maximum error rate"*: `0.1`
+>        - *"Minimum overlap length"*: `35`
+>        - *"Look for adapters in the reverse complement"*: `Yes`
+>    - In *"Filter Options"*:
+>        - *"Discard Trimmed Reads"*: `Yes`
 >
-> > <tip-title>Select collection dataset</tip-title>
-> >
-> > 1. Click on {% icon param-collection %} **Dataset collection** in front of the input parameter you want to supply the collection to.
-> > 2. Select the collection you want to use from the list
-> >
-> {: .tip}
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
-><br>
+> 2. Rename the output file as `HiFi_collection (trimmed)`.
 >
->**Step 2**: Rename the output file as `HiFi_collection (trimmed)`.
->
-> {% snippet faqs/galaxy/datasets_rename.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 {: .hands_on}
 
 # Genome profile analysis
 
-Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
+Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
 > <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
 >
@@ -342,32 +350,32 @@ In order to identify some key characteristics of the genome, we do genome profil
 
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
->**Step 1**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
->  1. *"Operation type selector"*: `Count operations`
->  2. *"Count operations"*: `Count: count the occurrences of canonical k-mers`
->  3. {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
->  4. *"k-mer size selector"*: `Set a k-mer size`
->  5. "*k-mer size*": `31`
+> 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
+>    - *"Operation type selector"*: `Count operations`
+>    - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
+>    - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
+>    - *"k-mer size selector"*: `Set a k-mer size`
+>    - "*k-mer size*": `31`
 >
-> > <comment-title>Selection of <i>k</i>-mer size</comment-title>
-> >
-> > We used 31 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
-> {: .comment}
-><br>
->**Step 2**: Rename output as `meryldb`
+>    > <comment-title>Selection of <i>k</i>-mer size</comment-title>
+>    >
+>    > We used 31 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
+>    {: .comment}
 >
->**Step 3**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
->  1. *"Operation type selector"*: `Operations on sets of *k*-mers`
->  2. *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
->  3. {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
+> 2. Rename output as `meryldb`
 >
->**Step 4**: Rename it as `Merged meryldb`
+> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
+>    - *"Operation type selector"*: `Operations on sets of *k*-mers`
+>    - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>    - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
->**Step 5**: Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} for the third time with the following parameters:
+> 4. Rename it as `Merged meryldb`
+>
+> 5. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} for the third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `Merged meryldb`
 >
->**Step 6**: Finally, rename it as `meryldb histogram`.
+> 6. Finally, rename it as `meryldb histogram`.
 >
 {: .hands_on}
 
@@ -377,13 +385,14 @@ The next step is to infer the genome properties from the *k*-mer histogram gener
 
 > <hands-on-title>Estimate genome properties</hands-on-title>
 >
-> Run {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
-> 1. {% icon param-file %} *"Input histogram file"*: `meryldb histogram`
-> 2. *Ploidy for model to use*: `2`
-> 3. *"k-mer length used to calculate k-mer spectra"*: `31`
-> 4. In "*Output options*": mark `Summary of the analysis`
-> 5. In "*Advanced options*":
-> 6. *"Create testing.tsv file with model parameters"*: `Yes`
+> 1. Run {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Input histogram file"*: `meryldb histogram`
+>    - *Ploidy for model to use*: `2`
+>    - *"k-mer length used to calculate k-mer spectra"*: `31`
+>    - In "*Output options*":
+>        - Check `Summary of the analysis`
+>    - In "*Advanced options*":
+>        - *"Create testing.tsv file with model parameters"*: `Yes`
 >
 {: .hands_on}
 
@@ -395,7 +404,7 @@ Genomescope will generate six outputs:
     - Transformed linear plot: *k*-mer spectra and fitted models: frequency times coverage (y-axis) versus coverage (x-axis). This transformation increases the heights of higher-order peaks, overcoming the effect of high heterozygosity.
     - Transformed log plot: logarithmic transformation of the previous plot.
 - **Model**: this file includes a detailed report about the model fitting.
-- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
+- **Summary**: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity. It is worth noting that the genome characteristics such as length, error percentage, etc., are based on the GenomeScope2 model, which is the black line in the plot. If the model (black line) does not fit your observed data (blue bars), then these estimated characteristics might be very off. In the case of this tutorial, the model is a good fit to our data, so we can trust the estimates.
 
 Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters shown below:
 
@@ -418,7 +427,7 @@ Once we have finished the genome profiling stage, we can start the genome assemb
 >
 {: .details}
 
-The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the GFA contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
+The output of hifiasm will be [GFA](https://github.com/GFA-spec/GFA-spec) files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the {GFA} contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
 
 ## `hifiasm` assembly modes
 
@@ -445,16 +454,22 @@ Hifiasm can be run in multiple modes depending on data availability
 - _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces <b>maternal</b> and <b>paternal</b> contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality.
+No matter which way you run hifiasm, you will have to evaluate the assemblies' {QC} to ensure your genome is in good shape. The VGP pipeline features several reference-free ways of evaluating assembly quality, all of which are automatically generated with our workflows; however, we will run them manually in this tutorial so we can familiarize ourselves with how each QC metric captures a different aspect of assembly quality. If you are interested in running the workflows with automatic QC generation, please see our [corresponding workflow tutorial]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}) .
 
 ## Assembly evaluation
 
-There are several tools for assessing various aspects of assembly quality:
+We use several tools for assessing various aspects of assembly quality:
 
 - **gfastats**: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
 - **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the {CN} of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
+
+> <comment-title>How do I pick which assembly trajectory to use?</comment-title>
+> The ideal scenario would be a trio assembly, where you can use parental data as a ground truth for phasing the haplotypes in the child. Unfortunately, attaining parental samples is difficult and often impossible when studying wild-caught organisms. When parental data is absent, the VGP recommends assembling using {Hi-C} phasing, if possible. This requires the Hi-C data to be derived from the same individual as the HiFi data. If this is not possible, then you cannot use the Hi-C data to phase the contigs, but you can still use it for scaffolding the primary assembly. Refer to the following decision tree for a visual representation of this logic. 
+>
+> ![Decision tree for picking workflow trajectory when one does not have parental data.](../../images/vgp_assembly/WF3vsWF4_decisiontree.png "If the HiFi and Hi-C data *do not* come from the same individual, then you can use WF3. After that, if you need to purge the primary, then run WF6 and then scaffolding. If the primary does not need purging, you can continue straight to scaffolding the primary. If the HiFi and Hi-C data *do* come from the same individual, then you can use WF4 to obtain hap1 and hap2 assemblies. If either of the assemblies need to be purged, then you can use WF6B to purge an individual haplotype. Then you can scaffold the assemblies separately. Accordingly, if neither need to be purged, then you can proceed to just scaffolding them separately.")
+{: .comment}
 
 <div id="solo_hic_switch">
 <!-- For use as an anchor -->
@@ -473,19 +488,19 @@ There are several tools for assessing various aspects of assembly quality:
 
 ## HiC-phased assembly with **hifiasm**
 
-If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
+If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the contigs.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
->**Step 1**: Run {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
-> 1. *"Assembly mode"*: `Standard`
-> 2. {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
-> 3. In *"Options for Hi-C-partition*" select `Specify`
->     - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
->     - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
+> 1. Run {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
+>    - *"Assembly mode"*: `Standard`
+>    - {% icon param-file %} *"Input reads"*: `HiFi_collection (trimmed)` (output of **Cutadapt** {% icon tool %})
+>    - In *"Options for Hi-C-partition*" select `Specify`
+>        - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
+>        - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
->**Step 2**:. After the tool has finished running, rename its outputs as follows:
->  1.  Rename the `Hi-C hap1 balanced contig graph` as `Hap1 contigs graph` and add a `#hap1` tag
->  2.  Rename the `Hi-C hap2 balanced contig graph` as `Hap2 contigs graph` and  add a `#hap2` tag
+> 2. After the tool has finished running, rename its outputs as follows:
+>    - Rename the `Hi-C hap1 balanced contig graph` as `Hap1 contigs graph` and add a `#hap1` tag
+>    - Rename the `Hi-C hap2 balanced contig graph` as `Hap2 contigs graph` and  add a `#hap2` tag
 >
 {: .hands_on}
 
@@ -493,19 +508,16 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 
 > <hands-on-title>GFA to FASTA conversion for hifiasm Hi-C assembly</hands-on-title>
 >
->**Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
->  1.  {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+> 1. Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 >
-> > <tip-title>Select multiple datasets</tip-title>
-> > 1. Click on {% icon param-files %} **Multiple datasets**
-> > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
-> {: .tip}
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >
-> 2.  *"Tool mode"*: `Genome assembly manipulation`
-> 3.  *"Output format"*: `FASTA`
-> 4.  *"Generates the initial set of paths*": toggle to `yes`
+>    - *"Tool mode"*: `Genome assembly manipulation`
+>    - *"Output format"*: `FASTA`
+>    - *"Generates the initial set of paths*": toggle to `yes`
 >
->**Step 2**: Rename the outputs as `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
+> 2. Rename the outputs as `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
 >
 {: .hands_on}
 
@@ -526,63 +538,54 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
-> **Step 1**: Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+> 1. Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
 >
-> 1. {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
-> 2. *"Tool mode": `Summary statistics generation`
-> 3. *"Expected genome size"*: `11747160` (remember we calculated this value [earlier using `GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
-> 4. *"Thousands separator in output"*: Set to "No"
+>    - {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+>    - *"Tool mode": `Summary statistics generation`
+>    - *"Expected genome size"*: `11747160` (remember we calculated this value [earlier using `GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+>    - *"Thousands separator in output"*: Set to "No"
 >
-> <br>
 >
-> **Step 2**: Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
+> 2. Rename outputs of `gfastats` step to as `Hap1 stats` and `Hap2 stats`
 >
-> This would generate summary files that look like this (only the first six rows are shown):
+>    This would generate summary files that look like this (only the first six rows are shown):
+>    
+>    ```
+>    Expected genome size    11747160
+>    # scaffolds                    0
+>    Total scaffold length          0
+>    Average scaffold length      nan
+>    Scaffold N50                   0
+>    Scaffold auN                0.00
+>    ```
+>    
+>    Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 >
-> ```
-> Expected genome size    11747160
-> # scaffolds                    0
-> Total scaffold length          0
-> Average scaffold length      nan
-> Scaffold N50                   0
-> Scaffold auN                0.00
-> ```
+> 3. Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other settings as they are.
 >
-> Because we ran `gfastats` on hap1 and hap2 outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+> 4. Rename the output as `gfastats on hap1 and hap2 (full)`
 >
-> <br>
+>    This would generate a joined summary file that looks like this (only the first five rows are shown):
+>    
+>    ```
+>    # gaps               0  0
+>    # gaps in scaffolds  0  0
+>    # paths              0  0
+>    # segments          17 16
+>    ```
+>    
+>    Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
-> **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+> 5. Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
+>    - *"that"*: `Don't Match`
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: enter the word `scaffold`
+>    - *"Match type*": leave as `case insensitive`
 >
-> {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets. Keep all other settings as they are.
 >
-> <br>
->
-> **Step 4**: Rename the output as `gfastats on hap1 and hap2 (full)`
->
-> This would generate a joined summary file that looks like this (only the first five rows are shown):
->
-> ```
-> # gaps               0  0
-> # gaps in scaffolds  0  0
-> # paths              0  0
-> # segments          17 16
-> ```
->
-> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
->
-> <br>
->
-> **Step 5**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
-> 1. {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
-> 2. *"that"*: `Don't Match`
-> 3. *"Type of regex"*: `Basic`
-> 4. *"Regular Expression"*: enter the word `scaffold`
-> 5. *"Match type*": leave as `case insensitive`
->
-> <br>
->
-> **Step 6**: Rename the output as `gfastats on hap1 and hap2 contigs`
+> 6. Rename the output as `gfastats on hap1 and hap2 contigs`
 >
 {: .hands_on}
 
@@ -590,7 +593,7 @@ Take a look at the `gfastats on hap1 and hap2 contigs` output — it has three c
 
   1. Name of statistic
   2. Value for haplotype 1 (hap1)
-  2. Value for haplotype 2 (hap2)
+  3. Value for haplotype 2 (hap2)
 
 According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!)
 
@@ -608,32 +611,31 @@ According to the report, both assemblies are quite similar; the hap1 assembly in
 >
 {: .question}
 
-Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+Next, we will use {BUSCO}, which will provide a qualitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
 >
-> **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
-> 1. {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
-> 2. *"Lineage data source"*: `Use cached lineage data`
-> 3. *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
-> 4. *"Mode"*: `Genome assemblies (DNA)`
-> 5. *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
-> 6. *"Auto-detect or select lineage?"*: `Select lineage`
-> 7. *"Lineage"*: `Saccharomycetes`
-> 8. *"Which outputs should be generated"*: `short summary text` and `summary image`
+> 1. Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
+>    - *"Lineage data source"*: `Use cached lineage data`
+>    - *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>    - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>    - *"Lineage"*: `Saccharomycetes`
+>    - *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
->> <comment-title></comment-title>
->>
->> Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
-> {: .comment}
+>    > <comment-title></comment-title>
+>    >
+>    > Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
+>    {: .comment}
 >
-> <br>
 >
-> **Step 2**: Rename the outputs as `BUSCO hap1` and `BUSCO hap2`.
+> 2. Rename the outputs as `BUSCO hap1` and `BUSCO hap2`.
 >
 {: .hands_on}
 
-We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
+We have asked {BUSCO} to generate two particular outputs: the short summary and a summary image.
 ![BUSCO for hap1 & hap2.](../../images/vgp_assembly/busco_hap1hap2.svg "BUSCO results for hap1 and hap2. Each haplotype is showing the summary image output as well as the short summary output. The summary image gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary lists these as percentages as well. In our case, neither assembly seems to have duplicated BUSCO genes (there is a very low amount of dark blue in the summary images).")
 
 > <question-title></question-title>
@@ -641,12 +643,12 @@ We have asked {BUSCO} to generate two particular outputs: the short summary, and
 > 1. How many complete and single copy BUSCO genes have been identified in the hap1 assembly? What percentage of the total BUSCO gene set is that?
 > 2. How many BUSCO genes are absent in the hap1 assembly?
 >
-> > <solution-title></solution-title>
-> >
-> > 1. Hap1 has 2,047 complete and single-copy BUSCO genes, which is 95.8% of the gene set.
-> > 2. 29 BUSCO genes are missing.
-> >
-> {: .solution}
+>    > <solution-title></solution-title>
+>    >
+>    > 1. Hap1 has 2,047 complete and single-copy BUSCO genes, which is 95.8% of the gene set.
+>    > 2. 29 BUSCO genes are missing.
+>    >
+>    {: .solution}
 >
 {: .question}
 
@@ -654,17 +656,16 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 > <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
 >
-> Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
->
-> 1. *"Evaluation mode"*: `Default mode`
-> 2. {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
-> 3. *"Number of assemblies"*: `Two assemblies`
-> 4. {% icon param-file %} *"First genome assembly"*: `Hap1 contigs FASTA`
-> 5. {% icon param-file %} *"Second genome assembly"*: `Hap2 contigs FASTA`
+> 1. Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>    - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+>    - *"Number of assemblies"*: `Two assemblies`
+>    - {% icon param-file %} *"First genome assembly"*: `Hap1 contigs FASTA`
+>    - {% icon param-file %} *"Second genome assembly"*: `Hap2 contigs FASTA`
 >
 {: .hands_on}
 
-By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn.fl* plot:
+By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn.ln* plot:
 
 ![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
@@ -692,23 +693,19 @@ When hifiasm is run without any additional phasing data, it will do its best to 
 
 > <hands-on-title>Pseudohaplotype assembly with <b>hifiasm</b></hands-on-title>
 >
-> **Step 1**: Run  {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
+> 1. Run  {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.19.8+galaxy0) %} with the following parameters:
+>    - *"Assembly mode"*: `Standard`
+>    - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
+>    - *"Options for purging duplicates"*: `Specify`
+>    - *"Purge level"*: `Light (1)`
 >
-> 1. *"Assembly mode"*: `Standard`
-> 2. {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
-> 3. *"Options for purging duplicates"*: `Specify`
-> 4. *"Purge level"*: `Light (1)`
+>    > <comment-title>A note on hifiasm purging level</comment-title>
+>    > Hifiasm has an internal purging function, which we have set to `Light` here. The VGP pipeline currently disables the hifiasm internal purging, in favor of using the <b>purge_dups</b> suite after the fact in order to have more control over the parameters used for purging.
+>    {: .comment}
 >
->
->> <comment-title>A note on hifiasm purging level</comment-title>
->> hifiasm has an internal purging function, which we have set to `Light` here. The VGP pipeline currently disables the hifiasm internal purging, in favor of using the <b>purge_dups</b> suite after the fact in order to have more control over the parameters used for purging.
->{: .comment}
->
-> <br>
->
-> **Step 2**: After the tool has finished running, rename its outputs as follows:
-> 1. Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
-> 2. Rename the `alternate assembly contig graph for pseudohaplotype assembly` as `Alternate contigs graph` and add a `#alt` tag
+> 2. After the tool has finished running, rename its outputs as follows:
+>    - Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
+>    - Rename the `alternate assembly contig graph for pseudohaplotype assembly` as `Alternate contigs graph` and add a `#alt` tag
 >
 {: .hands_on}
 
@@ -718,23 +715,17 @@ We have obtained the primary and alternate contig graphs (as {GFA} files), but t
 <!--- this is for linking --->
 </div>
 
-> <hands-on-title>convert GFA to FASTA</hands-on-title>
+> <hands-on-title>Convert GFA to FASTA</hands-on-title>
 >
->> <tip-title>Selecting multiple datasets</tip-title>
->> Below we start two `gfastats` jobs by selecting two input datasets. To do this:
->> 1. Click on {% icon param-files %} **Multiple datasets**
->> 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
->{: .tip}
+> 1. Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+>    - *"Tool mode"*: `Genome assembly manipulation`
+>    - *"Output format"*: `FASTA`
+>    - *"Generates the initial set of paths*": toggle to `yes`
 >
-> <br>
->
-> **Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
-> 1.  {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
-> 2. *"Tool mode"*: `Genome assembly manipulation`
-> 3. *"Output format"*: `FASTA`
-> 4. *"Generates the initial set of paths*": toggle to `yes`
->
-> **Step 2**: Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
+> 
+> 2. Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
 >
 {: .hands_on}
 
@@ -756,65 +747,53 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
-> **Step 1**: Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+> 1. Run assembly statistics generation with {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} using the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+>    - *"Tool mode": `Summary statistics generation`
+>    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier using [`GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
+>    - *"Thousands separator in output"*: Set to "No"
+>    - *"Generates the initial set of paths*": toggle to `yes`
 >
-> 1. {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
-> 2. *"Tool mode": `Summary statistics generation`
-> 3. *"Expected genome size"*: `11747160` (remember we calculated this value earlier using [`GenomeScope2`](#genome-profiling-with-genomescope2). It is contained within `GenomeScope2` **Summary** output that should be in your history!)
-> 4. *"Thousands separator in output"*: Set to "No"
-> 5. *"Generates the initial set of paths*": toggle to `yes`
+> 2. Rename outputs of `gfastats` step to as `Primary stats` and `Alternate stats`
 >
-> <br>
+>    This would generate summary files that look like this (only the first six rows are shown):
+>    
+>    ```
+>    Expected genome size     11747160
+>    # scaffolds                    25
+>    Total scaffold length    18519764
+>    Average scaffold length    740790.56
+>    Scaffold N50               813311
+>    Scaffold auN               913050.77
+>    ```
+>    
+>    Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
 >
-> **Step 2**: Rename outputs of `gfastats` step to as `Primary stats` and `Alternate stats`
+> 3. Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets (these are from **Step 2** above). Keep all other setting as they are.
 >
-> This would generate summary files that look like this (only the first six rows are shown):
+> 4. Rename the output as `gfastats on Pri and Alt (full)`
 >
-> ```
-> Expected genome size     11747160
-> # scaffolds                    25
-> Total scaffold length    18519764
-> Average scaffold length    740790.56
-> Scaffold N50               813311
-> Scaffold auN               913050.77
-> ```
+>    This would generate a joined summary file that looks like this (only  five rows are shown):
+>    
+>    ```
+>    # contigs                 25  10
+>    # dead ends                .  16
+>    # disconnected components  .   7
+>    # edges                    .   6
+>    # gaps                     0   0
+>    ```
+>    
+>    Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
 >
-> Because we ran `gfastats` on Primary and Alternate outputs of `hifiasm` we need to join the two outputs together for easier interpretation:
+> 5. Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `gfastats on Pri and Alt (full)`
+>    - *"that"*: `Don't Match`
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: enter the word `scaffold`
+>    - *"Match type*": leave as `case insensitive`
 >
-> <br>
->
-> **Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->
-> {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets (these are from **Step 2** above). Keep all other setting as they are.
->
-> <br>
->
-> **Step 4**: Rename the output as `gfastats on Pri and Alt (full)`
->
-> This would generate a joined summary file that looks like this (only  five rows are shown):
->
-> ```
-> # contigs                 25  10
-> # dead ends                .  16
-> # disconnected components  .   7
-> # edges                    .   6
-> # gaps                     0   0
-> ```
->
-> Now let's extract only relevant information by excluding all lines containing the word `scaffold` since there are no scaffolds at this stage of the assembly process (only contigs):
->
-> <br>
->
-> **Step 5**: Run {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
-> 1. {% icon param-files %} *"Input file"*: select `gfastats on Pri and Alt (full)`
-> 2. *"that"*: `Don't Match`
-> 3. *"Type of regex"*: `Basic`
-> 4. *"Regular Expression"*: enter the word `scaffold`
-> 5. *"Match type*": leave as `case insensitive`
->
-> <br>
->
-> **Step 6**: Rename the output as `gfastats on Pri and Alt contigs`
+> 6. Rename the output as `gfastats on Pri and Alt contigs`
 >
 {: .hands_on}
 
@@ -844,30 +823,28 @@ Next, we will use {BUSCO}, which will provide quantitative assessment of the com
 
 > <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
 >
-> **Step 1**: Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
-> 1. {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
-> 2. *"Lineage data source"*: `Use cached lineage data`
-> 3. *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
-> 4. *"Mode"*: `Genome assemblies (DNA)`
-> 5. *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
-> 6. *"Auto-detect or select lineage?"*: `Select lineage`
-> 7. *"Lineage"*: `Saccharomycetes`
-> 8. *"Which outputs should be generated"*: `short summary text` and `summary image`
+> 1. Run {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    - *"Lineage data source"*: `Use cached lineage data`
+>    - *"Cached database with lineage"*: `Busco v5 Lineage Datasets`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>    - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>    - *"Lineage"*: `Saccharomycetes`
+>    - *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
->> <comment-title></comment-title>
->>
->> Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
-> {: .comment}
+>    > <comment-title></comment-title>
+>    >
+>    > Remember to modify the *"Lineage"* option if you are working with vertebrate genomes.
+>    {: .comment}
 >
-> <br>
->
-> **Step 2**: Rename the outputs as `BUSCO Pri` and `BUSCO Alt`.
+> 2. Rename the outputs as `BUSCO Pri` and `BUSCO Alt`.
 >
 {: .hands_on}
 
 We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
 
-![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_alt_solo.svg "BUSCO results for primary and alternate contigs. The summary image (left) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (right) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
+![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_alt_solo.svg "BUSCO results for primary and alternate contigs. The summary image (top) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (bottom) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
 
 The BUSCO results support our hypothesis that the primary assembly is so much larger than expected due to improper purging, resulting in false duplications.
 
@@ -891,15 +868,15 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 > <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
 >
-> Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
+> 1. Run {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
 >
-> 1. *"Evaluation mode"*: `Default mode`
-> 2. {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
-> 3. *"Number of assemblies"*: `Two assemblies`
-> 4. {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
-> 5. {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
-> <br>
->(REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [earlier](#gfa2fasta_solo))
+>    - *"Evaluation mode"*: `Default mode`
+>    - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+>    - *"Number of assemblies"*: `Two assemblies`
+>    - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
+>    - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`
+> 
+>    (REMINDER: `Primary contigs FASTA` and `Alternate contigs FASTA` were generated [earlier](#gfa2fasta_solo))
 >
 {: .hands_on}
 
@@ -913,7 +890,7 @@ To get an idea of how the *k*-mers have been distributed between our Primary and
 
 ![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each <i>k</i>-mer found in the HiFi read set and colors it according to which assemblies contain those <i>k</i>-mers. This can tell you which <i>k</i>-mers are found in only one assembly or shared between them."){:width="65%"}
 
-For an idea of what a properly phased spectra-asm plot would look like, **please [go over](#solo_hic_switch) to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50✕), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25✕) and resembling each other in size.
+For an idea of what a properly phased spectra-asm plot would look like, **please [go over](#solo_hic_switch) to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot for a diploid individual should have a large green peak centered around the point of diploid coverage (here ~50✕), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25✕) and resembling each other in size.
 
 The spectra-asm plot we have for our primary & alternate assemblies here does not resemble one that is properly phased. There is a peak of green (shared) *k*-mers around diploid coverage, indicating that some homozygous regions have been properly split between the primary and alternate assemblies; however, there is still a large red peak of primary-assembly-only *k*-mers at that coverage value, too, which means that some homozygous regions are being represented twice in the primary assembly, instead of once in the primary and once in the alternate. Additionally, for the haploid peaks, the primary-only peak (in red) is much larger than the alternate-only peak (in blue), indicating that a lot of heterozygous regions might have both their alternate alleles represented in the primary assembly, which is false duplication.
 
@@ -931,56 +908,51 @@ Before proceeding to purging, we need to carry out some text manipulation operat
 
 ### Getting **purge_dups** cutoffs from **GenomeScope2** output
 
-The first relevant parameter is the `estimated genome size`.
+The first relevant parameter is the `Estimated genome size`.
 
 > <hands-on-title>Get estimated genome size</hands-on-title>
 >
->**Step 1**: Look at the `GenomeScope summary` output (generated during *k*-mer profiling [step](#genome-profiling-with-genomescope2)). The file should have content that looks like this (it may not be exactly like this):
-> ```
-> GenomeScope version 2.0
-> input file = ....
-> output directory = .
-> p = 2
-> k = 31
-> TESTING set to TRUE
+> 1. Look at the `GenomeScope summary` output (generated during *k*-mer profiling [step](#genome-profiling-with-genomescope2)). The file should have content that looks like this (it may not be exactly like this):
 >
-> property                      min               max
-> Homozygous (aa)               99.4165%          99.4241%
-> Heterozygous (ab)             0.575891%         0.583546%
-> Genome Haploid Length         11,739,321 bp     11,747,160 bp
-> Genome Repeat Length          722,921 bp        723,404 bp
-> Genome Unique Length          11,016,399 bp     11,023,755 bp
-> Model Fit                     92.5159%          96.5191%
-> Read Error Rate               0.000943206%      0.000943206%
->```
-><br>
->**Step 2**: Copy the number value for the maximum Genome Haploid Length to your clipboard (CTRL + C on Windows; CMD + C on MacOS).
+>    ```
+>    GenomeScope version 2.0
+>    input file = ....
+>    output directory = .
+>    p = 2
+>    k = 31
+>    TESTING set to TRUE
+>    
+>    property                      min               max
+>    Homozygous (aa)               99.4165%          99.4241%
+>    Heterozygous (ab)             0.575891%         0.583546%
+>    Genome Haploid Length         11,739,321 bp     11,747,160 bp
+>    Genome Repeat Length          722,921 bp        723,404 bp
+>    Genome Unique Length          11,016,399 bp     11,023,755 bp
+>    Model Fit                     92.5159%          96.5191%
+>    Read Error Rate               0.000943206%      0.000943206%
+>    ```
 >
->**Step 3**: Click on "Upload Data" in the toolbox on the left.
->
->**Step 4**: Click on "Paste/Fetch data".
->
->**Step 5**: Change `New File` to `Estimated genome size`.
->
->**Step 6**: Paste the maximum Genome Haploid Length into the text box.
->
->**Step 7**: Remove the commas from the number! We only want integers.
->
->**Step 8**: Click "Start".
->
+> 2. Copy the number value for the maximum Genome Haploid Length to your clipboard (CTRL + C on Windows; CMD + C on MacOS).
+> 3. Click on "Upload Data" in the toolbox on the left.
+> 4. Click on "Paste/Fetch data".
+> 5. Change `New File` to `Estimated genome size`.
+> 6. Paste the maximum Genome Haploid Length into the text box.
+> 7. Remove the commas from the number! We only want integers.
+> 8. Click "Start".
+> 
 > ![Image showing where to click to upload data as pasted data.](../../images/vgp_assembly/paste_data_to_upload.png "Use the 'paste data' dialog to upload a file with the estimated genome size.")
 >
-> > <question-title></question-title>
-> >
-> > What is the estimated genome size?
-> >
-> > > <solution-title></solution-title>
-> > >
-> > > The estimated genome size is 11,747,160 bp.
-> > >
-> > {: .solution}
-> >
-> {: .question}
+>> <question-title></question-title>
+>> 
+>> What is the estimated genome size?
+>> 
+>> > <solution-title></solution-title>
+>> >
+>> > The estimated genome size is 11,747,160 bp.
+>> >
+>> {: .solution}
+>> 
+>{: .question}
 >
 {: .hands_on}
 
@@ -988,68 +960,68 @@ Now let's parse the `transition between haploid & diploid` and `upper bound for 
 
 > <hands-on-title>Get maximum read depth</hands-on-title>
 >
->**Step 1**: Run {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
->  1. {% icon param-file %} *"Input file"*: `model_params` (output of **GenomeScope** {% icon tool %})
->  2. For "*1: Expressions*":
->      - *"Add expression"*: `round(1.5*c3)`
->      - *"Mode of the operation"*: `Append`
->  3. Click {% icon galaxy-wf-new %} Insert Expressions
->  4. For "*2: Expressions*":
->      - *"Add expression"*: `3*c7`
->      - *"Mode of the operation"*: `Append`
+> 1. Run {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `model_params` (output of **GenomeScope** {% icon tool %})
+>    - For "*1: Expressions*":
+>        - *"Add expression"*: `round(1.5*c3)`
+>        - *"Mode of the operation"*: `Append`
+>    - Click {% icon galaxy-wf-new %} Insert Expressions
+>    - For "*2: Expressions*":
+>        - *"Add expression"*: `3*c7`
+>        - *"Mode of the operation"*: `Append`
 >
->**Step 2**: Rename it as `Parsing purge parameters`
+> 2. Rename it as `Parsing purge parameters`
 >
->**Step 3**: Run  {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->  1. {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
->  2. *"Cut by"*: `fields`
->  3.  *"List of Fields"*: `Column: 8`
+> 3. Run  {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
+>    - *"Cut by"*: `fields`
+>    - *"List of Fields"*: `Column: 8`
 >
->**Step 4**: Rename the output as `Maximum depth`
+> 4. Rename the output as `Maximum depth`
 >
-> > <question-title></question-title>
-> >
-> > 1. What is the estimated maximum depth?
-> > 2. What does this parameter represent?
-> >
-> > > <solution-title></solution-title>
-> > >
-> > > 1. The estimated maximum depth is 114 reads.
-> > > 2. The maximum depth indicates the maximum number of sequencing reads that align to specific positions in the genome.
-> > >
-> > {: .solution}
-> >
-> {: .question}
+>    > <question-title></question-title>
+>    >
+>    > 1. What is the estimated maximum depth?
+>    > 2. What does this parameter represent?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > 1. The estimated maximum depth is 114 reads.
+>    > > 2. The maximum depth indicates the maximum number of sequencing reads that align to specific positions in the genome.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
-> Now let's get the transition parameter.
+>    Now let's get the transition parameter.
 >
->**Step 5**: Run {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->  1. {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
->  2. *"Cut by"*: `fields`
->  3. *"List of Fields"*: `Column: 7`
+> 5. Run {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
+>    - *"Cut by"*: `fields`
+>    - *"List of Fields"*: `Column: 7`
 >
->**Step 6**: Rename the output as `Transition parameter`
+> 6. Rename the output as `Transition parameter`
 >
-> > <question-title></question-title>
-> >
-> > What is the estimated transition parameter?
-> >
-> > > <solution-title></solution-title>
-> > >
-> > > The estimated transition parameter is 38 reads.
-> > >
-> > {: .solution}
-> >
-> {: .question}
+>    > <question-title></question-title>
+>    >
+>    > What is the estimated transition parameter?
+>    >
+>    > > <solution-title></solution-title>
+>    > >
+>    > > The estimated transition parameter is 38 reads.
+>    > >
+>    > {: .solution}
+>    >
+>    {: .question}
 >
 {: .hands_on}
 
 
 ## Purging with **purge_dups**
 
-An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups; this tool will allow us to identify and reassign allelic contigs.
+An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplomes, as well as all hemizygous regions from both haplomes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. This can lead to issues in downstream analysis, such as scaffolding, gene annotation and read mapping in general ({% cite Small2007 %}, {% cite Guan2019 %}, {% cite Roach2018 %}). In order to solve this problem, we are going to use purge_dups, which will allow us to identify and reassign allelic contigs.
 
-This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the {false duplications} depicted in **Figure 1**.
+This stage consists of three substages: read-depth analysis, generation of all versus all self-alignment and resolution of haplotigs and overlaps (fig. 8). This is meant to try to resolve the false duplications depicted in **Figure 1**.
 
 ![Post-processing with purge_dups](../../images/vgp_assembly/purge_dupspipeline.png "Purge_dups pipeline. Adapted from github.com/dfguan/purge_dups. Purge_dups is integrated in a multi-step pipeline consisting in three main substages. Red indicates the steps which require to use Minimap2.")
 
@@ -1063,39 +1035,41 @@ Initially, we need to collapse our HiFi trimmed reads collection into a single d
 
 > <hands-on-title>Collapse the collection</hands-on-title>
 >
->**Step 1**: Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
->   - {% icon param-collection %} *"Collection of files to collapse into single dataset"*:`HiFi_collection (trim)`
+> 1. Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*:`HiFi_collection (trim)`
 >
->**Step 2**: Rename the output as `HiFi reads collapsed`
+> 2. Rename the output as `HiFi reads collapsed`
+> 
 {: .hands_on}
 
 Now, we will map the reads against the primary assembly by using Minimap2 ({% cite Li2018 %}), an alignment program designed to map long sequences.
 
 > <hands-on-title>Map the reads to contigs with <b>Minimap2</b></hands-on-title>
 >
->**Step 1*: Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary contigs FASTA`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-collection %} *"Select fastq dataset"*: `HiFi reads collapsed`
->  5. *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
->  6. In *"Set advanced output options"* set *"Select an output format"*: `PAF`
+> 1. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Primary contigs FASTA`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-collection %} *"Select fastq dataset"*: `HiFi reads collapsed`
+>    - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)`
+>    - In *"Set advanced output options"* set *"Select an output format"*: `PAF`
 >
->**Step 2**: Rename the output as `Reads mapped to contigs`
+> 2. Rename the output as `Reads mapped to contigs`
+> 
 {: .hands_on}
 
 Finally, we will use the `Reads mapped to contigs` pairwise mapping format (PAF) file for calculating some statistics required in a later stage. In this step, purge_dups (listed as **Purge overlaps** in Galaxy tool panel) initially produces a read-depth histogram from base-level coverages. This information is used for estimating the coverage cutoffs, taking into account that collapsed haplotype contigs will lead to reads from both alleles mapping to those contigs, whereas if the alleles have assembled as separate contigs, then the reads will be split over the two contigs, resulting in half the read-depth ({% cite Roach2018 %}).
 
 > <hands-on-title>Read-depth analisys</hands-on-title>
->**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
->  2. {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
->  3. In *"Calcuts options"*:
->     - *"Transition between haploid and diploid"*: 38
->     - *"Upper bound for read depth"*: `114` (the previously estimated maximum depth)
->     - *"Ploidy"*: `Diploid`
+> 1. Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
+>    - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs`
+>    - In *"Calcuts options"*:
+>        - *"Transition between haploid and diploid"*: 38
+>        - *"Upper bound for read depth"*: `114` (the previously estimated maximum depth)
+>        - *"Ploidy"*: `Diploid`
 >
->**Step 2**: Rename the outputs as `PBCSTAT base coverage primary`, `Histogram plot primary` and `Calcuts cutoff primary`.
+> 2. Rename the outputs as `PBCSTAT base coverage primary`, `Histogram plot primary` and `Calcuts cutoff primary`.
 {: .hands_on}
 
 Purge overlaps (purge_dups) generates three outputs:
@@ -1109,21 +1083,21 @@ Purge overlaps (purge_dups) generates three outputs:
 Now, we will segment the draft assembly into contigs by cutting at blocks of *N*s, and use minimap2 to generate an all by all self-alignment.
 
 > <hands-on-title>purge_dups pipeline    </hands-on-title>
->**Step 1**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
->  2. {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
+> 1. Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
+>    - {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
 >
->**Step 2**: Rename the output as `Split FASTA`
+> 2. Rename the output as `Split FASTA`
 >
->**Step 3**: Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-file %} *"Select fastq dataset"*: `Split FASTA`
->  5. *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
->  6. In *"Set advanced output options"*: set *"Select an output format"* to `PAF`
+> 3. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Split FASTA`
+>    - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
+>    - In *"Set advanced output options"*: set *"Select an output format"* to `PAF`
 >
->**Step 4**: Rename the output as `Self-homology map primary`
+> 4. Rename the output as `Self-homology map primary`
 {: .hands_on}
 
 
@@ -1150,20 +1124,20 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 
 > <hands-on-title>Resolution of haplotigs and overlaps</hands-on-title>
 >
->**Step 1**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
->  2. {% icon param-file %} *"PAF input file"*: `Self-homology map primary`
->  3. {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage primary`
->  4. {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff primary`
+> 1. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
+>    - {% icon param-file %} *"PAF input file"*: `Self-homology map primary`
+>    - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage primary`
+>    - {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff primary`
 >
->**Step 2**: Rename the output as `purge_dups BED`
+> 2. Rename the output as `purge_dups BED`
 >
->**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
->  2. {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
->  3. {% icon param-file %} *"BED input file"*: `purge_dups BED` (output of the previous step)
+> 3. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
+>    - {% icon param-file %} *"Assembly FASTA file"*: `Primary contigs FASTA`
+>    - {% icon param-file %} *"BED input file"*: `purge_dups BED` (output of the previous step)
 >
->**Step 4**: Rename the output `get_seq purged sequences` as `Primary contigs purged` and the `get_seq haplotype` file as `Alternate haplotype contigs`
+> 4. Rename the output `get_seq purged sequences` as `Primary contigs purged` and the `get_seq haplotype` file as `Alternate haplotype contigs`
 >
 {: .hands_on}
 
@@ -1174,18 +1148,18 @@ Now we should repeat the same procedure with the alternate contigs generated by 
 
 > <hands-on-title>Merge the purged sequences and the Alternate contigs</hands-on-title>
 >
->**Step 1**: {% tool [Concatenate datasets](cat1) %} with the following parameters:
->  1. {% icon param-file %} *"Concatenate Dataset"*: `Alternate contigs FASTA`
->  2. In *"Dataset"*:
->  3. {% icon param-repeat %} *"Insert Dataset"*
->  4. {% icon param-file %} *"Select"*: `Alternate haplotype contigs`
+> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: `Alternate contigs FASTA`
+>    - In *"Dataset"*:
+>    - {% icon param-repeat %} *"Insert Dataset"*
+>    - {% icon param-file %} *"Select"*: `Alternate haplotype contigs`
 >
 >    > <comment-title></comment-title>
 >    >
 >    > Remember that the `Alternate haplotype contigs` file contains those contigs that were considered to be haplotypic duplications of the primary contigs.
 >    {: .comment}
 >
->**Step 2**: Rename the output as `Alternate contigs full`
+> 2. Rename the output as `Alternate contigs full`
 >
 {: .hands_on}
 
@@ -1193,55 +1167,55 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 
 > <hands-on-title>Process the alternate assembly with <i>purge_dups</i></hands-on-title>
 >
->**Step 1**: Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Alternate contigs full`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-collection %} *"Select fastq dataset"*: `HiFi reads collapsed`
->  5. *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)` (**Note** `asm5` at the end!)
->  6. In *"Set advanced output options"* set *"Select an output format"* to `PAF`
+> 1. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Alternate contigs full`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-collection %} *"Select fastq dataset"*: `HiFi reads collapsed`
+>    - *"Select a profile of preset options"*: `Long assembly to reference mapping (-k19 -w19 -A1 -B19 -O39,81 -E3,1 -s200 -z200 --min-occ-floor=100). Typically, the alignment will not extend to regions with 5% or higher sequence divergence. Only use this preset if the average divergence is far below 5%. (asm5)` (**Note** `asm5` at the end!)
+>    - In *"Set advanced output options"* set *"Select an output format"* to `PAF`
 >
->**Step 2**: Rename the output as `Reads mapped to contigs alternate`
+> 2. Rename the output as `Reads mapped to contigs alternate`
 >
->**Step 3**: {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
->  2. {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs alternate`
->  3. In *"Calcuts options"*:
->  4. *"Upper bound for read depth"*: `114`
->  5. *"Ploidy"*: `Diploid`
+> 3. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Function mode"*: `Calculate coverage cutoff, base-level read depth and create read depth histogram for PacBio data (calcuts+pbcstats)`
+>    - {% icon param-file %} *"PAF input file"*: `Reads mapped to contigs alternate`
+>    - In *"Calcuts options"*:
+>    - *"Upper bound for read depth"*: `114`
+>    - *"Ploidy"*: `Diploid`
 >
->**Step 4**: Rename the outputs as `PBCSTAT base coverage alternate`, `Histogram plot alternate` and `Calcuts cutoff alternate`.
+> 4. Rename the outputs as `PBCSTAT base coverage alternate`, `Histogram plot alternate` and `Calcuts cutoff alternate`.
 >
->**Step 5**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
->  2. {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
+> 5. Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Function mode"*: `split assembly FASTA file by 'N's (split_fa)`
+>    - {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
 >
->**Step 5**: Rename the output as `Split FASTA alternate`
+> 5. Rename the output as `Split FASTA alternate`
 >
->**Step 6**: Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA alternate`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-file %} *"Select fastq dataset"*: `Split FASTA alternate`
->  5. *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
->  6. In *"Set advanced output options"* set *"Select an output format"* to `PAF`
+> 6. Run {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy4) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Split FASTA alternate`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Split FASTA alternate`
+>    - *"Select a profile of preset options"*: `Construct a self-homology map - use the same genome as query and reference (-DP -k19 -w 19 -m200) (self-homology)`
+>    - In *"Set advanced output options"* set *"Select an output format"* to `PAF`
 >
->**Step 7**: Rename the output as `Self-homology map alternate`
+> 7. Rename the output as `Self-homology map alternate`
 >
->**Step 8**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
->  2. {% icon param-file %} *"PAF input file"*: `Self-homology map alternate`
->  3. {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage alternate`
->  4. {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff alternate`
+> 8. Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Purge haplotigs and overlaps for an assembly (purge_dups)`
+>    - {% icon param-file %} *"PAF input file"*: `Self-homology map alternate`
+>    - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage alternate`
+>    - {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff alternate`
 >
->**Step 9**: Rename the output as `purge_dups BED alternate`
+> 9. Rename the output as `purge_dups BED alternate`
 >
->**Step 10**: Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
->  1. *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
->  2. {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
->  3. {% icon param-file %} *"BED input file"*: `purge_dups BED alternate`
+> 10. Run {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.6+galaxy0) %} with the following parameters:
+>    - *"Select the purge_dups function"*: `Obtain sequences after purging (get_seqs)`
+>    - {% icon param-file %} *"Assembly FASTA file"*: `Alternate contigs full`
+>    - {% icon param-file %} *"BED input file"*: `purge_dups BED alternate`
 >
->**Step 11**: Rename the outputs as `Alternate contigs purged` and `Alternate haplotype contigs`.
+> 11. Rename the outputs as `Alternate contigs purged` and `Alternate haplotype contigs`.
 >
 {: .hands_on}
 
@@ -1251,39 +1225,39 @@ Recall that, prior to purging, our primary assembly showed it needed to be purge
 
 > <hands-on-title>Evaluating the purged assemblies</hands-on-title>
 >
->**Step 1**: Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
-> 1. {% icon param-files %} *"Input file"*: select `Primary contigs purged` and the `Alternate contigs purged` datasets
-> 2. *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
+> 1. Run {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary contigs purged` and the `Alternate contigs purged` datasets
+>    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
 >
->**Step 2**:. Rename the outputs as `Primary purged stats` and `Alternate purged stats`
+> 2. Rename the outputs as `Primary purged stats` and `Alternate purged stats`
 >
->**Step 3**: Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->   - {% icon param-files %} *"Input file"*: select `Primary purged stats` and the `Alternate purged stats` datasets
+> 3. Run {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary purged stats` and the `Alternate purged stats` datasets
 >
->**Step 4**: Rename the output as `gfastats on purged pri and alt (full)`
+> 4. Rename the output as `gfastats on purged pri and alt (full)`
 >
->**Step 5**: {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
->  1. {% icon param-files %} *"Input file"*: select `gfastats on purged pri and alt (full)`
->  2. *"that"*: `Don't Match`
->  3. *"Type of regex"*: `Basic`
->  4. *"Regular Expression"*: `[Ss]caffold`
+> 5. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `gfastats on purged pri and alt (full)`
+>    - *"that"*: `Don't Match`
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: `[Ss]caffold`
 >
->**Step 6**: Rename the output as `gfastats on purged pri and alt contigs`
+> 6. Rename the output as `gfastats on purged pri and alt contigs`
 >
->**Step 7**: {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
->  1. {% icon param-files %} *"Sequences to analyze"*: `Primary contigs purged`
->  2. *"Mode"*: `Genome assemblies (DNA)`
->  3. *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
->  4. *"Auto-detect or select lineage?"*: `Select lineage`
->  5. *"Lineage"*: `Saccharomycetes`
->  6. *"Which outputs should be generated"*: `short summary text` and `summary image`
+> 7. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs purged`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>    - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>    - *"Lineage"*: `Saccharomycetes`
+>    - *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
->**Step 8**: {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
->  1. *"Evaluation mode"*: `Default mode`
->  2. {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
->  3. *"Number of assemblies"*: `Two assemblies
->  4. {% icon param-file %} *"First genome assembly"*: `Primary contigs purged`
->  5. {% icon param-file %} *"Second genome assembly"*: `Alternate contigs purged`
+> 8. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>    - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+>    - *"Number of assemblies"*: `Two assemblies
+>    - {% icon param-file %} *"First genome assembly"*: `Primary contigs purged`
+>    - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs purged`
 >
 {: .hands_on}
 
@@ -1343,15 +1317,14 @@ Before we begin, we need to upload BioNano data:
 
 > <hands-on-title><b>Uploading BioNano datasets from Zenodo</b></hands-on-title>
 >
->**Step 1**: Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
+> 1. Copy the following URLs into clipboard. You can do this by clicking on {% icon copy %} button in the right upper corner of the box below. It will appear if you mouse over the box.
 >
 >    ```
->https://zenodo.org/records/5887339/files/bionano.cmap
+>    https://zenodo.org/records/5887339/files/bionano.cmap
 >    ```
 >
->**Step 2**: Upload datasets into Galaxy
+> 2. Upload datasets into Galaxy
 >    - set the datatype to `cmap`
->
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md format="cmap" %}
 >
@@ -1359,24 +1332,25 @@ Before we begin, we need to upload BioNano data:
 
 > <hands-on-title>Bionano hybrid scaffolding</hands-on-title>
 >
->**Step1**: Run {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy3) %} with the following parameters:
-> 1. {% icon param-file %} *"NGS FASTA"*: `Hap1 contigs FASTA` generated during [hifiasm contigging](#hic-phased-assembly-with-hifiasm).
-> 2. {% icon param-file %} *"BioNano CMAP"*: `Bionano_dataset` we just uploaded
-> 3. *"Configuration mode"*: `VGP mode`
-> 4. *"Genome maps conflict filter"*: `Cut contig at conflict`
-> 5. *"Sequences conflict filter"*: `Cut contig at conflict`
+> 1. Run {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.7.0+galaxy3) %} with the following parameters:
+>    - {% icon param-file %} *"NGS FASTA"*: `Hap1 contigs FASTA` generated during [hifiasm contigging](#hic-phased-assembly-with-hifiasm).
+>    - {% icon param-file %} *"BioNano CMAP"*: `Bionano_dataset` we just uploaded
+>    - *"Configuration mode"*: `VGP mode`
+>    - *"Genome maps conflict filter"*: `Cut contig at conflict`
+>    - *"Sequences conflict filter"*: `Cut contig at conflict`
 >
->> <comment-title></comment-title>
->>
->> If your data are not associated with VGP, make sure that the configuration mode fits with your samples.
->{: .comment}
+>    > <comment-title></comment-title>
+>    >
+>    > If your data are not associated with VGP, make sure that the configuration mode fits with your samples.
+>    {: .comment}
 >
->**Step 2**: Run {% tool [Concatenate datasets](cat1) %} with the following parameters:
->  1. {% icon param-file %} *"Concatenate Dataset"*: `NGScontigs scaffold NCBI trimmed` (output of **Bionano Hybrid Scaffold** {% icon tool %})
->  2. {% icon param-repeat %} *"Insert Dataset"*
->  3. {% icon param-file %} *"Select"*: `NGScontigs not scaffolded trimmed` (output of **Bionano Hybrid Scaffold** {% icon tool %})
+> 2. Run {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: `NGScontigs scaffold NCBI trimmed` (output of **Bionano Hybrid Scaffold** {% icon tool %})
+>    - {% icon param-repeat %} *"Insert Dataset"*
+>        - {% icon param-file %} *"Select"*: `NGScontigs not scaffolded trimmed` (output of **Bionano Hybrid Scaffold** {% icon tool %})
 >
->**Step 3**: Rename the output as `Hap1 assembly bionano`
+> 3. Rename the output as `Hap1 assembly bionano`
+> 
 {: .hands_on}
 
 ## Evaluating Bionano scaffolds
@@ -1429,35 +1403,37 @@ Despite Hi-C generating paired-end reads, we need to map each read separately. T
 
 > <hands-on-title>Mapping Hi-C reads</hands-on-title>
 >
->**Step 1**: Run {% tool [BWA-MEM2](ttoolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Hap1 assembly bionano`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_F`
->  5. *"Set read groups information?"*: `Do not set`
->  6. *"Select analysis mode"*: `1.Simple Illumina mode`
->  7. *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
+> 1. Run {% tool [BWA-MEM2](ttoolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Hap1 assembly bionano`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_F`
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->**Step 2**: Rename the output as `BAM forward`
->
+> 2. Rename the output as `BAM forward`
+> 
 > Now let's do the same for reverse Hi-C reads:
+> 
+> 1. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Hap1 assembly bionano`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->**Step 3**: Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->  2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `Hap1 assembly bionano`
->  3. *"Single or Paired-end reads"*: `Single`
->  4. {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
->  5. *"Set read groups information?"*: `Do not set`
->  6. *"Select analysis mode"*: `1.Simple Illumina mode`
->  7. *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
+> 2. Rename the output as `BAM reverse`
 >
->**Step 4**: Rename the output as `BAM reverse`
+> We will now merge the forward and reverse alignments into one Bam file.
 >
-> 5. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
+> 3. {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
 >    - {% icon param-file %} *"First set of reads"*: `BAM forward`
 >    - {% icon param-file %} *"Second set of reads"*: `BAM  reverse`
 >
-> 6. Rename it as `BAM Hi-C reads`
+> 4. Rename it as `BAM Hi-C reads`
 {: .hands_on}
 
 ## Generate initial Hi-C contact map
@@ -1478,16 +1454,17 @@ After mapping the Hi-C reads, the next step is to generate an initial Hi-C conta
 
 > <hands-on-title>Generate a contact map with <b>PretextMap</b> and <b>Pretext Snapshot</b></hands-on-title>
 >
->**Step 1**: Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
-> 1. {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads`
-> 2. *"Sort by"*: `Don't sort`
+> 1. Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads`
+>    - *"Sort by"*: `Don't sort`
 >
->**Step 2**: Rename the output as `PretextMap output`
+> 2. Rename the output as `PretextMap output`
 >
->**Step 3**: Run {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
-> 1. {% icon param-file %} *"Input Pretext map file"*: `PretextMap output`
-> 2. *"Output image format"*: `png`
-> 3. *"Show grid?"*: `Yes`
+> 3. Run {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `PretextMap output`
+>    - *"Output image format"*: `png`
+>    - *"Show grid?"*: `Yes`
+> 
 {: .hands_on}
 
 Let's have a look at the Hi-C contact maps generated by Pretext Snapshot.
@@ -1520,13 +1497,13 @@ Now we can launch YaHS in order to generate the hybrid scaffolding based on the 
 
 > <hands-on-title>YaHS scaffolding</hands-on-title>
 >
->**Step 1**: Run {% tool [YaHS](toolshed.g2.bx.psu.edu/repos/iuc/yahs/yahs/1.2a.2+galaxy1) %} with the following parameters:
-> 1. {% icon param-file %} *"Input contig sequences"*: `Hap1 assembly bionano`
-> 2. {% icon param-file %} *"Alignment file of Hi-C reads to contigs*"*: `BAM Hi-C reads`
-> 3. *"Restriction enzyme used in Hi-C experiment"*: set to `Enter a specific sequence`
-> 4. *"Restriction enzyme sequence(s)"*: Enter `CTTAAG`
+> 1. Run {% tool [YaHS](toolshed.g2.bx.psu.edu/repos/iuc/yahs/yahs/1.2a.2+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input contig sequences"*: `Hap1 assembly bionano`
+>    - {% icon param-file %} *"Alignment file of Hi-C reads to contigs*"*: `BAM Hi-C reads`
+>    - *"Restriction enzyme used in Hi-C experiment"*: set to `Enter a specific sequence`
+>    - *"Restriction enzyme sequence(s)"*: Enter `CTTAAG`
 >
->**Step 2**: Rename `YAHS on data NNN and data NNN: Final scaffolds fasta output` as `YaHS Scaffolds FASTA`
+> 2. Rename `YAHS on data NNN and data NNN: Final scaffolds fasta output` as `YaHS Scaffolds FASTA`
 >
 {: .hands_on}
 
@@ -1536,44 +1513,44 @@ Finally, we should repeat the procedure described previously for generating the 
 
 > <hands-on-title>Mapping reads against the scaffold</hands-on-title>
 >
->**Step 1**: Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
-> 1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
-> 2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `YaHS Scaffolds FASTA`
-> 3. *"Single or Paired-end reads"*: `Single`
-> 4. {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_F`
-> 5. *"Set read groups information?"*: `Do not set`
-> 6. *"Select analysis mode"*: `1.Simple Illumina mode`
-> 7. *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
+> 1. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `YaHS Scaffolds FASTA`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_F`
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->**Step 2**: Rename the output as `BAM forward YaHS`
+> 2. Rename the output as `BAM forward YaHS`
 >
->**Step 3**: Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
->  1. *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
-> 2. {% icon param-file %} *"Use the following dataset as the reference sequence"*: `YaHS Scaffolds FASTA`
-> 3. *"Single or Paired-end reads"*: `Single`
-> 4. {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
-> 5. *"Set read groups information?"*: `Do not set`
-> 6. *"Select analysis mode"*: `1.Simple Illumina mode`
-> 7. *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
+> 3. Run {% tool [BWA-MEM2](toolshed.g2.bx.psu.edu/repos/iuc/bwa_mem2/bwa_mem2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `YaHS Scaffolds FASTA`
+>    - *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-file %} *"Select fastq dataset"*: `Hi-C_dataset_R`
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `1.Simple Illumina mode`
+>    - *"BAM sorting mode"*: `Sort by read names  (i.e., the QNAME field) `
 >
->**Step 4**: Rename the output as `BAM reverse YaHS`
+> 4. Rename the output as `BAM reverse YaHS`
 >
->**Step 5**: Run {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
-> 1. {% icon param-file %} *"First set of reads"*: `BAM forward YaHS`
-> 2. {% icon param-file %} *"Second set of reads"*: `BAM reverse YaHS`
+> 5. Run {% tool [Filter and merge](toolshed.g2.bx.psu.edu/repos/iuc/bellerophon/bellerophon/1.0+galaxy1) %} chimeric reads from Arima Genomics with the following parameters:
+>    - {% icon param-file %} *"First set of reads"*: `BAM forward YaHS`
+>    - {% icon param-file %} *"Second set of reads"*: `BAM reverse YaHS`
 >
->**Step 6**: Rename the output as `BAM Hi-C reads YaHS`
+> 6. Rename the output as `BAM Hi-C reads YaHS`
 >
->**Step 7**: Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
-> 1. {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads YaHS`
-> 2. *"Sort by"*: `Don't sort`
+> 7. Run {% tool [PretextMap](toolshed.g2.bx.psu.edu/repos/iuc/pretext_map/pretext_map/0.1.9+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input dataset in SAM or BAM format"*: `BAM Hi-C reads YaHS`
+>    - *"Sort by"*: `Don't sort`
 >
->**Step 8**: Rename the output as `PretextMap output YaHS`
+> 8. Rename the output as `PretextMap output YaHS`
 >
->**Step 9**: Run {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
-> 1. {% icon param-file %} *"Input Pretext map file"*: `PretextMap output YaHS`
-> 2. *"Output image format"*: `png`
-> 3. *"Show grid?"*: `Yes`
+> 9. Run {% tool [Pretext Snapshot](toolshed.g2.bx.psu.edu/repos/iuc/pretext_snapshot/pretext_snapshot/0.0.3+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input Pretext map file"*: `PretextMap output YaHS`
+>    - *"Output image format"*: `png`
+>    - *"Show grid?"*: `Yes`
 >
 {: .hands_on}
 

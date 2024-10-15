@@ -43,7 +43,7 @@ data.each do |row|
   # extract metadata from Google form
   length = row[col_length]
   galaxy_version= row[col_galaxyversion]
-  speakers = row[col_speakers]
+  speakers = row[col_speakers]&.split(",")
   date = submission_date.strftime('%Y-%m-%d')
 
   if row[col_material] == 'TESTING' or row[col_prmade] == 'yes'
@@ -51,15 +51,16 @@ data.each do |row|
     next
   end
 
-  material_file = row[col_material].gsub("tutorial.html","tutorial.md").gsub("https://training.galaxyproject.org/","").gsub("training-material/","")
+  material_file = row[col_material].gsub("tutorial.html","tutorial.md").gsub("https://training.galaxyproject.org/","").gsub("training-material/","").gsub("training-material//","")
+
 
   bot_timestamp = submission_date.to_time.to_i
   recording_metadata = {"youtube_id" => "TODO",
                         "length" => length,
                         "galaxy_version" => galaxy_version,
-                        "date" => "'#{date}'",
-                        "speakers" => "[#{speakers}]",
-                        "captioners" => "[#{speakers}]",
+                        "date" => date,
+                        "speakers" => speakers,
+                        "captioners" => speakers.dup,
                         "bot-timestamp" => bot_timestamp }
 
   # append metadata into GTN material

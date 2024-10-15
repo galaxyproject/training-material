@@ -10,6 +10,8 @@ Did you know we have a unique Single Cell Omics Lab with all our single cell too
 
 The Single Cell Omics Lab currently uses the main European Galaxy infrastructure and power, it's just organised better for users of particular analyses...like single cell!
 
-Try it out! All your histories/workflows/logins from the general [European Galaxy server](https://usegalaxy.eu) will be there!
+Try it out!
 
- - {% icon subdomain %} [Single Cell Omics Lab](https://singlecell.usegalaxy.eu)
+ - {% icon subdomain %} [Europe | Single Cell Omics Lab](https://singlecell.usegalaxy.eu)
+ - {% icon subdomain %} [USA | Single Cell Omics Lab](https://singlecell.usegalaxy.org)
+ - {% icon subdomain %} [Australia | Single Cell Omics Lab](https://singlecell.usegalaxy.org.au)

@@ -1,24 +1,27 @@
 ---
 layout: tutorial_hands_on
 redirect_from:
-  - /topics/galaxy-ui/tutorials/history/tutorial
-
-title: "Understanding Galaxy history system"
-zenodo_link: ""
+- "/topics/galaxy-ui/tutorials/history/tutorial"
+title: Understanding Galaxy history system
+zenodo_link: ''
 level: Introductory
 questions:
-  - "How do Galaxy histories work?"
+- How do Galaxy histories work?
 objectives:
-  - "Gain understanding on navigating and manipulating histories"
-time_estimation: "30m"
+- Gain understanding on navigating and manipulating histories
+time_estimation: 30m
 key_points:
-  - "In Galaxy, data is stored in datasets and organized in histories"
-  - "The right pane shows the current history. It displays the name of the history, the tags and annotations assigned to it, and the size of the data in it"
-  - "The datasets are shown differently depending on their status: queued, running, ok, error, or paused"
-  - "The summary view for each dataset can be expanded to show additional information"
-  - "Datasets deleted are hidden from history. They can be restored to the history, or permanently deleted from the server, or purged. Purged files cannot be restored"
-  - "Histories can also be deleted and purged, similar to datasets"
-  - "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
+- In Galaxy, data is stored in datasets and organized in histories
+- The right pane shows the current history. It displays the name of the history, the
+  tags and annotations assigned to it, and the size of the data in it
+- 'The datasets are shown differently depending on their status: queued, running,
+  ok, error, or paused'
+- The summary view for each dataset can be expanded to show additional information
+- Datasets deleted are hidden from history. They can be restored to the history, or
+  permanently deleted from the server, or purged. Purged files cannot be restored
+- Histories can also be deleted and purged, similar to datasets
+- Datasets can be organized into collections within a history with search and multi-select.
+  Jobs applied to collections use the same settings for each dataset in the collection
 contributions:
   authorship:
   - nekrut
@@ -30,8 +33,8 @@ contributions:
   - bebatut
   - bgruening
   - hexylena
+  - ahmedhamidawan
 subtopic: histories
-
 recordings:
 - youtube_id: C3_HSgbbDWc
   speakers:
@@ -41,10 +44,21 @@ recordings:
   length: 18M
   date: '2023-05-19'
   galaxy_version: '23.01'
+- youtube_id: InBwrXde-g4
+  length: 23M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-07'
+  speakers:
+  - ahmedhamidawan
+  captioners:
+  - ahmedhamidawan
+  bot-timestamp: 1725682847
+
 
 ---
 
-{% snippet faqs/gtn/galaxy_tested_with.md version="24.0" %}
+
+{% snippet faqs/gtn/galaxy_tested_with.md version="24.1" %}
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by Galaxy in
@@ -56,7 +70,7 @@ All users have one 'current' history, which can be thought of as **a workspace**
 bioinformatics terms. Your current history is displayed in the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.svg "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
+![Screenshot of the Galaxy UI with the toolbox, center panel, and history visible](../../images/history.png "Galaxy History is simply the right panel of the interface. It lists all datasets uploaded or produced during an analysis. Galaxy was designed around history with the idea of <i>reproducibility</i> in mind!")
 
 The history panel displays output datasets in the order in which they were created, with the oldest/first shown at the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the

@@ -109,7 +109,7 @@ Discipline-specific repositories cater for communities and datatypes, and typica
 > <question-title></question-title>
 >
 > An example of a discipline-specific repository is [ArrayExpress](https://www.ebi.ac.uk/biostudies/arrayexpress) database.  ArrayExpress stores data from high-through functional genomics assays, such as RNAseq, ChIPseq and expression microarrays.
-The data submission interface of ArrayExpress is called [Annotare](https://www.ebi.ac.uk/fg/annotare/login/).  Without creating a login, what help is given to a person looking to submit a dataset for the first time?
+> The data submission interface of ArrayExpress is called [Annotare](https://www.ebi.ac.uk/fg/annotare/login/).  Without creating a login, what help is given to a person looking to submit a dataset for the first time?
 >
 > > <solution-title></solution-title>
 > >
@@ -127,7 +127,7 @@ The data submission interface of ArrayExpress is called [Annotare](https://www.e
 > > <solution-title></solution-title>
 > >
 > > Open the **Findability** pulldown on the left hand banner to find recipes for the following:
-[Depositing to generic repositories - Zenodo use case](https://faircookbook.elixir-europe.org/content/recipes/findability/zenodo-deposition.html) and [Registering Datasets in Wikidata](https://faircookbook.elixir-europe.org/content/recipes/findability/registeringDatasets.html).
+> > [Depositing to generic repositories - Zenodo use case](https://faircookbook.elixir-europe.org/content/recipes/findability/zenodo-deposition.html) and [Registering Datasets in Wikidata](https://faircookbook.elixir-europe.org/content/recipes/findability/registeringDatasets.html).
 > >
 > {: .solution}
 {: .question}

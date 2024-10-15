@@ -1,27 +1,30 @@
 ---
 layout: tutorial_hands_on
-
-title: 'Classification in Machine Learning'
+title: Classification in Machine Learning
 zenodo_link: https://zenodo.org/record/3738729
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
 - Learn classification background
-- Learn what a quantitative structure-analysis relationship (QSAR) model is and how it can be constructed in Galaxy
-- Learn to apply logistic regression, k-nearest neighbors, support verctor machines, random forests and bagging algorithms
+- Learn what a quantitative structure-analysis relationship (QSAR) model is and how
+  it can be constructed in Galaxy
+- Learn to apply logistic regression, k-nearest neighbors, support verctor machines,
+  random forests and bagging algorithms
 - Learn how visualizations can be used to analyze the classification results
 key_points:
 - Classification is a supervised approach in machine learning.
 - For classification tasks, data is divided into training and test sets.
-- Using classification, the samples are learned using the training set and predicted using the test set.
-- For each classification algorithm, it parameters should be optimised based on the dataset.
-- Machine learning algorithms can be applied to chemical datasets to predict important properties.
+- Using classification, the samples are learned using the training set and predicted
+  using the test set.
+- For each classification algorithm, it parameters should be optimised based on the
+  dataset.
+- Machine learning algorithms can be applied to chemical datasets to predict important
+  properties.
 time_estimation: 2H
 contributors:
 - khanteymoori
 - anuprulez
 - simonbray
-
 recordings:
 - captioners:
   - anuprulez
@@ -31,8 +34,20 @@ recordings:
   youtube_id: Gz2OdRPS2Nk
   speakers:
   - anuprulez
+- youtube_id: l4LCy6Zci4g
+  length: 1H7M
+  galaxy_version: "24.1.2.dev0"
+  date: '2024-08-29'
+  speakers:
+  - anuprulez
+  captioners:
+  - anuprulez
+  bot-timestamp: 1724930690
+
 
 ---
+
+
 
 
 In this tutorial you will learn how to apply Galaxy tools to solve [classification](https://en.wikipedia.org/wiki/Statistical_classification) problems. First, we will introduce classification briefly, and then examine logistic regression, which is an example of a linear classifier. Next, we will discuss the nearest neighbor classifier, which is a simple but nonlinear classifier. Then advanced classifiers, such as support vector machines, random forest and ensemble classifiers will be introduced and applied. Furthermore, we will show how to visualize the results in each step.
@@ -184,7 +199,7 @@ We will evaluate the classification by comparing the predicted with the expected
 Now we visualize and analyze the classification using the "Plot confusion matrix, precision, recall and ROC and AUC curves" tool.
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
@@ -298,7 +313,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
@@ -369,7 +384,7 @@ Now we will evaluate the performance of the SVM classifier:
 Now let's visualize the results:
 
 > <hands-on-title>Check and visualize the classification</hands-on-title>
->  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.3) %}:
+>  {% tool [Plot confusion matrix, precision, recall and ROC and AUC curves](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_ml_performance_plots/plotly_ml_performance_plots/0.4) %}:
 >    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
@@ -408,8 +423,8 @@ One big advantage of random forest is that it can be used for both classificatio
 > What are the advantages of random forest classifier compared with KNN and SVM?
 >
 > > <solution-title></solution-title>
-> > 1. The overfitting problem will never arise when we use the random forest algorithm in any classification problem.
-> > 2. The same random forest algorithm can be used for both classification and regression task.
+> > 1. It is resistant to overfitting as it produces results based on multiple decision trees.
+> > 2. It scales well with large datasets.
 > > 3. The random forest algorithm can be used for feature engineering, which means identifying the most important features out of the available features from the training dataset.
 > {: .solution}
 >

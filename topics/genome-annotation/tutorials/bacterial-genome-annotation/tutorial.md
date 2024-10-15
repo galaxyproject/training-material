@@ -1,20 +1,21 @@
 ---
 layout: tutorial_hands_on
-
 title: Bacterial Genome Annotation
-zenodo_link: 'https://zenodo.org/record/10572227'
+zenodo_link: https://zenodo.org/record/10572227
 questions:
 - Which genes are on a draft bacterial genome?
 - Which other genomic components can be found on a draft bacterial genome?
 objectives:
-- Run a series of tool to annotate a draft bacterial genome for different types of genomic components
+- Run a series of tool to annotate a draft bacterial genome for different types of
+  genomic components
 - Evaluate the annotation
 - Process the outputs to formate them for visualization needs
 - Visualize a draft bacterial genome and its annotations
 time_estimation: 3H
 key_points:
 - Bakta is a powerful tool to annotate a bacterial genome
-- Annotation can be easily visualized to understand the genomic context and help making sense of the annotations
+- Annotation can be easily visualized to understand the genomic context and help making
+  sense of the annotations
 tags:
 - gmod
 - illumina
@@ -23,13 +24,13 @@ tags:
 - jbrowse1
 subtopic: prokaryote
 edam_ontology:
-- topic_0622 # Genomics
-- topic_3301 # Microbiology
-- topic_0623 # Gene and protein families
-- topic_0080 # Sequence analysis
-- topic_3673 # Whole genome sequencing
-- topic_0085 # Functional genomics
-- topic_0798 # Mobile genetic elements
+- topic_0622
+- topic_3301
+- topic_0623
+- topic_0080
+- topic_3673
+- topic_0085
+- topic_0798
 level: Introductory
 contributions:
   authorship:
@@ -37,20 +38,33 @@ contributions:
   funding:
   - abromics
 follow_up_training:
-- type: "internal"
+- type: internal
   topic_name: genome-annotation
   tutorials:
   - apollo
-- type: "internal"
+- type: internal
   topic_name: visualisation
   tutorials:
   - circos
   - jbrowse
-- type: "internal"
+- type: internal
   topic_name: galaxy-interface
   tutorials:
   - history-to-workflow
+recordings:
+- youtube_id: VOwplmv0vNs
+  length: 44M
+  galaxy_version: "24.0.4.dev0"
+  date: '2024-09-02'
+  speakers:
+  - bebatut
+  captioners:
+  - bebatut
+  bot-timestamp: 1725267714
+
+
 ---
+
 
 After sequencing and assembly, a genome can be annotated. It is an essential step to describe the genome. 
 

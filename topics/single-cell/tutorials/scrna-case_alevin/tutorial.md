@@ -1,72 +1,56 @@
 ---
 layout: tutorial_hands_on
-
-title: "Generating a single cell matrix using Alevin"
+title: Generating a single cell matrix using Alevin
 subtopic: single-cell-CS
 priority: 1
-
-zenodo_link: 'https://zenodo.org/record/4574153'
-
+zenodo_link: https://zenodo.org/record/4574153
 redirect_from:
-- /topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial
-- /topics/transcriptomics/tutorials/scrna-case_alevin/tutorial
-
+- "/topics/transcriptomics/tutorials/droplet-quantification-preprocessing/tutorial"
+- "/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial"
 questions:
-  - I have some single cell FASTQ files I want to analyse. Where do I start?
-
+- I have some single cell FASTQ files I want to analyse. Where do I start?
 answer_histories:
-  - label: "UseGalaxy.eu"
-    history: https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-alevin
-    date: 2024-03-22
-  - label: "Older Alevin version"
-    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
-    date: 2024-01-01
-
+- label: UseGalaxy.eu
+  history: https://usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-alevin
+  date: 2024-03-22
+- label: Older Alevin version
+  history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+  date: 2024-01-01
 input_histories:
-  - label: "UseGalaxy.eu"
-    history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
-
+- label: UseGalaxy.eu
+  history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
 objectives:
-  - Generate a cellxgene matrix for droplet-based single cell sequencing data
-  - Interpret quality control (QC) plots to make informed decisions on cell thresholds
-  - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
-
+- Generate a cellxgene matrix for droplet-based single cell sequencing data
+- Interpret quality control (QC) plots to make informed decisions on cell thresholds
+- Find relevant information in GTF files for the particulars of their study, and include
+  this in data matrix metadata
 time_estimation: 2H
-
 key_points:
-  - Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene metadata
-
+- Create a scanpy-accessible AnnData object from FASTQ files, including relevant gene
+  metadata
 tags:
-  - 10x
-  - paper-replication
-
+- 10x
+- paper-replication
 contributions:
   authorship:
-    - nomadscientist
-    - pinin4fjords
-
+  - nomadscientist
+  - pinin4fjords
   editing:
-    - hexylena
-
+  - hexylena
   testing:
-    - wee-snufkin
-
+  - wee-snufkin
 requirements:
-  - type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-intro
-        - scrna-umis
-
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-intro
+  - scrna-umis
 gitter: Galaxy-Training-Network/galaxy-single-cell
-
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-case_alevin-combine-datasets
-
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-case_alevin-combine-datasets
 recordings:
 - captioners:
   - nomadscientist
@@ -76,8 +60,19 @@ recordings:
   youtube_id: 3ytm2AU6QUc
   speakers:
   - nomadscientist
+- youtube_id: BQriffof8yM
+  length: 49M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-12'
+  speakers:
+  - MarisaJL
+  captioners:
+  - MarisaJL
+  bot-timestamp: 1726104172
+
 
 ---
+
 
 
 This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
@@ -232,7 +227,7 @@ We now have:
 * transcript/ gene mapping
 * filtered FASTA
 
-We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2.
+We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you'll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It's often a good idea to check your tool versions. To identify which version of a tool you are using, select {% icon tool-versions %} 'Versions' and choose the appropriate version. In this case the tutorial was built with Alevin Galaxy Version 1.9.0+galaxy2, but will also work with the versions named in the Hands-on sections.
 
 
 > <hands-on-title>Running Alevin</hands-on-title>
@@ -528,7 +523,11 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >
 > 1. {% tool [SCEasy Converter](toolshed.g2.bx.psu.edu/repos/iuc/sceasy_convert/sceasy_convert/0.0.7+galaxy2) %} with the following parameters:
 >    - *"Convert From / To"*: `SingleCellExperiment to AnnData`
->    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object` (if the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - just drag the dataset from the history panel and drop into the input field)
+>    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object`
+>
+> If the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - try dragging the dataset from the history panel and dropping it into the input field. If this still doesn't work, then you can change the datatype to rdata.sce.
+> 
+> {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`
 >
