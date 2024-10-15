@@ -7,7 +7,7 @@ abbreviations:
   DMP: Data Management Plan
   PID: Persistent Identifier
 
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/records/13935061'
 questions:
 - What are ARCs?
 - Why should I create ARCs?
@@ -62,29 +62,76 @@ background about DataPLANT, RO-crates, FAIR, RDM, etc
 
 
 
-## ARCitect
+## Get Set up for the tutorial
 
-#### Install ARCitect
+For this tutorial you need three things:
+ - An account on DataHUB
+ - The ARCitect tool installed
+ - Example data to fill your ARC with
 
-First we will install the ARCitect tool. We will install version {{page.extra.arcitect_version}} of ARCitect to match the version in this tutorial. There may also be newer version available. Feel free to install the latest version if you prefer, but some of the instructions and screenshot may be different.
+Below we will walk you through these 3 steps
 
+### Create a DataHUB account
 
+DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collaboratively to create your ARC, and once you are ready to publish your ARC, you can do this from here as well.
 
+TODO: discuss multiple DataHUBs?
 
-
-#### Download demo data
-
-> <hands-on-title> Download example ARC data </hands-on-title>
+> <hands-on-title> Create a DataHUB account </hands-on-title>
 >
+> 1. Already have an account? Please [log in](https://git.nfdi4plants.org/])
+> 2. New to DataHUB? Create an account: [https://git.nfdi4plants.org/](https://git.nfdi4plants.org/)
+> 3. If you are not familiar with Git or GitLab that is ok, ARCitect will take care of syncing to DataHub
+>    - TODO: link to section/slides with more info about DataHUB
 >
 >
 {: .hands_on}
 
-### Structure your data
 
-### Add your metadata (SWATE)
+### Download demo data
 
-### Syncing to DataHUB
 
+TODO: a few sentences about the demo data (what kind of data, where did it come from, what was the study?)
+
+
+> <hands-on-title> Download example ARC data </hands-on-title>
+>
+> 1. Download the zip file from Zenodo (<2MB) to your machine
+>
+>    ```
+>    https://zenodo.org/records/13935061/files/arcitect-demo-data.zip
+>    ```
+>
+> 2. Unzip the file
+>    - You can put the files wherever is most convenient for you
+>
+> 3. Have a quick look at the files and folders
+>    - This example data mimics you might have your project data organised on your computer
+>    - In the next part we will show how to organise this data in an ARC-compatible way
+>
+{: .hands_on}
+
+https://git.nfdi4plants.org/]
+
+## ARCitect: Structure your data
+
+First we will organize our data into the ARC structure. ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
+for metadata annotation. The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
+that aligns well with most projects in (plant) biology labs. It allows to group multiple assays (measurements) to one study,
+and multiple studies to one investigation.
+
+![Overview of the ISA model](images/isa-model.png "Image source (left panel): https://isa-tools.org/format/specification.html")
+
+Your ARC has one isa.investigation.xlsx workbook at its root, where metadata about the investigataion is captured. Similarly, each study or assay that you add to your ARC contains one isa.study.xlsx or isa.assay.xlsx, respectively.
+
+
+## ARCitect: Add your metadata (SWATE)
+
+
+## ARCitect: Syncing to DataHUB
+
+
+
+## Publishing your ARC
 
 
