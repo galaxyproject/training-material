@@ -267,33 +267,29 @@ Now instead of having a collection of tables, we need to combine the collections
 
 > <hands-on-title>Combine output tables (MuSiC)</hands-on-title>
 >
-> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `MuSiC Results`
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - *"Remove first"*: `2`
+>    - {% icon param-file %} *"Tabular files"*: `MuSiC Results`
+>
+> 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: (output of **Remove beginning** {% icon tool %})
 >    - *"Keep one header line"*: **Yes**
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `Combined Music table`
->
-> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - *"Remove first"*: `1`
->    - {% icon param-file %} *"Tabular files"*: `Combined Music table`
->
-> 4. **Rename** {% icon galaxy-pencil %} output `MuSiC Combined`
+> 3. **Rename** {% icon galaxy-pencil %} output `MuSiC Combined`
 >
 {: .hands_on}
 
 > <hands-on-title>Combine output tables (NNLS)</hands-on-title>
 >
-> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `NNLS Results`
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - *"Remove first"*: `2`
+>    - {% icon param-file %} *"Tabular files"*: `NNLS Results`
+>
+> 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: (output of **Remove beginning** {% icon tool %})
 >    - *"Keep one header line"*: **Yes**
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `Combined NNLS table`
->
-> 3. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - *"Remove first"*: `1`
->    - {% icon param-file %} *"Tabular files"*: `Combined NNLS table`
->
-> 4. **Rename** {% icon galaxy-pencil %} output `NNLS Combined`
+> 3. **Rename** {% icon galaxy-pencil %} output `NNLS Combined`
 >
 {: .hands_on}
 
