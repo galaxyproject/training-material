@@ -297,8 +297,7 @@ Now instead of having a collection of tables, we need to combine the collections
 
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
-> 1. {% tool [Scatterplot with ggplot2
-](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
+> 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input in tabular format"*: `Combined output`
 >    - *"Column to plot on x-axis"*: `2`
 >    - *"Column to plot on y-axis"*: `3`
