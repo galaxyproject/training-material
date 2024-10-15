@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@45ecb05968cd1d69fe62539fcc1e36963328754d",
+		release: "galaxy-training-network@ed3376ad7a927b28e087249113239b352fca0a36",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -254,13 +254,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/taxonomic-profiling/workflows/main-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
 			
 			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
 			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
 			
 			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
+			
+			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
+			
+			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
 			
 			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-taxonomic-profiling/versions/main-workflow"
 			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
@@ -276,20 +276,20 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   0 -->|output| 2;
   3["Kraken2"];
   0 -->|output| 3;
-  b0e481c6-a92a-4cd6-b900-95c33f02b9fe["Output\nkraken_report"];
-  3 --> b0e481c6-a92a-4cd6-b900-95c33f02b9fe;
-  style b0e481c6-a92a-4cd6-b900-95c33f02b9fe stroke:#2c3143,stroke-width:4px;
+  7bdca08d-6a21-488f-a647-871e97b33311["Output\nkraken_report"];
+  3 --> 7bdca08d-6a21-488f-a647-871e97b33311;
+  style 7bdca08d-6a21-488f-a647-871e97b33311 stroke:#2c3143,stroke-width:4px;
   4["MetaPhlAn"];
   2 -->|forward| 4;
   2 -->|reverse| 4;
-  bb139dbb-6cbb-4cd5-ab8f-b30ac70d726b["Output\nmetaphlan_output"];
-  4 --> bb139dbb-6cbb-4cd5-ab8f-b30ac70d726b;
-  style bb139dbb-6cbb-4cd5-ab8f-b30ac70d726b stroke:#2c3143,stroke-width:4px;
+  2470bbb8-6a9f-4a99-9dbf-6b5174e143dc["Output\nmetaphlan_output"];
+  4 --> 2470bbb8-6a9f-4a99-9dbf-6b5174e143dc;
+  style 2470bbb8-6a9f-4a99-9dbf-6b5174e143dc stroke:#2c3143,stroke-width:4px;
   5["Krakentools: Convert kraken report file"];
   3 -->|report_output| 5;
-  d086d239-c322-4571-9495-41b8690457b8["Output\nkrakentool_report"];
-  5 --> d086d239-c322-4571-9495-41b8690457b8;
-  style d086d239-c322-4571-9495-41b8690457b8 stroke:#2c3143,stroke-width:4px;
+  c7cb17c6-e8d3-49b7-8c6f-213bf324d66b["Output\nkrakentool_report"];
+  5 --> c7cb17c6-e8d3-49b7-8c6f-213bf324d66b;
+  style c7cb17c6-e8d3-49b7-8c6f-213bf324d66b stroke:#2c3143,stroke-width:4px;
   6["Kraken-biom"];
   3 -->|report_output| 6;
   1 -->|output| 6;
@@ -377,7 +377,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/45ecb05968cd1d69fe62539fcc1e36963328754d">45ecb05</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ed3376ad7a927b28e087249113239b352fca0a36">ed3376a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
