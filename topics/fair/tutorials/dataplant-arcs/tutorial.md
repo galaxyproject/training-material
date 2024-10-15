@@ -65,11 +65,11 @@ background about DataPLANT, RO-crates, FAIR, RDM, etc
 ## Get Set up for the tutorial
 
 For this tutorial you need three things:
- - An account on DataHUB
- - The ARCitect tool installed
- - Example data to fill your ARC with
+ 1. An account on DataHUB
+ 2. The ARCitect tool installed
+ 3. Example data to fill your ARC with
 
-Below we will walk you through these 3 steps
+Below we will walk you through each of these 3 steps
 
 ### Create a DataHUB account
 
@@ -128,18 +128,20 @@ TODO: make this a choose-your-own adventure section, instructions per OS
 >
 > 2. Start ARCitect to verify that everything is installed correctly. You should see a screen like this:
 >
->
+>    ![screenshot of the ARCitect interface after startup](images/arcitect-home.png)
 {: .hands_on}
 
 
 ## ARCitect: Structure your data
 
-First we will organize our data into the ARC structure. ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
+Now that you have everything set up for the course, we can start creating our ARC.
+
+First we will organize our example data into the ARC structure. ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
 for metadata annotation. The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
-that aligns well with most projects in (plant) biology labs. It allows to group multiple assays (measurements) to one study,
+that aligns well with most projects in (plant) biology labs. It allows grouping multiple assays (measurements) to one study,
 and multiple studies to one investigation.
 
-![Overview of the ISA model](images/isa-model.png "Image source (left panel): https://isa-tools.org/format/specification.html")
+![Overview of the ISA model](images/isa-model.png "Image source left panel: [isa-tools.org](https://isa-tools.org/format/specification.html)")
 
 Your ARC has one isa.investigation.xlsx workbook at its root, where metadata about the investigataion is captured. Similarly, each study or assay that you add to your ARC contains one isa.study.xlsx or isa.assay.xlsx, respectively.
 
