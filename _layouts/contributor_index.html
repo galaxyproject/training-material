@@ -15,6 +15,8 @@ layout: base
 }
 
 </style>
+
+{% assign stats_filters = "" | split: ',' %}
 <section class="contributor-page contributor-{{ page.contributor }}">
 	<div class="stats">
 		<div class="row">
@@ -116,6 +118,7 @@ layout: base
 				<h3>Tutorials</h3>
 				<ul>
 				{% for res in page.tutorials %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -141,6 +144,7 @@ layout: base
 				<h3>Slides</h3>
 				<ul>
 				{% for res in page.slides %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -166,6 +170,7 @@ layout: base
 				<h3>Learning Pathways</h3>
 				<ul>
 				{% for res in page.learning_pathways %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						<a href="{{ site.baseurl }}/{{ res[0].url }}">
 						{{ res[0].title }}
@@ -210,6 +215,7 @@ layout: base
 				<h3>Events</h3>
 				<ul>
 				{% for res in page.events %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						<a href="{{ site.baseurl }}/{{ res[0].url }}">
 						{{ res[0].title }}
@@ -230,6 +236,7 @@ layout: base
 				<h3>News</h3>
 				<div class="newslist">
 				{% for n in page.news %}
+					{% assign stats_filters = stats_filters | push: n.url %}
 					{% include _includes/news-card.html news=n %}
 				{% endfor %}
 				</div>
@@ -464,3 +471,7 @@ var chart2 = new Chart(ctx2, {
 	}
 });
 </script>
+
+
+<h3>Stats for materials contributed to by {{ entity.name | default: page.contributor }}</h3>
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E{{stats_filters | join:"|"}}&embed=true&theme=system&background=transparent&period=12mo" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
