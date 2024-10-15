@@ -85,9 +85,13 @@ First we need to create a new history in Galaxy and load our single-cell data We
 
 # Process single-cell data
 
+In order to get a good understanding of the accuracy of our deconvolution tools, we are going to run our evaluations multiple times. This is to ensure that a single good or bad evaluation doesn't become indicative of the overall tool's performance.
+
+However, instead of running all of our tools multiple times for each evaluation (which would be quite time consuming!), we will leverage "batch computation" in Galaxy. By storing our data in collections, any tools or workflows that use with that data will run individually for each element in the collection. We will now perform some pre-processing of our data to get it into the right format.
+
 ## Transpose Expression Matrix
 
-Inspecting the expression data file, we can see that currently the rows represent genes and columns represent cells. However, this needs to be swapped for the later workflows. So first we will transpose the expression matrix.
+If we inspect the expression data file downloaded earlier, we can see that currently the rows represent genes and columns represent cells. However, this needs to be swapped for the later workflows. To fix this we will transpose the expression matrix.
 
 > <hands-on-title>Transpose expression matrix</hands-on-title>
 >
@@ -100,9 +104,9 @@ Inspecting the expression data file, we can see that currently the rows represen
 
 ## Generate Batch Mode Collections
 
-In order to run our evaluations 20 times we need to provide our workflow with a collection, doing this will run the workflow in "batch mode" which will run the workflow individually for each element in the collection.
+For this tutorial we will run the evaluations **20** times, this will both help improve the sample size and allow us to determine the consistency of the tools, whilst being small enough to run in a reasonable amount of time!
 
-We are going to duplicate our single-cell data 20 times and store it in a collection. This will be done for both the expression data and metadata files.
+We will now duplicate our single-cell data 20 times and store it in a collection. This will be done for both the expression data and metadata files.
 
 > <hands-on-title>Generate collections from data</hands-on-title>
 >
@@ -122,7 +126,9 @@ We are going to duplicate our single-cell data 20 times and store it in a collec
 
 ## Generate Expression Set Objects
 
-Next we will need to use the single-cell data to build and expression set object, this will be used later in the evaluation when we perform the actual deconvolution. **Note: We are using the original imported data here, not the transposed data or collections.**
+Next we will need to use the single-cell data to build and expression set object, this will be used later in the evaluation when we perform the actual deconvolution. 
+
+**Note: We are using the original imported data here, not the transposed data or collections.**
 
 > <hands-on-title>Build the Expression Set object</hands-on-title>
 >
