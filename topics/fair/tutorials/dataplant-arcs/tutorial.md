@@ -15,6 +15,7 @@ questions:
 time_estimation: "2H"
 key_points:
 - Annotated Research Contexts (ARCs) ..
+- ARCitect is a useful tool to help you create your ARC
 tags:
 - plants
 - fair
@@ -41,14 +42,16 @@ requirements:
     tutorials:
       - fair-intro
 
+extra:
+  arcitect_version: "0.48"
 ---
 
 intro
 
 > <comment-title> ARCitect version </comment-title>
 >
-> This tutorial uses version 0.40 or ARCitect. Since this tool is still
-> under rapid development, screenshot may be outdated (despite our best
+> This tutorial uses version {{page.extra.arcitect_version}} of ARCitect. Since this tool is still
+> under rapid development, a newer version of ARCitect may already be available and screenshots may be outdated (despite our best
 > efforts to keep this tutorial updated)
 >
 {: .comment}
@@ -58,7 +61,24 @@ intro
 background about DataPLANT, RO-crates, FAIR, RDM, etc
 
 
+
 ## ARCitect
+
+#### Install ARCitect
+
+First we will install the ARCitect tool. We will install version {{page.extra.arcitect_version}} of ARCitect to match the version in this tutorial. There may also be newer version available. Feel free to install the latest version if you prefer, but some of the instructions and screenshot may be different.
+
+
+
+
+
+#### Download demo data
+
+> <hands-on-title> Download example ARC data </hands-on-title>
+>
+>
+>
+{: .hands_on}
 
 ### Structure your data
 
