@@ -3,8 +3,8 @@ name: "[Social] Autogenerate missing social media cards"
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    # We'll run this daily at noon.
-    - cron:  '0 12 * * *'
+    # We'll run this weekly at noon.
+    - cron: '0 12 * * 0'
   workflow_dispatch:
     inputs:
       all_old:
@@ -29,6 +29,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get install -y imagemagick
+          pip install -r requests
           mkdir -p ~/.fonts/
           wget https://galaxy-training.s3.amazonaws.com/social/recursive.ttf -O ~/.fonts/recursive.ttf
           fc-cache -rv
