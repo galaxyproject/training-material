@@ -289,11 +289,14 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
                         <script>
                         function tutorial_finish() {
-                          if(plausible !== undefined){
-                            plausible('TutorialComplete', {callback: tutorial_finish_finish, props: {path: document.location.pathname}})
-                          } else {
-                            tutorial_finish_finish();
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
                           }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
                         }
                         function tutorial_finish_finish() {
                           document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
@@ -424,11 +427,12 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                    </p>
                 </blockquote>
 
+        {% if page.contributions and page.contributions.funding %}
 		<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
 		<p>These individuals or organisations provided funding support for the development of this resource</p>
-                {% if page.contributions %}
+
                 {% include _includes/funding-statement.md funders=page.contributions.funding %}
-                {% endif %}
+        {% endif %}
 
 
 <script>
@@ -525,7 +529,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         {% endif %}
 		</blockquote>
 
-		
+
 
 
 		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}

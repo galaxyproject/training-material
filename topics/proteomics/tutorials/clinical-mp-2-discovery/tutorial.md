@@ -58,7 +58,7 @@ This tutorial can be followed with any user-defined database but would work best
 The MSMS data will be searched against the compact database `Human UniProt Microbial Proteins (from MetaNovo) and cRAP` to identify peptide and protein sequences via sequence database searching. For this tutorial, two peptide identification programs will be used: SearchGUI/PeptideShaker and MaxQuant. However, you could use other software too, such as Fragpipe or Scribe. For the purpose of this tutorial, a dataset of the 4 RAW/MGF files will be used as the MS/MS input.
 
 
-![Discovery Workflow](../../images/clinical-mp/clinical-mp-discovery.JPG)
+![Discovery Workflow]({% link topics/proteomics/images/clinical-mp/clinical-mp-discovery.JPG %})
 
 
 > <agenda-title></agenda-title>

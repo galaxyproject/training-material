@@ -83,7 +83,7 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
-              - FUNDERS
+              - GRANTS
               - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
@@ -153,7 +153,7 @@ mapping:
                   enum:
                   - CONTRIBUTORS
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
@@ -161,7 +161,7 @@ mapping:
                 - type: str
                   enum:
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -178,7 +178,7 @@ mapping:
                   enum:
                   - CONTRIBUTORS
                   - ORGANISATIONS
-                  - FUNDERS
+                  - GRANTS
     subtopic:
         type: str
         description: |
@@ -481,6 +481,7 @@ mapping:
             history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
           - label: "Older Alevin version"
             history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+            date: 2024-01-01
         sequence:
           - type: map
             mapping: &answer_histories
@@ -499,6 +500,7 @@ mapping:
           input_histories:
             - label: "UseGalaxy.eu"
               history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+              date: "2021-09-01"
         sequence:
           - type: map
             mapping: *answer_histories
@@ -533,7 +535,7 @@ mapping:
               pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
             youtube_id:
               type: str
-              pattern: /[A-Za-z0-9_-]{9,13}/
+              pattern: /[A-Za-z0-9_-]{11}/
             type:
               type: str
             archive-id:

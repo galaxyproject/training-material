@@ -24,9 +24,12 @@ key_points:
   time points, z-stack positions and crop the image in different ways.
 - CellProfiler in Galaxy can segment and extract features of any object of interest.
 - The features and masks can be exported for further analysis.
-contributors:
-- beatrizserrano
-- jkh1
+
+contributions:
+  authorship:
+    - beatrizserrano
+    - jkh1
+
 zenodo_link: ''
 ---
 

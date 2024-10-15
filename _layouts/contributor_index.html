@@ -23,9 +23,11 @@ layout: base
 					<h1>
 						{{ entity.name | default: page.contributor }}
 					</h1>
-				{% if entity.funder_name %}
-					<p>Funded by {{ entity.funder_name }}</p>
-				{% endif %}
+					{% if entity.funder%}
+					<p>The materials and activities listed below were funded (to some degree) by this project.</p>
+				    <p>{{ entity.funding_statement | markdownify }}</p>
+
+					{% endif %}
 				</hgroup>
 
 				{% if entity.bio %}
@@ -34,9 +36,6 @@ layout: base
 				</p>
 				{% endif %}
 
-				{% if entity.funder %}
-				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
-				{% endif %}
 				{% if entity.in_memoriam %}
 				<div class="alert alert-dark" role="alert">
 					<h2 class="alert-heading">In Memoriam</h2>
@@ -81,12 +80,9 @@ layout: base
 
 				<h2>Contributions</h2>
 
-				{% if entity.funder %}
-				{{ entity.funding_statement | markdownify }}
-				{% endif %}
 
 				<p class="text-muted">
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
                 {% unless entity.github == false %}
                 <br><br>
@@ -276,7 +272,7 @@ layout: base
 
 				{% if entity.funding_id %}
 					Grant ID:
-					{% if entity.funding_system %}
+					{% if entity.funding_database %}
 						{% assign url = entity | fetch_funding_url %}
 						<a href="{{ url }}">
 							{{ entity.funding_id }}
