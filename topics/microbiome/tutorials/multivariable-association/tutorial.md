@@ -403,8 +403,7 @@ This is the effect size representing how strongly the abundance of Alistipes sha
     > > - The values in the matrix are the residuals, which show the difference between the observed microbiome abundance and the values predicted by the model for each sample and feature.
     > > - Positive residuals indicate that the observed value is higher than the model’s prediction, while negative residuals indicate lower observed values. For example, a residual of 0.12 indicates that the observed value was slightly higher than predicted, -0.15 shows it was lower, and 0.02 suggests the observed and predicted values are nearly identical.
     > > - Maaslin2 applies statistical thresholds (such as q-value for multiple testing correction or p-value) to filter results. If a taxon’s abundance is well predicted by the metadata, it may not meet the criteria for inclusion in the residual output. Essentially, only taxa with residuals large enough to be considered meaningful might be included. Interpreting these residuals allows you to assess how well the model has captured the variability in your data and explore any patterns or deviations not explained by the model's predictors.
-    > > 4. The mentioned plot shows the relationship between **age** (on the x-axis) and the relative abundance of the bacterial species
-    **Faecalibacterium prausnitzii** (on the y-axis).\
+    > > 4. The mentioned plot shows the relationship between **age** (on the x-axis) and the relative abundance of the bacterial species **Faecalibacterium prausnitzii** (on the y-axis).\
     > > **Key Components:**
     >   > - **<u>Y-axis (Faecalibacterium prausnitzii)</u>:**\
     >   > Represents the relative abundance of the species Faecalibacterium prausnitzii across samples.\
