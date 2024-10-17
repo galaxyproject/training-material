@@ -8,7 +8,7 @@ questions:
 - How do I build and evaluate the image classification model? 
 objectives:
 - Execute a Ludwig experiment. 
-- Evaluate the image classfier model. 
+- Evaluate the image classifier model. 
 - Compare different configurations to improve model performance. 
 time_estimation: 40M
 key_points:
