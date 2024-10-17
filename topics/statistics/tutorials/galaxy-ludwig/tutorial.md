@@ -97,7 +97,7 @@ v) The model is trained to classify images into categories (e.g., recognizing di
 Ludwig simplifies the complexities of machine learning by automating essential steps such as data preprocessing, model architecture selection, hyperparameter tuning, and device management. To properly adapt the configuration for different datasets, users should consider the following parameters:
 
 - Input Features: Ensure the type reflects the nature of the data.
-- Encoder: Depending on the input type, this may need to be changed. For example, for image data, consider varying num_filters and filter_size. For text data, you might switch to type: rnn or type: transformer.
+- Encoder: Depending on the input type, this may need to be changed. For example, for image data, consider varying `num_filters` and `filter_size` hyperparameters. For text data, you might switch to type: rnn or type: transformer.
 - Output Features: Adjust the type according to the target variable. For instance, if it's a regression task, use type: numerical instead of category.
 - Trainer Parameters: Users can adjust epochs, batch_size, and learning_rate based on the dataset size, complexity, data behavior, and available computational resources.
 
