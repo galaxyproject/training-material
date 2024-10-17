@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: FAIR-by-Design methodology
+draft: true
 abbreviations:
   FAIR: Findable, Accessible, Interoperable, Reusable
   OER: Open Educational Repositories
@@ -137,7 +138,7 @@ May all your materials be FAIR!
 
 > <details-title>More details on the FAIR principles</details-title>
 > [Follow the FAIR in a nutshell tutorial available on GTN]( {% link topics/fair/tutorials/fair-intro/tutorial.md %} )
-> 
+>
 > [Follow the FAIR Galaxy Training Material tutorial available on GTN]( {% link topics/fair/tutorials/fair-gtn/tutorial.md %} )
 {: .details}
 
@@ -260,7 +261,7 @@ More on the RDA minimal metadata schema here {% cite hoebelheinrich_2022 %}
 > ><tip-title>Use Blooms Taxonomy</tip-title>
 > >Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.
 > {: .tip}
-> 
+>
 > [Read more](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives)
 {: .question }
 
@@ -280,28 +281,28 @@ Reusable materials can be found anywhere. These are just some examples:
 
 **GTN**
 
-- [GTN learning resources](https://training.galaxyproject.org) 
+- [GTN learning resources](https://training.galaxyproject.org)
 - [TeSS Catalogue by Elixir](https://tess.elixir-europe.org)
 
 **OER**
 
-- [DOAB](https://directory.doabooks.org/) 
-- [MERLOT](https://www.merlot.org/merlot/index.htm) 
-- [OASIS](https://oasis.geneseo.edu/index.php) 
-- [OER Commons](https://www.oercommons.org/) 
-- [OERTX CORA](https://www.projectcora.org/) 
-- [GALILEO](https://oer.galileo.usg.edu/) 
+- [DOAB](https://directory.doabooks.org/)
+- [MERLOT](https://www.merlot.org/merlot/index.htm)
+- [OASIS](https://oasis.geneseo.edu/index.php)
+- [OER Commons](https://www.oercommons.org/)
+- [OERTX CORA](https://www.projectcora.org/)
+- [GALILEO](https://oer.galileo.usg.edu/)
 - [FORRT](https://forrt.org/)
 
 **EOSC**
 
-- [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*) 
+- [EOSC Training catalogue on the EOSC Marketplace](https://search.marketplace.eosc-portal.eu/search/training?q=*)
 - Most EOSC projects have their own training catalogues and/or platforms.
 
 **General**
 
-- [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license 
-- [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository 
+- [Creative Commons Search](https://search.creativecommons.org/) - content provided under a CC license
+- [Zenodo](https://zenodo.org/) - a multi-disciplinary open repository
 - [OSF](https://osf.io/) - a free, open research platform
 
 ### Potential for reuse
@@ -357,13 +358,13 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 ><hands-on-title>How to organise the files</hands-on-title>
 >
 > GTN defines a specific hierarchical structure that needs to be followed when developing learning materials.
-> 
+>
 > > <details-title>Check out the following tutorials</details-title>
 > > [How to create a skeleton for a new learning topic]( {% link topics/contributing/tutorials/create-new-topic/tutorial.md#creating-a-new-topic-with-its-own-materials %}  )
-> > 
+> >
 > > [How to create the skeleton of a new tutorial]( {% link topics/contributing/tutorials/create-new-tutorial/tutorial.md %}  )
 > {: .details}
-> 
+>
 {: .hands-on}
 
 ><comment-title>Syllabus is ready</comment-title>
@@ -372,33 +373,33 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 ><tip-title>Available feedback form</tip-title>
 > GTN provides a readily available feedback form that is automatically added at the end of each tutorial. The feedback form is used to gather quantitative and qualitative feedback.
-> 
+>
 > > <details-title> Learn more about feedback in training</details-title>
 > > [Follow the Assessment and feedback in training and teachings tutorial available on GTN]( {% link topics/teaching/tutorials/assessment/tutorial.md#dealing-with-feedback %}  )
 > {: .details}
-> 
+>
 {: .tip}
 
 ><tip-title>Facilitation guide kit</tip-title>
 > A <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/'> facilitation guide </a> should help prepare for the actual training.
-> 
+>
 > The facilitation guide kit includes documentation of the process of organising and running a training. What different people need to have, know and do so that everything runs smoothly.
-> 
+>
 > > <details-title> Learn more about facilitation</details-title>
 > > [Follow the Organizing a workshop tutorial available on GTN]( {% link topics/teaching/tutorials/organize-workshop/tutorial.md %}  )
-> > 
+> >
 > > [Follow the Running a workshop as instructor tutorial available on GTN]( {% link topics/teaching/tutorials/running-workshop/tutorial.md %}  )
 > {: .details}
-> 
+>
 > Another option is to use something like the [TRIPLE project TRAINING TOOLKIT](https://project.gotriple.eu/project-deliverables/triple-training-toolkit/).
-> 
+>
 {: .tip}
 
 ><question-title>What about instructor notes?</question-title>
 >  They need to be detailed enough so that anyone can reuse the learning content, especially slides properly.
->  
+>
 >  Any specific information relevant for instructors that would like to organise a training based on your GTN tutorial content should be added in Details box.
->  
+>
 >  This practice significantly increases the reuse potential of the material.
 {: .question}
 
@@ -516,13 +517,13 @@ Each MVS profile defines a list of technical and soft skills required for the pr
 
 > <tip-title>Collaborative environment for team work</tip-title>
 >  Choose an environment for producing the learning material that will enable multiple people to work on the same material at one.
->  
+>
 >  - GitHub is one of the most popular options at the moment (find out more <a href='https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/'>here</a>)
 >  - GTN is also based on GitHub and defines [specific procedures on how one can contribute and collaborate](https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTING.md) using GitHub
->  
+>
 >  > <details-title> GTN: collaboration using GitHub</details-title>
 > > [Follow the Contributing with GitHub via its interface tutorial available on GTN]( {% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}  )
-> > 
+> >
 > > [Follow the Contributing with GitHub via command-line tutorial available on GTN]( {% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %}  )
 > {: .details}
 {: .tip}
@@ -571,7 +572,7 @@ The existing materials you are reusing are available under a [CC license](https:
 
 ><details-title>I want to reuse a small part of it</details-title>
 > No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work.
-> 
+>
 > Remember that if the work is licensed with ND, you can not modify it while reusing.
 {: .details}
 
@@ -620,7 +621,7 @@ You should also be able to remove attribution upon request.
 
 > <details-title>Read more about how to attribute</details-title>
 > [{% icon point-right %}  Attribution and Citing](https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#attribution-and-citing)
-> 
+>
 > [{% icon point-right %} How to handle attribution?](https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/)
 {: .details}
 
@@ -629,7 +630,7 @@ You should also be able to remove attribution upon request.
 
 The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.
 
-![Universal access logo](../../images/universal-access-6602642_640.png)  
+![Universal access logo](../../images/universal-access-6602642_640.png)
 <a href="https://pixabay.com/vectors/universal-access-human-icon-6602642/">"Universal Access Human"</a> by <a href="https://pixabay.com/users/inspire-studio-22128832/">J S</a> from <a href="https://pixabay.com/">Pixabay</a>
 
 
@@ -648,7 +649,7 @@ PDF document accessibility is measured with a separate technical specification <
 
 ><tip-title>GTN Accessibility</tip-title>
 > GTN has developed an <a href="https://training.galaxyproject.org/training-material/accessibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.
-> 
+>
 {: .tip}
 
 
@@ -704,7 +705,7 @@ PDF document accessibility is measured with a separate technical specification <
 > Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:
 >  1. Syllabus, that contains all metadata that describe the materials. Metadata should always be open.
 >  2. Accompanying information (optional) to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective.
->  
+>
 > The complete learning materials package itself should be published in a closed repository where the corresponding access rules (and costs) can be implemented.
 {: .warning}
 
