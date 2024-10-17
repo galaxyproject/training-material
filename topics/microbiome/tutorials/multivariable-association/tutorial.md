@@ -181,7 +181,7 @@ Several tools available on Galaxy can generate outputs that are compatible with 
 
 
 
-# Find associations between the two files
+# Find associations between the two groups
 Now we will find significant associations between microbial features(features file) and metadata variables (metadata file) using the **MaAslin2** tool
 
 > <hands-on-title> Task description </hands-on-title>
