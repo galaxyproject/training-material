@@ -67,7 +67,7 @@ In this tutorial, you'll learn how to perform a structural annotation of the gen
 
 To annotate our genome using Helixer, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}) and already masked for you using RepeatMasker.
+- The **genome sequence** in fasta format. For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}). (Note: Helixer will ignore soft-masking. Hard-masking is not recommnded for Helixer either, as it does not ignore the hard-masked regions, but will get less information from them, which could influence your predictions in a negative way.)
 
 > <hands-on-title>Data upload</hands-on-title>
 >
