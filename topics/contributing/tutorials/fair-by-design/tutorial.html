@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: FAIR-by-Design methodology / FAIR-by-Design methodology / Contributing to the Galaxy Training Material</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@cf8cfbeb5fa83f1907e00b100e29bb1d3ec382d4",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="FAIR-by-Design methodology">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-17 09:13:36 +0000">
+<meta name="DC.creator" content="Sonja Filiposka">
+<meta name="DC.creator" content="Anastas Mishev">
+<meta name="DC.creator" content="Carolin Leister">
+<meta name="DC.creator" content="Vojdan Kjorveziroski">
+<meta name="DC.creator" content="Dominique Green">
+<meta name="DC.creator" content="Irakleitos Souyioultzoglou">
+<meta name="DC.creator" content="Achim Winandi">
+<meta name="DC.creator" content="Аrnaud Gingold">
+<meta name="DC.creator" content="Christine Hadrossek"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Contributing to the Galaxy Training Material / FAIR-by-Design methodology / Hands-on: FAIR-by-Design methodology">
+        <meta property="og:description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/contributing/tutorials/fair-by-design/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Instructors"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "FAIR-by-Design methodology",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Draft",
+  "dateModified": "2024-10-17 09:13:36 +0000",
+  "datePublished": "2024-10-17 09:13:36 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+
+  ],
+  "funding": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Grant",
+      "identifier": "10040140",
+      "url": "https://cordis.europa.eu/project/id/10040140",
+      "funder": {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+          "@type": "CreativeWork"
+        },
+        "name": "Skills for European Open Science Cloud",
+        "description": "An organization supporting the Galaxy Training Network",
+        "url": "https://www.skills4eosc.eu/",
+        "logo": "https://github.com/skills4eosc.png"
+      }
+    }
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Contributing to the Galaxy Training Material",
+    "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+  },
+  "abstract": "Welcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.",
+  "learningResourceType": "e-learning",
+  "name": "FAIR-by-Design methodology",
+  "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT20M",
+  "teaches": "- Design FAIR learning materials\n- Structure FAIR learning materials\n- Create and publish FAIR-by-Design learning materials\n- Assess FAIR-ness of learning objects",
+  "keywords": [
+    "Contributing to the Galaxy Training Material",
+    "FAIR-by-Design Learning Materials",
+    "FAIR Learning Objects",
+    "FAIR-by-Design Methodology",
+    "work-in-progress"
+  ],
+  "description": "## Abstract\n\nWelcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How to develop FAIR learning materials?\n - How to incorporate the FAIR principles in the instructional design process?\n\n\n## Learning Objectives\n\n- Design FAIR learning materials\n- Structure FAIR learning materials\n- Create and publish FAIR-by-Design learning materials\n- Assess FAIR-ness of learning objects\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/sonjafiliposka/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/sonjafiliposka/",
+      "name": "Sonja Filiposka",
+      "image": "https://avatars.githubusercontent.com/sonjafiliposka",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0034-2855",
+      "orcid": "https://orcid.org/0000-0003-0034-2855"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/amisev1971/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/amisev1971/",
+      "name": "Anastas Mishev",
+      "image": "https://avatars.githubusercontent.com/amisev1971",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-7271-6655",
+      "orcid": "https://orcid.org/0000-0001-7271-6655"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/CarolinLeister/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/CarolinLeister/",
+      "name": "Carolin Leister",
+      "image": "https://avatars.githubusercontent.com/CarolinLeister",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-6940-0024",
+      "orcid": "https://orcid.org/0000-0002-6940-0024"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/korvoj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/korvoj/",
+      "name": "Vojdan Kjorveziroski",
+      "image": "https://avatars.githubusercontent.com/korvoj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-0419-4300",
+      "orcid": "https://orcid.org/0000-0003-0419-4300"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/domlgreen/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/domlgreen/",
+      "name": "Dominique Green",
+      "image": "https://avatars.githubusercontent.com/domlgreen",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9411-4281",
+      "orcid": "https://orcid.org/0000-0002-9411-4281"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/isouyioul/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/isouyioul/",
+      "name": "Irakleitos Souyioultzoglou",
+      "image": "https://avatars.githubusercontent.com/isouyioul",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-9875-7196",
+      "orcid": "https://orcid.org/0000-0002-9875-7196"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/achim-kit/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/achim-kit/",
+      "name": "Achim Winandi",
+      "image": "https://avatars.githubusercontent.com/achim-kit",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-4800-7925",
+      "orcid": "https://orcid.org/0000-0003-4800-7925"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/agCleo/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/agCleo/",
+      "name": "Аrnaud Gingold",
+      "image": "https://avatars.githubusercontent.com/agCleo",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/CRHAD26/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/CRHAD26/",
+      "name": "Christine Hadrossek",
+      "image": "https://avatars.githubusercontent.com/CRHAD26",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-2638-6373",
+      "orcid": "https://orcid.org/0000-0002-2638-6373"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Contributing to the Galaxy Training Material",
+      "description": "Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable.<br> In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/contributing/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/11548062",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/contributing" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Contributing to the Galaxy Training Material
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/contributing/faqs/" title="Check our FAQs for the Contributing to the Galaxy Training Material topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/fair-by-design/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-contributing">
+    <h1 data-toc-skip>FAIR-by-Design methodology</h1>
+    
+    <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading">Under Development!</h4>
+        <p>This tutorial is not in its final state. The content may change a lot in the next months.
+        Because of this status, it is also not listed in the topic pages.</p>
+    </div>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/sonjafiliposka/" class="contributor-badge contributor-sonjafiliposka"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/sonjafiliposka?s=36" alt="Sonja Filiposka avatar" width="36" class="avatar" />
+    Sonja Filiposka</a><a href="/training-material/hall-of-fame/amisev1971/" class="contributor-badge contributor-amisev1971"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/amisev1971?s=36" alt="Anastas Mishev avatar" width="36" class="avatar" />
+    Anastas Mishev</a><a href="/training-material/hall-of-fame/CarolinLeister/" class="contributor-badge contributor-CarolinLeister"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/CarolinLeister?s=36" alt="Carolin Leister avatar" width="36" class="avatar" />
+    Carolin Leister</a><a href="/training-material/hall-of-fame/korvoj/" class="contributor-badge contributor-korvoj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/korvoj?s=36" alt="Vojdan Kjorveziroski avatar" width="36" class="avatar" />
+    Vojdan Kjorveziroski</a><a href="/training-material/hall-of-fame/domlgreen/" class="contributor-badge contributor-domlgreen"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/domlgreen?s=36" alt="Dominique Green avatar" width="36" class="avatar" />
+    Dominique Green</a><a href="/training-material/hall-of-fame/isouyioul/" class="contributor-badge contributor-isouyioul"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/isouyioul?s=36" alt="Irakleitos Souyioultzoglou avatar" width="36" class="avatar" />
+    Irakleitos Souyioultzoglou</a><a href="/training-material/hall-of-fame/achim-kit/" class="contributor-badge contributor-achim-kit"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/achim-kit?s=36" alt="Achim Winandi avatar" width="36" class="avatar" />
+    Achim Winandi</a><a href="/training-material/hall-of-fame/agCleo/" class="contributor-badge contributor-agCleo"><img src="https://avatars.githubusercontent.com/agCleo?s=36" alt="Аrnaud Gingold avatar" width="36" class="avatar" />
+    Аrnaud Gingold</a><a href="/training-material/hall-of-fame/CRHAD26/" class="contributor-badge contributor-CRHAD26"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/CRHAD26?s=36" alt="Christine Hadrossek avatar" width="36" class="avatar" />
+    Christine Hadrossek</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How to develop FAIR learning materials?</p>
+</li>
+        
+        <li><p>How to incorporate the FAIR principles in the instructional design process?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Design FAIR learning materials</p>
+</li>
+        
+        <li><p>Structure FAIR learning materials</p>
+</li>
+        
+        <li><p>Create and publish FAIR-by-Design learning materials</p>
+</li>
+        
+        <li><p>Assess FAIR-ness of learning objects</p>
+</li>
+        
+        </ul>
+
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 20 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Introductory <span class="visually-hidden">Introductory</span>
+<span class="level introductory" title="Introductory Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/11548062">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/contributing/tutorials/fair-by-design/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 17, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 17, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>Welcome to the FAIR-by-Design Methodology Microlearning GTN adapted tutorial.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>Below are the main stages of the FAIR-by-Design Methodology <span class="citation"><a href="#filiposka_2023_8305540">Filiposka <i>et al.</i> 2023</a></span> that will help guide you on your journey of creating FAIR learning materials.</p>
+
+  <p><a href="../../images/methodology.png" rel="noopener noreferrer"><img src="../../images/methodology.png" alt="Visual representation of the FAIR-by-Design Methodology flow with its separate stages. " width="720" height="405" loading="lazy" /></a></p>
+
+  <p>The FAIR-by-Design Methodology is defined in <a href="#main-stages">a number of stages</a> that help you incorporate the FAIR principles into the backward learning instructional design process so that the final output are FAIR learning materials from both learners and instructors perspective:</p>
+
+  <ol>
+    <li><a href="#stage-1---prepare">Prepare</a>
+      <ul>
+        <li>Do you understand FAIR and its implications</li>
+        <li>Define purpose, learning objectives, target audience</li>
+      </ul>
+    </li>
+    <li><a href="#stage-2---discover">Discover</a>
+      <ul>
+        <li>Find existing resources</li>
+        <li>Identify potential for reuse</li>
+      </ul>
+    </li>
+    <li><a href="#stage-3---design">Design</a>
+      <ul>
+        <li>Define the syllabus and structure</li>
+        <li>Identify granularity</li>
+        <li>Define facilitation materials</li>
+      </ul>
+    </li>
+    <li><a href="#stage-4---produce">Produce</a>
+      <ul>
+        <li>Develop content using common apps and file formats</li>
+        <li>Define machine readable metadata</li>
+        <li>Perform internal QA check</li>
+      </ul>
+    </li>
+    <li><a href="#stage-5---publish">Publish</a>
+      <ul>
+        <li>Define license and other related info</li>
+        <li>Release for instructors and learners</li>
+        <li>Enable feedback gathering</li>
+      </ul>
+    </li>
+    <li><a href="#stage-6---verify">Verify</a>
+      <ul>
+        <li>Final QA check</li>
+        <li>Use gathered feedback for continuous improvement</li>
+      </ul>
+    </li>
+    <li><a href="#stage-7---continuous-improvement">Continuous Improvement</a>
+      <ul>
+        <li>Create a list of potential improvements</li>
+        <li>Choose a set of improvements to be implemented</li>
+        <li>Start a new release cycle</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>Review each stage and the essential steps that it includes.</p>
+
+  <p>Essential information about the original microlearning unit that this adaptation is based on can be found in the <a href="#about">About</a> section.</p>
+
+</blockquote>
+
+<p>If you have any questions at any stage on your journey do not hesitate to <a href="mailto:sonja.filiposka@finki.ukim.mk">contact the FAIR-by-Design methodology team</a>.</p>
+
+<p>May all your materials be FAIR!</p>
+
+<h1 id="main-stages">Main stages</h1>
+
+<h2 id="stage-1---prepare">Stage 1 - Prepare</h2>
+
+<blockquote class="quote" author="Alexander Graham Bell">
+  <p>Before anything else, preparation is the key to success!</p>
+</blockquote>
+
+<h3 id="first-things-first-what-is-fair">First things first: What is FAIR?</h3>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-what-is-fair"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  What is FAIR?</div>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-findable"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-findable" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Findable</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The editable learning material has a unique and persistent identifier (PID) and is described with sufficiently detailed metadata.</p>
+  </blockquote>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-accessible"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-accessible" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Accessible</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The human and machine readable metadata and object are stored in a trusted repository with clear authentication and authorization procedures.</p>
+  </blockquote>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-interoperable"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-interoperable" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Interoperable</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The metadata describing the learning material follows a the RDA minimum metadata schema combined with agreed-upon controlled vocabularies.
+Formal, accessible, shared, and broadly applicable language(s) and format(s) are used to develop the material.</p>
+  </blockquote>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-reusable"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-reusable" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Reusable</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>The learning material has a clear usage license (CC-BY-4.0 recommended) and accurate information on provenance.</p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-on-the-fair-principles"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-the-fair-principles" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on the FAIR principles</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><a href="/training-material/topics/fair/tutorials/fair-intro/tutorial.html">Follow the FAIR in a nutshell tutorial available on GTN</a></p>
+
+  <p><a href="/training-material/topics/fair/tutorials/fair-gtn/tutorial.html">Follow the FAIR Galaxy Training Material tutorial available on GTN</a></p>
+</blockquote>
+
+<h3 id="adopt-a-metadata-schema">Adopt a metadata schema</h3>
+
+<p>If you are not using a discipline specific metadata schema, then, to ensure that your learning materials are appropriately described using a common approach, you should adopt the:</p>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#rda-minimal-metadata-for-learning-resources" class="btn btn-primary stretched-link">Go to the RDA Minimal Metadata Set for Learning Resources description details</a></p>
+
+<p>The following are the fields described in the RDA Minimal Metadata Set divided into three categories:</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-descriptive-info-metadata-fields"><button class="gtn-boxify-button details" type="button" aria-controls="details-descriptive-info-metadata-fields" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Descriptive info metadata fields</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><strong>Title</strong> =	The human readable name of the resource</li>
+    <li><strong>Abstract / Description</strong> =	A brief synopsis about or description of the learning resource</li>
+    <li><strong>Author(s)</strong> =	Name of entity(ies) authoring the resource</li>
+    <li><strong>Primary Language</strong> =	Language in which the resource was originally published or made available</li>
+    <li><strong>Keyword(s)</strong> =	Keywords or tags used to describe the resource</li>
+    <li><strong>Version Date</strong> =	Version date for the most recently published or broadcast resource</li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-access-info-metadata-fields"><button class="gtn-boxify-button details" type="button" aria-controls="details-access-info-metadata-fields" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Access info metadata fields</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><strong>URL to Resource</strong> =	URL that resolves to the learning resource or to a “landing page” for the resource that contains important contextual information including the direct resolvable link to the resource, if applicable.</li>
+    <li><strong>Resource URL Type</strong>	 = Designation of the identifier scheme used for the resource URL, e.g., DOI, ARK, Handle</li>
+    <li><strong>License</strong> =	A license document that applies to this content, typically indicated by URL</li>
+    <li><strong>Access Cost</strong>	= Choice stating whether or not there is a fee for use of the resource (yes, no, maybe)</li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-educational-info-metadata-fields"><button class="gtn-boxify-button details" type="button" aria-controls="details-educational-info-metadata-fields" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Educational info metadata fields</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><strong>Target Group (Audience)</strong> =	Principal users(s) for which the resource was designed</li>
+    <li><strong>Learning Resource Type</strong> =	The predominant type or kind that characterizes the learning resource</li>
+    <li><strong>Learning Outcome</strong> =	Descriptions of what knowledge, skills or abilities a learner should acquire on completion of the resource</li>
+    <li><strong>Expertise (Skill) Level</strong> =	Target skill level in the topic being taught; example values include beginner, intermediate, advanced</li>
+  </ul>
+</blockquote>
+
+<p>More on the RDA minimal metadata schema here <span class="citation"><a href="#hoebelheinrich_2022">Hoebelheinrich <i>et al.</i> 2022</a></span></p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-metadata-in-gtn-tutorials"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-metadata-in-gtn-tutorials" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using metadata in GTN tutorials</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <ul>
+    <li>When developing materials in GTN, this information should be included in the Tutorial.md file header metadata.</li>
+    <li>Most of the fields are already defined in the GTN Tutorial metadata schema. The ones that are missing can be added using the “extra” field.</li>
+  </ul>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-more-details-on-the-gtn-metadata"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-the-gtn-metadata" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on the GTN Metadata</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">Follow the GTN Metadata tutorial</a></p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-learn-more-about-fair-learning-objects"><button class="gtn-boxify-button details" type="button" aria-controls="details-learn-more-about-fair-learning-objects" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Learn more about FAIR learning objects</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-instructional-design-skills">FAIR instructional design skills</a></li>
+    <li><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-guiding-principles">FAIR guiding principles</a></li>
+    <li><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/01-FAIR%20skills%20%26%20principles/01-FAIR%20skills%20%26%20principles/#fair-learning-objects">FAIR learning objects</a></li>
+  </ul>
+</blockquote>
+
+<h3 id="start-ideating">Start Ideating</h3>
+
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 1</h5>
+        <p class="card-text">What are your desired effects, i.e. learning outcomes?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 2</h5>
+        <p class="card-text">How are you going to assess the learners achievement?</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+    <div class="card bg-light mb-3">
+      <div class="card-header"><i class="fa fa-fast-backward" aria-hidden="true"></i> Think backward</div>
+      <div class="card-body">
+        <h5 class="card-title">Step 3</h5>
+        <p class="card-text">How should you structure the material to provide effective learning experience?</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-learn-more-about-the-backward-learning-process"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-learn-more-about-the-backward-learning-process" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Learn more about the backward learning process</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#backward-instructional-design-process">Steps of the backward learning process</a></li>
+  </ul>
+</blockquote>
+
+<h3 id="define">Define</h3>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-purpose"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Purpose</div>
+  <p>When and how the learning materials can be used and for what purposes?</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-target-audience"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Target Audience</div>
+  <p>Is there anything specific that needs to be taken into account, such as cultural context?</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-prerequisites"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Prerequisites</div>
+  <p>What does the target audience need to know or understand before starting the learning process?</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-scope"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Scope</div>
+  <p>Is it going to be a single learning unit, or a group such as a course?</p>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-learning-objectives"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Learning Objectives</div>
+  <p>What competences will be gained after successful completing of the learning process?</p>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-be-smart"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-be-smart" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Be SMART</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Objectives should be <strong>s</strong>pecific, <strong>m</strong>easurable, <strong>a</strong>ttainable, <strong>r</strong>elevant and <strong>t</strong>ime-bound.</p>
+  </blockquote>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-use-blooms-taxonomy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-use-blooms-taxonomy" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Use Blooms Taxonomy</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Formulate the objectives as actionable verb + observable knowledge, skill, attitude, behavior or ability.</p>
+  </blockquote>
+
+  <p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects_cont/#defining-learning-objectives">Read more</a></p>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-on-ideating-learning-outcomes-and-related-information"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-ideating-learning-outcomes-and-related-information" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on ideating learning outcomes and related information</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><a href="/training-material/topics/contributing/tutorials/design/tutorial.html#define-intended-learning-outcomes-los">Read about defining intended Learning Outcomes in the Design and plan session, course, materials tutorial available on GTN</a></p>
+</blockquote>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/411-prepare/" class="btn btn-dark text-white stretched-link">Go to the full description of FAIR-by-Design Methodology: Prepare stage …</a></p>
+
+<h2 id="stage-2---discover">Stage 2 - Discover</h2>
+
+<blockquote class="quote" author="John Jacob Abel">
+  <p>Greater even than the greatest discovery is to keep open the way to future discovery.</p>
+</blockquote>
+<h3 id="get-inspired">Get inspired</h3>
+
+<p>Reusable materials can be found anywhere. These are just some examples:</p>
+
+<p><strong>GTN</strong></p>
+
+<ul>
+  <li><a href="https://training.galaxyproject.org">GTN learning resources</a></li>
+  <li><a href="https://tess.elixir-europe.org">TeSS Catalogue by Elixir</a></li>
+</ul>
+
+<p><strong>OER</strong></p>
+
+<ul>
+  <li><a href="https://directory.doabooks.org/">DOAB</a></li>
+  <li><a href="https://www.merlot.org/merlot/index.htm">MERLOT</a></li>
+  <li><a href="https://oasis.geneseo.edu/index.php">OASIS</a></li>
+  <li><a href="https://www.oercommons.org/">OER Commons</a></li>
+  <li><a href="https://www.projectcora.org/">OERTX CORA</a></li>
+  <li><a href="https://oer.galileo.usg.edu/">GALILEO</a></li>
+  <li><a href="https://forrt.org/">FORRT</a></li>
+</ul>
+
+<p><strong>EOSC</strong></p>
+
+<ul>
+  <li><a href="https://search.marketplace.eosc-portal.eu/search/training?q=*">EOSC Training catalogue on the EOSC Marketplace</a></li>
+  <li>Most EOSC projects have their own training catalogues and/or platforms.</li>
+</ul>
+
+<p><strong>General</strong></p>
+
+<ul>
+  <li><a href="https://search.creativecommons.org/">Creative Commons Search</a> - content provided under a CC license</li>
+  <li><a href="https://zenodo.org/">Zenodo</a> - a multi-disciplinary open repository</li>
+  <li><a href="https://osf.io/">OSF</a> - a free, open research platform</li>
+</ul>
+
+<h3 id="potential-for-reuse">Potential for reuse</h3>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-respect-the-licenses-to-be-respected"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning:  Respect the licenses, to be respected!</div>
+  <ul>
+    <li>Materials with non-permissible licenses can be used for inspiration only.</li>
+    <li>Materials with permissible licenses should be reused based on the license rules.</li>
+  </ul>
+</blockquote>
+
+<h3 id="dont-forget-the-multimedia-search">Don’t forget the multimedia search</h3>
+
+<p>Different learners have different learning modalities (read/write, auditory, visual, kinesthetic). To elevate the learning experience you should use all types of multimedia in your learning materials.</p>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/412-discover/" class="btn btn-dark text-white stretched-link">Go to the full description of FAIR-by-Design Methodology: Discover stage …</a></p>
+
+<h2 id="stage-3---design">Stage 3 - Design</h2>
+
+<blockquote class="quote" author="Alina Wheeler">
+  <p>Design is intelligence made visible.</p>
+</blockquote>
+
+<p>Now it’s time to brainstorm.</p>
+
+<h3 id="concept-map">Concept map</h3>
+
+<p>Step 1: Build a concept map of your learning materials.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-more-details-on-concept-maps"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-concept-maps" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: More details on concept maps</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><a href="/training-material/topics/contributing/tutorials/design/tutorial.html#concept-maps">Read about Concept Maps in the Design and plan session, course, materials tutorial available on GTN</a></p>
+</blockquote>
+
+<p>Step 2: Make sure you align your concept map with the MVS profiles.</p>
+
+<p>The aligned MVS profile can help you crystallize the learning objectives using the MVS taxonomy.</p>
+
+<p>Each MVS profile defines a list of technical and soft skills required for the profile. Think on how to incorporate both aspects in your learning materials.</p>
+
+<p><a href="https://fair-by-design-methodology.github.io/MVS/latest/MVS%20Profiles/Civil%20Servant/civil_servant/" class="btn btn-primary stretched-link">Go to the MVS profiles catalogue</a></p>
+
+<h3 id="structure-is-everything">Structure is everything</h3>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p><i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Use an intuitive logical organisation of all learning materials.</p>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p><i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> The goal is for other people to easily reuse a single item (plan, activity, unit, assessment, …).</p>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment</div>
+  <p><i class="fas fa-sitemap" aria-hidden="true"></i><span class="visually-hidden">galaxy-dataset-map</span> Take advantage of a hierarchical structure to combine learning units into larger compositions.</p>
+</blockquote>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-how-to-organise-the-files"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: How to organise the files</div>
+
+  <p>GTN defines a specific hierarchical structure that needs to be followed when developing learning materials.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-check-out-the-following-tutorials"><button class="gtn-boxify-button details" type="button" aria-controls="details-check-out-the-following-tutorials" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Check out the following tutorials</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#creating-a-new-topic-with-its-own-materials">How to create a skeleton for a new learning topic</a></p>
+
+    <p><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">How to create the skeleton of a new tutorial</a></p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-syllabus-is-ready"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Syllabus is ready</div>
+  <p>You should by now have the first draft of your <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/04-Conceptualisation/04-Conceptualisation/#syllabus/">syllabus</a>. It contains all the fields from the RDA min metadata set plus the high level topics covered by the learning material.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-available-feedback-form"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-available-feedback-form" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Available feedback form</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>GTN provides a readily available feedback form that is automatically added at the end of each tutorial. The feedback form is used to gather quantitative and qualitative feedback.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-learn-more-about-feedback-in-training"><button class="gtn-boxify-button details" type="button" aria-controls="details-learn-more-about-feedback-in-training" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Learn more about feedback in training</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><a href="/training-material/topics/teaching/tutorials/assessment/tutorial.html#dealing-with-feedback">Follow the Assessment and feedback in training and teachings tutorial available on GTN</a></p>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-facilitation-guide-kit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-facilitation-guide-kit" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Facilitation guide kit</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>A <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%203%20–%20Design/07-Facilitation/07-Facilitation/"> facilitation guide </a> should help prepare for the actual training.</p>
+
+  <p>The facilitation guide kit includes documentation of the process of organising and running a training. What different people need to have, know and do so that everything runs smoothly.</p>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-learn-more-about-facilitation"><button class="gtn-boxify-button details" type="button" aria-controls="details-learn-more-about-facilitation" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  Learn more about facilitation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><a href="/training-material/topics/teaching/tutorials/organize-workshop/tutorial.html">Follow the Organizing a workshop tutorial available on GTN</a></p>
+
+    <p><a href="/training-material/topics/teaching/tutorials/running-workshop/tutorial.html">Follow the Running a workshop as instructor tutorial available on GTN</a></p>
+  </blockquote>
+
+  <p>Another option is to use something like the <a href="https://project.gotriple.eu/project-deliverables/triple-training-toolkit/">TRIPLE project TRAINING TOOLKIT</a>.</p>
+
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-what-about-instructor-notes"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: What about instructor notes?</div>
+  <p>They need to be detailed enough so that anyone can reuse the learning content, especially slides properly.</p>
+
+  <p>Any specific information relevant for instructors that would like to organise a training based on your GTN tutorial content should be added in Details box.</p>
+
+  <p>This practice significantly increases the reuse potential of the material.</p>
+</blockquote>
+
+<h3 id="how-to-design-the-learning-content">How to design the learning content</h3>
+
+<p><a href="https://www.csun.edu/sites/default/files/Holle-Lesson-Planning.pdf" class="btn btn-primary stretched-link">Read more about the Hunter Model.</a></p>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> 1. Set Learning Objectives</h5>
+        <p class="card-text">
+         What is the goal?
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-id-card" aria-hidden="true"></i><span class="visually-hidden">pref-identities</span> 2. Identify Needs</h5>
+        <p class="card-text">
+        How to get there?
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-list" aria-hidden="true"></i><span class="visually-hidden">galaxy-panelview</span> 3. Plan</h5>
+        <p class="card-text">
+        Share the agenda.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> 4. Hook</h5>
+        <p class="card-text">
+        Why is the content important?
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> 5. Instruct</h5>
+        <p class="card-text">
+        Watch how I do it.
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> 6. Practise</h5>
+        <p class="card-text">
+        You help me do it, I'll watch you do it.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> 7. Wrap-Up</h5>
+        <p class="card-text">
+         Foster retention and reinforcement.
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-balance-scale" aria-hidden="true"></i><span class="visually-hidden">license</span> 8. Evaluate</h5>
+        <p class="card-text">
+        Monitor progress.
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <div class="card bg-light mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-sign-out-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-answer</span> 9. Reflect</h5>
+        <p class="card-text">
+        How did it go?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/413-design/" class="btn btn-dark text-white stretched-link">Go to the full description of FAIR-by-Design Methodology: Design stage …</a></p>
+
+<h2 id="stage-4---produce">Stage 4 - Produce</h2>
+
+<blockquote class="quote" author="Edward Rickenbacker">
+  <p>To contrive is nothing! To construct is something! To produce is everything!</p>
+</blockquote>
+
+<h3 id="choose-tools--formats">Choose Tools &amp; Formats</h3>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-collaborative-environment-for-team-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-collaborative-environment-for-team-work" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Collaborative environment for team work</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Choose an environment for producing the learning material that will enable multiple people to work on the same material at one.</p>
+
+  <ul>
+    <li>GitHub is one of the most popular options at the moment (find out more <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20–%20Produce/08-Development%20Tools/08-Introduction%20to%20Markdown%20and%20Git/">here</a>)</li>
+    <li>GTN is also based on GitHub and defines <a href="https://github.com/galaxyproject/training-material/blob/main/CONTRIBUTING.md">specific procedures on how one can contribute and collaborate</a> using GitHub</li>
+  </ul>
+
+  <blockquote class="details">
+    <div class="box-title details-title" id="details-gtn-collaboration-using-github"><button class="gtn-boxify-button details" type="button" aria-controls="details-gtn-collaboration-using-github" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details:  GTN: collaboration using GitHub</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Follow the Contributing with GitHub via its interface tutorial available on GTN</a></p>
+
+    <p><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Follow the Contributing with GitHub via command-line tutorial available on GTN</a></p>
+  </blockquote>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-granular-versioning-for-easy-rollback"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-granular-versioning-for-easy-rollback" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Granular versioning for easy rollback</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Versioning helps you maintain control over your changes.</li>
+    <li>GitHub natively provides versioning and history retention that help easy roll back to an earlier stable state.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-open-file-formats-to-foster-reuse"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-open-file-formats-to-foster-reuse" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Open file formats to foster reuse</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>For other people to reuse the materials they should be made available using open file formats.</li>
+    <li>GTN promotes the use of the MD open file format for the main learning content empowered with open scientific notebooks and workflows.</li>
+    <li>If you use close file formats then you MUST clearly state the tools that have been used in more details.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-multimodal-content-to-reach-all-audience"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-multimodal-content-to-reach-all-audience" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Multimodal content to reach all audience</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Don’t forget to include different types of multimedia to provide support for different learning modalities: read/write, auditory, visual, kinesthetic.</li>
+    <li>In addition to hands-on exercises, GTN also provides support for audio and video modalities.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-two-file-sets-editable-final"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-two-file-sets-editable-final" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Two file sets: editable + final</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>The MD and supporting files are the main files used for development of the content. These files are what matters for you and other instructors.</li>
+    <li>Based on the editable files, GTN automatically generates the final (non-editable version) in HTML (and PDF). These  are shared with the learners.</li>
+    <li>GTN takes care of the revision numbering for you.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-don-t-forget-to-take-advantage-of-co-creation"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-don-t-forget-to-take-advantage-of-co-creation" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Don't forget to take advantage of co-creation</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Truly FAIR learning materials enable co-creation with external parties.
+ GitHub is a collaborative environment that supports co-creation in every step of the learning materials development and revision process.
+ The GTN fork-and-pull process of contributing to the learning material is a clear example of co-creation implementation.</p>
+</blockquote>
+
+<h3 id="plan-to-reuse-existing-material">Plan to reuse existing material?</h3>
+
+<h4 id="check-the-license">Check the license</h4>
+
+<p>The existing materials you are reusing are available under a <a href="https://creativecommons.org/share-your-work/cclicenses/">CC license</a>, but it is different than the one you plan to use for your materials. Depending on how you want to reuse the material, you will need to consider the following aspects.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-i-want-to-reuse-it-as-a-whole"><button class="gtn-boxify-button details" type="button" aria-controls="details-i-want-to-reuse-it-as-a-whole" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: I want to reuse it as a whole</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>You can’t use something that is licensed with ND (no derivatives).</li>
+    <li>In this case you must follow the rules on combining and adapting CC material.</li>
+  </ul>
+
+  <p><a href="https://creativecommons.org/faq/#combining-and-adapting-cc-material">Read more</a></p>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-i-want-to-reuse-a-small-part-of-it"><button class="gtn-boxify-button details" type="button" aria-controls="details-i-want-to-reuse-a-small-part-of-it" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: I want to reuse a small part of it</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>No problem, you can reuse any existing CC licensed material in your learning materials as long as the reused portion is used as a showcase or to make a specific point and it is not the core of your work.</p>
+
+  <p>Remember that if the work is licensed with ND, you can not modify it while reusing.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-learn-more-about-ipr"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-learn-more-about-ipr" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Learn more about IPR</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#intellectual-property-rights-ipr">How Intellectual Property Rights (IPR) protect the interests of the creators and owners by providing them with rights over their creation?</a></p>
+</blockquote>
+
+<p>Still need help? <a href="https://creativecommons.org/faq/#before-using-cc-licensed-material"><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Go to CC licensing FAQ</a></p>
+
+<h4 id="attribute">Attribute</h4>
+
+<p>All CC licenses require that you attribute the author, and this rule is recommended even if the license is public domain CC-0.</p>
+
+<p>If the work you are reusing has a copyright notice (‘© some text’) you need to reproduce it while you credit the work.</p>
+
+<p>You should also be able to remove attribution upon request.</p>
+
+<h5 id="how-to-attribute">How to attribute?</h5>
+
+<blockquote class="solution">
+  <div class="box-title solution-title" id="solution-use-the-authors-recommended-attribution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-use-the-authors-recommended-attribution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Use the authors recommended attribution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>If the original author has provided a cite-as information, use it to attribute the work.</p>
+</blockquote>
+
+<blockquote class="solution">
+  <div class="box-title solution-title" id="solution-use-tasl"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-use-tasl" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Use TASL</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Provide the Title, Author, Source and License of the work that you are reusing.</p>
+
+  <ul>
+    <li>Source is the URL to the original work.</li>
+    <li>If there is a URL to the author personal pages, provide it together with the name.</li>
+    <li>Provide the name of the license and a URL to the license.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-examples"><button class="gtn-boxify-button details" type="button" aria-controls="details-examples" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Examples</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Examples are taken from <a href="https://www.newmediarights.org/guide/how_to/creative_commons/best_practices_creative_commons_attributions">Best Practices for Creative Commons attributions - how to attribute works you reuse under a Creative Commons license</a> submitted by <a href="https://www.newmediarights.org/">New Media Rights</a> available under a <a href="https://creativecommons.org/licenses/by-nc/3.0/us/">CC BY-NC 3.0 US DEED</a>.</p>
+  <ul>
+    <li>Webpage/Blog - Title (with link to original work), author (or username) (with link to author’s website), and license (with link).
+      <ul>
+        <li><a href="https://chriszabriskie.bandcamp.com/album/undercover-vampire-policeman">Undercover Vampire Policeman</a> by <a href="https://chriszabriskie.bandcamp.com/">Chris Zabriskie</a>, available under a <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 License</a></li>
+      </ul>
+    </li>
+    <li>Book – Title, author, license written somewhere near the title and author if it’s a hard copy or if it’s an online book you should include a link to the licensed terms.
+      <ul>
+        <li><a href="https://books.google.com/books?id=ImO3BgAAQBAJ&amp;pg=PR4&amp;dq=creative+commons+4.0&amp;hl=en&amp;sa=X&amp;ved=0CEoQ6AEwCGoVChMIspCXhPPxxgIVSF0eCh27NA5X#v=onepage&amp;q=creative%20commons%204.0&amp;f=false">From Dust to Digital: Ten Years of the Endangered Archives Programme</a> by Maja Kominko under a Creative Commons Attribution Non-commercial Non-Derivative 4.0 International license (CC BY-NC-ND 4.0)</li>
+      </ul>
+    </li>
+    <li>Online Video - Title, author, license written into credits at end of video.  Ideally make the text clickable to the original work.  Put links to the original work and the license terms in the information section for the particular work (i.e. on the right in YouTube).
+      <ul>
+        <li><a href="http://www.youtube.com/watch?v=fDbbdeIXO0w#t=3m0s">http://www.youtube.com/watch?v=fDbbdeIXO0w#t=3m0s</a></li>
+      </ul>
+    </li>
+    <li>Podcast/Audio - Title, author, license read at the end of the entire work.
+      <ul>
+        <li><a href="http://www.jonathancoulton.com/wiki/Je_Suis_Rick_Springfield">“Je Suis Rick Springfield”</a> from the album <a href="http://www.jonathancoulton.com/wiki/Artificial_Heart_(album)">Artificial Heart</a>, by Jonathan Coulton, used under a <a href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-Noncommercial 3.0 Unported License</a></li>
+      </ul>
+    </li>
+    <li>Photo/Drawing/Illustration – Title, author, license (with link online) or in close proximity to the tangible work (either in the border or directly on the work, if applicable).
+      <ul>
+        <li><a href="http://www.flickr.com/photos/ari/8503459/in/set-214952/">Comcast protest</a>” by Flikr user <a href="http://www.flickr.com/photos/ari/">Steve Rhodes</a> used under <a href="http://creativecommons.org/licenses/by/2.0/deed.en">Creative Commons Attribution 2.0 license</a></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-read-more-about-how-to-attribute"><button class="gtn-boxify-button details" type="button" aria-controls="details-read-more-about-how-to-attribute" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Read more about how to attribute</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%201%20%E2%80%93%20Prepare/02-Preparing%20FAIR%20Learning%20Objects/02-Preparing%20FAIR%20Learning%20Objects/#attribution-and-citing"><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span>  Attribution and Citing</a></p>
+
+  <p><a href="https://courses.lumenlearning.com/suny-oerguide/chapter/how-to-handle-attribution/"><i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> How to handle attribution?</a></p>
+</blockquote>
+
+<h3 id="accessibility">Accessibility</h3>
+
+<p>The developed learning materials should cover the widest range of learner variability including the ones that use or do not use assistive technology.</p>
+
+<p><a href="../../images/universal-access-6602642_640.png" rel="noopener noreferrer"><img src="../../images/universal-access-6602642_640.png" alt="Universal access logo. " width="142" height="142" loading="lazy" /></a>
+<a href="https://pixabay.com/vectors/universal-access-human-icon-6602642/">“Universal Access Human”</a> by <a href="https://pixabay.com/users/inspire-studio-22128832/">J S</a> from <a href="https://pixabay.com/">Pixabay</a></p>
+
+<h4 id="standards">Standards</h4>
+
+<p>There are several standards that govern the rules on the level of accessibility.</p>
+
+<p>Most commonly used is the <a href="https://www.w3.org/WAI/standards-guidelines/wcag/">W3C Web Content Accessibility Guidelines (WCAG) standard version 2.1</a>. Three conformance levels exist, you should aim for AA which is the middle one.</p>
+
+<p>PDF document accessibility is measured with a separate technical specification <a href="https://pdfua.foundation/en/why-pdf-ua/">PDF/UA (Universal Accessibility)</a>.</p>
+
+<h4 id="accessibility-guidelines">Accessibility guidelines</h4>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%204%20%E2%80%93%20Produce/11-Accessibility/11-Checking_accessibility/#general-guidelines-for-development-of-accessible-materials" class="btn btn-primary stretched-link">Review some general guidelines for development of accessible material</a></p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-gtn-accessibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gtn-accessibility" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: GTN Accessibility</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>GTN has developed an <a href="https://training.galaxyproject.org/training-material/accessibility.html"> accessibility mission </a> aiming for WCAG 2.0 AA compliance by implementing a number of accessibility features.</p>
+
+</blockquote>
+
+<h3 id="internal-qa">Internal QA</h3>
+
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> QA Self-assessment</h5>
+        <p class="card-text">
+         Check if everything is as it should be.
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-list" aria-hidden="true"></i><span class="visually-hidden">pref-list</span> Quantitative</h5>
+        <p class="card-text">
+        Are all required elements produced?
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Qualitative</h5>
+        <p class="card-text">
+        Do all learning units provide materials to reach the learning objectives with different modalities?
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/414-produce/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Produce stage …</a></p>
+
+<h2 id="stage-5---publish">Stage 5 - Publish</h2>
+
+<blockquote class="quote" author="Unknown">
+  <p>Publishing is the art of working on a creative idea and turning it into a masterpiece!</p>
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-publishing-closed-fair-materials"><i class="fas fa-exclamation-triangle" aria-hidden="true" ></i> Warning: Publishing closed FAIR materials</div>
+  <p>Having FAIR learning materials does not always mean that the materials are open to everyone and there are no costs or access rules attached. In this case the bundle that is going to be published in an open repository such as Zenodo should contain the following:</p>
+  <ol>
+    <li>Syllabus, that contains all metadata that describe the materials. Metadata should always be open.</li>
+    <li>Accompanying information (optional) to augment the description of the materials and describe the details when it comes to accessing and using the materials from a trainer perspective.</li>
+  </ol>
+
+  <p>The complete learning materials package itself should be published in a closed repository where the corresponding access rules (and costs) can be implemented.</p>
+</blockquote>
+
+<h3 id="final-preparations">Final preparations</h3>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-time-to-provide-the-accompanying-information"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-time-to-provide-the-accompanying-information" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Time to provide the accompanying information</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Usually provided at (or near) the root of the learning materials, the purpose of the accompanying information is to further describe the content and define the rules of reuse.</p>
+</blockquote>
+
+<div class="row">
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span> LICENSE</h5>
+        <p class="card-text">
+         The license defines the potential of reuse of your learning materials together with the rules regarding their attribution by others.<br />
+         CC-BY-4.0 is the recommended license, which is default in GTN. <br />
+         If you choose a different license, it must be supplied in the tutorial header as metadata.
+         <br />
+         <a href="https://creativecommons.org/licenses"> <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Browse through the available CC license types
+         </a>
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-sticky-note" aria-hidden="true"></i><span class="visually-hidden">sticky-note</span> README</h5>
+        <p class="card-text">
+        A README is a text file that introduces and explains the contents of the learning topics and materials. It usually describes the context and written in a plain text format. <br /> GTN provides a README file on the level of each topic, where context information about the topic and its tutorials can be provided.
+        <br />
+		<a href="https://www.makeareadme.com/">
+        <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span>  Make a README
+        </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">cofest</span> CONTRIBUTORS</h5>
+        <p class="card-text">
+        GTN CONTRIBUTORS is a YAML file that lists the information about all contributors of learning materials on the platform.
+        <br />You must have a GitHub user to be listed as a contributor. Additional information such as ORCID can also be provided.
+        <br />
+        <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html#listing-contributors">
+		<i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Add to CONTRIBUTORS.yaml
+		</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> FAQs</h5>
+        <p class="card-text">
+	        In addition to the learning content, the Frequently Asked Questions can further help both learners and instructors with specific information about the learning context or practicalities.
+	        <br /> Consider adding a tutorial-specific FAQ to the GTN tutorial, where you can answer questions about the challenges of working with the hands on activities, or provide other hints and guidelines to instructors and learners.
+	        <br />
+		<a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html#creating-new-faqssnippets">
+        <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span>  Create snippets
+        </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-tag" aria-hidden="true"></i><span class="visually-hidden">event-cost</span> FUNDERS</h5>
+        <p class="card-text">
+        If the creation of the learning materials is funded by an organisation or another body, they should be attributed accordingly. <br />
+        In GTN this can be accomplished by adding the funding information into the special FUNDERS.yaml file.
+         <br />
+         <a href="https://github.com/galaxyproject/training-material/blob/main/FUNDERS.yaml">
+         <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Add to the Funders file
+         </a>
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> OTHER</h5>
+        <p class="card-text">
+        Additional miscellaneous information should be provided if possible.
+        <br /> For example, GTN also supports adding organisations information.
+        <br />
+        <a href="https://github.com/galaxyproject/training-material/blob/main/ORGANISATIONS.yaml">
+        <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Add org info
+        </a>
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-bookmark" aria-hidden="true"></i><span class="visually-hidden">references</span> CITATION</h5>
+        <p class="card-text">
+	        It is best practice to provide information on how you want others to cite your learning materials when they are referenced or reused. <br /> GTN does this automatically by appending the "Citing this Tutorial" section at the end of each tutorial.
+	        <br />
+		<a href="https://training.galaxyproject.org/training-material/faqs/gtn/gtn_citing.html">
+        <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span>  See an example citation
+        </a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="fas fa-balance-scale" aria-hidden="true"></i><span class="visually-hidden">license</span> CODE OF CONDUCT</h5>
+        <p class="card-text">
+        A code of conduct defines the rules for how to engage in a co-creation community.
+        <br />It is based on the premise of an inclusive environment that respects all contributions.
+         <br />
+         <a href="https://galaxyproject.org/community/coc/">
+         <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Read the Galaxy Project Code of Conduct
+         </a>
+        </p>
+      </div>
+    </div>
+  </div>
+<div class="col-sm-4">
+   <!-- <div class="card text-white bg-secondary mb-3" > -->
+   <div class="card bg-light mb-3">
+      <!-- <div class="card-header text-white"> -->
+      <div class="card-body">
+        <h5 class="card-title"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> REVISIONS</h5>
+        <p class="card-text">
+        Information about new or updated versions of your learning materials helps others keep track of the changes more easily. <br /> GTN automatically updates the Revision number of each tutorial after each release.
+        <br />
+        <a href="https://github.com/galaxyproject/training-material/releases">
+        <i class="far fa-hand-point-right" aria-hidden="true"></i><span class="visually-hidden">point-right</span> Compare changes between GTN releases
+        </a>
+		</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h3 id="storing-and-indexing">Storing and indexing</h3>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-automated-publishing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-automated-publishing" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Automated publishing</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>If you are working on GTN following the provided rules and procedures, GTN will automatically publish the new tutorial once the full review and release process is completed.</p>
+
+  <p>Just follow the <a href="/training-material/topics/contributing/#st-contribute">GTN guide to contributing via GitHub</a>.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-to-training-catalogue"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-to-training-catalogue" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: To training catalogue</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>You are at the point when you should also consider making a record in a relevant training catalogue.</p>
+
+  <p>GTN automatically creates a new record in the <a href="https://tess.elixir-europe.org">Elixir TeSS training catalogue</a> that is the most relevant catalogue for its community.</p>
+</blockquote>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/415-publish/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Publish stage …</a></p>
+
+<h2 id="stage-6---verify">Stage 6 - Verify</h2>
+
+<blockquote class="quote" author="Martin Routh">
+  <p>You will find it a very good practice always to verify your references, sir!</p>
+</blockquote>
+
+<h3 id="external-qa">External QA</h3>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-a-fresh-set-of-eyes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-a-fresh-set-of-eyes" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  A fresh set of eyes</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Have someone who has not participated in the development of the learning materials review the final work. This will guarantee a review free of cognitive bias.</li>
+    <li>GTN implements this automatically via the fork-and-pull request process. Before publication your new contribution is being reviewed by GTN peers.</li>
+  </ul>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-go-through-the-qa-checklists"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-go-through-the-qa-checklists" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Go through the QA checklists</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In Skills4EOSC T2.4 has developed a number of QA checklists that you and your external reviewer need to go through so that you can ensure high-quality learning materials <span class="citation"><a href="#sanchez_2023_8305482">Sánchez <i>et al.</i> 2023</a></span>.</p>
+</blockquote>
+
+<h3 id="fair-or-not-fair-that-is-the-question">FAIR or not FAIR, that is the question</h3>
+
+<h4 id="measure-fairness">Measure FAIRness</h4>
+
+<p>Use the <a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_ToT/latest/Stage%206%20–%20Verify/19-Final%20QA%20check/19-finalQA/#fair-by-design-methodology-qa-checklist">FAIR-by-Design methodology QA checklist</a> to check if you have followed the most important aspects of the methodology and managed to produce FAIR learning materials.</p>
+
+<p>The questions marked as essential achieve bare minimum FAIRness.</p>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-essential-requirements"><button class="gtn-boxify-button details" type="button" aria-controls="details-essential-requirements" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Essential requirements</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li><strong>Findable</strong>
+      <ul>
+        <li>Is the complete learning resource (including instructors info) registered or indexed in at least one searchable repository? Is it in a FAIR repository?</li>
+        <li>Is metadata for the resource provided in both human- and machine-readable format (e.g JSON, XMLor YAML)?</li>
+      </ul>
+    </li>
+    <li><strong>Accessible</strong>
+      <ul>
+        <li>Has an accessibility checker tool been utilised to improve the accessibility of all learning resource files (PDF, HTML, video, etc.)?</li>
+        <li>Are access rules (authentication &amp; authorisation) implemented for the learning resource?</li>
+      </ul>
+    </li>
+    <li><strong>Interoperable</strong>
+      <ul>
+        <li>Is the RDA minimal (or domain specific) metadata schema used for the learning material description?</li>
+        <li>Is the resource available in open file formats which are tool agnostic and compatible with a wide variety of existing software?</li>
+      </ul>
+    </li>
+    <li><strong>Reusable</strong>
+      <ul>
+        <li>Is there clear attribution for all reused resources with compatible licenses?</li>
+        <li>Has the learning resource been made available for use by defining a permissable license or policy information that allows derivations?</li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-optional-requirements"><button class="gtn-boxify-button details" type="button" aria-controls="details-optional-requirements" aria-expanded="true"><i class="fas fa-info-circle" aria-hidden="true" ></i> <span>Details: Optional requirements</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <ul>
+    <li>Did you follow the stages of the backward instructional design process while developing the learning resource?</li>
+    <li>Are controlled vocabularies (CVs) used for describing the resource characteristics aligned with the chosen metadata schema?</li>
+    <li>Does the learning resource represent a complete learning object defined around minimum one learning objective?</li>
+    <li>Does the resource incorporate an instructor kit that aids in facilitating the process of others reusing learning material by offering helpful how-to guides?
+      <ul>
+        <li>facilitator guide</li>
+        <li>activities description</li>
+        <li>assessment activities and strategy to assess</li>
+        <li>general learning content or instructor notes</li>
+        <li>lesson unit plan</li>
+        <li>syllabus</li>
+      </ul>
+    </li>
+    <li>Have you employed a versioning system to track and control changes in your materials?</li>
+    <li>Are the resource access rules (how to access, e.g. registration procedure) explicitly communicated to learners?</li>
+    <li>Is the learning resource searchable in at least one relevant catalogue?
+      <ul>
+        <li>Is it FAIR (can be searched based on metadata)?</li>
+      </ul>
+    </li>
+    <li>Does the course include the possibility to provide feedback or comments from users and-or trainers/designers?
+      <ul>
+        <li>If so, do you regularly gather and analyse that feedback?</li>
+      </ul>
+    </li>
+    <li>Does the resource adopt an open community approach regarding its quality and reachability?</li>
+    <li>Has the learning resource been checked by a third party regarding its learning experience quality?</li>
+  </ul>
+</blockquote>
+
+<h3 id="feedback-qa">Feedback QA</h3>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-regularly-gather-feedback-from-learners-and-instructors"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Regularly gather feedback from learners and instructors</div>
+  <p>Ensure that you actively and regularly gather feedback from both perspectives: the learners and the instructors.</p>
+</blockquote>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.1%20-%20Workflow%20stages%20description/416-verify/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Verify stage …</a></p>
+
+<h2 id="stage-7---continuous-improvement">Stage 7 - Continuous Improvement</h2>
+<blockquote class="quote" author="Winston Churchill">
+  <p>To improve is to change; to be perfect is to change often</p>
+</blockquote>
+
+<h3 id="galaxy-download-gather"><i class="fas fa-download" aria-hidden="true"></i><span class="visually-hidden">galaxy-download</span> Gather</h3>
+
+<ul>
+  <li>Gather feedback from all available internal &amp; external sources.</li>
+  <li>Potential sources:
+    <ul>
+      <li>Feedback form</li>
+      <li>QA recommendations</li>
+      <li>Self-reflection after training</li>
+      <li>Git Issues</li>
+      <li>Matrix Chat</li>
+      <li>Direct mail contact</li>
+      <li>Other means of communication</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="galaxy-barchart-analyse"><i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Analyse</h3>
+
+<ul>
+  <li>Analyse the gathered information in a structured way.</li>
+  <li>Create a list of potential improvements with impact level (high, moderate, low).</li>
+</ul>
+
+<h3 id="galaxy-wf-edit-improve"><i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> Improve</h3>
+
+<ul>
+  <li>Select items from the list that will be part of a new version.</li>
+  <li>Choose items that make sense to be in the same new release.</li>
+</ul>
+
+<h3 id="galaxy-history-refresh-repeat"><i class="fas fa-arrows-rotate" aria-hidden="true"></i><span class="visually-hidden">galaxy-history-refresh</span> Repeat</h3>
+
+<ul>
+  <li>Start a new cycle of the FAIR-by-Design methodology that will implement the selected items.</li>
+  <li>After the Verify stage, you will reenter continuous improvement with the newly gathered information.</li>
+</ul>
+
+<p><a href="https://fair-by-design-methodology.github.io/FAIR-by-Design_Book/4%20-%20FAIR-by-design%20learning%20materials%20creation/4.2%20-%20Continuous%20Improvement/417-improvement/" class="btn btn-dark text-white stretched-link">Go to the full FAIR-by-Design Methodology: Continuous Improvement …</a></p>
+
+<h1 id="about">About</h1>
+
+<h2 id="fair-by-design-microlearning">FAIR-by-Design Microlearning</h2>
+
+<h3 id="self-paced-how-to-fair-by-design-guide">Self-paced how to FAIR-by-Design guide</h3>
+
+<h3 id="original-location">Original Location</h3>
+
+<ul>
+  <li>online: <a href="https://fair-by-design-methodology.github.io/microlearning/latest/">https://fair-by-design-methodology.github.io/microlearning/latest/</a></li>
+  <li>this tutorial is an adapted version of the original microlearning guide</li>
+</ul>
+
+<h3 id="training-description">Training Description</h3>
+
+<p>Short how-to that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.</p>
+
+<h3 id="target-audience">Target audience</h3>
+
+<p>All interested parties who need to develop learning materials for any type of project-related training.</p>
+
+<h3 id="expertise-level--skill-level-beginner">Expertise Level / Skill Level: Beginner</h3>
+
+<h3 id="primary-language-english">Primary Language: English</h3>
+
+<h3 id="access-cost-no">Access Cost: No</h3>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>No prior knowledge is required.</p>
+
+<h3 id="learning-objectives">Learning Objectives</h3>
+
+<ul>
+  <li>Design FAIR learning materials</li>
+  <li>Structure FAIR learning materials</li>
+  <li>Create and publish FAIR-by-Design learning materials</li>
+  <li>Assess FAIR-ness of learning objects</li>
+</ul>
+
+<h3 id="keywords">Keywords</h3>
+
+<p>FAIR, learning objects, methodology, practical implementation</p>
+
+<h3 id="certification-information">Certification Information</h3>
+
+<p>This training has no certification or any recognition mechanism included.</p>
+
+<h3 id="original-authors">Original Author(s)</h3>
+
+<ul>
+  <li>Sonja Filiposka, Dominique Green, Anastas Mishev, Vojdan Kjorveziroski, Andrea Corleto, Eleonora Napolitano, Gabriella Paolini, Sara di Giorgio, Joanna Janik, Luca Schirru, Arnaud Gingold, Christine Chardosek, Irakleitos Souyioultzoglou, Carolin Leister, Emma Lazzeri</li>
+</ul>
+
+<h3 id="contact-information">Contact information</h3>
+
+<ul>
+  <li>For more information please contact the T2.3 FAIR-by-Design Methodology Task Leader Sonja Filiposka using <a href="mailto:sonja.filiposka@finki.ukim.mk">sonja.filiposka@finki.ukim.mk</a>.</li>
+</ul>
+
+<h3 id="original-license">Original License</h3>
+
+<p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.</p>
+
+<h3 id="original-microlearning-unit-doi">Original microlearning unit DOI</h3>
+
+<p><a href="https://doi.org/10.5281/zenodo.11548062">https://doi.org/10.5281/zenodo.11548062</a></p>
+
+<h4 id="acknowledgement">Acknowledgement</h4>
+
+<p>These learning materials have been developed by following the <a href="https://zenodo.org/records/8305540">FAIR-by-Design Methodology</a>.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>The FAIR-by-Design Methodology ensures that the output of the instructional design process are FAIR learning materials.</p>
+</li>
+                        
+                        <li><p>Each stage of the FAIR-by-Design Methodology incorporates specific parts of the FAIR principles.</p>
+</li>
+                        
+                        <li><p>The ouput of the FAIR-by-Design Methodology are FAIR learning materials from both the perspective of instructors and of learners.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/contributing/faqs/">FAQ page for the Contributing to the Galaxy Training Material topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="hoebelheinrich_2022">Hoebelheinrich, N. J., K. Biernacka, M. Brazas, L. J. Castro, N. Fiore <i>et al.</i>, 2022 <b>Recommendations for a minimal metadata set to aid harmonised discovery of learning resources</b>. <a href="https://doi.org/10.15497/RDA00073">10.15497/RDA00073</a></li>
+<li id="filiposka_2023_8305540">Filiposka, S., D. Green, A. Mishev, V. Kjorveziroski, A. Corleto <i>et al.</i>, 2023 <b>D2.2 Methodology for FAIR-by-Design Training  Materials</b>. <a href="https://doi.org/10.5281/zenodo.8305540">10.5281/zenodo.8305540</a></li>
+<li id="sanchez_2023_8305482">Sánchez, M., E. Méndez, A. Whyte, K. Weisteen Bjerde, S. Martínez <i>et al.</i>, 2023 <b>D2.3 Community-endorsed quality assurance and  certification framework for professional training and qualifications</b>. <a href="https://doi.org/10.5281/zenodo.8305482">10.5281/zenodo.8305482</a></li></ol>
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>CC</dt>
+                    <dd>Creative Commons</dd>
+                    
+                    <dt>EOSC</dt>
+                    <dd>European Open Science Cloud</dd>
+                    
+                    <dt>FAIR</dt>
+                    <dd>Findable, Accessible, Interoperable, Reusable</dd>
+                    
+                    <dt>MVS</dt>
+                    <dd>Minimum Viable Skills</dd>
+                    
+                    <dt>OER</dt>
+                    <dd>Open Educational Repositories</dd>
+                    
+                    <dt>TeSS</dt>
+                    <dd>Training eSupport System</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=contributing/fair-by-design:en"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=contributing/fair-by-design:en">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Sonja Filiposka, Anastas Mishev, Carolin Leister, Vojdan Kjorveziroski, Dominique Green, Irakleitos Souyioultzoglou, Achim Winandi, Аrnaud Gingold, Christine Hadrossek,  <b>FAIR-by-Design methodology (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html">https://training.galaxyproject.org/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{contributing-fair-by-design,
+author = "Sonja Filiposka and Anastas Mishev and Carolin Leister and Vojdan Kjorveziroski and Dominique Green and Irakleitos Souyioultzoglou and Achim Winandi and Аrnaud Gingold and Christine Hadrossek",
+	title = "FAIR-by-Design methodology (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/contributing/tutorials/fair-by-design/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/skills4eosc/" class="funder-badge">
+		
+		<div class="avatar">
+			
+				
+				<img class="funder-avatar" src="https://avatars.githubusercontent.com/skills4eosc" alt="Logo">
+				
+			
+		</div>
+
+		<div class="info">
+			<div class="name">Skills4SEOSC</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+                <blockquote class="agenda">
+                    <div class="box-title">Developing GTN training material</div>
+                    This tutorial is part of a series to develop GTN training material, feel free to also look at:
+                    
+                    <ol>
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial/tutorial.html">Creating a new tutorial</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/introduction/slides.html">Overview of the Galaxy Training Material</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Creating Slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">Creating Interactive Galaxy Tours</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/github-interface-contribution/tutorial.html">Contributing with GitHub via its interface</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/generating-pdf/tutorial.html">Generating PDF artefacts of the website</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">Tools, Data, and Workflows for tutorials</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/python/tutorial.html">Teaching Python</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/design/tutorial.html">Design and plan session, course, materials</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/schemas/tutorial.html">GTN Metadata</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/gitpod/tutorial.html">Running the GTN website online using GitPod</a></li>
+                                
+                        
+                    
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Running the GTN website locally</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html">Adding auto-generated video to your slides</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html">Including a new topic</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-quiz/tutorial.html">Adding Quizzes to your Tutorial</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">Creating content in Markdown</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/learning-principles/tutorial.html">Principles of learning and how they apply to training and teaching</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/admin-knitting/tutorial.html">Updating diffs in admin training</a></li>
+                                
+                        
+                    
+                        
+                                
+                    <li><a href="/training-material/topics/contributing/tutorials/fair-gtn/tutorial.html">FAIR Galaxy Training Material</a></li>
+                                
+                        
+                    
+                    </ol>
+                </blockquote>
+                
+
+                
+                <blockquote class="agenda follow-up">
+                    <div class="box-title">Go Further</div>
+                    <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+                    <ul>
+                        
+    
+      <li>
+        <a href="https://learning.skills4eosc.eu/course/view.php?id=19">Skill4EOSC FAIR-by-design Methodology Training of Trainers</a>
+      </li>
+    
+
+
+                    </ul>
+                </blockquote>
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-by-design/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/contributing/tutorials/fair-by-design/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/contributing/tutorials/fair-by-design/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/cf8cfbeb5fa83f1907e00b100e29bb1d3ec382d4">cf8cfbe</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>

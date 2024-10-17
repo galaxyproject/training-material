@@ -299,7 +299,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-17 08:40:44 +0000",
+          "modified": "2024-10-17 09:14:42 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSRR891268_R1_20M.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRR891268_R2_20M.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Unique\"];\n  9 -->|out_file1| 10;\n  11[\"Text transformation\"];\n  10 -->|outfile| 11;\n  12[\"Concatenate datasets\"];\n  6 -->|out_file1| 12;\n  11 -->|output| 12;\n  13[\"Unique\"];\n  12 -->|out_file1| 13;\n  14[\"seqtk_subseq\"];\n  0 -->|output| 14;\n  13 -->|outfile| 14;\n  15[\"Text transformation\"];\n  13 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  2[\"FASTQ to Tabular\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Cut\"];\n  2 -->|output_file| 4;\n  5[\"Bowtie2\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  6[\"Select random lines\"];\n  4 -->|output| 6;\n  7[\"BAM-to-SAM\"];\n  5 -->|output| 7;\n  8[\"Filter\"];\n  7 -->|output1| 8;\n  9[\"Cut\"];\n  8 -->|out_file1| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR891268_R1_20M.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR891268_R2_20M.fastq.gz\"]\n  10[label=\"Unique\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Text transformation\"]\n  10 -> 11 [label=\"outfile\"]\n  12[label=\"Concatenate datasets\"]\n  6 -> 12 [label=\"out_file1\"]\n  11 -> 12 [label=\"output\"]\n  13[label=\"Unique\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"seqtk_subseq\"]\n  0 -> 14 [label=\"output\"]\n  13 -> 14 [label=\"outfile\"]\n  15[label=\"Text transformation\"]\n  13 -> 15 [label=\"outfile\"]\n  16[label=\"seqtk_subseq\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  2[label=\"FASTQ to Tabular\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Cutadapt\"]\n  0 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Cut\"]\n  2 -> 4 [label=\"output_file\"]\n  5[label=\"Bowtie2\"]\n  3 -> 5 [label=\"out1\"]\n  3 -> 5 [label=\"out2\"]\n  6[label=\"Select random lines\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"BAM-to-SAM\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Filter\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Cut\"]\n  8 -> 9 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -424,7 +424,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-17 08:40:44 +0000",
+          "modified": "2024-10-17 09:14:42 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAPI Request file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Copernicus Climate Data Store\"];\n  0 -->|output| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAPI Request file\"]\n  1[label=\"Copernicus Climate Data Store\"]\n  0 -> 1 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -2241,6 +2241,215 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "FAIR-by-Design methodology",
+      "draft": true,
+      "abbreviations": {
+        "FAIR": "Findable, Accessible, Interoperable, Reusable",
+        "OER": "Open Educational Repositories",
+        "EOSC": "European Open Science Cloud",
+        "CC": "Creative Commons",
+        "MVS": "Minimum Viable Skills",
+        "TeSS": "Training eSupport System"
+      },
+      "zenodo_link": "https://zenodo.org/records/11548062",
+      "questions": [
+        "How to develop FAIR learning materials?",
+        "How to incorporate the FAIR principles in the instructional design process?"
+      ],
+      "objectives": [
+        "Design FAIR learning materials",
+        "Structure FAIR learning materials",
+        "Create and publish FAIR-by-Design learning materials",
+        "Assess FAIR-ness of learning objects"
+      ],
+      "time_estimation": "20M",
+      "key_points": [
+        "The FAIR-by-Design Methodology ensures that the output of the instructional design process are FAIR learning materials.",
+        "Each stage of the FAIR-by-Design Methodology incorporates specific parts of the FAIR principles.",
+        "The ouput of the FAIR-by-Design Methodology are FAIR learning materials from both the perspective of instructors and of learners."
+      ],
+      "tags": [
+        "FAIR-by-Design Learning Materials",
+        "FAIR Learning Objects",
+        "FAIR-by-Design Methodology",
+        "work-in-progress"
+      ],
+      "priority": 1,
+      "contributions": {
+        "authorship": [
+          "sonjafiliposka",
+          "amisev1971",
+          "CarolinLeister",
+          "korvoj",
+          "domlgreen",
+          "isouyioul",
+          "achim-kit",
+          "agCleo",
+          "CRHAD26"
+        ],
+        "funding": [
+          "skills4eosc"
+        ]
+      },
+      "follow_up_training": [
+        {
+          "type": "external",
+          "title": "Skill4EOSC FAIR-by-design Methodology Training of Trainers",
+          "link": "https://learning.skills4eosc.eu/course/view.php?id=19"
+        }
+      ],
+      "lang": "en",
+      "level": "Introductory",
+      "extra": {
+        "description": "Short how to guide that guides you through the stages of the FAIR-by-Design methodology without any specific choice on tools and formats.",
+        "target_audience": "Instructional designers",
+        "URL_resource_type": "Permanent URL",
+        "learning_resource_type": "self-paced microlearning unit",
+        "access_cost": "No",
+        "attribution": "This microlearning unit is based on Filiposka, Sonja, Mishev, Anastas. (2024). FAIR-by-Design Microlearning (1.0.0). https://doi.org/10.5281/zenodo.11548062"
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/contributing/tutorials/fair-by-design/tutorial.html",
+      "topic_name": "contributing",
+      "tutorial_name": "fair-by-design",
+      "dir": "topics/contributing/tutorials/fair-by-design",
+      "id": "contributing/fair-by-design",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-10-17 09:13:36 +0000",
+      "pub_date": "2024-10-17 09:13:36 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-by-design/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "supported_servers_matrix": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Sonja Filiposka",
+          "joined": "2024-07",
+          "orcid": "0000-0003-0034-2855",
+          "id": "sonjafiliposka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/sonjafiliposka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/sonjafiliposka/"
+        },
+        {
+          "name": "Anastas Mishev",
+          "joined": "2024-07",
+          "orcid": "0000-0001-7271-6655",
+          "id": "amisev1971",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/amisev1971.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/amisev1971/"
+        },
+        {
+          "name": "Carolin Leister",
+          "joined": "2024-07",
+          "orcid": "0000-0002-6940-0024",
+          "id": "CarolinLeister",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/CarolinLeister.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CarolinLeister/"
+        },
+        {
+          "name": "Vojdan Kjorveziroski",
+          "joined": "2024-07",
+          "orcid": "0000-0003-0419-4300",
+          "id": "korvoj",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/korvoj.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/korvoj/"
+        },
+        {
+          "name": "Dominique Green",
+          "joined": "2024-07",
+          "orcid": "0000-0002-9411-4281",
+          "id": "domlgreen",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/domlgreen.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/domlgreen/"
+        },
+        {
+          "name": "Irakleitos Souyioultzoglou",
+          "joined": "2024-07",
+          "orcid": "0000-0002-9875-7196",
+          "id": "isouyioul",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/isouyioul.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/isouyioul/"
+        },
+        {
+          "name": "Achim Winandi",
+          "joined": "2024-07",
+          "orcid": "0000-0003-4800-7925",
+          "id": "achim-kit",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/achim-kit.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/achim-kit/"
+        },
+        {
+          "name": "Аrnaud Gingold",
+          "joined": "2024-07",
+          "id": "agCleo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/agCleo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/agCleo/"
+        },
+        {
+          "name": "Christine Hadrossek",
+          "joined": "2024-07",
+          "orcid": "0000-0002-2638-6373",
+          "id": "CRHAD26",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/CRHAD26.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CRHAD26/"
+        },
+        {
+          "name": "Skills for European Open Science Cloud",
+          "short_name": "Skills4SEOSC",
+          "joined": "2024-07",
+          "funding_id": "10040140",
+          "funding_database": "cordis",
+          "funder_name": "Horizon Europe",
+          "url": "https://training.galaxyproject.org/training-material/api/grants/skills4eosc.json",
+          "github": false,
+          "id": "skills4eosc",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/skills4eosc/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-by-design/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-by-design/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Running the GTN website locally",
       "questions": [
         "How to setup the infrastructure to build training webpages?"
@@ -3388,8 +3597,8 @@
       "id": "contributing/fair-gtn",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-10-17 08:40:46 +0000",
-      "pub_date": "2024-10-17 08:40:46 +0000",
+      "mod_date": "2024-10-17 09:14:44 +0000",
+      "pub_date": "2024-10-17 09:14:44 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-gtn/tutorial.json",
       "tools": [
