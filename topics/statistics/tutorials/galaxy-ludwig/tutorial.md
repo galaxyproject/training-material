@@ -455,7 +455,7 @@ The F1 score vs. frequency label graph is a valuable tool for diagnosing how wel
 
 ![F1 score vs frequency label](../../images/galaxy-ludwig/test2_f1_score.png "F1 Score vs. Frequency of Labels. This graph illustrates the relationship between the frequency of each class label in the dataset and the model's F1 score for that class. Higher F1 scores indicate better model performance.")
 
-Digits like '1' (occurrences > 7800 and F1 score > 0.992) and '0' (occurrences > 6800 and F1 score > 0.980) suggest that the model has learned to accurately identify these digits, despite of the difference when looking the frequency of the digits. Digit '5', with a lower frequency, still achieves a strong F1 score. Although its frequency is the lowest among the digits, the F1 score remains high, indicating that the model maintains a good balance of precision and recall even with fewer examples. This reflects the robustness of the CNN model.
+Digits like '1' (occurrences > 7800 and F1 score > 0.992) and '0' (occurrences > 6800 and F1 score > 0.980) suggest that the model has learned to accurately identify these digits, despite the difference when looking at the frequency of the digits. Digit '5', with a lower frequency, still achieves a strong F1 score. Although its frequency is the lowest among the digits, the F1 score remains high, indicating that the model maintains a good balance of precision and recall even with fewer examples. This reflects the robustness of the CNN model.
 
 # Conclusion
 In this tutorial, we demonstrated how to utilize the Galaxy-Ludwig tool to build an image recognition model using the MNIST dataset of handwritten digits. We followed a structured approach consisting of 
