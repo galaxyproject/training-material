@@ -59,10 +59,10 @@ handling of sparsity, and treatment of compositional data. Some of them are ment
 
 ![sensitivity and false discovery rate (FDR) across different tools](https://journals.plos.org/ploscompbiol/article/figure/image?size=large&id=10.1371/journal.pcbi.1009442.g004 "Source: <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009442#pcbi-1009442-g004">sensitivity and false discovery rate (FDR) across different tools</a>"){:width="60%"} 
 
-- The above figure compares various tools for differential abundance detection (Panel A) and multivariable association detection (Panel B) in microbiome studies, based on sensitivity and false discovery rate (FDR).
-- **Sensitivity** measures how well the methods detect true signals, higher values lead to better performance.
-- **False discovery rate (FDR)** measures the proportion of false positives among detected signals (lower FDR is better).
-- MaAsLin2 is the clear standout for both differential abundance detection and multivariable association detection, showing high sensitivity and maintaining a low FDR.
+The above figure compares various tools for differential abundance detection (Panel A) and multivariable association detection (Panel B) in microbiome studies, based on sensitivity and false discovery rate (FDR).\
+**Sensitivity** measures how well the methods detect true signals, higher values lead to better performance.\
+**False discovery rate (FDR)** measures the proportion of false positives among detected signals (lower FDR is better).\
+MaAsLin2 is the clear standout for both differential abundance detection and multivariable association detection, showing high sensitivity and maintaining a low FDR.
 
 > <agenda-title></agenda-title>
 >
@@ -87,13 +87,13 @@ MaAsLin2 requires the following input files:
 The Features file can contain samples not included in the metadata file (or vice versa). For both cases, those samples not included in both files will be removed from the analysis.
 Also, the samples do not need to be in the same order in the two files.
 
+## Origin
 In this tutorial, the two input files used are:
 -  `HMP2_taxonomy.tsv` or features file
 -  `HMP2_metadata.tsv` or metadata file
 
 The files provided were generated from the HMP2 data. To download [Click here](https://ibdmdb.org/)
  
- **Origin** : \
 The **HMP2_taxonomy.tsv** and **HMP2_metadata.tsv** files are part of the **Human Microbiome Project 2 (HMP2)**, which is a key component of the Inflammatory Bowel Disease Multi'omics Database ({% cite IBDMDB %}). The IBDMDB is a large-scale, multi-omic research initiative aimed at understanding the microbiome's role in IBD progression by integrating various omics data like metagenomics, metabolomics, and host genetics. 
 
 The **HMP2_taxonomy.tsv** file contains microbiome data (species abundances) collected from IBD patients and healthy controls, while the **HMP2_metadata.tsv** file includes clinical and demographic metadata for these samples, such as IBD diagnosis (non-IBD, ulcerative colitis(UC), or Crohn’s disease(CD)), dysbiosis state, and treatments like antibiotics.
@@ -148,7 +148,7 @@ The above two files were utilized prominently in the research study, **"Multivar
 >    {: .question}
 >
 {: .hands_on}
-## Data that can be analysed with MaAsLi2
+## Data that can be analysed with MaAsLin2
 
 MaAsLin2 is designed to analyze various types of **tabular data** for multivariable association studies. The following table formats are compatible:
 
@@ -258,14 +258,17 @@ The transformation starts by taking the square root of the proportion value. Thi
 Next, it applies the arcsine function (the inverse of the sine function) to the square root result. The arcsine function helps to normalize the distribution further.\
 Used when you are working with proportion data, such as relative abundances in microbiome studies, where the values are bounded between 0 and 1. 
                                  
-9. **analysis_method** [ Default: "LM" ] [ Options: "LM", "CPLM", "ZICP", "NEGBIN", "ZINB" ]
-- The analysis method to apply.
-- Options: \
-        1. <u>Linear Model (LM)</u>: Determines how changes in metadata are associated with changes in the taxonomy data. 
-        2. <u>Compositional Proportional Linear Model (CPLM)</u>: used for analyzing compositional data, where the taxa abundances are proportions or percentages that sum to 1.
-        3. <u>Zero-Inflated Count Model (ZCIP)</u>: used when there are many zero counts in the microbiome data. It handles datasets where a large number of taxa are absent in many samples. 
-        4. <u>Negative Binomial Model (NEGBIN)</u>: used for count data where there is overdispersion (variance exceeds the mean).
-        5. <u>Zero-Inflated Negative Binomial Model (ZIND)</u>: combines features of both zero-inflation and negative binomial models, useful for count data with both excess zeros and overdispersion.   
+9. **analysis_method** [ Default: "LM" ] [ Options: "LM", "CPLM", "NEGBIN", "ZINB" ]
+- MaAsLin2 uses linear models by default, but the specific model it applies depends on the input data provided and the configuration of parameters.
+- **Broader categories of models:** 
+    1. <u>Linear Model (default)</u>:This is the default modeling approach. A linear model is used when the relationships between the metadata and the taxa abundance are assumed to be linear.
+    2. <u>Linear Mixed-Effects Model</u>: Linear mixed models extend simple linear models by incorporating both fixed and random effects, making them particularly suitable for situations where data exhibit non-independence, such as those arising from a hierarchical structure.
+    3. <u>Generalized Linear Models (GLMs)</u>:Maaslin2 uses GLMs, which extend linear models to accommodate different types of input data  (e.g., continuous, binary, or count data)    
+**Options**: \
+        1. <u>Linear Model (LM)</u>:  The default linear model of MaAsLin2. By default, MaAsLin2 uses linear regression for continuous metadata or logistic regression (a generalized linear model) for binary metadata as its association method.
+        2. <u>Conditional Poisson Linear Model (CPLM)</u>: A type of generalized linear model used for non-negative count data. It looks at how one or more factors (covariates) influence the counts while considering that the counts may be related to each other. This model assumes that the counts follow a Poisson distribution based on certain predictors, making it useful for analyzing data with different levels of exposure or biological processes.     
+        3. <u>Negative Binomial Model (NEGBIN)</u>: A generalized linear model used for count data where there is overdispersion (variance exceeds the mean).
+        4. <u>Zero-Inflated Negative Binomial Model (ZINB)</u>: A generalized linear model that combines features of both zero-inflation and negative binomial models, useful for count data with both excess zeros and overdispersion.   
                                                           
 10. **correction or adjustment methods** [ Default: "BH" ] : 
 - When performing numerous statistical tests simultaneously, like testing the association of many microbial taxa with various metadata variables, the risk of finding false positives increases. 
@@ -289,37 +292,6 @@ For more information on correction methods, [click here](https://www.rdocumentat
 14.  **plot_scatter**: Generate scatter plots for the significant associations [ Default: TRUE ]
 15.   **cores**: The number of R processes to run in parallel [ Default: 1 ]
 
-# Model types in MaAslin2
-MaAsLin2 uses linear models by default, but the statistical model and transformation applied depend on the data type and the configuration of parameters:
-1. **Linear Model (default)**:\
-This is the default modeling approach. A linear model is used when the relationships between the metadata and the taxa abundance are assumed to be linear.\
-- **Example:**\
-Modeling the association between age and the abundance of a specific bacterial taxon, assuming that the abundance changes linearly with age.
-- **When to Use:**
-When the data is continuous and the relationships are likely to be linear.
-
-2. **Mixed-Effects Model:**\
-MaAsLin2 supports mixed-effects models, which can account for **random effects**.\
-- Fixed effects are the primary variables of interest (e.g., age, disease state).
-- Random effects account for variables with inherent grouping structures (e.g., multiple samples from the same patient, geographic region, or experimental batch). To use mixed-effects modeling, specify the random_effects parameter to define variables with random effects. This is important when you expect that variability between subjects is different from the variability within subjects.
-- **Characteristics**:\
-Accounts for both within-group and between-group variability.
-Particularly useful for longitudinal or repeated-measures data where multiple observations are taken from the same subject over time.
-- **Example**:\
-Modeling the association between microbial abundance and disease state, while accounting for multiple samples taken from the same patient as a random effect.
-- **When to Use:**\
-When the data has a hierarchical or grouped structure, and you need to account for subject-specific variability (e.g., repeated measures within patients).
-
-
-3. **Generalized Linear Models (GLMs):**\
-For non-normal distributions of microbiome abundance data, MaAsLin2 supports generalized linear models. For example, logit models or Poisson models can be used depending on the response variable distribution.
-- **GLM Variants in MaAsLin2:**\
-    **Binomial**: For binary outcome data (e.g., presence/absence of a microbe).\
-    **Poisson**: For count data (e.g., counts of a microbe in samples).
-- **Example**:\
-Modeling the presence/absence of a microbe (binary outcome) with predictors like treatment group or environmental exposure using a binomial GLM.
-- **When to Use**:\
-When the response variable is not continuous, such as in the case of binary data (0 or 1) or counts of microbial taxa.
 
 # Reading Output Files
 The tool generates the following five major files:
@@ -430,7 +402,20 @@ This is the effect size representing how strongly the abundance of Alistipes sha
     {: .question}
 
 
-# Studies involving MaAslin2 tool for analysis
+
+# Conclusion
+
+In essence, uncovering associations between microbial features and metadata variables through tools like MaAsLin2 not only deepens our understanding of microbiome dynamics but also holds promise for clinical applications, personalized health strategies, and advancing the field of microbiome research.
+
+The results obtained from MaAslin2 can further be visualized using tools like [**phyloseq**](https://training.galaxyproject.org/training-material/by-tool/interactive_tool_phyloseq.html).\
+Tools such as phyloseq necessitate that users prepare and structure their data prior to visualization. This preparation may include subsampling features to retain only those that are statistically significant using tools like [**ampvis**](https://usegalaxy.eu/?tool_id=toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fampvis2_subset_taxa%2Fampvis2_subset_taxa%2F2.8.9%2Bgalaxy0&version=latest), as well as organizing the data into appropriate formats, such as an OTU/ASV table and accompanying metadata.\
+Once the data is prepared, phyloseq can be used to create a range of plots, such as:
+
+**Barplots**: Show the relative abundance of significant taxa across different metadata groups (e.g., diagnosis).\
+**Ordination plots**: Show how samples cluster based on beta diversity, focusing on the significant taxa identified.\
+**Heatmaps**: Show the abundance of significant taxa across samples, grouped by metadata variables.
+
+## Studies involving MaAslin2 tool for analysis
 
 - **Instegrating Dietary Data into Microbiome Studies: A Step Forward for Nutri-Metaomics** ({% cite Yez2021 %}) : \
 The study explores the enhancement of microbiome research through the incorporation of dietary data. The research emphasizes that integrating detailed dietary information with microbiome analyses provides a more comprehensive understanding of how diet influences gut microbiota composition and function. By applying advanced techniques in nutri-metaomics, the study aims to link specific dietary patterns with microbial changes, revealing insights into the interactions between diet, the microbiome, and health outcomes. This approach improves the ability to identify diet-related biomarkers and tailor personalized nutrition interventions based on microbial profiles.\
@@ -465,19 +450,6 @@ The study investigated how the infant gut resistome—the collection of antibiot
 The analysis, which utilized additive boosting of generalized linear models for feature reduction, revealed significant associations between ARGs and E. coli presence, as well as early-life factors such
 as antibiotic use and other exposures. Key parameters included CLR normalization of compositional abundance data, no standardization of continuous variables, and a strict significance threshold
 (q-value < 0.01) using Benjamini-Hochberg correction. This approach highlighted how early exposures influence the resistome and its relationship with E. coli in the infant's gut.
-
-# Conclusion
-
-In essence, uncovering associations between microbial features and metadata variables through tools like MaAsLin2 not only deepens our understanding of microbiome dynamics but also holds promise for clinical applications, personalized health strategies, and advancing the field of microbiome research.
-
-The results obtained from MaAslin2 can further be visualized using tools like [**phyloseq**](https://training.galaxyproject.org/training-material/by-tool/interactive_tool_phyloseq.html).\
-Tools like phyloseq require that you prepare your data (OTU/ASV table, metadata) in a structured format before visualizing.\
-Once the data is prepared, you can use phyloseq to create a range of plots, such as:
-
-**Barplots**: Show the relative abundance of significant taxa across different metadata groups (e.g., diagnosis).\
-**Ordination plots**: Show how samples cluster based on beta diversity, focusing on the significant taxa identified.\
-**Heatmaps**: Show the abundance of significant taxa across samples, grouped by metadata variables.
-
 
 
 Congratulations! You have successfully completed the tutorial. Now, feel free to explore the tool further by running it with different input files from other Galaxy tools and experimenting with various parameter settings. Enjoy the process! :)
