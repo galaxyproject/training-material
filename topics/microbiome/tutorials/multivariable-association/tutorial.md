@@ -148,6 +148,7 @@ The above two files were utilized prominently in the research study, **"Multivar
 >    {: .question}
 >
 {: .hands_on}
+## Data that can be analysed with MaAsLi2
 
 MaAsLin2 is designed to analyze various types of **tabular data** for multivariable association studies. The following table formats are compatible:
 
