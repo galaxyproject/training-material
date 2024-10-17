@@ -398,7 +398,7 @@ Here are the results from the new model we have trained and validated. Using you
 >![alt](../../images/galaxy-ludwig/test2_accuracy.png "Accuracy - Epoch = 15")
 >> <question-title></question-title>
 >>
->> 1. Did the increase in Epochs hava a significant impact on the model's accuracy 
+>> 1. Did the increase in Epochs have a significant impact on the model's accuracy 
 >>
 >>> <solution-title></solution-title>
 >>>
