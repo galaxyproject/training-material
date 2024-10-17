@@ -75,13 +75,13 @@ Below we will walk you through each of these 3 steps
 
 DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collaboratively to create your ARC, and once you are ready to publish your ARC, you can do this from here as well.
 
-TODO: discuss multiple DataHUBs?
+TODO: details box discussing multiple DataHUBs?
 
 > <hands-on-title> Create a DataHUB account </hands-on-title>
 >
 > 1. Already have an account? Please [log in](https://git.nfdi4plants.org/])
 > 2. New to DataHUB? Create an account: [https://git.nfdi4plants.org/](https://git.nfdi4plants.org/)
-> 3. If you are not familiar with Git or GitLab that is ok, ARCitect will take care of syncing to DataHub
+> 3. If you are not familiar with Git or GitLab that is ok, ARCitect will take care of syncing to DataHub behind the scenes
 >    - TODO: link to section/slides with more info about DataHUB
 >
 >
@@ -109,6 +109,8 @@ TODO: a few sentences about the demo data (what kind of data, where did it come 
 >    - This example data mimics you might have your project data organised on your computer
 >    - In the next part we will show how to organise this data in an ARC-compatible way
 >
+>    TODO: screenshot of data?
+>
 {: .hands_on}
 
 
@@ -132,12 +134,18 @@ TODO: make this a choose-your-own adventure section, instructions per OS
 {: .hands_on}
 
 
-## ARCitect: Structure your data
+## ARCitect: Initiallize your ARC structure
 
-Now that you have everything set up for the course, we can start creating our ARC.
+Now that you have everything set up for the course, we can start creating our ARC. First we will  organize our example data into the ARC structure, then we will add structured metadata about our experiment.
 
-First we will organize our example data into the ARC structure. ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
-for metadata annotation. The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
+
+### ISA model
+
+ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
+for metadata annotation.
+
+
+The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
 that aligns well with most projects in (plant) biology labs. It allows grouping multiple assays (measurements) to one study,
 and multiple studies to one investigation.
 
@@ -146,13 +154,62 @@ and multiple studies to one investigation.
 Your ARC has one isa.investigation.xlsx workbook at its root, where metadata about the investigataion is captured. Similarly, each study or assay that you add to your ARC contains one isa.study.xlsx or isa.assay.xlsx, respectively.
 
 
-## ARCitect: Add your metadata (SWATE)
+> <question-title> </question-title>
+
+<queston box about structuring the data? which assays do you have? which studies?>
+
+
+### Creating a new ARC
+
+- describe ARCitect GUI main features
+- login to DataHub from ARCitect
+- "New ARC"
+- naming
+- saving your ARC locally
+
+### Add investigation-level metadata
+
+### Create your assays and studies
+
+
+## ARCitect: Adding files to your ARC
+
+add example files to various folders (protocols, assays datasets, workflows, etc?)
+
+
+## ARCitect: Add your experimental metadata (SWATE)
 
 
 ## ARCitect: Syncing to DataHUB
 
-
+### ARC validation on DataHUB
 
 ## Publishing your ARC
+
+### Enabling Invenio testing
+
+how to enable the invenio testing, how to troubleshoot errors
+
+
+### Publishing Process
+
+Once all of the test pass, you can start the submission process for publishing your ARC
+
+
+
+## Further Reading
+
+Link to knowledgebase
+
+Link to quickstart videos https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/guides/arcitect_QuickStart_Videos.html
+
+Link to follow up tutorials
+ - Tutorial for CWL/Workflows part of the ARC?
+ - DataHUb tutorial (sharing, groups, etc?)
+ - Creating of metadata templates?
+
+
+
+
 
 
