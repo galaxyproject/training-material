@@ -847,7 +847,7 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 ##
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
-  pfo_keys = site.data['contributors'].keys + site.data['funders'].keys + site.data['organisations'].keys
+  pfo_keys = site.data['contributors'].keys + site.data['grants'].keys + site.data['organisations'].keys
   site.posts.docs.each do |post|
     if post.content
       post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
@@ -899,10 +899,10 @@ Jekyll::Hooks.register :site, :post_read do |site|
           end
 
           site.data['organisations'][affiliation]['members'] << name
-        elsif site.data['funders'].key?(affiliation)
-          site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
+        elsif site.data['grants'].key?(affiliation)
+          site.data['grants'][affiliation]['members'] = [] if !site.data['grants'][affiliation].key?('members')
 
-          site.data['funders'][affiliation]['members'] << name
+          site.data['grants'][affiliation]['members'] << name
         end
       end
     end
@@ -915,12 +915,12 @@ Jekyll::Hooks.register :site, :post_read do |site|
           end
 
           site.data['organisations'][affiliation]['former_members'] << name
-        elsif site.data['funders'].key?(affiliation)
-          if !site.data['funders'][affiliation].key?('former_members')
-            site.data['funders'][affiliation]['former_members'] = []
+        elsif site.data['grants'].key?(affiliation)
+          if !site.data['grants'][affiliation].key?('former_members')
+            site.data['grants'][affiliation]['former_members'] = []
           end
 
-          site.data['funders'][affiliation]['former_members'] << name
+          site.data['grants'][affiliation]['former_members'] << name
         end
       end
     end
@@ -947,7 +947,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
 
   # Annotate symlinks
   site.pages.each do |page|
-    page.data['symlink'] = File.symlink?(page.path) 
+    page.data['symlink'] = File.symlink?(page.path)
     # Elsewhere we checked more levels deep, maybe enable if needed.
     # || File.symlink?(File.dirname(page.path)) || File.symlink?(File.dirname(File.dirname(page.path)))
   end

@@ -34,6 +34,10 @@ contributions:
   - hexylena
   editing:
   - teresa-m
+  funding:
+  - elixir-europe
+  - deNBI
+  - uni-freiburg
 
 ---
 

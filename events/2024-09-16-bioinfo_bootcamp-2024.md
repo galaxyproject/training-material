@@ -20,6 +20,9 @@ contributions:
     - MarisaJL
   funding: []
 location:
+  geo:
+    lat: 52.0406502
+    lon: -0.7594092
   name:  The Open University - Online
   city: Milton Keynes
   country: United Kingdom

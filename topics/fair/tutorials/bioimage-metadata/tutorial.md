@@ -25,7 +25,7 @@ tags:
 - fair
 - data management
 - bioimaging
-  
+
 priority: 4
 
 contributions:
@@ -36,6 +36,7 @@ contributions:
     - poterlowicz-lab
   funding:
     - elixir-uk-dash
+    - elixir-europe
 subtopic: fair-data
 
 requirements:
@@ -44,7 +45,7 @@ requirements:
     tutorials:
       - fair-intro
       - data-management
-   
+
 
 follow_up_training:
   -
@@ -55,7 +56,7 @@ follow_up_training:
   -
     type: "internal"
     topic_name: imaging
-        
+
 ---
 
 # FAIR Bioimaging
@@ -76,7 +77,7 @@ But the question remains: where can I submit my data? Currently the main reposit
 > - [IDR: Image Data Repository](https://idr.openmicroscopy.org/)
 > - [EMPIAR: Electron Microscopy Public Image Archive](https://www.ebi.ac.uk/empiar/)
 > - [BioImage Archive](https://www.ebi.ac.uk/bioimage-archive/)
-> 
+>
 > Visit their websites and find out what their scope is or what sorts of datasets they accept.
 >
 > > <solution-title></solution-title>
@@ -91,7 +92,7 @@ But the question remains: where can I submit my data? Currently the main reposit
 > <tip-title>Repositories everywhere</tip-title>
 >
 > As well as these repositories, your Institute may have their own repository. For example, at the Warwick University, there is also [OMERO](https://warwick.ac.uk/fac/sci/med/research/biomedical/facilities/camdu/training/omero-warwick-guide_2.pdf) and [WRAP](https://wrap.warwick.ac.uk/).
-> 
+>
 {: .tip}
 
 
@@ -117,7 +118,7 @@ Now we know what repositories are available, but how to decide which one is best
 > >   2. It is strongly recommended that submitters make their datasets available under [CC-BY](https://creativecommons.org/licenses/by/4.0/) license.
 > >   3. As specified on the [IDR website](https://idr.openmicroscopy.org/about/submission.html), dataset size is typically not an issue, but for sizes significantly larger than 1000 GB special planning may be needed.
 > > - **EMPIAR: Electron Microscopy Public Image Archive**:
-> >   1. Provide image data in the formats in which they are uploaded, but recommended is the use of common formats in the field including MRC, MRCS, TIFF, DM4, IMAGIC, SPIDER, MRC FEI, RAW FEI and BIG DATA VIEWER HDF5. 
+> >   1. Provide image data in the formats in which they are uploaded, but recommended is the use of common formats in the field including MRC, MRCS, TIFF, DM4, IMAGIC, SPIDER, MRC FEI, RAW FEI and BIG DATA VIEWER HDF5.
 > >   2. All data in EMPIAR is freely and publicly available to the global community under the [CC0](https://creativecommons.org/share-your-work/public-domain/cc0/) license.
 > >   3. As specified on the [EMPIAR page](https://www.ebi.ac.uk/empiar/deposition/manual/#manIntro), typically having more than 4000 files in a directory has a tendency to slow down access considerably. It is recommended in this case to sub-divide the directory into subdirectories with no more than 4000 files each. If you have a single file larger than 1 TB, contact EMPAIR in advance.
 > >      To find out more, check the [FAQ page](https://www.ebi.ac.uk/empiar/faq).
@@ -128,7 +129,7 @@ Now we know what repositories are available, but how to decide which one is best
 > >      - Less than 50 GB total size, less than 20GB per file – use submission tool
 > >      - Up to 1TB total size – use FTP
 > >      - Anything larger – use Aspera
-> > 
+> >
 > >        To find out more, check the [FAQ page](https://www.ebi.ac.uk/bioimage-archive/help-faq/).
 > {: .solution}
 >

@@ -19,11 +19,13 @@ key_points:
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
 subtopic: next-steps
-contributors:
-  - nekrut
-  - mvdbeek
-  - tnabtaf
-  - blankenberg
+
+contributions:
+  authorship:
+    - nekrut
+    - mvdbeek
+    - tnabtaf
+    - blankenberg
 
 recordings:
 - captioners:
