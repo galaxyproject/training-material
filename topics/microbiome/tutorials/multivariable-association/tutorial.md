@@ -159,6 +159,7 @@ MaAsLin2 is designed to analyze various types of **tabular data** for multivaria
 **Taxonomy Tables:** These tables contain taxonomic classifications of microbes, enabling researchers to investigate how different taxonomic levels relate to associated metadata variables.
 
 **Gene Count Matrices:** These matrices provide counts of specific genes across samples, useful for examining associations between gene abundances and metadata, particularly in metagenomics or transcriptomics studies.
+## Galaxy tools that can generate output for MaAsLin2
 
 Several tools available on Galaxy can generate outputs that are compatible with MaAsLin2, particularly in the context of microbiome data analysis. Following are some Galaxy tools that produce outputs that can be used as input for MaAsLin2:
 1. [**QIIME2**](https://training.galaxyproject.org/training-material/search2?query=Qiime) is a popular tool for processing microbiome data, and Galaxy offers a suite of QIIME2 tools.\
