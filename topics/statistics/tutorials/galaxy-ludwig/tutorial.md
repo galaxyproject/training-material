@@ -463,6 +463,6 @@ In this tutorial, we demonstrated how to utilize the Galaxy-Ludwig tool to build
 - running the Ludwig experiment, and 
 - evaluating the model's performance. 
 
-Through the process, we have seen how Ludwig simplifies the complexities of machine learning workflows, making it accessible and efficient for users. Additionally, we explored ways to enhance model performance by adjusting configurations and analyzing detailed evaluation metrics. 
+Through the process, we have seen how Ludwig simplifies the complexities of machine learning workflows, making them accessible and efficient for users. Additionally, we explored ways to enhance model performance by adjusting configurations and analyzing detailed evaluation metrics. 
 
 By the end of this tutorial, you should have a solid understanding of how to deploy a handwritten digit classification model and interpret its results effectively.
