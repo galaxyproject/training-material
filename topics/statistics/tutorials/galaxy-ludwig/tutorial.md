@@ -336,7 +336,7 @@ Run the experiment once again. If you need a refresher on how to set up the Ludw
 
 ## Ludwig Experiment Report
 
-Here are the results from the new model we have trained and validated. Using your knwoledge from the previous analysis, answers the following questions:
+Here are the results from the new model we have trained and validated. Using your knowledge from the previous analysis, answer the following questions:
 
 > <comment-title>Confusion Matrix</comment-title>
 >
