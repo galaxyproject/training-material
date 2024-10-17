@@ -194,7 +194,7 @@ Now we will find significant associations between microbial features(features fi
 >  Keep the rest of the default values as it is.
 {: .hands_on}
 
-# Understanding parameters in the tool
+## Understanding parameters in the tool
 
 Let's now understand the role of each parameter in the tool.
 
