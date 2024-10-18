@@ -8,10 +8,10 @@ zenodo_link: https://zenodo.org/records/12591715
 zenodo_link2: "https://zenodo.org/records/10362755"
 zenodo_link3: "https://zenodo.org/records/7020318"
 questions:
-- How can we adapt the plots to our research data?
-- How can we filter the data to show only significant information?
-- How can we compare multiple visualisation methods?
-- How can we use numerical and categorical metadata for amplicon visualisation?
+- How can the plots be adapted to suit the research data?
+- How can the data be filtered to show only significant information?
+- How can multiple visualisation methods be compared?
+- How can numerical and categorical metadata be used for amplicon visualisation?
 objectives:
 - Use heatmap workflow to analyse and visualise amplicon data
 - Use ungrouped or grouped data or grouped data with facets
@@ -41,8 +41,8 @@ such as FISH-based visualisation (fluorescence in situ hybridisation), Usearch f
 visualisation with packages like ggplot2. Among these tools, ampvis2 stands out for its ability to handle large datasets and 
 provide a range of visualisation options tailored to microbial ecology, making it a wide-ranging choice for many researchers {% cite Dueholm2019 %}.
 
-If you already have amplicon data and your OTU table created, you are ready to visualise it. You can start with this tutorial
-using your own data or download the data we used, thus follow this tutorial step-by-step. 
+If amplicon data and an OTU table have already been generated, the data are ready for visualisation. This tutorial can be followed 
+either by using your own data or by downloading the dataset used here to proceed step-by-step. 
 
 These OTU tables can be generated using various tools on Galaxy: 
 > <tip-title> Generate OTU or ASV table with one of this tools</tip-title>
@@ -113,7 +113,7 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 
 ## Upload .biom file; create a phyloseq file
 
- * Use your own biom dataset or find one online, we used the following:
+ * Use your own biom dataset or select one online, such as the following:
  
 > <hands-on-title> Download the BIOM dataset </hands-on-title>
 >
@@ -161,14 +161,13 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 * Either biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial 
 
 
-For this tutorial we chose to demonstrate all visualisation tools using a combination 
-of 3 inputs:
+In this tutorial all visualisations are demonstrated by using a combination of 3 inputs:
 OTU table, sample metadata and taxonomy table, all in _tabular_ format.
 
 
 > <agenda-title></agenda-title>
 >
-> In this tutorial, we will cover:
+> In this tutorial, the following topics will be covered:
 >
 > 1. TOC
 > {:toc}
@@ -191,8 +190,8 @@ together and calculates the mean species richness for different sample sizes, re
 in a smooth curve. Rarefaction curves are particularly useful for comparing different datasets, 
 as they provide a standard way to assess species richness regardless of sample size differences {% cite Gotelli2001 %}.
 > <comment-title></comment-title>
-> - For this part, we need 'raw' data, it should not be normalised
-> - For this section, we used a different dataset than for the rest of the tutorial
+> - For this part 'raw' data is required;  it should not be normalised
+> - A different dataset was used for this section compared to the rest of the tutorial
 {: .comment}
 
 ## Get Data
@@ -208,10 +207,10 @@ We looked for a dataset marked "open" and used the following:
 >
 {: .hands_on}
 
-There are 2 datasets: **"V4-18S"** and **"COI"**, of which we used the one named **"COI"**.
+There are 2 datasets available: **"V4-18S"** and **"COI"**, with **"COI"** being used here.
 
 ### Sub-step: Generate **Uploadable Datasets from Downloaded Excel Sheet**
-All data (OTU, metadata and tax table) we need to upload to Galaxy separately are combined in one excel sheet and looks like this...
+All data (OTU, metadata and tax table) that needs to be uploaded to Galaxy separately is combined in one excel sheet and looks like this...
 ![data to separate](./images/all_data.png 
 "OTU, metadata and tax table is combined in one sheet and needs to be separated")
 
@@ -334,8 +333,8 @@ Follow this workflow to create a rarefaction curve directly from ampvis_load.
 </div>
 
 Unfortunately multiple parameter selection is not possible at the time of the publication of this tutorial and
-the workflow can not be prepared and run at once. Therefore, we first need to run the both tools **ampvis load** 
-and **ampvis subset samples** before we can run the rest of the workflow with the visualisation tools in it.
+the workflow can not be prepared and and executed all at once. Therefore, both tools, **ampvis load** and **ampvis subset samples**, 
+must be run first before proceeding with the remaining workflow that includes the visualisation tools.
 
 ### **ampvis2 load**
 <div class="Short-Version" markdown="1">
@@ -414,8 +413,8 @@ and look at the picture how it was selected there.
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the rarefaction curve. We can observe that sample __"COI-B2b"__ has the highest richness, over 150 observed OTUs, while the
-remaining samples fall below 50 observed OTUs.
+> The result of the rarefaction curve indicates that the sample __"COI-B2b"__ has the highest richness, with over 150 observed OTUs, 
+whereas the other samples have fewer than 50 observed OTUs.
 > 
 >![Result of the rarefaction curve](./images/rarefaction.png "Result of the rarefaction curve")
 {: .details}
@@ -447,10 +446,10 @@ remaining samples fall below 50 observed OTUs.
 
 # Use Case 2: Heatmap, Ordination Plot or Boxploot
 
-To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
+To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as shown in the next sections.
 
 > <comment-title></comment-title>
-> - We now use normalised data and a different dataset than for the rarefaction curve, as this dataset has more metadata
+> - In this section normalised data are used and a different dataset than for the rarefaction curve, as this dataset has more metadata
 > - However, this normalised data cannot be use for rarefaction analysis, which requires raw data. Rarefaction analysis
 examines the distribution of sequencing depth across samples by counting the number of observed species or OTUs. 
 Normalised data loses information about the original sequencing depth, making it impossible to accurately evaluate species richness.
@@ -558,8 +557,8 @@ the heatmaps. You will find these parameters listed under the corresponding heat
 Heatmaps show relationships between 2 variables ploted on 2 axis and colour intensity representing the abundance of taxa in 
 relation to what it was ploted to, like sample, specific plant or year ([A complete guide to heatmaps](https://www.atlassian.com/data/charts/heatmap-complete-guide)).
 
-Now, we can use our data, put them into subsets, and create ungrouped or grouped outputs, including those with facets. 
-The subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
+Now, the data can be used to create subsets and generate ungrouped or grouped outputs, including those with facets. 
+The subsets are based on variables that are define and are available in the metadata {% cite Andersen2018 %}.
 
 ### Heatmap (ungrouped)
 Follow this workflow to create a simple heatmap without grouping or faceting data.
@@ -734,13 +733,13 @@ Follow this workflow to create a heatmap by grouping and faceting the data.
 {: .details}
 
 ## Ordination Plots
-To plot a multidimensional dataset onto a lower-demensional space, we need ordination techniques. In ecological datasets, similar 
+Ordination techniques are needed to plot a multidimensional dataset onto a lower-dimensional space. In ecological datasets, similar 
 samples and species are plotted close to each other, while dissimilar samples and species will be found far apart. The dimensions
 on the ordination plot represent enviromental gradients and describe the relationship between species patterns and environmental
 gradient ([Introduction to ordination](https://ourcodingclub.github.io/tutorials/ordination/)).
 
 We can now use our data, generate subsets, and create different plots by applying various ordination methods. 
-As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
+As with heatmaps, the subsets are based on variables that are defined and are available in the metadata {% cite Andersen2018 %}.
 
 
 ### Ordination Method: PCA
@@ -779,7 +778,7 @@ Aalborg East are closer together on the plot, same for Aalborg West plant.
 {: .details}
 
 ### Ordination Method: PCA plus Trajectory
-Using the PCA method, we can improve the analysis by adding a trajectory. This allows the samples 
+Using the PCA method, the analysis can be improved by adding a trajectory. This allows the samples 
 to be visualised following a path over the time points at which they were collected.
 
 Follow this workflow to create an ordination plot with trajectory.
@@ -866,8 +865,8 @@ Follow this workflow to create an ordination plot with the CCA method and the He
 
 > <details-title> How it will look like </details-title>
 >
-> Result of the ordination plot created with the CCA method and the Hellinger transformation. We see the correlation between taxa and seasons
-in the plants Aalborg East and Aalborg West.
+> The result of the ordination plot created using the CCA method and the Hellinger transformation shows the correlation between taxa and 
+seasons in the plants Aalborg East and Aalborg West.
 > 
 >![Result of the ordiantion plot](./images/ordination_cca_hellinger.png "Result of the ordination plot created with the CCA method and the Hellinger transformation")
 {: .details}
@@ -890,7 +889,7 @@ and frame by _Period_ and deselect the other mentioned options above, so they re
 Boxplots are used to provide high-level information at a glance and make comparisons between mulpiple groups very easy, as they offer
 general information about data symmetry, skew, variance and outliers ([A complete guide to box plots](https://www.atlassian.com/data/charts/box-plot-complete-guide)).
 
-As with heatmaps, the subsets are based on variables we define and are available in the metadata {% cite Andersen2018 %}.
+As with heatmaps, the subsets are based on variables that are defined and are available in the metadata {% cite Andersen2018 %}.
 
 <div class="Short-Version" markdown="1">
 > <hands-on-title> Create a boxplot </hands-on-title>
@@ -954,13 +953,12 @@ As with heatmaps, the subsets are based on variables we define and are available
 
 # Use Case 3: Time Series Plot
 
-Time series analysis is primarily known for forecasting. A time series can be seen as 
-an example of a random or stochastic process, which we can use to visualise seasonal 
+Time series analysis is primarily known for forecasting. A time series can be viewed as 
+an example of a random or stochastic process, which can be used to visualise seasonal 
 differences {% cite DeGooijer2006 %}. 
 
-In our dataset, and with the settings listed below, we can observe the 
-temporal evolution of the 3 most common microorganisms in the plants Aalborg East and Aalborg West 
-over the entire period data was collected.
+In the dataset, and with the settings listed below, the temporal evolution of the 3 most common microorganisms in the plants 
+Aalborg East and Aalborg West can be observed over the entire data collection period.
 
 ## Create a Time Series Plot
 Like in use case 2, you will need the ampvis2_load datasets as well as ampvis2_subset datasets to start of.
