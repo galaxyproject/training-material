@@ -30,6 +30,8 @@ contributions:
   authorship:
     - rlibouba
     - abretaud
+  editing:
+    - felicitas215
   funding:
     - eurosciencegateway
 abbreviations:
