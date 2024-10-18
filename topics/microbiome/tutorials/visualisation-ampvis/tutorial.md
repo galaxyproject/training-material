@@ -76,7 +76,7 @@ These OTU tables can be generated using various tools on Galaxy:
 >
 {: .tip}
 
-
+# Plotting options with ampvis2
 First of all you can put your data into a 
 rarefaction curve to explore species richness. Then you can input your
 data into subsets and finally create a heatmap, a boxplot, an ordination plot
@@ -97,9 +97,9 @@ options might be missing.
 
 > <tip-title>Upload .biom file; create a phyloseq file</tip-title>
 >
-> * use your own biom dataset or find one online, we used the following:
+> * Use your own biom dataset or find one online, we used the following:
 > 
-> > <hands-on-title> Download the BIOM dataset with us </hands-on-title>
+> > <hands-on-title> Download the BIOM dataset </hands-on-title>
 > >
 > > 1. Create a new history for this tutorial
 > > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or from
@@ -133,7 +133,7 @@ options might be missing.
 > >
 > {: .details}
 >
-> * you can create a phylosec object using this workflow: 
+> * You can create a phylosec object using this workflow: 
 >
 > > <hands-on-title> Create phyloseq </hands-on-title>
 > >
@@ -164,7 +164,7 @@ OTU table, sample metadata and taxonomy table, all in _tabular_ format.
 >
 {: .agenda}
 
-In this tutorial, we can offer 2 versions:
+This tutorial has 2 versions:
 - A short version, running prebuilt workflows
 - A long version, going step-by-step
 
@@ -180,8 +180,8 @@ together and calculates the mean species richness for different sample sizes, re
 in a smooth curve. Rarefaction curves are particularly useful for comparing different datasets, 
 as they provide a standard way to assess species richness regardless of sample size differences {% cite Gotelli2001 %}.
 > <comment-title></comment-title>
-> - for this part, we need 'raw' data, it should not be normalised
-> - for this section, we used a different dataset than for the rest of the tutorial
+> - For this part, we need 'raw' data, it should not be normalised
+> - For this section, we used a different dataset than for the rest of the tutorial
 {: .comment}
 
 ## Get Data
@@ -223,14 +223,14 @@ All data (OTU, metadata and tax table) we need to upload to Galaxy separately ar
 
 > <hands-on-title> Generate separated datasets for Galaxy upload </hands-on-title>
 >
-> 1. for OTU table:
->    - keep the sample names in the first row
->    - keep the asv+number in the first column
->    - the first cell (A1) needs to reed ASV or OTU 
+> 1. For OTU table:
+>    - Keep the sample names in the first row
+>    - Keep the asv+number in the first column
+>    - The first cell (A1) needs to reed ASV or OTU 
 >
 >    > <comment-title> Attention! </comment-title>
 >    >
->    > make sure sample names have no blank spaces
+>    > Make sure sample names have no blank spaces
 >    {: .comment}
 >    
 >    > <details-title> How it will look like </details-title>
@@ -240,8 +240,8 @@ All data (OTU, metadata and tax table) we need to upload to Galaxy separately ar
 >    >![separated OTU table](./images/otu.png "Separated OTU table")
 >    {: .details}
 >
-> 2. for metadata table:
->    - copy the metadata (marked in blue) and the sample names to a new sheet
+> 2. For metadata table:
+>    - Copy the metadata (marked in blue) and the sample names to a new sheet
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
@@ -250,8 +250,8 @@ All data (OTU, metadata and tax table) we need to upload to Galaxy separately ar
 >    >![copied metadata](./images/meta_row.png "Copied set of metadata")
 >    {: .details}
 >
->    - transpose the dataset and copy to a new sheet 
->    - remove blank spaces from sample names 
+>    - Transpose the dataset and copy to a new sheet 
+>    - Remove blank spaces from sample names 
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
@@ -260,11 +260,11 @@ All data (OTU, metadata and tax table) we need to upload to Galaxy separately ar
 >    >![transposed metadata](./images/meta.png "Transposed metadata")
 >    {: .details}
 >
-> 3. for tax table:
->    - keep the asv+number in the first column
->    - keep the last column "lineage"
->    - split the "lineage"-column by the delimeter __semicolon__
->    - give all columns a name 
+> 3. For tax table:
+>    - Keep the asv+number in the first column
+>    - Keep the last column "lineage"
+>    - Split the "lineage"-column by the delimeter __semicolon__
+>    - Give all columns a name 
 >    
 >    > <details-title> How it will look like </details-title>
 >    >
@@ -273,10 +273,10 @@ All data (OTU, metadata and tax table) we need to upload to Galaxy separately ar
 >    >![separated and renamed tax table](./images/taxa.png "Separated and renamed tax table")
 >    {: .details}
 >
-> 4. save all 3 data sheets separately
+> 4. Save all 3 data sheets separately
 >
-> 5. convert to tsv format
->    - e.g. use any free available tool online to convert xlsx to tsv
+> 5. Convert to tsv format
+>    - Use any free available tool online to convert xlsx to tsv
 >    
 {: .hands_on}
 
@@ -456,8 +456,8 @@ remaining samples fall below 50 observed OTUs.
 To create a heatmap, ordination plot, or boxplot you can continue with your dataset or use the same as we do for the next sections.
 
 > <comment-title></comment-title>
-> - we now use normalised data and a different dataset than for the rarefaction curve, as this dataset has more metadata
-> - however, this normalised data cannot be use for rarefaction analysis, which requires raw data. Rarefaction analysis
+> - We now use normalised data and a different dataset than for the rarefaction curve, as this dataset has more metadata
+> - However, this normalised data cannot be use for rarefaction analysis, which requires raw data. Rarefaction analysis
 examines the distribution of sequencing depth across samples by counting the number of observed species or OTUs. 
 Normalised data loses information about the original sequencing depth, making it impossible to accurately evaluate species richness.
 {: .comment}
@@ -612,10 +612,10 @@ The colour intensity represents the abundance of each Phylum within the samples.
 
 > <tip-title>Play around with options of output</tip-title>
 >
-> * choose a different **The taxonomic level to aggregate the OTUs**, in the Tutorial **Phylum** was used, but you might have different preferences
-> * use **Additional taxonomic level(s) to display** to show more taxa on the plot
-> * select **Plot the values on the heatmap** as **No** to generate a legend for the heatmap, or as **YES** to have the values insede the heatmap
-> * set **Display sum of remaining taxa** to **YES** to have the sum as last row on your plot
+> * Choose a different **The taxonomic level to aggregate the OTUs**, in the Tutorial **Phylum** was used, but you might have different preferences
+> * Use **Additional taxonomic level(s) to display** to show more taxa on the plot
+> * Select **Plot the values on the heatmap** as **No** to generate a legend for the heatmap, or as **YES** to have the values insede the heatmap
+> * Set **Display sum of remaining taxa** to **YES** to have the sum as last row on your plot
 > 
 {: .tip}
 
@@ -932,7 +932,7 @@ As with heatmaps, the subsets are based on variables we define and are available
 
 > <tip-title>Create a different boxplot</tip-title>
 >
-> * set metadata variable = Period and metadata values = Summer & Winter
+> * Set metadata variable = Period and metadata values = Summer & Winter
 >
 > > <details-title> How it will look like </details-title>
 > >
