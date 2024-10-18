@@ -75,9 +75,14 @@ These OTU tables can be generated using various tools on Galaxy:
 
 # Plotting options with ampvis2
 First of all you can put your data into a 
-rarefaction curve to explore species richness. Then you can input your
-data into subsets and finally create a heatmap, a boxplot, an ordination plot
-or even a timeseries plot. Most of these visualisation methods are described in 
+- rarefaction curve {% tool [rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.9+galaxy0) %}
+- rarefaction curve [rarefaction curve](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.9+galaxy0)
+to explore species richness. Then you can input your data into subsets and finally create:
+- a heatmap 
+- a boxplot 
+- an ordination plot
+- a timeseries plot 
+Most of these visualisation methods are described in 
 [Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
 ![overview of visualisation methods](./images/overview.png 
 "Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
