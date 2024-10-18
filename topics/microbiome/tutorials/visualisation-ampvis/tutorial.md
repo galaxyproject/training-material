@@ -83,11 +83,18 @@ or even a timeseries plot. Most of these visualisation methods are described in
 "Overview of posible visualisation methods (taken from: Introduction to ampvis2 by Kasper Skytte Andersen)")
 
 Your data need to be in an acceptable format for the ampvis_load tool. The tool 
-requires an OTU table and accepts the following formats: _phyloseq_, _biom_, 
-_dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input for 
-ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
-_taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
-and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
+requires an OTU table and accepts the following formats:
+- _phyloseq_ 
+- _biom_ 
+- _dada2_sequencetable_ 
+- _tabular_ 
+
+The OTU table is the only mandatory input for ampvis_load, but you can also input: 
+- _sample_metadata_ (in _tabular_ or _tsv_ formats) 
+- _taxonomy_table_ (in _tabular_ format) 
+- _fasta_file_ (in _fasta_ format)
+- _phylogenetic_tree_ (in _newick_ format)
+- as well as various combinations thereof.
 
 > <comment-title></comment-title>
 > - If you work without taxonomy table, ampvis wouldn't be able to visualise taxonomy hierarchy and other options might be missing
