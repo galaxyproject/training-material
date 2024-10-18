@@ -1,33 +1,27 @@
-# List of funders related to contributors
+---
+# List of grants funding GTN contributions
 #
-# reference funders by their id in tutorial metadata files
+# Grants can be listed as affiliations for contributors
+# Grants can be listed as funding contributors on training materials
 #
 # valid tags:
-#   name, email, linkedin, twitter, gitter, orcid, bio, joined, url,
-#   funder, funding_id, funding_system, funding_statement
+#   name, joined, url, github, funding_id, funding_database, funding_statement
 #
-# collection names should be equal to github username, if not, add github: false tag
----
-
-# funder1:
-#     name: Funder A
+# EXAMPLE
+#
+# Grant1:   # should be equal to GitHub username if one exists for the grant/project
+#     name: Grant/Project name
+#     github: false # add this if the id does not map to a GitHub account
 #     joined: 2020-06
-#     url: "https://example.com"
-#     funder: true
-#     funding_id: 2020-1-NL01-KA203-064717
-#     funding_system: erasmusplus
-#     funding_statement: "This project is funded with the support of .."
+#     url: "https://example.com"    # homepage of the project
+#     funding_statement: "This project is funded with the support of .."  # optional, if you want a specific bit of text to appear
+#     funding_id: 2020-1-NL01-KA203-064717   # id of your grant, will be used in combination with funding_database to link to offical grant page
+#     funding_database: cordis|highergov|ukri|erasmusplus   # Database where your project/grant is listed,
+#                                                           # EU grants are often listed in cordis, US grants in highergov, UK grants in ukri
+#                                                           # If your project is not present in one of these databases, please ping us.
+#
+# Please add in alphabetical order of the key (id)
 
-# our real funders <3
-# please add in alphabetical order of the key (id)
-
-abromics:
-    name: ABRomics
-    github: false
-    joined: 2024-01
-    avatar: "/training-material/assets/images/abromics.png"
-    url: https://www.abromics.fr/
-    funder: true
 
 ai4life:
     name: AI4Life
@@ -35,9 +29,8 @@ ai4life:
     joined: 2023-07
     avatar: "/training-material/topics/ai4life/images/AI4Life-logo_giraffe-solid.png"
     url: https://ai4life.eurobioimaging.eu/
-    funder: true
     funding_id: "101057970"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
       AI4Life has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement number 101057970.
 
@@ -47,18 +40,16 @@ biont:
     joined: 2023-09
     avatar: "/training-material/assets/images/BioNT_Logo.png"
     url: https://biont-training.eu/
-    funder: true
     funding_id: "101100604"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
       Co-funded by the European Union
 
 by-covid:
     name: BeYond-COVID
     joined: 2023-04
-    funder: true
     funding_id: "101046203"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
       BY-COVID is an EC funded project that tackles the data challenges that can hinder effective pandemic response.
 
@@ -70,23 +61,11 @@ CINECA-Project:
     name: Common Infrastructure for National Cohorts in Europe, Canada, and Africa
     short_name: "CINECA"
     joined: 2023-03
-    funder: true
     funding_id: "825775"
-    funding_system: cordis
+    funding_database: cordis
     funder_name: Horizon 2020
     url: https://www.cineca-project.eu
 
-nfdi4plants:
-    name: DataPLANT
-    joined: 2024-07
-    url: https://www.nfdi4plants.de://www.nfdi4plants.de/
-    avatar: "/training-material/shared/images/logo-dataplant.svg"
-    funder: true
-
-deNBI:
-    name: de.NBI
-    funder: true
-    url: https://www.denbi.de/
 
 elixir-converge:
     name: ELIXIR-CONVERGE
@@ -94,9 +73,8 @@ elixir-converge:
     joined: 2023-01
     avatar: "https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png"
     url: https://elixir-europe.org/about-us/how-funded/eu-projects/converge
-    funder: true
     funding_id: "871075"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
       ELIXIR CONVERGE is connecting and align ELIXIR Nodes to deliver sustainable FAIR life-science data management services. This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement № 871075
 
@@ -107,25 +85,19 @@ edctp-eu:
     avatar: "/training-material/shared/images/edctp-eu.png"
     github: false
     url: https://www.edctp.org/
-    funder: true
+    funding_id: "101103640"
+    funding_database: cordis
     funding_statement: |
         TB-CAPT, PanACEA  and PANGenS are part of the EDCTP2 and EDCTP3 programs supported by the European Union.
 
-elixir-excelerate:
-    name: Elixir Excelerate
-    url: https://www.elixir-europe.org/excelerate/
-    avatar: "/training-material/shared/images/Excelerate_whitebackground.png"
-    github: false
-    funder: true
 
 elixir-fair-data:
     name: "ELIXIR-UK: FAIR Data Stewardship training"
     short_name: "ELIXIR Fair Data"
     github: false
     joined: 2023-06
-    funder: true
     funding_id: MR/V038966/1
-    funding_system: ukri
+    funding_database: ukri
     funding_statement: |
       This work has been funded by the ELIXIR-UK FAIR Data Stewardship training UKRI award (MR/V038966/1)
 
@@ -136,8 +108,7 @@ elixir-uk-dash:
     github: false
     avatar: "/training-material/shared/images/dash.png"
     url: https://elixiruknode.org/projects/elixir-uk-dash/
-    funder: true
-    funding_system: ukri
+    funding_database: ukri
     funding_id: MR/V038966/1
     funding_statement: |
       This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.
@@ -147,9 +118,8 @@ eosc-life:
     github: false
     joined: 2023-04
     avatar: "https://www.eosc-life.eu/wp-content/themes/eosc-life-v2/assets/images/eosclogo.png"
-    funder: true
     funding_id: "824087"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
         EOSC-Life has received funding from the European Union’s Horizon 2020 programme under grant agreement number 824087
     url: https://www.eosc-life.eu
@@ -160,9 +130,11 @@ epsrc-training-grant:
     short_name: "EPSRC/OU"
     github: false
     joined: 2022-09
-    funder: true
+    funding_id: "EP/T518165/1"
+    funding_database: ukri
     funding_statement: The research internship was supported through EPSRC Training Grant DTP 2020-2021 Open University
     url: "https://www.open.ac.uk/"
+
 
 eurosciencegateway:
     name: EuroScienceGateway
@@ -170,9 +142,8 @@ eurosciencegateway:
     joined: 2023-10
     avatar: "/training-material/assets/images/eurosciencegateway.png"
     url: https://galaxyproject.org/projects/esg/
-    funder: true
     funding_id: "101057388"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
         EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.
 
@@ -183,9 +154,8 @@ fairease:
     joined: 2023-10
     avatar: "/training-material/assets/images/fair_ease_colour.png"
     url: https://fairease.eu/
-    funder: true
     funding_id: "101058785"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
         FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.
 
@@ -195,7 +165,6 @@ fnso2019:
     joined: 2023-05
     avatar: "/training-material/shared/images/fnso.png"
     github: false
-    funder: true
     url: "https://www.ouvrirlascience.fr/national-fund-for-open-science/"
     funder_name: National Fund for Open Science
     funding_id: AAPFNSO2019OpenMetaPaper-14026
@@ -212,11 +181,10 @@ gallantries:
     joined: 2020-09
     avatar: "https://gallantries.github.io/assets/images/gallantries-logo.png"
     github: false
-    funder: true
     url: "https://www.erasmusplus.nl"
     funder_name: Erasmus+ Programme
     funding_id: 2020-1-NL01-KA203-064717
-    funding_system: erasmusplus
+    funding_database: erasmusplus
     funding_statement: |
         This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
         ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
@@ -228,31 +196,13 @@ h2020-defend:
     short_name: DEFEND
     github: false
     joined: 2023-05
-    funder: true
     funding_id: "773701"
-    funding_system: cordis
+    funding_database: cordis
     funding_statement: |
       DEFEND is Addressing the dual emerging threats of African Swine Fever and Lumpy Skin Disease in Europe.
 
       This work has received funding from the DEFEND project (www.defend2020.eu) with funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No 773701.
     url: https://www.defend2020.eu
-
-madland:
-    name: MAdLand
-    joined: 2024-07
-    url: https://madland.science
-    avatar: "/training-material/shared/images/logo-madland.jpg"
-    funder: true
-    github: false
-
-mwk:
-    name: Ministerium für Wissenschaft, Forschung und Kunst Baden-Württemberg
-    short_name: MWK
-    joined: 2024-08
-    url: https://mwk.baden-wuerttemberg.de/de/startseite
-    avatar: "/training-material/assets/images/MWK.png"
-    funder: true
-    github: false
 
 nhgri-anvil:
     name: National Human Genome Research Institute Genomic Data Science Analysis, Visualization, and Informatics Lab-Space
@@ -261,7 +211,6 @@ nhgri-anvil:
     joined: 2023-06
     avatar: https://www.ashg.org/wp-content/uploads/2021/07/nhgri-logo-800x167-1.png
     url: https://www.genome.gov/Funded-Programs-Projects/Computational-Genomics-and-Data-Science-Program/Genomic-Analysis-Visualization-Informatics-Lab-space-AnVIL
-    funder: true
     funding_id: U24HG010263
 
 nhgri-gdscn:
@@ -271,39 +220,18 @@ nhgri-gdscn:
     joined: 2023-06
     avatar: https://www.ashg.org/wp-content/uploads/2021/07/nhgri-logo-800x167-1.png
     url: https://www.genome.gov/
-    funder: true
     funding_id: 75N92022P00232
+    funding_database: highergov
 
-NIH:
-    name: National Institutes of Health
-    short_name: "NIH"
-    avatar: /training-material/shared/images/nih.png
-    url: https://nih.gov/
-    funder: true
+skills4eosc:
+    name: Skills for European Open Science Cloud
+    short_name: "Skills4SEOSC"
+    joined: 2024-07
+    funding_id: "10040140"
+    funding_database: cordis
+    funder_name: Horizon Europe
+    url: https://www.skills4eosc.eu/
     github: false
 
-
-nsf:
-    name: National Science Foundation
-    url: https://www.nsf.gov
-    avatar: "/training-material/shared/images/nsf.gif"
-    github: false
-    funder: true
-
-
-sfb992:
-    name: Collaborative Research Centre 992
-    url: https://www.sfb992.uni-freiburg.de/
-    avatar: https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg
-    github: false
-    funder: true
-
-
-ukmrc:
-    name: UK Medical Research Council
-    url: https://mrc.ukri.org
-    avatar: https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/master/logo.png
-    github: false
-    funder: true
 
 

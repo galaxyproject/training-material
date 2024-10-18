@@ -156,7 +156,7 @@ module Jekyll
         },
         id: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         name: Gtn::Contributors.fetch_name(site, id),
-        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+        description: 'An organization supporting the Galaxy Training Network',
       }
 
       organization['url'] = contributor['url'] if contributor.key?('url') && contributor['url']
@@ -179,7 +179,7 @@ module Jekyll
       }
     end
 
-    def generate_funding_jsonld(id, contributor, site)
+    def generate_grant_jsonld(id, contributor, site)
       organization = {
         '@context': 'https://schema.org',
         '@type': 'Grant',
@@ -198,16 +198,16 @@ module Jekyll
     # Generate the JSON-LD metadata for a person, funder, or organisation as JSON.
     # Parameters:
     # +id+:: The id of the person.
-    # +contributor+:: The contributor object from CONTRIBUTORS.yaml.
     # +site+:: The site object.
+    # +json+:: Should the output be rendered as JSON (only really used in contributor page.)
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
       d = if Gtn::Contributors.person?(site, id)
             generate_person_jsonld(id, contributor, site)
-          elsif Gtn::Contributors.funder?(site, id)
-            generate_funder_jsonld(id, contributor, site)
+          elsif Gtn::Contributors.grant?(site, id)
+            generate_grant_jsonld(id, contributor, site)
           else
             generate_org_jsonld(id, contributor, site)
           end
@@ -278,7 +278,7 @@ module Jekyll
         to_pfo_jsonld(x, site, json: false)
       end
       funding = Gtn::Contributors.get_grants(site, page.to_h).map do |x|
-        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+        to_pfo_jsonld(x, site, json: false)
       end
 
       materials = []
@@ -519,7 +519,7 @@ module Jekyll
 
       funding = materials.map do |material|
         Gtn::Contributors.get_grants(site, material).map do |x|
-          generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+          to_pfo_jsonld(x, site, json: false)
         end
       end.flatten.uniq.compact
 
@@ -804,12 +804,12 @@ module Jekyll
       funders = Gtn::Contributors.get_funders(site, material).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funding = Gtn::Contributors.get_grants(site, material).map do |x|
-        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      grants = Gtn::Contributors.get_grants(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
       end
 
       data['funder'] = funders
-      data['funding'] = funding
+      data['funding'] = grants
 
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 

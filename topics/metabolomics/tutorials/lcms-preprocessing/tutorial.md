@@ -22,6 +22,15 @@ contributors:
 - lecorguille
 - workflow4metabolomics
 
+contributions:
+  authorship:
+    - melpetera
+    - jfrancoismartin
+    - lecorguille
+    - workflow4metabolomics
+  editing: []
+  funding:
+    - elixir-europe
 ---
 
 
@@ -251,7 +260,7 @@ Note that you can either:
 {: .tip}
 
 
-#### Prepare your sampleMetadata file
+### Prepare your sampleMetadata file
 
 The sampleMetadata file is a tab-separated table, in text format. This table has to be filled by the user. You can use any
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
@@ -336,13 +345,13 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > <warning-title> The class column </warning-title>
 >
 > Depending on further choices, the sampleMetadata file can be decisive.
-> It can be used to colour some plots, but also for ion selection (see further in the tutorial). 
+> It can be used to colour some plots, but also for ion selection (see further in the tutorial).
 > Please note that the information needed for these steps **should be given as the second column of the sampleMetadata file**,
-> the first one being the samples' identifiers. 
+> the first one being the samples' identifiers.
 {: .warning}
 
 
-#### Upload the sampleMetada file with 'Get data'
+### Upload the sampleMetada file with 'Get data'
 
 > <hands-on-title>Upload the sampleMetada</hands-on-title>
 >
