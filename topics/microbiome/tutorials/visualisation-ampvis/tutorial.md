@@ -109,7 +109,7 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 > > 1. Create a new history for this tutorial
 > > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or a data library:
 > >    ```text
-> >    {{ page.zenodo_link }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
+> >    {{ page.zenodo_link3 }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
 > >    ``` 
 > >
 > >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -194,13 +194,12 @@ We looked for a dataset marked "open" and used the following:
 >
 >    Import the files from [Zenodo]({{ page.zenodo_link2 }}) or a data library:
 >    ```text
->     {{ page.zenodo_link }}/files/BIOMARCS_ASV_tables.xlsx
+>     {{ page.zenodo_link2 }}/files/BIOMARCS_ASV_tables.xlsx
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 >
 {: .hands_on}
 
