@@ -21,16 +21,17 @@ tags:
 - fair
 - data stewardship
 priority: 2
+time_estimation: 2H
 contributions:
   authorship:
+    - shiltemann
     - Brilator
+    - SabrinaZander
     - CMR248
     - Freymaurer
     - Martin-Kuhl
-    - SabrinaZander
     - StellaEggels
-  editing:
-    - shiltemann
+  #editing:
   funding:
     - nfdi4plants
 
@@ -64,17 +65,15 @@ TODO: bit of background/intro about DataPLANT, ARCs etc
 ## Get Set up for the tutorial
 
 For this tutorial you need three things:
- 1. An account on DataHUB
- 2. The ARCitect tool installed
+ 1. An account on [DataHUB](https://git.nfdi4plants.org)
+ 2. The [ARCitect](https://www.nfdi4plants.de/nfdi4plants.knowledgebase/docs/ARCitect-Manual/index.html) tool installed
  3. Example data to fill your ARC with
 
-Below we will walk you through each of these 3 steps
+Below we will walk you through each of these 3 setup steps.
 
 ### Create a DataHUB account
 
 DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collaboratively to create your ARC, and once you are ready to publish your ARC, you can do this from here as well.
-
-TODO: details box discussing multiple DataHUBs?
 
 > <hands-on-title> Create a DataHUB account </hands-on-title>
 >
@@ -87,7 +86,7 @@ TODO: details box discussing multiple DataHUBs?
 
 ### Download demo data
 
-In this tutorial we will create an ARC for an example investigation. In this example investigation we grew Talinum plants under
+In this tutorial we will create an ARC for an example research data. In this example investigation we grew Talinum plants under
 drought conditions, with watered plants as control. Under these conditions the plants switch their type of photosynthesis
 (water: C3, drought: CAM). To study this change, we profiled gene expression (Transciptomics) using RNASeq, and metabolites
 (Metabolomics) via GC-MS (Gas-Chromatography Mass Spectrometry)
@@ -144,14 +143,13 @@ Now we will install the ARCitect tool. This tool will help you create and fill y
 
 ## ARCitect: Initialize your ARC structure
 
-Now that you have everything set up for the course, we can start creating our ARC. First we will organize our example data into the ARC structure, then we will add structured metadata about our experiment.
+Now that you have everything set up for the course, we can start creating our ARC. First we will organize our example data into the ARC structure, then we will add structured metadata describing our experiments and data.
 
 
 ### ISA model
 
 ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
 for metadata annotation.
-
 
 The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
 that aligns well with most projects in (plant) biology labs. It allows grouping multiple assays (measurements) to one study,
@@ -223,7 +221,39 @@ Let's start by creating a new ARC.
 >
 > 2. If all went well, you should see the folder structure that was created for your ARC:
 >    ![](images/new-arc.png)
+>
+> 3. Click on the **Explorer** button in the menu to see the files created on your machine
+>
 {: .hands_on}
+
+The basic ARC structure is initialized for you, and looks something like this:
+
+```bash
+my-arc
+├── studies
+│   ├── study1              # subfolder for each study
+│   │   ├── protocols       # folder for protocol documents
+│   │   ├── resources       # folder for any other supporting information and files
+│   │   isa.study.xlsx      # study-level metadata (e.g. sample sheet, culturing/harvesting conditions)
+│   │   README.md           # Free-text description of your study
+│   ├── assay2
+│   │   ├── ...
+├── assays
+│   ├── assay1              # subfolder for each assay
+│   │   ├── dataset         # assay result files (e.g. sequencing files)
+│   │   ├── protocols       # assay protocol files
+│   │   isa.assay.xlsx      # assay-level metadata (e.g. instrument)
+│   │   README.md
+│   ├── assay2
+│   │   ├── ...
+├── runs                    # analysis results
+│   ├── ...
+├── workflows               # analysis workflows (CWL, or any other scripts/code used)
+│   ├── ...
+├── isa.investigation.xlsx  # investigation-level metadata
+└── README.md
+```
+
 
 ### Add investigation-level metadata
 
@@ -235,13 +265,14 @@ We will start by adding some basic data about our ARC. We do this in the investi
 >    - This is the root of the ARC folder structure (e.g. *TalinumPhotosynthesis*)
 >    - This will bring up the investigation information in the main panel
 >    - Notice that the Identifier has already been filled in for you (but you can still change it)
+>    - Behind the scenes this information will be saved as an Excel sheet `isa.investigation.xlsx`
 >
 >    ![screenshot of the investigation metadata screen](images/investigation-empty.png)
 >
 > 2. **Add a title** for your investigation
 >    - This should be a concise but descriptive title
 >    - Tip: think of what you would name your publication based on this investigation
->    - For this tutorial, you could your title to `Effect of Drought on Talinum Photosynthesis`
+>    - For this tutorial, you could set your title to `Effect of Drought on Talinum Photosynthesis`
 >
 > 3. **Add a description** for your investigation
 >   - Here you can describe your main research questions and methods in a few sentences or paragraphs.
@@ -265,19 +296,20 @@ We will start by adding some basic data about our ARC. We do this in the investi
 
 It is a good idea to frequently save your work. There are 2 levels of saving your ARC; you can:
 1. Save it locally (to your computer)
-2. Save it online to DataHUB
+2. Save it online to DataHUB (syncing)
 
 By default your ARC on DataHUB is private to you, but you have the option of sharing it with your collaborators.
 
 > <comment-title>Why and how often to sync to DataHUB?</comment-title>
+>
 > Syncing your ARC to DataHUB frequently has several advantages:
 >  - It makes it easy to collaborate with colleagues on your ARC
 >  - It is a backup of your ARC in case anything happens to your computer
 >  - It is version controlled. This means you can always go back to any previous version your ARC if needed
 >
 > We advise you to save your ARC to your local machine as often as you can, and sync to DataHUB every time you have
-> completed a unit of work (e.g. "added data files", "added study metadata", "added protocol document" etc), this
-> makes it easy for others (and you) to see what you have changed.
+> completed a unit of work (e.g. "added data files", "added culturing metadata", "added protocol documents" etc), this
+> makes it easy for others (and future you) to see what you have changed.
 >
 {: .comment}
 
@@ -329,7 +361,8 @@ Since we have just completed our first unit of work (initialized our ARC and add
 >    ![](images/arcitect-add-remote.png)
 >
 > 9. Click **Push** to sync from your computer to DataHUB
->    - **Pull** will do the reverse, it will 'pull' in changes from DataHUB into your local copy of the ARC
+>    - **Pull** will do the reverse, it will 'pull' in changes from DataHUB into your local copy of the ARC,
+>      for example if a collaborator made changes, or you worked on it from a different machine.
 >
 > 10. Check that the push was successfull
 >     - Navigate to `https://git.nfdi4plants.org/YourUsername/TalinumPhotosynthesis`
@@ -341,24 +374,107 @@ Since we have just completed our first unit of work (initialized our ARC and add
 >
 {: .hands_on}
 
-Congrats! You have initialized, saved, and synced your ARC! Now let's continue with the good part, filling your ARC.
-
-### Create your assays and studies
+Congrats! You have initialized, saved, and synced your ARC! Now let's continue with the good part, actually filling your ARC.
 
 
+## Structure your data in the ARC
+
+### Think about your data
+
+Next we will divide our research into studies and assays. As a rule of thumb, create a study for every research question, and an assay for every measurement you performed (e.g. sequencing, mass-spec, imaging). An investigation can have one study, or several. A study can have one or more assays, and each assay can be associated with one or more studies.
 
 
-## ARCitect: Adding files to your ARC
+> <hands-on-title> Evaluate the example data </hands-on-title>
+>
+> 1. Recall our example research:
+>
+>    *In this example investigation we grew Talinum plants under drought conditions, with watered plants as control.
+>    Under these conditions the plants switch their type of photosynthesis (water: C3, drought: CAM). To study this
+>    change, we profiled gene expression (Transciptomics) using RNASeq, and metabolites (Metabolomics) via GC-MS
+>    (Gas-Chromatography Mass Spectrometry)*
+>
+> 2. Have a look at the demo data we downloaded
+>
+> > <question-title> Which studies and assays do we have? </question-title>
+> >
+> > 1. Which studies do we have?
+> > 2. Which assays did we perform?
+> >
+> > > <solution-title></solution-title>
+> > > 1. We had one research question, the effect of drought on photosynthesis, so we will create 1 study
+> > > 2. We performed 2 measurements, RNA sequencing and GC-MS, so we will create 2 assays in our ARC
+> > {: .solution}
+> {: .question}
+{: .hands_on}
+
+### Create a study
+
+Let's create our study now.
+
+> <hands-on-title>Create an ARC study</hands-on-title>
+>
+> 1. Click on the **+ (plus) icon** next to the studies folder
+> 2. Provide a study identifier, e.g. `talinum_drought`
+>    ![screenshot of the study creation dialogue window](images/arcitect-new-study.png)
+> 3. Click **New Study** button to confirm
+> 4. Expand the new study folder that was created in your ARC
+>    - you should see the protocols and resources folders created
+>      ![screenshot of the ARC structure after adding the new study](images/arcitect_new_study_files.png)
+{: .hands_on}
+
+As we did for the investigation, we can also add some basic study information
+
+> <hands-on-title>Add basic study metadata</hands-on-title>
+>
+> 1. Click on your study `talinum_drought`
+> 2. The main panel will now show study metadata, here you can add basic information about your study
+>    such as description, contacts, associated publications.
+>
+>    ![screenshot of the study metadata screen](images/arcitect-study-metadata.png)
+>
+> 3. **Add a description** for the study
+> 4. **Add yourself** as a contact
+>    - Remember that you can use your ORCiD ID for a fast way to fill this data
+> 5. **Add a publication**
+>    - Normally you would add the paper you published based on the data in this ARC
+>    - For this tutorial, add any publication (e.g. one of yours, or one you find interesting)
+>    - The easiest way to do this, is to add the **DOI link** or **Pubmed ID**, then the information will be autofilled
+>    - If you don't have a publication in mind, try one of the following papers:
+>      - Pubmed ID: `7825135`
+>      - DOI: `https://doi.org/10.1136/bmj.331.7531.1498`
+>
+>    ![Example of study metadata filled](images/arcitect-study-metadata-filled.png)
+{: .hands_on}
+
+Since we have once again completed a unit of work, let's save and sync our ARC again!
+
+> <hands-on-title>Save & Sync</hands-on-title>
+>
+> 1. Save your ARC locally
+>    - **Save ARC** button in menu
+> 2. Sync your ARC to DataHUB
+>    - **DataHub Sync** button in menu
+>    - Commit all changed files
+>    - Provide a good commit message (e.g. `added drought study`)
+{: .hands_on}
+
+
+### Create an assay
+
+Next, we will create our 2 assays
+
+
+
+## Adding files to your ARC
 
 add example files to various folders (protocols, assays datasets, workflows, etc?)
 
 
-## ARCitect: Add your experimental metadata (SWATE)
 
+- end: save & sync your ARC
 
-## ARCitect: Syncing to DataHUB
+## Add your experimental metadata (SWATE)
 
-### ARC validation on DataHUB
 
 ## Publishing your ARC
 
