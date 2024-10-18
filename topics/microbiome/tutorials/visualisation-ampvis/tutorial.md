@@ -197,10 +197,6 @@ We looked for a dataset marked "open" and used the following:
 >    {{ page.zenodo_link2 }}/files/BIOMARCS_ASV_tables.xlsx
 >    ```
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
 {: .hands_on}
 
 There are 2 datasets: **"V4-18S"** and **"COI"**, of which we used the one named **"COI"**.
