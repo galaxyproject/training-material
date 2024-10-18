@@ -88,9 +88,10 @@ _dada2_sequencetable_ or _tabular_. The OTU table is the only mandatory input fo
 ampvis_load, but you can also input _sample_metadata_ (in _tabular_ or _tsv_ formats), 
 _taxonomy_table_ (in _tabular_ format), _fasta_file_ (in _fasta_ format)
 and _phylogenetic_tree_ (in _newick_ format), as well as various combinations thereof.
-Note: if you work without taxonomy table, ampvis wouldn't be able to visualise taxonomy hierarchy and other 
-options might be missing.
 
+> <comment-title></comment-title>
+> - If you work without taxonomy table, ampvis wouldn't be able to visualise taxonomy hierarchy and other options might be missing
+{: .comment}
 
 > <tip-title>Upload .biom file; create a phyloseq file</tip-title>
 >
