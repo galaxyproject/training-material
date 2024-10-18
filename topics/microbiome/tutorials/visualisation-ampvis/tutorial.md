@@ -100,56 +100,54 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 > - If you work without taxonomy table, ampvis wouldn't be able to visualise taxonomy hierarchy and other options might be missing
 {: .comment}
 
-> <tip-title>Upload .biom file; create a phyloseq file</tip-title>
+## Upload .biom file; create a phyloseq file
+
+ * Use your own biom dataset or find one online, we used the following:
+ 
+> <hands-on-title> Download the BIOM dataset </hands-on-title>
 >
-> * Use your own biom dataset or find one online, we used the following:
-> 
-> > <hands-on-title> Download the BIOM dataset </hands-on-title>
-> >
-> > 1. Create a new history for this tutorial
-> > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or a data library:
-> >    ```text
-> >    {{ page.zenodo_link3 }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
-> >    ``` 
-> >
-> >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
-> >
-> >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
-> >
-> > 3. Rename the datasets
-> > 4. Check that the datatype
-> >
-> >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
-> >
-> > 5. Add to each database a tag corresponding to ...
-> >
-> >    {% snippet faqs/galaxy/datasets_add_tag.md %}
-> >
->{: .hands_on}
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or a data library:
+>    ```text
+>    {{ page.zenodo_link3 }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
+>    ``` 
 >
-> > <details-title> How the Upload should look like </details-title>
-> >
-> > Make sure to select "biom2" instead of "Auto-detect".
-> >
-> > ![Select biom](./images/upload_biom.png "Make sure to select "biom2" like shown on the picture")
-> >
-> {: .details}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
-> * You can create a phylosec object using this workflow: 
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> > <hands-on-title> Create phyloseq </hands-on-title>
-> >
-> > 1. {% tool [Create phyloseq object](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0) %} with the following parameters:
-> >    - {% icon param-file %} *"BIOM file"*: `output` (Input dataset)
-> >
-> > 2. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
-> >    - {% icon param-file %} *"OTU table"*: `output` (output of **Create phyloseq object** {% icon tool %})
-> >
-> {: .hands_on}
+> 3. Rename the datasets
+> 4. Check that the datatype
 >
-> * biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial 
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-{: .tip}
+> 5. Add to each database a tag corresponding to ...
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+{: .hands_on}
+
+> <details-title> How the Upload should look like </details-title>
+>
+> Make sure to select "biom2" instead of "Auto-detect".
+>
+> ![Select biom](./images/upload_biom.png "Make sure to select "biom2" like shown on the picture")
+>
+{: .details}
+
+* You can create a phylosec object using this workflow: 
+
+> <hands-on-title> Create phyloseq </hands-on-title>
+>
+> 1. {% tool [Create phyloseq object](toolshed.g2.bx.psu.edu/repos/iuc/phyloseq_from_biom/phyloseq_from_biom/1.46.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"BIOM file"*: `output` (Input dataset)
+>
+> 2. {% tool [ampvis2 load](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_load/ampvis2_load/2.8.6+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"OTU table"*: `output` (output of **Create phyloseq object** {% icon tool %})
+>
+{: .hands_on}
+
+* Either biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial 
 
 
 For this tutorial we chose to demonstrate all visualisation tools using a combination 
