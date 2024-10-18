@@ -192,27 +192,15 @@ We looked for a dataset marked "open" and used the following:
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link2 }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
->
->    ```
->    BIOMARCS_ASV_tables.xlsx
+>    Import the files from [Zenodo]({{ page.zenodo_link2 }}) or a data library:
+>    ```text
+>     {{ page.zenodo_link }}/files/BIOMARCS_ASV_tables.xlsx
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
