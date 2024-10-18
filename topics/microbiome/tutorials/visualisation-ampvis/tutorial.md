@@ -64,9 +64,7 @@ These OTU tables can be generated using various tools on Galaxy:
 > 4. {% tool [dada2: makeSequenceTable](toolshed.g2.bx.psu.edu%2Frepos%2Fiuc%2Fdada2_makesequencetable%2Fdada2_makeSequenceTable%2F1.30.0%2Bgalaxy0&version=latest) %} 
 >
 >    > <comment-title></comment-title>
->    >
->    > The Galaxy Training Network provides nice tutorials on this topic, such as [Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
->    
+>    > The Galaxy Training Network provides nice tutorials on this topic, such as [Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)   
 >    {: .comment}
 >
 > 5. Additionally, you can consider using outputs from tools like [Kraken2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html) 
