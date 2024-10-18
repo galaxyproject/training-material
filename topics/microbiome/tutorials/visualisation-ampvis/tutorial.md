@@ -107,13 +107,10 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 > > <hands-on-title> Download the BIOM dataset </hands-on-title>
 > >
 > > 1. Create a new history for this tutorial
-> > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or from
-> >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
-> >     -> `{{ page.title }}`):
-> >
-> >    ```
-> >    closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
-> >    ```
+> > 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or a data library:
+> >    ```text
+> >    {{ page.zenodo_link }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
+> >    ``` 
 > >
 > >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 > >
