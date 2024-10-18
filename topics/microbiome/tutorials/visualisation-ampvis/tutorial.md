@@ -194,7 +194,7 @@ We looked for a dataset marked "open" and used the following:
 >
 >    Import the files from [Zenodo]({{ page.zenodo_link2 }}) or a data library:
 >    ```text
->     {{ page.zenodo_link2 }}/files/BIOMARCS_ASV_tables.xlsx
+>    {{ page.zenodo_link2 }}/files/BIOMARCS_ASV_tables.xlsx
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
