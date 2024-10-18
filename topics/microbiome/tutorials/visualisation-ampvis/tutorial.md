@@ -65,8 +65,7 @@ These OTU tables can be generated using various tools on Galaxy:
 >
 >    > <comment-title></comment-title>
 >    >
->    > The Galaxy Training Network provides nice tutorials on this topic, such as 
-	[Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
+>    > The Galaxy Training Network provides nice tutorials on this topic, such as [Building an amplicon sequence variant (ASV) table from 16S data using DADA2](https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/dada-16S/tutorial.html)
 >    
 >    {: .comment}
 >
