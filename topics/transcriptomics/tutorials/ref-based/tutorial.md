@@ -265,7 +265,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Other Read Trimming Options"*
