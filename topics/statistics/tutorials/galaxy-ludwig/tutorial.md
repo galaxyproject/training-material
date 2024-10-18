@@ -137,7 +137,7 @@ These are just a few of the many options that Ludwig provides out-of-the-box, al
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [Ludwig Experiment](https://toolshed.g2.bx.psu.edu/repos/paulo_lyra_jr/ludwig_applications/ludwig_experiment/2024.0.10.3) %} with the following parameters:
+> 1. {% tool [Ludwig Experiment](.bx.psu.edu/repos/paulo_lyra_jr/ludwig_applications/ludwig_experiment/2024.0.10.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select the dataset containing model configuration"*: `config.yaml`
 >    - {% icon param-file %} *"Input dataset"*: `mnist_dataset.csv`
 >    - {% icon param-file %} *"Raw data"*: `mnist_images.zip`
@@ -320,7 +320,7 @@ Run the experiment once again. If you need a refresher on how to set up the Ludw
 >
 >><hands-on-title> Task description </hands-on-title>
 >>
->> 1. {% tool [Ludwig Experiment](ludwig_experiment) %} with the following parameters:
+>> 1. {% tool [Ludwig Experiment](.bx.psu.edu/repos/paulo_lyra_jr/ludwig_applications/ludwig_experiment/2024.0.10.3) %} with the following parameters:
 >> - {% icon param-file %} *"Select the dataset containing model configuration"*: `config.yaml`
 >> - {% icon param-file %} *"Input dataset"*: `mnist_dataset.csv`
 >> - {% icon param-file %} *"Raw data"*: `mnist_images.zip`
