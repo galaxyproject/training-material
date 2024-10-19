@@ -130,7 +130,7 @@ To speed up analysis for this tutorial, we will use only a subset of this data. 
 
 Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>History creation</hands-on-title>
 >
 > 1. Create a new history for this analysis
 >
