@@ -104,10 +104,8 @@ drought conditions, with watered plants as control. Under these conditions the p
 >    - You can put the files wherever is most convenient for you
 >
 > 3. Have a quick look at the files and folders
->    - This example data mimics you might have your project data organised on your computer
+>    - This example data mimics how you might have your project data organised on your computer
 >    - In the next part we will show how to organise this data in an ARC-compatible way
->
->    TODO: screenshot of data?
 >
 {: .hands_on}
 
@@ -187,8 +185,8 @@ This menu bar allows you to:
 1. **Login**: Log in to DataHUB (required to sync your ARC to DataHUB)
 2. **New ARC**: Create a new ARC
 3. **Open ARC**: Open an existing ARC from your machine
-4. **Download ARC**: From DataHUB to your machine (e.g. from a colleague or published)
-5. **Save ARC**: Save your changes to your machine
+4. {% icon download-cloud %} **Download ARC**: From DataHUB to your machine (e.g. from a colleague or published)
+5. {% icon save %} **Save ARC**: Save your changes to your machine
 6. **Explorer**: Open the local ARC folder on your computer
 7. **Commit**: prepare your ARC changes for sync to DataHUB
 8. **DataHUB sync**: push your comitted changes to DataHUB
@@ -280,8 +278,8 @@ We will start by adding some basic data about our ARC. We do this in the investi
 >   - For this tutorial you can add any text here
 >
 > 4. **Add an ARC Contact** (you)
->    - Click on the **+ (plus) icon** under Contacts
->    - Click on the **⌄ (dropdown) icon** on the right of the contact to expand it
+>    - Click on the **{% icon plus %} (plus) icon** under Contacts
+>    - Click on the **{% icon dropdown %} (dropdown) icon** on the right of the contact to expand it
 >    - Fill in at least your First name, Last name, and email.
 >    - **Tip:** if you have an [ORCiD](https://orcid.org) ID, fill that in and hit "Search" to autofill these fields
 >
@@ -347,7 +345,7 @@ Since we have just completed our first unit of work (initialized our ARC and add
 >    - There will be a confirmation screen like the one below
 >    - Click the **Ok** button
 >
->    ![](images/arcitect-commit-confirmation.png)
+>    ![Screenshot of the commit confirmation dialogue window](images/arcitect-commit-confirmation.png)
 >
 > 7. Click on **DataHUB Sync** in the menu
 >
@@ -358,7 +356,7 @@ Since we have just completed our first unit of work (initialized our ARC and add
 >    - you can keep all the default settings
 >    - Click **Add**
 >
->    ![](images/arcitect-add-remote.png)
+>    ![screenshot of the remote adding dialogue window](images/arcitect-add-remote.png)
 >
 > 9. Click **Push** to sync from your computer to DataHUB
 >    - **Pull** will do the reverse, it will 'pull' in changes from DataHUB into your local copy of the ARC,
@@ -413,13 +411,13 @@ Let's create our study now.
 
 > <hands-on-title>Create an ARC study</hands-on-title>
 >
-> 1. Click on the **+ (plus) icon** next to the studies folder
+> 1. Click on the **{% icon plus %} (plus) icon** next to the studies folder
 > 2. Provide a study identifier, e.g. `talinum_drought`
 >    ![screenshot of the study creation dialogue window](images/arcitect-new-study.png)
-> 3. Click **New Study** button to confirm
-> 4. Expand the new study folder that was created in your ARC
+> 3. Click **{% icon plus %} New Study** button to confirm
+> 4. **Expand** the new study folder that was created in your ARC
 >    - you should see the protocols and resources folders created
->      ![screenshot of the ARC structure after adding the new study](images/arcitect_new_study_files.png)
+>      ![screenshot of the ARC structure after adding the new study](images/arcitect-new-study-files.png)
 {: .hands_on}
 
 As we did for the investigation, we can also add some basic study information
@@ -461,13 +459,65 @@ Since we have once again completed a unit of work, let's save and sync our ARC a
 
 ### Create an assay
 
-Next, we will create our 2 assays
+Next, we will create our 2 assays. Recall that we performed two measurements/assays, RNA sequencing, and metabolomics.
+
+> <hands-on-title>Create the RNA-seq assay</hands-on-title>
+>
+> 1. Click on the **{% icon plus %} (plus) icon** next to the assays folder
+> 2. Give your assay a name, e.g. `rnaseq`
+> 3. In **measurement type** field, choose `mRNA Sequencing`
+>    - this field is **ontology based**
+>    - as soon as you start typing, suggetions for known terms will pop up
+>    - Notice the TSR and TAN fields are automatically filled in once you select a term. These fields help make your ARC machine readable.
+>
+> 4. Similarly, set the  **Technology Type** to `Next-generation Sequencing`
+>
+>    > <question-title></question-title>
+>    > Look through our demo data, can you find out which sequencing machine was used?
+>    > > <solution-title></solution-title>
+>    > > In the example data, we've got a **methods** folder where we've stored notes on our assays,
+>    > > In the file called **illumina_libraries** we see that the sequencer we used was a `Illumina HiSeq 2000`
+>    > {: .solution}
+>    {: .question}
+>
+> 5. Under **Technology platform**, fill in `Illumina HiSeq 2000`
+>
+>    ![screenshot of assay metadata filled](images/arcitect-assay.png)
+>
+{: .hands_on}
+
+
+Awesome, now let's repeat the process for our metabolomics assay.
+
+> <hands-on-title>Save & Sync</hands-on-title>
+>
+> 1. Create a new assay called `metabolomics`
+> 2. Under **measurement type** choose `Gas Chromatography Mass Spectrometry`
+> 3. We can leave the Technology type/platform fields empty for now
+>
+>   ![screenshot of metabolomics assay](images/arcitect-assay2.png)
+{: .hands_on}
+
+
+And once again, let's save our ARC and sync it to DataHUB.
+
+> <hands-on-title>Save & Sync</hands-on-title>
+>
+> 1. Save your ARC locally
+>    - **Save ARC** button in menu
+> 2. Sync your ARC to DataHUB
+>    - **DataHub Sync** button in menu
+>    - Commit all changed files
+>    - Provide a good commit message (e.g. `added rnaseq and metabolomics assays`)
+{: .hands_on}
 
 
 
 ## Adding files to your ARC
 
-add example files to various folders (protocols, assays datasets, workflows, etc?)
+As our next step, let's add the files we have to our ARC.
+
+
 
 
 
