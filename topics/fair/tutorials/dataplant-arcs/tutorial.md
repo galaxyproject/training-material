@@ -62,7 +62,7 @@ TODO: bit of background/intro about DataPLANT, ARCs etc
 {: .agenda}
 
 
-## Get Set up for the tutorial
+# Getting set up for the tutorial
 
 For this tutorial you need three things:
  1. An account on [DataHUB](https://git.nfdi4plants.org)
@@ -71,7 +71,7 @@ For this tutorial you need three things:
 
 Below we will walk you through each of these 3 setup steps.
 
-### Create a DataHUB account
+## Create a DataHUB account
 
 DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collaboratively to create your ARC, and once you are ready to publish your ARC, you can do this from here as well.
 
@@ -84,7 +84,7 @@ DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collabora
 {: .hands_on}
 
 
-### Download demo data
+## Download demo data
 
 In this tutorial we will create an ARC for an example research data. In this example investigation we grew Talinum plants under
 drought conditions, with watered plants as control. Under these conditions the plants switch their type of photosynthesis
@@ -110,7 +110,7 @@ drought conditions, with watered plants as control. Under these conditions the p
 {: .hands_on}
 
 
-### Install ARCitect
+## Install ARCitect
 
 Now we will install the ARCitect tool. This tool will help you create and fill your ARC.
 
@@ -139,12 +139,12 @@ Now we will install the ARCitect tool. This tool will help you create and fill y
 {: .hands_on}
 
 
-## ARCitect: Initialize your ARC structure
+# ARCitect: Initialize your ARC structure
 
 Now that you have everything set up for the course, we can start creating our ARC. First we will organize our example data into the ARC structure, then we will add structured metadata describing our experiments and data.
 
 
-### ISA model
+## The ISA data model
 
 ARCs build on the [ISA Abstract Model](https://isa-specs.readthedocs.io/en/latest/isamodel.html)
 for metadata annotation.
@@ -171,11 +171,11 @@ Your ARC has one isa.investigation.xlsx workbook at its root, where metadata abo
 {: .comment}
 
 
-### The ARCitect interface
+## The ARCitect interface
 
 The ARCitect window consists of 4 main parts; on the left is the menu panel, next to it is a panel displaying the ARC folder structure, then the main panel where we will configure our ARC, and on the righ is (optionally) a help panel.
 
-![](images/ARCitect-GUI.png "Overview of ARCitect interface. A) menu panel, B) ARC folder structure, C) Main panel, D) Help panel (off by default).")
+![Screenshot of the ARCitect graphical user interface](images/ARCitect-GUI.png "Overview of ARCitect interface. A) menu panel, B) ARC folder structure, C) Main panel, D) Help panel (off by default).")
 
 Let's have a closer look at the menu panel:
 
@@ -197,7 +197,7 @@ This menu bar allows you to:
 
 
 
-### Creating a new ARC
+## Creating a new ARC
 
 Let's start by creating a new ARC.
 
@@ -218,7 +218,7 @@ Let's start by creating a new ARC.
 >    {: .comment}
 >
 > 2. If all went well, you should see the folder structure that was created for your ARC:
->    ![](images/new-arc.png)
+>    ![screenshot of the ARC folder panel after initializing our ARC](images/new-arc.png)
 >
 > 3. Click on the **Explorer** button in the menu to see the files created on your machine
 >
@@ -253,7 +253,7 @@ my-arc
 ```
 
 
-### Add investigation-level metadata
+## Add investigation-level metadata
 
 We will start by adding some basic data about our ARC. We do this in the investigation-level metadata.
 
@@ -290,7 +290,7 @@ We will start by adding some basic data about our ARC. We do this in the investi
 {: .hands_on}
 
 
-### Saving your ARC
+## Saving your ARC
 
 It is a good idea to frequently save your work. There are 2 levels of saving your ARC; you can:
 1. Save it locally (to your computer)
@@ -375,9 +375,9 @@ Since we have just completed our first unit of work (initialized our ARC and add
 Congrats! You have initialized, saved, and synced your ARC! Now let's continue with the good part, actually filling your ARC.
 
 
-## Structure your data in the ARC
+# Structure your data in the ARC
 
-### Think about your data
+## Think about your data
 
 Next we will divide our research into studies and assays. As a rule of thumb, create a study for every research question, and an assay for every measurement you performed (e.g. sequencing, mass-spec, imaging). An investigation can have one study, or several. A study can have one or more assays, and each assay can be associated with one or more studies.
 
@@ -405,7 +405,7 @@ Next we will divide our research into studies and assays. As a rule of thumb, cr
 > {: .question}
 {: .hands_on}
 
-### Create a study
+## Create a study
 
 Let's create our study now.
 
@@ -457,7 +457,7 @@ Since we have once again completed a unit of work, let's save and sync our ARC a
 {: .hands_on}
 
 
-### Create an assay
+## Create an assay
 
 Next, we will create our 2 assays. Recall that we performed two measurements/assays, RNA sequencing, and metabolomics.
 
@@ -489,7 +489,7 @@ Next, we will create our 2 assays. Recall that we performed two measurements/ass
 
 Awesome, now let's repeat the process for our metabolomics assay.
 
-> <hands-on-title>Save & Sync</hands-on-title>
+> <hands-on-title>Create the metabolomics assay</hands-on-title>
 >
 > 1. Create a new assay called `metabolomics`
 > 2. Under **measurement type** choose `Gas Chromatography Mass Spectrometry`
@@ -513,10 +513,11 @@ And once again, let's save our ARC and sync it to DataHUB.
 
 
 
-## Adding files to your ARC
+# Adding files to your ARC
 
 As our next step, let's add the files we have in our demo folder to our ARC.
 
+## Add protocol documents
 
 > <hands-on-title>Adding protocols</hands-on-title>
 >
@@ -562,6 +563,8 @@ As our next step, let's add the files we have in our demo folder to our ARC.
 
 Note that adding files via ARCitect import option will create a copy of the file, rather than moving it, so if you have large data files you might want to move the files via the explorer option.
 
+## Add assay files
+
 Next, let's add the RNA-seq data we have to the ARC structure.
 
 > <hands-on-title>Add RNA-seq data</hands-on-title>
@@ -604,40 +607,357 @@ Congrats! you have added data to your ARC! As always, let's make sure to save & 
 {: .hands_on}
 
 
-## Add your experimental metadata (SWATE)
+# Add your experimental metadata (SWATE)
 
 Now that we have all our data in the ARC, we need to add metadata about or research in a structured way.
-We already put a lot of information about our samples and experiments and assays in the protocols folders,
-but these are just free-text notes; the information is not structured yet.
+We already put a lot of information about our samples and experiments in the protocols folders,
+but these are just free-text notes, like we would put in a methods section of a paper, or in our lab notebook.
+The information is there but it is not **structured** yet.
 
-The protocols folder is a create place
+In this section, we will show you how you can add structured metadata to your ARC. We do this by using a
+standard format ([isa-tab](https://isa-specs.readthedocs.io/en/latest/isatab.html)), combined with
+ontology-based annotations. We call these **annotation tables**, and these tables with metadata can be created
+directly within the ARCitect tool.
 
-## Publishing your ARC
+> <comment-title>SWATE</comment-title>
+>
+> If you have previously already looked into ARCs, you may remember a tool called SWATE.
+> SWATE helps you create these annotation tables. SWATE has now been integreted into ARCitect
+>
+{: .comment}
 
-### Enabling Invenio testing
+## Add sample information to the study metadata
+
+First, we will add information about our samples (plants) to our study.
+
+We took some notes about our samples in `plant_material.txt` file (now in our protocols folder)
+
+```
+Plant Material and Growth Conditions
+
+Plants:
+  - Species: Talinum fruticosum
+  - Age: 28-d-old
+
+Growth Chamber
+  - 12 h light (30°C, 37% relative humidity)/12 h dark (22°C)
+  - 425 µEinstein
+
+Drought treatment:
+  - no water for 12 days
+  - re-water for 2 days
+
+Sampling:
+  - Leaves: topmost mature unshaded leaves, ca. 3–4.5 cm (see pictures)
+  - shock-frozen in liquid N2
+
+drought samples (CAM)
+  - DB_097
+  - DB_099
+  - DB_103
+
+re-watered samples (C3)
+DB_161
+DB_163
+DB_165
+```
+
+### The ISA-Tab format
+
+We will now take this free-text description of our samples, and turn them into a structured annotation table
+using ARCitect.
+
+At it's core, an annotation table often looks like:
+
+Source Name | .. | .. | Sample Name
+------------|----|----|-----------
+plant 1     | .. | .. | sample1
+plant 1     |    |    | sample2
+plant 2     |    |    | sample3
+...         |    |    | ...
+
+The **Source Name** column and lists the sources (plants) you used in your experiments.
+The final column, **Sample Name** describes the samples derived from the sources (plants).
+Then there can be any number of columns in between describing characteristics of the plants (e.g. species, location, conditions, etc).
+Which columns appear here depends on your experimental setup, and can be chosen by you.
+
+These sample names you provide here can be referenced in other annotation tables in the study, or in assay-level annotation tables.
+ARCitect uses these sample identifiers to put information from different annotation tables together, so make sure you use
+consistent spelling and capitalization.
+
+### Create an annotation table from scratch
+
+There are 2 ways to add annotation tables, you can either:
+1. build them up by hand, choosing the columns ("Building Blocks") yourself.
+2. use a pre-defined template. These templates are either provided by the DataPLANT core team, or by other communities that use ARCs (or you!).
+
+We will show both ways of adding annotation tables in this section of the tutorial.
+
+First, let's add our sample information as an annotation table the manual way. Since this information pertains to the study as a whole,
+not just a single assay, we will add our sample sheet information at the study level.
+
+> <hands-on-title>Initialize smple information annotation table </hands-on-title>
+>
+> 1. Click on your study name in the ARC structure
+>    - This should bring up the study metadata we filled in previously
+> 2. At the bottom of the main panel, click on the **{% icon plus %} (plus) icon**
+>    - the icon is located next to the current tab named *Metadata*
+>
+>    ![screenshot showing the button for adding an annotation table](images/arcitect-annotation-table-add.png)
+>
+>    - You should then see a new tab named **NewTable0** appear
+>
+>    ![screenshot after adding the new annotation table](images/arcitect-annotation-table-new.png)
+>
+> 3. **Rename** the table to **Sample Information**
+>    - by right-clicking on the tab name **NewTable0**
+>    ![screenshot of renaming option](images/arcitect-annotation-table-rename.png)
+>
+> 4. In the center panel, choose **Or start from Scratch!**
+>
+> 5. We fill first add our **Source Name** column
+>    - In the dropdown, select **Input**
+>    - Next select **Source Name**
+>    - Click **Add Column**
+> 6. Next, add an output column **Sample Name**
+>    - Click on **Add building block** icon at the top of the table
+>    - In the dropdown, select **Output**
+>    - Next select **Sample Name**
+>    - Click **Add Column**
+>
+>    ![screenshot of the two added columns](images/arcitect-annotation-table-start.png)
+>
+> 7. Let's add a column for the species as well
+>    - Click on the **Add building block** button
+>    - Change the dropdown to **Characteristic**
+>    - In the search bar next to it, type **Species**
+>    - Select the **NCIT** ontology term
+>
+> 8. The column probably appear on the right
+>    - It is customary to keep the output column on the right
+>    - Right-click on the species column
+>    - Select **Move column**
+>    ![screenshot of the move column option](images/arcitect-annotation-table-move-column.png)
+>    - Change the column to `1`
+>    - Click **Apply** to get a preview of the new order
+>    - Click **Submit** to apply the change
+>    ![screenshot of final move dialogue window](images/annotation-table-move-column2.png)
+>    - You should now have 3 columns, with species column in the middle
+>
+> 9. To add data, we have to **add rows**
+>    - We had 6 samples, so we will add 6 rows
+>    - At the bottom, change the 1 to a 6, and click on the {% icon plus %} (plus) button to add the rows
+>    ![screenshot of the add rows button](images/arcitect-annotation-table-add-rows.png)
+>    - You should now have 6 rows in your table
+>    ![](images/arcitect-annotation-table-withrows.png)
+>
+{: .hands_on}
+
+Now that we have our basic table initialized, let's start adding some data. For our example study, we grew 6 plants
+(we will label them `DB001` to `DB006`). We grew 3 plants in drought conditions, and 3 controls. From our `sample_information.txt`
+file we see that the samples we derived from these plants had IDs DB_097, DB_099, DB_103 (drought/CAM), and DB_161, DB_163, DB_165
+(controls/re-watered/C3). All plants are species *Talinum fruticosum*.
+
+Let's fill all this information in our annotation table.
+
+> <hands-on-title>Fill the annotation table</hands-on-title>
+>
+> 1. Fill the first column (**Source Name**) with our 6 plant names
+>    ```
+>    DB001
+>    DB002
+>    DB003
+>    DB004
+>    DB005
+>    DB006
+>    ```
+>    > <tip-title>Copying a whole column at once </tip-title>
+>    > You can copy the values one by one, but you can also copy the whole column at once.
+>    > - Copy the IDs above
+>    > - In your ARC table, Select the first cell of the *Source Name* column
+>    > - Hold down the shift key
+>    > - Select the last (6th) cell of your column
+>    > - Paste the IDs (`CTRL+V`)
+>    {: .tip}
+>
+> 2. Fill the last column (**Sample Name**) with our 6 sample names
+>    ```
+>    DB_097
+>    DB_099
+>    DB_103
+>    DB_161
+>    DB_163
+>    DB_165
+>    ```
+> 3. Now we will fill in the Species column
+>    - Select the first cell in the Species column
+>    - Start typing the species name `Talinum fruticosum`
+>    - Since this is an ontology column, you will get suggestions as you type.
+>    - In our case, we see NCBI ontology term for our species, please select this value.
+>    ![screenshot of ncbi term in search](images/arcitect-species-search.png)
+>
+> 4. Copy the species value to the enitre column
+>    - Right-click on the species term you just added in the firs row
+>    - Select **Fill column** to apply this term to all 6 rows.
+>    ![screenshot of our table after these steps](images/arcitect-annotation-sample.png)
+{: .hands_on}
+
+This is the basic process of building our annotation table. We can now add more building blocks (columns) as needed,
+for all the information we have about our plants that we wish to describe. In the next section, we will add more columns.
+
+But first, let's have a closer look at our annotation table.
+
+> <comment-title> Why do we call them Building Blocks?</comment-title>
+>
+> 1. Click on the (expand) icon next to the species column name
+>    - You will now see additional hidden columns
+>    - These columns provide information about the ontology term you chose (TSR and TAN)
+>    - There is also a hidden unit column. (For species this column is unused)
+>
+>
+> ![screenshot of the hidden columns](images/arcitect-hidden-columns.png)
+>
+> This is why we use the term **Building Block** instead of **column**; behind the scenes there are actually more columns.
+> We hide these columns in ARCitect, because most of the time these columns are not so interesting to humans, but they are
+> what makes your ARC machine-readable.
+>
+> This machine readability is essential for example for ARC searching tools so that you can perform advanced
+> searches such as *"Find all ARCs with data of Talinum Fruticosum that performed an RNA-seq assay"* and facilitate re-use
+> of data. This will help people find your research, and will help you find data for your next study.
+>
+{: .comment}
+
+
+Let's add some more building blocks for other information we have about our plants.
+Based on our methods document, we know a few more characteristics of our plants:
+
+- Light intensity of 425 µEinstein
+- Plant age of 28 days
+- Watering exposure of 12 days drought (for 3 of the samples) or 12 days drought followed by 2 days rewatering (for the other 3 samples)
+
+Notice that the first two of these characteristics include a value (425, 28) and a unit (µEinstein, days).
+In the next step we will show you how to deal with units in ARCitect
+
+> <hands-on-title></hands-on-title>
+>
+> 1. **Add a new building block** for plant age
+>    - Select **Characteristic** from the dropdown
+>    - Type **Plant Age**
+>    - Select the DPBO term *Plant age*
+>    - In the results, you can always click on the {% icon dropdown %} (dropdown) icon to get more information about the term
+>    ![screenshot of ontology term information](images/arcitect-plant-age.png)
+>
+> 2. Before you add the column to the table, you can also **set the unit** for the column
+>    - Click the button labelled **Unit**
+>    - Search for **Day**
+>    - Find an ontology term with a good description
+>    ![screenshot of window adding building block with unit selected](images/arcitect-building-block-with-unit.png)
+>    - Click **Add Column**
+>    - Notice that the column is now already filled with the unit
+>
+> 3. The column will appear to the right of the column you were last on
+>    - If you want your column in a different place, move it now in the same way we did before (right click the column)
+>
+> 4. Add the value **28** to the age column for all 6 samples
+>    - You can see that your chosen unit is automatically added to the value you provide in the cell
+>    - remember, you can fill in one cell, then use the "Fill Column" option from the right-click menu to apply the same value to all rows.
+>
+>    ![screenshot of our annotation table after adding plant age column](images/arcitect-annotation-table-age-added.png)
+{: .hands-on-title}
+
+
+<comment-title>Characteristic vs Factor vs Parameter vs Component</comment-title>
+>
+> When adding building blocks, you may have noticed that a distinction is made between *characteristic*, *parameter*,
+> *factor* and *component*. But when to use which?
+>
+> Have a look at this [Annotation Principles Guide](https://nfdi4plants.github.io/nfdi4plants.knowledgebase/docs/guides/isa_AnnotationPrinciples.html)
+> For a more precise description, but in short:
+>
+> - **Characteristics columns** describe inherent properties of the source material, e.g., a certain strain or ecotype,
+>   but also the temperature an organism was exposed to.
+> - **Factor columns** describe independent variables that determine the specific output of your experiment when process and analysis were identical.
+>   Most of the time, Factors are the most important building blocks for downstream computational analysis.
+> - **Parameter columns** describe steps in your experimental workflow, e.g., the temperature or extraction buffer used for your assay.
+>   Multiple Parameter columns form a protocol.
+> - **Component columns** are used to list anything physical of a protocol, e.g. instrument names, software names, or reagents names.
+>
+{: .comment}
+
+Keeping this in mind, let's add more building blocks
+
+> <hands-on-title>Add more buiding blocks</hands-on-title>
+>
+> 1. Add a building block for **light intensity exposure** (PECO:0007224)
+>    - Add it as a **Parameter column**
+>    - Set the unit to *microeinstein per square meter per second* (UO:0000160)
+>    - Fill the column with a value of 425 for all samples
+>
+> 2. Add a building block for **Watering exposure** (PECO:0007383)
+>    - Add it as **Factor column**
+>    - set the value to "12 days drought" for the drought samples (`DB_097,DB_099,DB_103`)
+>    - set the value to "12 days drought + 2 days rewatered"* for the other 3 samples
+>
+>    ![screenshot of the annotation table at this point](images/arcitect-annotation-table-complete.png)
+>
+{: .hands-on}
+
+As a final step, we can associate our protocol document (`plant_material.txt`) with our annotation table.
+
+> <hands-on-title>Add more buiding blocks</hands-on-title>
+>
+> 1. Add a new building block
+>    - Add it as a **ProtocolREF** column (under *More*)
+>    - Click **Add column**
+> 2. For the value, set the file name `plant_material.txt` for all columns
+>    - ARCitect will know to look in the protocols folder for this file
+>    ![screenshot of the ProtocolREF column](images/arcitect-annotation-table-protocolref.png)
+{: .hands_on}
+
+Well done! You have added your first annotation table! You can add as many columns as you need in your annotation tables. The aim is always to capture as much information as you can in this way.
+
+While we succeeded in creating our annotation table, it was quite a bit of work adding in our building blocks one by one. Luckily, there are a lot of templates available that can make your life easier! In the next section, we will show you how to do this.
+
+## Add assay annotation
+
+In the previous section, we built our annotation from scratch, adding one building block at a time manually.
+It would be a bit time consuming to repeat this for every ARC, and therefore DataPLANT has also created a way
+to share templates for annotation tables. For example, the metadata for RNA sequencing will be very similar for
+everybody. So it is possible to load an RNA-seq annotation table template as a starting point. You will still be
+able to add and remove building blocks after you load the template if needed.
+
+### Create RNA-Seq annotation table from template
+
+
+
+
+# Publishing your ARC
+
+## Enabling Invenio testing
 
 how to enable the invenio testing, how to troubleshoot errors
 
 
-### Publishing Process
+## Publishing Process
 
 Once all of the test pass, you can start the submission process for publishing your ARC
 
+## Where is your ARC published to?
+
+ARChive: https://archive.nfdi4plants.org/
+isasearch: https://arcregistry.nfdi4plants.org/isasearc://arcregistry.nfdi4plants.org/isasearch
+
+# Next steps on your ARCification journey
+
+- project annotation templates for consistency?
+
+- link to knowledgebase
+- link to quickstart videos?
+- link to support channels
+- data stewards circle?
 
 
-## Further Reading
-
-Link to knowledgebase
-
-Link to quickstart videos https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/guides/arcitect_QuickStart_Videos.html
-
-Link to follow up tutorials
- - Tutorial for CWL/Workflows part of the ARC?
- - DataHUb tutorial (sharing, groups, etc?)
- - Creating of metadata templates?
-
-
-
+# Conclusions
 
 
 
