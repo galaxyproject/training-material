@@ -143,8 +143,16 @@ The feature Response is a categorical target variable indicating whether patient
 >
 {: .hands_on}
 
-# PyCaret MOdel Comparison
+# PyCaret Model Comparison
 
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [PyCaret Model Comparison](https://toolshed.g2.bx.psu.edu/repos/paulo_lyra_jr/pycaret_model_comparison/PyCaret_Model_Comparison/2024.3.3.2+0) %} with the following parameters:
+>    - {% icon param-file %} *"Select the dataset containing model configuration"*: `config.yaml`
+>    - {% icon param-file %} *"Input dataset"*: `mnist_dataset.csv`
+>    - {% icon param-file %} *"Raw data"*: `mnist_images.zip`
+> Run the tool 
+{: .hands_on}
 
 # Conclusion
 
