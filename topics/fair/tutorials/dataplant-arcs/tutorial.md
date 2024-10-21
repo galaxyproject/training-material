@@ -662,6 +662,19 @@ DB_163
 DB_165
 ```
 
+> <tip-title> Viewing and editing text documents in ARCitect</tip-title>
+>
+> Text files that we added to our ARC, can also be viewed and edited from within ARCitect
+>
+> 1. Expand the talinum_drought study
+> 2. Expand the protocols folder
+> 3. Click on the `plant_material.txt` file
+>
+>    ![screenshot of markdown editor in ARCitect](images/arcitect-markdown-editor.png)
+> 4. From this screen you can edit the text as needed.
+>    - text files support [Markdown syntax](https://www.markdownguide.org/cheat-sheet/)
+{: .tip}
+
 ### The ISA-Tab format
 
 We will now take this free-text description of our samples, and turn them into a structured annotation table
@@ -838,7 +851,7 @@ Based on our methods document, we know a few more characteristics of our plants:
 Notice that the first two of these characteristics include a value (425, 28) and a unit (µEinstein, days).
 In the next step we will show you how to deal with units in ARCitect
 
-> <hands-on-title></hands-on-title>
+> <hands-on-title>Add building blocks with units</hands-on-title>
 >
 > 1. **Add a new building block** for plant age
 >    - Select **Characteristic** from the dropdown
@@ -851,7 +864,7 @@ In the next step we will show you how to deal with units in ARCitect
 >    - Click the button labelled **Unit**
 >    - Search for **Day**
 >    - Find an ontology term with a good description
->    ![screenshot of window adding building block with unit selected](images/arcitect-building-block-with-unit.png)
+>    ![screenshot of window adding building block with unit selected](images/arcitect-building-block-add-with-unit.png)
 >    - Click **Add Column**
 >    - Notice that the column is now already filled with the unit
 >
@@ -863,10 +876,10 @@ In the next step we will show you how to deal with units in ARCitect
 >    - remember, you can fill in one cell, then use the "Fill Column" option from the right-click menu to apply the same value to all rows.
 >
 >    ![screenshot of our annotation table after adding plant age column](images/arcitect-annotation-table-age-added.png)
-{: .hands-on-title}
+{: .hands_on}
 
 
-<comment-title>Characteristic vs Factor vs Parameter vs Component</comment-title>
+> <comment-title>Characteristic vs Factor vs Parameter vs Component</comment-title>
 >
 > When adding building blocks, you may have noticed that a distinction is made between *characteristic*, *parameter*,
 > *factor* and *component*. But when to use which?
@@ -920,15 +933,18 @@ While we succeeded in creating our annotation table, it was quite a bit of work 
 
 ## Add assay annotation
 
-In the previous section, we built our annotation from scratch, adding one building block at a time manually.
-It would be a bit time consuming to repeat this for every ARC, and therefore DataPLANT has also created a way
-to share templates for annotation tables. For example, the metadata for RNA sequencing will be very similar for
-everybody. So it is possible to load an RNA-seq annotation table template as a starting point. You will still be
-able to add and remove building blocks after you load the template if needed.
+Building annotation tables from scratch can be a bit time consuming, especially if we have to repeat it for every ARC we create
+Therefore, DataPLANT has also a way to share templates for annotation tables. For example, the metadata for RNA sequencing will be very similar for
+everybody. So instead of creating this annoation table from scratch, we can load a pre-existing template. This is just a starting point, we can still
+add and remove building blocks as needed, but it will save us a lot of time.
 
 ### Create RNA-Seq annotation table from template
 
-
+> <hands-on-title></hands-on-title>
+>
+> 1. Click on the RNA-seq assay
+> 2. Add a new annotation table
+{: .hands_on}
 
 
 # Publishing your ARC
