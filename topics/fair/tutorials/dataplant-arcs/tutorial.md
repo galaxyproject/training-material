@@ -515,16 +515,102 @@ And once again, let's save our ARC and sync it to DataHUB.
 
 ## Adding files to your ARC
 
-As our next step, let's add the files we have to our ARC.
+As our next step, let's add the files we have in our demo folder to our ARC.
+
+
+> <hands-on-title>Adding protocols</hands-on-title>
+>
+> 1. Open the folder with demo data on your computer
+> 2. Look through the **methods** folder
+>    - This contains files with notes about methods we used in our research
+>    - In our ARC, these usually go in **protocols** folders
+>    - Studies and assays both have protocols folders
+>
+>    > <question-title></question-title>
+>    >
+>    > Where should each of the 4 files in the methods folder go in our ARC?
+>    >
+>    > > <solution-title></solution-title>
+>    > > - `plant_material.txt`: contains a general sample sheet, and should go in the study-level protocol folder
+>    > > - `RNA_extraction.txt` and `Illumina_libraries.txt` are specific to the RNA sequencing assay, so should go in the protocols folder for the rnaseq assay
+>    > > - `metabolite_extraction.txt` is specific to our metabolomics assay, so should go in the metabolomics protocol folder
+>    > {: .solution}
+>    {: .question}
+>
+> 3. There are two ways to add files to your ARC, we will do both now, in the future you can choose whichever option you prefer
+>
+> 4. **Adding files via ARCitect**
+>    - Expand the `studies` folder
+>    - Expand the `talinum_drought` folder
+>    - Right-click on the `protocols` folder
+>    - Choose `Import files` option
+>    - Browse to the demo data and choose the `methods/plant_material.txt` file
+>
+>    ![screenshot of menu to add documents](images/arcitect-import-files.png)
+>
+> 5. **Adding files via file explorer**
+>    - Click on `Explorer` in the left-hand menu
+>    - Open the `assays/metabolomics/protocols` folder of your ARC
+>    - In another window, open the demo data folder
+>    - Copy or drag the `metabolite_extraction.txt` file from the demo data folder to your ARC folder
+>
+> 6. **Add the two remaining protocol files** to the ARC in your preferred way
+>    - Files `illumina_libraries.txt` and `RNA_extraction.txt`
+>    - Both should go to `assays/rnaseq/protocols/` folder in your ARC
+>
+{: .hands_on}
+
+Note that adding files via ARCitect import option will create a copy of the file, rather than moving it, so if you have large data files you might want to move the files via the explorer option.
+
+Next, let's add the RNA-seq data we have to the ARC structure.
+
+> <hands-on-title>Add RNA-seq data</hands-on-title>
+>
+> 1. Look in the `rnaseq_data` folder of the demo data
+>    - Files with the `.fastq.gz` suffix are raw sequencing files
+>    - Raw data goes in the `assays/rnaseq/dataset/` folder
+>    - `NGS_samplesheet.xlsx` can go into the assay's protocol folder
+>
+> 2. Move the files to the ARC in your preferred way
+>
+>    ![screenshot of arc explorer panel after adding files](images/arcitect-assay-files-rnaseq.png)
+>
+{: .hands_on}
+
+Finally, let's do the same for our metabolomics data
+
+> <hands-on-title>Add Metabolomics data</hands-on-title>
+>
+> 1. Look in the `metabolomics_data` folder of the demo data
+>    - Folders with the `.D` suffix are raw data files
+>    - The rest of the files can go to the protocols folder
+>
+> 2. Move all the files to the ARC metabolomics assay folder
+>    - Note that if you move them via ARCitect, you should use the **Import Directories** option for the raw data folders
+>
+>    ![screenshot of arcitect files structure after adding metabolomics files](images/arcitect-assay-files-metabolomics.png)
+>
+{: .hands_on}
 
 
 
+Congrats! you have added data to your ARC! As always, let's make sure to save & sync our work before we continue.
 
+> <hands-on-title>Save & Sync</hands-on-title>
+>
+> 1. Save your ARC locally
+> 2. Sync your ARC to DataHUB
+>    - Provide a good commit message (e.g. `added protocols and raw data files`)
+{: .hands_on}
 
-- end: save & sync your ARC
 
 ## Add your experimental metadata (SWATE)
 
+Now that we have all our data in the ARC, we need to add metadata about or research in a structured way.
+We already put a lot of information about our samples and experiments and assays in the protocols folders,
+but these are just free-text notes; the information is not structured yet.
+
+The protocols folder is a create place
 
 ## Publishing your ARC
 
