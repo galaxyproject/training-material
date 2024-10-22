@@ -1001,16 +1001,16 @@ As always, let's save and sync our ARC
 >    - Provide a good commit message
 {: .hands_on}
 
-## Adding computational workflows to your ARC
+# Adding computational workflows to your ARC
 
 We have now added raw data, protocols, and annotation tables to our ARC. We can publish this *Data ARC* as-is,
-but ARCs can also support addition of analysis workflows.
+but ARCs can also support addition of analysis workflows and results.
 
-ARCs support [CWL](https://www.commonwl.org/) (Common Workflow Language) workflows, but this is out of scope for this tutorial.
+ARCs offer integrations for [CWL](https://www.commonwl.org/) (Common Workflow Language) workflows, but this is out of scope for this tutorial.
 You can read more about adding CWL workflows to your ARC in the [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/guides/ComputationalWorkflows/cwl_examples.html)
 
 If you do not have CWL workflows, you can put any other scripts or code you used in the `workflows` folder, and
-any analysis results in the `runs` folder. This will not be structured, but better than nothing.
+any analysis results in the `runs` folder. This will not be structured or statndardized, but better than nothing.
 
 # Publishing your ARC
 
