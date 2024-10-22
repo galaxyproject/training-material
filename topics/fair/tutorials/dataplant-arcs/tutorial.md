@@ -53,7 +53,7 @@ In this tutorial we will guide you through the process of creating your ARC (Ann
 ARCs are a part of your Research Data Management (RDM) strategy, and are aimed specifically at plant research
 data. ARCs are an [RO-crates](https://www.researchobject.org/ro-crate/) implementation developed by
 [DataPLANT (NFDI4Plants)](https://www.nfdi4plants.org/). ARCs allow you to bundle and annotate
-your reseach data in a standardized and [FAIR](https://www.go-fair.org/fair-principles/) (Findable, Accessible,
+your research data in a standardized and [FAIR](https://www.go-fair.org/fair-principles/) (Findable, Accessible,
 Interoperable, Reusable) manner.
 
 ![ARC concept showing bundling of experimental data, computation, and annotations](images/arcs-intro.png)
@@ -146,7 +146,7 @@ Now we will install the ARCitect tool. This tool will help you create and fill y
 {: .hands_on}
 
 
-# ARCitect: Initialize your ARC structure
+# Initialize your ARC structure
 
 Now that you have everything set up for the course, we can start creating our ARC. First we will organize our example data into the ARC structure, then we will add structured metadata describing our experiments and data.
 
