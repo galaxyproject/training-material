@@ -12,7 +12,6 @@ questions:
 - What are ARCs?
 - Why should I create ARCs?
 - How can I create my ARC?
-time_estimation: "2H"
 key_points:
 - Annotated Research Contexts (ARCs) help you structure your research data in a FAIR and standardized way
 - ARCitect is a useful tool to help you create your ARCs
