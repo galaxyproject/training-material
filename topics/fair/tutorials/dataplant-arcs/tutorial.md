@@ -1031,7 +1031,7 @@ By default, the basic ARC validation is enabled in DataHUB
 > 2. On the right of your DataHUB ARC repository, you should see a badge labelled **pipeline**
 >    with either a green *passed* label or a red *failed* label
 >
->    ![example of ARC pipeline badge](images/dataub-pipeline-passed.png)
+>    ![example of ARC pipeline badge](images/datahub-pipeline-passed.png)
 >
 > 3. You can click on this badge to get more information about the tests
 >    - you can also click on the green checkmark or red cross next to your latest commit see validation pipeline details
