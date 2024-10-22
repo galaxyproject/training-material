@@ -56,7 +56,7 @@ data. ARCs are an [RO-crates](https://www.researchobject.org/ro-crate/) implemen
 your reseach data in a standardized and [FAIR](https://www.go-fair.org/fair-principles/) (Findable, Accessible,
 Interoperable, Reusable) manner.
 
-![ARC concept showing bundling of experimental data, computation, and annotations](images/arc-intro.png)
+![ARC concept showing bundling of experimental data, computation, and annotations](images/arcs-intro.png)
 
 
 > <agenda-title></agenda-title>
