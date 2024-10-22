@@ -50,9 +50,14 @@ extra:
 ---
 
 In this tutorial we will guide you through the process of creating your ARC (Annotated Research Context)
+ARCs are a part of your Research Data Management (RDM) strategy, and are aimed specifically at plant research
+data. ARCs are an [RO-crates](https://www.researchobject.org/ro-crate/) implementation developed by
+[DataPLANT (NFDI4Plants)](https://www.nfdi4plants.org/). ARCs allow you to bundle and annotate
+your reseach data in a standardized and [FAIR](https://www.go-fair.org/fair-principles/) (Findable, Accessible,
+Interoperable, Reusable) manner.
 
+![ARC concept showing bundling of experimental data, computation, and annotations](images/arc-intro.png)
 
-TODO: bit of background/intro about DataPLANT, ARCs etc
 
 > <agenda-title></agenda-title>
 >
@@ -996,7 +1001,16 @@ As always, let's save and sync our ARC
 >    - Provide a good commit message
 {: .hands_on}
 
+## Adding computational workflows to your ARC
 
+We have now added raw data, protocols, and annotation tables to our ARC. We can publish this *Data ARC* as-is,
+but ARCs can also support addition of analysis workflows.
+
+ARCs support [CWL](https://www.commonwl.org/) (Common Workflow Language) workflows, but this is out of scope for this tutorial.
+You can read more about adding CWL workflows to your ARC in the [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/guides/ComputationalWorkflows/cwl_examples.html)
+
+If you do not have CWL workflows, you can put any other scripts or code you used in the `workflows` folder, and
+any analysis results in the `runs` folder. This will not be structured, but better than nothing.
 
 # Publishing your ARC
 
@@ -1102,6 +1116,8 @@ You should now know the basics needed to create an ARC for your own data using t
 For support during the process of creating an ARC for your own project(s), have a look at:
 - The [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/).
 - The [DataPLANT helpdesk](https://helpdesk.nfdi4plants.org/?topic=Documentation_KnowledgeBase)
+
+
 
 # Conclusions
 
