@@ -14,8 +14,10 @@ questions:
 - How can I create my ARC?
 time_estimation: "2H"
 key_points:
-- Annotated Research Contexts (ARCs) ..
-- ARCitect is a useful tool to help you create your ARC
+- Annotated Research Contexts (ARCs) help you structure your research data in a FAIR and standardized way
+- ARCitect is a useful tool to help you create your ARCs
+- DataHUB houses ARCs both during development and after publishing
+- ARCs can be published and shared with the global community
 tags:
 - plants
 - fair
@@ -994,33 +996,115 @@ As always, let's save and sync our ARC
 >    - Provide a good commit message
 {: .hands_on}
 
+
+
 # Publishing your ARC
+
+Once you have finished your ARC, you can choose to publish it. It will then become public for anybody to find and re-use.
+Before you can do this, your ARC must pass some basic validation. This process checks if your ARC is in valid ARC format,
+and if any files you reference are really included, etc.
+
+
+## ARC validation
+
+By default, the basic ARC validation is enabled in DataHUB
+
+> <hands-on-title></hands-on-title>
+>
+> 1. Open your ARC repository on DataHUB. Tip: a quick way to get there is
+>    - click on **DataHUB sync** in the ARCitect menu
+>    - click on the **globe icon** to open the DataHUB repository in the browser
+> 2. On the right of your DataHUB ARC repository, you should see a badge labelled **pipeline**
+>    with either a green *passed* label or a red *failed* label
+>
+>    ![example of ARC pipeline badge](images/dataub-pipeline-passed.png)
+>
+> 3. You can click on this badge to get more information about the tests
+>    - you can also click on the green checkmark or red cross next to your latest commit see validation pipeline details
+>    - if your tests are failing, this can give you more information about what is wrong
+>    - if it is green, you usually don't need to look at the test details.
+>    - We will cover testing in more detail in a different tutorial, for now, just know that it exists.
+{: .hands_on}
+
+This test performs some basic checks, but in order to publish our ARC, we need additional validation. This is not
+enabled by default.
 
 ## Enabling Invenio testing
 
-how to enable the invenio testing, how to troubleshoot errors
+Publishing of ARCs uses [Invenio](https://inveniosoftware.org/). Before you can publish your ARC,
+we must enable the *Invenio validation package*.
+
+> <hands-on-title> Invenio Validation </hands-on-title>
+>
+> 1. Click on **Validation** in the ARCitect menu panel
+> 2. Under **Custom Validation Packages**, select **Invenio**
+>    ![Screenshot of menu adding invenio](images/arcitect-validation-invenio-add.png)
+> 3. Click **Save**
+> 4. Sync the change to DataHUB
+>    - Remember to **commit** first
+> 5. Open your ARC repository on DataHUB again
+>    - You should see additional badges
+>    - Note that it may take a few minutes for these badges to show up
+>    ![screenshot of invenio badges on DataHUB](images/datahub-validation-invenio-badges.png)
+{: .hands_on}
 
 
 ## Publishing Process
 
-Once all of the test pass, you can start the submission process for publishing your ARC
+Once all of the test pass, you can start the submission process for publishing your ARC.
+
+> <hands-on-title></hands-on-title>
+>
+> 1. Open your ARC repository on DataHUB
+> 2. Click on the invenio testing badge
+>    - This can only be done if the badge is green
+> 3. This will open a screen where you can preview the basic ARC information
+>    ![Screenshot of invenio publishing page](images/datahub-invenio-publish.png)
+> 4. We will not publish this training ARC, but for your real ARC you would now check the boxes to agree to the terms, and then hit the **Publish** button.
+{: .hands_on}
+
 
 ## Where is your ARC published to?
 
-ARChive: https://archive.nfdi4plants.org/
-isasearch: https://arcregistry.nfdi4plants.org/isasearc://arcregistry.nfdi4plants.org/isasearch
+After publishing, your ARC will be public, and automatically included in several locations.
+
+### ARChive
+
+The DataPLANT [ARChive](https://archive.nfdi4plants.org/) will list all published ARCs
+
+For example [this ARC](https://archive.nfdi4plants.org/records/9e5jx-75d83)
+
+![Example of a published ARC on ARChive](images/archive-example.png)
+
+You see this looks a bit like a publication. Notice the DOI on the right. Every ARC will receive a DOI.
+You can use this DOI in your publication to point readers to your ARC.
+
+> <comment-title> Updating a published ARC </comment-title>
+> Note that you can still update your ARC after publishing, and you can publish a newer version. You will
+> receive a new DOI for the updated ARC, and the original version of your ARC will remain accessible
+> with the original DOI.
+{: .comment}
+
+### ARC Registry
+
+The [ARC registry](https://arcregistry.nfdi4plants.org/isasearch) is another place where your ARC will be listed.
+The ARC registry can search across different institution's DataHUBs, and supports advanced searching of ARC metadata.
+
+![screenshot of ARC registry homepage](images/arcregistry.png)
+
+Many of these ARC searching and aggregation portals are still under active development, and may change/improve a lot in
+the coming years.
 
 # Next steps on your ARCification journey
 
-- project annotation templates for consistency?
+You should now know the basics needed to create an ARC for your own data using the ARCitect tool.
 
-- link to knowledgebase
-- link to quickstart videos?
-- link to support channels
-- data stewards circle?
-
+For support during the process of creating an ARC for your own project(s), have a look at:
+- The [DataPLANT knowledgebase](https://nfdi4plants.org/nfdi4plants.knowledgebase/).
+- The [DataPLANT helpdesk](https://helpdesk.nfdi4plants.org/?topic=Documentation_KnowledgeBase)
 
 # Conclusions
 
-
+Congrats! You have now created your first ARC using ARCitect, you synced it to DataHUB, and saw the procedure for publishing
+your ARC.
 
