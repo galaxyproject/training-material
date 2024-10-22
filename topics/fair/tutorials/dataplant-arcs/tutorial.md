@@ -88,7 +88,7 @@ DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collabora
 
 In this tutorial we will create an ARC for an example research data. In this example investigation we grew Talinum plants under
 drought conditions, with watered plants as control. Under these conditions the plants switch their type of photosynthesis
-(water: C3, drought: CAM). To study this change, we profiled gene expression (Transciptomics) using RNASeq, and metabolites
+(water: C3, drought: CAM). To study this change, we profiled gene expression (Transcriptomics) using RNASeq, and metabolites
 (Metabolomics) via GC-MS (Gas-Chromatography Mass Spectrometry)
 
 
@@ -609,7 +609,7 @@ Congrats! you have added data to your ARC! As always, let's make sure to save & 
 
 # Add your experimental metadata (SWATE)
 
-Now that we have all our data in the ARC, we need to add metadata about or research in a structured way.
+Now that we have all our data in the ARC, we need to add metadata about our research in a structured way.
 We already put a lot of information about our samples and experiments in the protocols folders,
 but these are just free-text notes, like we would put in a methods section of a paper, or in our lab notebook.
 The information is there but it is not **structured** yet.
@@ -754,7 +754,7 @@ not just a single assay, we will add our sample sheet information at the study l
 >    - Change the column to `1`
 >    - Click **Apply** to get a preview of the new order
 >    - Click **Submit** to apply the change
->    ![screenshot of final move dialogue window](images/annotation-table-move-column2.png)
+>    ![screenshot of final move dialogue window](images/arcitect-annotation-table-move-column2.png)
 >    - You should now have 3 columns, with species column in the middle
 >
 > 9. To add data, we have to **add rows**
@@ -762,7 +762,7 @@ not just a single assay, we will add our sample sheet information at the study l
 >    - At the bottom, change the 1 to a 6, and click on the {% icon plus %} (plus) button to add the rows
 >    ![screenshot of the add rows button](images/arcitect-annotation-table-add-rows.png)
 >    - You should now have 6 rows in your table
->    ![](images/arcitect-annotation-table-withrows.png)
+>    ![annotation table with rows added](images/arcitect-annotation-table-withrows.png)
 >
 {: .hands_on}
 
@@ -938,14 +938,61 @@ Therefore, DataPLANT has also a way to share templates for annotation tables. Fo
 everybody. So instead of creating this annoation table from scratch, we can load a pre-existing template. This is just a starting point, we can still
 add and remove building blocks as needed, but it will save us a lot of time.
 
-### Create RNA-Seq annotation table from template
+### Create RNA-Seq assay annotation tables from template
 
 > <hands-on-title></hands-on-title>
 >
-> 1. Click on the RNA-seq assay
+> 1. Click on the RNA-seq assay in your ARC
 > 2. Add a new annotation table
+>    - {% icon plus %} (plus) icon at the bottom
+> 3. **Rename** the table to a better name
+>    - e.g. "RNA extraction"
+> 4. Choose **Start from an existing template!** in the center of the screen
+> 5. Search for **RNA**
+>    - The results will show a few options from the official DataPLANT templates
+>    - You can also search other community templates by changing the **Select community** dropdown to **All** (or a specific community)
+>    ![template search results for term RNA](images/arcitect-template-rnaseq.png)
+>
+> 6. Choose the **RNASeq extraction** template
+>    - Click **Select** to confirm
+>    - This will give you a preview of the building blocks in the template
+>    - Click **Add template**
+> 7. Add 6 rows to the table
+>    ![empty template file after importing](images/arcitect-template-rna-extraction.png)
+> 8. Try to add RNA extraction information to this table
+>    - Open the `RNA_extraction.txt` file in your protocols folder to view the information to add.
+>
+> > <question-title></question-title>
+> >
+> > 1. How does your final annotation table look?
+> >
+> > > <solution-title>Some Hints</solution-title>
+> > > 1. The **biosource amount** column does not have a unit set yet. To do so now, please:
+> > >    - Search for *milligram* in the column
+> > >    - Right-click on the term, and select `as unit cell`.
+> > >    - Choose "Fill column" from the right-click menu to apply this to all rows
+> > > 2. Set the unit for **buffer volume** column to **microliter** in the same way
+> > {: .solution}
+> >
+> > > <solution-title> Full solution </solution-title>
+> > > Below are screenshots of a filled annotation table. Note that there are often multiple ways to fill an ARC.
+> > >
+> > > ![first half of the final annotation table](images/arcitect-annotation-table-rna-extraction-solution-part1.png)
+> > > ![second half of the final annotation table](images/arcitect-annotation-table-rna-extraction-solution-part2.png)
+> > >
+> > {: .solution}
+> {: .question}
 {: .hands_on}
 
+
+As always, let's save and sync our ARC
+
+> <hands-on-title>Save & Sync</hands-on-title>
+>
+> 1. Save your ARC locally
+> 2. Sync your ARC to DataHUB
+>    - Provide a good commit message
+{: .hands_on}
 
 # Publishing your ARC
 
