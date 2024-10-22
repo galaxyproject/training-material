@@ -1,0 +1,2960 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: DataPLANT ARCs / DataPLANT ARCs / FAIR Data, Workflows, and Research</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@9b9a7ff7dc70170fb270887bb89a6bb9fc9a141c",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="DataPLANT ARCs">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-22 15:34:07 +0000">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Dominik Brilhaus">
+<meta name="DC.creator" content="Sabrina Zander">
+<meta name="DC.creator" content="Cristina Martins Rodrigues">
+<meta name="DC.creator" content="Kevin Frey">
+<meta name="DC.creator" content="Martin Kuhl">
+<meta name="DC.creator" content="Stella Eggels"><meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="FAIR Data, Workflows, and Research / DataPLANT ARCs / Hands-on: DataPLANT ARCs">
+        <meta property="og:description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/fair/tutorials/dataplant-arcs/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "DataPLANT ARCs",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-10-22 15:34:07 +0000",
+  "datePublished": "2024-10-22 15:22:19 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+      "name": "DataPLANT (NFDI4Plants)",
+      "description": "An organization supporting the Galaxy Training Network",
+      "url": "https://nfdi4plants.org"
+    }
+  ],
+  "funding": [
+
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "abstract": "In this tutorial we will guide you through the process of creating your ARC (Annotated Research Context)",
+  "learningResourceType": "e-learning",
+  "name": "DataPLANT ARCs",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html",
+  "version": 2,
+  "timeRequired": "PT2H",
+  "keywords": [
+    "FAIR Data, Workflows, and Research",
+    "plants",
+    "fair",
+    "data stewardship"
+  ],
+  "description": "## Abstract\n\nIn this tutorial we will guide you through the process of creating your ARC (Annotated Research Context)\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are ARCs?\n - Why should I create ARCs?\n - How can I create my ARC?\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/fair-intro/tutorial.html",
+      "name": "FAIR in a nutshell",
+      "description": "Hands-on for 'FAIR in a nutshell' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/",
+      "name": "Dominik Brilhaus",
+      "image": "https://avatars.githubusercontent.com/Brilator",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9021-3197",
+      "orcid": "https://orcid.org/0000-0001-9021-3197"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/",
+      "name": "Sabrina Zander",
+      "image": "https://avatars.githubusercontent.com/SabrinaZander",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0000-4569-6126",
+      "orcid": "https://orcid.org/0009-0000-4569-6126"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/",
+      "name": "Cristina Martins Rodrigues",
+      "image": "https://avatars.githubusercontent.com/CMR248",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4849-1537",
+      "orcid": "https://orcid.org/0000-0002-4849-1537"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/",
+      "name": "Kevin Frey",
+      "image": "https://avatars.githubusercontent.com/Freymaurer",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8493-1077",
+      "orcid": "https://orcid.org/0000-0002-8493-1077"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/",
+      "name": "Martin Kuhl",
+      "image": "https://avatars.githubusercontent.com/Martin-Kuhl",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8493-1077",
+      "orcid": "https://orcid.org/0000-0002-8493-1077"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/",
+      "name": "Stella Eggels",
+      "image": "https://avatars.githubusercontent.com/StellaEggels",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ]
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/13970369",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/fair" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> FAIR Data, Workflows, and Research
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/fair/faqs/" title="Check our FAQs for the FAIR Data, Workflows, and Research topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/dataplant-arcs/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-fair">
+    <h1 data-toc-skip>DataPLANT ARCs</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/Brilator/" class="contributor-badge contributor-Brilator"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Brilator?s=36" alt="Dominik Brilhaus avatar" width="36" class="avatar" />
+    Dominik Brilhaus</a><a href="/training-material/hall-of-fame/SabrinaZander/" class="contributor-badge contributor-SabrinaZander"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/SabrinaZander?s=36" alt="Sabrina Zander avatar" width="36" class="avatar" />
+    Sabrina Zander</a><a href="/training-material/hall-of-fame/CMR248/" class="contributor-badge contributor-CMR248"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/CMR248?s=36" alt="Cristina Martins Rodrigues avatar" width="36" class="avatar" />
+    Cristina Martins Rodrigues</a><a href="/training-material/hall-of-fame/Freymaurer/" class="contributor-badge contributor-Freymaurer"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Freymaurer?s=36" alt="Kevin Frey avatar" width="36" class="avatar" />
+    Kevin Frey</a><a href="/training-material/hall-of-fame/Martin-Kuhl/" class="contributor-badge contributor-Martin-Kuhl"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Martin-Kuhl?s=36" alt="Martin Kuhl avatar" width="36" class="avatar" />
+    Martin Kuhl</a><a href="/training-material/hall-of-fame/StellaEggels/" class="contributor-badge contributor-StellaEggels"><img src="https://avatars.githubusercontent.com/StellaEggels?s=36" alt="Stella Eggels avatar" width="36" class="avatar" />
+    Stella Eggels</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are ARCs?</p>
+</li>
+        
+        <li><p>Why should I create ARCs?</p>
+</li>
+        
+        <li><p>How can I create my ARC?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+
+        
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/fair-intro/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR in a nutshell</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 2 hours</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/13970369">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/fair/tutorials/dataplant-arcs/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org" title="">
+			UseGalaxy.org
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.org.au" title="">
+			UseGalaxy.org.au
+		</a>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.fr" title="">
+			UseGalaxy.fr
+		</a>
+	</li>
+    
+    
+
+    <!--
+    
+    -->
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 22, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 22, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 2 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <p>In this tutorial we will guide you through the process of creating your ARC (Annotated Research Context)
+ARCs are a part of your Research Data Management (RDM) strategy, and are aimed specifically at plant research
+data. ARCs are an <a href="https://www.researchobject.org/ro-crate/">RO-crates</a> implementation developed by
+<a href="https://www.nfdi4plants.org/">DataPLANT (NFDI4Plants)</a>. ARCs allow you to bundle and annotate
+your research data in a standardized and <a href="https://www.go-fair.org/fair-principles/">FAIR</a> (Findable, Accessible,
+Interoperable, Reusable) manner.</p>
+
+<p><a href="images/arcs-intro.png" rel="noopener noreferrer"><img src="images/arcs-intro.png" alt="ARC concept showing bundling of experimental data, computation, and annotations. " width="1135" height="506" loading="lazy" /></a></p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#getting-set-up-for-the-tutorial" id="markdown-toc-getting-set-up-for-the-tutorial">Getting set up for the tutorial</a>    <ol>
+      <li><a href="#create-a-datahub-account" id="markdown-toc-create-a-datahub-account">Create a DataHUB account</a></li>
+      <li><a href="#download-demo-data" id="markdown-toc-download-demo-data">Download demo data</a></li>
+      <li><a href="#install-arcitect" id="markdown-toc-install-arcitect">Install ARCitect</a></li>
+    </ol>
+  </li>
+  <li><a href="#initialize-your-arc-structure" id="markdown-toc-initialize-your-arc-structure">Initialize your ARC structure</a>    <ol>
+      <li><a href="#the-isa-data-model" id="markdown-toc-the-isa-data-model">The ISA data model</a></li>
+      <li><a href="#the-arcitect-interface" id="markdown-toc-the-arcitect-interface">The ARCitect interface</a></li>
+      <li><a href="#creating-a-new-arc" id="markdown-toc-creating-a-new-arc">Creating a new ARC</a></li>
+      <li><a href="#add-investigation-level-metadata" id="markdown-toc-add-investigation-level-metadata">Add investigation-level metadata</a></li>
+      <li><a href="#saving-your-arc" id="markdown-toc-saving-your-arc">Saving your ARC</a></li>
+    </ol>
+  </li>
+  <li><a href="#structure-your-data-in-the-arc" id="markdown-toc-structure-your-data-in-the-arc">Structure your data in the ARC</a>    <ol>
+      <li><a href="#think-about-your-data" id="markdown-toc-think-about-your-data">Think about your data</a></li>
+      <li><a href="#create-a-study" id="markdown-toc-create-a-study">Create a study</a></li>
+      <li><a href="#create-an-assay" id="markdown-toc-create-an-assay">Create an assay</a></li>
+    </ol>
+  </li>
+  <li><a href="#adding-files-to-your-arc" id="markdown-toc-adding-files-to-your-arc">Adding files to your ARC</a>    <ol>
+      <li><a href="#add-protocol-documents" id="markdown-toc-add-protocol-documents">Add protocol documents</a></li>
+      <li><a href="#add-assay-files" id="markdown-toc-add-assay-files">Add assay files</a></li>
+    </ol>
+  </li>
+  <li><a href="#add-your-experimental-metadata-swate" id="markdown-toc-add-your-experimental-metadata-swate">Add your experimental metadata (SWATE)</a>    <ol>
+      <li><a href="#add-sample-information-to-the-study-metadata" id="markdown-toc-add-sample-information-to-the-study-metadata">Add sample information to the study metadata</a></li>
+      <li><a href="#add-assay-annotation" id="markdown-toc-add-assay-annotation">Add assay annotation</a></li>
+    </ol>
+  </li>
+  <li><a href="#adding-computational-workflows-to-your-arc" id="markdown-toc-adding-computational-workflows-to-your-arc">Adding computational workflows to your ARC</a></li>
+  <li><a href="#publishing-your-arc" id="markdown-toc-publishing-your-arc">Publishing your ARC</a>    <ol>
+      <li><a href="#arc-validation" id="markdown-toc-arc-validation">ARC validation</a></li>
+      <li><a href="#enabling-invenio-testing" id="markdown-toc-enabling-invenio-testing">Enabling Invenio testing</a></li>
+      <li><a href="#publishing-process" id="markdown-toc-publishing-process">Publishing Process</a></li>
+      <li><a href="#where-is-your-arc-published-to" id="markdown-toc-where-is-your-arc-published-to">Where is your ARC published to?</a></li>
+    </ol>
+  </li>
+  <li><a href="#next-steps-on-your-arcification-journey" id="markdown-toc-next-steps-on-your-arcification-journey">Next steps on your ARCification journey</a></li>
+  <li><a href="#conclusions" id="markdown-toc-conclusions">Conclusions</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="getting-set-up-for-the-tutorial">Getting set up for the tutorial</h1>
+
+<p>For this tutorial you need three things:</p>
+<ol>
+  <li>An account on <a href="https://git.nfdi4plants.org">DataHUB</a></li>
+  <li>The <a href="https://www.nfdi4plants.de/nfdi4plants.knowledgebase/docs/ARCitect-Manual/index.html">ARCitect</a> tool installed</li>
+  <li>Example data to fill your ARC with</li>
+</ol>
+
+<p>Below we will walk you through each of these 3 setup steps.</p>
+
+<h2 id="create-a-datahub-account">Create a DataHUB account</h2>
+
+<p>DataHUB is a GitLab instance designed to hosts ARCs. Here you can work collaboratively to create your ARC, and once you are ready to publish your ARC, you can do this from here as well.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-datahub-account"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create a DataHUB account</div>
+
+  <ol>
+    <li>Already have an account? Please <a href="https://git.nfdi4plants.org/]">log in</a></li>
+    <li>New to DataHUB? Create an account: <a href="https://git.nfdi4plants.org/">https://git.nfdi4plants.org/</a>
+      <ul>
+        <li>If you are not familiar with Git or GitLab that is ok, ARCitect will take care of syncing to DataHub behind the scenes</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="download-demo-data">Download demo data</h2>
+
+<p>In this tutorial we will create an ARC for an example research data. In this example investigation we grew Talinum plants under
+drought conditions, with watered plants as control. Under these conditions the plants switch their type of photosynthesis
+(water: C3, drought: CAM). To study this change, we profiled gene expression (Transcriptomics) using RNASeq, and metabolites
+(Metabolomics) via GC-MS (Gas-Chromatography Mass Spectrometry)</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-download-example-arc-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Download example ARC data</div>
+
+  <ol>
+    <li>
+      <p>Download the zip file from Zenodo (&lt;2MB) to your machine</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13970369/files/GTN_ARC_tutorial_data.zip
+</code></pre></div>      </div>
+    </li>
+    <li>Unzip the file
+      <ul>
+        <li>You can put the files wherever is most convenient for you</li>
+      </ul>
+    </li>
+    <li>Have a quick look at the files and folders
+      <ul>
+        <li>This example data mimics how you might have your project data organised on your computer</li>
+        <li>In the next part we will show how to organise this data in an ARC-compatible way</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="install-arcitect">Install ARCitect</h2>
+
+<p>Now we will install the ARCitect tool. This tool will help you create and fill your ARC.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-install-the-arcitect-tool-on-linux"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Install the ARCitect tool on Linux</div>
+
+  <ol>
+    <li>Follow the installation instructions on the <a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/">DataPLANT knowledgebase</a> for your OS:
+      <ul>
+        <li><a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_windows.html">Windows Installation Instructions</a></li>
+        <li><a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_macos.html">macOS Installation Instructions</a></li>
+        <li><a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/ARCitect-Manual/arcitect_installation_linux.html">Linux Installation Instructions</a></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-arcitect-version"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  ARCitect version</div>
+
+        <p>This tutorial uses version 0.48 of ARCitect. Since this tool is still
+under rapid development, a newer version of ARCitect may already be available. Feel free to install
+the latest version of ARCitect, but be aware that some screenshots and instructions may be outdated.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Start ARCitect to verify that everything is installed correctly. You should see a screen like this:</p>
+
+      <p><a href="images/arcitect-home.png" rel="noopener noreferrer"><img src="images/arcitect-home.png" alt="screenshot of the ARCitect interface after startup. " width="1280" height="677" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="initialize-your-arc-structure">Initialize your ARC structure</h1>
+
+<p>Now that you have everything set up for the course, we can start creating our ARC. First we will organize our example data into the ARC structure, then we will add structured metadata describing our experiments and data.</p>
+
+<h2 id="the-isa-data-model">The ISA data model</h2>
+
+<p>ARCs build on the <a href="https://isa-specs.readthedocs.io/en/latest/isamodel.html">ISA Abstract Model</a>
+for metadata annotation.</p>
+
+<p>The ISA model comes with a hierarchy (ISA: Investigation - Study - Assay)
+that aligns well with most projects in (plant) biology labs. It allows grouping multiple assays (measurements) to one study,
+and multiple studies to one investigation.</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="images/isa-model.png" alt="Overview of the ISA model. " width="1092" height="640" loading="lazy" /><a target="_blank" href="images/isa-model.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Image source left panel: [isa-tools.org](https://isa-tools.org/format/specification.html)</figcaption></figure>
+
+<p>Your ARC has one isa.investigation.xlsx workbook at its root, where metadata about the investigataion is captured. Similarly, each study or assay that you add to your ARC contains one isa.study.xlsx or isa.assay.xlsx, respectively.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-before-you-start"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Before you start</div>
+
+  <p>Before creating your own ARC, invest some time to think about the following questions.</p>
+
+  <ul>
+    <li>What is my <strong>investigation</strong>?</li>
+    <li>What is my <strong>study</strong>?</li>
+    <li>Which <strong>assay</strong> did I perform?</li>
+    <li>What is my (raw) <strong>dataset</strong>?</li>
+    <li>What <strong>protocols</strong> did I use?</li>
+  </ul>
+
+</blockquote>
+
+<h2 id="the-arcitect-interface">The ARCitect interface</h2>
+
+<p>The ARCitect window consists of 4 main parts; on the left is the menu panel, next to it is a panel displaying the ARC folder structure, then the main panel where we will configure our ARC, and on the righ is (optionally) a help panel.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="images/ARCitect-GUI.png" alt="Screenshot of the ARCitect graphical user interface. " width="1103" height="581" loading="lazy" /><a target="_blank" href="images/ARCitect-GUI.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Overview of ARCitect interface. A) menu panel, B) ARC folder structure, C) Main panel, D) Help panel (off by default).</figcaption></figure>
+
+<p>Let’s have a closer look at the menu panel:</p>
+
+<p><a href="images/arcitect-sidebar.png" rel="noopener noreferrer"><img src="images/arcitect-sidebar.png" alt="screenshot of the ARCitect menu panel. " width="191" height="662" loading="lazy" /></a></p>
+
+<p>This menu bar allows you to:</p>
+<ol>
+  <li><strong>Login</strong>: Log in to DataHUB (required to sync your ARC to DataHUB)</li>
+  <li><strong>New ARC</strong>: Create a new ARC</li>
+  <li><strong>Open ARC</strong>: Open an existing ARC from your machine</li>
+  <li><i class="fas fa-cloud-arrow-down" aria-hidden="true"></i><span class="visually-hidden">download-cloud</span> <strong>Download ARC</strong>: From DataHUB to your machine (e.g. from a colleague or published)</li>
+  <li><i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">save</span> <strong>Save ARC</strong>: Save your changes to your machine</li>
+  <li><strong>Explorer</strong>: Open the local ARC folder on your computer</li>
+  <li><strong>Commit</strong>: prepare your ARC changes for sync to DataHUB</li>
+  <li><strong>DataHUB sync</strong>: push your comitted changes to DataHUB</li>
+  <li><strong>History</strong>: Show previous versions of your ARC</li>
+  <li><strong>Validation</strong>: Configure validation (checks) for our ARC</li>
+  <li><strong>Services</strong>: Check on the status of ARC services (e.g. is DataHUB down for maintenance?)</li>
+  <li><strong>Settings</strong>: For example turn on tool tips or the help panel</li>
+</ol>
+
+<h2 id="creating-a-new-arc">Creating a new ARC</h2>
+
+<p>Let’s start by creating a new ARC.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-arc-in-arcitect"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Create a new ARC in ARCitect</div>
+
+  <ol>
+    <li>In the left-hand panel of ARCitect, select <strong>New ARC</strong>
+      <ul>
+        <li>Navigate to a location on your machine where you would like to create the ARC folder</li>
+        <li>Choose a descriptive name for your ARC, e.g. <code class="language-plaintext highlighter-rouge">TalinumPhotosynthesis</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-what-s-in-a-name"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: What's in a name?</div>
+
+        <p>By default, the name give your ARC here will be used for:</p>
+        <ul>
+          <li>the ARC folder on your machine</li>
+          <li>the ARC repository on DataHUB at <code class="language-plaintext highlighter-rouge">https://git.nfdi4plants.org/&lt;YourUserName&gt;/&lt;YourARC&gt;</code> (see next steps)</li>
+          <li>the identifier for your investigation</li>
+        </ul>
+
+        <p><strong>Note:</strong> Make sure that no ARC exists at <code class="language-plaintext highlighter-rouge">https://git.nfdi4plants.org/&lt;YourUserName&gt;/&lt;YourARC&gt;</code>. Otherwise you will sync to that ARC.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>If all went well, you should see the folder structure that was created for your ARC:
+<a href="images/new-arc.png" rel="noopener noreferrer"><img src="images/new-arc.png" alt="screenshot of the ARC folder panel after initializing our ARC. " width="346" height="277" loading="lazy" /></a></p>
+    </li>
+    <li>Click on the <strong>Explorer</strong> button in the menu to see the files created on your machine</li>
+  </ol>
+
+</blockquote>
+
+<p>The basic ARC structure is initialized for you, and looks something like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my-arc
+├── studies
+│   ├── study1              <span class="c"># subfolder for each study</span>
+│   │   ├── protocols       <span class="c"># folder for protocol documents</span>
+│   │   ├── resources       <span class="c"># folder for any other supporting information and files</span>
+│   │   isa.study.xlsx      <span class="c"># study-level metadata (e.g. sample sheet, culturing/harvesting conditions)</span>
+│   │   README.md           <span class="c"># Free-text description of your study</span>
+│   ├── assay2
+│   │   ├── ...
+├── assays
+│   ├── assay1              <span class="c"># subfolder for each assay</span>
+│   │   ├── dataset         <span class="c"># assay result files (e.g. sequencing files)</span>
+│   │   ├── protocols       <span class="c"># assay protocol files</span>
+│   │   isa.assay.xlsx      <span class="c"># assay-level metadata (e.g. instrument)</span>
+│   │   README.md
+│   ├── assay2
+│   │   ├── ...
+├── runs                    <span class="c"># analysis results</span>
+│   ├── ...
+├── workflows               <span class="c"># analysis workflows (CWL, or any other scripts/code used)</span>
+│   ├── ...
+├── isa.investigation.xlsx  <span class="c"># investigation-level metadata</span>
+└── README.md
+</code></pre></div></div>
+
+<h2 id="add-investigation-level-metadata">Add investigation-level metadata</h2>
+
+<p>We will start by adding some basic data about our ARC. We do this in the investigation-level metadata.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-adding-investigation-information"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding investigation information</div>
+
+  <ol>
+    <li>In the ARC folder panel (second panel from the left), click on the investigation
+      <ul>
+        <li>This is the root of the ARC folder structure (e.g. <em>TalinumPhotosynthesis</em>)</li>
+        <li>This will bring up the investigation information in the main panel</li>
+        <li>Notice that the Identifier has already been filled in for you (but you can still change it)</li>
+        <li>Behind the scenes this information will be saved as an Excel sheet <code class="language-plaintext highlighter-rouge">isa.investigation.xlsx</code></li>
+      </ul>
+
+      <p><a href="images/investigation-empty.png" rel="noopener noreferrer"><img src="images/investigation-empty.png" alt="screenshot of the investigation metadata screen. " width="1406" height="955" loading="lazy" /></a></p>
+    </li>
+    <li><strong>Add a title</strong> for your investigation
+      <ul>
+        <li>This should be a concise but descriptive title</li>
+        <li>Tip: think of what you would name your publication based on this investigation</li>
+        <li>For this tutorial, you could set your title to <code class="language-plaintext highlighter-rouge">Effect of Drought on Talinum Photosynthesis</code></li>
+      </ul>
+    </li>
+    <li><strong>Add a description</strong> for your investigation
+      <ul>
+        <li>Here you can describe your main research questions and methods in a few sentences or paragraphs.</li>
+        <li>Tip: think of this as a short abstract like you would provide in a publication</li>
+        <li>For this tutorial you can add any text here</li>
+      </ul>
+    </li>
+    <li><strong>Add an ARC Contact</strong> (you)
+      <ul>
+        <li>Click on the <strong><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) icon</strong> under Contacts</li>
+        <li>Click on the <strong><i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">dropdown</span> (dropdown) icon</strong> on the right of the contact to expand it</li>
+        <li>Fill in at least your First name, Last name, and email.</li>
+        <li><strong>Tip:</strong> if you have an <a href="https://orcid.org">ORCiD</a> ID, fill that in and hit “Search” to autofill these fields</li>
+      </ul>
+    </li>
+    <li>
+      <p>Your investigation tab should look something like this</p>
+
+      <p><a href="images/investigation-filled.png" rel="noopener noreferrer"><img src="images/investigation-filled.png" alt="screenshot of investigation metadata filled in. " width="990" height="858" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="saving-your-arc">Saving your ARC</h2>
+
+<p>It is a good idea to frequently save your work. There are 2 levels of saving your ARC; you can:</p>
+<ol>
+  <li>Save it locally (to your computer)</li>
+  <li>Save it online to DataHUB (syncing)</li>
+</ol>
+
+<p>By default your ARC on DataHUB is private to you, but you have the option of sharing it with your collaborators.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-why-and-how-often-to-sync-to-datahub"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Why and how often to sync to DataHUB?</div>
+
+  <p>Syncing your ARC to DataHUB frequently has several advantages:</p>
+  <ul>
+    <li>It makes it easy to collaborate with colleagues on your ARC</li>
+    <li>It is a backup of your ARC in case anything happens to your computer</li>
+    <li>It is version controlled. This means you can always go back to any previous version your ARC if needed</li>
+  </ul>
+
+  <p>We advise you to save your ARC to your local machine as often as you can, and sync to DataHUB every time you have
+completed a unit of work (e.g. “added data files”, “added culturing metadata”, “added protocol documents” etc), this
+makes it easy for others (and future you) to see what you have changed.</p>
+
+</blockquote>
+
+<p>Since we have just completed our first unit of work (initialized our ARC and added basic investigation metadata), let’s save and sync our ARC to DataHUB now.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-and-sync-our-arc"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save and Sync our ARC</div>
+
+  <ol>
+    <li>Save locally simply by hitting the <strong>Save ARC</strong> button on the left
+      <ul>
+        <li>That’s it! Too easy!</li>
+        <li>Do this as often as possible to avoid losing work</li>
+      </ul>
+    </li>
+    <li>Click <strong>Login</strong> at the top of the menu panel
+      <ul>
+        <li>Select <code class="language-plaintext highlighter-rouge">git.nfdi4plant.org</code> as your host</li>
+        <li>Click the <strong>Login</strong> button</li>
+        <li>Since you already logged into DataHub via your browser earlier, ARCitect should now automatically log you in</li>
+      </ul>
+    </li>
+    <li>
+      <p>To check that you are successfully logged in, the Login button should now be replace with your DataHub username
+<a href="images/arcitect-loggedin.png" rel="noopener noreferrer"><img src="images/arcitect-loggedin.png" alt="screenshot of the menu panel as it looks when you are logged in. " width="192" height="154" loading="lazy" /></a></p>
+    </li>
+    <li>Click on <strong>Commit</strong> in the menu
+      <ul>
+        <li>This screen will show you all files that have chanced since your last sync</li>
+        <li>You can choose whether to sync all files, or only some</li>
+        <li>Choosing which files to sync is called “committing” those file.</li>
+        <li>In our case only one file has changed, <code class="language-plaintext highlighter-rouge">isa.investigation.xlsx</code>. By default it is already selected to be committed</li>
+      </ul>
+    </li>
+    <li>Add a <strong>commit message</strong>
+      <ul>
+        <li>in a few words, describe your changes</li>
+        <li>this will help you and your colleagues</li>
+        <li>For example, for this changes you can write <code class="language-plaintext highlighter-rouge">added investigation metadata</code></li>
+        <li>You can leave the rest of the fields to the default values</li>
+      </ul>
+
+      <p><a href="images/arcitect-commit.png" rel="noopener noreferrer"><img src="images/arcitect-commit.png" alt="screenshot of the commit menu. " width="690" height="440" loading="lazy" /></a></p>
+    </li>
+    <li>Click the <strong>Commit</strong> button
+      <ul>
+        <li>There will be a confirmation screen like the one below</li>
+        <li>Click the <strong>Ok</strong> button</li>
+      </ul>
+
+      <p><a href="images/arcitect-commit-confirmation.png" rel="noopener noreferrer"><img src="images/arcitect-commit-confirmation.png" alt="Screenshot of the commit confirmation dialogue window. " width="841" height="448" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Click on <strong>DataHUB Sync</strong> in the menu</p>
+
+      <p><a href="images/arcitect-sync.png" rel="noopener noreferrer"><img src="images/arcitect-sync.png" alt="Screenshot of the DataHUB sync menu. " width="691" height="207" loading="lazy" /></a></p>
+    </li>
+    <li>Click on <strong>+ (plus)</strong> to add a ‘remote’ (DataHUB location to save your ARC)
+      <ul>
+        <li>you only have to do this once</li>
+        <li>you can keep all the default settings</li>
+        <li>Click <strong>Add</strong></li>
+      </ul>
+
+      <p><a href="images/arcitect-add-remote.png" rel="noopener noreferrer"><img src="images/arcitect-add-remote.png" alt="screenshot of the remote adding dialogue window. " width="582" height="337" loading="lazy" /></a></p>
+    </li>
+    <li>Click <strong>Push</strong> to sync from your computer to DataHUB
+      <ul>
+        <li><strong>Pull</strong> will do the reverse, it will ‘pull’ in changes from DataHUB into your local copy of the ARC,
+for example if a collaborator made changes, or you worked on it from a different machine.</li>
+      </ul>
+    </li>
+    <li>Check that the push was successfull
+      <ul>
+        <li>Navigate to <code class="language-plaintext highlighter-rouge">https://git.nfdi4plants.org/YourUsername/TalinumPhotosynthesis</code></li>
+        <li>Replace ‘YourUsername’ with your DataHUB username in the URL</li>
+        <li>If you used a different Identifier for your ARC, replace ‘TalinumPhotosynthesis’ with your ARC Identifier in the URL</li>
+        <li>You should see your ARC on DataHUB:</li>
+      </ul>
+
+      <p><a href="images/datahub-firstpush.png" rel="noopener noreferrer"><img src="images/datahub-firstpush.png" alt="screenshot of your new ARC on DataHUB. " width="1300" height="609" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congrats! You have initialized, saved, and synced your ARC! Now let’s continue with the good part, actually filling your ARC.</p>
+
+<h1 id="structure-your-data-in-the-arc">Structure your data in the ARC</h1>
+
+<h2 id="think-about-your-data">Think about your data</h2>
+
+<p>Next we will divide our research into studies and assays. As a rule of thumb, create a study for every research question, and an assay for every measurement you performed (e.g. sequencing, mass-spec, imaging). An investigation can have one study, or several. A study can have one or more assays, and each assay can be associated with one or more studies.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-evaluate-the-example-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Evaluate the example data</div>
+
+  <ol>
+    <li>
+      <p>Recall our example research:</p>
+
+      <p><em>In this example investigation we grew Talinum plants under drought conditions, with watered plants as control.
+Under these conditions the plants switch their type of photosynthesis (water: C3, drought: CAM). To study this
+change, we profiled gene expression (Transciptomics) using RNASeq, and metabolites (Metabolomics) via GC-MS
+(Gas-Chromatography Mass Spectrometry)</em></p>
+    </li>
+    <li>
+      <p>Have a look at the demo data we downloaded</p>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-which-studies-and-assays-do-we-have"><i class="far fa-question-circle" aria-hidden="true" ></i> Question:  Which studies and assays do we have?</div>
+
+    <ol>
+      <li>Which studies do we have?</li>
+      <li>Which assays did we perform?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <ol>
+        <li>We had one research question, the effect of drought on photosynthesis, so we will create 1 study</li>
+        <li>We performed 2 measurements, RNA sequencing and GC-MS, so we will create 2 assays in our ARC</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<h2 id="create-a-study">Create a study</h2>
+
+<p>Let’s create our study now.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-an-arc-study"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create an ARC study</div>
+
+  <ol>
+    <li>Click on the <strong><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) icon</strong> next to the studies folder</li>
+    <li>Provide a study identifier, e.g. <code class="language-plaintext highlighter-rouge">talinum_drought</code>
+<a href="images/arcitect-new-study.png" rel="noopener noreferrer"><img src="images/arcitect-new-study.png" alt="screenshot of the study creation dialogue window. " width="817" height="476" loading="lazy" /></a></li>
+    <li>Click <strong><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> New Study</strong> button to confirm</li>
+    <li><strong>Expand</strong> the new study folder that was created in your ARC
+      <ul>
+        <li>you should see the protocols and resources folders created
+<a href="images/arcitect-new-study-files.png" rel="noopener noreferrer"><img src="images/arcitect-new-study-files.png" alt="screenshot of the ARC structure after adding the new study. " width="290" height="342" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>As we did for the investigation, we can also add some basic study information</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-basic-study-metadata"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add basic study metadata</div>
+
+  <ol>
+    <li>Click on your study <code class="language-plaintext highlighter-rouge">talinum_drought</code></li>
+    <li>
+      <p>The main panel will now show study metadata, here you can add basic information about your study
+such as description, contacts, associated publications.</p>
+
+      <p><a href="images/arcitect-study-metadata.png" rel="noopener noreferrer"><img src="images/arcitect-study-metadata.png" alt="screenshot of the study metadata screen. " width="1191" height="788" loading="lazy" /></a></p>
+    </li>
+    <li><strong>Add a description</strong> for the study</li>
+    <li><strong>Add yourself</strong> as a contact
+      <ul>
+        <li>Remember that you can use your ORCiD ID for a fast way to fill this data</li>
+      </ul>
+    </li>
+    <li><strong>Add a publication</strong>
+      <ul>
+        <li>Normally you would add the paper you published based on the data in this ARC</li>
+        <li>For this tutorial, add any publication (e.g. one of yours, or one you find interesting)</li>
+        <li>The easiest way to do this, is to add the <strong>DOI link</strong> or <strong>Pubmed ID</strong>, then the information will be autofilled</li>
+        <li>If you don’t have a publication in mind, try one of the following papers:
+          <ul>
+            <li>Pubmed ID: <code class="language-plaintext highlighter-rouge">7825135</code></li>
+            <li>DOI: <code class="language-plaintext highlighter-rouge">https://doi.org/10.1136/bmj.331.7531.1498</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><a href="images/arcitect-study-metadata-filled.png" rel="noopener noreferrer"><img src="images/arcitect-study-metadata-filled.png" alt="Example of study metadata filled. " width="1191" height="788" loading="lazy" /></a></p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Since we have once again completed a unit of work, let’s save and sync our ARC again!</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-amp-sync"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save &amp; Sync</div>
+
+  <ol>
+    <li>Save your ARC locally
+      <ul>
+        <li><strong>Save ARC</strong> button in menu</li>
+      </ul>
+    </li>
+    <li>Sync your ARC to DataHUB
+      <ul>
+        <li><strong>DataHub Sync</strong> button in menu</li>
+        <li>Commit all changed files</li>
+        <li>Provide a good commit message (e.g. <code class="language-plaintext highlighter-rouge">added drought study</code>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="create-an-assay">Create an assay</h2>
+
+<p>Next, we will create our 2 assays. Recall that we performed two measurements/assays, RNA sequencing, and metabolomics.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-the-rna-seq-assay"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create the RNA-seq assay</div>
+
+  <ol>
+    <li>Click on the <strong><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) icon</strong> next to the assays folder</li>
+    <li>Give your assay a name, e.g. <code class="language-plaintext highlighter-rouge">rnaseq</code></li>
+    <li>In <strong>measurement type</strong> field, choose <code class="language-plaintext highlighter-rouge">mRNA Sequencing</code>
+      <ul>
+        <li>this field is <strong>ontology based</strong></li>
+        <li>as soon as you start typing, suggetions for known terms will pop up</li>
+        <li>Notice the TSR and TAN fields are automatically filled in once you select a term. These fields help make your ARC machine readable.</li>
+      </ul>
+    </li>
+    <li>
+      <p>Similarly, set the  <strong>Technology Type</strong> to <code class="language-plaintext highlighter-rouge">Next-generation Sequencing</code></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+        <p>Look through our demo data, can you find out which sequencing machine was used?</p>
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <p>In the example data, we’ve got a <strong>methods</strong> folder where we’ve stored notes on our assays,
+In the file called <strong>illumina_libraries</strong> we see that the sequencer we used was a <code class="language-plaintext highlighter-rouge">Illumina HiSeq 2000</code></p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Under <strong>Technology platform</strong>, fill in <code class="language-plaintext highlighter-rouge">Illumina HiSeq 2000</code></p>
+
+      <p><a href="images/arcitect-assay.png" rel="noopener noreferrer"><img src="images/arcitect-assay.png" alt="screenshot of assay metadata filled. " width="1044" height="561" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Awesome, now let’s repeat the process for our metabolomics assay.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-create-the-metabolomics-assay"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Create the metabolomics assay</div>
+
+  <ol>
+    <li>Create a new assay called <code class="language-plaintext highlighter-rouge">metabolomics</code></li>
+    <li>Under <strong>measurement type</strong> choose <code class="language-plaintext highlighter-rouge">Gas Chromatography Mass Spectrometry</code></li>
+    <li>We can leave the Technology type/platform fields empty for now</li>
+  </ol>
+
+  <p><a href="images/arcitect-assay2.png" rel="noopener noreferrer"><img src="images/arcitect-assay2.png" alt="screenshot of metabolomics assay. " width="964" height="590" loading="lazy" /></a></p>
+</blockquote>
+
+<p>And once again, let’s save our ARC and sync it to DataHUB.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-amp-sync-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save &amp; Sync</div>
+
+  <ol>
+    <li>Save your ARC locally
+      <ul>
+        <li><strong>Save ARC</strong> button in menu</li>
+      </ul>
+    </li>
+    <li>Sync your ARC to DataHUB
+      <ul>
+        <li><strong>DataHub Sync</strong> button in menu</li>
+        <li>Commit all changed files</li>
+        <li>Provide a good commit message (e.g. <code class="language-plaintext highlighter-rouge">added rnaseq and metabolomics assays</code>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="adding-files-to-your-arc">Adding files to your ARC</h1>
+
+<p>As our next step, let’s add the files we have in our demo folder to our ARC.</p>
+
+<h2 id="add-protocol-documents">Add protocol documents</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-adding-protocols"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Adding protocols</div>
+
+  <ol>
+    <li>Open the folder with demo data on your computer</li>
+    <li>Look through the <strong>methods</strong> folder
+      <ul>
+        <li>This contains files with notes about methods we used in our research</li>
+        <li>In our ARC, these usually go in <strong>protocols</strong> folders</li>
+        <li>Studies and assays both have protocols folders</li>
+      </ul>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+        <p>Where should each of the 4 files in the methods folder go in our ARC?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">plant_material.txt</code>: contains a general sample sheet, and should go in the study-level protocol folder</li>
+            <li><code class="language-plaintext highlighter-rouge">RNA_extraction.txt</code> and <code class="language-plaintext highlighter-rouge">Illumina_libraries.txt</code> are specific to the RNA sequencing assay, so should go in the protocols folder for the rnaseq assay</li>
+            <li><code class="language-plaintext highlighter-rouge">metabolite_extraction.txt</code> is specific to our metabolomics assay, so should go in the metabolomics protocol folder</li>
+          </ul>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>There are two ways to add files to your ARC, we will do both now, in the future you can choose whichever option you prefer</p>
+    </li>
+    <li><strong>Adding files via ARCitect</strong>
+      <ul>
+        <li>Expand the <code class="language-plaintext highlighter-rouge">studies</code> folder</li>
+        <li>Expand the <code class="language-plaintext highlighter-rouge">talinum_drought</code> folder</li>
+        <li>Right-click on the <code class="language-plaintext highlighter-rouge">protocols</code> folder</li>
+        <li>Choose <code class="language-plaintext highlighter-rouge">Import files</code> option</li>
+        <li>Browse to the demo data and choose the <code class="language-plaintext highlighter-rouge">methods/plant_material.txt</code> file</li>
+      </ul>
+
+      <p><a href="images/arcitect-import-files.png" rel="noopener noreferrer"><img src="images/arcitect-import-files.png" alt="screenshot of menu to add documents. " width="320" height="270" loading="lazy" /></a></p>
+    </li>
+    <li><strong>Adding files via file explorer</strong>
+      <ul>
+        <li>Click on <code class="language-plaintext highlighter-rouge">Explorer</code> in the left-hand menu</li>
+        <li>Open the <code class="language-plaintext highlighter-rouge">assays/metabolomics/protocols</code> folder of your ARC</li>
+        <li>In another window, open the demo data folder</li>
+        <li>Copy or drag the <code class="language-plaintext highlighter-rouge">metabolite_extraction.txt</code> file from the demo data folder to your ARC folder</li>
+      </ul>
+    </li>
+    <li><strong>Add the two remaining protocol files</strong> to the ARC in your preferred way
+      <ul>
+        <li>Files <code class="language-plaintext highlighter-rouge">illumina_libraries.txt</code> and <code class="language-plaintext highlighter-rouge">RNA_extraction.txt</code></li>
+        <li>Both should go to <code class="language-plaintext highlighter-rouge">assays/rnaseq/protocols/</code> folder in your ARC</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Note that adding files via ARCitect import option will create a copy of the file, rather than moving it, so if you have large data files you might want to move the files via the explorer option.</p>
+
+<h2 id="add-assay-files">Add assay files</h2>
+
+<p>Next, let’s add the RNA-seq data we have to the ARC structure.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-rna-seq-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add RNA-seq data</div>
+
+  <ol>
+    <li>Look in the <code class="language-plaintext highlighter-rouge">rnaseq_data</code> folder of the demo data
+      <ul>
+        <li>Files with the <code class="language-plaintext highlighter-rouge">.fastq.gz</code> suffix are raw sequencing files</li>
+        <li>Raw data goes in the <code class="language-plaintext highlighter-rouge">assays/rnaseq/dataset/</code> folder</li>
+        <li><code class="language-plaintext highlighter-rouge">NGS_samplesheet.xlsx</code> can go into the assay’s protocol folder</li>
+      </ul>
+    </li>
+    <li>
+      <p>Move the files to the ARC in your preferred way</p>
+
+      <p><a href="images/arcitect-assay-files-rnaseq.png" rel="noopener noreferrer"><img src="images/arcitect-assay-files-rnaseq.png" alt="screenshot of arc explorer panel after adding files. " width="419" height="541" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Finally, let’s do the same for our metabolomics data</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-metabolomics-data"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add Metabolomics data</div>
+
+  <ol>
+    <li>Look in the <code class="language-plaintext highlighter-rouge">metabolomics_data</code> folder of the demo data
+      <ul>
+        <li>Folders with the <code class="language-plaintext highlighter-rouge">.D</code> suffix are raw data files</li>
+        <li>The rest of the files can go to the protocols folder</li>
+      </ul>
+    </li>
+    <li>Move all the files to the ARC metabolomics assay folder
+      <ul>
+        <li>Note that if you move them via ARCitect, you should use the <strong>Import Directories</strong> option for the raw data folders</li>
+      </ul>
+
+      <p><a href="images/arcitect-assay-files-metabolomics.png" rel="noopener noreferrer"><img src="images/arcitect-assay-files-metabolomics.png" alt="screenshot of arcitect files structure after adding metabolomics files. " width="414" height="692" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Congrats! you have added data to your ARC! As always, let’s make sure to save &amp; sync our work before we continue.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-amp-sync-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save &amp; Sync</div>
+
+  <ol>
+    <li>Save your ARC locally</li>
+    <li>Sync your ARC to DataHUB
+      <ul>
+        <li>Provide a good commit message (e.g. <code class="language-plaintext highlighter-rouge">added protocols and raw data files</code>)</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="add-your-experimental-metadata-swate">Add your experimental metadata (SWATE)</h1>
+
+<p>Now that we have all our data in the ARC, we need to add metadata about our research in a structured way.
+We already put a lot of information about our samples and experiments in the protocols folders,
+but these are just free-text notes, like we would put in a methods section of a paper, or in our lab notebook.
+The information is there but it is not <strong>structured</strong> yet.</p>
+
+<p>In this section, we will show you how you can add structured metadata to your ARC. We do this by using a
+standard format (<a href="https://isa-specs.readthedocs.io/en/latest/isatab.html">isa-tab</a>), combined with
+ontology-based annotations. We call these <strong>annotation tables</strong>, and these tables with metadata can be created
+directly within the ARCitect tool.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-swate"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: SWATE</div>
+
+  <p>If you have previously already looked into ARCs, you may remember a tool called SWATE.
+SWATE helps you create these annotation tables. SWATE has now been integreted into ARCitect</p>
+
+</blockquote>
+
+<h2 id="add-sample-information-to-the-study-metadata">Add sample information to the study metadata</h2>
+
+<p>First, we will add information about our samples (plants) to our study.</p>
+
+<p>We took some notes about our samples in <code class="language-plaintext highlighter-rouge">plant_material.txt</code> file (now in our protocols folder)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Plant Material and Growth Conditions
+
+Plants:
+  - Species: Talinum fruticosum
+  - Age: 28-d-old
+
+Growth Chamber
+  - 12 h light (30°C, 37% relative humidity)/12 h dark (22°C)
+  - 425 µEinstein
+
+Drought treatment:
+  - no water for 12 days
+  - re-water for 2 days
+
+Sampling:
+  - Leaves: topmost mature unshaded leaves, ca. 3–4.5 cm (see pictures)
+  - shock-frozen in liquid N2
+
+drought samples (CAM)
+  - DB_097
+  - DB_099
+  - DB_103
+
+re-watered samples (C3)
+DB_161
+DB_163
+DB_165
+</code></pre></div></div>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-viewing-and-editing-text-documents-in-arcitect"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-viewing-and-editing-text-documents-in-arcitect" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Viewing and editing text documents in ARCitect</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Text files that we added to our ARC, can also be viewed and edited from within ARCitect</p>
+
+  <ol>
+    <li>Expand the talinum_drought study</li>
+    <li>Expand the protocols folder</li>
+    <li>
+      <p>Click on the <code class="language-plaintext highlighter-rouge">plant_material.txt</code> file</p>
+
+      <p><a href="images/arcitect-markdown-editor.png" rel="noopener noreferrer"><img src="images/arcitect-markdown-editor.png" alt="screenshot of markdown editor in ARCitect. " width="1122" height="622" loading="lazy" /></a></p>
+    </li>
+    <li>From this screen you can edit the text as needed.
+      <ul>
+        <li>text files support <a href="https://www.markdownguide.org/cheat-sheet/">Markdown syntax</a></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h3 id="the-isa-tab-format">The ISA-Tab format</h3>
+
+<p>We will now take this free-text description of our samples, and turn them into a structured annotation table
+using ARCitect.</p>
+
+<p>At it’s core, an annotation table often looks like:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Source Name</th>
+      <th>..</th>
+      <th>..</th>
+      <th>Sample Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>plant 1</td>
+      <td>..</td>
+      <td>..</td>
+      <td>sample1</td>
+    </tr>
+    <tr>
+      <td>plant 1</td>
+      <td> </td>
+      <td> </td>
+      <td>sample2</td>
+    </tr>
+    <tr>
+      <td>plant 2</td>
+      <td> </td>
+      <td> </td>
+      <td>sample3</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td> </td>
+      <td> </td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The <strong>Source Name</strong> column and lists the sources (plants) you used in your experiments.
+The final column, <strong>Sample Name</strong> describes the samples derived from the sources (plants).
+Then there can be any number of columns in between describing characteristics of the plants (e.g. species, location, conditions, etc).
+Which columns appear here depends on your experimental setup, and can be chosen by you.</p>
+
+<p>These sample names you provide here can be referenced in other annotation tables in the study, or in assay-level annotation tables.
+ARCitect uses these sample identifiers to put information from different annotation tables together, so make sure you use
+consistent spelling and capitalization.</p>
+
+<h3 id="create-an-annotation-table-from-scratch">Create an annotation table from scratch</h3>
+
+<p>There are 2 ways to add annotation tables, you can either:</p>
+<ol>
+  <li>build them up by hand, choosing the columns (“Building Blocks”) yourself.</li>
+  <li>use a pre-defined template. These templates are either provided by the DataPLANT core team, or by other communities that use ARCs (or you!).</li>
+</ol>
+
+<p>We will show both ways of adding annotation tables in this section of the tutorial.</p>
+
+<p>First, let’s add our sample information as an annotation table the manual way. Since this information pertains to the study as a whole,
+not just a single assay, we will add our sample sheet information at the study level.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-initialize-smple-information-annotation-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Initialize smple information annotation table</div>
+
+  <ol>
+    <li>Click on your study name in the ARC structure
+      <ul>
+        <li>This should bring up the study metadata we filled in previously</li>
+      </ul>
+    </li>
+    <li>At the bottom of the main panel, click on the <strong><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) icon</strong>
+      <ul>
+        <li>the icon is located next to the current tab named <em>Metadata</em></li>
+      </ul>
+
+      <p><a href="images/arcitect-annotation-table-add.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-add.png" alt="screenshot showing the button for adding an annotation table. " width="1384" height="750" loading="lazy" /></a></p>
+
+      <ul>
+        <li>You should then see a new tab named <strong>NewTable0</strong> appear</li>
+      </ul>
+
+      <p><a href="images/arcitect-annotation-table-new.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-new.png" alt="screenshot after adding the new annotation table. " width="1196" height="745" loading="lazy" /></a></p>
+    </li>
+    <li><strong>Rename</strong> the table to <strong>Sample Information</strong>
+      <ul>
+        <li>by right-clicking on the tab name <strong>NewTable0</strong>
+<a href="images/arcitect-annotation-table-rename.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-rename.png" alt="screenshot of renaming option. " width="356" height="124" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>
+      <p>In the center panel, choose <strong>Or start from Scratch!</strong></p>
+    </li>
+    <li>We fill first add our <strong>Source Name</strong> column
+      <ul>
+        <li>In the dropdown, select <strong>Input</strong></li>
+        <li>Next select <strong>Source Name</strong></li>
+        <li>Click <strong>Add Column</strong></li>
+      </ul>
+    </li>
+    <li>Next, add an output column <strong>Sample Name</strong>
+      <ul>
+        <li>Click on <strong>Add building block</strong> icon at the top of the table</li>
+        <li>In the dropdown, select <strong>Output</strong></li>
+        <li>Next select <strong>Sample Name</strong></li>
+        <li>Click <strong>Add Column</strong></li>
+      </ul>
+
+      <p><a href="images/arcitect-annotation-table-start.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-start.png" alt="screenshot of the two added columns. " width="788" height="481" loading="lazy" /></a></p>
+    </li>
+    <li>Let’s add a column for the species as well
+      <ul>
+        <li>Click on the <strong>Add building block</strong> button</li>
+        <li>Change the dropdown to <strong>Characteristic</strong></li>
+        <li>In the search bar next to it, type <strong>Species</strong></li>
+        <li>Select the <strong>NCIT</strong> ontology term</li>
+      </ul>
+    </li>
+    <li>The column probably appear on the right
+      <ul>
+        <li>It is customary to keep the output column on the right</li>
+        <li>Right-click on the species column</li>
+        <li>Select <strong>Move column</strong>
+<a href="images/arcitect-annotation-table-move-column.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-move-column.png" alt="screenshot of the move column option. " width="383" height="217" loading="lazy" /></a></li>
+        <li>Change the column to <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click <strong>Apply</strong> to get a preview of the new order</li>
+        <li>Click <strong>Submit</strong> to apply the change
+<a href="images/arcitect-annotation-table-move-column2.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-move-column2.png" alt="screenshot of final move dialogue window. " width="606" height="412" loading="lazy" /></a></li>
+        <li>You should now have 3 columns, with species column in the middle</li>
+      </ul>
+    </li>
+    <li>To add data, we have to <strong>add rows</strong>
+      <ul>
+        <li>We had 6 samples, so we will add 6 rows</li>
+        <li>At the bottom, change the 1 to a 6, and click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) button to add the rows
+<a href="images/arcitect-annotation-table-add-rows.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-add-rows.png" alt="screenshot of the add rows button. " width="352" height="175" loading="lazy" /></a></li>
+        <li>You should now have 6 rows in your table
+<a href="images/arcitect-annotation-table-withrows.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-withrows.png" alt="annotation table with rows added. " width="938" height="313" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now that we have our basic table initialized, let’s start adding some data. For our example study, we grew 6 plants
+(we will label them <code class="language-plaintext highlighter-rouge">DB001</code> to <code class="language-plaintext highlighter-rouge">DB006</code>). We grew 3 plants in drought conditions, and 3 controls. From our <code class="language-plaintext highlighter-rouge">sample_information.txt</code>
+file we see that the samples we derived from these plants had IDs DB_097, DB_099, DB_103 (drought/CAM), and DB_161, DB_163, DB_165
+(controls/re-watered/C3). All plants are species <em>Talinum fruticosum</em>.</p>
+
+<p>Let’s fill all this information in our annotation table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-fill-the-annotation-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Fill the annotation table</div>
+
+  <ol>
+    <li>Fill the first column (<strong>Source Name</strong>) with our 6 plant names
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB001
+DB002
+DB003
+DB004
+DB005
+DB006
+</code></pre></div>      </div>
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-copying-a-whole-column-at-once"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copying-a-whole-column-at-once" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Copying a whole column at once </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>You can copy the values one by one, but you can also copy the whole column at once.</p>
+        <ul>
+          <li>Copy the IDs above</li>
+          <li>In your ARC table, Select the first cell of the <em>Source Name</em> column</li>
+          <li>Hold down the shift key</li>
+          <li>Select the last (6th) cell of your column</li>
+          <li>Paste the IDs (<code class="language-plaintext highlighter-rouge">CTRL+V</code>)</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Fill the last column (<strong>Sample Name</strong>) with our 6 sample names
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>DB_097
+DB_099
+DB_103
+DB_161
+DB_163
+DB_165
+</code></pre></div>      </div>
+    </li>
+    <li>Now we will fill in the Species column
+      <ul>
+        <li>Select the first cell in the Species column</li>
+        <li>Start typing the species name <code class="language-plaintext highlighter-rouge">Talinum fruticosum</code></li>
+        <li>Since this is an ontology column, you will get suggestions as you type.</li>
+        <li>In our case, we see NCBI ontology term for our species, please select this value.
+<a href="images/arcitect-species-search.png" rel="noopener noreferrer"><img src="images/arcitect-species-search.png" alt="screenshot of ncbi term in search. " width="969" height="314" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>Copy the species value to the enitre column
+      <ul>
+        <li>Right-click on the species term you just added in the firs row</li>
+        <li>Select <strong>Fill column</strong> to apply this term to all 6 rows.
+<a href="images/arcitect-annotation-sample.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-sample.png" alt="screenshot of our table after these steps. " width="969" height="314" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This is the basic process of building our annotation table. We can now add more building blocks (columns) as needed,
+for all the information we have about our plants that we wish to describe. In the next section, we will add more columns.</p>
+
+<p>But first, let’s have a closer look at our annotation table.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-why-do-we-call-them-building-blocks"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Why do we call them Building Blocks?</div>
+
+  <ol>
+    <li>Click on the (expand) icon next to the species column name
+      <ul>
+        <li>You will now see additional hidden columns</li>
+        <li>These columns provide information about the ontology term you chose (TSR and TAN)</li>
+        <li>There is also a hidden unit column. (For species this column is unused)</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p><a href="images/arcitect-hidden-columns.png" rel="noopener noreferrer"><img src="images/arcitect-hidden-columns.png" alt="screenshot of the hidden columns. " width="1310" height="338" loading="lazy" /></a></p>
+
+  <p>This is why we use the term <strong>Building Block</strong> instead of <strong>column</strong>; behind the scenes there are actually more columns.
+We hide these columns in ARCitect, because most of the time these columns are not so interesting to humans, but they are
+what makes your ARC machine-readable.</p>
+
+  <p>This machine readability is essential for example for ARC searching tools so that you can perform advanced
+searches such as <em>“Find all ARCs with data of Talinum Fruticosum that performed an RNA-seq assay”</em> and facilitate re-use
+of data. This will help people find your research, and will help you find data for your next study.</p>
+
+</blockquote>
+
+<p>Let’s add some more building blocks for other information we have about our plants.
+Based on our methods document, we know a few more characteristics of our plants:</p>
+
+<ul>
+  <li>Light intensity of 425 µEinstein</li>
+  <li>Plant age of 28 days</li>
+  <li>Watering exposure of 12 days drought (for 3 of the samples) or 12 days drought followed by 2 days rewatering (for the other 3 samples)</li>
+</ul>
+
+<p>Notice that the first two of these characteristics include a value (425, 28) and a unit (µEinstein, days).
+In the next step we will show you how to deal with units in ARCitect</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-building-blocks-with-units"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add building blocks with units</div>
+
+  <ol>
+    <li><strong>Add a new building block</strong> for plant age
+      <ul>
+        <li>Select <strong>Characteristic</strong> from the dropdown</li>
+        <li>Type <strong>Plant Age</strong></li>
+        <li>Select the DPBO term <em>Plant age</em></li>
+        <li>In the results, you can always click on the <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">dropdown</span> (dropdown) icon to get more information about the term
+<a href="images/arcitect-plant-age.png" rel="noopener noreferrer"><img src="images/arcitect-plant-age.png" alt="screenshot of ontology term information. " width="430" height="508" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>Before you add the column to the table, you can also <strong>set the unit</strong> for the column
+      <ul>
+        <li>Click the button labelled <strong>Unit</strong></li>
+        <li>Search for <strong>Day</strong></li>
+        <li>Find an ontology term with a good description
+<a href="images/arcitect-building-block-add-with-unit.png" rel="noopener noreferrer"><img src="images/arcitect-building-block-add-with-unit.png" alt="screenshot of window adding building block with unit selected. " width="478" height="288" loading="lazy" /></a></li>
+        <li>Click <strong>Add Column</strong></li>
+        <li>Notice that the column is now already filled with the unit</li>
+      </ul>
+    </li>
+    <li>The column will appear to the right of the column you were last on
+      <ul>
+        <li>If you want your column in a different place, move it now in the same way we did before (right click the column)</li>
+      </ul>
+    </li>
+    <li>Add the value <strong>28</strong> to the age column for all 6 samples
+      <ul>
+        <li>You can see that your chosen unit is automatically added to the value you provide in the cell</li>
+        <li>remember, you can fill in one cell, then use the “Fill Column” option from the right-click menu to apply the same value to all rows.</li>
+      </ul>
+
+      <p><a href="images/arcitect-annotation-table-age-added.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-age-added.png" alt="screenshot of our annotation table after adding plant age column. " width="1233" height="313" loading="lazy" /></a></p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-characteristic-vs-factor-vs-parameter-vs-component"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Characteristic vs Factor vs Parameter vs Component</div>
+
+  <p>When adding building blocks, you may have noticed that a distinction is made between <em>characteristic</em>, <em>parameter</em>,
+<em>factor</em> and <em>component</em>. But when to use which?</p>
+
+  <p>Have a look at this <a href="https://nfdi4plants.github.io/nfdi4plants.knowledgebase/docs/guides/isa_AnnotationPrinciples.html">Annotation Principles Guide</a>
+For a more precise description, but in short:</p>
+
+  <ul>
+    <li><strong>Characteristics columns</strong> describe inherent properties of the source material, e.g., a certain strain or ecotype,
+but also the temperature an organism was exposed to.</li>
+    <li><strong>Factor columns</strong> describe independent variables that determine the specific output of your experiment when process and analysis were identical.
+Most of the time, Factors are the most important building blocks for downstream computational analysis.</li>
+    <li><strong>Parameter columns</strong> describe steps in your experimental workflow, e.g., the temperature or extraction buffer used for your assay.
+Multiple Parameter columns form a protocol.</li>
+    <li><strong>Component columns</strong> are used to list anything physical of a protocol, e.g. instrument names, software names, or reagents names.</li>
+  </ul>
+
+</blockquote>
+
+<p>Keeping this in mind, let’s add more building blocks</p>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-add-more-buiding-blocks"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add more buiding blocks</div>
+
+  <ol>
+    <li>Add a building block for <strong>light intensity exposure</strong> (PECO:0007224)
+      <ul>
+        <li>Add it as a <strong>Parameter column</strong></li>
+        <li>Set the unit to <em>microeinstein per square meter per second</em> (UO:0000160)</li>
+        <li>Fill the column with a value of 425 for all samples</li>
+      </ul>
+    </li>
+    <li>Add a building block for <strong>Watering exposure</strong> (PECO:0007383)
+      <ul>
+        <li>Add it as <strong>Factor column</strong></li>
+        <li>set the value to “12 days drought” for the drought samples (<code class="language-plaintext highlighter-rouge">DB_097,DB_099,DB_103</code>)</li>
+        <li>set the value to “12 days drought + 2 days rewatered”* for the other 3 samples</li>
+      </ul>
+
+      <p><a href="images/arcitect-annotation-table-complete.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-complete.png" alt="screenshot of the annotation table at this point. " width="1557" height="337" loading="lazy" /></a></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>As a final step, we can associate our protocol document (<code class="language-plaintext highlighter-rouge">plant_material.txt</code>) with our annotation table.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-add-more-buiding-blocks-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Add more buiding blocks</div>
+
+  <ol>
+    <li>Add a new building block
+      <ul>
+        <li>Add it as a <strong>ProtocolREF</strong> column (under <em>More</em>)</li>
+        <li>Click <strong>Add column</strong></li>
+      </ul>
+    </li>
+    <li>For the value, set the file name <code class="language-plaintext highlighter-rouge">plant_material.txt</code> for all columns
+      <ul>
+        <li>ARCitect will know to look in the protocols folder for this file
+<a href="images/arcitect-annotation-table-protocolref.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-protocolref.png" alt="screenshot of the ProtocolREF column. " width="448" height="286" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Well done! You have added your first annotation table! You can add as many columns as you need in your annotation tables. The aim is always to capture as much information as you can in this way.</p>
+
+<p>While we succeeded in creating our annotation table, it was quite a bit of work adding in our building blocks one by one. Luckily, there are a lot of templates available that can make your life easier! In the next section, we will show you how to do this.</p>
+
+<h2 id="add-assay-annotation">Add assay annotation</h2>
+
+<p>Building annotation tables from scratch can be a bit time consuming, especially if we have to repeat it for every ARC we create
+Therefore, DataPLANT has also a way to share templates for annotation tables. For example, the metadata for RNA sequencing will be very similar for
+everybody. So instead of creating this annoation table from scratch, we can load a pre-existing template. This is just a starting point, we can still
+add and remove building blocks as needed, but it will save us a lot of time.</p>
+
+<h3 id="create-rna-seq-assay-annotation-tables-from-template">Create RNA-Seq assay annotation tables from template</h3>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+
+  <ol>
+    <li>Click on the RNA-seq assay in your ARC</li>
+    <li>Add a new annotation table
+      <ul>
+        <li><i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">plus</span> (plus) icon at the bottom</li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> the table to a better name
+      <ul>
+        <li>e.g. “RNA extraction”</li>
+      </ul>
+    </li>
+    <li>Choose <strong>Start from an existing template!</strong> in the center of the screen</li>
+    <li>Search for <strong>RNA</strong>
+      <ul>
+        <li>The results will show a few options from the official DataPLANT templates</li>
+        <li>You can also search other community templates by changing the <strong>Select community</strong> dropdown to <strong>All</strong> (or a specific community)
+<a href="images/arcitect-template-rnaseq.png" rel="noopener noreferrer"><img src="images/arcitect-template-rnaseq.png" alt="template search results for term RNA. " width="627" height="439" loading="lazy" /></a></li>
+      </ul>
+    </li>
+    <li>Choose the <strong>RNASeq extraction</strong> template
+      <ul>
+        <li>Click <strong>Select</strong> to confirm</li>
+        <li>This will give you a preview of the building blocks in the template</li>
+        <li>Click <strong>Add template</strong></li>
+      </ul>
+    </li>
+    <li>Add 6 rows to the table
+<a href="images/arcitect-template-rna-extraction.png" rel="noopener noreferrer"><img src="images/arcitect-template-rna-extraction.png" alt="empty template file after importing. " width="1762" height="458" loading="lazy" /></a></li>
+    <li>Try to add RNA extraction information to this table
+      <ul>
+        <li>Open the <code class="language-plaintext highlighter-rouge">RNA_extraction.txt</code> file in your protocols folder to view the information to add.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>How does your final annotation table look?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-some-hints"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-some-hints" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Some Hints</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <ol>
+        <li>The <strong>biosource amount</strong> column does not have a unit set yet. To do so now, please:
+          <ul>
+            <li>Search for <em>milligram</em> in the column</li>
+            <li>Right-click on the term, and select <code class="language-plaintext highlighter-rouge">as unit cell</code>.</li>
+            <li>Choose “Fill column” from the right-click menu to apply this to all rows</li>
+          </ul>
+        </li>
+        <li>Set the unit for <strong>buffer volume</strong> column to <strong>microliter</strong> in the same way</li>
+      </ol>
+    </blockquote>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-full-solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-full-solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution:  Full solution </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+      <p>Below are screenshots of a filled annotation table. Note that there are often multiple ways to fill an ARC.</p>
+
+      <p><a href="images/arcitect-annotation-table-rna-extraction-solution-part1.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-rna-extraction-solution-part1.png" alt="first half of the final annotation table. " width="1045" height="469" loading="lazy" /></a>
+<a href="images/arcitect-annotation-table-rna-extraction-solution-part2.png" rel="noopener noreferrer"><img src="images/arcitect-annotation-table-rna-extraction-solution-part2.png" alt="second half of the final annotation table. " width="916" height="475" loading="lazy" /></a></p>
+
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p>As always, let’s save and sync our ARC</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-save-amp-sync-3"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Save &amp; Sync</div>
+
+  <ol>
+    <li>Save your ARC locally</li>
+    <li>Sync your ARC to DataHUB
+      <ul>
+        <li>Provide a good commit message</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="adding-computational-workflows-to-your-arc">Adding computational workflows to your ARC</h1>
+
+<p>We have now added raw data, protocols, and annotation tables to our ARC. We can publish this <em>Data ARC</em> as-is,
+but ARCs can also support addition of analysis workflows and results.</p>
+
+<p>ARCs offer integrations for <a href="https://www.commonwl.org/">CWL</a> (Common Workflow Language) workflows, but this is out of scope for this tutorial.
+You can read more about adding CWL workflows to your ARC in the <a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/docs/guides/ComputationalWorkflows/cwl_examples.html">DataPLANT knowledgebase</a></p>
+
+<p>If you do not have CWL workflows, you can put any other scripts or code you used in the <code class="language-plaintext highlighter-rouge">workflows</code> folder, and
+any analysis results in the <code class="language-plaintext highlighter-rouge">runs</code> folder. This will not be structured or statndardized, but better than nothing.</p>
+
+<h1 id="publishing-your-arc">Publishing your ARC</h1>
+
+<p>Once you have finished your ARC, you can choose to publish it. It will then become public for anybody to find and re-use.
+Before you can do this, your ARC must pass some basic validation. This process checks if your ARC is in valid ARC format,
+and if any files you reference are really included, etc.</p>
+
+<h2 id="arc-validation">ARC validation</h2>
+
+<p>By default, the basic ARC validation is enabled in DataHUB</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+
+  <ol>
+    <li>Open your ARC repository on DataHUB. Tip: a quick way to get there is
+      <ul>
+        <li>click on <strong>DataHUB sync</strong> in the ARCitect menu</li>
+        <li>click on the <strong>globe icon</strong> to open the DataHUB repository in the browser</li>
+      </ul>
+    </li>
+    <li>
+      <p>On the right of your DataHUB ARC repository, you should see a badge labelled <strong>pipeline</strong>
+with either a green <em>passed</em> label or a red <em>failed</em> label</p>
+
+      <p><a href="images/datahub-pipeline-passed.png" rel="noopener noreferrer"><img src="images/datahub-pipeline-passed.png" alt="example of ARC pipeline badge. " width="391" height="396" loading="lazy" /></a></p>
+    </li>
+    <li>You can click on this badge to get more information about the tests
+      <ul>
+        <li>you can also click on the green checkmark or red cross next to your latest commit see validation pipeline details</li>
+        <li>if your tests are failing, this can give you more information about what is wrong</li>
+        <li>if it is green, you usually don’t need to look at the test details.</li>
+        <li>We will cover testing in more detail in a different tutorial, for now, just know that it exists.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>This test performs some basic checks, but in order to publish our ARC, we need additional validation. This is not
+enabled by default.</p>
+
+<h2 id="enabling-invenio-testing">Enabling Invenio testing</h2>
+
+<p>Publishing of ARCs uses <a href="https://inveniosoftware.org/">Invenio</a>. Before you can publish your ARC,
+we must enable the <em>Invenio validation package</em>.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-invenio-validation"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Invenio Validation</div>
+
+  <ol>
+    <li>Click on <strong>Validation</strong> in the ARCitect menu panel</li>
+    <li>Under <strong>Custom Validation Packages</strong>, select <strong>Invenio</strong>
+<a href="images/arcitect-validation-invenio-add.png" rel="noopener noreferrer"><img src="images/arcitect-validation-invenio-add.png" alt="Screenshot of menu adding invenio. " width="782" height="381" loading="lazy" /></a></li>
+    <li>Click <strong>Save</strong></li>
+    <li>Sync the change to DataHUB
+      <ul>
+        <li>Remember to <strong>commit</strong> first</li>
+      </ul>
+    </li>
+    <li>Open your ARC repository on DataHUB again
+      <ul>
+        <li>You should see additional badges</li>
+        <li>Note that it may take a few minutes for these badges to show up
+<a href="images/datahub-validation-invenio-badges.png" rel="noopener noreferrer"><img src="images/datahub-validation-invenio-badges.png" alt="screenshot of invenio badges on DataHUB. " width="391" height="405" loading="lazy" /></a></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="publishing-process">Publishing Process</h2>
+
+<p>Once all of the test pass, you can start the submission process for publishing your ARC.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-2"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on</div>
+
+  <ol>
+    <li>Open your ARC repository on DataHUB</li>
+    <li>Click on the invenio testing badge
+      <ul>
+        <li>This can only be done if the badge is green</li>
+      </ul>
+    </li>
+    <li>This will open a screen where you can preview the basic ARC information
+<a href="images/datahub-invenio-publish.png" rel="noopener noreferrer"><img src="images/datahub-invenio-publish.png" alt="Screenshot of invenio publishing page. " width="1276" height="849" loading="lazy" /></a></li>
+    <li>We will not publish this training ARC, but for your real ARC you would now check the boxes to agree to the terms, and then hit the <strong>Publish</strong> button.</li>
+  </ol>
+</blockquote>
+
+<h2 id="where-is-your-arc-published-to">Where is your ARC published to?</h2>
+
+<p>After publishing, your ARC will be public, and automatically included in several locations.</p>
+
+<h3 id="archive">ARChive</h3>
+
+<p>The DataPLANT <a href="https://archive.nfdi4plants.org/">ARChive</a> will list all published ARCs</p>
+
+<p>For example <a href="https://archive.nfdi4plants.org/records/9e5jx-75d83">this ARC</a></p>
+
+<p><a href="images/archive-example.png" rel="noopener noreferrer"><img src="images/archive-example.png" alt="Example of a published ARC on ARChive. " width="1375" height="953" loading="lazy" /></a></p>
+
+<p>You see this looks a bit like a publication. Notice the DOI on the right. Every ARC will receive a DOI.
+You can use this DOI in your publication to point readers to your ARC.</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-updating-a-published-arc"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  Updating a published ARC</div>
+  <p>Note that you can still update your ARC after publishing, and you can publish a newer version. You will
+receive a new DOI for the updated ARC, and the original version of your ARC will remain accessible
+with the original DOI.</p>
+</blockquote>
+
+<h3 id="arc-registry">ARC Registry</h3>
+
+<p>The <a href="https://arcregistry.nfdi4plants.org/isasearch">ARC registry</a> is another place where your ARC will be listed.
+The ARC registry can search across different institution’s DataHUBs, and supports advanced searching of ARC metadata.</p>
+
+<p><a href="images/arcregistry.png" rel="noopener noreferrer"><img src="images/arcregistry.png" alt="screenshot of ARC registry homepage. " width="1650" height="898" loading="lazy" /></a></p>
+
+<p>Many of these ARC searching and aggregation portals are still under active development, and may change/improve a lot in
+the coming years.</p>
+
+<h1 id="next-steps-on-your-arcification-journey">Next steps on your ARCification journey</h1>
+
+<p>You should now know the basics needed to create an ARC for your own data using the ARCitect tool.</p>
+
+<p>For support during the process of creating an ARC for your own project(s), have a look at:</p>
+<ul>
+  <li>The <a href="https://nfdi4plants.org/nfdi4plants.knowledgebase/">DataPLANT knowledgebase</a>.</li>
+  <li>The <a href="https://helpdesk.nfdi4plants.org/?topic=Documentation_KnowledgeBase">DataPLANT helpdesk</a></li>
+</ul>
+
+<h1 id="conclusions">Conclusions</h1>
+
+<p>Congrats! You have now created your first ARC using ARCitect, you synced it to DataHUB, and saw the procedure for publishing
+your ARC.</p>
+
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Annotated Research Contexts (ARCs) help you structure your research data in a FAIR and standardized way</p>
+</li>
+                        
+                        <li><p>ARCitect is a useful tool to help you create your ARCs</p>
+</li>
+                        
+                        <li><p>DataHUB houses ARCs both during development and after publishing</p>
+</li>
+                        
+                        <li><p>ARCs can be published and shared with the global community</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/fair/faqs/">FAQ page for the FAIR Data, Workflows, and Research topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+                <h1 data-toc-skip>Glossary</h1>
+                <dl>
+                    
+                    
+                    <dt>DMP</dt>
+                    <dd>Data Management Plan</dd>
+                    
+                    <dt>FAIR</dt>
+                    <dd>Findable, Accessible, Interoperable, Reusable</dd>
+                    
+                    <dt>PID</dt>
+                    <dd>Persistent Identifier</dd>
+                    
+                    <dt>RDM</dt>
+                    <dd>Research Data Management</dd>
+                    
+                </dl>
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/dataplant-arcs"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=fair/dataplant-arcs">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Saskia Hiltemann, Dominik Brilhaus, Sabrina Zander, Cristina Martins Rodrigues, Kevin Frey, Martin Kuhl, Stella Eggels,  <b>DataPLANT ARCs (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html">https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{fair-dataplant-arcs,
+author = "Saskia Hiltemann and Dominik Brilhaus and Sabrina Zander and Cristina Martins Rodrigues and Kevin Frey and Martin Kuhl and Stella Eggels",
+	title = "DataPLANT ARCs (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+		<h2 id="funding">Funding</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                
+<div class="d-flex flex-wrap">
+
+	<a href="/training-material/hall-of-fame/nfdi4plants/" class="funder-badge">
+		
+		<div class="avatar">
+			
+			<img class="funder-avatar" src="/training-material/shared/images/logo-dataplant.svg" alt="Logo">
+			
+		</div>
+
+		<div class="info">
+			<div class="name">DataPLANT</div>
+			<div class="description">
+			
+
+            
+			</div>
+		</div>
+	</a>
+
+</div>
+
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/dataplant-arcs/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/fair/tutorials/dataplant-arcs/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/9b9a7ff7dc70170fb270887bb89a6bb9fc9a141c">9b9a7ff</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
