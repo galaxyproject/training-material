@@ -28,8 +28,8 @@ jobs:
           architecture: 'x64'
       - name: Install dependencies
         run: |
-          sudo apt-get install -y imagemagick
-          pip install requests
+          sudo apt-get install -y imagemagick optipng
+          pip install requests awscli
           mkdir -p ~/.fonts/
           wget https://galaxy-training.s3.amazonaws.com/social/recursive.ttf -O ~/.fonts/recursive.ttf
           fc-cache -rv
@@ -64,12 +64,10 @@ jobs:
           PREVIOUS_TIMESTAMP: ${{ env.timestamp }}
 
       # Deploy step, scary.
-      - uses: jakejarvis/s3-sync-action@v0.5.1
-        with:
-          args: --acl public-read --follow-symlinks
+      - name: Build Social Media Cards
+        run: |
+          aws s3 cp --recursive ../gtn-social/ s3://galaxy-training/social/
         env:
-          AWS_S3_BUCKET: galaxy-training
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './social/'
-          DEST_DIR: 'social/'
+          AWS_DEFAULT_REGION: us-east-1
