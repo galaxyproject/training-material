@@ -7,7 +7,7 @@ abbreviations:
   DMP: Data Management Plan
   PID: Persistent Identifier
 
-zenodo_link: 'https://zenodo.org/records/13935061'
+zenodo_link: 'https://zenodo.org/records/13970369'
 questions:
 - What are ARCs?
 - Why should I create ARCs?
@@ -97,7 +97,7 @@ drought conditions, with watered plants as control. Under these conditions the p
 > 1. Download the zip file from Zenodo (<2MB) to your machine
 >
 >    ```
->    https://zenodo.org/records/13935061/files/arcitect-demo-data.zip
+>    https://zenodo.org/records/13970369/files/GTN_ARC_tutorial_data.zip
 >    ```
 >
 > 2. Unzip the file
