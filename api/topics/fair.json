@@ -194,8 +194,8 @@
       "id": "fair/med-chem-data",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-10-24 00:06:16 +0000",
-      "pub_date": "2024-10-24 00:06:16 +0000",
+      "mod_date": "2024-10-24 14:05:53 +0000",
+      "pub_date": "2024-10-24 14:05:53 +0000",
       "version": 0,
       "workflows": [
         {
@@ -236,7 +236,7 @@
 
           ],
           "test_results": null,
-          "modified": "2024-10-24 00:06:16 +0000",
+          "modified": "2024-10-24 14:05:53 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEthylamine\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Compound conversion\"];\n  0 -->|output| 2;\n  aff8fa4f-c254-4f05-9560-52bad6c7e04a[\"Output\\nBenzenesulfonyl chloride SDF\"];\n  2 --> aff8fa4f-c254-4f05-9560-52bad6c7e04a;\n  style aff8fa4f-c254-4f05-9560-52bad6c7e04a stroke:#2c3143,stroke-width:4px;\n  3[\"Search ChEMBL database\"];\n  0 -->|output| 3;\n  044d2c08-92ed-45c9-9868-ee802998d92c[\"Output\\nSubstructures from ChEMBL database\"];\n  3 --> 044d2c08-92ed-45c9-9868-ee802998d92c;\n  style 044d2c08-92ed-45c9-9868-ee802998d92c stroke:#2c3143,stroke-width:4px;\n  4[\"Search ChEMBL database\"];\n  0 -->|output| 4;\n  99274b60-732d-4276-969f-ccc3673a872a[\"Output\\nLipinski substructures from ChEMBL database\"];\n  4 --> 99274b60-732d-4276-969f-ccc3673a872a;\n  style 99274b60-732d-4276-969f-ccc3673a872a stroke:#2c3143,stroke-width:4px;\n  5[\"Compound conversion\"];\n  1 -->|output| 5;\n  77ad7b99-5761-46a3-b9a6-1dd3d8e2baac[\"Output\\nEthylamine SDF\"];\n  5 --> 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac;\n  style 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac stroke:#2c3143,stroke-width:4px;\n  6[\"Reaction maker\"];\n  2 -->|outfile| 6;\n  5 -->|outfile| 6;\n  f9d1d7fd-e854-469b-a464-6811998e058e[\"Output\\nReaction product\"];\n  6 --> f9d1d7fd-e854-469b-a464-6811998e058e;\n  style f9d1d7fd-e854-469b-a464-6811998e058e stroke:#2c3143,stroke-width:4px;\n  b0bd7ed2-a80b-44ce-994b-999e1d472281[\"Output\\nReaction maker logfile\"];\n  6 --> b0bd7ed2-a80b-44ce-994b-999e1d472281;\n  style b0bd7ed2-a80b-44ce-994b-999e1d472281 stroke:#2c3143,stroke-width:4px;\n  7[\"Visualisation\"];\n  6 -->|outfile| 7;\n  fc618f3f-6aa5-4970-841d-56f4eabf47b7[\"Output\\nVisualisation of reaction product\"];\n  7 --> fc618f3f-6aa5-4970-841d-56f4eabf47b7;\n  style fc618f3f-6aa5-4970-841d-56f4eabf47b7 stroke:#2c3143,stroke-width:4px;\n  8[\"Drug-likeness\"];\n  6 -->|outfile| 8;\n  7ad8c184-e10d-4fce-a402-3e79da6e09ac[\"Output\\nDrug-likeness of product molecule\"];\n  8 --> 7ad8c184-e10d-4fce-a402-3e79da6e09ac;\n  style 7ad8c184-e10d-4fce-a402-3e79da6e09ac stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nEthylamine\"]\n  2[label=\"Compound conversion\"]\n  0 -> 2 [label=\"output\"]\n  kaff8fa4fc2544f05956052bad6c7e04a[color=lightseagreen,label=\"Output\\nBenzenesulfonyl chloride SDF\"]\n  2 -> kaff8fa4fc2544f05956052bad6c7e04a\n  3[label=\"Search ChEMBL database\"]\n  0 -> 3 [label=\"output\"]\n  k044d2c0892ed45c99868ee802998d92c[color=lightseagreen,label=\"Output\\nSubstructures from ChEMBL database\"]\n  3 -> k044d2c0892ed45c99868ee802998d92c\n  4[label=\"Search ChEMBL database\"]\n  0 -> 4 [label=\"output\"]\n  k99274b60732d4276969fccc3673a872a[color=lightseagreen,label=\"Output\\nLipinski substructures from ChEMBL database\"]\n  4 -> k99274b60732d4276969fccc3673a872a\n  5[label=\"Compound conversion\"]\n  1 -> 5 [label=\"output\"]\n  k77ad7b99576146a3b9a61dd3d8e2baac[color=lightseagreen,label=\"Output\\nEthylamine SDF\"]\n  5 -> k77ad7b99576146a3b9a61dd3d8e2baac\n  6[label=\"Reaction maker\"]\n  2 -> 6 [label=\"outfile\"]\n  5 -> 6 [label=\"outfile\"]\n  kf9d1d7fde854469ba4646811998e058e[color=lightseagreen,label=\"Output\\nReaction product\"]\n  6 -> kf9d1d7fde854469ba4646811998e058e\n  kb0bd7ed2a80b44ce994b999e1d472281[color=lightseagreen,label=\"Output\\nReaction maker logfile\"]\n  6 -> kb0bd7ed2a80b44ce994b999e1d472281\n  7[label=\"Visualisation\"]\n  6 -> 7 [label=\"outfile\"]\n  kfc618f3f6aa54970841d56f4eabf47b7[color=lightseagreen,label=\"Output\\nVisualisation of reaction product\"]\n  7 -> kfc618f3f6aa54970841d56f4eabf47b7\n  8[label=\"Drug-likeness\"]\n  6 -> 8 [label=\"outfile\"]\n  k7ad8c184e10d4fcea4023e79da6e09ac[color=lightseagreen,label=\"Output\\nDrug-likeness of product molecule\"]\n  8 -> k7ad8c184e10d4fcea4023e79da6e09ac\n}",
           "workflow_tools": [
@@ -757,6 +757,10 @@
             "name": "Coloc-stats"
           },
           {
+            "url": "https://coralsnp.science.psu.edu/galaxy/",
+            "name": "CoralSNP"
+          },
+          {
             "url": "http://cropgalaxy.excellenceinbreeding.org/",
             "name": "CropGalaxy"
           },
@@ -824,10 +828,6 @@
           {
             "url": "http://galaxy.inf.ethz.ch",
             "name": "Oqtans"
-          },
-          {
-            "url": "https://palfinder.ls.manchester.ac.uk/",
-            "name": "Palfinder"
           },
           {
             "url": "http://pepsimili.e-nios.com:8080/",
@@ -905,6 +905,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -966,10 +970,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1044,6 +1044,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1105,10 +1109,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1183,6 +1183,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1245,10 +1249,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1324,6 +1324,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1386,10 +1390,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1467,6 +1467,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1528,10 +1532,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1606,6 +1606,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1667,10 +1671,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1745,6 +1745,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
                 "server": "http://cropgalaxy.excellenceinbreeding.org/"
               },
               {
@@ -1806,10 +1810,6 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -3540,6 +3540,271 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "DataPLANT ARCs",
+      "abbreviations": {
+        "FAIR": "Findable, Accessible, Interoperable, Reusable",
+        "RDM": "Research Data Management",
+        "DMP": "Data Management Plan",
+        "PID": "Persistent Identifier"
+      },
+      "zenodo_link": "https://zenodo.org/records/13970369",
+      "questions": [
+        "What are ARCs?",
+        "Why should I create ARCs?",
+        "How can I create my ARC?"
+      ],
+      "key_points": [
+        "Annotated Research Contexts (ARCs) help you structure your research data in a FAIR and standardized way",
+        "ARCitect is a useful tool to help you create your ARCs",
+        "DataHUB houses ARCs both during development and after publishing",
+        "ARCs can be published and shared with the global community"
+      ],
+      "tags": [
+        "plants",
+        "fair",
+        "data stewardship"
+      ],
+      "priority": 2,
+      "time_estimation": "2H",
+      "contributions": {
+        "authorship": [
+          "shiltemann",
+          "Brilator",
+          "SabrinaZander",
+          "CMR248",
+          "Freymaurer",
+          "Martin-Kuhl",
+          "StellaEggels"
+        ],
+        "funding": [
+          "nfdi4plants"
+        ]
+      },
+      "subtopic": "dataplant",
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "fair",
+          "tutorials": [
+            "fair-intro"
+          ]
+        }
+      ],
+      "extra": {
+        "arcitect_version": "0.48"
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/fair/tutorials/dataplant-arcs/tutorial.html",
+      "topic_name": "fair",
+      "tutorial_name": "dataplant-arcs",
+      "dir": "topics/fair/tutorials/dataplant-arcs",
+      "id": "fair/dataplant-arcs",
+      "hands_on": true,
+      "slides": true,
+      "mod_date": "2024-10-24 14:04:48 +0000",
+      "pub_date": "2024-10-22 15:22:19 +0000",
+      "version": 2,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "supported_servers_matrix": {
+        "servers": [
+
+        ],
+        "tools": [
+
+        ]
+      },
+      "topic_name_human": "FAIR Data, Workflows, and Research",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": true,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Dominik Brilhaus",
+          "orcid": "0000-0001-9021-3197",
+          "joined": "2024-10",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "Brilator",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Brilator.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/"
+        },
+        {
+          "name": "Sabrina Zander",
+          "joined": "2024-10",
+          "orcid": "0009-0000-4569-6126",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "SabrinaZander",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/SabrinaZander.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/"
+        },
+        {
+          "name": "Cristina Martins Rodrigues",
+          "joined": "2024-10",
+          "orcid": "0000-0002-4849-1537",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "CMR248",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/CMR248.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/"
+        },
+        {
+          "name": "Kevin Frey",
+          "joined": "2024-10",
+          "orcid": "0000-0002-8493-1077",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "Freymaurer",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Freymaurer.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/"
+        },
+        {
+          "name": "Martin Kuhl",
+          "joined": "2024-10",
+          "orcid": "0000-0002-8493-1077",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "Martin-Kuhl",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Martin-Kuhl.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/"
+        },
+        {
+          "name": "Stella Eggels",
+          "joined": "2024-07",
+          "affiliations": [
+            "nfdi4plants"
+          ],
+          "id": "StellaEggels",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/StellaEggels.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/"
+        },
+        {
+          "short_name": "DataPLANT",
+          "name": "DataPLANT (NFDI4Plants)",
+          "joined": "2024-07",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/nfdi4plants.json",
+          "avatar": "/training-material/shared/images/logo-dataplant.svg",
+          "members": [
+            "Brilator",
+            "CMR248",
+            "Freymaurer",
+            "Martin-Kuhl",
+            "SabrinaZander",
+            "shiltemann",
+            "StellaEggels"
+          ],
+          "id": "nfdi4plants",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "RO-Crate in Python",
       "time_estimation": "30M",
       "questions": [
@@ -4324,271 +4589,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/fair-metadata/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/fair-metadata/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "DataPLANT ARCs",
-      "abbreviations": {
-        "FAIR": "Findable, Accessible, Interoperable, Reusable",
-        "RDM": "Research Data Management",
-        "DMP": "Data Management Plan",
-        "PID": "Persistent Identifier"
-      },
-      "zenodo_link": "https://zenodo.org/records/13970369",
-      "questions": [
-        "What are ARCs?",
-        "Why should I create ARCs?",
-        "How can I create my ARC?"
-      ],
-      "key_points": [
-        "Annotated Research Contexts (ARCs) help you structure your research data in a FAIR and standardized way",
-        "ARCitect is a useful tool to help you create your ARCs",
-        "DataHUB houses ARCs both during development and after publishing",
-        "ARCs can be published and shared with the global community"
-      ],
-      "tags": [
-        "plants",
-        "fair",
-        "data stewardship"
-      ],
-      "priority": 2,
-      "time_estimation": "2H",
-      "contributions": {
-        "authorship": [
-          "shiltemann",
-          "Brilator",
-          "SabrinaZander",
-          "CMR248",
-          "Freymaurer",
-          "Martin-Kuhl",
-          "StellaEggels"
-        ],
-        "funding": [
-          "nfdi4plants"
-        ]
-      },
-      "subtopic": "dataplant",
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "fair",
-          "tutorials": [
-            "fair-intro"
-          ]
-        }
-      ],
-      "extra": {
-        "arcitect_version": "0.48"
-      },
-      "js_requirements": {
-        "mathjax": null,
-        "mermaid": false
-      },
-      "short_id": null,
-      "symlink": null,
-      "url": "/topics/fair/tutorials/dataplant-arcs/tutorial.html",
-      "topic_name": "fair",
-      "tutorial_name": "dataplant-arcs",
-      "dir": "topics/fair/tutorials/dataplant-arcs",
-      "id": "fair/dataplant-arcs",
-      "hands_on": true,
-      "slides": false,
-      "mod_date": "2024-10-22 15:34:07 +0000",
-      "pub_date": "2024-10-22 15:22:19 +0000",
-      "version": 2,
-      "api": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json",
-      "tools": [
-
-      ],
-      "supported_servers": {
-        "exact": [
-
-        ],
-        "inexact": [
-          {
-            "name": "UseGalaxy.eu",
-            "url": "https://usegalaxy.eu",
-            "id": "eu",
-            "human": "Galaxy Europe",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org",
-            "url": "https://usegalaxy.org",
-            "id": "us",
-            "human": "Galaxy Main",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.org.au",
-            "url": "https://usegalaxy.org.au",
-            "id": "au",
-            "human": "Galaxy Australia",
-            "usegalaxy": true
-          },
-          {
-            "name": "UseGalaxy.fr",
-            "url": "https://usegalaxy.fr",
-            "id": "fr",
-            "human": "Galaxy France",
-            "usegalaxy": true
-          }
-        ]
-      },
-      "supported_servers_matrix": {
-        "servers": [
-
-        ],
-        "tools": [
-
-        ]
-      },
-      "topic_name_human": "FAIR Data, Workflows, and Research",
-      "admin_install": {
-        "install_tool_dependencies": true,
-        "install_repository_dependencies": true,
-        "install_resolver_dependencies": true,
-        "tools": [
-
-        ]
-      },
-      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
-      "tours": false,
-      "video": false,
-      "slides_recordings": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "license": "CC-BY-4.0",
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Saskia Hiltemann",
-          "maintainer_contact": "gitter",
-          "email": "saskia.hiltemann@gmail.com",
-          "fediverse": "https://mstdn.science/@shiltemann",
-          "fediverse_flavor": "mastodon",
-          "bluesky": "shiltemann.bsky.social",
-          "linkedin": "shiltemann",
-          "matrix": "shiltemann:matrix.org",
-          "orcid": "0000-0003-3803-468X",
-          "joined": "2017-09",
-          "bio": "Researcher at Erasmus Medical Center",
-          "elixir_node": "nl",
-          "contact_for_training": true,
-          "affiliations": [
-            "uni-freiburg",
-            "nfdi4plants",
-            "elixir-europe"
-          ],
-          "former_affiliations": [
-            "CINECA-Project",
-            "gallantries",
-            "erasmusmc"
-          ],
-          "location": {
-            "country": "NL",
-            "lat": 51.912,
-            "lon": 4.462
-          },
-          "id": "shiltemann",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
-        },
-        {
-          "name": "Dominik Brilhaus",
-          "orcid": "0000-0001-9021-3197",
-          "joined": "2024-10",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "Brilator",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Brilator.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/"
-        },
-        {
-          "name": "Sabrina Zander",
-          "joined": "2024-10",
-          "orcid": "0009-0000-4569-6126",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "SabrinaZander",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/SabrinaZander.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/"
-        },
-        {
-          "name": "Cristina Martins Rodrigues",
-          "joined": "2024-10",
-          "orcid": "0000-0002-4849-1537",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "CMR248",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/CMR248.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/"
-        },
-        {
-          "name": "Kevin Frey",
-          "joined": "2024-10",
-          "orcid": "0000-0002-8493-1077",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "Freymaurer",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Freymaurer.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/"
-        },
-        {
-          "name": "Martin Kuhl",
-          "joined": "2024-10",
-          "orcid": "0000-0002-8493-1077",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "Martin-Kuhl",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/Martin-Kuhl.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/"
-        },
-        {
-          "name": "Stella Eggels",
-          "joined": "2024-07",
-          "affiliations": [
-            "nfdi4plants"
-          ],
-          "id": "StellaEggels",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/StellaEggels.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/"
-        },
-        {
-          "short_name": "DataPLANT",
-          "name": "DataPLANT (NFDI4Plants)",
-          "joined": "2024-07",
-          "url": "https://training.galaxyproject.org/training-material/api/organisations/nfdi4plants.json",
-          "avatar": "/training-material/shared/images/logo-dataplant.svg",
-          "members": [
-            "Brilator",
-            "CMR248",
-            "Freymaurer",
-            "Martin-Kuhl",
-            "SabrinaZander",
-            "shiltemann",
-            "StellaEggels"
-          ],
-          "id": "nfdi4plants",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/dataplant-arcs/tutorial.json"
       }
     },
     {

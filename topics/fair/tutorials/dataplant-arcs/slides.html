@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Intro to DataPLANT ARCs</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@8a9b0dca294ebaf945f5b32f9e7854b7eca4b918",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/slides.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <meta name="theme-color" content="#2c3143"/>
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Intro to DataPLANT ARCs">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-24 14:04:48 +0000">
+<meta name="DC.creator" content="Dominik Brilhaus">
+<meta name="DC.creator" content="Cristina Martins Rodrigues">
+<meta name="DC.creator" content="Kevin Frey">
+<meta name="DC.creator" content="Martin Kuhl">
+<meta name="DC.creator" content="Sabrina Zander">
+<meta name="DC.creator" content="Stella Eggels">
+<meta name="DC.creator" content="Saskia Hiltemann">
+
+        
+        
+        
+        
+        <meta name="description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:site_name" content="Galaxy Training Network">
+        <meta property="og:title" content="Slide Deck: Intro to DataPLANT ARCs">
+        <meta property="og:description" content="These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/fair/tutorials/dataplant-arcs/slides.png">
+
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Intro to DataPLANT ARCs",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-10-24 14:04:48 +0000",
+  "datePublished": "2024-10-24 14:04:48 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+
+  ],
+  "funding": [
+
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "FAIR Data, Workflows, and Research",
+    "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+    "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+  },
+  "abstract": "# About DataPLANT",
+  "learningResourceType": "slides",
+  "name": "Intro to DataPLANT ARCs",
+  "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/slides.html",
+  "version": 1,
+  "keywords": [
+    "FAIR Data, Workflows, and Research"
+  ],
+  "description": "## Abstract\n\n# About DataPLANT\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Brilator/",
+      "name": "Dominik Brilhaus",
+      "image": "https://avatars.githubusercontent.com/Brilator",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0001-9021-3197",
+      "orcid": "https://orcid.org/0000-0001-9021-3197"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/CMR248/",
+      "name": "Cristina Martins Rodrigues",
+      "image": "https://avatars.githubusercontent.com/CMR248",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4849-1537",
+      "orcid": "https://orcid.org/0000-0002-4849-1537"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Freymaurer/",
+      "name": "Kevin Frey",
+      "image": "https://avatars.githubusercontent.com/Freymaurer",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8493-1077",
+      "orcid": "https://orcid.org/0000-0002-8493-1077"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Martin-Kuhl/",
+      "name": "Martin Kuhl",
+      "image": "https://avatars.githubusercontent.com/Martin-Kuhl",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8493-1077",
+      "orcid": "https://orcid.org/0000-0002-8493-1077"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/SabrinaZander/",
+      "name": "Sabrina Zander",
+      "image": "https://avatars.githubusercontent.com/SabrinaZander",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0000-4569-6126",
+      "orcid": "https://orcid.org/0009-0000-4569-6126"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/StellaEggels/",
+      "name": "Stella Eggels",
+      "image": "https://avatars.githubusercontent.com/StellaEggels",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/",
+      "name": "Saskia Hiltemann",
+      "image": "https://avatars.githubusercontent.com/shiltemann",
+      "description": "Researcher at Erasmus Medical Center",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/uni-freiburg/",
+          "name": "University of Freiburg",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.uni-freiburg.de/"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4plants/",
+          "name": "DataPLANT (NFDI4Plants)",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://nfdi4plants.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-3803-468X",
+      "orcid": "https://orcid.org/0000-0003-3803-468X"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "FAIR Data, Workflows, and Research",
+      "description": "These lessons will teach you how to make your research objects more FAIR with practical, hands-on advice.",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/13970369",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}
+        </script>
+    </head>
+  <body data-brightness="auto" data-contrast="auto">
+
+
+    <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/fair" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a href="https://github.com/galaxyproject/training-material/edit/main/topics/fair/tutorials/dataplant-arcs/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+  
+<img src="/training-material/shared/images/dataplant-logo.png" alt="page logo" style="height: 40px;"/>
+  
+
+</span></div>
+
+---
+
+
+
+  
+<img src="/training-material/shared/images/dataplant-logo.png" alt="page logo" class="cover-logo" />
+  
+
+<br/>
+<br/>
+
+# Intro to DataPLANT ARCs
+
+<br/>
+<br/>
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+	
+<ul class="text-list">
+			
+			<li>
+				<a href="/training-material/hall-of-fame/Brilator/" class="contributor-badge contributor-Brilator"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Brilator?s=36" alt="Dominik Brilhaus avatar" width="36" class="avatar" />
+    Dominik Brilhaus</a>
+			<li>
+				<a href="/training-material/hall-of-fame/CMR248/" class="contributor-badge contributor-CMR248"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/CMR248?s=36" alt="Cristina Martins Rodrigues avatar" width="36" class="avatar" />
+    Cristina Martins Rodrigues</a>
+			<li>
+				<a href="/training-material/hall-of-fame/Freymaurer/" class="contributor-badge contributor-Freymaurer"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Freymaurer?s=36" alt="Kevin Frey avatar" width="36" class="avatar" />
+    Kevin Frey</a>
+			<li>
+				<a href="/training-material/hall-of-fame/Martin-Kuhl/" class="contributor-badge contributor-Martin-Kuhl"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Martin-Kuhl?s=36" alt="Martin Kuhl avatar" width="36" class="avatar" />
+    Martin Kuhl</a>
+			<li>
+				<a href="/training-material/hall-of-fame/SabrinaZander/" class="contributor-badge contributor-SabrinaZander"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/SabrinaZander?s=36" alt="Sabrina Zander avatar" width="36" class="avatar" />
+    Sabrina Zander</a>
+			<li>
+				<a href="/training-material/hall-of-fame/StellaEggels/" class="contributor-badge contributor-StellaEggels"><img src="https://avatars.githubusercontent.com/StellaEggels?s=36" alt="Stella Eggels avatar" width="36" class="avatar" />
+    Stella Eggels</a>
+			<li>
+				<a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a></li>
+</ul>
+	
+
+
+	</div>
+
+</div>
+
+
+<!-- modified date -->
+<div class="footnote" style="bottom: 8em;">
+  <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Updated:  &nbsp;
+  
+</div>
+
+
+<!-- other slide formats (video and plain-text) -->
+<div class="footnote" style="bottom: 5em;">
+
+  <i class="far fa-play-circle" aria-hidden="true"></i><span class="visually-hidden">video-slides</span> <a href="/training-material/videos/watch.html?v=/fair/tutorials/dataplant-arcs/slides">Video slides</a> |
+
+
+<i class="fas fa-file-alt" aria-hidden="true"></i><span class="visually-hidden">text-document</span><a href="slides-plain.html"> Plain-text slides</a> |
+
+
+
+
+
+
+</div>
+
+
+<!-- usage tips -->
+<div class="footnote" style="bottom: 2em;">
+    <strong>Tip: </strong>press <kbd>P</kbd> to view the presenter notes
+    | <i class="fa fa-arrows" aria-hidden="true"></i><span class="visually-hidden">arrow-keys</span> Use arrow keys to move between slides
+
+</div>
+
+???
+Presenter notes contain extra information which might be useful if you intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other.
+
+Useful when presenting.
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+# About DataPLANT
+
+![DataPLANT: participate in a thriving PLANT data research community, document and publish your research data FAIR, ensure the reproducibility of your research](images/dataplant-infographic.png)
+
+Towards democratization of plant research.
+
+???
+- Dataplant is a consortium from the heart of the German plant research community.
+- It aims to establish sustainable Research Data management, RDM, by providing both digital assistance such as software or teaching material.
+- as well as and personal assistance, for example via on-site consultation or workshops.
+- Dataplant is committed to developing an RDM system that meets community requirements and facilitates the processing and contextualization of research datasets in accordance with the FAIR principles (Findable, Accessible, Interoperable, Reusable).
+
+---
+
+# About DataPLANT
+
+.pull-left[
+- DataPLANT’s mission is to lead the **digital transformation** in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
+- DataPLANT builds **user-friendly services** that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
+]
+.pull-right[
+![logo of the word FAIR alongside a spreadsheet icon](images/dataplant-fair.png)
+]
+
+.footnote[ [nfdi4plants.org](https://nfdi4plants.org/)]
+???
+- Dataplant’s mission is to lead the digital transformation in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
+- Dataplant builds user-friendly services that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
+- You can read more about dataplant at NFDI for plants dot org
+
+---
+
+# Data Stewardship between DataPLANT and communities
+
+![images showing the interplay between dataplant on one hand, and research communities on the other](images/slides-dataplant-communities.png)
+
+???
+
+- dataplant works closely together with various plant consortia and projects
+- dataplant acts as the service provider, and has a team of technology experts and semantic specialists
+- dataplant supports communities through their tools, services and consultation
+- and in turn the communities provide feedback and contributions to dataplant
+
+---
+
+# Annotated Research Context (ARC)
+
+![concept of an ARC, experimental data, computation and annotation bundled together](images/arc-intro.png)
+
+Your entire investigation in a single unified bag
+
+???
+- Annotated research contexts, or arcs for short, provide a way to bundle your entire investigation in one unified place
+- Arcs can contain your experimental data and annotation, as well as your computational results and workflows
+- Arcs allow you to share your research in a fair and open way
+---
+
+# What does an ARC look like?
+
+![basic folder structure of an arc](images/slides-arc-structure.png)
+
+???
+- an arc, at its core, is a structured folder of data
+- this structure is based on the isa data model. isa stands for investigation, study assay
+- every arc represents an investigation, and contains studies, assays, workflows and runs at its root
+- we will focus mostly on studies and assays in this tutorial.
+- this is where you put your experimental data, and where you usually start when creating your arc.
+
+---
+
+# ARCs store experimental data
+
+![arc folder structure highlighting the studies and assays folder as places for storing experimental data](images/slides-arc-structure-experimental.png)
+
+???
+- studies contain information about the biological materials you used in your research, the plants you grew, but also lab protocols chemicals you used.
+- assays contain results and metadata about any measurements you performed
+- and at the end of a measurement you either have another sample, for example in the case of an extraction, or at the end you have data, for example a sequencing assay.
+
+---
+# Computations can be run inside ARCs
+
+![arc folder structure highlighting the workflows and runs folders for computational data](images/slides-arc-structure-computational.png)
+
+???
+- in the workflows folder you would store any scripts or workflows used to analyze the data coming from your assays
+- by specifying CWL workflows, your bioinformatics analysis can be reproduced, right inside the ARC
+- any results from these analysis workflows are stored in the runs folder
+
+---
+# ARCs come with comprehensive metadata
+
+![arc structure with the metadata files highlighted](images/slides-arc-structure-metadata.png)
+
+???
+- arcs also contain structured metadata
+- this metadata is uses ontologies to describe your research
+- metadata annotations are stored in so-called isa files. The are stored as excel workbooks in the arc.
+- there is investigation level metadata in isa investigation file
+- and similarly we have study-level and assay-level metadata files
+- For example, on the investigation level this would be information about your research, who you are, what was your biological question, what is the experimental design, and so on.
+- On the study level, you would for instance describe your plant samples, how they were grown, harvested, cultured, etcetera
+- On the assay level, let&apos;s say it is a sequencing assay, you would describe information about the measurement, such as the RNA or DNA extraction, library preparation, instruments used, the entire path of your samples in the lab.
+
+---
+
+# ARC builds on standards
+
+.pull-left[
+![arc structure highlighting places where standards such as isa, cwl and ro-crates come into play](images/slides-arc-standards.png)
+]
+
+.pull-right[
+&lt;br&gt;&lt;/br&gt;
+
+ARC incorporate established standards
+- **RO-Crate:** standardized exchange
+- **ISA:** structured, machine-readable metadata
+- **CWL:** reproducible, re-usable data analysis
+- **Git:** version control
+- **Ontologies:** standardized metadata
+]
+
+???
+- all of this builds on existing standards
+- arcs are an RO-crates implementation
+- they use the isa data model
+- CWL is used to describe data analysis
+- git is used for version control
+- and ontologies are leveraged to standardize metadata
+
+---
+
+# You can store ARCs in the DataHUB
+
+![image of your local computer, connected to datahub for online storage and backup](images/arc-datahub.png)
+
+???
+- now usually you start creating your arc on your computer
+- but you can store them online in the data hub, and thereby also creating a backup of your research
+- so you can make changes to your arc locally on your computer, push it to datahub, and from there sync it again, maybe to a different computer.
+
+---
+
+# ARCs are versioned
+
+![image showing different versions of an arc on datahub](images/slides-arc-versioned.png)
+
+???
+- datahub also provides version control for your arc
+- this means you have a detailed log of how your arc changed over time, and you can always go back to a previous version if you need
+
+
+---
+
+# You can invite collaborators
+
+![images showing different people having access to an arc](images/slides-arc-collaborate.png)
+
+???
+- by default your arc is private to you on datahub
+- but you can also invite other people to collaborate on your arc, give them access to your arc
+- this can be other people from your lab, or people from other institutes
+
+---
+
+# Collaborate and Contribute
+
+![images showing you you having access to multiple ARCs](images/slides-arc-collaborate-contribute.png)
+
+???
+- you can contribute to multiple arcs, multiple research projects
+- for example if others invited you to collaborate you can contribute to your research
+- or if you have multiple research projects, you can have multiple arcs of your own on datahub
+
+
+---
+
+# Reuse data in ARCs
+
+![image depicting parts of one arc being re-used in another](images/slides-arc-reuse.png)
+
+???
+- you can also reuse parts of other arcs, so you don&apos;t always have to recreate scripts, protocols, assays, etcetera
+
+---
+
+# Publish your ARC
+
+![an arc being published and receiving a doi. arcs can be published to dataplant, or to third party repositories](images/slides-arc-publish.png)
+
+???
+
+- and once your arc is complete and you are ready to release your work, you can publish your arc
+- you will receive a DOI, a digital object identifier, for your arc
+- dataplant is also creating converters for popular data repositories
+- for example if the editor of your journal requires you to deposit your data into a specific repository such as GEO ENA or NCBI
+- then you can convert the data from your arc into the format required for these repositories automatically
+
+---
+
+# Publish your ARC, get a DOI
+
+![image showing an arc being referenced by doi in a manuscript](images/slides-arc-doi.png)
+
+???
+- the DOI you receive for your arc can then be referenced in your journal article for example
+- if you make changes to your ARC you can publish a new version, and receive a new DOI, while your original DOI will always point to the original version of your arc
+
+---
+
+# Moving from paper to data publications
+
+![image showing move from classical publication to a more data-centric publishing model](images/slides-arc-data-publications.png)
+
+???
+- this approach allows us to move from classical publications to a more data-centric publication model
+
+---
+
+# ARC ecosystem
+
+![image depicting the circular RDM research cycle, with around its edge various dataplant tools and services](images/slides-arc-ecosystem.png)
+
+???
+- dataplant offers an entire ecosystem of tools and services around this concept
+- in all phases of the research data management cycle
+- from writing your data management plan, to storing and describing your research data, sharing and collaborating, and finally publishing your research and making it findable and accessible to scientists worldwide.
+
+
+
+
+
+
+
+
+
+
+
+---
+
+## Thank You!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://training.galaxyproject.org) and all the contributors!
+
+<div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/Brilator/" class="contributor-badge contributor-Brilator"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Brilator?s=36" alt="Dominik Brilhaus avatar" width="36" class="avatar" />
+    Dominik Brilhaus</a><a href="/training-material/hall-of-fame/CMR248/" class="contributor-badge contributor-CMR248"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/CMR248?s=36" alt="Cristina Martins Rodrigues avatar" width="36" class="avatar" />
+    Cristina Martins Rodrigues</a><a href="/training-material/hall-of-fame/Freymaurer/" class="contributor-badge contributor-Freymaurer"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Freymaurer?s=36" alt="Kevin Frey avatar" width="36" class="avatar" />
+    Kevin Frey</a><a href="/training-material/hall-of-fame/Martin-Kuhl/" class="contributor-badge contributor-Martin-Kuhl"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/Martin-Kuhl?s=36" alt="Martin Kuhl avatar" width="36" class="avatar" />
+    Martin Kuhl</a><a href="/training-material/hall-of-fame/SabrinaZander/" class="contributor-badge contributor-SabrinaZander"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/SabrinaZander?s=36" alt="Sabrina Zander avatar" width="36" class="avatar" />
+    Sabrina Zander</a><a href="/training-material/hall-of-fame/StellaEggels/" class="contributor-badge contributor-StellaEggels"><img src="https://avatars.githubusercontent.com/StellaEggels?s=36" alt="Stella Eggels avatar" width="36" class="avatar" />
+    Stella Eggels</a><a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
+    Saskia Hiltemann</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+<div style="display: flex;flex-direction: row;align-items: center;justify-content: center;">
+
+  
+<img src="/training-material/shared/images/dataplant-logo.png" alt="page logo" style="height: 100px;"/>
+  
+
+
+	
+
+
+</div>
+
+Tutorial Content is licensed under <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br/>
+
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js"></script>
+    <script src="/training-material/assets/js/clipboard.min.js"></script>
+    <script>
+      var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script>
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+        
+    </body>
+</html>
