@@ -1,0 +1,247 @@
+---
+layout: tutorial_slides
+logo: shared/images/dataplant-logo.png
+title: "Intro to DataPLANT ARCs"
+zenodo_link: ""
+contributions:
+  authorship:
+    - Brilator
+    - CMR248
+    - Freymaurer
+    - Martin-Kuhl
+    - SabrinaZander
+    - StellaEggels
+    - shiltemann
+subtopic: dataplant
+video: true
+---
+# About DataPLANT
+
+![DataPLANT: participate in a thriving PLANT data research community, document and publish your research data FAIR, ensure the reproducibility of your research](images/dataplant-infographic.png)
+
+Towards democratization of plant research.
+
+???
+- Dataplant is a consortium from the heart of the German plant research community.
+- It aims to establish sustainable Research Data management, RDM, by providing both digital assistance such as software or teaching material.
+- as well as and personal assistance, for example via on-site consultation or workshops.
+- Dataplant is committed to developing an RDM system that meets community requirements and facilitates the processing and contextualization of research datasets in accordance with the FAIR principles (Findable, Accessible, Interoperable, Reusable).
+
+---
+
+# About DataPLANT
+
+.pull-left[
+- DataPLANT’s mission is to lead the **digital transformation** in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
+- DataPLANT builds **user-friendly services** that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
+]
+.pull-right[
+![logo of the word FAIR alongside a spreadsheet icon](images/dataplant-fair.png)
+]
+
+.footnote[ [nfdi4plants.org](https://nfdi4plants.org/)]
+???
+- Dataplant’s mission is to lead the digital transformation in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
+- Dataplant builds user-friendly services that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
+- You can read more about dataplant at NFDI for plants dot org
+
+---
+
+# Data Stewardship between DataPLANT and communities
+
+![images showing the interplay between dataplant on one hand, and research communities on the other](images/slides-dataplant-communities.png)
+
+???
+
+- dataplant works closely together with various plant consortia and projects
+- dataplant acts as the service provider, and has a team of technology experts and semantic specialists
+- dataplant supports communities through their tools, services and consultation
+- and in turn the communities provide feedback and contributions to dataplant
+
+---
+
+# Annotated Research Context (ARC)
+
+![concept of an ARC, experimental data, computation and annotation bundled together](images/arc-intro.png)
+
+Your entire investigation in a single unified bag
+
+???
+- Annotated research contexts, or arcs for short, provide a way to bundle your entire investigation in one unified place
+- Arcs can contain your experimental data and annotation, as well as your computational results and workflows
+- Arcs allow you to share your research in a fair and open way
+---
+
+# What does an ARC look like?
+
+![basic folder structure of an arc](images/slides-arc-structure.png)
+
+???
+- an arc, at its core, is a structured folder of data
+- this structure is based on the isa data model. isa stands for investigation, study assay
+- every arc represents an investigation, and contains studies, assays, workflows and runs at its root
+- we will focus mostly on studies and assays in this tutorial.
+- this is where you put your experimental data, and where you usually start when creating your arc.
+
+---
+
+# ARCs store experimental data
+
+![arc folder structure highlighting the studies and assays folder as places for storing experimental data](images/slides-arc-structure-experimental.png)
+
+???
+- studies contain information about the biological materials you used in your research, the plants you grew, but also lab protocols chemicals you used.
+- assays contain results and metadata about any measurements you performed
+- and at the end of a measurement you either have another sample, for example in the case of an extraction, or at the end you have data, for example a sequencing assay.
+
+---
+# Computations can be run inside ARCs
+
+![arc folder structure highlighting the workflows and runs folders for computational data](images/slides-arc-structure-computational.png)
+
+???
+- in the workflows folder you would store any scripts or workflows used to analyze the data coming from your assays
+- by specifying CWL workflows, your bioinformatics analysis can be reproduced, right inside the ARC
+- any results from these analysis workflows are stored in the runs folder
+
+---
+# ARCs come with comprehensive metadata
+
+![arc structure with the metadata files highlighted](images/slides-arc-structure-metadata.png)
+
+???
+- arcs also contain structured metadata
+- this metadata is uses ontologies to describe your research
+- metadata annotations are stored in so-called isa files. The are stored as excel workbooks in the arc.
+- there is investigation level metadata in isa investigation file
+- and similarly we have study-level and assay-level metadata files
+- For example, on the investigation level this would be information about your research, who you are, what was your biological question, what is the experimental design, and so on.
+- On the study level, you would for instance describe your plant samples, how they were grown, harvested, cultured, etcetera
+- On the assay level, let's say it is a sequencing assay, you would describe information about the measurement, such as the RNA or DNA extraction, library preparation, instruments used, the entire path of your samples in the lab.
+
+---
+
+# ARC builds on standards
+
+.pull-left[
+![arc structure highlighting places where standards such as isa, cwl and ro-crates come into play](images/slides-arc-standards.png)
+]
+
+.pull-right[
+<br></br>
+
+ARC incorporate established standards
+- **RO-Crate:** standardized exchange
+- **ISA:** structured, machine-readable metadata
+- **CWL:** reproducible, re-usable data analysis
+- **Git:** version control
+- **Ontologies:** standardized metadata
+]
+
+???
+- all of this builds on existing standards
+- arcs are an RO-crates implementation
+- they use the isa data model
+- CWL is used to describe data analysis
+- git is used for version control
+- and ontologies are leveraged to standardize metadata
+
+---
+
+# You can store ARCs in the DataHUB
+
+![image of your local computer, connected to datahub for online storage and backup](images/arc-datahub.png)
+
+???
+- now usually you start creating your arc on your computer
+- but you can store them online in the data hub, and thereby also creating a backup of your research
+- so you can make changes to your arc locally on your computer, push it to datahub, and from there sync it again, maybe to a different computer.
+
+---
+
+# ARCs are versioned
+
+![image showing different versions of an arc on datahub](images/slides-arc-versioned.png)
+
+???
+- datahub also provides version control for your arc
+- this means you have a detailed log of how your arc changed over time, and you can always go back to a previous version if you need
+
+
+---
+
+# You can invite collaborators
+
+![images showing different people having access to an arc](images/slides-arc-collaborate.png)
+
+???
+- by default your arc is private to you on datahub
+- but you can also invite other people to collaborate on your arc, give them access to your arc
+- this can be other people from your lab, or people from other institutes
+
+---
+
+# Collaborate and Contribute
+
+![images showing you you having access to multiple ARCs](images/slides-arc-collaborate-contribute.png)
+
+???
+- you can contribute to multiple arcs, multiple research projects
+- for example if others invited you to collaborate you can contribute to your research
+- or if you have multiple research projects, you can have multiple arcs of your own on datahub
+
+
+---
+
+# Reuse data in ARCs
+
+![image depicting parts of one arc being re-used in another](images/slides-arc-reuse.png)
+
+???
+- you can also reuse parts of other arcs, so you don't always have to recreate scripts, protocols, assays, etcetera
+
+---
+
+# Publish your ARC
+
+![an arc being published and receiving a doi. arcs can be published to dataplant, or to third party repositories](images/slides-arc-publish.png)
+
+???
+
+- and once your arc is complete and you are ready to release your work, you can publish your arc
+- you will receive a DOI, a digital object identifier, for your arc
+- dataplant is also creating converters for popular data repositories
+- for example if the editor of your journal requires you to deposit your data into a specific repository such as GEO ENA or NCBI
+- then you can convert the data from your arc into the format required for these repositories automatically
+
+---
+
+# Publish your ARC, get a DOI
+
+![image showing an arc being referenced by doi in a manuscript](images/slides-arc-doi.png)
+
+???
+- the DOI you receive for your arc can then be referenced in your journal article for example
+- if you make changes to your ARC you can publish a new version, and receive a new DOI, while your original DOI will always point to the original version of your arc
+
+---
+
+# Moving from paper to data publications
+
+![image showing move from classical publication to a more data-centric publishing model](images/slides-arc-data-publications.png)
+
+???
+- this approach allows us to move from classical publications to a more data-centric publication model
+
+---
+
+# ARC ecosystem
+
+![image depicting the circular RDM research cycle, with around its edge various dataplant tools and services](images/slides-arc-ecosystem.png)
+
+???
+- dataplant offers an entire ecosystem of tools and services around this concept
+- in all phases of the research data management cycle
+- from writing your data management plan, to storing and describing your research data, sharing and collaborating, and finally publishing your research and making it findable and accessible to scientists worldwide.
+
+
