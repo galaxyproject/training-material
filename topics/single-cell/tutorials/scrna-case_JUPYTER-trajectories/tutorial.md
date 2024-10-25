@@ -29,7 +29,7 @@ answer_histories:
   - label: "Backup Jupyter Notebook for Google Colab"
     history: https://colab.research.google.com/drive/1-ENlIXM7TAoDGsMam7RyJIusIaBfF9e4?usp=sharing
     date: 2024-09-10
-    
+
 requirements:
 -
     type: "internal"
@@ -47,6 +47,7 @@ tags:
 - 10x
 - paper-replication
 - Python
+- MIGHTS
 
 contributions:
   authorship:
@@ -117,7 +118,7 @@ adata = sc.read_h5ad(thymusobject)
 ```
 
 > <details-title>Any problems with *get()* function?</details-title>
-> There shouldn't be any issues with fetching data from your Galaxy history using *get()* function. However, if you experience any problems, you can use the code below to download the input data and be able to follow the tutorial. 
+> There shouldn't be any issues with fetching data from your Galaxy history using *get()* function. However, if you experience any problems, you can use the code below to download the input data and be able to follow the tutorial.
 > ```python
 > %%bash
 > wget -nv https://zenodo.org/records/13743145/files/Filtered_anndata.h5ad
@@ -183,7 +184,7 @@ If you are working in a group, you can now divide up a decision here with one *c
    - you could undo the diffusion map step by running the following
 
         `sc.pp.neighbors(adata, n_neighbors=15, use_rep='X_pca')`
-     
+
         `sc.tl.draw_graph(adata)`
    - you could also change the number of neighbors used in the `pp.neighbors` step (this is the same as the Galaxy tool **Scanpy ComputeGraph**)
 
@@ -229,7 +230,7 @@ sc.pl.draw_graph(adata, color=['ENSMUSG00000023274', 'ENSMUSG00000053977'], titl
 ![Force-Directed + PAGA - Markers](../../images/scrna-casestudy/draw_graph_faPlot7.png "Force-Directed + PAGA - Markers")
 
 <!---
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came!
 -->
 
 
@@ -247,7 +248,7 @@ sc.pl.paga_compare(
 ![PAGA Compare](../../images/scrna-casestudy/paga_compare.png "PAGA Compare")
 
 <!---
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came!
 -->
 
 ## Diffusion pseudotime
