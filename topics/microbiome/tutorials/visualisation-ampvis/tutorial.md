@@ -75,17 +75,12 @@ These OTU tables can be generated using various tools on Galaxy:
 # Plotting options with ampvis2
 First of all you can put your data into  
 - {% tool [rarefaction curve](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.9+galaxy0) %}
-- a [rarefaction curve](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_rarecurve/ampvis2_rarecurve/2.8.9+galaxy0)
 
-to explore species richness. Then you can input your data into [subsets](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.9+galaxy0) and finally create:
+to explore species richness. Then you can input your data into {% tool [subsets](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_subset_samples/ampvis2_subset_samples/2.8.9+galaxy0) %} and finally create:
 - {% tool [heatmap](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.9+galaxy0) %}
-- a [heatmap](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_heatmap/ampvis2_heatmap/2.8.9+galaxy0)
--  {% tool [boxplot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.9+galaxy0) %}
-- a [boxplot](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.9+galaxy0)
+- {% tool [boxplot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_boxplot/ampvis2_boxplot/2.8.9+galaxy0) %}
 - {% tool [ordination plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.9+galaxy0) %}
-- an [ordination plot](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_ordinate/ampvis2_ordinate/2.8.9+galaxy0)
 - {% tool [timeseries plot](toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.9+galaxy0) %}
-- a [timeseries plot](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/ampvis2_timeseries/ampvis2_timeseries/2.8.9+galaxy0)
 
 Most of these visualisation methods are described in 
 [Introduction to ampvis2](https://kasperskytte.github.io/ampvis2/articles/ampvis2.html#heatmap).
@@ -451,7 +446,7 @@ Normalised data loses information about the original sequencing depth, making it
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or a data library:
+>    Import the files from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
 >    ```text
 >    {{ page.zenodo_link }}/files/MiDAS_otushort_table.tsv
