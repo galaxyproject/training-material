@@ -6,7 +6,6 @@ title: Divers and Adaptable Visualisations of Metabarcoding Data Using ampvis2
 level: Intermediate
 zenodo_link: https://zenodo.org/records/12591715
 zenodo_link2: "https://zenodo.org/records/10362755"
-zenodo_link3: "https://zenodo.org/records/7020318"
 questions:
 - How can the plots be adapted to suit the research data?
 - How can the data be filtered to show only significant information?
@@ -113,30 +112,11 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 
 ## Upload .biom file; create a phyloseq file
 
- * Use your own biom dataset or select one online, such as the following:
- 
-> <hands-on-title> Download the BIOM dataset </hands-on-title>
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link3 }}) or a data library:
->    ```text
->    {{ page.zenodo_link3 }}/files/closed_otu_table_mc2_w_tax_0.00005_rarefied12000_filtered.biom
->    ``` 
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
-{: .hands_on}
+* Both biom and phyloseq files are mentioned here for completeness 
+
+* Either biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial (though not demonstrated in this tutorial)
+
+* Use your own biom dataset or select one online, and upload it to Galaxy (as described in **Use Case 1**)
 
 > <details-title> How the Upload should look like </details-title>
 >
@@ -146,7 +126,7 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 >
 {: .details}
 
-* You can create a phylosec object using this workflow: 
+* You can create a phylosec object using these tools: 
 
 > <hands-on-title> Create phyloseq </hands-on-title>
 >
@@ -157,8 +137,6 @@ The OTU table is the only mandatory input for ampvis_load, but you can also inpu
 >    - {% icon param-file %} *"OTU table"*: `output` (output of **Create phyloseq object** {% icon tool %})
 >
 {: .hands_on}
-
-* Either biom or phyloseq files can be used as input for all of the visualisation methods presented in this tutorial 
 
 
 In this tutorial all visualisations are demonstrated by using a combination of 3 inputs:
@@ -200,10 +178,24 @@ We looked for a dataset marked "open" and used the following:
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
->    Import the files from [Zenodo]({{ page.zenodo_link2 }}) or a data library:
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link2 }}) or a data library:
 >    ```text
 >    {{ page.zenodo_link2 }}/files/BIOMARCS_ASV_tables.xlsx
 >    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 3. Rename the datasets
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+> 5. Add to each database a tag corresponding to ...
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
@@ -459,37 +451,13 @@ Normalised data loses information about the original sequencing depth, making it
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
+>    ```text
+>    {{ page.zenodo_link }}/files/MiDAS_otushort_table.tsv
+>    {{ page.zenodo_link }}/files/MiDAS_metadata.tsv
+>    {{ page.zenodo_link }}/files/MiDAS_taxtable.tsv
 >    ```
->    MiDAS_otushort_table.tsv
->    MiDAS_metadata.tsv
->    MiDAS_taxtable.tsv
->    ```
->
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype is in the right format
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
->
-> 6. When you have your history created and ready on the right side, click on "workflow" above.
->	 Choose the needed workflow by clicking on the blue play button in its box(if you hover over it, 
->	 it says: Run workflow).
->
-> 7. The workflow will ask you to input mandatory parameters. After doing so, click the blue button above
->	 "Run Workflow".
->    See on the next picture how it looks like.
 >
 {: .hands_on}
 
