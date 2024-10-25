@@ -20,16 +20,16 @@ description: |
 
 
 pathway:
-- section: "Module 1: Coding environments in Galaxy"
-  description: |
-    Let's start with the basics of running a coding environments in Galaxy.
-  tutorials:
-    - name: jupyterlab
-      topic: galaxy-interface
-    - name: galaxy-intro-jupyter
-      topic: galaxy-interface
-    - name: rstudio
-      topic: galaxy-interface
+  - section: "Module 1: Coding environments in Galaxy"
+    description: |
+      Let's start with the basics of running a coding environments in Galaxy.
+    tutorials:
+      - name: jupyterlab
+        topic: galaxy-interface
+      - name: galaxy-intro-jupyter
+        topic: galaxy-interface
+      - name: rstudio
+        topic: galaxy-interface
 
   - section: "Module 2: Preparing the dataset"
     description: |
