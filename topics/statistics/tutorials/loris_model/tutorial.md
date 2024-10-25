@@ -144,7 +144,7 @@ The feature Response is a categorical target variable indicating whether patient
 >
 {: .hands_on}
 
-# PyCaret Model Comparison
+# Using PyCaret Model Comparison Tool
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -155,6 +155,18 @@ The feature Response is a categorical target variable indicating whether patient
 >    - {% icon param-file %} *"Task"*: `Classification`
 > Run the tool 
 {: .hands_on}
+
+# Tool output files
+
+After your model is trained and tested, you should see two new files in your history list:
+
+- PyCaret Training report: ?
+
+- PyCaret Model Report: The file containing all the plots for the models trained and the best model selected.
+
+# PyCaret Model Report 
+
+Before we begin, it's crucial to understand the concept we want to drive into this analyse. Since we are looking to generate a model similar to what was published by {% cite Chang2024 %}, we are going to use the same metrics used in the paper as golden standard to the model we generate through Galaxy-PyCaret.
 
 # Conclusion
 
