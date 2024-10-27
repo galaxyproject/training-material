@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@8a9b0dca294ebaf945f5b32f9e7854b7eca4b918",
+		release: "galaxy-training-network@098881dabe90728ef8ece7ce95367c80d5196e71",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Quality Control">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-15 12:19:56 +0000">
+<meta name="DC.date" content="2024-10-27 09:37:04 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Maria Doyle">
 <meta name="DC.creator" content="Alexandre Cormier">
@@ -190,7 +190,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-15 12:19:56 +0000",
+  "dateModified": "2024-10-27 09:37:04 +0000",
   "datePublished": "2016-10-04 13:22:53 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -271,7 +271,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Quality Control",
   "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
-  "version": 43,
+  "version": 44,
   "timeRequired": "PT1H30M",
   "teaches": "- Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC\n- Assess long reads FASTQ quality using Nanoplot and PycoQC\n- Perform quality correction with Cutadapt (short reads)\n- Summarise quality metrics MultiQC\n- Process single-end and paired-end data",
   "keywords": [
@@ -1270,7 +1270,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 4, 2016 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 15, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 27, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1290,7 +1290,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (18 recent ratings, 206 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 43 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 44 </div>
 
     </blockquote>
     </section>
@@ -2062,12 +2062,12 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
   <div class="box-title hands-on-title" id="hands-on-improvement-of-sequence-quality"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Improvement of sequence quality</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 3.4+galaxy2)</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1" title="Cutadapt tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Cutadapt</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 4.9+galaxy1)</span> with the following parameters
       <ul>
         <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li>
-              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">Reads</code> (Input dataset)</p>
+              <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">Reads</code> (Input dataset)</p>
 
               <blockquote class="tip">
                 <div class="box-title tip-title" id="tip-files-not-selectable"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-files-not-selectable" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Files not selectable?</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2076,24 +2076,24 @@ GTGTCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCC
             </li>
           </ul>
         </li>
-        <li>In <em>“Read 1 Options”</em>:
+        <li>In <em>“Read 1 Adapters”</em>:
           <ul>
-            <li><em>“Insert 3’ (End) Adapters”</em>:
+            <li><em>“1: 3’ (End) Adapters”</em>:
               <ul>
                 <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code></li>
-                <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCT</code></li>
+                <li><em>“Custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CTGTCTCTTATACACATCT</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li>In <em>“Filter Options”</em>
+        <li>In <em>“Other Read Trimming Options”</em>
           <ul>
-            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Quality cutoff(s) (R1)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
-        <li>In <em>“Read Modification Options”</em>
+        <li>In <em>“Read Filtering Options”</em>
           <ul>
-            <li><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Minimum length (R1)”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Outputs selector”</em>: <code class="language-plaintext highlighter-rouge">Report</code></li>
@@ -3041,6 +3041,11 @@ tools:
   revisions: 44e2cc14f75b
   tool_panel_section_label: FASTA/FASTQ
   tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: cutadapt
+  owner: lparsons
+  revisions: 5eb7e84243f2
+  tool_panel_section_label: FASTA/FASTQ
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
 </code></pre></div>
                 </blockquote>
 		
@@ -3339,7 +3344,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/8a9b0dca294ebaf945f5b32f9e7854b7eca4b918">8a9b0dc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/098881dabe90728ef8ece7ce95367c80d5196e71">098881d</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
