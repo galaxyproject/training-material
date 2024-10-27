@@ -171,7 +171,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:25 +0000",
+          "modified": "2024-10-27 00:10:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nCollection of paired short-reads data\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Collection\\nCollection of long-reads data\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Samtools fastx\"];\n  7 -->|outputsam| 10;\n  11[\"Samtools fastx\"];\n  9 -->|outputsam| 11;\n  12[\"Collapse Collection\"];\n  10 -->|nonspecific| 12;\n  13[\"Zip Collection\"];\n  11 -->|forward| 13;\n  11 -->|reverse| 13;\n  14[\"Collapse Collection\"];\n  11 -->|forward| 14;\n  15[\"Collapse Collection\"];\n  11 -->|reverse| 15;\n  16[\"seqtk_sample\"];\n  14 -->|output| 16;\n  17[\"seqtk_sample\"];\n  15 -->|output| 17;\n  18[\"Create assemblies with Unicycler\"];\n  12 -->|output| 18;\n  16 -->|default| 18;\n  17 -->|default| 18;\n  19[\"Bandage Info\"];\n  18 -->|assembly_graph| 19;\n  2[\"fastp: Trimmed Illumina Reads\"];\n  0 -->|output| 2;\n  20[\"Filter sequences by length\"];\n  18 -->|assembly| 20;\n  21[\"Bandage Image\"];\n  18 -->|assembly_graph| 21;\n  3[\"NanoPlot\"];\n  1 -->|output| 3;\n  4[\"Map with minimap2\"];\n  1 -->|output| 4;\n  5[\"MultiQC\"];\n  2 -->|report_json| 5;\n  6[\"Bowtie2\"];\n  2 -->|output_paired_coll| 6;\n  7[\"Samtools view\"];\n  4 -->|alignment_output| 7;\n  8[\"Samtools stats\"];\n  4 -->|alignment_output| 8;\n  9[\"Samtools view\"];\n  6 -->|output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nCollection of paired short-reads data\"]\n  1[color=lightblue,label=\"ℹ️ Input Collection\\nCollection of long-reads data\"]\n  10[label=\"Samtools fastx\"]\n  7 -> 10 [label=\"outputsam\"]\n  11[label=\"Samtools fastx\"]\n  9 -> 11 [label=\"outputsam\"]\n  12[label=\"Collapse Collection\"]\n  10 -> 12 [label=\"nonspecific\"]\n  13[label=\"Zip Collection\"]\n  11 -> 13 [label=\"forward\"]\n  11 -> 13 [label=\"reverse\"]\n  14[label=\"Collapse Collection\"]\n  11 -> 14 [label=\"forward\"]\n  15[label=\"Collapse Collection\"]\n  11 -> 15 [label=\"reverse\"]\n  16[label=\"seqtk_sample\"]\n  14 -> 16 [label=\"output\"]\n  17[label=\"seqtk_sample\"]\n  15 -> 17 [label=\"output\"]\n  18[label=\"Create assemblies with Unicycler\"]\n  12 -> 18 [label=\"output\"]\n  16 -> 18 [label=\"default\"]\n  17 -> 18 [label=\"default\"]\n  19[label=\"Bandage Info\"]\n  18 -> 19 [label=\"assembly_graph\"]\n  2[label=\"fastp: Trimmed Illumina Reads\"]\n  0 -> 2 [label=\"output\"]\n  20[label=\"Filter sequences by length\"]\n  18 -> 20 [label=\"assembly\"]\n  21[label=\"Bandage Image\"]\n  18 -> 21 [label=\"assembly_graph\"]\n  3[label=\"NanoPlot\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Map with minimap2\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"MultiQC\"]\n  2 -> 5 [label=\"report_json\"]\n  6[label=\"Bowtie2\"]\n  2 -> 6 [label=\"output_paired_coll\"]\n  7[label=\"Samtools view\"]\n  4 -> 7 [label=\"alignment_output\"]\n  8[label=\"Samtools stats\"]\n  4 -> 8 [label=\"alignment_output\"]\n  9[label=\"Samtools view\"]\n  6 -> 9 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -1155,7 +1155,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:25 +0000",
+          "modified": "2024-10-27 00:10:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nList of Illumina accessions\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nList of ONT accessions\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Samtools stats\"];\n  6 -->|alignment_output| 10;\n  11[\"Samtools view\"];\n  8 -->|output| 11;\n  12[\"Samtools fastx\"];\n  9 -->|outputsam| 12;\n  13[\"Samtools fastx\"];\n  11 -->|outputsam| 13;\n  14[\"Collapse Collection\"];\n  12 -->|nonspecific| 14;\n  15[\"Zip Collection\"];\n  13 -->|forward| 15;\n  13 -->|reverse| 15;\n  16[\"Collapse Collection\"];\n  13 -->|forward| 16;\n  17[\"Collapse Collection\"];\n  13 -->|reverse| 17;\n  18[\"seqtk_sample\"];\n  16 -->|output| 18;\n  19[\"seqtk_sample\"];\n  17 -->|output| 19;\n  2[\"Illumina data\"];\n  0 -->|output| 2;\n  20[\"Create assemblies with Unicycler\"];\n  14 -->|output| 20;\n  18 -->|default| 20;\n  19 -->|default| 20;\n  21[\"Bandage Info\"];\n  20 -->|assembly_graph| 21;\n  22[\"Bandage Image\"];\n  20 -->|assembly_graph| 22;\n  23[\"Filter sequences by length\"];\n  20 -->|assembly| 23;\n  3[\"ONT data\"];\n  1 -->|output| 3;\n  4[\"fastp: Trimmed Illumina Reads\"];\n  2 -->|list_paired| 4;\n  5[\"NanoPlot\"];\n  3 -->|output_collection| 5;\n  6[\"Map with minimap2\"];\n  3 -->|output_collection| 6;\n  7[\"MultiQC\"];\n  4 -->|report_json| 7;\n  8[\"Bowtie2\"];\n  4 -->|output_paired_coll| 8;\n  9[\"Samtools view\"];\n  6 -->|alignment_output| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nList of Illumina accessions\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nList of ONT accessions\"]\n  10[label=\"Samtools stats\"]\n  6 -> 10 [label=\"alignment_output\"]\n  11[label=\"Samtools view\"]\n  8 -> 11 [label=\"output\"]\n  12[label=\"Samtools fastx\"]\n  9 -> 12 [label=\"outputsam\"]\n  13[label=\"Samtools fastx\"]\n  11 -> 13 [label=\"outputsam\"]\n  14[label=\"Collapse Collection\"]\n  12 -> 14 [label=\"nonspecific\"]\n  15[label=\"Zip Collection\"]\n  13 -> 15 [label=\"forward\"]\n  13 -> 15 [label=\"reverse\"]\n  16[label=\"Collapse Collection\"]\n  13 -> 16 [label=\"forward\"]\n  17[label=\"Collapse Collection\"]\n  13 -> 17 [label=\"reverse\"]\n  18[label=\"seqtk_sample\"]\n  16 -> 18 [label=\"output\"]\n  19[label=\"seqtk_sample\"]\n  17 -> 19 [label=\"output\"]\n  2[label=\"Illumina data\"]\n  0 -> 2 [label=\"output\"]\n  20[label=\"Create assemblies with Unicycler\"]\n  14 -> 20 [label=\"output\"]\n  18 -> 20 [label=\"default\"]\n  19 -> 20 [label=\"default\"]\n  21[label=\"Bandage Info\"]\n  20 -> 21 [label=\"assembly_graph\"]\n  22[label=\"Bandage Image\"]\n  20 -> 22 [label=\"assembly_graph\"]\n  23[label=\"Filter sequences by length\"]\n  20 -> 23 [label=\"assembly\"]\n  3[label=\"ONT data\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"fastp: Trimmed Illumina Reads\"]\n  2 -> 4 [label=\"list_paired\"]\n  5[label=\"NanoPlot\"]\n  3 -> 5 [label=\"output_collection\"]\n  6[label=\"Map with minimap2\"]\n  3 -> 6 [label=\"output_collection\"]\n  7[label=\"MultiQC\"]\n  4 -> 7 [label=\"report_json\"]\n  8[label=\"Bowtie2\"]\n  4 -> 8 [label=\"output_paired_coll\"]\n  9[label=\"Samtools view\"]\n  6 -> 9 [label=\"alignment_output\"]\n}",
           "workflow_tools": [
@@ -2294,11 +2294,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
@@ -2406,6 +2401,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -2423,11 +2423,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -2543,6 +2538,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -2556,10 +2555,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -2618,9 +2613,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.4.2+galaxy0",
+                  "2.4.5+galaxy1",
                   "2.3.4.2",
-                  "2.4.5+galaxy1"
+                  "2.4.2+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -2684,6 +2679,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.3.4.3+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -2692,13 +2691,13 @@
                 "state": "inexact",
                 "versions": [
                   "2.2.6",
-                  "0.2",
                   "2.2.6.2",
                   "2.3.2.2",
-                  "2.5.0+galaxy0",
-                  "0.6",
+                  "0.2",
                   "0.4",
-                  "0.3"
+                  "0.3",
+                  "2.5.0+galaxy0",
+                  "0.6"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -2711,11 +2710,6 @@
                 "state": "exact",
                 "version": "2.3.4.3+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.3.4.3+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -2831,6 +2825,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.2",
                 "server": "https://usegalaxy.be/"
@@ -2849,11 +2847,6 @@
                 "state": "exact",
                 "version": "1.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -2980,6 +2973,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.2+galaxy2",
                 "server": "https://usegalaxy.be/"
@@ -3000,11 +2997,6 @@
                 "state": "exact",
                 "version": "2.0.2+galaxy2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.0.2+galaxy2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -3065,9 +3057,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.8.1+galaxy4",
                   "0.8.1+galaxy0+galaxy0",
-                  "2022.09+galaxy4"
+                  "2022.09+galaxy4",
+                  "0.8.1+galaxy4"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3136,6 +3128,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.8.1+galaxy2",
                 "server": "https://usegalaxy.be/"
@@ -3156,11 +3152,6 @@
                 "state": "exact",
                 "version": "0.8.1+galaxy2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.8.1+galaxy2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -3221,8 +3212,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2022.09+galaxy2",
                   "0.8.1+galaxy2",
+                  "2022.09+galaxy2",
                   "0.8.1+galaxy0+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
@@ -3264,8 +3255,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2022.09+galaxy2",
-                  "0.8.1+galaxy2"
+                  "0.8.1+galaxy2",
+                  "2022.09+galaxy2"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -3284,6 +3275,10 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -3306,11 +3301,6 @@
                 "state": "exact",
                 "version": "0.8.1+galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.8.1+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -3439,6 +3429,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.19.5+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -3459,11 +3453,6 @@
                 "state": "exact",
                 "version": "0.19.5+galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.19.5+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -3527,8 +3516,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.24+galaxy0",
-                  "2.28+galaxy0"
+                  "2.28+galaxy0",
+                  "2.24+galaxy0"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -3540,8 +3529,8 @@
                 "state": "inexact",
                 "versions": [
                   "2.28+galaxy0",
-                  "2.17+galaxy4",
-                  "2.17+galaxy0"
+                  "2.17+galaxy0",
+                  "2.17+galaxy4"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -3596,6 +3585,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.17+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -3615,40 +3608,32 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.24+galaxy0",
                   "2.28+galaxy0",
+                  "2.24+galaxy0",
                   "2.27+galaxy0",
                   "2.12",
                   "2.26+galaxy0",
-                  "2.17+galaxy2",
                   "2.22+galaxy0",
-                  "2.23+galaxy0"
+                  "2.23+galaxy0",
+                  "2.17+galaxy2"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "2.24+galaxy0",
-                  "2.17+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.24+galaxy0",
                   "2.28+galaxy0",
-                  "2.17+galaxy4",
+                  "2.24+galaxy0",
                   "2.17+galaxy0",
+                  "2.17+galaxy4",
                   "2.27+galaxy0",
                   "2.17",
                   "2.26+galaxy0",
-                  "2.17+galaxy2",
-                  "2.20+galaxy2",
                   "2.20+galaxy1",
                   "2.17+galaxy3",
-                  "2.23+galaxy0"
+                  "2.23+galaxy0",
+                  "2.20+galaxy2",
+                  "2.17+galaxy2"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -3770,8 +3755,15 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.9",
-                  "1.8+galaxy0"
+                  "1.11+galaxy1"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "1.8+galaxy0",
+                  "1.9"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3789,11 +3781,6 @@
                 "state": "exact",
                 "version": "1.7",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.7",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -3920,6 +3907,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.25.0+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -3947,11 +3938,6 @@
                   "1.36.2+galaxy1"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.25.0+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4076,6 +4062,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -4096,11 +4086,6 @@
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.9+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4229,6 +4214,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -4249,11 +4238,6 @@
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.9+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4374,6 +4358,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.3.2",
                 "server": "https://usegalaxy.be/"
@@ -4392,11 +4380,6 @@
                 "state": "exact",
                 "version": "1.3.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.3.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4521,6 +4504,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.10.4+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -4543,26 +4530,19 @@
                   "2.11.0+galaxy0",
                   "2.10.4",
                   "3.0.5+galaxy0",
+                  "3.0.3+galaxy0",
                   "2.10.8+galaxy0",
                   "2.10.7+galaxy2",
-                  "3.0.3+galaxy0",
-                  "3.1.1+galaxy1",
-                  "2.11.0+galaxy1",
-                  "3.0.8+galaxy1",
-                  "3.1.0+galaxy1",
                   "3.0.10+galaxy0",
                   "3.1.0+galaxy0",
+                  "3.1.1+galaxy1",
                   "3.0.8+galaxy0",
+                  "2.11.0+galaxy1",
+                  "3.1.0+galaxy1",
+                  "3.0.8+galaxy1",
                   "3.0.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.11.0+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4682,6 +4662,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.4.8.0",
                 "server": "https://usegalaxy.be/"
@@ -4702,11 +4686,6 @@
                 "state": "exact",
                 "version": "0.4.8.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.4.8.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -4831,6 +4810,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.2",
                 "server": "https://usegalaxy.be/"
@@ -4851,15 +4834,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -5138,7 +5116,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:26 +0000",
+          "modified": "2024-10-27 00:10:32 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nCandidates\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nhits.sdf\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Enumerate changes\"];\n  0 -->|output| 3;\n  4[\"Compound conversion\"];\n  1 -->|output| 4;\n  5[\"Create Frankenstein ligand\"];\n  2 -->|output| 5;\n  6[\"Compound conversion\"];\n  3 -->|output| 6;\n  7[\"rDock cavity definition\"];\n  4 -->|outfile| 7;\n  5 -->|outfile| 7;\n  8[\"Split file\"];\n  6 -->|outfile| 8;\n  9[\"rDock docking\"];\n  4 -->|outfile| 9;\n  8 -->|list_output_sdf| 9;\n  7 -->|activesite| 9;\n  10[\"Collapse Collection\"];\n  9 -->|output| 10;\n  11[\"XChem TransFS pose scoring\"];\n  1 -->|output| 11;\n  10 -->|output| 11;\n  12[\"Max SuCOS score\"];\n  11 -->|output| 12;\n  2 -->|output| 12;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nCandidates\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nMpro-x0195_0_apo-desolv.pdb\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nhits.sdf\"]\n  3[label=\"Enumerate changes\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Compound conversion\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Create Frankenstein ligand\"]\n  2 -> 5 [label=\"output\"]\n  6[label=\"Compound conversion\"]\n  3 -> 6 [label=\"output\"]\n  7[label=\"rDock cavity definition\"]\n  4 -> 7 [label=\"outfile\"]\n  5 -> 7 [label=\"outfile\"]\n  8[label=\"Split file\"]\n  6 -> 8 [label=\"outfile\"]\n  9[label=\"rDock docking\"]\n  4 -> 9 [label=\"outfile\"]\n  8 -> 9 [label=\"list_output_sdf\"]\n  7 -> 9 [label=\"activesite\"]\n  10[label=\"Collapse Collection\"]\n  9 -> 10 [label=\"output\"]\n  11[label=\"XChem TransFS pose scoring\"]\n  1 -> 11 [label=\"output\"]\n  10 -> 11 [label=\"output\"]\n  12[label=\"Max SuCOS score\"]\n  11 -> 12 [label=\"output\"]\n  2 -> 12 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -5547,6 +5525,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -5564,11 +5547,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -5683,6 +5661,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1.1",
                 "server": "https://usegalaxy.be/"
@@ -5702,13 +5684,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2013.1-0+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -5825,6 +5800,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.1.1"
@@ -5844,11 +5823,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2013.1-0+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -5963,6 +5937,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1",
                 "server": "https://usegalaxy.be/"
@@ -5982,13 +5960,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2020.03.4+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -6105,6 +6076,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.1"
@@ -6124,11 +6099,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2020.03.4+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -6246,6 +6216,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.4.2.2.0",
                 "server": "https://usegalaxy.be/"
@@ -6265,13 +6239,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "3.1.1+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -6387,6 +6354,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.4.2.2.0"
@@ -6406,11 +6377,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "3.1.1+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -6525,6 +6491,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1",
                 "server": "https://usegalaxy.be/"
@@ -6544,13 +6514,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2013.1-0+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -6666,6 +6629,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1.4",
                 "server": "https://usegalaxy.be/"
@@ -6683,13 +6650,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2013.1-0+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -6806,6 +6766,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -6821,11 +6785,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.1.5",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -6945,6 +6904,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -6960,11 +6923,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.1.5",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -7091,6 +7049,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.4.0",
                 "server": "https://usegalaxy.be/"
@@ -7109,11 +7071,6 @@
                 "state": "exact",
                 "version": "0.4.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.4.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -7237,6 +7194,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.4.0",
@@ -7258,11 +7219,6 @@
                 "state": "exact",
                 "version": "0.5.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.5.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -7377,6 +7333,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.2.3",
                 "server": "https://usegalaxy.be/"
@@ -7396,13 +7356,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2020.03.4+galaxy0"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "inexact",
@@ -7519,6 +7472,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.2.3"
@@ -7538,11 +7495,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2020.03.4+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -7657,6 +7609,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.4.0",
                 "server": "https://usegalaxy.be/"
@@ -7674,11 +7630,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.4.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -7802,6 +7753,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.2",
                 "server": "https://usegalaxy.be/"
@@ -7822,15 +7777,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -7946,6 +7896,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -7959,10 +7913,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "missing",
@@ -8361,6 +8311,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -8378,11 +8333,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -8498,6 +8448,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -8511,10 +8465,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -8639,6 +8589,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "1.1.0",
@@ -8660,16 +8614,6 @@
                 "state": "exact",
                 "version": "1.8+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "1.1.0",
-                  "1.1.0+galaxy2",
-                  "1.0.6",
-                  "1.1.0+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -8790,6 +8734,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -8806,10 +8754,6 @@
                 "state": "exact",
                 "version": "2.7.0+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -8878,10 +8822,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0.5+galaxy0",
                   "3.1.16+galaxy0",
                   "4.1.1+galaxy0",
                   "4.1.2+galaxy0",
+                  "4.0.5+galaxy0",
                   "3.0.3+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -8935,6 +8879,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.3.8"
@@ -8958,10 +8906,6 @@
                 "state": "exact",
                 "version": "4.3+galaxy2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -9077,6 +9021,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -9092,10 +9040,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -9210,6 +9154,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -9223,10 +9171,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -9536,7 +9480,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:31 +0000",
+          "modified": "2024-10-27 00:10:37 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRA Manifest\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  1 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  0 -->|output| 4;\n  5[\"MarkDuplicates\"];\n  4 -->|bam_output| 5;\n  6[\"Realign reads\"];\n  5 -->|outFile| 6;\n  0 -->|output| 6;\n  7[\"Samtools stats\"];\n  5 -->|outFile| 7;\n  8[\"Insert indel qualities\"];\n  6 -->|realigned| 8;\n  0 -->|output| 8;\n  2ca7c89b-999f-41dc-8037-e54e25959a7e[\"Output\\nRealigned Alignments with Indel Qualities\"];\n  8 --> 2ca7c89b-999f-41dc-8037-e54e25959a7e;\n  style 2ca7c89b-999f-41dc-8037-e54e25959a7e stroke:#2c3143,stroke-width:4px;\n  9[\"Call variants\"];\n  8 -->|output| 9;\n  0 -->|output| 9;\n  10[\"SnpEff eff:\"];\n  9 -->|variants| 10;\n  11[\"SnpSift Extract Fields\"];\n  10 -->|snpeff_output| 11;\n  06259137-eaa5-404a-923c-70ee5f1d89d4[\"Output\\nSnpSift tabular output\"];\n  11 --> 06259137-eaa5-404a-923c-70ee5f1d89d4;\n  style 06259137-eaa5-404a-923c-70ee5f1d89d4 stroke:#2c3143,stroke-width:4px;\n  12[\"MultiQC\"];\n  3 -->|report_json| 12;\n  7 -->|output| 12;\n  5 -->|metrics_file| 12;\n  10 -->|csvFile| 12;\n  758ffde5-7ddd-482a-88b2-1504f8335488[\"Output\\nMultiQC Report PE\"];\n  12 --> 758ffde5-7ddd-482a-88b2-1504f8335488;\n  style 758ffde5-7ddd-482a-88b2-1504f8335488 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nNC_045512.2 fasta file\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRA Manifest\"]\n  2[label=\"Faster Download and Extract Reads in FASTQ\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  2 -> 3 [label=\"list_paired\"]\n  4[label=\"Map with BWA-MEM\"]\n  3 -> 4 [label=\"output_paired_coll\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"MarkDuplicates\"]\n  4 -> 5 [label=\"bam_output\"]\n  6[label=\"Realign reads\"]\n  5 -> 6 [label=\"outFile\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Samtools stats\"]\n  5 -> 7 [label=\"outFile\"]\n  8[label=\"Insert indel qualities\"]\n  6 -> 8 [label=\"realigned\"]\n  0 -> 8 [label=\"output\"]\n  k2ca7c89b999f41dc8037e54e25959a7e[color=lightseagreen,label=\"Output\\nRealigned Alignments with Indel Qualities\"]\n  8 -> k2ca7c89b999f41dc8037e54e25959a7e\n  9[label=\"Call variants\"]\n  8 -> 9 [label=\"output\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"SnpEff eff:\"]\n  9 -> 10 [label=\"variants\"]\n  11[label=\"SnpSift Extract Fields\"]\n  10 -> 11 [label=\"snpeff_output\"]\n  k06259137eaa5404a923c70ee5f1d89d4[color=lightseagreen,label=\"Output\\nSnpSift tabular output\"]\n  11 -> k06259137eaa5404a923c70ee5f1d89d4\n  12[label=\"MultiQC\"]\n  3 -> 12 [label=\"report_json\"]\n  7 -> 12 [label=\"output\"]\n  5 -> 12 [label=\"metrics_file\"]\n  10 -> 12 [label=\"csvFile\"]\n  k758ffde57ddd482a88b21504f8335488[color=lightseagreen,label=\"Output\\nMultiQC Report PE\"]\n  12 -> k758ffde57ddd482a88b21504f8335488\n}",
           "workflow_tools": [
@@ -10103,11 +10047,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
             "usegalaxy": true
@@ -10215,6 +10154,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -10232,11 +10176,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -10352,6 +10291,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -10365,10 +10308,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -10482,6 +10421,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -10495,10 +10438,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -10618,6 +10557,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.be/"
@@ -10636,11 +10579,6 @@
                 "state": "exact",
                 "version": "1.1.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.1.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -10767,6 +10705,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.7.17.1",
                 "server": "https://usegalaxy.be/"
@@ -10785,11 +10727,6 @@
                 "state": "exact",
                 "version": "0.7.17.1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.7.17.1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -10916,6 +10853,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.18.2.2",
                 "server": "https://usegalaxy.be/"
@@ -10937,11 +10878,6 @@
                 "state": "exact",
                 "version": "2.18.2.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.18.2.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11068,6 +11004,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.0.2+galaxy2",
                 "server": "https://usegalaxy.be/"
@@ -11088,11 +11028,6 @@
                 "state": "exact",
                 "version": "2.0.2+galaxy2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.0.2+galaxy2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11218,6 +11153,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.20.1+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -11238,11 +11177,6 @@
                 "state": "exact",
                 "version": "0.20.1+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.20.1+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11367,6 +11301,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -11387,11 +11325,6 @@
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.1.5+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11510,6 +11443,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -11530,11 +11467,6 @@
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.1.5+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11651,6 +11583,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -11669,11 +11605,6 @@
                 "state": "exact",
                 "version": "2.1.5+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.1.5+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11734,9 +11665,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
-                  "1.6",
                   "1.11+galaxy0",
+                  "1.6",
+                  "1.11+galaxy1",
                   "1.7"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
@@ -11748,8 +11679,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
                   "1.11+galaxy0",
+                  "1.11+galaxy1",
                   "1.7",
                   "1.9+galaxy1"
                 ],
@@ -11806,6 +11737,13 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.11+galaxy1"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.8+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -11824,11 +11762,6 @@
                 "state": "exact",
                 "version": "1.8+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.8+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -11946,6 +11879,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.5covid19",
                 "server": "https://usegalaxy.be/"
@@ -11964,11 +11901,6 @@
                 "state": "exact",
                 "version": "4.5covid19",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.5covid19",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -12087,6 +12019,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.3+t.galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -12105,11 +12041,6 @@
                 "state": "exact",
                 "version": "4.3+t.galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.3+t.galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -12233,6 +12164,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.10.7+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -12255,26 +12190,19 @@
                   "2.11.0+galaxy0",
                   "2.10.4",
                   "3.0.5+galaxy0",
+                  "3.0.3+galaxy0",
                   "2.10.8+galaxy0",
                   "2.10.7+galaxy2",
-                  "3.0.3+galaxy0",
-                  "3.1.1+galaxy1",
-                  "2.11.0+galaxy1",
-                  "3.0.8+galaxy1",
-                  "3.1.0+galaxy1",
                   "3.0.10+galaxy0",
                   "3.1.0+galaxy0",
+                  "3.1.1+galaxy1",
                   "3.0.8+galaxy0",
+                  "2.11.0+galaxy1",
+                  "3.1.0+galaxy1",
+                  "3.0.8+galaxy1",
                   "3.0.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.11.0+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -12290,18 +12218,18 @@
                   "2.11.0+galaxy0",
                   "2.10.4",
                   "2.10.4+galaxy1",
-                  "3.0.5+galaxy0",
-                  "2.10.8+galaxy0",
-                  "2.10.4+galaxy2",
-                  "3.0.3+galaxy0",
                   "2.10.7+galaxy0",
-                  "3.1.1+galaxy1",
-                  "2.11.0+galaxy1",
-                  "3.0.8+galaxy1",
-                  "3.1.0+galaxy1",
+                  "3.0.5+galaxy0",
+                  "3.0.3+galaxy0",
+                  "2.10.4+galaxy2",
+                  "2.10.8+galaxy0",
                   "3.0.10+galaxy0",
                   "3.1.0+galaxy0",
+                  "3.1.1+galaxy1",
                   "3.0.8+galaxy0",
+                  "2.11.0+galaxy1",
+                  "3.1.0+galaxy1",
+                  "3.0.8+galaxy1",
                   "3.0.0+galaxy0",
                   "3.0.5+galaxy1"
                 ],
@@ -12419,6 +12347,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "2.11.0+galaxy0",
@@ -12442,13 +12374,6 @@
                 "state": "exact",
                 "version": "3.0.3+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.11.0+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -12780,7 +12705,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:28 +0000",
+          "modified": "2024-10-27 00:10:34 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nVariant calls\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Parameter\\nmin-AF for consensus variant\"];\n  style 1 fill:#ded,stroke:#393,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nReference genome\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Compose text parameter value\"];\n  1 -->|output| 3;\n  4[\"SnpSift Filter\"];\n  3 -->|out1| 4;\n  0 -->|output| 4;\n  ee67c5ed-ff7c-404b-ad20-19259edbc671[\"Output\\nconsensus_variants\"];\n  4 --> ee67c5ed-ff7c-404b-ad20-19259edbc671;\n  style ee67c5ed-ff7c-404b-ad20-19259edbc671 stroke:#2c3143,stroke-width:4px;\n  5[\"bcftools consensus\"];\n  4 -->|output| 5;\n  2 -->|output| 5;\n  9028f80e-4112-40d8-9a49-f671677d304f[\"Output\\nconsensus\"];\n  5 --> 9028f80e-4112-40d8-9a49-f671677d304f;\n  style 9028f80e-4112-40d8-9a49-f671677d304f stroke:#2c3143,stroke-width:4px;\n  6[\"Collapse Collection\"];\n  5 -->|output_file| 6;\n  1dd7978e-b907-42d6-8fc4-f6fadeefcad1[\"Output\\nmultisample_consensus_fasta\"];\n  6 --> 1dd7978e-b907-42d6-8fc4-f6fadeefcad1;\n  style 1dd7978e-b907-42d6-8fc4-f6fadeefcad1 stroke:#2c3143,stroke-width:4px;\n  7[\"Pangolin\"];\n  6 -->|output| 7;\n  e02d2cfb-9842-4069-957c-6cf4ec197056[\"Output\\npangolin_results\"];\n  7 --> e02d2cfb-9842-4069-957c-6cf4ec197056;\n  style e02d2cfb-9842-4069-957c-6cf4ec197056 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nVariant calls\"]\n  1[color=lightgreen,label=\"ℹ️ Input Parameter\\nmin-AF for consensus variant\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nReference genome\"]\n  3[label=\"Compose text parameter value\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"SnpSift Filter\"]\n  3 -> 4 [label=\"out1\"]\n  0 -> 4 [label=\"output\"]\n  kee67c5edff7c404bad2019259edbc671[color=lightseagreen,label=\"Output\\nconsensus_variants\"]\n  4 -> kee67c5edff7c404bad2019259edbc671\n  5[label=\"bcftools consensus\"]\n  4 -> 5 [label=\"output\"]\n  2 -> 5 [label=\"output\"]\n  k9028f80e411240d89a49f671677d304f[color=lightseagreen,label=\"Output\\nconsensus\"]\n  5 -> k9028f80e411240d89a49f671677d304f\n  6[label=\"Collapse Collection\"]\n  5 -> 6 [label=\"output_file\"]\n  k1dd7978eb90742d68fc4f6fadeefcad1[color=lightseagreen,label=\"Output\\nmultisample_consensus_fasta\"]\n  6 -> k1dd7978eb90742d68fc4f6fadeefcad1\n  7[label=\"Pangolin\"]\n  6 -> 7 [label=\"output\"]\n  ke02d2cfb98424069957c6cf4ec197056[color=lightseagreen,label=\"Output\\npangolin_results\"]\n  7 -> ke02d2cfb98424069957c6cf4ec197056\n}",
           "workflow_tools": [
@@ -13359,6 +13284,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -13376,11 +13306,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -13505,6 +13430,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.10",
                 "server": "https://usegalaxy.be/"
@@ -13525,11 +13454,6 @@
                 "state": "exact",
                 "version": "1.10",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.10",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -13646,6 +13570,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1.1",
                 "server": "https://usegalaxy.be/"
@@ -13663,10 +13591,6 @@
                 "state": "exact",
                 "version": "0.1.1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -13735,10 +13659,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0.5+galaxy0",
                   "3.1.16+galaxy0",
                   "4.1.1+galaxy0",
                   "4.1.2+galaxy0",
+                  "4.0.5+galaxy0",
                   "3.0.3+galaxy0"
                 ],
                 "server": "https://galaxytrakr.org/"
@@ -13794,6 +13718,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.3.8",
                 "server": "https://usegalaxy.be/"
@@ -13814,26 +13742,22 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.0.5+galaxy0",
                   "3.1.16+galaxy0",
                   "4.1.1+galaxy0",
                   "4.1.2+galaxy0",
+                  "4.0.5+galaxy0",
                   "3.1.17+galaxy1",
                   "4.3+galaxy2",
                   "4.2+galaxy0",
                   "4.3+galaxy1",
-                  "3.1.4+galaxy1",
+                  "3.1.19+galaxy0",
+                  "3.1.11+galaxy0",
                   "3.1.20+galaxy0",
                   "3.1.14+galaxy0",
-                  "4.0.5+galaxy2",
-                  "3.1.11+galaxy0",
-                  "3.1.19+galaxy0"
+                  "3.1.4+galaxy1",
+                  "4.0.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -13954,6 +13878,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.3+t.galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -13972,11 +13900,6 @@
                 "state": "exact",
                 "version": "4.3+t.galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.3+t.galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -14101,6 +14024,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.2",
                 "server": "https://usegalaxy.be/"
@@ -14121,15 +14048,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.1.0",
-                  "4.1"
+                  "4.1",
+                  "5.1.0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -14352,7 +14274,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:28 +0000",
+          "modified": "2024-10-27 00:10:34 +0000",
           "mermaid": "flowchart TD\n  0[\"ENA Upload tool\"];\n  1[\"ENA Upload tool\"];",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"ENA Upload tool\"]\n  1[label=\"ENA Upload tool\"]\n}",
           "workflow_tools": [
@@ -14565,6 +14487,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -14582,11 +14509,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -14702,6 +14624,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -14715,10 +14641,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "missing",
@@ -14834,12 +14756,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
+                  "0.3",
                   "0.3.1",
                   "0.5.3",
-                  "0.7.1+galaxy1",
-                  "0.3"
+                  "0.7.1+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -14863,18 +14789,14 @@
                   "0.5.3",
                   "0.7.1+galaxy1",
                   "0.6.1",
-                  "0.6.0",
                   "0.4.1",
+                  "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.3",
                   "0.3.3",
+                  "0.4.3",
                   "0.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "missing",
@@ -14889,8 +14811,8 @@
                   "0.6.1",
                   "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.3",
-                  "0.3.3"
+                  "0.3.3",
+                  "0.4.3"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -15000,12 +14922,16 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
+                  "0.3",
                   "0.3.1",
                   "0.5.3",
-                  "0.7.1+galaxy1",
-                  "0.3"
+                  "0.7.1+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -15020,17 +14946,17 @@
                 "state": "inexact",
                 "versions": [
                   "0.7.3+galaxy1",
+                  "0.3",
                   "0.3.1",
                   "0.5.3",
                   "0.7.1+galaxy1",
-                  "0.3",
                   "0.6.1",
-                  "0.6.0",
-                  "0.4.1",
-                  "0.6.3+galaxy0",
-                  "0.4.3",
                   "0.3.2",
-                  "0.3.3"
+                  "0.4.1",
+                  "0.6.0",
+                  "0.6.3+galaxy0",
+                  "0.3.3",
+                  "0.4.3"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -15042,18 +14968,14 @@
                   "0.5.3",
                   "0.7.1+galaxy1",
                   "0.6.1",
-                  "0.6.0",
                   "0.4.1",
+                  "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.3",
                   "0.3.3",
+                  "0.4.3",
                   "0.7.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "missing",
@@ -15068,8 +14990,8 @@
                   "0.6.1",
                   "0.6.0",
                   "0.6.3+galaxy0",
-                  "0.4.3",
-                  "0.3.3"
+                  "0.3.3",
+                  "0.4.3"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -15239,7 +15161,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-26 00:06:29 +0000",
+          "modified": "2024-10-27 00:10:35 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Trimmomatic\"];\n  0 -->|output| 1;\n  2[\"Unzip Collection\"];\n  0 -->|output| 2;\n  3[\"Map with BWA-MEM\"];\n  1 -->|fastq_out_paired| 3;\n  4[\"Samtools fastx\"];\n  3 -->|bam_output| 4;\n  5[\"Select\"];\n  4 -->|forward| 5;\n  6[\"Replace Text\"];\n  5 -->|out_file1| 6;\n  7[\"seqtk_subseq\"];\n  2 -->|forward| 7;\n  6 -->|outfile| 7;\n  8[\"seqtk_subseq\"];\n  2 -->|reverse| 8;\n  6 -->|outfile| 8;\n  9[\"Paired-end collection of cleaned reads\"];\n  7 -->|default| 9;\n  8 -->|default| 9;\n  f24bbf28-dc51-440f-a758-ac05033f0645[\"Output\\nCleaned Data\"];\n  9 --> f24bbf28-dc51-440f-a758-ac05033f0645;\n  style f24bbf28-dc51-440f-a758-ac05033f0645 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[label=\"Trimmomatic\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Unzip Collection\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Map with BWA-MEM\"]\n  1 -> 3 [label=\"fastq_out_paired\"]\n  4[label=\"Samtools fastx\"]\n  3 -> 4 [label=\"bam_output\"]\n  5[label=\"Select\"]\n  4 -> 5 [label=\"forward\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"out_file1\"]\n  7[label=\"seqtk_subseq\"]\n  2 -> 7 [label=\"forward\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"seqtk_subseq\"]\n  2 -> 8 [label=\"reverse\"]\n  6 -> 8 [label=\"outfile\"]\n  9[label=\"Paired-end collection of cleaned reads\"]\n  7 -> 9 [label=\"default\"]\n  8 -> 9 [label=\"default\"]\n  kf24bbf28dc51440fa758ac05033f0645[color=lightseagreen,label=\"Output\\nCleaned Data\"]\n  9 -> kf24bbf28dc51440fa758ac05033f0645\n}",
           "workflow_tools": [
@@ -15896,11 +15818,6 @@
             "usegalaxy": true
           },
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.org.au",
             "name": "UseGalaxy.org.au",
             "usegalaxy": true
@@ -16008,6 +15925,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -16025,11 +15947,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -16145,6 +16062,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -16158,10 +16079,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -16275,6 +16192,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -16288,10 +16209,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -16405,6 +16322,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "local",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -16418,10 +16339,6 @@
               {
                 "state": "local",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "local",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "local",
@@ -16540,6 +16457,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.2",
                 "server": "https://usegalaxy.be/"
@@ -16558,11 +16479,6 @@
                 "state": "exact",
                 "version": "1.1.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.1.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -16686,6 +16602,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.7.17.1",
@@ -16707,11 +16627,6 @@
                 "state": "exact",
                 "version": "0.7.17.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.7.17.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -16837,6 +16752,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.be/"
@@ -16857,11 +16776,6 @@
                 "state": "exact",
                 "version": "1.9+galaxy1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.9+galaxy1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -16982,6 +16896,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.3.1",
                 "server": "https://usegalaxy.be/"
@@ -17000,11 +16918,6 @@
                 "state": "exact",
                 "version": "1.3.1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.3.1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -17132,6 +17045,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.38.0",
                 "server": "https://usegalaxy.be/"
@@ -17142,9 +17059,9 @@
                   "0.38.1",
                   "0.36.4",
                   "0.32.3",
-                  "0.32.2",
                   "0.36.0",
-                  "0.32.1"
+                  "0.32.1",
+                  "0.32.2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -17157,9 +17074,9 @@
                   "0.39+galaxy2",
                   "0.32.3",
                   "0.36.5",
-                  "0.32.2",
                   "0.36.0",
-                  "0.32.1"
+                  "0.32.1",
+                  "0.32.2"
                 ],
                 "server": "https://usegalaxy.eu"
               },
@@ -17167,15 +17084,6 @@
                 "state": "exact",
                 "version": "0.38.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "0.38.1",
-                  "0.36.4",
-                  "0.36.5"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -17301,6 +17209,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.36.6",
@@ -17325,11 +17237,6 @@
                 "state": "exact",
                 "version": "0.38.1",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.38.1",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -17539,11 +17446,6 @@
             "url": "https://usegalaxy.eu",
             "name": "UseGalaxy.eu",
             "usegalaxy": true
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
           }
         ]
       },
@@ -17648,6 +17550,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -17665,11 +17572,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -17792,6 +17694,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "0.1.0",
                 "server": "https://usegalaxy.be/"
@@ -17810,11 +17716,6 @@
                 "state": "exact",
                 "version": "0.1.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.1.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -17930,6 +17831,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.1.5",
                 "server": "https://usegalaxy.be/"
@@ -17947,11 +17852,6 @@
               {
                 "state": "missing",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.1.5",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18067,6 +17967,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.0",
                 "server": "https://usegalaxy.be/"
@@ -18085,11 +17989,6 @@
                 "state": "exact",
                 "version": "1.0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18210,6 +18109,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "3.0.0",
                 "server": "https://usegalaxy.be/"
@@ -18233,16 +18136,11 @@
                   "3.3.1",
                   "3.3.0",
                   "3.3.2",
-                  "3.1.1",
+                  "3.0.1",
                   "3.2.0",
-                  "3.0.1"
+                  "3.1.1"
                 ],
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "3.0.0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18360,6 +18258,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "4.5covid19",
                 "server": "https://usegalaxy.be/"
@@ -18378,11 +18280,6 @@
                 "state": "exact",
                 "version": "4.5covid19",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "4.5covid19",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18506,6 +18403,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.11.0+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -18518,12 +18419,12 @@
                   "2.10.7+galaxy1",
                   "2.10.4",
                   "2.10.4+galaxy1",
+                  "2.10.7+galaxy0",
                   "3.0.5+galaxy0",
-                  "2.10.8+galaxy0",
-                  "2.10.7+galaxy2",
-                  "2.10.4+galaxy2",
                   "3.0.3+galaxy0",
-                  "2.10.7+galaxy0"
+                  "2.10.4+galaxy2",
+                  "2.10.8+galaxy0",
+                  "2.10.7+galaxy2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -18536,13 +18437,6 @@
                 "state": "exact",
                 "version": "2.11.0+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "inexact",
-                "versions": [
-                  "2.11.0+galaxy1"
-                ],
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18669,6 +18563,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "2.11.0+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -18679,15 +18577,15 @@
                   "2.9.1.3",
                   "2.10.9+galaxy0",
                   "3.0.5+galaxy3",
+                  "2.10.7+galaxy1",
                   "2.10.4",
                   "2.10.4+galaxy1",
-                  "2.10.7+galaxy1",
                   "2.8.0",
-                  "2.10.7+galaxy0",
                   "1.2.5",
                   "3.0.5+galaxy0",
-                  "3.0.3+galaxy0",
                   "2.10.8+galaxy0",
+                  "2.10.7+galaxy0",
+                  "3.0.3+galaxy0",
                   "2.10.7+galaxy2"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -18699,11 +18597,11 @@
                   "3.1.1+galaxy0",
                   "3.0.5+galaxy0",
                   "3.0.3+galaxy0",
-                  "3.0.8+galaxy0",
-                  "3.1.0+galaxy0",
-                  "3.0.8+galaxy1",
-                  "3.1.1+galaxy1",
                   "3.0.10+galaxy0",
+                  "3.0.8+galaxy1",
+                  "3.1.0+galaxy0",
+                  "3.0.8+galaxy0",
+                  "3.1.1+galaxy1",
                   "3.1.0+galaxy1"
                 ],
                 "server": "https://usegalaxy.eu"
@@ -18712,11 +18610,6 @@
                 "state": "exact",
                 "version": "2.11.0+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "2.11.0+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -18910,11 +18803,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.org",
             "name": "UseGalaxy.org (Main)",
             "usegalaxy": true
@@ -19059,6 +18947,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.bio.di.uminho.pt/",
+            "name": "PhagePromotor",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -19076,11 +18969,6 @@
           {
             "url": "https://usegalaxy.fr/",
             "name": "UseGalaxy.fr",
-            "usegalaxy": false
-          },
-          {
-            "url": "https://usegalaxy.no/",
-            "name": "UseGalaxy.no",
             "usegalaxy": false
           },
           {
@@ -19204,6 +19092,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "inexact",
                 "versions": [
                   "0.7.17.1",
@@ -19225,11 +19117,6 @@
                 "state": "exact",
                 "version": "0.7.17.2",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.7.17.2",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -19359,15 +19246,22 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.72+galaxy1",
+                  "0.74+galaxy0"
+                ],
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
                   "0.72",
+                  "0.72+galaxy1",
                   "0.69",
-                  "0.74+galaxy1",
-                  "0.65",
-                  "0.68",
-                  "0.71",
                   "0.52",
-                  "0.67"
+                  "0.74+galaxy1",
+                  "0.71",
+                  "0.68",
+                  "0.67",
+                  "0.65"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -19376,13 +19270,13 @@
                 "versions": [
                   "0.74+galaxy0",
                   "0.69",
-                  "0.65",
-                  "0.68",
                   "0.52",
+                  "0.68",
                   "0.67",
-                  "0.63",
+                  "0.65",
                   "0.62",
-                  "0.64"
+                  "0.64",
+                  "0.63"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -19395,11 +19289,6 @@
                 "state": "exact",
                 "version": "0.73+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "0.73+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
@@ -19525,6 +19414,10 @@
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
+                "state": "missing",
+                "server": "https://galaxy.bio.di.uminho.pt/"
+              },
+              {
                 "state": "exact",
                 "version": "1.16.9+galaxy0",
                 "server": "https://usegalaxy.be/"
@@ -19545,11 +19438,6 @@
                 "state": "exact",
                 "version": "1.16.9+galaxy0",
                 "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "exact",
-                "version": "1.16.9+galaxy0",
-                "server": "https://usegalaxy.no/"
               },
               {
                 "state": "exact",
