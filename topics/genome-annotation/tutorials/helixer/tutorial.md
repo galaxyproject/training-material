@@ -222,6 +222,35 @@ This gives information about the completeness of the Helixer annotation. A good 
 >
 {: .comment}
 
+## Evaluation with **OMArk**
+
+[OMArk](https://github.com/DessimozLab/OMArk) is proteome quality assessment software. It provides measures of proteome completeness, characterises the consistency of all protein-coding genes with their homologues and identifies the presence of contamination by other species. OMArk is based on the OMA orthology database, from which it exploits orthology relationships, and on the OMAmer software for rapid placement of all proteins in gene families.
+
+OMArk's analysis is based on HOGs (Hierarchical Orthologous Groups), which play a central role in its assessment of the completeness and coherence of gene sets. HOGs make it possible to compare the genes of a given species with groups of orthologous genes conserved across a taxonomic clade. 
+
+> <hands-on-title>OMArk on extracted protein sequences</hands-on-title>
+>
+> 1. {% tool [OMArk](toolshed.g2.bx.psu.edu/repos/iuc/omark/omark/0.3.0+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"Protein sequences"*: `gffread: pep.fa`
+>    - *"OMAmer database*: select `LUCA-v2.0.0`
+>    - In *"Which outputs should be generated"*: select `Detailed summary`
+>
+{: .hands_on}
+
+The OMArk tool generated an output file in .txt format containing detailed information on the assessment of the completeness, consistency and species composition of the proteome analysed. This report includes statistics on conserved genes, the proportion of duplications, missing genes and the identification of reference lineages.
+
+> <comment-title>What can we deduce from these results?</comment-title>
+>
+> - Number of conserved HOGs: OMArk has identified a set of 5622 HOGs which are thought to be conserved in the majority of species in the Mucorineae clade.
+> - 85.52% of genes are complete, so the annotation is of good quality in terms of genomic completeness.
+> - Number of proteins in the whole proteome: 19 299. Of which 62.83% are present and 30.94% of the proteome does not share sufficient similarities with known gene families.
+> - No contamination detected.
+> - The OMArk analysis is based on the Mucorineae lineage, a more recent and specific clade than that used in the BUSCO assessment, which selected the Mucorales as the reference group.
+{: .comment}
+
+
+
+
 # Visualisation with a genome browser
 
 You can visualize the annotation generated using a genomic browser like [JBrowse](https://jbrowse.org/jbrowse1.html). This browser enables you to navigate along the chromosomes of the genome and view the structure of each predicted gene.
