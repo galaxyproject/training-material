@@ -50,7 +50,7 @@ jobs:
           echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
 
           # Support regenerating all
-          if [[ "${{ github.event.inputs.selected_tag }}" != "" ]]; then
+          if [[ "${{ github.event.inputs.all_old }}" != "" ]]; then
             echo "timestamp=0" >> $GITHUB_ENV
           fi
 
