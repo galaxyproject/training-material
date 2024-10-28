@@ -1,4 +1,4 @@
-![Galaxy49- Seurat_Visualize_(VlnPlot)_on_data_34__png_plot](https://github.com/user-attachments/assets/da627570-d16c-470d-8338-94353e2e5ff6)---
+---
 layout: tutorial_hands_on
 
 title: "Clustering 3K PBMCs with Seurat"
