@@ -10,7 +10,7 @@ answer_histories:
   - label: "Using Separate Preprocessing Tools"
     history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key
     date: 2023-10-28
-      - label: "Using SCTransform"
+  - label: "Using SCTransform"
     history: https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-key
     date: 2023-10-28
 questions:
