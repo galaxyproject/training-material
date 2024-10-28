@@ -28,11 +28,12 @@ tags:
 
 > <comment-title>PyCaret Model Comparison Tool</comment-title>
 >
-> The PyCaret Model Comparison tool described in this tutorial is only available at: 
+> The PyCaret Model Comparison tool described in this tutorial is only available (for now) at: 
 > [Cancer-Galaxy](https://cancer.usegalaxy.org)
 >
 > Galaxy-ML tools > PyCaret Model Comparison 
 >
+> As soon as it gets incorporated to the main galaxy project, this tutorial will be updated.
 {:  .comment}
 
 Using a comprehensive dataset of patients treated with immune checkpoint blockade (ICB) and non-ICB-treated patients across 18 solid tumor types, we will develop LORIS (logistic regression-based immunotherapy-response score). The goal is to accurately predict patient responses to the treatment.
@@ -119,7 +120,7 @@ The feature Response is a categorical target variable indicating whether patient
 
 > <hands-on-title> Environment and Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial. If you are not inspired, you can name it *LORIS classifier*.
+> 1. Create a new history for this tutorial. If you are not inspired, you can name it *LORIS model classifier*.
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
@@ -137,7 +138,7 @@ The feature Response is a categorical target variable indicating whether patient
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add a tag (`LORIS LLR6 dataset`) to the dataset corresponding to `Chowell_train_Response.tsv`
+> 5. Add a tag (`LORIS model dataset`) to the dataset corresponding to `Chowell_train_Response.tsv` and `Chowell_test_Response.tsv`
 >    This is important to trace back on what dataset the model was built on.
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
@@ -160,13 +161,38 @@ The feature Response is a categorical target variable indicating whether patient
 
 After your model is trained and tested, you should see two new files in your history list:
 
-- PyCaret Training report: ?
+- PyCaret Model Comparasion Best Model: The PyCaret model pickle file. This file allows the model to be reused without requiring retraining, ensuring consistent predictions.
 
 - PyCaret Model Report: The file containing all the plots for the models trained and the best model selected.
 
+As the proporse of this tutorial, we will focus on the PyCaret Model Report.
+
 # PyCaret Model Report 
 
+The PyCaret HTML report output provides a comprehensive and interactive overview of the trained model’s performance in an accessible, browser-ready format. This HTML report documents key aspects of the model’s training and evaluation process, supporting deeper insight into how well the model performed on both training and test datasets. There are four tabs: Setup & Best Model; Best Model Plots; Feature Importance; Explainer. 
+
+We are going to provide a brief explanation about the content of each tab present in the report.
+
+## Setup & Best Model Tab:
+
+- Setup Parameters: Documents the initial configurations used in the PyCaret Model Comparison Tool.
+
+- Best Model Class and Hyperparameters: Specifies the model selected as the best performer from the model comparison, listing the model’s hyperparameters as chosen through tuning.
+
+- Performance Metrics: Summarizes key evaluation metrics, including Accuracy, ROC-AUC, Recall, Precision, F1-Score, Cohen’s Kappa, Matthews Correlation Coefficient (MCC), and Training Time (TT in seconds).
+
+## Best Model Plots Tab:
+
+- Training and Test Evaluation Plots: Displays visualizations of the model’s performance, including an ROC-AUC curve for binary classification, Confusion Matrix, Precision-Recall (PR) curve, Error Analysis, and a Classification Report for detailed class-level performance.
+
+- Additional Model Insights: Includes diagnostic plots like the Learning Curve, Calibration Plot, Validation Curve (VC), and various dimensionality reduction plots (Manifold, RFE).
+
+- Feature Importance: Shows the contribution of each feature to the model, both individually and collectively (All Features), providing insight into the factors influencing model decisions.
+
+## 
+
 Before we begin, it's crucial to understand the concept we want to drive into this analyse. Since we are looking to generate a model similar to what was published by {% cite Chang2024 %}, we are going to use the same metrics used in the paper as golden standard to the model we generate through Galaxy-PyCaret.
+
 
 # Conclusion
 
