@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6e829cce53f553ea17af662d96f5ed8eaf1c6a26",
+		release: "galaxy-training-network@79f07eb82957bd9685e64965c3b732c3fc8fe46c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Inferring single cell trajectories with Scanpy (Python)">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-19 18:40:02 +0000">
+<meta name="DC.date" content="2024-10-28 12:59:16 +0000">
 <meta name="DC.creator" content="Wendi Bacon">
 <meta name="DC.creator" content="Julia Jakiela">
 <meta name="DC.creator" content="Mehmet Tekman"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
@@ -183,7 +183,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-19 18:40:02 +0000",
+  "dateModified": "2024-10-28 12:59:16 +0000",
   "datePublished": "2021-04-07 14:04:47 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -245,7 +245,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Inferring single cell trajectories with Scanpy (Python)",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html",
-  "version": 17,
+  "version": 18,
   "timeRequired": "PT2H",
   "teaches": "- Execute multiple plotting methods designed to maintain lineage relationships between cells\n- Interpret these plots",
   "keywords": [
@@ -253,6 +253,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "10x",
     "paper-replication",
     "Python",
+    "MIGHTS",
     "jupyter-notebook"
   ],
   "description": "## Abstract\n\n# Run the tutorial!\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How can I infer lineage relationships between single cells based on their RNA, without a time series?\n\n\n## Learning Objectives\n\n- Execute multiple plotting methods designed to maintain lineage relationships between cells\n- Interpret these plots\n\n",
@@ -1507,7 +1508,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 7, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 19, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1527,7 +1528,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.6</a> (0 recent ratings, 5 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 17 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 18 </div>
 
     </blockquote>
     </section>
@@ -1698,7 +1699,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <figure id="figure-6" style="max-width: 90%;"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " width="827" height="269" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/draw_graph_faPlot7.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Force-Directed + PAGA - Markers</figcaption></figure>
 
 <!---
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came!
 -->
 
 <p>Well aren’t those charts interesting! Using the diffusion map to drive the force-directed graph, we see correct ordering of our cells (from DN to DP to T-mature, which was lost with the diffusion map alone) as well as two apparent branches leaving the mature T-cell population, which is what we’d biologically expect. In terms of our experiment, we’re seeing a clear trajectory issue whereby the knockout cells are not found along the trajectory into T-mature (which, well, we kind of already figured out with just the cluster analysis, but we can feel even more confident about our results!) More importantly, we can see the T-mature population dividing itself, which we did not see in the clustering via UMAP/tSNE alone, and we can verify that as the leftmost branch has CD4 but the rightmost branch does not. This is suggesting our branchpoint from to CD4+ and CD8+ single positive cells. Exciting! However, it is important to note, that the branches there are quite small and sparsely populated, which can indicate artifact branches (i.e. trajectory analysis does its best to find branches, particularly diffusion map, so you can pretty easily force branches to appear even if they are not biologically real!). However, to be frank, we were surprised not to find this clearer in the main cluster map, as we know that the T-cells should diverge at that point, so if anything this is a relief that our data is believable!</p>
@@ -1713,7 +1714,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <figure id="figure-7" style="max-width: 90%;"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " width="819" height="244" loading="lazy" /><a target="_blank" href="../../images/scrna-casestudy/paga_compare.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PAGA Compare</figcaption></figure>
 
 <!---
-**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came! 
+**Note** - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix! The fix came!
 -->
 
 <h2 id="diffusion-pseudotime">Diffusion pseudotime</h2>
@@ -2068,7 +2069,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6e829cce53f553ea17af662d96f5ed8eaf1c6a26">6e829cc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/79f07eb82957bd9685e64965c3b732c3fc8fe46c">79f07eb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

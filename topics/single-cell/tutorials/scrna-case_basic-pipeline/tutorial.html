@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@6e829cce53f553ea17af662d96f5ed8eaf1c6a26",
+		release: "galaxy-training-network@79f07eb82957bd9685e64965c3b732c3fc8fe46c",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Filter, plot and explore single-cell RNA-seq data with Scanpy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-09-18 12:04:29 +0000">
+<meta name="DC.date" content="2024-10-28 12:59:16 +0000">
 <meta name="DC.creator" content="Wendi Bacon"><meta name="description" content="Training material and practicals for all kinds of single cell analysis (particularly scRNA-seq!). When you generate your lovely gene lists for your cells, consider checking out our Transcriptomics tutorials for further network analysis!  What else do you want to see? You can submit tool and/or tutorial request on our  [Single Cell Community Tool Request Spreadsheet](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing).  {: .alert.alert-success} ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Single Cell / Filter, plot and explore single-cell RNA-seq data with Scanpy / Hands-on: Filter, plot and explore single-cell RNA-seq data with Scanpy">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-09-18 12:04:29 +0000",
+  "dateModified": "2024-10-28 12:59:16 +0000",
   "datePublished": "2021-03-24 11:32:22 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -243,13 +243,14 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Filter, plot and explore single-cell RNA-seq data with Scanpy",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html",
-  "version": 20,
+  "version": 21,
   "timeRequired": "PT3H",
   "teaches": "- Interpret quality control plots to direct parameter decisions\n- Repeat analysis from matrix to clustering\n- Identify decision-making points\n- Appraise data outputs and decisions\n- Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process",
   "keywords": [
     "Single Cell",
     "10x",
-    "paper-replication"
+    "paper-replication",
+    "MIGHTS"
   ],
   "description": "## Abstract\n\nYou've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat, Scanpy, Monocle, Scater, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - Is my single cell dataset a quality dataset?\n - How do I generate and annotate cell clusters?\n - How do I pick thresholds and parameters in my analysis? What's a \"reasonable\" number, and will the world collapse if I pick the wrong one?\n\n\n## Learning Objectives\n\n- Interpret quality control plots to direct parameter decisions\n- Repeat analysis from matrix to clustering\n- Identify decision-making points\n- Appraise data outputs and decisions\n- Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process\n\n",
   "inLanguage": {
@@ -1246,7 +1247,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 24, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 18, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1266,7 +1267,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">4.7</a> (3 recent ratings, 7 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 20 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 21 </div>
 
     </blockquote>
     </section>
@@ -3391,7 +3392,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6e829cce53f553ea17af662d96f5ed8eaf1c6a26">6e829cc</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/79f07eb82957bd9685e64965c3b732c3fc8fe46c">79f07eb</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
