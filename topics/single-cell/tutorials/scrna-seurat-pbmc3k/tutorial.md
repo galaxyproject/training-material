@@ -251,8 +251,8 @@ We can visualise the QC metrics to help us decide where to set our thresholds fo
 
 > <question-title></question-title>
 >
-> 1. What do the violin plots in [Figure 1](#figure-1) tell us about the cell sizes and quality in our dataset? 
-> 2. What do the scatter plots in [Figure 2](#figure-2) tell us about the relationship between cell size and the other QC metrics?
+> 1. What do the violin plots tell us about the cell sizes and quality in our dataset? 
+> 2. What do the scatter plots in tell us about the relationship between cell size and the other QC metrics?
 >
 > > <solution-title></solution-title>
 > > 1. The violin plots give us an overview of the cell sizes (nCount_RNA), number of unique genes (nFeature_RNA), and proportion of mitochondrial reads for our cells. We can see that most of the cells are grouped together near the bottom of each plot, but there are some outliers that have unusually high or low values of each metric. Cells with higher values of nCount_RNA are likely to be larger as they contained more RNA. Cells with higher values of nFeature_RNA had RNAs produced from lots of different genes, while those with low nFeature_RNA had RNAs produced from a smaller range of genes. Cells with high percent.mt had lots of reads from mitochondrial genes. Although there will be some natural variation in cell size, the range of genes being expressed, and mitochondrial content, we suspect that extreme values of these three metrics reflect low quality cells.
@@ -325,13 +325,13 @@ If we produce the same plots again, we can see what has changed in our data.
 
 ![Three violin plots each showing most points grouped together and no extreme outliers](../../images/scrna-seurat-pbmc3k/seurat_violin_after.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes for all cells after filtering")
 
-![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. No extreme outliers. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. No extreme outliers.](../../images/seurat_QC_scatter_after.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt) after filtering")
+![Scatter plot A shows clear positive correlation with the number of unique features increasing as total counts increases. No extreme outliers. Scatter plot B does not show a relationship between the proportion of mitochondrial genes and total counts. No extreme outliers.](../../images/scrna-seurat-pbmc3k/seurat_QC_scatter_after.png "Scatter plots showing the relationships between the total counts (nCount_RNA) and A. the number of unique features (nFeature_RNA) and B. the proportion of mitochondrial reads (percent.mt) after filtering")
 
 > <question-title></question-title>
 >
 > 1. Have we eliminated the low-quality cells from our data?
 > > <solution-title></solution-title>
-> > 1. We can see in both Figures [3](#figure-3) and [4](#figure-4) that the outliers have been eliminated from our dataset - we've removed the cells with high mitochondrial counts and/or unusually high numbers of detected genes. We hope that this means we've got rid of the poor quality cells without losing any real biological variation, but we can't really be sure. Sometimes it is necessary to come back and re-think our filters - for example if you get to the end of the analysis and realise that you're missing a cell type that should be present in your data!
+> > 1. We can see in both the violin and scatter plots that the outliers have been eliminated from our dataset - we've removed the cells with high mitochondrial counts and/or unusually high numbers of detected genes. We hope that this means we've got rid of the poor quality cells without losing any real biological variation, but we can't really be sure. Sometimes it is necessary to come back and re-think our filters - for example if you get to the end of the analysis and realise that you're missing a cell type that should be present in your data!
 > >
 > {: .solution}
 {: .question}
@@ -531,7 +531,7 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 > 3. When we plot the cells along the PC axes (in the next step) do you expect to see differences in the expression of these genes along the associated axis?
 > > <solution-title></solution-title>
 > > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. When preprocessing was done using the separate tools, the top positively associated genes were CST3 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were MALAT1 for PC1, NKG7 for PC2, and PPBP for PC3. Similarly, if preprocessing was performed with SCTransform, the top positively associated genes were MALAT1, NKG7, and S100AB, while the top negatively associated genes were FTL, HLA-DRA, and CD74. However, these top genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression.
- > > The [VizDimLoadings plot](#figure-6) shows us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
+ > > The figures show us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
 > > 2. We can see that some of our highly variable genes are associated with the top PCs. For example, FTL is one of the top genes associated with PC1. We should expect to see some of our highly variable genes here as we used the features we selected to perform the PCA. It also makes sense that our top 10 variable genes are strongly associated with PCs, because we know these are the genes that varied most across the dataset and the PCA was looking for these strong differences in expression. However, a gene that varied a lot won't necessarily be associated with a top PC unless its expression correlates with other variable genes - a group of correlated genes is likely to have a stronger impact than a single gene, even if that one gene varies a lot.
 > > 3. Since these are the genes that most are strongly associated with each PC, we should expect to see strong differences in their expression from one end of the associated axis to the other. The genes positively associated with PC 1 should mainly be expressed near the positive end of the PC1 axis while the negatively associated genes should mainly be expressed at the negative end. We would expect to see similar patterns for the other PCs.
 > {: .solution}
@@ -553,7 +553,7 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 ![Three large groups appear in different parts of the plot with a scattering of cells in between them](../../images/scrna-seurat-pbmc3k/seurat_PCA_DimPlot_SCT.png "PCA plot showing the distribution of cells along the first two principal components (SCTransform")
 
 > <question-title></question-title>
-> 1. Can you see any groups or clusters of cells in the the [PCA Plot](#figure-7)?
+> 1. Can you see any groups or clusters of cells in the the PCA plot?
 > > <solution-title></solution-title>
 > > 1. The cells seem to form three main clusters, although there are also cells spread outside and in between these groups. The cells are distributed along the full length of both axes, which makes sense as these are the PCs that explain the greatest amounts of variation in the data.
 > {: .solution}
@@ -604,7 +604,7 @@ If you used the separate preprocessing tools, then your plots will look like thi
 > 2. How does the expression of the top positive and negative genes relate to PCs 2 and 3?
 > > <solution-title></solution-title>
 > > 1. When we look at the expression of our top genes along PCs 1 and 2 we see that, as expected, the top positively associated gene for PC1, CST3, is almost exclusively expressed in cells at the positive end of the PC1 (horizontal) axis. The pattern is less clear for the negatively associated MALAT1 as most cells are expressing it, but if we look closely we can see that the expression is higher in cells at the negative end of the PC1 axis. We can see similar patterns for the top genes associated with PC2. The top positively associated gene, CD79A is mainly expressed by the cells closest to the top of the PC2 (vertical) axis. The top negative gene NKG7 is mainly expressed by cells along the lower half of the PC2 axis.
-> > We don't see similar patterns for the genes associated with PC3 in this figure - although these genes are only expressed in parts of the plot, there is no clear relationship with either the PC1 or PC2 axes. This is exactly what we would expect to see - these genes are associated with PC3 so they shouldn't show any relationship with the axes in Figure 8[#figure-8].
+> > We don't see similar patterns for the genes associated with PC3 in this figure - although these genes are only expressed in parts of the plot, there is no clear relationship with either the PC1 or PC2 axes. This is exactly what we would expect to see - these genes are associated with PC3 so they shouldn't show any relationship with the axes.
 > > 2. The picture looks very different when we plot our cells along PC2 and PC3. We can see two clumps of cells close together at the top of the plot and another small group of cells spread down the middle of the plot. This is why we have to be careful when interpreting dimensional reduction plots - the data can look very different depending on which of the many axes we choose to visualise.
 > > Now it is the top genes for PC1 that don't show any relationship with the axes. The top genes for PC2 still show differences in expression along the PC2 axis (now the horizontal axis) - and these actually look a bit clearer than in the previous plot. We can also see how the top genes for PC3 relate to the PC3 (vertical) axis. The positively associated HLA-DQA1 is mostly expressed by cells at the top of the axis while the negatively associated PPBP is mostly expressed along the negative part of that axis.
 > {: .solution}
@@ -1192,7 +1192,7 @@ If you used SCTransfrom, then you'll have more clusters to annotate. We can use 
 
 ![6 UMAP Plots coloured by expression of different genes. Plot 1 shows GZMK expression in cluster 4. Plot 2 shows CCL5 expression in clusters 4, 5, and 7. Plot 3 shows CCR7 expression in clusters 1, 8, and 10. Plot 4 shows high S100A4 expression in clusters 1 and 6 with medium expression in clusters 0, 4, 5, 7 and 9. Plot 5 shows IL32 expression in clusters 0, 2, 4, 5, 6, 7, and 11. Plot 6 shows high ISG15 expression in cluster 10 with some expression in clusters 1 and 6](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_T_Markers_SCT.png "UMAP plots showing expression of canonical markers for T cells (SCTransform)")
 
-We have produced a series of UMAP plots, each coloured according to the expression level of a different marker gene. We can look back at the [UMAP plot](#figure-13) we created earlier to see which areas correspond to specific clusters.
+We have produced a series of UMAP plots, each coloured according to the expression level of a different marker gene. We can look back at the UMAP plots we created earlier showing the clusters for the [separate preprocessing route](#figure-17) and [SCTransform route](#figure-18) to see which areas correspond to specific clusters.
 
 > <question-title></question-title>
 > 1. Are the markers clearly associated with one or more clusters?
