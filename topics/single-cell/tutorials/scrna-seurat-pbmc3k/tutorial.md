@@ -100,7 +100,7 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 >
 >    {% snippet aqs/galaxy/datasets_change_datatype.html%}
 >
-> 6. Inspect the `matrix` file by clicking on the {% galaxy-eye %} icon
+> 6. Inspect the `matrix` file by clicking on the {% icon galaxy-eye %} icon
 >
 >    {% snippet faqs/galaxy/histories_dataset_item.html %}
 >
@@ -505,13 +505,13 @@ The standard Seurat pipeline performs the PCA on the Variable Features only, rat
 
 ### Visualise the PCA Results
 
-We've now reduced our dataset to 50 dimensions or PCs that represent the expression of sets of correlated genes. Since we selected the option to output a list of the top genes, we can use the {% galaxy-eye %} icon on this output in our history to see which genes were most strongly associated with the top five PCs. We can see lists of the genes that had the strongest positive and negative scores for each PC - these are the correlated sets of genes that defined the PCs.
+We've now reduced our dataset to 50 dimensions or PCs that represent the expression of sets of correlated genes. Since we selected the option to output a list of the top genes, we can use the {% icon galaxy-eye %} icon on this output in our history to see which genes were most strongly associated with the top five PCs. We can see lists of the genes that had the strongest positive and negative scores for each PC - these are the correlated sets of genes that defined the PCs.
 
 {% snippet faqs/galaxy/histories_dataset_item.html %}
 
 Rather than just looking at a list of genes, we can also produce plots to help us better understand how our cells and genes relate to the PCs we have just computed. Let's start by finding out more about the genes that were most strongly associated with our top three PCs. We can do this with the `VizDimLoadings` plot, which shows the genes associated with each PC, how strongly each gene affected the PC, and whether it was positively or negatively correlated with the PC. The plots will look a bit different depending on which preprocessing approach you followed.
 
-><hands-on-title>Visualise the PCA Results</hands-on-title>
+><hands-on-title>Visualise the PCA Results - Dimensional Loadings</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -542,7 +542,7 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 
 Next, let's see how our cells are distributed along the top PCs. We can use `DimPlot` to create a 2-dimensional plot where each axis represents one of the PCs - being able to produce these plots is one of the benefits of dimensional reduction as it makes our data easier to interpret when we can see it on two axes rather than imagining it along thousands. If we're plotting the top PCs then we should see cells or clumps of cells spread along these axes. If PC1 is really explaining a lot of the variation in the data then we should see that there are cells with both high and low values along this axis - if they're all grouped together at one end of the axis then the PC wouldn't be telling us much about the differences between cells. We'd hope to see a similar effect along the next PCs, although it won't be as strong as for the top PC because that's the one that explained the most variation in the dataset. We should see similar relationships no matter which preprocessing approach we used, although of course the plots will look a bit different.
 
-><hands-on-title>Visualise the PCA Results</hands-on-title>
+><hands-on-title>Visualise the PCA Results - DimPlot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -569,7 +569,7 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 
 We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to plot our data along. We can also use the `FeaturePlot` function to colour the plots by the expression levels of specific genes to see how this relates to the PCs, so let's see how the top genes relate to the top three PCs.
 
-><hands-on-title>Visualise the PCA Results</hands-on-title>
+><hands-on-title>Visualise the PCA Results - Feature Plots</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -633,7 +633,7 @@ If you used SCTransform, then you should see plots that look like this:
 
 Another option for visualising our PCA results is to use `DimHeatmap` to produce a heatmap of the PCA scores for the top genes in each cell. We can see which genes scored highly in the same cells and get an idea of how the scores varied across the dataset. We can look for groups of cells that had similar scores for a particular PC, suggesting that they share similar expression profiles - these groups of cells might become our clusters. We can also compare the patterns for different PCs. We would expect to see more similarities (genes with similar scores across cells and more cells grouping together) for the top PCs since these explain more of the variation in the data.
 
-> <hands-on-title>Visualise the PCA Results</hands-on-title>
+> <hands-on-title>Visualise the PCA Results - Heatmaps</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -684,7 +684,7 @@ The DimHeatmap plots can give you an idea of which PCs are having the strongest 
 
 The Elbow Plot ranks the PCs based on the percentage of variance that each of them explains. We should see that the top PCs each explain a substantial amount of the data, but that there is a bend or elbow where the dots start lining up along the bottom axis. The PCs before the elbow explain most of the variation while those after the elbow don't provide much additional information, so we don't need to include them in our analysis.
 
-><hands-on-title>Elbow Plot</hands-on-title>
+><hands-on-title>Make an Elbow Plot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -730,7 +730,7 @@ Seurat includes a selection of different methods for computing a neighborhood gr
 
 The best approach to building the neighborhood graph and the optimal value for `k` will depend on the data we are analysing - sometimes we'll need to try a few options to find the right fit. We'll use Seurat's default value of 20 for now - we'll know how well it worked when we take a look at our clusters later.
 
-><hands-on-title>Find Neighbors</hands-on-title>
+><hands-on-title>Find Neighbors by Computing a Neighborhood Graph</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -749,7 +749,7 @@ We need to define a value for the resolution parameter, which determines the siz
 > Resolution is one of the key parameters you might need to change when performing clustering. It sets the 'granularity' of the clustering - you can choose a lower value to arrange your data into bigger clusters or use a higher resolution if you're looking for lots of little clusters. The best resolution can depend on how varied your cells are - do you think there are only a few different cell types or should your sample contain lots of different populations of cells? The resolution will usually need to be higher for larger datasets too. In most cases, a resolution of between 0.4 and 1.2 will work well - we're using a fairly low value here as we have a smaller dataset.
 {: .comment}
 
-><hands-on-title>FindClusters</hands-on-title>
+><hands-on-title>Find Clusters using the Neighborhood Graph</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Find Clusters** {% icon tool %})
@@ -769,7 +769,7 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 > If you have followed the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial, you might notice that this step was performed between construction of the neighborhood graph and finding clusters. In the Seurat pipeline, it is usually performed after clustering, but it shouldn't make any difference to your plots. You should end up with the same result if you run these steps the other way around, except that you won't be able to show your clusters on the plot if you haven't found them yet.
 {: .comment}
 
-><hands-on-title>RunUMAP</hands-on-title>
+><hands-on-title>Perform Dimensional Reduction with UMAP</hands-on-title>
 >
 > 1. {% tool [Seurat Run Dimensional Reduction](toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Find Clusters** {% icon tool %})
@@ -784,7 +784,7 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 
 Now we can visualise the UMAP, just as we did with the PCA. We can also colour in the UMAP plot based on the expression of genes we're interested in - we'll start by seeing where the cells expressing the top genes associated with PCs 1-3 have ended up in the UMAP plot.
 
-><hands-on-title>Visualise UMAP</hands-on-title>
+><hands-on-title>Visualise the UMAP</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -819,7 +819,7 @@ If you used SCTransform then your plots should look like this:
 > 2. Are there any relationships between our clusters and expression of the top genes associated with the first three PCs?
 >
 > > <solution-title></solution-title>
-> > 1. We have three main groups of cells in our plot and they are more clearly separated here than the cells in our PCA plot. Since the cells have been coloured by the cluster they were assigned to by the `FindClusters` algorithm, we can see that if we used the separate preprocessing tools, we have identified 9 clusters in our data. Using SCTransform, we identified 12 clusters, suggesting that preprocessing with this tool enabled us to capture more of the biological variation. In boths cases, the first cluster is numbered as zero.
+> > 1. We have three main groups of cells in our plot and they are more clearly separated here than the cells in our PCA plot. Since the cells have been coloured by the cluster they were assigned to by the `FindClusters` algorithm, we can see that if we used the separate preprocessing tools, we have identified 9 clusters in our data. Using SCTransform, we identified 12 clusters, suggesting that preprocessing with this tool enabled us to capture more of the biological variation. In both cases, the first cluster is numbered as zero.
 > > Only one of the three main clumps of cells is made up of a single cluster (cluster 3). The other two big groups have been split up into different clusters by the algorithm, suggesting that there are some differences within them - this is one of the reasons we don't just want to rely on our eyes when identifying clusters. The UMAP can give us a quick overview of the data and our clusters, but we must be careful about overinterpreting it. We can't see everything about the data just be looking!
 > > 2. Although this plot looks somewhat different from our PCA plot, we can still see patterns in the expression of the top genes that were associated with our PCs. The top positive and negative genes associated with PCs 1, 2, and 3 are expressed in different parts of the UMAP plot.  This makes sense, because we used the PCA to make the UMAP, so the cells that were at different ends of the PC axes should be in different parts of the UMAP plot too. We don't see the same relationships between the genes and the axes, because we're now looking at a UMAP plot not a PCA plot - the UMAP axes are not the same as the PCA axes!
 > > As well as the broader patterns across the plot, we can also see some relationships between the top genes and specific clusters. In the plots produced after using the separate preprocessing tools, the top negative gene for PC2, NKG7, is expressed at the highest level in cluster 6 and at a slightly lower level in the adjacent cluster 4. This must be one of the genes that caused the clustering algorithm to assign these cells into separate clusters even though they are part of the same larger group on the plot. Again, this makes sense because we used the PCA reduction to create the neighborhood graph that we then used to identify our clusters.
@@ -830,7 +830,7 @@ If you used SCTransform then your plots should look like this:
 
 UMAP plots aren't the only way to see what is going on with the clusters we've just identified - and they aren't always the best choice when we're interested in which cells express specific genes. For example, we can create violin plots to show the expression of our top six genes from the PCA across the clusters we've just identified.
 
-><hands-on-title>Visualise Results to compare all clusters</hands-on-title> TODO
+><hands-on-title>Visualise Expression across Clusters with a Violin Plot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -885,7 +885,7 @@ The `FindAllMarkers` option is the simplest way to do this as it will run the DE
 
 We can look for both positive and negative markers, or limit the results to just the positive markers for the clusters. We'll start by looking for the positive markers of all clusters.
 
-> <hands-on-title>Use `FindAllMarkers` to compare all clusters</hands-on-title>
+> <hands-on-title>Use `FindAllMarkers` to Compare All Clusters</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -899,7 +899,7 @@ We can look for both positive and negative markers, or limit the results to just
 
 The output is a list of positive markers for each cluster, genes that were significantly more likely to be expressed by cells in that cluster than in the rest of the dataset.
 
-Take a look at the second output, the CSV file. You can click on the dataset to see a quick peek of it in the history panel or use the {% galaxy-eye %} icon to see the full table in the main panel.
+Take a look at the second output, the CSV file. You can click on the dataset to see a quick peek of it in the history panel or use the {% icon galaxy-eye %} icon to see the full table in the main panel.
 
 {% snippet faqs/galaxy/histories_dataset_item.html %}
 
@@ -919,9 +919,9 @@ Although there is a lot of information here, all we need to know for now is that
 > 1. Are the top genes associated with PCs 1-3 in our list of markers? Which clusters are they markers for?
 > 2. Do these results match your expectations?
 > > <solution-title></solution-title>
-> > 1. If we search the markers table for our top genes (you can use Ctrl+F to do this), we can see that CST3 is a positive marker for clusters 1, 5, and 7 while MALAT1 is a positive marker for clusters 0, 4 and 6. CD79A was a marker for cluster 3 while NKG7 was a marker for clusters 4 and 6. HLA-DQA1 was a marker for clusters 3 and 7 while PPBP was a marker for cluster 8.
-> > 2. The results make sense, as we would expect the top positive and negative genes for each PC to be expressed in different clusters. The results also match up fairly well with what we saw on the UMAP and violin plots - although we might have thoughtthat MALAT1 could be a marker for clusters 2 and 3 too as it seems to be highly expressed by them. The apparent difference in expression we saw in the plot wasn't strong enough to show up in this statistical test.
-> > However, the top genes associated with our PCs aren't necessarily the most significant markers for our clusters (they can appear quite far down the lists) and they are often markers for more than one cluster. Again, this makes sense, because the PCA was looking for the bigger patterns across the whole dataset, while now we're looking for differences between smaller groups of cells.
+> > 1. If we search the markers table for our top genes (you can use Ctrl+F to do this but it may take time for the full dataset to load when you view it), we can see that CST3 is a positive marker for clusters 1, 5, and 7 while MALAT1 is a positive marker for clusters 0, 4 and 6. CD79A was a marker for cluster 3 while NKG7 was a marker for clusters 4 and 6. HLA-DQA1 was a marker for clusters 3 and 7 while PPBP was a marker for cluster 8. So, these top genes are differentially expressed by some of our clusters.
+> > 2. The results make sense, as we would expect the top positive and negative genes for each PC to be expressed in different clusters. The results also match up fairly well with what we saw on the UMAP and violin plots - although we might have thought that MALAT1 could be a marker for clusters 2 and 3 too as it seems to be highly expressed by them. The apparent difference in expression we saw in the plot wasn't strong enough to show up in this statistical test.
+> > However, the top genes associated with our PCs aren't necessarily the most significant markers for our clusters (they can appear quite far down the lists) and they are often markers for more than one cluster. Again, this makes sense, because the PCA was looking for the bigger patterns across the whole dataset, while now we're looking for differences between smaller groups of cells - the clusters.
 > {: .solution}
 {: .question}
 
@@ -931,7 +931,7 @@ If we are interested in a specific cluster, we might want to find out which gene
 
 Let's try finding the positive and negative markers of cluster 2.
 
-><hands-on-title>Use `FindMarkers` on a single cluster</hands-on-title>
+><hands-on-title>Use `FindMarkers` on a Single Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -967,7 +967,7 @@ We don't have a cluster column this time as we were only testing one group again
 > > > | 4  | IL7R |
 > > > | 5  | LDHB |
 > > We can look at the third column, avg_log2FC to see if these are positive or negative markers. Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.
-> > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
+> > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we just found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
 >>
 > {: .solution}
 {: .question}
@@ -976,7 +976,7 @@ We don't have a cluster column this time as we were only testing one group again
 
 We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers` performs for all the clusters, but we can also use it to ask different questions. If we are interested in what makes one cluster different from another, then we might want to look for genes that are differentially expressed between two specific clusters. We can also choose to compare expression with more than one cluster. We might do this if we want to focus on differences between two specific cell types, without considering what makes them different from the rest of the dataset - this could be handy if we have two very similar cell types or subtypes.
 
-><hands-on-title>Use `FindMarkers` to compare specific clusters</hands-on-title>
+><hands-on-title>Use `FindMarkers` to Compare Specific Clusters</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1001,7 +1001,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 > > > | 5  | RP11-290F20.3 |
 > >
 > > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset. Only two of these markers are in the top five of both lists, although we can find the other genes further down in the table if we look.
-> > We would'nt expect to see the same results because we're now looking for differences specifically between cluster 5 and clusters 0 and 3. The genes that `FindAllMarkers` identified as differentiating cluster 5 from all of the other clusters might not be best at differentiating it specifically from clusters 0 and 3 - some of those markers could actually be expressed by all three of these clusters.
+> > We wouldn't expect to see the same results because we're now looking for differences specifically between cluster 5 and clusters 0 and 3. The genes that `FindAllMarkers` identified as differentiating cluster 5 from all of the other clusters might not be best at differentiating it specifically from clusters 0 and 3 - some of those markers could actually be expressed by all three of these clusters.
 > >
 > {: .solution}
 {: .question}
@@ -1010,7 +1010,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 
 We can also use other methods for DE analyis in Seurat. We can use the 'ROC' test to find out the 'classification power' of marker genes for our clusters. A classification power of 1 means that the expression level of this gene can perfectly assign cells to this cluster. A classification power of 0 means that the expression of this gene is useless for identifying cells in this particular cluster - it's completely random!
 
-><hands-on-title></hands-on-title>
+><hands-on-title>Use `FindMarkers` to Calculate Classification Power</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1039,7 +1039,7 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 > > > | 4  | RPS32 |
 > > > | 5  | RPS14 |
 > >
-> > Many of the top markers (including all of the top five) have names starting with RP. This indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
+> > Many of the top markers (including all of the top five) have names starting with RP. In humans, this gene naming patterns indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
 > > However, if we don't expect to see differences in ribosomal content between cells, then we might suspect that we've ended up with a cluster based on ribosomal RNA content rather than on cell type. In this case, we might want to go back to the QC steps. We could score the cells for `percent.ribo` in the same way we did for `percent.mt`. We could then filter out cells with unusually high proportions of ribosomal genes or regress out the variation associated with this characteristic during the scaling step. Just as when we're filtering cells by mitochondrial RNA proportions, we would need to think carefully about this - we wouldn't want to eliminate a cell type just because it has higher proportions of ribosomal genes, which is what we could end up doing if we tried it with this particular dataset.
 > >
 > {:.solution}
@@ -1051,14 +1051,14 @@ Now that we've arranged our data into clusters, we can start to identify the cel
 
 We can take two different approaches when identifying our cells:
 
-1. **Unsupervised**
+1. **Unsupervised:**
     We could start with our list of marker genes and then see if they are known to be expressed in specific cell types. In this case, we are starting with what the data tells us - the list of genes produced by our DE tests.
-2. **Supervised**
+2. **Supervised:**
     We could start with a list of known marker genes for each cell type we expect to see in our data, then look to see which clusters are expressing these genes. With this approach, we are starting with a list of genes selected from previous research and then searching from them in our data - we're choosing or 'supervising' the genes we use.
 
 If we're taking the unsupervised approach, then we might want to limit our markers to the ones that showed the biggest differences in expression. We can do this using some of the extra parametes provided by `FindAllMarkers`. Let's refine the parameters to find the top 10 positive markers for each cluster that showed a log fold change of at least 1 (meaning their expression was at least twice as high).
 
-><hands-on-title>Find the top 10 markers</hands-on-title>
+><hands-on-title>Find the Top 10 Positive Markers for Each Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1110,7 +1110,7 @@ To begin, we'll need a list of these canonical markers for PBMCs. Let's use the 
 
 The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If we look back at our table of the top 10 markers, we can see that this was actually the second gene in the list, so if we'd continued with the unsupervised approach we'd have ended up using the same gene to help identify our B cells. Both of these genes are actually very good markers for B cells, so some lists of B cell markers might suggest using CD79A rather than (or in addition to) MS4A1. If we plot the expression of both genes across our clusters, we should be able to see where our B cells are.
 
-><hands-on-title>Violin Plots of B Cell Markers</hands-on-title>
+><hands-on-title>Make Violin Plots of B Cell Markers</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1125,7 +1125,7 @@ Both CD79A and MS4A1 are mainly expressed in cluster 3, with very little express
 
 Sometimes the results aren't quite so clear as markers might be expressed across multiple clusters of the same or different cell types. We might need to use multiple markers to differentiate between these groups - as with T cells in this dataset.
 
-><hands-on-title>Violin Plots of T Cell Markers</hands-on-title>
+><hands-on-title>Make Violin Plots of T Cell Markers</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1138,13 +1138,15 @@ Sometimes the results aren't quite so clear as markers might be expressed across
 >
 {: .hands_on}
 
-![In Part A, the first violin plot shows IL7R expressed in clusters 0, 2 and 4. Second plot shows high CCR7 expression in cluster 0 with some expression in cluster 2. Plot 3 shows S100A4 expression across most clusters, including cluster 2. Fourth plot shows CD8A expression in cluster 4. In Part B, the first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, and CD8A by cluster after performing A. Separate preprocessing steps B. SCTransform")
+![In Part A, the first violin plot shows IL7R expressed in clusters 0, 2 and 4 (although there is some lower level expression in cluster 7). Second plot shows high CCR7 expression in cluster 0 with some expression in cluster 2. Plot 3 shows S100A4 expression across most clusters, including cluster 2. Fourth plot shows CD8A expression in cluster 4. In Part B, the first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, and CD8A by cluster after performing A. Separate preprocessing steps B. SCTransform")
 
-We can see that IL7R (also known as CD4+) is only expressed in clusters 0, 2, and 4 if we're following the separate preprocessing steps route or in clusters 0, 2, 4, 8, and 10 if we're on the SCTransform route. With this marker alone, we could only identfy these as clusters of T cells. If we look at which other markers are being expressed (or not expressed) by the T cell clusters, we can identify different types of T cells. Expression of CCR7 is associated with naive T cells, while S100A4 is associated with memory T cells, so you should be able to identify clusters of naive and memory CD4+ T cells in these plots for both the separate and SCTransform preprocessing routes.
+We can see that IL7R (also known as CD4+) is mainly expressed in clusters 0, 2, and 4, with some expression in cluster 7, if we're following the separate preprocessing steps route or in clusters 0, 2, 4, 8, and 10 if we're on the SCTransform route. With this marker alone, we could only identify these as clusters of T cells - and in the case of cluster 7 from the separate preprocessing route plot, we would be making a mistake as once we plot markers of other cell types, we'll see that these aren't T cells at all!
+
+If we look at which other markers are being expressed (or not expressed) by the T cell clusters, we can identify different types of T cells. Expression of CCR7 is associated with naive T cells, while S100A4 is associated with memory T cells, so you should be able to identify clusters of naive and memory CD4+ T cells in these plots for both the separate and SCTransform preprocessing routes.
 
 We can also see that using SCTransform for preprocessing has allowed us to break down our T cells into more clusters, which could enable us to identify more different types. It looks like these might include additional subtypes of CD8+ T cells, as we have three clusters expressing CD8A when we use SCTransform, but only one when we used the separate preprocessing steps. 
 
-We'll use some additional T cell markers from the [original Seurat](https://satijalab.org/seurat/articles/pbmc3k_tutorial) and [SCTransform](https://satijalab.org/seurat/articles/sctransform_vignette.html) versions of this tutorial to identify these clusters below. We should be able to identify the following T cell subtypes using these markers:
+We'll use some additional T cell markers from the [original Seurat SCTransform](https://satijalab.org/seurat/articles/sctransform_vignette.html) tutorial to identify these clusters below. We should be able to identify the following T cell subtypes using these markers:
 
 > | Cell Type            | Marker Genes        |
 > | ---------------------|---------------------|
@@ -1165,7 +1167,7 @@ Some of these patterns are clearer to see than others and we haven't plotted all
 
 To continue with the supervised approach, we can check the expression of the chosen markers in our clusters to see if they match the known expression patterns of specific cell types. We could just look at our list of the top positive markers, but there are also several options for visualising marker gene expression. We'll try a few of them here to give you an idea of the types of plots you can use in the future.
 
-> <hands-on-title>Colour the UMAP Plot by Feature Expression</hands-on-title>
+> <hands-on-title>Colour the UMAP Plot by Canonical Marker Expression</hands-on-title>
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
@@ -1184,9 +1186,9 @@ If you used SCTransform for preprocessing, then your plots should look like this
 
 ![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, 4, 8, 10 and part of cluster 7. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows CD14 expression mainly in cluster 1. Plot 4 shows LYZ expression in clusters 1, 6, and 9. Plot 5 shows high S100A4 expression in clusters 1 and 6 with medium expression in clusters 0, 4, 5, 7 and 9. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in clusters 4, 7, and 8. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 6. Plot 10 shows GNLY expression in cluster 5. Plot 11 shows NKG7 expression in clusters 5 and 7. Plot 12 shows FCER1A expression in cluster 9. Plot 13 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 14 shows PPBP expression in cluster 11.](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers_SCT.png "UMAP plots showing expression of canonical markers for PBMCs (SCTransform)")
 
-If you used SCTransfrom, then you'll have more clusters to annotate. We can use those additional T cell subtype markers to do this as our extra clusters represent different types of T cells.
+If you used SCTransform, then you'll have more clusters to annotate. We can use those additional T cell subtype markers to do this as our extra clusters represent different types of T cells.
 
-> <hands-on-title>Colour the UMAP Plot by Feature Expression</hands-on-title>
+> <hands-on-title>Colour the UMAP Plot by T Cell Marker Expression</hands-on-title>
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
@@ -1207,14 +1209,14 @@ We have produced a series of UMAP plots, each coloured according to the expressi
 > 3. How similar are the clusters in terms of their expression of these cell type markers? Are more similar cell types closer together on the UMAP plot?
 > > <solution-title></solution-title>
 > > 1. Each cell type marker is clearly expressed at higher levels in certain parts of the plots - we don't have the same problem as we did when we plotted the top genes for PCs 1-3 and found that MALAT1 was expressed at quite high levels across the entire plot! When we compare the expression plots to the clusters we previously plotted, we can see that they match up quite well with each other. Most of the markers are expressed more in certain clusters, but there isn't always a clear boundary, especially for clusters that are close together in the plot. Some markers are associated with a single cluster, such as PPBP, while others are expressed across multiple clusters.
-> > 2. Although marker expression mainly occurs in one or more clusters, there is still some expression by cells in other parts of the plot. It could be that these genes are sometimes expressed by other cell types, but these could also be cells of the same type that have simply ended up further away in the plot. It can be hard to tell which cluster these cells have been assigned to from these plots, especially when you consider that some points could be hidden behind others. Cells of the same type might have been assigned to different clusters, but there could also be a few cells that have been plotted at a distance from the main part of their assigned cluster - for example, in the plots for the separate preprocessing route you might be able to spot a couple of differently coloured cells at the tip of cluster 7 and by cluster 8.
+> > 2. Although marker expression mainly occurs in one or more clusters, there is still some expression by cells in other parts of the plot. It could be that these genes are sometimes expressed by other cell types, but these could also be cells of the same type that have simply ended up further away in the plot. It can sometimes be hard to tell which cluster these cells have been assigned to from these plots, especially when you consider that some points could be hidden behind others. Cells of the same type might have been assigned to different clusters, but there could also be a few cells that have been plotted at a distance from the main part of their assigned cluster - for example, in the plots for the separate preprocessing route you might be able to spot a couple of differently coloured cells at the tip of cluster 7 and by cluster 8.
 > > 3. We can distinguish between all of our clusters on the basis of which known markers they are shown to express. Each cluster expresses a unique combination of these genes, although the markers aren't only expressed in the clusters they're mainly associated with. Some of the clusters are more similar to each other, particularly those that are close together on the plot, forming part of the same larger group of cells. For example, clusters 1, 5 and 7 are grouped together on the plot for the separate preprocessing steps route and all express a lot of LYZ, S100A4, and CST3. Since the UMAP was created based on the PCA, which was in turn based on similarities in expression of the highly variable genes, it makes sense that clusters that are plotted closer together are more similar to each other. However, we should always remember that we're only looking at a 2D plot of the first two UMAP dimensions, so we shouldn't read too much into what we see! The plot can't tell us everything about the relationships between cells and clusters.
 > {: .solution}
 {: .question}
 
-Another option for visualising marker gene expression across clusters is the Violin Plot, which can sometimes make it easier to distinguish between clusters. Each cluster is plotted separately, so we don't need to work out which cluster a cell belongs to, which can be tricky when we have similar clusters close together on the UMAP plot.
+Another option for visualising marker gene expression across clusters is the Violin Plot, which can sometimes make it easier to distinguish between clusters. Each cluster is plotted separately, so we don't need to work out which cluster a cell belongs to, which can be tricky when we have similar clusters close together and often overlapping on the UMAP plot.
 
-> <hands-on-title>Use Violin Plots to Compare Expression by Cluster</hands-on-title>
+> <hands-on-title>Use Violin Plots to Compare Expression of Canonical Markers by Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1236,7 +1238,7 @@ If you used SCTransfrom then you should see these violin plots:
 
 Again, if we used SCTransform for preprocessing, we can use those additional T cell subtype markers to identify our smaller clusters. We can show these on violin plots too.
 
-> <hands-on-title>Use Violin Plots to Compare Expression by Cluster</hands-on-title>
+> <hands-on-title>Use Violin Plots to Compare Expression of T Cell Markers by Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1257,7 +1259,7 @@ Again, if we used SCTransform for preprocessing, we can use those additional T c
 > > <solution-title></solution-title>
 > > 1. The violin plot can make the associations between clusters and markers look clearer, since each cluster is plotted separately and labelled by number. Some of the markers are clearly expressed mainly in one or a few clusters, while others like LYZ and S100A4 are expressed across most of the clusters.
 > > 2. None of the markers are unique to a specific cluster - there are always a few dots (or cells) in the other clusters that are expressing these genes. We can also see that the expression level varies within each cluster as there are cells at different positions along the vertical axis. As well as looking at the expression level in individual cells (dots) we can compare the overall expression patterns by looking at the coloured violin shapes, which show us where most of the cells in each cluster are plotted. For example, in the plots for the separate preprocessing route, we can see there was more variation in the expression level of NKG7 in cluster 4 (where the violin shape is longer) than there was in cluster 6 (where there is a short violin shape as all the cells showed high expression of this gene).
-> > 3. Each cluster has a unique pattern of expression of the canonical markers. Some clusters are very distinct as they express markers that are rarely seen in other clusters. In the plots for both preprocessing routes, cluster 3 is the only cluster to express MS4A1 and it doesn't express much of the other markers. Other clusters seem to be more similar to each other, with multiple clusters of T cells all expressing IL7R, although the expression levels of other genes vary between these cells allowing us to classify them as different subtypes. This makes sense because cluster 3 is far away from all the other clusters in the UMAP while the different T cell clusters are close to each other.
+> > 3. Each cluster has a unique pattern of expression of the canonical markers. Some clusters are very distinct as they express markers that are rarely seen in other clusters. In the plots for both preprocessing routes, cluster 3 is the only cluster to express MS4A1 and it doesn't express much of the other markers. Other clusters seem to be more similar to each other, with multiple clusters of T cells all expressing IL7R, although the expression levels of other genes vary between these cells allowing us to classify them as different subtypes. This makes sense because cluster 3 is far away from all the other clusters in the UMAP while the different T cell clusters are close to each other because of their similarities.
 > {: .solution}
 {: .question}
 
@@ -1289,7 +1291,7 @@ Based on our table of marker genes and these plots, we know which clusters were 
 
 We can now rename our clusters using these cell names, while keeping a copy of the original idents (the cluster numbers) in case we want to use them again. It will be easier to interpret our plots and any downstream analyses we run if we can use cell names rather than cluster numbers!
 
-> <hands-on-title>Rename Clusters</hands-on-title>
+> <hands-on-title>Rename Clusters with Cell Types</hands-on-title>
 >
 > 1. {% tool [Seurat Data Management](toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
@@ -1305,7 +1307,7 @@ We can now rename our clusters using these cell names, while keeping a copy of t
 
 Now we can plot our UMAP again, this time showing the names of our clusters.
 
-> <hands-on-title>DimPlot Clusters</hands-on-title>
+> <hands-on-title>Revisualise the UMAP with Cell Type Annotations</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
@@ -1420,8 +1422,8 @@ In order to do this, we'll need to turn the output from `FindAllMarkers` into a 
 >              - `Unselect` Output column headers
 >              - `Unselect` Output row headers
 >
-> 3. Rename this file as `Input DE Markers`
-
+> 3. Rename this file as `Input DE Markers` - if you take a look at it using the {% icon galaxy-eye %}, you should see the column of gene names with no header line
+>
 > 4. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'DoHeatmap'`
@@ -1457,12 +1459,12 @@ Comparing the two plots also shows us why the supervised approach can be faster 
 > > Heatmaps can give us the best overview of the variation between cells as each cell is given its own little section on the plot. We can see how consistently the markers are expressed within the cluster and how common it is for cells outside the cluster to express the same genes. We can also see the overall patterns as blocks of cells with similar expression profiles, including the clusters that share similar patterns. However, heatmaps can be less useful if we want to focus on individual cells or genes, as it can be hard to pick out details.
 > > 2. We should be happy with the results of our clustering as they match up with what we already know about PBMCs. We have been able to annotate each cluster as a different cell type based on a supervised approach - and we could do the same using an unsupervised approach. The decisions we made along the way, such as the number of PCs we used and how many nearest neighbors we looked for have worked well. We even identified some subtypes of T cells, although we were able to separate out more of these when we used SCTransform.
 > > On the separate preprocessing route, even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!
-> > If we couldn't see strong associations between our clusters and the different cell types that we expect to see in the dataset, then this would make us very suspicious - did something go wrong with our experiment or analysis? We would need to go back and try to identify the problem to see if we can fix it. If the problem isn't too bad, we might just need to change some of the clustering parameters to get clusters that make biological sense - maybe we would need to use more PCs, look for more/fewer nearest neighbors, or simply change the resolution. If the problem is more serious, we might need to recheck the quality of our data or make bigger changes to the analysis.
+> > If we couldn't see strong associations between our clusters and the different cell types that we expect to see in the dataset, then this would be very suspicious - did something go wrong with our experiment or analysis? We would need to go back and try to identify the problem to see if we can fix it. If the problem isn't too bad, we might just need to change some of the clustering parameters to get clusters that make biological sense - maybe we would need to use more PCs, look for more/fewer nearest neighbors, or simply change the resolution. If the problem is more serious, we might need to recheck the quality of our data or make bigger changes to the analysis.
 > {: .solution}
 {: .question}
 
 # Conclusion
-{ icon congratualtions %} Well done, you've successfully used Seurat to prepare and cluster single cell data. You might want to check your results against the example histories for the [separate preprocessing steps](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key) or [SCTransform route](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-key). You can also take a look at the whole workflow for [the separate steps](https://usegalaxy.eu/u/marisa_jl/w/copy-of-cluster-3k-pbmcs-with-seurat---workflow) of [SCTransform version](https://usegalaxy.eu/u/marisa_jl/w/cluster-3k-pbmcs-with-seurat---workflow---sctransform-version).
+{ icon congratualtions %} Well done, you've successfully used Seurat to prepare and cluster single cell data. You might want to check your results against the example histories for the [separate preprocessing steps](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key) or [SCTransform route](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-key). You can also take a look at the whole workflow for [the separate steps](https://usegalaxy.eu/u/marisa_jl/w/copy-of-cluster-3k-pbmcs-with-seurat---workflow) or [SCTransform version](https://usegalaxy.eu/u/marisa_jl/w/cluster-3k-pbmcs-with-seurat---workflow---sctransform-version).
 
 In this tutorial, we've learned about the steps involved in clustering single cell data and how to identify different cell types. We followed a typical clustering workflow:
 
@@ -1478,6 +1480,6 @@ In this tutorial, we've learned about the steps involved in clustering single ce
 4. Identification of marker genes for the clusters
 5. Annotation of the clusters with cell types
 
-Now that you know how to perform clustering with Seurat, you might want to try the alternative Scanpy pipeline by following the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. If you would prefer to stay with Seurat, then you could go back and try using the alternative preprocessing steps described above or try using it to analyse a slightly trickier dataset by following the 'Filter, plot and explore single cell RNA-seq data with Seurat' tutorial [using Galaxy buttons]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html %}) or in an [R notebook on Galaxy](% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html %}). You could also trying using Seurat to analyse your own data!
+Now that you know how to perform clustering with Seurat, you might want to try the alternative Scanpy pipeline by following the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. If you would prefer to stay with Seurat, then you could go back and try using the alternative preprocessing steps described above or try using it to analyse a slightly trickier dataset by following the 'Filter, plot and explore single cell RNA-seq data with Seurat' tutorial [using Galaxy buttons]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html %}) or in an [R notebook on Galaxy](% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html %}). You could also try using Seurat to analyse your own data!
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
