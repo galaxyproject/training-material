@@ -94,12 +94,13 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets as `genes`, `barcodes`, and `matrix` if necessary
->
-> 4. Check the datatypes are correst - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx or txt file
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>    
+> 5. Check the datatypes are correst - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx or txt file
 >
 >    {% snippet aqs/galaxy/datasets_change_datatype.html%}
 >
-> 5. Inspect the `matrix` file by clicking on the {% galaxy-eye %} icon
+> 6. Inspect the `matrix` file by clicking on the {% galaxy-eye %} icon
 >
 >    {% snippet faqs/galaxy/histories_dataset_item.html %}
 >
@@ -1062,6 +1063,10 @@ If we're taking the unsupervised approach, then we might want to limit our marke
 >        - In *"Advanced Options"*:
 >            - *"Only return positive markers"*: `Yes`
 >
+> 2. Rename the second output (the csv file) as `DE Markers`
+> 
+>     {% snippet faqs/galaxy/datasets_rename.md %}
+>    
 {: .hands_on}
 
 We could now search online or in a database such as [PanglaoDB](https://panglaodb.se/) or the [Human Protein Atlas](https://www.proteinatlas.org/) to find out which cell types express the markers we've identified for each cluster. If we look at the top 10 markers for cluster 3, we see that the first gene in the list is CD79A, whether we used SCTransform or not. This was also the top positive marker for PC2 when we used the separate preprocessing tools.
@@ -1318,47 +1323,51 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 
 > <hands-on-title>Create Heatmaps to Compare Expression by Cluster - Canonical Markers</hands-on-title>
 >
-> 1. Use the Upload Data - Paste/Fetch data option to create a table of genes to plot. Select the input type as **tabular** and enter a list of genes, one on each row. You can type these in or copy and paste one of the following lists.
+> 1. Use the Upload Data - Paste/Fetch data option to create a table of genes to plot. Select the input type as **tabular** and enter a list of genes, one on each row. You can type these in or copy and paste one of the following lists - don't copy the empty header row if you do this!
 > 
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
 > 
 > If you used the separate preprocessing tools:
 >
-> IL7R
-> CCR7
-> CD14
-> LYZ
-> S100A4
-> MS4A1
-> CD8A
-> FCGR3A
-> MS4A7
-> GNLY
-> NKG7
-> FCER1A
-> CST3
-> PPBP
+> |        |
+> |--------|
+> | IL7R   |
+> | CCR7   |
+> | CD14   |
+> | LYZ    | 
+> | S100A4 |
+> | MS4A1  |
+> | CD8A   |
+> | FCGR3A |
+> | MS4A7  |
+> | GNLY   |
+> | NKG7   |
+> | FCER1A |
+> | CST3   |
+> | PPBP   |
 >
 > If you used SCTransform:
->
-> IL7R
-> GZMK
-> CCL5
-> CCR7
-> CD14
-> IL32
-> ISG15
-> LYZ
-> S100A4
-> MS4A1
-> CD8A
-> FCGR3A
-> MS4A7
-> GNLY
-> NKG7
-> FCER1A
-> CST3
-> PPBP
+> 
+> |        |
+> |--------|
+> | IL7R   |
+> | GZMK   |
+> | CCL5   |
+> | CCR7   |
+> | CD14   |
+> | IL32   |
+> | ISG15  |
+> | LYZ    |
+> | S100A4 |
+> | MS4A1  |
+> | CD8A   |
+> | FCGR3A |
+> | MS4A7  |
+> | GNLY   |
+> | NKG7   |
+> | FCER1A |
+> | CST3   |
+> | PPBP   |
 > 
 > 2. Rename the file as `Top Markers` when it has finished uploading and make sure the datatype is **tabular**
 >
@@ -1379,19 +1388,22 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 
 The heatmap of the canonical markers will look like this if you used the separate preprocessing tools: 
 
-![Heatmap showing expression of IL7R mainly in clusters 0, 2 and 4, expression of CCR7 mainly in clusters 0, 2 and 3, expression of CD14 in cluster 1, expression of LYZ in clusters 1, 4 and 7, expression of S100A4 in clusters 1 and 5, expression of MS4A1 in cluster 3, expression of CD8A in cluster 4, expression of FCGR3A in clusters 5 and 6, expression of MS4A7 in cluster 5, expression of GNLY in cluster 6 and to a lesser extent in cluster 4, expression of NKG7 in clusters 4 and 6, expression of FCER1A in cluster 7, expression of CST3 in clusters 1, 5 and 7, and expression of PPBP in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster (Separate preprocessing tools)")
+![Heatmap showing expression of IL7R mainly in CD4NaiveT, CD4MemoryT, and CD8T cells, expression of CCR7 mainly in CD4NaiveT, CD4MemoryT, and B cells, expression of CD14 in CD14Mono cells, expression of LYZ in clusters CD14Mono, FCGR3Mono, and DC cells, expression of S100A4 in CD14Mono and FCGR3A cells, expression of MS4A1 in B cells, expression of CD8A in CD8T cells, expression of FCGR3A in FCGR3AMono and NK cells, expression of MS4A7 in FCGR3AMono and some CD14Mono cells, expression of GNLY in NK cells and to a lesser extent in CD8T cells, expression of NKG7 in CD8T and NK cells, expression of FCER1A in cluster DC, expression of CST3 in CD14Mono, FCGR3A and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster (Separate preprocessing tools)")
 
-![Heatmap showing expression of IL7R mainly in clusters , expression of CCR7 mainly in clusters , expression of CD14 in cluster , expression of LYZ in clusters , expression of S100A4 in clusters , expression of MS4A1 in cluster , expression of CD8A in cluster , expression of FCGR3A in clusters , expression of MS4A7 in cluster , expression of GNLY in cluster , expression of NKG7 in clusters , expression of FCER1A in cluster , expression of CST3 in clusters , and expression of PPBP in cluster .](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers_SCT.png "Heatmap showing expression of known PBMC markers by cluster (SCTransform)")
+If you used SCTransform for preprocessing then you should see this heatmap:
 
-If we want to make a heatmap of the top markers from our DE analysis, we'll first need to turn the output from `FindAllMarkers` into a tabular file. We can then cut out the column with the list of gene names, getting rid of the column header, and use this as an input for the plot.
+![Heatmap showing expression of IL7R mainly in CD4MemoryT, CD4NaiveT, and CD8EffectorT cells, expression of GZMK in CD8EffectorT cells and some CD8MemoryT cells, expression of CCL5 in CD8EffectorT, CD8MemoryT and most NK cells, expression of CCR7 mainly in CD4NaiveT and CD8NaiveT cells, expression of CD14 in CD14Mono cells, expression of IL32 in CD4MemoryT, CD8EffectorT, and CD8MemoryT cells as well as some NK cells, expression of ISG15 in CD4IFN-activatedT cells as well as some CD14Mono and FCGR3AMono cells, expression of LYZ in CD14Mono and DC cells, expression of S100A4 mainly in CD14Mono and FCGR3AMono cells but also in some CD4MemoryT cells, expression of MS4A1 in B cells, expression of CD8A in CD8EffectorT, CD8MemoryT, and CD8NaiveT cells, expression of FCGR3A in FCGR3AMono and NK cells as well as some CD8MemoryT cells, expression of MS4A7 in FCG3RAMono cells with some expression by CD14Mono cells, expression of GNLY in NK cells, expression of NKG7 in NK and CD8MemoryT cells as well as some CD8EffectorT cells, expression of FCER1A in DC, expression of CST3 in CD14Mono, FCGR3AMono and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers_SCT.png "Heatmap showing expression of known PBMC markers by cluster (SCTransform)")
+
+Rather than looking at the canonical markers, we might want to make a heatmap of the top markers from our DE analysis.
+In order to do this, we'll need to turn the output from `FindAllMarkers` into a tabular file type. We can then cut out the column with the list of gene names, getting rid of the column header, and use this as an input for the plot.
 
 > <hands-on-title>Create Heatmaps to Compare Expression by Cluster - Markers from DE</hands-on-title>
 >
-> 1. Click on the {% icon galaxy-pencil %} pencil icon of the CSV output from `FindAllMarkers`(from the second time we ran it) then select {% icon galaxy-chart-select-data %} Datatypes in the central panel. Choose the second option, `Convert to Datatype` and make sure `tabular (using `Convert CSV to tabular`)` is selected in the drop down menu before pressing the `Create Dataset` button. This will create a new, tabular version of the dataset at the top of your history.
+> 1. Click on the {% icon galaxy-pencil %} pencil icon of the file we renamed as `DE Markers` CSV output from `FindAllMarkers` then select {% icon galaxy-chart-select-data %} Datatypes in the central panel. Choose the second option, `Convert to Datatype` and make sure `tabular (using `Convert CSV to tabular`)` is selected in the drop down menu before pressing the `Create Dataset` button. This will create a new, tabular version of the dataset at the top of your history.
 >
 > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
->        - {% icon param-file %} *"Table"*: `tabular` (output of **Convert CSV to tabular** {% icon tool %})
+>        - {% icon param-file %} *"Table"*: `DE Markers` (output of **Convert CSV to tabular** {% icon tool %})
 >        - *"Input data has"*:
 >              - `Select` Column names on the first row
 >              - `Unselect` Row names on the first column
@@ -1401,12 +1413,12 @@ If we want to make a heatmap of the top markers from our DE analysis, we'll firs
 >              - `Unselect` Output column headers
 >              - `Unselect` Output row headers
 >
-> 3. Rename this file as `Canonical Markers`
+> 3. Rename this file as `Input DE Markers`
 
 > 4. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'DoHeatmap'`
->        - {% icon param-file %} *"List of features to plot"*: `Canonical Markers` (output of **Table Compute** {% icon tool %})
+>        - {% icon param-file %} *"List of features to plot"*: `Input DE Markers` (output of **Table Compute** {% icon tool %})
 >        - In *"Plot Formatting Options"*:
 >            - *"Size of text above colour bar"*: `3.5`
 >            - *"Angle of text above colour bar"*: `60`
@@ -1416,7 +1428,13 @@ If we want to make a heatmap of the top markers from our DE analysis, we'll firs
 >
 {: .hands_on}
 
-![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. Clusters 0, 2 and 4 all show higher expression of the markers for clusters 0 and 2 although the strongest patterns are seen for their own markers.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers.png "Heatmap showing expression of the top 10 markers for each cluster")
+If you are following the separate preprocessing tools route then you should see a heatmap like this:
+
+![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. For example the CD8T cells show some expression of the top markers for CD4NaiveT and CD4MemoryT cells, although expression of their own top markers is much higher.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers.png "Heatmap showing expression of the top 10 markers for each cluster")
+
+If you're on the SCTransform route then your heatmap should look like this:
+
+![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. For example, the different T cell subtypes often show high expression of the top markers for other T cell groups.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers_SCT.png "Heatmap showing expression of the top 10 markers for each cluster")
 
 Looking at these plots, we can see that there are clear associations between certain genes and clusters. In both cases, we can also see that there is variation in the expression level of these genes within the associated clusters, with some cells expressing little or none of the gene. We can also see cells outside of the associated clusters that are expressing the genes. This is true for both the known cell type markers and the markers we identified through our DE analysis - even when a statistical test has identified a significant association with one cluster, there are still differences between cells.
 
@@ -1424,14 +1442,14 @@ Comparing the two plots also shows us why the supervised approach can be faster 
 
 > <question-title></question-title>
 > 1. Which plot type was best for annotating clusters?
-> 2. Are you happy with this clustering - even for cluster 0, which had a lot of ribosomal genes in its top markers list?
+> 2. Are you happy with this clustering - even for cluster 0 (the CD4NaiveT cells) on the separate preprocessing steps route, which had a lot of ribosomal genes in its top markers list?
 > > <solution-title></solution-title>
 > > 1. The best type of plot for identifying cell types can depend on your data as well as your own personal preferences. You might find one plot easier to interpret than another. It can also be helpful to create different types of plots as some patterns may be clearer on one type while others are clearer on another. It's also good to be able to confirm your interpretation on multiple plots! 
 > > UMAP plots are often used to provide a quick and memorable overview of the data, but it can be tricky to match the expression patterns to the clusters, especially given the limitations of these plots - some cells can be hidden, adjacent clusters can blend into each other, and we can't rely on the 2D plot to accurately represent all the relationships between cells and clusters.
 > > Violin plots present each cluster separately, so they can make it easier to differentiate between clusters. Since every cluster is given the same amount of space on the plot, no matter how many cells it contains, violin plots can also make it easier to see what's going on with smaller clusters. We can also get a clearer idea of how much variation there is within and between clusters, although some of the points may still be hidden behind others.
-> > Heatmaps give us the best overview of the variation between cells as each cell is given its own little section on the plot. We can see how consistently the markers are expressed within the cluster and how common it is for cells outside the cluster to express the same genes. We can also see the overall patterns as blocks of cells with similar expression profiles, including the clusters that share similar patterns. However, heatmaps can be less useful if we want to focus on individual cells or genes, as it can be hard to pick out details.
-> > 2. We should be happy with the results of our clustering as they match up with what we already know about PBMCs. We have been able to annotate each cluster as a different cell type based on a supervised approach - and we could do the same using an unsupervised approach. The decisions we made along the way, such as using the top 10 PCA dimensions and looking for the 20 nearest neighbors have worked well.
-> > Even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!
+> > Heatmaps can give us the best overview of the variation between cells as each cell is given its own little section on the plot. We can see how consistently the markers are expressed within the cluster and how common it is for cells outside the cluster to express the same genes. We can also see the overall patterns as blocks of cells with similar expression profiles, including the clusters that share similar patterns. However, heatmaps can be less useful if we want to focus on individual cells or genes, as it can be hard to pick out details.
+> > 2. We should be happy with the results of our clustering as they match up with what we already know about PBMCs. We have been able to annotate each cluster as a different cell type based on a supervised approach - and we could do the same using an unsupervised approach. The decisions we made along the way, such as the number of PCs we used and how many nearest neighbors we looked for have worked well. We even identified some subtypes of T cells, although we were able to separate out more of these when we used SCTransform.
+> > On the separate preprocessing route, even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!
 > > If we couldn't see strong associations between our clusters and the different cell types that we expect to see in the dataset, then this would make us very suspicious - did something go wrong with our experiment or analysis? We would need to go back and try to identify the problem to see if we can fix it. If the problem isn't too bad, we might just need to change some of the clustering parameters to get clusters that make biological sense - maybe we would need to use more PCs, look for more/fewer nearest neighbors, or simply change the resolution. If the problem is more serious, we might need to recheck the quality of our data or make bigger changes to the analysis.
 > {: .solution}
 {: .question}
