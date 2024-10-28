@@ -38,25 +38,24 @@ pathway:
       - name: alevin-commandline
         topic: single-cell
 
-- section: "Module 2: Generating cluster plots"
-  description: |
-            These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Python (Scanpy) or R (Seurat) tutorial.
-  tutorials:
-    - name: scrna-case_jupyter_basic-pipeline
-      topic: single-cell
-    - name: scrna-case_FilterPlotandExplore_RStudio
-      topic: single-cell
+  - section: "Module 2: Generating cluster plots"
+    description: |
+              These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Python (Scanpy) or R (Seurat) tutorial.
+    tutorials:
+      - name: scrna-case_jupyter_basic-pipeline
+        topic: single-cell
+      - name: scrna-case_FilterPlotandExplore_RStudio
+        topic: single-cell
 
-
- - section: "Module 3: Inferring trajectories"
-   description: |
-             This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset. Again, you can choose whether to follow the Python (Scanpy) or R (Monocle) tutorial.
-   tutorials:
-    - name: scrna-case_JUPYTER-trajectories
-      topic: single-cell
-    - name: scrna-case_monocle3-rstudio
-      topic: single-cell
-
+  - section: "Module 3: Inferring trajectories"
+    description: |
+              This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset. Again, you can choose whether to follow the Python (Scanpy) or R (Monocle) tutorial.
+    tutorials:
+     - name: scrna-case_JUPYTER-trajectories
+       topic: single-cell
+     - name: scrna-case_monocle3-rstudio
+       topic: single-cell
+ 
   - section: "The End!"
     description: |
       And now you're done! You will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).
