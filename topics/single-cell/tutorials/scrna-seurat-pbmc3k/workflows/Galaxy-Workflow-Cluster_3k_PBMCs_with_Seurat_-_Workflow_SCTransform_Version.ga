@@ -1,0 +1,1698 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This is the workflow for the Clustering 3K PBMCs with Seurat tutorial if you use SCTransform for preprocessing.",
+    "comments": [
+        {
+            "color": "green",
+            "data": {
+                "text": "CREATE SEURATOBJECT & QUALITY CHECK"
+            },
+            "id": 0,
+            "position": [
+                320,
+                720
+            ],
+            "size": [
+                1020,
+                1010
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "red",
+            "data": {
+                "text": "INPUTS"
+            },
+            "id": 1,
+            "position": [
+                0,
+                1120
+            ],
+            "size": [
+                280,
+                350
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "blue",
+            "data": {
+                "text": "PREPROCESSING"
+            },
+            "id": 2,
+            "position": [
+                1350,
+                1140
+            ],
+            "size": [
+                540,
+                490
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "orange",
+            "data": {
+                "text": "DIMENSIONAL REDUCTION & VISUALISATION"
+            },
+            "id": 3,
+            "position": [
+                1930,
+                0
+            ],
+            "size": [
+                680,
+                1750
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "pink",
+            "data": {
+                "text": "CLUSTERING"
+            },
+            "id": 4,
+            "position": [
+                2690,
+                1500
+            ],
+            "size": [
+                550,
+                290
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "lime",
+            "data": {
+                "text": "UMAP & VISUALISATIO"
+            },
+            "id": 5,
+            "position": [
+                3290,
+                880
+            ],
+            "size": [
+                570,
+                950
+            ],
+            "type": "markdown"
+        },
+        {
+            "color": "yellow",
+            "data": {
+                "text": "FIND MARKERS & ANNOTATE CELL TYPES"
+            },
+            "id": 6,
+            "position": [
+                4090,
+                120
+            ],
+            "size": [
+                2100,
+                2040
+            ],
+            "type": "markdown"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6979-6930",
+            "name": "Marisa Loach"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Cluster 3k PBMCs with Seurat - Workflow - SCTransform Version",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Single cell expression data in Matrix Market (mtx) format. This is the table that shows the counts of each RNA in each cell.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Single cell expression data in Matrix Market (mtx) format. This is the table that shows the counts of each RNA in each cell.",
+                    "name": "matrix.mtx"
+                }
+            ],
+            "label": "matrix.mtx",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 40,
+                "top": 1180
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2b5746f6-1fc9-4631-87a6-141bbcae6651",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Table of gene names for the features in the matrix.",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Table of gene names for the features in the matrix.",
+                    "name": "genes.tsv"
+                }
+            ],
+            "label": "genes.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 40,
+                "top": 1260
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "3b8bd964-8601-4617-a6af-0828f921510a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "Table of barcodes for the cells in the matrix.",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Table of barcodes for the cells in the matrix.",
+                    "name": "barcodes.tsv"
+                }
+            ],
+            "label": "barcodes.tsv",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 40,
+                "top": 1340
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0c7c757f-097a-40e1-a549-5e2b792a2a5d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Paste in a list of canonical markers for PBMCs - this is given in the Clustering 3K PBMCs with Seurat tutorial.",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Paste in a list of canonical markers for PBMCs - this is given in the Clustering 3K PBMCs with Seurat tutorial.",
+                    "name": "Pasted Entry"
+                }
+            ],
+            "label": "Pasted Entry",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 5550,
+                "top": 1690
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "74704209-04fc-47fe-a002-a4f1aeee36ce",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "method|input_type|cell_barcodes": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "method|input_type|gene_names": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "method|input_type|matrix": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "Input 3k PBMCs",
+            "name": "Seurat Create",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 370,
+                "top": 1150
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d0c26c9430f2",
+                "name": "seurat_create",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"CreateSeuratObject\", \"__current_case__\": 0, \"input_type\": {\"input_type\": \"mtx\", \"__current_case__\": 0, \"matrix\": {\"__class__\": \"ConnectedValue\"}, \"citeseq_boolean\": false, \"gene_names\": {\"__class__\": \"ConnectedValue\"}, \"cell_barcodes\": {\"__class__\": \"ConnectedValue\"}, \"gene_column\": \"2\", \"cell_column\": \"1\", \"unique_features\": true, \"strip_suffix\": false}, \"meta_data\": null, \"assay\": \"RNA\", \"min_cells\": \"3\", \"min_features\": \"200\", \"names_field\": null, \"names_delim\": \"\", \"percent_mt\": {\"percent_mt\": \"false\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "fcaabd49-a903-4e86-9764-fb8d280e3ceb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "method|seurat_rds": {
+                    "id": 4,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat Create",
+                    "name": "method"
+                }
+            ],
+            "label": "Mitochondrial Annotations",
+            "name": "Seurat Create",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 630,
+                "top": 1340
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d0c26c9430f2",
+                "name": "seurat_create",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Add_QC_Metrics\", \"__current_case__\": 1, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"match\": {\"match\": \"pattern\", \"__current_case__\": 0, \"pattern\": \"^MT-\"}, \"col_name\": \"percent.mt\", \"assay\": \"\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "2678868b-db68-46e6-9f99-d6f4608e426b",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 5,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 980,
+                "top": 770
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"nFeature_RNA,nCount_RNA,percent.mt\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": \"3\", \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "46b1c3fd-4e1b-4ce6-b092-b22b7a35cf6c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 5,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 980,
+                "top": 930
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeatureScatter\", \"__current_case__\": 1, \"feature1\": \"nCount_RNA\", \"feature2\": \"percent.mt\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"smooth\": false, \"plot_cor\": true, \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"log\": false, \"jitter\": false}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"group_by\": \"\", \"split_by\": \"\", \"span\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "7b2070ae-49dd-4dce-acbd-1e1755d30b54",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 5,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 980,
+                "top": 1140
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeatureScatter\", \"__current_case__\": 1, \"feature1\": \"nCount_RNA\", \"feature2\": \"nFeature_RNA\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"smooth\": false, \"plot_cor\": true, \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"log\": false, \"jitter\": false}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"group_by\": \"\", \"split_by\": \"\", \"span\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "b65822db-be1b-4af5-b58c-1302080479ed",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "method|seurat_rds": {
+                    "id": 5,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat Create",
+                    "name": "method"
+                }
+            ],
+            "label": "Filtered Dataset",
+            "name": "Seurat Create",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 1070,
+                "top": 1420
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d0c26c9430f2",
+                "name": "seurat_create",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FilterCells\", \"__current_case__\": 2, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"minimum_nFeature_RNA\": \"200\", \"maximum_nFeature_RNA\": \"2500\", \"minimum_nCount_RNA\": null, \"maximum_nCount_RNA\": null, \"minimum_percent_mt\": null, \"maximum_percent_mt\": \"5.0\", \"other\": {\"other\": \"false\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e69bad32-53ec-4f77-86c8-25ff656ef151",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 9,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": "Preprocessed Data",
+            "name": "Seurat Preprocessing",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                },
+                {
+                    "name": "variable_tabular",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1370,
+                "top": 1400
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "c3170652bd98",
+                "name": "seurat_preprocessing",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"SCTransform\", \"__current_case__\": 3, \"assay\": \"RNA\", \"new_assay_name\": \"SCT\", \"residual_features\": {\"residual_features_options\": \"NULL\", \"__current_case__\": 0, \"variable_features\": {\"variable_features\": \"set_number\", \"__current_case__\": 0, \"variable_features_n\": \"3000\"}}, \"output_topN\": {\"output_topN\": \"true\", \"__current_case__\": 0, \"topN\": \"10\"}, \"vars_to_regress\": \"percent.mt\", \"do_scale\": false, \"do_center\": true, \"min_clip_range\": null, \"max_clip_range\": null, \"adv\": {\"do_correct_umi\": true, \"ncells\": \"5000\", \"seed_use\": \"1448145\", \"vst_flavor\": \"v2\", \"conserve_memory\": {\"conserve_memory\": \"FALSE\", \"__current_case__\": 0, \"return_only_var_genes\": true}}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "16d5622f-45fb-4988-92b7-3ae7652143a8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 10,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Data Management",
+            "outputs": [
+                {
+                    "name": "inspect_general",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1650,
+                "top": 1160
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "50c5abeb08ba",
+                "name": "seurat_data",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Inspect\", \"__current_case__\": 0, \"inspect\": {\"inspect\": \"General\", \"__current_case__\": 0}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "16c4d23d-d422-48c0-ab1f-80dc15a405bb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 10,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 1650,
+                "top": 1320
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VariableFeaturePlot\", \"__current_case__\": 3, \"assay\": \"\", \"label_topN\": {\"label_topN\": \"true\", \"__current_case__\": 0, \"topN\": \"10\"}, \"plot\": {\"cols_1\": \"black\", \"cols_2\": \"red\", \"pt_size\": null, \"log\": false, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "de012846-fa8b-4afb-82f3-59a8ebf18085",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 10,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Run Dimensional Reduction",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                },
+                {
+                    "name": "top_pcs",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1950,
+                "top": 1470
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e49429e8d6dd",
+                "name": "seurat_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"RunPCA\", \"__current_case__\": 0, \"assay\": \"\", \"npcs\": \"50\", \"rev_pca\": false, \"weight_by_var\": true, \"seed_use\": \"42\", \"approx\": true, \"features\": null, \"reduction_name\": \"pca\", \"reduction_key\": \"PC_\", \"print_pcs\": {\"print_pcs\": \"true\", \"__current_case__\": 1, \"dims\": \"5\", \"nfeatures\": \"5\"}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e6cefaf5-fcfc-4aba-aa87-69b2f13c70f7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2240,
+                "top": 30
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VizDimLoadings\", \"__current_case__\": 4, \"dims\": \"3\", \"nfeatures\": \"30\", \"reduction\": \"pca\", \"projected\": false, \"balanced\": false, \"plot\": {\"col\": \"blue\", \"ncol\": \"3\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3000\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "3d04eb35-d477-4006-92a1-3921c6ec9a74",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2250,
+                "top": 200
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"pca\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "9cd00c6d-04a3-4c3f-b82f-00e8f89f2b29",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2250,
+                "top": 430
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeaturePlot\", \"__current_case__\": 8, \"features\": \"MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74\", \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"pca\", \"plot\": {\"keep_scale\": \"feature\", \"blend\": {\"blend\": \"FALSE\", \"__current_case__\": 1, \"by_col\": false}, \"cols_2\": \"lightgrey\", \"cols_3\": \"blue\", \"pt_size\": null, \"alpha\": \"1\", \"order\": false, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"coord_fixed\": false, \"ncol\": \"3\", \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"split_by\": \"\", \"shape_by\": \"\", \"min_cutoff\": null, \"max_cutoff\": null}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "bbf50287-0fc4-42df-bbe6-c60a7e13513a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2250,
+                "top": 660
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeaturePlot\", \"__current_case__\": 8, \"features\": \"MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74\", \"dims_1\": \"2\", \"dims_2\": \"3\", \"reduction\": \"pca\", \"plot\": {\"keep_scale\": \"feature\", \"blend\": {\"blend\": \"FALSE\", \"__current_case__\": 1, \"by_col\": false}, \"cols_2\": \"lightgrey\", \"cols_3\": \"blue\", \"pt_size\": null, \"alpha\": \"1\", \"order\": false, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"coord_fixed\": false, \"ncol\": \"3\", \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"split_by\": \"\", \"shape_by\": \"\", \"min_cutoff\": null, \"max_cutoff\": null}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "649fd303-f759-4c86-8e62-0c5d9ceb678d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2250,
+                "top": 880
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimHeatmap\", \"__current_case__\": 6, \"dims\": \"1\", \"nfeatures\": \"30\", \"reduction\": \"pca\", \"plot\": {\"disp_min\": \"-2.5\", \"disp_max\": null, \"ncol\": null, \"raster\": true}, \"adv\": {\"cells\": \"500\", \"slot\": \"scale.data\", \"assays\": \"\", \"projected\": false, \"balanced\": true}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "67d9e826-4665-4574-880d-98d9d8b30116",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2240,
+                "top": 1050
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimHeatmap\", \"__current_case__\": 6, \"dims\": \"1:15\", \"nfeatures\": \"30\", \"reduction\": \"pca\", \"plot\": {\"disp_min\": \"-2.5\", \"disp_max\": null, \"ncol\": null, \"raster\": true}, \"adv\": {\"cells\": \"500\", \"slot\": \"scale.data\", \"assays\": \"\", \"projected\": false, \"balanced\": true}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4400\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "2a169635-d6c3-45df-a53c-d72c0da315f8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2240,
+                "top": 1220
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"ElbowPlot\", \"__current_case__\": 7, \"ndims\": \"30\", \"reduction\": \"pca\"}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e39c2836-98bb-4967-a297-4b35369ab466",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 13,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 2730,
+                "top": 1580
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "94f1b9c7286f",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindNeighbors\", \"__current_case__\": 0, \"reduction\": \"pca\", \"dims\": \"30\", \"k_param\": \"20\", \"nn_method\": {\"nn_method\": \"annoy\", \"__current_case__\": 1, \"annoy_metric\": \"euclidean\"}, \"adv\": {\"n_trees\": \"50\", \"l2_norm\": false, \"compute_snn\": {\"compute_snn\": \"TRUE\", \"__current_case__\": 1, \"prune_snn\": null, \"distance_matrix\": false}}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "68e52588-ea3f-4dc3-ba8b-b851de5ff691",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 21,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 3000,
+                "top": 1580
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "94f1b9c7286f",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindClusters\", \"__current_case__\": 2, \"modularity_fxn\": \"1\", \"resolution\": \"0.8\", \"algorithm\": {\"algorithm\": \"1\", \"__current_case__\": 1}, \"n_start\": \"10\", \"n_iter\": \"10\", \"random_seed\": \"0\", \"group_singletons\": true, \"graph_name\": \"\", \"cluster_name\": \"\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "0c735f36-3fe7-477b-9be0-fb0e1028b249",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 22,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Run Dimensional Reduction",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 3350,
+                "top": 1600
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_reduce_dimension/seurat_reduce_dimension/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "e49429e8d6dd",
+                "name": "seurat_reduce_dimension",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"RunUMAP\", \"__current_case__\": 2, \"reduction\": \"pca\", \"assay\": \"\", \"umap_method\": {\"umap_method\": \"uwot\", \"__current_case__\": 0}, \"n_neighbors\": \"30\", \"n_components\": \"2\", \"metric\": \"cosine\", \"run_umap_on\": {\"run_umap_on\": \"dims\", \"__current_case__\": 0, \"dims\": \"30\"}, \"adv\": {\"reduction_model\": \"\", \"n_epochs\": null, \"learning_rate\": \"1\", \"min_dist\": \"0.3\", \"spread\": \"1\", \"set_op_mix_ratio\": \"1.0\", \"local_connectivity\": \"1\", \"repulsion_strength\": \"1\", \"negative_sample_rate\": \"5\", \"a\": \"\", \"b\": \"\", \"uwot_sgd\": false, \"seed_use\": \"42\", \"angular_rp_forest\": false, \"reduction_name\": \"umap\", \"reduction_key\": \"UMAP_\"}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "4177c098-ee9a-4877-a57e-571bc608577d",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3600,
+                "top": 910
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "f908ea4a-5d77-4b5e-847a-5a0599df0d15",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3600,
+                "top": 1140
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeaturePlot\", \"__current_case__\": 8, \"features\": \"MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74\", \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap\", \"plot\": {\"keep_scale\": \"feature\", \"blend\": {\"blend\": \"FALSE\", \"__current_case__\": 1, \"by_col\": false}, \"cols_2\": \"lightgrey\", \"cols_3\": \"blue\", \"pt_size\": null, \"alpha\": \"1\", \"order\": false, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"coord_fixed\": false, \"ncol\": \"3\", \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"split_by\": \"\", \"shape_by\": \"\", \"min_cutoff\": null, \"max_cutoff\": null}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "ef665c3a-083d-49a3-9274-086a2214f3b2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 3600,
+                "top": 1370
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": \"3\", \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "4df0c807-56c1-4142-8b3e-9dfda52af5ba",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "27": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "errors": null,
+            "id": 27,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Find Clusters",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                },
+                {
+                    "name": "markers_tabular",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 4150,
+                "top": 1650
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "94f1b9c7286f",
+                "name": "seurat_clustering",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FindAllMarkers\", \"__current_case__\": 3, \"features\": null, \"logfc_threshold\": \"1.0\", \"test_use\": {\"test_use\": \"wilcox\", \"__current_case__\": 0, \"slot\": \"data\"}, \"set_top_markers\": {\"set_top_markers\": \"true\", \"__current_case__\": 0, \"topN\": \"10\"}, \"adv\": {\"base\": \"2\", \"assay\": \"\", \"fc_name\": \"\", \"min_pct\": \"0.01\", \"min_diff_pct\": null, \"only_pos\": true, \"max_cells_per_ident\": null, \"random_seed\": \"1\", \"min_cells_group\": \"3\", \"densify\": false}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "7d54ab6f-614e-44dd-bc0e-6c57136df569",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "28": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 28,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4530,
+                "top": 270
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"CD79A,MS4A1\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": null, \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "56e5ecb5-841e-4700-9639-d3b233cf618f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "29": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 29,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4530,
+                "top": 470
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"IL7R,CCR7,S100A4,CD8A\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": \"4\", \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "0265672b-f89c-47d0-a081-6003fa648c0a",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "30": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 30,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4530,
+                "top": 670
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeaturePlot\", \"__current_case__\": 8, \"features\": \"IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP\", \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap\", \"plot\": {\"keep_scale\": \"feature\", \"blend\": {\"blend\": \"FALSE\", \"__current_case__\": 1, \"by_col\": false}, \"cols_2\": \"lightgrey\", \"cols_3\": \"blue\", \"pt_size\": null, \"alpha\": \"1\", \"order\": false, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"coord_fixed\": false, \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"split_by\": \"\", \"shape_by\": \"\", \"min_cutoff\": null, \"max_cutoff\": null}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "903b771d-8f96-4119-b063-66b08c7925de",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "31": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 31,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4520,
+                "top": 910
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"FeaturePlot\", \"__current_case__\": 8, \"features\": \"GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15\", \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap\", \"plot\": {\"keep_scale\": \"feature\", \"blend\": {\"blend\": \"FALSE\", \"__current_case__\": 1, \"by_col\": false}, \"cols_2\": \"lightgrey\", \"cols_3\": \"blue\", \"pt_size\": null, \"alpha\": \"1\", \"order\": false, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"coord_fixed\": false, \"ncol\": \"3\", \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}}, \"adv\": {\"cells\": null, \"slot\": \"data\", \"split_by\": \"\", \"shape_by\": \"\", \"min_cutoff\": null, \"max_cutoff\": null}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"3100\", \"height\": \"2100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "1543f410-c0b8-4ec6-8a99-03568333d1b8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "32": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 32,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4530,
+                "top": 1160
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": null, \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "eb141e18-0657-4f2b-9b15-092dcccdfff9",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "33": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 33,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4530,
+                "top": 1350
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"VlnPlot\", \"__current_case__\": 0, \"features\": \"GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15\", \"idents\": \"\", \"sort\": false, \"plot\": {\"ncol\": null, \"cols\": \"\", \"pt_size\": null, \"alpha\": \"1\", \"adjust\": \"1\", \"y_max\": null, \"same_y_lims\": false, \"log\": false, \"fill_by\": \"feature\", \"flip\": false, \"add_noise\": true}, \"adv\": {\"assay\": \"\", \"layer\": \"\", \"group_by\": \"\", \"split_by\": \"\", \"split_plot\": false, \"stack\": false}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "2bc51f26-2cce-46a4-beb7-bfd534e832f8",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "34": {
+            "annotation": "This is the final annotated Seurat Object with each cluster labelled by cell type.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "errors": null,
+            "id": 34,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 23,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": "Annotated Clusters",
+            "name": "Seurat Data Management",
+            "outputs": [
+                {
+                    "name": "rds_out",
+                    "type": "rds"
+                }
+            ],
+            "position": {
+                "left": 4610,
+                "top": 1940
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "50c5abeb08ba",
+                "name": "seurat_data",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"Manipulate\", \"__current_case__\": 1, \"manipulate\": {\"manipulate\": \"Rename_Idents\", \"__current_case__\": 1, \"rename\": {\"rename_all\": \"true\", \"__current_case__\": 0, \"new_names\": \"CD4 Memory T, CD14 Mono, CD4 Naive T, B, CD8 Effector T, NK, FCGR3A Mono, CD8 Memory T, CD8 Naive T,DC, CD4 IFN-activated T,Platelet\"}, \"stash_idents\": {\"stash_idents\": \"true\", \"__current_case__\": 1, \"old_ident\": \"old.ident\"}}}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "a9c5f565-9de8-4e36-9596-f8af9d21f619",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "35": {
+            "annotation": "",
+            "content_id": "csv_to_tabular",
+            "errors": null,
+            "id": 35,
+            "input_connections": {
+                "csv": {
+                    "id": 27,
+                    "output_name": "markers_tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert CSV to tabular",
+            "outputs": [
+                {
+                    "name": "tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 5040,
+                "top": 1440
+            },
+            "post_job_actions": {},
+            "tool_id": "csv_to_tabular",
+            "tool_state": "{\"__input_ext\": \"input\", \"__target_datatype__\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"csv\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "cb86cade-b903-4b7d-8d69-2abd5e3bc787",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "36": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 36,
+            "input_connections": {
+                "seurat_rds": {
+                    "id": 34,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 4820,
+                "top": 1730
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DimPlot\", \"__current_case__\": 5, \"dims_1\": \"1\", \"dims_2\": \"2\", \"reduction\": \"umap\", \"plot\": {\"cols\": \"\", \"pt_size\": null, \"order\": \"\", \"shuffle\": {\"shuffle\": \"FALSE\", \"__current_case__\": 1}, \"alpha\": \"1\", \"ncol\": null, \"raster\": {\"raster\": \"NULL\", \"__current_case__\": 0}, \"label\": {\"label\": \"FALSE\", \"__current_case__\": 1}, \"highlight\": {\"highlight\": \"false\", \"__current_case__\": 1}, \"na_value\": \"lightgrey\"}, \"adv\": {\"cells\": null, \"group_by\": \"\", \"split_by\": \"\", \"shape_by\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"false\", \"__current_case__\": 0}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "388f9645-894b-4668-9999-2c7223d1b268",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "37": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 37,
+            "input_connections": {
+                "method|features": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "seurat_rds": {
+                    "id": 34,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat Visualize",
+                    "name": "method"
+                }
+            ],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5860,
+                "top": 1630
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DoHeatmap\", \"__current_case__\": 9, \"features\": {\"__class__\": \"ConnectedValue\"}, \"cells\": null, \"plot\": {\"group_bar\": true, \"group_colors\": \"\", \"disp_min\": \"-2.5\", \"disp_max\": null, \"label\": true, \"size\": \"2.5\", \"hjust\": \"0.0\", \"vjust\": \"0.0\", \"angle\": \"60\", \"raster\": true, \"draw_lines\": true, \"lines_width\": null, \"group_bar_height\": \"0.02\"}, \"adv\": {\"group_by\": \"ident\", \"slot\": \"scale.data\", \"assay\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "e5051943-ee0e-4d1c-bd1f-cd225bfb2cea",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "38": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "errors": null,
+            "id": 38,
+            "input_connections": {
+                "singtabop|input": {
+                    "id": 35,
+                    "output_name": "tabular"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Table Compute",
+                    "name": "singtabop"
+                }
+            ],
+            "label": "Input DE Markers",
+            "name": "Table Compute",
+            "outputs": [
+                {
+                    "name": "table",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 5420,
+                "top": 1430
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3bf5661c0280",
+                "name": "table_compute",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"out_opts\": [\"ignore_nas\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": true}, \"user\": {\"mode\": \"select\", \"__current_case__\": 1, \"select_cols_wanted\": \"1\", \"select_rows_wanted\": null, \"select_keepdupe\": [\"select_cols_keepdupe\", \"select_rows_keepdupe\"]}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.4+galaxy0",
+            "type": "tool",
+            "uuid": "40f4fbec-a7cd-48a2-a458-0407f1fc0bf7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "39": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "errors": null,
+            "id": 39,
+            "input_connections": {
+                "method|features": {
+                    "id": 38,
+                    "output_name": "table"
+                },
+                "seurat_rds": {
+                    "id": 34,
+                    "output_name": "rds_out"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Seurat Visualize",
+                    "name": "method"
+                }
+            ],
+            "label": null,
+            "name": "Seurat Visualize",
+            "outputs": [
+                {
+                    "name": "plot_out_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 5860,
+                "top": 1360
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "2622dd85416f",
+                "name": "seurat_plot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced_common\": {\"show_log\": false}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method\": {\"method\": \"DoHeatmap\", \"__current_case__\": 9, \"features\": {\"__class__\": \"ConnectedValue\"}, \"cells\": null, \"plot\": {\"group_bar\": true, \"group_colors\": \"\", \"disp_min\": \"-2.5\", \"disp_max\": null, \"label\": true, \"size\": \"2.5\", \"hjust\": \"0.0\", \"vjust\": \"0.0\", \"angle\": \"60\", \"raster\": true, \"draw_lines\": true, \"lines_width\": null, \"group_bar_height\": \"0.02\"}, \"adv\": {\"group_by\": \"ident\", \"slot\": \"scale.data\", \"assay\": \"\"}}, \"plot_format\": \"png\", \"resize\": {\"resize\": \"true\", \"__current_case__\": 1, \"width\": \"4100\", \"height\": \"4100\"}, \"seurat_rds\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0+galaxy0",
+            "type": "tool",
+            "uuid": "82ae853a-4611-45d8-a3f5-3c260b671ac4",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "singlecell",
+        "seurat"
+    ],
+    "uuid": "e2275592-addd-4c72-afa6-0df1caeafbab",
+    "version": 6
+}
