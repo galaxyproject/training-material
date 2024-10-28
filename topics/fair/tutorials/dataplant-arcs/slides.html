@@ -21,7 +21,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@79f07eb82957bd9685e64965c3b732c3fc8fe46c",
+		release: "galaxy-training-network@9969bf812b20e6eb30192f4daef19ed198a381a0",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Intro to DataPLANT ARCs">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-10-24 14:04:48 +0000">
+<meta name="DC.date" content="2024-10-28 14:29:37 +0000">
 <meta name="DC.creator" content="Dominik Brilhaus">
 <meta name="DC.creator" content="Cristina Martins Rodrigues">
 <meta name="DC.creator" content="Kevin Frey">
@@ -195,7 +195,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-10-24 14:04:48 +0000",
+  "dateModified": "2024-10-28 14:29:37 +0000",
   "datePublished": "2024-10-24 14:04:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -257,7 +257,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "slides",
   "name": "Intro to DataPLANT ARCs",
   "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/dataplant-arcs/slides.html",
-  "version": 1,
+  "version": 2,
   "keywords": [
     "FAIR Data, Workflows, and Research"
   ],
@@ -836,10 +836,9 @@ Useful when presenting.
 Towards democratization of plant research.
 
 ???
-- Dataplant is a consortium from the heart of the German plant research community.
-- It aims to establish sustainable Research Data management, RDM, by providing both digital assistance such as software or teaching material.
-- as well as and personal assistance, for example via on-site consultation or workshops.
-- Dataplant is committed to developing an RDM system that meets community requirements and facilitates the processing and contextualization of research datasets in accordance with the FAIR principles (Findable, Accessible, Interoperable, Reusable).
+- DataPLANT is a consortium from the heart of the German plant research community.
+- It aims to establish sustainable Research Data management, RDM, by providing both digital assistance, such as software or teaching material, as well as and personal assistance, for example via on-site consultation or workshops.
+- DataPLANT is committed to developing an RDM system that meets community requirements and facilitates the processing and contextualization of research datasets in accordance with the FAIR principles (Findable, Accessible, Interoperable, Reusable).
 
 ---
 
@@ -855,9 +854,9 @@ Towards democratization of plant research.
 
 .footnote[ [nfdi4plants.org](https://nfdi4plants.org/)]
 ???
-- Dataplant’s mission is to lead the digital transformation in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
-- Dataplant builds user-friendly services that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
-- You can read more about dataplant at NFDI for plants dot org
+- DataPLANT’s mission is to lead the digital transformation in plant science by advancing from traditional publications to innovative data-driven formats like Annotated Research Contexts (ARC).
+- DataPLANT builds user-friendly services that simplify data annotation and metadata management for plant scientists. By leveraging existing IT infrastructure, it aims to make the process as seamless and efficient as possible.
+- You can read more about dataplant at nfdi4plants.org
 
 ---
 
@@ -867,10 +866,10 @@ Towards democratization of plant research.
 
 ???
 
-- dataplant works closely together with various plant consortia and projects
-- dataplant acts as the service provider, and has a team of technology experts and semantic specialists
-- dataplant supports communities through their tools, services and consultation
-- and in turn the communities provide feedback and contributions to dataplant
+- DataPLANT works closely together with various plant consortia and projects.
+- DataPLANT acts as the service provider, and has a team of technology experts and semantic specialists.
+- DataPLANT supports communities through their tools, services and consultation.
+- And in turn, the communities provide feedback and contributions to DataPLANT.
 
 ---
 
@@ -881,9 +880,10 @@ Towards democratization of plant research.
 Your entire investigation in a single unified bag
 
 ???
-- Annotated research contexts, or arcs for short, provide a way to bundle your entire investigation in one unified place
-- Arcs can contain your experimental data and annotation, as well as your computational results and workflows
-- Arcs allow you to share your research in a fair and open way
+- Annotated research contexts, or ARCs for short, provide a way to bundle your entire investigation in one unified place.
+- ARCs can contain your experimental data and annotation, as well as your computational results and workflows.
+- ARCs allow you to share your research in a FAIR and open way.
+
 ---
 
 # What does an ARC look like?
@@ -891,11 +891,12 @@ Your entire investigation in a single unified bag
 ![basic folder structure of an arc](images/slides-arc-structure.png)
 
 ???
-- an arc, at its core, is a structured folder of data
-- this structure is based on the isa data model. isa stands for investigation, study assay
-- every arc represents an investigation, and contains studies, assays, workflows and runs at its root
-- we will focus mostly on studies and assays in this tutorial.
-- this is where you put your experimental data, and where you usually start when creating your arc.
+- An ARC, at its core, is a structured folder of data.
+- This structure is based on the ISA data model.
+- ISA stands for investigation, study, assay.
+- Every ARC represents an investigation, and contains one or more studies, assays, workflows and runs at its root.
+- We will focus mostly on studies and assays in this tutorial.
+- This is where you put your experimental data, and where you usually start when creating your ARC.
 
 ---
 
@@ -904,9 +905,9 @@ Your entire investigation in a single unified bag
 ![arc folder structure highlighting the studies and assays folder as places for storing experimental data](images/slides-arc-structure-experimental.png)
 
 ???
-- studies contain information about the biological materials you used in your research, the plants you grew, but also lab protocols chemicals you used.
-- assays contain results and metadata about any measurements you performed
-- and at the end of a measurement you either have another sample, for example in the case of an extraction, or at the end you have data, for example a sequencing assay.
+- Studies contain information about the biological materials you used in your research. The plants you grew, but also lab protocols chemicals you used.
+- Assays contain results and metadata about any measurements you performed.
+- At the end of a measurement you either have another sample, for example in the case of an extraction, or you have data, for example for a sequencing assay.
 
 ---
 # Computations can be run inside ARCs
@@ -914,9 +915,9 @@ Your entire investigation in a single unified bag
 ![arc folder structure highlighting the workflows and runs folders for computational data](images/slides-arc-structure-computational.png)
 
 ???
-- in the workflows folder you would store any scripts or workflows used to analyze the data coming from your assays
-- by specifying CWL workflows, your bioinformatics analysis can be reproduced, right inside the ARC
-- any results from these analysis workflows are stored in the runs folder
+- In the workflows folder you would store any scripts or workflows used to analyze the data coming from your assays.
+- By specifying CWL workflows, your bioinformatics analysis can be reproduced, right inside the ARC.
+- Any results from these analysis workflows are stored in the runs folder.
 
 ---
 # ARCs come with comprehensive metadata
@@ -924,14 +925,15 @@ Your entire investigation in a single unified bag
 ![arc structure with the metadata files highlighted](images/slides-arc-structure-metadata.png)
 
 ???
-- arcs also contain structured metadata
-- this metadata is uses ontologies to describe your research
-- metadata annotations are stored in so-called isa files. The are stored as excel workbooks in the arc.
-- there is investigation level metadata in isa investigation file
-- and similarly we have study-level and assay-level metadata files
-- For example, on the investigation level this would be information about your research, who you are, what was your biological question, what is the experimental design, and so on.
-- On the study level, you would for instance describe your plant samples, how they were grown, harvested, cultured, etcetera
-- On the assay level, let&apos;s say it is a sequencing assay, you would describe information about the measurement, such as the RNA or DNA extraction, library preparation, instruments used, the entire path of your samples in the lab.
+- In addition to raw data, ARCs also contain structured metadata.
+- This metadata uses ontologies to describe your research.
+- Metadata annotations are stored in so-called ISA files. These are stored as excel workbooks in the ARC.
+- There is investigation level metadata in the ISA investigation file.
+- And similarly we have study-level and assay-level metadata files.
+- For example, on the investigation level this is high-level information about your research, who you are, what your biological questions are, what the experimental design was, any related publications, etcetera.
+- On the study level, you would describe things like your plant samples, how they were grown, harvested and cultured.
+- On the assay level, you would describe information about the measurement.
+- For example for a sequencing assay you would describe the RNA or DNA extraction, the library preparation and the instruments used. Essentially the aim is to capture the entire path of your samples in the lab.
 
 ---
 
@@ -953,12 +955,12 @@ ARC incorporate established standards
 ]
 
 ???
-- all of this builds on existing standards
-- arcs are an RO-crates implementation
-- they use the isa data model
-- CWL is used to describe data analysis
-- git is used for version control
-- and ontologies are leveraged to standardize metadata
+- All of this builds on existing standards.
+- ARCs are an RO-crates implementation.
+- They use the ISA data model.
+- CWL is used to describe data analysis.
+- Git is used for version control.
+- Ontologies are leveraged to standardize metadata.
 
 ---
 
@@ -967,9 +969,9 @@ ARC incorporate established standards
 ![image of your local computer, connected to datahub for online storage and backup](images/arc-datahub.png)
 
 ???
-- now usually you start creating your arc on your computer
-- but you can store them online in the data hub, and thereby also creating a backup of your research
-- so you can make changes to your arc locally on your computer, push it to datahub, and from there sync it again, maybe to a different computer.
+- Typically you start creating your ARC on your computer.
+- But you can store ARCs online in the DataHUB, and thereby also creating a backup of your research.
+- You can make changes to your ARC locally on your computer, push it to DataHUB, and from there sync it again, maybe to a different computer.
 
 ---
 
@@ -978,8 +980,8 @@ ARC incorporate established standards
 ![image showing different versions of an arc on datahub](images/slides-arc-versioned.png)
 
 ???
-- datahub also provides version control for your arc
-- this means you have a detailed log of how your arc changed over time, and you can always go back to a previous version if you need
+- DataHUB also provides version control for your ARC.
+- This means you have a detailed log of how your ARC changed over time, and you can always go back to a previous version if needed.
 
 
 ---
@@ -989,9 +991,9 @@ ARC incorporate established standards
 ![images showing different people having access to an arc](images/slides-arc-collaborate.png)
 
 ???
-- by default your arc is private to you on datahub
-- but you can also invite other people to collaborate on your arc, give them access to your arc
-- this can be other people from your lab, or people from other institutes
+- By default your ARC is private to you on DataHUB.
+- But you can invite other people to collaborate on your ARC, by giving them access to your ARC.
+- This can be other people from your lab, or people from other institutes.
 
 ---
 
@@ -1000,9 +1002,9 @@ ARC incorporate established standards
 ![images showing you you having access to multiple ARCs](images/slides-arc-collaborate-contribute.png)
 
 ???
-- you can contribute to multiple arcs, multiple research projects
-- for example if others invited you to collaborate you can contribute to your research
-- or if you have multiple research projects, you can have multiple arcs of your own on datahub
+- You can contribute to multiple ARCs, multiple research projects.
+- For example, if others invited you to collaborate, you can contribute to their ARC.
+- Or if you have multiple research projects of your own, you can have multiple ARCs on DataHUB.
 
 
 ---
@@ -1012,7 +1014,7 @@ ARC incorporate established standards
 ![image depicting parts of one arc being re-used in another](images/slides-arc-reuse.png)
 
 ???
-- you can also reuse parts of other arcs, so you don&apos;t always have to recreate scripts, protocols, assays, etcetera
+- You can also reuse parts of other ARCs, so you don&apos;t always have to recreate things like scripts, protocols, assays, and other shared research components.
 
 ---
 
@@ -1022,11 +1024,10 @@ ARC incorporate established standards
 
 ???
 
-- and once your arc is complete and you are ready to release your work, you can publish your arc
-- you will receive a DOI, a digital object identifier, for your arc
-- dataplant is also creating converters for popular data repositories
-- for example if the editor of your journal requires you to deposit your data into a specific repository such as GEO ENA or NCBI
-- then you can convert the data from your arc into the format required for these repositories automatically
+- Once your ARC is complete, and you are ready to release your work, you can publish your ARC.
+- You will receive a DOI, a digital object identifier, for your ARC.
+- DataPLANT is also creating converters for popular data repositories such as ENA, GEO, and NCBI.
+- For example, if the editor of your journal requires you to deposit your data in one of these repositories, you can easily extract the data and information from your ARC in the appropriate format for these repositories.
 
 ---
 
@@ -1035,8 +1036,8 @@ ARC incorporate established standards
 ![image showing an arc being referenced by doi in a manuscript](images/slides-arc-doi.png)
 
 ???
-- the DOI you receive for your arc can then be referenced in your journal article for example
-- if you make changes to your ARC you can publish a new version, and receive a new DOI, while your original DOI will always point to the original version of your arc
+- The DOI you receive for your ARC can be referenced in your journal article, anabling readers to reuse your data and workflows.
+- If you make changes to your ARC, you can publish a new version, and receive a new DOI, while your original DOI will always point to the original version of your ARC.
 
 ---
 
@@ -1045,7 +1046,7 @@ ARC incorporate established standards
 ![image showing move from classical publication to a more data-centric publishing model](images/slides-arc-data-publications.png)
 
 ???
-- this approach allows us to move from classical publications to a more data-centric publication model
+- This approach allows us to move from classical publications to a more data-centric publication model.
 
 ---
 
@@ -1054,9 +1055,8 @@ ARC incorporate established standards
 ![image depicting the circular RDM research cycle, with around its edge various dataplant tools and services](images/slides-arc-ecosystem.png)
 
 ???
-- dataplant offers an entire ecosystem of tools and services around this concept
-- in all phases of the research data management cycle
-- from writing your data management plan, to storing and describing your research data, sharing and collaborating, and finally publishing your research and making it findable and accessible to scientists worldwide.
+- DataPLANT offers an entire ecosystem of tools and services around this concept, in all phases of the research data management cycle.
+- From writing your data management plan, to storing and describing your research data, sharing and collaborating, and finally publishing your research and making it findable and accessible to scientists worldwide.
 
 
 
