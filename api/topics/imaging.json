@@ -145,7 +145,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"BaSiC Illumination\"];\n  0 -->|output| 3;\n  4[\"ASHLAR\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"UNetCoreograph\"];\n  4 -->|output| 5;\n  6[\"Mesmer\"];\n  5 -->|tma_sections| 6;\n  ee73bee3-59e7-4e1c-87fd-197b8eac7e15[\"Output\\nMesmer on input dataset(s): Mask\"];\n  6 --> ee73bee3-59e7-4e1c-87fd-197b8eac7e15;\n  style ee73bee3-59e7-4e1c-87fd-197b8eac7e15 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert image\"];\n  5 -->|tma_sections| 7;\n  8[\"MCQUANT\"];\n  1 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  fe28534a-2b3f-4ecc-8ba9-a106b2d1425c[\"Output\\nPrimary Mask Quantification\"];\n  8 --> fe28534a-2b3f-4ecc-8ba9-a106b2d1425c;\n  style fe28534a-2b3f-4ecc-8ba9-a106b2d1425c stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF Channels\"];\n  1 -->|output| 9;\n  7 -->|output| 9;\n  10[\"Convert McMicro Output to Anndata\"];\n  8 -->|cellmask| 10;\n  11[\"Single Cell Phenotyping\"];\n  10 -->|outfile| 11;\n  2 -->|output| 11;\n  12[\"Vitessce Visualization\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nmarkers.csv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"]\n  3[label=\"BaSiC Illumination\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"ASHLAR\"]\n  3 -> 4 [label=\"output_dfp\"]\n  3 -> 4 [label=\"output_ffp\"]\n  0 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"UNetCoreograph\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Mesmer\"]\n  5 -> 6 [label=\"tma_sections\"]\n  kee73bee359e74e1c87fd197b8eac7e15[color=lightseagreen,label=\"Output\\nMesmer on input dataset(s): Mask\"]\n  6 -> kee73bee359e74e1c87fd197b8eac7e15\n  7[label=\"Convert image\"]\n  5 -> 7 [label=\"tma_sections\"]\n  8[label=\"MCQUANT\"]\n  1 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"tma_sections\"]\n  6 -> 8 [label=\"mask\"]\n  kfe28534a2b3f4ecc8ba9a106b2d1425c[color=lightseagreen,label=\"Output\\nPrimary Mask Quantification\"]\n  8 -> kfe28534a2b3f4ecc8ba9a106b2d1425c\n  9[label=\"Rename OME-TIFF Channels\"]\n  1 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Convert McMicro Output to Anndata\"]\n  8 -> 10 [label=\"cellmask\"]\n  11[label=\"Single Cell Phenotyping\"]\n  10 -> 11 [label=\"outfile\"]\n  2 -> 11 [label=\"output\"]\n  12[label=\"Vitessce Visualization\"]\n  11 -> 12 [label=\"output\"]\n  9 -> 12 [label=\"renamed_image\"]\n  6 -> 12 [label=\"mask\"]\n}",
           "workflow_tools": [
@@ -1085,6 +1085,10 @@
             "name": "Oqtans"
           },
           {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
             "usegalaxy": false
@@ -1216,6 +1220,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1353,6 +1361,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -1480,6 +1492,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1611,6 +1627,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -1736,6 +1756,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -1875,13 +1899,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.4",
-                  "6.7.0+galaxy2"
+                  "6.7.0+galaxy2",
+                  "0.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -2015,6 +2043,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -2142,6 +2174,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -2275,6 +2311,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -2402,6 +2442,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -2729,7 +2773,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Histogram equalization\"];\n  0 -->|output| 1;\n  2[\"Image Info\"];\n  0 -->|output| 2;\n  3[\"Filter Image\"];\n  0 -->|output| 3;\n  4[\"Filter Image\"];\n  0 -->|output| 4;\n  5[\"Convert image\"];\n  0 -->|output| 5;\n  6[\"Convert image\"];\n  1 -->|output| 6;\n  7[\"Auto Threshold\"];\n  3 -->|output| 7;\n  8[\"Histogram equalization\"];\n  3 -->|output| 8;\n  9[\"Binary 2 Label\"];\n  7 -->|output| 9;\n  10[\"Convert image\"];\n  8 -->|output| 10;\n  11[\"Overlay Images\"];\n  6 -->|output| 11;\n  9 -->|output| 11;\n  85029ccb-ebb3-4a91-9ba3-d1daefd13efc[\"Output\\nout\"];\n  11 --> 85029ccb-ebb3-4a91-9ba3-d1daefd13efc;\n  style 85029ccb-ebb3-4a91-9ba3-d1daefd13efc stroke:#2c3143,stroke-width:4px;\n  12[\"Convert image\"];\n  9 -->|output| 12;\n  13[\"Count Objects\"];\n  9 -->|output| 13;\n  1446f4bf-b031-405a-84f0-88acc1a5c8a3[\"Output\\noutput\"];\n  13 --> 1446f4bf-b031-405a-84f0-88acc1a5c8a3;\n  style 1446f4bf-b031-405a-84f0-88acc1a5c8a3 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput_image\"]\n  1[label=\"Histogram equalization\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Image Info\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter Image\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Filter Image\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Convert image\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Convert image\"]\n  1 -> 6 [label=\"output\"]\n  7[label=\"Auto Threshold\"]\n  3 -> 7 [label=\"output\"]\n  8[label=\"Histogram equalization\"]\n  3 -> 8 [label=\"output\"]\n  9[label=\"Binary 2 Label\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Convert image\"]\n  8 -> 10 [label=\"output\"]\n  11[label=\"Overlay Images\"]\n  6 -> 11 [label=\"output\"]\n  9 -> 11 [label=\"output\"]\n  k85029ccbebb34a919ba3d1daefd13efc[color=lightseagreen,label=\"Output\\nout\"]\n  11 -> k85029ccbebb34a919ba3d1daefd13efc\n  12[label=\"Convert image\"]\n  9 -> 12 [label=\"output\"]\n  13[label=\"Count Objects\"]\n  9 -> 13 [label=\"output\"]\n  k1446f4bfb031405a84f088acc1a5c8a3[color=lightseagreen,label=\"Output\\noutput\"]\n  13 -> k1446f4bfb031405a84f088acc1a5c8a3\n}",
           "workflow_tools": [
@@ -3013,6 +3057,10 @@
             "name": "Oqtans"
           },
           {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
             "usegalaxy": false
@@ -3147,13 +3195,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.3",
-                  "0.0.4"
+                  "0.0.4",
+                  "0.0.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3170,10 +3222,10 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.0.5-2",
+                  "0.18.1+galaxy3",
                   "0.18.1+galaxy2",
                   "0.18.1+galaxy1",
-                  "0.18.1+galaxy3",
-                  "0.0.5-2",
                   "0.18.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -3290,13 +3342,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.3",
-                  "0.0.4"
+                  "0.0.4",
+                  "0.0.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -3430,6 +3486,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -3451,8 +3511,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.18.1+galaxy0",
-                  "0.0.1-2",
-                  "0.14.2+galaxy0"
+                  "0.14.2+galaxy0",
+                  "0.0.1-2"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -3563,6 +3623,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -3704,6 +3768,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -3837,6 +3905,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -3993,6 +4065,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -4132,13 +4208,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.4",
-                  "6.7.0+galaxy2"
+                  "6.7.0+galaxy2",
+                  "0.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -4269,6 +4349,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -4409,6 +4493,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -4537,6 +4625,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -4680,6 +4772,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -4815,6 +4911,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -4957,6 +5057,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -4977,8 +5081,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "5.7.1",
-                  "5.7.1+galaxy1"
+                  "5.7.1+galaxy1",
+                  "5.7.1"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -5092,6 +5196,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -5111,9 +5219,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.4+galaxy0",
                   "0.0.4+galaxy4",
                   "0.0.4+galaxy1",
+                  "0.0.4+galaxy0",
                   "0.0.4+galaxy3",
                   "0.0.4+galaxy2"
                 ],
@@ -5231,6 +5339,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -5241,8 +5353,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.0.1",
-                  "0.0.2",
-                  "0.0.3"
+                  "0.0.3",
+                  "0.0.2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -5254,9 +5366,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.4+galaxy0",
                   "0.0.4+galaxy4",
                   "0.0.4+galaxy1",
+                  "0.0.4+galaxy0",
                   "0.0.4+galaxy3",
                   "0.0.4+galaxy2"
                 ],
@@ -5374,6 +5486,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -5882,7 +5998,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\ninput images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nfeature_extraction\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"merge_table\"];\n  2 -->|output| 3;\n  3fc2324d-233b-4785-9fb7-9c30b2daaef4[\"Output\\noutput\"];\n  3 --> 3fc2324d-233b-4785-9fb7-9c30b2daaef4;\n  style 3fc2324d-233b-4785-9fb7-9c30b2daaef4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\ninput images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nfeature_extraction\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"merge_table\"]\n  2 -> 3 [label=\"output\"]\n  k3fc2324d233b47859fb79c30b2daaef4[color=lightseagreen,label=\"Output\\noutput\"]\n  3 -> k3fc2324d233b47859fb79c30b2daaef4\n}",
           "workflow_tools": [
@@ -6100,7 +6216,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter Image\"];\n  0 -->|output| 2;\n  3[\"Auto Threshold\"];\n  2 -->|output| 3;\n  4[\"Split objects\"];\n  3 -->|output| 4;\n  5[\"2D Feature Extraction\"];\n  4 -->|output| 5;\n  6[\"Filter segmentation\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  b90cbc94-33fd-4600-96b5-8cf0bcaf2e94[\"Output\\noutput\"];\n  6 --> b90cbc94-33fd-4600-96b5-8cf0bcaf2e94;\n  style b90cbc94-33fd-4600-96b5-8cf0bcaf2e94 stroke:#2c3143,stroke-width:4px;\n  7[\"2D Feature Extraction\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n  3d3c037a-50ef-443b-a6f8-8a37db6bfb36[\"Output\\noutput\"];\n  7 --> 3d3c037a-50ef-443b-a6f8-8a37db6bfb36;\n  style 3d3c037a-50ef-443b-a6f8-8a37db6bfb36 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput image\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[label=\"Filter Image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Auto Threshold\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Split objects\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"2D Feature Extraction\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Filter segmentation\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  kb90cbc9433fd460096b58cf0bcaf2e94[color=lightseagreen,label=\"Output\\noutput\"]\n  6 -> kb90cbc9433fd460096b58cf0bcaf2e94\n  7[label=\"2D Feature Extraction\"]\n  6 -> 7 [label=\"output\"]\n  0 -> 7 [label=\"output\"]\n  k3d3c037a50ef443ba6f88a37db6bfb36[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k3d3c037a50ef443ba6f88a37db6bfb36\n}",
           "workflow_tools": [
@@ -6420,6 +6536,10 @@
             "name": "Oqtans"
           },
           {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
             "usegalaxy": false
@@ -6554,13 +6674,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.3",
-                  "0.0.4"
+                  "0.0.4",
+                  "0.0.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6577,10 +6701,10 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "0.0.5-2",
+                  "0.18.1+galaxy3",
                   "0.18.1+galaxy2",
                   "0.18.1+galaxy1",
-                  "0.18.1+galaxy3",
-                  "0.0.5-2",
                   "0.18.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -6697,13 +6821,17 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.3",
-                  "0.0.4"
+                  "0.0.4",
+                  "0.0.3"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6837,6 +6965,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -6965,6 +7097,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -7105,6 +7241,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -7233,6 +7373,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -7369,6 +7513,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -7511,6 +7659,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -7638,6 +7790,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -7782,6 +7938,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -7918,6 +8078,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -8318,7 +8482,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting modules\"];\n  1[\"Download images\"];\n  2[\"Segment complete nuclei\"];\n  0 -->|output_pipeline| 2;\n  3[\"Segmentation mask complete nuclei\"];\n  2 -->|output_pipeline| 3;\n  4[\"Label nuclei\"];\n  3 -->|output_pipeline| 4;\n  5[\"Save labelled nuclei\"];\n  4 -->|output_pipeline| 5;\n  6[\"Detect dark holes in nuclei\"];\n  5 -->|output_pipeline| 6;\n  7[\"Segment nucleoli that fall inside nuclei\"];\n  6 -->|output_pipeline| 7;\n  8[\"Segment nucleoli\"];\n  7 -->|output_pipeline| 8;\n  9[\"Convert the segmented nucleoli into an image\"];\n  8 -->|output_pipeline| 9;\n  10[\"Combine masks nuclei + nucleoli\"];\n  9 -->|output_pipeline| 10;\n  11[\"Save combined segmentation masks\"];\n  10 -->|output_pipeline| 11;\n  12[\"Segment all nuclei\"];\n  11 -->|output_pipeline| 12;\n  13[\"Segmentation mask nucleoli including cells touching borders\"];\n  12 -->|output_pipeline| 13;\n  14[\"Extract background\"];\n  13 -->|output_pipeline| 14;\n  15[\"Measure the image granularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"Measure the nuclei texture\"];\n  15 -->|output_pipeline| 16;\n  17[\"Measure the nuclei intensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"Measure size and shape of nuclei and nucleoli\"];\n  17 -->|output_pipeline| 18;\n  19[\"Relate nucleoli with their parent nuclei\"];\n  18 -->|output_pipeline| 19;\n  20[\"Measure the image quality\"];\n  19 -->|output_pipeline| 20;\n  21[\"Measure the area occupied by nuclei and nucleoli\"];\n  20 -->|output_pipeline| 21;\n  22[\"Measure the image intensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"Export measurements\"];\n  22 -->|output_pipeline| 23;\n  24[\"Run CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting modules\"]\n  1[label=\"Download images\"]\n  2[label=\"Segment complete nuclei\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Segmentation mask complete nuclei\"]\n  2 -> 3 [label=\"output_pipeline\"]\n  4[label=\"Label nuclei\"]\n  3 -> 4 [label=\"output_pipeline\"]\n  5[label=\"Save labelled nuclei\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"Detect dark holes in nuclei\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"Segment nucleoli that fall inside nuclei\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"Segment nucleoli\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Convert the segmented nucleoli into an image\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"Combine masks nuclei + nucleoli\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"Save combined segmentation masks\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"Segment all nuclei\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  13[label=\"Segmentation mask nucleoli including cells touching borders\"]\n  12 -> 13 [label=\"output_pipeline\"]\n  14[label=\"Extract background\"]\n  13 -> 14 [label=\"output_pipeline\"]\n  15[label=\"Measure the image granularity\"]\n  14 -> 15 [label=\"output_pipeline\"]\n  16[label=\"Measure the nuclei texture\"]\n  15 -> 16 [label=\"output_pipeline\"]\n  17[label=\"Measure the nuclei intensity\"]\n  16 -> 17 [label=\"output_pipeline\"]\n  18[label=\"Measure size and shape of nuclei and nucleoli\"]\n  17 -> 18 [label=\"output_pipeline\"]\n  19[label=\"Relate nucleoli with their parent nuclei\"]\n  18 -> 19 [label=\"output_pipeline\"]\n  20[label=\"Measure the image quality\"]\n  19 -> 20 [label=\"output_pipeline\"]\n  21[label=\"Measure the area occupied by nuclei and nucleoli\"]\n  20 -> 21 [label=\"output_pipeline\"]\n  22[label=\"Measure the image intensity\"]\n  21 -> 22 [label=\"output_pipeline\"]\n  23[label=\"Export measurements\"]\n  22 -> 23 [label=\"output_pipeline\"]\n  24[label=\"Run CellProfiler\"]\n  1 -> 24 [label=\"output_tar\"]\n  23 -> 24 [label=\"output_pipeline\"]\n}",
           "workflow_tools": [
@@ -9702,6 +9866,10 @@
             "name": "Oqtans"
           },
           {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
             "usegalaxy": false
@@ -9833,6 +10001,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -9972,6 +10144,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -10105,6 +10281,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -10244,6 +10424,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -10377,6 +10561,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -10516,6 +10704,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -10649,6 +10841,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -10788,6 +10984,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -10921,6 +11121,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -11060,6 +11264,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -11193,6 +11401,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -11332,6 +11544,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -11465,6 +11681,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -11604,6 +11824,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -11737,6 +11961,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -11876,6 +12104,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -12009,6 +12241,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -12148,6 +12384,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -12284,6 +12524,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -12417,6 +12661,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -12776,7 +13024,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 10:23:41 +0000",
+          "modified": "2024-10-28 11:19:53 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n  dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e[\"Output\\nCellProfiler pipeline output files\"];\n  12 --> dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e;\n  style dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting Modules\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"ColorToGray\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Unzip\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"IdentifyPrimaryObjects\"]\n  2 -> 4 [label=\"output_pipeline\"]\n  5[label=\"MeasureObjectSizeShape\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"MeasureObjectIntensity\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"TrackObjects\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"OverlayOutlines\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Tile\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"SaveImages\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"ExportToSpreadsheet\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"CellProfiler\"]\n  3 -> 12 [label=\"unzipped\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label=\"Output\\nCellProfiler pipeline output files\"]\n  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e\n}",
           "workflow_tools": [
@@ -13650,6 +13898,10 @@
             "name": "Oqtans"
           },
           {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
             "url": "http://pepsimili.e-nios.com:8080/",
             "name": "PepSimili",
             "usegalaxy": false
@@ -13781,6 +14033,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -13920,6 +14176,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -14046,6 +14306,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -14185,6 +14449,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -14318,6 +14586,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -14457,6 +14729,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -14590,6 +14866,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -14729,6 +15009,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -14855,6 +15139,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -14994,6 +15282,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
               },
               {
@@ -15120,6 +15412,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -15250,6 +15546,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
               },
               {
                 "state": "missing",
@@ -15518,8 +15818,8 @@
       "id": "imaging/bioimage-metadata",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-10-28 10:23:41 +0000",
-      "pub_date": "2024-10-28 10:23:41 +0000",
+      "mod_date": "2024-10-28 11:19:52 +0000",
+      "pub_date": "2024-10-28 11:19:52 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-metadata/tutorial.json",
       "tools": [
@@ -15825,8 +16125,8 @@
       "id": "imaging/bioimage-REMBI",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-10-28 10:23:41 +0000",
-      "pub_date": "2024-10-28 10:23:41 +0000",
+      "mod_date": "2024-10-28 11:19:52 +0000",
+      "pub_date": "2024-10-28 11:19:52 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-REMBI/tutorial.json",
       "tools": [
