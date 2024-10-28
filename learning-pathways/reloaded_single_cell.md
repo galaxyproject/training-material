@@ -42,9 +42,9 @@ pathway:
     description: |
               These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Python (Scanpy) or R (Seurat) tutorial.
     tutorials:
-      - name: scrna-case_jupyter_basic-pipeline
+      - name: scrna-case-jupyter_basic-pipeline
         topic: single-cell
-      - name: scrna-case_FilterPlotandExplore_RStudio
+      - name: scrna-case_FilterPlotandExploreRStudio
         topic: single-cell
 
   - section: "Module 3: Inferring trajectories"
@@ -55,7 +55,7 @@ pathway:
        topic: single-cell
      - name: scrna-case_monocle3-rstudio
        topic: single-cell
- 
+
   - section: "The End!"
     description: |
       And now you're done! You will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).
