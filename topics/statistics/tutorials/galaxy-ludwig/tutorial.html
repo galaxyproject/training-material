@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Train and Test a Deep learning image classifier with Galaxy-Ludwig / Train and Test a Deep learning image classifier with Galaxy-Ludwig / Statistics and machine learning</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@6e829cce53f553ea17af662d96f5ed8eaf1c6a26",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Train and Test a Deep learning image classifier with Galaxy-Ludwig">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-10-28 12:27:43 +0000">
+<meta name="DC.creator" content="Paulo Cilas Morais Lyra Junior">
+<meta name="DC.creator" content="Junhao Qiu">
+<meta name="DC.creator" content="Jeremy Goecks"><meta name="description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Statistics and machine learning / Train and Test a Deep learning image classifier with Galaxy-Ludwig / Hands-on: Train and Test a Deep learning image classifier with Galaxy-Ludwig">
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning using Galaxy tools">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/statistics/tutorials/galaxy-ludwig/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Train and Test a Deep learning image classifier with Galaxy-Ludwig",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-10-28 12:27:43 +0000",
+  "datePublished": "2024-10-28 12:27:43 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+
+  ],
+  "funding": [
+
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+  },
+  "abstract": "> <div class="box-title comment-title" id="comment-galaxy-ludwig-tool"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Galaxy-Ludwig Tool</div>",
+  "learningResourceType": "e-learning",
+  "name": "Train and Test a Deep learning image classifier with Galaxy-Ludwig",
+  "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT40M",
+  "teaches": "- Execute a Ludwig experiment.\n- Evaluate the image classifier model.\n- Compare different configurations to improve model performance.",
+  "keywords": [
+    "Statistics and machine learning",
+    "MNIST",
+    "Deep learning",
+    "Ludwig"
+  ],
+  "description": "## Abstract\n\n> <div class="box-title comment-title" id="comment-galaxy-ludwig-tool-1"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Galaxy-Ludwig Tool</div>\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - How do I use the Ludwig tool to create and run a deep learning image classifier?\n - What files do I need to run Ludwig?\n - How do I build and evaluate the image classification model?\n\n\n## Learning Objectives\n\n- Execute a Ludwig experiment.\n- Evaluate the image classifier model.\n- Compare different configurations to improve model performance.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/paulocilasjr/",
+      "name": "Paulo Cilas Morais Lyra Junior",
+      "image": "https://avatars.githubusercontent.com/paulocilasjr",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4403-6684",
+      "orcid": "https://orcid.org/0000-0002-4403-6684"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/qchiujunhao/",
+      "name": "Junhao Qiu",
+      "image": "https://avatars.githubusercontent.com/qchiujunhao",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org/"
+        }
+      ],
+      "identifier": "https://orcid.org/0009-0005-4322-3401",
+      "orcid": "https://orcid.org/0009-0005-4322-3401"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/jgoecks/",
+      "name": "Jeremy Goecks",
+      "image": "https://avatars.githubusercontent.com/jgoecks",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/moffitt/",
+          "name": "Moffitt Cancer Center",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.moffitt.org/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-4583-5226",
+      "orcid": "https://orcid.org/0000-0002-4583-5226"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ],
+  "educationalLevel": "Intermediate",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/workflows/",
+      "name": "Associated Workflows"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Statistics and machine learning
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/statistics/faqs/" title="Check our FAQs for the Statistics and machine learning topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/galaxy-ludwig/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-statistics">
+    <h1 data-toc-skip>Train and Test a Deep learning image classifier with Galaxy-Ludwig</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Authors: <a href="/training-material/hall-of-fame/paulocilasjr/" class="contributor-badge contributor-paulocilasjr"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/paulocilasjr?s=36" alt="Paulo Cilas Morais Lyra Junior avatar" width="36" class="avatar" />
+    Paulo Cilas Morais Lyra Junior</a><a href="/training-material/hall-of-fame/qchiujunhao/" class="contributor-badge contributor-qchiujunhao"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/qchiujunhao?s=36" alt="Junhao Qiu avatar" width="36" class="avatar" />
+    Junhao Qiu</a><a href="/training-material/hall-of-fame/jgoecks/" class="contributor-badge contributor-jgoecks"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/jgoecks?s=36" alt="Jeremy Goecks avatar" width="36" class="avatar" />
+    Jeremy Goecks</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>How do I use the Ludwig tool to create and run a deep learning image classifier?</p>
+</li>
+        
+        <li><p>What files do I need to run Ludwig?</p>
+</li>
+        
+        <li><p>How do I build and evaluate the image classification model?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Execute a Ludwig experiment.</p>
+</li>
+        
+        <li><p>Evaluate the image classifier model.</p>
+</li>
+        
+        <li><p>Compare different configurations to improve model performance.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 40 minutes</div>
+        
+
+        
+        <div><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i> Level: </strong>
+        
+
+
+ Intermediate <span class="visually-hidden">Intermediate</span>
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i> <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+</span>
+
+</div>
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/statistics/tutorials/galaxy-ludwig/workflows/" title="Train and Test a Deep learning image classifier with Galaxy-Ludwig workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/galaxy-ludwig/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Oct 28, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 28, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <blockquote class="comment">
+  <div class="box-title comment-title" id="comment-galaxy-ludwig-tool-2"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Galaxy-Ludwig Tool</div>
+
+  <p>The Ludwig tool described in this tutorial is only available at: 
+<a href="https://cancer.usegalaxy.org">Cancer-Galaxy</a></p>
+
+  <p>Galaxy-ML tools &gt; Ludwig Experiment</p>
+
+</blockquote>
+
+<p>Using the MNIST image dataset of handwritten digits as input, we will build an image recognition model with the Galaxy-Ludwig tool. The goal is to classify the handwritten digit in each image.</p>
+
+<p>To accomplish this, three steps are needed: (i) upload Ludwig files and image files to Galaxy (ii) Set up and running the Ludwig experiment function on Galaxy, and (iii) Evaluate the image classification model. As a bonus step, we’ll also explore (iv) improving the model’s classification performance (Figure 1).</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_model_schema.png" alt="schema of the whole process of training model and test." width="3611" height="1819" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_model_schema.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Overview of the steps process to obtain the handwritten classification model and testing it.</figcaption></figure>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#files-format" id="markdown-toc-files-format">Files Format</a>    <ol>
+      <li><a href="#mnist-traintest-image-files" id="markdown-toc-mnist-traintest-image-files">MNIST Train/Test Image Files</a></li>
+      <li><a href="#mnist-tabular-structure" id="markdown-toc-mnist-tabular-structure">MNIST Tabular Structure</a></li>
+      <li><a href="#configuring-convolutional-neural-networks-cnns" id="markdown-toc-configuring-convolutional-neural-networks-cnns">Configuring Convolutional Neural Networks (CNNs)</a></li>
+    </ol>
+  </li>
+  <li><a href="#galaxy-ludwig-tool" id="markdown-toc-galaxy-ludwig-tool">Galaxy-Ludwig Tool</a>    <ol>
+      <li><a href="#prepare-environment-and-get-the-data" id="markdown-toc-prepare-environment-and-get-the-data">Prepare environment and get the data</a></li>
+      <li><a href="#ludwig-experiment" id="markdown-toc-ludwig-experiment">Ludwig Experiment</a></li>
+      <li><a href="#ludwig-experiment-outputs-files" id="markdown-toc-ludwig-experiment-outputs-files">Ludwig Experiment Outputs files</a></li>
+    </ol>
+  </li>
+  <li><a href="#ludwig-experiment-report" id="markdown-toc-ludwig-experiment-report">Ludwig Experiment Report</a>    <ol>
+      <li><a href="#confusion-matrix" id="markdown-toc-confusion-matrix">Confusion matrix</a></li>
+      <li><a href="#entropy" id="markdown-toc-entropy">Entropy</a></li>
+      <li><a href="#combined-loss" id="markdown-toc-combined-loss">Combined Loss</a></li>
+      <li><a href="#accuracy" id="markdown-toc-accuracy">Accuracy</a></li>
+      <li><a href="#hits-at-k" id="markdown-toc-hits-at-k">Hits at K</a></li>
+    </ol>
+  </li>
+  <li><a href="#changing-models-configuration-epoch--15" id="markdown-toc-changing-models-configuration-epoch--15">Changing model’s configuration (Epoch = 15)</a>    <ol>
+      <li><a href="#changing-epochs" id="markdown-toc-changing-epochs">Changing Epochs</a></li>
+      <li><a href="#ludwig-experiment-report-1" id="markdown-toc-ludwig-experiment-report-1">Ludwig Experiment Report</a></li>
+      <li><a href="#one-more-graph---f1-score-vs-frequency" id="markdown-toc-one-more-graph---f1-score-vs-frequency">One more graph - F1 Score vs Frequency</a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-background"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Background</div>
+
+  <p><a href="https://yann.lecun.com/exdb/mnist/">MNIST dataset</a> provides the database of handwritten digits
+the database has a training set of 60,000 examples, and a test set of 10,000 examples.
+at our planet and its environment for the ultimate benefit of all European citizens.
+It is a subset of a larger set available from NIST.
+The digits have been size normalized and centered in a fixed-size image.</p>
+</blockquote>
+
+<h1 id="files-format">Files Format</h1>
+<p>Before starting our hands-on, here is a brief explanation of the three files generated for the Ludwig Experiment tool.</p>
+
+<h2 id="mnist-traintest-image-files">MNIST Train/Test Image Files</h2>
+
+<p>Since our model will learn directly from the PNG files containing the handwritten numbers, we need to upload these files as well. The images are stored in two main folders: one for training and one for testing. Another folder, named after the figure label, is used to store the figures (Figure 2).</p>
+
+<p>Notice that we are going to work with compressed file (.zip), Galaxy-Ludwig knows how to decompress the files and have them ready.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_images_file.png" alt="folder tree related to the hand-written digits picture. " width="1570" height="440" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_images_file.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> File tree containing the images files used to training and testing the model</figcaption></figure>
+
+<h2 id="mnist-tabular-structure">MNIST Tabular Structure</h2>
+
+<p>The MNIST dataset consists of images and their corresponding labels. For the purpose of this tutorial, mnist_dataset.csv file is created and contains three columns: image_path, label and, split.</p>
+
+<p>Briefly, the image_path column provides the file paths to the images that will be fed into the deep learning algorithm. The label column contains the correct classifications, ranging from 0 to 9, for the handwritten digits in the images. The split column indicates whether the data should be used for training (0) or testing (2) the model.</p>
+
+<figure id="figure-3" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_dataset_format.png" alt="Dataset.csv file format snapshot. " width="416" height="556" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_dataset_format.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> Dataset.csv file format snapshot. features in order: file_path, label, split.</figcaption></figure>
+
+<h2 id="configuring-convolutional-neural-networks-cnns">Configuring Convolutional Neural Networks (CNNs)</h2>
+
+<p>The config.yaml file is crucial as it defines the entire structure of your machine learning experiment. This configuration file tells Ludwig how to process your data, what model to use, how to train it, and what outputs to generate.</p>
+
+<p>The rationale behind the construction of this configuration file for the dataset is as follows:</p>
+
+<p>i) The model takes images as input and uses a stacked convolutional neural network (CNN) to extract features.
+ii) It consists of two convolutional layers followed by a fully connected layer, with dropout applied to the second convolutional layer. The max pooling settings are defined by pool_size = 2 and pool_stride = 2, which are important for reducing the spatial dimensions of the input volume.
+iii) The fully connected layer helps to reduce overfitting.
+iv) The split configuration is used to divide the dataset based on the ‘split’ column rather than using a random split (which is the default). In this configuration, rows labeled with ‘0’ are included in the training set, while rows labeled with ‘2’ are included in the testing set. If a validation category is needed, rows are labeled with ‘1’.
+v) The model is trained to classify images into categories (e.g., recognizing digits) and will train for 5 epochs.</p>
+
+<figure id="figure-4" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_config.png" alt="Config.yaml file snapshot. " width="512" height="1120" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_config.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Config.yaml file snapshot.</figcaption></figure>
+
+<h1 id="galaxy-ludwig-tool">Galaxy-Ludwig Tool</h1>
+
+<p>Ludwig simplifies the complexities of machine learning by automating essential steps such as data preprocessing, model architecture selection, hyperparameter tuning, and device management. To properly adapt the configuration for different datasets, users should consider the following parameters:</p>
+
+<ul>
+  <li>Input Features: Ensure the type reflects the nature of the data.</li>
+  <li>Encoder: Depending on the input type, this may need to be changed. For example, for image data, consider varying <code class="language-plaintext highlighter-rouge">num_filters</code> and <code class="language-plaintext highlighter-rouge">filter_size</code> hyperparameters. For text data, you might switch to type: rnn or type: transformer.</li>
+  <li>Output Features: Adjust the type according to the target variable. For instance, if it’s a regression task, use type: numerical instead of category.</li>
+  <li>Trainer Parameters: Users can adjust epochs, batch_size, and learning_rate based on the dataset size, complexity, data behavior, and available computational resources.</li>
+</ul>
+
+<p>These are just a few of the many options that Ludwig provides out-of-the-box, allowing users to easily set and modify parameters. This is particularly beneficial for Galaxy users who are more interested in addressing their scientific questions than in navigating the intricacies of machine learning workflows.</p>
+
+<h2 id="prepare-environment-and-get-the-data">Prepare environment and get the data</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-environment-and-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Environment and Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>image classifier</em>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Import the files from Zenodo or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13292895/files/mnist_images.zip
+https://zenodo.org/records/13357260/files/mnist_dataset.csv 
+https://zenodo.org/records/13713095/files/config.yaml
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Check that the data format assigned for each file is <strong>zip</strong>, <strong>csv</strong>, and <strong>yaml</strong>, respectively.
+If it is not, follow the Changing the datatype tip.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>
+      <p>Add a tag (<code class="language-plaintext highlighter-rouge">Stacked CNN</code>) to the dataset corresponding to <code class="language-plaintext highlighter-rouge">config.yaml</code>
+This is important to trace back on what configurations the model was built on.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="ludwig-experiment">Ludwig Experiment</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+  <ol>
+    <li><span class="tool" data-tool=".bx.psu.edu/repos/paulo_lyra_jr/ludwig_applications/ludwig_experiment/2024.0.10.3" title="Ludwig Experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ludwig Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2024.0.10.3)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the dataset containing model configuration”</em>: <code class="language-plaintext highlighter-rouge">config.yaml</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset”</em>: <code class="language-plaintext highlighter-rouge">mnist_dataset.csv</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Raw data”</em>: <code class="language-plaintext highlighter-rouge">mnist_images.zip</code>
+Run the tool</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="ludwig-experiment-outputs-files">Ludwig Experiment Outputs files</h2>
+
+<p>After your model is trained and tested, you should see three new files in your history list:</p>
+
+<ul>
+  <li>
+    <p>Ludwig Experiment Report: An HTML file containing the evaluation report of the trained model.</p>
+  </li>
+  <li>
+    <p>Ludwig Experiment Trained Model: A composite dataset of the trained Ludwig model.</p>
+  </li>
+  <li>
+    <p>Ludwig Experiment Predictions CSV: A CSV file with the prediction results from the model evaluations.</p>
+  </li>
+</ul>
+
+<p>To evaluate the model, the Ludwig Experiment Report contains all the necessary information.</p>
+
+<h1 id="ludwig-experiment-report">Ludwig Experiment Report</h1>
+
+<p>Before we begin, it’s crucial to determine the most appropriate metric for a given machine learning problem. While accuracy is a useful metric, other performance measures might be more suitable depending on the specific goal. For instance, an overfitted model might exhibit high accuracy due to class imbalance in the dataset. Therefore, the purpose of building the model should guide the interpretation of various metrics.</p>
+
+<p>In this section, we will demonstrate how to evaluate the results of an image classifier model, providing you with a foundational understanding of how to interpret the model’s performance.</p>
+
+<h2 id="confusion-matrix">Confusion matrix</h2>
+
+<p>A confusion matrix is powerful for evaluating the performance of a deep learning model, especially in classification tasks. It provides a granular view of model performance, helping to refine the model. It achieves that by showing the predicted labels with the actual labels in a structured table format, where rows are the actual values and columns the prediction from the model (Figure 5).</p>
+
+<figure id="figure-5" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_confusion_matrix_2.png" alt="figure illustrates the process of generating a confusion matrix from a machine learning model's predictions. " width="3570" height="2204" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_confusion_matrix_2.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> This figure illustrates the process of generating a confusion matrix from a machine learning model's predictions. The confusion matrix is a table used to evaluate the performance of a classification algorithm. It compares the actual labels (true values) with the predicted labels produced by the model.</figcaption></figure>
+
+<p>Understanding the confusion matrix allows to calculate and interpreting: Recall, Precision, Specificity, Accuracy, and other aspects involved such as bias.</p>
+
+<p>The starting point is the confusion matrix generated after training and testing the model (Figure 6). As usual, the diagonal elements represent the correctly predicted samples, giving you a sense of how well your model predicted all possible labels before conducting a more in-depth analysis.</p>
+
+<p>The confusion matrix plot:</p>
+
+<figure id="figure-6" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test1_confusion_matrix.png" alt="confusion matrix generated from the image classifier results. " width="989" height="880" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test1_confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Confusion matrix derivate from Image classifier model testing.</figcaption></figure>
+
+<p>For example, we can interpret the results for the handwritten digit ‘1’ (Figure 7a) and for digit ‘7’ (Figure 7b). Each analysis provides a snapshot of the model’s performance for each tested digit.</p>
+
+<figure id="figure-7" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_confusion_matrix.png" alt="Analysis of the confusion matrix derived from image classifier model testing. " width="3235" height="2374" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> Analysis of the confusion matrix derived from image classifier model testing. A) Analysis of the digit '1' and its corresponding confusion matrix. B) Analysis of the digit '7' and its corresponding confusion matrix.</figcaption></figure>
+
+<p>Based on the analysis presented, we can conclude that (i) the model demonstrates a remarkable ability to identify the digits, (ii) with slightly better predictions for the digit ‘1’ compared to the digit ‘7’. (iii) It’s important to note that the confusion matrix also provides insight into the model’s bias; for example, if the numbers along the diagonal are low and the off-diagonal numbers are high, it may indicate bias. The model shows a strong tendency to confuse the digit ‘1’ with the digit ‘8’ and the digit ‘7’ with the digit ‘2’ and ‘9’.</p>
+
+<h2 id="entropy">Entropy</h2>
+
+<p>In the context of a confusion matrix, entropy measures the uncertainty or disorder in the model’s predictions (Figure 8). A confusion matrix with low entropy would have high values concentrated along the diagonal (indicating correct predictions) and low values elsewhere, suggesting that the model is confident and accurate in its classifications. Conversely, a high entropy confusion matrix would have more evenly distributed values, indicating more frequent misclassifications and greater uncertainty in the model’s predictions. In simple terms, entropy helps quantify how mixed or “confused” the model is when making decisions, with higher entropy reflecting more confusion.</p>
+
+<p>The confusion matrix plot:</p>
+
+<figure id="figure-8" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test1_entropy.png" alt="Confusion matrix entropy from image classifier results. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test1_entropy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Confusion matrix entropy of the model trained. The figure visualizes how the model's performance varies across different digits based on the distribution of prediction probabilities.</figcaption></figure>
+
+<p>The lowest entropy value, observed for digit ‘0’ (0.1147), indicates that the model is highly confident and accurate in predicting this digit, with fewer misclassifications and greater certainty. Conversely, the highest entropy value, seen for digit ‘8’ (0.6066), suggests that the model experiences more uncertainty and confusion when predicting this digit, leading to more frequent misclassifications. Additionally, the entropy for digit ‘1’ is lower than that for digit ‘7’, confirming our earlier observation that the model classifies digit ‘1’ more effectively. This variability in entropy can guide further improvements in model training and tuning, with the goal of reducing uncertainty and enhancing prediction accuracy across all digits.</p>
+
+<h2 id="combined-loss">Combined Loss</h2>
+
+<p>The Loss vs. Epoch graph represents the learning progress during the training of a neural network. The x-axis shows the epochs, where one epoch means that each sample in the training dataset has had an opportunity to update the model’s internal parameters. The y-axis represents the loss, a numerical metric indicating how incorrect the model’s predictions are. The objective of training is to minimize this loss, aiming to reduce it to the lowest possible value.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-loss-function-details"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-loss-function-details" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Loss Function details</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>In image classification tasks, cross-entropy loss, also known as log loss, is the most frequently used loss function. For binary classification (two classes), binary cross-entropy is used, while sparse categorical cross-entropy is applied when classifying three or more categories. The model produces a probability vector indicating the likelihood that the input image belongs to each predefined category. This predicted vector is then compared to the actual output, which is represented by a vector of the same size, where the correct category is assigned a probability of 1, and all other categories are assigned a probability of 0.</p>
+
+</blockquote>
+
+<p>In the graph (Figure 9), there is a training curve. When training a model, you’ll often look at a loss curve to determine if the model has converged. It could also help in detecting overfitting and underfitting and can provide insights for implementing early stopping.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-overfitting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-overfitting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Overfitting</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Overfitting occurs when the network fails to generalize well to unseen data because it begins to model the noise and randomness in the training dataset.</p>
+  <figure id="figure-9" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_overfitting.png" alt="alt. " width="798" height="476" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_overfitting.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 9</strong>:</span> Overfitting curve</figcaption></figure>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-underfitting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-underfitting" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Underfitting</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Underfitting happens when the patterns in the training dataset are too complex for our model. It can’t capture them, so it has a poor performance on training and validation sets.</p>
+  <figure id="figure-10" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/explain_underfitting.png" alt="alt. " width="922" height="552" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/explain_underfitting.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 10</strong>:</span> Underfitting curve</figcaption></figure>
+
+</blockquote>
+
+<figure id="figure-11" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test1_combined_loss.png" alt="loss vs epochs. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test1_combined_loss.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 11</strong>:</span> Loss versus Epochs during training. The graph illustrates the relationship between the training loss and the number of epochs during the training of the model.</figcaption></figure>
+
+<p>Based on the training curve (blue line), we can draw the following conclusions:</p>
+
+<ul>
+  <li>CONSISTENT IMPROVEMENT:
+  Training loss consistently decreases over the five epochs. This indicates that the model is effectively learning and improving its performance on the dataset.</li>
+  <li>APPROACHING CONVERGENCE:
+  By Epoch 5, the training loss has reduced to less than 0.5. The gradual reduction in losses suggests that the model is approaching convergence, where further training may yield diminishing returns in terms of performance improvement.</li>
+  <li>ADDITIONAL INFORMATION: 
+  Looking at the test statistics results {“combined”: {“loss”: 0.03800534829497337}}, the combined loss indicates that the model is generalizing well to unseen data after training.</li>
+</ul>
+
+<h2 id="accuracy">Accuracy</h2>
+
+<p>Plotting accuracy over epochs in deep learning is a common practice to visualize how well a model is learning to make correct predictions as training progresses. The x-axis represents the number of epochs, which are complete passes through the training dataset, while the y-axis shows the accuracy, typically expressed as a percentage.
+As training progresses, the accuracy on the training data usually increases, indicating that the model is learning to correctly classify more examples.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-plotting-accuracy-and-or-loss"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-plotting-accuracy-and-or-loss" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Plotting accuracy and/or Loss</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Plotting accuracy and plotting loss are both essential for monitoring the performance of a deep learning model, but they serve different purposes and provide different insights. While accuracy provides a straightforward measure of model performance, loss offers deeper insights into the training process, making both plots valuable for different aspects of model evaluation.</p>
+</blockquote>
+
+<figure id="figure-12" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test1_label_accuracy.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test1_label_accuracy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 12</strong>:</span> Accuracy versus Epochs. This graph depicts the accuracy of the model over the course of training. The training accuracy curve indicates how well the model is performing on the training data.</figcaption></figure>
+
+<p>Based on the training curve (blue line), we can draw the following conclusions:</p>
+
+<ul>
+  <li>THE DATASET IS RELATIVELY EASY FOR THE MODEL TO LEARN:
+  The model starts with a relatively high training accuracy of &gt;0.8.</li>
+  <li>CONSISTENT IMPROVEMENT:
+  Training accuracies increase steadily across the epochs. This consistent upward trend indicates that the model is learning effectively and becoming more accurate in its predictions with each epoch.</li>
+  <li>ADDITIONAL INFORMATION:
+ The test statistics show an accuracy of {“label”: {“accuracy”: 0.9885247349739075}} for the model when applied to unseen images. This high accuracy is crucial because it indicates that the model can effectively classify new data that it has not encountered during training. Thus, validates the model’s ability to generalize beyond the training data, ensuring that it can make reliable predictions in real-world scenarios.</li>
+</ul>
+
+<h2 id="hits-at-k">Hits at K</h2>
+
+<p>This metric measures the proportion of times the correct item is found within the top-k predictions made by the model. X-axis (Epochs) represents the number of training cycles (epochs) completed. Y-axis (Hits at k) represents the hit rate, or the frequency with which the correct item appears in the top k predictions.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-hits-at-k-trend"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hits-at-k-trend" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Hits at K trend</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Upward Trend: An upward trend in the graph indicates that the model is improving, as it becomes more likely to rank the correct item within the top k predictions as training progresses. Plateauing: If the graph plateaus, it suggests that the model’s performance has stabilized and further training may not yield significant improvements. Fluctuations: Fluctuations in the graph could indicate overfitting, underfitting, or instability in the model’s training process.</p>
+</blockquote>
+
+<figure id="figure-13" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test1_label_hits_at_k.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test1_label_hits_at_k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 13</strong>:</span> Hits at K metric across different epochs. The Hits at K metric evaluates the proportion of times the correct item is found within the top K predictions made by the model.</figcaption></figure>
+
+<p>Based on the training curve (blue line), we can draw the following conclusions:</p>
+
+<ul>
+  <li>GOOD MODEL PERFORMANCE:
+  The model shows consistent improvement over the epochs and Hits at k approaching near-perfect levels.</li>
+  <li>CONVERGENCE:
+  Overall, the graph would depict a rapid increase in performance early on, followed by a plateau as the model approaches optimal performance. This indicates successful training with effective generalization.</li>
+</ul>
+
+<h1 id="changing-models-configuration-epoch--15">Changing model’s configuration (Epoch = 15)</h1>
+
+<p>When designing a neural network, it is unfortunately not possible to determine the optimal number of neurons, layers, or other hyperparameters solely from a problem description. There is limited guidance available for selecting appropriate initial values, making it challenging to identify a starting point.</p>
+
+<p>A widely adopted approach involves making an initial estimate based on prior experience with networks designed for similar problems. This experience could be derived from your own work or gathered from secondary sources, such as training courses, blogs, or research papers. From there, it is advisable to experiment with different configurations and carefully evaluate the performance of each before selecting the most effective architecture.</p>
+
+<p>Since we have gathered insights from our recent model, we can now begin testing new configurations and comparing them to the previous results.</p>
+
+<h2 id="changing-epochs">Changing Epochs</h2>
+
+<p>For this new configuration, the file has been modified to adjust the Epoch value, increasing it from 5 to 15. Upload the file using the following link:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13716147/files/config_test_2.yaml
+</code></pre></div></div>
+<p>If you are comfortable using the same history to run and obtain the results, that is fine. Click on the “Upload Data” button in the navigation bar on the left side, then select “Paste/Fetch Data” to paste the link.</p>
+
+<p>Alternatively, you can create a new history to keep your experiment organized. Follow the steps below to start the new history.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-create-new-history-and-upload-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-new-history-and-upload-files" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: create new history and upload files</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-environment-and-data-upload-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Environment and Data Upload</div>
+
+    <ol>
+      <li>
+        <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>climate101</em>.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Import the files from Zenodo or from the shared data library</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/13292895/files/mnist_images.zip
+https://zenodo.org/records/13357260/files/mnist_dataset.csv 
+https://zenodo.org/records/13716147/files/config_test_2.yaml
+</code></pre></div>        </div>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Check that the data format assigned for each file is <strong>zip</strong>, <strong>csv</strong>, and <strong>yaml</strong>, respectively.
+If it is not, follow the Changing the datatype tip.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+      <li>
+        <p>Add a tag (<code class="language-plaintext highlighter-rouge">Stacked CNN</code>) to the dataset corresponding to <code class="language-plaintext highlighter-rouge">config.yaml</code>
+This is important to trace back on what configurations the model was built on.</p>
+
+        <!--SNIPPET-->
+        <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Adding a tag</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Datasets can be tagged. This simplifies the tracking of datasets across the Galaxy interface. Tags can contain any combination of letters or numbers but cannot contain spaces.</p>   <p><strong>To tag a dataset</strong>:</p>   <ol>   <li>Click on the dataset to expand it</li>   <li>Click on <strong>Add Tags</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span></li>   <li>Add  tag text. Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset (see below).</li>   <li>Press <kbd>Enter</kbd></li>   <li>Check that the tag appears below the dataset name</li> </ol>   <p><strong>Tags beginning with <code class="language-plaintext highlighter-rouge">#</code> are special!</strong></p>   <p>They are called <strong>Name tags</strong>. The unique feature of these tags is that they <em>propagate</em>: if a dataset is labelled with a name tag, all derivatives (children) of this dataset will automatically inherit this tag (see below). The figure below explains why this is so useful. Consider the following analysis (numbers in parenthesis correspond to dataset numbers in the figure below):</p>   <ol>   <li>a set of forward and reverse reads (datasets 1 and 2) is mapped against a reference using <span><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating dataset 3;</li>   <li>dataset 3 is used to calculate read coverage using <span><strong>BedTools Genome Coverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> <em>separately</em> for <code class="language-plaintext highlighter-rouge">+</code> and <code class="language-plaintext highlighter-rouge">-</code> strands. This generates two datasets (4 and 5 for plus and minus, respectively);</li>   <li>datasets 4 and 5 are used as inputs to <span><strong>Macs2 broadCall</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> datasets generating datasets 6 and 8;</li>   <li>datasets 6 and 8 are intersected with coordinates of genes (dataset 9) using <span><strong>BedTools Intersect</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> generating datasets 10 and 11.</li> </ol>   <p><img src="/training-material/shared/images/histories_why_nametags.svg" alt="A history without name tags versus history with name tags" /></p>   <p>Now consider that this analysis is done without name tags. This is shown on the left side of the figure. It is hard to trace which datasets contain “plus” data versus “minus” data. For example, does dataset 10 contain “plus” data or “minus” data? Probably “minus” but are you sure? In the case of a small history like the one shown here, it is possible to trace this manually but as the size of a history grows it will become very challenging.</p>   <p>The right side of the figure shows exactly the same analysis, but using name tags. When the analysis was conducted datasets 4 and 5 were tagged with <code class="language-plaintext highlighter-rouge">#plus</code> and <code class="language-plaintext highlighter-rouge">#minus</code>, respectively. When they were used as inputs to Macs2 resulting datasets 6 and 8 automatically inherited them and so on… As a result it is straightforward to trace both branches (plus and minus) of this analysis.</p>   <p>More information is in a <a href="/training-material/topics/galaxy-interface/tutorials/name-tags/tutorial.html">dedicated #nametag tutorial</a>.</p>   <!-- Image is here = https://docs.google.com/drawings/d/1iiNsau6ddiE2MV9qMyekUq2mrpDHHcc02bXtcFEAnhY/edit?usp=sharing --> </blockquote>
+        <p><!--END_SNIPPET--></p>
+      </li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>Run the experiment once again. If you need a refresher on how to set up the Ludwig experiment to run the tool, follow the instructions below.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-ludwig-experiment"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-ludwig-experiment" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Ludwig Experiment</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on:  Task description</div>
+
+    <ol>
+      <li><span class="tool" data-tool=".bx.psu.edu/repos/paulo_lyra_jr/ludwig_applications/ludwig_experiment/2024.0.10.3" title="Ludwig Experiment tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Ludwig Experiment</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 2024.0.10.3)</span> with the following parameters:
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the dataset containing model configuration”</em>: <code class="language-plaintext highlighter-rouge">config.yaml</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input dataset”</em>: <code class="language-plaintext highlighter-rouge">mnist_dataset.csv</code></li>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Raw data”</em>: <code class="language-plaintext highlighter-rouge">mnist_images.zip</code></li>
+        </ul>
+      </li>
+    </ol>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-short-description"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment:  short description</div>
+
+      <p>Once all the inputs are in place, press the ‘RUN TOOL’ button to start your job.</p>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="ludwig-experiment-report-1">Ludwig Experiment Report</h2>
+
+<p>Here are the results from the new model we have trained and validated. Using your knowledge from the previous analysis, answer the following questions:</p>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-confusion-matrix"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Confusion Matrix</div>
+
+  <figure id="figure-14" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_confusion_matrix.png" alt="alt. " width="989" height="880" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_confusion_matrix.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 14</strong>:</span> Confusion Matrix - Epoch = 15</figcaption></figure>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>For which label(s) did the model increase the number of correct predictions?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The model improved prediction across all labels.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-entropy"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Entropy</div>
+
+  <figure id="figure-15" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_entropy.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_entropy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 15</strong>:</span> Entropy - Epoch = 15</figcaption></figure>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-1"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>
+        <p>For which label(s) did the model decrease the entropy?</p>
+      </li>
+      <li>
+        <p>Why did the order of the labels change compared to the previous results?</p>
+      </li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>
+          <p>The model decreased entropy across all labels.</p>
+        </li>
+        <li>
+          <p>For some labels, the entropy drop was more pronounced, moving those labels toward the bottom of the list.</p>
+        </li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-loss"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Loss</div>
+
+  <figure id="figure-16" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_combined_loss.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_combined_loss.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 16</strong>:</span> Combined Loss - Epoch = 15</figcaption></figure>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-2"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Did the increase in Epochs have a significant impact on the model’s loss?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>The model’s training loss curve showed improvement, reaching a loss below 0.25 by the end of the epochs.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-accuracy"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Accuracy</div>
+
+  <figure id="figure-17" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_accuracy.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_accuracy.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 17</strong>:</span> Accuracy - Epoch = 15</figcaption></figure>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-3"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Did the increase in Epochs have a significant impact on the model’s accuracy</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>In alignment with the data presented by the confusion matrix, the accuracy exhibited an improvement.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-hits-at-k"><i class="far fa-comment-dots" aria-hidden="true" ></i> Comment: Hits at K</div>
+
+  <figure id="figure-18" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_hits_at_k.png" alt="alt. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_hits_at_k.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 18</strong>:</span> Hits at K - Epoch = 15</figcaption></figure>
+  <blockquote class="question">
+    <div class="box-title question-title" id="question-4"><i class="far fa-question-circle" aria-hidden="true" ></i> Question</div>
+
+    <ol>
+      <li>Can we infer that, overall, the model is making more accurate label predictions based on the hits at k?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+      <ol>
+        <li>Yes, the curve for training has approached to 1, indicating that the correct label is now present within the top-k predictions more frequently.</li>
+      </ol>
+
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="one-more-graph---f1-score-vs-frequency">One more graph - F1 Score vs Frequency</h2>
+
+<p>The F1 score is a metric used to evaluate the performance of a classification model, particularly in cases where the dataset is imbalanced, meaning some classes are more frequent than others. It combines two other important metrics: precision and recall, into a single score that balances them both.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-precision-definition"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-precision-definition" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Precision definition</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Precision: Precision measures the accuracy of positive predictions. It is the ratio of correctly predicted positive observations to the total predicted positives. In other words, it answers the question, “Of all the instances the model predicted as positive, how many were actually positive?
+<a href="../../images/galaxy-ludwig/explain_sensitivity_formula.png" rel="noopener noreferrer"><img src="../../images/galaxy-ludwig/explain_sensitivity_formula.png" alt="precision formula. " width="1966" height="1031" loading="lazy" /></a></p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-recall-definition"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-recall-definition" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Recall definition</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>Recall, also known as sensitivity or true positive rate, measures how well the model identifies all the actual true cases. It is the ratio of correctly predicted positive observations to all observations in the actual class. It answers the question, “Of all the actual true, how many did the model correctly identify? 
+<a href="../../images/galaxy-ludwig/explain_recall_formula.png" rel="noopener noreferrer"><img src="../../images/galaxy-ludwig/explain_recall_formula.png" alt="recall formula. " width="1590" height="1054" loading="lazy" /></a></p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-f1-score-definition"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-f1-score-definition" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: F1 score definition</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>The F1 score is the harmonic mean of precision and recall. Unlike the simple average, the harmonic mean gives more weight to lower values, so the F1 score will be high only if both precision and recall are high.
+<a href="../../images/galaxy-ludwig/explain_f1_score.png" rel="noopener noreferrer"><img src="../../images/galaxy-ludwig/explain_f1_score.png" alt="F1 score formula. " width="1466" height="288" loading="lazy" /></a></p>
+
+</blockquote>
+
+<p>The F1 score vs. frequency label graph is a valuable tool for diagnosing how well a model handles different classes, especially in datasets where some classes are much more common than others. By analyzing this graph, you can identify areas where your model might need more attention, ensuring balanced and accurate predictions across all classes.</p>
+
+<figure id="figure-19" style="max-width: 90%;"><img src="../../images/galaxy-ludwig/test2_f1_score.png" alt="F1 score vs frequency label. " width="640" height="480" loading="lazy" /><a target="_blank" href="../../images/galaxy-ludwig/test2_f1_score.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 19</strong>:</span> F1 Score vs. Frequency of Labels. This graph illustrates the relationship between the frequency of each class label in the dataset and the model's F1 score for that class. Higher F1 scores indicate better model performance.</figcaption></figure>
+
+<p>Digits like ‘1’ (occurrences &gt; 7800 and F1 score &gt; 0.992) and ‘0’ (occurrences &gt; 6800 and F1 score &gt; 0.980) suggest that the model has learned to accurately identify these digits, despite the difference when looking at the frequency of the digits. Digit ‘5’, with a lower frequency, still achieves a strong F1 score. Although its frequency is the lowest among the digits, the F1 score remains high, indicating that the model maintains a good balance of precision and recall even with fewer examples. This reflects the robustness of the CNN model.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>In this tutorial, we demonstrated how to utilize the Galaxy-Ludwig tool to build an image recognition model using the MNIST dataset of handwritten digits. We followed a structured approach consisting of</p>
+<ul>
+  <li>uploading necessary files,</li>
+  <li>running the Ludwig experiment, and</li>
+  <li>evaluating the model’s performance.</li>
+</ul>
+
+<p>Through the process, we have seen how Ludwig simplifies the complexities of machine learning workflows, making them accessible and efficient for users. Additionally, we explored ways to enhance model performance by adjusting configurations and analyzing detailed evaluation metrics.</p>
+
+<p>By the end of this tutorial, you should have a solid understanding of how to deploy a handwritten digit classification model and interpret its results effectively.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Use Galaxy-Ludwig Experiment to solve an image classification problem</p>
+</li>
+                        
+                        <li><p>Using CNN on MNIST dataset.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/statistics/faqs/">FAQ page for the Statistics and machine learning topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/galaxy-ludwig"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=statistics/galaxy-ludwig">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Paulo Cilas Morais Lyra Junior, Junhao Qiu, Jeremy Goecks,  <b>Train and Test a Deep learning image classifier with Galaxy-Ludwig (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html">https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{statistics-galaxy-ludwig,
+author = "Paulo Cilas Morais Lyra Junior and Junhao Qiu and Jeremy Goecks",
+	title = "Train and Test a Deep learning image classifier with Galaxy-Ludwig (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/statistics/tutorials/galaxy-ludwig/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/statistics/tutorials/galaxy-ludwig/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools: []
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/statistics/tutorials/galaxy-ludwig/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/statistics/tutorials/galaxy-ludwig/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/6e829cce53f553ea17af662d96f5ed8eaf1c6a26">6e829cc</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
