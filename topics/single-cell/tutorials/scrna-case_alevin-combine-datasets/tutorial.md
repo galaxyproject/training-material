@@ -40,7 +40,7 @@ key_points:
 tags:
   - 10x
   - paper-replication
-
+  - MIGHTS
 
 contributions:
   authorship:
@@ -114,12 +114,12 @@ You can access the data for this tutorial in multiple ways:
 
 2. **Importing from a history**
     - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)
-    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input) 
+    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
    - If you want to import the history to another Galaxy server, check how to do it below!
-  
+
    {% snippet faqs/galaxy/histories_transfer_entire_histories_from_one_galaxy_server_to_another.md %}
 
 
@@ -131,7 +131,7 @@ You can access the data for this tutorial in multiple ways:
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/records/10852529).
 >
 >    ```
->    {{ page.zenodo_link }}/files/Experimental_Design.tabular.tabular 
+>    {{ page.zenodo_link }}/files/Experimental_Design.tabular.tabular
 >    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
