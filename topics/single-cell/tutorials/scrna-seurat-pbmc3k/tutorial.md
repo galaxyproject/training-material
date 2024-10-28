@@ -34,7 +34,7 @@ contributors:
 
 ---
 
-Single cell RNA-seq analysis enables us to explore differences in gene expression between cells. It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes. Single cell omics is a relatively young field, but there are a few commonly-used analysis pipelines that you will often see used in the literature. In this tutorial, we will use one of these pipelines, Seurat, to cluster single cell data from a 10X Genomics experiment ({% cite seurat2023v5 %}). You can follow the same analysis using the Scanpy pipeline in the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. 
+Single cell RNA-seq analysis enables us to explore differences in gene expression between cells. It can reveal the heterogenity within cell populations and help us to identify cell types that could play roles in development, disease, or other processes. Single cell omics is a relatively young field, but there are a few commonly-used analysis pipelines that you will often see in the literature. In this tutorial, we will use one of these pipelines, Seurat, to cluster single cell data from a 10X Genomics experiment ({% cite seurat2023v5 %}). You can follow the same analysis using the Scanpy pipeline in the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. 
 
 Clustering is typically the first type of analysis we will perform on a single cell dataset. It groups together cells that are expressing similar genes, which makes the data easier to understand and often helps us to identify specific cell types.
 
@@ -96,7 +96,7 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 > 3. Rename the datasets as `genes`, `barcodes`, and `matrix` if necessary
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >    
-> 5. Check the datatypes are correst - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx or txt file
+> 5. Check the datatypes are correct - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx file
 >
 >    {% snippet aqs/galaxy/datasets_change_datatype.html%}
 >
@@ -105,6 +105,8 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 >    {% snippet faqs/galaxy/histories_dataset_item.html %}
 >
 {: .hands_on}
+
+The beginning of the file should look like this: 
 
 > <question-title></question-title>
 >
@@ -196,9 +198,9 @@ We already have two useful QC metrics that were calculated when we created our S
 - ** nFeature_RNA** the number of unique genes that were detected in each cell
     We would expect to see some variation in the variety of genes expressed by cells of different sizes, types, and conditions, but if this number is unusually high or low then it could be a sign of poor quality. High nFeature_RNA could be another sign of a doublet or multiplet - we might have captured cells of different types and processed them together. Low nFeature_RNA could be due to loss of RNA if nCount_RNA is also low, or a sign that we have failed to capture the diversity of the transcript population, perhaps due to technical problems in our experiment. 
 
-One other metric that is often used to assess cell quality is the proportion of reads that came from the mitochondrial genome. The proportion is often higher in low quality, damaged or dying cells. Mitochondrial RNAs, which are protected inside the mitochondrial membranes, can be the last RNAs to be degraded or lost from a damaged cell, so we can end up with higher proportions of them in a low quality cell. We could have calculated the proportion of mitochondrial genes while creating out Seurat Object, but we will calculate it separately here to see how it is done - and how we could do the same for other types of genes.
+One other metric that is often used to assess cell quality is the proportion of reads that came from the mitochondrial genome. The proportion is often higher in low quality, damaged or dying cells. Mitochondrial RNAs, which are protected inside the mitochondrial membranes, can be the last RNAs to be degraded or lost from a damaged cell, so we can end up with higher proportions of them in a low quality cell. We could have calculated the proportion of mitochondrial genes while creating our Seurat Object, but we will calculate it separately here to see how it is done - and how we could do the same for other types of genes.
 
-We can identify mitochondrial genes from their gene symbols. Genes that are encoded in the mitochondrial DNA (rather than in the cell nucleus) have names beginning with 'MT-'. The {% tool create_seurat %} can identify genes based on a specific naming pattern and then calculate the proportion of reads in each cell that came from these genes. We could use this tool to calculate the proportions of other genes with shared naming patterns too, such as ribosomal genes.
+We can identify mitochondrial genes from their gene symbols. Human genes that are encoded in the mitochondrial DNA (rather than in the cell nucleus) have names beginning with 'MT-'. Different naming patterns are used in other species. The {% tool Seurat Create %} tool can identify genes based on a specific naming pattern and then calculate the proportion of reads in each cell that came from these genes. We could use this tool to calculate the proportions of other genes with shared naming patterns too, such as ribosomal genes.
 
 > <hands-on-title>Calculate the Proportion of Mitochondrial Reads</hands-on-title>
 >
@@ -206,6 +208,7 @@ We can identify mitochondrial genes from their gene symbols. Genes that are enco
 >    - *"Method used"*: `Add QC Metrics`
 >        - {% icon param-file %} *"Input file with the Seurat object"*: `Input 3k PBMC` (output of **Seurat Create** {% icon tool %})
 >        - *"Calculate percentage of reads based on"*: `Pattern in gene names`
+>        - *"Pattern/regex to match in gene names"*: `^MT-`
 >
 > 2. Rename the output as `Mitochondrial Annotations`
 {: .hands_on}
@@ -453,7 +456,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > | 10 | FCER1A                        | CCL5        |
 > >
 > > > <comment-title></comment-title>
-> > > If you used `SCTransform` for preprocessing, then you'll end up with a slightly sifferent list of highly variable genes. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableFeatures`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
+> > > If you used `SCTransform` for preprocessing, then you'll end up with a slightly different list of highly variable genes. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` also returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableFeatures`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
 > > {: .comment}
 > >
 > > 2. Single cell datasets contain a lot of information, including expression data for thousands of different genes. Some of these genes don't tell us much about the data, for example they might be housekeeping genes that are expressed at similar levels in most of our cells. We want to find the genes that can tell us most about the differences between our cells, so we want to identify the genes whose expression varies most across the dataset - focusing on these highly variable features should help us to uncover the biological differences we're looking for.
@@ -489,7 +492,7 @@ We assume that the top PCs are more likely to represent real biological variatio
 
 We will start by calculating the top 50 PCs and then decide how many of these we want to use.
 
-The standard Seurat pipeline performs the PCA on the Variable Features only, rather than the complete dataset. You can change this using the `features` parameter, but you will need to scale the chosen features using `ScaleData` before running the PCA, if you didn't already choose this option during the preprocessing stage.
+The standard Seurat pipeline performs the PCA on the Variable Features only, rather than the complete dataset. You can change this using the `features` parameter, but you will need to scale the chosen features using `ScaleData` before running the PCA, if you didn't already choose this option during the preprocessing stage as we did above.
 
 ><hands-on-title>Perform the PCA</hands-on-title>
 >
@@ -530,14 +533,14 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 > 2. Are any of our top 10 highly variable genes associated with the top PCS? Does this surprise you?
 > 3. When we plot the cells along the PC axes (in the next step) do you expect to see differences in the expression of these genes along the associated axis?
 > > <solution-title></solution-title>
-> > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. When preprocessing was done using the separate tools, the top positively associated genes were CST3 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were MALAT1 for PC1, NKG7 for PC2, and PPBP for PC3. Similarly, if preprocessing was performed with SCTransform, the top positively associated genes were MALAT1, NKG7, and S100AB, while the top negatively associated genes were FTL, HLA-DRA, and CD74. However, these top genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression.
+> > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. When preprocessing was done using the separate tools, the top positively associated genes were CST3 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were MALAT1 for PC1, NKG7 for PC2, and PPBP for PC3. Similarly, if preprocessing was performed with SCTransform, the top positively associated genes were MALAT1, NKG7, and S100A8, while the top negatively associated genes were FTL, HLA-DRA, and CD74. However, these top genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression.
  > > The figures show us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
 > > 2. We can see that some of our highly variable genes are associated with the top PCs. For example, FTL is one of the top genes associated with PC1. We should expect to see some of our highly variable genes here as we used the features we selected to perform the PCA. It also makes sense that our top 10 variable genes are strongly associated with PCs, because we know these are the genes that varied most across the dataset and the PCA was looking for these strong differences in expression. However, a gene that varied a lot won't necessarily be associated with a top PC unless its expression correlates with other variable genes - a group of correlated genes is likely to have a stronger impact than a single gene, even if that one gene varies a lot.
-> > 3. Since these are the genes that most are strongly associated with each PC, we should expect to see strong differences in their expression from one end of the associated axis to the other. The genes positively associated with PC 1 should mainly be expressed near the positive end of the PC1 axis while the negatively associated genes should mainly be expressed at the negative end. We would expect to see similar patterns for the other PCs.
+> > 3. Since these are the genes that most are strongly associated with each PC, we should expect to see strong differences in their expression from one end of the associated axis to the other. The genes positively associated with PC1 should mainly be expressed near the positive end of the PC1 axis while the negatively associated genes should mainly be expressed at the negative end. We would expect to see similar patterns for the other PCs.
 > {: .solution}
 {: .question}
 
-Next, let's see how our cells are distributed along the top PCs. We can use `DimPlot` to create a 2-dimensional plot where each axis represents one of the PCs - being able to produce these plots is one of the benefits of dimensional reduction as it makes our data easier to interpret when we can see it on two axes rather than thousands. If we're plotting the top PCs then we should see cells or clumps of cells spread along these axes. If PC1 is really explaining a lot of the variation in the data then we should see that there are cells with both high and low values along this axis - if they're all grouped together at one end of the axis then the PC wouldn't be telling us much about the differences between cells. We'd hope to see a similar effect along the next PCs, although it won't be as strong as for the top PC because that's the one that explained the most variation in the dataset. We should see similar relationships no matter which preprocessing approach we used, although of course the plots will look a bit different.
+Next, let's see how our cells are distributed along the top PCs. We can use `DimPlot` to create a 2-dimensional plot where each axis represents one of the PCs - being able to produce these plots is one of the benefits of dimensional reduction as it makes our data easier to interpret when we can see it on two axes rather than imagining it along thousands. If we're plotting the top PCs then we should see cells or clumps of cells spread along these axes. If PC1 is really explaining a lot of the variation in the data then we should see that there are cells with both high and low values along this axis - if they're all grouped together at one end of the axis then the PC wouldn't be telling us much about the differences between cells. We'd hope to see a similar effect along the next PCs, although it won't be as strong as for the top PC because that's the one that explained the most variation in the dataset. We should see similar relationships no matter which preprocessing approach we used, although of course the plots will look a bit different.
 
 ><hands-on-title>Visualise the PCA Results</hands-on-title>
 >
@@ -556,8 +559,13 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 > 1. Can you see any groups or clusters of cells in the the PCA plot?
 > > <solution-title></solution-title>
 > > 1. The cells seem to form three main clusters, although there are also cells spread outside and in between these groups. The cells are distributed along the full length of both axes, which makes sense as these are the PCs that explain the greatest amounts of variation in the data.
+> > The plots from the two different preprocessing routes look quite similar, but it seems like one of them has been flipped upside down and back to front compared to the other! This explains why MALAT1 was the top positive gene for PC1 in the separate preprocessing route but the top negative gene for PC1 in the SCTransform route - this axis is showing simiar differences, but the other way around.
 > {: .solution}
 {: .question}
+
+> <comment-title></comment-title>
+> If you've tried the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might notice that there are some differences in the relationships between the genes and PCs. Our top negative genes for PCs 2 and 3 (NKG7 and PPBP) when using the separate preprocessing tools here are among the top positively associated genes there. This is simply a mathematical quirk - in both cases, these genes are strongly associated with the top PCs, but we're just calculating or drawing our axes in the opposite direction. You should be able to spot some similarities in the plots between these two tutorials, especially in the PC2/PC3 plot, which looks like it has been flipped upside down!
+{: .comment}
 
 We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to plot our data along. We can also use the `FeaturePlot` function to colour the plots by the expression levels of specific genes to see how this relates to the PCs, so let's see how the top genes relate to the top three PCs.
 
@@ -575,7 +583,7 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 >    - *"Change size of plot"*: `Yes`
 >        - *"Width of plot in pixels"*: `3100`
 >
-> 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
+> 2. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*:  Use the top positive and negative genes for PCs 1-3. If you did the separate preprocessing steps these will be `CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP` but if you used SCTransform they will be `MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`
@@ -589,11 +597,7 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 >
 {: .hands_on}
 
-> <comment-title></comment-title>
-> If you've tried the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might notice that there are some differences in the relationships between the genes and PCs. Our top negative genes for PCs 2 and 3 (NKG7 and PPBP) are among the top positively associated genes there. This is simply a mathematical quirk - in both cases, these genes are strongly associated with the top PCs, but we're just calculating or drawing our axes in the opposite direction. You should be able to spot some similarities in the plots between these two tutorials, especially in the PC2/PC3 plot, which looks like it has been flipped upside down!
-{: .comment}
-
-If you used the separate preprocessing tools, then your plots will look like this: 
+If you used the separate preprocessing tools, then your two sets of plots will look like this: 
 
 ![Six versions of the same PCA plot showing three main groups of cells in different parts of the plot. The positively associated genes for each PC are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../../images/scrna-seurat-pbmc3k/seurat_PCA_12_featureplots.png "PCA Plots coloured by expression of the top positive and  negative markers for PCs 1 to 3, plotted along the PC1 and PC2 axes (Separate preprocessing steps)")
 
@@ -617,17 +621,17 @@ If you used SCTransform, then you should see plots that look like this:
 ![Six versions of the same PCA plot showing two main groups of cells and a smaller third group spread vertically along the middle of the plot. The positively associated genes for each PC are mainly shown as expressed in cells near the positive end of that axis. The opposite is true for the negatively associated genes.](../../images/scrna-seurat-pbmc3k/seurat_PCA_23_featureplots_SCT.png "PCA Plots coloured by the expression of the top positive and negative markers for PCs 1 to 3, plotted along the PC2 and PC3 axes (SCTransform)")
 
 > <question-title></question-title>
-> 1. How does the expression of the top positive and negative genes relate to PCs 1 and 2 in the plot?
-> 2. How does the expression of the top positive and negative genes relate to PCs 2 and 3 in the plot?
+> 1. How does the expression of the top positive and negative genes relate to PCs 1 and 2?
+> 2. How does the expression of the top positive and negative genes relate to PCs 2 and 3?
 > > <solution-title></solution-title>
 > > 1. When we look at the expression of our top genes along PCs 1 and 2 we see that, as expected, the top positively associated gene for PC1, MALAT1, is expressed at higher levels in cells at the positive end of the PC1 (horizontal) axis while the top negatively associated gene, FTL, is expressed mainly at the negative end. The pattern isn't as clear for these genes as it is for the other PCs we plotted, because both MALAT1 and FTL are expressed to some extent by most of the cells in our plots. We can see more obvious patterns for the top genes associated with PC2. The top positively associated gene, NKG7 is mainly expressed by the cells at the positive end of the PC2 (vertical) axis. The top negative gene HLA-DRA is mainly expressed by cells along the lower half of the PC2 axis.
-> > We don't see similar patterns for the genes associated with PC3 in this figure - although these genes are only expressed in parts of the plot, there is no clear relationship with either the PC1 or PC2 axes. This is exactly what we would expect to see - these genes are associated with PC3 so they shouldn't show any relationship with the axes.
+> > We don't see similar patterns for the genes associated with PC3 in this figure - although these genes are only expressed in parts of the plot, there is no clear relationship with either the PC1 or PC2 axes. This is exactly what we would expect to see - these genes are associated with PC3 so they shouldn't show any relationship with the PC1 and PC2 axes.
 > > 2. The picture looks very different when we plot our cells along PC2 and PC3. We can see two long lines of cells forming an upside-down 'V'. This is why we have to be careful when interpreting dimensional reduction plots - the data can look very different depending on which of the many axes we choose to visualise.
 > > Now it is the top genes for PC1 that don't show any relationship with the axes. The top genes for PC2 still show differences in expression along the PC2 axis (now the horizontal axis). We can also see how the top genes for PC3 relate to the PC3 (vertical) axis. The positively associated S100A8 is mostly expressed by cells at the top of the axis while the negatively associated CD74 is mostly expressed along the negative part of that axis.
 > {: .solution}
 {: .question}
 
-Another option for visualising our PCA results is to use `DimHeatmap` to produce a heatmap of the PCA scores for the top genes in each cell. We can see which genes scored highly in the same cells and get an idea of how the scores varied across the dataset. We can also look for groups of cells that had similar scores for a particular PC, suggesting that they share similar expression profiles - these groups of cells might become our clusters. We can also compare the patterns for different PCs. We would expect to see more similarities (genes with similar scores across cells and more cells grouping together) for the top PCs since these explain more of the variation in the data.
+Another option for visualising our PCA results is to use `DimHeatmap` to produce a heatmap of the PCA scores for the top genes in each cell. We can see which genes scored highly in the same cells and get an idea of how the scores varied across the dataset. We can look for groups of cells that had similar scores for a particular PC, suggesting that they share similar expression profiles - these groups of cells might become our clusters. We can also compare the patterns for different PCs. We would expect to see more similarities (genes with similar scores across cells and more cells grouping together) for the top PCs since these explain more of the variation in the data.
 
 > <hands-on-title>Visualise the PCA Results</hands-on-title>
 >
@@ -692,12 +696,15 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 ![In Plot A, dots showing the standard deviation for each PC start high for PC1 then drop substantially for each following PC. A sharp bend appears around PC10 where the drop from one PC to the next becomes very small. The dots from PC10 onwards are close to the bottom axis, with low standard deviations. Plot B looks similar, but the dot for PC10 is a bit higher and there is a gentler slope down towards the horizontal axis from this point.](../../images/scrna-seurat-pbmc3k/seurat_elbowplot.png "Elbow Plot showing the standard deviations for the first 30 PCs after performing A. Separate preprocessing steps B. SCTransform")
 
 > <question-title></question-title>
-> 1. How many PCs should we use?
+> 1. How many PCs should we use for the separate preprocessing route?
+> 2. How many PCs should we use for the SCTransform route?
 > > <solution-title></solution-title>
-> > 1. As with many decisions in single cell analysis, there isn't an exact method for deciding how many PCs we should use. The elbow in Plot A (after performing separate preprocesing steps) appears to be around PC9-10, so we'll use 10 dimensions in this tutorial, but you could justifiably choose anywhere between about PC7 to PC12 on the basis of this plot. It is usually better to err on the higher side than to get rid of PCs that might be useful. Sometimes it is worth repeating the analysis with different numbers of PCs to see how it affects the results.
-> > In Plot B (for the SCTransform route), there is still a sharp elbow at around PC10, but there is a more gradual slope down towards the x-axis after this. We can actually use more PCs when we preprocess with SCTransform because the more effective normalisation method seems to be better at removing technical effects from the data. When we preprocess with SCTransform, we assume that higher PCs are more likely to represent subtle biological variation rather than technical effects, so we might improve our results by including more of them.
-> > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells (e.g. MZB1 is a marker for plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs.
-> > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset (especially after seeing the weaker patterns in those later heatmaps) - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead. We plotted all 50 after running SCTransfrom as we expect to be able to use more PCs in this case. You might want to do this if you're following the SCTransform route where we're using more PCs.
+> > 1. As with many decisions in single cell analysis, there isn't an exact method for deciding how many PCs we should use. The elbow in Plot A (after performing separate preprocessing steps) appears to be around PC9-10, so we'll use 10 dimensions in this tutorial, but you could justifiably choose anywhere between about PC7 to PC12 on the basis of this plot. It is usually better to err on the higher side than to get rid of PCs that might be useful. Sometimes it is worth repeating the analysis with different numbers of PCs to see how it affects the results.
+> > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells (e.g. MZB1 is a marker for plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs on the basis of our Elbow Plot.
+> > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset (especially after seeing the weaker patterns in those later heatmaps) - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead.
+> > 2. In Plot B (for the SCTransform route), there is still a sharp elbow at around PC10, but there is a more gradual slope down towards the x-axis after this. In order to capture some of this additional variation for our analysis, we might decide to include 30 PCs. The curve of dots will be much flatter and closer to the x-axis after this point, so the additional PCs won't explain much more of the variation.
+> > We can actually use more PCs when we preprocess with SCTransform because the more effective normalisation method seems to be better at removing technical effects from the data. When we preprocess with SCTransform, we assume that higher PCs are more likely to represent subtle biological variation rather than technical effects, so we might improve our results by including more of them.
+> > If you're carefully following the SCTransform route instructions then your plot should look a bit different than the one shown above as you should have plotted all 50 PCs! We only showed 30 PCs here to enable comparison with the plot for the separate preprocessing route, but you should come to a similar conclusion when you examine your own Elbow Plot. We expect to be able to use more PCs in this case, so we want to take a look at all 50.
 > {: .solution}
 {: .question}
 
@@ -736,7 +743,7 @@ The best approach to building the neighborhood graph and the optimal value for `
 
 Seurat also offers a variety of different clustering algorithms, including SLM, Leiden and Louvain. We will follow the default Seurat pipeline and use the Louvain algorithm.
 
-We need to define a value for the resolution parameter, which determines the size of the clusters the algorithm will find. We'll set the resolution at `0.5` for now, or `0.8` if we used SCTransfrom for preprocessing, but this is one of those parameters that we'll often want to try a few different values for when working with single cell data.
+We need to define a value for the resolution parameter, which determines the size of the clusters the algorithm will find. We'll set the resolution at `0.5` for now, or `0.8` if we used SCTransfrom for preprocessing, but this is one of those parameters that we'll often want to try a few different values for when working with single cell data. We'll set a higher resolution on the SCTransform route because we expect it to capture more of the biological variation, so we might be able to find more clusters.
 
 > <comment-title></comment-title>
 > Resolution is one of the key parameters you might need to change when performing clustering. It sets the 'granularity' of the clustering - you can choose a lower value to arrange your data into bigger clusters or use a higher resolution if you're looking for lots of little clusters. The best resolution can depend on how varied your cells are - do you think there are only a few different cell types or should your sample contain lots of different populations of cells? The resolution will usually need to be higher for larger datasets too. In most cases, a resolution of between 0.4 and 1.2 will work well - we're using a fairly low value here as we have a smaller dataset.
@@ -1369,14 +1376,14 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 > | CST3   |
 > | PPBP   |
 > 
-> 2. Rename the file as `Top Markers` when it has finished uploading and make sure the datatype is **tabular**
+> 2. Rename the file as `Canonical Markers` when it has finished uploading and make sure the datatype is **tabular**
 >
 >    {% snippet aqs/galaxy/datasets_change_datatype.html%}
 >
 > 3. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'DoHeatmap'`
->        - {% icon param-file %} *"List of features to plot"*: `Top Markers` (Input dataset)
+>        - {% icon param-file %} *"List of features to plot"*: `Canonical Markers` (Input dataset)
 >        - In *"Plot Formatting Options"*:
 >            - *"Size of text above colour bar"*: `3.5`
 >            - *"Angle of text above colour bar"*: `60`
@@ -1399,11 +1406,11 @@ In order to do this, we'll need to turn the output from `FindAllMarkers` into a 
 
 > <hands-on-title>Create Heatmaps to Compare Expression by Cluster - Markers from DE</hands-on-title>
 >
-> 1. Click on the {% icon galaxy-pencil %} pencil icon of the file we renamed as `DE Markers` CSV output from `FindAllMarkers` then select {% icon galaxy-chart-select-data %} Datatypes in the central panel. Choose the second option, `Convert to Datatype` and make sure `tabular (using `Convert CSV to tabular`)` is selected in the drop down menu before pressing the `Create Dataset` button. This will create a new, tabular version of the dataset at the top of your history.
+> 1. Click on the {% icon galaxy-pencil %} pencil icon of the file we renamed as `DE Markers` (this was the CSV output from `FindAllMarkers`) then select {% icon galaxy-chart-select-data %} Datatypes in the central panel. Choose the second option, `Convert to Datatype` and make sure `tabular (using `Convert CSV to tabular`)` is selected in the drop down menu before pressing the `Create Dataset` button. This will create a new, tabular version of the dataset at the top of your history - make sure that this is the version you use in the next step.
 >
 > 2. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
->        - {% icon param-file %} *"Table"*: `DE Markers` (output of **Convert CSV to tabular** {% icon tool %})
+>        - {% icon param-file %} *"Table"*: `DE Markers` (**tabular** output of **Convert CSV to tabular** {% icon tool %})
 >        - *"Input data has"*:
 >              - `Select` Column names on the first row
 >              - `Unselect` Row names on the first column
