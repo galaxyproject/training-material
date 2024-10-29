@@ -155,9 +155,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPeaks\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenes\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select last\"];\n  0 -->|output| 2;\n  3[\"Replace Text\"];\n  0 -->|output| 3;\n  4[\"Get flanks\"];\n  1 -->|output| 4;\n  5[\"Replace Text\"];\n  3 -->|outfile| 5;\n  6[\"Replace Text\"];\n  5 -->|outfile| 6;\n  7[\"Convert Genomic Intervals To BED\"];\n  6 -->|outfile| 7;\n  8[\"Intersect\"];\n  4 -->|out_file1| 8;\n  7 -->|output1| 8;\n  9[\"Group\"];\n  8 -->|output| 9;\n  115a307b-867f-4cb4-8dcc-3ff5556a7a7a[\"Output\\nchr_count\"];\n  9 --> 115a307b-867f-4cb4-8dcc-3ff5556a7a7a;\n  style 115a307b-867f-4cb4-8dcc-3ff5556a7a7a stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPeaks\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenes\"]\n  2[label=\"Select last\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Replace Text\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Get flanks\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Replace Text\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"outfile\"]\n  7[label=\"Convert Genomic Intervals To BED\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"Intersect\"]\n  4 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Group\"]\n  8 -> 9 [label=\"output\"]\n  k115a307b867f4cb48dcc3ff5556a7a7a[color=lightseagreen,label=\"Output\\nchr_count\"]\n  9 -> k115a307b867f4cb48dcc3ff5556a7a7a\n}",
+          "modified": "2024-10-29 00:06:21 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nPeaks\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenes\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Select last\"];\n  0 -->|output| 2;\n  3[\"Replace Text\"];\n  0 -->|output| 3;\n  4[\"Get flanks\"];\n  1 -->|output| 4;\n  5[\"Replace Text\"];\n  3 -->|outfile| 5;\n  6[\"Replace Text\"];\n  5 -->|outfile| 6;\n  7[\"Convert Genomic Intervals To BED\"];\n  6 -->|outfile| 7;\n  8[\"Intersect\"];\n  4 -->|out_file1| 8;\n  7 -->|output1| 8;\n  9[\"Group\"];\n  8 -->|output| 9;\n  318f7c25-7968-450b-a5e7-af242ead9d71[\"Output\\nchr_count\"];\n  9 --> 318f7c25-7968-450b-a5e7-af242ead9d71;\n  style 318f7c25-7968-450b-a5e7-af242ead9d71 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nPeaks\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenes\"]\n  2[label=\"Select last\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Replace Text\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Get flanks\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Replace Text\"]\n  3 -> 5 [label=\"outfile\"]\n  6[label=\"Replace Text\"]\n  5 -> 6 [label=\"outfile\"]\n  7[label=\"Convert Genomic Intervals To BED\"]\n  6 -> 7 [label=\"outfile\"]\n  8[label=\"Intersect\"]\n  4 -> 8 [label=\"out_file1\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Group\"]\n  8 -> 9 [label=\"output\"]\n  k318f7c257968450ba5e7af242ead9d71[color=lightseagreen,label=\"Output\\nchr_count\"]\n  9 -> k318f7c257968450ba5e7af242ead9d71\n}",
           "workflow_tools": [
             "CONVERTER_interval_to_bed_0",
             "Grouping1",
@@ -268,7 +268,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "chr_count",
-                  "uuid": "115a307b-867f-4cb4-8dcc-3ff5556a7a7a"
+                  "uuid": "318f7c25-7968-450b-a5e7-af242ead9d71"
                 }
               ]
             }
@@ -385,6 +385,11 @@
           {
             "url": "http://gigagalaxy.net/",
             "name": "GigaGalaxy"
+          },
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
           },
           {
             "url": "https://galaxy-web.ipk-gatersleben.de",
@@ -526,6 +531,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "local",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -653,6 +662,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -785,6 +798,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -915,6 +932,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.3",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -1059,6 +1081,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "1.1.1",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -1199,6 +1226,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -1347,6 +1379,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -1483,8 +1522,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.6",
-                  "1.2.0"
+                  "1.2.0",
+                  "1.6"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -1498,6 +1537,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "2.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -1539,9 +1583,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "1.2.0",
                   "1.5",
                   "1.3.0",
-                  "1.2.0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -1641,6 +1685,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -1781,6 +1829,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -1916,6 +1968,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -2489,7 +2545,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nolympics.tsv\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\ncountry-information.tsv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nolympics_2022.tsv\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"Line/Word/Character count\"];\n  0 -->|output| 3;\n  4[\"tabular-to-csv\"];\n  0 -->|output| 4;\n  5[\"Sort\"];\n  0 -->|output| 5;\n  6[\"Sort\"];\n  0 -->|output| 6;\n  7[\"Sort\"];\n  0 -->|output| 7;\n  8[\"Sort\"];\n  0 -->|output| 8;\n  9[\"Sort\"];\n  0 -->|output| 9;\n  10[\"Sort\"];\n  0 -->|output| 10;\n  11[\"Filter\"];\n  0 -->|output| 11;\n  12[\"Filter\"];\n  0 -->|output| 12;\n  13[\"Count\"];\n  0 -->|output| 13;\n  14[\"Count\"];\n  0 -->|output| 14;\n  15[\"Count\"];\n  0 -->|output| 15;\n  16[\"Count\"];\n  0 -->|output| 16;\n  17[\"Datamash\"];\n  0 -->|output| 17;\n  18[\"Count\"];\n  0 -->|output| 18;\n  19[\"Datamash\"];\n  0 -->|output| 19;\n  20[\"Filter\"];\n  0 -->|output| 20;\n  21[\"Filter\"];\n  0 -->|output| 21;\n  22[\"Filter\"];\n  0 -->|output| 22;\n  23[\"Filter\"];\n  0 -->|output| 23;\n  24[\"Filter\"];\n  0 -->|output| 24;\n  25[\"Filter\"];\n  0 -->|output| 25;\n  26[\"Filter\"];\n  0 -->|output| 26;\n  27[\"Compute\"];\n  0 -->|output| 27;\n  28[\"Compute\"];\n  0 -->|output| 28;\n  29[\"Cut\"];\n  0 -->|output| 29;\n  30[\"Column Regex Find And Replace\"];\n  0 -->|output| 30;\n  31[\"Column Regex Find And Replace\"];\n  0 -->|output| 31;\n  32[\"Column Regex Find And Replace\"];\n  0 -->|output| 32;\n  33[\"Cut\"];\n  0 -->|output| 33;\n  34[\"Cut\"];\n  0 -->|output| 34;\n  35[\"Datamash\"];\n  0 -->|output| 35;\n  36[\"Datamash\"];\n  0 -->|output| 36;\n  37[\"Datamash\"];\n  0 -->|output| 37;\n  38[\"Datamash\"];\n  0 -->|output| 38;\n  39[\"Datamash\"];\n  0 -->|output| 39;\n  40[\"Count\"];\n  0 -->|output| 40;\n  41[\"Column Regex Find And Replace\"];\n  0 -->|output| 41;\n  42[\"Split file\"];\n  0 -->|output| 42;\n  43[\"Join two Datasets\"];\n  0 -->|output| 43;\n  1 -->|output| 43;\n  44[\"Remove beginning\"];\n  2 -->|output| 44;\n  45[\"Sort\"];\n  11 -->|out_file1| 45;\n  46[\"Filter\"];\n  12 -->|out_file1| 46;\n  47[\"Cut\"];\n  28 -->|out_file1| 47;\n  48[\"Unique\"];\n  29 -->|out_file1| 48;\n  49[\"Count\"];\n  41 -->|out_file1| 49;\n  50[\"Datamash\"];\n  41 -->|out_file1| 50;\n  51[\"Concatenate datasets\"];\n  0 -->|output| 51;\n  44 -->|out_file1| 51;\n  52[\"Filter\"];\n  45 -->|outfile| 52;\n  53[\"Sort\"];\n  46 -->|out_file1| 53;\n  54[\"Remove beginning\"];\n  47 -->|out_file1| 54;\n  55[\"Select first\"];\n  47 -->|out_file1| 55;\n  56[\"Sort\"];\n  48 -->|outfile| 56;\n  57[\"Unique\"];\n  54 -->|out_file1| 57;\n  58[\"Concatenate datasets\"];\n  55 -->|out_file1| 58;\n  57 -->|outfile| 58;\n  59[\"Join two Datasets\"];\n  0 -->|output| 59;\n  58 -->|out_file1| 59;\n  60[\"Cut\"];\n  59 -->|out_file1| 60;\n  61[\"Line/Word/Character count\"];\n  60 -->|out_file1| 61;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nolympics.tsv\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\ncountry-information.tsv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nolympics_2022.tsv\"]\n  3[label=\"Line/Word/Character count\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"tabular-to-csv\"]\n  0 -> 4 [label=\"output\"]\n  5[label=\"Sort\"]\n  0 -> 5 [label=\"output\"]\n  6[label=\"Sort\"]\n  0 -> 6 [label=\"output\"]\n  7[label=\"Sort\"]\n  0 -> 7 [label=\"output\"]\n  8[label=\"Sort\"]\n  0 -> 8 [label=\"output\"]\n  9[label=\"Sort\"]\n  0 -> 9 [label=\"output\"]\n  10[label=\"Sort\"]\n  0 -> 10 [label=\"output\"]\n  11[label=\"Filter\"]\n  0 -> 11 [label=\"output\"]\n  12[label=\"Filter\"]\n  0 -> 12 [label=\"output\"]\n  13[label=\"Count\"]\n  0 -> 13 [label=\"output\"]\n  14[label=\"Count\"]\n  0 -> 14 [label=\"output\"]\n  15[label=\"Count\"]\n  0 -> 15 [label=\"output\"]\n  16[label=\"Count\"]\n  0 -> 16 [label=\"output\"]\n  17[label=\"Datamash\"]\n  0 -> 17 [label=\"output\"]\n  18[label=\"Count\"]\n  0 -> 18 [label=\"output\"]\n  19[label=\"Datamash\"]\n  0 -> 19 [label=\"output\"]\n  20[label=\"Filter\"]\n  0 -> 20 [label=\"output\"]\n  21[label=\"Filter\"]\n  0 -> 21 [label=\"output\"]\n  22[label=\"Filter\"]\n  0 -> 22 [label=\"output\"]\n  23[label=\"Filter\"]\n  0 -> 23 [label=\"output\"]\n  24[label=\"Filter\"]\n  0 -> 24 [label=\"output\"]\n  25[label=\"Filter\"]\n  0 -> 25 [label=\"output\"]\n  26[label=\"Filter\"]\n  0 -> 26 [label=\"output\"]\n  27[label=\"Compute\"]\n  0 -> 27 [label=\"output\"]\n  28[label=\"Compute\"]\n  0 -> 28 [label=\"output\"]\n  29[label=\"Cut\"]\n  0 -> 29 [label=\"output\"]\n  30[label=\"Column Regex Find And Replace\"]\n  0 -> 30 [label=\"output\"]\n  31[label=\"Column Regex Find And Replace\"]\n  0 -> 31 [label=\"output\"]\n  32[label=\"Column Regex Find And Replace\"]\n  0 -> 32 [label=\"output\"]\n  33[label=\"Cut\"]\n  0 -> 33 [label=\"output\"]\n  34[label=\"Cut\"]\n  0 -> 34 [label=\"output\"]\n  35[label=\"Datamash\"]\n  0 -> 35 [label=\"output\"]\n  36[label=\"Datamash\"]\n  0 -> 36 [label=\"output\"]\n  37[label=\"Datamash\"]\n  0 -> 37 [label=\"output\"]\n  38[label=\"Datamash\"]\n  0 -> 38 [label=\"output\"]\n  39[label=\"Datamash\"]\n  0 -> 39 [label=\"output\"]\n  40[label=\"Count\"]\n  0 -> 40 [label=\"output\"]\n  41[label=\"Column Regex Find And Replace\"]\n  0 -> 41 [label=\"output\"]\n  42[label=\"Split file\"]\n  0 -> 42 [label=\"output\"]\n  43[label=\"Join two Datasets\"]\n  0 -> 43 [label=\"output\"]\n  1 -> 43 [label=\"output\"]\n  44[label=\"Remove beginning\"]\n  2 -> 44 [label=\"output\"]\n  45[label=\"Sort\"]\n  11 -> 45 [label=\"out_file1\"]\n  46[label=\"Filter\"]\n  12 -> 46 [label=\"out_file1\"]\n  47[label=\"Cut\"]\n  28 -> 47 [label=\"out_file1\"]\n  48[label=\"Unique\"]\n  29 -> 48 [label=\"out_file1\"]\n  49[label=\"Count\"]\n  41 -> 49 [label=\"out_file1\"]\n  50[label=\"Datamash\"]\n  41 -> 50 [label=\"out_file1\"]\n  51[label=\"Concatenate datasets\"]\n  0 -> 51 [label=\"output\"]\n  44 -> 51 [label=\"out_file1\"]\n  52[label=\"Filter\"]\n  45 -> 52 [label=\"outfile\"]\n  53[label=\"Sort\"]\n  46 -> 53 [label=\"out_file1\"]\n  54[label=\"Remove beginning\"]\n  47 -> 54 [label=\"out_file1\"]\n  55[label=\"Select first\"]\n  47 -> 55 [label=\"out_file1\"]\n  56[label=\"Sort\"]\n  48 -> 56 [label=\"outfile\"]\n  57[label=\"Unique\"]\n  54 -> 57 [label=\"out_file1\"]\n  58[label=\"Concatenate datasets\"]\n  55 -> 58 [label=\"out_file1\"]\n  57 -> 58 [label=\"outfile\"]\n  59[label=\"Join two Datasets\"]\n  0 -> 59 [label=\"output\"]\n  58 -> 59 [label=\"out_file1\"]\n  60[label=\"Cut\"]\n  59 -> 60 [label=\"out_file1\"]\n  61[label=\"Line/Word/Character count\"]\n  60 -> 61 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -2721,6 +2777,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -2860,6 +2921,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -2987,6 +3052,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -3119,6 +3188,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -3247,6 +3320,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -3380,6 +3457,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -3507,6 +3588,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -3640,6 +3725,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -3767,6 +3856,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -3900,6 +3993,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "local",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -4030,6 +4127,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -4170,6 +4271,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "0.1.1",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -4316,6 +4422,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "1.1.1",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -4456,6 +4567,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -4603,6 +4719,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "2.0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -4644,9 +4767,9 @@
               {
                 "state": "inexact",
                 "versions": [
+                  "1.2.0",
                   "1.5",
                   "1.3.0",
-                  "1.2.0",
                   "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
@@ -4754,6 +4877,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -4905,6 +5032,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0+galaxy2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -5050,6 +5184,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0+galaxy2",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -5201,6 +5340,10 @@
               },
               {
                 "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "local",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -5330,6 +5473,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -5461,133 +5608,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -5721,133 +5742,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -5981,133 +5876,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -6241,133 +6010,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -6501,133 +6144,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -6761,133 +6278,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -7021,133 +6412,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -7281,133 +6546,7 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy-web.ipk-gatersleben.de"
-              },
-              {
-                "state": "missing",
-                "server": "https://www.immportgalaxy.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.interactomix.com/"
-              },
-              {
-                "state": "missing",
-                "server": "https://mississippi.sorbonne-universite.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://neo.engr.uconn.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "http://galaxy.inf.ethz.ch"
-              },
-              {
-                "state": "missing",
-                "server": "https://palfinder.ls.manchester.ac.uk/"
-              },
-              {
-                "state": "missing",
-                "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.be/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.cz/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.eu"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.no/"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org"
-              },
-              {
-                "state": "missing",
-                "server": "https://usegalaxy.org.au"
-              },
-              {
-                "state": "missing",
-                "server": "https://viralvariant.anses.fr/"
-              }
-            ],
-            "version": "local"
-          },
-          {
-            "id": "",
-            "servers": [
-              {
-                "state": "missing",
-                "server": "http://apostl.moffitt.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://smile.hku.hk/SARGs"
-              },
-              {
-                "state": "missing",
-                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
-              },
-              {
-                "state": "missing",
-                "server": "https://vm-chemflow-francegrille.eu/"
-              },
-              {
-                "state": "missing",
-                "server": "https://hyperbrowser.uio.no/coloc-stats"
-              },
-              {
-                "state": "missing",
-                "server": "https://coralsnp.science.psu.edu/galaxy/"
-              },
-              {
-                "state": "missing",
-                "server": "http://cropgalaxy.excellenceinbreeding.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://dintor.eurac.edu/"
-              },
-              {
-                "state": "missing",
-                "server": "http://igg.cloud.ba.infn.it/galaxy"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.mesocentre.uca.fr"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.pasteur.fr/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxytrakr.org/"
-              },
-              {
-                "state": "missing",
-                "server": "http://hyperbrowser.uio.no/hb/"
-              },
-              {
-                "state": "missing",
-                "server": "http://gigagalaxy.net/"
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -7541,6 +6680,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -7668,6 +6811,1082 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "local"
+          },
+          {
+            "id": "",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -8011,9 +8230,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  0ab332a0-6cb6-4c9a-912a-96d5e081b608[\"Output\\ndatamash_output\"];\n  2 --> 0ab332a0-6cb6-4c9a-912a-96d5e081b608;\n  style 0ab332a0-6cb6-4c9a-912a-96d5e081b608 stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  538901a8-2e7a-4270-ae78-215d13ef3e93[\"Output\\ngroup1\"];\n  5 --> 538901a8-2e7a-4270-ae78-215d13ef3e93;\n  style 538901a8-2e7a-4270-ae78-215d13ef3e93 stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  4231f22b-1002-4a6d-9967-012e38637b4c[\"Output\\ngroup2\"];\n  6 --> 4231f22b-1002-4a6d-9967-012e38637b4c;\n  style 4231f22b-1002-4a6d-9967-012e38637b4c stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6[\"Output\\nunique_output\"];\n  9 --> ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6;\n  style ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k0ab332a06cb64c9a912a96d5e081b608[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k0ab332a06cb64c9a912a96d5e081b608\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  k538901a82e7a4270ae78215d13ef3e93[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> k538901a82e7a4270ae78215d13ef3e93\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  k4231f22b10024a6d9967012e38637b4c[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> k4231f22b10024a6d9967012e38637b4c\n  7[label=\"Scatterplot w ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot w ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  kec39c0adeb2647d6b9a7c2e5ffa043c6[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> kec39c0adeb2647d6b9a7c2e5ffa043c6\n}",
+          "modified": "2024-10-29 00:06:21 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  26cdb24d-a2dd-45ac-a71d-0f712146d3cd[\"Output\\ndatamash_output\"];\n  2 --> 26cdb24d-a2dd-45ac-a71d-0f712146d3cd;\n  style 26cdb24d-a2dd-45ac-a71d-0f712146d3cd stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  e07bb2b6-6e77-4aeb-8938-16648610541a[\"Output\\ngroup1\"];\n  5 --> e07bb2b6-6e77-4aeb-8938-16648610541a;\n  style e07bb2b6-6e77-4aeb-8938-16648610541a stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  8ee676fb-b12c-4dac-9215-155224e80a5c[\"Output\\ngroup2\"];\n  6 --> 8ee676fb-b12c-4dac-9215-155224e80a5c;\n  style 8ee676fb-b12c-4dac-9215-155224e80a5c stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot w ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6[\"Output\\nunique_output\"];\n  9 --> ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6;\n  style ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k26cdb24da2dd45aca71d0f712146d3cd[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k26cdb24da2dd45aca71d0f712146d3cd\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  ke07bb2b66e774aeb893816648610541a[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> ke07bb2b66e774aeb893816648610541a\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  k8ee676fbb12c4dac9215155224e80a5c[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> k8ee676fbb12c4dac9215155224e80a5c\n  7[label=\"Scatterplot w ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot w ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  kec39c0adeb2647d6b9a7c2e5ffa043c6[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> kec39c0adeb2647d6b9a7c2e5ffa043c6\n}",
           "workflow_tools": [
             "Cut1",
             "Grouping1",
@@ -8106,7 +8325,7 @@
                 {
                   "output_name": "out_file",
                   "label": "datamash_output",
-                  "uuid": "0ab332a0-6cb6-4c9a-912a-96d5e081b608"
+                  "uuid": "26cdb24d-a2dd-45ac-a71d-0f712146d3cd"
                 }
               ]
             },
@@ -8153,7 +8372,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "group1",
-                  "uuid": "538901a8-2e7a-4270-ae78-215d13ef3e93"
+                  "uuid": "e07bb2b6-6e77-4aeb-8938-16648610541a"
                 }
               ]
             },
@@ -8200,7 +8419,7 @@
                 {
                   "output_name": "out_file1",
                   "label": "group2",
-                  "uuid": "4231f22b-1002-4a6d-9967-012e38637b4c"
+                  "uuid": "8ee676fb-b12c-4dac-9215-155224e80a5c"
                 }
               ]
             },
@@ -8493,6 +8712,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -8631,6 +8855,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -8759,6 +8987,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -8892,6 +9124,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9019,6 +9255,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -9151,6 +9391,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -9298,6 +9543,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0+galaxy2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -9443,6 +9695,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -9502,10 +9758,10 @@
                 "versions": [
                   "2.2.1+galaxy2",
                   "3.4.0+galaxy1",
-                  "3.3.5+galaxy2",
-                  "3.3.5+galaxy1",
                   "3.3.5+galaxy0",
-                  "3.4.0+galaxy0"
+                  "3.4.0+galaxy0",
+                  "3.3.5+galaxy1",
+                  "3.3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -9527,10 +9783,10 @@
                 "versions": [
                   "2.2.1+galaxy2",
                   "3.4.0+galaxy1",
-                  "3.3.5+galaxy2",
-                  "3.3.5+galaxy1",
                   "3.3.5+galaxy0",
-                  "3.4.0+galaxy0"
+                  "3.4.0+galaxy0",
+                  "3.3.5+galaxy1",
+                  "3.3.5+galaxy2"
                 ],
                 "server": "https://usegalaxy.org.au"
               },
@@ -9599,6 +9855,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -9932,7 +10192,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Gene BED To Exon/Intron/Codon BED\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  1 -->|out_file1| 2;\n  3[\"Filter\"];\n  1 -->|out_file1| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Gene BED To Exon/Intron/Codon BED\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  1 -> 2 [label=\"out_file1\"]\n  3[label=\"Filter\"]\n  1 -> 3 [label=\"out_file1\"]\n  4[label=\"Intersect\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Intersect\"]\n  3 -> 5 [label=\"out_file1\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Concatenate datasets\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -10039,7 +10299,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Filter\"];\n  0 -->|output| 1;\n  2[\"Filter\"];\n  0 -->|output| 2;\n  3[\"Filter\"];\n  0 -->|output| 3;\n  4[\"Intersect\"];\n  2 -->|out_file1| 4;\n  3 -->|out_file1| 4;\n  5[\"Intersect\"];\n  3 -->|out_file1| 5;\n  2 -->|out_file1| 5;\n  6[\"Concatenate datasets\"];\n  5 -->|output| 6;\n  4 -->|output| 6;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  1[label=\"Filter\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Filter\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"Intersect\"]\n  2 -> 4 [label=\"out_file1\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Intersect\"]\n  3 -> 5 [label=\"out_file1\"]\n  2 -> 5 [label=\"out_file1\"]\n  6[label=\"Concatenate datasets\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -10201,6 +10461,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -10339,6 +10604,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -10467,6 +10736,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -10600,6 +10873,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -10729,6 +11006,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.1.1"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -10869,6 +11153,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -11281,7 +11569,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAccessions\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nGenome\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Faster Download and Extract Reads in FASTQ\"];\n  0 -->|output| 2;\n  3[\"fastp\"];\n  2 -->|list_paired| 3;\n  4[\"Map with BWA-MEM\"];\n  3 -->|output_paired_coll| 4;\n  1 -->|output| 4;\n  5[\"Samtools view\"];\n  4 -->|bam_output| 5;\n  6[\"MarkDuplicates\"];\n  5 -->|outputsam| 6;\n  7[\"Samtools stats\"];\n  6 -->|outFile| 7;\n  8[\"Realign reads\"];\n  6 -->|outFile| 8;\n  1 -->|output| 8;\n  9[\"MultiQC\"];\n  3 -->|report_json| 9;\n  6 -->|metrics_file| 9;\n  7 -->|output| 9;\n  10[\"Insert indel qualities\"];\n  8 -->|realigned| 10;\n  1 -->|output| 10;\n  11[\"Call variants\"];\n  10 -->|output| 11;\n  1 -->|output| 11;\n  12[\"SnpEff eff:\"];\n  11 -->|variants| 12;\n  13[\"SnpSift Extract Fields\"];\n  12 -->|snpeff_output| 13;\n  14[\"Collapse Collection\"];\n  13 -->|output| 14;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAccessions\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nGenome\"]\n  2[label=\"Faster Download and Extract Reads in FASTQ\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"fastp\"]\n  2 -> 3 [label=\"list_paired\"]\n  4[label=\"Map with BWA-MEM\"]\n  3 -> 4 [label=\"output_paired_coll\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"Samtools view\"]\n  4 -> 5 [label=\"bam_output\"]\n  6[label=\"MarkDuplicates\"]\n  5 -> 6 [label=\"outputsam\"]\n  7[label=\"Samtools stats\"]\n  6 -> 7 [label=\"outFile\"]\n  8[label=\"Realign reads\"]\n  6 -> 8 [label=\"outFile\"]\n  1 -> 8 [label=\"output\"]\n  9[label=\"MultiQC\"]\n  3 -> 9 [label=\"report_json\"]\n  6 -> 9 [label=\"metrics_file\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Insert indel qualities\"]\n  8 -> 10 [label=\"realigned\"]\n  1 -> 10 [label=\"output\"]\n  11[label=\"Call variants\"]\n  10 -> 11 [label=\"output\"]\n  1 -> 11 [label=\"output\"]\n  12[label=\"SnpEff eff:\"]\n  11 -> 12 [label=\"variants\"]\n  13[label=\"SnpSift Extract Fields\"]\n  12 -> 13 [label=\"snpeff_output\"]\n  14[label=\"Collapse Collection\"]\n  13 -> 14 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -12301,6 +12589,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -12440,6 +12733,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -12571,6 +12868,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -12585,8 +12887,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "9.3+galaxy2",
-                  "9.3+galaxy1"
+                  "9.3+galaxy1",
+                  "9.3+galaxy2"
                 ],
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
@@ -12715,6 +13017,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.7.17.2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -12864,6 +13173,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "2.18.2.2",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -13017,6 +13331,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "2.0.2+galaxy2",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -13162,6 +13481,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "0.23.2+galaxy0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -13310,6 +13636,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "2.1.5+galaxy1",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -13351,10 +13682,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.1.3.1+galaxy2",
-                  "2.1.3.1+galaxy0",
                   "2.1.5+galaxy0",
-                  "2.1.3.1+galaxy1"
+                  "2.1.3.1+galaxy1",
+                  "2.1.3.1+galaxy2",
+                  "2.1.3.1+galaxy0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -13455,6 +13786,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "2.1.5+galaxy0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -13599,6 +13935,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "2.1.5+galaxy0",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -13719,10 +14060,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
                   "1.11+galaxy0",
-                  "1.7",
-                  "1.6"
+                  "1.11+galaxy1",
+                  "1.6",
+                  "1.7"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -13733,8 +14074,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.11+galaxy1",
                   "1.11+galaxy0",
+                  "1.11+galaxy1",
                   "1.7",
                   "1.9+galaxy1"
                 ],
@@ -13747,6 +14088,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "1.11+galaxy1"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -13899,6 +14247,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "1.9+galaxy2",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -14045,6 +14398,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "4.5covid19",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -14183,6 +14541,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "4.3+t.galaxy0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -14326,6 +14689,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.0.5+galaxy3"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -14367,10 +14737,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.4",
                   "2.11.0+galaxy0",
-                  "2.10.4+galaxy1",
-                  "2.10.7+galaxy1"
+                  "2.10.7+galaxy1",
+                  "2.10.4",
+                  "2.10.4+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -14474,6 +14844,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "3.0.5+galaxy3"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -14515,10 +14892,10 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "2.10.4",
                   "2.11.0+galaxy0",
-                  "2.10.4+galaxy1",
-                  "2.10.7+galaxy1"
+                  "2.10.7+galaxy1",
+                  "2.10.4",
+                  "2.10.4+galaxy1"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -14535,21 +14912,21 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "3.1.1+galaxy0",
-                  "2.10.4",
-                  "2.11.0+galaxy0",
-                  "3.0.3+galaxy0",
                   "3.0.5+galaxy3",
+                  "3.1.1+galaxy0",
+                  "2.11.0+galaxy0",
+                  "2.10.4",
                   "2.10.7+galaxy2",
                   "2.10.8+galaxy0",
+                  "3.0.3+galaxy0",
                   "3.0.5+galaxy0",
                   "2.11.0+galaxy1",
-                  "3.1.0+galaxy0",
                   "3.1.1+galaxy1",
-                  "3.0.10+galaxy0",
-                  "3.0.8+galaxy0",
-                  "3.1.0+galaxy1",
                   "3.0.8+galaxy1",
+                  "3.0.8+galaxy0",
+                  "3.0.10+galaxy0",
+                  "3.1.0+galaxy1",
+                  "3.1.0+galaxy0",
                   "3.0.0+galaxy0"
                 ],
                 "server": "https://usegalaxy.fr/"
@@ -14621,8 +14998,8 @@
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://galaxy.mesocentre.uca.fr"
               },
@@ -14644,6 +15021,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "5.1.0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -14705,8 +15089,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://usegalaxy.fr/"
               },
@@ -14714,8 +15098,8 @@
                 "state": "inexact",
                 "versions": [
                   "4.2",
-                  "4.1",
-                  "5.1.0"
+                  "5.1.0",
+                  "4.1"
                 ],
                 "server": "https://usegalaxy.no/"
               },
@@ -14796,6 +15180,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "5.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -15917,9 +16306,9 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
-          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Filter by quality\"];\n  0 -->|output| 2;\n  872b1fa1-a1e1-4f6d-bbbe-b9fcdfab46d7[\"Output\\nfilter1\"];\n  2 --> 872b1fa1-a1e1-4f6d-bbbe-b9fcdfab46d7;\n  style 872b1fa1-a1e1-4f6d-bbbe-b9fcdfab46d7 stroke:#2c3143,stroke-width:4px;\n  3[\"Filter by quality\"];\n  0 -->|output| 3;\n  6153cb45-81c6-431f-b130-d1e7afe82012[\"Output\\nfilter2\"];\n  3 --> 6153cb45-81c6-431f-b130-d1e7afe82012;\n  style 6153cb45-81c6-431f-b130-d1e7afe82012 stroke:#2c3143,stroke-width:4px;",
-          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmutant_R1\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter by quality\"]\n  0 -> 2 [label=\"output\"]\n  k872b1fa1a1e14f6dbbbeb9fcdfab46d7[color=lightseagreen,label=\"Output\\nfilter1\"]\n  2 -> k872b1fa1a1e14f6dbbbeb9fcdfab46d7\n  3[label=\"Filter by quality\"]\n  0 -> 3 [label=\"output\"]\n  k6153cb4581c6431fb130d1e7afe82012[color=lightseagreen,label=\"Output\\nfilter2\"]\n  3 -> k6153cb4581c6431fb130d1e7afe82012\n}",
+          "modified": "2024-10-29 00:06:21 +0000",
+          "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nmutant_R1\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"FastQC\"];\n  0 -->|output| 1;\n  2[\"Filter by quality\"];\n  0 -->|output| 2;\n  9f8a1dd6-5fdd-4278-b34d-b33ce690961d[\"Output\\nfilter1\"];\n  2 --> 9f8a1dd6-5fdd-4278-b34d-b33ce690961d;\n  style 9f8a1dd6-5fdd-4278-b34d-b33ce690961d stroke:#2c3143,stroke-width:4px;\n  3[\"Filter by quality\"];\n  0 -->|output| 3;\n  8d22eff3-1e0c-40ab-8a9d-fb0b3175a8f1[\"Output\\nfilter2\"];\n  3 --> 8d22eff3-1e0c-40ab-8a9d-fb0b3175a8f1;\n  style 8d22eff3-1e0c-40ab-8a9d-fb0b3175a8f1 stroke:#2c3143,stroke-width:4px;",
+          "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nmutant_R1\"]\n  1[label=\"FastQC\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter by quality\"]\n  0 -> 2 [label=\"output\"]\n  k9f8a1dd65fdd4278b34db33ce690961d[color=lightseagreen,label=\"Output\\nfilter1\"]\n  2 -> k9f8a1dd65fdd4278b34db33ce690961d\n  3[label=\"Filter by quality\"]\n  0 -> 3 [label=\"output\"]\n  k8d22eff31e0c40ab8a9dfb0b3175a8f1[color=lightseagreen,label=\"Output\\nfilter2\"]\n  3 -> k8d22eff31e0c40ab8a9dfb0b3175a8f1\n}",
           "workflow_tools": [
             "toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1",
             "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72"
@@ -16001,7 +16390,7 @@
                 {
                   "output_name": "output",
                   "label": "filter1",
-                  "uuid": "872b1fa1-a1e1-4f6d-bbbe-b9fcdfab46d7"
+                  "uuid": "9f8a1dd6-5fdd-4278-b34d-b33ce690961d"
                 }
               ]
             },
@@ -16048,7 +16437,7 @@
                 {
                   "output_name": "output",
                   "label": "filter2",
-                  "uuid": "6153cb45-81c6-431f-b130-d1e7afe82012"
+                  "uuid": "8d22eff3-1e0c-40ab-8a9d-fb0b3175a8f1"
                 }
               ]
             }
@@ -16178,6 +16567,11 @@
           {
             "url": "http://gigagalaxy.net/",
             "name": "GigaGalaxy"
+          },
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
           },
           {
             "url": "https://galaxy-web.ipk-gatersleben.de",
@@ -16311,8 +16705,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.0",
-                  "1.0.2+galaxy0"
+                  "1.0.2+galaxy0",
+                  "1.0.0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -16323,6 +16717,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -16406,8 +16804,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.0.2+galaxy2",
-                  "1.0.0",
                   "1.0.2+galaxy0",
+                  "1.0.0",
                   "1.0.2"
                 ],
                 "server": "https://usegalaxy.org.au"
@@ -16470,8 +16868,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.0",
-                  "1.0.2+galaxy0"
+                  "1.0.2+galaxy0",
+                  "1.0.0"
                 ],
                 "server": "https://galaxytrakr.org/"
               },
@@ -16482,6 +16880,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -16523,8 +16925,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "1.0.0",
                   "1.0.2+galaxy0",
+                  "1.0.0",
                   "1.0.2",
                   "1.0.1"
                 ],
@@ -16638,6 +17040,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.73+galaxy0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -16691,12 +17100,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
+                  "0.52",
                   "0.68",
                   "0.67",
-                  "0.52",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -16808,6 +17217,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "0.73+galaxy0"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -16866,12 +17282,12 @@
                   "0.74+galaxy0",
                   "0.69",
                   "0.65",
+                  "0.52",
                   "0.68",
                   "0.67",
-                  "0.52",
+                  "0.63",
                   "0.64",
-                  "0.62",
-                  "0.63"
+                  "0.62"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -18410,7 +18826,7 @@
               "version": "0.1"
             }
           },
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nExons\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nFeatures\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"bedtools Intersect intervals\"];\n  0 -->|output| 2;\n  1 -->|output| 2;\n  3[\"Datamash\"];\n  2 -->|output| 3;\n  4[\"Sort\"];\n  3 -->|out_file| 4;\n  5[\"Select first\"];\n  4 -->|outfile| 5;\n  6[\"Compare two Datasets\"];\n  0 -->|output| 6;\n  5 -->|outfile| 6;\n  565e3d76-0230-4a5e-87c1-9c36ce0b7df8[\"Output\\ntop_5_exons\"];\n  6 --> 565e3d76-0230-4a5e-87c1-9c36ce0b7df8;\n  style 565e3d76-0230-4a5e-87c1-9c36ce0b7df8 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nExons\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nFeatures\"]\n  2[label=\"bedtools Intersect intervals\"]\n  0 -> 2 [label=\"output\"]\n  1 -> 2 [label=\"output\"]\n  3[label=\"Datamash\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Sort\"]\n  3 -> 4 [label=\"out_file\"]\n  5[label=\"Select first\"]\n  4 -> 5 [label=\"outfile\"]\n  6[label=\"Compare two Datasets\"]\n  0 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"outfile\"]\n  k565e3d7602304a5e87c19c36ce0b7df8[color=lightseagreen,label=\"Output\\ntop_5_exons\"]\n  6 -> k565e3d7602304a5e87c19c36ce0b7df8\n}",
           "workflow_tools": [
@@ -18668,6 +19084,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -18807,6 +19228,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -18936,6 +19361,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -19078,6 +19508,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.1",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -19226,6 +19661,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.1"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -19268,8 +19710,8 @@
                 "state": "inexact",
                 "versions": [
                   "1.1.1",
-                  "1.1.0",
-                  "1.0.0"
+                  "1.0.0",
+                  "1.1.0"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -19286,8 +19728,8 @@
                 "versions": [
                   "1.1.1",
                   "9.3+galaxy1",
-                  "1.1.0",
                   "1.0.0",
+                  "1.1.0",
                   "9.3+galaxy0"
                 ],
                 "server": "https://usegalaxy.eu"
@@ -19314,8 +19756,8 @@
                 "versions": [
                   "1.1.1",
                   "9.3+galaxy1",
-                  "1.1.0",
-                  "1.0.0"
+                  "1.0.0",
+                  "1.1.0"
                 ],
                 "server": "https://usegalaxy.org"
               },
@@ -19401,6 +19843,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "2.30.0+galaxy1",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -19560,6 +20007,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0+galaxy2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -19708,6 +20162,13 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0+galaxy2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -19852,6 +20313,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -20531,7 +20996,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-10-28 14:30:51 +0000",
+          "modified": "2024-10-29 00:06:21 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\niris\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Convert CSV to tabular\"];\n  0 -->|output| 1;\n  2[\"Datamash\"];\n  1 -->|tabular| 2;\n  254f1b4b-d466-4f0e-8c46-0e97bbedae4d[\"Output\\ndatamash_output\"];\n  2 --> 254f1b4b-d466-4f0e-8c46-0e97bbedae4d;\n  style 254f1b4b-d466-4f0e-8c46-0e97bbedae4d stroke:#2c3143,stroke-width:4px;\n  3[\"Remove beginning\"];\n  1 -->|tabular| 3;\n  4[\"Cut\"];\n  3 -->|out_file1| 4;\n  5[\"Group\"];\n  3 -->|out_file1| 5;\n  a689bddf-14d0-4a72-b1f9-c34d8f50d2b3[\"Output\\ngroup1\"];\n  5 --> a689bddf-14d0-4a72-b1f9-c34d8f50d2b3;\n  style a689bddf-14d0-4a72-b1f9-c34d8f50d2b3 stroke:#2c3143,stroke-width:4px;\n  6[\"Group\"];\n  3 -->|out_file1| 6;\n  ac7c73b2-58dd-4c6e-85ce-ddf49323b206[\"Output\\ngroup2\"];\n  6 --> ac7c73b2-58dd-4c6e-85ce-ddf49323b206;\n  style ac7c73b2-58dd-4c6e-85ce-ddf49323b206 stroke:#2c3143,stroke-width:4px;\n  7[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 7;\n  8[\"Scatterplot with ggplot2\"];\n  3 -->|out_file1| 8;\n  9[\"Unique\"];\n  4 -->|out_file1| 9;\n  8a2b5e30-d42a-4019-9674-4b4af00c820a[\"Output\\nunique_output\"];\n  9 --> 8a2b5e30-d42a-4019-9674-4b4af00c820a;\n  style 8a2b5e30-d42a-4019-9674-4b4af00c820a stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\niris\"]\n  1[label=\"Convert CSV to tabular\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Datamash\"]\n  1 -> 2 [label=\"tabular\"]\n  k254f1b4bd4664f0e8c460e97bbedae4d[color=lightseagreen,label=\"Output\\ndatamash_output\"]\n  2 -> k254f1b4bd4664f0e8c460e97bbedae4d\n  3[label=\"Remove beginning\"]\n  1 -> 3 [label=\"tabular\"]\n  4[label=\"Cut\"]\n  3 -> 4 [label=\"out_file1\"]\n  5[label=\"Group\"]\n  3 -> 5 [label=\"out_file1\"]\n  ka689bddf14d04a72b1f9c34d8f50d2b3[color=lightseagreen,label=\"Output\\ngroup1\"]\n  5 -> ka689bddf14d04a72b1f9c34d8f50d2b3\n  6[label=\"Group\"]\n  3 -> 6 [label=\"out_file1\"]\n  kac7c73b258dd4c6e85ceddf49323b206[color=lightseagreen,label=\"Output\\ngroup2\"]\n  6 -> kac7c73b258dd4c6e85ceddf49323b206\n  7[label=\"Scatterplot with ggplot2\"]\n  3 -> 7 [label=\"out_file1\"]\n  8[label=\"Scatterplot with ggplot2\"]\n  3 -> 8 [label=\"out_file1\"]\n  9[label=\"Unique\"]\n  4 -> 9 [label=\"out_file1\"]\n  k8a2b5e30d42a401996744b4af00c820a[color=lightseagreen,label=\"Output\\nunique_output\"]\n  9 -> k8a2b5e30d42a401996744b4af00c820a\n}",
           "workflow_tools": [
@@ -21031,6 +21496,11 @@
             "name": "GigaGalaxy"
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://galaxy-web.ipk-gatersleben.de",
             "name": "IPK Galaxy Blast Suite"
           },
@@ -21169,6 +21639,10 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -21297,6 +21771,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -21430,6 +21908,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -21557,6 +22039,10 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -21689,6 +22175,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.1.0",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -21834,6 +22325,13 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "inexact",
+                "versions": [
+                  "1.1.0+galaxy2"
+                ],
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
@@ -21983,6 +22481,10 @@
               },
               {
                 "state": "missing",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
+                "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
               {
@@ -22127,6 +22629,10 @@
               {
                 "state": "local",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "local",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "local",
@@ -22489,6 +22995,11 @@
             "usegalaxy": false
           },
           {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
+          },
+          {
             "url": "https://usegalaxy.cz/",
             "name": "UseGalaxy.cz",
             "usegalaxy": false
@@ -22592,6 +23103,11 @@
           {
             "url": "http://gigagalaxy.net/",
             "name": "GigaGalaxy"
+          },
+          {
+            "url": "https://galaxy.hyphy.org/",
+            "name": "HyPhy HIV NGS Tools",
+            "usegalaxy": false
           },
           {
             "url": "https://galaxy-web.ipk-gatersleben.de",
@@ -22735,6 +23251,11 @@
                 "server": "http://gigagalaxy.net/"
               },
               {
+                "state": "exact",
+                "version": "0.23.2+galaxy0",
+                "server": "https://galaxy.hyphy.org/"
+              },
+              {
                 "state": "missing",
                 "server": "https://galaxy-web.ipk-gatersleben.de"
               },
@@ -22778,11 +23299,11 @@
                 "versions": [
                   "0.19.5+galaxy1",
                   "0.20.1+galaxy0",
-                  "0.19.5",
+                  "0.18.0.0",
+                  "0.12.4.0",
                   "0.19.3.3",
                   "0.19.3.2",
-                  "0.12.4.0",
-                  "0.18.0.0"
+                  "0.19.5"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -22884,6 +23405,11 @@
               {
                 "state": "missing",
                 "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "exact",
+                "version": "1.11+galaxy1",
+                "server": "https://galaxy.hyphy.org/"
               },
               {
                 "state": "missing",
