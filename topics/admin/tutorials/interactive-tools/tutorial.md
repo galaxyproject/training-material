@@ -19,12 +19,13 @@ key_points:
   - nginx routes GxIT requests to the GxIT(/GIE) Proxy, which routes them to the node/port on which the GxIT is running
   - GxITs require wildcard SSL certificates
   - GxITs expose your Galaxy server's user datasets unless configured to use Pulsar
-contributors:
-  - natefoo
-  - slugger70
-  - hexylena
-  - abretaud
-  - kysrpex
+contributions:
+  authorship:
+    - natefoo
+    - slugger70
+    - hexylena
+    - abretaud
+    - kysrpex
 tags:
   - ansible
   - interactive-tools
