@@ -875,10 +875,12 @@ module GtnLinter
 
   def self.fix_ga_wf(contents)
     results = []
-    if !contents.key?('tags')
-      topic = @path.split('/')[1]
+    if !contents.key?('tags') or contents['tags'].empty?
+      path_parts = @path.split('/')
+      topic = path_parts[path_parts.index('topics') + 1]
+
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: "This workflow is missing tags. Please add `\"tags\": [\"#{topic}\"]`",
+                     path: @path, message: "This workflow is missing required tags. Please add `\"tags\": [\"#{topic}\"]`",
                      code: 'GTN:015'
                    ))
     end
@@ -988,7 +990,7 @@ module GtnLinter
   def self.format_reviewdog_output(message)
     return if !@LIMIT_EMITTED_CODES.nil? && !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
 
-    if !message.nil? && (message != [])
+    if !message.nil? && (message != []) && message.is_a?(Hash)
       if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
           message['location']['path'],
@@ -1051,7 +1053,7 @@ module GtnLinter
       # Remove any empty lists
       results = results.select { |x| !x.nil? && x.length.positive? }.flatten
       # Before ignoring anything matching GTN:IGNORE:###
-      return results if ignores.nil?
+      return results if ignores.nil? or ignores.empty?
 
       results = results.select { |x| ignores.index(x['code']['value']).nil? } if results.length.positive?
       return results

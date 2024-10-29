@@ -17,6 +17,7 @@ key_points:
   - Infrastructure is available for running GATs for free from UseGalaxy.eu
   - This can be very convenient and easy to use
   - EU provides appropriate DNS entries so you can run trainings with ITs.
+level: Advanced
 requirements:
   - type: "internal"
     topic_name: admin

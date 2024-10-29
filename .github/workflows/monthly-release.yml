@@ -24,6 +24,7 @@ jobs:
         with:
           # Based on logic in deploy.yml
           fetch-depth: 1200
+          fetch-tags: true
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -53,7 +54,8 @@ jobs:
           pip install pyyaml
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          npm install
+          rm -f package.json package-lock.json yarn.lock
+          npm install markdown-yaml-metadata-parser lunr
           bundle pristine ffi
       # END Dependencies
 
@@ -69,7 +71,6 @@ jobs:
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
           curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
-          npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | ruby bin/yaml2json.rb > api/swagger.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
@@ -93,5 +94,7 @@ jobs:
 
       - name: Create Release
         id: create_release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create ${{ env.release_tag }} --title "Release ${{ env.release_title }}" --notes "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/${{ env.release_tag }}/)." --target main --latest

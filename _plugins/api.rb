@@ -164,7 +164,7 @@ module Jekyll
 
       # Contributors
       Jekyll.logger.debug '[GTN/API] Contributors, Funders, Organisations'
-      %w[contributors funders organisations].each do |type|
+      %w[contributors grants organisations].each do |type|
         page2 = PageWithoutAFile.new(site, '', 'api/', "#{type}.json")
         page2.content = JSON.pretty_generate(site.data[type].map { |c, _| mapContributor(site, c) })
         page2.data['layout'] = nil
@@ -209,6 +209,7 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
+          puts q['url']
           q['contributors'] = Gtn::Contributors.get_contributors(q).dup.map do |c|
             mapContributor(site, c)
           end

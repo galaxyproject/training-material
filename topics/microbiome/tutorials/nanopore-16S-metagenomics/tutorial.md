@@ -22,6 +22,7 @@ tags:
   - 16S
   - nanopore
   - microgalaxy
+  - plants
 redirect_from:
   - /topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial
 edam_ontology:

@@ -28,6 +28,7 @@ module Jekyll
         page2.data['topic_name'] = material['topic_name']
         page2.data['tutorial_name'] = material['tutorial_name']
         page2.data['material'] = material
+        page2.data['title'] = 'Recordings for ' + material['title']
         site.pages << page2
       end
     end

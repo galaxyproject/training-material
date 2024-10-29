@@ -1,0 +1,73 @@
+name: "[Social] Autogenerate missing social media cards"
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # We'll run this weekly at noon.
+    - cron: '0 12 * * 0'
+  workflow_dispatch:
+    inputs:
+      all_old:
+        type: string
+        description: If you want to re-generate ALL images set to a non-empty value
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-24.04
+    steps:
+      # Shallow should be fine for video
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 500
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - name: Install dependencies
+        run: |
+          sudo apt-get install -y imagemagick optipng inkscape
+          pip install requests awscli
+          mkdir -p ~/.fonts/
+          wget https://galaxy-training.s3.amazonaws.com/social/recursive.ttf -O ~/.fonts/recursive.ttf
+          fc-cache -rv
+      # END Dependencies
+
+
+      # We get the previous build ID to know how many videos were changed since
+      # then.
+      #
+      # We *could* fetch the diff in the past N days but if a build fails for
+      # any reason, we'd lose those changes permanently and things would never
+      # get built.
+      #
+      # So instead we just track the last successfully built timestamp
+      - name: Previous build ID
+        id: build_id
+        run: |
+          echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
+
+          # Support regenerating all
+          if [[ "${{ github.event.inputs.all_old }}" != "" ]]; then
+            echo "timestamp=0" >> $GITHUB_ENV
+          fi
+
+      # The actual compilation process deposits everything in the ./social/ folder.
+      # And requires fetching metadata from the live website (api/social-meta.json)
+      - name: Build Social Media Cards
+        run: |
+          mkdir -p social/
+          python bin/social-cards.py $PREVIOUS_TIMESTAMP
+        env:
+          PREVIOUS_TIMESTAMP: ${{ env.timestamp }}
+
+      # Deploy step, scary.
+      - name: Build Social Media Cards
+        run: |
+          aws s3 cp --recursive ../gtn-social/ s3://galaxy-training/social/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1

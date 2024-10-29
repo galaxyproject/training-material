@@ -20,6 +20,8 @@ priority: 2
 contributions:
   authorship:
     - pauldg
+  editing: 
+    - Marie59
   funding:
     - by-covid
     - eurosciencegateway
@@ -51,6 +53,27 @@ This tutorial will guide you through the steps of defining such a report for you
 
 This tutorial will show you how to generate Galaxy-based [Workflow Run RO-Crate](https://w3id.org/ro/crate/) after running the workflow.
 
+{% include _includes/cyoa-choices.html option1="Locally" option2="Not_locally" default="Not_locally"
+       text="Are you running Galaxy locally ?" %}
+       
+<div class="Locally" markdown="1">
+
+## Enable RO-Crate on your local instance
+> <hands-on-title>Update your galaxy configuration</hands-on-title>
+> - Go to where your Galaxy folder is in your computer
+> - In your root Galaxy folder navigate to the `config` folder where a the `galaxy.yml` should be located. Please open it.
+> - (In case you only find a `galaxy.yml.sample` file, copy this one and name it `galaxy.yml`) 
+> - make sure the option `enable_celery_tasks` is set to `true`:
+> ```
+> galaxy:
+>       enable_celery_tasks: true
+> ```
+> That's it ! Now you can launch your local instance as usual.
+{: .hands_on}
+</div>
+
+<div class="Not_locally" markdown="1">
+</div>
 
 ## Import an example workflow
 
@@ -81,25 +104,13 @@ Let’s run the workflow and export the RO-Crate.
 >    https://zenodo.org/record/1319069/files/iris.csv
 >    ```
 >
->    Tip: Importing via links:
->
->    - Copy the link location
->    - Open the Galaxy Upload Manager (galaxy-upload on the top-right of the tool panel)
->    - Select Paste/Fetch Data
->    - Paste the link(s) into the text field
->    - Press Start
->    - Close the window
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 > 2. Run **GTN Training: Galaxy 101 For Everyone** workflow using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - *"1: Iris Dataset""*: the `iris.csv` file we just uploaded
 >
->    Tip: Running a workflow:
->    - Click on Workflow on the top menu bar of Galaxy. You will see a list of all your workflows.
->    - Click on the workflow-run (Run workflow) button next to your workflow
->    - Configure the workflow as needed
->    - Click the Run Workflow button at the top-right of the screen
->    - You may have to refresh your history to see the queued jobs
+>    {% snippet faqs/galaxy/workflows_run.md  %}
 >
 > 3. **View the workflow outputs** once the workflow has completed
 >    - The workflow produces several text and tabular outputs, and two plot (image) outputs
@@ -108,11 +119,13 @@ Let’s run the workflow and export the RO-Crate.
 
 ## Export the Workflow Run Crate
 
-After the workflow has completed, we can export the RO-Crate. The crate does not appear in your history, but can be accessed from the **User -> Workflow Invocations** menu on the top bar.
+After the workflow has completed, we can export the RO-Crate. The crate does not appear in your history, but can be accessed from the {% icon galaxy-history-options %} **-> Show Invocations** menu on the top right of your history OR on the left pannel from the {% icon galaxy-panelview %} Workflow Invocations .
 
 > <hands-on-title>Export the Workflow Run Crate</hands-on-title>
 >
-> 1. In the top menu bar, go to **User -> Workflow Invocations**
+> 1. In the top right of your history, go to {% icon galaxy-history-options %} **-> Show Invocations**
+>
+>    ![screenshot of the history options to get the Show invocations button](./images/show_invocation.png)
 >
 > 2. Our latest workflow run should be listed at the top.
 >    - Click on it to expand it:
@@ -121,11 +134,12 @@ After the workflow has completed, we can export the RO-Crate. The crate does not
 >
 > 3. Click on the **Export** tab in the expanded view of the workflow invocation.
 >
-> 4. You should see a page like this. It contains:
->    - The different export options
->    - Location where the export should be sent to (Download locally or a remote location)
->
-> 5. Click on the Download option
+> 4. Click on the Export tab in the expanded view of the workflow invocation.
+>        You should see a page that contains three download options:
+> 	     - Research Object Crate (RO-Crate) 
+> 	     - BioCompute Object
+> 	     - File
+> 5. Click on the **Generate** {% icon galaxy-download %} option of the RO-Crate box (1st box)
 >
 >    ![screenshot of the beginning of the workflow run export options](./images/workflow-invocation-export.png)
 >

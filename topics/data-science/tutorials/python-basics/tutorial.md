@@ -23,10 +23,12 @@ key_points:
 - Python is a fairly easy programming language to learn and use, but be mindful of the indexing.
 - Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users
 subtopic: python
-contributors:
+contributions:
+  authorship:
   - mcmaniou
   - fpsom
   - carpentries
+  funding:
   - gallantries
 
 priority: 1

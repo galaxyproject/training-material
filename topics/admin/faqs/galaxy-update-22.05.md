@@ -3,7 +3,7 @@ title: Updating from 22.01 to 23.0 with Ansible
 area: ansible
 box_type: tip
 layout: faq
-contributors: [hexylena]
+contributors: [hexylena, lldelisle]
 ---
 
 Galaxy introduced a number of changes in 22.05 and 23.0 that are extremely important to be aware of during the upgrade process. Namely a new database migration system, and a new required running environment (gunicorn instead of uwsgi).
@@ -14,24 +14,25 @@ Here is the recommended update procedure with ansible:
 
 1. Update to 22.01 normally
 2. Change the release to 22.05, and run the upgrade
-   1. Galaxy will probably not start correctly here, ignore it.
-   2. Run the database migration manually
+   1. Galaxy will probably not start correctly here, ignore it (even if the build fail, this if fine, just ignore).
+   2. Run the database migration manually (with the galaxy user with the venv activated)
 
       ```
-      GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml sh manage_db.sh -c /srv/galaxy/config/galaxy.yml upgrade
+      GALAXY_CONFIG_FILE=/srv/galaxy/config/galaxy.yml sh /srv/galaxy/server/manage_db.sh -c /srv/galaxy/config/galaxy.yml upgrade
       ```
 
-3. Update your system's ansible, you probably need something with a major version greater than 2.
-3. Set the release to `23.0` and make other required changes. There are a lot of useful changes, but the easiest procedure is probably something like:
+3. Update your system's ansible, you probably need something with a major version of at least 2.
+4. Set the release to `23.0` and make other required changes. There are a lot of useful changes, but the easiest procedure is probably something like:
 
    1. git clone https://github.com/hexylena/git-gat/
-   2. git checkout step-4
-   3. Diff and sync (e.g. `vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml`) for the main configuration files:
+   2. cd git-gat
+   3. git checkout c2e7bf6d3584fbf3281fb57d8024a9189f957e0e (this corresponds to the version of the repo after the 23.0 integration without too much customization and after potential bug fixes)
+   4. Diff and sync (e.g. `vimdiff group_vars/galaxyservers.yml git-gat/group_vars/galaxyservers.yml`) for the main configuration files:
 
       - group_vars/all.yml
       - group_vars/dbservers.yml
       - galaxy.yml
-      - requirements.yml
+      - requirements.yml (and don't forget to install the new role versions)
       - hosts
       - templates/nginx/galaxy.j2
 
@@ -95,12 +96,14 @@ Here is the recommended update procedure with ansible:
    - uchida.miniconda is replaced with galaxyproject.conda
    - usegalaxy_eu.systemd is no longer needed
    - `galaxy_user_name` is defined in all.yml in the latest git-gat
+   - the `galaxy_job_config` needs to have a database `handling` specified - assign set to `db-skip-locked`
    - git-gat also separates out the DB serving into a `dbservers.yml` host group
 
-4. Backup your `venv`, `mv /srv/galaxy/venv/ /srv/galaxy/venv-old/`, as your NodeJS is probably out of date and Galaxy doesn't handle that gracefully
-5. Do any local customs for luck (knocking on wood, etc.)
-6. Run the playbook
-7. Things might go wrong with systemd units
+5. Backup your `venv`, `mv /srv/galaxy/venv/ /srv/galaxy/venv-old/`, as your NodeJS is probably out of date and Galaxy doesn't handle that gracefully
+6. Do any local customs for luck (knocking on wood, etc.)
+7. Run the playbook
+8. Things might go wrong with systemd units
    - try running `galaxyctl -c /srv/galaxy/config/galaxy.yml update` as root
    - you may also need to `rm /etc/systemd/system/galaxy.service` which is then no longer needed
    - you'll have a `galaxy.target` and you can instead `systemctl daemon-reload` and `systemctl start galaxy.target`
+9. You may need to restart galaxy manually with `sudo galaxyctl restart`

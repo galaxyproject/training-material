@@ -68,6 +68,7 @@ recordings:
   date: '2023-05-15'
   galaxy_version: '23.01'
   length: 2H50M
+  cyoa: true
 - captioners:
   - hexylena
   - shiltemann
@@ -264,7 +265,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Other Read Trimming Options"*
@@ -376,7 +377,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >           - *"Select reference genome"*: `Fly (Drosophila melanogaster): dm6 Full`
 >           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
->               
+>
 >             This parameter should be length of reads - 1
 >                - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >    - *"Compute coverage"*:
@@ -1488,6 +1489,8 @@ We can now run **DESeq2**:
 >                        - In *"Count file(s)"*: `Select all the single-end count files (GSM461176, GSM461179, GSM461182)`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
@@ -1565,6 +1568,8 @@ We can now run **DESeq2**:
 >                        - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >

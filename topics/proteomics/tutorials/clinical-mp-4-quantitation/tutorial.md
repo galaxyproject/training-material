@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Clinical-MP-4-Quantitation
+title: "Clinical Metaproteomics 4: Quantitation"
 zenodo_link: "https://doi.org/10.5281/zenodo.10105821"
 questions:
 - How to perform quantitation?
@@ -33,15 +33,25 @@ follow_up_training:
 tags: [label-TMT11]
 redirect_from:
 - /topics/proteomics/tutorials/clinical-mp-quantitation/tutorial
+
+recordings:
+- captioners:
+  - katherine-d21
+  date: '2024-06-21'
+  galaxy_version: '23.1'
+  length: 8M
+  youtube_id: _e0l1AtfZ4Y
+  speakers:
+  - katherine-d21
 ---
 
 
 # Introduction
-The next step of the clinical metaproteomics workflow is the quantification workflow. Running a quantification workflow in proteomics is essential for several critical purposes. It allows researchers to measure and compare the abundance of proteins or peptides in biological samples, offering valuable insights into biomarker discovery, comparative analysis, and differential expression studies. Quantitative proteomics helps reveal the functional roles of proteins, the stoichiometry of protein complexes, and the effects of drugs on protein expression in pharmacological studies. Additionally, it serves as a quality control measure, validating initial protein identifications, and providing data normalization for increased accuracy. Quantitative data are indispensable for hypothesis testing, systems biology, and their clinical relevance in areas such as disease diagnosis, prognosis, and therapeutic decision-making. In summary, the quantitation workflow in proteomics is a cornerstone for deciphering the complexities of protein expression and regulation, facilitating a wide array of biological and clinical applications. 
+The next step of the clinical metaproteomics workflow is the quantification workflow. Running a quantification workflow in proteomics is essential for several critical purposes. It allows researchers to measure and compare the abundance of proteins or peptides in biological samples, offering valuable insights into biomarker discovery, comparative analysis, and differential expression studies. Quantitative proteomics helps reveal the functional roles of proteins, the stoichiometry of protein complexes, and the effects of drugs on protein expression in pharmacological studies. Additionally, it serves as a quality control measure, validating initial protein identifications, and providing data normalization for increased accuracy. Quantitative data are indispensable for hypothesis testing, systems biology, and their clinical relevance in areas such as disease diagnosis, prognosis, and therapeutic decision-making. In summary, the quantitation workflow in proteomics is a cornerstone for deciphering the complexities of protein expression and regulation, facilitating a wide array of biological and clinical applications.
 
 In this current workflow, we perform Quantification using the MaxQuant tool and the output will be interpreted in our next module.
 
-![Quantitation workflow](../../images/clinical-mp/clinical-mp-quantification.JPG)
+![Quantitation workflow]({% link topics/proteomics/images/clinical-mp/clinical-mp-quantification.JPG %})
 
 
 
@@ -89,7 +99,24 @@ In this current workflow, we perform Quantification using the MaxQuant tool and 
 >
 {: .hands_on}
 
+# Import Workflow
 
+
+> <hands-on-title>Running the Workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy:
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/proteomics/tutorials/clinical-mp-4-quantitation/workflows/WF4_Quantitation_Workflow.ga" title="Quantitation Workflow" %}
+>
+> 2. Run **Workflow** {% icon workflow %} using the following parameters:
+>    - *"Send results to a new history"*: `No`
+>    - {% icon param-file %} *" Quantitation_Database-For-MaxQuant * "*: `Quantitation_Database_for_MaxQuant.fasta`
+>    - {% icon param-file %} *" Experimental-Design Discovery MaxQuant"*: `Experimental-Design_Discovery_MaxQuant.tabular`
+>    - {% icon param-file %} *" Input Raw-files"*: `RAW dataset collection`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+>
+{: .hands_on}
 
 
 # Peptide quantification
@@ -135,7 +162,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 >
 > > <solution-title></solution-title>
 > >
-> > 1. MaxQuant prefers RAW format compared to MGF as it has more information compared to MGF. 
+> > 1. MaxQuant prefers RAW format compared to MGF as it has more information compared to MGF.
 > >
 > {: .solution}
 >
@@ -146,7 +173,7 @@ The outputs we are most interested in consist of the `MaxQuant Evidence file`, `
 >
 > > <solution-title></solution-title>
 > >
-> > 1. We are using MaxQuant for quantification purposes only. SearchGUI Peptide Shaker doesn't have the capability to perform quantification of peptides or proteins. 
+> > 1. We are using MaxQuant for quantification purposes only. SearchGUI Peptide Shaker doesn't have the capability to perform quantification of peptides or proteins.
 > >
 > {: .solution}
 >

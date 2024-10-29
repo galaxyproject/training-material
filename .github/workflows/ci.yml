@@ -1,4 +1,4 @@
-name: "[CI] Accessibility Linting"
+name: "[CI] GTN Build Testing"
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -8,17 +8,6 @@ concurrency:
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
-    paths:
-      - 'Gemfile.lock'
-      - '**/*.md'
-      - '**/*.html'
-      - '*.yml'
-      - '*.yaml'
-      - 'metadata/*'
-      - 'topics/*/images/*'
-      - '_plugins/*'
-      - '_plugins_dev/*'
-      - '**/*.bib'
 
 jobs:
   build-site:
@@ -58,7 +47,7 @@ jobs:
       - name: Validate all links, enforce alt text
         run: |
           bundle exec htmlproofer \
-            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
+            --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/","/workflows\/trs_import/" \
             --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/","/.*recentrifuge.*\.html/" \
             --swap-urls "github.com/galaxyproject/training-material/tree/main:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_HEAD_REF}" \
             --disable-external=true \

@@ -12,6 +12,7 @@ time_estimation: 30m
 key_points:
   - Circos is incredibly customisable
   - Not all customisations have to be done with rules, but they can be a useful method
+level: Intermediate
 
 requirements:
   - type: "internal"
@@ -85,7 +86,7 @@ If you would like to try the 'fast' option, once you've imported the datasets, y
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/microbiome/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" title="Quality Control" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/visualisation/tutorials/circos-microbial/workflows/main_workflow.ga" title="Circos for E. Coli" %}
 >
 > 2. Run the workflow {% icon workflow %} using the following parameters:
 >

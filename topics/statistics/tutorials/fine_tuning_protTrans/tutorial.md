@@ -1,25 +1,23 @@
 ---
 layout: tutorial_hands_on
-
 title: Fine tune large protein model (ProtTrans) using HuggingFace
 zenodo_link: https://zenodo.org/records/10986248
 questions:
 - How to load large protein AI models?
-- How to fine-tune such models on downstream tasks such as post-translational site prediction?
+- How to fine-tune such models on downstream tasks such as post-translational site
+  prediction?
 objectives:
 - Learn to load and use large protein models from HuggingFace
 - Learn to fine-tune them on specific tasks such as predicting dephosphorylation sites
 requirements:
-  -
-    type: internal
-    topic_name: galaxy-interface
-    tutorials:
-      - jupyterlab
-  -
-    type: internal
-    topic_name: statistics
-    tutorials:
-      - gpu_jupyter_lab
+- type: internal
+  topic_name: galaxy-interface
+  tutorials:
+  - jupyterlab
+- type: internal
+  topic_name: statistics
+  tutorials:
+  - gpu_jupyter_lab
 time_estimation: 1H
 tags:
 - interactive-tools
@@ -30,8 +28,21 @@ tags:
 - dephosphorylation-site-prediction
 contributors:
 - anuprulez
+recordings:
+- youtube_id: QTXdcsYaLlE
+  length: 35M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-08-29'
+  speakers:
+  - anuprulez
+  captioners:
+  - anuprulez
+  bot-timestamp: 1724930837
+
 
 ---
+
+
 
 The advent of [large language models](https://en.wikipedia.org/wiki/Large_language_model) has transformed the field of natural language processing, enabling machines to comprehend and generate human-like language with unprecedented accuracy. Pre-trained language models, such as [BERT](https://arxiv.org/abs/1810.04805), [RoBERTa](https://arxiv.org/abs/1907.11692), and their variants, have achieved state-of-the-art results on various tasks, from sentiment analysis and question answering to language translation and text classification. Moreover, the emergence of transformer-based models, such as Generative Pre-trained Transformer ([GPT](https://openai.com/index/gpt-2-1-5b-release/)) and its variants, has enabled the creation of highly advanced language models to generate coherent and context-specific text. The latest iteration of these models, [ChatGPT](https://openai.com/index/chatgpt/), has taken the concept of conversational AI to new heights, allowing users to engage in natural-sounding conversations with machines. However, despite their impressive capabilities, these models are imperfect, and their performance can be significantly improved through fine-tuning. Fine-tuning involves adapting the pre-trained model to a specific task or domain by adjusting its parameters to optimise its performance on a target dataset. This process allows the model to learn task-specific features and relationships that may not be captured by the pre-trained model alone, resulting in highly accurate and specialised language models that can be applied to a wide range of applications. In this tutorial, we will discuss and fine-tune large language model trained on protein sequences [ProtT5](https://github.com/agemagician/ProtTrans/tree/master/Fine-Tuning), exploring the benefits and challenges of this approach, as well as the various techniques and strategies such as low ranking adaptations (LoRA) that can be employed to fit large language models with billions of parameters on regular GPUs. [Protein large language models](https://ieeexplore.ieee.org/document/9477085) (LLMs) represent a significant advancement in Bioinformatics, leveraging the power of deep learning to understand and predict the behaviour of proteins at an unprecedented scale. These models, exemplified by the [ProtTrans](https://github.com/agemagician/ProtTrans) suite, are inspired by natural language processing (NLP) techniques, applying similar methodologies to biological sequences. ProtTrans models, including BERT and T5 adaptations, are trained on vast datasets of protein sequences from databases such as [UniProt](https://www.uniprot.org/) and [BFD](https://bfd.mmseqs.com/), storing millions of protein sequences and enabling them to capture the complex patterns and functions encoded within amino acid sequences. By interpreting these sequences much like languages, protein LLMs offer transformative potential in drug discovery, disease understanding, and synthetic biology, bridging the gap between computational predictions and experimental biology. In this tutorial, we will fine-tune the ProtT5 pre-trained model for [dephosphorylation](https://en.wikipedia.org/wiki/Dephosphorylation) site prediction, a binary classification task.
 
