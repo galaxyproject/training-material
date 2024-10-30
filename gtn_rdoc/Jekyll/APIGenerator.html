@@ -121,7 +121,7 @@
 </dd></dl>
 
           <div class="method-source-code" id="generate-source">
-            <pre><span class="ruby-comment"># File _plugins/api.rb, line 119</span>
+            <pre><span class="ruby-comment"># File _plugins/api.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">generate</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">generateConfiguration</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-comment"># For some reason the templating isn&#39;t working right here.</span>
@@ -215,7 +215,6 @@
     <span class="ruby-identifier">out</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">dup</span>
     <span class="ruby-identifier">out</span>[<span class="ruby-string">&#39;materials&#39;</span>] = <span class="ruby-constant">TopicFilter</span>.<span class="ruby-identifier">topic_filter</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">topic</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">q</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">dup</span>
-      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;url&#39;</span>]
       <span class="ruby-identifier">q</span>[<span class="ruby-string">&#39;contributors&#39;</span>] = <span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Contributors</span>.<span class="ruby-identifier">get_contributors</span>(<span class="ruby-identifier">q</span>).<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">mapContributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
       <span class="ruby-keyword">end</span>
@@ -419,7 +418,6 @@
   <span class="ruby-identifier">page2</span> = <span class="ruby-constant">PageWithoutAFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;api/&#39;</span>, <span class="ruby-string">&#39;data-library.yaml&#39;</span>)
   <span class="ruby-identifier">data_libraries</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-string">&#39;topics/**/data-library.yaml&#39;</span>)
   <span class="ruby-identifier">data_libraries</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">x</span>) }
-  <span class="ruby-identifier">pp</span> <span class="ruby-identifier">data_libraries</span>
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">content</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">pretty_generate</span>(<span class="ruby-constant">Gtn</span><span class="ruby-operator">::</span><span class="ruby-constant">Git</span>.<span class="ruby-identifier">discover</span>)
   <span class="ruby-identifier">page2</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;layout&#39;</span>] = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">pages</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">page2</span>
