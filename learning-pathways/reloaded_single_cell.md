@@ -38,7 +38,7 @@ pathway:
       - name: alevin-commandline
         topic: single-cell
 
-  - section: "Module 2: Generating cluster plots"
+  - section: "Module 3: Generating cluster plots"
     description: |
               These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Python (Scanpy) or R (Seurat) tutorial.
     tutorials:
