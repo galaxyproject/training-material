@@ -47,7 +47,7 @@ pathway:
       - name: scrna-case_FilterPlotandExploreRStudio
         topic: single-cell
 
-  - section: "Module 3: Inferring trajectories"
+  - section: "Module 4: Inferring trajectories"
     description: |
               This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset. Again, you can choose whether to follow the Python (Scanpy) or R (Monocle) tutorial.
     tutorials:
