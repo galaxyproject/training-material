@@ -148,7 +148,7 @@ It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGC
 >
 > 1. Which ASCII character corresponds to the worst Phred score for Illumina 1.8+?
 > 2. What is the Phred quality score of the 3rd nucleotide of the 1st sequence?
-> 3. How to calculate the accuracy of the nucleotide base with the ASCII code /?
+> 3. How to calculate the accuracy of the nucleotide base with the ASCII code `/`?
 > 4. What is the accuracy of this 3rd nucleotide?
 >
 > > <solution-title></solution-title>
