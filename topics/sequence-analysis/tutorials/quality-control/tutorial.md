@@ -160,7 +160,7 @@ It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGC
        P = 10 -Q/10
        Probability of error = 10-14/10 = 0.03981
        Therefore Accuracy = 100 - 0.03981 = 99.96%
-> > 4. The corresponding nucleotide `G` has an accuracy of almost 99.99%
+> > 4. The corresponding nucleotide `G` has an accuracy of almost 99.96%
 > >
 > {: .solution }
 {: .question}
