@@ -1,11 +1,10 @@
 ---
 title: Using answer key histories
-layout: faq
 area: learners
+layout: faq
 box_type: tip
 google_form_id: 1728648609
-contributors:
-- nomadscientist
+contributors: [nomadscientist]
 ---
 
 If you are struggling with a tutorial and you can't figure out why, you can use the answer history (if it's available) which is linked at the top of the tutorial.
