@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@3b04f69d0ed7c2b1f7b1522c736ccfcd38f375c3",
+		release: "galaxy-training-network@644587771272072a106db81d8cb5b15ade4bf60d",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Applying single-cell RNA-seq analysis">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-03-07 16:22:08 +0000"><meta name="description" content="Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.  The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.  For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions! ">
+<meta name="DC.date" content="2024-10-30 14:54:23 +0000"><meta name="description" content="Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.  The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.  For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions! ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Learning Pathway: Applying single-cell RNA-seq analysis">
         <meta property="og:description" content="Gone is the pre-annotated, high quality tutorial data - now you have real, messy data to deal with. You have decisions to make and parameters to decide. This learning pathway challenges you to replicate a published analysis as if this were your own dataset. You will be introduced to a few more tools available for scRNA-seq in Galaxy. Finally, if our tool offerings are not enough for you, you will be directed towards how to use coding notebooks within Galaxy, setting you up to analyse scRNA-seq in R or python notebooks.  The data is messy. The decisions are tough. The interpretation is meaningful. Come here to advance your single cell skills! Note that you get two options for inferring trajectories.  For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions! ">
@@ -232,6 +232,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "Identify decision-making points",
     "Appraise data outputs and decisions",
     "Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process",
+    "Interpret quality control plots to direct parameter decisions",
+    "Repeat analysis from matrix to clustering to labelling clusters",
+    "Identify decision-making points",
+    "Appraise data outputs and decisions",
+    "Explain why single cell analysis is an iterative process (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly)",
     "Execute multiple plotting methods designed to identify lineage relationships between cells",
     "Interpret these plots",
     "Identify which operations to perform on an AnnData object to obtain the files needed for Monocle",
@@ -351,17 +356,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "syllabusSections": [
     {
       "@type": "Syllabus",
-      "name": "Module 1: Case study",
-      "description": "These tutorials take you from raw scRNA sequencing reads to cell cluster plots to replicate a published analysis.\n"
+      "name": "Module 1: Preparing the dataset",
+      "description": "This tutorial takes you from the large files containing raw scRNA sequencing reads to a smaller, combined cell matrix.\n"
     },
     {
       "@type": "Syllabus",
-      "name": "Module 2: Inferring trajectories",
-      "description": "This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Note that you get two options for inferring trajectories, you can choose either.\n"
+      "name": "Module 2: Generating cluster plots",
+      "description": "These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Scanpy or Seurat tutorials - they will accomplish the same thing and generate the same results, so follow whichever you prefer!\n"
     },
     {
       "@type": "Syllabus",
-      "name": "Module 3: Moving into coding environments",
+      "name": "Module 3: Inferring trajectories",
+      "description": "This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Again, you get two options for inferring trajectories, and you can choose either.\n"
+    },
+    {
+      "@type": "Syllabus",
+      "name": "Module 4: Moving into coding environments",
       "description": "Did you know Galaxy can host coding environments? They don't have the same level of computational power as the easy-to-use Galaxy tools, but you can unlock the full freedom in your data analysis. You can install your favourite single-cell tool suite that is not available on Galaxy, export your data into these coding environments and run your analysis there. If you want your favourite tool suite as a Galaxy tool, you can always request [here](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing). Let's start with the basics of running these environments in Galaxy.\n"
     },
     {
@@ -370,7 +380,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       "description": "And now you're done! If you are interested in trying out the case study analyses in a coding environment, try out our [\"Case study: Reloaded\" series](/training-material/topics/single-cell#st-single-cell-cs-code) next! Otherwise, you will find more features, tips and tricks in our general [Galaxy Single-cell Training page](/training-material/topics/single-cell/index.html).\n"
     }
   ],
-  "dateModified": "2024-03-07 16:22:08 +0000",
+  "dateModified": "2024-10-30 14:54:23 +0000",
   "datePublished": "2024-03-07 16:22:08 +0000",
   "isAccessibleForFree": true,
   "offers": [
@@ -422,8 +432,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 
     
-        <h3 id="st-module-1-case-study">Module 1: Case study</h3>
-        <p><p>These tutorials take you from raw scRNA sequencing reads to cell cluster plots to replicate a published analysis.</p>
+        <h3 id="st-module-1-preparing-the-dataset">Module 1: Preparing the dataset</h3>
+        <p><p>This tutorial takes you from the large files containing raw scRNA sequencing reads to a smaller, combined cell matrix.</p>
 </p>
 
 	
@@ -474,11 +484,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffaeba; --color-darker: #ff8b9f; --color-dimmed: #ff9dad;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00dad7; --color-darker: #00c2c0; --color-dimmed: #00cecb;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #7fdb00; --color-darker: #70c300; --color-dimmed: #78cf00;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
               
             
             </div>
@@ -771,11 +781,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffaeba; --color-darker: #ff8b9f; --color-dimmed: #ff9dad;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00dad7; --color-darker: #00c2c0; --color-dimmed: #00cecb;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #7fdb00; --color-darker: #70c300; --color-dimmed: #78cf00;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
               
             
             </div>
@@ -1027,287 +1037,6 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
       
     
     <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/recordings/" title="View all recordings for this tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
-    </li>
-
-  </ul>
-
-  
-</div>
-  
-
-
- </td>
-
-          
-
-          
-          <!-- not custom session -->
-         </tr>
-       
-    
-        <!-- MAT: single-cell/scrna-case_basic-pipeline -->
-      
-      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
-
-        <tr>
-          
-          
-
-          
-          <td class="tutorial_title">
-            
-            
-            <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
-                Filter, plot and explore single-cell RNA-seq data with Scanpy
-            </a>
-            
-
-
-            <div class="extra">
-            
-            
-              
-              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffaeba; --color-darker: #ff8b9f; --color-dimmed: #ff9dad;" title="Click to show all tutorials tagged 10x">10x</a>
-              
-              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00dad7; --color-darker: #00c2c0; --color-dimmed: #00cecb;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
-              
-              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #7fdb00; --color-darker: #70c300; --color-dimmed: #78cf00;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
-              
-            
-            </div>
-
-            <div class="duplicate" style="display: none;">
-              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
-              
-
-
-
-<!-- video slides -->
-
-
-              
-    <div class="btn-group">
-        <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html" class="btn btn-default" title="Follow the tutorial">
-            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-        <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Deutsch
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Español
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			中文
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Français
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			日本語
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Português
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			العربية
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			More Languages
-		</a>
-	</li>
-    </ul>
-</div>
-
-
-              
-
-
-
-
-
-
-
-
-
-
-
-<div class="btn-group">
-
-
-  <!-- dropdown with all recordings -->
-  <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
-        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
-  </a>
-
-
-  <ul class="dropdown-menu">
-    
-
-    
-      
-      
-      
-    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 30m</a>
-    </li>
-      
-    
-    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" title="View all recordings for this tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
-    </li>
-
-  </ul>
-
-  
-</div>
-  
-
-
-
-
-              
-
-              
-              </div>
-            </div>
-          </td>
-
-          <td> 
-
-
-
-<!-- video slides -->
-
- </td>
-          <td> 
-    <div class="btn-group">
-        <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html" class="btn btn-default" title="Follow the tutorial">
-            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
-        </a>
-        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
-            <span class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-        
-        
-        <li class="dropdown-item"><strong>Automatic translations</strong></li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Deutsch
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Español
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			中文
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Français
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			日本語
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			Português
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			العربية
-		</a>
-	</li>
-        
-	<li class="dropdown-item">
-		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
-			More Languages
-		</a>
-	</li>
-    </ul>
-</div>
-
- </td>
-          <td> 
-
-
-
-
-
-
-
-
-
-
-
-<div class="btn-group">
-
-
-  <!-- dropdown with all recordings -->
-  <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
-        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
-  </a>
-
-
-  <ul class="dropdown-menu">
-    
-
-    
-      
-      
-      
-    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
-                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 30m</a>
-    </li>
-      
-    
-    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" title="View all recordings for this tutorial">
                 <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
     </li>
 
@@ -1351,8 +1080,556 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
     
-        <h3 id="st-module-2-inferring-trajectories">Module 2: Inferring trajectories</h3>
-        <p><p>This isn’t strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Note that you get two options for inferring trajectories, you can choose either.</p>
+        <h3 id="st-module-2-generating-cluster-plots">Module 2: Generating cluster plots</h3>
+        <p><p>These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Scanpy or Seurat tutorials - they will accomplish the same thing and generate the same results, so follow whichever you prefer!</p>
+</p>
+
+	
+        
+	
+
+
+
+<table class="table table-responsive table-striped tutorials-list">
+  <thead>
+    <tr>
+      
+      
+      <th scope="col">Lesson</th>
+      <th scope="col" title="Lecture for this training. May include a video version using automated text-to-speech.">Slides</th>
+      <th scope="col" title="Practical tutorial guiding you through an analysis step by step.">Hands-on</th>
+      <th scope="col" title="Recordings of various instructors teaching this tutorial. May use an outdated version of the tutorial.">Recordings</th>
+      
+
+      
+
+      
+    </tr>
+  </thead>
+  <tbody class="list">
+
+  
+  
+        <!-- MAT: single-cell/scrna-case_basic-pipeline -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">
+                Filter, plot and explore single-cell RNA-seq data with Scanpy
+            </a>
+            
+
+
+            <div class="extra">
+            
+            
+              
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
+              
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 30m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+
+
+<div class="btn-group">
+
+
+  <!-- dropdown with all recordings -->
+  <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Latest recordings of this material in the GTN Video Library">
+        <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span>
+  </a>
+
+
+  <ul class="dropdown-menu">
+    
+
+    
+      
+      
+      
+    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/index.html#tutorial-recording-15-february-2021" title="View the recording for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> Tutorial (February 2021) - 30m</a>
+    </li>
+      
+    
+    <li><a class="dropdown-item" href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/recordings/" title="View all recordings for this tutorial">
+                <i class="fas fa-video" aria-hidden="true"></i><span class="visually-hidden">video</span> View All</a>
+    </li>
+
+  </ul>
+
+  
+</div>
+  
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+        <!-- MAT: single-cell/scrna-case_FilterPlotandExplore_SeuratTools -->
+      
+      <!-- show materials that are not in draft mode, unless we are in a dev environment or on a draft page such as a learning pathway or topic -->
+
+        <tr>
+          
+          
+
+          
+          <td class="tutorial_title">
+            
+            
+            <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html">
+                Filter, plot, and explore single cell RNA-seq data with Seurat
+            </a>
+            
+
+
+            <div class="extra">
+            
+            
+              
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
+              
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              
+            
+            </div>
+
+            <div class="duplicate" style="display: none;">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
+              
+
+
+
+<!-- video slides -->
+
+
+              
+    <div class="btn-group">
+        <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+
+              
+
+
+
+
+
+
+
+
+
+
+
+              
+
+              
+              </div>
+            </div>
+          </td>
+
+          <td> 
+
+
+
+<!-- video slides -->
+
+ </td>
+          <td> 
+    <div class="btn-group">
+        <a href="/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html" class="btn btn-default" title="Follow the tutorial">
+            <i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span>
+        </a>
+        <a href="#" class="btn btn-default dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Follow the tutorial in a different language">
+            <span class="sr-only">Toggle Dropdown</span>
+        </a>
+        <ul class="dropdown-menu">
+        
+        
+        <li class="dropdown-item"><strong>Automatic translations</strong></li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="de" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Deutsch
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="es" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Español
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="zh-CN" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=zh-CN&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			中文
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="fr" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Français
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ja" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=ja&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			日本語
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="pt" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=pt&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			Português
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" hreflang="ar" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=ar&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			العربية
+		</a>
+	</li>
+        
+	<li class="dropdown-item">
+		<a class="dropdown-item" href="https://training-galaxyproject-org.translate.goog/training-material/topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html?_x_tr_sl=en&_x_tr_tl=fr&_x_tr_hl=en&_x_tr_pto=wapp" title="">
+			More Languages
+		</a>
+	</li>
+    </ul>
+</div>
+
+ </td>
+          <td> 
+
+
+
+
+
+
+
+
+
+ </td>
+
+          
+
+          
+          <!-- not custom session -->
+         </tr>
+       
+    
+  </tbody>
+</table>
+
+
+<style>
+@media (max-width:767px) {
+    table.table.table-responsive.tutorials-list  {
+        display: inline-table;
+    }
+    .tutorials-list tr th:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list tr td:not(:first-child) {
+        display: none;
+    }
+    .tutorials-list .duplicate {
+        display: unset !important;
+    }
+}
+</style>
+
+
+	
+    
+        <h3 id="st-module-3-inferring-trajectories">Module 3: Inferring trajectories</h3>
+        <p><p>This isn’t strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Again, you get two options for inferring trajectories, and you can choose either.</p>
 </p>
 
 	
@@ -1403,11 +1680,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffaeba; --color-darker: #ff8b9f; --color-dimmed: #ff9dad;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00dad7; --color-darker: #00c2c0; --color-dimmed: #00cecb;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #7fdb00; --color-darker: #70c300; --color-dimmed: #78cf00;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
               
             
             </div>
@@ -1616,11 +1893,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffaeba; --color-darker: #ff8b9f; --color-dimmed: #ff9dad;" title="Click to show all tutorials tagged 10x">10x</a>
+              <a href="/training-material/search2.html?query=10x" class="label label-default tutorial_tag" style="--color-primary: #ffb2bd; --color-darker: #ff90a2; --color-dimmed: #ffa1b0;" title="Click to show all tutorials tagged 10x">10x</a>
               
-              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00dad7; --color-darker: #00c2c0; --color-dimmed: #00cecb;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
+              <a href="/training-material/search2.html?query=paper-replication" class="label label-default tutorial_tag" style="--color-primary: #00ddda; --color-darker: #00c5c2; --color-dimmed: #00d1ce;" title="Click to show all tutorials tagged paper-replication">paper-replication</a>
               
-              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #7fdb00; --color-darker: #70c300; --color-dimmed: #78cf00;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
+              <a href="/training-material/search2.html?query=MIGHTS" class="label label-default tutorial_tag" style="--color-primary: #81de00; --color-darker: #72c500; --color-dimmed: #79d100;" title="Click to show all tutorials tagged MIGHTS">MIGHTS</a>
               
             
             </div>
@@ -1899,7 +2176,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
     
-        <h3 id="st-module-3-moving-into-coding-environments">Module 3: Moving into coding environments</h3>
+        <h3 id="st-module-4-moving-into-coding-environments">Module 4: Moving into coding environments</h3>
         <p><p>Did you know Galaxy can host coding environments? They don’t have the same level of computational power as the easy-to-use Galaxy tools, but you can unlock the full freedom in your data analysis. You can install your favourite single-cell tool suite that is not available on Galaxy, export your data into these coding environments and run your analysis there. If you want your favourite tool suite as a Galaxy tool, you can always request <a href="https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing">here</a>. Let’s start with the basics of running these environments in Galaxy.</p>
 </p>
 
@@ -1951,7 +2228,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffb194; --color-darker: #ff915a; --color-dimmed: #ffa27a;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search2.html?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffb59b; --color-darker: #ff9562; --color-dimmed: #ffa581;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2365,7 +2642,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
             
             
               
-              <a href="/training-material/search2.html?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffb194; --color-darker: #ff915a; --color-dimmed: #ffa27a;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
+              <a href="/training-material/search2.html?query=interactive-tools" class="label label-default tutorial_tag" style="--color-primary: #ffb59b; --color-darker: #ff9562; --color-dimmed: #ffa581;" title="Click to show all tutorials tagged interactive-tools">interactive-tools</a>
               
             
             </div>
@@ -2660,7 +2937,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/3b04f69d0ed7c2b1f7b1522c736ccfcd38f375c3">3b04f69</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/644587771272072a106db81d8cb5b15ade4bf60d">6445877</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
