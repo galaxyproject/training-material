@@ -106,7 +106,6 @@ module Jekyll
       page2 = PageWithoutAFile.new(site, '', 'api/', 'data-library.yaml')
       data_libraries = Dir.glob('topics/**/data-library.yaml')
       data_libraries.map! { |x| YAML.load_file(x) }
-      pp data_libraries
       page2.content = JSON.pretty_generate(Gtn::Git.discover)
       page2.data['layout'] = nil
       site.pages << page2
@@ -209,7 +208,6 @@ module Jekyll
         out = site.data[topic].dup
         out['materials'] = TopicFilter.topic_filter(site, topic).map do |x|
           q = x.dup
-          puts q['url']
           q['contributors'] = Gtn::Contributors.get_contributors(q).dup.map do |c|
             mapContributor(site, c)
           end
