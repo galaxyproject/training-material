@@ -4,8 +4,7 @@ layout: faq
 area: data upload
 box_type: tip
 google_form_id: 1730224450
-contributors:
-- hexhowells
+contributors: [hexhowells]
 ---
 This section will guide you through generating external links to your data stored in the Sierra LIMS system to be downloaded directly into Galaxy.
 

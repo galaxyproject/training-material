@@ -4,8 +4,7 @@ layout: faq
 area: tools
 box_type: tip
 google_form_id: 1728577286
-contributors:
-- nomadscientist
+contributors: [nomadscientist]
 ---
 To request tools that already exist in the [Galaxy toolshed](https://toolshed.g2.bx.psu.edu), but not in your server, please raise an issue at:
 

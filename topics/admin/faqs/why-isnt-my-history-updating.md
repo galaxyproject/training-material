@@ -4,8 +4,7 @@ layout: faq
 area: debugging
 box_type: tip
 google_form_id: 1729851011
-contributors:
-- hexylena
+contributors: [hexylena]
 ---
 Have you ever experienced that you would submit a job but your history wouldn't update? Maybe it doesn't scroll or the datasets stay permanently grey even when you know they should be complete, *until you refresh the webpage*?
 
