@@ -6,6 +6,7 @@ box_type: tip
 google_form_id: 1730224450
 contributors: [hexhowells]
 ---
+
 This section will guide you through generating external links to your data stored in the Sierra LIMS system to be downloaded directly into Galaxy.
 
 1. Go to the [Sierra portal](https://www.bioinformatics.babraham.ac.uk/sierra/sierra.pl) and login to your account.
