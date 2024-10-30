@@ -7,6 +7,7 @@ google_form_id: 1728648609
 contributors:
 - nomadscientist
 ---
+
 If you are struggling with a tutorial and you can't figure out why, you can use the answer history (if it's available) which is linked at the top of the tutorial.
 
 1. Select the *Answer history* and choose the appropriate link from the resulting drop-down menu.
@@ -16,4 +17,5 @@ If you are struggling with a tutorial and you can't figure out why, you can use 
  If you can't find what has gone wrong, you can then: 5. [Ask for help] ({% link faqs/gtn/instructors_getting_help.md %}).
 
 6. [Copy the necessary datasets over from the answer history into your history]({% link faqs/galaxy/histories_copy_dataset.md %}) so that you can continue your analysis from wherever you got stuck!
+
 <!-- It would be awesome if this was automatically added to any tutorial that has answer key histories -->
