@@ -76,6 +76,11 @@ module Jekyll
       end
 
       site.pages.each do |t|
+        # Skip Symlinks
+        if t.data['symlink']
+          next
+        end
+
         # Tutorials
         pusher(t, tutorials_by_author, false) if t['layout'] == 'tutorial_hands_on'
 
