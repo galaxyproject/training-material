@@ -11,7 +11,7 @@ require './_plugins/util'
 url = 'https://docs.google.com/spreadsheets/d/1RFF3G9_bP8EpfACBk8lnF-Ib43ZGGAMm3ewPwW7eFT0/export?format=tsv'
 data = `curl -sL "#{url}"`
 
-data = CSV.parse(data, col_sep: "\t", headers: true, quote_char: '|')
+data = CSV.parse(data, col_sep: "\t", headers: true)
 count = 0
 
 data.each do |row|
