@@ -3,7 +3,7 @@ title: How can I get my container requiring jobs to run in a container?
 area: galaxy
 box_type: tip
 layout: faq
-contributors: [hexylena]
+contributors: [hexylena, thanhleviet]
 ---
 
 Some tools will only run in a container, i.e. they have a container defined in the 'requirements' section of the tool's XML file.
@@ -15,7 +15,7 @@ You can resolve this by configuring your job conf to have destinations that supp
 
 The destination must have `docker_enabled` (Or `singularity_enabled`), and you can consider adding `require_container` to make sure the job will fail if the container isn't available. The `docker_volumes` string will allow you to control which volumes are attached to that container;
 
-In TPV this would look like:
+In TPV configuration (provided by @gtn:thanhleviet) this would look like:
 
 ```yaml
   docker:
