@@ -61,6 +61,7 @@ module Jekyll
       news_by_author = Hash.new { |hash, key| hash[key] = [] }
       events_by_author = Hash.new { |hash, key| hash[key] = [] }
       videos_by_author = Hash.new { |hash, key| hash[key] = [] }
+      faqs_by_author = Hash.new { |hash, key| hash[key] = [] }
       has_philosophy = Hash.new { false }
 
       prs_by_author = Hash.new { |hash, key| hash[key] = [] }
@@ -84,6 +85,8 @@ module Jekyll
         end
 
         pusher(t, events_by_author, false) if t['layout'] == 'event'
+
+        pusher(t, faqs_by_author, false) if t['layout'] == 'faq'
 
         t.data.fetch('recordings', []).each do |r|
           r.fetch('captioners', []).each { |ent| videos_by_author[ent].push([t, 'captioner', r]) }
@@ -121,6 +124,7 @@ module Jekyll
         page2.data['learning_pathways'] = learning_pathways_by_author[contributor]
         page2.data['events'] = events_by_author[contributor].group_by{|x| x[0] }.map{|k, v| [k, v.map{|vv| vv[1]}.compact]}
         page2.data['videos'] = videos_by_author[contributor].group_by{|x| x[0] }.map{|k, v| [k, v.map{|vv| vv[1]}.uniq.compact]}
+        page2.data['faqs'] = faqs_by_author[contributor].group_by{|x| x[0] }.map{|k, v| [k, v.map{|vv| vv[1]}.uniq.compact]}
 
         page2.data['tutorials_count'] = tutorials_by_author[contributor].length
         page2.data['slides_count'] = slides_by_author[contributor].length
@@ -128,6 +132,7 @@ module Jekyll
         page2.data['learning_pathways_count'] = learning_pathways_by_author[contributor].length
         page2.data['events_count'] = events_by_author[contributor].length
         page2.data['videos_count'] = videos_by_author[contributor].length
+        page2.data['faqs_count'] = faqs_by_author[contributor].length
 
         page2.data['editors'] = TopicFilter.enumerate_topics(site).select do |t|
           t.fetch('editorial_board', []).include?(contributor)
