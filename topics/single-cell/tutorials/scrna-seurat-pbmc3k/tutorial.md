@@ -53,7 +53,7 @@ Clustering is typically the first type of analysis we will perform on a single c
 >
 > This tutorial is based on the [Seurat - Guided Clustering Tutorial](https://satijalab.org/seurat/articles/pbmc3k_tutorial). The SCTransform sections also draw from the [Using sctransform in Seurat](https://satijalab.org/seurat/articles/sctransform_vignette.html) tutorial.
 >
-> {: .comment}
+{: .comment}
 
 > <agenda-title></agenda-title>
 >
@@ -449,18 +449,19 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > <solution-title></solution-title>
 > > 1. We can check the list of the top variable genes in our history by clicking on the {% icon galaxy-eye %} or see them on our variable features plot. The ten most variable genes will depend on whether you used the separate preprocessing steps or SCTransform.
 > > 
-> > |    | Separate Preprocessing Steps  | SCTransform |
-> > |----|-------------------------------|-------------|
-> > | 1  | PPBP                          | S100A9      |
-> > | 2  | S100A9                        | GNLY        |
-> > | 3  | LYZ                           | LYZ         |
-> > | 4  | IGLL5                         | S100A8      |
-> > | 5  | GNLY                          | NKG7        |
-> > | 6  | FTL                           | FTL         |
-> > | 7  | PF4                           | GZMB        |
-> > | 8  | FTH1                          | IGLL5       |
-> > | 9  | GNG11                         | FTH1        |
-> > | 10 | FCER1A                        | CCL5        |
+> > > |    | Separate Preprocessing Steps  | SCTransform |
+> > > |----|-------------------------------|-------------|
+> > > | 1  | PPBP                          | S100A9      |
+> > > | 2  | S100A9                        | GNLY        |
+> > > | 3  | LYZ                           | LYZ         |
+> > > | 4  | IGLL5                         | S100A8      |
+> > > | 5  | GNLY                          | NKG7        |
+> > > | 6  | FTL                           | FTL         |
+> > > | 7  | PF4                           | GZMB        |
+> > > | 8  | FTH1                          | IGLL5       |
+> > > | 9  | GNG11                         | FTH1        |
+> > > | 10 | FCER1A                        | CCL5        |
+> > {: .matrix}
 > >
 > > > <comment-title></comment-title>
 > > > If you used `SCTransform` for preprocessing, then you'll end up with a slightly different list of highly variable genes. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` also returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableFeatures`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
@@ -973,6 +974,7 @@ We don't have a cluster column this time as we were only testing one group again
 > > > | 3  | CD3D |
 > > > | 4  | IL7R |
 > > > | 5  | LDHB |
+> > {: .matrix}
 > > We can look at the third column, avg_log2FC to see if these are positive or negative markers. Although we didn't limit this test to positive markers, we can see that the avg_log2FC for the five top markers is positive, which means these are all positive markers for cluster 2. Expression of these genes was higher in cluster 2 than in the rest of the dataset.
 > > 2. If we go back to the markers table from the `FindAllMarkers` step above and then scroll down to the cluster 2 results (starting on line 2189!) we will see the same top five markers for this cluster. Since we used `FindMarkers` to test cluster 2 against all the rest of the data, we actually performed the same test that `FindAllMarkers` does for each cluster in turn. The only difference is that we previously limited `FindAllMarkers` to positive markers only. We don't see a difference in the top five markers as these all happened to be positive markers for cluster 2, but if we keep looking down the marker tables we'll start to see differences as the negative markers we just found for cluster 2 using `FindMarkers` won't appear in our `FindAllMarkers` table. If we hadn't limited that test to positive markers, then we wouldn't see any differences.
 >>
@@ -1006,6 +1008,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 > > > | 3  | CFD           |
 > > > | 4  | CD68          |
 > > > | 5  | RP11-290F20.3 |
+> > {: .matrix}
 > >
 > > 2. If we go back to our `FindAllMarkers` table, we'll see that these aren't exactly the same as the top five markers for cluster 5 when we compared it to all of the rest of the dataset. Only two of these markers are in the top five of both lists, although we can find the other genes further down in the table if we look.
 > > We wouldn't expect to see the same results because we're now looking for differences specifically between cluster 5 and clusters 0 and 3. The genes that `FindAllMarkers` identified as differentiating cluster 5 from all of the other clusters might not be best at differentiating it specifically from clusters 0 and 3 - some of those markers could actually be expressed by all three of these clusters.
@@ -1045,6 +1048,7 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 > > > | 3  | RPL27 |
 > > > | 4  | RPS32 |
 > > > | 5  | RPS14 |
+> > {: .matrix}
 > >
 > > Many of the top markers (including all of the top five) have names starting with RP. In humans, this gene naming patterns indicates that they are ribosomal genes (encoding proteins or RNAs that form ribosomes). Cluster 0 might represent a group of cells that are very busy making new proteins using all these ribosomes. If we expect our data to include a cell type that has lots of ribosomes, then this could be a sign that they've formed their own cluster, so we'll be happy with this result (this is actually the case here, as we'll see in the next section). 
 > > However, if we don't expect to see differences in ribosomal content between cells, then we might suspect that we've ended up with a cluster based on ribosomal RNA content rather than on cell type. In this case, we might want to go back to the QC steps. We could score the cells for `percent.ribo` in the same way we did for `percent.mt`. We could then filter out cells with unusually high proportions of ribosomal genes or regress out the variation associated with this characteristic during the scaling step. Just as when we're filtering cells by mitochondrial RNA proportions, we would need to think carefully about this - we wouldn't want to eliminate a cell type just because it has higher proportions of ribosomal genes, which is what we could end up doing if we tried it with this particular dataset.
@@ -1114,6 +1118,7 @@ To begin, we'll need a list of these canonical markers for PBMCs. Let's use the 
 > | NK            | GNLY, NKG7    |
 > | DC            | FCER1A, CST3  |
 > | Platelet      | PPBP          |
+{: .matrix}
 
 The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If we look back at our table of the top 10 markers, we can see that this was actually the second gene in the list, so if we'd continued with the unsupervised approach we'd have ended up using the same gene to help identify our B cells. Both of these genes are actually very good markers for B cells, so some lists of B cell markers might suggest using CD79A rather than (or in addition to) MS4A1. If we plot the expression of both genes across our clusters, we should be able to see where our B cells are.
 
@@ -1164,6 +1169,7 @@ We'll use some additional T cell markers from the [original Seurat SCTransform](
 > | Naive CD8+ T         | CD8A, CCR7          |
 > | Memory CD8+ T        | CD8A, CCL5          |
 > | Effector CD8+ T      | CD8A, GZMK          |
+{: .matrix}
 
 Some of these patterns are clearer to see than others and we haven't plotted all of these T cell marker genes yet. The violin plots we just made can only help us identify Naive and Memory CD4+ T cells and CD8+ T cells as a whole, but we'll visualise the expression of these other T cell markers for the SCTransform route results below.
 
@@ -1277,22 +1283,22 @@ Based on our table of marker genes and these plots, we know which clusters were 
 > > <solution-title></solution-title>
 > > 1. Based on the expression of the known PBMC markers, we can assign the following cell types to our clusters: 
 > >
-> > | Cell Type            |Marker Genes       | Clusters (Separate Steps) | Clusters (SCTransform) |
-> > | ---------------------|-------------------|---------------------------|------------------------|
-> > | Naive CD4+ T         | IL7R, CCR7        |            0              |           2            |
-> > | CD14+ Mono           | CD14, LYZ         |            1              |           1            |
-> > | Memory CD4+ T        | IL7R, S100A4      |            2              |           0            |
-> > | B                    | MS4A1             |            3              |           3            |
-> > | CD8+ T               | CD8A              |            4              |        8, 7, 4         |
-> > | FCGR3A+ Mono         | FCGR3A, MS4A7     |            5              |           6            |
-> > | NK                   | GNLY, NKG7        |            6              |           5            |
-> > | DC                   | FCER1A, CST3      |            7              |           9            |
-> > | Platelet             | PPBP              |            8              |          11            |
-> > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |                           |          10            |
-> > | Naive CD8+ T         | CD8A, CCR7        |                           |          8             |
-> > | Memory CD8+ T        | CD8A, CCL5        |                           |          7             |
-> > | Effector CD8+ T      | CD8A, GZMK        |                           |          4             |
-> >
+> > > | Cell Type            |Marker Genes       | Clusters (Separate Steps) | Clusters (SCTransform) |
+> > > | ---------------------|-------------------|---------------------------|------------------------|
+> > > | Naive CD4+ T         | IL7R, CCR7        |            0              |           2            |
+> > > | CD14+ Mono           | CD14, LYZ         |            1              |           1            |
+> > > | Memory CD4+ T        | IL7R, S100A4      |            2              |           0            |
+> > > | B                    | MS4A1             |            3              |           3            |
+> > > | CD8+ T               | CD8A              |            4              |        8, 7, 4         |
+> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |            5              |           6            |
+> > > | NK                   | GNLY, NKG7        |            6              |           5            |
+> > > | DC                   | FCER1A, CST3      |            7              |           9            |
+> > > | Platelet             | PPBP              |            8              |          11            |
+> > > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |                           |          10            |
+> > > | Naive CD8+ T         | CD8A, CCR7        |                           |          8             |
+> > > | Memory CD8+ T        | CD8A, CCL5        |                           |          7             |
+> > > | Effector CD8+ T      | CD8A, GZMK        |                           |          4             |
+> > {: .matrix}
 > {: .solution}
 {: .question}
 
