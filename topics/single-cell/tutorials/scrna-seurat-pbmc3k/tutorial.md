@@ -1393,7 +1393,7 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 > 
 > 2. Rename the file as `Canonical Markers` when it has finished uploading and make sure the datatype is **tabular**
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md%}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 3. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
