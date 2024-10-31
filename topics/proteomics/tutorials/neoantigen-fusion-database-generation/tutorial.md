@@ -15,6 +15,7 @@ contributions:
   authorship:
     - subinamehta
     - katherine-d21
+    - jj-umn
   editing:
     - pratikdjagtap
     - timothygriffin
