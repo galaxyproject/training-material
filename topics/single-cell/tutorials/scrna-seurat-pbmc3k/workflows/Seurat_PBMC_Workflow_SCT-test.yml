@@ -1,0 +1,32 @@
+- doc: Test the Clustering 3k PBMCs with Seurat tutorial with SCTransform
+  job:
+    Matrix:
+    matrix.mtx:
+      class: File
+      location: https://zenodo.org/records/3581213/files/matrix.mtx
+      filetype: mtx
+    genes.tsv:
+      class: File
+      location: https://zenodo.org/records/3581213/files/genes.tsv
+      filetype: tsv
+    barcodes.tsv:
+      class: File
+      location: https://zenodo.org/records/3581213/files/barcodes.tsv
+      filetype: tsv
+    Canonical Markers SCT:
+      class: File
+      location: https://zenodo.org/records/14013638/files/Pasted_Entry.tabular
+      filetype: tabular
+  outputs:
+    Input 3k PBMC:
+      location: https://zenodo.org/records/14013638/files/Input_3k_PBMC.rds
+      compare: diff
+    Preprocessed Data:
+      location: https://zenodo.org/records/14013638/files/Galaxy11-Preprocessed_Data.rds
+      compare: diff
+    Annotated Clusters:
+      location: https://zenodo.org/records/14013638/files/Annotated_Clusters.rds
+      compare: diff
+    Input DE Markers:
+      location: https://zenodo.org/records/14013638/files/Input_DE_Markers.tabular
+      compare: diff
