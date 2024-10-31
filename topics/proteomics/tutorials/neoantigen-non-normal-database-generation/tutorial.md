@@ -1,54 +1,49 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen_Non-normal_Database_Generation
-zenodo_link: ''
+title: "Neoantigen 2: Non-normal-Database-Generation"
+zenodo_link: ""
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Why do we need to generate a customized fusion database for Proteogenomics research?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Downloading databases related to 16SrRNA data
+- For better neoantigen identification results.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Create a customized fusion proteomics database from 16SrRNA results.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-free]
+redirect_from:
+- /topics/proteomics/tutorials/neoantigen-1-fusion-database-generation/tutorial
 
 ---
 
 
 # Introduction
 
-<!-- This is a comment. -->
+Proteogenomics leverages mass spectrometry (MS)-based proteomics data alongside genomics and transcriptomics data to identify neoantigens—unique peptide sequences arising from tumor-specific mutations. In the initial section of this tutorial, we will construct a customized protein database (FASTA) using RNA-sequencing files (FASTQ) derived from tumor samples. Following this, we will conduct sequence database searches using the resultant FASTA file and MS data to identify peptides corresponding to novel proteoforms, specifically focusing on potential neoantigens. We will then assign genomic coordinates and annotations to these identified peptides and visualize the data, assessing both spectral quality and genomic localization.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored protein sequence databases, enabling the identification of protein sequence variants, including neoantigens, through mass spectrometry analysis ({% cite Chambers_2017 %}).
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
