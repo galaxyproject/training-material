@@ -1,54 +1,51 @@
 ---
 layout: tutorial_hands_on
 
-title: neoantigen-fusion-database-generation
-zenodo_link: ''
+title: "Neoantigen 1: Fusion-Database-Generation"
+zenodo_link: ""
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Why do we need to generate a customized fusion database for metaproteomics research?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Downloading databases related to 16SrRNA data
+- For better neoantigen identification results.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Create a customized fusion proteomics database from 16SrRNA results.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-TMT11]
+redirect_from:
+- /topics/proteomics/tutorials/neoantigen-fusion-database-generation/tutorial
 
 ---
 
 
 # Introduction
 
-<!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+A neoantigen is a novel peptide (protein fragment) that is produced by cancer cells due to mutations, including gene fusions, that alter the DNA sequence in a way that generates unique proteins not found in normal cells. Because these mutated proteins are unique to the tumor, they are recognized as "foreign" by the immune system. Neoantigens are valuable in immunotherapy because they can serve as specific targets for the immune system, allowing treatments to selectively attack cancer cells while sparing normal tissue. By stimulating an immune response specifically against these neoantigens, therapies like cancer vaccines or T-cell-based treatments can be developed to enhance the body’s natural defense mechanisms, making neoantigens a promising avenue for personalized cancer treatment.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+Creating a fusion database is essential in cancer genomics and personalized medicine, as it enables the identification of crucial biomarkers, enhances diagnostic accuracy, and supports therapeutic development. Gene fusions, where parts of two previously separate genes merge, can produce abnormal proteins that drive cancer. Cataloging these fusion events in a database helps researchers identify specific biomarkers linked to cancer types and design more targeted treatments. Additionally, fusion events may lead to unique peptide sequences, known as neoantigens, which are found only in cancer cells. These neoantigens can be targeted by the immune system, making fusion databases valuable in designing personalized immunotherapies like cancer vaccines or T-cell therapies. Some gene fusions also create oncogenic proteins that promote tumor growth, such as the BCR-ABL fusion in chronic myeloid leukemia. Including such information in a database aids in identifying potential therapeutic targets and predicting treatment efficacy. On the diagnostic side, known gene fusions serve as reliable markers, helping clinicians better classify cancer types and choose the most effective treatments. Finally, fusion databases provide a critical reference for researchers studying fusion mechanisms, their impact on disease progression, and their prevalence across cancers, ultimately fueling the discovery of novel treatments and therapies.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+To generate the fusion database, RNA star and Arriba tools are used in this workflow.
 
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -59,26 +56,30 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Neoantigen database generation
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+## Overview of Fusion Neoantigen Database Workflow
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+The workflow in this tutorial guides users through the generation of a fusion neoantigen database, covering key steps in bioinformatics to identify, filter, and prepare fusion-specific peptides for further immunological study. Below is an overview of each major stage:
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+### 1. Get Data
+The process begins with the upload and quality assessment of raw sequencing data, which is then uncompressed. This stage sets the groundwork for all subsequent analyses.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+### 2. Fusion Detection and Alignment
+RNA sequencing data undergoes alignment to a reference genome using tools like **RNA STAR**, followed by **Arriba** to detect fusion events. These tools identify gene fusions and help characterize the gene segments that combine to form new fusion genes.
 
-have fun!
+### 3. Filtering and Refinement
+After identifying fusions, various filters are applied to remove non-specific or common fusion events using blacklist data and other criteria. This step ensures that only relevant, unique fusion events are retained for neoantigen prediction.
+
+### 4. Peptide Sequence Extraction and Formatting
+Potential neoantigen peptides are extracted from the fusion gene sequences. Using tools such as **Text Reformatting** and **Tabular-to-FASTA**, the data is transformed into formats suitable for further immunological analysis.
+
+### 5. Final Database Formatting
+The workflow concludes by applying regex adjustments and formatting functions to standardize the output, creating a database of potential fusion neoantigens.
+
+### Summary
+This workflow provides a structured approach to preparing fusion neoantigen data for downstream applications, such as immunotherapy research, by making fusion-derived peptides accessible in a database for experimental or clinical exploration.
+
 
 ## Get data
 
@@ -111,97 +112,35 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Data preparation
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
 
-![Alternative text](../../images/image_name "Legend of the image")
+## **Convert compressed file to uncompressed.**
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+Uncompressing data is a crucial first step in many bioinformatics workflows because raw sequencing data files, especially from high-throughput sequencing, are often stored in compressed formats (such as `.gz` or `.zip`) to save storage space and facilitate faster data transfer. Compressed files need to be uncompressed to make the data readable and accessible for analysis tools, which generally require the data to be in plain text or other compatible formats. By uncompressing these files, we ensure that downstream applications can efficiently process and analyze the raw sequencing data without compatibility issues related to compression. We do that for both forward and reverse files.
 
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
+> <hands-on-title> Converting compressed to uncompressed </hands-on-title>
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
+>    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Convert compressed file to uncompressed.**
+>
+{: .hands_on}
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
 >    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Alignment with **RNA STAR**
 
-## Sub-step with **Convert compressed file to uncompressed.**
+**RNA STAR** (Spliced Transcripts Alignment to a Reference) is a high-performance tool used to align RNA sequencing (RNA-seq) reads to a reference genome. It identifies the best matches between RNA reads and genome sequences by detecting exon-exon junctions, which are critical for accurately mapping reads from spliced transcripts. RNA STAR uses a "two-pass" mapping approach that first identifies splice junctions across all reads and then uses these junctions to guide a more accurate alignment on the second pass. This capability is especially valuable for studying gene expression, discovering novel splice variants, and identifying fusion genes in cancer and other disease research. The output includes aligned sequences that can be used in subsequent steps of bioinformatics pipelines, such as fusion detection and differential expression analysis.
 
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
->    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RNA STAR**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Spliced transcripts Alignment to a human reference </hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy4) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
@@ -220,14 +159,6 @@ A big step can have several subsections or sub steps:
 >        - *"Configure seed, alignment and limits options"*: `Use parameters suggested for STAR-Fusion`
 >    - *"Compute coverage"*: `No coverage`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -247,9 +178,18 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Arriba**
+## Fusion detection with **Arriba**
 
-> <hands-on-title> Task description </hands-on-title>
+**Arriba** is a specialized tool used for detecting gene fusions from RNA sequencing (RNA-seq) data. It is particularly focused on identifying fusion events in cancer, where gene fusions can drive oncogenic processes. Arriba uses the output from **RNA STAR** alignments, specifically looking at chimeric alignments that result from fusion transcripts, and applies a series of filtering steps to reduce false positives. 
+
+Arriba’s pipeline includes features for:
+- Filtering out common artifacts and false-positive fusions based on blacklisted regions.
+- Annotating fusion breakpoints.
+- Generating a visualization of detected fusion events.
+
+The output includes a list of fusion candidates with key information like fusion partners, breakpoint locations, reading frames, and peptide sequences. Arriba’s results can provide insight into potential neoantigens, helping guide research into therapeutic targets or immune-based therapies for cancer.
+
+> <hands-on-title> Fusion detection </hands-on-title>
 >
 > 1. {% tool [Arriba](toolshed.g2.bx.psu.edu/repos/iuc/arriba/arriba/2.4.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"STAR Aligned.out.sam"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
@@ -264,14 +204,6 @@ A big step can have several subsections or sub steps:
 >    - *"Generate visualization"*: `Yes`
 >        - {% icon param-file %} *"Cytobands"*: `cytobands` (output of **Arriba Get Filters** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -291,9 +223,18 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Text reformatting**
+## **Text reformatting**
 
-> <hands-on-title> Task description </hands-on-title>
+**Text Reformatting** is a step used in bioinformatics workflows to manipulate and clean up data for easier downstream processing. In fusion detection workflows, text reformatting is often used to parse and restructure output files, making the data consistent and accessible for subsequent analysis steps.
+
+In this context, text reformatting may involve:
+- Extracting specific columns or fields from tabular outputs, such as gene names, breakpoint coordinates, or fusion peptide sequences.
+- Formatting peptide sequences and related information into specific columns or concatenating fields for unique identifiers.
+- Converting the data into a consistent format that downstream tools can interpret, such as converting tab-separated values into a structured layout for database input or analysis.
+
+The reformatting step ensures that the processed data adheres to the requirements of other tools, enabling seamless integration across the workflow and supporting reliable, interpretable final results.
+
+> <hands-on-title> Formating Arriba output</hands-on-title>
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `fusions_tsv` (output of **Arriba** {% icon tool %})
@@ -341,9 +282,6 @@ A big step can have several subsections or sub steps:
     }
 } `
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > <comment-title> short description </comment-title>
 >    >
@@ -368,9 +306,20 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Query Tabular**
+## **Query Tabular**
 
-> <hands-on-title> Task description </hands-on-title>
+**Query Tabular** is a bioinformatics tool used to extract and manipulate specific data from tabular datasets in workflows. This tool allows users to perform SQL-like queries on tabular data, enabling them to filter, aggregate, and transform datasets based on user-defined criteria.
+
+In the context of fusion detection and neoantigen workflows, the **Query Tabular** tool can be employed for several purposes:
+
+- **Data Filtering:** Users can select specific rows based on certain conditions (e.g., filtering fusions that meet particular criteria).
+- **Column Manipulation:** Users can specify which columns to retain or create new columns by combining or transforming existing data.
+- **Aggregation:** The tool allows for summarizing data, such as counting occurrences of specific fusion events or summarizing results based on particular categories.
+- **Output Customization:** Users can format the output to suit downstream processing needs, making it easier to pass data to subsequent analysis tools.
+
+By leveraging **Query Tabular**, researchers can efficiently refine and structure their data, ensuring that only relevant information is carried forward in the workflow, ultimately aiding in the identification and analysis of significant biological insights.
+
+> <hands-on-title> Manipulating the data to extract fusions </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.1) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -382,14 +331,6 @@ A big step can have several subsections or sub steps:
 FROM t1 `
 >    - *"include query result column headers"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -409,9 +350,11 @@ FROM t1 `
 >
 {: .question}
 
-## Sub-step with **Tabular-to-FASTA**
+##  **Tabular-to-FASTA**
 
-> <hands-on-title> Task description </hands-on-title>
+Tabular to FASTA conversion is a common task in bioinformatics that transforms data structured in a tabular format (such as CSV or TSV) into FASTA format, which is widely used for representing nucleotide or protein sequences. This conversion is essential when you need to input sequence data into various bioinformatics tools or databases that require FASTA-formatted files.
+
+> <hands-on-title> COnverting tabular to fasta </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `output` (output of **Query Tabular** {% icon tool %})
@@ -447,7 +390,9 @@ FROM t1 `
 
 ## Sub-step with **Regex Find And Replace**
 
-> <hands-on-title> Task description </hands-on-title>
+Using regex (regular expressions) for find and replace is a powerful technique for text manipulation, allowing you to search for patterns and replace them with desired text. Below is a guide on how to use regex for find and replace, including examples in different programming languages.
+
+> <hands-on-title> Adding fusion tag in the fasta header </hands-on-title>
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Tabular-to-FASTA** {% icon tool %})
@@ -467,31 +412,8 @@ FROM t1 `
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+The workflow outlined above demonstrates a systematic approach to processing biological data, emphasizing the importance of each step in ensuring accurate and reliable results. By integrating tools like RNA-STAR for alignment and Arriba for structural variant detection, researchers can effectively analyze complex genomic information. The transition from tabular data to FASTA format and the application of regex for find-and-replace operations further streamline data management, enhancing efficiency and clarity. Ultimately, this workflow not only facilitates the identification of neoantigens but also contributes to the broader goals of personalized medicine and targeted therapies. By leveraging these methodologies, researchers can gain deeper insights into the genetic underpinnings of diseases and advance the development of innovative treatments.
