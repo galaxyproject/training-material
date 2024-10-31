@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "Neoantigen 1: Fusion-Database-Generation"
 zenodo_link: ""
 questions:
-- Why do we need to generate a customized fusion database for metaproteomics research?
+- Why do we need to generate a customized fusion database for proteogenomics research?
 objectives:
 - Downloading databases related to 16SrRNA data
 - For better neoantigen identification results.
