@@ -356,7 +356,7 @@ Now that we're happy with the cells left in our Seurat Object, we can begin prep
 >
 > Once you are familiar with the separate steps, you might find it more effective and convenient to use `SCTransform`. The main difference to be aware of when using `SCTransform` is that the results will be stored as a new assay called `SCT` in the Seurat Object. You will need to use this assay in the following analysis steps, instead of the original `RNA` assay. After running `SCTransform`, `SCT` will be set as the default assay for the Seurat Object so the tools should automatically use the correct one. The methods and default settings used in `SCTransform` also differ from the standard pipeline, so you should expect to see some differences in your results compared to the other route.
 >
-> {: .comment}
+{: .comment}
 
 The usual preprocessing steps for single cell data are normalisation, selection of the most variable features, and scaling the data. The same steps are performed in slightly different ways by the separate preprocessing functions and SCTransform.
 
