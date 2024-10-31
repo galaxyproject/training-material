@@ -101,13 +101,14 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets as `genes`, `barcodes`, and `matrix` if necessary
+> 
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >    
-> 5. Check the datatypes are correct - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx file
+> 4. Check the datatypes are correct - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx file
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
-> 6. Inspect the `matrix` file by clicking on the {% icon galaxy-eye %} icon
+> 5. Inspect the `matrix` file by clicking on the {% icon galaxy-eye %} icon
 >
 >    {% snippet faqs/galaxy/histories_dataset_item.md %}
 >
@@ -1083,7 +1084,7 @@ If we're taking the unsupervised approach, then we might want to limit our marke
 >
 > 2. Rename the second output (the csv file) as `DE Markers`
 > 
->     {% snippet faqs/galaxy/datasets_rename.md %}
+>    {% snippet faqs/galaxy/datasets_rename.md %}
 >    
 {: .hands_on}
 
