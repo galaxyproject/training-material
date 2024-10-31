@@ -390,7 +390,7 @@ This fasta file contains
 >
 > > <solution-title></solution-title>
 > >
-> > 1. 32 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.
+> > 1. 30 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.
 > > 2. 2,911,349 (*Total length (>= 0 bp)*). Not far from the estimated genome size: 2,914,567 
 > > 1. The GC content for our assembly was 32.77%. For comparison [MRSA Isolate HC1335 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) GC% is 32.89%.
 > >
