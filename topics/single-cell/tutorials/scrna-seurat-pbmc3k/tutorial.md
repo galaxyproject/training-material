@@ -105,11 +105,11 @@ In this matrix, the values represent the number of each feature (i.e. gene; row)
 >    
 > 5. Check the datatypes are correct - the `genes` and `barcodes` files should be tsv or tabular while the `matrix` should be an mtx file
 >
->    {% snippet aqs/galaxy/datasets_change_datatype.html%}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 6. Inspect the `matrix` file by clicking on the {% icon galaxy-eye %} icon
 >
->    {% snippet faqs/galaxy/histories_dataset_item.html %}
+>    {% snippet faqs/galaxy/histories_dataset_item.md %}
 >
 {: .hands_on}
 
@@ -252,7 +252,7 @@ We can visualise the QC metrics to help us decide where to set our thresholds fo
 {: .hands_on}
 
 > <tip-title></tip-title>
-> If you are re-running the same step again or just want to change a couple of parameters for the same tool, then you can click on a previous dataset to expand it in the history and then click the {% dataset-rerun button %}. The tool you used to create that dataset will open in the main panel, with the settings and inputs you used before. Make any changes and run it again.
+> If you are re-running the same step again or just want to change a couple of parameters for the same tool, then you can click on a previous dataset to expand it in the history and then click the {% icon dataset-rerun button %}. The tool you used to create that dataset will open in the main panel, with the settings and inputs you used before. Make any changes and run it again.
 {: .tip}
 
 ![Three violin plots each showing most points grouped together in the lower part of the plot with some outliers at higher values](../../images/scrna-seurat-pbmc3k/seurat_violin_QC_before.png "Violin Plots showing the unique features (nFeature_RNA), total counts (nCount_RNA) and the proportion of reads coming from mitochondial genes (percent.mt) for all cells")
@@ -515,7 +515,7 @@ The standard Seurat pipeline performs the PCA on the Variable Features only, rat
 
 We've now reduced our dataset to 50 dimensions or PCs that represent the expression of sets of correlated genes. Since we selected the option to output a list of the top genes, we can use the {% icon galaxy-eye %} icon on this output in our history to see which genes were most strongly associated with the top five PCs. We can see lists of the genes that had the strongest positive and negative scores for each PC - these are the correlated sets of genes that defined the PCs.
 
-{% snippet faqs/galaxy/histories_dataset_item.html %}
+{% snippet faqs/galaxy/histories_dataset_item.md %}
 
 Rather than just looking at a list of genes, we can also produce plots to help us better understand how our cells and genes relate to the PCs we have just computed. Let's start by finding out more about the genes that were most strongly associated with our top three PCs. We can do this with the `VizDimLoadings` plot, which shows the genes associated with each PC, how strongly each gene affected the PC, and whether it was positively or negatively correlated with the PC. The plots will look a bit different depending on which preprocessing approach you followed.
 
@@ -909,7 +909,7 @@ The output is a list of positive markers for each cluster, genes that were signi
 
 Take a look at the second output, the CSV file. You can click on the dataset to see a quick peek of it in the history panel or use the {% icon galaxy-eye %} icon to see the full table in the main panel.
 
-{% snippet faqs/galaxy/histories_dataset_item.html %}
+{% snippet faqs/galaxy/histories_dataset_item.md %}
 
 The first column is the name of the marker gene. The following columns tell us the:
 
@@ -1105,7 +1105,7 @@ A supervised approach should work well for the current dataset because PBMCs hav
 
 To begin, we'll need a list of these canonical markers for PBMCs. Let's use the one provided in the [original Seurat version](https://satijalab.org/seurat/articles/pbmc3k_tutorial) of this tutorial:
 
-### Known Markers for PBMCs
+## Known Markers for PBMCs
 
 > | Cell Type     | Marker Genes  |
 > | --------------|---------------|
@@ -1393,7 +1393,7 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 > 
 > 2. Rename the file as `Canonical Markers` when it has finished uploading and make sure the datatype is **tabular**
 >
->    {% snippet aqs/galaxy/datasets_change_datatype.html%}
+>    {% snippet faqs/galaxy/datasets_change_datatype.md%}
 >
 > 3. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `Annotated Clusters` (output of **Seurat Data Management** {% icon tool %})
@@ -1477,7 +1477,7 @@ Comparing the two plots also shows us why the supervised approach can be faster 
 {: .question}
 
 # Conclusion
-{ icon congratualtions %} Well done, you've successfully used Seurat to prepare and cluster single cell data. You might want to check your results against the example histories for the [separate preprocessing steps](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key) or [SCTransform route](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-key). You can also take a look at the whole workflow for [the separate steps](https://usegalaxy.eu/u/marisa_jl/w/copy-of-cluster-3k-pbmcs-with-seurat---workflow) or [SCTransform version](https://usegalaxy.eu/u/marisa_jl/w/cluster-3k-pbmcs-with-seurat---workflow---sctransform-version).
+{% icon congratulations %} Well done, you've successfully used Seurat to prepare and cluster single cell data. You might want to check your results against the example histories for the [separate preprocessing steps](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---separate-preprocessing---answer-key) or [SCTransform route](https://usegalaxy.eu/u/marisa_jl/h/clustering-3k-pbmcs-with-seurat---sctransform---answer-key). You can also take a look at the whole workflow for [the separate steps](https://usegalaxy.eu/u/marisa_jl/w/copy-of-cluster-3k-pbmcs-with-seurat---workflow) or [SCTransform version](https://usegalaxy.eu/u/marisa_jl/w/cluster-3k-pbmcs-with-seurat---workflow---sctransform-version).
 
 In this tutorial, we've learned about the steps involved in clustering single cell data and how to identify different cell types. We followed a typical clustering workflow:
 
@@ -1493,6 +1493,6 @@ In this tutorial, we've learned about the steps involved in clustering single ce
 4. Identification of marker genes for the clusters
 5. Annotation of the clusters with cell types
 
-Now that you know how to perform clustering with Seurat, you might want to try the alternative Scanpy pipeline by following the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. If you would prefer to stay with Seurat, then you could go back and try using the alternative preprocessing steps described above or try using it to analyse a slightly trickier dataset by following the 'Filter, plot and explore single cell RNA-seq data with Seurat' tutorial [using Galaxy buttons]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html %}) or in an [R notebook on Galaxy](% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html %}). You could also try using Seurat to analyse your own data!
+Now that you know how to perform clustering with Seurat, you might want to try the alternative Scanpy pipeline by following the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial. If you would prefer to stay with Seurat, then you could go back and try using the alternative preprocessing steps described above or try using it to analyse a slightly trickier dataset by following the 'Filter, plot and explore single cell RNA-seq data with Seurat' tutorial [using Galaxy buttons]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.html %}) or in an [R notebook on Galaxy]({% link topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.html %}). You could also try using Seurat to analyse your own data!
 
 This tutorial is part of the https://singlecell.usegalaxy.eu portal ({% cite tekman2020single %}).
