@@ -10,7 +10,7 @@ objectives:
 - For better neoantigen identification results.
 time_estimation: 3H
 key_points:
-- Create a customized fusion proteomics database from 16SrRNA results.
+- Create a customized Variant proteomics database from 16SrRNA results.
 contributions:
   authorship:
     - subinamehta
@@ -33,7 +33,7 @@ follow_up_training:
             - neoantigen-non-normal-database
 tags: [label-free]
 redirect_from:
-- /topics/proteomics/tutorials/neoantigen-1-fusion-database-generation/tutorial
+- /topics/proteomics/tutorials/neoantigen-1-non-normal-database-generation/tutorial
 
 ---
 
@@ -54,26 +54,25 @@ In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored
 >
 {: .agenda}
 
-# Title for your first section
+# Neoantigen-Non-normal-database generation
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+This tutorial guides users through the process of generating a non-normal variant database. It encompasses essential bioinformatics steps to identify and prepare variant-specific peptides for immunological studies. Below is an overview of each major stage:
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+### 1. Get Data
+The workflow begins with uploading raw sequencing data, followed by a quality assessment to ensure data integrity. This step establishes a solid foundation for subsequent analyses by addressing any issues in the initial dataset.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+### 2. Variant Detection and Mapping
+Next, the RNA sequencing data is aligned to a reference genome using tools like HISAT2 and StringTie. Alignment events are detected with specialized tools like Freebayes, CustomProDB, and GFFcompare, which identify non-normal gene transcripts. These tools analyze the resulting alignments to characterize the gene segments in CDS, single nucleotide variants, indels, UTRs, or frameshifts.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+### 3. Text reformatting and Database generation
+Once variants are identified, we generate a customized database and apply various reformatting techniques to tag it, ensuring optimal usability for downstream processing.
 
-have fun!
+### 4. Addition of known protein sequences
+Known proteomics databases are added to the variant database to create a comprehensive database.
+
+### 5. Final Database Construction
+The workflow concludes with the application of regex adjustments and other formatting functions to standardize the output. This process culminates in the creation of a comprehensive database of potential non-normal protein sequences, making them ready for experimental validation and clinical exploration.
+
 
 ## Get data
 
@@ -106,93 +105,28 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
 
-![Alternative text](../../images/image_name "Legend of the image")
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+## **Convert compressed file to uncompressed.**
 
-***TODO***: *Consider adding a detail box to expand the theory*
+Uncompressing data is a crucial first step in many bioinformatics workflows because raw sequencing data files, especially from high-throughput sequencing, are often stored in compressed formats (such as `.gz` or `.zip`) to save storage space and facilitate faster data transfer. Compressed files need to be uncompressed to make the data readable and accessible for analysis tools, which generally require the data to be in plain text or other compatible formats. By uncompressing these files, we ensure that downstream applications can efficiently process and analyze the raw sequencing data without compatibility issues related to compression. In this workflow, we do that for both forward and reverse files.
 
-> <details-title> More details about the theory </details-title>
+> <hands-on-title> Converting compressed to uncompressed </hands-on-title>
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
+>    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Convert compressed file to uncompressed.**
+>
+{: .hands_on}
 
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
 >    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Convert compressed file to uncompressed.**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert compressed file to uncompressed.](CONVERTER_gz_to_uncompressed) %} with the following parameters:
->    - {% icon param-file %} *"Choose compressed file"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **FASTA-to-Tabular**
 
