@@ -109,45 +109,45 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > nano docker-compose.yaml
 > ```
 > 4. Copy the text below into the `docker-compose.yaml` file
-> >```yaml
-> > version: '3.6'
-> > services:
-> >
-> >  mongo-client:
-> >    image: mongo:3.6
-> >    restart: unless-stopped
-> >    volumes:
-> >      - ./mongo/db:/data/db
-> >      - ./mongo-init:/docker-entrypoint-initdb.d
-> >    ports:
-> >      - "27017:27017"
-> >    environment:
-> >      MONGO_INITDB_ROOT_USERNAME: root
-> >      MONGO_INITDB_ROOT_PASSWORD: example
-> >
-> >  mongo-express:
-> >    image: mongo-express
-> >    restart: unless-stopped
-> >    environment:
-> >      - ME_CONFIG_MONGODB_SERVER=mongo-client
-> >      - ME_CONFIG_MONGODB_PORT=27017
-> >      - ME_CONFIG_BASICAUTH_USERNAME=root
-> >      - ME_CONFIG_BASICAUTH_PASSWORD=example
-> >    ports:
-> >      - "8081:8081"
-> >
-> >  mongo-init:
-> >    image: mongo:3.6
-> >    restart: "no"
-> >    depends_on:
-> >      - mongo-client
-> >    environment:
-> >      - MONGO_INITDB_DATABASE=admin
-> >      - MONGO_INITDB_ROOT_USERNAME=root
-> >      - MONGO_INITDB_ROOT_PASSWORD=example
-> >    volumes:
-> >      - ./mongo-init:/docker-entrypoint-initdb.d
-> > ```
+> ```yaml
+> version: '3.6'
+> services:
+> 
+>   mongo-client:
+>     image: mongo:3.6
+>     restart: unless-stopped
+>     volumes:
+>       - ./mongo/db:/data/db
+>       - ./mongo-init:/docker-entrypoint-initdb.d
+>     ports:
+>       - "27017:27017"
+>     environment:
+>       MONGO_INITDB_ROOT_USERNAME: root
+>       MONGO_INITDB_ROOT_PASSWORD: example
+>  
+>   mongo-express:
+>     image: mongo-express
+>     restart: unless-stopped
+>     environment:
+>       - ME_CONFIG_MONGODB_SERVER=mongo-client
+>       - ME_CONFIG_MONGODB_PORT=27017
+>       - ME_CONFIG_BASICAUTH_USERNAME=root
+>       - ME_CONFIG_BASICAUTH_PASSWORD=example
+>     ports:
+>       - "8081:8081"
+>  
+>   mongo-init:
+>     image: mongo:3.6
+>     restart: "no"
+>     depends_on:
+>       - mongo-client
+>     environment:
+>       - MONGO_INITDB_DATABASE=admin
+>       - MONGO_INITDB_ROOT_USERNAME=root
+>       - MONGO_INITDB_ROOT_PASSWORD=example
+>     volumes:
+>       - ./mongo-init:/docker-entrypoint-initdb.d
+> ```
 > 5. Create the path `mongo/db` in your directory using `$mkdir` tool
 > ```bash
 > mkdir mongo
@@ -168,23 +168,23 @@ We will use docker and docker-compose for this step. If you don't have it instal
 > nano create-user.js
 > ```
 > 9. Copy the text below into the `create-user.js` file
-> >```js
-> > // create_user.js
-> >
-> > // Connect to the admin database
-> > var adminDB = db.getSiblingDB("admin");
-> >
-> > // Create a new user with read-only access to all databases
-> > adminDB.createUser({
-> >  user: "query_user",
-> >  pwd: "querypassword",
-> >  roles: [
-> >    { role: "read", db: "admin" },
-> >    { role: "read", db: "Beacon" }, // Adjust this for your needs
-> >    // Add additional read roles as needed
-> >  ]
-> >});
-> > ```
+> ```js
+> // create_user.js
+> 
+> // Connect to the admin database
+> var adminDB = db.getSiblingDB("admin");
+> 
+> // Create a new user with read-only access to all databases
+> adminDB.createUser({
+>   user: "query_user",
+>   pwd: "querypassword",
+>   roles: [
+>     { role: "read", db: "admin" },
+>     { role: "read", db: "Beacon" }, // Adjust this for your needs
+>     // Add additional read roles as needed
+>   ]
+> });
+> ```
 > This will add a user (user name: `query_user` and password:`querypassword`) account with read-only permission to the Beacon database. This is important to avoid unwanted modifications to the Beacon database. 
 > To know more about MongoDB, please read the [MongoDB documentation](https://www.mongodb.com/docs/).
 > 10. Run the command `$docker-compose` in the directory containing the `docker-compose.yaml` file with the specified parameters.
@@ -456,21 +456,21 @@ We are looking to see if there is a deletion mutation in the gene **located** in
 >   - *"END"*: `243620819`
 >   - *"VARIANT STATE ID"*: `EFO:0030068`
 > The srarch function will queiry the Beacon database and print out the resutls that matches our quiery specifications. In this case it will print something like this. 
-> > ```json
-> >    {'_id': ObjectId('6690160a3a936e8e0a7828e2'),
-> > 'assemblyId': 'GRCh38',
-> > 'biosampleId': 'HG00096',
-> > 'definitions': {'Location': {'chromosome': '1',
-> >                              'end': 243620819,
-> >                              'start': 243618689}},
-> > 'id': 'refvar-6690160a3a936e8e0a7828e2',
-> > 'info': {'cnCount': 1,
-> >          'cnValue': 0.422353,
-> >          'legacyId': 'DRAGEN:LOSS:chr1:243618690-243620819'},
-> > 'updated': '2024-07-11T17:26:27.265115',
-> > 'variantInternalId': 'chr1:243618689-243620819:EFO:0030068',
-> > 'variantState': {'id': 'EFO:0030068', 'label': 'low-level loss'}}
-> > ```
+> ```json
+>    {'_id': ObjectId('6690160a3a936e8e0a7828e2'),
+> 'assemblyId': 'GRCh38',
+> 'biosampleId': 'HG00096',
+> 'definitions': {'Location': {'chromosome': '1',
+>                              'end': 243620819,
+>                              'start': 243618689}},
+> 'id': 'refvar-6690160a3a936e8e0a7828e2',
+> 'info': {'cnCount': 1,
+>          'cnValue': 0.422353,
+>          'legacyId': 'DRAGEN:LOSS:chr1:243618690-243620819'},
+> 'updated': '2024-07-11T17:26:27.265115',
+> 'variantInternalId': 'chr1:243618689-243620819:EFO:0030068',
+> 'variantState': {'id': 'EFO:0030068', 'label': 'low-level loss'}}
+> ```
 >
 > When sharing a Beacon protocol, it is important to provide users with read-only access to query the Beacon database. Creating read-only users for Beacon-providing institutions helps prevent unwanted data overwrites that can occur by mistake.
 > 

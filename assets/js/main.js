@@ -172,15 +172,15 @@ document.querySelectorAll("article.topic-admin section#tutorial-content div.lang
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 // Redirects
-if(window.location.hostname === "galaxyproject.github.io") {
-	// Redirect
-	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
-	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+//if(window.location.hostname === "galaxyproject.github.io") {
+//	// Redirect
+//	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+//	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
 
-	window.setTimeout(function(){
-	window.location.href = redirect;
-	}, 5000)
-}
+//	window.setTimeout(function(){
+//	window.location.href = redirect;
+//	}, 5000)
+//}
 
 // Copy paste buttons
 document.querySelectorAll('div.highlight').forEach((snippet) => {

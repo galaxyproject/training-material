@@ -26,6 +26,7 @@ contributions:
     - fairease
     - eurosciencegateway
 
+subtopic: ecologyanalysis
 ---
 
 # Introduction

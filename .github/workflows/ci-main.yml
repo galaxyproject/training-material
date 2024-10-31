@@ -17,7 +17,7 @@ on:
       - 'news/**'
       - 'events/**'
       - CONTRIBUTORS.yaml
-      - FUNDERS.yaml
+      - GRANTS.yaml
       - ORGANISATIONS.yaml
 
 
@@ -66,8 +66,8 @@ jobs:
 
       - name: Check Tutorial Formatting
         run: |
-          find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review
-          bundle exec ruby bin/lint.rb --format rdjson | reviewdog -filter-mode=file -reporter=github-pr-review -f=rdjsonl -fail-on-error
+          find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review -fail-level=any
+          bundle exec ruby bin/lint.rb --format rdjson | reviewdog -filter-mode=file -reporter=github-pr-review -f=rdjsonl -fail-level=any
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

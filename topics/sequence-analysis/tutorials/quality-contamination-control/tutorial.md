@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
-
-title: Quality and contamination control in bacterial isolate using Illumina MiSeq Data
-zenodo_link: 'https://zenodo.org/record/10669812'
+title: Quality and contamination control in bacterial isolate using Illumina MiSeq
+  Data
+zenodo_link: https://zenodo.org/record/10669812
 questions:
 - How to check the quality of MiSeq data?
 - What are the species in bacterial isolate sequencing data?
@@ -14,7 +14,8 @@ objectives:
 - Visualize the species abundance
 time_estimation: 2H
 key_points:
-- Conduct quality control on every dataset before performing any other bioinformatics analysis
+- Conduct quality control on every dataset before performing any other bioinformatics
+  analysis
 - Review the quality metrics and, if necessary, improve the quality of your data
 - Check the impact of the quality control
 - Detect witch microorganisms are present and extract the species level
@@ -25,17 +26,28 @@ tags:
 - microgalaxy
 level: Introductory
 edam_ontology:
-- topic_3673 # Whole genome sequencing
-- topic_0622 # Genomics
-- topic_3301 # Microbiology
-- topic_3697 # Microbial ecology
+- topic_3673
+- topic_0622
+- topic_3301
+- topic_3697
 contributions:
   authorship:
   - bebatut
   - clsiguret
   funding:
   - abromics
+recordings:
+- youtube_id: Cx31r5emUJk
+  length: 34M
+  galaxy_version: 24.0.4.dev0
+  date: '2024-08-01'
+  speakers: [clsiguret]
+  captioners: [clsiguret]
+  bot-timestamp: 1722527209
+
+
 ---
+
 
 Sequencing (determining of DNA/RNA nucleotide sequence) is used all over the world for all kinds of analysis. The product of these sequencers are reads, which are sequences of detected nucleotides. Depending on the technique these have specific lengths (30-500bp) or using Oxford Nanopore Technologies sequencing have much longer variable lengths.
 
@@ -475,7 +487,7 @@ __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken
    > > <solution-title></solution-title>
    > >
    > > 1. 119, as the number of lines
-   > > 2. Staphylococcus, with 99.04%!
+   > > 2. Staphylococcaceae, with 99.06%!
    > {: .solution}
    >
    {: .question}

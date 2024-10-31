@@ -21,7 +21,7 @@ PRIO = [
   'faqs',
   'workflows',
   'contributors',
-  'funders',
+  'grants',
   'organisations'
 ].map.with_index { |x, i| [x, i] }.to_h
 
@@ -88,7 +88,7 @@ end
 
 ICON_FOR = {
   'contributors' => '🧑‍🏫',
-  'funders' => '💰',
+  'grants' => '💰',
   'organisations' => '🏢',
   'events' => '📅',
   'tutorials' => '📚',
@@ -274,14 +274,14 @@ def all_date_sorted_materials(site)
     [DateTime.parse("#{v['joined']}-01T12:00:00", 'content' => "GTN Contributions from #{k}"), 'contributors', obj, ['contributor']]
   end
 
-  bucket += site.data['funders'].map do |k, v|
+  bucket += site.data['grants'].map do |k, v|
     a = {'title' => "@#{k}",
          'content' => "GTN Contributions from #{k}"}
     obj = objectify(a, "/hall-of-fame/#{k}/", k)
 
-    # TODO: backdate funders, organisations
+    # TODO: backdate grants, organisations
     if v['joined']
-      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'funders', obj, ['funder']]
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'grants', obj, ['grant']]
     end
   end.compact
 
@@ -479,7 +479,7 @@ end
 # Our old style matrix bot postsx
 def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
   # new materials (tut + sli)
-  # new funders/contributors/orgs
+  # new grants/contributors/orgs
   # new news posts(?)
   filter_title = nil
   if !filter_by.nil?

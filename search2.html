@@ -27,6 +27,7 @@ We are testing a new search experience. It does not do semantic ranking of resul
 		<option value="Slides">Slides</option>
 		<option value="FAQs">FAQs</option>
 		<option value="News">News</option>
+		<option value="Workflow">Workflows</option>
 	</select>
 	</div>
 	</div>
@@ -74,10 +75,12 @@ We are testing a new search experience. It does not do semantic ranking of resul
 			</tr>
 		{%- endfor -%}
 		{%- for page in site.pages -%}
-			{%- if page.short_id -%}
+			{%- assign layout = page.layout | layout_to_human -%}
+			{%- unless page.symlink %}
+			{%- if layout -%}
 			{%- if page.short_id != 'F00001' -%}
 			<tr id="{{ page.short_id }}">
-				<td><a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a></td>
+				<td>{% if page.short_id %}<a class="badge badge-info" href="https://gxy.io/GTN:{{ page.short_id }}">{%- icon purl -%} GTN:{{ page.short_id }}</a>{% else %}<abbr title="To Be Assigned">TBA</a>{% endif %}</td>
 				<td>{{ page.layout | layout_to_human }}</td>
 				<td><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a><br/>
 					{%- for tag in page.tags -%}
@@ -90,6 +93,7 @@ We are testing a new search experience. It does not do semantic ranking of resul
 			</tr>
 			{%- endif -%}
 			{%- endif -%}
+			{%- endunless -%}
 		{%- endfor -%}
 	</tbody>
 </table>

@@ -1,29 +1,27 @@
 ---
 layout: tutorial_hands_on
-
-title: "Chloroplast genome assembly"
-zenodo_link: "https://doi.org/10.5281/zenodo.3567224"
+title: Chloroplast genome assembly
+zenodo_link: https://doi.org/10.5281/zenodo.3567224
 tags:
-  - plants
-  - nanopore
-  - jbrowse1
+- plants
+- nanopore
+- jbrowse1
 questions:
-  - "How can we assemble a chloroplast genome?"
+- How can we assemble a chloroplast genome?
 objectives:
-  - "Assemble a chloroplast genome from long reads"
-  - "Polish the assembly with short reads"
-  - "Annotate the assembly and view"
-  - "Map reads to the assembly and view"
-
-time_estimation: "2h"
+- Assemble a chloroplast genome from long reads
+- Polish the assembly with short reads
+- Annotate the assembly and view
+- Map reads to the assembly and view
+time_estimation: 2h
 key_points:
-  - "A chloroplast genome can be assembled with long reads and polished with short reads"
-  - "The assembly graph is useful to look at and think about genomic structure"
-  - "We can map raw reads back to the assembly and investigate areas of high or low read coverage"
-  - "We can view an assembly, its mapped reads, and its annotations in JBrowse"
+- A chloroplast genome can be assembled with long reads and polished with short reads
+- The assembly graph is useful to look at and think about genomic structure
+- We can map raw reads back to the assembly and investigate areas of high or low read
+  coverage
+- We can view an assembly, its mapped reads, and its annotations in JBrowse
 contributors:
-  - annasyme
-
+- annasyme
 recordings:
 - captioners:
   - annasyme
@@ -33,8 +31,19 @@ recordings:
   youtube_id: eyfCyINTD_E
   speakers:
   - annasyme
+- youtube_id: gIcbY9kXdTo
+  length: 16M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-12'
+  speakers:
+  - hannahkimincompbio
+  captioners:
+  - hannahkimincompbio
+  bot-timestamp: 1726113532
+
 
 ---
+
 
 # Introduction
 

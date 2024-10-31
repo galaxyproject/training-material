@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: 'Generating a single cell matrix using Alevin and combining datasets (bash + R)'
 subtopic: single-cell-CS-code
 priority: 1
-zenodo_link: 
+zenodo_link:
 
 questions:
   - I have some single cell FASTQ files I want to analyse. Where do I start?
@@ -14,6 +14,11 @@ objectives:
   - Generate a cellxgene matrix for droplet-based single cell sequencing data
   - Interpret quality control (QC) plots to make informed decisions on cell thresholds
   - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
+
+answer_histories:
+  - label: "Backup Jupyter Notebook for Google Collab"
+    history: https://colab.research.google.com/drive/1nRidlpiU-_qUG1zLgpc8mJZewr_EQL0N?usp=sharing
+    date: 2024-09-08
 
 time_estimation: 2H
 
@@ -37,6 +42,7 @@ follow_up_training:
 tags:
 - 10x
 - paper-replication
+- MIGHTS
 
 contributions:
   authorship:
@@ -56,7 +62,7 @@ notebook:
 ---
 
 
-# Setting up the environment 
+# Setting up the environment
 
 Alevin is a tool integrated with the [Salmon software](https://salmon.readthedocs.io/en/latest/salmon.html), so first we need to get Salmon. You can install Salmon using conda, but in this tutorial we will show an alternative method - downloading the pre-compiled binaries from the [releases page](https://github.com/COMBINE-lab/salmon/releases). Note that binaries are usually compiled for specific CPU architectures, such as the 64-bit (x86_64) machine release referenced below .
 
@@ -74,11 +80,11 @@ tar -xvzf salmon-1.10.0_linux_x86_64.tar.gz
 >
 > As mentioned, installing salmon using conda is also an option, and you can do it using the following command in the terminal:
 > ```
-> conda install -c bioconda salmon
+> conda install -c conda-forge -c bioconda salmon
 > ```
 >
 > However, for this tutorial, it would be easier and quicker to use the downloaded pre-compiled binaries, as shown above.
-> 
+>
 {: .details}
 
 We're going to use Alevin for demonstration purposes, but we do not endorse one method over another.
@@ -112,15 +118,28 @@ wget -c https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff 
 wget -c https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta -O GRCm38_cdna.fasta
 ```
 
-Why do we need FASTA and GTF files? 
+Why do we need FASTA and GTF files?
 To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you'd need to add these to the transcriptome and the transcript-gene mapping.
 
 We will use the murine reference annotation as retrieved from Ensembl (*GRCm38* or *mm10*) in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript-gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.
 
+Finally, we will download some files for later so that you don't have to switch kernels again - that's an Alevin output folder for another sample!
+
+```bash
+wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
+unzip alevin_output_702.zip
+```
+
 
 # Generate a transcript to gene map and filtered FASTA
 
-You can have a look at the Terminal tab again. Has the package `atlas-gene-annotation-manipulation` been installed yet? If yes, you can execute the code cell below and while it's running, I'll explain all the parameters we set here. 
+We will now install the package `atlas-gene-annotation-manipulation` to help us generate the files required for Salmon and Alevin.
+
+```bash
+conda install -y -c conda-forge -c bioconda atlas-gene-annotation-manipulation
+```
+
+After the installation is completed, you can execute the code cell below and while it's running, I'll explain all the parameters we set here.
 
 ```bash
 gtf2featureAnnotation.R -g GRCm38_gtf.gff -c GRCm38_cdna.fasta -d "transcript_id" -t "transcript" -f "transcript_id" -o map -l "transcript_id,gene_id" -r -e filtered_fasta
@@ -145,7 +164,7 @@ Where `-t` stands for our filtered FASTA file, and `-i` is the output of the map
 
 > <details-title>What is the index?</details-title>
 >
-> To be able to search a transcriptome quickly, Salmon needs to convert the text (FASTA) format sequences into something it can search quickly, called an 'index'. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often. 
+> To be able to search a transcriptome quickly, Salmon needs to convert the text (FASTA) format sequences into something it can search quickly, called an 'index'. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often.
 >
 {: .details}
 
@@ -158,7 +177,7 @@ Time to use Alevin now! Alevin works under the same indexing scheme (as Salmon) 
 > <details-title>How does Alevin work in detail?</details-title>
 >
 > Alevin works in two phases. In the first phase it quickly parses the read file containing the CB and UMI information to generate the frequency distribution of all the observed CBs, and creates a lightweight data-structure for fast-look up and correction of the CB. In the second round, Alevin utilizes the read-sequences contained in the files to map the reads to the transcriptome, identify potential PCR/sequencing errors in the UMIs, and performs hybrid de-duplication while accounting for UMI collisions. Finally, a post-abundance estimation CB whitelisting procedure is done and a cell-by-gene count matrix is generated.
-> 
+>
 {: .details}
 
 Alevin can be run using the following command:
@@ -184,7 +203,7 @@ All the required input parameters are described in [the documentation](https://s
 >
 > - `-o`: output, path to folder where the output gene-count matrix (along with other meta-data) would be dumped. We simply call it alevin_output
 >
-> - `--tgMap`: transcript to gene map file, a tsv (tab-separated) file — with no header, containing two columns mapping of each transcript present in the reference to the corresponding gene (the first column is a transcript and the second is the corresponding gene). In our case, that's map_code generated by using gtf2featureAnnotation.R function. 
+> - `--tgMap`: transcript to gene map file, a tsv (tab-separated) file — with no header, containing two columns mapping of each transcript present in the reference to the corresponding gene (the first column is a transcript and the second is the corresponding gene). In our case, that's map_code generated by using gtf2featureAnnotation.R function.
 >
 > - `--freqThreshold` - minimum frequency for a barcode to be considered. We've chosen 3 as this will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes.
 >
@@ -197,7 +216,7 @@ All the required input parameters are described in [the documentation](https://s
 We have also added some additional parameters (`--freqThreshold`, `--keepCBFraction`) and their values are derived from the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}) after QC to stop Alevin from applying its own thresholds. However, if you're not sure what value to pick, you can simply allow Alevin to make its own calls on what constitutes empty droplets.
 
 
-This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find information such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis. 
+This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, you can look through all the different files to find information such as the mapping rate, but we'll just pass the whole output folder directory for downstream analysis.
 
 
 > <question-title></question-title>
@@ -209,35 +228,60 @@ This tool will take a while to run. Alevin produces many file outputs, not all o
 > >
 > > 1. As mentioned above, in *alevin_output* folder there will be many different files, including the log files. To check the mapping rate, go to *alevin_output* -> *logs* and open *salmon_quant* file. There you will find not only information about mapping rate, but also many more, calculated at salmon indexing step.
 > > 2. Alevin log can be found in *alevin_output* -> *alevin* and the file name is also *alevin*. You can find many details about the alevin process there, including the number of transcripts found.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
 
 > <warning-title>Process stopping</warning-title>
 >  
-> The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel and that should help.
-> 
+> The command above will display the log of the process and will say "Analyzed X cells (Y% of all)". For some reason, running Alevin may sometimes cause problems in Jupyter Notebook and this process will stop and not go to completion. This is the reason why we use hugely subsampled dataset here - bigger ones couldn't be fully analysed (they worked fine locally though). The dataset used in this tutorial shouldn't make any issues when you're using Jupyter notebook through galaxy.eu, however might not work properly on galaxy.org. If you're accessing Jupyter notebook via galaxy.eu and alevin process stopped, just restart the kernel (in the upper left corner: *Kernel* -> *Restart kernel...*) and that should help. However, if it doesn't, here are the alternatives:
+> - We prepared a Jupyter notebook with the same workflow as shown here, compatible with Google Collab. So if you have troubles with running the above step, you can use the [notebook provided](https://colab.research.google.com/drive/1nRidlpiU-_qUG1zLgpc8mJZewr_EQL0N?usp=sharing), upload it to your [Google Collab](https://colab.research.google.com/) and run the code there, following the tutorial on GTN.
+> - You can download the output folder that you would get as a result of running the code above. Simply run the code below.
+>
 {: .warning}
 
+```bash
+# get the output folder from Alevin in case yours crashes
+wget https://zenodo.org/records/13732502/files/alevin_output.zip
+unzip alevin_output.zip
+```
 
 <!---
 check if we can get alevinQC to work - and paste the info from the first Alevin tutorial?
 -->
 
-# Alevin output to SummarizedExperiment 
+# Alevin output to SummarizedExperiment
 
 Let's change gear a little bit. We've done the work in bash, and now we're switching to R to complete the processing. To do so, you have to change Kernel to R (either click on `Kernel` -> `Change Kernel...` in the upper left corner of your JupyterLab or click on the displayed current kernel in the upper right corner and change it).
 ![Figure showing the JupyterLab interface with an arrow pointing to the left corner, showing the option 'Kernel' -> 'Change Kernel...' and another arrow pointing to the right corner, showing the icon of the current kernel. The pop-up window asks which kernel should be chosen instead.](../../images/scrna-pre-processing/switch_kernel.jpg "Two ways of switching kernel.")
 
 
-Now load the library that we have previously installed in terminal:
+Now, when we are in the R environment, let's install the packages required for this part - `tximeta` and `DropletUtils`:
 
 ```bash
-library(tximeta)
+system("conda install -y bioconductor-tximeta bioconductor-dropletutils", intern=TRUE)
+```
+Double check that the installation went fine:
+```bash
+require("tximeta")
+require("DropletUtils")
 ```
 
-The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified. 
+> <details-title>"There is no package called ‘tximeta’ or ‘DropletUtils’"?</details-title>
+> If you encounter this error message while loading the library, you can try to install them with BiocManager, as shown below. Just replace "package_name" with either `tximeta` or `DropletUtils`. Beware, it can take up to 25 minutes to run!
+> ```bash
+> # run the code below only if you cannot load tximeta library (or using notebook version 1.0.1)
+> if (!require("BiocManager", quietly = TRUE))
+>     install.packages("BiocManager")
+>
+> BiocManager::install("package_name")
+> library("package_name")
+> ```
+{: .details}
+
+
+The [tximeta package](https://bioconductor.org/packages/devel/bioc/vignettes/tximeta/inst/doc/tximeta.html) created by {% cite Love2020 %} is used for import of transcript-level quantification data into R/Bioconductor and requires that the entire output of alevin is present and unmodified.
 
 In the *alevin_output* -> *alevin* folder you can find the following files:
 - *quants_mat.gz*- Compressed count matrix
@@ -269,17 +313,13 @@ Inspect the created object:
 alevin_se
 ```
 
-As you can see, *rowData names* and *colData names* are still empty. Before we add some metadata,  we will first identify barcodes that correspond to non-empty droplets. 
+As you can see, *rowData names* and *colData names* are still empty. Before we add some metadata,  we will first identify barcodes that correspond to non-empty droplets.
 
-# Identify barcodes that correspond to non-empty droplets 
+# Identify barcodes that correspond to non-empty droplets
 
-Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. 
+Some sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ (see the [Alevin Galaxy tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin/tutorial.md %}#basic-qc) for multiple sub-populations. The `emptyDrops` method ({% cite Lun2019 %}) has become a popular way of dealing with this. `emptyDrops` still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar.
 
-```bash
-library(DropletUtils)               # load the library and required packages
-```
-
-emptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
+EmptyDrops takes multiple arguments that you can read about in the [documentation](https://rdrr.io/github/MarioniLab/DropletUtils/man/emptyDrops.html). However, in this case, we will only specify the following arguments:
 
 > <details-title>emptyDrops input parameters</details-title>
 >
@@ -290,7 +330,7 @@ emptyDrops takes multiple arguments that you can read about in the [documentatio
 >
 {: .details}
 
-Let's then extract the matrix from our `alevin_se` object. It's stored in *assays* -> *counts*. 
+Let's then extract the matrix from our `alevin_se` object. It's stored in *assays* -> *counts*.
 
 ```bash
 matrix_alevin <- assays(alevin_se)$counts
@@ -303,14 +343,14 @@ out <- emptyDrops(matrix_alevin, lower = 100, niters = 1000, retain = 20)
 out
 ```
 
-We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses. 
+We also correct for multiple testing by controlling the false discovery rate (FDR) using the Benjamini-Hochberg (BH) method ({% cite Benjamini1995 %}). Putative cells are defined as those barcodes that have significantly poor fits to the ambient model at a specified FDR threshold. Here, we will use an FDR threshold of 0.01. This means that the expected proportion of empty droplets in the set of retained barcodes is no greater than 1%, which we consider to be acceptably low for downstream analyses.
 
 ```bash
 is.cell <- out$FDR <= 0.01                           
 sum(is.cell, na.rm=TRUE)                              # check how many cells left after filtering
 ```
 
-We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells. 
+We got rid of the background droplets containing no cells, so now we will filter the matrix that we passed on to emptyDrops, so that it corresponds to the remaining cells.
 
 ```bash
 emptied_matrix <- matrix_alevin[,which(is.cell),drop=FALSE]          # filter the matrix
@@ -339,9 +379,9 @@ colData(alevin_se) <- cbind(colData(alevin_se),out)
 colData(alevin_se)
 ```
 
-As you can see, the new columns were appended successfully and now the dataframe has 6 columns. 
+As you can see, the new columns were appended successfully and now the dataframe has 6 columns.
 
-If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below. 
+If you have a look at the Experimental Design from that study, you might notice that there is actually more information about the cells. The most important for us would be batch, genotype and sex, summarised in the small table below.
 
 | Index | Batch | Genotype | Sex |
 |------ |--------------------|
@@ -354,9 +394,9 @@ If you have a look at the Experimental Design from that study, you might notice 
 | N706 | 5    | wildtype    | male    |
 | N707 | 6    | knockout    | male    |
 
-We are currently analysing sample N701, so let's add its information from the table. 
+We are currently analysing sample N701, so let's add its information from the table.
 
-## Batch 
+## Batch
 
 We will label batch as an integer - "0" for sample N701, "1" for N702 etc. The way to do it is creating a list with zeros of the length corresponding to the number of cells that we have in our SummarizedExperiment object, like so:
 
@@ -371,7 +411,7 @@ colData(alevin_se)$batch <- batch
 colData(alevin_se)
 ```
 
-A new column appeared, full of zeros - as expected! 
+A new column appeared, full of zeros - as expected!
 
 ## Genotype
 
@@ -382,9 +422,9 @@ genotype <- rep("wildtype", length(colnames(alevin_se)))
 colData(alevin_se)$genotype <- genotype
 ```
 
-## Sex 
+## Sex
 
-You already know what to do, right? A list with string "male" and then adding it into a new slot! 
+You already know what to do, right? A list with string "male" and then adding it into a new slot!
 ```bash
 sex <- rep("male", length(colnames(alevin_se)))
 colData(alevin_se)$sex <- sex
@@ -395,10 +435,10 @@ Check if all looks fine:
 colData(alevin_se)
 ```
 
-3 new columns appeared with the information that we've just added - perfect! You can add any information you need in this way, as long as it's the same for all the cells from one sample. 
+3 new columns appeared with the information that we've just added - perfect! You can add any information you need in this way, as long as it's the same for all the cells from one sample.
 
- 
-# Adding gene metadata 
+
+# Adding gene metadata
 
 The genes IDs are stored in *rownames*. Let's exctract them into a separate object:
 
@@ -421,7 +461,7 @@ Since gene symbols are much more informative than only gene IDs, we will add the
 library("biomaRt")                                      # load the BioMart library
 ensembl.ids <- gene_ID                               
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", version=100)
+ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
 
 # The line above connects to a specified BioMart database and dataset within this database.
 # In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38,
@@ -484,11 +524,11 @@ listDatasets(mart)                # available datasets
 
 ## Flag mitochondrial genes
 
-We can also flag mitochondrial genes. Usually those are the genes whose name starts with 'mt-' or 'MT-'. Therefore, we will store those characters in `mito_genes_names` and then use *grepl()* to find those genes stored in *gene_name* slot. 
+We can also flag mitochondrial genes. Usually those are the genes whose name starts with 'mt-' or 'MT-'. Therefore, we will store those characters in `mito_genes_names` and then use *grepl()* to find those genes stored in *gene_name* slot.
 
 ```bash
 mito_genes_names <- '^mt-|^MT-'                                    # how mitochondrial gene names can start
-mito <- grepl(mito_genes_names, rowData(alevin_se)$gene_name)      # find mito genes 
+mito <- grepl(mito_genes_names, rowData(alevin_se)$gene_name)      # find mito genes
 mito                                                               # see the resulting boolean list
 ```
 
@@ -528,7 +568,7 @@ And that's our subset, ready for downstream analysis!
 
 # More datasets
 
-We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run Alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701. 
+We've done the analysis for one sample. But there are 7 samples in this experiment and it would be very handy to have all the information in one place. Therefore, you would need to repeat all the steps for the subsequent samples (that's when you'll appreciate wrapped tools and automation in Galaxy workflows!). To make your life easier, we will show you how to combine the datasets on smaller scale. Also, to save you some time, we've already run Alevin on sample 702 (also subsampled to 50k reads). Let's quickly repeat the steps we performed in R to complete the analysis of sample 702 in the same way as we did with 701.
 
 But first, we have to save the results of our hard work on sample 701!
 
@@ -540,36 +580,22 @@ Saving files is quite straightforward. Just specify which object you want to sav
 save(alevin_701, file = "alevin_701.rdata")
 ```
 
-You will see the new file in the panel on the left. 
+You will see the new file in the panel on the left.
 
 
 ## Analysis of sample 702
 
-Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, but to give you some practise in switching kernels and saving data, we will use bash to unzip the folder with that output data.
+Normally, at this point you would switch kernel to bash to run alevin, and then back to R to complete the analysis of another sample. Here, we are providing you with the alevin output for the next sample, which you have already downloaded and unzipped at the beginning of the tutorial when we were using bash.
 
 > <warning-title>Switching kernels & losing variables</warning-title>
 >  
 > Be aware that every time when you switch kernel, you will lose variables you store in the objects that you've created, unless you save them. Therefore, if you want to switch from R to bash, make sure you save your R objects! You can then load them anytime.
-> 
+>
 {: .warning}
 
-Let's **switch the kernel back to bash** and run the following code to unzip the alevin output for sample 702:
+Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything!
 
 ```bash
-# we're in bash again!
-wget https://zenodo.org/records/10116786/files/alevin_output_702.zip
-```
-```bash
-unzip alevin_output_702.zip
-```
-
-The files are there! Now **back to R - switch kernel again**. 
-
-Above we described all the steps done in R and explained what each bit of code does. Below all those steps are in one block of code, so read carefully and make sure you understand everything! 
-
-```bash
-# we're in R now!
-
 ## load libraries again ##
 library(tximeta)
 library(DropletUtils)
@@ -607,7 +633,7 @@ rowData(alevin2)$gene_ID <- gene_ID2
 # get relevant gene names
 ensembl.ids2 <- gene_ID2               
 mart <- useEnsembl(biomart = "ENSEMBL_MART_ENSEMBL")    # connect to a specified BioMart database and dataset hosted by Ensembl
-ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl", version=100) 	
+ensembl_m2 = useMart("ensembl", dataset="mmusculus_gene_ensembl") 	
 
 genes2 <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id',
@@ -634,7 +660,7 @@ for (geneID in gene_names2)
 rowData(alevin2)$gene_name <- gene_names2                              # add gene names to gene metadata
 
 mito_genes_names <- '^mt-|^MT-'                                        # how mitochondrial gene names can start
-mito2 <- grepl(mito_genes_names, rowData(alevin2)$gene_name)           # find mito genes 
+mito2 <- grepl(mito_genes_names, rowData(alevin2)$gene_name)           # find mito genes
 rowData(alevin2)$mito <- mito2                                         # add mitochondrial information to gene metadata
 
 ## create a subset of filtered object ##
@@ -650,7 +676,7 @@ Alright, another sample pre-processed!
 
 # Combining datasets
 
-Pre-processed sample 702 is there, but we still need to load sample 701 that we saved before switching kernels. It's equally easy as saving the object:
+Pre-processed sample 702 is there, but keep in mind that if you switched kernels in the meantime, you still need to load sample 701 that was saved before switching kernels. It's equally easy as saving the object:
 
 ```bash
 load("alevin_701.rdata")
@@ -676,10 +702,10 @@ alevin_combined_demo <- cbind(alevin_combined, alevin_subset3)
 alevin_combined_demo
 ```
 
-You get the point, right? It's important though that the rowData names and colData names are the same in each sample. 
+You get the point, right? It's important though that the rowData names and colData names are the same in each sample.
 
 
-# Saving and exporting the files 
+# Saving and exporting the files
 
 It is generally more common to use SingleCellExperiment format rather than SummarizedExperiment. The conversion is quick and easy, and goes like this:
 
@@ -688,7 +714,7 @@ library(SingleCellExperiment)                                 # might need to lo
 alevin_sce <- as(alevin_combined, "SingleCellExperiment")
 alevin_sce
 ```
-As you can see, all the embeddings have been successfully transfered during this conversion and believe me, sce object will be more useful for you! 
+As you can see, all the embeddings have been successfully transfered during this conversion and believe me, SCE object will be more useful for you!
 
 You've already learned how to save and load objects in Jupyter notebook, let's then save the SCE file:
 
@@ -699,17 +725,18 @@ save(alevin_sce, file = "alevin_sce.rdata")
 The last thing that might be useful is exporting the files into your Galaxy history. To do it... guess what! Yes - **switching kernels again**! But this time we choose **Python 3** kernel and run the following command:
 
 ```bash
-# that's Python now! 
+# that's Python now!
 put("alevin_sce.rdata")
 ```
+A new dataset should appear in your Galaxy history now.
 
 # Conclusion
 
 Well done! In this tutorial we have:
 - examined raw read data, annotations and necessary input files for quantification
-- created an index in Salmon and run Alevin 
+- created an index in Salmon and run Alevin
 - identified barcodes that correspond to non-empty droplets
 - added gene and cell metadata
 - applied the necessary conversion to pass these data to downstream processes.
 
-As you might now appreciate, some tasks are much quicker and easier when run in the code, but the reproducibility and automation of Galaxy workflows is a huge advantage that helps in dealing with many samples more quickly and efficiently. 
+As you might now appreciate, some tasks are much quicker and easier when run in the code, but the reproducibility and automation of Galaxy workflows is a huge advantage that helps in dealing with many samples more quickly and efficiently.
