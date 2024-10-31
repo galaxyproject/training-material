@@ -30,9 +30,9 @@ follow_up_training:
         topic_name: proteomics
         tutorials:
             - neoantigen-non-normal-database
-tags: [label-TMT11]
+tags: [label-free]
 redirect_from:
-- /topics/proteomics/tutorials/neoantigen-fusion-database-generation/tutorial
+- /topics/proteomics/tutorials/neoantigen-1-fusion-database-generation/tutorial
 
 ---
 
@@ -117,7 +117,7 @@ This workflow provides a structured approach to preparing fusion neoantigen data
 
 ## **Convert compressed file to uncompressed.**
 
-Uncompressing data is a crucial first step in many bioinformatics workflows because raw sequencing data files, especially from high-throughput sequencing, are often stored in compressed formats (such as `.gz` or `.zip`) to save storage space and facilitate faster data transfer. Compressed files need to be uncompressed to make the data readable and accessible for analysis tools, which generally require the data to be in plain text or other compatible formats. By uncompressing these files, we ensure that downstream applications can efficiently process and analyze the raw sequencing data without compatibility issues related to compression. We do that for both forward and reverse files.
+Uncompressing data is a crucial first step in many bioinformatics workflows because raw sequencing data files, especially from high-throughput sequencing, are often stored in compressed formats (such as `.gz` or `.zip`) to save storage space and facilitate faster data transfer. Compressed files need to be uncompressed to make the data readable and accessible for analysis tools, which generally require the data to be in plain text or other compatible formats. By uncompressing these files, we ensure that downstream applications can efficiently process and analyze the raw sequencing data without compatibility issues related to compression. In this workflow, we do that for both forward and reverse files.
 
 > <hands-on-title> Converting compressed to uncompressed </hands-on-title>
 >
@@ -207,7 +207,7 @@ The output includes a list of fusion candidates with key information like fusion
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+***TODO***: *Consider adding a question to test the learners' understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -238,7 +238,7 @@ The reformatting step ensures that the processed data adheres to the requirement
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `fusions_tsv` (output of **Arriba** {% icon tool %})
->    - *"AWK Program"*: `(NR==1){
+>    - *"AWK Program"*: ` (NR==1){
     for (i=1;i<=NF;i++) {
         if ($i ~ gene1) { 
             gene1 = i;
@@ -361,36 +361,13 @@ Tabular to FASTA conversion is a common task in bioinformatics that transforms d
 >    - *"Title column(s)"*: `c['1']`
 >    - *"Sequence column"*: `c2`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## **Regex Find And Replace**
 
-## Sub-step with **Regex Find And Replace**
-
-Using regex (regular expressions) for find and replace is a powerful technique for text manipulation, allowing you to search for patterns and replace them with desired text. Below is a guide on how to use regex for find and replace, including examples in different programming languages.
+Using regex (regular expressions) for find and replace is a powerful technique for text manipulation, allowing you to search for patterns and replace them with desired text. Below is a guide on how to use regex for find and replace, including examples in different programming languages. In this context, we are adding "fusion" to the database header.
 
 > <hands-on-title> Adding fusion tag in the fasta header </hands-on-title>
 >
@@ -401,17 +378,8 @@ Using regex (regular expressions) for find and replace is a powerful technique f
 >            - *"Find Regex"*: `>(\b\w+\S+)(.*$)`
 >            - *"Replacement"*: `>generic|fusion_\1|\2`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
-
 
 
 # Conclusion
