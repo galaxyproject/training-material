@@ -175,49 +175,45 @@ The PyCaret HTML report output provides a comprehensive and interactive overview
 
 We are going to provide a brief explanation about the content of each tab present in the report.
 
-## Setup & Best Model Tab:
+> <tip-title>Setup & Best Model Tab</tip-title>
+>- Setup Parameters: Documents the initial configurations used in the PyCaret Model Comparison Tool.
+>- Best Model Class and Hyperparameters: Specifies the model selected as the best performer from the model comparison, listing the model’s hyperparameters as chosen through tuning.
+>- Performance Metrics: Summarizes key evaluation metrics, including Accuracy, ROC-AUC, Recall, Precision, F1-Score, Cohen’s Kappa, Matthews Correlation Coefficient (MCC), and Training Time (TT in seconds).
+>![alt](... "label")
+>
+{: .tip}
 
-- Setup Parameters: Documents the initial configurations used in the PyCaret Model Comparison Tool.
+> <tip-title>Best Model Plots Tab</tip-title>
+>- Training and Test Evaluation Plots: Displays visualizations of the model’s performance, including an ROC-AUC curve for binary classification, Confusion Matrix, Precision-Recall (PR) curve, Error Analysis, and a Classification Report for detailed class-level performance.
+>- Additional Model Insights: Includes diagnostic plots like the Learning Curve, Calibration Plot, Validation Curve (VC), and various dimensionality reduction plots (Manifold, RFE).
+>- Feature Importance: Shows the contribution of each feature to the model, both individually and collectively (All Features), providing insight into the factors influencing model decisions.
+>![alt](... "label")
+>
+{: .tip}
 
-- Best Model Class and Hyperparameters: Specifies the model selected as the best performer from the model comparison, listing the model’s hyperparameters as chosen through tuning.
+> <tip-title>Feature Importance Tab</tip-title>
+>- Feature importance analysis from atrained Random Forest: While these metrics are not directly related to LASSO logistic regression, they can offer additional insights into how features behave in alternative models, potentially validating or constrasting with the model's results.
+>- SHAP summary from a trained lightGBM model: SHAP (SHapley Additive exPlanations) is particularly useful for understanding feature impact. SHAP values provide a unified measure of feature contribution of each feature's influence on predictions.
+>![alt](... "label")
+>
+{: .tip}
 
-- Performance Metrics: Summarizes key evaluation metrics, including Accuracy, ROC-AUC, Recall, Precision, F1-Score, Cohen’s Kappa, Matthews Correlation Coefficient (MCC), and Training Time (TT in seconds).
+> <tip-title>Explainer Tab</tip-title>
+>- Mean Absolute SHAP Value (Average Impact on Predicted Response): This shows the overall contribution of each feature to predictions. Higher SHAP values indicate features with a larger influence on the model, helping identify which inputs are most impactful.
+>- Permutation Importance (Decrease in ROC AUC with Randomized Feature): By randomly shuffling each feature and observing the drop in ROC AUC, you can see how crucial each feature is for model performance. A large drop indicates high importance.
+>- Partial Dependence Plot (PDP): PDPs show how a feature affects predictions on average. For each feature, observe the plot's curve to understand if it has a linear, nonlinear, or interaction effect on the prediction.
+>- Percentage 1 vs. Predicted Probability: This plot compares the true proportion of positive cases (label=1) to predicted probabilities, helping assess the model’s calibration—whether predicted probabilities match observed outcomes.
+>- Cumulative Percentage per Category (Top X%): This measures the cumulative impact of each category when sampling the top percentage. It's helpful for understanding feature value distribution or concentration.
+>- Percentage Above and Below Cutoff: This evaluates the model's performance above and below a chosen threshold, offering insight into sensitivity and specificity at different probability cutoffs.
+>- Confusion Matrix: A matrix of True Positives, False Positives, True Negatives, and False Negatives, allowing you to assess the model's accuracy, error types, and balance of predictions.
+>- Lift Curve: The lift curve shows the improvement over random selection for each decile of predictions, with the lift value indicating the effectiveness of the model in capturing positive instances.
+>- ROC AUC Curve: This curve plots True Positive Rate vs. False Positive Rate across thresholds, with the AUC score representing the model’s discriminative ability. Higher AUC means better distinction between classes.
+>- PR AUC Curve: Plots Precision vs. Recall, focusing on the model’s performance on the positive class. Useful for imbalanced data, with a higher AUC indicating better handling of positive instances without sacrificing precision.
+>![alt](... "label")
+>
+{: .tip}
 
-## Best Model Plots Tab:
-
-- Training and Test Evaluation Plots: Displays visualizations of the model’s performance, including an ROC-AUC curve for binary classification, Confusion Matrix, Precision-Recall (PR) curve, Error Analysis, and a Classification Report for detailed class-level performance.
-
-- Additional Model Insights: Includes diagnostic plots like the Learning Curve, Calibration Plot, Validation Curve (VC), and various dimensionality reduction plots (Manifold, RFE).
-
-- Feature Importance: Shows the contribution of each feature to the model, both individually and collectively (All Features), providing insight into the factors influencing model decisions.
-
-## Feature Importance Tab:
-
-- Feature importance analysis from atrained Random Forest: While these metrics are not directly related to LASSO logistic regression, they can offer additional insights into how features behave in alternative models, potentially validating or constrasting with the model's results.
-
-- SHAP summary from a trained lightGBM model: SHAP (SHapley Additive exPlanations) is particularly useful for understanding feature impact. SHAP values provide a unified measure of feature contribution of each feature's influence on predictions.
-
-## Explainer Tab:
-
-- Mean Absolute SHAP Value (Average Impact on Predicted Response): This shows the overall contribution of each feature to predictions. Higher SHAP values indicate features with a larger influence on the model, helping identify which inputs are most impactful.
-
-- Permutation Importance (Decrease in ROC AUC with Randomized Feature): By randomly shuffling each feature and observing the drop in ROC AUC, you can see how crucial each feature is for model performance. A large drop indicates high importance.
-
-- Partial Dependence Plot (PDP): PDPs show how a feature affects predictions on average. For each feature, observe the plot's curve to understand if it has a linear, nonlinear, or interaction effect on the prediction.
-
-- Percentage 1 vs. Predicted Probability: This plot compares the true proportion of positive cases (label=1) to predicted probabilities, helping assess the model’s calibration—whether predicted probabilities match observed outcomes.
-
-- Cumulative Percentage per Category (Top X%): This measures the cumulative impact of each category when sampling the top percentage. It's helpful for understanding feature value distribution or concentration.
-
-- Percentage Above and Below Cutoff: This evaluates the model's performance above and below a chosen threshold, offering insight into sensitivity and specificity at different probability cutoffs.
-
-- Confusion Matrix: A matrix of True Positives, False Positives, True Negatives, and False Negatives, allowing you to assess the model's accuracy, error types, and balance of predictions.
-
-- Lift Curve: The lift curve shows the improvement over random selection for each decile of predictions, with the lift value indicating the effectiveness of the model in capturing positive instances.
-
-- ROC AUC Curve: This curve plots True Positive Rate vs. False Positive Rate across thresholds, with the AUC score representing the model’s discriminative ability. Higher AUC means better distinction between classes.
-
-- PR AUC Curve: Plots Precision vs. Recall, focusing on the model’s performance on the positive class. Useful for imbalanced data, with a higher AUC indicating better handling of positive instances without sacrificing precision.
+## :
 
 Before we begin, it's crucial to understand the concept we want to drive into this analyse. Since we are looking to generate a model similar to what was published by {% cite Chang2024 %}, we are going to use the same metrics used in the paper as golden standard to the model we generate through Galaxy-PyCaret.
 
