@@ -45,7 +45,7 @@ AMQP is a message queue protocol which processes can use to pass messages betwee
 
 Add the following to your Galaxy configuration to use Postgres:
 
-```bash
+```yaml
 amqp_internal_connection: "sqlalchemy+postgresql:///galaxy?host=/var/run/postgresql"
 ```
 
@@ -53,7 +53,7 @@ amqp_internal_connection: "sqlalchemy+postgresql:///galaxy?host=/var/run/postgre
 
 Celery would prefer you use Redis (a Key-Value store) as a backend to store results. But we have a database! So let's try using that instead:
 
-```
+```yaml
 enable_celery_tasks: true
 celery_conf:
   broker_url: null  # This should default to using amqp_internal_connection
@@ -63,8 +63,24 @@ celery_conf:
     galaxy.set_job_metadata: galaxy.external
 ```
 
+
 With that we should now be able to [use useful features like](https://docs.galaxyproject.org/en/master/admin/production.html#use-celery-for-asynchronous-tasks):
 
 - Changing the datatype of a collection.
 - Exporting histories
 - other things!
+
+# Configuring with Ansible
+
+If you're using Ansible, this could also look like:
+
+```yaml
+amqp_internal_connection: "sqlalchemy+{{ database_connection }}"
+enable_celery_tasks: true
+celery_conf:
+  broker_url: null  # This should default to using amqp_internal_connection
+  result_backend: "db+{{ database_connection }}"
+  task_routes:
+    galaxy.fetch_data: galaxy.external
+    galaxy.set_job_metadata: galaxy.external
+```
