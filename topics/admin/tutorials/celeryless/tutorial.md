@@ -4,10 +4,14 @@ layout: tutorial_hands_on
 title: "Alternative Celery Deployment for Galaxy"
 zenodo_link: ""
 questions:
+  - What is *required* for Celery to work in Galaxy?
 objectives:
   - Setup the bare minimum configuration to get tasks working
+  - Avoid deploying, securing, and managing RabbitMQ and Redis and Flower
 time_estimation: "1h"
 key_points:
+  - While a combination of RabbitMQ and Redis is perhaps the most production ready, you can use Postgres as a backend for Celery
+  - This significantly simplifies operational complexity, and reduces the attack surface of your Galaxy.
 contributions:
   authorship:
   - hexylena
@@ -17,7 +21,6 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
-      - pulsar
 subtopic: data
 tags:
   - ansible
