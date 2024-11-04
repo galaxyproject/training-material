@@ -263,34 +263,21 @@ c3: Music Estimated Proportions of Cell Types
 {: .hands_on}
 
 
-Now instead of having a collection of tables, we need to combine the collections together into a single table for both MuSiC and NNLS.
-
-> <hands-on-title>Combine output tables (MuSiC)</hands-on-title>
+> <hands-on-title>Run visualisation pre-processing workflow</hands-on-title>
 >
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - *"Remove first"*: `2`
->    - {% icon param-file %} *"Tabular files"*: `MuSiC Results`
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
-> 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: (output of **Remove beginning** {% icon tool %})
->    - *"Keep one header line"*: **Yes**
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} output `MuSiC Combined`
+> 2. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+>    - {% icon param-collection %} *"Cell Proportions"*: `Music Results`
 >
-{: .hands_on}
-
-> <hands-on-title>Combine output tables (NNLS)</hands-on-title>
+> 3. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+>    - {% icon param-collection %} *"Cell Proportions"*: `NNLS Results`
 >
-> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
->    - *"Remove first"*: `2`
->    - {% icon param-file %} *"Tabular files"*: `NNLS Results`
->
-> 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: (output of **Remove beginning** {% icon tool %})
->    - *"Keep one header line"*: **Yes**
->
-> 3. **Rename** {% icon galaxy-pencil %} output `NNLS Combined`
->
+>    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
 
 ## Plot scatter plots of the results
@@ -336,39 +323,82 @@ Now instead of having a collection of tables, we need to combine the collections
 {: .hands_on}
 
 
-# Compute Accuracy and Error Metrics
+## Plot Violin plots of the error
 
-Then plot with scatterplot tool
+Next we will plot the distribution of errors between the predicted and actual cellular proportions for a select number of cell types. We could plot all cell types in the output, however too many will cause the visualisations to be messy and difficult to interpret.
 
-Then show how it should be more quantitative and can be plotted in different ways
+If we inspect the cell counts table from earlier, we will see the following (note the actual counts will differ from this tutorial since the subsamples are random):
 
-Workflow -> compute error, compute RMSE, compute Pearson coefficient
+- table here -
 
-Use error table, filter for certain cell types, plot violin plot
+We can see that most cell types have very low proportions, so for this visualisation we will only look at 5 cell types with the highest proportion values. For the above table these cell types are: `alpha, beta, gamma, ductal, acinar`. Before we visualise the data we first need to extract only these cell types from the error table.
 
-show the RSME and Pearson coefficient values as quantitative metrics for both error (as seen in the violin plot) and correlation (as shown in the scatter plot)
-
-so plots first, nice and visual, easy to interpret, then more concrete quantitative results
-
-need to do this for both MuSiC and NNLS
-
-> <hands-on-title>Combine output tables</hands-on-title>
+> <hands-on-title>Extract Cell Types</hands-on-title>
 >
-> 1. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Tabular files"*: `A proportions actual-infer`
->    - *"Identifier column"*: `1`
->    - *"Number of header lines in each input line"*: `1`
->    - *"Fill character"*: `0.0`
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Error Table (Music)`
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>       - *"Delimited by"*: `Tab`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>           - *"List of Fields"*: `Select the columns containing: alpha, beta, gamma, ductal, acinar`
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `Sample A output table`
+> 2. **Rename** {% icon galaxy-pencil %} output `Music Errors`
 >
-> 3. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Tabular files"*: `B proportions actual-infer`
->    - *"Identifier column"*: `1`
->    - *"Number of header lines in each input line"*: `1`
->    - *"Fill character"*: `0.0`
+> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Error Table (NNLS)`
+>    - *"Operation"*: `Discard`
+>    - *"Cut by"*: `fields`
+>       - *"Delimited by"*: `Tab`
+>       - *"Is there a header for the data's columns ?"*: `Yes`
+>           - *"List of Fields"*: `Select the columns containing: alpha, beta, gamma, ductal, acinar`
 >
-> 4. **Rename** {% icon galaxy-pencil %} output `Sample B output table`
+> 4. **Rename** {% icon galaxy-pencil %} output `NNLS Errors`
 >
 {: .hands_on}
+
+
+# Compute Accuracy Metrics
+
+Visualisations are a great tool for getting an intuitive overview of the data. However, some of the interpretations from visualisations can be subjective. Having quantitative results alongside visualisations can offer concrete and precise values about the data that can more easily be compared. We will use two different quantitative metrics in this tutorial; Pearson correlation and RMSE.
+
+## Pearson Correlation
+
+The Pearson correlation coefficient is a statistical value that represents the direction and correlation between two variables, the value of this metric ranges between -1 and 1, where:
+
+- -1 = negative correlation
+- 0 = no correlation
+- 1 = positive correlation
+
+The equation for calculating the Pearson correlation can be seen below, the workflow to compute this metric breaks down this formula into smaller steps.
+
+- insert formula -
+
+
+## Root Mean Squared Error (RMSE)
+
+Root Mean Squared Error or RMSE is a
+
+- insert formula -
+
+
+## Compute Metrics
+
+> <hands-on-title>Run visualisation workflow</hands-on-title>
+>
+> 1. **Import the workflow** into Galaxy
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
+>
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
+>
+> 2. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+>    - {% icon param-collection %} *"Cell Proportions"*: `Music Results`
+>
+> 3. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+>    - {% icon param-collection %} *"Cell Proportions"*: `NNLS Results`
+>
+>    {% snippet faqs/galaxy/workflows_run.md %}
+{: .hands_on}
+
 
