@@ -18,5 +18,5 @@ contributors: [shiltemann, hexylena]
 
 If you are on a smaller Galaxy server, i.e. not one of the large (multi)national public servers, you may not be able to find this operation, and there is no indication it is missing or why it is disabled.
 
-Galaxy has recently started putting more features behind a setting and deployment configuration that needs to be enabled by the server administrator.
-Your administrator will need to deploy Celery and potentially additionally flower and redis to their stack to enable changing the datatype of a collection.
+Galaxy has recently started putting [more features behind a setting and deployment configuration](https://docs.galaxyproject.org/en/master/admin/production.html#use-celery-for-asynchronous-tasks) that needs to be enabled by the server administrator.
+Your administrator will need to deploy Celery and potentially additionally flower and redis to their stack to enable changing the datatype of a collection. Consider sending them also the link to the [GTN tutorial for setting up redis and flower]({% link topics/admin/tutorials/celery/tutorial.md %}).
