@@ -48,8 +48,8 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: Import news posts from Google Form
-          branch-suffix: timestamp
           title: "[Google Form] New News Post!"
+          branch: google-form/news
           add-paths: news/_posts/
 
       - name: Update recordings from Google Form
@@ -65,9 +65,9 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           title: "[Google Form] New Recording Submission!"
-          branch-suffix: timestamp
           commit-message: add new recording from Google Form submission
           add-paths: topics/
+          branch: google-form/recordings
           committer: "Saskia Hiltemann <zazkia@gmail.com>"
           author: "Saskia Hiltemann <zazkia@gmail.com>"
           body: |

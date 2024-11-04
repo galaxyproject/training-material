@@ -26,16 +26,19 @@ key_points:
 - Check the impact of the quality control
 - Different tools are available to provide additional quality metrics
 - For paired-end reads analyze the forward and reverse reads together
-contributors:
-- bebatut
-- mblue9
-- alexcorm
-- abretaud
-- lleroi
-- r1corre
-- stephanierobin
-- gallantries
-- neoformit
+contributions:
+  authorship:
+  - bebatut
+  - mblue9
+  - alexcorm
+  - abretaud
+  - lleroi
+  - r1corre
+  - stephanierobin
+  - neoformit
+  funding:
+  - gallantries
+
 recordings:
 - youtube_id: coaMGvZazoc
   length: 50M
@@ -58,9 +61,9 @@ recordings:
   length: 51M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-30'
-  speakers: 
+  speakers:
   - dianichj
-  captioners: 
+  captioners:
   - dianichj
   bot-timestamp: 1727710795
 
@@ -588,21 +591,21 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 
 > <hands-on-title>Improvement of sequence quality</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `Reads` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file"*: `Reads` (Input dataset)
 >
 >          > <tip-title>Files not selectable?</tip-title>
 >          > If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (`fastqsanger.gz`). You can edit the data type by clicking on the pencil symbol.
 >          {: .tip}
->    - In *"Read 1 Options"*:
->       - *"Insert 3' (End) Adapters"*:
+>    - In *"Read 1 Adapters"*:
+>       - *"1: 3' (End) Adapters"*:
 >          - *"Source"*: `Enter custom sequence`
->          - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
+>          - *"Custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
+>       - *"Minimum length (R1)"*: `20`
 >    - {% icon param-select %} *"Outputs selector"*: `Report`
 >
 > 2. Inspect the generated txt file (`Report`)

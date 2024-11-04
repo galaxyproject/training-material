@@ -23,14 +23,18 @@ key_points:
   - "Galaxy provides ways to share your results and methods with others"
 subtopic: core
 priority: 2
-contributors:
-  - annefou
-  - nagoue
-  - chrisbarnettster
-  - michelemaroni89
-  - olanag1
-  - tnabtaf
-  - shiltemann
+
+contributions:
+  authorship:
+    - annefou
+    - nagoue
+    - chrisbarnettster
+    - michelemaroni89
+    - olanag1
+    - tnabtaf
+    - shiltemann
+  funding:
+    - elixir-europe
 
 recordings:
 - captioners:
