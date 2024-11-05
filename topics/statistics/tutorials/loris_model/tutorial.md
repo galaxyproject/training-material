@@ -1,19 +1,20 @@
 ---
 layout: tutorial_hands_on
 level: Intermediate
-title: Building the LORIS LLR6 Model Using Galaxy ML Tools
+title: Building the LORIS LLR6 Model Using Galaxy-PyCaret Tool
 zenodo_link: https://zenodo.org/records/13885908
 questions:
-- How can I build the LORIS LLR6 model published by Chang et al., 2024?
-- Which tools can I use in Galaxy to obtain a logistic regression model with my desired hyperparameters?
+- How can I reproduce the LORIS LLR6 model published by Chang et al., 2024?
+- Which tools can I use in Galaxy to obtain a logistic regression model?
 - How can I evaluate the model to confirm its performance?
 objectives:
-- Build the LORIS LLR6 model using machine learning tools available in Galaxy for reproducibility.
-- Use the PyCaret tool to generate a new model using the LORIS dataset published by Chang et al., 2024.
-- Evaluate the created models for reproducibility and robustness by comparing them with the original LORIS LLR6 model.
+- Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.
+- Build a Machine Learing model using PyCaret tool available in Galaxy.
+- Evaluate the models for reproducibility and robustness by comparing them with the original LORIS LLR6 model published by Chang et al., 2024.
+
 time_estimation: 1H
 key_points:
-- Use Galaxy tools to build the identical LORIS LLR6 model published by Chang et al., 2024.
+- Use Galaxy tools to build similar LORIS LLR6 model published by Chang et al., 2024.
 - Use the PyCaret tool to train a new model and confirm the robustness of the study published by Chang et al., 2024.
 contributors:
 - paulocilasjr 
