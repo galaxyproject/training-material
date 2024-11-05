@@ -35,7 +35,7 @@ This prevents filtering for all tools in a specific research community or domain
 [EDAM](https://edamontology.org/page) ({% cite black2021edam %}) is a comprehensive ontology of well-established, familiar concepts that are prevalent within bioscientific data analysis and data management. It includes 4 main sections of concepts (sub-ontologies):
 
 - **Topic**:  A category denoting a rather broad domain or field of interest, of study, application, work, data, or technology. Topics have no clearly defined borders between each other.
-- **Operation**> A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).
+- **Operation**: A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).
 - **Data**: Information, represented in an information artefact (data record) that is "understandable" by dedicated computational tools that can use the data as input or produce it as output.
 - **Format**: A defined way or layout of representing and structuring data in a computer file, blob, string, message, or elsewhere.
 
