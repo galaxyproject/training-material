@@ -241,7 +241,7 @@ Now we have the wrapper, and can add the bio.tools entry.
 
 > <hands-on-title>Add bio.tools entry to the Galaxy toolsuite</hands-on-title>
 >
-> 1. In the `macros.xml` file, add the following lines anywhere that does not break an existing block.
+> 1. In the `macros.xml` file, add the following lines above any `requirements` sections, such that it does not break an existing block.
 >    ```
 >    <xml name="xrefs">
 >      <xrefs>
