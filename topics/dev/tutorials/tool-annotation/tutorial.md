@@ -193,6 +193,72 @@ To link a Galaxy tool to its corresponding bio.tools entry, we need to first fin
 
 Now we have the wrapper, and can add the bio.tools entry.
 
+{% include _includes/cyoa-choices.html option1="Add entry to toolsuite" option2="Add entry to single tool" default="Ideal: Add bio.tools ID to toolsuite" text="How do you want to add the bio.tools entry?" disambiguation="biotool"%}
+
+<div class="Add-entry-to-toolsuite" markdown="1">
+
+> <hands-on-title>Check for an existing xrefs section</hands-on-title>
+> 
+> 1. Open the Galaxy tool `macros.xml` file (*If this does not exist*: You have to add the entry to a single tool instead)
+> 2. Check if a `xml name="xrefs"` section exists in this file.
+>
+{: .hands_on}
+
+{% include _includes/cyoa-choices.html option1="Yes, an xrefs section exists" option2="No, an xrefs section does not exist" default="No, an xrefs section does not exist" text="Does an xref section already exist?" disambiguation="biotool"%}
+
+<div class="yes-exists" markdown="1">
+
+> <hands-on-title>Add bio.tools entry to the Galaxy toolsuite</hands-on-title>
+> 
+> 1. In the `macros.xml` file, add the following lines into the existing `xrefs` section:
+>    ```
+>      <xrefs>
+>          <xref type="bio.tools">biotool-id</xref>
+>      </xrefs>
+>    ```
+> 2. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
+>
+>    This section should now look a bit like this, but with other xref text inside:
+>    <xml name="xrefs">
+>      <xrefs>
+>          <xref type="other cool stuff">supercool</xref>
+>          <xref type="bio.tools">your-biotool-id</xref>
+>      </xrefs>
+>    </xml>
+>
+> 6. Commit the change on a new branch
+> 7. Make a pull request (PR) against the original repository
+> 8. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 9. Make sure to respond to any feedback from the owner of the wrapper
+>
+{: .hands_on}
+
+</div>
+
+<div class="no-exist" markdown="1">
+
+> <hands-on-title>Add bio.tools entry to the Galaxy toolsuite</hands-on-title>
+>
+> 1. In the `macros.xml` file, add the following lines anywhere that does not break an existing block.
+>    ```
+>    <xml name="xrefs">
+>      <xrefs>
+>          <xref type="bio.tools">biotool-id</xref>
+>      </xrefs>
+>    </xml>
+>    ```
+> 2. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
+> 3. Commit the change on a new branch
+> 4. Make a pull request (PR) against the original repository
+> 5. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 6. Make sure to respond to any feedback from the owner of the wrapper 
+> 
+{: .hands_on}
+
+</div>
+
+<div class="Add-entry-to-single-tool" markdown="1">
+
 > <hands-on-title>Add bio.tools entry to the Galaxy wrapper</hands-on-title>
 > 
 > 1. Open the Galaxy tool XML file
@@ -213,5 +279,9 @@ Now we have the wrapper, and can add the bio.tools entry.
 > 7. Make sure to respond to any feedback from the owner of the wrapper
 >
 {: .hands_on}
+
+</div>
+
+</div>
 
 # Conclusion
