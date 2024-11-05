@@ -25,6 +25,8 @@ contributions:
     - bebatut
     - supernord
     - paulzierep
+  editor:
+    - nomadscientist
 
 ---
 
