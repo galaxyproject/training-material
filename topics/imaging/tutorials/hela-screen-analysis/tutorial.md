@@ -142,11 +142,12 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >    - {% icon param-file %} *"Source file"*: output of {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %}
 >    - *"Threshold Algorithm"*: `Otsu`
 >    - *"Dark Background"*: `Yes`
-> 3. {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %} with the following parameters to split touching objects:
+> 3. {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %} with the following parameters to split touching objects:
 >    - {% icon param-file %} *"Source file"*: output of {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %}
->    - *"Minimum distance between two objects."*: `20`
+>    - *"Mode":* `Watershed transform`
+>    - *"Minimum distance between two objects"*: `20`
 > 4. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features from the segmented objects:
->    - {% icon param-file %} *"Label file"*: output of {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %}
+>    - {% icon param-file %} *"Label file"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
 >    - *"Use original image to compute additional features."*: `No original image`
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*:
@@ -155,7 +156,7 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 >        - {% icon param-check %} `Eccentricity`
 >        - {% icon param-check %} `Major Axis Length`
 > 5. {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1) %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
->    - {% icon param-file %} *"Source file"*: output of {% tool [Split binary image using watershed transformation](toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1-2) %}
+>    - {% icon param-file %} *"Source file"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
 >    - {% icon param-file %} *"Feature file"*: output of {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %}
 >    - {% icon param-file %} *"Rules file"*: rules file
 > 6. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features the final readout from the segmented objects:
