@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Introduction to image analysis using Galaxy"
+title: "Introduction to Image Analysis using Galaxy"
 zenodo_link: https://zenodo.org/record/3362976
 level: Introductory
 questions:
@@ -50,7 +50,7 @@ This tutorial shows how to use Galaxy to perform basic image analysis tasks such
 >
 {: .agenda}
 
-# Getting data
+# Getting Data
 
 The dataset required for this tutorial is available from [Zenodo](https://zenodo.org/record/3362976) and
 contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](https://en.wikipedia.org/wiki/HeLa) nuclei ([more information](https://zenodo.org/record/3362976)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
@@ -223,7 +223,7 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    - *"Contour color"*: `red`
 >    - *"Show labels"*: `yes`
 >    - *"Label color"*: `yellow`
-> 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance
+> 8. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and assess the segmentation performance.
 > 9. {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} with the following parameters to count the segmented objects in the image:
 >    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4-2) %})
 >
