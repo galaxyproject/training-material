@@ -197,17 +197,19 @@ Now we want to apply our extracted workflow to a series of images and merge the 
 > 1. Create a new workflow in the workflow editor.
 >
 >    {% snippet faqs/galaxy/workflows_create_new.md %}
-> 2. Add a {% tool Input dataset collection %} node and name it `input images`
-> 3. Add a {% tool Input dataset %} node and name it `rules`
-> 4. Add the **feature_extraction** workflow as node.
->    - {% icon param-file %} *"input image"*: `input images` output of {% tool Input dataset collection %}
->    - {% icon param-file %} *"filter rules"*: `rules` output of {% tool Input dataset %}
-> 5. Add a {% tool Collapse Collection %} node.
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **feature_extraction** workflow
->    - *"Keep one header line"*: `Yes`
->    - *"Append File name"*: `No`
->    - Mark the tool output as workflow output
-> 6. Save your workflow and name it `analyze_screen`
+>
+> 2. Select "Input dataset collection" from the list of tools. The step {% icon param-collection %} **1: Input Dataset Collection** appears in your workflow. Change the "Label" of this step to `input images`.
+> 3. Add the input dataset {% icon param-file %} **2: rules** to your workflow (select "Input dataset" from the list of tools and set the "Label" of the newly created step to `rules`).
+> 4. Add the {% icon workflow %} **feature_extraction** workflow as a sub-workflow:
+>    - Expand the "Workflows" section in the list of tools and select "feature_extraction" to add it to the workflow.
+>    - Connect the output of {% icon param-file %} **1: input images** to the "input image" input of {% icon workflow %} **3: feature_extraction**.
+>    - Connect the output of {% icon param-file %} **2: rules** to the "filter rules" input of {% icon workflow %} **3: feature_extraction**.
+> 5. Create the step {% icon tool %} **4: Collapse Collection** in the workflow (by choosing "Collapse Collection" from the list of tools).
+>    - Connect the output "output (tabular)" of {% icon workflow %} **3: feature_extraction** to {% icon tool %} **4: Collapse Collection**.
+>    - Set *"Keep one header line"* of {% icon tool %} **4: Collapse Collection**: `Yes`
+>    - Set *"Prepend File name"* of {% icon tool %} **4: Collapse Collection**: `No`
+>    - Mark the output of {% icon tool %} **4: Collapse Collection** as the primary workflow output.
+> 6. Save your workflow and name it `analyze_screen`.
 {: .hands_on}
 
 The resulting workflow should look something like this:
