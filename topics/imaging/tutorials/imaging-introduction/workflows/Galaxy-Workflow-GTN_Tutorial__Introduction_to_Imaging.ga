@@ -8,10 +8,16 @@
             "identifier":"https://orcid.org/0000-0002-2315-9247",
             "name":"Till Korten",
             "url":"https://github.com/thawn/"
+        },
+        {
+            "class":"Person",
+            "identifier":"https://orcid.org/0000-0003-1323-3762",
+            "name":"Leonid Kostrykin",
+            "url":"https://github.com/kostrykin/"
         }
     ],
     "license": "MIT",
-    "name": "Workflow constructed from Tutorial 'Introduction to image analysis using Galaxy'",
+    "name": "Workflow constructed from Tutorial 'Introduction to Image Analysis using Galaxy'",
     "steps": {
         "0": {
             "annotation": "",
@@ -19,71 +25,27 @@
             "errors": null,
             "id": 0,
             "input_connections": {},
-            "inputs": [
-                {
-                    "description": "",
-                    "name": "input_image"
-                }
-            ],
-            "label": "input_image",
+            "inputs": [],
+            "label": null,
             "name": "Input dataset",
             "outputs": [],
             "position": {
                 "left": 0.0,
-                "top": 184.22997472088954
+                "top": 75.09814526405907
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "3414473c-85fe-41b7-9492-61afc45dd847",
+            "uuid": "5fe09045-7605-4907-9e93-8144906b2fee",
             "when": null,
             "workflow_outputs": []
         },
         "1": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "errors": null,
             "id": 1,
-            "input_connections": {
-                "input": {
-                    "id": 0,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Histogram equalization",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 294.6275348549688,
-                "top": 9.67764154070423
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
-            "tool_shed_repository": {
-                "changeset_revision": "70316d792fc9",
-                "name": "2d_histogram_equalization",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"h_type\": \"clahe\", \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.1",
-            "type": "tool",
-            "uuid": "ad893e74-ea5b-4fe5-8c1a-d6226cddc64c",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "2": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2",
-            "errors": null,
-            "id": 2,
             "input_connections": {
                 "input_file": {
                     "id": 0,
@@ -92,7 +54,7 @@
             },
             "inputs": [],
             "label": null,
-            "name": "Image Info",
+            "name": "Show image info",
             "outputs": [
                 {
                     "name": "output",
@@ -100,38 +62,77 @@
                 }
             ],
             "position": {
-                "left": 305.1611618482082,
-                "top": 154.87238386658447
+                "left": 307.443207709823,
+                "top": 4.681629498277772
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/0.2",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_info/ip_imageinfo/5.7.1+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "7b6d9412c7f8",
+                "changeset_revision": "f8b4eada923c",
                 "name": "image_info",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.2",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input_file\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.7.1+galaxy1",
             "type": "tool",
-            "uuid": "b1419eae-3264-4e43-9c60-761e56ab9bdf",
+            "uuid": "81eb28f9-5ed1-4bfb-a3d9-c5993eb215bd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter 2-D image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 307.4371639943331,
+                "top": 159.02788690822547
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "d51310ab328a",
+                "name": "2d_simple_filter",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filter\": {\"filter_type\": \"gaussian\", \"__current_case__\": 0, \"size\": \"3.0\"}, \"input\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.12.0+galaxy1",
+            "type": "tool",
+            "uuid": "291ce9a8-0c54-40e5-bc15-937dbc363737",
             "when": null,
             "workflow_outputs": []
         },
         "3": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
             "errors": null,
             "id": 3,
             "input_connections": {
                 "input": {
-                    "id": 0,
+                    "id": 2,
                     "output_name": "output"
                 }
             },
             "inputs": [],
             "label": null,
-            "name": "Filter Image",
+            "name": "Perform histogram equalization",
             "outputs": [
                 {
                     "name": "output",
@@ -139,38 +140,38 @@
                 }
             ],
             "position": {
-                "left": 320.6808506504364,
-                "top": 266.1656937886696
+                "left": 616.6426868083374,
+                "top": 10.010879811099102
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.18.1+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "dba87c4b32d3",
-                "name": "2d_simple_filter",
+                "changeset_revision": "b1c2c210813c",
+                "name": "2d_histogram_equalization",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filter_type\": \"gaussian\", \"input\": null, \"radius\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.3",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"h_type\": \"clahe\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy0",
             "type": "tool",
-            "uuid": "377e7324-da8d-495a-8487-3eddcd6e4149",
+            "uuid": "11bc3613-7db1-46e9-be6d-52c3c3237349",
             "when": null,
             "workflow_outputs": []
         },
         "4": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
             "errors": null,
             "id": 4,
             "input_connections": {
                 "input": {
-                    "id": 0,
+                    "id": 2,
                     "output_name": "output"
                 }
             },
             "inputs": [],
             "label": null,
-            "name": "Filter Image",
+            "name": "Threshold image",
             "outputs": [
                 {
                     "name": "output",
@@ -178,38 +179,38 @@
                 }
             ],
             "position": {
-                "left": 366.7675666682015,
-                "top": 499.34471491120644
+                "left": 623.8274194890064,
+                "top": 224.12262653953576
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
             "tool_shed_repository": {
-                "changeset_revision": "dba87c4b32d3",
-                "name": "2d_simple_filter",
+                "changeset_revision": "699a5e9146b3",
+                "name": "2d_auto_threshold",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filter_type\": \"gaussian\", \"input\": null, \"radius\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.3",
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"threshold\": \"0\", \"block_size\": \"0\", \"offset\": \"0.0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy3",
             "type": "tool",
-            "uuid": "3739303e-2f0d-4a96-8ff8-b5a4d8e3ef74",
+            "uuid": "457f4dcb-ea33-41f5-a7ca-4b387eedc508",
             "when": null,
             "workflow_outputs": []
         },
         "5": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
             "errors": null,
             "id": 5,
             "input_connections": {
-                "input_file": {
-                    "id": 0,
+                "input": {
+                    "id": 4,
                     "output_name": "output"
                 }
             },
             "inputs": [],
             "label": null,
-            "name": "Convert image",
+            "name": "Convert binary image to label map",
             "outputs": [
                 {
                     "name": "output",
@@ -217,321 +218,96 @@
                 }
             ],
             "position": {
-                "left": 290.09445140540004,
-                "top": 763.8582009100585
+                "left": 930.0670147353778,
+                "top": 220.8295723934341
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
             "tool_shed_repository": {
-                "changeset_revision": "10eed33aa9b2",
-                "name": "bfconvert",
+                "changeset_revision": "984358e43242",
+                "name": "binary2labelimage",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"bigtiff\": false, \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": null, \"noflat\": true, \"out_format\": \"png\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "6.7.0+galaxy1",
+            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"cca\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5+galaxy0",
             "type": "tool",
-            "uuid": "b57bd063-57a5-4e74-a16c-597e377c2ca4",
+            "uuid": "a39ccbb3-5229-4dc8-b2da-4c010b0cab57",
             "when": null,
             "workflow_outputs": []
         },
         "6": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
             "errors": null,
             "id": 6,
             "input_connections": {
-                "input_file": {
-                    "id": 1,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Convert image",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 616.8235051619221,
-                "top": 0.0
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "10eed33aa9b2",
-                "name": "bfconvert",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"bigtiff\": false, \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": true, \"out_format\": \"png\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "6.7.0+galaxy1",
-            "type": "tool",
-            "uuid": "67eebe95-32f8-4a51-939c-15e6b9651372",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "7": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
-            "errors": null,
-            "id": 7,
-            "input_connections": {
-                "input": {
-                    "id": 3,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Auto Threshold",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 565.4553644787659,
-                "top": 271.8601974142642
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
-            "tool_shed_repository": {
-                "changeset_revision": "0c777d708acc",
-                "name": "2d_auto_threshold",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"input\", \"block_size\": \"5\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dark_bg\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"th_method\": \"otsu\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.5",
-            "type": "tool",
-            "uuid": "4abd1ecb-f54a-4cff-adda-65ed63421c01",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "8": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
-            "errors": null,
-            "id": 8,
-            "input_connections": {
-                "input": {
-                    "id": 3,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Histogram equalization",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 648.6890406867856,
-                "top": 486.4509894806307
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_histogram_equalization/ip_histogram_equalization/0.0.1",
-            "tool_shed_repository": {
-                "changeset_revision": "70316d792fc9",
-                "name": "2d_histogram_equalization",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"h_type\": \"clahe\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.1",
-            "type": "tool",
-            "uuid": "e5e01d8f-229d-48e6-8cda-e47730466d0b",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "9": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4",
-            "errors": null,
-            "id": 9,
-            "input_connections": {
-                "input": {
-                    "id": 7,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Binary 2 Label",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 801.4373365054726,
-                "top": 268.7031633940634
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.4",
-            "tool_shed_repository": {
-                "changeset_revision": "6e65fd971e13",
-                "name": "binary2labelimage",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.4",
-            "type": "tool",
-            "uuid": "3ca6831a-9de0-4419-91d6-e309dd8aca47",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "10": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
-            "errors": null,
-            "id": 10,
-            "input_connections": {
-                "input_file": {
-                    "id": 8,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Convert image",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 928.8992030203831,
-                "top": 697.501166488679
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "10eed33aa9b2",
-                "name": "bfconvert",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"bigtiff\": false, \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": true, \"out_format\": \"png\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "6.7.0+galaxy1",
-            "type": "tool",
-            "uuid": "fcfbce5d-6b76-4a4c-adfb-0e9f1a313512",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "11": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3",
-            "errors": null,
-            "id": 11,
-            "input_connections": {
                 "method_option|im1": {
-                    "id": 6,
+                    "id": 3,
                     "output_name": "output"
                 },
                 "method_option|im2": {
-                    "id": 9,
+                    "id": 5,
                     "output_name": "output"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                },
+                {
+                    "description": "runtime parameter for tool Overlay images",
+                    "name": "method_option"
+                }
+            ],
             "label": null,
-            "name": "Overlay Images",
+            "name": "Overlay images",
             "outputs": [
                 {
-                    "name": "out",
-                    "type": "tiff"
+                    "name": "out_png",
+                    "type": "png"
                 }
             ],
             "position": {
-                "left": 1103.1565029542078,
-                "top": 4.927314536610737
+                "left": 1314.9399120401854,
+                "top": 0.0
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.3",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy4",
             "tool_shed_repository": {
-                "changeset_revision": "b74693340624",
+                "changeset_revision": "ca362a9bfa20",
                 "name": "overlay_images",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"method_option\": {\"method\": \"seg_contour\", \"__current_case__\": 2, \"im1\": {\"__class__\": \"ConnectedValue\"}, \"im2\": {\"__class__\": \"ConnectedValue\"}, \"thickness\": \"2\", \"color\": \"#ff0000\", \"show_label\": true, \"label_color\": \"#ffff00\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.3",
+            "tool_version": "0.0.4+galaxy4",
             "type": "tool",
-            "uuid": "e6920848-10eb-406c-939e-6bfae3041346",
+            "uuid": "e0e7dddd-8cdd-4a0b-85cb-bc964606c1a0",
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "out",
-                    "output_name": "out",
-                    "uuid": "85029ccb-ebb3-4a91-9ba3-d1daefd13efc"
+                    "label": "out_png",
+                    "output_name": "out_png",
+                    "uuid": "d362c206-756d-4f04-82f0-bd6f24907e04"
                 }
             ]
         },
-        "12": {
+        "7": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2",
             "errors": null,
-            "id": 12,
-            "input_connections": {
-                "input_file": {
-                    "id": 9,
-                    "output_name": "output"
-                }
-            },
-            "inputs": [],
-            "label": null,
-            "name": "Convert image",
-            "outputs": [
-                {
-                    "name": "output",
-                    "type": "tiff"
-                }
-            ],
-            "position": {
-                "left": 1092.210348169852,
-                "top": 262.0055143155444
-            },
-            "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy1",
-            "tool_shed_repository": {
-                "changeset_revision": "10eed33aa9b2",
-                "name": "bfconvert",
-                "owner": "imgteam",
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            },
-            "tool_state": "{\"__input_ext\": \"tiff\", \"bigtiff\": false, \"channel_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": true, \"out_format\": \"png\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "6.7.0+galaxy1",
-            "type": "tool",
-            "uuid": "822dc276-73d8-45d6-af66-9c3d25a947b8",
-            "when": null,
-            "workflow_outputs": []
-        },
-        "13": {
-            "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5",
-            "errors": null,
-            "id": 13,
+            "id": 7,
             "input_connections": {
                 "input": {
-                    "id": 9,
+                    "id": 5,
                     "output_name": "output"
                 }
             },
             "inputs": [],
             "label": null,
-            "name": "Count Objects",
+            "name": "Count objects in label map",
             "outputs": [
                 {
                     "name": "output",
@@ -539,27 +315,27 @@
                 }
             ],
             "position": {
-                "left": 1172.3462617863868,
-                "top": 500.229868675786
+                "left": 1320.8498185422127,
+                "top": 225.5405367580745
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2",
             "tool_shed_repository": {
-                "changeset_revision": "5bf8eb50b280",
+                "changeset_revision": "b58447a2eed2",
                 "name": "count_objects",
                 "owner": "imgteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
             "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "0.0.5",
+            "tool_version": "0.0.5-2",
             "type": "tool",
-            "uuid": "3c7f2b09-2fd6-452a-983d-ca120067c1a4",
+            "uuid": "953d1fd0-67cb-4452-8553-296d316e2101",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "output",
                     "output_name": "output",
-                    "uuid": "1446f4bf-b031-405a-84f0-88acc1a5c8a3"
+                    "uuid": "9c56017b-20c7-4ad3-8340-d36dd6b2e7b4"
                 }
             ]
         }
