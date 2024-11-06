@@ -83,7 +83,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - {% icon param-file %} *"input_file"*: `B2.zip`
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
@@ -92,7 +92,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    {% snippet faqs/galaxy/datasets_rename.md %}
 >
 > 5. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - {% icon param-file %} *"input_file"*: `B2.zip`
 >    - *"Extract single file"*: `All files`
 >
 > 6. Rename {% icon galaxy-pencil %} the resulting collection to `control`
@@ -110,7 +110,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 8. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} to extract the zipped screen:
->    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - {% icon param-file %} *"input_file"*: `B3.zip`
 >    - *"Extract single file"*: `All files`
 >
 > 9. Rename {% icon galaxy-pencil %} the collection to `PLK1`
@@ -134,51 +134,53 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 
 > <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
-> 1. {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %} with the following parameters to smooth the image:
->    - *"Filter type"*: `Gaussian Blur`
->    - *"Radius/Sigma"*: `3`
->    - {% icon param-file %} *"Source file"*: `testinput.tif` file
-> 2. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %} with the following parameters to segment the image:
->    - {% icon param-file %} *"Source file"*: output of {% tool [Filter 2D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3-3) %}
->    - *"Threshold Algorithm"*: `Otsu`
->    - *"Dark Background"*: `Yes`
+> 1. {% tool [Filter 2-D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1) %} with the following parameters to smooth the image:
+>    - {% icon param-file %} *"Input image"*: `testinput.tif` file
+>    - *"Filter type"*: `Gaussian`
+>    - *"Sigma"*: `3`
+> 2. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3) %} with the following parameters to segment the image:
+>    - {% icon param-file %} *"Input image"*: output of {% tool [Filter 2-D image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1) %}
+>    - *"Thresholding method"*: `Globally adaptive / Otsu`
 > 3. {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %} with the following parameters to split touching objects:
->    - {% icon param-file %} *"Source file"*: output of {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5-2) %}
+>    - {% icon param-file %} *"Binary image"*: output of {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3) %}
 >    - *"Mode":* `Watershed transform`
 >    - *"Minimum distance between two objects"*: `20`
-> 4. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features from the segmented objects:
->    - {% icon param-file %} *"Label file"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
->    - *"Use original image to compute additional features."*: `No original image`
+> 4. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters to extract features from the segmented objects:
+>    - {% icon param-file %} *"Label map"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
+>    - *"Use the intensity image to compute additional features"*: `No intensity image`
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*:
->        - {% icon param-check %} `Add label id of label image`
+>        - {% icon param-check %} `Label from the label map`
 >        - {% icon param-check %} `Area`
 >        - {% icon param-check %} `Eccentricity`
->        - {% icon param-check %} `Major Axis Length`
-> 5. {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1) %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
->    - {% icon param-file %} *"Source file"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
->    - {% icon param-file %} *"Feature file"*: output of {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %}
->    - {% icon param-file %} *"Rules file"*: rules file
-> 6. {% tool [Extract 2D features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1-2) %} with the following parameters to extract features the final readout from the segmented objects:
->    - {% icon param-file %} *"Label file"*: output of {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1) %}
->    - *"Use original image to compute additional features."*: `Use original image`
->    - {% icon param-file %} *"Original image file"*: `testinput.tif` file
+>        - {% icon param-check %} `Major axis length`
+> 5. {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4) %} with the following parameters to filter the label map from 3. with the extracted features and a set of rules:
+>    - {% icon param-file %} *"Label map"*: output of {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %}
+>    - {% icon param-file %} *"Features"*: output of {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %}
+>    - {% icon param-file %} *"Rules"*: `rules` file
+> 6. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters to extract features the final readout from the segmented objects:
+>    - {% icon param-file %} *"Label map"*: output of {% tool [Filter label map by rules](toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4) %}
+>    - *"Use the intensity image to compute additional features"*: `Use intensity image`
+>    - {% icon param-file %} *"Intensity image"*: `testinput.tif` file
 >    - *"Select features to compute"*: `Select features`
 >    - *"Available features"*:
->      - {% icon param-check %} `Mean Intensity`
+>      - {% icon param-check %} `Mean Intensity (requires original image)`
 >      - {% icon param-check %} `Area`
->      - {% icon param-check %} `Major Axis Length`
-> 7. Now we can extract the workflow for batch processing
+>      - {% icon param-check %} `Major axis length`
+> 7. Now we can extract the workflow for batch processing:
 >    - Name it "feature_extraction".
->    - Remember to exclude {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} by unchecking the tool.
 >    - Don't treat `B2.zip` and `B3.zip` as inputs (the workflow is supposed to be applied to the images directly).
+>    - Exclude {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} by unchecking the tool (3 times).
 >
 >    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
-> 8. Edit the workflow you just created
->    - Add the tool {% tool Input dataset %} and name it `input image`.
->    - Name the input for the rules file `filter rules`.
->    - Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).
+> 8. Edit the workflow you just created:
+>    - Select "Input dataset" from the list of tools. The step {% icon param-file %} **8: Input Dataset** appears.
+>    - Change the "Label" of {% icon param-file %} **8: Input Dataset** to `input image`.
+>    - Change the "Label" of {% icon param-file %} **1: rules** to `filter rules`.
+>    - Connect the output of {% icon param-file %} **8: input image** to the input of {% icon tool %} **2: Filter 2-D image**.
+>    - Connect the output of {% icon param-file %} **8: input image** to the "Intensity image" input of {% icon tool %} **7: Extract image features**.
+>    - Mark the results of {% icon tool %} **6: Filter label map by rules** and {% icon tool %} **7: Extract image features** as the primary outputs of the workflow (by clicking on the checkboxes of the outputs).
 >
 {: .hands_on}
 
