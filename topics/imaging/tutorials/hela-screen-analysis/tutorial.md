@@ -219,11 +219,11 @@ The resulting workflow should look something like this:
 
 > <hands-on-title>Run screen analysis workflow</hands-on-title>
 >
-> 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
+> 1. Run the "analyze_screen" workflow on the `control` screen using the `rules` file.
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 >
-> 2. Run the screen analysis workflow {% icon workflow %} on the `PLK1` screen and the `rules` file
+> 2. Run the "analyze_screen" workflow on the `PLK1` screen using the `rules` file.
 >
 {: .hands_on}
 
