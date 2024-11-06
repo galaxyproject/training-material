@@ -186,11 +186,11 @@ First, we will create and test a workflow which extracts mean DAPI intensity, ar
 
 The resulting workflow should look something like this:
 
-![feature extraction workflow](../../images/hela-screen-analysis/feature_extraction_workflow.png "Feature extraction subworkflow.")
+![feature extraction workflow](../../images/hela-screen-analysis/feature_extraction_workflow.png "Feature extraction workflow.")
 
 # Apply workflow to screen
 
-Now we want to apply our extracted workflow to `original data` and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.
+Now we want to apply our extracted workflow to a series of images and merge the results. For this purpose, we create a workflow which uses the previously created workflow as a sub-workflow.
 
 > <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
