@@ -8,6 +8,12 @@
             "identifier":"https://orcid.org/0000-0002-2315-9247",
             "name":"Till Korten",
             "url":"https://github.com/thawn/"
+        },
+        {
+            "class":"Person",
+            "identifier":"https://orcid.org/0000-0003-1323-3762",
+            "name":"Leonid Kostrykin",
+            "url":"https://github.com/kostrykin/"
         }
     ],
     "license": "MIT",
@@ -29,14 +35,14 @@
             "name": "Input dataset collection",
             "outputs": [],
             "position": {
-                "left": 0.0,
-                "top": 0.0
+                "left": 0,
+                "top": 0
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null, \"collection_type\": \"list\"}",
             "tool_version": null,
             "type": "data_collection_input",
-            "uuid": "f021a2d0-b90b-4f1e-830c-127af3741b90",
+            "uuid": "f58fad4c-b657-4f02-99ee-839f6d89b19a",
             "when": null,
             "workflow_outputs": []
         },
@@ -56,14 +62,14 @@
             "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 3.140430845923717,
-                "top": 127.71085440089814
+                "left": 0,
+                "top": 120
             },
             "tool_id": null,
             "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "8040611c-247d-4339-b8be-3858f01a0d6c",
+            "uuid": "88e6cadf-78bf-4e30-bb2d-c601532dbd7a",
             "when": null,
             "workflow_outputs": []
         },
@@ -71,14 +77,14 @@
             "annotation": "",
             "id": 2,
             "input_connections": {
+                "filter rules": {
+                    "id": 1,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "output"
+                },
                 "input image": {
                     "id": 0,
                     "input_subworkflow_step_id": 0,
-                    "output_name": "output"
-                },
-                "rules": {
-                    "id": 1,
-                    "input_subworkflow_step_id": 1,
                     "output_name": "output"
                 }
             },
@@ -87,14 +93,18 @@
             "name": "feature_extraction",
             "outputs": [],
             "position": {
-                "left": 298.3409303627538,
-                "top": 8.3744822557966
+                "left": 260,
+                "top": 0
             },
             "subworkflow": {
                 "a_galaxy_workflow": "true",
                 "annotation": "",
+                "comments": [],
                 "format-version": "0.1",
                 "name": "feature_extraction",
+                "report": {
+                    "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+                },
                 "steps": {
                     "0": {
                         "annotation": "",
@@ -112,14 +122,14 @@
                         "name": "Input dataset",
                         "outputs": [],
                         "position": {
-                            "left": 10.46055506794869,
-                            "top": 133.99089344526203
+                            "left": 480,
+                            "top": 320
                         },
                         "tool_id": null,
                         "tool_state": "{\"optional\": false, \"tag\": null}",
                         "tool_version": null,
                         "type": "data_input",
-                        "uuid": "15544dd3-65e5-4fdb-8648-3d8425bc77a8",
+                        "uuid": "061fd715-3ad3-4374-bb4b-6135629e6cc0",
                         "when": null,
                         "workflow_outputs": []
                     },
@@ -132,27 +142,27 @@
                         "inputs": [
                             {
                                 "description": "",
-                                "name": "rules"
+                                "name": "filter rules"
                             }
                         ],
-                        "label": "rules",
+                        "label": "filter rules",
                         "name": "Input dataset",
                         "outputs": [],
                         "position": {
-                            "left": 0.0,
-                            "top": 648.1594953805964
+                            "left": 800,
+                            "top": 320
                         },
                         "tool_id": null,
                         "tool_state": "{\"optional\": false, \"tag\": null}",
                         "tool_version": null,
                         "type": "data_input",
-                        "uuid": "39010bc8-dd57-4777-a325-c6d04c9f8eb6",
+                        "uuid": "bcfb3a7b-bd44-422d-af27-5ad03cee07eb",
                         "when": null,
                         "workflow_outputs": []
                     },
                     "2": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
                         "errors": null,
                         "id": 2,
                         "input_connections": {
@@ -163,7 +173,7 @@
                         },
                         "inputs": [],
                         "label": null,
-                        "name": "Filter Image",
+                        "name": "Filter 2-D image",
                         "outputs": [
                             {
                                 "name": "output",
@@ -171,27 +181,27 @@
                             }
                         ],
                         "position": {
-                            "left": 337.9146525739101,
-                            "top": 0.0
+                            "left": 0,
+                            "top": 0
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1",
                         "tool_shed_repository": {
-                            "changeset_revision": "dba87c4b32d3",
+                            "changeset_revision": "d51310ab328a",
                             "name": "2d_simple_filter",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filter_type\": \"gaussian\", \"input\": null, \"radius\": \"3\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.0.3",
+                        "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"filter\": {\"filter_type\": \"gaussian\", \"__current_case__\": 0, \"size\": \"3.0\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "1.12.0+galaxy1",
                         "type": "tool",
-                        "uuid": "6d938741-3596-48d0-8f1b-531f841507d2",
+                        "uuid": "9d2fc22b-b588-471c-a132-6b8bbda5ee97",
                         "when": null,
                         "workflow_outputs": []
                     },
                     "3": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
                         "errors": null,
                         "id": 3,
                         "input_connections": {
@@ -202,7 +212,7 @@
                         },
                         "inputs": [],
                         "label": null,
-                        "name": "Auto Threshold",
+                        "name": "Threshold image",
                         "outputs": [
                             {
                                 "name": "output",
@@ -210,27 +220,27 @@
                             }
                         ],
                         "position": {
-                            "left": 588.2965017615786,
-                            "top": 0.15500429160880458
+                            "left": 250,
+                            "top": 30
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3",
                         "tool_shed_repository": {
-                            "changeset_revision": "0c777d708acc",
+                            "changeset_revision": "699a5e9146b3",
                             "name": "2d_auto_threshold",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"input\", \"block_size\": \"5\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"dark_bg\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"th_method\": \"otsu\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.0.5",
+                        "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"otsu\", \"__current_case__\": 1, \"threshold\": \"0\", \"block_size\": \"0\", \"offset\": \"0.0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.18.1+galaxy3",
                         "type": "tool",
-                        "uuid": "d51887b1-f5aa-407c-b2c6-f1229d3c3316",
+                        "uuid": "dd096f5b-e497-4697-84e0-1a9585235736",
                         "when": null,
                         "workflow_outputs": []
                     },
                     "4": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
                         "errors": null,
                         "id": 4,
                         "input_connections": {
@@ -241,7 +251,7 @@
                         },
                         "inputs": [],
                         "label": null,
-                        "name": "Split objects",
+                        "name": "Convert binary image to label map",
                         "outputs": [
                             {
                                 "name": "output",
@@ -249,27 +259,27 @@
                             }
                         ],
                         "position": {
-                            "left": 856.4482983239258,
-                            "top": 10.305598069792723
+                            "left": 500,
+                            "top": 60
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
                         "tool_shed_repository": {
-                            "changeset_revision": "f8f7987586b7",
-                            "name": "2d_split_binaryimage_by_watershed",
+                            "changeset_revision": "984358e43242",
+                            "name": "binary2labelimage",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"min_distance\": \"20\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.0.1",
+                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"watershed\", \"__current_case__\": 1, \"min_distance\": \"20\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.5+galaxy0",
                         "type": "tool",
-                        "uuid": "42610ec6-d632-4397-a4b2-ea1181acbccf",
+                        "uuid": "46924577-7b9b-416d-9bb4-3ed0b36c1ffd",
                         "when": null,
                         "workflow_outputs": []
                     },
                     "5": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
                         "errors": null,
                         "id": 5,
                         "input_connections": {
@@ -280,7 +290,7 @@
                         },
                         "inputs": [],
                         "label": null,
-                        "name": "2D Feature Extraction",
+                        "name": "Extract image features",
                         "outputs": [
                             {
                                 "name": "output",
@@ -288,27 +298,27 @@
                             }
                         ],
                         "position": {
-                            "left": 618.2992804474043,
-                            "top": 532.6303887882905
+                            "left": 770,
+                            "top": 170
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
                         "tool_shed_repository": {
-                            "changeset_revision": "5791a7f65275",
+                            "changeset_revision": "5bc8cdc17fd0",
                             "name": "2d_feature_extraction",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--label\", \"--area\", \"--eccentricity\", \"--major_axis_length\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"no_original\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.1.1",
+                        "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--label\", \"--area\", \"--eccentricity\", \"--major_axis_length\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"no_original\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.18.1+galaxy0",
                         "type": "tool",
-                        "uuid": "798a94a8-3dfa-46bc-9972-191b5a7527c7",
+                        "uuid": "8b2be7cc-bda0-4a3d-80b8-ae58eab23212",
                         "when": null,
                         "workflow_outputs": []
                     },
                     "6": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4",
                         "errors": null,
                         "id": 6,
                         "input_connections": {
@@ -327,7 +337,7 @@
                         },
                         "inputs": [],
                         "label": null,
-                        "name": "Filter segmentation",
+                        "name": "Filter label map by rules",
                         "outputs": [
                             {
                                 "name": "output",
@@ -335,33 +345,33 @@
                             }
                         ],
                         "position": {
-                            "left": 934.6383840869061,
-                            "top": 550.5509793890867
+                            "left": 1080,
+                            "top": 0
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4",
                         "tool_shed_repository": {
-                            "changeset_revision": "e576b73a2e2f",
+                            "changeset_revision": "9d47aabda459",
                             "name": "2d_filter_segmentation_by_features",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_file\": {\"__class__\": \"ConnectedValue\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"rule_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.0.1",
+                        "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_file\": {\"__class__\": \"ConnectedValue\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"rule_file\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.0.1-4",
                         "type": "tool",
-                        "uuid": "4b253c14-4315-431e-baa2-92773c53e8ea",
+                        "uuid": "a4d68d20-91f4-4a4f-8826-79b99f90a26a",
                         "when": null,
                         "workflow_outputs": [
                             {
                                 "label": "output",
                                 "output_name": "output",
-                                "uuid": "b90cbc94-33fd-4600-96b5-8cf0bcaf2e94"
+                                "uuid": "f6f7f638-0f3c-404e-ab2e-5281a0393060"
                             }
                         ]
                     },
                     "7": {
                         "annotation": "",
-                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
                         "errors": null,
                         "id": 7,
                         "input_connections": {
@@ -374,9 +384,14 @@
                                 "output_name": "output"
                             }
                         },
-                        "inputs": [],
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Extract image features",
+                                "name": "use_raw_option"
+                            }
+                        ],
                         "label": null,
-                        "name": "2D Feature Extraction",
+                        "name": "Extract image features",
                         "outputs": [
                             {
                                 "name": "output",
@@ -384,37 +399,37 @@
                             }
                         ],
                         "position": {
-                            "left": 316.54453978928655,
-                            "top": 839.7316069939548
+                            "left": 1120,
+                            "top": 390
                         },
                         "post_job_actions": {},
-                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1",
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0",
                         "tool_shed_repository": {
-                            "changeset_revision": "5791a7f65275",
+                            "changeset_revision": "5bc8cdc17fd0",
                             "name": "2d_feature_extraction",
                             "owner": "imgteam",
                             "tool_shed": "toolshed.g2.bx.psu.edu"
                         },
-                        "tool_state": "{\"__input_ext\": \"tiff\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--mean_intensity\", \"--area\", \"--major_axis_length\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"raw_image\", \"__current_case__\": 1, \"input_raw\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-                        "tool_version": "0.1.1",
+                        "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--mean_intensity\", \"--area\", \"--major_axis_length\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"raw_image\", \"__current_case__\": 1, \"input_raw\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": "0.18.1+galaxy0",
                         "type": "tool",
-                        "uuid": "40d50f9c-ac41-4a34-8212-6c0b67fcc409",
+                        "uuid": "399119ff-fe83-4abf-b273-f7ec9c260842",
                         "when": null,
                         "workflow_outputs": [
                             {
                                 "label": "output",
                                 "output_name": "output",
-                                "uuid": "3d3c037a-50ef-443b-a6f8-8a37db6bfb36"
+                                "uuid": "31da5e27-19fe-465e-95f0-96d3f6dcaba4"
                             }
                         ]
                     }
                 },
-                "tags": "",
-                "uuid": "f6e4d938-7915-4075-a9be-c8d35f1d6f7d"
+                "tags": [],
+                "uuid": "0ccca10e-45d7-40cb-8d5a-d72efab3b626"
             },
             "tool_id": null,
             "type": "subworkflow",
-            "uuid": "ded75e21-4e63-4727-93ab-baeeb239602f",
+            "uuid": "76d5f415-4457-439d-9246-8ed502c4d27b",
             "when": null,
             "workflow_outputs": []
         },
@@ -435,7 +450,7 @@
                     "name": "input_list"
                 }
             ],
-            "label": "merge_table",
+            "label": null,
             "name": "Collapse Collection",
             "outputs": [
                 {
@@ -444,8 +459,8 @@
                 }
             ],
             "position": {
-                "left": 573.742905824752,
-                "top": 29.554536267952393
+                "left": 530,
+                "top": 40
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
@@ -455,21 +470,23 @@
                 "owner": "nml",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"filename\": {\"add_name\": false, \"__current_case__\": 1}, \"input_list\": {\"__class__\": \"RuntimeValue\"}, \"one_header\": true, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "5.1.0",
             "type": "tool",
-            "uuid": "f48f5037-e4ab-4b8c-bd15-059546203e0e",
+            "uuid": "8fa72585-71cf-4950-842b-b2d330dd19a3",
             "when": null,
             "workflow_outputs": [
                 {
                     "label": "output",
                     "output_name": "output",
-                    "uuid": "3fc2324d-233b-4785-9fb7-9c30b2daaef4"
+                    "uuid": "189572e7-e0e6-4818-91b1-441beced67a4"
                 }
             ]
         }
     },
-    "tags": [],
+    "tags": [
+        "imaging"
+    ],
     "uuid": "5baa87ce-32b6-4342-b1b3-bcd779b83ba4",
-    "version": 2
+    "version": 3
 }

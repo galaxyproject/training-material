@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@e1259c3e86b5e23fd7c6ca2a7ce2ba12f1e76105",
+		release: "galaxy-training-network@705a89b07df0b76cc5599cfc88e1fa8c1c2075e3",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -231,7 +231,9 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Author(s)</b>
 			<br/>
 			
-			Till Korten
+			Till Korten, 
+			
+			Leonid Kostrykin
 			
 			
 			<br/>
@@ -239,14 +241,14 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span>
 			<b>Version</b>
 			<br/>
-			5
+			6
 
 			<br/>
 
 			<i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span>
 			<b>Last updated</b>
 			<br/>
-			Dec 5, 2023
+			Nov 6, 2024
 
 			<br/>
 
@@ -264,6 +266,8 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			<b>Tags</b>
 			<br/>
 
+			
+			<div class="label label-default tutorial_tag" style="--color-primary: #ffa9de; --color-darker: #ff83d3; --color-dimmed: #ff97d8;">imaging</div>
 			
 			</br>
 			
@@ -332,13 +336,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<ul class="dropdown-menu">
 					
 					
-					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy Australia</a></li>
-					
-					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy France</a></li>
-					
 					<li class="dropdown-item"><a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy Europe</a></li>
 					
 					<li class="dropdown-item"><a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy Main</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy Australia</a></li>
+					
+					<li class="dropdown-item"><a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Galaxy France</a></li>
 					
 					<li class="dropdown-item hide-when-galaxy-proxy-active">
 						<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/imaging-hela-screen-analysis/versions/analyze-screen">Import to another server (≥23.0+ only!)</a>
@@ -356,13 +360,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
   style 1 stroke:#2c3143,stroke-width:4px;
   2["🛠️ Subworkflow\nfeature_extraction"];
   style 2 fill:#edd,stroke:#900,stroke-width:4px;
-  0 -->|output| 2;
   1 -->|output| 2;
-  3["merge_table"];
+  0 -->|output| 2;
+  3["Collapse Collection"];
   2 -->|output| 3;
-  3fc2324d-233b-4785-9fb7-9c30b2daaef4["Output\noutput"];
-  3 --> 3fc2324d-233b-4785-9fb7-9c30b2daaef4;
-  style 3fc2324d-233b-4785-9fb7-9c30b2daaef4 stroke:#2c3143,stroke-width:4px;</pre>
+  189572e7-e0e6-4818-91b1-441beced67a4["Output\noutput"];
+  3 --> 189572e7-e0e6-4818-91b1-441beced67a4;
+  style 189572e7-e0e6-4818-91b1-441beced67a4 stroke:#2c3143,stroke-width:4px;</pre>
 			<h2>Inputs</h2>
 			<table class="table table-striped">
 				<thead>
@@ -400,7 +404,7 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tr>
 					<td>toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</td>
 					<td>Collapse Collection</td>
-					<td>merge_table</td>
+					<td></td>
 				</tr>
 				
 				</tbody>
@@ -418,11 +422,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 				<tbody>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.0.5</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3">toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy3</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_auto_threshold/0c777d708acc">
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_auto_threshold/699a5e9146b3">
 						View in ToolShed
 					</a>
 					
@@ -430,11 +434,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1">toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.1.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0">toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_feature_extraction/5791a7f65275">
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_feature_extraction/5bc8cdc17fd0">
 						View in ToolShed
 					</a>
 					
@@ -442,11 +446,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1">toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4">toolshed.g2.bx.psu.edu/repos/imgteam/2d_filter_segmentation_by_features/ip_2d_filter_segmentation_by_features/0.0.1-4</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_filter_segmentation_by_features/e576b73a2e2f">
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_filter_segmentation_by_features/9d47aabda459">
 						View in ToolShed
 					</a>
 					
@@ -454,11 +458,11 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/0.0.3</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1">toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy1</a></td>
 				<td>
 					
 					
-					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_simple_filter/dba87c4b32d3">
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/2d_simple_filter/d51310ab328a">
 						View in ToolShed
 					</a>
 					
@@ -466,8 +470,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 			</tr>
 			
 			<tr>
-				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1">toolshed.g2.bx.psu.edu/repos/imgteam/2d_split_binaryimage_by_watershed/ip_2d_split_binaryimage_by_watershed/0.0.1</a></td>
+				<td><a href="https://my.galaxy.training/?path=?tool_id=toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0">toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0</a></td>
 				<td>
+					
+					
+					<a href="https://toolshed.g2.bx.psu.edu/view/imgteam/binary2labelimage/984358e43242">
+						View in ToolShed
+					</a>
 					
 				</td>
 			</tr>
@@ -507,6 +516,13 @@ hgroup p { font-family: monospace; font-size: 0.8rem;}
 					</tr>
 				</thead>
 				<tbody>
+					
+					<tr>
+						<td>8</td>
+						<td><a href="https://github.com/galaxyproject/training-material/commit/3bcc0520cd3a80852d53af428a61c7f5716845de">3bcc0520c</a></td>
+						<td>2024-11-06 16:20:37</td>
+						<td>Update analyze_screen.ga and fix tests</td>
+					</tr>
 					
 					<tr>
 						<td>7</td>
@@ -638,7 +654,7 @@ workflow-install -g GALAXY -a API_KEY -w workflow.ga --publish-workflows
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e1259c3e86b5e23fd7c6ca2a7ce2ba12f1e76105">e1259c3</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/705a89b07df0b76cc5599cfc88e1fa8c1c2075e3">705a89b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
