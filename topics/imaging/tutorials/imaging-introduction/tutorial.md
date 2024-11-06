@@ -15,7 +15,7 @@ objectives:
   - "How to perform basic image processing in Galaxy."
 key_points:
 - The **Image Info** tool can provide valuable metadata information of an image.
-- TIFF files cannot viewed directly in most web browser, but have to be converted.
+- TIFF files cannot viewed directly in most web browser, so a visualization plugin must be used.
 - For visualization, images with a bit-depth more than 8-bit have to be histogram equalized.
 time_estimation: "1H"
 follow_up_training:
@@ -76,7 +76,7 @@ Our objective is to automatically count the number of cells contained in this im
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. {% tool [Unzip](toolshed.g2.bx.psu.edu/repos/imgteam/unzip/unzip/6.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"input_file"*: `Zipped ` input file
+>    - {% icon param-file %} *"input_file"*: `B2.zip`
 >    - *"Extract single file"*: `Single file`
 >    - *"Filepath"*: `B2--W00026--P00001--Z00000--T00000--dapi.tif`
 >
