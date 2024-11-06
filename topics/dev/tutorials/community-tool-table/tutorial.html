@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@b2657cd0007ef7ad923f752b42c0aff6d0c05db0",
+		release: "galaxy-training-network@e1259c3e86b5e23fd7c6ca2a7ce2ba12f1e76105",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creation of an interactive Galaxy tools table for your community">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-11-05 06:02:51 +0000">
+<meta name="DC.date" content="2024-11-06 17:13:06 +0000">
 <meta name="DC.creator" content="Bérénice Batut"><meta name="description" content="Galaxy is an open-source project. Everyone can contribute to its development with core Galaxy development, integration of softwares in Galaxy environment, ...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Development in Galaxy / Creation of an interactive Galaxy tools table for your community / Hands-on: Creation of an interactive Galaxy tools table for your community">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-11-05 06:02:51 +0000",
+  "dateModified": "2024-11-06 17:13:06 +0000",
   "datePublished": "2024-03-13 15:41:48 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -243,7 +243,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creation of an interactive Galaxy tools table for your community",
   "url": "https://training.galaxyproject.org/training-material/topics/dev/tutorials/community-tool-table/tutorial.html",
-  "version": 5,
+  "version": 6,
   "timeRequired": "PT1H",
   "teaches": "- Create a community reviewed table for Galaxy tools within a specific scientific domain\n- Embed an interactive table in a community page",
   "keywords": [
@@ -657,7 +657,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Mar 13, 2024 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 5, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 6, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -675,7 +675,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 5 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 6 </div>
 
     </blockquote>
     </section>
@@ -717,10 +717,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <ol id="markdown-toc">
   <li><a href="#add-your-community-to-the-galaxy-codex-pipeline" id="markdown-toc-add-your-community-to-the-galaxy-codex-pipeline">Add your community to the Galaxy Codex pipeline</a></li>
-  <li><a href="#review-the-generated-interactive-table" id="markdown-toc-review-the-generated-interactive-table">Review the generated interactive table</a>    <ol>
-      <li><a href="#add-a-tools-status-list" id="markdown-toc-add-a-tools-status-list">Add a tools status list</a></li>
-    </ol>
-  </li>
+  <li><a href="#review-the-generated-table-to-curate-tools" id="markdown-toc-review-the-generated-table-to-curate-tools">Review the generated table to curate tools</a></li>
   <li><a href="#embed-the-interactive-table-in-your-community-page-on-the-hub" id="markdown-toc-embed-the-interactive-table-in-your-community-page-on-the-hub">Embed the interactive table in your community page on the Hub</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -786,62 +783,52 @@ Metagenomics
 
 <p>The Pull Request will be reviewed. Make sure to respond to any feedback.</p>
 
-<p>Once the Pull Request is merged, the interactive table will be created and made available online at <code class="language-plaintext highlighter-rouge">https://galaxyproject.github.io/galaxy_codex/&lt;your community&gt;</code>.</p>
+<p>Once the Pull Request is merged, a table with all tool suites and a short description will be created in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/resources/tools_filtered_by_ts_categories.tsv</code></p>
 
-<h1 id="review-the-generated-interactive-table">Review the generated interactive table</h1>
+<h1 id="review-the-generated-table-to-curate-tools">Review the generated table to curate tools</h1>
 
-<p>The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community.</p>
+<p>The generated table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community.</p>
 
-<p>Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).</p>
+<p>Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you!).</p>
 
-<p>The additional filter must be stored in a file called  <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> located in <code class="language-plaintext highlighter-rouge">data/community/&lt;your community&gt;</code>. The file must include 3 columns (without header):</p>
+<p>The additional filter must be stored in a file called <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> located in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/metadata</code>. The file must include at least 3 columns (with a header):</p>
 <ol>
-  <li>The <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code> corresponding to the IDs in the <code class="language-plaintext highlighter-rouge">tools.tsv</code> file in <code class="language-plaintext highlighter-rouge">results/&lt;your community&gt;</code>.</li>
-  <li>Whether the tool should be included in the final table (TRUE/FALSE).</li>
-  <li>Whether the tool is deprecated (TRUE/FALSE).</li>
+  <li><code class="language-plaintext highlighter-rouge">Suite ID</code></li>
+  <li><code class="language-plaintext highlighter-rouge">To keep</code> indicating whether the tool should be included in the final table (TRUE/FALSE).</li>
+  <li><code class="language-plaintext highlighter-rouge">Deprecated</code> indicating whether the tool is deprecated (TRUE/FALSE).</li>
 </ol>
 
 <p>Example of the <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> file:</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>abacas	TRUE	FALSE
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	To keep	Deprecated
+abacas	TRUE	FALSE
 abricate	TRUE	FALSE
 abritamr	TRUE	FALSE
 </code></pre></div></div>
 
-<p>Have a look on the <a href="https://github.com/galaxyproject/galaxy_codex/blob/main/data/communities/microgalaxy/tool_status.tsv">microGalaxy tool stats TSV</a> for 
-an example of the file that is used to manually filter the tools for a community.</p>
-
-<h2 id="add-a-tools-status-list">Add a tools status list</h2>
+<p>To generate this file, we recommend you to use the <code class="language-plaintext highlighter-rouge">tools_filtered_by_ts_categories.tsv</code> file.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-review-tools-in-your-community-table"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Review tools in your community table</div>
 
   <ol>
-    <li>Download the <code class="language-plaintext highlighter-rouge">tools.tsv</code> file in <code class="language-plaintext highlighter-rouge">results/&lt;your community&gt;</code>.</li>
-    <li>Open <code class="language-plaintext highlighter-rouge">tools.tsv</code> with a Spreadsheet Software.</li>
+    <li>Download the <code class="language-plaintext highlighter-rouge">tools_filtered_by_ts_categories.tsv</code> file in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/resources/</code>.</li>
+    <li>Open <code class="language-plaintext highlighter-rouge">tools.tsv</code> with a Spreadsheet Software</li>
     <li>
       <p>Review each line corresponding to a tool</p>
 
-      <p>You can also just review some tools. Those tools that are not reviewed will be have <code class="language-plaintext highlighter-rouge">FALSE</code> in the <code class="language-plaintext highlighter-rouge">Reviewed</code> columns the updated table.</p>
-
       <ol>
-        <li>Change the value in the <code class="language-plaintext highlighter-rouge">Reviewed</code> column from <code class="language-plaintext highlighter-rouge">FALSE</code> to <code class="language-plaintext highlighter-rouge">TRUE</code> (this will be done automatically if an entry of the tool in <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> exists).</li>
         <li>Add <code class="language-plaintext highlighter-rouge">TRUE</code> to the <code class="language-plaintext highlighter-rouge">To keep</code> column if the tool should be kept, and <code class="language-plaintext highlighter-rouge">FALSE</code> if not.</li>
         <li>Add <code class="language-plaintext highlighter-rouge">TRUE</code> or <code class="language-plaintext highlighter-rouge">FALSE</code> also to the <code class="language-plaintext highlighter-rouge">Deprecated</code> column.</li>
       </ol>
     </li>
-    <li>
-      <p>Copy paste the <code class="language-plaintext highlighter-rouge">Galaxy wrapper id</code>, <code class="language-plaintext highlighter-rouge">To keep</code>, <code class="language-plaintext highlighter-rouge">Deprecated</code> column in a new table (in that order).</p>
-
-      <p>This can also be done using the reference function of your Spreadsheet Software.</p>
-    </li>
-    <li>Export the new table as TSV (without header).</li>
-    <li>Submit the TSV as <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> in your community folder.</li>
+    <li>Export the new table as TSV</li>
+    <li>Submit the TSV as <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> in your <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/metadata/</code> folder.</li>
     <li>Wait for the Pull Request to be merged</li>
   </ol>
 
 </blockquote>
 
-<p>You should have now an interactive table reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.</p>
+<p>Once merged, a <code class="language-plaintext highlighter-rouge">curated_tools.tsv</code> file will be generated in <code class="language-plaintext highlighter-rouge">communities/&lt;your community&gt;/resources/</code> folder reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the <code class="language-plaintext highlighter-rouge">tools_status.tsv</code> file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.</p>
 
 <h1 id="embed-the-interactive-table-in-your-community-page-on-the-hub">Embed the interactive table in your community page on the Hub</h1>
 
@@ -1136,7 +1123,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b2657cd0007ef7ad923f752b42c0aff6d0c05db0">b2657cd</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/e1259c3e86b5e23fd7c6ca2a7ce2ba12f1e76105">e1259c3</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
