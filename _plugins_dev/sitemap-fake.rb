@@ -1,6 +1,6 @@
 module Jekyll
   # Fake sitemap generator.
- class SitemapGenerator2 < Generator
+  class SitemapGenerator2 < Generator
     safe true
 
     def generate(site)
