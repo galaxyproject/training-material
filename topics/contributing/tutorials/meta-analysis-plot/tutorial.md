@@ -263,3 +263,7 @@ views %>% group_by(date=floor_date(date, 'week')) %>%
   ggtitle("GTN Single Cell Visits")
 ggsave("sc-pageviews.png", width=14, height=4)
 ```
+
+for our lovely pageview plot!
+
+![pageviews over time, it's relatively stable except for the large annotated outage, and a large spike around the bootcamp date](./images/sc-pageviews.png)
