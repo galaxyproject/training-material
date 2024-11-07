@@ -17,8 +17,8 @@ contributions:
   authorship:
   - hexylena
 subtopic: meta
-notebook:
-    language: ruby
+#notebook:
+#    language: ruby
 priority: 3
 tags:
 - Ruby
@@ -45,9 +45,9 @@ require 'yaml'
 data = YAML.load_file('metadata/github.yml')
 ```
 
-Let's fetch data from within the GTN's infrastructure:
+Let's fetch data from within the GTN's infrastructure. You can see documentation for some of our APIs in the [RDoc](https://training.galaxyproject.org/training-material/gtn_rdoc/). E.g. here is how we document [`TopicFilter.list_materials_structured`](https://training.galaxyproject.org/training-material/gtn_rdoc/TopicFilter.html#method-c-list_materials_structured).
 
-```
+```ruby
 # Obtain all single cell materials
 mats = TopicFilter
  .list_materials_structured(site, 'single-cell')
@@ -92,9 +92,9 @@ def is_sc(path)
 end
 ```
 
-Now let's obtain everything that IS a single cell PR. Here we define everything with 50% or more of the files being "single cell" files, as a single cell PR:
+Now let's obtain everything that IS a single cell PR. Here we define everything with 50% or more of the files being "single cell" files, as a single cell PR. How did we arrive at 50%? We made some plots and spot-checked individual results to see what made sense.
 
-```
+```ruby
 sc_prs = data
   .reject{|num, pr| pr['author']['login'] == 'github-actions'} # Remove all automation
   .map{|num, pr| 
@@ -127,7 +127,7 @@ end
 
 Let's write a classifier for each file type, to enhance our statistics:
 
-```
+```ruby
 def classify(path)
   if path =~ /tutorial[A-Z_]*?\.md/ then
     return 'tutorial'
@@ -157,6 +157,8 @@ def classify(path)
     return 'news'
   end
 
+  # This will raise an exception which will ensure we catch the case where we
+  # haven't defined a classification rule for a file yet.
   1/ 0
 end
 ```
@@ -190,6 +192,28 @@ File.open('sc.tsv', 'w') do |f|
   end
 end
 ```
+
+Preview of that data:
+
+num | path | class | additions | deletions | createdAt | mergedAt
+--- | ---- | ----- | --------- | --------- | --------- | --------
+5484 | topics/single-cell/faqs/single_cell_omics.md | faq | 3 | 3 | 2024-10-29T12:24:51Z | 2024-10-29T12:47:23Z
+5473 | topics/single-cell/tutorials/alevin-commandline/tutorial.md | tutorial | 48 | 47 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case-jupyter_basic-pipeline/tutorial.md | tutorial | 3 | 2 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_FilterPlotandExploreRStudio/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_FilterPlotandExplore_SeuratTools/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.md | tutorial | 6 | 5 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md | tutorial | 4 | 4 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_alevin/tutorial.md | tutorial | 3 | 2 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5473 | topics/single-cell/tutorials/scrna-case_trajectories/tutorial.md | tutorial | 1 | 0 | 2024-10-25T11:24:40Z | 2024-10-28T12:59:16Z
+5447 | topics/single-cell/tutorials/GO-enrichment/tutorial.md | tutorial | 7 | 3 | 2024-10-11T11:22:34Z | 2024-10-11T13:36:22Z
+5445 | topics/single-cell/tutorials/scrna-case-cell-annotation/slides.html | slides | 1 | 1 | 2024-10-11T10:52:08Z | 2024-10-12T15:44:00Z
+5443 | topics/single-cell/faqs/single_cell_omics.md | faq | 4 | 2 | 2024-10-11T10:16:18Z | 2024-10-12T15:43:24Z
+5416 | topics/single-cell/metadata.yaml | metadata | 4 | 2 | 2024-10-07T22:26:36Z | 2024-10-12T15:35:11Z
+5416 | topics/single-cell/tutorials/GO-enrichment/tutorial.md | tutorial | 1 | 0 | 2024-10-07T22:26:36Z | 2024-10-12T15:35:11Z
 
 ## Contributors over time
 
@@ -308,7 +332,7 @@ See, terrible, but it works!
 contribs_over_time.reject!{|k, v| v.values.all?{|vv| vv.empty?}}
 pp contribs_over_time
 
-File.open("contribs.tsv", "w") do |f|
+File.open("sc-roles.tsv", "w") do |f|
   f.write("date\tarea\tcount\tcontributors\n")
 
   KEYS.each do |k|
