@@ -19,6 +19,7 @@ PRIO = [
   'learning-pathways',
   'tutorials',
   'slides',
+  'recordings',
   'faqs',
   'workflows',
   'contributors',
@@ -97,7 +98,8 @@ ICON_FOR = {
   'news' => '📰',
   'faqs' => '❓',
   'workflows' => '🛠️',
-  'learning-pathways' => '🛤️'
+  'learning-pathways' => '🛤️',
+  'recordings' => '🎥',
 }
 
 def generate_opml(site, groups)
@@ -219,6 +221,10 @@ def all_date_sorted_materials(site)
     tags = [m['topic_name']] + (m['tags'] || [])
     bucket += m.fetch('ref_tutorials', []).map do |t|
       [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+
+      (t['recordings'] || []).map do |r|
+        [Date.parse(r['date'].to_s), 'recordings', r, tags]
+      end
     end
 
     bucket += m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
