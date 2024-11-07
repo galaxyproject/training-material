@@ -77,10 +77,12 @@ If you are working on your own training materials and want preview them online w
 >    ![screenshot of new workspace menu](images/gitpod-workspace.png)
 > 6. Click **continue**
 >    - This will create an enviroment where you can make changes to the GTN and preview them
->    - It can take quite some time to start up (10-15 minutes)
-> 6. In the browser’s address bar, prefix the entire URL with `gitpod.io/#` and press Enter.
+>    - It can take quite some time to start up the first time (15+ minutes), but subsequent launches should be a lot quicker
 >
->    For example, `gitpod.io/#https://github.com/<your username>/training-material`
+>    ![progress indicator of GitPod first setup](../../images/gitpod/setup.png)
+>
+> 8. Once the setup is finished, you should see a page something like this:
+>    ![GitPod welcome screen](../../images/gitpod/welcomepage.png)
 >
 >    > <tip-title>Make this even easier with the GitPod browser extension!</tip-title>
 >    >  1. To make this even easier, you can install the GitPod browser extension
@@ -89,10 +91,7 @@ If you are working on your own training materials and want preview them online w
 >    >  2. Now it is just a single click to open any GitHub repository in GitPod
 >    >     ![screenshot of the button the GitPod browser extension adds to GitHub repository ](../../images/gitpod/browser-extension.png)
 >    {: .tip}
-> 6. Gitpod will now configure your environment. This may take some time
->    ![progress indicator of GitPod first setup](../../images/gitpod/setup.png)
-> 7. Once the setup is finished, you should see a page something like this:
->    ![GitPod welcome screen](../../images/gitpod/welcomepage.png)
+>
 {: .hands_on}
 
 # The GitPod Workspace
@@ -123,9 +122,7 @@ Before we start making any changes, let's build the website and get a live previ
 >
 > 3. When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.
 >
->    - You may need to click 'Try Again' to load the GTN.
->
->      ![gitpod with the GTN open in the right panel, but saying "Try again"](../../images/gitpod_tryagain.png)
+>      ![gitpod with the GTN open in the right panel, but saying "Try again"](../../images/gitpod_launched.png)
 >
 >    - Click on the link in the terminal to see the GTN in full-screen: `Server address: http://127.0.0.1:4000/training-material/`
 >
@@ -173,13 +170,15 @@ Now that you have the GitPod environment working and we have a live preview up, 
 > 3. Change the title of the tutorial
 >    - **From:** "A Short Introduction to Galaxy"
 >    - **To:** "A Short and Cool Introduction to Galaxy"
->    - You should immediately see a message in the terminal saying "regenerating". GitPod has detected your changes and is rebuilding the website.
+>
 >    ![we changed the title of the tutorial in the text editor window](../../images/gitpod/changes.png)
+>
+>    - You should immediately see a message in the terminal saying "regenerating". GitPod has detected your changes and is rebuilding the website.
+>
 >    ![the terminal shows a message stating the website is being regenerated](../../images/gitpod/regenerating.png)
 >
 > 4. Move to the top right panel where the GTN is previewed and refresh the frame
->    - Firefox: `right-click -> This Frame -> Reload Frame`
->    - Chrome: `right-click -> Reload frame`
+>    - {% icon galaxy-refresh %} Refresh button in front of the address bar of the preview panel
 >    - You can also open the preview in it's own brower tab, using the {% icon galaxy_instance %} button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)
 >
 > 5. You should see the change you made:
@@ -209,7 +208,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 >
 > 2. **Option 2: via the web interface**
 >    - Create a new branch:
->      -  On the bottom-left, click on the branch logo (probably "master" or "main")
+>      -  On the bottom-left, click on the branch logo (probably labelled "main")
 >         ![button on the bottom of the page with the current branch](../../images/gitpod/branch-change.png)
 >      - Enter `fix-title` as the name for your new branch (at top of window)
 >      - Choose "+ Create new branch..." from the dropdown
