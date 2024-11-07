@@ -63,6 +63,17 @@ module Jekyll
       videos_by_author = Hash.new { |hash, key| hash[key] = [] }
       has_philosophy = Hash.new { false }
 
+      prs_by_author = Hash.new { |hash, key| hash[key] = [] }
+      reviews_by_author = Hash.new { |hash, key| hash[key] = [] }
+
+      site.data['github'].each do |num, pr|
+        prs_by_author[pr['author']['login']] << [num, pr['mergedAt']]
+
+        pr['reviews'].each do |review|
+          reviews_by_author[review['author']['login']] << [num, review['submittedAt'], review['state']]
+        end
+      end
+
       site.pages.each do |t|
         # Tutorials
         pusher(t, tutorials_by_author, false) if t['layout'] == 'tutorial_hands_on'
@@ -128,6 +139,19 @@ module Jekyll
         page2.data['editor_count'] = page2.data['editors'].length
 
         page2.data['has_philosophy'] = has_philosophy[contributor]
+
+        countable_reviews = reviews_by_author[contributor]
+          .reject{|x| x[1].nil?} # Group by PRs.
+          .group_by{|x| x[0]}.map{|x, r| r.sort_by{|r1| r1[1]}.max}.sort_by{|w| w[1]}.reverse
+
+        page2.data['gh_prs_count'] = prs_by_author[contributor].count
+        page2.data['gh_reviews_count'] = countable_reviews.count
+
+        page2.data['gh_prs_recent'] = prs_by_author[contributor]
+          .reject{|x| x[1].nil?}.sort_by { |x| x[1] }.reverse.take(5)
+          .map{|x| x[0]}
+        page2.data['gh_reviews_recent'] = countable_reviews.take(5)
+          .map{|x| x[0]}
 
         site.pages << page2
       end
