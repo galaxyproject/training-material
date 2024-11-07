@@ -1,25 +1,20 @@
 ---
 layout: tutorial_hands_on
 
-title: Voronoi Segmentation and Feature Extraction
+title: Voronoi Segmentation
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+  - How to use Galaxy for Voronoi Segmentation?
+  - How should images be prepared before applying Voronoi segmentation?
+  - How can Voronoi segmentation be used to analyze spatial relationships and divide an image into distinct regions based on proximity?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+  - "What Galaxy tools can I use to perform Voronoi Segmentation in Galaxy."
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - Learn how to prepare images for Voronoi segmentation.
+  - Learn to use Voronoi Segmentation to identify different regions in an image
 contributors:
-- contributor1
-- contributor2
+- annefou
 
 ---
 
@@ -28,27 +23,32 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+Voronoi segmentation is a technique used to divide an image or space into regions
+based on the proximity to a set of defined points, called seeds or sites. Each 
+region, known as a Voronoi cell, contains all locations that are closer to its 
+seed than to any other. This approach is especially useful when analyzing spatial 
+relationships, as it reveals how different areas relate in terms of distance and 
+distribution. Voronoi segmentation is widely applicable for tasks where it's 
+important to understand the proximity or neighborhood structure of points, such 
+as organizing space, studying clustering patterns, or identifying regions of 
+influence around each point in various types of data.
 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+## Voronoi Segmentation for bioimage analysis
+
+In bioimage analysis, Voronoi segmentation is a valuable tool for studying the 
+spatial organization of cells, tissues, or other biological structures within an 
+image. By dividing an image into regions around each identified cell or structure, 
+Voronoi segmentation enables researchers to analyze how different cell types are 
+distributed, measure distances between cells, and examine clustering patterns. This 
+can provide insights into cellular interactions, tissue organization, and functional 
+relationships within biological samples, such as identifying the proximity of immune 
+cells to tumor cells or mapping neuron distributions within brain tissue.
+
+## Voronoi Segmentation for Earth Observation
+
+In Earth observation, Voronoi segmentation is used to analyze spatial patterns and distributions in satellite or aerial images. By creating regions based on proximity to specific points, such as cities, vegetation clusters, or monitoring stations, Voronoi segmentation helps in studying how features are organized across a landscape. This method is particularly useful for mapping resource distribution, analyzing urban growth, monitoring vegetation patterns, or assessing land use changes. For instance, it can help divide an area into regions of influence around weather stations or identify how different land cover types interact spatially, aiding in environmental monitoring and planning.
+
 
 > <agenda-title></agenda-title>
 >
