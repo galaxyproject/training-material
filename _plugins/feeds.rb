@@ -27,6 +27,16 @@ PRIO = [
   'organisations'
 ].map.with_index { |x, i| [x, i] }.to_h
 
+def track(url)
+  if url =~ /utm_source/
+    url
+  elsif url.include? '#'
+    url.gsub(/#/, TRACKING + '#')
+  else
+    url + TRACKING
+  end
+end
+
 def objectify(attrs, url, path)
   obj = attrs.clone
   obj['__path'] = path
@@ -223,10 +233,11 @@ def all_date_sorted_materials(site)
       bucket << [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
 
       (t['recordings'] || []).map do |r|
-        url = t.path.gsub(/tutorial.(html|md)$/, 'recordings/')
-        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%d-%B-%Y').downcase}"
+        url = '/' + t.path.gsub(/tutorial(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
         attr = {'title' => "Recording of " + t['title'], 
-                'contributors' => r['speakers'] + (r['captions'] || [])}
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
 
         obj = objectify(attr, url, t.path)
         bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
@@ -239,10 +250,11 @@ def all_date_sorted_materials(site)
       bucket << [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
 
       (s['recordings'] || []).map do |r|
-        url = s.path.gsub(/tutorial.(html|md)$/, 'recordings/')
-        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%d-%B-%Y').downcase}"
+        url = '/' + s.path.gsub(/slides(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
         attr = {'title' => "Recording of " + s['title'], 
-                'contributors' => r['speakers'] + (r['captions'] || [])}
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
         obj = objectify(attr, url, s.path)
         bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
       end
@@ -438,7 +450,7 @@ def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
                 href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
 
                 xml.id(href)
-                xml.link(href: href + TRACKING)
+                xml.link(href: track(href))
 
                 tags.uniq.each do |tag|
                   xml.category(term: tag)
@@ -591,11 +603,11 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
                     items.each do |date, _type, page, _tags|
                       xml.li do
                         if page.is_a?(String)
-                          href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/#{TRACKING}"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/")
                           text = "@#{page}"
                         else
                           text = page.data['title']
-                          href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}#{TRACKING}"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}#{page.url}")
                         end
                         if group_by != 'day'
                           text += " (#{date.strftime('%B %d, %Y')})"
