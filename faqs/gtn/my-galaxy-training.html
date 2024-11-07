@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@ad2c319706f9e910a167a355ea0a25dad34aa305",
+		release: "galaxy-training-network@fb5ee0f23d686503c949514ecf27419adb46ad99",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,11 +70,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="What is my.galaxy.training">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-12-19 16:38:35 +0000">
-<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="The [`my.galaxy.training`](https://my.galaxy.training) is part of the GTN. We found that often need to direct our learners to specific pages within Galaxy, but which Galaxy? Should we add three links, one for each of the current bigger UseGalaxy.* servers? That would be really annoying for users who aren't using one of those servers.  E.g. how do we link to [/user](https://my.galaxy.training/?path=/user), the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.  ## (Learners) How to Use It  When you access a my.galaxy.training page you'll be prompted to select a server, simply select one and you're good to go!   If you want to enter a private Galaxy instance, perhaps, behind a firewall, that's also an option! Just select the 'other' option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as *you* can access the server, you'll get redirected to the ri...">
+<meta name="DC.date" content="2024-11-07 12:02:00 +0000">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="The [`my.galaxy.training`](https://my.galaxy.training) is part of the GTN. We found that often need to direct our learners to specific pages within Galaxy, but which Galaxy? Should we add three links, one for each of the current bigger UseGalaxy.* servers? That would be really annoying for users who aren't using one of those servers.  E.g. how do we link to [/user](https://my.galaxy.training/?path=/user), the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.  ### (Learners) How to Use It  When you access a my.galaxy.training page you'll be prompted to select a server, simply select one and you're good to go!  If you want to enter a private Galaxy instance, perhaps, behind a firewall, that's also an option! Just select the 'other' option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as *you* can access the server, you'll get redirected to the ri...">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: What is my.galaxy.training">
-        <meta property="og:description" content="The [`my.galaxy.training`](https://my.galaxy.training) is part of the GTN. We found that often need to direct our learners to specific pages within Galaxy, but which Galaxy? Should we add three links, one for each of the current bigger UseGalaxy.* servers? That would be really annoying for users who aren't using one of those servers.  E.g. how do we link to [/user](https://my.galaxy.training/?path=/user), the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.  ## (Learners) How to Use It  When you access a my.galaxy.training page you'll be prompted to select a server, simply select one and you're good to go!   If you want to enter a private Galaxy instance, perhaps, behind a firewall, that's also an option! Just select the 'other' option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as *you* can access the server, you'll get redirected to the ri...">
+        <meta property="og:description" content="The [`my.galaxy.training`](https://my.galaxy.training) is part of the GTN. We found that often need to direct our learners to specific pages within Galaxy, but which Galaxy? Should we add three links, one for each of the current bigger UseGalaxy.* servers? That would be really annoying for users who aren't using one of those servers.  E.g. how do we link to [/user](https://my.galaxy.training/?path=/user), the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.  ### (Learners) How to Use It  When you access a my.galaxy.training page you'll be prompted to select a server, simply select one and you're good to go!  If you want to enter a private Galaxy instance, perhaps, behind a firewall, that's also an option! Just select the 'other' option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as *you* can access the server, you'll get redirected to the ri...">
         <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/faqs/gtn/my-galaxy-training.png">
 	</head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
@@ -239,22 +239,22 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p>E.g. how do we link to <a href="https://my.galaxy.training/?path=/user">/user</a>, the user preferences page which is available on every Galaxy Instance? This service handles that in a private and user-friendly manner.</p>
 
-<h2 id="learners-how-to-use-it">(Learners) How to Use It</h2>
+<h3 id="learners-how-to-use-it">(Learners) How to Use It</h3>
 
 <p>When you access a my.galaxy.training page you’ll be prompted to select a server, simply select one and you’re good to go!</p>
 
 <p>If you want to enter a private Galaxy instance, perhaps, behind a firewall, that’s also an option! Just select the ‘other’ option and provide your domain. Since the redirection happens in your browser with no servers involved, as long as <em>you</em> can access the server, you’ll get redirected to the right location.</p>
 
-<h2 id="tutorial-authors-how-to-use-it">(Tutorial Authors) How to use it</h2>
+<h3 id="tutorial-authors-how-to-use-it">(Tutorial Authors) How to use it</h3>
 
 <p>If you want to link to a specific page within Galaxy, simple construct the URL: <code class="language-plaintext highlighter-rouge">https://my.galaxy.training/?path=/user</code> where everything after <code class="language-plaintext highlighter-rouge">?path</code> is the location they should be redirected to on Galaxy. That example link will eventually redirect the learner to something like <code class="language-plaintext highlighter-rouge">https://usegalaxy.eu/user</code>.</p>
 
-<h2 id="technical-background">Technical Background</h2>
+<h3 id="technical-background">Technical Background</h3>
 
 <p>So we took inspiration from <a href="https://my.home-assistant.io/">Home Assistant</a> which had the same problem, how to redirect users to pages on their own servers. The <code class="language-plaintext highlighter-rouge">my.galaxy.training</code> service is a very simple static page which looks in the user’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage"><code class="language-plaintext highlighter-rouge">localStorage</code></a> for their preferred server.
 If it’s not set, the user can click one of the common domains, and be redirected. When they access another link, they’ll be prompted to use a button that remembers which server they chose.</p>
 
-<h2 id="data-privacy">Data Privacy</h2>
+<h3 id="data-privacy">Data Privacy</h3>
 
 <p>Any domain selected is not tracked nor communicated to any third party. Your preferred server is stored in your browser, and never transmitted to the GTN. That’s why we use localStorage instead of cookies.</p>
 
@@ -410,7 +410,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/ad2c319706f9e910a167a355ea0a25dad34aa305">ad2c319</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/fb5ee0f23d686503c949514ecf27419adb46ad99">fb5ee0f</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
