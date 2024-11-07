@@ -128,8 +128,8 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 >
 {: .hands_on}
 
-## Sub-step with **FASTA-to-Tabular**
-
+##  **FASTA-to-Tabular**
+Convert the FASTA To tabular.
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
