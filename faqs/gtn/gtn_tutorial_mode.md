@@ -6,7 +6,7 @@ box_type: tip
 contributors: [shiltemann]
 ---
 
-GTN tutorials can be viewed directly withing Galaxy, we call this *Tutorial mode* ([read news post](https://training.galaxyproject.org/training-material/faqs/galaxy/tutorial_mode.html))
+GTN tutorials can be viewed directly withing Galaxy, we call this *Tutorial mode* ([read news post]({% link faqs/galaxy/tutorial_mode.md %}))
 
 In this mode, tool names in hands-on boxes become clickable, directly opening the tool in Galaxy, at the right version.
 
