@@ -86,65 +86,6 @@ layout: base
 				<p class="text-muted">
 					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
-                {% unless entity.github == false %}
-                <br><br>
-		{% unless entity.funder %}
-                <h3> GitHub Activity</h4>
-                <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a>
-
-		{% if page.gh_prs_count > 0 %}
-		<h4>{{ page.gh_prs_count }} Merged Pull Requests</h4>
-		<p>
-		See all of the 
-                <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> and 
-		<a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a> by {{ entity.name | default: page.contributor }}.
-		</p>
-		<ul>
-			{% for pr in page.gh_prs_recent %}
-			<li>
-				{% assign prdata = site.data['github'][pr] %}
-				{% if prdata.author.login == "github-actions" %}
-
-				{% icon github %}
-				{% else %}
-				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
-				{% endif %}
-
-				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
-
-				{% for label in prdata.labels %}
-				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
-				{% endfor %}
-			</li>
-			{% endfor %}
-		</ul>
-		{% endif %}
-
-		{% if page.gh_reviews_count > 0 %}
-		<h4>Reviewed {{ page.gh_reviews_count }} PRs</h4>
-		<p>We love our community reviewing each other's work!</p>
-		<ul>
-			{% for pr in page.gh_reviews_recent %}
-			<li>
-				{% assign prdata = site.data['github'][pr] %}
-
-				{% icon github %}
-				{% else %}
-				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
-				{% endif %}
-				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
-
-				{% for label in prdata.labels %}
-				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
-				{% endfor %}
-			</li>
-			{% endfor %}
-
-		</ul>
-		{% endif %}
-
-                {% endunless %}
-		{% endunless %}
                 </p>
 				{% if page.editor_count > 0 %}
 				<h3>Editorial Roles</h3>
@@ -279,6 +220,69 @@ layout: base
 				</ul>
 				{% endif %}
 
+                {% unless entity.github == false %}
+                <br><br>
+		{% unless entity.funder %}
+                <h3> GitHub Activity</h4>
+                <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a>
+
+		{% if page.gh_prs_count > 0 %}
+		<h4>{{ page.gh_prs_count }} Merged Pull Requests</h4>
+		<p>
+		See all of the 
+                <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> and 
+		<a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a> by {{ entity.name | default: page.contributor }}.
+		</p>
+		<ul>
+			{% for pr in page.gh_prs_recent %}
+			<li>
+				{% assign prdata = site.data['github'][pr] %}
+				{% if prdata.author.login == "github-actions" %}
+				{% icon github %}
+				{% else %}
+				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				{% endif %}
+
+				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
+
+				{% for label in prdata.labels %}
+				{% if forloop.index <= 5 %}
+				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
+				{% endif %}
+				{% endfor %}
+			</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if page.gh_reviews_count > 0 %}
+		<h4>Reviewed {{ page.gh_reviews_count }} PRs</h4>
+		<p>We love our community reviewing each other's work!</p>
+		<ul>
+			{% for pr in page.gh_reviews_recent %}
+			<li>
+				{% assign prdata = site.data['github'][pr] %}
+
+				{% if prdata.author.login == "github-actions" %}
+				{% icon github %}
+				{% else %}
+				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				{% endif %}
+				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
+
+				{% for label in prdata.labels %}
+				{% if forloop.index <= 5 %}
+				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
+				{% endif %}
+				{% endfor %}
+			</li>
+			{% endfor %}
+
+		</ul>
+		{% endif %}
+
+                {% endunless %}
+		{% endunless %}
 
 				{% if page.news_count > 0 %}
 				<h3>News</h3>
