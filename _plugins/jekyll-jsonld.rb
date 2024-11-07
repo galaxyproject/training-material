@@ -922,6 +922,11 @@ module Jekyll
                           url: url,
                           name: "Quarto/RMarkdown Notebook"
                         })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: "https://bio.tools/tool/rstudio",
+                          name: "RStudio"
+                        })
         end
       end
 
