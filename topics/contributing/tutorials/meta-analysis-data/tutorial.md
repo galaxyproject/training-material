@@ -490,3 +490,7 @@ end
 ```
 
 With that, I think we're done! Ready to plot.
+
+> <tip-title>Do you want to re-do this analysis? For your community?</tip-title>
+> Let us know and we can perhaps generalise this dataset such that you could more easily download it for your own community.
+{: .tip}

@@ -267,3 +267,7 @@ ggsave("sc-pageviews.png", width=14, height=4)
 for our lovely pageview plot!
 
 ![pageviews over time, it's relatively stable except for the large annotated outage, and a large spike around the bootcamp date](./images/sc-pageviews.png)
+
+> <tip-title>Do you want to re-do this analysis? For your community?</tip-title>
+> Discuss this with us and we can perhaps generalise this analysis, to reduce the amount of data processing you need to do, and make it more accessible for everyone!
+{: .tip}
