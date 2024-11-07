@@ -202,3 +202,64 @@ added_by_time %>% dcast(date ~ `type`) %>%
   ggtitle("New Single Cell events, FAQs, news, slides, tutorials, videos and workflows in the GTN")
 ggsave("sc-files-cumulative.png", width=6, height=6)
 ```
+
+We may also want to know how many changes there have been since the start date of this study, e.g. October 1st, 2020:
+
+```R
+since_oct = added_by_time %>% dcast(date ~ `type`) %>% 
+  arrange(date) %>% 
+  mutate(across(event:workflow, cumsum)) %>% 
+  filter(date > as.Date("2020-10-01"))
+
+# Pull out the first/last date as our start ane dnwend
+start_date = (since_oct %>% head(n=1))$date
+end_date = (since_oct %>% tail(n=1))$date
+
+# Table of our changes.
+since_oct %>% 
+  filter(date == start_date | date == end_date) %>%  # Just those rows
+  mutate(date = case_when(date == start_date ~ 'start', date == end_date ~ 'end')) %>% # Relabel the start/end as literal string start and end
+  pivot_longer(-date) %>% pivot_wider(names_from=date, values_from=value) %>% # Transpose the data
+  mutate(increase=end - start) %>% # And calculate our increase
+  select(name, increase) %>% arrange(-increase)
+```
+
+## Pageviews
+
+GTN uses the Galaxy Europe Plausible server for collecting metrics (you can change your preferences in [your GTN privacy preferences]({% link user/privacy.md %})).
+We can download the data from the server and plot it, filtering by our preferred start/end dates and filters (namely that page includes `/topics/single-cell/`).
+Unfortunately the data is downloaded as a zip file which we'll then need to extract data from:
+
+```R
+system("wget 'https://plausible.galaxyproject.eu/training.galaxyproject.org/export?period=custom&date=2024-11-07&from=2022-08-01&to=2024-11-07&filters=%7B%22page%22%3A%22~%2Ftopics%2Fsingle-cell%2F%22%7D&with_imported=true&interval=date' -O sc-stats.zip")
+```
+
+We can use the unzip function to read a single file directly from the zip:
+
+```R
+views = read_csv(unzip("sc-stats.zip", "visitors.csv"))
+```
+
+With that we're ready to plot. We're going to use a new feature for our plot,
+`annotate`. Annotation allows you to draw arbitrary features atop your plot, in
+this case we're going to draw rectangles to indicate outages and events that
+might have affected our data.
+
+```R
+y = 3300
+xoff = 3
+views %>% group_by(date=floor_date(date, 'week')) %>% 
+  summarise(date, visitors=sum(visitors), pageviews=sum(pageviews)) %>% 
+  filter(visitors != 0 | pageviews != 0) %>%
+  melt(id.var="date")  %>% 
+  ggplot(aes(x=date, y=value, color=variable)) + geom_line() + 
+  annotate("rect", xmin = as.Date("2023-10-01"), xmax = as.Date("2023-10-27"), ymin = 0, ymax = y,  alpha = .2) + # Outage
+  annotate("rect", xmin = as.Date("2023-05-22") - xoff, xmax = as.Date("2023-05-26") - xoff, ymin = 0, ymax = y,  alpha = .2) + # Smorg3
+  annotate("rect", xmin = as.Date("2024-10-07") - xoff, xmax = as.Date("2024-10-11") - xoff, ymin = 0, ymax = y,  alpha = .2) + # GTA
+  annotate("rect", xmin = as.Date("2024-09-16") - xoff, xmax = as.Date("2024-09-20") - xoff, ymin = 0, ymax = y,  alpha = .2) + # Bootcamp
+  theme_bw() + theme +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, NA)) +
+  xlab("Date") + ylab("Count") + guides(color=guide_legend(title="Metric")) +
+  ggtitle("GTN Single Cell Visits")
+ggsave("sc-pageviews.png", width=14, height=4)
+```
