@@ -1,6 +1,6 @@
 ---
 title: Supporting Tutorial Mode (GTN-in-Galaxy) in a tutorial
-area: other
+area: contributors
 layout: faq
 box_type: tip
 contributors: [shiltemann]
