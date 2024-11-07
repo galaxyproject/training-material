@@ -233,8 +233,8 @@ Finally, we want to plot the results for better interpretation.
 
 > <hands-on-title>Plot feature extraction results</hands-on-title>
 >
-> 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the {% tool Collapse Collection %} results.
-> 2. Run `Box plot` with the following parameters:
+> 1. Click on the **Visualize** {% icon galaxy-barchart %} icon of the {% icon tool %} **4: Collapse Collection** results.
+> 2. Run **Box plot (jqPlot)** with the following parameters:
 >    - *"Provide a title"*: `Screen features`
 >    - *"X-Axis label"*:
 >    - *"Y-Axis label"*:
