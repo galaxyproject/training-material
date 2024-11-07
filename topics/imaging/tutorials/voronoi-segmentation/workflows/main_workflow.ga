@@ -1,1 +1,524 @@
-{"a_galaxy_workflow": "true", "annotation": "Generic workflow to perform voronoi segmentation and their quantitative analysis (Black Background)", "comments": [{"child_steps": [1, 2, 0], "color": "red", "data": {"title": "User Input"}, "id": 0, "position": [0, 17], "size": [251.2, 660.6], "type": "frame"}, {"child_steps": [4, 5, 6, 7, 8, 9, 10, 13, 14, 15], "color": "lime", "data": {"title": "Voronoi Segmentation Plus Overlay"}, "id": 1, "position": [365, 0], "size": [2266, 827], "type": "frame"}, {"child_steps": [11], "color": "orange", "data": {"title": "Quantitative Analysis - Image features and Counting"}, "id": 2, "position": [2794.4, 110.80000000000001], "size": [240, 410], "type": "frame"}], "creator": [{"class": "Person", "identifier": "", "name": "Riccardo Massei"}], "format-version": "0.1", "license": "MIT", "name": "Voronoi Segmentation and Feature Extraction", "steps": {"0": {"annotation": "Image to analyze", "content_id": null, "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "Image to analyze", "name": "Input Image"}], "label": "Input Image", "name": "Input dataset", "outputs": [], "position": {"left": 20, "top": 57}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "dda4de6c-776e-44bc-b34b-2b7bc060ee62", "when": null, "workflow_outputs": []}, "1": {"annotation": "Channel where to perform the Voronoi Segmentation", "content_id": null, "errors": null, "id": 1, "input_connections": {}, "inputs": [{"description": "Channel where to perform the Voronoi Segmentation", "name": "Select Channel for Voronoi Segmentation"}], "label": "Select Channel for Voronoi Segmentation", "name": "Input parameter", "outputs": [], "position": {"left": 24, "top": 235}, "tool_id": null, "tool_state": "{\"parameter_type\": \"integer\", \"optional\": false}", "tool_version": null, "type": "parameter_input", "uuid": "eac65cde-5951-435b-9214-f9b849801629", "when": null, "workflow_outputs": [{"label": null, "output_name": "output", "uuid": "0e4d4c97-298e-46ea-846b-5af9e7fd7ab4"}]}, "2": {"annotation": "", "content_id": null, "errors": null, "id": 2, "input_connections": {}, "inputs": [{"description": "", "name": "Threhold Value"}], "label": "Threhold Value", "name": "Input parameter", "outputs": [], "position": {"left": 22, "top": 421.5}, "tool_id": null, "tool_state": "{\"parameter_type\": \"float\", \"optional\": false}", "tool_version": null, "type": "parameter_input", "uuid": "2a014e33-cb79-4b27-8ff4-61fb7f288fb8", "when": null, "workflow_outputs": [{"label": null, "output_name": "output", "uuid": "203afe86-4509-48b3-bf36-89020ce42e42"}]}, "3": {"annotation": "Binary Image with seeds", "content_id": null, "errors": null, "id": 3, "input_connections": {}, "inputs": [{"description": "Binary Image with seeds", "name": "Input seeds for segmentation"}], "label": "Input seeds for segmentation", "name": "Input dataset", "outputs": [], "position": {"left": 21.557356375842502, "top": 575.3661152348966}, "tool_id": null, "tool_state": "{\"optional\": false, \"tag\": null}", "tool_version": null, "type": "data_input", "uuid": "924d2ac9-3b0f-4d37-a618-baed5dd0bfc1", "when": null, "workflow_outputs": []}, "4": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3", "errors": null, "id": 4, "input_connections": {"input_file": {"id": 0, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Convert image format", "name": "input_file"}], "label": null, "name": "Convert image format", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 1310.2587706377763, "top": 57.994534604236485}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3", "tool_shed_repository": {"changeset_revision": "fcadded98e61", "name": "bfconvert", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"bigtiff\": false, \"channel_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"channel\": \"0\"}, \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"noflat\": false, \"out_format\": \"tiff\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "6.7.0+galaxy3", "type": "tool", "uuid": "c0b429ac-904f-4f14-8ed5-bba1ea2ebfc5", "when": null, "workflow_outputs": []}, "5": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3", "errors": null, "id": 5, "input_connections": {"channel_options|channel": {"id": 1, "output_name": "output"}, "input_file": {"id": 0, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Convert image format", "name": "channel_options"}], "label": null, "name": "Convert image format", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 413.00801220703124, "top": 221.574}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3", "tool_shed_repository": {"changeset_revision": "fcadded98e61", "name": "bfconvert", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"bigtiff\": false, \"channel_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"channel\": {\"__class__\": \"ConnectedValue\"}}, \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": false, \"out_format\": \"tiff\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "6.7.0+galaxy3", "type": "tool", "uuid": "c18c4523-f5d5-4769-a6bd-9df5480f68e3", "when": null, "workflow_outputs": []}, "6": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0", "errors": null, "id": 6, "input_connections": {"input": {"id": 3, "output_name": "output"}}, "inputs": [], "label": null, "name": "Convert binary image to label map", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 421.4382419411547, "top": 510.2648436754392}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0", "tool_shed_repository": {"changeset_revision": "984358e43242", "name": "binary2labelimage", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"cca\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.5+galaxy0", "type": "tool", "uuid": "5937f007-43d5-4884-918f-36ad484580b5", "when": null, "workflow_outputs": []}, "7": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/repeat_channels/repeat_channels/1.26.4+galaxy0", "errors": null, "id": 7, "input_connections": {"input": {"id": 4, "output_name": "output"}}, "inputs": [], "label": null, "name": "Convert single-channel to multi-channel image", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 1798.9166870117188, "top": 65.46665954589844}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/repeat_channels/repeat_channels/1.26.4+galaxy0", "tool_shed_repository": {"changeset_revision": "7cdb50fee601", "name": "repeat_channels", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"count\": \"3\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.26.4+galaxy0", "type": "tool", "uuid": "d0854e51-56e7-4eab-8d9a-cc60cbd2eba5", "when": null, "workflow_outputs": []}, "8": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy0", "errors": null, "id": 8, "input_connections": {"input": {"id": 5, "output_name": "output"}}, "inputs": [], "label": null, "name": "Filter 2-D image", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 722.1079877929687, "top": 198.9739938964844}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy0", "tool_shed_repository": {"changeset_revision": "6c4b22ef2b81", "name": "2d_simple_filter", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"filter\": {\"filter_type\": \"gaussian\", \"__current_case__\": 0, \"size\": \"3.0\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.12.0+galaxy0", "type": "tool", "uuid": "ae388ff0-8ad5-4053-9931-b43aaa701bf5", "when": null, "workflow_outputs": []}, "9": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/voronoi_tesselation/voronoi_tessellation/0.22.0+galaxy1", "errors": null, "id": 9, "input_connections": {"input": {"id": 6, "output_name": "output"}}, "inputs": [], "label": null, "name": "Compute Voronoi tessellation", "outputs": [{"name": "result", "type": "tiff"}], "position": {"left": 825.9246687011719, "top": 683.0999755859375}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/voronoi_tesselation/voronoi_tessellation/0.22.0+galaxy1", "tool_shed_repository": {"changeset_revision": "e7fdea8385f0", "name": "voronoi_tesselation", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.22.0+galaxy1", "type": "tool", "uuid": "61a6a645-2f8e-4025-8a5f-89ad07a83510", "when": null, "workflow_outputs": []}, "10": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy2", "errors": null, "id": 10, "input_connections": {"input": {"id": 8, "output_name": "output"}, "th_method|threshold": {"id": 2, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Threshold image", "name": "th_method"}], "label": null, "name": "Threshold image", "outputs": [{"name": "output", "type": "tiff"}], "position": {"left": 988, "top": 381.5}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy2", "tool_shed_repository": {"changeset_revision": "e5c8e7e72373", "name": "2d_auto_threshold", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"manual\", \"__current_case__\": 0, \"threshold\": {\"__class__\": \"ConnectedValue\"}, \"block_size\": \"0\", \"offset\": \"0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.18.1+galaxy2", "type": "tool", "uuid": "c3843019-87b0-47b8-aa68-52d1151bf8b0", "when": null, "workflow_outputs": []}, "11": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2", "errors": null, "id": 11, "input_connections": {"input": {"id": 9, "output_name": "result"}}, "inputs": [], "label": null, "name": "Count objects in label map", "outputs": [{"name": "output", "type": "tabular"}], "position": {"left": 2817.816650390625, "top": 182.683349609375}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2", "tool_shed_repository": {"changeset_revision": "b58447a2eed2", "name": "count_objects", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.5-2", "type": "tool", "uuid": "eb7b59cd-4450-44fc-b459-6168a9434895", "when": null, "workflow_outputs": [{"label": "Count Objects", "output_name": "output", "uuid": "1e4d0a8a-2e77-4bb5-a3a0-6fd3779af090"}]}, "12": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0", "errors": null, "id": 12, "input_connections": {"input_label": {"id": 9, "output_name": "result"}, "use_raw_option|input_raw": {"id": 5, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Extract image features", "name": "use_raw_option"}], "label": null, "name": "Extract image features", "outputs": [{"name": "output", "type": "tabular"}], "position": {"left": 2814.3333740234375, "top": 355.3500061035156}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0", "tool_shed_repository": {"changeset_revision": "5bc8cdc17fd0", "name": "2d_feature_extraction", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"feature_options\": {\"features\": \"select\", \"__current_case__\": 1, \"selected_features\": [\"--label\", \"--max_intensity\", \"--mean_intensity\", \"--area\", \"--filled_area\", \"--convex_area\", \"--extent\", \"--perimeter\", \"--eccentricity\", \"--convexity\", \"--moments\", \"--solidity\", \"--orientation\", \"--major_axis_length\", \"--minor_axis_length\", \"--inertia_tensor_eigvals\", \"--euler_number\", \"--equivalent_diameter\", \"--bbox\", \"--centroid\", \"--moments_hu\", \"--min_intensity\", \"--patches\"]}, \"input_label\": {\"__class__\": \"ConnectedValue\"}, \"use_raw_option\": {\"use_raw\": \"raw_image\", \"__current_case__\": 1, \"input_raw\": {\"__class__\": \"ConnectedValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.18.1+galaxy0", "type": "tool", "uuid": "caa2f425-6d7b-4e8a-b8ae-89da3775ce4b", "when": null, "workflow_outputs": [{"label": "Image Features", "output_name": "output", "uuid": "6243dcfe-f3c2-4eeb-83cc-9281bfc6eba4"}]}, "13": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy1", "errors": null, "id": 13, "input_connections": {"inputs_0|image": {"id": 9, "output_name": "result"}, "inputs_1|image": {"id": 3, "output_name": "output"}, "inputs_2|image": {"id": 10, "output_name": "output"}}, "inputs": [], "label": null, "name": "Process images using arithmetic expressions", "outputs": [{"name": "result", "type": "tiff"}], "position": {"left": 1408.3177607169048, "top": 519.2920266462543}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy1", "tool_shed_repository": {"changeset_revision": "f8b7770cbca5", "name": "image_math", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"expression\": \"tessellation * (mask / 255) * (1 - seeds / 255)\", \"inputs\": [{\"__index__\": 0, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"tessellation\"}, {\"__index__\": 1, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"seeds\"}, {\"__index__\": 2, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"mask\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "1.26.4+galaxy1", "type": "tool", "uuid": "138a6ff3-fcc8-4082-bbf9-4c308cfe1674", "when": null, "workflow_outputs": []}, "14": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/colorize_labels/colorize_labels/3.2.1+galaxy1", "errors": null, "id": 14, "input_connections": {"input": {"id": 13, "output_name": "result"}}, "inputs": [], "label": null, "name": "Colorize label map", "outputs": [{"name": "output", "type": "png"}], "position": {"left": 2071.4977777777785, "top": 620.488}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/colorize_labels/colorize_labels/3.2.1+galaxy1", "tool_shed_repository": {"changeset_revision": "3aa2d054848a", "name": "colorize_labels", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"bg_color\": \"#000000\", \"bg_label\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"radius\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "3.2.1+galaxy1", "type": "tool", "uuid": "25bbce6a-01d4-4010-8a7c-2d31c119c2de", "when": null, "workflow_outputs": []}, "15": {"annotation": "", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy1", "errors": null, "id": 15, "input_connections": {"method_option|im1": {"id": 7, "output_name": "output"}, "method_option|im2": {"id": 14, "output_name": "output"}}, "inputs": [{"description": "runtime parameter for tool Overlay images", "name": "method_option"}, {"description": "runtime parameter for tool Overlay images", "name": "method_option"}], "label": null, "name": "Overlay images", "outputs": [{"name": "out_tiff", "type": "tiff"}], "position": {"left": 2379.9799280237644, "top": 53.85060249812341}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy1", "tool_shed_repository": {"changeset_revision": "002f7bad3e82", "name": "overlay_images", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"method_option\": {\"method\": \"blending\", \"__current_case__\": 1, \"im1\": {\"__class__\": \"RuntimeValue\"}, \"im2\": {\"__class__\": \"RuntimeValue\"}, \"alpha\": \"0.5\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.4+galaxy1", "type": "tool", "uuid": "94c002b9-abe9-43c3-9d70-ae7014b3de98", "when": null, "workflow_outputs": []}}, "tags": ["imageanaylsis", "Segmentation", "voronoi"], "uuid": "9418aaba-a9cd-47a3-8610-b694c50e1f54", "version": 0}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Generic workflow to perform voronoi segmentation and their quantitative analysis (Black Background)",
+    "comments": [
+        {
+            "child_steps": [
+                3,
+                2,
+                0,
+                1
+            ],
+            "color": "orange",
+            "data": {
+                "title": "User Input"
+            },
+            "id": 0,
+            "position": [
+                0,
+                45
+            ],
+            "size": [
+                251.2,
+                660.6
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                10
+            ],
+            "color": "blue",
+            "data": {
+                "title": "Visualisation Image features"
+            },
+            "id": 3,
+            "position": [
+                2526.9,
+                421.2
+            ],
+            "size": [
+                240,
+                411
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                9,
+                5,
+                7,
+                8
+            ],
+            "color": "lime",
+            "data": {
+                "title": "Voronoi segmentation"
+            },
+            "id": 2,
+            "position": [
+                974.3,
+                257.2
+            ],
+            "size": [
+                1254.2,
+                900.9
+            ],
+            "type": "frame"
+        },
+        {
+            "child_steps": [
+                6,
+                4
+            ],
+            "color": "yellow",
+            "data": {
+                "title": "Preprocessing (only for bio-images)"
+            },
+            "id": 1,
+            "position": [
+                360.3,
+                0
+            ],
+            "size": [
+                401,
+                429
+            ],
+            "type": "frame"
+        }
+    ],
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "",
+            "name": "Riccardo Massei"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Voronoi Segmentation BiA (Tutorial)",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Image to analyze",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Image to analyze",
+                    "name": "Input Image"
+                }
+            ],
+            "label": "Input Image",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 19.896066009909354,
+                "top": 85.02096026201994
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "57297a4a-3c64-41bc-bf4a-70aa07221187",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Channel where to perform the Voronoi Segmentation",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Channel where to perform the Voronoi Segmentation",
+                    "name": "Select Channel for Voronoi Segmentation"
+                }
+            ],
+            "label": "Select Channel for Voronoi Segmentation",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 23.89588290444067,
+                "top": 265.0208381917074
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"integer\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "a375cf18-e81c-4ecd-af0e-dd52f64d5578",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "The threshold in Voronoi segmentation sets a distance limit for each region's size and influence around its seed point.",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "The threshold in Voronoi segmentation sets a distance limit for each region's size and influence around its seed point.",
+                    "name": "Threshold Value"
+                }
+            ],
+            "label": "Threshold Value",
+            "name": "Input parameter",
+            "outputs": [],
+            "position": {
+                "left": 21.89588290444067,
+                "top": 449.5208381917074
+            },
+            "tool_id": null,
+            "tool_state": "{\"parameter_type\": \"float\", \"optional\": false}",
+            "tool_version": null,
+            "type": "parameter_input",
+            "uuid": "372a34f0-8d8b-4bb2-80f7-64990cb65abd",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "Binary Image with seeds",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Binary Image with seeds",
+                    "name": "Input seeds for segmentation"
+                }
+            ],
+            "label": "Input seeds for segmentation",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 21.453422385751928,
+                "top": 603.3870754969164
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d45104a3-8567-4369-94e5-61149142bc00",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "channel_options|channel": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "input_file": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Convert image format",
+                    "name": "channel_options"
+                }
+            ],
+            "label": null,
+            "name": "Convert image format",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 384.06302675863685,
+                "top": 50.600695401694594
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "fcadded98e61",
+                "name": "bfconvert",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bigtiff\": false, \"channel_options\": {\"extract\": \"True\", \"__current_case__\": 1, \"channel\": {\"__class__\": \"ConnectedValue\"}}, \"compression\": \"False\", \"crop_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"input_file\": {\"__class__\": \"ConnectedValue\"}, \"noflat\": false, \"out_format\": \"tiff\", \"pyramid_options\": {\"generate\": \"False\", \"__current_case__\": 1}, \"range_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"series_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"tile_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"timepoint_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"z_options\": {\"extract\": \"False\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "6.7.0+galaxy3",
+            "type": "tool",
+            "uuid": "ba289013-f43c-48e3-a280-605ae8a0b063",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert binary image to label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1110.8141593247035,
+                "top": 886.4280635640689
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "984358e43242",
+                "name": "binary2labelimage",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"mode\": {\"mode_selector\": \"cca\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5+galaxy0",
+            "type": "tool",
+            "uuid": "94e9da42-3cce-42b7-a997-7cec28ea2ab2",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter 2-D image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 531.3741290823522,
+                "top": 270.986691759329
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_simple_filter/ip_filter_standard/1.12.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "6c4b22ef2b81",
+                "name": "2d_simple_filter",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter\": {\"filter_type\": \"gaussian\", \"__current_case__\": 0, \"size\": \"3.0\"}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.12.0+galaxy0",
+            "type": "tool",
+            "uuid": "9a596b52-d436-4027-a235-d364419fa359",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/voronoi_tesselation/voronoi_tessellation/0.22.0+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Compute Voronoi tessellation",
+            "outputs": [
+                {
+                    "name": "result",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1383.3013280258754,
+                "top": 901.2780391500064
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/voronoi_tesselation/voronoi_tessellation/0.22.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e7fdea8385f0",
+                "name": "voronoi_tesselation",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.22.0+galaxy1",
+            "type": "tool",
+            "uuid": "070b08bc-7959-496e-8c7b-a095ef6f89a4",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy2",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "output"
+                },
+                "th_method|threshold": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Threshold image",
+                    "name": "th_method"
+                }
+            ],
+            "label": null,
+            "name": "Threshold image",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1129.085474681118,
+                "top": 329.595615762486
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "e5c8e7e72373",
+                "name": "2d_auto_threshold",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert_output\": false, \"th_method\": {\"method_id\": \"manual\", \"__current_case__\": 0, \"threshold\": {\"__class__\": \"ConnectedValue\"}, \"block_size\": \"0\", \"offset\": \"0\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.18.1+galaxy2",
+            "type": "tool",
+            "uuid": "761a9d93-2d70-498a-b79f-c70de1363f6c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "inputs_0|image": {
+                    "id": 7,
+                    "output_name": "result"
+                },
+                "inputs_1|image": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "inputs_2|image": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Process images using arithmetic expressions",
+            "outputs": [
+                {
+                    "name": "result",
+                    "type": "tiff"
+                }
+            ],
+            "position": {
+                "left": 1935.0085912670663,
+                "top": 583.5575492040355
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/image_math/image_math/1.26.4+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "f8b7770cbca5",
+                "name": "image_math",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"expression\": \"tessellation * (mask / 255) * (1 - seeds / 255)\", \"inputs\": [{\"__index__\": 0, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"tessellation\"}, {\"__index__\": 1, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"seeds\"}, {\"__index__\": 2, \"image\": {\"__class__\": \"ConnectedValue\"}, \"name\": \"mask\"}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.26.4+galaxy1",
+            "type": "tool",
+            "uuid": "b81e3146-4bcd-477e-8499-9bd1f9a5bed6",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "Visualize the different regions",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/colorize_labels/colorize_labels/3.2.1+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "result"
+                }
+            },
+            "inputs": [],
+            "label": "Visualisation",
+            "name": "Colorize label map",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 2545.469463466948,
+                "top": 600.5368843142134
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/colorize_labels/colorize_labels/3.2.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3aa2d054848a",
+                "name": "colorize_labels",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bg_color\": \"#000000\", \"bg_label\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"radius\": \"10\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.2.1+galaxy1",
+            "type": "tool",
+            "uuid": "80875ea7-b51a-40aa-95af-7835c061d53f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Image",
+                    "output_name": "output",
+                    "uuid": "69596a0e-4c77-4407-b2a2-0b978afd1876"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "imageanaylsis",
+        "Segmentation",
+        "voronoi"
+    ],
+    "uuid": "0e074432-8100-4013-a5d5-b441eafca0ce",
+    "version": 9
+}
