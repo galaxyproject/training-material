@@ -112,6 +112,11 @@ mats = TopicFilter
 
 ```
 
+> <tip-title>Jekyll console only needed for this one command</tip-title>
+> The `site` object is currently required for calculating this list of structured materials. This is only available in the Jekyll console, so you'll need to run this command in a Jekyll console.
+> All of the subsequent steps can be run in a normal Ruby environment, but you might as well keep running it in the Jekyll console anyway.
+{: .tip}
+
 Let's go ahead and patch array to let us calculate a mean, because laziness is great actually
 
 ```ruby
