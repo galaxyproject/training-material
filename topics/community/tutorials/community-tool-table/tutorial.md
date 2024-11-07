@@ -55,21 +55,13 @@ The aim is this tutorial is to create such table for a community.
 >
 {: .agenda}
 
-# Add your community to the Galaxy Codex pipeline
+# Add your community to the Galaxy CoDex
 
-To create a table for a community, you first need to create a new folder in the `data/community` folder within [Galaxy Codex code source](https://github.com/galaxyproject/galaxy_codex).
+You first need to make sure that your Community is in the [Galaxy CoDex](https://github.com/galaxyproject/galaxy_codex/tree/main/communities), a central resource for Galaxy communities.
 
-> <hands-on-title>Create a folder for your community</hands-on-title>
->
-> 1. If not already done, fork the [Galaxy Codex repository](https://github.com/galaxyproject/galaxy_codex)
-> 2. Go to the `communities` folder
-> 3. Click on **Add file** in the drop-down menu at the top
-> 4. Select **Create a new file**
-> 5. Fill in the `Name of your file` field with:  name of your community + `metadata/categories`
->
->    This will create a new folder for your community and add a categories file to this folder.
->
-{: .hands_on}
+{% snippet topics/community/faqs/codex.md %}
+
+# Add your community to the Galaxy Catalog pipeline
 
 One of the filters for the main community table is based on the tool categories on the [Galaxy ToolShed](https://toolshed.g2.bx.psu.edu/). Only tools in the selected ToolShed categories will be added to the filtered table. As a result, it is recommended to include broad categories.
 
