@@ -395,4 +395,98 @@ File.open("sc-roles.tsv", "w") do |f|
 end
 ```
 
+## All contributions over time
+
+The plot of all new items over time was requested, and since the git log approach is so deeply ugly and slow, let's do something slightly different.
+
+The date that Single Cell Tutorials, FAQ, Video, News, Events were added is requested.
+
+The GTN produces RSS [feeds of all new content]({% link feeds/index.md %}), as well as feeds subsetted by their area (e.g. the [single cell feed](https://training.galaxyproject.org/training-material/feeds/single-cell-all.i.w.html) or the [single cell grouped by month](https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html)) so we can use that to get a list of all new single cell content over time.
+
+```ruby
+require 'net/http'
+require 'date'
+require './_plugins/util'
+require 'uri'
+
+# Ruby's stdlib for doing web requests is ... not great.
+def request(url)
+  uri = URI.parse(url)
+  request = Net::HTTP::Get.new(uri)
+  req_options = {
+    use_ssl: uri.scheme == 'https',
+  }
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
+  end
+end
+```
+
+Let's look though the data we get back:
+
+```ruby
+feed = request('https://training.galaxyproject.org/training-material/feeds/single-cell-month.xml').body
+# The body of the feed has structure but it's slightly inconvenient.
+# The URLs however...
+# <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-preprocessing/workflows/scrna_mp_celseq.html?utm_source=matrix&amp;utm_medium=newsbot&amp;utm_campaign=matrix-news">CelSeq2: Multi Batch (mm10) (February 22, 2019)</a>
+#
+# That has everything and a date, can just figure out what 'type' of thing it was by the folder/name.
+
+def classify(url)
+  if url =~ /tutorial(_[A-Z_]*)?\.html/
+    return 'tutorial'
+  elsif url.include? '/events/'
+    return 'event'
+  elsif url =~ /slides(_[A-Z_]*)?\.html/
+    return 'slide'
+  elsif url.include? '/faqs/'
+    return 'faq'
+  elsif url.include? '/workflows/'
+    return 'workflow'
+  elsif url.include? '/news/'
+    return 'news'
+  end
+
+  p url
+
+  1/0
+end
+
+out = []
+
+feed.scan(/<a href="([^"]+)">([^<]+)<\/a>/).each do |url, title|
+  next if url.include? 'gtn-standards-rss.html'
+  date = title.match(/\(([^)]+)\)$/)[1]
+  date = Date.parse(date).to_s
+  out << [date, classify(url)]
+end
+```
+
+And that's almost done! Let's add in the video data as well:
+
+```ruby
+# Let's add in videos, they're stored in the tutorials. Thankfully these have a
+# recording date we can use.
+tutos = Dir.glob("topics/single-cell/tutorials/*/tutorial.md")
+tutos.each do |tuto|
+  meta = safe_load_yaml(tuto)
+  next if meta['recordings'].nil? || meta['recordings'].empty?
+
+  meta['recordings'].each do |rec|
+    out << [rec['date'], 'video']
+  end
+end
+```
+
+and write it out:
+
+```ruby
+File.open("single-cell-over-time.tsv", "w") do |f|
+  f.puts "date\ttype"
+  out.sort_by{|d, t| d}.each do |date, type|
+    f.puts "#{date}\t#{type}"
+  end
+end
+```
+
 With that, I think we're done! Ready to plot.

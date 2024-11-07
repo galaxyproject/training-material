@@ -143,30 +143,19 @@ That doesn't look quite right so, let's change how the data is aggregated:
 
 ```R
 # cumulative
-z = clean %>% select(month, class, additions)  %>% dcast(month ~ class, value.var="additions", fun.aggregate = sum)
+clean %>% select(month, class, additions)  %>% dcast(month ~ class, value.var="additions", fun.aggregate = sum)
 ```
 
-And now we can calculate cumulative sums across the columns:
+Let's do it for real now:
 
 ```R
-# I strongly suspect there is a better way to do this but I do not know it. PRs welcome!
-z$bibliography = cumsum(z$bibliography)
-z$`data-library` = cumsum(z$`data-library`)
-z$`faq` = cumsum(z$`faq`)
-z$`framework` = cumsum(z$`framework`)
-z$`metadata` = cumsum(z$`metadata`)
-z$`news` = cumsum(z$`news`)
-z$`slides` = cumsum(z$`slides`)
-z$`tutorial` = cumsum(z$`tutorial`)
-z$`workflows` = cumsum(z$`workflows`)
-```
+cumulative = clean %>% select(month, class, additions)  %>% 
+  dcast(month ~ class, value.var="additions", fun.aggregate = sum) %>%
+  mutate(across(bibliography:workflows, cumsum)) %>% 
+  reshape2::melt(id.var="month")
 
-With that done we can reshape it back into it's original shape for plotting:
-
-```R
-z2 = z %>% reshape2::melt(id.var="month")
-z2 %>% ggplot(aes(x=month, y=value, color=variable)) + geom_line() + 
-  theme +
+cumulative %>% ggplot(aes(x=month, y=value, color=variable)) + geom_line() + 
+  theme_bw() + theme +
   xlab("Month") + ylab("Lines added") + guides(color=guide_legend(title="Category")) +
   ggtitle("Cumulative lines added by category, across GTN Single Cell materials")
 ggsave("sc-lines-cumulative.png", width=12, height=8)
@@ -195,3 +184,21 @@ ggsave("sc-contribs.png", width=12, height=6)
 ```
 
 ![plot of several lines increasing over time in a very discrete way, authorship remains highest](./images/sc-contribs.png)
+
+## New X over Time
+
+Let's plot all of the new single cell things added over time, all the new FAQs, Tutorials, Slides, Etc:
+
+```R
+added_by_time = read_tsv("single-cell-over-time.tsv")
+added_by_time %>% dcast(date ~ `type`) %>% 
+  arrange(date) %>% 
+  mutate(across(event:workflow, cumsum)) %>% 
+  melt(id.var="date") %>% 
+  as_tibble() %>% arrange(date) %>% 
+  ggplot(aes(x=date, y=value, color=variable)) + geom_line() + 
+  theme_bw() + theme +
+  xlab("Date") + ylab("New Single Cell Items") + guides(color=guide_legend(title="Contribution Type")) +
+  ggtitle("New Single Cell events, FAQs, news, slides, tutorials, videos and workflows in the GTN")
+ggsave("sc-files-cumulative.png", width=6, height=6)
+```
