@@ -175,6 +175,26 @@ layout: base
 				</ul>
 				{% endif %}
 
+				{% if page.faqs_count > 0 %}
+				<h3>FAQs</h3>
+				<ul>
+				{% for res in page.faqs %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
 				{% if page.videos_count > 0 %}
 				<h3>Video Recordings</h3>
 				<ul>
@@ -443,6 +463,9 @@ var topics = [
 var slidesVsTutos = [
 {% for res in page.tutorials %}
 	"Tutorials",
+{% endfor %}
+{% for res in page.faqs %}
+	"FAQs",
 {% endfor %}
 {% for res in page.slides %}
 	"Slides",
