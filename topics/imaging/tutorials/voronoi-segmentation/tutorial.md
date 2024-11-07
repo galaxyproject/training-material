@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Voronoi Segmentation
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.5494629'
 questions:
   - How to use Galaxy for Voronoi Segmentation?
   - How should images be prepared before applying Voronoi segmentation?
@@ -59,119 +59,105 @@ In Earth observation, Voronoi segmentation is used to analyze spatial patterns a
 >
 {: .agenda}
 
-# Title for your first section
+# Get data
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+## Bioimage data
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+This tutorial will use an image dataset from the [BioImage archive](https://www.ebi.ac.uk/bioimage-archive/). This dataset is specifically prepared for training nuclear segmentation. 
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+The images are saved in the BioImage archive and can be uploaded to the Galaxy server with the corresponding BioImage Archive retrieval tool.
 
-have fun!
+![S-BIAD634:IM276 dataset](../../images/voronoi-segmentation/BIAD634_IM276.png "An annotated fluorescence image dataset for training nuclear segmentation methods")
 
-## Get data
-
-> <hands-on-title> Data Upload </hands-on-title>
+> <hands-on-title>Data upload with Bioimage Archive Tool</hands-on-title>
 >
-> 1. Create a new history for this tutorial
+> 1. Create a new history for this tutorial.
+>    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
+> 
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. {% tool [FTP Link for BioImage Archive](toolshed.g2.bx.psu.edu/repos/bgruening/bia_download/bia_download/0.1.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Storage mode"*: `fire` (Storage mode is always fire)
+>    - *"The path of accession"*: `S-BIAD/634/S-BIAD634`
+>    > <comment-title> BioImage Archive </comment-title>
+>    >
+>    > This tool will upload all the files into your Galaxy history which can be very inconvenient when you have large dataset. 
+>    > In that case, you can delete data files you do not plan to use for your analysis.
+>    {: .comment}
+>
+> 3. Rename {% icon galaxy-pencil %} the file `Neuroblastoma_0.tif` to `input_image.tif`  
+> 4. Check that the datatype
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>
+> 5. Add to each database a tag corresponding to `input`
+>
+>    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>
+>
+{: .hands_on}
+
+## Earth Observation (EO) data
+
+![Datasets of SH's AI4ER MRes Project](https://edsbook.org/_images/7d3b3ce159046d8da12d413a00c69137e4a073dcf1ee27d7cd4e33af6d93d526.png "a top-down RGB image of forest, captured by drone, aircraft or satellite.")
+
+> <hands-on-title> EO Data Upload </hands-on-title>
+>
+> 1. Create a new history for this tutorial.
+>    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
+> 
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to tiff.
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    ```
+>    https://zenodo.org/records/5494629/files/Sep_2014_RGB_602500_646500.tif
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. Rename {% icon galaxy-pencil %} the file `Sep_2014_RGB_602500_646500.tif` to `input_image.tif`
 > 4. Check that the datatype
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
+> 5. Add to each database a tag corresponding to `input`
 >
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
+# Data preparation
 
 ## Sub-step with **Convert image format**
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Select channel for Voronoi Segmentation </hands-on-title>
 >
 > 1. {% tool [Convert image format](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Input Image"*: `output` (Input dataset)
 >    - *"Extract series"*: `All series`
 >    - *"Extract timepoint"*: `All timepoints`
 >    - *"Extract channel"*: `Extract channel`
+>        - *"Channel id"*: `{'id': 2, 'output_name': 'output'}`
 >    - *"Extract z-slice"*: `All z-slices`
 >    - *"Extract range"*: `All images`
 >    - *"Extract crop"*: `Full image`
 >    - *"Tile image"*: `No tiling`
 >    - *"Pyramid image"*: `No Pyramid`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Why do we need to select a single channel? </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Select a single channel from the input image. Note that some tools number channels starting from 1, while others start from 0.
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Convert image format**
 
@@ -182,7 +168,7 @@ A big step can have several subsections or sub steps:
 >    - *"Extract series"*: `All series`
 >    - *"Extract timepoint"*: `All timepoints`
 >    - *"Extract channel"*: `Extract channel`
->        - *"Channel id"*: `{'id': 1, 'output_name': 'output'}`
+>        - *"Channel id"*: `{'id': 2, 'output_name': 'output'}`
 >    - *"Extract z-slice"*: `All z-slices`
 >    - *"Extract range"*: `All images`
 >    - *"Extract crop"*: `Full image`
@@ -223,40 +209,6 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Convert binary image to label map](toolshed.g2.bx.psu.edu/repos/imgteam/binary2labelimage/ip_binary_to_labelimage/0.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Binary image"*: `output` (Input dataset)
 >    - *"Mode"*: `Connected component analysis`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Convert single-channel to multi-channel image**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert single-channel to multi-channel image](toolshed.g2.bx.psu.edu/repos/imgteam/repeat_channels/repeat_channels/1.26.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input image (single-channel)"*: `output` (output of **Convert image format** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -361,79 +313,7 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Threshold image](toolshed.g2.bx.psu.edu/repos/imgteam/2d_auto_threshold/ip_threshold/0.18.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input image"*: `output` (output of **Filter 2-D image** {% icon tool %})
 >    - *"Thresholding method"*: `Manual`
->        - *"Threshold value"*: `{'id': 2, 'output_name': 'output'}`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Count objects in label map**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Count objects in label map](toolshed.g2.bx.psu.edu/repos/imgteam/count_objects/ip_count_objects/0.0.5-2) %} with the following parameters:
->    - {% icon param-file %} *"Source file"*: `result` (output of **Compute Voronoi tessellation** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Extract image features**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Extract image features](toolshed.g2.bx.psu.edu/repos/imgteam/2d_feature_extraction/ip_2d_feature_extraction/0.18.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Label map"*: `result` (output of **Compute Voronoi tessellation** {% icon tool %})
->    - *"Use the intensity image to compute additional features"*: `Use intensity image`
->        - {% icon param-file %} *"Intensity image"*: `output` (output of **Convert image format** {% icon tool %})
->    - *"Select features to compute"*: `Select features`
->        - *"Available features"*: ``
+>        - *"Threshold value"*: `{'id': 3, 'output_name': 'output'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -540,42 +420,6 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Overlay images**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Overlay images](toolshed.g2.bx.psu.edu/repos/imgteam/overlay_images/ip_overlay_images/0.0.4+galaxy1) %} with the following parameters:
->    - *"Type of the overlay"*: `Linear blending`
->        - {% icon param-file %} *"Image #1"*: `output` (output of **Convert single-channel to multi-channel image** {% icon tool %})
->        - {% icon param-file %} *"Image #2"*: `output` (output of **Colorize label map** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 ## Re-arrange
 
@@ -588,3 +432,5 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+
