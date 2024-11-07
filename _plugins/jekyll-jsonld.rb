@@ -934,7 +934,7 @@ module Jekyll
 
       # Zenodo link out
       if actual_material.key?('zenodo_link') && ! actual_material['zenodo_link'].nil?
-        if ! (actual_material.fetch('zenodo_link', '') || "").empty?
+        if actual_material['zenodo_link'].length.positive?
           mentions.push({
                           '@type': 'Thing',
                           url: (actual_material['zenodo_link']).to_s,

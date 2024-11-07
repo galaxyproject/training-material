@@ -229,7 +229,7 @@ def all_date_sorted_materials(site)
                 'contributors' => r['speakers'] + (r['captions'] || [])}
 
         obj = objectify(attr, url, t.path)
-        bucket << [Date.parse(r['date'].to_s), 'recordings', obj, tags]
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
       end
     end
 
@@ -244,7 +244,7 @@ def all_date_sorted_materials(site)
         attr = {'title' => "Recording of " + s['title'], 
                 'contributors' => r['speakers'] + (r['captions'] || [])}
         obj = objectify(attr, url, s.path)
-        bucket << [Date.parse(r['date'].to_s), 'recordings', obj, tags]
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
       end
     end
   end
