@@ -94,6 +94,8 @@ require 'yaml'
 data = YAML.load_file('metadata/github.yml')
 ```
 
+<!-- GTN:IGNORE:003 -->
+
 Let's fetch data from within the GTN's infrastructure. You can see documentation for some of our APIs in the [RDoc](https://training.galaxyproject.org/training-material/gtn_rdoc/). E.g. here is how we document [`TopicFilter.list_materials_structured`](https://training.galaxyproject.org/training-material/gtn_rdoc/TopicFilter.html#method-c-list_materials_structured).
 
 ```ruby
