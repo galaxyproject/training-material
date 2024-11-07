@@ -15,7 +15,8 @@ key_points:
 - Mitoflashes are superoxide burst events in mitochondria that signal functional states and stress responses.
 - Bioinformatics tools can facilitate the visualization, tracking, and quantitative analysis of these events.
 - Proper tracking and analysis of mitoflashes contribute to understanding mitochondrial behavior and health in cells.
-contributors:
+
+contributions:
   authorship:
     - dianichj
     - kostrykin
