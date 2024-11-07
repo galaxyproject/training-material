@@ -153,7 +153,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
+> 4. Create a paired collection named `2 PE fastqs`, name your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
