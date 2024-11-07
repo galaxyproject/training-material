@@ -1,38 +1,43 @@
 ---
 layout: tutorial_slides
-logo: "GTN"
-
-title: "Single-cell Formats and Resources"
+logo: GTN
+title: Single-cell Formats and Resources
 questions:
-  - "What does single-cell data look like?"
-  - "What are the common single-cell formats?"
-  - "Where can public single-cell data be found?"
+- What does single-cell data look like?
+- What are the common single-cell formats?
+- Where can public single-cell data be found?
 objectives:
-  - "Learn the basic structure of single-cell data"
-  - "Be able to recognise different types of single-cell metadata"
-  - "Learn the common data formats used for storing single-cell data"
-  - "Become familiar with some popular sources for public single-cell data"
-
+- Learn the basic structure of single-cell data
+- Be able to recognise different types of single-cell metadata
+- Learn the common data formats used for storing single-cell data
+- Become familiar with some popular sources for public single-cell data
 subtopic: scintroduction
 priority: 4
-
 tags:
-
 key_points:
-  - "Single-cell data consists of four main sections"
-  - "Single-cell data can come in a variety of formats"
-  - "Different data formats are required for different languages and packages"
-  - "There are various public single-cell atlases that consist of useful data"
+- Single-cell data consists of four main sections
+- Single-cell data can come in a variety of formats
+- Different data formats are required for different languages and packages
+- There are various public single-cell atlases that consist of useful data
 contributors:
-  - hexhowells
-  - nomadscientist
-  - kkamieniecka
+- hexhowells
+- nomadscientist
+- kkamieniecka
 requirements:
-  -
-    type: "internal"
-    topic_name: single-cell
-    tutorials:
-        - scrna-intro
+- type: internal
+  topic_name: single-cell
+  tutorials:
+  - scrna-intro
+recordings:
+- youtube_id: _GsIlvWxdFw
+  length: 19M
+  date: '2024-09-30'
+  speakers:
+  - hexhowells
+  captioners:
+  - hexhowells
+  bot-timestamp: 1727719569
+
 
 ---
 
@@ -68,7 +73,7 @@ requirements:
 ???
 
 Single-cell data consists of 4 main components:
-- gene expression data 
+- gene expression data
 - metadata about each cell
 - metadata about each gene
 - unstructured metadata about the data collected
@@ -102,9 +107,9 @@ The core component of single-cell data is the gene expression matrix. This is a 
 
 Typically each row of the matrix represents the genes and the columns represent the cells. However, it is important to note that this is not always the case and some matrices may need to be transposed before further processing.
 
-The matrix can come in two different forms: full or sparse. 
+The matrix can come in two different forms: full or sparse.
 
-Full matrices act as one large table where every entry contains a value, including genes that were not sequenced (in which case their value will be 0). This is the simplest format but can be inefficient to store as many of the values in the matrix are redundant. 
+Full matrices act as one large table where every entry contains a value, including genes that were not sequenced (in which case their value will be 0). This is the simplest format but can be inefficient to store as many of the values in the matrix are redundant.
 
 A more compact method to store these values is with a sparse matrix. This is a compressed representation of the matrix that removes all values that contain no useful information whilst keeping track of the overall structure of the matrix.
 
@@ -176,7 +181,7 @@ AGR2	      | ENSG00000106541
 
 ???
 
-The next section of metadata to explore is the gene metadata. Commonly referred to as features when stored in a file. This contains metadata about each gene that was sequenced. This metadata includes gene identifiers/ensembl IDs, expression metrics and quality control metrics, both generated with additional analysis tools. 
+The next section of metadata to explore is the gene metadata. Commonly referred to as features when stored in a file. This contains metadata about each gene that was sequenced. This metadata includes gene identifiers/ensembl IDs, expression metrics and quality control metrics, both generated with additional analysis tools.
 
 Gene identifiers typically consist of a sequence of letters and numbers. If a column in your file contains these types of values then your likely looking at the gene metadata! (If you're unsure, performing an internet search on one of the potential gene names will likely reveal whether that string represents a gene)
 
@@ -399,7 +404,7 @@ It's important to note that AnnData does not support sparse matrices, therefore 
 
 Loom is another format based on HDF5. Loom objects are supported in various different programming languages and supports sparse matrices making it efficient for large data files.
 
-**Supported languages:** 
+**Supported languages:**
 - Python
 - R
 - MATLAB
@@ -531,7 +536,7 @@ Repository | Link to resource
 --- | ---
 NCBI | https://www.ncbi.nlm.nih.gov/
 Human Cell Atlas: Data Explorer | https://explore.data.humancellatlas.org/projects
-CellXGene Collection | https://cellxgene.cziscience.com/datasets 
+CellXGene Collection | https://cellxgene.cziscience.com/datasets
 Single Cell Portal | https://singlecell.broadinstitute.org/single_cell
 EBI Single Cell Expression Atlas | https://www.ebi.ac.uk/gxa/sc/home
 

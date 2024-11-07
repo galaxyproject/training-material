@@ -102,7 +102,7 @@ In a typical DIA-MS experiment, the precursor scan usually ranges between 400-10
 >    https://zenodo.org/records/13505774/files/191023JAT06_P_1ug_595_705_4_20.raw
 >    https://zenodo.org/records/13505774/files/191023JAT07_P_1ug_695_805_4_20.raw
 >    https://zenodo.org/records/13505774/files/191023JAT08_P_1ug_795_905_4_20.raw
->    ttps://zenodo.org/records/13505774/files/191023JAT09_P_1ug_895_1005_4_20.raw
+>    https://zenodo.org/records/13505774/files/191023JAT09_P_1ug_895_1005_4_20.raw
 >    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_BS_191102.fasta
 >    https://zenodo.org/record/4926594/files/T4_Salmonella_Ecoli_Bacillus_fasta_trypsin_z2_nce33_BS_191102.dlib
 >    ```

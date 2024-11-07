@@ -156,7 +156,7 @@ module Jekyll
         },
         id: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         name: Gtn::Contributors.fetch_name(site, id),
-        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+        description: 'An organization supporting the Galaxy Training Network',
       }
 
       organization['url'] = contributor['url'] if contributor.key?('url') && contributor['url']
@@ -179,12 +179,12 @@ module Jekyll
       }
     end
 
-    def generate_funding_jsonld(id, contributor, site)
+    def generate_grant_jsonld(id, contributor, site)
       organization = {
         '@context': 'https://schema.org',
         '@type': 'Grant',
         identifier: contributor['funding_id'],
-        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        url: Gtn::Contributors.fetch_funding_url(contributor) || contributor['url'],
         funder: generate_funder_jsonld(id, contributor, site)
       }
 
@@ -198,16 +198,16 @@ module Jekyll
     # Generate the JSON-LD metadata for a person, funder, or organisation as JSON.
     # Parameters:
     # +id+:: The id of the person.
-    # +contributor+:: The contributor object from CONTRIBUTORS.yaml.
     # +site+:: The site object.
+    # +json+:: Should the output be rendered as JSON (only really used in contributor page.)
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
       d = if Gtn::Contributors.person?(site, id)
             generate_person_jsonld(id, contributor, site)
-          elsif Gtn::Contributors.funder?(site, id)
-            generate_funder_jsonld(id, contributor, site)
+          elsif Gtn::Contributors.grant?(site, id)
+            generate_grant_jsonld(id, contributor, site)
           else
             generate_org_jsonld(id, contributor, site)
           end
@@ -274,11 +274,11 @@ module Jekyll
       instructors = Gtn::Contributors.get_instructors(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
+      funders = Gtn::Contributors.get_funders(site, page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funding = Gtn::Contributors.get_funders(page.to_h).map do |x|
-        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      funding = Gtn::Contributors.get_grants(site, page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
       end
 
       materials = []
@@ -511,6 +511,18 @@ module Jekyll
         material.fetch('objectives', [])
       end.flatten.compact
 
+      funders = materials.map do |material|
+        Gtn::Contributors.get_funders(site, material).map do |x|
+          to_pfo_jsonld(x, site, json: false)
+        end
+      end.flatten.uniq.compact
+
+      funding = materials.map do |material|
+        Gtn::Contributors.get_grants(site, material).map do |x|
+          to_pfo_jsonld(x, site, json: false)
+        end
+      end.flatten.uniq.compact
+
       # TODO: add topic edam terms too? Not sure.
       parts = []
       materials.each do |material|
@@ -558,8 +570,8 @@ module Jekyll
         # learningResourceType
         # teaches
 
-        # funder: funders, # Org or person
-        # funding: funding, # Grant
+        funder: funders, # Org or person
+        funding: funding, # Grant
         publisher: GTN,
         provider: GTN,
         syllabusSections: syllab,
@@ -679,18 +691,26 @@ module Jekyll
         # "award":,
         # "author" described below
         # "character":,
-        citation: {
-          '@type': 'CreativeWork',
-          name: 'Community-Driven Data Analysis Training for Biology',
-          url: 'https://doi.org/10.1016/j.cels.2018.05.012'
-        },
+        citation: [
+          {
+            '@type': 'CreativeWork',
+            name: 'Galaxy Training: A Powerful Framework for Teaching!',
+            url: 'https://doi.org/10.1371/journal.pcbi.1010752'
+          },
+          {
+            '@type': 'CreativeWork',
+            name: 'Community-Driven Data Analysis Training for Biology',
+            url: 'https://doi.org/10.1016/j.cels.2018.05.012'
+          }
+        ],
         # "comment":,
         # "commentCount":,
         # "contentLocation":,
         # "contentRating":,
         # "contentReferenceTime":,
         # "contributor" described below
-        copyrightHolder: GTN,
+        # copyrightHolder: GTN,
+        # copyrightNotice: m
         # "copyrightYear":,
         # "correction":,
         # "creator":,
@@ -704,7 +724,7 @@ module Jekyll
         # "encodingFormat":,
         # "exampleOfWork":,
         # "expires":,
-        # "funder":,
+        # "funder": funding,
         # "genre":,
         # "hasPart" described below
         headline: (material['title']).to_s,
@@ -779,6 +799,24 @@ module Jekyll
           data['datePublished'] = Gtn::PublicationTimes.obtain_time(material['path'])
         end
       end
+
+      if material.key?('copyright')
+        # copyrightHolder: GTN,
+        data['copyrightNotice'] = material['copyright']
+      else
+        # I'm not sure this is accurate.
+        data['copyrightHolder'] = GTN
+      end
+
+      funders = Gtn::Contributors.get_funders(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      grants = Gtn::Contributors.get_grants(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+
+      data['funder'] = funders
+      data['funding'] = grants
 
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
@@ -890,6 +928,11 @@ module Jekyll
                           '@type': 'Thing',
                           url: url,
                           name: "Quarto/RMarkdown Notebook"
+                        })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: "https://bio.tools/tool/rstudio",
+                          name: "RStudio"
                         })
         end
       end

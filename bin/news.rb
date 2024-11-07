@@ -51,7 +51,7 @@ NOW = Time.now
 
 CONTRIBUTORS = safe_load_yaml('CONTRIBUTORS.yaml')
 ORGANISATIONS = safe_load_yaml('ORGANISATIONS.yaml')
-FUNDERS = safe_load_yaml('FUNDERS.yaml')
+GRANTS = safe_load_yaml('GRANTS.yaml')
 
 # new   news
 # new   slidevideos
@@ -140,7 +140,7 @@ data = {
        .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
   organisations: `git diff --unified --ignore-all-space #{options[:previousCommit]} ORGANISATIONS.yaml`
        .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
-  funders: `git diff --unified --ignore-all-space #{options[:previousCommit]} FUNDERS.yaml`
+  grants: `git diff --unified --ignore-all-space #{options[:previousCommit]} GRANTS.yaml`
        .split("\n").grep(/^\+[^ ]+:\s*$/).map { |x| x.strip[1..-2] },
 }
 
@@ -234,10 +234,10 @@ def build_news(data, filter: nil, updates: true, only_news: false)
     output += data[:organisations].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
-  if filter.nil? && data[:funders].length.positive?
+  if filter.nil? && data[:grants].length.positive?
     newsworthy = true
-    output += "\n\n## #{data[:funders].length} new funders!\n\n"
-    output += data[:funders].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
+    output += "\n\n## #{data[:grants].length} new grants!\n\n"
+    output += data[:grants].map { |c| linkify("@#{c}", "hall-of-fame/#{c}") }.join("\n").gsub(/^/, '- ')
   end
 
   [output, newsworthy]

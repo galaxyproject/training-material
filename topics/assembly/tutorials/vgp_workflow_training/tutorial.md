@@ -49,7 +49,7 @@ abbreviations:
   VGP: Vertebrate Genome Project
   G10K: Genome 10K
 recordings:
-- youtube_id: LO-migvwcM
+- youtube_id: _LO-migvwcM
   length: 1H56M
   galaxy_version: 24.1.2.dev0
   date: '2024-09-12'

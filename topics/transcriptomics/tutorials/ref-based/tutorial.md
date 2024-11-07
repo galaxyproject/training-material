@@ -153,7 +153,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
+> 4. Create a paired collection named `2 PE fastqs`, name your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -265,7 +265,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Other Read Trimming Options"*
@@ -1489,6 +1489,8 @@ We can now run **DESeq2**:
 >                        - In *"Count file(s)"*: `Select all the single-end count files (GSM461176, GSM461179, GSM461182)`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
@@ -1566,6 +1568,8 @@ We can now run **DESeq2**:
 >                        - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >

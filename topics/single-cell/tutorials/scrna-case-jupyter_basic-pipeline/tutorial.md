@@ -40,6 +40,7 @@ tags:
 - 10x
 - paper-replication
 - Python
+- MIGHTS
 contributions:
   authorship:
   - hexhowells
@@ -774,7 +775,7 @@ The authors weren’t interested in further annotation of the DP cells, so neith
 
 ## Annotating Clusters
 
-As mentioned at the beginning of the tutorial, you might not get outputs identical to a tutorial if you are running it in a programming environment, but the outputs should still be pretty close. However, you have to double check if the categories (ie. cell types) in the example below correspond to the identified cluster numbers based on gene expression. You might need to change the order of assigned cell types in the *categories* parameter to match the cluster numbers identified by *louvain*. 
+As mentioned at the beginning of the tutorial, you might not get outputs identical to a tutorial if you are running it in a programming environment, but the outputs should still be pretty close. However, you have to double check if the categories (ie. cell types) in the example below correspond to the identified cluster numbers based on gene expression. You might need to change the order of assigned cell types in the *categories* parameter to match the cluster numbers identified by *louvain*.
 
 ```python
 # Add meaningful names to each category
@@ -919,4 +920,4 @@ put("figures/plotname.png")
 
 In this tutorial, you moved from technical processing to biological exploration. By analysing real data - both the exciting and the messy! - you have, hopefully, experienced what it’s like to analyse and question a dataset, potentially without clear cut-offs or clear answers. If you were working in a group, you each analysed the data in different ways, and most likely found similar insights. One of the biggest problems in analysing scRNA-seq is the lack of a clearly defined pathway or parameters. You have to make the best call you can as you move through your analysis, and ultimately, when in doubt, try it multiple ways and see what happens!
 
-If, for some reasons anything didn't work in Galaxy JupyterLab environment, please don't get discouraged - we prepared a [Google Colab notebook version](https://colab.research.google.com/drive/1DkCysA77iaFAWoKJ1vwE5_qYV8Su7UsX?usp=sharing) for you as a backup so that you can enjoy the tutorial no matter what! 
+If, for some reasons anything didn't work in Galaxy JupyterLab environment, please don't get discouraged - we prepared a [Google Colab notebook version](https://colab.research.google.com/drive/1DkCysA77iaFAWoKJ1vwE5_qYV8Su7UsX?usp=sharing) for you as a backup so that you can enjoy the tutorial no matter what!
