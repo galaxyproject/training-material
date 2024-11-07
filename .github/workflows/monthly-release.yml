@@ -6,13 +6,16 @@ on:
     - cron:  '0 4 1 * *'
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
   setup:
     if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
+
+    # This is only needed for the final step of gh release creation.
+    # That should be separated into a separate dependent job at some point.
+    permissions:
+      contents: write
+
     steps:
       - name: Release Name
         id: release_name
@@ -25,6 +28,7 @@ jobs:
           # Based on logic in deploy.yml
           fetch-depth: 1200
           fetch-tags: true
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -96,10 +100,12 @@ jobs:
         id: create_release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_TAG: ${{ env.release_tag }}
+          RELEASE_TITLE: ${{ env.release_title }}
         run: |
           # Compile release notes
           echo "Monthly release of the GTN materials is now [available on the archive](https://training.galaxyproject.org/archive/$RELEASE_TAG/)." > /tmp/last-month-on.md
           echo >> /tmp/last-month-on.md
           bundle exec ruby bin/last-month-on.rb | pandoc --wrap none -t markdown -f html >> /tmp/last-month-on.md
           # Create the release
-          gh release create "$RELEASE_TAG" --title "$RELEASE_TITLE" --notes-file /tmp/last-month-on.md  --target main --latest
+          gh release create "$RELEASE_TAG" --title "Release $RELEASE_TITLE" --notes-file /tmp/last-month-on.md  --target main --latest

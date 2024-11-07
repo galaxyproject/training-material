@@ -19,27 +19,33 @@ description: |
   For support throughout these tutorials, join our Galaxy [single cell chat group on Matrix](https://matrix.to/#/#Galaxy-Training-Network_galaxy-single-cell:gitter.im) to ask questions!
 
 pathway:
-  - section: "Module 1: Case study"
+  - section: "Module 1: Preparing the dataset"
     description: |
-      These tutorials take you from raw scRNA sequencing reads to cell cluster plots to replicate a published analysis.
+      This tutorial takes you from the large files containing raw scRNA sequencing reads to a smaller, combined cell matrix.
     tutorials:
       - name: scrna-case_alevin
         topic: single-cell
       - name: scrna-case_alevin-combine-datasets
         topic: single-cell
+  - section: "Module 2: Generating cluster plots"
+    description: |
+      These tutorials take you from the pre-processed matrix to cluster plots and gene expression values. You can pick whether to follow the Scanpy or Seurat tutorials - they will accomplish the same thing and generate the same results, so follow whichever you prefer!
+    tutorials:
       - name: scrna-case_basic-pipeline
         topic: single-cell
+      - name: scrna-case_FilterPlotandExplore_SeuratTools
+        topic: single-cell
 
-  - section: "Module 2: Inferring trajectories"
+  - section: "Module 3: Inferring trajectories"
     description: |
-      This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Note that you get two options for inferring trajectories, you can choose either.
+      This isn't strictly necessary, but if you want to infer trajectories - pseudotime relationships between cells - you can try out these tutorials with the same dataset.  Again, you get two options for inferring trajectories, and you can choose either.
     tutorials:
       - name: scrna-case_trajectories
         topic: single-cell
       - name: scrna-case_monocle3-trajectories
         topic: single-cell
 
-  - section: "Module 3: Moving into coding environments"
+  - section: "Module 4: Moving into coding environments"
     description: |
       Did you know Galaxy can host coding environments? They don't have the same level of computational power as the easy-to-use Galaxy tools, but you can unlock the full freedom in your data analysis. You can install your favourite single-cell tool suite that is not available on Galaxy, export your data into these coding environments and run your analysis there. If you want your favourite tool suite as a Galaxy tool, you can always request [here](https://docs.google.com/spreadsheets/d/15hqgqA-RMDhXR-ylKhRF-Dab9Ij2arYSKiEVoPl2df4/edit?usp=sharing). Let's start with the basics of running these environments in Galaxy.
     tutorials:

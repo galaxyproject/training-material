@@ -219,7 +219,7 @@ To identify our contaminants, we only need the information from the first three 
 >    > <comment-title> Columns definitions </comment-title>
 >    >
 >    > The three columns that we extracted contain:
->    > 1. Wheter the sequence is classified `C` or unclassified `U`
+>    > 1. Whether the sequence is classified `C` or unclassified `U`
 >    > 2. The sequence name
 >    > 3. The sequence classification
 >    >
