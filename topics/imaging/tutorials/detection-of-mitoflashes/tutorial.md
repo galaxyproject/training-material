@@ -16,8 +16,9 @@ key_points:
 - Bioinformatics tools can facilitate the visualization, tracking, and quantitative analysis of these events.
 - Proper tracking and analysis of mitoflashes contribute to understanding mitochondrial behavior and health in cells.
 contributors:
-- Diana Chiang Jurado
-- Leonid Kostrykin
+  authorship:
+    - dianichj
+    - kostrykin
 
 ---
 
