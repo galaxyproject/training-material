@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4c1db3d1518ac2c08e253fabd4f1a24e906a75e7",
+		release: "galaxy-training-network@d13364a38afc39744816f83d3eb204fbd3d24d41",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Setting up Celery Workers for Galaxy">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-02-20 14:56:35 +0000">
+<meta name="DC.date" content="2024-11-07 14:55:31 +0000">
 <meta name="DC.creator" content="Mira Kuntz"><meta name="description" content="Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation. ">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Galaxy Server administration / Setting up Celery Workers for Galaxy / Hands-on: Setting up Celery Workers for Galaxy">
@@ -181,7 +181,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-02-20 14:56:35 +0000",
+  "dateModified": "2024-11-07 14:55:31 +0000",
   "datePublished": "2023-04-16 09:02:56 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -239,11 +239,11 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "description": "Here you can learn everything you need to become a Pro Galaxy Administrator! These resources cover everything from setup, to configuration, to monitoring, to customisation.\n",
     "url": "https://training.galaxyproject.org/training-material/topics/admin/"
   },
-  "abstract": "# Overview",
+  "abstract": "Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.",
   "learningResourceType": "e-learning",
   "name": "Setting up Celery Workers for Galaxy",
   "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/celery/tutorial.html",
-  "version": 10,
+  "version": 11,
   "timeRequired": "PT1H",
   "teaches": "- Have an understanding of what Celery is and how it works\n- Install Redis\n- Configure and start Celery workers\n- Install Flower to the Galaxy venv and configure it\n- Use an Ansible playbook for all of the above.\n- Monitor a Celery task using the Flower dashboard",
   "keywords": [
@@ -251,7 +251,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     "ansible",
     "git-gat"
   ],
-  "description": "## Abstract\n\n# Overview\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Learning Objectives\n\n- Have an understanding of what Celery is and how it works\n- Install Redis\n- Configure and start Celery workers\n- Install Flower to the Galaxy venv and configure it\n- Use an Ansible playbook for all of the above.\n- Monitor a Celery task using the Flower dashboard\n\n",
+  "description": "## Abstract\n\nCelery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Learning Objectives\n\n- Have an understanding of what Celery is and how it works\n- Install Redis\n- Configure and start Celery workers\n- Install Flower to the Galaxy venv and configure it\n- Use an Ansible playbook for all of the above.\n- Monitor a Celery task using the Flower dashboard\n\n",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -1037,6 +1037,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
+                    
+                
             
                 
                     
@@ -1068,6 +1070,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                                 </li>
                             
                         
+                    
+                
                     
                 
                     
@@ -1263,6 +1267,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                 
                     
                 
+                    
+                
             
         
     
@@ -1325,7 +1331,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Apr 16, 2023 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 20, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 7, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1343,7 +1349,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
 
     </blockquote>
     </section>
@@ -1358,9 +1364,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
                  
 
                 <section aria-label="Tutorial Content" id="tutorial-content">
-                <h1 id="overview">Overview</h1>
-
-<p>Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.</p>
+                <p>Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.</p>
 
 <p>From the Celery website:</p>
 
@@ -1381,11 +1385,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 <p><a href="slides.html">A slideshow presentation on this subject is available</a>.</p>
 
+<p>If you are not interesting in managing Redis and Flower, you might be interested in the <a href="/training-material/topics/admin/tutorials/celeryless/tutorial.html">lower-configuration deployment option</a>.</p>
+
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda">Agenda</div>
 
 <ol id="markdown-toc">
-  <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
   <li><a href="#installing-and-configuring" id="markdown-toc-installing-and-configuring">Installing and Configuring</a></li>
   <li><a href="#installing-and-configuring-1" id="markdown-toc-installing-and-configuring-1">Installing and Configuring</a></li>
   <li><a href="#test-celery" id="markdown-toc-test-celery">Test Celery</a></li>
@@ -2118,7 +2123,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4c1db3d1518ac2c08e253fabd4f1a24e906a75e7">4c1db3d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d13364a38afc39744816f83d3eb204fbd3d24d41">d13364a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

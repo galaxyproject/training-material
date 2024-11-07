@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@4c1db3d1518ac2c08e253fabd4f1a24e906a75e7",
+		release: "galaxy-training-network@d13364a38afc39744816f83d3eb204fbd3d24d41",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,8 +70,9 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Changing the datatype of a collection">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2023-06-15 08:14:18 +0000">
-<meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="This will set the datatype for all files in your collection. Does not change the files themselves.">
+<meta name="DC.date" content="2024-11-07 14:55:31 +0000">
+<meta name="DC.creator" content="Saskia Hiltemann">
+<meta name="DC.creator" content="Helena Rasche"><meta name="description" content="This will set the datatype for all files in your collection. Does not change the files themselves.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="FAQ: Changing the datatype of a collection">
         <meta property="og:description" content="This will set the datatype for all files in your collection. Does not change the files themselves.">
@@ -228,7 +229,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
     
     <div class="contributors-line" style="font-size:1rem;">Authors: <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge contributor-shiltemann"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/shiltemann?s=36" alt="Saskia Hiltemann avatar" width="36" class="avatar" />
-    Saskia Hiltemann</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
+    Saskia Hiltemann</a><a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/hexylena?s=36" alt="Helena Rasche avatar" width="36" class="avatar" />
+    Helena Rasche</a><a href="https://training.galaxyproject.org/training-material/topics/contributing/" class="contributor-badge contributor-newcontributors"><i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span>Add Contributions!</a></div>
     <hr>
     
 
@@ -250,6 +252,13 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   </li>
   <li>Click the <strong>Save</strong> button</li>
 </ol>
+
+<p><strong>Cannot find the feature?</strong></p>
+
+<p>If you are on a smaller Galaxy server, i.e. not one of the large (multi)national public servers, you may not be able to find this operation, and there is no indication it is missing or why it is disabled.</p>
+
+<p>Galaxy has recently started putting <a href="https://docs.galaxyproject.org/en/master/admin/production.html#use-celery-for-asynchronous-tasks">more features behind a setting and deployment configuration</a> that needs to be enabled by the server administrator.
+Your administrator will need to deploy Celery and potentially additionally flower and redis to their stack to enable changing the datatype of a collection. Consider sending your Galaxy administrator the link to the <a href="/training-material/topics/admin/tutorials/celeryless/tutorial.html">simpler deployment option</a> or more complex <a href="/training-material/topics/admin/tutorials/celery/tutorial.html">GTN tutorial for setting up redis and flower</a>.</p>
 
         </div>
         <div class="col-md-4">
@@ -403,7 +412,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4c1db3d1518ac2c08e253fabd4f1a24e906a75e7">4c1db3d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d13364a38afc39744816f83d3eb204fbd3d24d41">d13364a</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
