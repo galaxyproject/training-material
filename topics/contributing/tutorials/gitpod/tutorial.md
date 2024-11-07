@@ -67,9 +67,12 @@ If you are working on your own training materials and want preview them online w
 >    >   ![Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked](../../images/github_update_fork.png)
 >    {: .tip}
 >
-> 2. **Open** your browser and navigate to [gitpod.io](https://gitpod.io)
+> 2. **Open** your browser and navigate to [gitpod.io/login](https://gitpod.io/login)
+>    - Note: don't leave the `/login` part of the url off, it will lead you to a different flavour of GitPod. We are using Gitpod classig
 > 3. **Log in** with GitHub
 >    ![GitPod sign-in menu with various options, including GitHub](../../images/gitpod/signin.png){: width="25%"}
+> 4. Click on **Configure your own repository** under the Workspaces menu
+>    ![GitPod homepage](images/gitpod-home.png)
 > 4. Copy the link to your fork of the GTN, e.g. `https://github.com/shiltemann/training-material`
 > 5. In the browser’s address bar, prefix the entire URL with `gitpod.io/#` and press Enter.
 >
