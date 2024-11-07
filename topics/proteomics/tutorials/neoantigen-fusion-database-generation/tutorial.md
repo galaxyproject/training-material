@@ -8,7 +8,7 @@ questions:
 objectives:
 - Downloading databases related to 16SrRNA data
 - For better neoantigen identification results.
-time_estimation: 3H
+time_estimation: 2H
 key_points:
 - Create a customized fusion proteomics database from 16SrRNA results.
 contributions:
@@ -163,17 +163,16 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is RNA STAR, and what does it do?
+> 2. How do I interpret the alignment statistics in STAR’s output?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. STAR is a tool for aligning RNA-Seq reads to a reference genome, helping researchers understand gene expression and identify splice junctions. STAR requires RNA-Seq reads, usually in FASTQ format. It also needs a reference genome file in FASTA format and annotation files in GTF/GFF format to build an index. STAR outputs alignments in BAM/SAM format, as well as splice junction files. It can also provide additional alignment stats in log files.
+> > 2. STAR provides logs with mapping statistics, such as the percentage of uniquely mapped reads, which can be useful for quality control. Aligned BAM files from STAR can be visualized in genome browsers like IGV (Integrative Genomics Viewer) to examine coverage and splicing.
 > >
 > {: .solution}
 >
@@ -208,17 +207,16 @@ The output includes a list of fusion candidates with key information like fusion
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners' understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is ARRIBA, and what does it do?
+> 2. How can I ensure ARRIBA finds specific known fusions?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. ARRIBA is a tool for detecting gene fusions in RNA-Seq data, especially helpful for identifying cancer-associated fusions and other structural variations. ARRIBA needs:A sorted BAM file with RNA-Seq reads aligned by STAR; STAR’s chimeric output (Chimeric.out.junction) to identify candidate fusion junctions; Reference annotation files, like a gene annotation GTF file and a blacklist file to filter false positives.
+> > 2. Ensure that the STAR alignment and ARRIBA parameters are optimized for sensitivity. Adjusting settings for segment length and alignment quality in STAR can improve detection of specific known fusions.
 > >
 > {: .solution}
 >
@@ -228,7 +226,7 @@ The output includes a list of fusion candidates with key information like fusion
 
 **Text Reformatting** is a step used in bioinformatics workflows to manipulate and clean up data for easier downstream processing. In fusion detection workflows, text reformatting is often used to parse and restructure output files, making the data consistent and accessible for subsequent analysis steps.
 
-In this context, text reformatting may involve:
+In this workflow, text reformatting involves:
 - Extracting specific columns or fields from tabular outputs, such as gene names, breakpoint coordinates, or fusion peptide sequences.
 - Formatting peptide sequences and related information into specific columns or concatenating fields for unique identifiers.
 - Converting the data into a consistent format that downstream tools can interpret, such as converting tab-separated values into a structured layout for database input or analysis.
@@ -284,34 +282,16 @@ The reformatting step ensures that the processed data adheres to the requirement
 } `
 >
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **Query Tabular**
 
 **Query Tabular** is a bioinformatics tool used to extract and manipulate specific data from tabular datasets in workflows. This tool allows users to perform SQL-like queries on tabular data, enabling them to filter, aggregate, and transform datasets based on user-defined criteria.
 
-In the context of fusion detection and neoantigen workflows, the **Query Tabular** tool can be employed for several purposes:
+In this workflow, the **Query Tabular** tool is employed for several purposes:
 
 - **Data Filtering:** Users can select specific rows based on certain conditions (e.g., filtering fusions that meet particular criteria).
 - **Column Manipulation:** Users can specify which columns to retain or create new columns by combining or transforming existing data.
@@ -335,25 +315,10 @@ FROM t1 `
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ##  **Tabular-to-FASTA**
 
-Tabular to FASTA conversion is a common task in bioinformatics that transforms data structured in a tabular format (such as CSV or TSV) into FASTA format, which is widely used for representing nucleotide or protein sequences. This conversion is essential when you need to input sequence data into various bioinformatics tools or databases that require FASTA-formatted files.
+Tabular to FASTA conversion is a common task in bioinformatics that transforms data structured in a tabular format (such as CSV or TSV) into FASTA format, widely used for representing nucleotide or protein sequences. This conversion is essential when sequence data needs to be input into various bioinformatics tools or databases that require FASTA-formatted files.
 
 > <hands-on-title> COnverting tabular to fasta </hands-on-title>
 >
