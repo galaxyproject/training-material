@@ -73,8 +73,12 @@ If you are working on your own training materials and want preview them online w
 >    ![GitPod sign-in menu with various options, including GitHub](../../images/gitpod/signin.png){: width="25%"}
 > 4. Click on **Configure your own repository** under the Workspaces menu
 >    ![GitPod homepage](images/gitpod-home.png)
-> 4. Copy the link to your fork of the GTN, e.g. `https://github.com/shiltemann/training-material`
-> 5. In the browser’s address bar, prefix the entire URL with `gitpod.io/#` and press Enter.
+> 5. Under **Select a repository** choose your fork, e.g. `https://github.com/shiltemann/training-material`
+>    ![screenshot of new workspace menu](images/gitpod-workspace.png)
+> 6. Click **continue**
+>    - This will create an enviroment where you can make changes to the GTN and preview them
+>    - It can take quite some time to start up (10-15 minutes)
+> 6. In the browser’s address bar, prefix the entire URL with `gitpod.io/#` and press Enter.
 >
 >    For example, `gitpod.io/#https://github.com/<your username>/training-material`
 >
