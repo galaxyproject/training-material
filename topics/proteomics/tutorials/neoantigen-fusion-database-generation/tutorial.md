@@ -237,7 +237,8 @@ The reformatting step ensures that the processed data adheres to the requirement
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `fusions_tsv` (output of **Arriba** {% icon tool %})
->    - *"AWK Program"*: ` (NR==1){
+>    - *"AWK Program"*:
+>      ` (NR==1){
     for (i=1;i<=NF;i++) {
         if ($i ~ gene1) { 
             gene1 = i;
@@ -280,6 +281,7 @@ The reformatting step ensures that the processed data adheres to the requirement
         print(id \t (NR-1) \t brkpnts \t neopep);  
     }
 } `
+
 >
 >
 >
