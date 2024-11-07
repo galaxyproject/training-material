@@ -1,1 +1,167 @@
-{"a_galaxy_workflow": "true", "annotation": "This workflow is developed for automatic detection and measuring of mitoflashes in time-lapse microscopy images. \n\nIn addition, this workflow can be used for detection and tracking of other spot-like organelles with small motion.\n\nIf this workflow helped with the analysis of your data, please do not forget to cite: https://doi.org/10.1097/j.pain.0000000000002642", "comments": [], "creator": [{"class": "Organization", "name": "BMCV Group, Heidelberg University"}], "format-version": "0.1", "name": "Capturing mitoflashes", "steps": {"0": {"annotation": "Localization and intensity measurement of mitochondria in all frames.\n\n(*Note: 1. The input image sequence should be a single TIFF stack; 2. parameter 'Sigma' needs to be adapted for the input image.)", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1", "errors": null, "id": 0, "input_connections": {}, "inputs": [{"description": "runtime parameter for tool Spot Detection", "name": "fn_in"}, {"description": "runtime parameter for tool Spot Detection", "name": "frame_1st"}, {"description": "runtime parameter for tool Spot Detection", "name": "frame_end"}], "label": "Mitochondrion detection", "name": "Spot Detection", "outputs": [{"name": "fn_out", "type": "tabular"}], "position": {"bottom": 439.59375, "height": 113.59375, "left": 909, "right": 1109, "top": 326, "width": 200, "x": 909, "y": 326}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1", "tool_shed_repository": {"changeset_revision": "d78372040976", "name": "spot_detection_2d", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"bndy\": \"10\", \"fn_in\": {\"__class__\": \"RuntimeValue\"}, \"frame_1st\": {\"__class__\": \"RuntimeValue\"}, \"frame_end\": {\"__class__\": \"RuntimeValue\"}, \"ssig\": \"1.0\", \"thres\": \"10.0\", \"typ_intens\": \"smoothed\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1", "type": "tool", "uuid": "8e0c57eb-c78c-4b01-b2fb-6ffa03b4258b", "when": null, "workflow_outputs": [{"label": null, "output_name": "fn_out", "uuid": "027cf20c-fca3-4707-a76c-4070c8f39361"}]}, "1": {"annotation": "Association of all detected mitochondria. \n\n(*Note: Parameter 'Neighborhood size' needs to be adapted for the size and moving speed of mitochondria in images.)", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.2", "errors": null, "id": 1, "input_connections": {"fn_in": {"id": 0, "output_name": "fn_out"}}, "inputs": [], "label": "Mitochondrion tracking", "name": "Association of points", "outputs": [{"name": "fn_out", "type": "xlsx"}], "position": {"bottom": 665.390625, "height": 154.390625, "left": 1154, "right": 1354, "top": 511, "width": 200, "x": 1154, "y": 511}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.2", "tool_shed_repository": {"changeset_revision": "b30aa285ac0a", "name": "points_association_nn", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"fn_in\": {\"__class__\": \"ConnectedValue\"}, \"minlen\": \"50.0\", \"nbpx\": \"6\", \"thres\": \"25.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.2", "type": "tool", "uuid": "31fd48df-3a44-4b46-8940-9c6f16a995af", "when": null, "workflow_outputs": [{"label": null, "output_name": "fn_out", "uuid": "ad563466-fb98-4320-96a3-e6a0bb51ca39"}]}, "2": {"annotation": "For each mitochondrion, a curve is fitted to its intensities over time.\n\nIf the significance level is set to a value greater than zero, an additional curve is generated to assist in distinguishing mitoflash events (significant intensity deviation from the fitted curve).", "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.1", "errors": null, "id": 2, "input_connections": {"fn_in": {"id": 1, "output_name": "fn_out"}}, "inputs": [], "label": "Curve fitting to measured intensities", "name": "Curve Fitting", "outputs": [{"name": "fn_out", "type": "xlsx"}], "position": {"bottom": 854.9921875, "height": 133.9921875, "left": 1409, "right": 1609, "top": 721, "width": 200, "x": 1409, "y": 721}, "post_job_actions": {}, "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.1", "tool_shed_repository": {"changeset_revision": "c54cf4ce6baf", "name": "curve_fitting", "owner": "imgteam", "tool_shed": "toolshed.g2.bx.psu.edu"}, "tool_state": "{\"alpha\": \"0.01\", \"degree\": \"2\", \"fn_in\": {\"__class__\": \"ConnectedValue\"}, \"penalty\": \"abs\", \"__page__\": null, \"__rerun_remap_job_id__\": null}", "tool_version": "0.0.1", "type": "tool", "uuid": "265ac002-8e59-40ef-8b55-c0b70619d8ef", "when": null, "workflow_outputs": [{"label": null, "output_name": "fn_out", "uuid": "87aee56b-dd7e-4cf8-81db-e3a1538bd6bc"}]}}, "tags": ["mito-flash", "mitochondrion_tracking"], "uuid": "e82670d7-6dcd-42da-ac1a-9ef189737f7f", "version": 21}
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow is developed for automatic detection and measuring of mitoflashes in time-lapse microscopy images. \n\nIn addition, this workflow can be used for detection and tracking of other spot-like organelles with small motion.\n\nIf this workflow helped with the analysis of your data, please do not forget to cite: https://doi.org/10.1097/j.pain.0000000000002642",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "BMCV Group, Heidelberg University"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "Capturing mitoflashes",
+    "report": {
+        "markdown": "\n# Workflow Execution Report\n\n## Workflow Inputs\n```galaxy\ninvocation_inputs()\n```\n\n## Workflow Outputs\n```galaxy\ninvocation_outputs()\n```\n\n## Workflow\n```galaxy\nworkflow_display()\n```\n"
+    },
+    "steps": {
+        "0": {
+            "annotation": "Localization and intensity measurement of mitochondria in all frames.\n\n(*Note: 1. The input image sequence should be a single TIFF stack; 2. parameter 'Sigma' needs to be adapted for the input image.)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Spot Detection",
+                    "name": "fn_in"
+                },
+                {
+                    "description": "runtime parameter for tool Spot Detection",
+                    "name": "frame_1st"
+                },
+                {
+                    "description": "runtime parameter for tool Spot Detection",
+                    "name": "frame_end"
+                }
+            ],
+            "label": "Mitochondrion detection",
+            "name": "Spot Detection",
+            "outputs": [
+                {
+                    "name": "fn_out",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d78372040976",
+                "name": "spot_detection_2d",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bndy\": \"10\", \"fn_in\": {\"__class__\": \"RuntimeValue\"}, \"frame_1st\": {\"__class__\": \"RuntimeValue\"}, \"frame_end\": {\"__class__\": \"RuntimeValue\"}, \"ssig\": \"1.0\", \"thres\": \"10.0\", \"typ_intens\": \"smoothed\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "daf283e7-b8e4-4961-ba19-c937f2a4a4c8",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fn_out",
+                    "uuid": "8463e42e-6e70-4ed0-bdc1-b0fb507d81fb"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "Association of all detected mitochondria. \n\n(*Note: Parameter 'Neighborhood size' needs to be adapted for the size and moving speed of mitochondria in images.)",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.3-2",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "fn_in": {
+                    "id": 0,
+                    "output_name": "fn_out"
+                }
+            },
+            "inputs": [],
+            "label": "Mitochondrion tracking",
+            "name": "Perform linking in time series (nearest neighbors)",
+            "outputs": [
+                {
+                    "name": "fn_out",
+                    "type": "xlsx"
+                }
+            ],
+            "position": {
+                "left": 245,
+                "top": 191.93
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.3-2",
+            "tool_shed_repository": {
+                "changeset_revision": "f3fad67af22c",
+                "name": "points_association_nn",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"fn_in\": {\"__class__\": \"ConnectedValue\"}, \"minlen\": \"50.0\", \"nbpx\": \"6\", \"thres\": \"25.0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3-2",
+            "type": "tool",
+            "uuid": "e28bfea2-3604-4d86-8fad-be52278b859c",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fn_out",
+                    "uuid": "bf4bfd21-6149-40f8-b217-eea182743c71"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "For each mitochondrion, a curve is fitted to its intensities over time.\n\nIf the significance level is set to a value greater than zero, an additional curve is generated to assist in distinguishing mitoflash events (significant intensity deviation from the fitted curve).",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.3-2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "fn_in": {
+                    "id": 1,
+                    "output_name": "fn_out"
+                }
+            },
+            "inputs": [],
+            "label": "Curve fitting to measured intensities",
+            "name": "Perform curve fitting",
+            "outputs": [
+                {
+                    "name": "fn_out",
+                    "type": "xlsx"
+                }
+            ],
+            "position": {
+                "left": 500,
+                "top": 401.93
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.3-2",
+            "tool_shed_repository": {
+                "changeset_revision": "2dc244356765",
+                "name": "curve_fitting",
+                "owner": "imgteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alpha\": \"0.01\", \"degree\": \"2\", \"fn_in\": {\"__class__\": \"ConnectedValue\"}, \"penalty\": \"abs\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.3-2",
+            "type": "tool",
+            "uuid": "2a07edee-a55d-4806-a41b-6dc34341a6e7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "fn_out",
+                    "uuid": "e4b388dd-4769-4ec0-9fd6-dbd6dc35d24a"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "mito-flash",
+        "mitochondrion_tracking"
+    ],
+    "uuid": "169c06d2-2e6e-4745-a5f3-78367298b570",
+    "version": 2
+}
