@@ -25,7 +25,7 @@ tags:
 
 ---
 
-Extracting data from the GTN's Git history isn't that difficult. Here we'll document what we've done!
+Extracting data from the GTN's Git history isn't that difficult, but it requires some internal knowledge of how the GTN's Jekyll-based codebase works. Here we'll document what we've done!
 
 > <agenda-title></agenda-title>
 >
@@ -37,6 +37,55 @@ Extracting data from the GTN's Git history isn't that difficult. Here we'll docu
 {: .agenda}
 
 Our imports and metadata (all merged github PRs), and the list of all historical names of single-cell tutorial folders.
+
+The author recommends running this code in a 'Jekyll Console' context. Jekyll does not natively have support for a console, but [there is an open Pull Request to add it](https://github.com/jekyll/jekyll/pull/8164). We recommend you install this yourself to most easily run the following code. You can do that by:
+
+> <hands-on-title>Installing Jekyll's Console</hands-on-title>
+> 1. View [the open Pull Request to add it](https://github.com/jekyll/jekyll/pull/8164)
+> 2. Download `lib/jekyll/commands/console.rb` to somewhere on your computer.
+> 3. Find out where jekyll is installed:
+>    
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > gem which jekyll
+>    > ```
+>    {: .code-in}
+>    
+>    > <code-out-title></code-out-title>
+>    > ```bash
+>    > /home/user/galaxy/training-material/.direnv/ruby/gems/jekyll-4.3.3/lib/jekyll.rb
+>    > ```
+>    {: .code-out}
+>    
+>    That means the commands should be in:
+>    
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ls /home/user/galaxy/training-material/.direnv/ruby/gems/jekyll-4.3.3/lib/jekyll/commands/
+>    > ```
+>    {: .code-in}
+>    
+>    > <code-out-title></code-out-title>
+>    > ```bash
+>    > build.rb  clean.rb  doctor.rb  help.rb  new.rb  new_theme.rb  serve  serve.rb
+>    > ```
+>    {: .code-out}
+> 
+> 4. Copy the `console.rb` you downloaded to that folder
+> 
+>     ```bash
+>     cp ~/Downloads/console.rb $(dirname $(gem which jekyll))/jekyll/commands/
+>     ```
+> 
+>     This was written with commands in case folks want to copy paste it, to reduce error.
+>
+> 5. Launch the console with 
+>    
+>    ```bash
+>    jekyll console
+>    ```
+> 
+{: .hands_on}
 
 ## Which PRs are Single Cell RPs?
 
