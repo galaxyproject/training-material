@@ -219,16 +219,33 @@ def all_date_sorted_materials(site)
 
   materials.each do |m|
     tags = [m['topic_name']] + (m['tags'] || [])
-    bucket += m.fetch('ref_tutorials', []).map do |t|
-      [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+    m.fetch('ref_tutorials', []).map do |t|
+      bucket << [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
 
       (t['recordings'] || []).map do |r|
-        [Date.parse(r['date'].to_s), 'recordings', r, tags]
+        url = t.path.gsub(/tutorial.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + t['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || [])}
+
+        obj = objectify(attr, url, t.path)
+        bucket << [Date.parse(r['date'].to_s), 'recordings', obj, tags]
       end
     end
 
-    bucket += m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
-      [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+
+    m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
+      bucket << [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+      (s['recordings'] || []).map do |r|
+        url = s.path.gsub(/tutorial.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + s['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || [])}
+        obj = objectify(attr, url, s.path)
+        bucket << [Date.parse(r['date'].to_s), 'recordings', obj, tags]
+      end
     end
   end
 
@@ -541,7 +558,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, learning paths, recordings, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
