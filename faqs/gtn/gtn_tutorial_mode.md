@@ -32,7 +32,7 @@ To find the toolshed ID of a tool:
 2. Click on the {% icon dropdown %} options menu (dropdown icon)
 3. Select **Copy Tool ID**
 
-  ![screenshot of menu with toolshed link for a tool](images/tool_toolshed_link.png)
+  ![screenshot of menu with toolshed link for a tool]({% link faqs/gtn/images/tool_toolshed_link.png %})
 
 Example of a hands-on box using this feature:
 
