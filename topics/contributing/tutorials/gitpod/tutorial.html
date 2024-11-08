@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@80818afe6e42be35a4c4019c8dd7ad7381be250d",
+		release: "galaxy-training-network@1a4581e407c0fabfb57d5f779f0d27475b58df36",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Running the GTN website online using GitPod">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-11-08 13:22:39 +0000">
+<meta name="DC.date" content="2024-11-08 13:35:49 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Contributing to the Galaxy Training Material / Running the GTN website online using GitPod / Hands-on: Running the GTN website online using GitPod">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-11-08 13:22:39 +0000",
+  "dateModified": "2024-11-08 13:35:49 +0000",
   "datePublished": "2021-06-24 18:48:57 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -250,7 +250,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Running the GTN website online using GitPod",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html",
-  "version": 11,
+  "version": 12,
   "timeRequired": "PT15M",
   "teaches": "- Preview the GTN website online via GitPod\n- Make changes to the GTN website and preview those changes",
   "keywords": [
@@ -668,7 +668,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 6 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 11 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 12 </div>
 
     </blockquote>
     </section>
@@ -759,10 +759,48 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
     <li>Click <strong>continue</strong>
       <ul>
         <li>This will create an enviroment where you can make changes to the GTN and preview them</li>
-        <li>It can take quite some time to start up the first time (15+ minutes), but subsequent launches should be a lot quicker</li>
+        <li><strong>Note:</strong> It can take quite some time to start up the first time (15-30 minutes)</li>
+        <li>We can make future starts a lot faster using <strong>prebuilds</strong> (see tip box below), you can configure this now while you wait</li>
       </ul>
 
       <p><a href="../../images/gitpod/setup.png" rel="noopener noreferrer"><img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup. " width="274" height="303" loading="lazy" /></a></p>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-enabling-prebuilds-for-your-gitpod-workspace"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-enabling-prebuilds-for-your-gitpod-workspace" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  Enabling Prebuilds for your GitPod workspace </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Prebuilds can speed up the launch of your GitPod workspace after the first time. When this is enabled,
+starting a workspace will check if there is a previous build to reuse. This should bring startup times
+down to 3-5 minutes.</p>
+
+        <p><strong>Enable Prebuilds</strong></p>
+        <ol>
+          <li>On the GitPod website, click on your name in the top left of the screen</li>
+          <li>Select <strong>Repositories</strong></li>
+          <li>Add your fork as a repository</li>
+          <li>On the left, click <strong>Prebuild settings</strong></li>
+          <li>Click the slider in front of <strong>Prebuilds are disabled</strong> to toggle the setting</li>
+          <li>Set <strong>Branch Filter</strong> to <strong>Default Branch</strong></li>
+        </ol>
+
+        <p><a href="images/gitpod-prebuilds.png" rel="noopener noreferrer"><img src="images/gitpod-prebuilds.png" alt="screenshot of prebuild setting of our repository. " width="815" height="723" loading="lazy" /></a></p>
+
+        <p><strong>Run a prebuild now</strong></p>
+        <ol>
+          <li>In GitPod, click on your name in the top left of the screen</li>
+          <li>Select <strong>Prebuilds</strong></li>
+          <li>Click <strong>Run a Prebuild</strong></li>
+          <li><strong>Select a Repository</strong>: your fork</li>
+          <li>Click <strong>Run Prebuild</strong>
+            <ul>
+              <li>This will also take a bit of time to complete</li>
+              <li>In the future, it will automatically refresh this prebuild every 20 commits, so you only have to do this once</li>
+            </ul>
+          </li>
+        </ol>
+
+        <p><strong>Note:</strong> Prebuilds expire if you haven’t used them in 7 days, so if you have taken a longer
+break from GTN you might have to wait longer again the first time. But otherwise it should
+bring the launch time down to around 3-5 minutes.</p>
+      </blockquote>
     </li>
     <li>
       <p>Once the setup is finished, you should see a page something like this:
@@ -1450,7 +1488,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/80818afe6e42be35a4c4019c8dd7ad7381be250d">80818af</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1a4581e407c0fabfb57d5f779f0d27475b58df36">1a4581e</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
