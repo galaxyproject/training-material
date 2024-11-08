@@ -1601,7 +1601,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 >    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
 >        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
 >
-> 5. Rename both collections `untreat` (the filtered collection) and `treat` (the discarded collection).
+> 5. Rename both collections `untreated` (the filtered collection) and `treated` (the discarded collection).
 >
 > We will repeat the same process using `single`
 >
