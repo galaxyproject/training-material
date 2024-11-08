@@ -336,7 +336,7 @@ We can see that most cell types have very low proportions, so for this visualisa
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Error Table (Music)`
->    - *"Operation"*: `Discard`
+>    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >       - *"Delimited by"*: `Tab`
 >       - *"Is there a header for the data's columns ?"*: `Yes`
@@ -346,7 +346,7 @@ We can see that most cell types have very low proportions, so for this visualisa
 >
 > 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"File to cut"*: `Error Table (NNLS)`
->    - *"Operation"*: `Discard`
+>    - *"Operation"*: `Keep`
 >    - *"Cut by"*: `fields`
 >       - *"Delimited by"*: `Tab`
 >       - *"Is there a header for the data's columns ?"*: `Yes`
