@@ -82,7 +82,7 @@ If you are working on your own training materials and want preview them online w
 >    ![screenshot of new workspace menu](images/gitpod-workspace.png)
 > 6. Click **continue**
 >    - This will create an enviroment where you can make changes to the GTN and preview them
->    - **Note:** It can take quite some time to start up the first time (15+ minutes)
+>    - **Note:** It can take quite some time to start up the first time (15-30 minutes)
 >    - We can make future starts a lot faster using **prebuilds** (see tip box below), you can configure this now while you wait
 >
 >    ![progress indicator of GitPod first setup](../../images/gitpod/setup.png)
