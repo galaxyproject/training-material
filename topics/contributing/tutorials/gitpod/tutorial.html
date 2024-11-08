@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@d7df185d039afa3d9d09a81c704876f007224bbd",
+		release: "galaxy-training-network@5f7200b6ab3d14346533b29ec68b898d140273b2",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -68,7 +68,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Running the GTN website online using GitPod">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-06-14 09:56:50 +0000">
+<meta name="DC.date" content="2024-11-08 09:32:07 +0000">
 <meta name="DC.creator" content="Saskia Hiltemann"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
 	<meta property="og:title" content="Contributing to the Galaxy Training Material / Running the GTN website online using GitPod / Hands-on: Running the GTN website online using GitPod">
@@ -188,7 +188,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-06-14 09:56:50 +0000",
+  "dateModified": "2024-11-08 09:32:07 +0000",
   "datePublished": "2021-06-24 18:48:57 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -250,7 +250,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Running the GTN website online using GitPod",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/gitpod/tutorial.html",
-  "version": 9,
+  "version": 10,
   "timeRequired": "PT15M",
   "teaches": "- Preview the GTN website online via GitPod\n- Make changes to the GTN website and preview those changes",
   "keywords": [
@@ -648,7 +648,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 24, 2021 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jun 14, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 8, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -668,7 +668,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 	
 	<div><strong><i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">rating</span> Rating:</strong> <a href="#feedback-responses">3.0</a> (1 recent ratings, 6 all time)</div>
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 9 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 10 </div>
 
     </blockquote>
     </section>
@@ -720,32 +720,53 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
         <ul>
           <li>Start by browsing to your fork in GitHub</li>
-          <li>Check the default branch that is shown? Does it say <code class="language-plaintext highlighter-rouge">master</code>? Then you need to update it. (Note - don’t just switch branches from “master” to “main”, follow the instructions below to reset the default branch to “main”.)
-            <ol>
-              <li>Go to your fork’s settings (Click on the gear icon called “Settings”)</li>
-              <li>Find “Branches” on the left</li>
-              <li>If it says master you can click on the ⇆  icon to switch branches.</li>
-              <li>Select <code class="language-plaintext highlighter-rouge">main</code> (it may not be present).</li>
-              <li>If it isn’t present, use the pencil icon to rename <code class="language-plaintext highlighter-rouge">master</code> to <code class="language-plaintext highlighter-rouge">main</code>.</li>
-              <li>Now you can update it in the next step</li>
-            </ol>
+          <li>Check the default branch that is shown.
+            <ul>
+              <li>Does it say <code class="language-plaintext highlighter-rouge">master</code>? Then you need to update it, following the instructions below</li>
+            </ul>
+
+            <blockquote class="tip">
+              <div class="box-title tip-title" id="tip-changing-your-default-branch-from-master-to-main"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-your-default-branch-from-master-to-main" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip:  changing your default branch from master to main </span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+              <ol>
+                <li>Go to your fork’s settings (Click on the gear icon called “Settings”)</li>
+                <li>Find “Branches” on the left</li>
+                <li>If it says master you can click on the ⇆  icon to switch branches.</li>
+                <li>Select <code class="language-plaintext highlighter-rouge">main</code> (it may not be present).</li>
+                <li>If it isn’t present, use the pencil icon to rename <code class="language-plaintext highlighter-rouge">master</code> to <code class="language-plaintext highlighter-rouge">main</code>.</li>
+                <li>Now you can update it in the next step</li>
+              </ol>
+            </blockquote>
           </li>
           <li>
-            <p>Is your fork using <code class="language-plaintext highlighter-rouge">main</code>? Fantastic, but you might need to update it. GitHub has a built in feature for this as shown below:</p>
+            <p>Click the <strong>Sync Fork</strong> button on your fork to update it to the latest version</p>
 
-            <p><a href="../../images/github_update_fork.png" rel="noopener noreferrer"><img src="../../images/github_update_fork.png" alt="Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked. " width="1067" height="370" loading="lazy" /></a></p>
+            <p><a href="../../images/github_update_fork.png" rel="noopener noreferrer"><img src="../../images/github_update_fork.png" alt="Github with the top bar of a repository shown, including the button for 'Sync Fork'. " width="944" height="379" loading="lazy" /></a></p>
           </li>
         </ul>
       </blockquote>
     </li>
-    <li><strong>Open</strong> your browser and navigate to <a href="https://gitpod.io">gitpod.io</a></li>
+    <li><strong>Open</strong> your browser and navigate to <a href="https://gitpod.io/login">gitpod.io/login</a>
+      <ul>
+        <li>Note: don’t leave the <code class="language-plaintext highlighter-rouge">/login</code> part of the URL off, it will lead you to a different flavour of GitPod. We are using Gitpod classic</li>
+      </ul>
+    </li>
     <li><strong>Log in</strong> with GitHub
 <a href="../../images/gitpod/signin.png" rel="noopener noreferrer"><img src="../../images/gitpod/signin.png" alt="GitPod sign-in menu with various options, including GitHub. " width="304" height="416" loading="lazy" /></a></li>
-    <li>Copy the link to your fork of the GTN, e.g. <code class="language-plaintext highlighter-rouge">https://github.com/shiltemann/training-material</code></li>
-    <li>
-      <p>In the browser’s address bar, prefix the entire URL with <code class="language-plaintext highlighter-rouge">gitpod.io/#</code> and press Enter.</p>
+    <li>Click on <strong>Configure your own repository</strong> under the Workspaces menu
+<a href="images/gitpod-home.png" rel="noopener noreferrer"><img src="images/gitpod-home.png" alt="GitPod homepage. " width="1365" height="655" loading="lazy" /></a></li>
+    <li>Under <strong>Select a repository</strong> choose your fork, e.g. <code class="language-plaintext highlighter-rouge">https://github.com/shiltemann/training-material</code>
+<a href="images/gitpod-workspace.png" rel="noopener noreferrer"><img src="images/gitpod-workspace.png" alt="screenshot of new workspace menu. " width="585" height="451" loading="lazy" /></a></li>
+    <li>Click <strong>continue</strong>
+      <ul>
+        <li>This will create an enviroment where you can make changes to the GTN and preview them</li>
+        <li>It can take quite some time to start up the first time (15+ minutes), but subsequent launches should be a lot quicker</li>
+      </ul>
 
-      <p>For example, <code class="language-plaintext highlighter-rouge">gitpod.io/#https://github.com/&lt;your username&gt;/training-material</code></p>
+      <p><a href="../../images/gitpod/setup.png" rel="noopener noreferrer"><img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup. " width="274" height="303" loading="lazy" /></a></p>
+    </li>
+    <li>
+      <p>Once the setup is finished, you should see a page something like this:
+<a href="../../images/gitpod/welcomepage.png" rel="noopener noreferrer"><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></a></p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-make-this-even-easier-with-the-gitpod-browser-extension"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-make-this-even-easier-with-the-gitpod-browser-extension" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Make this even easier with the GitPod browser extension!</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -761,11 +782,8 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ol>
       </blockquote>
     </li>
-    <li>Gitpod will now configure your environment. This may take some time
-<a href="../../images/gitpod/setup.png" rel="noopener noreferrer"><img src="../../images/gitpod/setup.png" alt="progress indicator of GitPod first setup. " width="274" height="303" loading="lazy" /></a></li>
-    <li>Once the setup is finished, you should see a page something like this:
-<a href="../../images/gitpod/welcomepage.png" rel="noopener noreferrer"><img src="../../images/gitpod/welcomepage.png" alt="GitPod welcome screen. " width="1614" height="932" loading="lazy" /></a></li>
   </ol>
+
 </blockquote>
 
 <h1 id="the-gitpod-workspace">The GitPod Workspace</h1>
@@ -799,14 +817,12 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <li>Next times will be a lot faster! (~30 seconds)</li>
       </ul>
     </li>
-    <li>
-      <p>When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.</p>
-
+    <li>When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.
       <ul>
         <li>
-          <p>You may need to click ‘Try Again’ to load the GTN.</p>
+          <p>You may have to click the “Try Again” button if the preview was generated before the site building completed</p>
 
-          <p><a href="../../images/gitpod_tryagain.png" rel="noopener noreferrer"><img src="../../images/gitpod_tryagain.png" alt="gitpod with the GTN open in the right panel, but saying &quot;Try again&quot;. " width="1280" height="918" loading="lazy" /></a></p>
+          <p><a href="images/gitpod-launched.png" rel="noopener noreferrer"><img src="images/gitpod-launched.png" alt="gitpod with the GTN open in the right panel. " width="1600" height="943" loading="lazy" /></a></p>
         </li>
         <li>
           <p>Click on the link in the terminal to see the GTN in full-screen: <code class="language-plaintext highlighter-rouge">Server address: http://127.0.0.1:4000/training-material/</code></p>
@@ -864,15 +880,19 @@ Some browsers block popups by default, you may need to allow GitPod to show popu
       <ul>
         <li><strong>From:</strong> “A Short Introduction to Galaxy”</li>
         <li><strong>To:</strong> “A Short and Cool Introduction to Galaxy”</li>
-        <li>You should immediately see a message in the terminal saying “regenerating”. GitPod has detected your changes and is rebuilding the website.
-<a href="../../images/gitpod/changes.png" rel="noopener noreferrer"><img src="../../images/gitpod/changes.png" alt="we changed the title of the tutorial in the text editor window. " width="595" height="191" loading="lazy" /></a>
-<a href="../../images/gitpod/regenerating.png" rel="noopener noreferrer"><img src="../../images/gitpod/regenerating.png" alt="the terminal shows a message stating the website is being regenerated. " width="724" height="100" loading="lazy" /></a></li>
       </ul>
+
+      <p><a href="../../images/gitpod/changes.png" rel="noopener noreferrer"><img src="../../images/gitpod/changes.png" alt="we changed the title of the tutorial in the text editor window. " width="595" height="191" loading="lazy" /></a></p>
+
+      <ul>
+        <li>You should immediately see a message in the terminal saying “regenerating”. GitPod has detected your changes and is rebuilding the website.</li>
+      </ul>
+
+      <p><a href="../../images/gitpod/regenerating.png" rel="noopener noreferrer"><img src="../../images/gitpod/regenerating.png" alt="the terminal shows a message stating the website is being regenerated. " width="724" height="100" loading="lazy" /></a></p>
     </li>
     <li>Move to the top right panel where the GTN is previewed and refresh the frame
       <ul>
-        <li>Firefox: <code class="language-plaintext highlighter-rouge">right-click -&gt; This Frame -&gt; Reload Frame</code></li>
-        <li>Chrome: <code class="language-plaintext highlighter-rouge">right-click -&gt; Reload frame</code></li>
+        <li><i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> Refresh button in front of the address bar of the preview panel</li>
         <li>You can also open the preview in it’s own brower tab, using the <i class="fas fa-external-link-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy_instance</span> button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)</li>
       </ul>
     </li>
@@ -907,7 +927,7 @@ git push origin fix-title
       <ul>
         <li>Create a new branch:
           <ul>
-            <li>On the bottom-left, click on the branch logo (probably “master” or “main”)
+            <li>On the bottom-left, click on the branch logo (probably labelled “main”)
 <a href="../../images/gitpod/branch-change.png" rel="noopener noreferrer"><img src="../../images/gitpod/branch-change.png" alt="button on the bottom of the page with the current branch. " width="310" height="114" loading="lazy" /></a></li>
             <li>Enter <code class="language-plaintext highlighter-rouge">fix-title</code> as the name for your new branch (at top of window)</li>
             <li>Choose “+ Create new branch…” from the dropdown</li>
@@ -1430,7 +1450,7 @@ tools: []
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d7df185d039afa3d9d09a81c704876f007224bbd">d7df185</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/5f7200b6ab3d14346533b29ec68b898d140273b2">5f7200b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
