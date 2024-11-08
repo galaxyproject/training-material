@@ -9,6 +9,7 @@ require 'json'
 require 'citeproc/ruby'
 require 'csl/styles'
 
+GTN_HOME = Pathname.new(__dir__).parent.to_s
 # This is our ONE central linting script that handles EVERYTHING.
 
 # A custom module to properly format reviewdog json output
@@ -977,6 +978,11 @@ module GtnLinter
     @PLAIN_OUTPUT = false
   end
 
+  @SHORT_PATH = false
+  def self.set_short_path
+    @SHORT_PATH = true
+  end
+
   @LIMIT_EMITTED_CODES = nil
   def self.code_limits(codes)
     @LIMIT_EMITTED_CODES = codes
@@ -990,10 +996,15 @@ module GtnLinter
   def self.format_reviewdog_output(message)
     return if !@LIMIT_EMITTED_CODES.nil? && !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
 
+
     if !message.nil? && (message != []) && message.is_a?(Hash)
+      path = message['location']['path']
+      if @SHORT_PATH && path.include?(GTN_HOME + '/')
+        path = path.gsub(GTN_HOME + '/', '')
+      end
       if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
-          message['location']['path'],
+          path,
           message['location']['range']['start']['line'],
           message['location']['range']['start']['column'],
           message['location']['range']['end']['line'],
@@ -1272,6 +1283,7 @@ if $PROGRAM_NAME == __FILE__
     end
     opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options[:limit] = o }
     opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |_o| options[:apply] = true }
+    opt.on('-s', '--short-path', 'Use short path in outputs') { |_o| options[:short] = true }
   end.parse!
 
   options[:format] = 'plain' if options[:format].nil?
@@ -1282,6 +1294,7 @@ if $PROGRAM_NAME == __FILE__
     linter.set_rdjson_output
   end
 
+  linter.set_short_path if options[:short]
   linter.code_limits(options[:limit].split(',')) if options[:limit]
 
   linter.enable_auto_fix if options[:apply]
