@@ -385,6 +385,8 @@ The equation for calculating this metric is seen below, the implementation of th
 
 ## Compute Metrics
 
+With a basic understanding of some useful metrics, we will now compute these to get quantitative values alongside our visualisation results. The following workflow needs to be run for both the MuSiC and NNLS results table.
+
 > <hands-on-title>Run visualisation workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
@@ -401,3 +403,12 @@ The equation for calculating this metric is seen below, the implementation of th
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
+
+After running the workflow on both the MuSiC and NNLS results we should have the Pearson and RMSE metrics for both tools. The below table summarises these scores.
+
+| Tool  | Pearson Correlation | RMSE  |
+|-------|---------------------|-------|
+| MuSiC | 0.982               | 0.030 |
+| NNLS  | 0.954               | 0.037 |
+
+From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a better accuracy with a higher correlation score and lower error compared to NNLS.
