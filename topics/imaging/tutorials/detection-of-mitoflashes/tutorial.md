@@ -84,10 +84,14 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 
 > <hands-on-title>Detecting Mitochondrial Regions</hands-on-title>
 >
-> 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection/ip_spot_detection/1.0.0) %} with the following parameters:
+> 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection/ip_spot_detection/1.0.0) %} with the following recommended parameters:
 >    - {% icon param-file %} *"Image input"*: `Mitochondrial_Flashes.tiff`
->    - Set parameters such as "Thresholding" to optimize mitochondrial detection.
->
+>    - **Starting time point** (`frame_1st`): `1` (first frame in the stack)
+>    - **Ending time point** (`frame_end`): `0` (use `0` to process until the last frame)
+>    - **Intensity measurement method** (`typ_intens`): Set to `Smoothed` for a more averaged intensity or `Robust` for resilience to outliers.
+>    - **Threshold** (`thres`): A starting value of `10%` of the global maximum intensity is often effective, but increase to `15-20` for higher sensitivity.
+>    - **Gaussian filter sigma** (`ssig`): Use a value around `1` to suppress noise; increase to `1.5` if noise is high.
+>    - **Boundary pixels** (`bndy`): Set to `10` to ignore spots within the image edges, adjusting as needed for image size.
 >    This tool detects mitochondria as spots or 'mitoflashes' based on intensity maxima, identifying them as distinct regions. Adjusting the threshold parameter can improve the accuracy of spot detection, allowing for better identification of mitoflash events.
 >
 {: .hands_on}
@@ -96,11 +100,13 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 
 > <hands-on-title>Tracking Mitochondrial Movement</hands-on-title>
 >
-> 1. {% tool [Perform linking in time series (nearest neighbors)](toolshed.g2.bx.psu.edu/view/imgteam/points_association_nn) %} with the following parameters:
+> 1. {% tool [Perform linking in time series (nearest neighbors)](toolshed.g2.bx.psu.edu/view/imgteam/points_association_nn) %} with the following recommended parameters:
 >    - {% icon param-file %} *"Coordinates (and intensities) of input points"*: Output from the **Spot Detection** tool.
->    - Set "Neighborhood size" and other tracking parameters to optimize linking across.
->
->    **Comment**:  This tool links the detected mitoflash events (spots) across consecutive frames by finding the nearest neighboring spot in each frame, effectively tracking mitochondrial movement and mitoflash events over time. Observing these tracks provides insight into mitochondrial dynamics, helping to analyze how mitochondria move, change, and interact within the cell, which can reflect their functional states and roles in cellular processes.
+>    - **Neighborhood size** (`nbpx`): Set to `6` pixels as a starting value. Adjust within `1-10` pixels based on the density of points and proximity between spots across frames.
+>    - **Intensity threshold** (`thres`): A recommended starting value is `25%` of the global maximum intensity. Increase to `30-40%` for stricter filtering if spots have low intensity.
+>    - **Minimum track length** (`minlen`): Use `50%` of the sequence length as a baseline. Adjust based on the expected duration of mitoflash events.
+>    
+>    This tool links detected spots across frames to track movement. The **Neighborhood size** parameter controls the pixel range for associating points between frames. Increasing the **Intensity threshold** filters out weaker signals, improving track accuracy.
 >
 {: .hands_on}
 
