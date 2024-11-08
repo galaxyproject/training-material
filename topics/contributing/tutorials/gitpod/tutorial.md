@@ -8,7 +8,8 @@ objectives:
   - "Preview the GTN website online via GitPod"
   - "Make changes to the GTN website and preview those changes"
 time_estimation: "15m"
-subtopic: writing
+subtopic: getting-started
+priority: 1
 key_points:
   - "GitPod can be used to serve the GTN training materials"
 contributors:

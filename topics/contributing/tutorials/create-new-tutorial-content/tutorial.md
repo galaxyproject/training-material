@@ -13,7 +13,8 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
-subtopic: writing
+subtopic: getting-started
+priority: 4
 contributions:
   authorship:
   - bebatut
