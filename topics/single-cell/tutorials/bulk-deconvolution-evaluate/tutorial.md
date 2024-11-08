@@ -356,6 +356,36 @@ We can see that most cell types have very low proportions, so for this visualisa
 >
 {: .hands_on}
 
+> <hands-on-title>Plot violin plots</hands-on-title>
+>
+> 1. {% tool [Violin plot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_violin/ggplot2_violin/3.4.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input in tabular format"*: `Music Errors`
+>    - *"Plot title"*: `Error Distribution`
+>    - *"Label for x axis"*: `Cell Type`
+>    - *"Label for y axis"*: `Difference Error`
+>    - In *"Advanced Options"*:
+>       - *"Violin border options"*: `Purple`
+>    - In *"Output Options"*:
+>       - *"width of output"*: `3.0`
+>       - *"height of output"*: `2.0`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Violin Plot - Music`
+>
+> 3. {% tool [Violin plot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_violin/ggplot2_violin/3.4.0+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input in tabular format"*: `NNLS Errors`
+>    - *"Plot title"*: `Error Distribution`
+>    - *"Label for x axis"*: `Cell Type`
+>    - *"Label for y axis"*: `Difference Error`
+>    - In *"Advanced Options"*:
+>       - *"Violin border options"*: `Purple`
+>    - In *"Output Options"*:
+>       - *"width of output"*: `3.0`
+>       - *"height of output"*: `2.0`
+>
+> 4. **Rename** {% icon galaxy-pencil %} output `Violin Plot - NNLS`
+>
+{: .hands_on}
+
 
 # Compute Accuracy Metrics
 
