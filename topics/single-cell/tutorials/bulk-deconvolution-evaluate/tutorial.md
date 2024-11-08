@@ -252,7 +252,7 @@ Need to identify the list of cells first before running the second workflow, thi
 >       - *"width of output"*: `5.0`
 >       - *"height of output"*: `3.0`
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Scatterplot`
+> 2. **Rename** {% icon galaxy-pencil %} output `Scatter plot - Music`
 >
 > 3. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input in tabular format"*: `Results Table (NNLS)`
@@ -270,7 +270,7 @@ Need to identify the list of cells first before running the second workflow, thi
 >       - *"width of output"*: `5.0`
 >       - *"height of output"*: `3.0`
 >
-> 4. **Rename** {% icon galaxy-pencil %} output `NNLS Scatterplot`
+> 4. **Rename** {% icon galaxy-pencil %} output `Scatter plot - NNLS`
 >
 {: .hands_on}
 
