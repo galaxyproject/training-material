@@ -55,20 +55,25 @@ If you are working on your own training materials and want preview them online w
 >    > If you already have a fork, fantastic! But a common issue is that the `main` branch gets outdated, or your fork was from before we renamed the `master` branch to `main`.
 >    >
 >    > - Start by browsing to your fork in GitHub
->    > - Check the default branch that is shown? Does it say `master`? Then you need to update it. (Note - don't just switch branches from "master" to "main", follow the instructions below to reset the default branch to "main".)
->    >     1. Go to your fork's settings (Click on the gear icon called "Settings")
->    >     2. Find "Branches" on the left
->    >     3. If it says master you can click on the ⇆  icon to switch branches.
->    >     4. Select `main` (it may not be present).
->    >     5. If it isn't present, use the pencil icon to rename `master` to `main`.
->    >     6. Now you can update it in the next step
->    > - Is your fork using `main`? Fantastic, but you might need to update it. GitHub has a built in feature for this as shown below:
+>    > - Check the default branch that is shown.
+>    >   - Does it say `master`? Then you need to update it, following the instructions below
 >    >
->    >   ![Github with the top bar of a repository shown, the button for 'Fetch Upstream' has been clicked](../../images/github_update_fork.png)
+>    >   > <tip-title> changing your default branch from master to main </tip-title>
+>    >   >  1. Go to your fork's settings (Click on the gear icon called "Settings")
+>    >   >  2. Find "Branches" on the left
+>    >   >  3. If it says master you can click on the ⇆  icon to switch branches.
+>    >   >  4. Select `main` (it may not be present).
+>    >   >  5. If it isn't present, use the pencil icon to rename `master` to `main`.
+>    >   >  6. Now you can update it in the next step
+>    >   {: .tip}
+>    >
+>    > - Click the **Sync Fork** button on your fork to update it to the latest version
+>    >
+>    >   ![Github with the top bar of a repository shown, including the button for 'Sync Fork'](../../images/github_update_fork.png)
 >    {: .tip}
 >
 > 2. **Open** your browser and navigate to [gitpod.io/login](https://gitpod.io/login)
->    - Note: don't leave the `/login` part of the url off, it will lead you to a different flavour of GitPod. We are using Gitpod classig
+>    - Note: don't leave the `/login` part of the URL off, it will lead you to a different flavour of GitPod. We are using Gitpod classic
 > 3. **Log in** with GitHub
 >    ![GitPod sign-in menu with various options, including GitHub](../../images/gitpod/signin.png){: width="25%"}
 > 4. Click on **Configure your own repository** under the Workspaces menu
@@ -121,8 +126,9 @@ Before we start making any changes, let's build the website and get a live previ
 >    - Next times will be a lot faster! (~30 seconds)
 >
 > 3. When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.
+>    - You may have to click the "Try Again" button if the preview was generated before the site building completed
 >
->      ![gitpod with the GTN open in the right panel, but saying "Try again"](../../images/gitpod_launched.png)
+>      ![gitpod with the GTN open in the right panel](images/gitpod-launched.png)
 >
 >    - Click on the link in the terminal to see the GTN in full-screen: `Server address: http://127.0.0.1:4000/training-material/`
 >
