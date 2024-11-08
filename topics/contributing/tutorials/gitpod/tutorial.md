@@ -82,9 +82,40 @@ If you are working on your own training materials and want preview them online w
 >    ![screenshot of new workspace menu](images/gitpod-workspace.png)
 > 6. Click **continue**
 >    - This will create an enviroment where you can make changes to the GTN and preview them
->    - It can take quite some time to start up the first time (15+ minutes), but subsequent launches should be a lot quicker
+>    - **Note:** It can take quite some time to start up the first time (15+ minutes)
+>    - We can make future starts a lot faster using **prebuilds** (see tip box below), you can configure this now while you wait
 >
 >    ![progress indicator of GitPod first setup](../../images/gitpod/setup.png)
+>
+>    > <tip-title> Enabling Prebuilds for your GitPod workspace </tip-title>
+>    > Prebuilds can speed up the launch of your GitPod workspace after the first time. When this is enabled,
+>    > starting a workspace will check if there is a previous build to reuse. This should bring startup times
+>    > down to 3-5 minutes.
+>    >
+>    > **Enable Prebuilds**
+>    > 1. On the GitPod website, click on your name in the top left of the screen
+>    > 2. Select **Repositories**
+>    > 3. Add your fork as a repository
+>    > 4. On the left, click **Prebuild settings**
+>    > 5. Click the slider in front of **Prebuilds are disabled** to toggle the setting
+>    > 6. Set **Branch Filter** to **Default Branch**
+>    >
+>    > ![screenshot of prebuild setting of our repository](images/gitpod-prebuilds.png)
+>    >
+>    > **Run a prebuild now**
+>    > 1. In GitPod, click on your name in the top left of the screen
+>    > 2. Select **Prebuilds**
+>    > 3. Click **Run a Prebuild**
+>    > 4. **Select a Repository**: your fork
+>    > 5. Click **Run Prebuild**
+>    >    - This will also take a bit of time to complete
+>    >    - In the future, it will automatically refresh this prebuild every 20 commits, so you only have to do this once
+>    >
+>    >
+>    > **Note:** Prebuilds expire if you haven't used them in 7 days, so if you have taken a longer
+>    > break from GTN you might have to wait longer again the first time. But otherwise it should
+>    > bring the launch time down to around 3-5 minutes.
+>    {: .tip}
 >
 > 8. Once the setup is finished, you should see a page something like this:
 >    ![GitPod welcome screen](../../images/gitpod/welcomepage.png)
