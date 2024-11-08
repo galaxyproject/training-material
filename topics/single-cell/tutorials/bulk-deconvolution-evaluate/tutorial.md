@@ -278,7 +278,7 @@ Need to identify the list of cells first before running the second workflow, thi
 >
 > 1. Which method has the most accurate results?
 > 2. Which cell type has the biggest proportion in the dataset?
-> 3. What correlation does the data show?
+> 3. Are there any cell types the tools fail to predict?
 >
 > {% snippet faqs/galaxy/features_scratchbook.md datatype="tabular" %}
 >
@@ -286,9 +286,9 @@ Need to identify the list of cells first before running the second workflow, thi
 > >
 > > ![Scatter plot comparison](../../images/bulk-deconvolution-evaluate/scatterplot-compare.png "Scatter plot comparison between Music and NNLS")
 > >
-> > 1. Answer A
-> > 2. Answer B
-> > 3. Answer C
+> > 1. Comparing scatter plots, the MuSiC tool has the most accurate results since the points fall closer onto the x=y line
+> > 2. Both scatter plots show alpha cells having the highest proportion by a large margin
+> > 3. In both plots, only the top 6 cell types are predicted accurately, the rest are predicted as 0. This is likely due to how small the proportions of these cell types are
 > >
 > {: .solution}
 >
