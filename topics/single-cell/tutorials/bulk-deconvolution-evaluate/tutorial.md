@@ -376,7 +376,9 @@ The equation for calculating the Pearson correlation can be seen below, the work
 
 ## Root Mean Squared Error (RMSE)
 
-Root Mean Squared Error or RMSE is a
+Root Mean Squared Error or RMSE is a common error metric for measuring a tools prediction accuracy. This metric calculates the average error between the predicted and actual values for each prediction then takes the mean and square root of the error to produce a final value. Lower RMSE values (close to 0) indicate accurate predictions similar to the actual value, as the value increases the accuracy score is worse.
+
+The equation for calculating this metric is seen below, the implementation of this calculation is in the workflow alongside the Pearson correlation.
 
 ![Root Mean Squared Error Equation](../../images/bulk-deconvolution-evaluate/rmse.png "Root Mean Squared Error Equation")
 
