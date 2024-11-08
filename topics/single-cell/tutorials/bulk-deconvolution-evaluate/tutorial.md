@@ -215,54 +215,6 @@ Need to identify the list of cells first before running the second workflow, thi
 
 ## Pre-process the output results
 
-> <hands-on-title>Transpose output tables</hands-on-title>
->
-> 1. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.8+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `MuSiC x NNLS`
->
-> 2. **Rename** {% icon galaxy-pencil %} output `Transposed - MuSiC x NNLS`
->
-{: .hands_on}
-
-Now we need to separate the output tables for MuSiC and NNLS in the transposed collection.
-
-> <hands-on-title>Extract MuSiC Table</hands-on-title>
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Transposed - MuSiC x NNLS`
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->       - *"Delimited by"*: `Tab`
->       - *"Is there a header for the data's columns ?"*: `Yes`
->           - *"List of Fields"*: 
-```
-c4: NNLS Estimated Proportions of Cell Types
-c5: NNLS Estimated Proportions of Cell Types
-```
->
-> 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Results`
->
-{: .hands_on}
-
-> <hands-on-title>Extract NNLS Table</hands-on-title>
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Transposed - MuSiC x NNLS`
->    - *"Operation"*: `Discard`
->    - *"Cut by"*: `fields`
->       - *"Delimited by"*: `Tab`
->       - *"Is there a header for the data's columns ?"*: `Yes`
->           - *"List of Fields"*: 
-```
-c2: Music Estimated Proportions of Cell Types
-c3: Music Estimated Proportions of Cell Types
-```
->
-> 2. **Rename** {% icon galaxy-pencil %} output `NNLS Results`
->
-{: .hands_on}
-
-
 > <hands-on-title>Run visualisation pre-processing workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
@@ -285,7 +237,7 @@ c3: Music Estimated Proportions of Cell Types
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
 > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input in tabular format"*: `MuSiC Combined`
+>    - {% icon param-file %} *"Input in tabular format"*: `Results Table (Music)`
 >    - *"Column to plot on x-axis"*: `2`
 >    - *"Column to plot on y-axis"*: `3`
 >    - *"Plot title"*: `Correlation between inferred and actual cell-type proportions`
@@ -303,7 +255,7 @@ c3: Music Estimated Proportions of Cell Types
 > 2. **Rename** {% icon galaxy-pencil %} output `MuSiC Scatterplot`
 >
 > 3. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input in tabular format"*: `NNLS Combined`
+>    - {% icon param-file %} *"Input in tabular format"*: `Results Table (NNLS)`
 >    - *"Column to plot on x-axis"*: `2`
 >    - *"Column to plot on y-axis"*: `3`
 >    - *"Plot title"*: `Correlation between inferred and actual cell-type proportions`
@@ -322,14 +274,61 @@ c3: Music Estimated Proportions of Cell Types
 >
 {: .hands_on}
 
+> <question-title>Interpreting the Scatter Plots</question-title>
+>
+> 1. Which method has the most accurate results?
+> 2. Which cell type has the biggest proportion in the dataset?
+> 3. What correlation does the data show?
+>
+> {% snippet faqs/galaxy/features_scratchbook.md datatype="tabular" %}
+>
+> > <solution-title></solution-title>
+> >
+> > ![Scatter plot comparison](../../images/bulk-deconvolution-evaluate/scatterplot-compare.png "Scatter plot comparison between Music and NNLS")
+> >
+> > 1. Answer A
+> > 2. Answer B
+> > 3. Answer C
+> >
+> {: .solution}
+>
+{: .question}
+
 
 ## Plot Violin plots of the error
 
 Next we will plot the distribution of errors between the predicted and actual cellular proportions for a select number of cell types. We could plot all cell types in the output, however too many will cause the visualisations to be messy and difficult to interpret.
 
-If we inspect the cell counts table from earlier, we will see the following (note the actual counts will differ from this tutorial since the subsamples are random):
+> <hands-on-title>Get cell counts</hands-on-title>
+>
+> 1. {% tool [Count](Count1) %} with the following parameters:
+>    - {% icon param-file %} *"from dataset"*: `EMTABesethealthy.phenotype.tabular`
+>    - *"Count occurrences of values in column(s)"*: `Column 5`
+>    - *"Delimited by"*: `Tab`
+>    - *"How should the results be sorted?"*: `With the most common value first`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Cell Type Counts`
+>
+{: .hands_on}
 
-- table here -
+Run Counts on the original metadata file and sort by most frequent:
+
+| Cell Type               | Count |
+|-------------------------|-------|
+| alpha                   | 443   |
+| beta                    | 171   |
+| ductal                  | 135   |
+| acinar                  | 112   |
+| gamma                   | 75    |
+| delta                   | 59    |
+| unclassified endocrine  | 29    |
+| co-expression           | 26    |
+| PSC                     | 23    |
+| endothelial             | 13    |
+| epsilon                 | 5     |
+| mast                    | 4     |
+| unclassified            | 1     |
+| MHC class II            | 1     |
 
 We can see that most cell types have very low proportions, so for this visualisation we will only look at 5 cell types with the highest proportion values. For the above table these cell types are: `alpha, beta, gamma, ductal, acinar`. Before we visualise the data we first need to extract only these cell types from the error table.
 
@@ -372,14 +371,14 @@ The Pearson correlation coefficient is a statistical value that represents the d
 
 The equation for calculating the Pearson correlation can be seen below, the workflow to compute this metric breaks down this formula into smaller steps.
 
-- insert formula -
+![Pearson Correlation Equation](../../images/bulk-deconvolution-evaluate/pearson.png "Pearson Correlation Equation")
 
 
 ## Root Mean Squared Error (RMSE)
 
 Root Mean Squared Error or RMSE is a
 
-- insert formula -
+![Root Mean Squared Error Equation](../../images/bulk-deconvolution-evaluate/rmse.png "Root Mean Squared Error Equation")
 
 
 ## Compute Metrics
@@ -400,5 +399,3 @@ Root Mean Squared Error or RMSE is a
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
-
-
