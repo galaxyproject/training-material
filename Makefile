@@ -83,11 +83,11 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 .PHONY: serve-quick
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml --incremental --livereload
+	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
 
 serve-gitpod-quick: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental --livereload
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
 .PHONY: serve-gitpod-quick
 
 build-gitpod: bundle-install  ## run a build on a gitpod.io environment
