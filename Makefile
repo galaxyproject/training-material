@@ -86,6 +86,9 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
+preview: serve-codespaces
+.PHONY: serve-codespaces
+
 serve-codespaces: bundle-install bundle-update
 	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-codespaces
