@@ -88,7 +88,7 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 
 serve-codespaces: bundle-install bundle-update
 	bundle exec jekyll serve --config _config.yml --incremental
-.PHONY: run-codespaces
+.PHONY: serve-codespaces
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
 	bundle exec jekyll serve --config _config.yml --incremental
