@@ -33,12 +33,15 @@ The frequency and kinetics of mitoflashes hold significant physiological and pat
 
 In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using specialized Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
 
+> <agenda-title></agenda-title>
+>
 > In this tutorial, we will cover:
 >
 > 1. Understanding the concept and biological relevance of mitoflashes.
 > 2. Processing live-cell imaging data for mitochondrial tracking.
 > 3. Detecting and analyzing mitoflashes with Galaxy tools.
-> {: .agenda}
+>
+{: .agenda}
 
 # Preparing Your Data
 
@@ -49,10 +52,14 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 > <hands-on-title>Data Upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial in Galaxy.
-> 2. Import the mitoflash imaging data from [Zenodo]({{https://zenodo.org/records/14051280/files/Mitoflash_CM-8bit.tif}}) or from the shared data library:
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the mitoflash imaging data from [Zenodo](https://zenodo.org/records/14051280/files/Mitoflash_CM-8bit.tif) or from the shared data library:
+>    - **Important:** Choose the correct data type if prompted.
 >
 >    ```
->    File1: Mitoflash_CM-8bit.tif 
+>    https://zenodo.org/records/14051280/files/Mitoflash_CM-8bit.tif
 >    ```
 >
 >    **Tip**: If any extra files are included, remove them to keep the workspace clean.
@@ -62,7 +69,7 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >
 > 3. Rename the datasets to keep track of them easily, e.g., "MitoFlash."
 > 4. Confirm that the datatypes are correct for each file:
->    - `Mitoflash_CM-8bit.tif` should be an image file format.
+>    - `Mitoflash_CM-8bit.tif` should be an image tif or tiff file format.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 > 5. Tag each dataset with a label such as "mitoflash" for easy identification later if you are working multiple images.
