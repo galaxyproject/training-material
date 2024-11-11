@@ -102,8 +102,7 @@ Before we start making any changes, let's build the website and get a live previ
 >    >    - Or, click on the **window icon** to the right of the globe icon to preview the GTN in a tab inside the codespaces environment
 >    {: .tip}
 >
-> 4. >
-> 5. If you opened the GTN preview inside the codespace, your window will now look something like this:
+> 4. If you opened the GTN preview inside the codespace, your window will now look something like this:
 >
 >    ![screenshot of the codespace with the preview editor opend to the GTN homepage](images/codespaces-preview-editor.png)
 >
@@ -153,6 +152,14 @@ Now that you have the codespace environment working and we have a live preview u
 > 5. Move to the top right panel where the GTN is previewed and refresh the website
 >    - {% icon galaxy-refresh %} Refresh button in front of the address bar of the preview panel
 >    - You can also open the preview in it's own brower tab, using the {% icon galaxy_instance %} button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)
+>
+>    > <tip-title> Reload not working? </tip-title>
+>    > It is possible that this reload button gives you the 404 again, in that case there are 2 solutions
+>    > 1. Right-click in the preview panel, and choose
+>    >    - Firefox: "This Frame -> Reload Frame"
+>    > 2. Open the preview in it's own browser tab
+>    >    - Click the {% icon galaxy_instance %} button at the top-right corner of the preview window
+>    {: .tip}
 >
 > 6. You should see the change you made:
 >    ![The updated preview with our changed tutorial title](../../images/gitpod-changed.png)
