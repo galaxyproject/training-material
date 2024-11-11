@@ -68,7 +68,7 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >
 > 3. Rename the datasets to keep track of them easily, e.g., "MitoFlash."
 > 4. Confirm that the datatypes are correct for each file:
->    - `Mitoflash_CM-8bit.tif` should be an image tif or tiff file format.
+>    - `mitoflashes_8bit.tif` should be an image tif or tiff file format.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
 > 5. Tag each dataset with a label such as "mitoflash" for easy identification later if you are working multiple images.
