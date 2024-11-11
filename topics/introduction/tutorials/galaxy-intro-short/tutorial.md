@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "A short introduction to Galaxy"
+title: "A short and cool introduction to Galaxy"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
 tags:
