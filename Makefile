@@ -90,7 +90,7 @@ preview: serve-codespaces
 .PHONY: serve-codespaces
 
 serve-codespaces: bundle-install bundle-update
-	bundle exec jekyll serve --config _config.yml --incremental
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
 .PHONY: serve-codespaces
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
