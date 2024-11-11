@@ -83,7 +83,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 
 > <hands-on-title>Detecting Mitochondrial Regions</hands-on-title>
 >
-> 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection/ip_spot_detection/1.0.0) %} with the following recommended parameters:
+> 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1) %} with the following recommended parameters:
 >    - {% icon param-file %} *"Image input"*: `Mitochondrial_Flashes.tiff`
 >    - **Starting time point** (`frame_1st`): `1` (first frame in the stack)
 >    - **Ending time point** (`frame_end`): `0` (use `0` to process until the last frame)
@@ -99,7 +99,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 
 > <hands-on-title>Tracking Mitochondrial Movement</hands-on-title>
 >
-> 1. {% tool [Perform linking in time series (nearest neighbors)](toolshed.g2.bx.psu.edu/view/imgteam/points_association_nn) %} with the following recommended parameters:
+> 1. {% tool [Perform linking in time series (nearest neighbors)](toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.3-2) %} with the following recommended parameters:
 >    - {% icon param-file %} *"Coordinates (and intensities) of input points"*: Output from the **Spot Detection** tool.
 >    - **Neighborhood size** (`nbpx`): Set to `6` pixels as a starting value. Adjust within `1-10` pixels based on the density of points and proximity between spots across frames.
 >    - **Intensity threshold** (`thres`): A recommended starting value is `25%` of the global maximum intensity. Increase to `30-40%` for stricter filtering if spots have low intensity.
