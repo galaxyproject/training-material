@@ -214,10 +214,46 @@ We are going to provide a brief explanation about the content of each tab presen
 >
 {: .tip}
 
-## :
+# LORIS PanCancer LLR6 Model Robustness:
 
-Before we begin, it's crucial to understand the concept we want to drive into this analyse. Since we are looking to generate a model similar to what was published by {% cite Chang2024 %}, we are going to use the same metrics used in the paper as golden standard to the model we generate through Galaxy-PyCaret.
+It's crucial to understand the concept we want to drive into this analyse. Since we are looking to generate a model similar to what was published by {% cite Chang2024 %}, we are going to use the model's metrics from the paper to compare the model we generate through Galaxy-PyCaret.
 
+> <comment-title>Robustness definition </comment-title>
+>
+> Some evidence is robust across reasonable variations in analysis, and some evidence is fragile, meaning that support for the finding is contingent on specific decisions such as which observations are excluded and which covariates are included.
+> 
+> Thus, Robustness refers to testing the reliability of a prior finding using the same data and a different analysis strategy.
+>
+>![alt](... "label")
+>
+{:  .comment}
+
+## Classification Algorithms
+
+
+## Hyperparameters
+
+{% cite Chang2024 %}'s model for Pan-Cancer LLR6 model has the following hyperparameters set:
+C = 0.1, Class Weight = Balanced, l1 ratio = 1, max iter = 100, Penalty = Elasticnet, Solver = Saga.
+
+> <comment-title>Hyperparameters meaning</comment-title>
+>
+> *Penalty* - Defines the type of regularization applied to the model to prevent overffiting. Options for linear and logistic regression are: `L1`, `L2`, and `Elasticnet`. 
+> Briefily, L1 (Lasso Regression) removes not important features, overcomming overffiting as well as in dimension reduction, but when most of the features (variables) in the model are useful, L2 (Ridge Regression) is used. Elasticnet regularization combines both L1 and L2, addressing multicolinearity while also enabling feature selection. When Elasticnet is selected, opens the L1 Ratio parameter.
+>
+> *L1-Ratio* - Controls the balance between L1 and L2 penalties. A value of `1` uses purely L1 regularization, which encourages sparsity. A value of `0` uses purely L2.
+>
+> *C* - is the inverse of the regularization strength. A smaller C (like `0.1`) implies stronger regularization, prevents overfitting by penalizing large coefficients, also makes the model simple (smaller coefficients). The contrary, higher values make the model more complex.
+>
+> *Solver* - Specifies the optmization algorithm used for fitting the model. `SAGA` is well-suited for large datasets and supports the elastinet penalty. Also effective for sparse data and is fast for L1. `LBFGS` is a quasi-newton optimization algorithm, efficient for smaller dataset and suppport L2 regularization but does not support elasticnet.
+>
+> *Class Weight* - is used to handle imbalanced classes by adjusting the weigth associated with each class. `Balanced` adjusts these weights inversely proportional to class frequencies in the data, more weight to the minority class.
+>
+> *Max Iter* - Specifies the maximum `number of iterations` the solver will run before stopping. If converge is achieved earlier, it will stop, if not, might need to increase the value.
+>
+{:  .comment}
+
+Our PyCaret Best Model has the hyperparameters 
 
 # Conclusion
 
