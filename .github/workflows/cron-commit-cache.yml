@@ -59,6 +59,8 @@ jobs:
         id: ghmeta
         run: |
           bundle exec ruby bin/collect-gh.rb
+        env:
+          GH_TOKEN: ${{ github.token }}
 
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
