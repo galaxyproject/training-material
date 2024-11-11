@@ -72,26 +72,34 @@ Before we start making any changes, let's build the website and get a live previ
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
 > 1. In the terminal window (bottom), type the following command:
->    `make serve-codespaces`
+>    `make preview`
+>
+>    - this will take 2-3 minutes to complete
 >
 >    ![output in the terminal after issuing the make serve-gitpod command](../../images/gitpod/command.png)
 >
 > 3. When the build process is finished, a message will pop up with a button to view the GTN website preview.
->    - You may have to click the "Try Again" button if the preview was generated before the site building completed
+>    - Click on **Open in Browser** in this message
 >
->      ![gitpod with the GTN open in the right panel](images/gitpod-launched.png)
+>    ![screenshot of the "open in browser" button that appears after building](images/codespaces-viewbutton.png)
 >
->    - Click on the link in the terminal to see the GTN in full-screen: `Server address: http://127.0.0.1:4000/training-material/`
+> 4. If you miss this message, you can always open the preview in the following way:
+>    - Go to the **Ports** tab of the bottom panel
 >
->    ![output in the terminal after the build process has completed ](../../images/gitpod/ready.png)
+>      ![screenshot of the tabs on the bottom panel](images/codespaces-ports-tab.png)
+>
+>    - Hover over the link in the **Forwarded Address** column, 3 icons should appear
+>      ![screenshot of the 3 icons](images/codespaces-ports-preview-buttons.png)
+>    - Click on the **world/globe icon** to open the GTN preview in a new window, or
+>    - Or click on the **window icon** to the right of the globe icon to preview the GTN in a tab inside the codespaces environment
+>    - You will get the GTN 404 page since codespaces does not know which page to show, but just click on the **Return to homepage** button.
+>
+>    ![screenshot of the codespace with the preview editor opend to the GTN homepage](images/codespaces-preview-editor.png)
 >
 >    > <tip-title>Not opening?</tip-title>
 >    > ![screenshot of firefox permissions dialog which shows blocked windows and an allow menu](../../images/gitpod_popup.png)
->    > Some browsers block popups by default, you may need to allow GitPod to show popups in order to click links.
+>    > Some browsers block popups by default, you may need to allow CodeSpaces to show popups in your browser.
 >    {: .tip}
->
-> 4. This will take you to a preview of the GTN website
->    - **Note:** It will take you the 404 page because GitPod doesn't know the location of the GTN homepage, but from here you can just click the homepage button.
 >
 {: .hands_on}
 
@@ -201,17 +209,30 @@ TODO: main option: do nothing, and just hit the "save to branch/fork" message in
 
 # Closing your CodeSpace
 
-Everybody gets 60 hours per month for free on CodeSpaces. Your codespace should automatically shut down after a certain period of inactivity,
+Everybody gets 60 hours per month for free on CodeSpaces. Your codespace will automatically shut down after 30 minutes of inactivity,
 but it is always a good idea to close your CodeSpace when you are finished with it, to conserve your quotum.
 
 
-> <hands-on-title>Shutting down your GitPod workspace</hands-on-title>
+> <hands-on-title>Shutting down your CodeSpace</hands-on-title>
 >
-> 1. Click on the menu button at the top left corner of the screen
->    - Choose "Gitpod: Stop Workspace"
+> 1. Return to the [GTN GitHub page](https://github.com/galaxyproject/training-material)
 >
->    ![stop workspace option in the main menu](../../images/gitpod/stopworkspace.png)
+> 2. Click on the green **Code** button again
+>
+> 3. Under the Codespaces tab, you should see your running codespace
+>
+>    ![codespaces menu in github](images/codespaces-stop-1.png)
+>
+> 4. Click on the 3-dots menu to the right of your (randomly generated) codespace name
+>
+> 5. In this menu you can quit your codespace in two ways:
+>    - **Stop codespace**: your changes will be kept and you can restart the codespace later
+>    - **Delete** your codespace. Any changes you did not commit and push to GitHub are lost.
+>      ![screenshot of the codespace options menu](images/codespaces-stop-2.png)
+>
+> 6. To resume a stopped codespace:
 >
 {: .hands_on}
 
 
+Congrats! You learned how to contribute to the GTN by using the CodeSpaces environment!
