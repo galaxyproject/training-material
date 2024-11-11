@@ -181,16 +181,16 @@ When you have finished your changes, it all looks good in the preview, you want 
 >
 > First we commit our changes inside the codespace:
 > 1. Go to the "Source Control" icon on the left menu bar (it should have a blue dot on it)
-> 2. You should see your changed file
+> 2. You should see your changed file (`tutorial.md`)
 >    ![source control tab](images/codespaces-commit-1.png)
-> 3. Click on the plus behind `tutorial.md` file to *stage* it
+> 3. Hover over the file name, and **click on the plus* icon* to *stage* it
 > 4. Enter a commit message (e.g. "updated tutorial title)
 >    ![adding a commit message](images/codespaces-commit-2.png)
-> 5. Click on **commit changes**
+> 5. Click on the green **Commit** button
 >
 {: .hands_on}
 
-Next, we will push these changes to a branch/fork.
+Next, we will push these changes to a branch/fork. We will do this from outside of our codespace for convenience.
 
 > <hands-on-title>Pushing changes to GitHub</hands-on-title>
 >
