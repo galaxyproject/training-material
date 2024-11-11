@@ -8,11 +8,13 @@ objectives:
   - "Preview the GTN website online via CodeSpaces"
   - "Make changes to the GTN website and preview those changes"
   - "Save the changes to your fork of the GTN repo"
+  - "Create a pull request (PR) based on your changes"
 time_estimation: "30m"
 subtopic: getting-started
 priority: 1
 key_points:
-  - "GitHub CodeSpaces can be used to serve the GTN training materials without installing anything on your machine"
+  - "GitHub CodeSpaces can be used to change and preview the GTN training materials without installing anything on your machine"
+  - "Everybody gets 60 free hours per month on CodeSpaces"
 contributions:
   authorship:
   - shiltemann
@@ -45,8 +47,9 @@ If you are working on your own training materials and want preview them online w
 >    ![the codespaces tab of the menu](images/codespaces-launch.png)
 > 4. Click on **Create codespace on main**
 > 5. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
->    - it may take a minute or two to finish setting up
->    - in this environment you can also build the GTN website to preview your changes
+>    - It may take a couple minutes to finish setting everything up
+>    - In this environment you can also build the GTN website to preview your changes
+>    - When everything is ready, you should see something like this:
 >
 >    ![screenshot of Codespaces just after startup](images/codespaces-home.png)
 {: .hands_on}
@@ -62,7 +65,6 @@ Let's have a closer look at your CodeSpaces window:
 ![VScode interface](images/codespaces-home.png)
 
 
-
 # Build and preview the GTN website
 
 Before we start making any changes, let's build the website and get a live preview.
@@ -74,9 +76,7 @@ Before we start making any changes, let's build the website and get a live previ
 >
 >    ![output in the terminal after issuing the make serve-gitpod command](../../images/gitpod/command.png)
 >
-> 2. While you wait for the GTN website to build, switch to the **Ports** tab of the bottom panel
->    -
-> 3. When the build process is finished, the terminal will show you a link, and a window should popup with a preview on the right.
+> 3. When the build process is finished, a message will pop up with a button to view the GTN website preview.
 >    - You may have to click the "Try Again" button if the preview was generated before the site building completed
 >
 >      ![gitpod with the GTN open in the right panel](images/gitpod-launched.png)
