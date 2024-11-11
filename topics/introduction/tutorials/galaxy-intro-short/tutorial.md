@@ -5,7 +5,7 @@ title: "A short and cool introduction to Galaxy"
 zenodo_link: "https://doi.org/10.5281/zenodo.582600"
 level: Introductory
 tags:
-  - español
+  - español 
 questions:
   - "How to get started in Galaxy"
 objectives:
