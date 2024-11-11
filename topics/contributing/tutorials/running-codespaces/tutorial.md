@@ -42,10 +42,15 @@ If you are working on your own training materials and want preview them online w
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
 > 1. Navigate to the GTN GitHub repository, [github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material)
-> 2. Click on the greed **Code** button
+>
+> 2. Click on the green **Code** button
+>
 > 3. At the top, switch to the **CodeSpaces** tab
 >    ![the codespaces tab of the menu](images/codespaces-launch.png)
+>
 > 4. Click on **Create codespace on main**
+>    - Note: if you switch to a specific branch in GitHub first, you can create a codespace for that branch
+>
 > 5. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
 >    - It may take a couple minutes to finish setting everything up
 >    - In this environment you can also build the GTN website to preview your changes
@@ -74,25 +79,31 @@ Before we start making any changes, let's build the website and get a live previ
 > 1. In the terminal window (bottom), type the following command:
 >    `make preview`
 >
->    - this will take 2-3 minutes to complete
+>    - This will take 2-3 minutes to complete
 >
->    ![output in the terminal after issuing the make serve-gitpod command](../../images/gitpod/command.png)
+>    ![output in the terminal after issuing the make preview command](images/codespaces-make-preview.png)
 >
-> 3. When the build process is finished, a message will pop up with a button to view the GTN website preview.
->    - Click on **Open in Browser** in this message
+> 3. When the build process is finished, a preview window will automatically open (at the top right)
+>    - The preview will show the GTN 404 (codespace doesnt know what to show)
+>    - Just click on **Return to homepage**.
 >
->    ![screenshot of the "open in browser" button that appears after building](images/codespaces-viewbutton.png)
+>    > <tip-title>Window not opening? </tip-title>
+>    > If the preview window doesn't open for you, or if you close it and want to reopen it, you can always do so as follows:
+>    > 1. Go to the **Ports** tab of the bottom panel
+>    >
+>    >    ![screenshot of the tabs on the bottom panel](images/codespaces-ports-tab.png)
+>    >
+>    > 2. Hover over the link in the **Forwarded Address** column, 3 icons should appear
+>    >
+>    >    ![screenshot of the 3 icons](images/codespaces-ports-preview-buttons.png)
+>    >
+>    > 3. Click on:
+>    >    - The **world/globe icon** to open the GTN preview in a new window, or
+>    >    - Or, click on the **window icon** to the right of the globe icon to preview the GTN in a tab inside the codespaces environment
+>    {: .tip}
 >
-> 4. If you miss this message, you can always open the preview in the following way:
->    - Go to the **Ports** tab of the bottom panel
->
->      ![screenshot of the tabs on the bottom panel](images/codespaces-ports-tab.png)
->
->    - Hover over the link in the **Forwarded Address** column, 3 icons should appear
->      ![screenshot of the 3 icons](images/codespaces-ports-preview-buttons.png)
->    - Click on the **world/globe icon** to open the GTN preview in a new window, or
->    - Or click on the **window icon** to the right of the globe icon to preview the GTN in a tab inside the codespaces environment
->    - You will get the GTN 404 page since codespaces does not know which page to show, but just click on the **Return to homepage** button.
+> 4. >
+> 5. If you opened the GTN preview inside the codespace, your window will now look something like this:
 >
 >    ![screenshot of the codespace with the preview editor opend to the GTN homepage](images/codespaces-preview-editor.png)
 >
@@ -104,7 +115,6 @@ Before we start making any changes, let's build the website and get a live previ
 {: .hands_on}
 
 
-![screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right](../../images/gitpod.png)
 
 # Editing Training Materials on CodeSpaces
 
@@ -128,25 +138,23 @@ Now that you have the codespace environment working and we have a live preview u
 >    topics/introduction/tutorials/galaxy-intro-short/tutorial.md
 >    ```
 >
->    > <tip-title>Finding files faster?</tip-title>
->    > You can use the key combination <kbd>ctrl-p</kbd> to launch the file search dialog and simply enter the text `topics/introduction/tutorials/galaxy-intro-short/tutorial.md`
->    {: .tip}
->
 > 3. Change the title of the tutorial
 >    - **From:** "A Short Introduction to Galaxy"
 >    - **To:** "A Short and Cool Introduction to Galaxy"
 >
->    ![we changed the title of the tutorial in the text editor window](../../images/gitpod/changes.png)
+>    ![we changed the title of the tutorial in the text editor window](images/codespaces-tutorial-edited.png)
 >
+> 4. Save the file
+>    - **CTRL+S** to save the file
 >    - You should immediately see a message in the terminal saying "regenerating". CodeSpaces has detected your changes and is rebuilding the website.
 >
->    ![the terminal shows a message stating the website is being regenerated](../../images/gitpod/regenerating.png)
+>    ![the terminal shows a message stating the website is being regenerated](images/codespaces-regenerating.png)
 >
-> 4. Move to the top right panel where the GTN is previewed and refresh the website
+> 5. Move to the top right panel where the GTN is previewed and refresh the website
 >    - {% icon galaxy-refresh %} Refresh button in front of the address bar of the preview panel
 >    - You can also open the preview in it's own brower tab, using the {% icon galaxy_instance %} button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)
 >
-> 5. You should see the change you made:
+> 6. You should see the change you made:
 >    ![The updated preview with our changed tutorial title](../../images/gitpod-changed.png)
 >
 {: .hands_on}
@@ -230,7 +238,7 @@ but it is always a good idea to close your CodeSpace when you are finished with 
 >    - **Delete** your codespace. Any changes you did not commit and push to GitHub are lost.
 >      ![screenshot of the codespace options menu](images/codespaces-stop-2.png)
 >
-> 6. To resume a stopped codespace:
+>    - In this menu you can also resume a stopped codespace by simply clicking **Open in Browswer**
 >
 {: .hands_on}
 
