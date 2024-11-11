@@ -1,6 +1,6 @@
 module Jekyll
   # Fake sitemap generator.
-  class SitemapGenerator < Generator
+  class SitemapGenerator2 < Generator
     safe true
 
     def generate(site)
@@ -11,7 +11,13 @@ module Jekyll
                 'http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" ' \
                 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
 
-      site.pages.each do |t|
+
+      subset_pages = site.pages
+        .reject { |t| t.path =~ /ipynb$/ || t.path =~ /api\/ga4gh\/trs\/v2/}
+        .reject { |t| t.data.fetch('layout', 'page') =~ /external/}
+        .reject { |t| t.data.fetch('hands_on', '') == 'external'}
+
+      subset_pages.each do |t|
         result += "<url><loc>#{site.config['url'] + site.config['baseurl'] + t.url}</loc>" \
                   '<lastmod>2016-06-30T18:00:00-07:00</lastmod></url>'
       end

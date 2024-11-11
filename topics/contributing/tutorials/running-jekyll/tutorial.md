@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Running the GTN website locally"
+title: "Running the GTN website locally using the command line"
 questions:
   - "How to setup the infrastructure to build training webpages?"
 objectives:
@@ -9,7 +9,8 @@ objectives:
   - "Running the GTN material website locally"
   - "Tracking changes to the content live in the webbrowser"
 time_estimation: "15m"
-subtopic: writing
+subtopic: getting-started
+priority: 2
 key_points:
   - "Checking the generated website can be done locally"
 contributors:

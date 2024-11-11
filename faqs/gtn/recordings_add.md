@@ -8,7 +8,7 @@ contributors: [shiltemann]
 
 **We welcome anybody to submit their recordings!** Your videos can be used in (online) training events, or for self-study by learners on the GTN.
 
-For some tips and tricks about recording the video itself, please see
+For some tips and tricks about recording the video itself, please ensure your recording conforms to our recommendations:
 
 [Recording Tips & Tricks]({% link faqs/gtn/recordings_create.md %}){: .btn.btn-info}
 [Submit a Recording](https://forms.gle/qNG8FkTN1yRZPNZY6){: .btn.btn-info}
