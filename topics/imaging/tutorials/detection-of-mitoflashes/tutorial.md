@@ -62,9 +62,8 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >    https://zenodo.org/records/14051280/files/Mitoflash_CM-8bit.tif
 >    ```
 >
->    **Tip**: If any extra files are included, remove them to keep the workspace clean.
->
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>    
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
 > 3. Rename the datasets to keep track of them easily, e.g., "MitoFlash."
