@@ -55,11 +55,11 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the mitoflash imaging data from [Zenodo]() or from the shared data library:
+> 2. Import the mitoflash imaging data from [Zenodo](https://zenodo.org/records/14071552) or from the shared data library:
 >    - **Important:** Choose the correct data type if prompted.
 >
 >    ```
->    https://zenodo.org/records/
+>    https://zenodo.org/records/14071552/files/mitoflashes_8bit.tiff
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
