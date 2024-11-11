@@ -1001,6 +1001,120 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Running the GTN website online using GitHub CodeSpaces",
+      "questions": [
+        "How can I get a preview of the GTN website using GitHub CodeSpaces?"
+      ],
+      "objectives": [
+        "Preview the GTN website online via CodeSpaces",
+        "Make changes to the GTN website and preview those changes",
+        "Save the changes to your fork of the GTN repo",
+        "Create a pull request (PR) based on your changes"
+      ],
+      "time_estimation": "30m",
+      "subtopic": "getting-started",
+      "priority": 1,
+      "key_points": [
+        "GitHub CodeSpaces can be used to change and preview the GTN training materials without installing anything on your machine",
+        "Everybody gets 60 free hours per month on CodeSpaces"
+      ],
+      "contributions": {
+        "authorship": [
+          "shiltemann"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/contributing/tutorials/running-codespaces/tutorial.html",
+      "topic_name": "contributing",
+      "tutorial_name": "running-codespaces",
+      "dir": "topics/contributing/tutorials/running-codespaces",
+      "id": "contributing/running-codespaces",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-11-11 17:07:08 +0000",
+      "pub_date": "2024-11-11 17:07:08 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/running-codespaces/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": [
+
+      ],
+      "supported_servers_matrix": [
+
+      ],
+      "topic_name_human": "Contributing to the Galaxy Training Material",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/running-codespaces/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/running-codespaces/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Design and plan session, course, materials",
       "subtopic": "pedagogy",
       "time_estimation": "60m",
@@ -2735,7 +2849,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-11-11 08:36:47 +0000",
+          "modified": "2024-11-11 17:08:23 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nSRR891268_R1_20M.fastq.gz\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nSRR891268_R2_20M.fastq.gz\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  10[\"Unique\"];\n  9 -->|out_file1| 10;\n  11[\"Text transformation\"];\n  10 -->|outfile| 11;\n  12[\"Concatenate datasets\"];\n  6 -->|out_file1| 12;\n  11 -->|output| 12;\n  13[\"Unique\"];\n  12 -->|out_file1| 13;\n  14[\"seqtk_subseq\"];\n  0 -->|output| 14;\n  13 -->|outfile| 14;\n  15[\"Text transformation\"];\n  13 -->|outfile| 15;\n  16[\"seqtk_subseq\"];\n  1 -->|output| 16;\n  15 -->|output| 16;\n  2[\"FASTQ to Tabular\"];\n  0 -->|output| 2;\n  3[\"Cutadapt\"];\n  0 -->|output| 3;\n  1 -->|output| 3;\n  4[\"Cut\"];\n  2 -->|output_file| 4;\n  5[\"Bowtie2\"];\n  3 -->|out1| 5;\n  3 -->|out2| 5;\n  6[\"Select random lines\"];\n  4 -->|output| 6;\n  7[\"BAM-to-SAM\"];\n  5 -->|output| 7;\n  8[\"Filter\"];\n  7 -->|output1| 8;\n  9[\"Cut\"];\n  8 -->|out_file1| 9;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR891268_R1_20M.fastq.gz\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nSRR891268_R2_20M.fastq.gz\"]\n  10[label=\"Unique\"]\n  9 -> 10 [label=\"out_file1\"]\n  11[label=\"Text transformation\"]\n  10 -> 11 [label=\"outfile\"]\n  12[label=\"Concatenate datasets\"]\n  6 -> 12 [label=\"out_file1\"]\n  11 -> 12 [label=\"output\"]\n  13[label=\"Unique\"]\n  12 -> 13 [label=\"out_file1\"]\n  14[label=\"seqtk_subseq\"]\n  0 -> 14 [label=\"output\"]\n  13 -> 14 [label=\"outfile\"]\n  15[label=\"Text transformation\"]\n  13 -> 15 [label=\"outfile\"]\n  16[label=\"seqtk_subseq\"]\n  1 -> 16 [label=\"output\"]\n  15 -> 16 [label=\"output\"]\n  2[label=\"FASTQ to Tabular\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Cutadapt\"]\n  0 -> 3 [label=\"output\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"Cut\"]\n  2 -> 4 [label=\"output_file\"]\n  5[label=\"Bowtie2\"]\n  3 -> 5 [label=\"out1\"]\n  3 -> 5 [label=\"out2\"]\n  6[label=\"Select random lines\"]\n  4 -> 6 [label=\"output\"]\n  7[label=\"BAM-to-SAM\"]\n  5 -> 7 [label=\"output\"]\n  8[label=\"Filter\"]\n  7 -> 8 [label=\"output1\"]\n  9[label=\"Cut\"]\n  8 -> 9 [label=\"out_file1\"]\n}",
           "workflow_tools": [
@@ -2860,7 +2974,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-11-11 08:36:47 +0000",
+          "modified": "2024-11-11 17:08:23 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nAPI Request file\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Copernicus Climate Data Store\"];\n  0 -->|output| 1;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nAPI Request file\"]\n  1[label=\"Copernicus Climate Data Store\"]\n  0 -> 1 [label=\"output\"]\n}",
           "workflow_tools": [
@@ -3317,8 +3431,8 @@
       "id": "contributing/fair-gtn",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-11-11 08:36:49 +0000",
-      "pub_date": "2024-11-11 08:36:49 +0000",
+      "mod_date": "2024-11-11 17:08:25 +0000",
+      "pub_date": "2024-11-11 17:08:25 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/contributing/tutorials/fair-gtn/tutorial.json",
       "tools": [
