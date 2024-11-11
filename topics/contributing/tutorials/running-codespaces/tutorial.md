@@ -163,7 +163,8 @@ Now that you have the codespace environment working and we have a live preview u
 >    {: .tip}
 >
 > 6. You should see the change you made:
->    ![The updated preview with our changed tutorial title](../../images/gitpod-changed.png)
+>
+>    ![The updated preview with our changed tutorial title](images/codespaces-reloaded.png)
 >
 {: .hands_on}
 
@@ -176,50 +177,34 @@ In this way you can edit files in the text editor, and see the effects in the we
 When you have finished your changes, it all looks good in the preview, you want to save your changes back to GitHub so that you can either continue later, or make a Pull Request to the GTN to contribute your changes.
 
 
-TODO: main option: do nothing, and just hit the "save to branch/fork" message in GitHub web interface
+> <hands-on-title>Comitting changes</hands-on-title>
+>
+> First we commit our changes inside the codespace:
+> 1. Go to the "Source Control" icon on the left menu bar (it should have a blue dot on it)
+> 2. You should see your changed file
+>    ![source control tab](images/codespaces-commit-1.png)
+> 3. Click on the plus behind `tutorial.md` file to *stage* it
+> 4. Enter a commit message (e.g. "updated tutorial title)
+>    ![adding a commit message](images/codespaces-commit-2.png)
+> 5. Click on **commit changes**
+>
+{: .hands_on}
 
+Next, we will push these changes to a branch/fork.
 
-> <hands-on-title>Save changes</hands-on-title>
+> <hands-on-title>Pushing changes to GitHub</hands-on-title>
 >
-> 1. **Option 1: via the terminal**
->    - Hit <kbd>ctrl+c</kbd> if your preview was still running to stop it
->    - Create a new branch, commit your changes, push changes:
->
->    ```bash
->    git checkout -b fix-title
->    git commit -m "update tutorial title" topics/introduction/tutorials/galaxy-intro-short/tutorial.md
->    git push origin fix-title
->    ```
->
-> 2. **Option 2: via the web interface**
->    - Create a new branch:
->      -  On the bottom-left, click on the branch logo (probably labelled "main")
->         ![button on the bottom of the page with the current branch](../../images/gitpod/branch-change.png)
->      - Enter `fix-title` as the name for your new branch (at top of window)
->      - Choose "+ Create new branch..." from the dropdown
->    - Commit changes:
->      - On the left menu, click on the "changed files" tab
->        ![button on the left menu to show changed files](../../images/gitpod/changedfiles.png)
->      - Click on the "+" icon next to the file we edited to *stage changes*
->        ![stage changes button](../../images/gitpod/stagechanges.png)
->      - Hit the checkmark icon at the top to commit the changes
->      - Enter a commit message (top of window)
->   - Publish changes
->     - Click the cloud button at bottom left to publish your changes
->       ![publish changes button](../../images/gitpod/publlish.png)
->
->
-> 3. Your changes are now saved to your fork, and you can make a PR via the GitHub interface.
->    - If you used option 1 and want to do that right away, you can click on the link in the terminal:
->      ![link in the terminal to open a PR](../../images/gitpod/push.png)
->
-> > <tip-title>GitPod Permissions</tip-title>
-> > If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
-> > ![prompt to changes permissions](../../images/gitpod/access.png)
-> > This will take you through a process to authorize GitPod, and set permissions
-> > ![permission settings for GitPod](../../images/gitpod/permissions.png)
-> > If it doesn't take you to GitPod's permission page because your browser blocks popups, you can set them [on this page](https://gitpod.io/integrations).
-> {: .tip}
+> 1. In your browser (outside of codespaces), navigate to the [GTN GitHub page](https://github.com/galaxyproject/training-material)
+> 2. Click on the green **Code** button again
+> 3. Click on the 3-dots menu to the right of your (randomly generated) codespace name
+>    ![screenshot of the codespace options menu](images/codespaces-stop-2.png)
+> 4. Choose **Export changes to a branch**
+>    - For you, it could be **Export changes to fork**
+>    ![screenshot of export to branch dialogue window](images/codespaces-export-to-branch.png)
+> 5. Once it is done, click **See branch** button
+>    - This will take you to the new branch
+>    - Click the **Compare & pull request** button to create a PR for your changes
+>    ![compare and pull request button on the new branch](images/codespaces-compare-pr.png)
 {: .hands_on}
 
 
