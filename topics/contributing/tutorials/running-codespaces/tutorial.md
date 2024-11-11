@@ -98,9 +98,9 @@ Before we start making any changes, let's build the website and get a live previ
 
 ![screenshot of gitpod's code editor with a tutorial open, and the GTN preview on the right](../../images/gitpod.png)
 
-# Editing Training Materials on GitPod
+# Editing Training Materials on CodeSpaces
 
-Now that you have the GitPod environment working and we have a live preview up, let's make some changes to the GTN materials and get an instant preview.
+Now that you have the codespace environment working and we have a live preview up, let's make some changes to the GTN materials and get an instant preview.
 
 
 **Scenario:** You have spotted a typo in one of the tutorials, and would like to fix this and see the resulting GTN webpage.
@@ -130,11 +130,11 @@ Now that you have the GitPod environment working and we have a live preview up, 
 >
 >    ![we changed the title of the tutorial in the text editor window](../../images/gitpod/changes.png)
 >
->    - You should immediately see a message in the terminal saying "regenerating". GitPod has detected your changes and is rebuilding the website.
+>    - You should immediately see a message in the terminal saying "regenerating". CodeSpaces has detected your changes and is rebuilding the website.
 >
 >    ![the terminal shows a message stating the website is being regenerated](../../images/gitpod/regenerating.png)
 >
-> 4. Move to the top right panel where the GTN is previewed and refresh the frame
+> 4. Move to the top right panel where the GTN is previewed and refresh the website
 >    - {% icon galaxy-refresh %} Refresh button in front of the address bar of the preview panel
 >    - You can also open the preview in it's own brower tab, using the {% icon galaxy_instance %} button at the top-right corner of the preview window. Then you can reload the page the regular way (e.g. <kbd>F5</kbd> or <kbd>ctrl + r</kbd> or the reload button in the browser)
 >
@@ -150,6 +150,10 @@ In this way you can edit files in the text editor, and see the effects in the we
 # Saving your changes back to GitHub
 
 When you have finished your changes, it all looks good in the preview, you want to save your changes back to GitHub so that you can either continue later, or make a Pull Request to the GTN to contribute your changes.
+
+
+TODO: main option: do nothing, and just hit the "save to branch/fork" message in GitHub web interface
+
 
 > <hands-on-title>Save changes</hands-on-title>
 >
@@ -195,9 +199,11 @@ When you have finished your changes, it all looks good in the preview, you want 
 {: .hands_on}
 
 
-# Closing your GitPod Workspace
+# Closing your CodeSpace
 
-Everybody gets 50 hours per month for free on GitPod, so it is wise to close your GitPod workspace when you are finished with it, to conserve your quotum.
+Everybody gets 60 hours per month for free on CodeSpaces. Your codespace should automatically shut down after a certain period of inactivity,
+but it is always a good idea to close your CodeSpace when you are finished with it, to conserve your quotum.
+
 
 > <hands-on-title>Shutting down your GitPod workspace</hands-on-title>
 >
@@ -207,3 +213,5 @@ Everybody gets 50 hours per month for free on GitPod, so it is wise to close you
 >    ![stop workspace option in the main menu](../../images/gitpod/stopworkspace.png)
 >
 {: .hands_on}
+
+
