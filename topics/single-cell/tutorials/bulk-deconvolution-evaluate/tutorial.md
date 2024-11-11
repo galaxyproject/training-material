@@ -403,6 +403,11 @@ The equation for calculating the Pearson correlation can be seen below, the work
 
 ![Pearson Correlation Equation](../../images/bulk-deconvolution-evaluate/pearson.png "Pearson Correlation Equation")
 
+Where
+- `x` = actual proportion values
+- `x̄` = mean of actual proportion values
+- `y` = predicted proportion values
+- `ȳ` = mean of predicted proportion values
 
 ## Root Mean Squared Error (RMSE)
 
@@ -411,6 +416,11 @@ Root Mean Squared Error or RMSE is a common error metric for measuring a tools p
 The equation for calculating this metric is seen below, the implementation of this calculation is in the workflow alongside the Pearson correlation.
 
 ![Root Mean Squared Error Equation](../../images/bulk-deconvolution-evaluate/rmse.png "Root Mean Squared Error Equation")
+
+Where
+- `n` = number of samples
+- `y` = actual proportion
+- `ŷ` = predicted proportion
 
 
 ## Compute Metrics
