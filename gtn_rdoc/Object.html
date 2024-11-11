@@ -99,6 +99,8 @@
     <li ><a href="#method-i-generate_opml">#generate_opml</a>
     <li ><a href="#method-i-generate_tag_topic_feeds">#generate_tag_topic_feeds</a>
     <li ><a href="#method-i-generate_topic_feeds">#generate_topic_feeds</a>
+    <li ><a href="#method-i-gh_cli_pr_info">#gh_cli_pr_info</a>
+    <li ><a href="#method-i-gh_cli_pr_list">#gh_cli_pr_list</a>
     <li ><a href="#method-i-group_bucket_by">#group_bucket_by</a>
     <li ><a href="#method-i-isDraft">#isDraft</a>
     <li ><a href="#method-i-json_boxify">#json_boxify</a>
@@ -1668,6 +1670,53 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">serialise</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">feed_path</span>, <span class="ruby-identifier">builder</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-gh_cli_pr_info" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gh_cli_pr_info</span><span
+              class="method-args">(num, fields)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="gh_cli_pr_info-source">
+            <pre><span class="ruby-comment"># File bin/collect-gh.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gh_cli_pr_info</span>(<span class="ruby-identifier">num</span>, <span class="ruby-identifier">fields</span>)
+  <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">`gh pr view #{num} --json #{fields.join(&#39;,&#39;)}`</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-gh_cli_pr_list" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">gh_cli_pr_list</span><span
+              class="method-args">(count: 3)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="gh_cli_pr_list-source">
+            <pre><span class="ruby-comment"># File bin/collect-gh.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gh_cli_pr_list</span>(<span class="ruby-value">count:</span> <span class="ruby-value">3</span>)
+  <span class="ruby-identifier">d</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">`gh pr list --search &#39;sort:updated-desc is:merged&#39; --limit #{count} --json number`</span>)
+  <span class="ruby-identifier">d</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">pr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pr</span>[<span class="ruby-string">&#39;number&#39;</span>] }
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
