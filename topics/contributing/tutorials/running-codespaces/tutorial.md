@@ -156,6 +156,7 @@ Now that you have the codespace environment working and we have a live preview u
 >    > <tip-title> Reload not working? </tip-title>
 >    > It is possible that this reload button gives you the 404 again, in that case there are 2 solutions
 >    > 1. Right-click in the preview panel, and choose
+>    >    - Chrome: "Reload Frame"
 >    >    - Firefox: "This Frame -> Reload Frame"
 >    > 2. Open the preview in it's own browser tab
 >    >    - Click the {% icon galaxy_instance %} button at the top-right corner of the preview window
