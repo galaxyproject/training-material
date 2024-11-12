@@ -286,7 +286,16 @@ The following workflow will take the two pseudo-bulk samples (A and B), as well 
 
 # Visualise results
 
+Now that we have our deconvolution results, the next step is to analyse the predictions and determine how accurate our tools are given our reference data. Since our pseudo-subjects **A** and **B** come from the same data, there isn't much point inspecting them both. So for the rest of the tutorial we will just focus our analysis on subject **A**.
+
+In order to determine if our tools have produced accurate results, we will create various plots and compute different metrics to visualise and quantify the outputs of our tools.
+
 ## Pre-process the output results
+
+Before visualising or inspecting the outputs of the deconvolution tools, we first need to perform some pre-processing. Up until now we have been working with collections in order to perform our evaluations multiple times in parallel. However, for analysing our data collections will be a bit messy and are no longer needed. The following workflow will combine all the collections of the MuSiC and NNLS outputs into two tables:
+
+1. A results table presenting the predicted and actual proportion values of each cell-type for each subsample
+2. An error table showing the difference between the actual and predicted values. This table will be used shortly for a plot representing the tool errors.
 
 > <hands-on-title>Run visualisation pre-processing workflow</hands-on-title>
 >
