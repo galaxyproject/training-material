@@ -79,7 +79,55 @@ First we need to create a new history in Galaxy and load in our single-cell data
 >
 {: .hands_on}
 
+## Inspect single-cell data
 
+Before continuing lets quickly inspect our single-cell data. We can find all of the cell types present in the data alongside their proportions by using the count tool to count the occurrence of each cell type category in the metadata file.
+
+> <hands-on-title>Get cell counts</hands-on-title>
+>
+> 1. {% tool [Count](Count1) %} with the following parameters:
+>    - {% icon param-file %} *"from dataset"*: `EMTABesethealthy.phenotype.tabular`
+>    - *"Count occurrences of values in column(s)"*: `Column 5`
+>    - *"Delimited by"*: `Tab`
+>    - *"How should the results be sorted?"*: `With the most common value first`
+>
+> 2. **Rename** {% icon galaxy-pencil %} output `Cell Type Counts`
+>
+{: .hands_on}
+
+We can see from the output table below, there are various cell types present in the data. Note that many of the cell types have very low proportion values, this should be kept in mind later on as cell types that appear only a hand full of times (or even just once!) in the data may not be very useful and only add noise. 
+
+| Cell Type               | Count |
+|-------------------------|-------|
+| alpha                   | 443   |
+| beta                    | 171   |
+| ductal                  | 135   |
+| acinar                  | 112   |
+| gamma                   | 75    |
+| delta                   | 59    |
+| unclassified endocrine  | 29    |
+| co-expression           | 26    |
+| PSC                     | 23    |
+| endothelial             | 13    |
+| epsilon                 | 5     |
+| mast                    | 4     |
+| unclassified            | 1     |
+| MHC class II            | 1     |
+
+> <question-title>Inspecting the single-cell data</question-title>
+>
+> 1. How many cells are in the single-cell data?
+> 2. How many cell types are present in the data?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Inspecting the general information of `EMTABesethealthy.expression.tabular` we can see that there are **1,097** cells in the data as there are 1,098 columns (subtracting 1 for the header).
+columns (minus 1 for the header), with each column being a cell.
+> > 2. Looking at the output of the {% tool [Count](Count1) %} tool (or the above table), there are **14** distinct cell types in the data.
+> >
+> {: .solution}
+>
+{: .question}
 
 # Process single-cell data
 
@@ -296,37 +344,6 @@ Need to identify the list of cells first before running the second workflow, thi
 ## Plot Violin plots of the error
 
 Next we will plot the distribution of errors between the predicted and actual cellular proportions for a select number of cell types. We could plot all cell types in the output, however too many will cause the visualisations to be messy and difficult to interpret.
-
-> <hands-on-title>Get cell counts</hands-on-title>
->
-> 1. {% tool [Count](Count1) %} with the following parameters:
->    - {% icon param-file %} *"from dataset"*: `EMTABesethealthy.phenotype.tabular`
->    - *"Count occurrences of values in column(s)"*: `Column 5`
->    - *"Delimited by"*: `Tab`
->    - *"How should the results be sorted?"*: `With the most common value first`
->
-> 2. **Rename** {% icon galaxy-pencil %} output `Cell Type Counts`
->
-{: .hands_on}
-
-Run Counts on the original metadata file and sort by most frequent:
-
-| Cell Type               | Count |
-|-------------------------|-------|
-| alpha                   | 443   |
-| beta                    | 171   |
-| ductal                  | 135   |
-| acinar                  | 112   |
-| gamma                   | 75    |
-| delta                   | 59    |
-| unclassified endocrine  | 29    |
-| co-expression           | 26    |
-| PSC                     | 23    |
-| endothelial             | 13    |
-| epsilon                 | 5     |
-| mast                    | 4     |
-| unclassified            | 1     |
-| MHC class II            | 1     |
 
 We can see that most cell types have very low proportions, so for this visualisation we will only look at 5 cell types with the highest proportion values. For the above table these cell types are: `alpha, beta, gamma, ductal, acinar`. Before we visualise the data we first need to extract only these cell types from the error table.
 
