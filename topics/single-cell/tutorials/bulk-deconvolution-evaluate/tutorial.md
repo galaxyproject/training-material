@@ -48,7 +48,7 @@ In this tutorial we will be using single-cell data with known cell-type proporti
 >
 {: .agenda}
 
-# Get single-cell data
+# Get the single-cell data
 
 First we need to create a new history in Galaxy and load in our single-cell data. We are going to use the single-cell dataset from a previous deconvolution tutorial found here: [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html).
 
@@ -79,7 +79,7 @@ First we need to create a new history in Galaxy and load in our single-cell data
 >
 {: .hands_on}
 
-## Inspect single-cell data
+## Inspecting the single-cell data
 
 Before continuing lets quickly inspect our single-cell data. We can find all of the cell types present in the data alongside their proportions by using the count tool to count the occurrence of each cell type category in the metadata file.
 
@@ -129,13 +129,13 @@ columns (minus 1 for the header), with each column being a cell.
 >
 {: .question}
 
-# Process single-cell data
+# Process the single-cell data
 
 In order to get a good understanding of the accuracy of our deconvolution tools, we are going to run our evaluations multiple times. This is to ensure that a single good or bad evaluation doesn't become indicative of the overall tool's performance.
 
 However, instead of running all of our tools multiple times for each evaluation (which would be quite time consuming!), we will leverage "batch computation" in Galaxy. By storing our data in collections, any tools or workflows that use with that data will run individually for each element in the collection. We will now perform some pre-processing of our data to get it into the right format.
 
-## Transpose Expression Matrix
+## Transpose expression matrix
 
 If we inspect the expression data file downloaded earlier, we can see that currently the rows represent genes and columns represent cells. However, this needs to be swapped for the later workflows. To fix this we will transpose the expression matrix.
 
@@ -148,7 +148,7 @@ If we inspect the expression data file downloaded earlier, we can see that curre
 >
 {: .hands_on}
 
-## Generate Batch Mode Collections
+## Generate batch mode collections
 
 For this tutorial we will run the evaluations **20** times, this will both help improve the sample size and allow us to determine the consistency of the tools, whilst being small enough to run in a reasonable amount of time!
 
@@ -170,7 +170,7 @@ We will now duplicate our single-cell data 20 times and store it in a collection
 >
 {: .hands_on}
 
-## Generate Expression Set Objects
+## Generate expression set objects
 
 Next we will need to use the single-cell data to build and expression set object, this will be used later in the evaluation when we perform the actual deconvolution. 
 
@@ -231,7 +231,7 @@ We are now going to run our first workflow! This workflow will extract a subsamp
 
 Need to identify the list of cells first before running the second workflow, this can be done by looking at the cell type counts output. For this tutorial we will use all of the cell types as this will be the most realistic scenario. However, cell types with counts below a threshold value (e.g. 10) can be removed.
 
-# Perform Deconvolution on the Pseudo-Bulk Data
+# Perform deconvolution on the pseudo-bulk data
 
 > <hands-on-title>Run inferring cellular proportions workflow</hands-on-title>
 >
@@ -257,7 +257,7 @@ Need to identify the list of cells first before running the second workflow, thi
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
-# Visualise Results
+# Visualise results
 
 ## Pre-process the output results
 
@@ -341,7 +341,7 @@ Need to identify the list of cells first before running the second workflow, thi
 {: .question}
 
 
-## Plot Violin plots of the error
+## Plot violin plots of the errors
 
 Next we will plot the distribution of errors between the predicted and actual cellular proportions for a select number of cell types. We could plot all cell types in the output, however too many will cause the visualisations to be messy and difficult to interpret.
 
@@ -422,7 +422,7 @@ We can see that most cell types have very low proportions, so for this visualisa
 {: .question}
 
 
-# Compute Accuracy Metrics
+# Compute accuracy metrics
 
 Visualisations are a great tool for getting an intuitive overview of the data. However, some of the interpretations from visualisations can be subjective. Having quantitative results alongside visualisations can offer concrete and precise values about the data that can more easily be compared. We will use two different quantitative metrics in this tutorial; Pearson correlation and RMSE.
 
@@ -458,7 +458,7 @@ Where
 - `ŷ` = predicted proportion
 
 
-## Compute Metrics
+## Compute metrics
 
 With a basic understanding of some useful metrics, we will now compute these to get quantitative values alongside our visualisation results. The following workflow needs to be run for both the MuSiC and NNLS results table.
 
