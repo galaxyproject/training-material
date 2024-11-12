@@ -50,7 +50,7 @@ In this tutorial we will be using single-cell data with known cell-type proporti
 
 # Get single-cell data
 
-First we need to create a new history in Galaxy and load our single-cell data We are going to use the single-cell dataset found in a previous deconvolution tutorial [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html).
+First we need to create a new history in Galaxy and load in our single-cell data. We are going to use the single-cell dataset from a previous deconvolution tutorial found here: [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -69,9 +69,7 @@ First we need to create a new history in Galaxy and load our single-cell data We
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
->
-> 4. Check the datatype
+> 4. Check the datatypes are `tabular`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
