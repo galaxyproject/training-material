@@ -238,7 +238,23 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
-The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B.
+The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B. If you inspect one of the elements in the `Actual Cell Proportions` collection, you should see a table similar to the following:
+(**Note:** your cell-types and values will differ slightly since these subtypes are random)
+
+|                         | A_actual   |
+|-------------------------|------------|
+| acinar                  | 0.090000   |
+| alpha                   | 0.415000   |
+| beta                    | 0.170000   |
+| co-expression           | 0.050000   |
+| delta                   | 0.070000   |
+| ductal                  | 0.105000   |
+| endothelial             | 0.015000   |
+| gamma                   | 0.050000   |
+| mast                    | 0.010000   |
+| unclassified endocrine  | 0.025000   |
+
+Comparing the above table with the cell-type counts of the original single-cell data, does this look correct? Well the top 3 cell-types with the highest proportion in the single-cell data are: alpha, beta, ductal. Which aligns with the proportion values of the above data! There may be some variance due to the randomly selected cells. Also note that some of the lesser common cell types (like `MHC class II`) aren't present in the above table, again this is due to the 200 randomly selected cells for this specific sample and isn't of concern.
 
 # Perform deconvolution on the pseudo-bulk data
 
