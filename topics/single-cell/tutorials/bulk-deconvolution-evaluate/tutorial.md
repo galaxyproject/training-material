@@ -35,9 +35,9 @@ follow_up_training:
 
 ---
 
-There are various methods to estimate the proportions of cell types in bulk RNA data. Since the actual proportions of the data are unknown, how do we know if our tools are producing accurate results?
+There are various methods to estimate the proportions of cell types in bulk RNA data. Since the actual cell proportions of the data are unknown, how do we know if our tools are producing accurate results?
 
-In this tutorial we will be using single-cell data with known cell proportions in order to create' pseudo' bulk RNA data. We will then estimate the proportions of this this pseudo-bulk data using the currently available deconvolution tools within Galaxy. Since we know the true proportions values, we will be able to measure and compare the accuracy of the tools.
+In this tutorial we will be using single-cell data with known cell-type proportions in order to create pseudo-bulk RNA data. We will then estimate the cell-type proportions of this pseudo-bulk data using the currently available deconvolution tools within Galaxy. Since we know the true proportions values, we will be able to measure and compare the accuracy of the tools.
 
 > <agenda-title></agenda-title>
 >
