@@ -331,6 +331,8 @@ But this is only a small sample of the results. Lets create some visualisations 
 
 ## Plot scatter plots of the results
 
+The first type of visualisation we will do is a scatter plot. This plot will compare the actual and predicted proportion values for each cell across each subsample. We will also colour each point on the plot to indicate which cell type each data point belongs to. Let's do that now for both the MuSiC and NNLS results.
+
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
 > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
