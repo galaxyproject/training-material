@@ -1576,7 +1576,7 @@ We can now run **DESeq2**:
 {: .hands_on}
 
 </div>
-<div class="Collection split" markdown="1">
+<div class="Collection-split" markdown="1">
 
 DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use patterns on the name of our samples to easily select all samples belonging to the same category.
 
