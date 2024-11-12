@@ -12,7 +12,7 @@ objectives:
 - Use image analysis tools to detect and quantify mitoflashes.
 time_estimation: 1H
 key_points:
-- Mitoflashes are superoxide burst events in mitochondria that signal functional states and stress responses.
+- Mitoflashes are superoxide events in mitochondria that signal functional states and stress responses.
 - Bioinformatics tools can facilitate the visualization, tracking, and quantitative analysis of these events.
 - Proper tracking and analysis of mitoflashes contribute to understanding mitochondrial behavior and health in cells.
 
@@ -25,13 +25,13 @@ contributions:
 
 # Introduction
 
-Mitochondria act like fuel stations for the cell, supplying the energy needed to keep it functioning and healthy. During certain activities, they can produce bursts of superoxide, known as 'mitoflashes.' These short, intense events occur in individual mitochondria and can be observed in live heart cells and other cell types using a confocal microscope. Commonly detected with a mitochondria-targeted circularly permuted fluorescent protein (mt-cpYFP), mitoflashes provide real-time insights into mitochondrial respiration function in situ and act as a biosensor for superoxide levels, reflecting the activity of the mitochondrial electron transport chain.
+Mitochondria act like fuel stations for the cell, supplying the energy needed to keep it functioning and healthy. During certain activities, they can produce bursts of **superoxide**, known as '***mitoflashes**.' These short, intense events occur in individual mitochondria and can be observed in cardiomyocytes, skeletal muscle, hippocampal neurons, chondrocytes, isolated mitochondria and among other types of eukaryotic cells using confocal microscopy. Commonly detected with a mitochondria-targeted circularly permuted fluorescent protein (mt-cpYFP), mitoflashes provide real-time insights into mitochondrial respiration function in situ and act as a biosensor for superoxide levels, reflecting the activity of the mitochondrial electron transport chain.
 
-Mitoflashes are triggered by an increase in basal reactive oxygen species (ROS) levels in mitochondria. This burst event activates the mitochondrial permeability transition pore (mPTP), causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix. Although mitoflashes can indicate changes in ROS, they do not precisely quantify ROS levels. These events can reveal active mitochondria from static ones, becoming mitoflashes great biomarkers for tracking mitochondrial health and function.
+Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels and various physiological and stress-related signals including: fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand). Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mitochondrial permeability transition pore (mPTP), causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix. While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.
 
 The frequency and kinetics of mitoflashes hold significant physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell.
 
-In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using specialized Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
+In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect ***mitoflashes*** using specialized Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
 
 > <agenda-title></agenda-title>
 >
