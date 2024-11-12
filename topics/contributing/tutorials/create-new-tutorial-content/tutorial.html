@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@522b0655ebcf5b29dd74eefc12d8082647d67f7b",
+		release: "galaxy-training-network@b850c27d0d15dfe841e6588cf5cfe238241a4f16",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating content in Markdown">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-11-08 13:22:39 +0000">
+<meta name="DC.date" content="2024-11-12 16:19:36 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-11-08 13:22:39 +0000",
+  "dateModified": "2024-11-12 16:19:36 +0000",
   "datePublished": "2017-06-25 22:36:01 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -272,7 +272,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creating content in Markdown",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html",
-  "version": 82,
+  "version": 83,
   "timeRequired": "PT15M",
   "teaches": "- Create hands-on\n- Use the different boxes",
   "keywords": [
@@ -1003,7 +1003,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 25, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 8, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 12, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1021,7 +1021,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 82 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 83 </div>
 
     </blockquote>
     </section>
@@ -10709,7 +10709,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-markdown-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Markdown</div>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados"
        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
 </code></pre></div>  </div>
 </blockquote>
@@ -10723,8 +10723,8 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 	</p>
 	
 	
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="Ananas" onclick="cyoaChoice('Ananas', 'gtn-cyoa')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">Ananas</label>
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Ananas-of-course" onclick="cyoaChoice('Ananas-of-course', 'gtn-cyoa')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Ananas of course</label>
 	
 	
 		<input id="cyoa-opt2" type="radio" name="cyoa" value="Avocados" onclick="cyoaChoice('Avocados', 'gtn-cyoa')" />
@@ -10749,14 +10749,14 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 	
 </blockquote>
 
-<p>And then they can wrap the relevant sections with a <code class="language-plaintext highlighter-rouge">div</code> block with the relevant class. You <strong>must</strong> set <code class="language-plaintext highlighter-rouge">markdown="1"</code> as well to have the inner contents rendered corretly.</p>
+<p>And then they can wrap the relevant sections with a <code class="language-plaintext highlighter-rouge">div</code> block with the relevant class (if you have space in your option, use <code class="language-plaintext highlighter-rouge">-</code> in the class). You <strong>must</strong> set <code class="language-plaintext highlighter-rouge">markdown="1"</code> as well to have the inner contents rendered corretly.</p>
 
 <p><strong>NB</strong>: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user’s browser generally will remember which button was selected across navigation and page reloads.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
     <div class="box-title code-in-title" id="code-in-markdown-3"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Markdown</div>
-    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="Ananas" markdown="1"&gt;
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;div class="Ananas-of-course" markdown="1"&gt;
 - 🍍 are fantastic
 - hands on!
 - questions!
@@ -10775,7 +10775,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   <blockquote class="code-out">
     <div class="box-title code-out-title" id="code-out-4"><i class="fas fa-laptop-code" aria-hidden="true" ></i> Output</div>
 
-    <div class="Ananas">
+    <div class="Ananas-of-course">
       <ul>
         <li>🍍 are fantastic</li>
         <li>hands on!</li>
@@ -10795,7 +10795,7 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   </blockquote>
 </blockquote>
 
-<p>This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.</p>
+<p>This can also be used inline: My favourite fruit is an <span class="Ananas-of-course">🍍</span><span class="Avocados">🥑</span>.</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-multiple-disconnected-cyoas"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-multiple-disconnected-cyoas" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Multiple, Disconnected CYOAs</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -11799,7 +11799,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/522b0655ebcf5b29dd74eefc12d8082647d67f7b">522b065</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/b850c27d0d15dfe841e6588cf5cfe238241a4f16">b850c27</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
