@@ -314,6 +314,21 @@ Before visualising or inspecting the outputs of the deconvolution tools, we firs
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
 
+The following table shows a snippet of the `Results Table` for the MuSiC tool. A header has been added for better reading but has been omitted in the workflow output as it will interfere with the visualisation tools. Another reminder that the output in this tutorial will differ to your own since random cells were selected for the subsamples!
+
+| Cell Type      | Actual Proportion   | Predicted Proportion   |
+|----------------|---------------------|------------------------|
+| acinar         | 0.090000            | 0.0814442584577275     |
+| alpha          | 0.415000            | 0.427718807911522      |
+| beta           | 0.170000            | 0.256954867012044      |
+| co-expression  | 0.050000            | 0                      |
+| delta          | 0.070000            | 0.0929840465107452     |
+| ...            | ...                 | ...                    |
+
+Already at first glance we can see some interesting results! Firstly we can see that the tool is able to make predictions close to the actual values such as with acinar, alpha, delta. We also see the tool failing to make any type of prediction for co-expression cells with a predicted proportion value of 0. This however isn't a compete surprise since co-expression cells are of small proportion in the bulk and reference data. 
+
+But this is only a small sample of the results. Lets create some visualisations to see the whole picture!
+
 ## Plot scatter plots of the results
 
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
