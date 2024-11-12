@@ -1,7 +1,7 @@
 ---
 layout: event-external
 google_form_id: 1731347547
-title: 'Galaxy at  Congresso Brasileiro de Biologia Evolutiva '
+title: 'Galaxy at  Congresso Brasileiro de Biologia Evolutiva'
 description: A whole day training event highlighting various aspects of Galaxy functionality.
 external: No page
 contributions:
