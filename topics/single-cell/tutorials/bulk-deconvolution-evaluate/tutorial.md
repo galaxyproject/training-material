@@ -258,7 +258,9 @@ Comparing the above table with the cell-type counts of the original single-cell 
 
 # Perform deconvolution on the pseudo-bulk data
 
-Now that we have our pseudo-bulk data along-side 
+Now that we have our pseudo-bulk data alongside the actual proportion values. Our next step is to run deconvolution to get predicted cell-type proportions! Currently, Galaxy contains two tools for performing deconvolution: **MuSiC** and **NNLS**. We will use both of these tools in this tutorial and compare their results together.
+
+The following workflow will take the two pseudo-bulk samples (A and B), as well as the original single-cell data as reference and output the deconvolution results for both samples and deconvolution methods. Thus producing 4 output collections. The pdf results of the deconvolution tools will also be outputted from the workflow but won't be needed for the tutorial.
 
 > <hands-on-title>Run inferring cellular proportions workflow</hands-on-title>
 >
@@ -280,8 +282,6 @@ Now that we have our pseudo-bulk data along-side
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 > 3. Rename output collections / add tags?
->
-> 4. Inspect `cell type counts`
 {: .hands_on}
 
 # Visualise results
