@@ -447,7 +447,7 @@ Where
 
 With a basic understanding of some useful metrics, we will now compute these to get quantitative values alongside our visualisation results. The following workflow needs to be run for both the MuSiC and NNLS results table.
 
-> <hands-on-title>Run visualisation workflow</hands-on-title>
+> <hands-on-title>Run metrics workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
@@ -455,10 +455,10 @@ With a basic understanding of some useful metrics, we will now compute these to 
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
-> 2. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+> 2. Run **Workflow compute metrics** {% icon workflow %} using the following parameters:
 >    - {% icon param-collection %} *"Cell Proportions"*: `Music Results`
 >
-> 3. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
+> 3. Run **Workflow compute metrics** {% icon workflow %} using the following parameters:
 >    - {% icon param-collection %} *"Cell Proportions"*: `NNLS Results`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
