@@ -204,16 +204,23 @@ Similar to the expression data, this ExpressionSet object needs to be duplicated
 
 # Create pseudo-bulk and actual cell proportions
 
-We are now going to run our first workflow! This workflow will extract a subsample from the data containing 200 random cells. This data will be used to generate our pseudo-bulk data along with the actual cell proportions used to evaluate/compare with the output of the deconvolutional tools. **Remember** since we have a collection of 20 inputs, the output of this workflow will be 20 subsamples, each with 200 random cells each.
+We are now going to run our first workflow! This workflow will extract a subsample from the data containing 200 random cells. The workflow will then perform two things with this subsample:
 
-> <comment-title>Inputting Multiple Datasets</comment-title>
+1. Count the cell types and proportions of the data in order to be used as reference later against the predicted proportion values
+2. Remove the cell types and convert the single-cell data into pseudo-bulk data to be later inputted into the deconvolution tools.
+
+The above will be done twice to emulate multiple "subjects". Since the deconvolution tools will be expecting the bulk-RNA data to comprise of at least 2 subjects (each with their own bulk data). For this tutorial our subjects will simply be called **A** and **B**. However, in the real world these subjects could be different patients, tissue samples, diseased/healthy, etc. 
+
+**Remember** since we have a collection of 20 inputs, the output of this workflow will be a collection of 20 elements, each corresponding to the input elements. Each output will have its own random selection of 200 cells.
+
+> <comment-title>Inputting multiple datasets</comment-title>
 >
 > In order to upload the input collections into the workflow, you first need to set the input type to **Multiple datasets** in the input file selection.
 > 
 > ![Multiple Datasets](../../images/bulk-deconvolution-evaluate/batch-mode.png "Multiple Datasets button in Galaxy")
 {: .comment}
 
-> <hands-on-title>Run pseudobulk and actual proportions workflow</hands-on-title>
+> <hands-on-title>Run pseudo-bulk and actual proportions workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
@@ -231,9 +238,11 @@ We are now going to run our first workflow! This workflow will extract a subsamp
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
-inspect the output of workflow
+The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B.
 
 # Perform deconvolution on the pseudo-bulk data
+
+Now that we have our pseudo-bulk data along-side 
 
 > <hands-on-title>Run inferring cellular proportions workflow</hands-on-title>
 >
