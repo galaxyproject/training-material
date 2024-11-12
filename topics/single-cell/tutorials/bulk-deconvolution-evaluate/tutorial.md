@@ -204,11 +204,13 @@ Similar to the expression data, this ExpressionSet object needs to be duplicated
 
 # Create pseudo-bulk and actual cell proportions
 
-We are now going to run our first workflow! This workflow will extract a subsample from the data containing 200 cells. This data will be used to generate our pseudo-bulk data along with the actual cell proportions used to evaluate/compare with the output of the deconvolutional tools.
+We are now going to run our first workflow! This workflow will extract a subsample from the data containing 200 random cells. This data will be used to generate our pseudo-bulk data along with the actual cell proportions used to evaluate/compare with the output of the deconvolutional tools. **Remember** since we have a collection of 20 inputs, the output of this workflow will be 20 subsamples, each with 200 random cells each.
 
 > <comment-title>Inputting Multiple Datasets</comment-title>
 >
 > In order to upload the input collections into the workflow, you first need to set the input type to **Multiple datasets** in the input file selection.
+> 
+> ![Multiple Datasets](../../images/bulk-deconvolution-evaluate/batch-mode.png "Multiple Datasets button in Galaxy")
 {: .comment}
 
 > <hands-on-title>Run pseudobulk and actual proportions workflow</hands-on-title>
@@ -229,7 +231,7 @@ We are now going to run our first workflow! This workflow will extract a subsamp
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
-Need to identify the list of cells first before running the second workflow, this can be done by looking at the cell type counts output. For this tutorial we will use all of the cell types as this will be the most realistic scenario. However, cell types with counts below a threshold value (e.g. 10) can be removed.
+inspect the output of workflow
 
 # Perform deconvolution on the pseudo-bulk data
 
