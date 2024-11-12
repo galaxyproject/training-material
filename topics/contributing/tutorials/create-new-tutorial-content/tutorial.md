@@ -1186,6 +1186,8 @@ Sometimes you're writing a large tutorial and at one small step there are multip
 
 Include this markdown where you want your user to choose between the multiple paths:
 
+<!-- GTN:IGNORE:041 we cannot tell code samples from text so we get dupe warnings here. -->
+
 > <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```

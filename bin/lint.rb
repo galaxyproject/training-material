@@ -8,6 +8,7 @@ require 'bibtex'
 require 'json'
 require 'citeproc/ruby'
 require 'csl/styles'
+require './_plugins/util'
 
 GTN_HOME = Pathname.new(__dir__).parent.to_s
 # This is our ONE central linting script that handles EVERYTHING.
@@ -814,6 +815,136 @@ module GtnLinter
     end
   end
 
+  def self.cyoa_branches(contents)
+    joined_contents = contents.join("\n")
+    cyoa_branches = joined_contents.scan(/_includes\/cyoa-choices[^%]*%}/m)
+      .map{|cyoa_line| 
+        cyoa_line.gsub(/\n/, ' ') # Remove newlines, want it all one one line.
+          .gsub(/\s+/, ' ') # Collapse multiple whitespace for simplicity
+          .gsub(/_includes\/cyoa-choices.html/, '').gsub(/%}$/, '') # Strip start/end
+          .strip
+          .split('" ') # Split on the end of an option to get the individual option groups
+          .map{|p| p.gsub(/="/, '=').split('=')}.to_h} # convert it into a convenient hash
+    # NOTE: Errors on this line usually mean that folks have used ' instead of " in their CYOA.
+
+
+    # cyoa_branches = 
+    # [{"option1"=>"Quick one tool method",
+    #   "option2"=>"Convert to AnnData object compatible with Filter, Plot, Explore workflow",
+    #   "default"=>"Quick one tool method",
+    #   "text"=>"Choose below if you just want to convert your object quickly or see how it all happens behind the scenes!",
+    #   "disambiguation"=>"seurat2anndata\""},
+    
+    # We use slugify_unsafe to convert it to a slug, now we should check:
+    # 1. Is it unique in the file? No duplicate options?
+    # 2. Is every branch used?
+
+    # Uniqueness:
+    options = cyoa_branches.map{|o| o.select{|k, v| k =~ /option/}.values}.flatten
+    slugified = options.map{|o| [o, unsafe_slugify(o)]}
+    slugified_grouped = slugified.group_by{|before, after| after}
+      .map{|k, pairs| [k, pairs.map{|p| p[0]}]}.to_h
+    
+    errors = []
+    if slugified_grouped.values.any?{|v| v.length > 1}
+      dupes = slugified_grouped.select{|k, v| v.length > 1}
+      msg = "We identified the following duplicate options in your CYOA: "
+      msg += dupes.map do |slug, options|
+        "Options #{options.join(', ')} became the key: #{slug}"
+      end.join("; ")
+
+      errors << ReviewDogEmitter.error(
+        path: @path,
+        idx: 0,
+        match_start: 0,
+        match_end: 1,
+        replacement: nil,
+        message: 'You have non-unique options in your Choose Your Own Adventure. Please ensure that each option is unique in its text. Unfortunately we do not currently support re-using the same option text across differently disambiguated CYOA branches, so, please inform us if this is a requirement for you.' + msg,
+        code: 'GTN:041'
+      )
+    end
+
+    # Missing default
+    cyoa_branches.each do |branch|
+      if branch['default'].nil?
+        errors << ReviewDogEmitter.error(
+          path: @path,
+          idx: 0,
+          match_start: 0,
+          match_end: 1,
+          replacement: nil,
+          message: 'We recommend specifying a default for every branch',
+          code: 'GTN:042'
+        )
+      end
+
+      # Checking default/options correspondence.
+      options = branch.select{|k, v| k =~ /option/}.values
+      if branch.key?("default") && ! options.include?(branch['default'])
+        if options.any?{|o| unsafe_slugify(o) == unsafe_slugify(branch['default'])}
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a corresponding option# for the default: «#{branch['default']}», but this could have been written before we automatically slugified the options. If you like, please consider making your default option match the option text exactly.",
+            code: 'GTN:043'
+          )
+        else
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a corresponding option# for the default: «#{branch['default']}», please ensure the text matches one of the branches.",
+            code: 'GTN:044'
+          )
+        end
+      end
+    end
+
+    # Branch testing.
+    cyoa_branches.each do |branch|
+      options = branch
+        .select{|k, v| k =~ /option/}
+        .values
+
+      # Check for matching lines in the file.
+      options.each do |option|
+        slug_option = unsafe_slugify(option)
+        if !joined_contents.match(/#{slug_option}/)
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a branch for #{option} (#{slug_option}) in the file. Please consider ensuring that all options are used.",
+            code: 'GTN:045'
+          )
+        end
+      end
+    end
+    
+
+
+    # find_matching_texts(contents, />\s*(\*\*\s*[Ss]tep)/) .map do |idx, _text, selected|
+    #   ReviewDogEmitter.error(
+    #     path: @path,
+    #     idx: idx,
+    #     match_start: selected.begin(1),
+    #     match_end: selected.end(1) + 1,
+    #     replacement: nil,
+    #     message: 'This is a non-semantic list which is bad for accessibility and bad for screenreaders. ' \
+    #              'It results in poorly structured HTML and as a result is not allowed.',
+    #     code: 'GTN:035'
+    #   )
+    # end
+    errors
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -843,7 +974,8 @@ module GtnLinter
       *zenodo_api(contents),
       *empty_alt_text(contents),
       *check_bad_trs_link(contents),
-      *nonsemantic_list(contents)
+      *nonsemantic_list(contents),
+      *cyoa_branches(contents)
     ]
   end
 
@@ -994,6 +1126,7 @@ module GtnLinter
   end
 
   def self.format_reviewdog_output(message)
+    return if message.nil? || message.empty?
     return if !@LIMIT_EMITTED_CODES.nil? && !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
 
 
@@ -1052,7 +1185,9 @@ module GtnLinter
   def self.emit_results(results)
     return unless !results.nil? && results.length.positive?
 
-    results.compact.flatten.each { |r| format_reviewdog_output(r) }
+    results.compact.flatten
+      .select{|r| r.is_a? Hash }
+      .each { |r| format_reviewdog_output(r) }
   end
 
   def self.should_ignore(contents)
