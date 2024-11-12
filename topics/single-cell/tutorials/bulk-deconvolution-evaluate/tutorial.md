@@ -373,6 +373,8 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >
 {: .hands_on}
 
+![Scatter plot MuSiC](../../images/bulk-deconvolution-evaluate/scatterplot-music.png "Scatter plot of Music results")
+
 > <question-title>Interpreting the Scatter Plots</question-title>
 >
 > 1. Which method has the most accurate results?
@@ -453,6 +455,8 @@ We can see that most cell types have very low proportions, so for this visualisa
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin Plot - NNLS`
 >
 {: .hands_on}
+
+![Violin plot MuSiC](../../images/bulk-deconvolution-evaluate/violin-music.png "Violin plot of Music results")
 
 > <question-title>Interpreting the Violin Plots</question-title>
 >
