@@ -31,7 +31,7 @@ tags:
 
 Mitochondria act like fuel stations for the cell, supplying the energy needed to keep it functioning and healthy. During certain activities, they can produce bursts of **superoxide**, known as '***mitoflashes**.' These short, intense events occur in individual mitochondria and can be observed in cardiomyocytes, skeletal muscle, hippocampal neurons, chondrocytes, isolated mitochondria and among other types of eukaryotic cells using confocal microscopy. Commonly detected with a mitochondria-targeted circularly permuted fluorescent protein (mt-cpYFP), mitoflashes provide real-time insights into mitochondrial respiration function in situ and act as a biosensor for superoxide levels, reflecting the activity of the mitochondrial electron transport chain.
 
-Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels and various physiological and stress-related signals including: fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand). Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mitochondrial permeability transition pore (mPTP), causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix. While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.
+Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels and various physiological and stress-related signals including fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand). Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mitochondrial permeability transition pore (mPTP), causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix. While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.
 
 The frequency and kinetics of mitoflashes hold significant physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell.
 
@@ -75,7 +75,7 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >    - `mitoflashes_8bit.tif` should be an image tif or tiff file format.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
-> 5. Tag each dataset with a label such as "mitoflash" for easy identification later if you are working multiple images.
+> 5. Tag each dataset with a label such as "mitoflash" for easy identification later if you are working with multiple images.
 >
 {: .hands_on}
 
@@ -92,7 +92,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 >    - **Starting time point** (`frame_1st`): `1` (first frame in the stack)
 >    - **Ending time point** (`frame_end`): `0` (use `0` to process until the last frame)
 >    - **Intensity measurement method** (`typ_intens`): Set to `Smoothed` for a more averaged intensity or `Robust` for resilience to outliers.
->    - **Threshold** (`thres`): A starting value of `10%` of the global maximum intensity is often effective, but increase to `15-20` for higher sensitivity.
+>    - **Threshold** (`thres`): A starting value of `10%` of the global maximum intensity is often effective, but increasing to `15-20%` is possible for higher sensitivity.
 >    - **Gaussian filter sigma** (`ssig`): Use a value around `1` to suppress noise; increase to `1.5` if noise is high.
 >    - **Boundary pixels** (`bndy`): Set to `10` to ignore spots within the image edges, adjusting as needed for image size.
 >    This tool detects mitochondria as spots or 'mitoflashes' based on intensity maxima, identifying them as distinct regions. Adjusting the threshold parameter can improve the accuracy of spot detection, allowing for better identification of mitoflash events.
