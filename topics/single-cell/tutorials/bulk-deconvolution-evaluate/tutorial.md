@@ -131,9 +131,9 @@ columns (minus 1 for the header), with each column being a cell.
 
 # Process the single-cell data
 
-In order to get a good understanding of the accuracy of our deconvolution tools, we are going to run our evaluations multiple times. This is to ensure that a single good or bad evaluation doesn't become indicative of the overall tool's performance.
+In order to get a good understanding of the accuracy of our deconvolution tools, we are going to run our evaluations multiple times. This approach ensures that a single good or bad evaluation does not disproportionately represent the tool's overall performance.
 
-However, instead of running all of our tools multiple times for each evaluation (which would be quite time consuming!), we will leverage "batch computation" in Galaxy. By storing our data in collections, any tools or workflows that use with that data will run individually for each element in the collection. We will now perform some pre-processing of our data to get it into the right format.
+However, instead of running all of our tools multiple times for each evaluation (which would be quite time consuming!), we will leverage "batch computation" in Galaxy. By storing our data in collections, any tools or workflows that use those collections will automatically run multiple times (once for each element in the collection). We will now perform some pre-processing of our data to get it into the right format.
 
 ## Transpose expression matrix
 
@@ -172,7 +172,7 @@ We will now duplicate our single-cell data 20 times and store it in a collection
 
 ## Generate expression set objects
 
-Next we will need to use the single-cell data to build and expression set object, this will be used later in the evaluation when we perform the actual deconvolution. 
+Next we will need to use the single-cell data to build an expression set object, this will be used later in the evaluation when we perform the actual deconvolution. 
 
 **Note: We are using the original imported data here, not the transposed data or collections.**
 
