@@ -88,7 +88,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 > <hands-on-title>Detecting Mitochondrial Regions</hands-on-title>
 >
 > 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1) %} with the following recommended parameters:
->    - {% icon param-file %} *"Image input"*: `Mitochondrial_Flashes.tiff`
+>    - {% icon param-file %} *"Image input"*: `mitoflashes_8bit.tiff`
 >    - **Starting time point** (`frame_1st`): `1` (first frame in the stack)
 >    - **Ending time point** (`frame_end`): `0` (use `0` to process until the last frame)
 >    - **Intensity measurement method** (`typ_intens`): Set to `Smoothed` for a more averaged intensity or `Robust` for resilience to outliers.
