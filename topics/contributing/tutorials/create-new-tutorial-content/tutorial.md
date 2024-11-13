@@ -13,7 +13,8 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
-subtopic: writing
+subtopic: getting-started
+priority: 4
 contributions:
   authorship:
   - bebatut
@@ -1188,20 +1189,20 @@ Include this markdown where you want your user to choose between the multiple pa
 > <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```
-> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+> {% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados"
 >        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
 > ```
 {: .code-in}
 
-{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+{% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
 
-And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+And then they can wrap the relevant sections with a `div` block with the relevant class (if you have space in your option, use `-` in the class). You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
 
 **NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
 
 > > <code-in-title>Markdown</code-in-title>
 > > ```
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1219,7 +1220,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 >
 > > <code-out-title></code-out-title>
 > >
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1235,7 +1236,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > {: .code-out}
 {: .code-2col}
 
-This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+This can also be used inline: My favourite fruit is an <span class="Ananas-of-course">🍍</span><span class="Avocados">🥑</span>.
 
 > <tip-title>Multiple, Disconnected CYOAs</tip-title>
 > If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:

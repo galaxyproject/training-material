@@ -59,10 +59,10 @@ To create a table for a community, you first need to create a new folder in the 
 > <hands-on-title>Create a folder for your community</hands-on-title>
 >
 > 1. If not already done, fork the [Galaxy Codex repository](https://github.com/galaxyproject/galaxy_codex) 
-> 2. Go to the `data/communities` folder
+> 2. Go to the `communities` folder
 > 3. Click on **Add file** in the drop-down menu at the top
 > 4. Select **Create a new file**
-> 5. Fill in the `Name of your file` field with:  name of your community + `/categories`
+> 5. Fill in the `Name of your file` field with:  name of your community + `metadata/categories`
 >
 >    This will create a new folder for your community and add a categories file to this folder.
 > 
@@ -100,52 +100,45 @@ Once you have a list of the ToolShed categories that you wish to keep, you can s
 
 The Pull Request will be reviewed. Make sure to respond to any feedback. 
 
-Once the Pull Request is merged, the interactive table will be created and made available online at `https://galaxyproject.github.io/galaxy_codex/<your community>`.
+Once the Pull Request is merged, a table with all tool suites and a short description will be created in `communities/<your community>/resources/tools_filtered_by_ts_categories.tsv`
 
-# Review the generated interactive table
+# Review the generated table to curate tools
 
-The interactive table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
+The generated table will contain all the tools associated with the ToolShed categories that you selected. However, not all of these tools might be interesting for your community. 
 
-Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you !).
+Galaxy Codex allows for an additional optional filter for tools, that can be defined by the community curator (maybe that is you!).
 
-The additional filter must be stored in a file called  `tools_status.tsv` located in `data/community/<your community>`. The file must include 3 columns (without header):
-1. The `Galaxy wrapper id` corresponding to the IDs in the `tools.tsv` file in `results/<your community>`. 
-2. Whether the tool should be included in the final table (TRUE/FALSE). 
-3. Whether the tool is deprecated (TRUE/FALSE).
+The additional filter must be stored in a file called `tools_status.tsv` located in `communities/<your community>/metadata`. The file must include at least 3 columns (with a header):
+1. `Suite ID`
+2. `To keep` indicating whether the tool should be included in the final table (TRUE/FALSE). 
+3. `Deprecated` indicating whether the tool is deprecated (TRUE/FALSE).
 
 Example of the `tools_status.tsv` file:
 ```
+	To keep	Deprecated
 abacas	TRUE	FALSE
 abricate	TRUE	FALSE
 abritamr	TRUE	FALSE
 ```
 
-Have a look on the [microGalaxy tool stats TSV](https://github.com/galaxyproject/galaxy_codex/blob/main/data/communities/microgalaxy/tool_status.tsv) for 
-an example of the file that is used to manually filter the tools for a community.
-
-## Add a tools status list 
+To generate this file, we recommend you to use the `tools_filtered_by_ts_categories.tsv` file.
 
 > <hands-on-title>Review tools in your community table</hands-on-title>
 >
-> 1. Download the `tools.tsv` file in `results/<your community>`.
-> 2. Open `tools.tsv` with a Spreadsheet Software.
+> 1. Download the `tools_filtered_by_ts_categories.tsv` file in `communities/<your community>/resources/`.
+> 2. Open `tools.tsv` with a Spreadsheet Software
 > 3. Review each line corresponding to a tool
-       
-       You can also just review some tools. Those tools that are not reviewed will be have `FALSE` in the `Reviewed` columns the updated table.
->    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
->    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
->    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
-> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` column in a new table (in that order).
-
-       This can also be done using the reference function of your Spreadsheet Software.
-> 5. Export the new table as TSV (without header).
-> 6. Submit the TSV as `tools_status.tsv` in your community folder.
+>
+>    1. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
+>    2. Add `TRUE` or `FALSE` also to the `Deprecated` column.
+>
+> 5. Export the new table as TSV
+> 6. Submit the TSV as `tools_status.tsv` in your `communities/<your community>/metadata/` folder.
 > 7. Wait for the Pull Request to be merged
 >
 {: .hands_on}
 
-You should have now an interactive table reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the `tools_status.tsv` file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.
-
+Once merged, a `curated_tools.tsv` file will be generated in `communities/<your community>/resources/` folder reflecting the Galaxy tool landscape for your community. You can step-by-step review all tools in your community and update the `tools_status.tsv` file. You could also share this file with your community members and discuss weather the tool should be kept or not. Collaborative work could be established using google spreadsheet.
 
 # Embed the interactive table in your community page on the Hub
 

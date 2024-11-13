@@ -30,6 +30,8 @@ contributions:
   authorship:
     - rlibouba
     - abretaud
+  editing:
+    - felicitas215
   funding:
     - eurosciencegateway
 abbreviations:
@@ -67,7 +69,7 @@ In this tutorial, you'll learn how to perform a structural annotation of the gen
 
 To annotate our genome using Helixer, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}) and already masked for you using RepeatMasker.
+- The **genome sequence** in fasta format. For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}). (Note: Helixer will ignore soft-masking. Hard-masking is not recommnded for Helixer either, as it does not ignore the hard-masked regions, but will get less information from them, which could influence your predictions in a negative way.)
 
 > <hands-on-title>Data upload</hands-on-title>
 >
@@ -170,7 +172,7 @@ We want to run BUSCO on the protein sequences predicted from gene sequences of t
 >    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: output of {% tool [Helixer](toolshed.g2.bx.psu.edu/repos/genouest/helixer/helixer/0.3.3+galaxy1)) %}
 >    - In *"Reference Genome"* select: `From your history` (Input dataset)
 >    - *"Genome Reference Fasta"*: `masked genome` (Input dataset)
->    - In *"Select fasta outputs"* select: `fasta file with spliced exons for each GFF transcript (-y)`
+>    - In *"Select fasta outputs"* select: `protein fasta file with the translation of CDS for each record (-y)`
 >    - *"full GFF attribute preservation (all attributes are shown)"*: `Yes`
 >    - *"decode url encoded characters within attributes"*: `Yes`
 >    - *"warn about duplicate transcript IDs and other potential problems with the given GFF/GTF records"*: `Yes`

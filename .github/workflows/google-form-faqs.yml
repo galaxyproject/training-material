@@ -15,6 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
@@ -48,6 +49,6 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           commit-message: Import FAQs from Google Form
-          branch-suffix: timestamp
           title: "[Google Form] New FAQ!"
+          branch: google-form/faq
           add-paths: faqs/

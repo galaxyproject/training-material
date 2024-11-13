@@ -730,6 +730,13 @@ module TopicFilter
                                       []
                                     end
 
+    page_obj['supported_servers_matrix'] = if topic['type'] == 'use' || topic['type'] == 'basics'
+      Gtn::Supported.calculate_matrix(site.data['public-server-tools'], page_obj['tools'])
+    else
+      []
+    end
+
+
     topic_name_human = site.data[page_obj['topic_name']]['title']
     page_obj['topic_name_human'] = topic_name_human # TODO: rename 'topic_name' and 'topic_name' to 'topic_id'
     admin_install = Gtn::Toolshed.format_admin_install(site.data['toolshed-revisions'], page_obj['tools'],
@@ -889,13 +896,16 @@ module TopicFilter
   # Parameters:
   # +materials+:: An array of materials
   # Returns:
-  # +Array+:: An array of contributors as strings.
+  # +Array+:: An array of individual contributors as strings.
   def self.identify_contributors(materials, site)
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
-      .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
-      .reject { |c| Gtn::Contributors.funder?(site, c) }
+      .map { |mat| Gtn::Contributors.get_contributors(mat) }
+      .flatten
+      .select { |c| Gtn::Contributors.person?(site, c) }
+      .uniq
+      .shuffle
   end
 
   ##
@@ -903,13 +913,15 @@ module TopicFilter
   # Parameters:
   # +materials+:: An array of materials
   # Returns:
-  # +Array+:: An array of funders as strings.
-  def self.identify_funders(materials, site)
+  # +Array+:: An array of funder (organisations that provided support) IDs as strings.
+  def self.identify_funders_and_grants(materials, site)
     materials
       .map { |_k, v| v['materials'] }.flatten
       # Not 100% sure why this flatten is needed? Probably due to the map over hash
-      .map { |mat| Gtn::Contributors.get_contributors(mat) }.flatten.uniq.shuffle
-      .select { |c| Gtn::Contributors.funder?(site, c) }
+      .map { |mat| Gtn::Contributors.get_all_funding(site, mat) }
+      .flatten
+      .uniq
+      .shuffle
   end
 
   ##
@@ -1134,6 +1146,7 @@ module Jekyll
         .list_materials_structured(site, topic_name)
         .map { |k, v| v['materials'] }
         .flatten
+        .uniq { |x| x['id'] }
     end
 
     def list_all_tags(site)
@@ -1153,7 +1166,7 @@ module Jekyll
     end
 
     def identify_funders(materials, site)
-      TopicFilter.identify_funders(materials, site)
+      TopicFilter.identify_funders_and_grants(materials, site)
     end
 
     def list_videos(site)

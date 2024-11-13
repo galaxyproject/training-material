@@ -1,3 +1,5 @@
+require 'yaml'
+
 def safe_load_yaml(file)
   YAML.load_file(file)
 rescue StandardError

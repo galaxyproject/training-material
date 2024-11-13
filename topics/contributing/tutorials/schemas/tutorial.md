@@ -60,6 +60,6 @@ contributors:
 {% assign kid_val = site.data['schema-organisations'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
 
-{% assign kid_key = "Funder Schema" %}
-{% assign kid_val = site.data['schema-funders'] %}
+{% assign kid_key = "Grant Schema" %}
+{% assign kid_val = site.data['schema-grants'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}

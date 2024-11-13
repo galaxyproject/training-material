@@ -40,7 +40,7 @@ key_points:
 tags:
   - 10x
   - paper-replication
-
+  - MIGHTS
 
 contributions:
   authorship:
@@ -114,12 +114,12 @@ You can access the data for this tutorial in multiple ways:
 
 2. **Importing from a history**
     - You can import [this history for usegalaxy.eu](https://usegalaxy.eu/u/j.jakiela/h/combining-datasets-input)
-    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input) 
+    - You can import [this history for usegalaxy.org](https://usegalaxy.org/u/juliajot/h/combining-datasets-input)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
    - If you want to import the history to another Galaxy server, check how to do it below!
-  
+
    {% snippet faqs/galaxy/histories_transfer_entire_histories_from_one_galaxy_server_to_another.md %}
 
 
@@ -131,7 +131,7 @@ You can access the data for this tutorial in multiple ways:
 > 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/records/10852529).
 >
 >    ```
->    {{ page.zenodo_link }}/files/Experimental_Design.tabular.tabular 
+>    {{ page.zenodo_link }}/files/Experimental_Design.tabular.tabular
 >    {{ page.zenodo_link }}/files/N701-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N702-400k-AnnData.h5ad
 >    {{ page.zenodo_link }}/files/N703-400k-AnnData.h5ad
@@ -169,11 +169,11 @@ You can access the data for this tutorial in multiple ways:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k`
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N702 to N707`
-> 
->    <comment-title></comment-title>
->     >If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we're adding in metadata later!
-    {: .comment}
-> 
+>
+>    > <comment-title></comment-title>
+>    > If you imported files from Zenodo instead of using the input history, yours might not be in the same order as ours. Since the files will be concatenated in the order that you click, it will be helpful if you click them in the same order, from N702 to N707. This will ensure your samples are given the same batch numbers as we got in this tutorial, which will help when we're adding in metadata later!
+>    {: .comment}
+>
 >    > <warning-title>Don't add N701!</warning-title>
 >    > You are adding files to N701, so do not add N701 to itself!
 >    {: .warning}

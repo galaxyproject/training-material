@@ -11,7 +11,7 @@ questions:
 objectives:
 - Identify Galaxy tools without bio.tools entry
 - Create a bio.tools entry
-- Update a bio.tools entry 
+- Update a bio.tools entry
 - Add EDAM ontology terms to a bio.tools entry
 - Link a Galaxy tool to its corresponding bio.tools entry
 time_estimation: 1H
@@ -25,7 +25,9 @@ contributions:
     - bebatut
     - supernord
     - paulzierep
-    
+  editing:
+    - nomadscientist
+
 ---
 
 Galaxy offers thousands of tools. Many of these tools either have incomplete metadata or are not yet linked to sources of high-quality metadata such as [bio.tools](https://bio.tools/).
@@ -35,7 +37,7 @@ This prevents filtering for all tools in a specific research community or domain
 [EDAM](https://edamontology.org/page) ({% cite black2021edam %}) is a comprehensive ontology of well-established, familiar concepts that are prevalent within bioscientific data analysis and data management. It includes 4 main sections of concepts (sub-ontologies):
 
 - **Topic**:  A category denoting a rather broad domain or field of interest, of study, application, work, data, or technology. Topics have no clearly defined borders between each other.
-- **Operation**> A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).
+- **Operation**: A function that processes a set of inputs and results in a set of outputs, or associates arguments (inputs) with values (outputs).
 - **Data**: Information, represented in an information artefact (data record) that is "understandable" by dedicated computational tools that can use the data as input or produce it as output.
 - **Format**: A defined way or layout of representing and structuring data in a computer file, blob, string, message, or elsewhere.
 
@@ -102,24 +104,24 @@ Now let's search for our selected tool on bio.tools.
 
 # Create a bio.tools entry for a tool
 
-If the tool is not on bio.tools, we need to create a new entry and populate it with metadata. 
+If the tool is not on bio.tools, we need to create a new entry and populate it with metadata.
 
 > <hands-on-title> Create a bio.tools entry with minimum metadata </hands-on-title>
 >
 > 1. Sign up to [bio.tools](https://bio.tools/)
 > 2. Select **Add a tool** from the drop-down **Menu**
 > 3. Fill in general information in the first tab of the wizard. Required information includes:
->    1. **Tool name** 
+>    1. **Tool name**
 >    2. **Description**
 >    3. **Homepage URL**
 > 4. Add EDAM operation concepts, as well as EDAM data concepts for both inputs and outputs
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_function.md %}
-> 
+>
 > 5. Add EDAM topic concepts
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_topic.md %}
-> 
+>
 > 6. Add the tool type, license, language, and other metadata as needed
 > 7. In the Permissions tab, select **Make this resource editable by anyone**
 > 8. Click on **Validate** on the top
@@ -157,7 +159,7 @@ To modify EDAM terms in a bio.tools entry, we need to request editing rights and
 > 5. Update, or add, EDAM **Operation** term(s) and EDAM **Data** term(s) for both inputs and outputs
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_function.md %}
-> 
+>
 > 6. Update, or add, EDAM **Topic** term(s)
 >    
 >    {% include topics/dev/tutorials/tool-annotation/add_edam_topic.md %}
@@ -188,13 +190,95 @@ To link a Galaxy tool to its corresponding bio.tools entry, we need to first fin
 > 2. Search your tool
 > 3. Expand the row
 > 4. Open the link shown in the `Galaxy wrapper parsed folder` column
-
+>
 {: .hands_on}
 
 Now we have the wrapper, and can add the bio.tools entry.
 
+{% include _includes/cyoa-choices.html option1="Add entry to toolsuite" option2="Add entry to single tool" default="Ideal: Add bio.tools ID to toolsuite" text="How do you want to add the bio.tools entry?" disambiguation="biotool"%}
+
+<div class="Add-entry-to-toolsuite" markdown="1">
+
+> <hands-on-title>Check for an existing xrefs section</hands-on-title>
+>
+> 1. Open the Galaxy tool `macros.xml` file (*If this does not exist*: You have to add the entry to a single tool instead)
+> 2. Check if a `xml name="xrefs"` section exists in this file.
+>
+{: .hands_on}
+
+{% include _includes/cyoa-choices.html option1="Yes, an xrefs section exists" option2="No, an xrefs section does not exist" default="No, an xrefs section does not exist" text="Does an xref section already exist?" disambiguation="biotool"%}
+
+<div class="yes-exists" markdown="1">
+
+> <hands-on-title>Add bio.tools entry to the Galaxy toolsuite</hands-on-title>
+>
+> 1. In the `macros.xml` file, add the following lines into the existing `xrefs` section:
+>    ```
+>      <xrefs>
+>          <xref type="bio.tools">biotool-id</xref>
+>      </xrefs>
+>    ```
+> 2. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
+>
+>    This section should now look a bit like this, but with other xref text inside:
+>    <xml name="xrefs">
+>      <xrefs>
+>          <xref type="other cool stuff">supercool</xref>
+>          <xref type="bio.tools">your-biotool-id</xref>
+>      </xrefs>
+>    </xml>
+>
+> 6. Commit the change on a new branch
+> 7. Make a pull request (PR) against the original repository
+> 8. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 9. Make sure to respond to any feedback from the owner of the wrapper
+>
+{: .hands_on}
+
+</div>
+
+<div class="no-exist" markdown="1">
+
+> <hands-on-title>Add bio.tools entry to the Galaxy toolsuite</hands-on-title>
+>
+> 1. In the `macros.xml` file, add the following lines above any `requirements` sections, such that it does not break an existing block.
+>    ```
+>    <xml name="xrefs">
+>      <xrefs>
+>          <xref type="bio.tools">biotool-id</xref>
+>      </xrefs>
+>    </xml>
+>    ```
+> 2. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
+> 3. Commit the change on a new branch
+> 4. Make a pull request (PR) against the original repository
+> 5. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 6. Make sure to respond to any feedback from the owner of the wrapper
+>
+{: .hands_on}
+
+</div>
+
+Now, we need to make sure that each tool pulls the bio.tools entry from the macro.
+
+> <hands-on-title>Add bio.tools line to each tool</hands-on-title>
+>
+> 1. In **each** tool `.xml` file, add the following line after the `macros` section. Usually, there are other similar lines that also `expand macro` to follow.
+>    ```
+>      <expand macro="xrefs"/>
+>    ```
+> 3. Commit the change on a new branch
+> 4. Make a pull request (PR) against the original repository
+> 5. Wait patiently for the PR to be merged, at which point the new bio.tools reference will be added to the Galaxy tool wrapper
+> 6. Make sure to respond to any feedback from the owner of the wrapper
+>
+{: .hands_on}
+
+
+<div class="Add-entry-to-single-tool" markdown="1">
+
 > <hands-on-title>Add bio.tools entry to the Galaxy wrapper</hands-on-title>
-> 
+>
 > 1. Open the Galaxy tool XML file
 > 2. Add the xref snippet indicated below:
 >
@@ -204,7 +288,7 @@ Now we have the wrapper, and can add the bio.tools entry.
 >    </xrefs>
 >    ```
 >
->    It should appear below the `macros` section and before the `requirements` section. If the tools already defines `xrefs` in the `macro.xml` file. The snipped should be placed there.
+>    It should appear below the `macros` section and before the `requirements` section. If the tools already defines `xrefs` in the `macro.xml` file. The snippet should be placed there.
 >
 > 3. Replace `biotool-id` in the example snippet above with the bio.tools ID for your tool
 > 4. Commit the change on a new branch
@@ -213,5 +297,9 @@ Now we have the wrapper, and can add the bio.tools entry.
 > 7. Make sure to respond to any feedback from the owner of the wrapper
 >
 {: .hands_on}
+
+</div>
+
+</div>
 
 # Conclusion
