@@ -239,6 +239,8 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 > 4. Inspect `cell type counts`
 {: .hands_on}
 
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=cb27f805d076ee9f&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
+
 The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B. If you inspect one of the elements in the `Actual Cell Proportions` collection, you should see a table similar to the following:
 (**Note:** your cell-types and values will differ slightly since these subtypes are random)
 
@@ -285,6 +287,8 @@ The following workflow will take the two pseudo-bulk samples (A and B), as well 
 > 3. Rename output collections / add tags?
 {: .hands_on}
 
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=6a47b42bf753aa3a&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
+
 # Visualise results
 
 Now that we have our deconvolution results, the next step is to analyse the predictions and determine how accurate our tools are given our reference data. Since our pseudo-subjects **A** and **B** come from the same data, there isn't much point inspecting them both. So for the rest of the tutorial we will just focus our analysis on subject **A**.
@@ -314,6 +318,8 @@ Before visualising or inspecting the outputs of the deconvolution tools, we firs
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
+
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=76d3408d0d22ad05&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
 
 The following table shows a snippet of the `Results Table` for the MuSiC tool. A header has been added for better reading but has been omitted in the workflow output as it will interfere with the visualisation tools. Another reminder that the output in this tutorial will differ to your own since random cells were selected for the subsamples!
 
@@ -542,6 +548,8 @@ With a basic understanding of some useful metrics, we will now compute these to 
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
+
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=7caa58e36df6ad03&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
 
 After running the workflow on both the MuSiC and NNLS results we should have the Pearson and RMSE metrics for both tools in various outputs. Below combines these metrics into a single summary table.
 
