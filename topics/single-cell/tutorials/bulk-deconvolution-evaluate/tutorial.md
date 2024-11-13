@@ -598,6 +598,6 @@ The conclusions to draw this analysis, is that our reference data is effective f
 
 # Conclusion
 
-Congratulations! You made it to the end of the tutorial!
+{% icon congratulations %} Congratulations! You made it to the end of the tutorial!
 
 In this tutorial we took some single-cell data with known cell-type proportions, subsampled the data, and converted them to pseudo-bulk data. We then used this pseudo-bulk data to perform deconvolution using the two tools available in Galaxy: MuSiC and NNLS. Using the known cell-type proportions we were able to analyse the predicted proportions to the ground truth in order to determine if the reference data can be used and which tool is the most effective. We used various visualisation and statistical techniques to analyse and quantify the tools accuracy, reliability, and error.
