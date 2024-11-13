@@ -128,7 +128,7 @@ Mitoflashes are identified based on sudden changes in fluorescence intensity in 
 >    - **Penalty**: Choose *Least absolute deviations (LAD)* for robust fitting to intensity fluctuations.
 >    - **Alpha**: Set a significance level, such as `0.01`, to generate assistive curves if needed.
 >
->    This step applies polynomial curve fitting to model intensity fluctuations over time that represent mitoflash events. After running the tool, key parameters to analyze from the output file include:
+>    This step applies polynomial curve fitting to obtain a model of the intensity fluctuations over time. Values which exceed the curve model by the given significance level, are recognized as mitoflash events. After running the tool, key parameters to analyze from the output file include:
 >    - **Amplitude (F/F0)**: The peak value in the **CURVE** or **CURVE_A** column, representing the magnitude of the superoxide burst or intensity change.
 >    - **Tpk (Time to Peak)**: The frame number at which the **CURVE** or **CURVE_A** reaches its maximum value, indicating the speed of the burst.
 >    - **T50 (Duration)**: The number of frames where the **CURVE** or **CURVE_A** values are at least half of the peak value, representing the duration of the mitoflash.
