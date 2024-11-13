@@ -35,7 +35,7 @@ There are third party tools which can help us in making high resolution screensh
 and produce pictures which are suitable for printing and sharing.
 
 {% include _includes/cyoa-choices.html option1="Print" option2="Web" default="Print"
-       text="If you want to print your Galaxy Workflow on a poster, choose \"Print\", otherwise \"Web\" is the better option." %}
+       text="If you want to print your Galaxy Workflow on a poster, choose Print, otherwise Web is the better option." %}
 
 > <agenda-title></agenda-title>
 >

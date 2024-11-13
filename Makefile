@@ -89,9 +89,14 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 preview: serve-codespaces
 .PHONY: serve-codespaces
 
-serve-codespaces: bundle-install bundle-update
+serve-codespaces: codespace-clean bundle-install bundle-update
 	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
 .PHONY: serve-codespaces
+
+codespace-clean:
+	rm -rf /workspaces/.codespaces/shared/editors/jetbrains;
+	rm -f /workspaces/training-material/.git/objects/pack/tmp_pack*
+.PHONY: codespace-clean
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
 	bundle exec jekyll serve --config _config.yml --incremental
