@@ -542,7 +542,7 @@ With a basic understanding of some useful metrics, we will now compute these to 
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
 
-After running the workflow on both the MuSiC and NNLS results we should have the Pearson and RMSE metrics for both tools. The below table summarises these scores.
+After running the workflow on both the MuSiC and NNLS results we should have the Pearson and RMSE metrics for both tools in various outputs. Below combines these metrics into a single summary table.
 
 | Tool  | Pearson Correlation | RMSE  |
 |-------|---------------------|-------|
