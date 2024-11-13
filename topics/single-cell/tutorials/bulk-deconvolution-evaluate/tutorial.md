@@ -402,7 +402,7 @@ The output of this tool should produce a scatter plot that looks like the follow
 
 Next we will plot the distribution of errors between the predicted and actual cellular proportions for a select number of cell types. We could plot all cell types in the output, however too many will cause the visualisations to be messy and difficult to interpret.
 
-We can see that most cell types have very low proportions, so for this visualisation we will only look at 5 cell types with the highest proportion values. For the above table these cell types are: `alpha, beta, gamma, ductal, acinar`. Before we visualise the data we first need to extract only these cell types from the error table.
+We can use the cell-type counts we computed at the beginning of the tutorial to determine the best cell types to use. We will use the top 5 most abundant cell types in the single-cell data being: `alpha, beta, gamma, ductal, acinar`. Before plotting we will extract only these cell types from our table of errors.
 
 > <hands-on-title>Extract Cell Types</hands-on-title>
 >
@@ -427,6 +427,8 @@ We can see that most cell types have very low proportions, so for this visualisa
 > 4. **Rename** {% icon galaxy-pencil %} output `NNLS Errors`
 >
 {: .hands_on}
+
+Now we have our table of errors consisting of only the top 5 cell-types, we can plot the violin plots.
 
 > <hands-on-title>Plot violin plots</hands-on-title>
 >
@@ -457,6 +459,8 @@ We can see that most cell types have very low proportions, so for this visualisa
 > 4. **Rename** {% icon galaxy-pencil %} output `Violin Plot - NNLS`
 >
 {: .hands_on}
+
+The output of this tool will be two violin plots that will look similar to the following. Here we can see the distribution of errors for each cell type. Since we are using normal errors and not absolute or squared errors, we are also able to see whether the tool has under or over estimated the cell type. An ideal plot would be all the violin plots being short and close to 0 indicating that the estimated and actual values are close (resulting in an error close to 0).
 
 ![Violin plot MuSiC](../../images/bulk-deconvolution-evaluate/violin-music.png "Violin plot of Music results")
 
