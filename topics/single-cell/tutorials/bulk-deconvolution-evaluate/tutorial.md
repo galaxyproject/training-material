@@ -551,3 +551,11 @@ After running the workflow on both the MuSiC and NNLS results we should have the
 | NNLS  | 0.954               | 0.037 |
 
 From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a better accuracy with a higher correlation score and lower error compared to NNLS.
+
+The conclusions then to draw from this analysis, is that our reference data is effective for use in deconvolution analysis since both tools were able to have high accuracy and low error scores. We also determined that (for at least this data) the MuSiC tool was the more effective/accurate tool and thus would likely be the more trustworthy when performing deconvolution with this single-cell reference data.
+
+# Conclusion
+
+Congratulations! You made it to the end of the tutorial!
+
+In this tutorial we took some single-cell data with known cell-type proportions, subsampled the data, and converted them to pseudo-bulk data. We then used this pseudo-bulk data to perform deconvolution using the two tools available in Galaxy: MuSiC and NNLS. Using the known cell-type proportions we were able to analyse the predicted proportions to the ground truth in order to determine if the reference data can be used and which tool is the most effective. We used various visualisation and statistical techniques to analyse and quantify the tools accuracy, reliability, and error.
