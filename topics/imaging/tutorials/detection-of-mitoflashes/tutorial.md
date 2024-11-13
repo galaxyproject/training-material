@@ -95,6 +95,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 >    - **Threshold** (`thres`): A starting value of `10%` of the global maximum intensity is often effective, but increasing to `15-20%` is possible for higher sensitivity.
 >    - **Gaussian filter sigma** (`ssig`): Use a value around `1` to suppress noise; increase to `1.5` if noise is high.
 >    - **Boundary pixels** (`bndy`): Set to `10` to ignore spots within the image edges, adjusting as needed for image size.
+>
 >    This tool detects mitochondria as spots or 'mitoflashes' based on intensity maxima, identifying them as distinct regions. Adjusting the threshold parameter can improve the accuracy of spot detection, allowing for better identification of mitoflash events.
 >
 {: .hands_on}
