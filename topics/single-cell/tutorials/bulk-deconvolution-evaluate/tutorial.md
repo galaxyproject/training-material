@@ -373,6 +373,8 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >
 {: .hands_on}
 
+The output of this tool should produce a scatter plot that looks like the following. Each point on the plot represents a cell-type for a specific subsample, so there should be 20 points of each colour (one for each subsample created earlier). Since we are comparing the actual and inferred proportions, the ideal scatter plot would have all of the points be at the `y=x` line. The further the deviations from this ideal the less accurate the tool is. We can also use this plot to determine if the tool is under or over predicting proportion values for each cell-type.
+
 ![Scatter plot MuSiC](../../images/bulk-deconvolution-evaluate/scatterplot-music.png "Scatter plot of Music results")
 
 > <question-title>Interpreting the Scatter Plots</question-title>
