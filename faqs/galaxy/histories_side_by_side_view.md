@@ -11,8 +11,7 @@ You can view multiple Galaxy histories at once. This allows to better understand
 
 1. Enabling Multiview via History menu is done by first clicking on the {% icon galaxy-history-options %} "**History options**" drop-down and selecting {% icon galaxy-multihistory %} "**Show Histories Side-by-Side option**":
 
-  
-  
+   ![Enabling side-by-side view using History Options menu]({% link shared/images/histories_side_by_side_view.svg %})  
 
 2. Clicking the {% icon galaxy-multihistory %} "**History Multiview**" button within the Activity Bar:
 
