@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@87017d5c7066183c765180dd89d8c5bd408f808d",
+		release: "galaxy-training-network@80fe198dc2c42831b7511997657269882e649f6a",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -70,7 +70,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 <meta name="DC.type" content="text">
 <meta name="DC.title" content="Creating content in Markdown">
 <meta name="DC.publisher" content="Galaxy Training Network">
-<meta name="DC.date" content="2024-11-12 16:19:36 +0000">
+<meta name="DC.date" content="2024-11-13 10:55:47 +0000">
 <meta name="DC.creator" content="Bérénice Batut">
 <meta name="DC.creator" content="Helena Rasche"><meta name="description" content="Galaxy is a great solution to train the bioinformatics concepts: numerous bioinformatics tools are available (more than 7,000 in the ToolShed), it can be used by people without any computer science skills, it trains to use technology, outlining available resources and efforts that have made them accessible to researchers, it is scalable. In 2016, the Galaxy Training Network decided to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as always in Galaxy.">
         <meta property="og:site_name" content="Galaxy Training Network">
@@ -191,7 +191,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
   ],
   "creativeWorkStatus": "Active",
-  "dateModified": "2024-11-12 16:19:36 +0000",
+  "dateModified": "2024-11-13 10:55:47 +0000",
   "datePublished": "2017-06-25 22:36:01 +0000",
   "copyrightHolder": {
     "@type": "Organization",
@@ -272,7 +272,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
   "learningResourceType": "e-learning",
   "name": "Creating content in Markdown",
   "url": "https://training.galaxyproject.org/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html",
-  "version": 83,
+  "version": 84,
   "timeRequired": "PT15M",
   "teaches": "- Create hands-on\n- Use the different boxes",
   "keywords": [
@@ -1003,7 +1003,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         </ul>
 
         <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Jun 25, 2017 </div>
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 12, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 13, 2024 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
 		
             Tutorial Content is licensed under
@@ -1021,7 +1021,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
 	
 	
-	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 83 </div>
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 84 </div>
 
     </blockquote>
     </section>
@@ -10706,6 +10706,8 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
 
 <p>Include this markdown where you want your user to choose between the multiple paths:</p>
 
+<!-- GTN:IGNORE:041 we cannot tell code samples from text so we get dupe warnings here. -->
+
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-markdown-2"><i class="far fa-keyboard" aria-hidden="true" ></i> Input: Markdown</div>
 
@@ -10795,6 +10797,21 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   </blockquote>
 </blockquote>
 
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-why-ananas-of-course-name-munging"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-ananas-of-course-name-munging" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Why ananas-of-course? Name munging</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>CYOAs work by filtering the content based on the class name. Class names cannot contain spaces, so, we need to replace all whitespace with <code class="language-plaintext highlighter-rouge">-</code>.
+The exact algorithm we use to create ‘safe’ IDs is:</p>
+
+  <ol>
+    <li>Remove the following character <code class="language-plaintext highlighter-rouge">"</code>, <code class="language-plaintext highlighter-rouge">'</code>, <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">;</code>, <code class="language-plaintext highlighter-rouge">:</code>, <code class="language-plaintext highlighter-rouge">,</code>, <code class="language-plaintext highlighter-rouge">.</code>, <code class="language-plaintext highlighter-rouge">!</code>, <code class="language-plaintext highlighter-rouge">@</code>, <code class="language-plaintext highlighter-rouge">#</code>, <code class="language-plaintext highlighter-rouge">$</code>, <code class="language-plaintext highlighter-rouge">%</code>, <code class="language-plaintext highlighter-rouge">^</code>, <code class="language-plaintext highlighter-rouge">&amp;</code>, <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">(</code>, <code class="language-plaintext highlighter-rouge">)</code> from the text.</li>
+    <li>Replace all whitespace with <code class="language-plaintext highlighter-rouge">-</code></li>
+    <li>Replace multiple <code class="language-plaintext highlighter-rouge">-</code>s with a single <code class="language-plaintext highlighter-rouge">-</code></li>
+  </ol>
+
+  <p>This results in retaining capitalisation. Hence, <code class="language-plaintext highlighter-rouge">Ananas of course</code> becomes <code class="language-plaintext highlighter-rouge">Ananas-of-course</code>.
+For a more complicated example <code class="language-plaintext highlighter-rouge">(RNA) inhibitors</code> would become <code class="language-plaintext highlighter-rouge">RNA-inhibitors</code>.</p>
+</blockquote>
+
 <p>This can also be used inline: My favourite fruit is an <span class="Ananas-of-course">🍍</span><span class="Avocados">🥑</span>.</p>
 
 <blockquote class="tip">
@@ -10813,6 +10830,27 @@ The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call t
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
 {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-using-every-branch"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-every-branch" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true" ></i> <span>Tip: Using every branch</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>We, the GTN, don’t always know if you <em>intend</em> to have not used a specific branch. As such we recommend that if you have a branch that has no steps, you should include a <code class="language-plaintext highlighter-rouge">div</code> block with the class name of that branch, just so we know for sure you meant it to be empty.</p>
+
+  <p>E.g.</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{% include _includes/cyoa-choices.html option1="Yes, they don't pass QC" option2="No" text="Do you think your samples need to be filtered?" %}
+
+&lt;div class="Yes-they-dont-pass-QC" markdown="1"&gt;
+Some content here!
+&lt;/div&gt;
+
+&lt;div class="No" markdown="1"&gt;
+&lt;!-- intentionally empty. This comment itself isn't necessary, but we recommend adding the div. --&gt;
+&lt;/div&gt;
+
 
 </code></pre></div>  </div>
 </blockquote>
@@ -11799,7 +11837,7 @@ tools:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/87017d5c7066183c765180dd89d8c5bd408f808d">87017d5</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/80fe198dc2c42831b7511997657269882e649f6a">80fe198</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

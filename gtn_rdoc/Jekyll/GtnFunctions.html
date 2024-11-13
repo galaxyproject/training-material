@@ -1922,7 +1922,7 @@ fedi2link(&quot;@hexylena@galaxians.garden&quot;) =&gt; &quot;https://galaxians.
             <pre><span class="ruby-comment"># File _plugins/gtn.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">slugify_unsafe</span>(<span class="ruby-identifier">text</span>)
   <span class="ruby-comment"># Gets rid of *most* things without making it completely unusable?</span>
-  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{[&quot;&#39;\\/;:,.!@#$%^&amp;*()]}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/-+/</span>, <span class="ruby-string">&#39;-&#39;</span>)
+  <span class="ruby-identifier">unsafe_slugify</span>(<span class="ruby-identifier">text</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>

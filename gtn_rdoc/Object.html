@@ -132,6 +132,7 @@
     <li ><a href="#method-i-titleize">#titleize</a>
     <li ><a href="#method-i-track">#track</a>
     <li ><a href="#method-i-translate">#translate</a>
+    <li ><a href="#method-i-unsafe_slugify">#unsafe_slugify</a>
     <li ><a href="#method-i-update_data_library">#update_data_library</a>
     <li ><a href="#method-i-update_tutorial">#update_tutorial</a>
     <li ><a href="#method-i-url_prefix">#url_prefix</a>
@@ -2948,6 +2949,29 @@
 
   <span class="ruby-comment"># puts &quot;#{m} ⇒ #{m[1] + fixed + m[3]}&quot;</span>
   <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">fixed</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">4</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-unsafe_slugify" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">unsafe_slugify</span><span
+              class="method-args">(text)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="unsafe_slugify-source">
+            <pre><span class="ruby-comment"># File _plugins/util.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unsafe_slugify</span>(<span class="ruby-identifier">text</span>)
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r{[&quot;&#39;\\/;:,.!@#$%^&amp;*()]}</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;-&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/-+/</span>, <span class="ruby-string">&#39;-&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
         </div>
