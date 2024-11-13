@@ -552,49 +552,7 @@ After running the workflow on both the MuSiC and NNLS results we should have the
 
 From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a better accuracy with a higher correlation score and lower error compared to NNLS.
 
-## Standard deviation
-
-One last bit of statistical analysis we can perform is the standard deviation of the errors. This will tell us how consistent the tools are in their predictions for each cell-type across all 20 subsamples. We can do this using a single tool.
-
-> <hands-on-title>Compute standard deviation</hands-on-title>
->
-> 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Table"*: `Music Errors`
->
->    - In *"Input data has"*:
->       - *"Column names on the first row"*: {% icon param-check %} `Yes`
->
->    - *"Type of table operation"*: `Compute expression across rows or columns`
->    - *"Calculate"*: `Standard Deviation`
->    - *"For each"*: `Column`
->
->    - In *"Output formatting options"*:
->       - *"Ignore NA values"*: {% icon param-check %} `Yes`
->       - *"Output row headers"*: {% icon param-check %} `Yes`
->
-> 2. **Rename** {% icon galaxy-pencil %} output `Standard deviation - Music`
->
-> 3. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Table"*: `NNLS Errors`
->
->    - In *"Input data has"*:
->       - *"Column names on the first row"*: {% icon param-check %} `Yes`
->
->    - *"Type of table operation"*: `Compute expression across rows or columns`
->    - *"Calculate"*: `Standard Deviation`
->    - *"For each"*: `Column`
->
->    - In *"Output formatting options"*:
->       - *"Ignore NA values"*: {% icon param-check %} `Yes`
->       - *"Output row headers"*: {% icon param-check %} `Yes`
->
-> 4. **Rename** {% icon galaxy-pencil %} output `Standard deviation - NNLS`
->
-{: .hands_on}
-
-
-
-The conclusions to draw this analysis, is that our reference data is effective for use in deconvolution analysis since both tools were able to have high accuracy and low error scores. We also determined that (for at least this data) the MuSiC tool was the more effective/accurate tool and thus would likely be the more trustworthy when performing deconvolution with this single-cell reference data.
+The conclusions to draw from this analysis, is that our reference data is effective for use in deconvolution analysis since both tools were able to have high accuracy and low error scores. We also determined that (for at least this data) the MuSiC tool was the more effective/accurate tool and thus would likely be the more trustworthy when performing deconvolution with this single-cell reference data.
 
 # Conclusion
 
