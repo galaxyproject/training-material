@@ -95,6 +95,7 @@ serve-codespaces: codespace-clean bundle-install bundle-update
 
 codespace-clean:
 	rm -rf /workspaces/.codespaces/shared/editors/jetbrains;
+	rm -f /workspaces/training-material/.git/objects/pack/tmp_pack*
 .PHONY: codespace-clean
 
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
