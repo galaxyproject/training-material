@@ -224,7 +224,7 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 > <hands-on-title>Run pseudo-bulk and actual proportions workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow](https://usegalaxy.eu/u/hexhowells/w/deconv-eval-stage-1) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
@@ -266,7 +266,7 @@ The following workflow will take the two pseudo-bulk samples (A and B), as well 
 > <hands-on-title>Run inferring cellular proportions workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow](https://usegalaxy.eu/u/hexhowells/w/deconv-eval-stage-2) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
@@ -301,7 +301,7 @@ Before visualising or inspecting the outputs of the deconvolution tools, we firs
 > <hands-on-title>Run visualisation pre-processing workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow](https://usegalaxy.eu/u/hexhowells/w/deconv-eval-stage-3-process) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
@@ -529,7 +529,7 @@ With a basic understanding of some useful metrics, we will now compute these to 
 > <hands-on-title>Run metrics workflow</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow](https://usegalaxy.eu/u/hexhowells/w/deconv-eval-stage-3-metrics) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
