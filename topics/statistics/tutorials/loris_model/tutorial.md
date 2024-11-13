@@ -130,8 +130,8 @@ The feature Response is a categorical target variable indicating whether patient
 > 2. Import the files from Zenodo or from the shared data library
 >
 >    ```
->    https://zenodo.org/api/records/13885908/files/Chowell_train_Response.tsv
->    https://zenodo.org/api/records/13885908/files/Chowell_test_Response.tsv
+>    https://zenodo.org/records/13885908/files/Chowell_train_Response.tsv
+>    https://zenodo.org/records/13885908/files/Chowell_test_Response.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -230,6 +230,11 @@ It's crucial to understand the concept we want to drive into this analyse. Since
 
 ## Classification Algorithms
 
+One of PyCaret's key features is the ability to train and compare multiple models with minimal code. By default, PyCaret evaluates a broad range of algorithms—including linear models, tree-based models, and ensemble methods—and then ranks these models based on their performance. It uses the Area Under the Curve (AUC) metric as the primary criterion to determine which model is the best.
+
+![alt](... "label")
+
+In this case, the best algorithm to perform in the datase matches what was reported in the article: Logistic Regression model.
 
 ## Hyperparameters
 
