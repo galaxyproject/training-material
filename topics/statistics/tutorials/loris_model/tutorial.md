@@ -221,7 +221,7 @@ It's crucial to understand the concept we want to drive into this analyse. Since
 > <comment-title>Robustness definition </comment-title>
 >
 > Some evidence is robust across reasonable variations in analysis, and some evidence is fragile, meaning that support for the finding is contingent on specific decisions such as which observations are excluded and which covariates are included.
-> 
+>
 > Thus, Robustness refers to testing the reliability of a prior finding using the same data and a different analysis strategy.
 >
 >![alt](... "label")
@@ -230,7 +230,7 @@ It's crucial to understand the concept we want to drive into this analyse. Since
 
 ## Classification Algorithms
 
-One of PyCaret's key features is the ability to train and compare multiple models with minimal code. By default, PyCaret evaluates a broad range of algorithms—including linear models, tree-based models, and ensemble methods—and then ranks these models based on their performance. It uses the Area Under the Curve (AUC) metric as the primary criterion to determine which model is the best.
+One of PyCaret's key features is the ability to train and compare multiple models with minimal code. By default, PyCaret evaluates a broad range of algorithms—including linear models, tree-based models, and ensemble methods—and then ranks these models based on their performance. It uses the Area Under the Curve (AUC) metric as the primary criterion to determine which model is the best (Figure x).
 
 ![alt](... "label")
 
@@ -240,6 +240,11 @@ In this case, the best algorithm to perform in the datase matches what was repor
 
 {% cite Chang2024 %}'s model for Pan-Cancer LLR6 model has the following hyperparameters set:
 C = 0.1, Class Weight = Balanced, l1 ratio = 1, max iter = 100, Penalty = Elasticnet, Solver = Saga.
+
+The hyperparameters search performed by Galaxy-PyCaret built the model slight different:
+C = 1.0, Class Weight = None, L1 ratio = None, max iter = 1000, Penalty = L2, Solver = LBFGS
+
+The differences found in the hyperparameters set the analysis towards to proof the robusteness of LORIS Score proposed by {% cite Chang2024 %}.
 
 > <comment-title>Hyperparameters meaning</comment-title>
 >
@@ -258,9 +263,24 @@ C = 0.1, Class Weight = Balanced, l1 ratio = 1, max iter = 100, Penalty = Elasti
 >
 {:  .comment}
 
-Our PyCaret Best Model has the hyperparameters 
+## Model Evaluation Metrics
+
+In this study, we compare the performance of machine learning models built using two different frameworks: PyCaret and Scikit-learn. The comparison focuses on four key model evaluation metrics—Accuracy, Area Under the Curve (AUC), F1 Score, and Matthews Correlation Coefficient (MCC)—to assess the relative performance and strengths of each model.
+
+- Accuracy
+Accuracy measures the proportion of correct predictions among all predictions. The PyCaret model outperformed the Scikit-learn model in terms of accuracy, achieving an accuracy of 0.80, compared to 0.6803 for the Scikit-learn model. This suggests that the PyCaret model was able to correctly classify a higher percentage of samples, indicating better overall predictive performance on the given dataset. This higher accuracy across different runs indicates a level of consistency in the performance of the LORIS Score, regardless of the specific model-building tool used.
+
+- Area Under the Curve (AUC)
+AUC provides an aggregate measure of performance across all classification thresholds, with higher values indicating better model performance. The PyCaret model exhibited a moderate AUC of 0.7599, which was slightly higher than the Scikit-learn model’s AUC of 0.7155. This suggests that the PyCaret model had better discrimination capability between positive and negative classes, indicating a robust ability to distinguish between the two classes across various thresholds. Despite the different frameworks, both models achieved a relatively high AUC, demonstrating that the LORIS Score maintains a consistent discriminatory power, reinforcing its robustness.
+
+- F1 Score
+The F1 Score is the harmonic mean of precision and recall, providing a balanced measure of a model’s ability to correctly classify both positive and negative classes, especially in cases of imbalanced datasets. The Scikit-learn model showed a higher F1 score of 0.5289 compared to the PyCaret model’s F1 score of 0.4246. This suggests that while the PyCaret model had better overall accuracy and AUC, the Scikit-learn model may have had a better balance between precision and recall, making it more effective in identifying positive instances.
+
+- Matthews Correlation Coefficient (MCC)
+The MCC is a more balanced metric for binary classification, taking into account all four confusion matrix categories (True Positive, True Negative, False Positive, False Negative). The Scikit-learn model achieved a higher MCC of 0.4652 than the PyCaret model’s MCC of 0.3764. This indicates that, although both models showed moderate performance, the Scikit-learn model had a more favorable balance between false positives and false negatives, making it more reliable in terms of overall classification accuracy, particularly for imbalanced datasets.
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+The comparison of the PyCaret and Scikit-learn models reveals a consistent performance across multiple evaluation metrics, such as accuracy, AUC, F1 score, and MCC. The slight differences in the results reflect the inherent flexibility of the LORIS Score, where a model built with two different tools—PyCaret and Scikit-learn—can still provide comparable performance, demonstrating robustness in terms of predictive capabilities.
+
+This highlights the reliability and generalizability of the LORIS Score, making it a valuable and consistent metric for predictive modeling across varied analytical setups. The results support the notion that slight changes in the analytical approach do not substantially affect the model's ability to discriminate between classes, providing confidence in the robustness of the LORIS Score for future applications.
