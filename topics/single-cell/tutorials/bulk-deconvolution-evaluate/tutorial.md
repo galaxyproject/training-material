@@ -16,8 +16,9 @@ objectives:
 - Evaluate and visualse the results of the different deconvolution methods
 time_estimation: 2H
 key_points:
-- Something about deconv tools having different accuracies
-- Its important to validate the accuracy of tools 
+- It is important to validate the accuracy of both deconvolution tools and reference data
+- There are various visualisation and quantative methods of analysing results
+- Different deconvolution tools have varying accuracy, comparing them against the same reference is a useful test to determine the best tool for your data
 
 tags:
 - transcriptomics
