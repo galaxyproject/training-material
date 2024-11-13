@@ -110,7 +110,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 >    - **Intensity threshold** (`thres`): A recommended starting value is `25%` of the global maximum intensity. Increase to `30-40%` for stricter filtering if spots have low intensity.
 >    - **Minimum track length** (`minlen`): Use `50%` of the sequence length as a baseline. Adjust based on the expected duration of mitoflash events.
 >    
->    This tool links detected spots across frames to track movement. The **Neighborhood size** parameter controls the pixel range for associating points between frames. Increasing the **Intensity threshold** filters out weaker signals, improving track accuracy.
+>    This tool links detected spots across frames to track movement. The **Neighborhood size** parameter controls the pixel range for associating points between frames. Reducing the **Intensity threshold** filters out weaker signals, reducing the number of spurious tracks.
 >
 {: .hands_on}
 
