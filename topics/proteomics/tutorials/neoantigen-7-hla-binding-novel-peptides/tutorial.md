@@ -44,6 +44,8 @@ Neoantigens are peptides derived from tumor-specific mutations, which are recogn
 
 This tutorial outlines a comprehensive workflow for the identification, prediction, and validation of potential neoantigens. We begin by using the Immune Epitope Database (IEDB) to predict the binding affinity of peptide sequences to MHC molecules. IEDB provides powerful tools to model how peptides interact with different MHC alleles, helping to prioritize peptides that are most likely to be presented by the immune system. Next, we validate these peptides using PepQuery, a tool that allows for the comparison of predicted neoantigens with experimental proteomics data, providing an additional layer of confidence in their relevance. Finally, we categorize the peptides into strong and weak binders, based on their predicted affinity, which helps in identifying the most promising candidates for cancer immunotherapy.
 
+![HLA-binding-peptides-overview]({% link topics/proteomics/images/neoantigen/Predict_MHC_Binding_for_Novel_Neoantigens.PNG %})
+
 
 > <agenda-title></agenda-title>
 >
