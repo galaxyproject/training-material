@@ -445,11 +445,14 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >
 {: .question}
 
-# Extracting Non-Normal with Stringtie
+# Extracting Non-Normal with Stringtie and GFF compare
 
-## Sub-step with **StringTie**
+## Assemble with **StringTie**
+StringTie is a tool used for assembling RNA-Seq alignments into potential transcripts, estimating their abundances, and creating GTF files of transcript structures. In this task, StringTie takes short reads mapped by HISAT2 as input and uses a reference GTF/GFF3 file to guide the assembly of transcripts. This guidance enables StringTie to produce accurate transcript structures that can be useful for differential expression analysis and downstream functional analyses.
 
-> <hands-on-title> Task description </hands-on-title>
+In this workflow, StringTie is responsible for reconstructing transcript structures based on RNA-Seq alignments. By using a reference file to guide the assembly, StringTie improves the accuracy of the transcript annotations, which is valuable for comparing expression levels across conditions or identifying novel transcript variants. This step provides a foundation for gene expression quantification and other transcriptome analyses.
+
+> <hands-on-title> StringTie</hands-on-title>
 >
 > 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
@@ -459,39 +462,31 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
 >        - *"Output files for differential expression?"*: `No additional output`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is a reference GTF/GFF3 file used to guide the assembly in StringTie?
+> 2. What type of input does StringTie require to perform transcript assembly?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. A reference GTF/GFF3 file provides known transcript information, helping StringTie to assemble transcripts more accurately. This guidance ensures that the assembled transcript structures are consistent with existing gene models, enhancing the reliability of the results and enabling easier comparison across different samples.
+> > 2. StringTie requires mapped short reads as input, typically in BAM format, which contain RNA-Seq alignments. These mapped reads are used to reconstruct transcript structures, and a reference annotation file can be optionally provided to guide the assembly process.
 > >
 > {: .solution}
 >
 {: .question}
 
 
+## Accuracy of transcript predictions with **GffCompare**
+GffCompare is a tool used to compare and evaluate the accuracy of transcript predictions by comparing GTF/GFF files with reference annotations. In this task, GffCompare takes the transcript assembly output from StringTie and compares it against a reference annotation file. This allows users to identify novel transcripts, assess the accuracy of the assembly, and evaluate the completeness of the transcript predictions relative to known annotations.
 
+In this workflow, GffCompare assesses the quality of the transcript assembly produced by StringTie by aligning it with a known reference annotation. This step helps determine which assembled transcripts match known genes, which are new variants, and which might represent entirely novel transcripts. By providing accuracy metrics and categorizing the transcripts, GffCompare facilitates the interpretation of transcriptomic data, especially in studies aiming to identify new gene isoforms or validate assembled structures.
 
-## Sub-step with **GffCompare**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> GffCompare </hands-on-title>
 >
 > 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"GTF inputs for comparison"*: `output_gtf` (output of **StringTie** {% icon tool %})
@@ -500,28 +495,18 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >            - {% icon param-file %} *"Reference annotation"*: `output` (Input dataset)
 >    - *"Use sequence data"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it important to compare assembled transcripts to a reference annotation?
+> 2. What information can GffCompare provide about the assembled transcripts?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Comparing assembled transcripts to a reference annotation helps identify which transcripts correspond to known genes, which ones are novel isoforms, and which are new transcript structures. This process validates the transcript assembly and provides confidence in the biological relevance of the findings.
+> > 2. GffCompare provides information on how well the assembled transcripts match the reference annotation, categorizing transcripts as known, novel isoforms, or completely new structures. It also provides accuracy metrics, which are useful for evaluating the quality of the transcript assembly.
 > >
 > {: .solution}
 >
@@ -529,36 +514,29 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 
 
 
-## Sub-step with **Convert gffCompare annotated GTF to BED**
+## BED file conversion with **Convert gffCompare annotated GTF to BED**
+Convert gffCompare Annotated GTF to BED is a tool that converts GTF files annotated by GffCompare into BED format. BED (Browser Extensible Data) files are commonly used for displaying transcript annotations in genome browsers, providing a simpler and more compact representation than GTF files. In this task, the tool converts GffCompare’s annotated GTF output, allowing visualization and further analyses of transcript annotations in a format compatible with many genomic tools and browsers.
 
-> <hands-on-title> Task description </hands-on-title>
+In this workflow, converting GffCompare's annotated GTF output to BED format allows the user to visualize and analyze the assembled and annotated transcripts in genome browsers. This step facilitates the interpretation of transcript locations, boundaries, and structures in an accessible and efficient manner, especially for assessing the genomic context and identifying patterns across the genome.
+
+> <hands-on-title> Convert gffCompare annotated GTF to BED </hands-on-title>
 >
 > 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
 >    - {% icon param-file %} *"GTF annotated by gffCompare"*: `transcripts_annotated` (output of **GffCompare** {% icon tool %})
 >    - *"filter gffCompare class_codes to convert"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is BED format useful for viewing transcript annotations?
+> 2. What does the option "filter gffCompare class_codes to convert" allow you to do?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. BED format provides a simplified, compact way to represent transcript locations, which is widely compatible with genome browsers. This format allows easy visualization of transcript structures, making it efficient for examining the genomic context of the assembled transcripts.
+> > 2. The "filter gffCompare class_codes to convert" option lets users specify which types of transcript classes (such as known or novel isoforms) to include in the BED output. This filter is useful for focusing on specific categories of transcripts, such as novel structures, for further analysis or visualization.
 > >
 > {: .solution}
 >
@@ -566,11 +544,12 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 
 
 
+## Translating BED to FASTA sequences with **Translate BED transcripts**
+Translate BED transcripts is a tool that translates BED files containing transcript annotations into FASTA sequences. This tool uses a reference genomic sequence (in this case, a 2bit file) to extract the nucleotide sequences corresponding to the regions defined in the BED file. The output is a FASTA file, which contains the translated sequences of the annotated transcripts, allowing further analysis of their sequence composition.
 
+In this workflow, translating BED files to FASTA sequences is essential for obtaining the actual nucleotide sequences of the annotated transcripts. This step enables the user to analyze the sequences further, for example, by identifying functional regions, sequence motifs, or conducting downstream analysis like mutation detection or variant calling.
 
-## Sub-step with **Translate BED transcripts**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Translate BED transcripts </hands-on-title>
 >
 > 1. {% tool [Translate BED transcripts](toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"A BED file with 12 columns"*: `output` (output of **Convert gffCompare annotated GTF to BED** {% icon tool %})
@@ -579,62 +558,45 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >    - In *"Fasta ID Options"*:
 >        - *"fasta ID source, e.g. generic"*: `generic`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we use a 2bit reference file in the Translate BED Transcripts tool?
+> 2. What is the role of the "Fasta ID source" option in this tool?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The 2bit reference file provides a compact and efficient representation of the reference genome sequence, which is used to extract the nucleotide sequences corresponding to the BED annotations. It allows the tool to quickly and accurately retrieve the relevant genomic sequences for translation into FASTA format.
+> > 2. The "Fasta ID source" option specifies the format for the FASTA sequence identifiers. The "generic" option assigns a simple generic identifier to each sequence. This helps in organizing the sequences in a standardized manner, especially if specific identifiers are not available or needed for further analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **bed to protein map**
+## Generating a genomic coordinate file with **bed to protein map**
+The bed to protein map tool translates the genomic coordinates in a BED file into protein sequences. The input BED file should have 12 columns, where the "thickStart" and "thickEnd" fields define the protein-coding regions. This tool uses these coordinates to map the nucleotide sequences (from the BED regions) into protein sequences, assuming the provided BED file contains protein-coding regions.
 
-> <hands-on-title> Task description </hands-on-title>
+This tool is important for converting the genomic annotations (in BED format) that correspond to protein-coding regions into actual protein sequences. This step is critical for downstream protein analysis, such as protein function prediction, domain identification, or understanding the consequences of genetic mutations at the protein level.
+
+> <hands-on-title> bed to protein map </hands-on-title>
 >
 > 1. {% tool [bed to protein map](toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `translation_bed` (output of **Translate BED transcripts** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What does the "thickStart" and "thickEnd" field in the BED file represent in the context of protein mapping?
+> 2. Why is it important to ensure that the BED file contains the correct "protein-coding regions" for this tool to function properly?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The "thickStart" and "thickEnd" fields in the BED file specify the start and end coordinates of the protein-coding regions within the genome. These fields define the portion of the transcript that will be used for translating nucleotide sequences into protein sequences.
+> > 2. The accuracy of the protein sequences produced by the bed to protein map tool depends on correctly identifying protein-coding regions in the BED file. If the file includes non-coding regions or incorrectly defined coordinates, the resulting protein sequences may not be accurate, which could lead to erroneous conclusions in downstream analyses.
 > >
 > {: .solution}
 >
