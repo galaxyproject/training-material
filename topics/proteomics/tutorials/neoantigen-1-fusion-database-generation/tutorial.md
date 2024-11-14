@@ -46,7 +46,7 @@ A neoantigen is a novel peptide (protein fragment) that is produced by cancer ce
 Creating a fusion database is essential in cancer genomics and personalized medicine, as it enables the identification of crucial biomarkers, enhances diagnostic accuracy, and supports therapeutic development. Gene fusions, where parts of two previously separate genes merge, can produce abnormal proteins that drive cancer. Cataloging these fusion events in a database helps researchers identify specific biomarkers linked to cancer types and design more targeted treatments. Additionally, fusion events may lead to unique peptide sequences, known as neoantigens, which are found only in cancer cells. These neoantigens can be targeted by the immune system, making fusion databases valuable in designing personalized immunotherapies like cancer vaccines or T-cell therapies. Some gene fusions also create oncogenic proteins that promote tumor growth, such as the BCR-ABL fusion in chronic myeloid leukemia. Including such information in a database aids in identifying potential therapeutic targets and predicting treatment efficacy. On the diagnostic side, known gene fusions serve as reliable markers, helping clinicians better classify cancer types and choose the most effective treatments. Finally, fusion databases provide a critical reference for researchers studying fusion mechanisms, their impact on disease progression, and their prevalence across cancers, ultimately fueling the discovery of novel treatments and therapies.
 
 To generate the fusion database, RNA star and Arriba tools are used in this workflow.
-
+![Fusions_Protein_Database workflow]({% link topics/proteomics/images/neoantigen/Fusions_Protein_Database.PNG %})
 
 > <agenda-title></agenda-title>
 >
