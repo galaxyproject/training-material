@@ -44,7 +44,9 @@ Proteogenomics leverages mass spectrometry (MS)-based proteomics data alongside 
 
 In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored protein sequence databases, enabling the identification of protein sequence variants, including neoantigens, through mass spectrometry analysis ({% cite Chambers_2017 %}).
 
+![Non-Normal_Protein_Database overview workflow]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_1.PNG %})
 
+In this workflow, (A) Generation of variant database, (B) Generation of assembled protein database, and (C) Merging all databases with known HUMAN protein sequences.
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -124,7 +126,7 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 {: .hands_on}
 
 # Extracting Single amino acid variants with HISAT and Freebayes
-
+![A:Generating variant protein sequence database]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_2.PNG %})
 ## Aligning to the reference genome with **HISAT2**
 HISAT2 is a fast and efficient tool used in bioinformatics workflows for aligning sequence reads to a reference genome. In this task, HISAT2 is being utilized to align paired-end reads against the human genome version GRCh38 (hg38). This alignment is essential for downstream analyses such as variant calling or transcript quantification. HISAT2 is configured to use default alignment and scoring options to ensure simplicity and speed, which is often suitable for general-purpose analyses.
 
@@ -445,8 +447,8 @@ In this workflow, FASTA Merge Files and Filter Unique Sequences consolidate all 
 >
 {: .question}
 
-# Extracting Non-Normal with Stringtie and GFF compare
-
+# Extracting Assembled sequences with Stringtie and GFF compare
+![Assembled sequence database generation]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_3.PNG %})
 ## Assemble with **StringTie**
 StringTie is a tool used for assembling RNA-Seq alignments into potential transcripts, estimating their abundances, and creating GTF files of transcript structures. In this task, StringTie takes short reads mapped by HISAT2 as input and uses a reference GTF/GFF3 file to guide the assembly of transcripts. This guidance enables StringTie to produce accurate transcript structures that can be useful for differential expression analysis and downstream functional analyses.
 
@@ -604,7 +606,11 @@ This tool is important for converting the genomic annotations (in BED format) th
 
 # Merging the non-normal databases with the known HUMAN protein sequence
 
-Merging non-normal databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), non-normal FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
+Merging non-normal databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
+
+
+![Fusions_Protein_Database workflow]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG %})
+
 
 ## Merging all databases **FASTA Merge Files and Filter Unique Sequences**
 
@@ -621,7 +627,9 @@ Merging non-normal databases with the known human protein sequence involves inte
 
 # Conclusion
 
-In this workflow, we demonstrated a comprehensive process for merging non-normal protein sequence data with known human protein sequences, ensuring compatibility and consistency at each step. Starting with data preparation, we converted sequence data into appropriate formats using tools like FASTA-to-Tabular, StringTie, and GffCompare, making it suitable for downstream analysis. Next, we merged non-normal sequences with known human proteins using tools such as FASTA Merge Files and BEDTools, ensuring the datasets aligned based on common identifiers. The subsequent steps, involving Translate BED transcripts and bed to protein map, translated genomic coordinates into protein sequences, further enriching our dataset. Finally, by extracting protein accession IDs and validating the merged data, we ensured a clean and well-organized dataset. This workflow effectively integrates newly identified proteins with established references, offering a robust resource for further analysis in bioinformatics applications like functional annotation and differential expression studies. By combining multiple bioinformatics tools, this process is adaptable to various research needs, making it invaluable for genomic and proteomic analysis. The output from this workflow will be now used for the neoantigen database searching.
+In this workflow, we demonstrated a comprehensive process for merging non-normal protein sequence data with known human protein sequences, ensuring compatibility and consistency at each step. 
+
+Starting with data preparation, we converted sequence data into appropriate formats making it suitable for downstream analysis. Next, we merged non-normal sequences with known human proteins using tools such as FASTA Merge Files, ensuring the datasets aligned based on common identifiers. The subsequent steps, involving Translate BED transcripts and bed to protein map, translated genomic coordinates into protein sequences, further enriching our dataset. This workflow effectively integrates variant/non-normal proteins with established references, offering a robust resource for further analysis in bioinformatics applications like functional annotation and differential expression studies. By combining multiple bioinformatics tools, this process is adaptable to various research needs, making it invaluable for genomic and proteomic analysis. The output from this workflow will be now used for the neoantigen database searching.
 
 # Disclaimer 
 
