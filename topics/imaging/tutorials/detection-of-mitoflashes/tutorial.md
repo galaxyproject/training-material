@@ -31,9 +31,9 @@ tags:
 
 Mitochondria act like fuel stations for the cell, supplying the energy needed to keep it functioning and healthy. During certain activities, they can produce bursts of **superoxide**, known as '**mitoflashes**.' These short, intense events occur in individual mitochondria and can be observed in cardiomyocytes, skeletal muscle, hippocampal neurons, chondrocytes, isolated mitochondria, and among other types of eukaryotic cells using confocal microscopy. Commonly detected with a mitochondria-targeted circularly permuted fluorescent protein (mt-cpYFP), mitoflashes provide real-time insights into mitochondrial respiration function _in situ_ and act as a biosensor for superoxide levels, reflecting the activity of the mitochondrial electron transport chain.
 
-Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels, and various physiological and stress-related signals including fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand).{% raw %} `{% cite Wang2022 %}`{% endraw %} Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mPTP, causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix.{% raw %} `{% cite Feng2019 %}`{% endraw %} While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.
+Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels, and various physiological and stress-related signals including fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand).{% raw %}`{% cite Wang2022 %}`{% endraw %} Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mPTP, causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix.{% raw %}`{% cite Feng2019 %}`{% endraw %} While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.
 
-Importantly, the frequency and kinetics of mitoflashes hold physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell.{% raw %} `{% cite Li2020 %}`{% endraw %}
+Importantly, the frequency and kinetics of mitoflashes hold physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell.{% raw %}`{% cite Li2020 %}`{% endraw %}
 
 In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using general Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
 
@@ -103,8 +103,7 @@ In this section, we will focus on identifying mitochondrial regions in a time-la
 
 ## Step 2: Tracking Mitochondrial Movement
 
-Mitochondria are dynamic organelles, constantly moving, and changing position within the cell. Without tracking, intensity measurements could be inconsistent or misleading, as they might reflect overlapping 
-signals from different mitochondria rather than continuous changes in a single organelle. 
+Mitochondria are dynamic organelles, constantly moving, and changing position within the cell. Without tracking, intensity measurements could be inconsistent or misleading, as they might reflect overlapping signals from different mitochondria rather than continuous changes in a single organelle. 
 
 By linking each mitochondrion’s position across frames, we ensure that intensity fluctuations represent true changes within the same mitochondrial structure, enabling precise analysis of events like mitoflashes.
 
@@ -168,13 +167,13 @@ With our data results, we can analyze their frequency, duration, and intensity. 
 
 > <details-title>More details about mitoflash dynamics</details-title>
 >
-> Mitoflashes represent brief but significant superoxide burst events. They provide insight into mitochondrial responses to energy demands and stress, acting as indicators of mitochondrial health. The kinetics of mitoflashes, including frequency and parameters like amplitude, Tpk, and T50, are influenced by cellular conditions, such as bioenergetics and starvation.
+> Mitoflashes represent brief but significant superoxide burst events. They provide insight into mitochondrial responses to energy demands and stress, acting as indicators of mitochondrial health. The kinetics of mitoflashes, including frequency and parameters like amplitude, Tpk, and T50, are influenced by cellular conditions, such as bioenergetics, starvation, oxidative stress, aging, and metabolic diseases.
 >
 {: .details}
 
-These analyses and visualizations provide a deeper understanding of mitochondrial activity and responses to cellular conditions, enabling meaningful insights into mitochondrial health and function in various states.
+These analyses and visualizations provide an understanding of mitochondrial activity and responses to cellular conditions, enabling insights into mitochondrial health and function in various states.
 
 
 # Conclusion
 
-In this tutorial, we have covered key techniques for tracking mitochondria and detecting mitoflashes. By processing and analyzing live-cell imaging data, you can gain valuable insights into mitochondrial behavior and health in cells. Tracking mitoflashes can contribute to studies in metabolism, aging, and diseases linked to mitochondrial dysfunction.
+In this tutorial, we have covered key techniques for tracking mitochondria and detecting mitoflashes. By processing and analyzing live-cell imaging data, you can gain valuable insights into mitochondrial behavior and health in cells. Tracking mitoflashes can contribute to studies in metabolism, aging, and diseases linked to mitochondrial dysfunction in verious cell types and eukaryotic organisms.
