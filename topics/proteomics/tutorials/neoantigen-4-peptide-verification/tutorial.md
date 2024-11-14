@@ -308,7 +308,7 @@ In this step, the NCBI BLAST+ blastp tool is used for performing protein sequenc
 ## Refining Data with **Query Tabular**
 The Query Tabular tool is used in this workflow to filter and organize data from previous steps. In this case, it processes the output from the NCBI BLAST+ blastp tool, which contains protein sequence alignment results. The tool allows the user to execute SQL-like queries on the tabular data, enabling filtering and sorting based on specific criteria. For example, the query selects distinct peptides from the pep table that are not perfectly aligned (i.e., with a sequence identity of 100%) and have certain mismatches or gaps in the alignment. The filtered results are then used for further analysis.
 
-The tool helps to refine the data by removing sequences that meet specific criteria, such as perfect alignment, and ensuring that the remaining sequences meet the necessary quality standards for further exploration.
+The tool helps to refine the data by removing sequences that meet specific criteria, such as perfect alignment, and ensuring that the remaining sequences meet the necessary quality standards for further exploration. The output of this tool is the novel peptides identified from the datasets.
 
 > <hands-on-title> Query Tabular</hands-on-title>
 >
@@ -365,8 +365,7 @@ ORDER BY pep.pep`
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This workflow effectively integrates several bioinformatics tools to process, analyze, and refine protein sequence data. Starting from raw MS data, through peptide identification and database querying, to sequence alignment and filtering, each tool serves a specific purpose in ensuring that only the most relevant sequences are selected for further analysis. By utilizing Query Tabular in particular, users can apply custom SQL-like queries to filter out sequences based on specific criteria, which helps focus on the most promising data. The final results in this workflow are the neoantigen peptides which will be then used for further interpretation and exploration, enabling researchers to gain valuable insights into protein sequences with high confidence and precision. This approach highlights the power of combining multiple tools and techniques in a streamlined bioinformatics workflow to tackle complex data analysis challenges.
 
 # Disclaimer 
 
