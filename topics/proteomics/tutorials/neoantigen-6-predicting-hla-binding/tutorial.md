@@ -36,7 +36,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-non-normal-database
+            - neoantigen-7-hla-binding-novel-peptides
 tags: [label-free]
 redirect_from:
 - proteomics/tutorials/neoantigen-6-predicting-hla-binding/tutorial
@@ -58,6 +58,7 @@ By completing this tutorial, learners will gain an understanding of:
 
 This hands-on tutorial is designed to offer practical experience for learners aiming to integrate bioinformatics techniques into their immunotherapy research or clinical practice, emphasizing the theoretical and technical concepts essential for neoantigen prediction.
 
+![HLAtyping-overview]({% link topics/proteomics/images/neoantigen/Prediction_of_HLA_Binding.PNG %})
 
 > <agenda-title></agenda-title>
 >
