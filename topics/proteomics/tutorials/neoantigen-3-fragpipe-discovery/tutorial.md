@@ -4,51 +4,50 @@ layout: tutorial_hands_on
 title: Neoantigen_Database_merge_FragPipe_discovery
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What are the key features and unique sequences in protein datasets that contribute to neoantigen discovery?
+- How can we identify neoantigens from proteomic data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Understand the process of merging neoantigen databases with human protein sequences.
+- Learn to use FragPipe for proteomics data analysis.
+- Gain hands-on experience with bioinformatics tools such as FASTA file processing, database validation, and peptide identification.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Merging of non-normal databases with known human protein sequences.
+- Processing and validation of FASTA files for proteomics analysis.
+- Utilization of FragPipe to identify neoantigens and perform downstream analysis.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-free]
+redirect_from:
+- proteomics/tutorials/neoantigen-3-fragpipe-discovery/tutorial
 
 ---
 
 
 # Introduction
 
-<!-- This is a comment. -->
+In this tutorial, we will guide you through a bioinformatics workflow aimed at merging neoantigen databases with known human protein sequences, preparing the data for proteomics analysis using FragPipe. This workflow involves processing FASTA files, filtering for unique sequences, and validating the FASTA databases before using FragPipe to perform peptide identification and validation of neoantigens.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+Throughout the tutorial, you will learn how to integrate multiple datasets, ensuring that you can perform analyses such as the identification of potential neoantigens, which are critical for cancer immunotherapy and vaccine development. The tools and steps covered here are important for any bioinformatics pipeline dealing with proteomics and neoantigen discovery.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -59,26 +58,27 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Neoantigen Fragpipe Discovery
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+This tutorial guides users through the process of performing database searching or neoantigen protein/peptide discovery. It encompasses essential bioinformatics steps to identify and variant-specific peptides for immunological studies. Below is an overview of each major stage:
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+### 1. Get Data
+The first step involves gathering and uploading the necessary proteomics data files into the analysis environment. These files typically contain protein sequences or raw spectrum data that will be processed throughout the tutorial. Proper data organization and tagging are essential to ensure smooth workflow execution.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+### 2. Merging FASTA Files and Filtering for Unique Sequences
+In this step, multiple FASTA files containing protein sequences are merged into a single file. After merging, sequences are filtered to retain only the unique ones, ensuring that redundancy is removed and only relevant protein data is used for downstream analysis.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+### 3. Validating FASTA Databases
+Once the FASTA files are merged and filtered, it's important to validate the database to ensure that the protein sequences are correctly formatted and usable for analysis. This step helps identify and correct any issues in the dataset before performing more complex analysis tasks.
 
-have fun!
+### 4. Running FragPipe for Neoantigen Discovery
+FragPipe, a proteomics analysis tool, is then employed to process the data further. This involves peptide identification, protein quantification, and running specialized workflows such as nonspecific-HLA searches to identify potential neoantigens that may be targeted for immunotherapy.
+
+### 5. Collapsing Datasets and Selecting Relevant Data
+After the analysis, the resulting datasets are collapsed into a single dataset to simplify further processing. This step helps streamline the data, making it easier to select and focus on the relevant sequences that match the biological question being addressed.
+
+### 6. Querying Tabular Results for Further Analysis
+In the final step, tabular results from the analysis are queried using SQL-like commands to filter and extract the most relevant data. This allows for focused analysis on specific protein sequences or neoantigens that were identified, enabling further downstream analysis and interpretation.
 
 ## Get data
 
@@ -92,9 +92,6 @@ have fun!
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -111,29 +108,14 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Merging FASTA Files and Filtering for Unique Sequences
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-normal database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.
 
 
-## Sub-step with **FASTA Merge Files and Filter Unique Sequences**
+## Merging fusion and non-normal databases with **FASTA Merge Files and Filter Unique Sequences**
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> FASTA Merge Files and Filter Unique Sequences</hands-on-title>
 >
 > 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -141,70 +123,41 @@ A big step can have several subsections or sub steps:
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
 >                - {% icon param-file %} *"FASTA File"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Sequence database parsing with **Validate FASTA Database**
 
-## Sub-step with **Validate FASTA Database**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Validate FASTA Database </hands-on-title>
 >
 > 1. {% tool [Validate FASTA Database](toolshed.g2.bx.psu.edu/repos/galaxyp/validate_fasta_database/validate_fasta_database/0.1.5) %} with the following parameters:
 >    - {% icon param-file %} *"Select input FASTA dataset"*: `output` (output of **FASTA Merge Files and Filter Unique Sequences** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it important to validate a FASTA database before using it for further analysis in a proteomics pipeline?
+> 2. What potential issues might be identified by the Validate FASTA Database tool?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Validating a FASTA database ensures that the sequences are correctly formatted and that no errors are present. It helps ensure the accuracy of the data used in downstream analysis, which is critical for correct protein identification and neoantigen discovery.
+> > 2. The Validate FASTA Database tool might identify issues such as incorrect sequence formatting, missing information (e.g., headers or sequence data), or invalid characters in the sequences, which could cause errors during further analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **FragPipe -  Academic Research and Education User License (Non-Commercial)**
+##  Running FragPipe for Neoantigen Discovery
+The FragPipe tool is used for processing and analyzing proteomics data in mass spectrometry experiments. This tool integrates multiple components such as MSFragger, IonQuant, and Percolator, allowing users to perform tasks such as peptide-spectrum match (PSM) identification, protein quantification, and post-translational modification (PTM) analysis. In this task, FragPipe is being used to identify potential neoantigens by analyzing mass spectrometry (MS) data and correlating it with a validated FASTA sequence database.
+The FragPipe tool is executed with the MS data and a validated FASTA sequence database to identify peptides, proteins, and potential neoantigens from the raw mass spectrometry data. Users must provide MS spectrum files, a manifest file, and the validated FASTA database (created in the previous step using the Validate FASTA Database tool). The tool runs a series of analyses, including non-specific enzyme digestion, quantification of protein abundance, and validation of peptide-spectrum matches (PSMs) with Percolator and Protein Prophet. Output includes identified peptides, proteins, and quantification results, which are essential for downstream neoantigen discovery.
 
-> <hands-on-title> Task description </hands-on-title>
+In this workflow, FragPipe is used after FASTA database validation to ensure that the sequence database is correctly formatted and ready for mass spectrometry analysis. It integrates several tools in a single workflow to process the raw MS data, identify peptides and proteins, and provide validation for the results. It also supports isobaric and label-free quantification methods for protein and peptide quantification, important for understanding relative protein abundance and identifying potential neoantigens.
+
+> <hands-on-title> Fragpipe </hands-on-title>
 >
 > 1. {% tool [FragPipe -  Academic Research and Education User License (Non-Commercial)](toolshed.g2.bx.psu.edu/repos/galaxyp/fragpipe/fragpipe/20.0+galaxy2) %} with the following parameters:
 >    - *"I understand that these tools, including MSFragger, IonQuant, Bruker, and Thermo Raw File Reader, are available freely for academic research and educational purposes only, and agree to the following terms."*: `Yes`
