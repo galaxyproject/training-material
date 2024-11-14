@@ -30,7 +30,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-non-normal-database
+            - neoantigen-2-non-normal-database
 tags: [label-free]
 redirect_from:
 - /topics/proteomics/tutorials/neoantigen-1-fusion-database-generation/tutorial
