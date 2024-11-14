@@ -362,9 +362,11 @@ PepPointer is a tool designed to map peptide sequences to their respective genom
 >
 {: .question}
 
-## Sub-step with **Query Tabular**
+## Visualization and Interpretation
 
-> <hands-on-title> Task description </hands-on-title>
+In this step, we are using Query Tabular to extract and format relevant information from the results produced by PepPointer. The SQL query in this tool is designed to structure the data into a more readable format, providing key details such as the peptide ID, chromosome location, start and end positions, strand orientation, and any annotations. Additionally, it generates genome coordinates in a format suitable for viewing in genome browsers like IGV and UCSC Genome Browser. This formatting step helps to visualize and interpret the data more effectively by linking the peptides to their genomic context.
+
+> <hands-on-title> Query Tabular </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -382,40 +384,24 @@ c1||':'||c2||'-'||c3 AS IGV_Genome_Coordinate,
 FROM  t1`
 >    - *"include query result column headers"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it important to include both the "IGV_Genome_Coordinate" and "UCSC_Genome_Browser" columns?
+> 2. What is the significance of the "Annotation" column, and what type of data might it contain?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The IGV_Genome_Coordinate column provides a formatted coordinate that is directly usable in genome viewers like IGV, helping users visualize the peptide's genomic location. The UCSC_Genome_Browser column provides a clickable URL to launch UCSC Genome Browser with the coordinates, offering another convenient method for visualizing the peptide's location in a widely used genome browser. Including both makes it easier for users to explore the data in different genomic tools.
+> > 2. The Annotation column provides additional context about the genomic feature associated with the peptide, such as whether the peptide is part of a gene, exon, or other regulatory element. This column can help to interpret the biological relevance of the peptide in the genomic region and is important for understanding the functional role of the peptide within the genome. The data might include annotations like "gene", "exon", "intron", or other functional genomic elements.
 > >
 > {: .solution}
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
@@ -427,3 +413,8 @@ By the end of this tutorial, you should now be able to:
 - Recognize the importance of annotating neoantigens for immunotherapy research and how bioinformatics tools can facilitate this process.
 
 The key takeaway from this tutorial is the ability to manipulate complex genomic data and generate insights into potential therapeutic targets using bioinformatics techniques. You should now be better equipped to handle similar datasets and apply these techniques to other types of genomic and proteomic research.
+
+# Disclaimer 
+
+Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. We recommend that users verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
+
