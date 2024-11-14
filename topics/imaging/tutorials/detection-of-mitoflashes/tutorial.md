@@ -143,6 +143,8 @@ Finally, now you have your results table ready for analysis! The output is an Ex
 
 With our data results, we can analyze their frequency, duration, and intensity. This data helps us understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing.
 
+![Curve fitting results mitoflash](../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png "Mitoflash Curve Fitting Results: Data for plotting.")
+
 ### Key Parameters for Analysis and Plotting
 
 1. **FRAME**: Represents time points in the data, with each row corresponding to a frame in the time-lapse sequence. Use **FRAME** as the x-axis for time-based plotting.
@@ -173,6 +175,7 @@ With our data results, we can analyze their frequency, duration, and intensity. 
 
 These analyses and visualizations provide an understanding of mitochondrial activity and responses to cellular conditions, enabling insights into mitochondrial health and function in various states.
 
+![Image of the workflow](../../images/detection-of-mitoflashes/Workflow_mitoflash.png "Overview of the workflow for detecting mitoflash using Galaxy tools.")
 
 # Conclusion
 
