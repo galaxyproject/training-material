@@ -4,22 +4,40 @@ layout: tutorial_hands_on
 title: Neoantigen_PepQuery2_Verification
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How can neoantigens be verified using bioinformatics tools?
+- What is the role of mass spectrometry and peptide sequence databases in neoantigen discovery?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Understand the workflow for neoantigen validation.
+- Apply bioinformatics tools to validate peptides and proteins.
+- Interpret the results from various analytical steps.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Understand the workflow for neoantigen validation.
+- Apply bioinformatics tools to validate peptides and proteins.
+- Interpret the results from various analytical steps.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-free]
+redirect_from:
+- proteomics/tutorials/neoantigen-4-peptide-verification/tutorial
 
 ---
 
@@ -430,3 +448,7 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+# Disclaimer 
+
+Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may also vary due to updates in the reference databases or tool modifications. We recommend the users to verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
