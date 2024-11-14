@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "Neoantigen 2: Non-normal-Database-Generation"
 zenodo_link: ""
 questions:
-- Why do we need to generate a customized fusion database for Proteogenomics research?
+- Why must we generate a customized fusion database for Proteogenomics research?
 objectives:
 - Downloading databases related to 16SrRNA data
 - For better neoantigen identification results.
@@ -71,7 +71,7 @@ Once variants are identified, we generate a customized database and apply variou
 Known proteomics databases are added to the variant database to create a comprehensive database.
 
 ### 5. Final Database Construction
-The workflow concludes with the application of regex adjustments and other formatting functions to standardize the output. This process culminates in the creation of a comprehensive database of potential non-normal protein sequences, making them ready for experimental validation and clinical exploration.
+The workflow concludes with applying regex adjustments and other formatting functions to standardize the output. This process culminates in creating a comprehensive database of potential non-normal protein sequences, making them ready for experimental validation and clinical exploration.
 
 
 ## Get data
@@ -86,9 +86,6 @@ The workflow concludes with the application of regex adjustments and other forma
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -104,8 +101,6 @@ The workflow concludes with the application of regex adjustments and other forma
 >    {% snippet faqs/galaxy/datasets_add_tag.md %}
 >
 {: .hands_on}
-
-
 
 
 ## **Convert compressed file to uncompressed.**
@@ -128,39 +123,7 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 >
 {: .hands_on}
 
-##  **FASTA-to-Tabular**
-Convert the FASTA To tabular.
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Convert these sequences"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Extracting Single amino acid variants with HISAT and Freebayes
 
 ## Sub-step with **HISAT2**
 
@@ -182,88 +145,6 @@ Convert the FASTA To tabular.
 >        - *"Output options"*: `Use default values`
 >        - *"SAM options"*: `Use default values`
 >        - *"Other options"*: `Use default values`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
->    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - In *"Filter Tabular Input Lines"*:
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `select columns`
->                - *"enter column numbers to keep"*: `1`
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `regex replace value in column`
->                - *"enter column number to replace"*: `1`
->                - *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
->                - *"replacement expression"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **StringTie**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
->    - *"Input options"*: `Short reads`
->        - {% icon param-file %} *"Input short mapped reads"*: `output_alignments` (output of **HISAT2** {% icon tool %})
->    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
->        - *"Reference file"*: `Use a file from history`
->            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
->        - *"Output files for differential expression?"*: `No additional output`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -332,44 +213,6 @@ Convert the FASTA To tabular.
 >
 {: .question}
 
-## Sub-step with **GffCompare**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"GTF inputs for comparison"*: `output_gtf` (output of **StringTie** {% icon tool %})
->    - *"Use reference annotation"*: `Yes`
->        - *"Choose the source for the reference annotation"*: `History`
->            - {% icon param-file %} *"Reference annotation"*: `output` (Input dataset)
->    - *"Use sequence data"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **CustomProDB**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -382,41 +225,6 @@ Convert the FASTA To tabular.
 >    - *"Create a variant FASTA for short insertions and deletions"*: `Yes`
 >    - *"Create SQLite files for mapping proteins to genome and summarizing variant proteins"*: `Yes`
 >    - *"Create RData file of variant protein coding sequences"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Convert gffCompare annotated GTF to BED**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
->    - {% icon param-file %} *"GTF annotated by gffCompare"*: `transcripts_annotated` (output of **GffCompare** {% icon tool %})
->    - *"filter gffCompare class_codes to convert"*: ``
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -519,153 +327,6 @@ Convert the FASTA To tabular.
 >
 > 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Convert these sequences"*: `output_rpkm` (output of **CustomProDB** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SQLite to tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
->    - {% icon param-file %} *"SQLite Database"*: `output_genomic_mapping_sqlite` (output of **CustomProDB** {% icon tool %})
->    - *"SQL query"*: `SELECT pro_name, chr_name, cds_chr_start - 1, cds_chr_end,strand,cds_start - 1, cds_end
-  FROM genomic_mapping
-  ORDER BY pro_name, cds_start, cds_end`
->    - *"include query result column headers"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **FASTA-to-Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Convert these sequences"*: `output_rpkm` (output of **CustomProDB** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SQLite to tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [SQLite to tabular](toolshed.g2.bx.psu.edu/repos/iuc/sqlite_to_tabular/sqlite_to_tabular/2.0.0) %} with the following parameters:
->    - {% icon param-file %} *"SQLite Database"*: `output_variant_annotation_sqlite` (output of **CustomProDB** {% icon tool %})
->    - *"SQL query"*: `SELECT var_pro_name,pro_name,cigar,annotation
-FROM variant_annotation`
->    - *"include query result column headers"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Translate BED transcripts**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Translate BED transcripts](toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"A BED file with 12 columns"*: `output` (output of **Convert gffCompare annotated GTF to BED** {% icon tool %})
->    - *"Source for Genomic Sequence Data"*: `Locally cached twobit`
->        - *"Select reference 2bit file"*: `hg38`
->    - In *"Fasta ID Options"*:
->        - *"fasta ID source, e.g. generic"*: `generic`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -837,174 +498,6 @@ FROM variant_annotation`
 > {: .solution}
 >
 {: .question}
-
-## Sub-step with **Column Regex Find And Replace**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `query_results` (output of **SQLite to tabular** {% icon tool %})
->    - *"using column"*: `c1`
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->            - *"Replacement"*: `\1\2_\3`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
->            - *"Replacement"*: `.\1`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `^(ENS[^ |]*)\s*`
->            - *"Replacement"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
->    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - In *"Filter Tabular Input Lines"*:
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `select columns`
->                - *"enter column numbers to keep"*: `1`
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `regex replace value in column`
->                - *"enter column number to replace"*: `1`
->                - *"regex pattern"*: `^([^ |]+).*$`
->                - *"replacement expression"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Column Regex Find And Replace**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3) %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `query_results` (output of **SQLite to tabular** {% icon tool %})
->    - *"using column"*: `c1`
->    - In *"Check"*:
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
->            - *"Replacement"*: `\1\2_\3`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
->            - *"Replacement"*: `.\1`
->        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `^(ENS[^ |]*)\s*`
->            - *"Replacement"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **bed to protein map**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [bed to protein map](toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0) %} with the following parameters:
->    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `translation_bed` (output of **Translate BED transcripts** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Tabular-to-FASTA**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -1085,118 +578,6 @@ FROM variant_annotation`
 >    - {% icon param-file %} *"Tab-delimited file"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
 >    - *"Title column(s)"*: `c['1']`
 >    - *"Sequence column"*: `c2`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Concatenate datasets**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Datasets to concatenate"*: `output` (output of **Filter Tabular** {% icon tool %}), `output` (output of **Filter Tabular** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Query Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
->    - In *"Database Table"*:
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %})
->            - In *"Table Options"*:
->                - *"Specify Name for Table"*: `variant_annotation`
->                - *"Specify Column Names (comma-separated list)"*: `name,reference,cigar,annotation`
->                - In *"Table Index"*:
->                    - {% icon param-repeat %} *"Insert Table Index"*
->                        - *"Index on Columns"*: `name,cigar`
->    - *"Save the sqlite database in your history"*: `Yes`
->    - *"include query result column headers"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Concatenate datasets**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Datasets to concatenate"*: `out_file1` (output of **Column Regex Find And Replace** {% icon tool %}), `output` (output of **bed to protein map** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1262,22 +643,19 @@ FROM variant_annotation`
 >
 {: .question}
 
-## Sub-step with **Query Tabular**
+# Extracting Non-Normal with Stringtie
+
+## Sub-step with **StringTie**
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
->    - In *"Database Table"*:
->        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
->            - In *"Table Options"*:
->                - *"Specify Name for Table"*: `feature_cds_map`
->                - *"Specify Column Names (comma-separated list)"*: `name,chrom,start,end,strand,cds_start,cds_end`
->                - In *"Table Index"*:
->                    - {% icon param-repeat %} *"Insert Table Index"*
->                        - *"Index on Columns"*: `name,cds_start,cds_end`
->    - *"Save the sqlite database in your history"*: `Yes`
->    - *"include query result column headers"*: `No`
+> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy0) %} with the following parameters:
+>    - *"Input options"*: `Short reads`
+>        - {% icon param-file %} *"Input short mapped reads"*: `output_alignments` (output of **HISAT2** {% icon tool %})
+>    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
+>        - *"Reference file"*: `Use a file from history`
+>            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
+>        - *"Output files for differential expression?"*: `No additional output`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -1305,6 +683,321 @@ FROM variant_annotation`
 > {: .solution}
 >
 {: .question}
+
+
+
+
+## Sub-step with **GffCompare**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [GffCompare](toolshed.g2.bx.psu.edu/repos/iuc/gffcompare/gffcompare/0.12.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"GTF inputs for comparison"*: `output_gtf` (output of **StringTie** {% icon tool %})
+>    - *"Use reference annotation"*: `Yes`
+>        - *"Choose the source for the reference annotation"*: `History`
+>            - {% icon param-file %} *"Reference annotation"*: `output` (Input dataset)
+>    - *"Use sequence data"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+## Sub-step with **Convert gffCompare annotated GTF to BED**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Convert gffCompare annotated GTF to BED](toolshed.g2.bx.psu.edu/repos/galaxyp/gffcompare_to_bed/gffcompare_to_bed/0.2.1) %} with the following parameters:
+>    - {% icon param-file %} *"GTF annotated by gffCompare"*: `transcripts_annotated` (output of **GffCompare** {% icon tool %})
+>    - *"filter gffCompare class_codes to convert"*: ``
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
+
+
+
+## Sub-step with **Translate BED transcripts**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Translate BED transcripts](toolshed.g2.bx.psu.edu/repos/galaxyp/translate_bed/translate_bed/0.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"A BED file with 12 columns"*: `output` (output of **Convert gffCompare annotated GTF to BED** {% icon tool %})
+>    - *"Source for Genomic Sequence Data"*: `Locally cached twobit`
+>        - *"Select reference 2bit file"*: `hg38`
+>    - In *"Fasta ID Options"*:
+>        - *"fasta ID source, e.g. generic"*: `generic`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **bed to protein map**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [bed to protein map](toolshed.g2.bx.psu.edu/repos/galaxyp/bed_to_protein_map/bed_to_protein_map/0.2.0) %} with the following parameters:
+>    - {% icon param-file %} *"A BED file with 12 columns, thickStart and thickEnd define protein coding region"*: `translation_bed` (output of **Translate BED transcripts** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+# Extracting Protein Accession IDs
+
+
+## Sub-step with **FASTA-to-Tabular**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Convert these sequences"*: `output` (Input dataset)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Filter Tabular**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
+>    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
+>    - In *"Filter Tabular Input Lines"*:
+>        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
+>            - *"Filter By"*: `select columns`
+>                - *"enter column numbers to keep"*: `1`
+>        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
+>            - *"Filter By"*: `regex replace value in column`
+>                - *"enter column number to replace"*: `1`
+>                - *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
+>                - *"replacement expression"*: `\1`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+# Filtering RPKM accessions
+
+## Sub-step with **Filter Tabular**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
+>    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
+>    - In *"Filter Tabular Input Lines"*:
+>        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
+>            - *"Filter By"*: `select columns`
+>                - *"enter column numbers to keep"*: `1`
+>        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
+>            - *"Filter By"*: `regex replace value in column`
+>                - *"enter column number to replace"*: `1`
+>                - *"regex pattern"*: `^([^ |]+).*$`
+>                - *"replacement expression"*: `\1`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Concatenate datasets**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
+>    - {% icon param-files %} *"Datasets to concatenate"*: `output` (output of **Filter Tabular** {% icon tool %}), `output` (output of **Filter Tabular** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+
 
 ## Sub-step with **FASTA Merge Files and Filter Unique Sequences**
 
@@ -1342,6 +1035,23 @@ FROM variant_annotation`
 > {: .solution}
 >
 {: .question}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Re-arrange
