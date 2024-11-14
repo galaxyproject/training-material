@@ -71,13 +71,16 @@ The first step in the process is to gather the necessary data for analysis, whic
 ### 2. Mutation to Peptide Mapping
 Once somatic mutations are identified, the next step is to map these mutations to peptide sequences. This involves creating a list of peptides that contain the mutated residue, representing potential neoantigens. Peptide prediction tools are used to generate the corresponding peptide sequences from the mutated positions.
 
-### 3. MHC Binding Affinity Prediction
-After generating peptide sequences, the next step is to evaluate their potential to bind to MHC molecules, which play a critical role in presenting neoantigens to the immune system. MHC binding affinity prediction tools, such as NetMHC or other relevant software, are used to assess the likelihood of each peptide being presented by MHC class I or II molecules. Peptides with strong binding affinities are considered high-priority candidates for immunotherapy.
+### 3. Generating FASTA for MHC binding tool
+In this step, we prepare the peptide sequences in FASTA format to be used with an MHC binding prediction tool. MHC (Major Histocompatibility Complex) binding tools are often used in immunology research to predict which peptides can bind to specific MHC molecules and present them to T-cells. 
 
 ### 4. Annotation and Filtering
 At this stage, the predicted peptides are annotated with relevant biological and immunological information, such as their predicted MHC class, binding affinity, and potential for being recognized by T-cells. Filtering is performed to retain only the most promising candidates, based on binding affinity thresholds and relevance to the tumor type being studied.
 
-### 5. Visualization and Interpretation
+### 5. Mapping Peptide sequences with **PepPointer**
+PepPointer is used to map the peptide sequences to their corresponding genomic coordinates. This tool helps align peptide sequences (often derived from proteomic data) to the genomic context, providing useful insights into where these peptides are located in the genome. It allows researchers to determine which genomic regions are associated with the peptides of interest, facilitating the study of their potential functional roles.
+
+### 6. Visualization and Interpretation
 The final step involves visualizing the results of the annotation and filtering steps. Various bioinformatics tools can be used to present the data in a way that is easy to interpret, such as visualizing peptide binding affinity scores or generating summary plots that highlight the most immunogenic neoantigens. This step helps in drawing meaningful conclusions about the potential of the identified peptides for cancer immunotherapy.
 
 ## Get data
@@ -133,7 +136,7 @@ ON t1.c1 = t2.c1`
 {: .hands_on}
 
 
-## Input for IEDB **Tabular-to-FASTA**
+## Generating FASTA for MHC binding tool
 This output is an input for the next workflow.
 
 > <hands-on-title> Tabular-to-FASTA </hands-on-title>
@@ -205,7 +208,7 @@ In this step, we will use the Convert tool to remove colons from the dataset. Th
 {: .hands_on}
 
 
-## Extracting bed file information **Query Tabular**
+### Extracting bed file information **Query Tabular**
 In this step, we will use the Query Tabular tool to extract specific information from a dataset, such as a BED file containing genomic regions, and match it with novel peptides. This allows for identifying the relevant genomic and peptide information by querying data from two sources and combining them through an SQL query. By using an INNER JOIN operation, we can merge data from two tables based on shared columns, and retrieve the necessary information. This query extracts specific columns from both the BED file (such as genomic coordinates) and the novel peptide dataset (such as peptide sequences or identifiers), enabling the identification of peptides that correspond to specific genomic regions. These are the columns that will be extracted - 
 - Chrom: Chromosome name (e.g., chr1).
 - Start: Starting position of the feature (zero-based index).
@@ -235,7 +238,7 @@ ON t1.c3 = t2.c4`
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 
-## Performing calculations to convert proteomic coordinates to genomic coordinates.  
+### Performing calculations to convert proteomic coordinates to genomic coordinates.  
 To convert proteomic coordinates to genomic coordinates, it is essential to account for the relationship between the protein sequence and its corresponding gene or genomic region. In this workflow, the proteomic coordinates have already been extracted at the amino acid level. Since each amino acid in the protein sequence corresponds to a triplet of nucleotides (a codon) in the mRNA, we need to multiply the proteomic coordinate by 3 to obtain the genomic coordinate. This conversion will give us the position of each amino acid within the genomic sequence. The resulting genomic coordinates are stored in a separate column for easy reference. Once this step is completed, we can extract and organize the information in the correct order for further analysis or mapping to the genomic reference.
 
 
@@ -255,7 +258,7 @@ FROM t1`
 {: .hands_on}
 
 
-## Annotating the genomic coordinate
+### Annotating the genomic coordinate
 
 The Query Tabular step in this workflow is used to extract and calculate genomic coordinates based on the proteomic data. The SQL query within the tool defines two calculations for genomic coordinates, start and stop, based on the strand information of the data. For each row in the input dataset (t1), if the strand (t1.c7) is "-" (negative), the genomic coordinates are calculated by subtracting the position from the given end (t1.c3 - t1.c9 for start, and t1.c3 - t1.c10 for stop). If the strand is "+" (positive), the genomic coordinates are calculated by adding the respective positions (t1.c2 + t1.c9 for start, and t1.c2 + t1.c10 for stop). These calculated coordinates are then returned in the query results, where they will be included as new columns (start and stop). This step is essential for transforming the proteomic information into genomic positions for further analysis.
 
@@ -295,7 +298,7 @@ FROM t1`
 >
 {: .question}
 
-## Generating BED file for Peppointer 
+### Generating BED file for Peppointer 
 This step is necessary to extract and reorganize relevant genomic information from the dataset. By querying specific columns such as chromosome (chromosome), start (chromStart), end (chromEnd), and strand (strand), we are preparing the data for further analysis. These values are essential for mapping proteomic or peptide data to the genomic coordinates, ensuring accurate alignment and interpretation of the sequence in the context of its genomic location. Additionally, renaming columns enhances clarity and standardizes the format, making it easier to work with the data in subsequent steps.
 
 > <hands-on-title> Query Tabular </hands-on-title>
