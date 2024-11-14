@@ -13,11 +13,15 @@ jobs:
   runner-job:
     if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2000
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
@@ -62,7 +66,7 @@ jobs:
           git diff
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: Update WorkflowHub IDs
           branch-suffix: timestamp

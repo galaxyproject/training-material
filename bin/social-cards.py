@@ -24,6 +24,9 @@ for path, time in meta.items():
     if time < last_timestamp:
         continue
 
+    if '/tags/' in path:
+        continue
+
     # Do something with the path
     print(f"New social card: {path}")
     # download the svg

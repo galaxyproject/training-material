@@ -153,7 +153,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
+> 4. Create a paired collection named `2 PE fastqs`, name your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -265,7 +265,7 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.8+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
 >    - In *"Other Read Trimming Options"*
@@ -1460,7 +1460,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 
 If you have only one or two factors with few number of biological replicates, the basic setup of **DESeq2** is enough. In the case of a complex experimental setup with a large number of biological replicates, tag-based collections are appropriate. Both approaches give the same results. The Tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with a complex experimental setup.
 
-{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" default="Basic" text="Which approach would you prefer to use?" disambiguation="deseq"%}
+{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" option3="Collection split" default="Basic" text="Which approach would you prefer to use?" disambiguation="deseq"%}
 
 <div class="Basic" markdown="1">
 
@@ -1504,7 +1504,7 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 
 > <hands-on-title>Add tags to your collection for each of these factors</hands-on-title>
 >
-> 1. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+> 1. Create a collection list with all these counts that you label `all counts`. Name each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
@@ -1575,6 +1575,80 @@ We can now run **DESeq2**:
 >
 {: .hands_on}
 
+</div>
+<div class="Collection-split" markdown="1">
+
+DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use patterns on the name of our samples to easily select all samples belonging to the same category.
+
+> <hands-on-title>Generate a collection of each category</hands-on-title>
+>
+> 1. Create a collection list with all these counts that you label `all counts`. Name each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Dataset collection"*: `all counts`
+>
+>    We will now split the collection by treatment. We need to find a pattern which will be present into only one of the 2 categories. We will use the word `untreat`:
+>
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `untreat`
+>
+> 4. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `all counts`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
+>
+> 5. Rename both collections `untreated` (the filtered collection) and `treated` (the discarded collection).
+>
+> We will repeat the same process using `single`
+>
+> 6. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `single`
+>
+> 7. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `all counts`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
+>
+> 8. Rename both collections `single` (the filtered collection) and `paired` (the discarded collection).
+{: .hands_on}
+
+We can now run **DESeq2**:
+
+> <hands-on-title>Determine differentially expressed features</hands-on-title>
+>
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
+>    - *"how"*: `Select datasets per level`
+>        - In *"Factor"*:
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
+>           - In *"1: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
+>               - {% icon param-collection %} *"Count file(s)"*: Select the collection `treated`
+>           - In *"2: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
+>               - {% icon param-collection %} *"Count file(s)"*: Select the collection `untreated`
+>       - {% icon param-repeat %} *"Insert Factor"*
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
+>               - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
+>                        - {% icon param-collection %} *"Count file(s)"*: Select the collection `paired`
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
+>                        - {% icon param-collection %} *"Count file(s)"*: Select the collection `single`
+>    - *"Files have header?"*: `Yes`
+>    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
+>    - In *"Output options"*:
+>        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
+>
+{: .hands_on}
 </div>
 
 **DESeq2** generated 3 outputs:

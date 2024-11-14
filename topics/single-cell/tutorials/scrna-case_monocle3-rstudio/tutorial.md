@@ -41,6 +41,7 @@ tags:
 - 10x
 - paper-replication
 - R
+- MIGHTS
 
 contributions:
   authorship:

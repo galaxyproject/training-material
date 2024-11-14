@@ -14,12 +14,13 @@ on:
 jobs:
   runner-job:
     if: github.repository_owner == 'galaxyproject'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # Shallow should be fine for video
       - uses: actions/checkout@v4
         with:
           fetch-depth: 500
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -28,7 +29,7 @@ jobs:
           architecture: 'x64'
       - name: Install dependencies
         run: |
-          sudo apt-get install -y imagemagick optipng
+          sudo apt-get install -y imagemagick optipng inkscape
           pip install requests awscli
           mkdir -p ~/.fonts/
           wget https://galaxy-training.s3.amazonaws.com/social/recursive.ttf -O ~/.fonts/recursive.ttf
@@ -50,7 +51,7 @@ jobs:
           echo "timestamp=$(curl https://galaxy-training.s3.amazonaws.com/social/timestamp.txt -f 2>/dev/null || echo none)" >> $GITHUB_ENV
 
           # Support regenerating all
-          if [[ "${{ github.event.inputs.selected_tag }}" != "" ]]; then
+          if [[ "${{ github.event.inputs.all_old }}" != "" ]]; then
             echo "timestamp=0" >> $GITHUB_ENV
           fi
 
