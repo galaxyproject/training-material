@@ -602,170 +602,13 @@ This tool is important for converting the genomic annotations (in BED format) th
 >
 {: .question}
 
-# Extracting Protein Accession IDs
+# Merging the non-normal databases with the known HUMAN protein sequence
 
+Merging non-normal databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), non-normal FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
 
-## Sub-step with **FASTA-to-Tabular**
+## Merging all databases **FASTA Merge Files and Filter Unique Sequences**
 
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [FASTA-to-Tabular](toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Convert these sequences"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
->    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - In *"Filter Tabular Input Lines"*:
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `select columns`
->                - *"enter column numbers to keep"*: `1`
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `regex replace value in column`
->                - *"enter column number to replace"*: `1`
->                - *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
->                - *"replacement expression"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-# Filtering RPKM accessions
-
-## Sub-step with **Filter Tabular**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Filter Tabular](toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.1) %} with the following parameters:
->    - {% icon param-file %} *"Tabular Dataset to filter"*: `output` (output of **FASTA-to-Tabular** {% icon tool %})
->    - In *"Filter Tabular Input Lines"*:
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `select columns`
->                - *"enter column numbers to keep"*: `1`
->        - {% icon param-repeat %} *"Insert Filter Tabular Input Lines"*
->            - *"Filter By"*: `regex replace value in column`
->                - *"enter column number to replace"*: `1`
->                - *"regex pattern"*: `^([^ |]+).*$`
->                - *"replacement expression"*: `\1`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Concatenate datasets**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Concatenate datasets](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/9.3+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Datasets to concatenate"*: `output` (output of **Filter Tabular** {% icon tool %}), `output` (output of **Filter Tabular** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-## Sub-step with **FASTA Merge Files and Filter Unique Sequences**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> FASTA Merge Files and Filter Unique Sequences </hands-on-title>
 >
 > 1. {% tool [FASTA Merge Files and Filter Unique Sequences](toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0) %} with the following parameters:
 >    - *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -773,59 +616,13 @@ This tool is important for converting the genomic annotations (in BED format) th
 >            - {% icon param-repeat %} *"Insert Input FASTA File(s)"*
 >                - {% icon param-file %} *"FASTA File"*: `translation_fasta` (output of **Translate BED transcripts** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this workflow, we demonstrated a comprehensive process for merging non-normal protein sequence data with known human protein sequences, ensuring compatibility and consistency at each step. Starting with data preparation, we converted sequence data into appropriate formats using tools like FASTA-to-Tabular, StringTie, and GffCompare, making it suitable for downstream analysis. Next, we merged non-normal sequences with known human proteins using tools such as FASTA Merge Files and BEDTools, ensuring the datasets aligned based on common identifiers. The subsequent steps, involving Translate BED transcripts and bed to protein map, translated genomic coordinates into protein sequences, further enriching our dataset. Finally, by extracting protein accession IDs and validating the merged data, we ensured a clean and well-organized dataset. This workflow effectively integrates newly identified proteins with established references, offering a robust resource for further analysis in bioinformatics applications like functional annotation and differential expression studies. By combining multiple bioinformatics tools, this process is adaptable to various research needs, making it invaluable for genomic and proteomic analysis. The output from this workflow will be now used for the neoantigen database searching.
+
+# Disclaimer 
+
+Please note that all tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may vary due to updates in the reference databases or tool modifications. Therefore, the results may not be consistent across different runs or versions of the tools, and we recommend verifying the specific versions used to ensure reproducibility and accuracy.
