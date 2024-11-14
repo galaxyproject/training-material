@@ -34,7 +34,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-non-normal-database
+            - neoantigen-4-peptide-verification
 tags: [label-free]
 redirect_from:
 - proteomics/tutorials/neoantigen-3-fragpipe-discovery/tutorial
