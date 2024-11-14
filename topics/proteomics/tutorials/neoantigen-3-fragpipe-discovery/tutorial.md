@@ -113,12 +113,9 @@ In the final step, tabular results from the analysis are queried using SQL-like 
 >
 {: .hands_on}
 
-# Merging FASTA Files and Filtering for Unique Sequences
+## Merging FASTA Files and Filtering for Unique Sequences
 
 Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-normal database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.
-
-
-## Merging fusion and non-normal databases with **FASTA Merge Files and Filter Unique Sequences**
 
 > <hands-on-title> FASTA Merge Files and Filter Unique Sequences</hands-on-title>
 >
