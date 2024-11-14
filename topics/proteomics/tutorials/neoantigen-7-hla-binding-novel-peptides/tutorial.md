@@ -4,22 +4,36 @@ layout: tutorial_hands_on
 title: Neoantigen_IEDB_binding_PepQuery_novel_peptides
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What are neoantigens, and why are they significant in cancer immunotherapy?
+- How can binding predictions and validation help in distinguishing strong and weak binders?
+- What tools and techniques are commonly used for neoantigen identification and validation?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Understand the process of neoantigen identification and the role of peptide binding predictions.
+- Learn how to use IEDB to predict the binding affinity of peptides to MHC molecules.
+- Gain practical experience using PepQuery to validate novel peptides from proteomics data.
+- Distinguish between strong and weak binders based on predicted binding affinity.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Neoantigens are crucial targets for cancer immunotherapy, with their binding strength to MHC molecules playing a critical role in immune response.
+- IEDB allows for the prediction of peptide-MHC binding affinities, helping to identify candidate neoantigens.
+- PepQuery enables validation of these peptides in proteomics data, adding confidence to neoantigen identification.
+- Separating strong and weak binders allows for prioritization in therapeutic applications.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+tags: [label-free]
+redirect_from:
+- proteomics/tutorials/neoantigen-7-hla-binding-novel-peptides/tutorial
 
 ---
 
