@@ -609,7 +609,7 @@ This tool is important for converting the genomic annotations (in BED format) th
 Merging non-normal databases with the known human protein sequence involves integrating data from various sources into a unified format for more efficient analysis. In bioinformatics, this process is often necessary when working with protein sequence data, especially when datasets include variations, unknown sequences, or newly identified proteins alongside well-established reference proteins from the human genome. In this case, we are merging a previously integrated variant database (which includes SNV, INDEL, and RPKM), assembled FASTA data generated from translating BED files to transcripts, the UniProt human reference, and a known contaminant database.
 
 
-![Fusions_Protein_Database workflow]({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG %})
+![Database Merging({% link topics/proteomics/images/neoantigen/Non-Normal_Protein_Database_4.PNG %})
 
 
 ## Merging all databases **FASTA Merge Files and Filter Unique Sequences**
