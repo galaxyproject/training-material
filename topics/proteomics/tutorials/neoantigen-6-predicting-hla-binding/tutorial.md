@@ -4,51 +4,60 @@ layout: tutorial_hands_on
 title: Neoantigen_Predicting_HLA_Binding
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How can we predict the neoantigens presented by tumor cells?
+- How does the HLA genotype affect the immune response to cancer?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+The following tools will be used in this tutorial:
+  - Predict potential neoantigens based on HLA binding affinity.
+  - Understand the role of HLA genotyping in predicting personalized immune responses.
+  - Use specific tools for processing sequence data to predict HLA-binding peptides.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Neoantigen prediction is a key step in personalized medicine.
+- HLA binding affinity helps identify potential neoantigens.
+- Tools like OptiType, seq2HLA, and query tabular tools are essential for the workflow.
 contributors:
-- contributor1
-- contributor2
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-free]
+redirect_from:
+- proteomics/tutorials/neoantigen-6-predicting-hla-binding/tutorial
 
 ---
 
 
 # Introduction
 
-<!-- This is a comment. -->
+Neoantigen prediction for HLA binding is a critical component of personalized cancer immunotherapy. Neoantigens, which are tumor-specific antigens resulting from mutations in cancer cells, can be recognized by the immune system, making them promising targets for tailored immunotherapies. Human leukocyte antigen (HLA) molecules play a key role in presenting these neoantigens on the surface of cells, where they can be detected by T-cells, triggering an immune response.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This tutorial focuses on predicting HLA binding affinities for potential neoantigens, an essential step in identifying effective targets for immunotherapy. The workflow includes the use of tools such as OptiType and seq2HLA to determine HLA genotypes, as well as data reformatting and querying methods to manage complex data outputs.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+By completing this tutorial, learners will gain an understanding of:
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+- The bioinformatics approaches required to predict HLA binding,
+- Practical skills for neoantigen identification, including managing and analyzing genomic data,
+- How to apply specific bioinformatics tools to analyze HLA binding predictions effectively.
 
+This hands-on tutorial is designed to offer practical experience for learners aiming to integrate bioinformatics techniques into their immunotherapy research or clinical practice, emphasizing the theoretical and technical concepts essential for neoantigen prediction.
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -59,26 +68,25 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Predicting HLA binding
+This tutorial provides a step-by-step guide for predicting HLA binding of neoantigens, a crucial part of personalized immunotherapy research. Using OptiType and seq2HLA, we will perform HLA typing and analyze which neoantigens are likely to bind to a specific individual’s HLA molecules, potentially driving an immune response. This process is essential for identifying candidate peptides that could serve as effective targets in immunotherapy.
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+### 1. Get Data
+The tutorial begins with the acquisition and upload of necessary sequencing files. These files typically contain raw paired-end reads or other sequencing outputs, which will be processed to identify HLA alleles. Proper organization and tagging of data are crucial for maintaining an efficient workflow.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+### 2. HLA Typing with OptiType
+OptiType is used first in this tutorial for HLA typing. This tool processes the uploaded sequencing data to identify HLA class I alleles, which are essential for the subsequent neoantigen binding predictions. OptiType’s output will include the predicted HLA alleles that are specific to the individual’s immune profile.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+### 3. HLA Typing with seq2HLA
+As a complementary approach, we will use seq2HLA for HLA typing to cross-validate results. By comparing predictions from both OptiType and seq2HLA, we can ensure greater accuracy in identifying relevant HLA alleles, allowing us to confidently proceed with neoantigen predictions.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+### 4. Reformatting and Filtering HLA Alleles
+After obtaining results from both HLA typing tools, the next step is to reformat and filter the data. This involves removing redundant entries and preparing the data in a format that’s optimized for binding prediction. Cleaning and filtering ensure that only the most relevant HLA alleles are used in the neoantigen analysis.
 
-have fun!
+### 5. Querying and Validating HLA Typing Results
+The final step is to use SQL-like queries to further refine and validate the HLA typing results. This allows us to filter and focus on the HLA alleles most relevant to our research question, ensuring the quality and relevance of the dataset for predicting neoantigen binding.
+
+This structured workflow enables a streamlined approach for accurate HLA typing and binding prediction, setting the foundation for personalized immunotherapy and advancing the development of effective cancer treatments.
 
 ## Get data
 
@@ -92,9 +100,6 @@ have fun!
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -111,29 +116,12 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+## HLA typing with **OptiType**
 
-![Alternative text](../../images/image_name "Legend of the image")
+OptiType is a bioinformatics tool designed specifically for HLA class I typing using paired-end sequencing reads. In this workflow, OptiType identifies the HLA alleles that a person possesses, which are crucial for understanding which neoantigens may effectively bind to an individual’s immune receptors. This tool enhances the personalization of immunotherapy by providing highly accurate HLA allele predictions. In turn, this allows for more targeted analysis of potential neoantigen binding candidates.
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **OptiType**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> OptiType </hands-on-title>
 >
 > 1. {% tool [OptiType](toolshed.g2.bx.psu.edu/repos/iuc/optitype/optitype/1.3.5+galaxy0) %} with the following parameters:
 >    - *"Single or Paired-end reads"*: `Paired`
@@ -141,36 +129,29 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Select second set of reads"*: `output` (Input dataset)
 >    - *"Enumerations"*: `3`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we use paired-end reads in OptiType?
+> 2. What does the "Enumerations" parameter mean in OptiType, and why set it to 3?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Paired-end reads are used because they provide more comprehensive information about the DNA sequence. This improves the accuracy of HLA typing, as OptiType can analyze data from both directions of a DNA segment, reducing ambiguity and increasing the chance of correctly identifying HLA alleles.
+> > 2. The "Enumerations" parameter controls the number of best-matching HLA allele combinations that OptiType will report. Setting it to 3 provides multiple possible allele combinations for verification and ensures that we capture the most likely HLA types while still keeping the output manageable for downstream analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **seq2HLA**
+## HLA typing with **seq2HLA**
 
-> <hands-on-title> Task description </hands-on-title>
+seq2HLA is a computational tool for identifying HLA types from RNA-Seq or DNA-Seq data. It is especially useful in immunogenomics research, as it allows for the prediction of an individual’s HLA class I and II alleles, which play a key role in immune response. In this workflow, seq2HLA provides essential data for identifying potential neoantigens by aligning sequencing reads to reference HLA alleles, allowing researchers to understand the specific immune profile of each sample.
+
+> <hands-on-title> seq2HLA </hands-on-title>
 >
 > 1. {% tool [seq2HLA](toolshed.g2.bx.psu.edu/repos/iuc/seq2hla/seq2hla/2.3+galaxy0) %} with the following parameters:
 >    - *"Name prefix for this analysis"*: `STS26TGen`
@@ -178,36 +159,28 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Select first set of reads"*: `output` (Input dataset)
 >        - {% icon param-file %} *"Select second set of reads"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it important to specify a "Name prefix for this analysis"?
+> 2. What is the significance of using paired-end reads in seq2HLA?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The "Name prefix for this analysis" parameter allows users to easily identify the output files related to a specific sample or experiment. By assigning a unique prefix, you can better organize and retrieve results, especially in workflows with multiple samples.
+> > 2. Paired-end reads enhance seq2HLA's accuracy by providing complementary information from both ends of the DNA or RNA fragment. This improves the resolution and reliability of the HLA typing results, as more context is available to match against the reference HLA alleles.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Text reformatting**
+## Reformatting and Filtering HLA Alleles 
 
-> <hands-on-title> Task description </hands-on-title>
+This step involves reformatting and filtering the HLA alleles output from the OptiType tool to retain only the relevant and unique alleles. The process is essential for streamlining the data and ensuring that only the significant allele information is passed on for further analysis. Using a simple AWK program, we can filter out redundant data and focus on distinct HLA alleles, which are crucial for downstream neoantigen discovery and immunogenomics applications.
+
+> <hands-on-title> Text reformatting </hands-on-title>
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `result` (output of **OptiType** {% icon tool %})
@@ -220,36 +193,28 @@ END {
     }
 }`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the purpose of using the AWK program in this step?
+> 2. Why is it important to filter out redundant HLA alleles?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The AWK program here helps identify and filter unique HLA alleles from the output of OptiType. This step removes duplicates and ensures that only relevant alleles are retained for further analysis, improving data quality and accuracy.
+> > 2. Filtering out redundant alleles simplifies the dataset and enhances computational efficiency, making downstream analyses quicker and more focused on significant variants. This is essential for accurately interpreting immune responses in personalized medicine and neoantigen discovery.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Query Tabular**
+## Querying and Validating HLA Typing Results
 
-> <hands-on-title> Task description </hands-on-title>
+In this step, we use the Query Tabular tool to validate and organize the HLA typing results from OptiType and seq2HLA outputs. By querying and filtering the data, we create a consolidated list of HLA alleles, formatted consistently for further analysis. This process ensures that we have a clean dataset of HLA alleles that will improve the accuracy of downstream analyses, such as neoantigen prediction or immune response studies.
+
+> <hands-on-title> Query tabular </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -311,42 +276,29 @@ UNION
 SELECT c2 FROM seq2hla WHERE c2 LIKE '%*%:%'`
 >                - *"include query result column headers"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it necessary to use SQL queries on HLA typing results?
+> 2. How do we know the query results are accurate for the next steps?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. SQL queries allow us to filter, organize, and validate the HLA typing results efficiently. This approach ensures consistent formatting and removes unnecessary or redundant data, making the dataset more manageable for further analysis.
+> > 2. By carefully setting regex patterns and filtering options, we can ensure that only valid HLA allele formats are included. Reviewing the query results for consistency and completeness further ensures accuracy before moving to the next steps in the pipeline.
 > >
 > {: .solution}
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This tutorial covers the workflow for identifying and validating HLA alleles using OptiType and seq2HLA. Each step in the process, from reformatting and filtering to querying, is essential for generating accurate and consistent allele data. This validated data can then be used confidently in downstream immunological analyses, including neoantigen prediction and personalized medicine applications.
+
+
+# Disclaimer 
+
+Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may also vary due to updates in the reference databases or tool modifications. We recommend the users to verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
