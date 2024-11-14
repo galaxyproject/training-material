@@ -241,6 +241,7 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 <iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=cb27f805d076ee9f&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
 
 The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B. If you inspect one of the elements in the `Actual Cell Proportions` collection, you should see a table similar to the following:
+
 (**Note:** your cell-types and values will differ slightly since these subtypes are random)
 
 |                         | A_actual   |
@@ -273,14 +274,14 @@ The following workflow will take the two pseudo-bulk samples (A and B), as well 
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Run **Workflow inferring cellular proportions** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Subsample_A - matrix"*: `expression data - A`
->    - {% icon param-collection %} *"Subsample_B - matrix"*: `expression data - B`
+>    - {% icon param-collection %} *"Pseudobulk - A"*: `expression data - A`
+>    - {% icon param-collection %} *"Pseudobulk - A"*: `expression data - B`
 >    - {% icon param-collection %} *"ESet Reference scRNA-seq"*: `ESet Object`
 >    - *"Cell Types Label from scRNA dataset"*: `cellType`
 >    - *"Samples Identifier from scRNA dataset"*: `sampleID`
 >    - *"Cell types to use from scRNA dataset"*:`acinar,alpha,beta,delta,ductal,gamma`
->    - {% icon param-collection %} *"B_actuals"*: `actual - B`
->    - {% icon param-collection %} *"A_actuals"*: `actual - A`
+>    - {% icon param-collection %} *"Actual - B"*: `actual - B`
+>    - {% icon param-collection %} *"Actual - A"*: `actual - A`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 > 3. Rename output collections / add tags?
