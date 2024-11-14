@@ -4,22 +4,42 @@ layout: tutorial_hands_on
 title: Neoantigen_PepPointer_Annotation
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How can neoantigens be identified in cancer genomes?
+- What role do neoantigens play in personalized immunotherapy?
+- How can mutations in cancer cells be used to predict immune system responses?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Identify potential neoantigens from sequencing data.
+- Annotate somatic mutations and predict peptide sequences.
+- Predict MHC binding affinities for neoantigens.
+- Interpret data using bioinformatics tools for cancer immunotherapy applications.
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
-contributors:
-- contributor1
-- contributor2
+- Neoantigen discovery involves the identification of somatic mutations that generate novel peptide sequences recognized by the immune system.
+- Accurate prediction of MHC binding affinity is critical for evaluating the immunogenic potential of neoantigens.
+- Immunoinformatics tools and pipelines are integral for analyzing neoantigens from genomic data and visualizing results.
+contributions:
+  authorship:
+    - subinamehta
+    - katherine-d21
+    - jj-umn
+  editing:
+    - pratikdjagtap
+    - timothygriffin
+requirements:
+  -
+    type: "internal"
+    topic_name: proteomics
+subtopic: neoantigen
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - neoantigen-non-normal-database
+tags: [label-free]
+redirect_from:
+- proteomics/tutorials/neoantigen-5-variant-annotation/tutorial
 
 ---
 
@@ -589,5 +609,11 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial, we have covered the process of annotating neoantigen peptides using the PepPointer tool in a bioinformatics pipeline. The main focus was to guide you through the various steps involved in the analysis, including querying tabular datasets, converting data formats, and using the PepPointer tool to classify peptides based on genomic information.
+
+By the end of this tutorial, you should now be able to:
+- Understand the steps involved in preparing and processing peptide data for neoantigen prediction.
+- Use tools like Query Tabular, Convert, and PepPointer to manipulate and classify peptide sequences.
+- Recognize the importance of annotating neoantigens for immunotherapy research and how bioinformatics tools can facilitate this process.
+
+The key takeaway from this tutorial is the ability to manipulate complex genomic data and generate insights into potential therapeutic targets using bioinformatics techniques. You should now be better equipped to handle similar datasets and apply these techniques to other types of genomic and proteomic research.
