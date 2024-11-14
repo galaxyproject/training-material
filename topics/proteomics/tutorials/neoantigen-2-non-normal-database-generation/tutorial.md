@@ -30,7 +30,7 @@ follow_up_training:
         type: "internal"
         topic_name: proteomics
         tutorials:
-            - neoantigen-non-normal-database
+            - neoantigen-3-fragpipe-discovery
 tags: [label-free]
 redirect_from:
 - /topics/proteomics/tutorials/neoantigen-1-non-normal-database-generation/tutorial
