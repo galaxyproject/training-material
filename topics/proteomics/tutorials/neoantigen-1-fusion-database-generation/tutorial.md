@@ -355,3 +355,7 @@ Using regex (regular expressions) for find and replace is a powerful technique f
 # Conclusion
 
 The workflow outlined above demonstrates a systematic approach to processing biological data, emphasizing the importance of each step in ensuring accurate and reliable results. By integrating tools like RNA-STAR for alignment and Arriba for structural variant detection, researchers can effectively analyze complex genomic information. The transition from tabular data to FASTA format and the application of regex for find-and-replace operations further streamline data management, enhancing efficiency and clarity. Ultimately, this workflow not only facilitates the identification of neoantigens but also contributes to the broader goals of personalized medicine and targeted therapies. By leveraging these methodologies, researchers can gain deeper insights into the genetic underpinnings of diseases and advance the development of innovative treatments.
+
+# Disclaimer
+
+Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may also vary due to updates in the reference databases or tool modifications. We recommend the users to verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
