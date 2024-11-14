@@ -38,7 +38,7 @@ follow_up_training:
 
 There are various methods to estimate the proportions of cell types in bulk RNA data. Since the actual cell proportions of the data are unknown, how do we know if our tools are producing accurate results?
 
-In this tutorial we will be using single-cell data with known cell-type proportions in order to create pseudo-bulk RNA data. We will then estimate the cell-type proportions of this pseudo-bulk data using the currently available deconvolution tools within Galaxy. Since we know the true proportions values, we will be able to measure and compare the accuracy of the tools.
+In this tutorial we will be using single-cell data with known cell-type proportions in order to create pseudo-bulk RNA data. We will then estimate the cell-type proportions of this pseudo-bulk data using the currently available deconvolution tools within Galaxy. Since we know the true proportion values, we will be able to measure and compare the accuracy of the tools' predictions.
 
 > <agenda-title></agenda-title>
 >
@@ -92,7 +92,7 @@ Before continuing lets quickly inspect our single-cell data. We can find all of 
 >    - *"Delimited by"*: `Tab`
 >    - *"How should the results be sorted?"*: `With the most common value first`
 >
-> 2. **Rename** {% icon galaxy-pencil %} output `Cell Type Counts`
+> 2. **Rename** {% icon galaxy-pencil %} output `Cell type counts`
 >
 {: .hands_on}
 
@@ -122,8 +122,7 @@ We can see from the output table below, there are various cell types present in 
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Inspecting the general information of `EMTABesethealthy.expression.tabular` we can see that there are **1,097** cells in the data as there are 1,098 columns (subtracting 1 for the header).
-columns (minus 1 for the header), with each column being a cell.
+> > 1. Inspecting the general information of `EMTABesethealthy.expression.tabular` we can see that there are **1,097** cells in the data as there are 1,098 columns (we need to subtract 1 for the header).
 > > 2. Looking at the output of the {% tool [Count](Count1) %} tool (or the above table), there are **14** distinct cell types in the data.
 > >
 > {: .solution}
@@ -151,7 +150,7 @@ If we inspect the expression data file downloaded earlier, we can see that curre
 
 ## Generate batch mode collections
 
-For this tutorial we will run the evaluations **20** times, this will both help improve the sample size and allow us to determine the consistency of the tools, whilst being small enough to run in a reasonable amount of time!
+For this tutorial we will run the evaluations **20** times, this will both help improve the sample size and allow us to determine the consistency of the tools, whilst being small enough to run in a reasonable amount of time.
 
 We will now duplicate our single-cell data 20 times and store it in a collection. This will be done for both the expression data and metadata files.
 
@@ -195,7 +194,7 @@ Similar to the expression data, this ExpressionSet object needs to be duplicated
 > <hands-on-title>Generate ESet collection</hands-on-title>
 >
 > 1. {% tool [Duplicate file to collection](__DUPLICATE_FILE_TO_COLLECTION__) %} with the following parameters:
->    - {% icon param-file %} *"Input Dataset"*: `ESet Object` (output of **Construct Expression Set Object** {% icon tool %})
+>    - {% icon param-file %} *"Input Dataset"*: `RData ESet Object` (output of **Construct Expression Set Object** {% icon tool %})
 >    - *"Size of output colection"*: `20`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `ESet Object`
@@ -234,9 +233,9 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 >    - {% icon param-collection %} *"Expression Data"*: `expression data collection`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
-> 3. Rename output collections / add tags?
+> 3. Add a tag labelled `#A` to the first "Actual cell proportions" and "Pseudobulk" collections
 >
-> 4. Inspect `cell type counts`
+> 4. Add a tag labelled `#B` to the second "Actual cell proportions" and "Pseudobulk" collections
 {: .hands_on}
 
 <iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=cb27f805d076ee9f&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
