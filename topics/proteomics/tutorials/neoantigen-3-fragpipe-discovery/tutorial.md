@@ -193,70 +193,39 @@ In this workflow, FragPipe is used after FASTA database validation to ensure tha
 >            - *"Perform Isobaric Quantification"*: `no`
 >    - *"Additional outputs"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we need to use a validated FASTA database with FragPipe?
+> 2. What is the significance of running Percolator and Protein Prophet in the FragPipe workflow?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. A validated FASTA database ensures that the protein sequences used in the analysis are correctly formatted and free from errors. This improves the accuracy of peptide identification and ensures reliable downstream analysis for neoantigen discovery.
+> > 2. Percolator is used to validate peptide-spectrum matches (PSMs) by improving the accuracy of identification through machine learning-based scoring. Protein Prophet is used for protein identification validation, providing confidence levels for protein inference. Both tools help ensure high-quality, reliable results in proteomics analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Collapse Collection**
+## Collapsing Datasets and Selecting Relevant Data
 
-> <hands-on-title> Task description </hands-on-title>
+The Collapse Collection tool is used to combine multiple input files into a single dataset, which is especially useful in workflows where various outputs, such as peptide or protein data, need to be merged for further analysis. In this specific workflow, the tool consolidates peptide data produced by FragPipe into one unified collection. This step is important because it simplifies data handling and organization, making downstream processes like querying or visualization much easier and more efficient. Collapsing the collection reduces the complexity of dealing with multiple files and minimizes the risk of errors. It also ensures that all related data is available in a single dataset, speeding up subsequent analysis and improving overall workflow efficiency. By merging the results into one file, researchers can focus on analysis rather than managing fragmented data.
+
+In this workflow, we aim to consolidate the peptide output from FragPipe. In the current version of FragPipe, the peptide output is generated in a collection format. We need to collapse this collection to create a single tabular output. The next step is to select only relevant variant sequences, hence we remove all the contaminants and known HUMAN sequences from the output.
+
+> <hands-on-title> Collapse Collection </hands-on-title>
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `output_peptide` (output of **FragPipe -  Academic Research and Education User License (Non-Commercial)** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Select**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Removing contaminants and known proteins with **Select** </hands-on-title>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output` (output of **Collapse Collection** {% icon tool %})
@@ -264,36 +233,16 @@ In this workflow, FragPipe is used after FASTA database validation to ensure tha
 >    - *"the pattern"*: `(HUMAN)|(contam_)|(con_)|(ENSP)`
 >    - *"Keep header line"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Querying Tabular Results for Further Analysis
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The Query Tabular tool is used to query and filter tabular data using SQL-like commands. It allows users to extract specific data from a larger dataset based on defined criteria. This tool is essential for querying complex data and narrowing down results for further analysis. In this step, the Query Tabular tool is applied to the output of the Select tool (a previous step in the workflow). The input is a tabular dataset (out_file1), and a custom SQL query is provided to filter the dataset based on specific conditions. The query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')) retrieves a subset of the data, selecting only the rows where columns c16 and c18 are empty or null.
 
-## Sub-step with **Query Tabular**
+In this workflow, this step filters the tabular data to isolate the rows that meet the specified conditions. By using this query, unnecessary or irrelevant data is excluded from the dataset, and only the relevant results are retained for further analysis. This step ensures that the subsequent analysis is based on clean and focused data.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Query Tabular </hands-on-title>
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.2) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -307,42 +256,29 @@ WHERE (c16 IS NULL OR c16 = '')
 AND (c18 IS NULL OR c18 = '')`
 >    - *"include query result column headers"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What is the purpose of using an SQL query in the Query Tabular tool in this workflow?
+> 2. How does the SQL query provided (SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')) filter the dataset, and what does it aim to accomplish?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The purpose of using an SQL query in the Query Tabular tool is to filter and retrieve specific rows from a tabular dataset based on defined conditions, allowing the user to focus on relevant data for further analysis.
+> > 2. The SQL query filters the dataset by selecting only the rows where columns c16 and c18 are either null or empty. It aims to exclude any rows where these columns contain data, ensuring that only relevant and clean data is retained for further processing.
 > >
 > {: .solution}
 >
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this workflow, tools like FragPipe, Collapse Collection, and Query Tabular are used to process, merge, and filter proteomics data for efficient analysis. FragPipe allows for in-depth proteomic analysis, producing results that are consolidated using Collapse Collection into a unified dataset, simplifying further analysis. The Query Tabular tool then enables targeted querying of this dataset, filtering it based on specific conditions to refine the data for downstream analysis. Together, these tools streamline the workflow, enhancing the ability to manage, manipulate, and extract meaningful insights from complex biological data. This step-by-step process exemplifies how bioinformatics tools can be integrated to handle large-scale data, making the analysis more efficient and focused on specific research questions.
+
+# Disclaimer 
+
+Please note that all tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may vary due to updates in the reference databases or tool modifications. Therefore, the results may not be consistent across different runs or versions of the tools, and we recommend verifying the specific versions used to ensure reproducibility and accuracy.
