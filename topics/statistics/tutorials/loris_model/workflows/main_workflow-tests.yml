@@ -1,0 +1,19 @@
+- doc: Test the PyCaret comparison workflow
+  job:
+    'chowell_train':
+      location: https://zenodo.org/records/13885908/files/Chowell_train_Response.tsv
+      class: File
+      filetype: .tsv
+    'chowell_test':
+      location: https://zenodo.org/records/13885908/files/Chowell_test_Response.tsv
+      class: File
+      filetype: .tsv
+    outputs:
+      PyCaret_Model_Comparison_Result:
+        asserts:
+          has_text:
+            text: "Model Training Report"
+      PyCaret_Model_Comparison_best_model:
+        asserts:
+          has_text:
+            text: "pycaret.internal.pipeline"
