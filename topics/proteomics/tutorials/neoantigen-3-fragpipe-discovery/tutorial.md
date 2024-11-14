@@ -48,7 +48,7 @@ In this tutorial, we will guide you through a bioinformatics workflow aimed at m
 
 Throughout the tutorial, you will learn how to integrate multiple datasets, ensuring that you can perform analyses such as the identification of potential neoantigens, which are critical for cancer immunotherapy and vaccine development. The tools and steps covered here are important for any bioinformatics pipeline dealing with proteomics and neoantigen discovery.
 
-
+![Discovery Overview workflow]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_1.PNG %})
 > <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
@@ -112,6 +112,7 @@ In the final step, tabular results from the analysis are queried using SQL-like 
 
 Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-normal database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.
 
+![Database Merging]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_2.PNG %})
 
 ## Merging fusion and non-normal databases with **FASTA Merge Files and Filter Unique Sequences**
 
@@ -156,6 +157,8 @@ The FragPipe tool is used for processing and analyzing proteomics data in mass s
 The FragPipe tool is executed with the MS data and a validated FASTA sequence database to identify peptides, proteins, and potential neoantigens from the raw mass spectrometry data. Users must provide MS spectrum files, a manifest file, and the validated FASTA database (created in the previous step using the Validate FASTA Database tool). The tool runs a series of analyses, including non-specific enzyme digestion, quantification of protein abundance, and validation of peptide-spectrum matches (PSMs) with Percolator and Protein Prophet. Output includes identified peptides, proteins, and quantification results, which are essential for downstream neoantigen discovery.
 
 In this workflow, FragPipe is used after FASTA database validation to ensure that the sequence database is correctly formatted and ready for mass spectrometry analysis. It integrates several tools in a single workflow to process the raw MS data, identify peptides and proteins, and provide validation for the results. It also supports isobaric and label-free quantification methods for protein and peptide quantification, important for understanding relative protein abundance and identifying potential neoantigens.
+
+![Fragpipe-discovery]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_3.PNG %})
 
 > <hands-on-title> Fragpipe </hands-on-title>
 >
