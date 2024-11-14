@@ -40,29 +40,10 @@ redirect_from:
 
 # Introduction
 
-<!-- This is a comment. -->
+Neoantigens are peptides derived from tumor-specific mutations, which are recognized by the immune system as foreign and can stimulate an immune response against cancer cells. Identifying these neoantigens is a crucial step in the development of personalized cancer immunotherapies, as they serve as targets for T-cell mediated immune responses. However, predicting which peptides from the tumor genome will bind effectively to major histocompatibility complex (MHC) molecules—key proteins that present antigens to immune cells—remains a significant challenge.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+This tutorial outlines a comprehensive workflow for the identification, prediction, and validation of potential neoantigens. We begin by using the Immune Epitope Database (IEDB) to predict the binding affinity of peptide sequences to MHC molecules. IEDB provides powerful tools to model how peptides interact with different MHC alleles, helping to prioritize peptides that are most likely to be presented by the immune system. Next, we validate these peptides using PepQuery, a tool that allows for the comparison of predicted neoantigens with experimental proteomics data, providing an additional layer of confidence in their relevance. Finally, we categorize the peptides into strong and weak binders, based on their predicted affinity, which helps in identifying the most promising candidates for cancer immunotherapy.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > <agenda-title></agenda-title>
 >
@@ -106,9 +87,7 @@ have fun!
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -158,18 +137,11 @@ A big step can have several subsections or sub steps:
 >    - *"Peptide sequences"*: `Fasta file`
 >        - {% icon param-file %} *"Peptide Sequence Fasta"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -194,18 +166,11 @@ A big step can have several subsections or sub steps:
 >    - *"With following condition"*: `c11>0.5 and c11<=2`
 >    - *"Number of header lines to skip"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -230,18 +195,11 @@ A big step can have several subsections or sub steps:
 >    - *"With following condition"*: `c11<=0.5`
 >    - *"Number of header lines to skip"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -271,18 +229,11 @@ A big step can have several subsections or sub steps:
 >                - *"Values"*: `percentile_rank`
 >                - *"Aggregator Function"*: `Maximum`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -312,18 +263,11 @@ A big step can have several subsections or sub steps:
 >                - *"Values"*: `percentile_rank`
 >                - *"Aggregator Function"*: `Maximum`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -346,18 +290,11 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `table` (output of **Table Compute** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -380,18 +317,10 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `table` (output of **Table Compute** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -415,18 +344,11 @@ A big step can have several subsections or sub steps:
 >    - *"Cut columns"*: `c1`
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -450,18 +372,9 @@ A big step can have several subsections or sub steps:
 >    - *"Cut columns"*: `c1`
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Remove beginning** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -493,18 +406,11 @@ A big step can have several subsections or sub steps:
 >            - {% icon param-file %} *"Spectrum File"*: `output` (Input dataset)
 >        - *"Report Spectrum Scan as"*: `spectrum title in MGF`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -536,18 +442,11 @@ A big step can have several subsections or sub steps:
 >            - {% icon param-file %} *"Spectrum File"*: `output` (Input dataset)
 >        - *"Report Spectrum Scan as"*: `spectrum title in MGF`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -571,18 +470,11 @@ A big step can have several subsections or sub steps:
 >    - {% icon param-file %} *"Filter"*: `psm_rank_txt` (output of **PepQuery2** {% icon tool %})
 >    - *"With following condition"*: `c20=='Yes'`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -606,18 +498,11 @@ A big step can have several subsections or sub steps:
 >    - {% icon param-file %} *"Filter"*: `psm_rank_txt` (output of **PepQuery2** {% icon tool %})
 >    - *"With following condition"*: `c20=='Yes'`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > <question-title></question-title>
 >
@@ -659,18 +544,9 @@ WHERE t1.icore IN (SELECT c1 FROM t2)
 ORDER BY icore`
 >                - *"include query result column headers"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -712,18 +588,9 @@ WHERE t1.icore IN (SELECT c1 FROM t2)
 ORDER BY icore`
 >                - *"include query result column headers"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > <question-title></question-title>
 >
@@ -739,15 +606,15 @@ ORDER BY icore`
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+The ability to predict and validate neoantigens is a cornerstone of modern cancer immunotherapy, particularly in personalized immunotherapies such as cancer vaccines and adoptive T-cell therapies. The identification of high-affinity neoantigens, which can effectively stimulate the immune system, is key to developing therapeutic strategies that selectively target tumor cells while sparing healthy tissue.
+
+This workflow is particularly relevant in the neoantigen discovery process, as it combines computational prediction with experimental validation, ensuring that only the most promising peptides are considered for therapeutic development. By integrating IEDB’s predictive capabilities with PepQuery’s validation approach, this workflow bridges the gap between in silico predictions and in vitro experimental data, allowing for a more robust and reliable neoantigen identification pipeline. Separating peptides into strong and weak binders based on their predicted MHC affinity further refines the selection process, ensuring that high-priority candidates are prioritized for downstream therapeutic application.
+
+Given the increasing demand for personalized cancer treatments, this workflow represents a vital approach for accelerating the identification of clinically relevant neoantigens, thus advancing the field of cancer immunotherapy and personalized medicine.
+
+# Disclaimer 
+
+Please note that all the software tools used in this workflow are subject to version updates and changes. As a result, the parameters, functionalities, and outcomes may differ with each new version. Additionally, if the protein sequences are downloaded at different times, the number of sequences may also vary due to updates in the reference databases or tool modifications. We recommend the users to verify the specific versions of software tools used to ensure the reproducibility and accuracy of results.
