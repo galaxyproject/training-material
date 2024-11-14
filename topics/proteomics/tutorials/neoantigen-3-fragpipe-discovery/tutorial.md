@@ -60,14 +60,16 @@ Throughout the tutorial, you will learn how to integrate multiple datasets, ensu
 
 # Neoantigen Fragpipe Discovery
 
-This tutorial guides users through the process of performing database searching or neoantigen protein/peptide discovery. It encompasses essential bioinformatics steps to identify and variant-specific peptides for immunological studies. Below is an overview of each major stage:
+This tutorial guides users through the process of performing database searching or neoantigen protein/peptide discovery. It encompasses essential bioinformatics steps to identify and variant-specific peptides for immunological studies.The overview is divided into 2 major stages: (A) Merging all the variant databases and Validating the sequences, (B) Performing database searching using Fragpipe to discover neoantigen peptides. Below is an overview of each major stages
 
+# A: Merging Databases
 ### 1. Get Data
 The first step involves gathering and uploading the necessary proteomics data files into the analysis environment. These files typically contain protein sequences or raw spectrum data that will be processed throughout the tutorial. Proper data organization and tagging are essential to ensure smooth workflow execution.
 
 ### 2. Merging FASTA Files and Filtering for Unique Sequences
 In this step, multiple FASTA files containing protein sequences are merged into a single file. After merging, sequences are filtered to retain only the unique ones, ensuring that redundancy is removed and only relevant protein data is used for downstream analysis.
 
+# B: Discovery search
 ### 3. Validating FASTA Databases
 Once the FASTA files are merged and filtered, it's important to validate the database to ensure that the protein sequences are correctly formatted and usable for analysis. This step helps identify and correct any issues in the dataset before performing more complex analysis tasks.
 
@@ -79,6 +81,9 @@ After the analysis, the resulting datasets are collapsed into a single dataset t
 
 ### 6. Querying Tabular Results for Further Analysis
 In the final step, tabular results from the analysis are queried using SQL-like commands to filter and extract the most relevant data. This allows for focused analysis on specific protein sequences or neoantigens that were identified, enabling further downstream analysis and interpretation.
+
+# A: Merging Databases
+![Database Merging]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_2.PNG %})
 
 ## Get data
 
@@ -112,7 +117,6 @@ In the final step, tabular results from the analysis are queried using SQL-like 
 
 Next, we will merge the FASTA files, ensuring that any redundant sequences are removed. This step ensures that we only work with unique sequences, improving the quality and accuracy of the subsequent analysis. In this step, we combine the fusion database generated from the Arriba Pipeline (first neoantigen workflow) with the non-normal database created from HISAT, Freebayes, CustomPRODB, and the Stringtie Pipeline (second neoantigen workflow). Once merging is done, we validate the database to ensure that the sequences are in the right format.
 
-![Database Merging]({% link topics/proteomics/images/neoantigen/FragPipe_Discovery_2.PNG %})
 
 ## Merging fusion and non-normal databases with **FASTA Merge Files and Filter Unique Sequences**
 
@@ -152,6 +156,7 @@ Next, we will merge the FASTA files, ensuring that any redundant sequences are r
 >
 {: .question}
 
+# B: Discovery search
 ##  Running FragPipe for Neoantigen Discovery
 The FragPipe tool is used for processing and analyzing proteomics data in mass spectrometry experiments. This tool integrates multiple components such as MSFragger, IonQuant, and Percolator, allowing users to perform tasks such as peptide-spectrum match (PSM) identification, protein quantification, and post-translational modification (PTM) analysis. In this task, FragPipe is being used to identify potential neoantigens by analyzing mass spectrometry (MS) data and correlating it with a validated FASTA sequence database.
 The FragPipe tool is executed with the MS data and a validated FASTA sequence database to identify peptides, proteins, and potential neoantigens from the raw mass spectrometry data. Users must provide MS spectrum files, a manifest file, and the validated FASTA database (created in the previous step using the Validate FASTA Database tool). The tool runs a series of analyses, including non-specific enzyme digestion, quantification of protein abundance, and validation of peptide-spectrum matches (PSMs) with Percolator and Protein Prophet. Output includes identified peptides, proteins, and quantification results, which are essential for downstream neoantigen discovery.
