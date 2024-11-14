@@ -14,7 +14,8 @@ time_estimation: "15m"
 key_points:
   - "Finding good training datasets is hard!"
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
-subtopic: writing
+subtopic: getting-started
+priority: 3
 contributors:
   - bebatut
   - hexylena

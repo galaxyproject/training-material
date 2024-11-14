@@ -52,3 +52,7 @@ def markdownify(site, text)
     Jekyll::Converters::Markdown
   ).convert(text.to_s)
 end
+
+def unsafe_slugify(text)
+  text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
+end
