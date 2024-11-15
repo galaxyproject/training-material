@@ -218,7 +218,7 @@ Here, we are going to trim the Illumina data using **fastp** ({% cite Chen2018 %
 >    - In *"Read Modification Options"*:
 >        - In *"Per read cuitting by quality options"*:
 >            - *Cut by quality in front (5')*: `Yes`
->            - *Cut by quality in front (3')*: `Yes`
+>            - *Cut by quality in tail (3')*: `Yes`
 >            - *Cutting window size*: `4`
 >            - *Cutting mean quality*: `20`
 >    - In *"Output Options"*:
