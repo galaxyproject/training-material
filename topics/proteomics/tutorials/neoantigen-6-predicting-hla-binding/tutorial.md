@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen_Predicting_HLA_Binding
+title: Neoantigen 6: Predicting HLA Binding
 zenodo_link: ''
 questions:
 - How can we predict the neoantigens presented by tumor cells?
