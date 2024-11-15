@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen 3: Database merge and FragPipe discovery
+title: "Neoantigen 3: Database merge and FragPipe discovery"
 zenodo_link: ''
 questions:
 - What are the key features and unique sequences in protein datasets that contribute to neoantigen discovery?
