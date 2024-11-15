@@ -342,6 +342,8 @@ But this is only a small sample of the results. Lets create some visualisations 
 
 The first type of visualisation we will do is a scatter plot. This plot will compare the actual and predicted proportion values for each cell across each subsample. We will also colour each point on the plot to indicate which cell type it belongs to. Let's do that now for both the MuSiC and NNLS results.
 
+{% snippet faqs/galaxy/tools_rerun.md %}
+
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
 > 1. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
@@ -362,7 +364,9 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Scatter plot - Music`
 >
-> 3. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
+> 3. Add a `#plot` tag to `Scatter plot - Music`
+>
+> 4. {% tool [Scatterplot with ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/3.4.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input in tabular format"*: `Results Table (NNLS)`
 >    - *"Column to plot on x-axis"*: `2`
 >    - *"Column to plot on y-axis"*: `3`
@@ -378,11 +382,13 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >       - *"width of output"*: `5.0`
 >       - *"height of output"*: `3.0`
 >
-> 4. **Rename** {% icon galaxy-pencil %} output `Scatter plot - NNLS`
+> 5. **Rename** {% icon galaxy-pencil %} output `Scatter plot - NNLS`
+>
+> 6. Add a `#plot` tag to `Scatter plot - NNLS`
 >
 {: .hands_on}
 
-The output of this tool should produce two scatter plots that looks like the following. Each point on the plot represents a cell-type for a specific subsample, so there should be 20 points of each colour (one for each subsample created earlier). Since we are comparing the actual and inferred proportions, the ideal scatter plot would have all of the points be at the `y=x` line. The further the deviations from this ideal the less accurate the tool is. We can also use this plot to determine if the tool is under or over predicting proportion values for each cell-type.
+The output of this tool should produce two scatter plots that looks like the image below. Each point on the plot represents a cell-type for a specific subsample, so there should be 20 points of each colour (one for each subsample created earlier). Since we are comparing the actual and inferred proportions, the ideal scatter plot would have all of the points be at the `y=x` line. The further the deviations are from this ideal line, the less accurate the tool is. We can also use this plot to determine if the tool is under or over predicting proportion values for each cell-type, or if the tool is struggling to predict certain cell types.
 
 ![Scatter plot MuSiC](../../images/bulk-deconvolution-evaluate/scatterplot-music.png "Scatter plot of Music results")
 
@@ -413,6 +419,8 @@ Next we will plot the distribution of errors between the predicted and actual ce
 
 We can use the cell-type counts we computed at the beginning of the tutorial to determine the best cell types to use. We will use the top 5 most abundant cell types in the single-cell data being: `alpha, beta, gamma, ductal, acinar`. Before plotting we will extract only these cell types from our table of errors.
 
+{% snippet faqs/galaxy/tools_rerun.md %}
+
 > <hands-on-title>Extract Cell Types</hands-on-title>
 >
 > 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy2) %} with the following parameters:
@@ -439,6 +447,8 @@ We can use the cell-type counts we computed at the beginning of the tutorial to 
 
 Now we have our table of errors consisting of only the top 5 cell-types, we can plot the violin plots.
 
+{% snippet faqs/galaxy/tools_rerun.md %}
+
 > <hands-on-title>Plot violin plots</hands-on-title>
 >
 > 1. {% tool [Violin plot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_violin/ggplot2_violin/3.4.0+galaxy1) %} with the following parameters:
@@ -454,7 +464,9 @@ Now we have our table of errors consisting of only the top 5 cell-types, we can 
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Violin Plot - Music`
 >
-> 3. {% tool [Violin plot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_violin/ggplot2_violin/3.4.0+galaxy1) %} with the following parameters:
+> 3. Add a `#plot` tag to `Violin Plot - Music`
+>
+> 4. {% tool [Violin plot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_violin/ggplot2_violin/3.4.0+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input in tabular format"*: `NNLS Errors`
 >    - *"Plot title"*: `Error Distribution`
 >    - *"Label for x axis"*: `Cell Type`
@@ -465,11 +477,13 @@ Now we have our table of errors consisting of only the top 5 cell-types, we can 
 >       - *"width of output"*: `3.0`
 >       - *"height of output"*: `2.0`
 >
-> 4. **Rename** {% icon galaxy-pencil %} output `Violin Plot - NNLS`
+> 5. **Rename** {% icon galaxy-pencil %} output `Violin Plot - NNLS`
+>
+> 6. Add a `#plot` tag to `Violin Plot - NNLS`
 >
 {: .hands_on}
 
-The output of this tool will be two violin plots that will look similar to the following. Here we can see the distribution of errors for each cell type. Since we are using normal errors and not absolute or squared errors, we are also able to see whether the tool has under or over estimated the cell type. An ideal plot would be all the violin plots being short and close to 0 indicating that the estimated and actual values are close (resulting in an error close to 0).
+The output of this tool will be two violin plots that will look similar to the below image. Here we can see the distribution of errors for each cell type. Since we are using normal errors and not absolute or squared errors, we are also able to see whether the tool has under or over estimated the cell type. An ideal plot would have all the violin plots being short in height and close to 0 indicating that the estimated and actual values are close together (resulting in an error close to 0).
 
 ![Violin plot MuSiC](../../images/bulk-deconvolution-evaluate/violin-music.png "Violin plot of Music results")
 
@@ -518,7 +532,7 @@ Where
 
 ## Root Mean Squared Error (RMSE)
 
-Root Mean Squared Error or RMSE is a common error metric for measuring a tools prediction accuracy. This metric calculates the average error between the predicted and actual values for each prediction then takes the mean and square root of the error to produce a final value. Lower RMSE values (close to 0) indicate accurate predictions similar to the actual value, as the value increases the accuracy score is worse.
+Root Mean Squared Error or RMSE is a common metric for measuring a tools prediction error. This metric calculates the average error between the predicted and actual values for each prediction then takes the mean and square root of the error to produce a final value. Lower RMSE values (close to 0) indicate accurate predictions similar to the actual value, as the value increases the accuracy score worsens.
 
 The equation for calculating this metric is seen below, the implementation of this calculation is in the workflow alongside the Pearson correlation.
 
@@ -543,10 +557,10 @@ With a basic understanding of some useful metrics, we will now compute these to 
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Run **Workflow compute metrics** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Cell Proportions"*: `Music Results`
+>    - {% icon param-collection %} *"Cell Proportions"*: `Results Table (Music)`
 >
 > 3. Run **Workflow compute metrics** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Cell Proportions"*: `NNLS Results`
+>    - {% icon param-collection %} *"Cell Proportions"*: `Results Table (NNLS)`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
