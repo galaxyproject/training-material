@@ -69,13 +69,12 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >    
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
->
-> 3. Rename the datasets to keep track of them easily, e.g., "Mitoflash."
-> 4. Confirm that the datatypes are correct for each file:
+> 
+> 3. Confirm that the datatypes are correct for each file:
 >    - `mitoflashes_8bit.tiff` should be an image in **tiff** file format.
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
-> 5. Tag each dataset with a label like "mitoflash_1" for easy identification later if you are working with multiple images.
+> 4. Tag each dataset with a label like "mitoflash_1" for easy identification later if you are working with multiple images.
 >
 {: .hands_on}
 
