@@ -22,8 +22,6 @@ tags:
 - nanopore
 - assembly
 - amr
-- gmod
-- jbrowse1
 - microgalaxy
 edam_ontology:
 - topic_0196 # Sequence Assembly
