@@ -211,6 +211,10 @@ We are now going to run our first workflow! This workflow will extract a subsamp
 
 The above will be done twice to emulate multiple "subjects". Since the deconvolution tools will be expecting the bulk-RNA data to comprise of at least 2 subjects (each with their own bulk data). For this tutorial our subjects will simply be called **A** and **B**. However, in the real world these subjects could be different patients, tissue samples, diseased/healthy, etc. 
 
+> <comment-title>Different Results</comment-title>
+> Note that since we are selecting 20 samples, each containing 200 randomly selected cells. The plots and results presented in this tutorial will differ from your own. There will be some similarities such as certain cells being in higher proportion to others but the exact values with differ!
+{: .comment}
+
 **Remember** since we have a collection of 20 inputs, the output of this workflow will be a collection of 20 elements, each corresponding to the input elements. Each output will have its own random selection of 200 cells.
 
 > <comment-title>Inputting multiple datasets</comment-title>
@@ -241,8 +245,6 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 <iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=cb27f805d076ee9f&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
 
 The output of this workflow will be the psuedo-bulk and actual cell proportions for both samples A and B. If you inspect one of the elements in the `Actual Cell Proportions` collection, you should see a table similar to the following:
-
-(**Note:** your cell-types and values will differ slightly since these subtypes are random)
 
 |                         | A_actual   |
 |-------------------------|------------|
@@ -297,10 +299,10 @@ In order to determine if our tools have produced accurate results, we will creat
 
 ## Pre-process the output results
 
-Before visualising or inspecting the outputs of the deconvolution tools, we first need to perform some pre-processing. Up until now we have been working with collections in order to perform our evaluations multiple times in parallel. However, for analysing our data collections will be a bit messy and are no longer needed. The following workflow will combine all the collections of the MuSiC and NNLS outputs into two tables:
+Before visualising or inspecting the outputs of the deconvolution tools, we first need to perform some pre-processing. Up until now we have been working with collections in order to perform our evaluations multiple times in parallel. However, for analysing our data, collections will be a bit messy and are no longer needed. The following workflow will combine all the collections of the MuSiC and NNLS outputs into two tables:
 
-1. A results table presenting the predicted and actual proportion values of each cell-type for each subsample
-2. An error table showing the difference between the actual and predicted values. This table will be used shortly for a plot representing the tool errors.
+1. A results table presenting the predicted and actual proportion values of each cell-type of each subsample
+2. An error table showing the difference between the actual and predicted values. Which will be needed for a later plot.
 
 > <hands-on-title>Run visualisation pre-processing workflow</hands-on-title>
 >
@@ -311,17 +313,17 @@ Before visualising or inspecting the outputs of the deconvolution tools, we firs
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Cell Proportions"*: `Music Results`
+>    - {% icon param-collection %} *"Cell Proportions"*: `A - Music Results`
 >
 > 3. Run **Workflow preprocess visualisations** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Cell Proportions"*: `NNLS Results`
+>    - {% icon param-collection %} *"Cell Proportions"*: `B - NNLS Results`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 {: .hands_on}
 
 <iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://usegalaxy.eu/published/workflow?id=76d3408d0d22ad05&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=0.5"></iframe>
 
-The following table shows a snippet of the `Results Table` for the MuSiC tool. A header has been added for better reading but has been omitted in the workflow output as it will interfere with the visualisation tools. Another reminder that the output in this tutorial will differ to your own since random cells were selected for the subsamples!
+The following table shows a snippet of the `Results Table` for the MuSiC tool. A header has been added for better reading but has been omitted in the workflow output as it will interfere with the visualisation tools.
 
 | Cell Type      | Actual Proportion   | Predicted Proportion   |
 |----------------|---------------------|------------------------|
@@ -332,13 +334,13 @@ The following table shows a snippet of the `Results Table` for the MuSiC tool. A
 | delta          | 0.070000            | 0.0929840465107452     |
 | ...            | ...                 | ...                    |
 
-Already at first glance we can see some interesting results! Firstly we can see that the tool is able to make predictions close to the actual values such as with acinar, alpha, delta. We also see the tool failing to make any type of prediction for co-expression cells with a predicted proportion value of 0. This however isn't a compete surprise since co-expression cells are of small proportion in the bulk and reference data. 
+Already at first glance we can see some interesting results! Firstly we can see that the tool is able to make predictions close to the actual values such as with `acinar, alpha, delta`. We also see the tool failing to make any type of prediction for `co-expression` cells with a predicted proportion value of 0. This however isn't a compete surprise since `co-expression` cells are of small proportion in the bulk and reference data. 
 
 But this is only a small sample of the results. Lets create some visualisations to see the whole picture!
 
 ## Plot scatter plots of the results
 
-The first type of visualisation we will do is a scatter plot. This plot will compare the actual and predicted proportion values for each cell across each subsample. We will also colour each point on the plot to indicate which cell type each data point belongs to. Let's do that now for both the MuSiC and NNLS results.
+The first type of visualisation we will do is a scatter plot. This plot will compare the actual and predicted proportion values for each cell across each subsample. We will also colour each point on the plot to indicate which cell type it belongs to. Let's do that now for both the MuSiC and NNLS results.
 
 > <hands-on-title>Plot the actual and inferred data</hands-on-title>
 >
