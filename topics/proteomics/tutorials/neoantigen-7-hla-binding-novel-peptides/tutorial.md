@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen 7:IEDB binding PepQuery Validated Neopeptides
+title: "Neoantigen 7:IEDB binding PepQuery Validated Neopeptides"
 zenodo_link: ''
 questions:
 - What are neoantigens, and why are they significant in cancer immunotherapy?
