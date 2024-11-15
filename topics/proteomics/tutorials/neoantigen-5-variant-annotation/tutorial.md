@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen_PepPointer_Annotation
+title: Neoantigen 5: Variant Annotation
 zenodo_link: ''
 questions:
 - How can neoantigens be identified in cancer genomes?
