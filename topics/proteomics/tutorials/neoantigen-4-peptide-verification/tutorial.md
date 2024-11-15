@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen 4: PepQuery2 Verification
+title: "Neoantigen 4: PepQuery2 Verification"
 zenodo_link: ''
 questions:
 - How can neoantigens be verified using bioinformatics tools?
