@@ -149,7 +149,7 @@ With our data results, we can analyze their frequency, duration, and intensity. 
 
 1. **FRAME**: Represents time points in the data, with each row corresponding to a frame in the time-lapse sequence. Use **FRAME** as the x-axis for time-based plotting.
 
-2. **POS_X** and **POS_Y**: These columns provide positional coordinates of each detected mitoflash, allowing visualization of mitochondrial movement and spatial distribution within the cell.
+2. **POS_X** and **POS_Y**: These columns provide the coordinates of each detected mitoflash, allowing visualization of mitochondrial movement and spatial distribution within the cell.
 
 3. **INTENSITY**: Shows the raw intensity values for each mitochondrion at each time point. Plotting **INTENSITY** against **FRAME** reveals fluctuations over time, with peaks indicating mitoflash events.
 
