@@ -120,6 +120,13 @@ function search(){
 	const typeFilter = document.getElementById("type").value
 	const levelFilter = document.getElementById("level").value
 
+	if(typeof plausible !== 'undefined'){
+		// Plausible may be undefined (script blocked)
+		// or it may be defined, but opted-out (select box/DNT),
+		// which means `plausible()` will work but not send data, *nor* execute the callback.
+		plausible('Search', {props: {query: textQuery, type: typeFilter, level: levelFilter}})
+	}
+
 	if (previousSearch == `${textQuery} ${typeFilter} ${levelFilter}`) {
 		console.log("Skipping search for the same query")
 		return
