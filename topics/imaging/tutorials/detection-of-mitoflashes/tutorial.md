@@ -133,7 +133,7 @@ Mitoflashes are identified based on sudden changes in fluorescence intensity in 
 >    - **Penalty**: Choose *Least absolute deviations (LAD)* for robust fitting to intensity fluctuations.
 >    - **Alpha**: Set a significance level, such as `0.01`, to generate assistive curves if needed.
 >
->    This step applies polynomial curve fitting to model intensity fluctuations over time, identifying mitoflash events when intensity values exceed the fitted curve by the given significance level. Key parameters to analyze are **Amplitude** (peak intensity), **Tpk** (time to peak), and **T50** (duration). These values provide initial insights into mitochondrial function, with further interpretation outlined in the following section.
+>    This step applies polynomial curve fitting to model intensity fluctuations over time. The chosen **Penalty** used for curve fitting ensures that the curve is not affected by strong but short intensity deviations (e.g., mitoflashes or image noise) but rather represents the basic underlying intensity patterns. Mitoflash events can then be found by looking for intensity values which exceed the fitted curve by the given significance level. To facilitate this by thresholding, an assistive curve is generated which that corresponds to the significance level. Intensity values above the thresholds given by the assistive curve exceed the given significance level and correspond to mitoflash events.
 >
 {: .hands_on}
 
