@@ -1,11 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: Neoantigen_IEDB_binding_PepQuery_novel_peptides
+title: Neoantigen 7:IEDB binding PepQuery Validated Neopeptides
 zenodo_link: ''
 questions:
 - What are neoantigens, and why are they significant in cancer immunotherapy?
-- How can binding predictions and validation help in distinguishing strong and weak binders?
+- How can binding predictions and validation help distinguish strong and weak binders?
 - What tools and techniques are commonly used for neoantigen identification and validation?
 objectives:
 - Understand the process of neoantigen identification and the role of peptide binding predictions.
