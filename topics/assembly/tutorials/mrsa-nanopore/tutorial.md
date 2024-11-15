@@ -153,7 +153,9 @@ The dataset is a FASTQ file.
 
 {% include _includes/cyoa-choices.html option1="Without Illumina MiSeq data" option2="With Illumina MiSeq data" default="Without Illumina MiSeq data" text="Do you have associated Illumina MiSeq data?" disambiguation="miseq"%}
 
-<div class="Existing-Illumina-MiSeq-data" markdown="1">
+<span class="Without-Illumina-MiSeq-data"></span>
+
+<div class="With-Illumina-MiSeq-data" markdown="1">
 
 > <hands-on-title>Illumina Data upload</hands-on-title>
 > 1. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
@@ -197,7 +199,7 @@ FastQC combines quality statistics from all separate reads and combines them in 
 
 ![FastQC plot showing reads that mostly stay in the read](./images/fastqc.png)
 
-<div class="Existing-Illumina-MiSeq-data" markdown="1">
+<div class="With-Illumina-MiSeq-data" markdown="1">
 
 Here, we are going to trim the Illumina data using **fastp** ({% cite Chen2018 %}):
 
@@ -228,7 +230,7 @@ Here, we are going to trim the Illumina data using **fastp** ({% cite Chen2018 %
 
 Depending on the analysis it could be possible that a certain quality or length is needed. The reads can be filtered using the [Filtlong](https://github.com/rrwick/Filtlong) tool. In this training all reads below 1000bp will be filtered.
 
-<div class="Existing-Illumina-MiSeq-data" markdown="1">
+<div class="With-Illumina-MiSeq-data" markdown="1">
 
 When Illumina reads are available, we can use them **if they are good Illumina reads (high depth and complete coverage)**  as external reference. In this case, Filtlong ignores the Phred quality scores and instead judges read quality using k-mer matches to the reference (a more accurate gauge of quality).
 
@@ -240,7 +242,7 @@ When Illumina reads are available, we can use them **if they are good Illumina r
 >    - In *"Output thresholds"*:
 >        - *"Min. length"*: `1000`
 >
->    <div class="Existing-Illumina-MiSeq-data" markdown="1">
+>    <div class="With-Illumina-MiSeq-data" markdown="1">
 >    - In *"External references"*:
 >        - {% icon param-file %} *"Reference Illumina read"*: **fastp** `Read 1 output`
 >        - {% icon param-file %} *"Reference Illumina read"*: **fastp** `Read 2 output` 
@@ -431,7 +433,7 @@ QUAST outputs assembly metrics as an HTML file with metrics and graphs.
 > {: .solution}
 {: .question}
 
-<div class="Existing-Illumina-MiSeq-data" markdown="1">
+<div class="With-Illumina-MiSeq-data" markdown="1">
 
 ## Assembly Polishing
 
