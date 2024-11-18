@@ -406,7 +406,7 @@ The output of this tool should produce two scatter plots that looks like the ima
 > >
 > > 1. Comparing scatter plots, the MuSiC tool has the most accurate results since the points fall closer onto the x=y line
 > > 2. Both scatter plots show `alpha` cells having the highest proportion by a large margin
-> > 3. The MuSiC tool seems to handle all cell types well. However, NNLS appears to struggle predicting the proportions of beta cells, with many of the samples being predicted as having a proportion of 0.
+> > 3. The MuSiC tool seems to handle all cell types well. However, NNLS appears to struggle predicting the proportions of beta cells, with many of the samples being predicted as having a proportion of 0
 > >
 > {: .solution}
 >
@@ -489,8 +489,8 @@ The output of this tool will be two violin plots that will look similar to the b
 
 > <question-title>Interpreting the Violin Plots</question-title>
 >
-> 1. Which method has a tendency to overestimate proportions?
-> 2. Which cell types roughly have the most and least accurate predictions in MuSiC?
+> 1. Which method has the least errors?
+> 2. Which method is the most balanced when to over and under estimating proportions?
 > 3. Which is the most overestimated cell type in NNLS?
 >
 > {% snippet faqs/galaxy/features_scratchbook.md datatype="tabular" %}
@@ -499,9 +499,9 @@ The output of this tool will be two violin plots that will look similar to the b
 > >
 > > ![Scatter plot comparison](../../images/bulk-deconvolution-evaluate/violin-compare.png "Scatter plot comparison between Music and NNLS")
 > >
-> > 1. Comparing the two violin plots, MuSiC overestimates a lot on alpha, beta, and delta cells. Most of NNLS's results are quite uniform in over/under estimations, with the exception of ductal cells.
-> > 2. Whilst it's difficult to know which cell types are exactly the best predicted from the plot alone, it can be seen that delta and gamma cells have the narrowest margin of error in Music, whilst alpha, beta, and ductal have more spread out errors across all 20 samples.
-> > 3. Most of the cell types in NNLS evenly over and under estimate the cell proportions, however from the violin plot it can be seen that ductal cells are greatly overestimated.
+> > 1. Comparing the two violin plots, MuSiC has the better error results, with more samples closer to zero. Inspecting the y-axis of the plots also show that the MuSiC errors span a smaller range compared to NNLS.
+> > 2. MuSiC can be seen as having the most balanced results with the bulk of the estimates being around 0. Whereas the NNLS results show large amounts of both overestimation and underestimation of various cell types.
+> > 3. From the NNLS violin plot it can be seen that ductal cells are greatly overestimated.
 > >
 > {: .solution}
 >
