@@ -277,11 +277,11 @@ The following workflow will take the two pseudo-bulk samples (A and B), as well 
 >
 > 2. Run **Workflow inferring cellular proportions** {% icon workflow %} using the following parameters:
 >    - {% icon param-collection %} *"Pseudobulk - A"*: `expression data - A`
->    - {% icon param-collection %} *"Pseudobulk - A"*: `expression data - B`
+>    - {% icon param-collection %} *"Pseudobulk - B"*: `expression data - B`
 >    - {% icon param-collection %} *"ESet Reference scRNA-seq"*: `ESet Object`
 >    - *"Cell Types Label from scRNA dataset"*: `cellType`
 >    - *"Samples Identifier from scRNA dataset"*: `sampleID`
->    - *"Cell types to use from scRNA dataset"*:`acinar,alpha,beta,delta,ductal,gamma`
+>    - *"Cell types to use from scRNA dataset"*:`alpha,beta,ductal,acinar,gamma,delta,unclassified endocrine,co-expression,PSC,endothelial,epsilon,mast,unclassified,MHC class II`
 >    - {% icon param-collection %} *"Actual - B"*: `actual - B`
 >    - {% icon param-collection %} *"Actual - A"*: `actual - A`
 >
