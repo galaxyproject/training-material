@@ -571,8 +571,8 @@ After running the workflow on both the MuSiC and NNLS results we should have the
 
 | Tool  | Pearson Correlation | RMSE  |
 |-------|---------------------|-------|
-| MuSiC | 0.982               | 0.030 |
-| NNLS  | 0.954               | 0.037 |
+| MuSiC | 0.982               | 0.022 |
+| NNLS  | 0.778               | 0.678 |
 
 From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a better accuracy with a higher correlation score and lower error compared to NNLS.
 
