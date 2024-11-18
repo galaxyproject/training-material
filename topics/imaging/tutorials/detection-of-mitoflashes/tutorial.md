@@ -44,6 +44,7 @@ In this tutorial, you will learn to track mitochondria in live-cell imaging data
 > 1. Understanding the concept and biological relevance of mitoflashes.
 > 2. Processing live-cell imaging data for mitochondrial tracking.
 > 3. Detecting and analyzing mitoflashes with Galaxy tools.
+> 4. Analysis and Interpretation of mitoflash events.
 >
 {: .agenda}
 
@@ -138,11 +139,50 @@ Mitoflashes are identified based on sudden changes in fluorescence intensity in 
 
 ## Analysis and Interpretation of Results
 
-Great Job! Now you have your results table ready for analysis! The output is an Excel file containing the columns **FRAME**, **POS_X**, **POS_Y**, **INTENSITY**, **CURVE**, and **CURVE_A**. This information is available for all detected spots in your image stack and can be used to calculate metrics for interpreting and plotting your mitoflash events results. 
+Congratulations! You’ve reached the final step of your analysis and now have a fully prepared results table, ready for interpretation and further exploration! The output is an Excel file containing the columns **FRAME**, **POS_X**, **POS_Y**, **INTENSITY**, **CURVE**, and **CURVE_A**. This information is available for all detected spots in your image stack and can be used to calculate metrics for interpreting and plotting your mitoflash events results. 
 
-Therefore, We can now analyze the frequency, duration, and intensity of the mitoflashes. This data will allows us understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing. On the upcoming section, we will expand on how to interpret and plot this mitoflash events to give them biologicalm meaning. 
+Therefore, we can now analyze the _frequency_, _duration_, and _intensity_ of the mitoflashes. This data will allow us to understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing. In the upcoming section, we will expand on how to interpret and plot these mitoflash events to give them biological meaning.
+
+Here is an example of what the final output from the curve fitting tool in this tutorial looks like:
 
 ![Curve fitting results mitoflash](../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png "Mitoflash Curve Fitting Results: Data for plotting.")
+
+
+### Example Cases: Identifying Key Mitoflash Scenarios
+
+Below is an example of how your data might look, illustrating differences between **INTENSITY**, **CURVE**, and **CURVE_A** for detected spots. Notice the highlighted rows where **INTENSITY** exceeds **CURVE** and/or **CURVE_A**, representing potential mitoflash events or borderline cases.
+
+```
+| FRAME | POS_X | POS_Y | INTENSITY | CURVE   | CURVE_A |
+|-------|-------|-------|-----------|---------|---------|
+| 1     | 57    | 474   | 114.84    | 116.10  | 165.38  |
+| 2     | 57    | 474   | 115.91    | 116.11  | 165.39  |
+| 3     | 57    | 474   | 166.00    | 166.05  | 165.40  | ← **INTENSITY > CURVE_A** (mitoflash event) |
+| 4     | 57    | 474   | 116.24    | 116.13  | 165.42  |
+| 5     | 57    | 474   | 116.40    | 116.15  | 165.43  |
+| 6     | 57    | 474   | 164.50    | 165.00  | 165.44  | ← **CURVE > CURVE_A** while **INTENSITY < CURVE_A** |
+| 7     | 57    | 474   | 165.10    | 165.20  | 165.45  | ← **INTENSITY and CURVE ≈ CURVE_A** (borderline case) |
+| 8     | 57    | 474   | 115.69    | 116.33  | 165.62  |
+```
+
+> <question-title>Spot Analysis: Evaluating Intensity and Fitted Curves</question-title>
+>
+> Based on the example data table provided:
+>
+> 1. How many frames show **INTENSITY** values exceeding the stricter threshold (**CURVE_A**)?
+> 2. How many frames have a **CURVE** value exceeding **CURVE_A** while **INTENSITY** remains below **CURVE_A**?
+> 3. What does a case like Frame 7 (where both **INTENSITY** and **CURVE** are close to **CURVE_A**) indicate in terms of biological significance or computational interpretation?
+>
+> > <solution-title>Solutions</solution-title>
+> >
+> > 1. **1 frame**: Frame 3 demonstrates **INTENSITY > CURVE_A**, marking it as a mitoflash event.
+> > 2. **1 frame**: Frame 6 shows **CURVE > CURVE_A**, while **INTENSITY** remains below **CURVE_A**.
+> > 3. Frame 7 represents a borderline case where both **INTENSITY** and **CURVE** are near **CURVE_A**. This could reflect computational noise, weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.
+> >
+> {: .solution}
+>
+{: .question}
+
 
 ### Key Parameters for Analysis and Plotting
 
@@ -166,11 +206,7 @@ Therefore, We can now analyze the frequency, duration, and intensity of the mito
 
 - **Spatial Mapping of Mitoflashes**: Use **POS_X** and **POS_Y** for a 2D plot, with each point representing a mitoflash location. Color-code points by **Amplitude** to show intensity distribution across the cell.
 
-> <details-title>More details about mitoflash dynamics</details-title>
->
-> Mitoflashes represent brief but significant superoxide burst events. They provide insight into mitochondrial responses to energy demands and stress, acting as indicators of mitochondrial health. The kinetics of mitoflashes, including frequency and parameters like amplitude, Tpk, and T50, are influenced by cellular conditions, such as bioenergetics, starvation, oxidative stress, aging, and metabolic diseases.
->
-{: .details}
+This format seamlessly integrates the example data and a question for the user to reflect on and interact with the tutorial, helping them understand how to interpret differences between **INTENSITY**, **CURVE**, and **CURVE_A**.
 
 These analyses and visualizations provide an understanding of mitochondrial activity and responses to cellular conditions, enabling insights into mitochondrial health and function in various states.
 
