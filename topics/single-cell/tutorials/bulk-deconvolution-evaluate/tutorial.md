@@ -574,7 +574,7 @@ After running the workflow on both the MuSiC and NNLS results we should have the
 | MuSiC | 0.982               | 0.022 |
 | NNLS  | 0.778               | 0.678 |
 
-From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a better accuracy with a higher correlation score and lower error compared to NNLS.
+From the table we can now see concrete values representing the error and correlation between the predictions and actual proportion values. We can see from the table that the MuSiC tool has a much better accuracy with a higher correlation score and lower error compared to NNLS.
 
 The conclusions to draw from this analysis, is that our reference data is effective for use in deconvolution analysis since both tools were able to have high accuracy and low error scores. We also determined that (for at least this data) the MuSiC tool was the more effective/accurate tool and thus would likely be the more trustworthy when performing deconvolution with this single-cell reference data.
 
