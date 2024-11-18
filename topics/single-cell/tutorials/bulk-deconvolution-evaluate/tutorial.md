@@ -359,8 +359,8 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >           - *"Color schemes to differentiate your groups"*: `Paired - predefined color pallete (discrete, max=12 colors)`
 >           - *"Reverse color scheme"*: `Default order of color scheme`
 >    - In *"Output options"*:
->       - *"width of output"*: `5.0`
->       - *"height of output"*: `3.0`
+>       - *"width of output"*: `6.0`
+>       - *"height of output"*: `4.0`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output `Scatter plot - Music`
 >
@@ -379,8 +379,8 @@ The first type of visualisation we will do is a scatter plot. This plot will com
 >           - *"Color schemes to differentiate your groups"*: `Paired - predefined color pallete (discrete, max=12 colors)`
 >           - *"Reverse color scheme"*: `Default order of color scheme`
 >    - In *"Output options"*:
->       - *"width of output"*: `5.0`
->       - *"height of output"*: `3.0`
+>       - *"width of output"*: `6.0`
+>       - *"height of output"*: `4.0`
 >
 > 5. **Rename** {% icon galaxy-pencil %} output `Scatter plot - NNLS`
 >
