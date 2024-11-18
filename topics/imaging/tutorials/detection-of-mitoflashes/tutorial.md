@@ -132,16 +132,15 @@ Mitoflashes are identified based on sudden changes in fluorescence intensity in 
 >    - **Penalty**: Choose *Least absolute deviations (LAD)* for robust fitting to intensity fluctuations.
 >    - **Alpha**: Set a significance level, such as `0.01`, to generate assistive curves if needed.
 >
->    This step uses polynomial curve fitting to model the basic underlying intensity patterns over time. The chosen **Penalty** ensures that the curve remains robust against brief, high-intensity deviations (e.g., mitoflashes or image noise), preserving the basic intensity trends. 
-Mitoflash events are then identified as intensity values that significantly exceed the fitted curve by a specified threshold. To aid in this identification, an assistive curve is generated to represent the significance threshold, allowing mitoflash events to be easily recognized as those values exceeding the assistive curve.
+>    This step uses polynomial curve fitting to model the basic underlying intensity patterns over time. The chosen **Penalty** ensures that the curve remains robust against brief, high-intensity deviations (e.g., mitoflashes or image noise), preserving the basic intensity trends. Mitoflash events are then identified as intensity values that significantly exceed the fitted curve by a specified threshold. To aid in this identification, an assistive curve is generated to represent the significance threshold, allowing mitoflash events to be easily recognized as those values exceeding the assistive curve.
 >
 {: .hands_on}
 
 ## Analysis and Interpretation of Results
 
-Finally, now you have your results table ready for analysis! The output is an Excel file containing the columns **FRAME**, **POS_X**, **POS_Y**, **INTENSITY**, **CURVE**, and **CURVE_A**. This information is available for all detected spots in your image stack. 
+Great Job! Now you have your results table ready for analysis! The output is an Excel file containing the columns **FRAME**, **POS_X**, **POS_Y**, **INTENSITY**, **CURVE**, and **CURVE_A**. This information is available for all detected spots in your image stack and can be used to calculate metrics for interpreting and plotting your mitoflash events results. 
 
-With our data results, we can analyze their frequency, duration, and intensity. This data helps us understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing.
+Therefore, We can now analyze the frequency, duration, and intensity of the mitoflashes. This data will allows us understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing. On the upcoming section, we will expand on how to interpret and plot this mitoflash events to give them biologicalm meaning. 
 
 ![Curve fitting results mitoflash](../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png "Mitoflash Curve Fitting Results: Data for plotting.")
 
