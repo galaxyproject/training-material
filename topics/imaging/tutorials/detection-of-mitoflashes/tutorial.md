@@ -157,11 +157,11 @@ Below is an example of how your data might look, illustrating differences betwee
 |-------|-------|-------|-----------|---------|---------|
 | 1     | 57    | 474   | 114.84    | 116.10  | 165.38  |
 | 2     | 57    | 474   | 115.91    | 116.11  | 165.39  |
-| 3     | 57    | 474   | 166.00    | 166.05  | 165.40  | ← **INTENSITY > CURVE_A** (mitoflash event) |
+| 3     | 57    | 474   | 166.00    | 166.05  | 165.40  | ← INTENSITY > CURVE_A (mitoflash event) |
 | 4     | 57    | 474   | 116.24    | 116.13  | 165.42  |
 | 5     | 57    | 474   | 116.40    | 116.15  | 165.43  |
-| 6     | 57    | 474   | 164.50    | 165.00  | 165.44  | ← **CURVE > CURVE_A** while **INTENSITY < CURVE_A** |
-| 7     | 57    | 474   | 165.10    | 165.20  | 165.45  | ← **INTENSITY and CURVE ≈ CURVE_A** (borderline case) |
+| 6     | 57    | 474   | 164.50    | 165.00  | 165.44  | ← CURVE > CURVE_A while INTENSITY < CURVE_A |
+| 7     | 57    | 474   | 165.10    | 165.20  | 165.45  | ← INTENSITY and CURVE ≈ CURVE_A (borderline case) |
 | 8     | 57    | 474   | 115.69    | 116.33  | 165.62  |
 ```
 
