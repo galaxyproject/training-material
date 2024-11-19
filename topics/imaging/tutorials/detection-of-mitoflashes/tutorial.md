@@ -210,7 +210,7 @@ This format seamlessly integrates the example data and a question for the user t
 
 These analyses and visualizations provide an understanding of mitochondrial activity and responses to cellular conditions, enabling insights into mitochondrial health and function in various states.
 
-![Image of the workflow](../../images/detection-of-mitoflashes/Workflow_mitoflash.png "Overview of the workflow for detecting mitoflash using Galaxy tools.")
+![Image of the workflow](../../images/detection-of-mitoflashes/Workflow_mitoflash.png "Overview of the workflow for detecting mitoflash using Mitochondrion detection (Step 1), Mitochondrion tracking (Step 2), and Curve fitting to measured intensities (Step 3).")
 
 # Conclusion
 
