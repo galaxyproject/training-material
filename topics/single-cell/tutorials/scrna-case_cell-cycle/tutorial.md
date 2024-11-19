@@ -34,10 +34,10 @@ contributions:
   testing:
     - hrukkudyr
 
+
 ---
 
 
-# Introduction
 
 Single-cell RNA sequencing can be sensitive to both biological and technical variation, which is why preparing your data carefully is an important part of the analysis. You want the results to reflect the interesting differences in expression between cells that relate to their type or state. Other sources of variation can conceal or confound this, making it harder for you to see what is going on.
 

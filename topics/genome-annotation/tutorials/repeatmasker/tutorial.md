@@ -24,7 +24,8 @@ contributions:
     - stephanierobin
     - jkreplak
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 abbreviations:
   SINEs: Short Interspersed Nuclear Elements
@@ -37,11 +38,26 @@ follow_up_training:
     - funannotate
 subtopic: eukaryote
 priority: 1
+
+recordings:
+- youtube_id: 7tYEDmAvHD4
+  speakers:
+  - abretaud
+  length: 18M
+  captioners:
+  - abretaud
+  galaxy_version: '23.01'
+  date: '2023-05-10'
+- captioners:
+  - abretaud
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 16M
+  youtube_id: AYAvjwm4cnM
+  speakers:
+  - abretaud
+
 ---
-
-# Introduction
-
-
 
 When you assemble a new genome, you get its full sequence in FASTA format, in the form of contigs, scaffolds, or even whole chromosomes if you are lucky. However genomes, in particular for eukaryote organisms, contain a varying but significant proportion of repeated elements all along the sequence. These elements belong to different classes, including:
 

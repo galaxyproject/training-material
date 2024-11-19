@@ -20,11 +20,6 @@ contributors:
   - bgruening
 ---
 
-Galaxy Database Schema
-======================
-
-
-# Requirements
 
 For the hands-on examples you need access to a Galaxy server and access to its PostgreSQL database. You can set-up this yourself, or use the Galaxy Docker Image provided by Björn Grüning (https://github.com/bgruening/docker-galaxy-stable). During this tutorial, we will work with the Galaxy Docker Image.
 

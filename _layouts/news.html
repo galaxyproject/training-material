@@ -23,7 +23,9 @@ layout: page
 {% include _includes/contributors-line.html page=page %}
 
 {% for tag in page.tags %}
+{% if tag != "already-on-hub" %}
 <span class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}">{{ tag  }}</span>
+{% endif %}
 {% endfor %}
 
 <hr/>
@@ -55,12 +57,18 @@ layout: page
     {% endif %}
 
     {% if page.contributions %}
-    {% include _includes/funding-statement.md contributions=page.contributions %}
+    {% if page.contributions.funding %}
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These organisations or grants provided funding support for the development of this resource</p>
+    {% include _includes/funding-statement.md funders=page.contributions.funding %}
+    {% endif %}
     {% endif %}
   </div>
 
   <div class="col-md-4">
-    <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
+    <a href="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}">
+      <img alt="{{ coverimagealt }}" src="{% unless coverimage contains 'http' %}{{site.baseurl}}/{% endunless %}{{coverimage}}" width="300"/>
+    </a>
   </div>
 </div>
 </div>

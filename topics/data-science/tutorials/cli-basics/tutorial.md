@@ -63,12 +63,14 @@ key_points:
 notebook:
   language: bash
 subtopic: bash
-contributors:
+contributions:
+  authorship:
   - carpentries
   - hexylena
   - bazante1
-  - erasmusplus
   - avans-atgm
+  funding:
+  - gallantries
 tags:
 - bash
 ---
@@ -412,7 +414,7 @@ are plain old **files**.
 {: .tip}
 
 
-### Getting help
+## Getting help
 
 `ls` has lots of other **options**. There are two common ways to find out how
 to use a command and what options it accepts:
@@ -420,7 +422,7 @@ to use a command and what options it accepts:
 1. We can pass a `--help` option to the command,
 2. We can read its manual with `man`
 
-#### The `--help` option
+### The `--help` option
 
 Many bash commands, and programs that people have written that can be
 run from within bash, support a `--help` option to display more
@@ -449,7 +451,7 @@ ls --help
 >
 {: .tip}
 
-#### The `man` command
+### The `man` command
 
 The other way to learn about `ls` is to type
 
@@ -570,7 +572,7 @@ To **quit** the `man` pages, press <kbd>Q</kbd>.
 # Explore the possible solutions here!
 ```
 
-### Exploring Other Directories
+## Exploring Other Directories
 
 Not only can we use `ls` on the current working directory,
 but we can use it to list the contents of a different directory.
@@ -1590,7 +1592,7 @@ or specifying a naming pattern using wildcards.
 # Explore the possible solutions here!
 ```
 
-### Using wildcards for accessing multiple files at once
+## Using wildcards for accessing multiple files at once
 
 > <tip-title>Wildcards</tip-title>
 >

@@ -10,7 +10,7 @@ This past year has been a struggle for all of us, but one task has become appare
 
 We have found ourselves spending countless hours recording video lectures, producing videos of us giving slide decks, and videos of us giving trainings on how to run tools in Galaxy. Worse, whenever changes were made we would have to re-record lessons!
 
-Inspired by the efforts of {% include _includes/contributor-badge.html id="delphine-l" %} in her [video-lectures](https://github.com/galaxyproject/video-lectures/) series, {% include _includes/contributor-badge.html id="hexylena" %} has implemented a similar feature of automatic Text-to-Speech (TTS) in the [Galaxy Training Network]({% link topics/contributing/tutorials/slides-with-video/tutorial.md %}).
+Inspired by the efforts of @gtn:delphine-l in her [video-lectures](https://github.com/galaxyproject/video-lectures/) series, @gtn:hexylena has implemented a similar feature of automatic Text-to-Speech (TTS) in the [Galaxy Training Network]({% link topics/contributing/tutorials/slides-with-video/tutorial.md %}).
 
 The GTN had existing infrastructure for producing slide decks from easy-to-maintain markdown documents, and, key to the success, existing syntax for writing "Speaker Notes" on slides. These were intended to be little reminders to instructors giving slide decks about what they should say on each slide.
 

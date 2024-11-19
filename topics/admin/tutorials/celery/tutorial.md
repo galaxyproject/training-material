@@ -31,9 +31,6 @@ tags:
   - git-gat
 ---
 
-# Overview
-
-
 Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.
 
 From the Celery website:
@@ -50,10 +47,11 @@ From the Celery website:
 >
 >Language interoperability can also be achieved exposing an HTTP endpoint and having a task that requests it (webhooks)."
 >
-> -- [https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue](https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue)
-{: .quote}
+{: .quote cite="https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue"}
 
-[A slideshow presentation on this subject is available](slides.html). 
+[A slideshow presentation on this subject is available](slides.html).
+
+If you are not interesting in managing Redis and Flower, you might be interested in the [lower-configuration deployment option]({% link topics/admin/tutorials/celeryless/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >
@@ -149,7 +147,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -279,3 +279,7 @@ rabbitmq_users:
+>        @@ -282,3 +282,7 @@ rabbitmq_users:
 >         # TUS
 >         galaxy_tusd_port: 1080
 >         galaxy_tus_upload_store: /data/tus
@@ -248,7 +246,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -266,6 +266,7 @@ rabbitmq_config:
+>        @@ -269,6 +269,7 @@ rabbitmq_config:
 >         
 >         rabbitmq_vhosts:
 >           - /pulsar/pulsar_au
@@ -256,7 +254,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >         
 >         rabbitmq_users:
 >           - user: admin
->        @@ -275,6 +276,13 @@ rabbitmq_users:
+>        @@ -278,6 +279,13 @@ rabbitmq_users:
 >           - user: pulsar_au
 >             password: "{{ vault_rabbitmq_password_vhost }}"
 >             vhost: /pulsar/pulsar_au
@@ -299,7 +297,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >        ```diff
 >        --- a/group_vars/galaxyservers.yml
 >        +++ b/group_vars/galaxyservers.yml
->        @@ -291,3 +291,22 @@ galaxy_tus_upload_store: /data/tus
+>        @@ -294,3 +294,22 @@ galaxy_tus_upload_store: /data/tus
 >         #Redis
 >         galaxy_additional_venv_packages:
 >           - redis
@@ -373,7 +371,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -127,6 +127,11 @@ galaxy_config:
+>    @@ -130,6 +130,11 @@ galaxy_config:
 >           preload: true
 >         celery:
 >           concurrency: 2
@@ -394,7 +392,7 @@ First we need to add our new Ansible Roles to the `requirements.yml`:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -108,6 +108,11 @@ galaxy_config:
+>    @@ -111,6 +111,11 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user

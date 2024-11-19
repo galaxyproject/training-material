@@ -44,10 +44,10 @@ $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title>button", this).click();
 });
 
-$("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
+$("section#tutorial-content .hands_on,section#tutorial-content .hands-on").each((idx, el) => {
 	var box_id = $(".box-title", el).attr("id");
 	$(el).append(`
-		<p class="text-muted" style="text-align:right;font-size:0.9rem;">
+		<p class="text-muted post-faq-box hide-when-printing" style="text-align:right;font-size:0.9rem;">
 			<a href="#${box_id}">Link to here</a> |
 			<i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> |
 			<a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> |
@@ -57,16 +57,16 @@ $("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
 })
 
 // CYOA Support
-function cyoaChoice(text){
+function cyoaChoice(text, cyoaId){
 	if(text !== undefined && text !== null){
 		var loc = new URL(document.location)
 		try {
-			localStorage.setItem(`gtn-cyoa-${loc.pathname}`, text);
+			localStorage.setItem(`${cyoaId}-${loc.pathname}`, text);
 		} catch(e) {
 			// Helaas pindakaas
 		}
 
-		var inputs = document.querySelectorAll(".gtn-cyoa input"),
+		var inputs = document.querySelectorAll(`#${cyoaId} input`),
 			options = [...inputs].map(x => x.value),
 			nonMatchingOptions = options.filter(x => x !== text);
 
@@ -85,36 +85,36 @@ function cyoaChoice(text){
 	}
 }
 
-function cyoaDefault(defaultOption){
+function cyoaDefault(defaultOption, cyoaId){
 	// Start with the URL parameter
 	var loc = new URL(document.location)
-	var urlOption = loc.searchParams.get("gtn-cyoa");
+	var urlOption = loc.searchParams.get(cyoaId);
 	if(urlOption){
-		cyoaChoice(urlOption);
+		cyoaChoice(urlOption, cyoaId);
 		return;
 	}
 
 	// Otherwise fall back to local storage (survives refreshes)
 	var lsOption;
 	try {
-		lsOption = localStorage.getItem(`gtn-cyoa-${loc.pathname}`);
+		lsOption = localStorage.getItem(`${cyoaId}-${loc.pathname}`);
 	} catch(e) {
 		// Helaas pindakaas
 	}
 	if(lsOption !== null && lsOption !== undefined){
-		cyoaChoice(lsOption);
+		cyoaChoice(lsOption, cyoaId);
 		return;
 	}
 
 	// Otherwise if the browser is remembering for us, use that.
 	var currentlySelected = [...document.querySelectorAll("input[name='cyoa']")].filter(x => x.checked)[0];
 	if(currentlySelected){
-		cyoaChoice(currentlySelected);
+		cyoaChoice(currentlySelected, cyoaId);
 		return;
 	}
 
 	// And failing that, use the default.
-	cyoaChoice(defaultOption);
+	cyoaChoice(defaultOption, cyoaId);
 }
 
 (function (window, document) {
@@ -172,15 +172,15 @@ document.querySelectorAll("article.topic-admin section#tutorial-content div.lang
 document.querySelectorAll("article.topic-data-science section#tutorial-content div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 
 // Redirects
-if(window.location.hostname === "galaxyproject.github.io") {
-	// Redirect
-	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
-	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+//if(window.location.hostname === "galaxyproject.github.io") {
+//	// Redirect
+//	var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+//	$('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
 
-	window.setTimeout(function(){
-	window.location.href = redirect;
-	}, 5000)
-}
+//	window.setTimeout(function(){
+//	window.location.href = redirect;
+//	}, 5000)
+//}
 
 // Copy paste buttons
 document.querySelectorAll('div.highlight').forEach((snippet) => {
@@ -195,3 +195,11 @@ document.querySelectorAll('div.highlight').forEach((snippet) => {
 var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
     target:function(trigger){return trigger.nextElementSibling;
 }});
+
+// Cited blockquotes
+document.querySelectorAll("blockquote[cite],blockquote[author]").forEach(bq => {
+	let bq_cite = bq.getAttribute("cite");
+	let bq_url = bq_cite ? `<cite class="text-muted"><a href="${bq_cite}"><i>Source</i></a></cite>` : "";
+	let bq_author = bq.getAttribute("author") ? "— " + bq.getAttribute("author") + " " : "";
+	bq.insertAdjacentHTML("beforeend", `<footer>${bq_author}${bq_url}</footer>`)
+})

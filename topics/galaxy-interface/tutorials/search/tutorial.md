@@ -20,13 +20,4 @@ contributors:
 subtopic: histories
 ---
 
-> <agenda-title></agenda-title>
->
-> In this tutorial, we will deal with:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
 {% include topics/galaxy-interface/tutorials/search/search.md %}

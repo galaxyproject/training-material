@@ -1,0 +1,256 @@
+---
+layout: base
+---
+
+{% assign topic = site.data[page.topic_name] | default: page.topic %}
+{% assign topic_material = site | list_materials_structured:topic.name %}
+{% assign topic_material_flat = site | list_materials_flat:topic.name %}
+
+<h1>{{ topic.title }} Editorial Board Home</h1>
+
+This is a new, experimental "Editorial Board Home" for a given topic. It is intended to provide a single place for maintainers and editorial board members to find out key information about their topic and identify action items.
+
+<h2>Editorial Board</h2>
+
+{% assign editorial_board_count = topic.editorial_board | size %}
+
+{% if topic.editorial_board %}
+{% assign editorial_board = topic.editorial_board | shuffle %}
+{% include _includes/contributor-list.html contributors=editorial_board badge=true %}
+{% endif %}
+
+<h2>Action Items</h2>
+
+{% assign funders_list_sorted = topic_material | identify_funders: site %}
+{% assign funders_count  = funders_list_sorted | size %}
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Item</th>
+			<th>Status</th>
+			<th>Why you should do this</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Summary</td>
+			<td>{% if topic.summary %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>Provide a sufficiently detailed summary of the topic to let learners know what they're learning about in this topic.</td>
+		</tr>
+		<tr>
+			<td>Sufficient Editorial Board Members</td>
+			<td>{% if editorial_board_count > 2 %} Done ✅ ({{ editorial_board_count }} members){% else %} More required ❌ {% endif %}</td>
+			<td>Having multiple people sharing the burden of being responsible for a specific topic can reduce board member burn-out in the long term.</td>
+		</tr>
+		<tr>
+			<td>Enable Subtopics</td>
+			<td>{% if topic.subtopics %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>Subtopics help organize the content and make it easier to navigate.</td>
+		</tr>
+		<tr>
+			<td>Annotate Funders</td>
+			<td>{% if funders_count > 0 %} Done ✅ ({{ funders_count }} funders){% else %} Pending ❌ {% endif %}</td>
+			<td>By annotating the funders of your topic's materials, you make it easier to write your grant reports later</td>
+		</tr>
+		<tr>
+			<td>Learning Pathway CTA</td>
+			<td>{% if topic.learning_path_cta %} Done ✅ {% else %} Pending ❌ {% endif %}</td>
+			<td>By providing a Learning Pathway CTA, we can help guide learners to the best resources for learning about this topic.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Topic Materials</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th scope="col">Material</th>
+			<th scope="col">Contributions v2 <a href="{% link topics/contributing/faqs/new-contributions.md %}">{% icon help %}</a></th>
+			<th scope="col">Pre-requisites <a href="{% link topics/contributing/faqs/why-prerequisites.md  %}">{% icon help %}</a></th>
+			<th scope="col">Follow up trainings</th>
+			<th scope="col">Data on Zenodo</th>
+			<th scope="col">Notebook</th>
+			<th scope="col">Server Compatibility</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for material in topic_material_flat %}
+		<tr>
+			<th scope="row"><a href="{{ site.baseurl }}{{ material.url }}">{{ material.title }}</a></th>
+			<td>{% if material.contributions %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.requirements %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.follow_up_training %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.zenodo_link != ""%} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if material.notebook %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>
+				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#{{material.id | replace:'/', '-'}}-compat">
+					View
+				</button>
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+
+<h2>Topic Workflows</h2>
+<table  class="table table-striped scroll-header">
+	<thead>
+		<tr>
+			<th>Material</th>
+			<th>Workflow</th>
+
+			<th>Updated</th>
+			<th>Version</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for material in topic_material_flat %}
+	{% for workflow in material['workflows'] %}
+		<tr>
+			<td><a href="{{ site.baseurl }}{{ material.url }}">{{ material.title }}</a></td>
+			<td><a href="{{ workflow.url_html }}">{{ workflow.name }}</a></td>
+			<td>{{ workflow.modified | date: "%b %-d, %Y"}} </td>
+			<td>{{ workflow.version }} </td>
+			<td>{% if workflow.tests %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if workflow.features.report %} ✅ {% else %} ❌ {% endif %}</td>
+			<td>{% if workflow.features.comments %} ✅ {% else %} ❌ {% endif %}</td>
+		</tr>
+	{% endfor %}
+{% endfor %}
+	</tbody>
+</table>
+
+
+{% for material in topic_material_flat %}
+<div id="{{material.id | replace:'/', '-'}}-compat" class="modal" tabindex="-1" aria-labelledby="{{material.id | replace:'/', '-'}}-label" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="{{material.id | replace:'/', '-'}}-label">Current Server Compatibility table for "{{ material.title }}"</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="overflow-x: auto">
+				<p>Data as of {{ site.data.build.now }}</p>
+	<table class="table table-striped compat scroll-header scroll-row">
+		<thead>
+		<tr>
+			<th scope="col">Tool</th>
+			{% for server in material.supported_servers_matrix.servers %}
+			<th scope="col">
+				<a href="{{ server.url }}">
+				{{ server.name }}
+				</a>
+			</th>
+			{% endfor %}
+		</tr>
+		</thead>
+		<tbody>
+
+		{% for tool in material.supported_servers_matrix.tools %}
+		<tr>
+			<th scope="row">{{ tool.id }}</th>
+			{% for res in tool.servers %}
+				{% if res.state == "exact" %}
+					<td class="exact">
+						{{ res.version }}
+					</td>
+				{% elsif res.state == "local" %}
+					<td class="local">
+						built-in
+					</td>
+				{% elsif res.state == "inexact" %}
+					<td class="inexact">
+						{% for x in res.versions %}
+						{{ x }}{% if forloop.last == false %}, {% endif %}
+						{% endfor %}
+					</td>
+				{% else %}
+					<td class="missing">Missing</td>
+				{% endif %}
+			{% endfor %}
+		</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+<style>
+td.exact, td.local {
+	background-color: var(--feedback-color);
+	color: black;
+}
+td.inexact {
+	background-color: var(--solution-color);
+	color: black;
+}
+
+/* https://adrianroselli.com/2020/01/fixed-table-headers.html */
+
+table.compat th[scope=row] {
+  background-color: var(--color-background);
+}
+
+table.scroll-header th:not([scope=row]) {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: var(--color-background);
+}
+table.scroll-row th[scope=row] {
+  position: -webkit-sticky;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: end;
+}
+</style>
+
+
+<h2>Your topic's Workflow Testing Results</h2>
+
+Coming Soon™
+
+<h2>Learning Pathways using materials from this Topic</h2>
+
+{% assign learning_pathways = site | find_learningpaths_including_topic: topic.name %}
+{% assign stats_extra_filters = "" | split: ',' %}
+
+<div class="pathwaylist row">
+{% if learning_pathways %}
+  {% for path in learning_pathways %}
+    {% include _includes/pathway-card.html path=path %}
+    {% assign stat_filter = path.path | replace: "md", "html" %}
+    {% assign stats_extra_filters = stats_extra_filters | push: stat_filter %}
+  {% endfor %}
+{% endif %}
+</div>
+
+<details>
+	<summary>Statistics for your Learning Pathways</summary>
+
+	<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E{{stats_extra_filters | join:"|"}}&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+	<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+	<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>
+</details>
+
+<h2>Events using materials from this Topic</h2>
+
+TODO once this is merged:
+https://github.com/galaxyproject/training-material/pull/4963
+
+<h2>Statistics For Your Materials</h2>
+
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E%2Ftopics%2F{{ topic.name }}%2F&embed=true&theme=system&background=transparent" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>
+<div style="font-size: 14px; padding-bottom: 14px;">Stats powered by <a target="_blank" style="color: #4F46E5; text-decoration: underline;" href="https://plausible.io">Plausible Analytics</a></div>
+<script async src="https://plausible.galaxyproject.eu/js/embed.host.js"></script>

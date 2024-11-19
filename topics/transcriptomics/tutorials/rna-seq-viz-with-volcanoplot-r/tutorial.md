@@ -34,10 +34,19 @@ requirements:
         tutorials:
           - rna-seq-viz-with-volcanoplot
           - rna-seq-counts-to-viz-in-r
+
+recordings:
+- captioners:
+  - mblue9
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 4dspgiwkuxk
+  speakers:
+  - mblue9
+
 ---
 
-
-# Introduction
 
 
 The [Volcano plot]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.md %}) tutorial, introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.

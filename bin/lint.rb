@@ -8,7 +8,9 @@ require 'bibtex'
 require 'json'
 require 'citeproc/ruby'
 require 'csl/styles'
+require './_plugins/util'
 
+GTN_HOME = Pathname.new(__dir__).parent.to_s
 # This is our ONE central linting script that handles EVERYTHING.
 
 # A custom module to properly format reviewdog json output
@@ -141,7 +143,7 @@ module GtnLinter
         match_end: selected.end(0) + 1,
         replacement: '',
         message: 'Instead of embedding IFrames to YouTube contents, consider adding this video to the ' \
-                 '[GTN Video Library](https://github.com/gallantries/video-library/issues/) where it will ' \
+                 'GTN tutorial "recordings" metadata where it will ' \
                  'be more visible for others.',
         code: 'GTN:002'
       )
@@ -151,16 +153,17 @@ module GtnLinter
   def self.link_gtn_tutorial_external(contents)
     find_matching_texts(
       contents,
-      %r{\((https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/[^)]*)\)}
+      %r{\(https?://(training.galaxyproject.org|galaxyproject.github.io)/training-material/([^)]*)\)}
     )
       .map do |idx, _text, selected|
+      # puts "#{idx} 0 #{selected[0]} 1 #{selected[1]} 2 #{selected[2]} 3 #{selected[3]}"
       ReviewDogEmitter.error(
         path: @path,
         idx: idx,
         # We wrap the entire URL (inside the explicit () in a matching group to make it easy to select/replace)
-        match_start: selected.begin(1),
-        match_end: selected.end(1) + 1,
-        replacement: "{% link #{selected[3]}.md %}",
+        match_start: selected.begin(0) + 1,
+        match_end: selected.end(0),
+        replacement: "{% link #{selected[2].gsub('.html', '.md')} %}",
         message: 'Please use the link function to link to other pages within the GTN. ' \
                  'It helps us ensure that all links are correct',
         code: 'GTN:003'
@@ -313,6 +316,16 @@ module GtnLinter
     @CITATION_LIBRARY
   end
 
+  @JEKYLL_CONFIG = nil
+
+  def self.jekyll_config
+    if @JEKYLL_CONFIG.nil?
+      # Load
+      @JEKYLL_CONFIG = YAML.load_file('_config.yml')
+    end
+    @JEKYLL_CONFIG
+  end
+
   def self.check_bad_cite(contents)
     find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
@@ -326,6 +339,24 @@ module GtnLinter
           replacement: nil,
           message: "The citation (#{citation_key}) could not be found.",
           code: 'GTN:007'
+        )
+      end
+    end
+  end
+
+  def self.check_bad_icon(contents)
+    find_matching_texts(contents, /{%\s*icon\s+([^%]*)\s*%}/i)
+      .map do |idx, _text, selected|
+      icon_key = selected[1].strip.split[0]
+      if jekyll_config['icon-tag'][icon_key].nil?
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The icon (#{icon_key}) could not be found, please add it to _config.yml.",
+          code: 'GTN:033'
         )
       end
     end
@@ -361,6 +392,22 @@ module GtnLinter
           replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
           message: 'You have used the full tool URL to a specific server, here we only need the tool ID portion.',
           code: 'GTN:009'
+        )
+      end
+  end
+
+  def self.bad_zenodo_links(contents)
+    find_matching_texts(contents, /https:\/\/zenodo.org\/api\//)
+      .reject { |_idx, _text, selected| _text =~ /files-archive/ }
+      .map do |idx, _text, selected|
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0) + 1,
+          replacement: nil,
+          message: 'Please do not use zenodo.org/api/ links, instead it should look like zenodo.org/records/id/files/<filename>',
+          code: 'GTN:040'
         )
       end
   end
@@ -403,6 +450,7 @@ module GtnLinter
     'cat1',
     'comp1',
     'gene2exon1',
+    'gff2bed1',
     'intermine',
     'join1',
     'param_value_from_file',
@@ -529,6 +577,24 @@ module GtnLinter
     end
   end
 
+  def self.empty_alt_text(contents)
+    find_matching_texts(contents, /!\[\]\(/i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path.gsub(%r{^/}, ''))
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: 'The alt text for this image seems to be empty',
+          code: 'GTN:034'
+        )
+      end
+    end
+  end
+
   def self.check_bad_link(contents)
     find_matching_texts(contents, /{%\s*link\s+([^%]*)\s*%}/i)
       .map do |idx, _text, selected|
@@ -542,6 +608,40 @@ module GtnLinter
           replacement: nil,
           message: "The linked file (`#{selected[1].strip}`) could not be found.",
           code: 'GTN:018'
+        )
+      end
+    end
+
+    find_matching_texts(contents, /\]\(\)/i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path.gsub(%r{^/}, ''))
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: 'The link does not seem to have a target.',
+          code: 'GTN:018'
+        )
+      end
+    end
+  end
+
+  def self.check_bad_trs_link(contents)
+    find_matching_texts(contents, %r{snippet faqs/galaxy/workflows_run_trs.md path="([^"]*)"}i)
+      .map do |idx, _text, selected|
+      path = selected[1].to_s.strip
+      if !File.exist?(path)
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0),
+          replacement: nil,
+          message: "The linked file (`#{path}`) could not be found.",
+          code: 'GTN:036'
         )
       end
     end
@@ -685,7 +785,7 @@ module GtnLinter
   end
 
   def self.zenodo_api(contents)
-    find_matching_texts(contents, /(zenodo\.org\/api\/files\/)/)
+    find_matching_texts(contents, %r{(zenodo\.org/api/files/)})
       .map do |idx, _text, selected|
       ReviewDogEmitter.error(
         path: @path,
@@ -693,10 +793,156 @@ module GtnLinter
         match_start: selected.begin(1),
         match_end: selected.end(1) + 1,
         replacement: nil,
-        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/..., apologies we cannot fix automatically.',
+        message: 'The Zenodo.org/api URLs are not stable, you must use a URL of the format zenodo.org/record/...',
         code: 'GTN:032'
       )
     end
+  end
+
+  def self.nonsemantic_list(contents)
+    find_matching_texts(contents, />\s*(\*\*\s*[Ss]tep)/)
+      .map do |idx, _text, selected|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: nil,
+        message: 'This is a non-semantic list which is bad for accessibility and bad for screenreaders. ' \
+                 'It results in poorly structured HTML and as a result is not allowed.',
+        code: 'GTN:035'
+      )
+    end
+  end
+
+  def self.cyoa_branches(contents)
+    joined_contents = contents.join("\n")
+    cyoa_branches = joined_contents.scan(/_includes\/cyoa-choices[^%]*%}/m)
+      .map{|cyoa_line| 
+        cyoa_line.gsub(/\n/, ' ') # Remove newlines, want it all one one line.
+          .gsub(/\s+/, ' ') # Collapse multiple whitespace for simplicity
+          .gsub(/_includes\/cyoa-choices.html/, '').gsub(/%}$/, '') # Strip start/end
+          .strip
+          .split('" ') # Split on the end of an option to get the individual option groups
+          .map{|p| p.gsub(/="/, '=').split('=')}.to_h} # convert it into a convenient hash
+    # NOTE: Errors on this line usually mean that folks have used ' instead of " in their CYOA.
+
+
+    # cyoa_branches = 
+    # [{"option1"=>"Quick one tool method",
+    #   "option2"=>"Convert to AnnData object compatible with Filter, Plot, Explore workflow",
+    #   "default"=>"Quick one tool method",
+    #   "text"=>"Choose below if you just want to convert your object quickly or see how it all happens behind the scenes!",
+    #   "disambiguation"=>"seurat2anndata\""},
+    
+    # We use slugify_unsafe to convert it to a slug, now we should check:
+    # 1. Is it unique in the file? No duplicate options?
+    # 2. Is every branch used?
+
+    # Uniqueness:
+    options = cyoa_branches.map{|o| o.select{|k, v| k =~ /option/}.values}.flatten
+    slugified = options.map{|o| [o, unsafe_slugify(o)]}
+    slugified_grouped = slugified.group_by{|before, after| after}
+      .map{|k, pairs| [k, pairs.map{|p| p[0]}]}.to_h
+    
+    errors = []
+    if slugified_grouped.values.any?{|v| v.length > 1}
+      dupes = slugified_grouped.select{|k, v| v.length > 1}
+      msg = "We identified the following duplicate options in your CYOA: "
+      msg += dupes.map do |slug, options|
+        "Options #{options.join(', ')} became the key: #{slug}"
+      end.join("; ")
+
+      errors << ReviewDogEmitter.error(
+        path: @path,
+        idx: 0,
+        match_start: 0,
+        match_end: 1,
+        replacement: nil,
+        message: 'You have non-unique options in your Choose Your Own Adventure. Please ensure that each option is unique in its text. Unfortunately we do not currently support re-using the same option text across differently disambiguated CYOA branches, so, please inform us if this is a requirement for you.' + msg,
+        code: 'GTN:041'
+      )
+    end
+
+    # Missing default
+    cyoa_branches.each do |branch|
+      if branch['default'].nil?
+        errors << ReviewDogEmitter.error(
+          path: @path,
+          idx: 0,
+          match_start: 0,
+          match_end: 1,
+          replacement: nil,
+          message: 'We recommend specifying a default for every branch',
+          code: 'GTN:042'
+        )
+      end
+
+      # Checking default/options correspondence.
+      options = branch.select{|k, v| k =~ /option/}.values
+      if branch.key?("default") && ! options.include?(branch['default'])
+        if options.any?{|o| unsafe_slugify(o) == unsafe_slugify(branch['default'])}
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a corresponding option# for the default: «#{branch['default']}», but this could have been written before we automatically slugified the options. If you like, please consider making your default option match the option text exactly.",
+            code: 'GTN:043'
+          )
+        else
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a corresponding option# for the default: «#{branch['default']}», please ensure the text matches one of the branches.",
+            code: 'GTN:044'
+          )
+        end
+      end
+    end
+
+    # Branch testing.
+    cyoa_branches.each do |branch|
+      options = branch
+        .select{|k, v| k =~ /option/}
+        .values
+
+      # Check for matching lines in the file.
+      options.each do |option|
+        slug_option = unsafe_slugify(option)
+        if !joined_contents.match(/#{slug_option}/)
+          errors << ReviewDogEmitter.warning(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 1,
+            replacement: nil,
+            message: "We did not see a branch for #{option} (#{slug_option}) in the file. Please consider ensuring that all options are used.",
+            code: 'GTN:045'
+          )
+        end
+      end
+    end
+    
+
+
+    # find_matching_texts(contents, />\s*(\*\*\s*[Ss]tep)/) .map do |idx, _text, selected|
+    #   ReviewDogEmitter.error(
+    #     path: @path,
+    #     idx: idx,
+    #     match_start: selected.begin(1),
+    #     match_end: selected.end(1) + 1,
+    #     replacement: nil,
+    #     message: 'This is a non-semantic list which is bad for accessibility and bad for screenreaders. ' \
+    #              'It results in poorly structured HTML and as a result is not allowed.',
+    #     code: 'GTN:035'
+    #   )
+    # end
+    errors
   end
 
   def self.fix_md(contents)
@@ -717,13 +963,19 @@ module GtnLinter
       *new_more_accessible_boxes_agenda(contents),
       *no_target_blank(contents),
       *check_bad_link(contents),
+      *check_bad_icon(contents),
       *check_looks_like_heading(contents),
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
       *check_bad_heading_order(contents),
       *check_bolded_heading(contents),
       *snippets_too_close_together(contents),
+      *bad_zenodo_links(contents),
       *zenodo_api(contents),
+      *empty_alt_text(contents),
+      *check_bad_trs_link(contents),
+      *nonsemantic_list(contents),
+      *cyoa_branches(contents)
     ]
   end
 
@@ -756,10 +1008,12 @@ module GtnLinter
 
   def self.fix_ga_wf(contents)
     results = []
-    if !contents.key?('tags')
-      topic = @path.split('/')[1]
+    if !contents.key?('tags') or contents['tags'].empty?
+      path_parts = @path.split('/')
+      topic = path_parts[path_parts.index('topics') + 1]
+
       results.push(ReviewDogEmitter.file_error(
-                     path: @path, message: "This workflow is missing tags. Please add `\"tags\": [\"#{topic}\"]`",
+                     path: @path, message: "This workflow is missing required tags. Please add `\"tags\": [\"#{topic}\"]`",
                      code: 'GTN:015'
                    ))
     end
@@ -856,6 +1110,11 @@ module GtnLinter
     @PLAIN_OUTPUT = false
   end
 
+  @SHORT_PATH = false
+  def self.set_short_path
+    @SHORT_PATH = true
+  end
+
   @LIMIT_EMITTED_CODES = nil
   def self.code_limits(codes)
     @LIMIT_EMITTED_CODES = codes
@@ -867,12 +1126,18 @@ module GtnLinter
   end
 
   def self.format_reviewdog_output(message)
+    return if message.nil? || message.empty?
     return if !@LIMIT_EMITTED_CODES.nil? && !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
 
-    if !message.nil? && (message != [])
+
+    if !message.nil? && (message != []) && message.is_a?(Hash)
+      path = message['location']['path']
+      if @SHORT_PATH && path.include?(GTN_HOME + '/')
+        path = path.gsub(GTN_HOME + '/', '')
+      end
       if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
-          message['location']['path'],
+          path,
           message['location']['range']['start']['line'],
           message['location']['range']['start']['column'],
           message['location']['range']['end']['line'],
@@ -907,7 +1172,7 @@ module GtnLinter
 
       # puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
       fixed = original[0..start_coln - 2] + repl + original[end_coln - 1..]
-      warn "Fixing #{original} to #{fixed}"
+      warn "DIFF\n-#{original}\n+#{fixed}"
       lines[start_line - 1] = fixed
 
       # Save our changes
@@ -920,7 +1185,9 @@ module GtnLinter
   def self.emit_results(results)
     return unless !results.nil? && results.length.positive?
 
-    results.compact.flatten.each { |r| format_reviewdog_output(r) }
+    results.compact.flatten
+      .select{|r| r.is_a? Hash }
+      .each { |r| format_reviewdog_output(r) }
   end
 
   def self.should_ignore(contents)
@@ -932,7 +1199,7 @@ module GtnLinter
       # Remove any empty lists
       results = results.select { |x| !x.nil? && x.length.positive? }.flatten
       # Before ignoring anything matching GTN:IGNORE:###
-      return results if ignores.nil?
+      return results if ignores.nil? or ignores.empty?
 
       results = results.select { |x| ignores.index(x['code']['value']).nil? } if results.length.positive?
       return results
@@ -946,6 +1213,12 @@ module GtnLinter
     if path.match(/\s/)
       emit_results([ReviewDogEmitter.file_error(path: path,
                                                 message: 'There are spaces in this filename, that is forbidden.',
+                                                code: 'GTN:014')])
+    end
+
+    if path.match(/\?/)
+      emit_results([ReviewDogEmitter.file_error(path: path,
+                                                message: 'There ?s in this filename, that is forbidden.',
                                                 code: 'GTN:014')])
     end
 
@@ -982,33 +1255,39 @@ module GtnLinter
       # Check if there's a missing workflow test
       folder = File.dirname(path)
       basename = File.basename(path).gsub(/.ga$/, '')
-      possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
-      possible_tests = possible_tests.grep(/#{basename}[_-]tests?.ya?ml/)
+      possible_tests = Dir.glob("#{folder}/#{Regexp.escape(basename)}*ym*")
+      possible_tests = possible_tests.grep(/#{Regexp.escape(basename)}[_-]tests?.ya?ml/)
+
+      contains_interactive_tool = contents.match(/interactive_tool_/)
 
       if possible_tests.empty?
-        results += [
-          ReviewDogEmitter.file_error(path: path,
-                                      message: 'This workflow is missing a test, which is now mandatory. Please ' \
-                                               'see [the FAQ on how to add tests to your workflows](' \
-                                               'https://training.galaxyproject.org/training-material/faqs/' \
-                                               'gtn/gtn_workflow_testing.html).',
-                                      code: 'GTN:027')
-        ]
+        if !contains_interactive_tool
+          results += [
+            ReviewDogEmitter.file_error(path: path,
+                                        message: 'This workflow is missing a test, which is now mandatory. Please ' \
+                                                 'see [the FAQ on how to add tests to your workflows](' \
+                                                 'https://training.galaxyproject.org/training-material/faqs/' \
+                                                 'gtn/gtn_workflow_testing.html).',
+                                        code: 'GTN:027')
+          ]
+        end
       else
         # Load tests and run some quick checks:
         possible_tests.each do |test_file|
-          if !test_file.match(/-test.yml/)
+          if !test_file.match(/-tests.yml/)
             results += [
               ReviewDogEmitter.file_error(path: path,
-                                          message: 'Please use the extension -test.yml for this test file.',
+                                          message: 'Please use the extension -tests.yml ' \
+                                                   'for this test file.',
                                           code: 'GTN:032')
             ]
           end
 
           test = YAML.safe_load(File.open(test_file))
+          test_plain = File.read(test_file)
           # check that for each test, the outputs is non-empty
           test.each do |test_job|
-            if test_job['outputs'].nil? || test_job['outputs'].empty?
+            if (test_job['outputs'].nil? || test_job['outputs'].empty?) && !test_plain.match(/GTN_RUN_SKIP_REASON/)
               results += [
                 ReviewDogEmitter.file_error(path: path,
                                             message: 'This workflow test does not test the contents of outputs, ' \
@@ -1078,7 +1357,9 @@ module GtnLinter
   end
 
   def self.enumerate_lintable
-    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/, root_dir: 'faqs')
+    enumerate_type(/bib$/) + enumerate_type(/md$/) + enumerate_type(/md$/,
+                                                                    root_dir: 'faqs') + enumerate_type(/md$/,
+                                                                                                       root_dir: 'news')
   end
 
   def self.enumerate_all
@@ -1137,6 +1418,7 @@ if $PROGRAM_NAME == __FILE__
     end
     opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options[:limit] = o }
     opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |_o| options[:apply] = true }
+    opt.on('-s', '--short-path', 'Use short path in outputs') { |_o| options[:short] = true }
   end.parse!
 
   options[:format] = 'plain' if options[:format].nil?
@@ -1147,6 +1429,7 @@ if $PROGRAM_NAME == __FILE__
     linter.set_rdjson_output
   end
 
+  linter.set_short_path if options[:short]
   linter.code_limits(options[:limit].split(',')) if options[:limit]
 
   linter.enable_auto_fix if options[:apply]

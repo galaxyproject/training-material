@@ -39,10 +39,20 @@ abbreviations:
   MAGeCK: Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout
 subtopic: eukaryote
 priority: 8
+redirect_from:
+ - /topics/genome-editing/tutorials/crispr-screen/tutorial
+
+recordings:
+- captioners:
+  - mblue9
+  date: '2022-03-10'
+  galaxy_version: '21.09'
+  length: 45M
+  youtube_id: wavAf_2ytWg
+  speakers:
+  - mblue9
+
 ---
-
-
-# Introduction
 
 
 The {CRISPR} system is a bacterial immune system that has been modified for genome engineering. This groundbreaking technology resulted in a Nobel Prize for Emmanuelle Charpentier and Jennifer Doudna in 2020 ({% cite Uyhazi2021 %}). CRISPR consists of two components: a guide RNA (gRNA) and a non-specific CRISPR-associated endonuclease (Cas9). The gRNA is a short synthetic RNA composed of a scaffold sequence necessary for Cas9-binding (trRNA) and ~20 nucleotide spacer or targeting sequence which defines the genomic target to be modified (crRNA). Cas9 induces double-stranded breaks (DSB) within the target DNA. The resulting DSB is then repaired by either error-prone Non-Homologous End Joining (NHEJ) pathway or less efficient but high-fidelity Homology Directed Repair (HDR) pathway. The NHEJ pathway is the most active repair mechanism and it leads to small nucleotide insertions or deletions (indels) at the DSB site. This results in in-frame amino acid deletions, insertions or frameshift mutations leading to premature stop codons within the open reading frame (ORF) of the targeted gene. Ideally, the end result is a loss-of-function mutation within the targeted gene; however, the strength of the knockout phenotype for a given mutant cell is ultimately determined by the amount of residual gene function.
@@ -406,7 +416,7 @@ If we want to compare the drug treatment (T8-APR-246) to the vehicle control (T8
 * a sgRNA Summary file
 * a PDF report
 
-**Gene Summary file**
+### Gene Summary file
 
 The Gene Summary file contains the columns described below and a row for each gene targeted by sgRNAs. We have >20,000 genes in the file for this dataset.
 We get values for both negative and positive selection. The dataset here is from a negative selection screen so we are most interested in the negative values.
@@ -430,7 +440,7 @@ pos\|goodsgrna | The number of "good" sgRNAs, i.e., sgRNAs whose ranking is belo
 pos\|lfc | The log fold change of this gene in positive selection
 
 
-**sgRNA summary file**
+### sgRNA summary file
 
 The sgRNA Summary file contains the columns described below. We can use the sgRNA file to check how the individual guides for genes of interest performed.
 
@@ -453,7 +463,7 @@ FDR | false discovery rate
 high_in_treatment | Whether the abundance is higher in treatment samples
 
 
-**PDF report**
+### PDF report
 
 The PDF shows plots of the top 10 negatively and positively selected genes.
 We can see the top genes ranked by RRA scores or p value. These values come from the gene summary file.

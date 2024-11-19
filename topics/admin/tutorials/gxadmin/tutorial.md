@@ -27,7 +27,7 @@ We will just briefly cover the features available in `gxadmin`, there are lots o
 
 It started life as a small shell script that Helena wrote because she couldn't remember what [Gravity](https://github.com/galaxyproject/gravity) was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to UseGalaxy.eu and not generally useful.
 
-Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
+Since then it became the home for "all of the SQL queries we [galaxy admins] run regularly." @gtn:hexylena and @gtn:natefoo often shared SQL queries with each other in private chats, but this wasn't helpful to the admin community at large, so they decided to put them all in `gxadmin` and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that's missing or broken, or have a new query you want to run, just [let us know](https://github.com/usegalaxy-eu/gxadmin/issues/new).
 
 > <agenda-title></agenda-title>
 >
@@ -148,7 +148,7 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 
 ## Admin Favourite Queries
 
-**@slugger70's favourite**: `gxadmin query old-histories`. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.
+**@gtn:slugger70's favourite**: `gxadmin query old-histories`. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on UseGalaxy.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.
 
 > <code-in-title></code-in-title>
 > ```
@@ -169,7 +169,7 @@ Meta          | `meta`              | More miscellaneous commands, and a built-i
 >
 {: .code-out}
 
-**@natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
+**@gtn:natefoo's favourite**: `gxadmin query job-inputs`. He contributed this function which helps him debug jobs which are not running and should be.
 
 > <code-in-title></code-in-title>
 > ```
@@ -183,7 +183,7 @@ hda-id   | hda-state | hda-deleted | hda-purged |  d-id   | d-state | d-deleted 
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 8638195  |           | f           | f          | 8246852 | running | f         | f        | files9
 
-**@bgruening's favourite**: `gxadmin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
+**@gtn:bgruening's favourite**: `gxadmin query latest-users` let's us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven't registered for [training infrastructure as a service](https://galaxyproject.eu/tiaas) which helps us coordinate infrastructure for them so they don't have bad experiences.
 
 > <code-in-title></code-in-title>
 > ```
@@ -199,7 +199,7 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 3934  | 2019-01-27 10:06:40.973938 | 0 bytes    | xxxx     | xxxx  |        | f
 3933  | 2019-01-27 10:01:22.562782 |            | xxxx     | xxxx  |        | f
 
-**@hexylena's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
+**@gtn:hexylena's favourite** `gxadmin report job-info`. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.
 
 > <code-in-title></code-in-title>
 > ```
@@ -273,7 +273,7 @@ id    |        create_time         | disk_usage | username | email | groups | ac
 > ```
 {: .code-out}
 
-**@cat-bro** contributed the 'jobs' query: `gxadmin query jobs` lets you list jobs that have been run on your Galaxy. It's a **lot** more flexible than `queue-overview` and we suggest using it instead, in most places. E.g. to find `circos` jobs that were recently run:
+**@gtn:cat-bro contributed** the 'jobs' query: `gxadmin query jobs` lets you list jobs that have been run on your Galaxy. It's a *lot* more flexible than `queue-overview` and we suggest using it instead, in most places. E.g. to find `circos` jobs that were recently run:
 
 
 > <code-in-title></code-in-title>

@@ -1,0 +1,329 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - event
+        description: |
+            This must be set to `event`
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the event
+        _examples:
+            - Smörgåsbord 2023
+            - MTS Basics Workshop
+    contributions:
+        required: true
+        description: |
+            List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        _examples: |
+            contributions:
+                organisers:
+                    - shiltemann
+                    - bebatut
+                instructors:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                funding:
+                    - gallantries
+        type: map
+        mapping:
+            testing:
+                type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            infrastructure:
+                type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
+            funding:
+                type: seq
+                description: These entities provided funding support for the development of this resource
+                sequence:
+                - type: str
+                  enum:
+                  - ORGANISATIONS
+                  - GRANTS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            organisers:
+                description: These entities organised the event
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            instructors:
+                description: These entities helped or instructed at the event
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+    draft:
+        type: bool
+        description: |
+            `true` to hide your event. This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    status:
+        type: str
+        enum:
+          - wip
+        description: "The status of the event. `wip` for work in progress, otherwise, do not set this key."
+    description:
+        type: str
+        required: true
+        description: |
+            A brief description of the event.
+    redirect_from:
+        type: seq
+        sequence:
+            - type: str
+        description: |
+            If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
+        _examples:
+        - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
+    cover-image:
+        type: str
+        pattern: /^\/.*(.png|.jpg|.jpeg)/
+        description: |
+            link to a picture that will be used as the cover for the article
+        _examples:
+            - "/assets/images/BYCOVID_logo_tagline.png"
+    cover-image-alt:
+        type: str
+        description: |
+            If a cover is provided, then alt text is Mandatory.
+        _examples:
+            - "logo of by covid with subtitle reading beyond covid"
+    date_start:
+        type: date
+        description: |
+            When the event starts
+        _examples:
+            - 2024-04-01
+    date_end:
+        type: date
+        description: |
+            When the event ends
+        _examples:
+            - 2024-04-01
+    location:
+        required: false
+        description: |
+            Physical location of the event, only required for in-person events
+        _examples: |
+          location:
+            name: Zoom
+          location:
+            name: Bioinf Dept
+            address: 42 E Main St.
+            city: Reyjkjavik
+            country: Iceland
+        type: map
+        mapping:
+          name:
+            required: true
+            type: str
+          address:
+            type: str
+          city:
+            type: str
+          country:
+            type: str
+          region:
+            type: str
+          postcode:
+            type: str
+          geo:
+            type: map
+            mapping:
+              lat:
+                type: float
+              lon:
+                type: float
+    cost:
+        type: str
+        required: true
+        pattern: /(free|\d+ [A-Z]{3})/
+        description: |
+            Price of the event. If the event is free, use the word `free`. If there is a cost, use the currency and amount.
+        _examples:
+            - free
+            - 123 EUR
+            - 456 USD
+    audience:
+        type: str
+        _examples:
+          - This event is intended for PhD students interested in Genomics. A basic knowledge in R is useful but not required.
+    contact_email:
+        type: str
+    async:
+        type: bool
+        description: |
+            `true` for an asynchronous event. If this is true, we will not display any value for `time`s in the columns of the program
+    mode:
+        type: str
+        required: true
+        enum:
+            - online
+            - onsite
+            - hybrid
+        description: |
+            The mode of the event. For some reason the schema.org markup for this provides three separate axes (online/onsite/blended, synchronous/asynchronous, and full-time/part-time), but we're just going to use the first axis because there is no way to represent choices from each axis. Why, schema.org why‽ If you want to record async/sync please do so in the separate attribute, and we will not record full/part time.
+    registration:
+        description: |
+            Link to the registration page
+        type: map
+        mapping:
+          link:
+            required: true
+            type: str
+          deadline:
+            required: true
+            type: date
+          open:
+            required: false
+            type: bool
+    feedback:
+        description: |
+            Link to the feedback form
+        type: map
+        mapping:
+          link:
+            required: true
+            type: str
+          deadline:
+            required: true
+            type: date
+    program:
+        type: seq
+        sequence:
+          - type: map
+            mapping:
+              section:
+                type: str
+                required: true
+              subsection:
+                type: bool
+                description: "Treat this section as a subsection of the previous item"
+              description:
+                type: str
+              tracks:
+                type: seq
+                sequence:
+                  - type: map
+                    mapping:
+                      title:
+                        type: str
+                      link:
+                        type: str
+              tutorials:
+                type: seq
+                sequence:
+                  - type: map
+                    mapping:
+                      name:
+                        type: str
+                      topic:
+                        type: str
+                      time:
+                        type: str
+                      description:
+                        type: str
+                        description: |
+                          Description of the custom session here, in markdown.
+                      type:
+                        type: str
+                        enum:
+                          - custom
+
+    infrastructure:
+        description: |
+            Link to the feedback form
+        type: map
+        mapping:
+          tiaas:
+            type: bool
+            description: Indicate that you will be using TIaaS for this event
+          support:
+            type: map
+            mapping:
+              platform:
+                type: str
+                description: |
+                  The name of the platform
+                enum:
+                  - Slack
+              join_link:
+                type: str
+                description: Invite link for the platform, GTN slack by default
+              channel:
+                type: str
+                description: A channel identifier for the platform, instructors can create channels on the GTN slack themselves.
+              link:
+                type: str
+                description: Link to the channel
+          servers:
+            type: seq
+            sequence:
+              - type: map
+                mapping:
+                  server:
+                    type: str
+                    description: |
+                      The URL of the server
+                  name:
+                    type: str
+                    description: |
+                      A human readable name for the server
+                  tiaas_link:
+                    type: str
+                    description: |
+                      The TIaaS URL. If you don't have one officially yet, just set it provisionally (we'll generate a link which will make it easier to request it!)
+          custom:
+            type: map
+            mapping:
+              description:
+                type: str
+                description: |
+                  Custom markdown formatted text to display. Note that Jekyll things like `{% snippet %}` or `{% include %}` will not work here.
+          no_galaxy:
+            type: bool
+            description: |
+              Set to `true` to disable the automatic "register for a galaxy account" card.
+    tags:
+        type: seq
+        sequence:
+            - type: str
+              required: true
+        description: |
+            A free form list of tags that are relevant for your tutorial.
+        _examples:
+            - covid-19
+            - git-gat

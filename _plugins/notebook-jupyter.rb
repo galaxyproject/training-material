@@ -36,7 +36,7 @@ def json_boxify(h, page)
 end
 
 def jupyter_pre_render(site)
-  puts '[GTN/Notebooks] Rendering'
+  Jekyll.logger.info '[GTN/Notebooks] Rendering'
 
   site.config['__rendered_notebook_cache'] = {}
 
@@ -51,7 +51,7 @@ def jupyter_pre_render(site)
     page.data['tags'] = page.data['tags'] || []
     page.data['tags'].push('jupyter-notebook')
 
-    puts "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
+    Jekyll.logger.info "[GTN/Notebooks] Rendering #{notebook_language} #{fn}"
     last_modified = Gtn::ModificationTimes.obtain_time(page.path)
     notebook = GTNNotebooks.render_jupyter_notebook(page.data, page.content, page.url, last_modified,
                                                     notebook_language, site, dir)

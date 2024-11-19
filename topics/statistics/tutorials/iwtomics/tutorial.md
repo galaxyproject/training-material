@@ -27,8 +27,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 IWTomics ({% cite Cremona2018 %}) implements the Interval-Wise Testing (IWT; {% cite Pini2017 %}) for omics data. This
 inferential procedure tests for differences in "Omics" data between two groups

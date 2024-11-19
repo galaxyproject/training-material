@@ -13,15 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 200
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.0"
-      - uses: actions/cache@v2
+          ruby-version: "3.2"
+      - uses: actions/cache@v4
         with:
           path: |
             vendor/bundle
@@ -40,7 +41,7 @@ jobs:
 
       - name: Send announcements to matrix
         run: |
-            commit=$(git log --since "24 hours ago" --format=%H | tail -n 1)
+            commit=$(git log --since "24 hours ago" --format=%H --first-parent main| tail -n 1)
             bundle exec ruby bin/news.rb -p "${commit}~1" --matrix-post
         env:
             MATRIX_ACCESS_TOKEN: ${{ secrets.matrix_access_token }}

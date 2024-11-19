@@ -14,20 +14,23 @@ key_points:
 - This tutorial can not exhaustively cover every data type, but maybe it provides inspiration for your own analyses
 - JBrowse is a great, workflow-compatible alternative to other genome browsers
 - You can build visualisations that summarise dozens of analyses in one visualisation
-contributors:
+level: Intermediate
+tags:
+  - gmod
+  - jbrowse1
+contributions:
+  authorship:
   - hexylena
   - shiltemann
-  - erasmusplus
+  funding:
+  - gallantries
 ---
-
-# Introduction
 
 
 > JBrowse ({% cite Buels_2016 %}) is a fast, embeddable genome browser built completely with JavaScript
 > and HTML5, with optional run-once data formatting tools written in Perl.
 >
-> *from [http://jbrowse.org/](http://jbrowse.org/)*
-{: .quote}
+{: .quote cite="https://jbrowse.org/jbrowse1.html"}
 
 The Galaxy tool accepts data in many formats:
 

@@ -53,8 +53,6 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 <!-- TODO: Subset analysis to validate prior cell labelling -->
 <!-- TODO: Replace sort/unique with datamash -->
 
-# Introduction
-
 
 The data provided here as part of this tutorial analyses single-cell RNA-seq data from a study published by {% cite Gr_n_2016 %}. The data was used to cluster cells from *Lgr5*-positive intestinal stem cells of C57BL6/J mice, with the aim of discovering distinct cell sub-populations and deriving a lineage tree between them to find out how these sub-populations relate (or are derived from) one another.
 

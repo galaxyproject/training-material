@@ -3,10 +3,10 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign entity = site | fetch_contributor: page.contributor %}
 
 <script type="application/ld+json">
-	{% assign c = contributors[page.contributor] %}
-	{{ page.contributor | to_person_jsonld: c,site }}
+	{{ page.contributor | to_pfo_jsonld: site }}
 </script>
 
 <style type="text/css" media="all">
@@ -15,165 +15,77 @@ layout: base
 }
 
 </style>
-<section class="contributor-{{ page.contributor }}">
+
+{% assign stats_filters = "" | split: ',' %}
+<section class="contributor-page contributor-{{ page.contributor }}">
 	<div class="stats">
 		<div class="row">
+			<div class="col-md-9">
+				<hgroup>
+					<h1>
+						{{ entity.name | default: page.contributor }}
+					</h1>
+					{% if entity.funder%}
+					<p>The materials and activities listed below were funded (to some degree) by this project.</p>
+				    <p>{{ entity.funding_statement | markdownify }}</p>
 
-			<div class="col-md-3">
-				<div>
-				{% if contributors[page.contributor].avatar %}
-					<img src="{{ contributors[page.contributor].avatar }}" alt="avatar" >
-				{% elsif contributors[page.contributor].github != false %}
-					<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-				{% else %}
-					<span class="thumbnail">
-						<img src="https://avatars.githubusercontent.com/{{ page.contributor }}" alt="github avatar" >
-					</span>
-				{% endif %}
-				</div>
+					{% endif %}
+				</hgroup>
 
-				{% if contributors[page.contributor].bio %}
+				{% if entity.bio %}
 				<p class="text-muted">
-					{{ contributors[page.contributor].bio }}
+					{{ entity.bio }}
 				</p>
 				{% endif %}
 
-				{% if page.has_philosophy %}
-				<div class="contact-items">
-					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
-						Training Philosophy
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].github != false %}
-				<div class="contact-items">
-					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
-						{% icon github %} {{ page.contributor }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].funding_id %}
-					Grant ID:
-					{% if contributors[page.contributor].funding_system %}
-						{% if contributors[page.contributor].funding_system == "cordis" %}
-							<a href="https://cordis.europa.eu/project/id/{{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% elsif contributors[page.contributor].funding_system == "erasmusplus" %}
-							<a href="https://erasmus-plus.ec.europa.eu/projects/search/details/{{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% elsif contributors[page.contributor].funding_system == "ukri" %}
-							<a href="https://gtr.ukri.org/projects?ref={{ contributors[page.contributor].funding_id }}">
-								{{ contributors[page.contributor].funding_id }}
-							</a>
-						{% endif %}
-					{% else %}
-						{{ contributors[page.contributor].funding_id }}
-					{% endif %}
-				{% endif %}
-
-				{% if contributors[page.contributor].email %}
-				<div class="contact-items">
-					<a title="E-mail" href="mailto:{{ contributors[page.contributor].email }}">
-						{% icon email %} {{ contributors[page.contributor].email }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].matrix %}
-				<div class="contact-items">
-					<a title="matrix" href="https://matrix.to/#/@{{ contributors[page.contributor].matrix }}">
-						{% icon gitter %} {{ contributors[page.contributor].matrix }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].fediverse %}
-				<div class="contact-items">
-					<a href="{{ contributors[page.contributor].fediverse }}" rel="me">
-						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].twitter %}
-				<div class="contact-items">
-					<a title="Twitter" href="https://twitter.com/{{ contributors[page.contributor].twitter }}">
-						{% icon twitter %} {{ contributors[page.contributor].twitter }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].linkedin %}
-				<div class="contact-items">
-					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ contributors[page.contributor].linkedin }}">
-						{% icon linkedin %} {{ contributors[page.contributor].linkedin }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].orcid %}
-				<div class="contact-items">
-					<a title="ORCID" href="https://orcid.org/{{ contributors[page.contributor].orcid }}">
-						{% icon orcid %} {{ contributors[page.contributor].orcid }}
-					</a>
-				</div>
-				{% endif %}
-
-				{% if contributors[page.contributor].elixir_node %}
-				<div class="contact-items">
-					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ contributors[page.contributor].elixir_node }}.svg" alt="elixir logo for {{ contributors[page.contributor].elixir_node | elixirnode2name }}">
-				</div>
-				{% endif %}
-
-				<h4>Favourite Topics</h4>
-				<canvas id="myChart" height="300px"></canvas>
-				<h4>Favourite Formats</h4>
-				<canvas id="slidesVsTutorials" height="300px"></canvas>
-
-			</div>
-
-			<div class="col-md-9">
-				<h1>
-					{{ contributors[page.contributor].name | default: page.contributor }}
-				</h1>
-				{% if contributors[page.contributor].funder %}
-				<div class="label label-default label-large" style="{{ 'GTN Funder' | colour_tag }}">GTN Funder</div>
-				{% endif %}
-				{% if contributors[page.contributor].in_memoriam %}
+				{% if entity.in_memoriam %}
 				<div class="alert alert-dark" role="alert">
 					<h2 class="alert-heading">In Memoriam</h2>
-					<p>{{ contributors[page.contributor].in_memoriam | markdownify }}</p>
+					<p>{{ entity.in_memoriam | markdownify }}</p>
 				</div>
 
+				{% endif %}
+
+				{% assign affil_count  = entity.affiliations | size %}
+				{% if affil_count > 0 %}
+				<h2>Affiliations</h2>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.affiliations badge=true %}
+				</div>
+				{% endif %}
+
+				{% assign former_affil_count  = entity.former_affiliations | size %}
+				{% if former_affil_count > 0 %}
+				<h2>Former Affiliations</h2>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.former_affiliations badge=true %}
+				</div>
+				{% endif %}
+
+				{% assign member_count  = entity.members | size %}
+				{% if member_count > 0 %}
+				<h2>Members</h2>
+				<p class="text-muted">These individuals have noted that they are affiliated in some way with this organisation. This list is non-exhaustive, and randomly ordered.</p>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.members badge=true shuffle=true %}
+				</div>
+				{% endif %}
+
+				{% assign former_member_count  = entity.former_members | size %}
+				{% if former_member_count > 0 %}
+				<h2>Former Members</h2>
+				<p class="text-muted">These individuals have noted that they previously were affiliated in some way with this organisation. This list is non-exhaustive.</p>
+				<div class="contributors-line">
+					{% include _includes/contributor-list.html contributors=entity.former_members badge=true shuffle=true %}
+				</div>
 				{% endif %}
 
 				<h2>Contributions</h2>
 
-				{% if contributors[page.contributor].funder %}
-				{% if contributors[page.contributor].url %}
-				<a href="{{ contributors[page.contributor].url }}">{{ contributors[page.contributor].url }}</a>
-				{% endif %}
-				{{ contributors[page.contributor].funding_statement | markdownify }}
-				{% endif %}
 
 				<p class="text-muted">
-					The following list includes only slides and tutorials where the individual has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
+					The following list includes only slides and tutorials where the individual or organisation has been added to the contributor list. This may not include the sum total of their contributions to the training materials (e.g. GTN css or design, tutorial datasets, workflow development, etc.) unless described by a news post.
 
-                {% unless contributors[page.contributor].github == false %}
-                <br><br>
-		{% unless contributors[page.contributor].funder %}
-                <h3> GitHub Activity</h4>
-                <ul>
-                  <li><a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> </li>
-                  <li><a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a></li>
-                  <li><a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a></li>
-                </ul>
-                {% endunless %}
-		{% endunless %}
                 </p>
 				{% if page.editor_count > 0 %}
 				<h3>Editorial Roles</h3>
@@ -195,6 +107,7 @@ layout: base
 				<h3>Tutorials</h3>
 				<ul>
 				{% for res in page.tutorials %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -206,7 +119,11 @@ layout: base
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -216,6 +133,7 @@ layout: base
 				<h3>Slides</h3>
 				<ul>
 				{% for res in page.slides %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						{% assign topic_id = res[0] | get_topic %}
 						{% assign topic = site.data[topic_id] %}
@@ -227,7 +145,11 @@ layout: base
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
@@ -237,27 +159,283 @@ layout: base
 				<h3>Learning Pathways</h3>
 				<ul>
 				{% for res in page.learning_pathways %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
 					<li>
 						<a href="{{ site.baseurl }}/{{ res[0].url }}">
 						{{ res[0].title }}
 						</a>
 						{% assign res_activity = res[1] %}
-						{% include _includes/contributor-human-icons.html activity=res_activity %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
 					</li>
 				{% endfor %}
 				</ul>
 				{% endif %}
 
+				{% if page.faqs_count > 0 %}
+				<h3>FAQs</h3>
+				<ul>
+				{% for res in page.faqs %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.videos_count > 0 %}
+				<h3>Video Recordings</h3>
+				<ul>
+				{% for res in page.videos %}
+					<li>
+						{% assign topic_id = res[0] | get_topic %}
+						{% assign topic = site.data[topic_id] %}
+						<a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+							{{ topic.title }}
+						</a>
+						/
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+				{% if page.events_count > 0 %}
+				<h3>Events</h3>
+				<ul>
+				{% for res in page.events %}
+					{% assign stats_filters = stats_filters | push: res[0].url %}
+					<li>
+						<a href="{{ site.baseurl }}/{{ res[0].url }}">
+						{{ res[0].title }}
+						</a>
+						{% assign res_activity = res[1] %}
+						{% if res_activity %}
+						{% for act in res_activity %}
+						{% include _includes/contributor-human-icons.html activity=act %}
+						{% endfor %}
+						{% endif %}
+					</li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+
+                {% unless entity.github == false %}
+                <br><br>
+		{% unless entity.funder %}
+                <h3> GitHub Activity</h4>
+                <a href="https://github.com/galaxyproject/training-material/issues?q=+is%3Aissue+author%3A{{page.contributor}}">{% icon github %} Issues Reported</a>
+
+		{% if page.gh_prs_count > 0 %}
+		<h4>{{ page.gh_prs_count }} Merged Pull Requests</h4>
+		<p>
+		See all of the 
+                <a href="https://github.com/galaxyproject/training-material/pulls?q=is%3Apr+author%3A{{page.contributor}}">{% icon github %} Pull Requests</a> and 
+		<a href="https://github.com/galaxyproject/training-material/commits?author={{page.contributor}}">{% icon github %} Commits</a> by {{ entity.name | default: page.contributor }}.
+		</p>
+		<ul>
+			{% for pr in page.gh_prs_recent %}
+			<li>
+				{% assign prdata = site.data['github'][pr] %}
+				{% if prdata.author.login == "github-actions" %}
+				{% icon github %}
+				{% else %}
+				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				{% endif %}
+
+				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
+
+				{% for label in prdata.labels %}
+				{% if forloop.index <= 5 %}
+				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
+				{% endif %}
+				{% endfor %}
+			</li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+		{% if page.gh_reviews_count > 0 %}
+		<h4>Reviewed {{ page.gh_reviews_count }} PRs</h4>
+		<p>We love our community reviewing each other's work!</p>
+		<ul>
+			{% for pr in page.gh_reviews_recent %}
+			<li>
+				{% assign prdata = site.data['github'][pr] %}
+
+				{% if prdata.author.login == "github-actions" %}
+				{% icon github %}
+				{% else %}
+				<img src="https://github.com/{{ prdata.author.login }}.png?s=20" alt="{{ prdata.author.login }}" style="height: 1.2em; margin: 0px; border-radius: 25%;">
+				{% endif %}
+				<a href="{{ prdata.url }}">{{ prdata.title }}</a>
+
+				{% for label in prdata.labels %}
+				{% if forloop.index <= 5 %}
+				<div class="label label-default tutorial_tag" style="{{ label | colour_tag }}">{{ label }}</div>
+				{% endif %}
+				{% endfor %}
+			</li>
+			{% endfor %}
+
+		</ul>
+		{% endif %}
+
+                {% endunless %}
+		{% endunless %}
 
 				{% if page.news_count > 0 %}
-                <h3>News</h3>
-                <div class="newslist">
-                {% assign news_sorted = page.news | sort: 'date' | reverse %}
-                {% for n in news_sorted %}
-                   {% include _includes/news-card.html news=n %}
-                {% endfor %}
-                </div>
+				<h3>News</h3>
+				<div class="newslist">
+				{% for n in page.news %}
+					{% assign stats_filters = stats_filters | push: n.url %}
+					{% include _includes/news-card.html news=n %}
+				{% endfor %}
+				</div>
 				{% endif %}
+			</div>
+
+			<div class="col-md-3">
+				<div>
+					{{ entity | fetch_entity_avatar: page.contributor, 200 }}
+				</div>
+
+				<h2>External Links</h2>
+				{% if page.has_philosophy %}
+				<div class="contact-items">
+					<a href="{{ site.baseurl }}/topics/teaching/tutorials/experiences/tutorial.html#{{ page.contributor }}">
+						Training Philosophy
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.ror %}
+				<div class="contact-items">
+					<a title="ROR" href="https://ror.org/{{ entity.ror }}">
+						ROR:{{ entity.ror }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.github != false %}
+				<div class="contact-items">
+					<a title="GitHub" href="https://github.com/{{ page.contributor }}">
+						{% icon github %} {{ page.contributor }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.url %}
+				Website: <a href="{{ entity.url }}">{{ entity.url }}</a>
+				{% endif %}
+
+				{% if entity.funding_id %}
+					Grant ID:
+					{% if entity.funding_database %}
+						{% assign url = entity | fetch_funding_url %}
+						<a href="{{ url }}">
+							{{ entity.funding_id }}
+						</a>
+					{% else %}
+						{{ entity.funding_id }}
+					{% endif %}
+				{% endif %}
+
+				{% if entity.email %}
+				<div class="contact-items">
+					<a title="E-mail" href="mailto:{{ entity.email }}">
+						{% icon email %} {{ entity.email }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.matrix %}
+				<div class="contact-items">
+					<a title="matrix" href="https://matrix.to/#/@{{ entity.matrix }}">
+						{% icon gitter %} {{ entity.matrix }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.fediverse %}
+				<div class="contact-items">
+					<a href="{{ entity.fediverse }}" rel="me">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ entity.fediverse }}
+					</a>
+				</div>
+				{% endif %}
+
+                {% if entity.bluesky %}
+             	<div class="contact-items">
+					<a title="BlueSky" href="https://bsky.app/profile/{{entity.bluesky}}">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/bluesky-logo.svg" | load_svg }}</span> {{ entity.bluesky }}
+					</a>
+				</div>
+
+                {% endif %}
+
+				{% if entity.twitter %}
+				<div class="contact-items">
+					<a title="Twitter" href="https://twitter.com/{{ entity.twitter }}">
+						{% icon twitter %} {{ entity.twitter }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.linkedin %}
+				<div class="contact-items">
+					<a title="LinkedIn" href="https://www.linkedin.com/in/{{ entity.linkedin }}">
+						{% icon linkedin %} {{ entity.linkedin }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.orcid %}
+				<div class="contact-items">
+					<a title="ORCID" href="https://orcid.org/{{ entity.orcid }}">
+						{% icon orcid %} {{ entity.orcid }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if entity.elixir_node %}
+				<div class="contact-items">
+					<img src="{{ site.baseurl }}/assets/images/elixir/elixir-{{ entity.elixir_node }}.svg" alt="elixir logo for {{ entity.elixir_node | elixirnode2name }}">
+				</div>
+				{% endif %}
+
+				<p>Favourite Topics</p>
+				<canvas id="myChart" height="300px"></canvas>
+				<p>Favourite Formats</p>
+				<canvas id="slidesVsTutorials" height="300px"></canvas>
+
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
 <script src="{% link assets/js/Chart.bundle.js %}"></script>
 
 <script>
@@ -285,6 +463,9 @@ var topics = [
 var slidesVsTutos = [
 {% for res in page.tutorials %}
 	"Tutorials",
+{% endfor %}
+{% for res in page.faqs %}
+	"FAQs",
 {% endfor %}
 {% for res in page.slides %}
 	"Slides",
@@ -364,11 +545,8 @@ var chart2 = new Chart(ctx2, {
 		}
 	}
 });
-				</script>
+</script>
 
-			</div>
 
-			</div>
-		</div>
-	</div>
-</section>
+<h3>Stats for materials contributed to by {{ entity.name | default: page.contributor }}</h3>
+<iframe plausible-embed src="https://plausible.galaxyproject.eu/training.galaxyproject.org?page=%7E{{stats_filters | join:"|"}}&embed=true&theme=system&background=transparent&period=12mo" scrolling="no" frameborder="0" loading="lazy" style="width: 1px; min-width: 100%; height: 1800px;"></iframe>

@@ -31,10 +31,8 @@ contributions:
     - ppalagi
     - elixir-goblet-ttt
   funding:
-    - erasmusplus
+    - gallantries
 ---
-
-# Introduction
 
 **Assessment** is the evaluation or estimation of the nature, quality, or ability of someone or something, while **feedback** integrate the output of the assessment in the learning process.
 

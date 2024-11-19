@@ -1,0 +1,296 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow performs contamination cleaning steps on assembled genomes. Users specify an input genome (fasta/fasta.gz) and taxonomic information corresponding to the source organism. There are two screening steps for foreign organism sequences (FCS-GX) and adaptors (FCS-adaptor), each followed by a cleaning step to remove identified contaminants. The final output is a cleaned genome. ",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Organization",
+            "name": "National Center for Biotechnology Information",
+            "url": "https://github.com/ncbi/fcs"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "http://www.usa.gov/publicdomain/label/1.0/",
+    "name": "NCBI Foreign Contamination Screen",
+    "steps": {
+        "0": {
+            "annotation": "input must be an assembled genome in fasta/fasta.gz format. FCS is not intended to identify contaminants in sequencing reads inputs.",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "input must be an assembled genome in fasta/fasta.gz format. FCS is not intended to identify contaminants in sequencing reads inputs.",
+                    "name": "Input genome"
+                }
+            ],
+            "label": "Input genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 3.9375
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta.gz\", \" fasta\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "a2066ff6-a9c6-4152-9537-a7d05d2bea00",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "mode|fasta": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NCBI FCS GX",
+                    "name": "mode"
+                }
+            ],
+            "label": "FCS-GX screen",
+            "name": "NCBI FCS GX",
+            "outputs": [
+                {
+                    "name": "taxonomy_report",
+                    "type": "tabular"
+                },
+                {
+                    "name": "action_report",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 355.5156127405953,
+                "top": 3.28126838910714
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3cdb96f2855d",
+                "name": "ncbi_fcs_gx",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mode\": {\"mode_selector\": \"screen\", \"__current_case__\": 0, \"config_tag\": \"all\", \"fasta\": {\"__class__\": \"ConnectedValue\"}, \"id\": {\"id_selector\": \"gx_div\", \"__current_case__\": 0, \"div\": \"fung:budding yeasts\"}, \"species\": null, \"screen_adv\": {\"gx_align_exclude_taxa\": \"\", \"gx_extra_contam_divs\": null, \"split_fasta\": true, \"div\": \"\", \"database\": \"/cvmfs/data.galaxyproject.org/byhand/ncbi_fcs_gx/all\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "7907456b-eaa7-4a3f-b53b-c250110a117a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "fcs_gx_action_report",
+                    "output_name": "action_report",
+                    "uuid": "9741edf2-4be6-45a3-980d-99b1aea18380"
+                },
+                {
+                    "label": "fcs_gx_taxonomy_report",
+                    "output_name": "taxonomy_report",
+                    "uuid": "ddedd49f-8c57-4e3e-a158-3d66ce12f05c"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "mode|action_report": {
+                    "id": 1,
+                    "output_name": "action_report"
+                },
+                "mode|input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NCBI FCS GX",
+                    "name": "mode"
+                },
+                {
+                    "description": "runtime parameter for tool NCBI FCS GX",
+                    "name": "mode"
+                }
+            ],
+            "label": "FCS-GX clean",
+            "name": "NCBI FCS GX",
+            "outputs": [
+                {
+                    "name": "contam_fasta",
+                    "type": "fasta"
+                },
+                {
+                    "name": "clean_fasta",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 351.484375,
+                "top": 301.109375
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3cdb96f2855d",
+                "name": "ncbi_fcs_gx",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mode\": {\"mode_selector\": \"clean\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"action_report\": {\"__class__\": \"ConnectedValue\"}, \"min_seq_len\": \"200\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "0eba0bee-4d7a-4a8d-824c-76d5ae5dcdaa",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "gx_contam_fasta",
+                    "output_name": "contam_fasta",
+                    "uuid": "f3a37b43-d304-4ec0-a023-197c9e0ce2e1"
+                },
+                {
+                    "label": "gx_clean_fasta",
+                    "output_name": "clean_fasta",
+                    "uuid": "56716c7c-ac7f-42f7-bbef-62a36b4d3810"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "clean_fasta"
+                }
+            },
+            "inputs": [],
+            "label": "FCS-adaptor screen",
+            "name": "NCBI FCS Adaptor",
+            "outputs": [
+                {
+                    "name": "adaptor_report",
+                    "type": "tabular"
+                },
+                {
+                    "name": "clean_fasta",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 701.53125,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/richard-burhans/ncbi_fcs_adaptor/ncbi_fcs_adaptor/0.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "d55ad8533d58",
+                "name": "ncbi_fcs_adaptor",
+                "owner": "richard-burhans",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced\": {\"optional_log\": null}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"tax\": \"--euk\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "1c9a5183-76a7-4cd9-9511-72fd75101c13",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "fcs_adaptor_report",
+                    "output_name": "adaptor_report",
+                    "uuid": "6a4baf46-80b0-4a96-b864-9201fc80cdb7"
+                },
+                {
+                    "label": "adaptor_clean_fasta",
+                    "output_name": "clean_fasta",
+                    "uuid": "1cad7ab4-a817-436c-9a63-fd4e3c6b4bbb"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "mode|action_report": {
+                    "id": 3,
+                    "output_name": "adaptor_report"
+                },
+                "mode|input": {
+                    "id": 2,
+                    "output_name": "clean_fasta"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool NCBI FCS GX",
+                    "name": "mode"
+                },
+                {
+                    "description": "runtime parameter for tool NCBI FCS GX",
+                    "name": "mode"
+                }
+            ],
+            "label": "FCS-adaptor clean",
+            "name": "NCBI FCS GX",
+            "outputs": [
+                {
+                    "name": "contam_fasta",
+                    "type": "fasta"
+                },
+                {
+                    "name": "clean_fasta",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 699,
+                "top": 302.78125
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ncbi_fcs_gx/ncbi_fcs_gx/0.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "3cdb96f2855d",
+                "name": "ncbi_fcs_gx",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mode\": {\"mode_selector\": \"clean\", \"__current_case__\": 1, \"input\": {\"__class__\": \"ConnectedValue\"}, \"action_report\": {\"__class__\": \"ConnectedValue\"}, \"min_seq_len\": \"200\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "ee8b7bac-42a5-4b17-b8ef-f432c626bb80",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "adaptor_contam_fasta",
+                    "output_name": "contam_fasta",
+                    "uuid": "0da68570-7490-4087-86c8-739522e1a776"
+                },
+                {
+                    "label": "final_clean_fasta",
+                    "output_name": "clean_fasta",
+                    "uuid": "4985eb07-30b0-4872-ab83-52ffeb619900"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "NCBI"
+    ],
+    "uuid": "00001c47-0f60-49c5-a520-4d9fc57f3a58",
+    "version": 10
+}

@@ -1,14 +1,10 @@
 # frozen_string_literal: true
 
 # Plugin to add environment variables to the `site` object in Liquid templates
-require 'find'
-require 'bibtex'
-require 'citeproc/ruby'
-require 'csl/styles'
+require 'date'
 require 'time'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
-require './_plugins/gtn'
 
 module Jekyll
   # This module contains a generator for adding environment variables to the `site` object in Liquid templates
@@ -25,6 +21,15 @@ module Jekyll
       # Add other environment variables to `site.config` here...
       Gtn::Scholar.load_bib(site)
       site.config.update(Gtn::Git.discover)
+
+      site.data['build'] = {
+        'today' => Date.today,
+        'now' => Time.now,
+        'jekyll' => {
+          'version' => Jekyll::VERSION,
+          'environment' => Jekyll.env,
+        }
+      }
     end
   end
 end

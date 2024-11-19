@@ -32,12 +32,17 @@ tags:
 - prokaryote
 - one-health
 - phylogenetics
+- microgalaxy
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0084 # Phylogeny
+- topic_3324 # Infectious disease
 ---
 
 
-# Introduction
-
-*"Nothing in biology makes sense except in the light of evolution."* --- Theodosius Dobzhansky, 1973
+> "Nothing in biology makes sense except in the light of evolution."
+{: .quote author="Theodosius Dobzhansky" year="1973"}
 
 Phylogenetic trees are a tool for organizing biological diversity. Just as maps provide a spatial framework to the geographer, phylogenies provide an evolutionary context to the biologist: they capture the relationship among "things" (species, individuals, genes), represented as tips in the tree, based on common ancestry.
 
@@ -123,7 +128,7 @@ Near the end of this tutorial, we will show and discuss ways to correct for this
 
 > <comment-title>The alternative approach: genome assembly</comment-title>
 >
-> A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials](https://training.galaxyproject.org/training-material/topics/assembly) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. {% cite Zhou2021 %}).
+> A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous [Galaxy tutorials]({% link topics/assembly/index.md %}) on this topic), b) annotate genes, c) extract genes present in all strains (the "core" genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. {% cite Zhou2021 %}).
 >
 {: .comment}
 

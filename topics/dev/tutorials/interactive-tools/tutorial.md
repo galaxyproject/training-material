@@ -275,22 +275,36 @@ RUN \
 # inside we will find our Shiny app log file:
 #     docker run -p 8888:8888 -e LOG_PATH=/tmp/shiny/gxit.log -v $PWD/log:/tmp/shiny <container_name>
 
-ARG PORT=8888
-ARG LOG_PATH=/tmp/gxit/gxit.log
+ARG PORT=8765
+ARG LOG_PATH=/tmp/gxit.log
 
 ENV LOG_PATH=$LOG_PATH
 ENV PORT=$PORT
 
 # ------------------------------------------------------------------------------
 
+# Edit shiny-server config to use our port
+RUN cat /etc/shiny-server/shiny-server.conf \
+    | sed "s/3838/${PORT}/" > /etc/shiny-server/shiny-server.conf.1
+RUN mv /etc/shiny-server/shiny-server.conf.1 /etc/shiny-server/shiny-server.conf
+
+# ------------------------------------------------------------------------------
+
 RUN mkdir -p $(dirname "${LOG_PATH}")
 EXPOSE $PORT
-COPY ./gxit /gxit
+COPY ./gxit/app.R /srv/shiny-server/
 
-# This is the command that will be run when the Docker container is launched.
-# In this case it will launch the R Shiny app within the container.
-CMD R -e "shiny::runApp('/gxit', host='0.0.0.0', port=${PORT})" 2>&1 > "${LOG_PATH}"
+CMD ["/bin/sh", "-c", "shiny-server > ${LOG_PATH} 2>&1"]
 ```
+
+> <tip-title>Shiny-based interactive tools</tip-title>
+> In a previous version of this tutorial, we ran the Shiny App with `R -e "shiny:runApp()"`
+> rather than using `shiny-server`. The latter is better practice, because it ensures that
+> ports are mapped correctly for websocket functionality. With `shiny::runApp()` you will
+> probably notice a websocket timeout in the app when run as a GxIT - the UI often greys
+> out and becomes unresponsive after 20-30 seconds.
+>
+{: .tip}
 
 This image is already hosted on [Docker Hub](https://hub.docker.com/r/ancelete/first-gxit)
 , but anyone can use this Dockerfile to rebuild the image if necessary.
@@ -465,8 +479,8 @@ our new Docker container as a Galaxy tool.
 > >         ## onto the Docker container at runtime - enabling access to
 > >         ## '$infile' and '$outfile' from inside the container.
 > >
-> >         R -e "shiny::runApp('/gxit', host='0.0.0.0', port=8765)" 2>&1 > "/var/log/tuto-gxit-01.log"
-> >         ## The log file can be found inside the container, for debbuging purposes
+> >         shiny-server 2>&1 > /var/log/tuto-gxit-01.log
+> >         ## The log file can be found inside the container, for debugging purposes
 > >
 > >     ]]>
 > >     </command>
@@ -496,8 +510,8 @@ our new Docker container as a Galaxy tool.
 > >     <citations>
 > >        <citation type="bibtex">
 > >        @misc{
-> >             author       = {Lain Pavot - lain.pavot@inrae.fr },
-> >             title        = {{first-gxit -  A tool to visualise tsv/csv files }},
+> >             author       = {Lain Pavot - lain.pavot@inrae.fr},
+> >             title        = {first-gxit -  A tool to visualise tsv/csv files},
 > >             publisher    = {INRAE},
 > >             url          = {}
 > >         }

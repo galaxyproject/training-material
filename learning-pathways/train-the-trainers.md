@@ -11,7 +11,7 @@ editorial_board:
 - bebatut
 - fpsom
 funding:
-- erasmusplus
+- gallantries
 
 pathway:
   - section: "Module 1: Learning principles"

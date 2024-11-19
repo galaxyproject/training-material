@@ -7,7 +7,7 @@ cover-image-alt: "microgalaxy logo"
 editorial_board:
 - bebatut
 funding:
-- erasmusplus
+- gallantries
 
 title: Metagenomics data processing and analysis for microbiome
 description: |
@@ -21,7 +21,7 @@ pathway:
     description: Why study the microbiome? What are the different approaches for metagenomics? This module will give you a short introduction to metagenomics.
     tutorials:
       - name: introduction
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Module 2: Introduction to Galaxy"
     description: |
@@ -51,7 +51,7 @@ pathway:
         - How to assess the quality of metagenomic data assembly?
     tutorials:
       - name: metagenomics-assembly
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Module 5: Community taxonomic profiling"
     description: |
@@ -63,18 +63,18 @@ pathway:
         This module will cover taxonomic profiling in theory and also with an example tutorial.
     tutorials:
       - name: taxonomic-profiling
-        topic: metagenomics
+        topic: microbiome
         #description: More theoretical tutorial
       - name: beer-data-analysis
-        topic: metagenomics
+        topic: microbiome
         #description: Application tutorial
 
-  #- section: "Module 6: Taxonomic binning"
-  #  description:
-  #
-  #  tutorials:
-  #    - name: learner_participation_engagement
-  #      topic: metagenomics
+  - section: "Module 6: Taxonomic binning"
+    description:  |
+      This module covers the process used to classify DNA sequences obtained from metagenomic sequencing into discrete groups, or bins, based on their similarity to each other.
+    tutorials:
+      - name: metagenomics-binning
+        topic: microbiome
 
 
   #- section: "Module 7: Community Biodiversity"
@@ -82,7 +82,7 @@ pathway:
   #
   #  tutorials:
   #    - name: learner_participation_engagement
-  #      topic: metagenomics
+  #      topic: microbiome
 
   - section: "Module 8: Applying concepts to metatranscriptomics data"
     description: |
@@ -92,12 +92,12 @@ pathway:
         - How to assign taxa and function to the identified sequences?
     tutorials:
       - name: metatranscriptomics
-        topic: metagenomics
+        topic: microbiome
 
   - section: "Recommended follow-up tutorials"
     tutorials:
       - name: pathogen-detection-from-nanopore-foodborne-data
-        topic: metagenomics
+        topic: microbiome
 ---
 
 

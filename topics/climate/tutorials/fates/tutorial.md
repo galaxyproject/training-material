@@ -39,10 +39,18 @@ contributors:
 - annefou
 - huitang-earth
 
+
+recordings:
+- captioners:
+  - s3by01
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H20M
+  youtube_id: 0LsEx11eLiI
+  speakers:
+  - annefou
+
 ---
-
-
-# Introduction
 
 
 Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
@@ -395,17 +403,7 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
-
-1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
-2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
-3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
-
-> <comment-title>Permissions</comment-title>
-> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
->
-> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
-{: .comment}
+{% snippet faqs/galaxy/histories_sharing.md %}
 
 > <hands-on-title>Share history</hands-on-title>
 >

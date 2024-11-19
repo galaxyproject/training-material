@@ -20,6 +20,7 @@ tags:
 - cookbook
 - eukaryote
 - prokaryote
+- microgalaxy
 requirements:
   -
     type: "internal"
@@ -34,9 +35,12 @@ requirements:
 abbreviations:
   ORF: Open Reading Frame
 priority: 2
+edam_ontology:
+- topic_0622 # Genomics
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+- topic_0084 # Phylogeny
 ---
-
-# Introduction
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
@@ -353,7 +357,7 @@ This is a URL pointing to one of the workflow outputs: `Mapping report` with the
 
 Running the notebook will generate two graphs explained in the next section.
 
-### Interpreting the graphs
+## Interpreting the graphs
 
 Analysis of sample data associated with this tutorial will produce the genome graph shown below. In this graph the Y-axis represents ORFs on positive (1, 2, 3 in red color) and negative (-1, -2, -3 in blue color) strands. The X-axis is genomic coordinates.  Boxes represent matches between amino acid sequences of exons and ORFs they are superimposed to. The color of boxes reflect the extent of amino acid identity. The color key is shown in the left upper corner of the plot. The image is interactive so you can zoom in and out.
 

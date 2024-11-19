@@ -1,53 +1,61 @@
 ---
 layout: tutorial_hands_on
-
 title: Long non-coding RNAs (lncRNAs) annotation with FEELnc
-zenodo_link: https://zenodo.org/record/7107050
+zenodo_link: https://zenodo.org/records/11367439
 tags:
-  - eukaryote
+- eukaryote
 questions:
-  - How to annotate lncRNAs with FEELnc?
-  - How to classify lncRNAs according to their localisation and direction of transcription of proximal RNA transcripts?
-  - How to update genome annotation with these annotated lncRNAs?
-
+- How to annotate lncRNAs with FEELnc?
+- How to classify lncRNAs according to their localisation and direction of transcription
+  of proximal RNA transcripts?
+- How to update genome annotation with these annotated lncRNAs?
 objectives:
-  - Load data (genome assembly, annotation and mapped RNASeq) into Galaxy
-  - Perform a transcriptome assembly with StringTie
-  - Annotate lncRNAs with FEELnc
-  - Classify lncRNAs according to their location
-  - Update genome annotation with lncRNAs
-
+- Load data (genome assembly, annotation and mapped RNASeq) into Galaxy
+- Perform a transcriptome assembly with StringTie
+- Annotate lncRNAs with FEELnc
+- Classify lncRNAs according to their location
+- Update genome annotation with lncRNAs
 time_estimation: 2h
 level: Intermediate
 key_points:
-  - StringTie allows to perform a transcriptome assembly using mapped RNASeq data and provides an annotation file containing trancripts description.
-  - FEELnc pipeline allows to perform annotation of long non-coding RNAs (lncRNAs).
-  - Annotation is based on reconstructed transcripts from RNA-seq data (either with or without a reference genome)
-  - Annotation can be performed without any training set of non-coding RNAs.
-  - FEELnc provides the localisation and the direction of transcription of proximal RNA transcripts of lncRNAs.
+- StringTie allows to perform a transcriptome assembly using mapped RNASeq data and
+  provides an annotation file containing trancripts description.
+- FEELnc pipeline allows to perform annotation of long non-coding RNAs (lncRNAs).
+- Annotation is based on reconstructed transcripts from RNA-seq data (either with
+  or without a reference genome)
+- Annotation can be performed without any training set of non-coding RNAs.
+- FEELnc provides the localisation and the direction of transcription of proximal
+  RNA transcripts of lncRNAs.
 contributions:
   authorship:
-    - stephanierobin
+  - stephanierobin
   editing:
-    - abretaud
-
+  - abretaud
 abbreviations:
   lncRNAs: long non-coding RNAs
   LncRNAs: Long non-coding RNAs
   mRNAs: Messenger RNAs
-
 requirements:
- - type: internal
-   topic_name: genome-annotation
-   tutorials:
-     - funannotate
-
+- type: internal
+  topic_name: genome-annotation
+  tutorials:
+  - funannotate
 subtopic: eukaryote
 priority: 7
+recordings:
+- youtube_id: U5WZMWd-3kk
+  length: 11M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-11'
+  speakers:
+  - rlibouba
+  captioners:
+  - stephanierobin
+  - abretaud
+  bot-timestamp: 1726077703
+
+
 ---
-
-
-# Introduction
 
 
 {mRNAs} are not the only type of RNAs present in organisms (like mammals, insects or plants) and represent only a small fraction of the transcripts. A vast repertoire of small (miRNAs, snRNAs) and {lncRNAs} are also present. {LncRNAs} are generally defined as transcripts longer than 200 nucleotides that are not translated into functional proteins. They are important because of their major roles in cellular machinery and their presence in large number. Indeed, they are notably involved in gene expression regulation, control of translation or imprinting. Statistics from the [GENCODE project](https://www.gencodegenes.org/human/stats_41.html) reveals that the human genome contains more than 19,095 lncRNA genes, almost as much as the 19,370 protein-coding genes.
@@ -93,9 +101,9 @@ To assemble transcriptome with StringTie and annotate {lncRNAs} with FEELnc, we 
 >     -> `{{ page.title }}`):
 >
 >    ```
->    https://zenodo.org/record/7107050/files/genome_assembly.fasta
->    https://zenodo.org/record/7107050/files/genome_annotation.gff3
->    https://zenodo.org/record/7107050/files/all_RNA_mapped.bam
+>    https://zenodo.org/records/11367439/files/genome_assembly.fasta
+>    https://zenodo.org/records/11367439/files/genome_annotation.gff3
+>    https://zenodo.org/records/11367439/files/SRR8534859_RNASeq_mapped.bam
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -113,9 +121,9 @@ A reference annotation file in GTF or GFF3 format can be provided to StringTie w
 
 > <hands-on-title>Transcripts assembly</hands-on-title>
 >
-> {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.1.7+galaxy1) %} with the following parameters:
+> {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.3+galaxy1) %} with the following parameters:
 >    - *"Input options"*: `Short reads`
->    - {% icon param-file %} *"Input short mapped reads"*: `all_RNA_mapped.bam`
+>    - {% icon param-file %} *"Input short mapped reads"*: `SRR8534859_RNASeq_mapped.bam`
 >    - *"Specify strand information"*: Unstranded
 >    - *"Use a reference file to guide assembly?"*: Use reference GTF/GFF3
 >    - *"Reference file"*: Use a file from history
@@ -136,7 +144,7 @@ We obtain an annotation file (GTF format) which contained all assembled transcri
 >
 > > <solution-title></solution-title>
 > >
-> > Specific features can be extracted from the GTF file using for example {% tool [Extract features from GFF data](Extract_features1) %}. By selecting `transcript` From `column 3 / Feature`, we can select only the transcript elements present in this annotation file. Assembly contains 14,877 transcripts (corresponding to the number of lines in the filtered GTF file).
+> > Specific features can be extracted from the GTF file using for example {% tool [Extract features from GFF data](Extract_features1) %}. By selecting `transcript` From `column 3 / Feature`, we can select only the transcript elements present in this annotation file. Assembly contains 17,653 transcripts (corresponding to the number of lines in the filtered GTF file).
 > >
 > {: .solution}
 >
@@ -150,11 +158,11 @@ To use FEELnc, we need to have a reference annotation file in GTF format, which 
 
 > <hands-on-title>FEELnc</hands-on-title>
 >
-> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.3+galaxy0) %} with the following parameters:
+> 1. {% tool [gffread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input BED, GFF3 or GTF feature file"*: `genome_annotation.gff3`
 >    - *"Feature File Output"*: `GTF`
 >
-> 2. {% tool [FEELnc](toolshed.g2.bx.psu.edu/repos/iuc/feelnc/feelnc/0.2) %} with the following parameters:
+> 2. {% tool [FEELnc](toolshed.g2.bx.psu.edu/repos/iuc/feelnc/feelnc/0.2.1) %} with the following parameters:
 >    - {% icon param-file %} *"Transcripts assembly"*: `Assembled transcript` (output of **StringTie** {% icon tool %})
 >    - {% icon param-file %} *"Reference annotation"*: `genome_annotation.gtf` (Output of **gffread** {% icon tool %})
 >    - {% icon param-file %} *"Genome sequence"*: `genome_assembly.fasta`
@@ -176,11 +184,11 @@ FEELnc provides also summary file in stdout.
 >
 > > <solution-title></solution-title>
 > >
-> > The summary file indicates 104 {lncRNAs} and 0 new {mRNAs} were annotated by FEELnc. The initial annotation contains 13,795 {mRNAs} annotated. Therefore, a total of 13,898 RNAs are currently annotated.
+> > The summary file indicates 268 {lncRNAs} and 0 new {mRNAs} were annotated by FEELnc. The initial annotation contains 13,795 {mRNAs} annotated. Therefore, a total of 14,063 RNAs are currently annotated.
 > >
-> > The summary file indicates 652 interactions between {lncRNAs} and {mRNAs}. These interactions are described in the Classifier output file.
+> > The summary file indicates 772 interactions between {lncRNAs} and {mRNAs}. These interactions are described in the Classifier output file.
 > >
-> > The different types of {lncRNAs} (intergenic (sense and antisense), intragenic (sense)) are described in the Classifier output file. We observe that the majority of the {lncRNAs} are intergenic. These {lncRNAs} can each have interactions with several {mRNAs}. Only 7 {lncRNAs} are genic. These {lncRNAs} have only one interaction with the mRNA that contains it.
+> > The different types of {lncRNAs} (intergenic (sense and antisense), intragenic (sense)) are described in the Classifier output file. We observe that the majority of the {lncRNAs} are intergenic. These {lncRNAs} can each have interactions with several {mRNAs}. Only 5 {lncRNAs} are genic. These {lncRNAs} have only one interaction with the mRNA that contains it.
 > >
 > {: .solution}
 >
@@ -190,8 +198,8 @@ For future analyses, it would be interesting to use an updated annotation contai
 
 > <hands-on-title>Merge the annotations</hands-on-title>
 >
-> {% tool [concatenate](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
->    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf`
+> {% tool [concatenate](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/1.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Datasets to concatenate"*: `genome_annotation.gtf` (Output of **gffread** {% icon tool %})
 >    - Insert Dataset
 >    - {% icon param-file %} *"Dataset"*: `lncRNA annotation with FEELnc`
 >

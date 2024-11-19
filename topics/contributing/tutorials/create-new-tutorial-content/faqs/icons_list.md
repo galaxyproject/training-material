@@ -12,13 +12,16 @@ To use icons in your tutorial, take the name of the icon, 'details' in this exam
 {% raw %}{% icon details %}{% endraw %}
 ```
 
+Some icons have multiple aliases, any may be used, but we'd suggest trying to choose the most semantically appropriate one in case Galaxy later decides to change the icon.
+
 The following icons are currently available:
 
 <div class="row">
-{% for icon in site["icon-tag"] %}
+{% assign icon_groups = site['icon-tag'] | group_icons %}
+{% for icon in icon_groups %}
 	<div class="col-md-2 col-sm-3" style="text-align: center">
-		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
-		<div>{{ icon[0] }}</div>
+		<div style="font-size: 400%">{% icon_var icon[0][0] %}</div>
+		<div>{% for z in icon[0] %}{{ z }}{%unless forloop.last%},{%endunless%} {% endfor %}</div>
 	</div>
 {% endfor %}
 </div>

@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/upgrading/slides
 
 title: "Upgrading Galaxy"
 zenodo_link: ""
@@ -27,6 +29,18 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+
+recordings:
+- captioners:
+  - slugger70
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 36M
+  youtube_id: OnL47MvXjoo
+  speakers:
+  - slugger70
+
 ---
 
 # Overview

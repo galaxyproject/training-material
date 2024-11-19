@@ -22,11 +22,13 @@ contributions:
     authorship:
         - Marie59
         - yvanlebras
+    funding:
+        - pndb
 
+subtopic: ecologyanalysis
 ---
 
 
-# Introduction
 
 This tutorial will guide you on getting Sentinel 2 data and processing them in order to calculate and visualize biodiversity indicators. This workflow made of 6 tools will allow you to explore Sentinel 2 data in the view of making biodiversity analyses.
 

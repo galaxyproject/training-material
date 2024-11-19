@@ -51,7 +51,6 @@ contributors:
 ---
 
 
-# Introduction
 
 The practical aims at familiarizing you with running CLM-FATES within Galaxy Climate JupyterLab.
 
@@ -507,17 +506,7 @@ p.fig.savefig('CANOPY_HEIGHT_DIST.png')
 
 One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.
 
-To share a history, click on the {% icon galaxy-gear %} icon in the history panel and select `Share or Publish`. On this page you can do 3 things:
-
-1. **Make History Accessible via Link**. This generates a link that you can give out to others. Anybody with this link will be able to view your history.
-2. **Make History Accessible and Publish**. This will not only create a link, but will also publish your history. This means your history will be listed under `Shared Data → Histories` in the top menu.
-3. **Share with a user**. This will share the history only with specific users on the Galaxy instance.
-
-> <comment-title>Permissions</comment-title>
-> Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.
->
-> Be sure to select **Also make all objects within the History accessible** whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.
-{: .comment}
+{% snippet faqs/galaxy/histories_sharing.md %}
 
 > <hands-on-title>Share history</hands-on-title>
 >

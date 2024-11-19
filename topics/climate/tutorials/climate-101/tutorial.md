@@ -20,17 +20,14 @@ contributors:
 ---
 
 
-# Introduction
-
+The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
+anyone interested in learning about climate.
 
 > <comment-title></comment-title>
 >
 > This tutorial is significantly based on [Getting your hands-on Climate data](https://nordicesmhub.github.io/climate-data-tutorial/).
 >
 {: .comment}
-
-The practical aims at familiarzing you with Climate Science and the terminology used by climate scientists. The target audience is not a climate scientist but
-anyone interested in learning about climate.
 
 > <agenda-title></agenda-title>
 >
@@ -129,8 +126,7 @@ the climate and gives us an indication of where both the woman and dog are likel
 
 You can also watch an animated illustration of the difference between climate and weather:
 
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://www.youtube.com/embed/e0vj-0imOLw" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
+{% include _includes/youtube.html id="e0vj-0imOLw" title="Difference between climate and weather" %}
 
 # What is the weather like in Paris?
 

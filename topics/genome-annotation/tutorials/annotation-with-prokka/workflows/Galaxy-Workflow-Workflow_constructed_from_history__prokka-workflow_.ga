@@ -1,8 +1,27 @@
 {
     "a_galaxy_workflow": "true",
     "annotation": "Genome annotation with Prokka",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-9906-0673",
+            "name": "Anna Syme"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-6046-610X",
+            "name": "Torsten Seemann"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-6100-4385",
+            "name": "Simon Gladman"
+        }
+    ],
+    "comments": [],
     "format-version": "0.1",
-    "name": "Genome Annotation with Prokka [Feb 2020]",
+    "license": "GPL-3.0-or-later",
+    "name": "Genome Annotation with Prokka ",
     "steps": {
         "0": {
             "annotation": "",
@@ -17,17 +36,18 @@
                 }
             ],
             "label": "contigs.fasta",
-            "name": "contigs.fasta",
+            "name": "Input dataset",
             "outputs": [],
             "position": {
-                "left": 200,
-                "top": 329
+                "left": 0,
+                "top": 76.845458984375
             },
             "tool_id": null,
-            "tool_state": "{\"name\": \"contigs.fasta\"}",
+            "tool_state": "{\"optional\": false, \"tag\": null}",
             "tool_version": null,
             "type": "data_input",
-            "uuid": "3586e3c5-110e-4b09-881d-b89570a41f26",
+            "uuid": "79e73b85-8d44-413f-83b7-c0e668ec963c",
+            "when": null,
             "workflow_outputs": []
         },
         "1": {
@@ -91,8 +111,8 @@
                 }
             ],
             "position": {
-                "left": 452,
-                "top": 416
+                "left": 254.117919921875,
+                "top": 0.0
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5",
@@ -102,30 +122,40 @@
                 "owner": "crs4",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"fasta\", \"__job_resource\": {\"__job_resource__select\": \"no\", \"__current_case__\": 0}, \"__workflow_invocation_uuid__\": \"5dc31c9443c711eabead005056ba55fb\", \"centre\": \"V\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"compliant\": {\"compliant_select\": \"no\", \"__current_case__\": 0, \"addgenes\": \"false\", \"mincontig\": \"200\"}, \"evalue\": \"1e-06\", \"fast\": \"false\", \"genus\": \"Staphylococcus\", \"gffver\": \"3\", \"increment\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"kingdom\": {\"kingdom_select\": \"Bacteria\", \"__current_case__\": 1, \"gcode\": \"11\"}, \"locustag\": \"P\", \"metagenome\": \"false\", \"norrna\": \"false\", \"notrna\": \"false\", \"outputs\": [\"gff\", \"gbk\", \"fna\", \"faa\", \"ffn\", \"sqn\", \"fsa\", \"tbl\", \"err\", \"txt\"], \"plasmid\": \"\", \"proteins\": null, \"rfam\": \"false\", \"species\": \"aureus\", \"strain\": \"\", \"usegenus\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"__input_ext\": \"fasta\", \"__job_resource\": {\"__current_case__\": 0, \"__job_resource__select\": \"no\"}, \"__workflow_invocation_uuid__\": \"5dc31c9443c711eabead005056ba55fb\", \"centre\": \"V\", \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"compliant\": {\"compliant_select\": \"no\", \"__current_case__\": 0, \"addgenes\": false, \"mincontig\": \"200\"}, \"evalue\": \"1e-06\", \"fast\": false, \"genus\": \"Staphylococcus\", \"gffver\": \"3\", \"increment\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"kingdom\": {\"kingdom_select\": \"Bacteria\", \"__current_case__\": 1, \"gcode\": \"11\"}, \"locustag\": \"P\", \"metagenome\": false, \"norrna\": false, \"notrna\": false, \"outputs\": [\"gff\", \"gbk\", \"fna\", \"faa\", \"ffn\", \"sqn\", \"fsa\", \"tbl\", \"err\", \"txt\"], \"plasmid\": \"\", \"proteins\": null, \"rfam\": false, \"species\": \"aureus\", \"strain\": \"\", \"usegenus\": false, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.14.5",
             "type": "tool",
-            "uuid": "966d84cb-851e-4d11-bf7c-a43865a77b91",
+            "uuid": "28efec53-71bb-4aaa-993d-03b78d493570",
+            "when": null,
             "workflow_outputs": [
-                {"output_name": "out_gff", "label": "gff_output"}
+                {
+                    "label": "gff_output",
+                    "output_name": "out_gff",
+                    "uuid": "a336c364-e69e-47eb-ace6-a7fe46d285fe"
+                }
             ]
         },
         "2": {
             "annotation": "",
-            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.5+galaxy7",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
             "errors": null,
             "id": 2,
             "input_connections": {
                 "reference_genome|genome": {
-                    "id": 0,
-                    "output_name": "output"
+                    "id": 1,
+                    "output_name": "out_fna"
                 },
                 "track_groups_0|data_tracks_0|data_format|annotation": {
                     "id": 1,
                     "output_name": "out_gff"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool JBrowse",
+                    "name": "reference_genome"
+                }
+            ],
             "label": null,
             "name": "JBrowse",
             "outputs": [
@@ -135,27 +165,29 @@
                 }
             ],
             "position": {
-                "left": 811,
-                "top": 200
+                "left": 558.4925537109375,
+                "top": 174.88604736328125
             },
             "post_job_actions": {},
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.5+galaxy7",
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
             "tool_shed_repository": {
-                "changeset_revision": "edb534491f92",
+                "changeset_revision": "a6e57ff585c0",
                 "name": "jbrowse",
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"__input_ext\": \"fasta\", \"__workflow_invocation_uuid__\": \"5dc31c9443c711eabead005056ba55fb\", \"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"gencode\": \"11\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": \"true\", \"aboutDescription\": \"\", \"show_tracklist\": \"true\", \"show_nav\": \"true\", \"show_overview\": \"true\", \"show_menu\": \"true\", \"hideGenomeOptions\": \"false\"}, \"plugins\": {\"BlastView\": \"true\", \"ComboTrackSelector\": \"false\", \"GCContent\": \"false\"}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"ConnectedValue\"}}, \"standalone\": \"true\", \"track_groups\": [{\"__index__\": 0, \"category\": \"gene annotations\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"match_part\": {\"match_part_select\": \"false\", \"__current_case__\": 1}, \"index\": \"false\", \"track_config\": {\"track_class\": \"JBrowse/View/Track/CanvasFeatures\", \"__current_case__\": 0, \"canvas_options\": {\"transcriptType\": \"\", \"subParts\": \"\", \"impliedUTRs\": \"false\"}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"name,id,product\", \"style_description\": \"note,description\", \"style_height\": \"100px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_on\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
-            "tool_version": "1.16.5+galaxy7",
+            "tool_state": "{\"__input_ext\": \"fasta\", \"__workflow_invocation_uuid__\": \"5dc31c9443c711eabead005056ba55fb\", \"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"chromInfo\": \"/cvmfs/data.galaxyproject.org/managed/len/ucsc/?.len\", \"gencode\": \"11\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": true, \"aboutDescription\": \"\", \"show_tracklist\": true, \"show_nav\": true, \"show_overview\": true, \"show_menu\": true, \"hideGenomeOptions\": false}, \"plugins\": {\"BlastView\": true, \"ComboTrackSelector\": false, \"GCContent\": false}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"ConnectedValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"gene annotations\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"JBrowse/View/Track/CanvasFeatures\", \"__current_case__\": 0, \"canvas_options\": {\"transcriptType\": \"\", \"subParts\": \"\", \"impliedUTRs\": false}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"name,id,product\", \"style_description\": \"note,description\", \"style_height\": \"100px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_on\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
             "type": "tool",
-            "uuid": "11585cb8-7fda-4d70-a889-7f37a60c7b58",
+            "uuid": "02e306ff-22b4-4fb3-9033-2f6a8e926ec6",
+            "when": null,
             "workflow_outputs": []
         }
     },
     "tags": [
-        "genome-annotation"
+        "genome-annotation",
+        "GTN"
     ],
-    "uuid": "501a4b0f-900b-4cad-ba97-94f6d5c8c103",
-    "version": 1
+    "uuid": "e37407c2-3388-4145-87b1-f97503e670de",
+    "version": 2
 }

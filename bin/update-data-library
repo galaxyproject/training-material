@@ -7,13 +7,25 @@ require 'commander/import'
 require 'net/http'
 require 'json'
 require 'yaml'
-require 'httparty'
 
 program :name, 'Data Library Updater'
 program :version, '0.0.1'
 program :description, 'Updates data libraries from from zenodo_links'
 
 @SHARED_DATATYPES = YAML.load_file('shared/datatypes.yaml')
+
+def request(url)
+  uri = URI.parse(url)
+  request = Net::HTTP::Get.new(uri)
+  request['Accept'] = 'application/json'
+  req_options = {
+    use_ssl: uri.scheme == 'https',
+  }
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    json_s = http.request(request).body
+    JSON.parse(json_s)
+  end
+end
 
 def parse_zenodo_id_formats(link)
   # https://zenodo.org/record/1234567
@@ -44,15 +56,23 @@ def update_data_library(path, topic, tutorial, zenodo_record)
   zenodo_id = zenodo_record['id'].to_s
   zenodo_files = zenodo_record.fetch('files', []).map do |f|
     official_extension = f['type']
-    unofficial_extension = f['links']['self'].split('.')[-2..].join('.')
+
+    link = f['links']['self'].sub(%r{/content$}, '')
+    unofficial_extension = link.split('.')[-2..].join('.')
     ext = @SHARED_DATATYPES.fetch(unofficial_extension, nil) || @SHARED_DATATYPES.fetch(official_extension, nil)
+
+    # Example:
+    # https://zenodo.org/api/records/10870107/files/elem_s2_r1.fq.gz/content
+    # Needs to be
+    # https://zenodo.org/record/10870107/files/elem_s2_r1.fq.gz
+    real_link = f['links']['self'].sub(%r{/content$}, '').sub('/api/records/', '/record/')
     # puts "Processing file: #{f['type']} #{f['links']['self']} => #{ext}"
     # puts "#{unofficial_extension} => #{@SHARED_DATATYPES.fetch(unofficial_extension, nil)}"
     # puts "#{official_extension} => #{@SHARED_DATATYPES.fetch(official_extension, nil)}"
     warn "Unknown file type: #{f['type']}. Consider adding this to shared/datatypes.yaml" if ext.nil?
 
     {
-      'url' => f['links']['self'],
+      'url' => real_link,
       'src' => 'url',
       'ext' => ext || f['type'],
       'info' => "https://doi.org/10.5281/zenodo.#{zenodo_id}",
@@ -88,8 +108,7 @@ end
 
 def write_data_library(path, topic, tutorial, tutorial_zenodo_id, force)
   # Fetch the zenodo record
-  uri = URI("https://zenodo.org/api/records/#{tutorial_zenodo_id}")
-  zenodo_record = HTTParty.get(uri)
+  zenodo_record = request("https://zenodo.org/api/records/#{tutorial_zenodo_id}")
   new_zenodo_id = zenodo_record['id'].to_s
 
   # If it's redirected we'll get a different ID here

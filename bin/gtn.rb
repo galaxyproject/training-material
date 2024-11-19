@@ -1,18 +1,27 @@
 # frozen_string_literal: true
 
 CONTRIBUTORS = YAML.load_file('CONTRIBUTORS.yaml')
+ORGANISATIONS = YAML.load_file('ORGANISATIONS.yaml')
+GRANTS = YAML.load_file('GRANTS.yaml')
 
 def automagic_loading(f)
   # Remove our documentation
   f.reject! { |k, v| k == 'description' and v.is_a?(String) }
-  f.reject! { |k| k == 'examples' }
+  f.reject! { |k| k == '_examples' }
 
   # Auto-replace CONTRIBUTORS in enums.
   f.each do |k, v|
     if v.is_a?(Hash)
       automagic_loading(v)
     elsif v.is_a?(Array)
-      v.replace CONTRIBUTORS.keys if (k == 'enum') && (v[0] == 'CONTRIBUTORS')
+      if k == 'enum'
+        repl = []
+        # If one of the elements in this array is CONTRIBUTORS, replace it with the same named variable
+        repl << CONTRIBUTORS.keys if v.find { |x| x == 'CONTRIBUTORS' }
+        repl << GRANTS.keys if v.find { |x| x == 'GRANTS' }
+        repl << ORGANISATIONS.keys if v.find { |x| x == 'ORGANISATIONS' }
+        v.replace repl.flatten if repl.length.positive?
+      end
       v.flatten.each { |x| automagic_loading(x) if x.is_a?(Hash) }
     end
   end

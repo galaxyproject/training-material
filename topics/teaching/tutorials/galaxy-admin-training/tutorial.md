@@ -17,6 +17,7 @@ key_points:
   - Infrastructure is available for running GATs for free from UseGalaxy.eu
   - This can be very convenient and easy to use
   - EU provides appropriate DNS entries so you can run trainings with ITs.
+level: Advanced
 requirements:
   - type: "internal"
     topic_name: admin
@@ -27,12 +28,9 @@ contributors:
   - hexylena
 ---
 
-# Introduction
-
+Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.
 
 ![GAT logo is the GTN logo over a space background and text reading galaxy admin traiing.](../../images/gat.png)
-
-Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.
 
 This tutorial has multiple audiences who are all adressed within this one tutorial. We encourage everyone involved in hosting a GAT event to read this, so you are aware of all of the moving parts which are required for such an event.
 

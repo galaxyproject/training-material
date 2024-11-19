@@ -20,17 +20,18 @@ tags:
   - interactive-tools
 key_points:
 - Why it's helpful to be able to work with R interactively within Galaxy
-contributors:
+contributions:
+  authorship:
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  funding:
+  - gallantries
 subtopic: analyse
 ---
 
 
-# Introduction
-
+This tutorial will introduce you to how to run RStudio in Galaxy
 
 {% include topics/data-science/tutorials/r-basics/tutorial_origin.md %}
 

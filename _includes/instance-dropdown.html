@@ -4,7 +4,7 @@
 {% assign supported_inexactly = own_material.supported_servers.inexact | size %}
 {% assign supported = supported_exactly | plus: supported_inexactly %}
 
-{% if supported > 0 or include.docker %}
+{% if supported > 0 %}
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
         {% icon instances %}{% if include.label %}&nbsp;{{ locale['supporting-galaxies'] | default: "Available on these Galaxies" }} {% endif %}
     </a>
@@ -19,7 +19,7 @@
     {% for inst in usegalaxy_exact %}
 	<li>
 		<a class="dropdown-item" href="{{ inst.url }}" title="{{ inst[0] }}">
-			{{ inst.name }} <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> ⭐️
+			{{ inst.name }} <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
 		</a>
 	</li>
     {% endfor %}
@@ -44,15 +44,5 @@
     {% endfor %}
     {% endif %}
 
-    {% if include.docker %}
-	<li class="dropdown-header">
-		Containers
-	</li>
-        <li>
-            <a class="dropdown-item" href="{{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/{{ include.topic }}/docker" title="Docker image for this tutorial">
-                {% icon docker_image %} Docker image
-            </a>
-        </li>
-    {% endif %}
     </ul>
 {% endif %}

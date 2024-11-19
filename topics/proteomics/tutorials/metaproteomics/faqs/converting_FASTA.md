@@ -3,6 +3,8 @@ title: I have FASTQ files from metagenomics or metatranscriptomics datasets? How
 box_type: tip
 layout: faq
 contributors: [millen2223]
+redirect_from:
+ - /topics/proteomics/faqs/converting_FASTA
 ---
 
 Galaxy has a tool named Sixgill that can be used to convert the nucleic acid sequences to ‘metapeptide’ sequences. There are other options available within Galaxy such as the GalaxyGraph approach and Metagenome Binning, Assembly and Annotation Workflow. Please [contact us](https://help.galaxyproject.org/), if you need assistance.

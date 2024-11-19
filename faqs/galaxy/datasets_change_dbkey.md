@@ -4,10 +4,14 @@ description: You can tell Galaxy which dbkey (e.g. reference genome) your datase
 area: datasets
 box_type: tip
 layout: faq
-contributors: [shiltemann,hexylena]
+contributors: [shiltemann,hexylena,nekrut]
 ---
 
-- Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+- Click the desired dataset's name to expand it.
+- Click on the "?" next to database indicator:
+
+  ![UI for changing dbkey]({% link shared/images/datasets_dbkey.svg %})
+
 - In the central panel, change the **Database/Build** field
 - Select your desired database key from the dropdown list{% if include.dbkey %}: `{{ include.dbkey }}`{% endif %}
 - Click the **Save** button

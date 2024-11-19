@@ -1,0 +1,74 @@
+name: "[Cron] Upload workflows to (DEV)WorkflowHub"
+
+concurrency:
+  group: wfh-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
+on:
+  schedule:
+    - cron:  '55 12 * * 1'
+  workflow_dispatch:
+
+jobs:
+  runner-job:
+    if: github.repository_owner == 'galaxyproject'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2000
+          persist-credentials: false
+
+      # BEGIN Dependencies
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+          architecture: 'x64'
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.1"
+      - uses: actions/cache@v2
+        with:
+          path: |
+            vendor/bundle
+            ~/.npm
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}-node-
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          pip install pyyaml requests
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+          bundle pristine ffi
+          sudo apt install -y graphviz
+      # END Dependencies
+
+      # Required to build the RO-Crates
+      - name: Build Site
+        run: |
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+
+      - name: Upload workflows
+        run: |
+          python bin/wfh-upload.py
+        env:
+          WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
+
+      - name: Any changes?
+        run: |
+          git diff
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: Update WorkflowHub IDs
+          branch-suffix: timestamp
+          commit-message: Update WorkflowHub IDs
+          add-paths: metadata/

@@ -37,8 +37,6 @@ contributions:
     - biont
 ---
 
-# Introduction
-
 When doing a biological data analysis, we might end up with some interesting proteins, that we need explore these genes. But how can we do that? What are the resources available for that? And how to navigate through them?
 
 The aim of this tutorial is to familiarize ourselves with that, using Human opsins as an example.
@@ -194,7 +192,7 @@ Let's now scroll the entry page, section by section.
 
 This section summarises the functions of this protein as follows: 
 
-> Visual pigments are the light-absorbing molecules that mediate vision. They consist of an apoprotein, opsin, covalently linked to cis-retinal.
+Visual pigments are the light-absorbing molecules that mediate vision. They consist of an apoprotein, opsin, covalently linked to cis-retinal.
 
 Regardless of the level of details that you understand (depending on your background), this is impressively short and specific considering the enourmous amount of literature and studies that exist beyond the determination of a protein function. Anyway, someone did the work for us, and this protein is already fully classified in the Gene Ontology (GO), which describes any classified protein's molecular function, biological process and cellular component. 
 

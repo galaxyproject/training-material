@@ -29,6 +29,18 @@ requirements:
      - ansible
      - ansible-galaxy
      - tool-management
+
+recordings:
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 22M
+  youtube_id: 6BWu29Oiihw
+  speakers:
+  - shiltemann
+
 ---
 
 Data libraries are a great way to provide structured repositories of data to
@@ -84,10 +96,10 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -88,6 +88,9 @@ galaxy_config:
+>    @@ -91,6 +91,9 @@ galaxy_config:
 >         # Tool Dependencies
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>         container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user

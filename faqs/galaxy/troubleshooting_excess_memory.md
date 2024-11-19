@@ -43,5 +43,5 @@ Memory Error
     - The most common reasons for this error are input and tool parameters problems that must be adjusted/corrected.
 - Solutions:
     - Try at least one rerun to execute the job on a different cluster node.
-    - Review the Solutions section of the [Understanding input error messages](https://training.galaxyproject.org/training-material/faqs/galaxy/analysis_job_failure_input_problem.html) FAQ.
-    - Your data may actually be too large to process at a public Galaxy server. Alternatives include setting up a [private Galaxy server](https://training.galaxyproject.org/training-material/faqs/gtn/galaxy_usage.html).
+    - Review the Solutions section of the [Understanding input error messages]({% link faqs/galaxy/troubleshooting_input_problem.md %}) FAQ.
+    - Your data may actually be too large to process at a public Galaxy server. Alternatives include setting up a [private Galaxy server]({% link faqs/gtn/galaxy_usage.md %}).

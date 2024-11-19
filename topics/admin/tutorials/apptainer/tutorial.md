@@ -27,16 +27,38 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+
+recordings:
+- captioners:
+  - gallardoalba
+  - slugger70
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 43M
+  youtube_id: q6Dt7j713tI
+  speakers:
+  - slugger70
+- captioners:
+  - hexylena
+  - cat-bro
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 16M
+  youtube_id: airzg4-ETEs
+  speakers:
+  - hexylena
+
 ---
 
 In this tutorial you will learn how to configure Galaxy to run jobs using [Apptainer](https://apptainer.org) containers provided by the [BioContainers](https://biocontainers.pro/) community.
+Make sure to read the documentation on [container in Galaxy](https://docs.galaxyproject.org/en/master/admin/special_topics/mulled_containers.html) and in particular [container resolvers in Galaxy](https://docs.galaxyproject.org/en/master/admin/container_resolvers.html).
+
 
 ## Background
 
 > BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g Conda) and containers (e.g Docker, Apptainer). BioContainers is based on the popular frameworks Conda, Docker and Apptainer.
 >
-> -- [https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html](https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html)
-{: .quote}
+{: .quote cite="https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html"}
 
 Apptainer is an alternative to Docker that is much friendlier for HPCs
 
@@ -57,9 +79,7 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 {: .comment}
 
 > Apptainer is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.
->
-> -- [https://sylabs.io/guides/3.7/user-guide/introduction.html](https://sylabs.io/guides/3.7/user-guide/introduction.html)
-{: .quote}
+{: .quote cite="https://sylabs.io/guides/3.7/user-guide/introduction.html"}
 
 > <agenda-title></agenda-title>
 >
@@ -179,23 +199,23 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -72,6 +72,9 @@ galaxy_config:
+>    @@ -75,6 +75,9 @@ galaxy_config:
 >         tus_upload_store: "{{ galaxy_tus_upload_store }}"
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    +    # Tool Dependencies
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>    +    container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -111,6 +114,12 @@ galaxy_config_files:
+>    @@ -114,6 +117,12 @@ galaxy_config_files:
 >       - src: files/galaxy/themes.yml
 >         dest: "{{ galaxy_config.galaxy.themes_config_file }}"
 >     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
->    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>    +    dest: "{{ galaxy_config.galaxy.container_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +
@@ -235,17 +255,17 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
 >    @@ -0,0 +1,11 @@
->    +container_resolvers:
->    +  - type: cached_explicit_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
->    +  - type: cached_mulled_singularity
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
->    +  - type: build_mulled_singularity
->    +    auto_install: False
->    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
+>    +
+>    +- type: cached_explicit_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
+>    +- type: cached_mulled_singularity
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +- type: build_mulled_singularity
+>    +  auto_install: False
+>    +  cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}
@@ -393,14 +413,14 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 > <hands-on-title>Optional: Configure Galaxy to use Apptainer containers from CVMFS</hands-on-title>
 >
-> 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
+> 1. Edit the `group_vars/galaxyservers.yml` file and add `container_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
 >    {% raw %}
 >    ```yaml
 >    galaxy_singularity_images_cvmfs_path: "/cvmfs/singularity.galaxyproject.org/all/"
 >    galaxy_config:
 >      galaxy:
 >        ...
->        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>        container_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >    {% endraw %}
 >

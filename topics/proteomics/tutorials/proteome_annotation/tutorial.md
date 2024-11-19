@@ -29,9 +29,18 @@ contributors:
 subtopic: post-process
 tags: [DDA, human]
 
----
 
-# Introduction
+recordings:
+- captioners:
+  - combesf
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: qG7GZc6BeGY
+  speakers:
+  - yvesvdb
+
+---
 
 
 [ProteoRE Galaxy instance](http://www.proteore.org) provides necessary tools to execute a whole annotation pipeline of a protein list identified by LC-MS/MS experiments. This activity introduces these tools and guides you through a simple pipeline using some example datasets based on the study entitled "Proteomic characterization of human exhaled breath condensate" {% cite Lacombe2018 %}.

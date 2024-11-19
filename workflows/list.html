@@ -1,22 +1,33 @@
 ---
 layout: page
-title: Cross UseGalaxy.* Workflow Search
+title: GTN Pan-Galactic Workflow Search
 ---
 
 <p>
 We are testing a new search experience. Tell us what you think!
 </p>
+<p>
+This site
+currently lists {{ site.data['workflows'] | size }} workflows from
+{% assign servers = nil | list_usegalaxy_servers %}
+{% for server in servers %}{{ server.name }}, {% endfor %}
+and WorkflowHub.eu. It is updated weekly.
+</p>
 
+<label for="title">Search</label>
 <div class="row" id="search-form">
-	<div class="col-md-11">
+	<div class="col-md-8">
 	<div class="form-group">
-		<label for="title">Search</label>
 		<input type="text" class="form-control" id="title" placeholder="Search Materials" oninput="onInputDebounced()">
-		<button class="btn btn-primary" onclick="search()">Search</button>
 	</div>
 	</div>
 
-	<div class="col-md-1">
+	<div class="col-md-2">
+		<button style="width: 100%" class="btn btn-primary" onclick="search()">Search</button>
+	</div>
+
+	<div class="col-md-2">
+		Results: <span id="results-count">{{ site.data['workflows'] | size }}</span>
 	</div>
 </div>
 
@@ -53,7 +64,14 @@ We are testing a new search experience. Tell us what you think!
 				<td>{{ workflow.updated }}</td>
 				<td>
 					{% for id in workflow.ids %}
+						{% if id[0] == "https://workflowhub.eu" %}
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a>
+						{% else %}
 					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% endif %}
 					{% endfor %}
 				</td>
 			</tr>
@@ -85,10 +103,13 @@ function search(){
 		return
 	}
 
+	// Include search term in page title
+	document.getElementsByTagName("title")[0].innerText = `${textQuery} | GTN Pan-Galactic Workflow Search`
 	console.log(`Searching! ${textQuery}`)
 
 	// Which should be hidden
 
+	var count = 0;
 	var to_hide = rows.filter(row => {
 		if (textQuery != "" && (
 			row.children[0].innerText.toLowerCase() + " " + 
@@ -96,8 +117,10 @@ function search(){
 		).indexOf(textQuery.toLowerCase()) == -1) {
 			return true;
 		}
+		count += 1;
 		return false;
 	});
+	document.getElementById("results-count").innerText = count;
 
 	// Display all
 	document.querySelectorAll("#results tr").forEach(r => r.style.display = "");

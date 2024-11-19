@@ -2,25 +2,33 @@
 layout: tutorial_hands_on
 
 title: Obis marine indicators
-zenodo_link: ''
 questions:
+- How to retrieve Obis data with Galaxy ?
+- How can you analyse and visualise them ?
 objectives:
 - Calculating and vizualizing marine biodiversity indicators
 time_estimation: 1H
 key_points:
 - Marine data
 - Diversity indicators
+tags:
+  - earth-system
+  - ocean
+  - marine omics
+  - biodiversity
 contributions:
     authorship:
         - Marie59
         - yvanlebras
     funding:
-        - erasmusplus
+        - gallantries
+        - fairease
+        - eurosciencegateway
+        - pndb
+
+subtopic: ecologyanalysis
 ---
 
-
-
-# Introduction
 
 OBIS is a global open-access data and information clearing-house on marine biodiversity for science, conservation and sustainable development. In order to visualize their marine data OBIS created the package obisindicators.
 
@@ -46,78 +54,109 @@ In this tutorial, highly based on [OBIS indicators documentation](https://obis.o
 This first step consist of downloading and uploading obis data onto galaxy.
 
 > <hands-on-title>Data upload</hands-on-title>
->
-> 1. Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.
->
->    {% snippet faqs/galaxy/histories_create_new.md %}
->
->
-> 2. Download the files from [Obis](https://mapper.obis.org/) 
->
->    ![Obis portal welcome page](../../images/obisindicators/portal.png "Obis portal")
->
->     > <details-title>Download data from the obis portal</details-title>
->     > * Go on the right panel and enter the criteria of your choise here in "Area" write down **Mediterranean** and select "France: Mediterranean Sea".
->     > * Click on save on the top right
->     > ![Guide to download obis data](../../images/obisindicators/download.png "Obis download")
->     > * Then on the 3 green lines top right press download
->     > * Enter your email on the pop-up screen and press **Yes, procced**
->     > ![The obis portal while you wait for the download](../../images/obisindicators/waiting.png "Waiting download")
->     > * The download can take a while depending on the size of your dataset (here less than 15min) 
->     > * Then click on **Download ZIP file**
->     > * Don't forget to unzip your file on your machine.
->     {: .details}
->
-> In the downloaded folder you should have your data either csv format (Occurence.csv) and you must have at least 4 columns containing: latitude, longitude, species and record.
->
-> 3. Upload obis data
->
->     > <tip-title>Importing data from your computer</tip-title>
->     >
->     > * Open the Galaxy Upload Manager {% icon galaxy-upload %}
->     > * Select **Choose local files**
->     > * Browse in your computer and get the downloaded zip folder
->     >
->     > * Press **Start** (it can take a few seconds to get ready)
->     {: .tip}
->
-> 4. Rename the datasets “obis data" for example and preview your dataset
->
-> 5. Check the datatype must be csv or tabular
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
->
+> 
+> Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.
+> 
+> {% snippet faqs/galaxy/histories_create_new.md %}
 {: .hands_on}
 
-## Convert data **csv-to-tabular**
+{% include _includes/cyoa-choices.html option1="Tool" option2="Portal" default="Tool" text="You can use a tool to download the data you want to study or you can download them from the Obis portal." %}
+
+<div class="Tool" markdown="1">
+## Use the galaxy tool
+> <hands-on-title>Download your data</hands-on-title>
+> 
+> 1. {% tool [OBIS occurences](toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2) %} with the following parameters:
+>    - *"Scientific name of the species"*: Empty
+>    - *"Taxon ID"*: Empty
+>    - *"Input latitude min (+north/-south)"*: `41.5`
+>    - *"Input latitude max (+north/-south)"*: `45.0`
+>    - *"Input longitude min (+east/-west)"*: `7.5`
+>    - *"Input longitude max (+east/-west)"*: `10.0`
+> 2. **Run Tool**
+{: .hands_on}
+
+## Clean data Advanced Cut
+
+> <hands-on-title>Clean your data</hands-on-title>
+> 
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    -*"File to cut"*: `Species occurences`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `basisOfRecord` `decimalLatitude` `decimalLongitude` `species` `individualCount`
+> You should always have at least the 4 folowing columns: decimalLatitude, decimalLongitude, species and individualCount
+{: .hands_on}
+</div>
+
+<div class="Portal" markdown="1">
+## Get to the Portal
+1. Download the files from [Obis](https://mapper.obis.org/) 
+
+![Obis portal welcome page](../../images/obisindicators/portal.png "Obis portal")
+> <details-title>Download data from the obis portal</details-title>
+> * Go on the right panel and enter the criteria of your choise here in "Area" write down **Mediterranean** and select "France: Mediterranean Sea".
+> * Click on save on the top right
+> ![Guide to download obis data](../../images/obisindicators/download.png "Obis download")
+> * Then on the 3 green lines top right press download
+> * Enter your email on the pop-up screen and press **Yes, procced**
+> ![The obis portal while you wait for the download](../../images/obisindicators/waiting.png "Waiting download")
+> * The download can take a while depending on the size of your dataset (here less than 15min) 
+> * Then click on **Download ZIP file**
+> * Don't forget to unzip your file on your machine.
+{: .details}
+
+In the downloaded folder you should have your data either csv format (Occurence.csv) and you must have at least 4 columns containing: latitude, longitude, species and record.
+
+2. Upload obis data
+
+> <tip-title>Importing data from your computer</tip-title>
+> 
+> * Open the Galaxy Upload Manager {% icon galaxy-upload %}
+> * Select **Choose local files**
+> * Browse in your computer and get the downloaded zip folder
+> 
+> * Press **Start** (it can take a few seconds to get ready)
+{: .tip}
+
+3. Rename the datasets “obis data" for example and preview your dataset
+
+4. Check the datatype must be csv or tabular
+
+{% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+
+## Convert data csv-to-tabular
 
 > <hands-on-title>Convert your data</hands-on-title>
->
+> 
 > 1. On your data in your history pannel click on {% icon param-text %}
 > 2. In the top click on {% icon galaxy-gear %} Convert
 > 3. Press {% icon exchange %} Create Dataset
->
+> 
 >    
 {: .hands_on}
 
-## Clean data **Advanced Cut**
+## Clean data Advanced Cut
 
 > <hands-on-title>Clean your data</hands-on-title>
->
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+> 
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy0) %} with the following parameters:
+>    -*"File to cut"*: `obis data`
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `c['1', '3', '4', '9', '95']`
->
+>      - *"Delimited by"*: `Tab`
+>      -*"Is there a header for the data's columns ?"*: `Yes`
+>        - *"List of Fields"*: `basisOfRecord` `decimalLatitude` `decimalLongitude` `species` `individualCount`
+> You should always have at least the 4 folowing columns: decimalLatitude, decimalLongitude, species and individualCount
 {: .hands_on}
+</div>
 
 You are now all set to use your obis data in order to do a diversity analysis. 
 
-## **Ocean biodiversity indicators**
+## Ocean biodiversity indicators
 
 > <hands-on-title>Ocean biodiversity indicators</hands-on-title>
 >
 > 1. {% tool [Ocean biodiversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.1) %} with the following parameters:
+>    - *"Input table"*: The result tabular of the Advanced Cut tool
 >    - *"What character is the separator in your data? (Mostlikely a comma for a csv file and t for a tabular)"*: `Tabulator (\t)`
 >    - *"Select column containing the decimal value of the longitude "*: `c2`
 >    - *"Select column containing the decimal value of the latitude "*: `c3`
@@ -164,11 +203,11 @@ Warning: The Simpson index has the same assumptions as the Shannon index.
 
 The expected number of marine species in a random sample of 50 individuals (records) is an indicator on marine biodiversity richness.
 
-The ES50 is defined in OBIS as the $sum(esi)$ over all species of the following per species calculation:
+The ES50 is defined in OBIS as the $$ sum(esi) $$ over all species of the following per species calculation:
 
-    when $n$ - ni$ $\ge$ $50$ (with n as the total number of records in the cell and ni the total number of records for the ith-species)
+    when $$ n - ni$ <= 50 $$ (with n as the total number of records in the cell and ni the total number of records for the ith-species)
         $$ esi = 1 - exp(lngamma(n-ni+1) + lngamma(n-50+1) - lngamma(n-ni-50+1) - lngamma(n+1)) $$
-    when $n$ $\ge$ $50$
+    when $$ n >= 50 $$
         $$ esi = 1 $$
     else
         $$ esi = NULL $$
@@ -184,13 +223,13 @@ Maxp is the maximum of the total number of records for the ith-species ni divide
 
 ## Hill
 
-### **Hill 1**
+### Hill 1
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and Hill1 can be roughly interpreted as the number of species with “typical” abundances, and is a commonly used indicator for marine biodiversity richness. It is defined as:
 
 Warning: The Simpson index has the same assumptions as the Shannon index.
 
-### **Hill 2**
+### Hill 2
 
 The Hill biodiversity index accounts for species’ relative abundance (number of records in OBIS) and discounts rare species, so Hill2 can be interpreted as the equivalent to the number of more dominant species and so is less sensitive to sample size than Hill1. The Hill index is a commonly used indicator for marine biodiversity richness. It is defined as:
 
@@ -210,6 +249,5 @@ Nb: the column sp is the count of the number of observations in a dataset. It is
 # Conclusion
 
 You here learn how to select and download OBIS dataset for your region of interest, to handle data to finally compute diversity indicators and display it in maps.
-
 
 

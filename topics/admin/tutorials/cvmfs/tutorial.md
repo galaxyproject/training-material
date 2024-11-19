@@ -28,6 +28,17 @@ subtopic: data
 tags:
   - ansible
   - git-gat
+
+recordings:
+- captioners:
+  - slugger70
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 23M
+  youtube_id: X3iFMZP_fQ8
+  speakers:
+  - slugger70
+
 ---
 
 > These words come from a transcript of Simon Gladman teaching this course. He
@@ -67,8 +78,7 @@ From the Cern website:
 
 > The CernVM File System provides a scalable, reliable and low-maintenance software distribution service. It was developed to assist High Energy Physics (HEP) collaborations to deploy software on the worldwide-distributed computing infrastructure used to run data processing applications. CernVM-FS is implemented as a POSIX read-only file system in user space (a FUSE module). Files and directories are hosted on standard web servers and mounted in the universal namespace /cvmfs."
 >
-> -- [https://cernvm.cern.ch/portal/filesystem](https://cernvm.cern.ch/portal/filesystem)
-{: .quote id="cvmfs-quote"}
+{: .quote id="cvmfs-quote" cite="https://cernvm.cern.ch/portal/filesystem"}
 
 > All right, just a quick recap. CVMFS or
 > Cern-VMFS is a distributed file system perfectly
@@ -507,7 +517,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -70,6 +70,8 @@ galaxy_config:
+>    @@ -73,6 +73,8 @@ galaxy_config:
 >         # TUS
 >         galaxy_infrastructure_url: "https://{{ inventory_hostname }}"
 >         tus_upload_store: "{{ galaxy_tus_upload_store }}"

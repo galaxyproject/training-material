@@ -11,7 +11,7 @@ mapping:
         required: true
         description: |
             Title of the news post
-        examples:
+        _examples:
             - 'BY-COVID and RO-Crate collaboration brings new topic: FAIR Data, Workflows & More'
             - "New Tutorial Feature: Choose Your Own Tutorial"
     tags:
@@ -21,7 +21,7 @@ mapping:
               required: true
         description: |
             A free form list of tags that are relevant for your tutorial.
-        examples:
+        _examples:
             - new topic
             - new tutorial
             - new feature
@@ -34,16 +34,18 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - ORGANISATIONS
+              - GRANTS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
-        examples:
+        _examples:
             - hexylena
             - shiltemann
     contributions:
         required: true
         description: |
             List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
-        examples: |
+        _examples: |
             contributions:
                 authorship:
                     - shiltemann
@@ -59,7 +61,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -69,6 +71,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -76,6 +79,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -83,6 +87,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -90,6 +95,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -97,13 +103,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -111,17 +120,27 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+            data:
+                type: seq
+                description: These entities provided data for this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
     cover:
         type: str
         description: |
             link to a picture that will be used as the cover for the article
-        examples:
+        _examples:
             - "assets/images/BYCOVID_logo_tagline.png"
     coveralt:
         type: str
         description: |
             If a cover is provided, then alt text is Mandatory.
-        examples:
+        _examples:
             - "logo of by covid with subtitle reading beyond covid"
     abbreviations:
         type: map
@@ -132,7 +151,7 @@ mapping:
                     The expansion of the abbreviated term.
         description: |
             A dictionary of abbreviations and their expansions.
-        examples: |
+        _examples: |
             abbreviations:
                 SQL: Structured Query Language
                 API: Application Programming Interface
@@ -142,24 +161,31 @@ mapping:
             - type: str
         description: |
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
-        examples:
+        _examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     tutorial:
         type: str
         description: |
             Include a link to a specific page as a call to action button at the bottom of the page.
-        examples:
+        _examples:
         - topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial.html
     link:
         type: str
         description: |
             Basically an alias for tutorial, except requiring a full URL
-        examples:
+        _examples:
           - https://example.org
     external:
         type: bool
         description: |
             Whether clicking on the "read story link" goes directly to another site.
+        enum:
+          - true
+          - false
+    from_google_form:
+        type: bool
+        description: |
+            A boolean tracking in an automated way if this news post was generated via the GTN's News Google Form. Please do not add this manually.
         enum:
           - true
           - false

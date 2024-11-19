@@ -17,7 +17,7 @@ contributors: [jennaj, garimavs]
         - If only GFF3 is available, you can attempt to transform it with the tool **gffread**.
     - Was GTF data detected as GFF during Upload? It probably has headers.
         -Remove the headers (lines that start with a "#") with the **Select** tool using the option "NOT Matching" with the regular expression: ^#
-        - [Redetect the datatype](https://training.galaxyproject.org/training-material/faqs/galaxy/#detecting-the-datatype-file-format). It should be GTF once corrected.
+        - [Redetect the datatype]({% link faqs/galaxy/datasets_detect_datatype.md %}). It should be GTF once corrected.
     - UCSC annotation
         - Find annotation under their Downloads area. The path will be similar to: `https://hgdownload.soe.ucsc.edu/goldenPath/<database>/bigZips/genes/`
         - Copy the URL from UCSC and paste it into the Upload tool, allowing Galaxy to detect the datatype.

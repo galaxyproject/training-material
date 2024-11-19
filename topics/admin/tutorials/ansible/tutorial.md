@@ -11,23 +11,37 @@ questions:
 objectives:
   - Learn Ansible basics
   - Write a simple role
-  - Install a role from Ansible Galaxy
+  - Install a role from Ansible Galaxy (repository unrelated to the Galaxy Project)
 time_estimation: "60m"
 key_points:
   - Ansible lets you do system administration at scale
   - Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles
-contributors:
+contributions:
+  authorship:
   - hexylena
   - shiltemann
+  testing:
+  - vladvisan
 subtopic: core
 tags:
   - ansible
+
+
+recordings:
+- captioners:
+  - martenson
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 61M
+  youtube_id: 2KdT0sYKUeE
+  speakers:
+  - martenson
 
 ---
 
 # Overview
 
-In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the [Galaxyproject Ansible roles](https://github.com/galaxyproject?q=ansible).
+In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Maybe even [install Galaxy using Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) or contribute to the [Galaxy Project's Ansible roles](https://github.com/galaxyproject?q=ansible).
 
 This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.
 
@@ -56,7 +70,7 @@ Task
 :    A call to an Ansible module that should be executed and the configuration for this module.
 
 Role
-:    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
+:    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/) (repository unrelated to the Galaxy Project).
 
 Playbook
 :    A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
@@ -132,7 +146,7 @@ Folder    | Usage
 defaults  | Default values for variables the user can set (e.g. "version of software to install").
 files     | These are files which should be copied as-is over to the remote location.
 handlers  | This is typically used for restarting processes.
-meta      | Only needed to publish your role to Ansible Galaxy.
+meta      | Only needed to publish your role to Ansible Galaxy (repository unrelated to the Galaxy Project).
 tasks     | **Always start reading here**. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here (e.g. variables to load, handlers, files, templates).
 templates | Files that are templated out with variables before being copied.
 vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions).
@@ -190,7 +204,7 @@ And an inline style.
 {% raw %}- package name={{ package_name }} state={{ package_state }}{% endraw %}
 ```
 
-Some groups prefer one style or another. You can mix both of these but you probably shouldn't. In the YAML style the templated value needs to be quoted if the value after the colon starts with a `{` (see https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#when-to-quote-variables-a-yaml-gotcha ). The inline style does not require quoting of templated values.
+Some groups prefer one style or another. You can mix both of these but you probably shouldn't. In the YAML style the templated value needs to be quoted if the value after the colon starts with a `{` (see [this page](https://docs.ansible.com/ansible/9/playbook_guide/playbooks_variables.html#when-to-quote-variables-a-yaml-gotcha) for more details ). The inline style does not require quoting of templated values.
 
 ## Playbooks
 
@@ -257,7 +271,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 
 > <comment-title>Requirements for Running This Tutorial</comment-title>
 >
-> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+> 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine you will run this tutorial from
 >
 >    > <comment-title>Running Ansible on remote machine</comment-title>
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
@@ -278,7 +292,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 3. **Create a directory named `intro` and `cd` into it.**
 >
->    It's good practice to keep your deployments separated, and later on we'll be deploying Galaxy with ansible in a separate directory.
+>    It's good practice to keep your deployments separated.
 >
 > 4. Create your inventory file (named `hosts`) in this folder
 >
@@ -295,7 +309,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >       > ```
 >       {: .solution }
 >
->       > <details-title>For your own infrastructure, do you connect with a different user? Password? SSH key?</details-title>
+>       > <details-title>For your own infrastructure, do you connect as a different user? Password? SSH key?</details-title>
 >       > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
 >       {: .details}
 >
@@ -592,7 +606,7 @@ Templates give you greater control over the files you are deploying to the targe
 
 # Ansible Galaxy
 
-Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
+Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy (repository unrelated to the Galaxy Project) is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
 
 **Warning**: This will install Memcached on the target machine.
 

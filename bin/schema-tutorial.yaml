@@ -13,7 +13,7 @@ mapping:
         required: true
         description: |
             Title of the tutorial (it will appear on the tutorial page and the topic page)
-        examples:
+        _examples:
             - Clustering in Machine Learning
             - Breve introducción a Galaxy - en español
             - Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools
@@ -24,7 +24,7 @@ mapping:
               required: true
         description: |
             list of questions that will be addressed in the tutorial
-        examples:
+        _examples:
             - How does Genome assembly work?
             - How do I change Galaxy configs?
             - How to detect and quantify differentially abundant proteins in a HEK-Ecoli Benchmark DIA datatset?
@@ -42,7 +42,7 @@ mapping:
             - Compute (Skill)
             - multiple whole genome assemblies (Objective)
             - in such a way to develop big data processing skills (Result)
-        examples:
+        _examples:
             - Understand the basic concepts behind phylogenetic trees, as applied to *Mycobacterium tuberculosis*
             - Explore Biodiversity data with taxonomic, temporal and geographical informations
             - Generate a DotPlot emulating the original paper using a different analysis tool
@@ -56,7 +56,7 @@ mapping:
             of the tutorial. These should really be a key point, something that
             should stick in their mind; what you want them to take home from
             the tutorial.
-        examples:
+        _examples:
             - Pangeo ecosystem enables big data analysis in geosciences
             - "The MiModD suite of tools bundles most of the functionality required to perform mapping-by-sequencing analyses with Galaxy"
             - It can drastically simplify management of large numbers of VMs
@@ -67,13 +67,13 @@ mapping:
             pattern: /^topic_[0-9]+$/
             description: |
                 An edam ontology id that describes the resource
-            examples:
+            _examples:
                 - topic_3173
     gitter:
         type: str
         description: |
             Link to a gitter channel that is more relevant for the tutorial than the default. E.g. a single cell tutorial could use `Galaxy-Training-Network/galaxy-single-cell` to link to their specific chat room.
-        examples:
+        _examples:
             - Galaxy-Training-Network/galaxy-single-cell
             - galaxy-genome-annotation/Lobby
     contributors:
@@ -83,16 +83,18 @@ mapping:
               required: true
               enum:
               - CONTRIBUTORS
+              - GRANTS
+              - ORGANISATIONS
         description: |
             List of tutorial contributors. Please use `contributions` instead as it provides more detailed accounting of tutorial history.
-        examples:
+        _examples:
             - hexylena
             - shiltemann
     contributions:
         required: true
         description: |
             List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
-        examples: |
+        _examples: |
             contributions:
                 authorship:
                     - shiltemann
@@ -108,7 +110,7 @@ mapping:
                 translation:
                     - shiltemann
                 funding:
-                    - erasmusplus
+                    - gallantries
         type: map
         mapping:
             authorship:
@@ -118,6 +120,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             editing:
                 type: seq
                 description: These entities edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories
@@ -125,6 +128,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             testing:
                 type: seq
                 description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
@@ -132,6 +136,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             ux:
                 type: seq
                 description: These entities contributed UX or Design improvements to this tutorial or the GTN as a whole
@@ -139,6 +144,7 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
             infrastructure:
                 type: seq
                 description: These entities managed and provided infrastructure to the GTN or for training purposes
@@ -146,13 +152,16 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
             funding:
                 type: seq
                 description: These entities provided funding support for the development of this resource
                 sequence:
                 - type: str
                   enum:
-                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
             translation:
                 type: seq
                 description: These entities did translation and localisation work on this resource
@@ -160,23 +169,40 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+                  - ORGANISATIONS
+            data:
+                type: seq
+                description: These entities provided data for this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
     subtopic:
         type: str
         description: |
             if the topic has [multiple subtopics defined](/training-material/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
-        examples:
+        _examples:
             - single-cell
     priority:
         type: int
         description: |
             This field allows ordering tutorials within the tutorial list. Tutorials with lower numbered priority come before tutorials with higher numbers.
-        examples: 1
+        _examples: 1
     zenodo_link:
         type: str
         description: |
             link on Zenodo to the input data for the tutorial
-        examples:
+        _examples:
             - "https://zenodo.org/record/3706539"
+        pattern: /(^$|^https://zenodo.org/records?/[0-9]+/?$|^https://doi.org/10.5281/zenodo.[0-9]+/?$)/
+    extra:
+        type: map
+        description: |
+            Any additional variables you want to set on the page
+        mapping:
+          '=': {}
     tags:
         type: seq
         sequence:
@@ -184,7 +210,7 @@ mapping:
               required: true
         description: |
             A free form list of tags that are relevant for your tutorial.
-        examples:
+        _examples:
             - covid-19
             - git-gat
     translations:
@@ -194,7 +220,7 @@ mapping:
               required: true
         description: |
             If alternative translations of a material are available, then use this key to indicate which languages have been manually translated.
-        examples:
+        _examples:
             - en
     abbreviations:
         type: map
@@ -205,7 +231,7 @@ mapping:
                     The expansion of the abbreviated term.
         description: |
             A dictionary of abbreviations and their expansions.
-        examples: |
+        _examples: |
             abbreviations:
                 SQL: Structured Query Language
                 API: Application Programming Interface
@@ -227,7 +253,7 @@ mapping:
         pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
         description: |
             An estimation of the time needed to complete the hands-on.
-        examples:
+        _examples:
             - 10M
             - 1H30M
     redirect_from:
@@ -236,11 +262,11 @@ mapping:
             - type: str
         description: |
             If a tutorial is renamed to a new location, use this field to list prior locations from which this tutorial was accessible.
-        examples:
+        _examples:
         - /topics/sequence-analysis/tutorials/de-novo-rad-seq/tutorial
     notebook:
         type: map
-        examples: |
+        _examples: |
             notebook:
                 language: python
                 pyolite: true
@@ -255,7 +281,7 @@ mapping:
                     If you have an alternative preamble for your notebook that students should know before following (e.g. they must load X datasets in their history), it can be listed here.
 
                     This text will be shown in the GTN tutorial, but it will **not** be included in the notebook, giving you a bit better control over mixing setup content which is relevant for Galaxy, with notebook content that can be easy to run for students.
-                examples:
+                _examples:
                     - topics/climate/tutorials/pangeo-notebook/preamble.md
             pyolite:
                 type: bool
@@ -286,7 +312,7 @@ mapping:
                 description: |
                   A list of packages that must be installed before running this tutorial. This value is not currently used, but might be in the future.
                 required: false
-                examples:
+                _examples:
                   - tidyverse
                 sequence:
                   - type: str
@@ -313,7 +339,7 @@ mapping:
             neural:
                 type: bool
                 required: true
-        examples: |
+        _examples: |
             voice:
                 id: Lupe
                 lang: es-US
@@ -321,7 +347,7 @@ mapping:
     follow_up_training:
         type: seq
         description: list of resources that the reader of the material could follow at the end of the tutorial
-        examples:
+        _examples:
             - |
                 type: internal
                 topic_name: statistics
@@ -368,7 +394,7 @@ mapping:
     requirements:
         type: seq
         description: List of resources that the reader of the material should be familiar with before starting this training. The structure is identical to `follow_up_training`.
-        examples:
+        _examples:
             - |
                 type: internal
                 topic_name: statistics
@@ -416,13 +442,13 @@ mapping:
         type: str
         description: |
           A copyright attribution string, as required by some licenses.
-        examples:
+        _examples:
             - © Copyright 2021-2023 University of Technology Sydney, The University of Manchester UK and RO-Crate contributors
     license:
         type: str
         description: |
             An [SPDX](https://spdx.org/) identifier for the alternative license that is used for that particular material. This is **only** relevant for materials which have been imported from an external source and were originally licensed under another license. For new materials we strongly encourage contributors to not use this key as materials are CC-BY, by default.
-        examples:
+        _examples:
             - MIT
             - Apache-2.0
     draft:
@@ -434,5 +460,87 @@ mapping:
         description: |
             A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
         pattern: /^\/.*/
-        examples:
+        _examples:
             - /assets/images/gat.png
+    hands_on:
+        type: str
+        enum:
+            - external
+        description: |
+            This must be set to `external` to link to an external tutorial
+    hands_on_url:
+        type: str
+        description: |
+            link to the external tutorial
+        _examples:
+            - "https://docs.qiime2.org/jupyterbooks/cancer-microbiome-intervention-tutorial/index.html#"
+    answer_histories:
+        type: seq
+        _examples: |
+          - label: "UseGalaxy.eu"
+            history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+          - label: "Older Alevin version"
+            history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+            date: 2024-01-01
+        sequence:
+          - type: map
+            mapping: &answer_histories
+              label:
+                type: str
+                required: true
+              history:
+                type: str
+                required: true
+              date:
+                type: date
+                pattern: /[0-9]{4,}-[0-9]{2}-[0-9]{2}/
+    input_histories:
+        type: seq
+        _examples: |
+          input_histories:
+            - label: "UseGalaxy.eu"
+              history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+              date: "2021-09-01"
+        sequence:
+          - type: map
+            mapping: *answer_histories
+    recordings:
+        type: seq
+        sequence:
+        - type: map
+          mapping:
+            captioners:
+              type: seq
+              sequence:
+               - type: str
+                 enum:
+                 - CONTRIBUTORS
+            speakers:
+              type: seq
+              sequence:
+              - type: str
+                enum:
+                - CONTRIBUTORS
+            bot-timestamp:
+               type: int
+            date:
+              type: str
+              required: true
+              pattern: /[0-9]{4}-[0-9]{2}-[0-9]{2}/
+            galaxy_version:
+              type: str
+              pattern: /[0-9]{2}\.[0-9]{1,2}/
+            length:
+              type: str
+              pattern: /^(?:([0-9]*)[Hh])*(?:([0-9]*)[Mm])*(?:([0-9.]*)[Ss])*$/
+            youtube_id:
+              type: str
+              pattern: /[A-Za-z0-9_-]{11}/
+            type:
+              type: str
+            archive-id:
+              type: str
+            description:
+              type: str
+            cyoa:
+              type: bool

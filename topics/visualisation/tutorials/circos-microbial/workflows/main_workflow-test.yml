@@ -1,0 +1,31 @@
+- doc: Test outline for Circos-for-E.-Coli
+  job:
+    Genome:
+      class: File
+      location: https://zenodo.org/record/3591856/files/genome.fa
+      filetype: fasta
+    Genes:
+      class: File
+      location: https://zenodo.org/record/3591856/files/genes%20(NCBI).gff3
+      filetype: gff3
+    RNA Seq Coverage (1):
+      class: File
+      location: https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%201.bw
+      filetype: bigwig
+    RNA Seq Coverage (2):
+      class: File
+      location: https://zenodo.org/record/3591856/files/RNA-Seq%20coverage%202.bw
+      filetype: bigwig
+    DNA Sequencing Coverage:
+      class: File
+      location: https://zenodo.org/record/3591856/files/dna%20sequencing%20coverage.bw
+      filetype: bigwig
+    Variants:
+      class: File
+      location: https://zenodo.org/record/3591856/files/variants.vcf
+      filetype: vcf
+  outputs:
+    plot:
+      path: test-data/plot.png
+      compare: sim_size
+      delta: 300000 # This is so large because the GTN will automatically optimise the PNGs which destroy's this test.

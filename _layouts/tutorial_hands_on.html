@@ -63,7 +63,7 @@ We should ONLY be using new_material (if at all possible.)
     <blockquote class="overview">
         <div id="overview-box" class="box-title">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
-        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}"/>
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="{% link assets/images/cc-by.png %}" width="88" height="31"/>
         {% endunless %}
         <strong>{% icon question aria=false %} {{ locale['questions'] | default: "Questions" }}:</strong>
         <ul>
@@ -128,6 +128,14 @@ We should ONLY be using new_material (if at all possible.)
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
+            {% if own_material.input_histories %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-input-histories.html material=own_material topic=topic.name label=true %}</li>
+            {% endif %}
+
+            {% if own_material.answer_histories %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-answer-histories.html material=own_material topic=topic.name label=true %}</li>
+            {% endif %}
+
             {% if own_material.notebook %}
                 <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
@@ -139,7 +147,7 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
 
             <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
-            {% include _includes/resource-video-library.html label=true wrapper=true %}
+            {% include _includes/resource-recordings.html label=true wrapper=true %}
 
 
             {% if tuto_has_docker %}
@@ -149,20 +157,35 @@ We should ONLY be using new_material (if at all possible.)
             {% endif %}
         </ul>
 
+        <div><strong>{% icon last_modification aria=false %} {{ locale['published'] | default: "Published" }}:</strong> {{ page | gtn_pub_date | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
 		{% if page.copyright %}
 		{{ page.copyright }}.
 		{% endif %}
+            {{ locale['license-framework'] | default: "Tutorial Content is licensed under" }}
             {% if page.license %}
-	    Tutorial Content is licensed under <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
+              <a rel="license" href="https://spdx.org/licenses/{{ page.license }}">{{ page.license }}</a>.
             {% else %}
-            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">{{ locale['license-framework'] | default: "Tutorial Content is licensed under Creative Commons Attribution 4.0 International License" }}</a>.
-            {% endif %} The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            {% endif %}
+            The GTN Framework is licensed under <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">MIT</a>
         </div>
         {% if page.short_id %}
-        <div><strong>{% icon purl %}<abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
+        <div><strong>{% icon purl %} <abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
         {% endif %}
+
+	{% assign own_material_id = own_material.id %}
+	{% if page.lang %}
+		{% capture own_material_id %}{{ own_material.id }}:{{ page.lang }}{% endcapture %}
+	{% endif %}
+
+	{% assign feedback_count = site | get_feedback_count: own_material_id %}
+	{% if feedback_count > 0 %}
+	<div><strong>{% icon rating %} Rating:</strong> <a href="#feedback-responses">{{ site | get_rating_recent:own_material_id }}</a> ({{ site | get_feedback_count_recent: own_material_id }} recent ratings, {{ feedback_count }} all time)</div>
+	{% endif %}
+	<div><strong>{% icon version %} Revision:</strong> {{ page | get_version_number }} </div>
+
     </blockquote>
     </section>
 
@@ -261,6 +284,28 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 </section>
 
                 <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
                 {% if page.key_points %}
                 <blockquote class="key_points">
                     <div class="box-title">{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</div>
@@ -316,14 +361,12 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 </dl>
                 {% endif %}
 
-                <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
+                <h1 id="gtn-feedback">{{locale['feedback'] | default: "Feedback" }}</h1>
                 <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ page.title }} ({{ topic.title }})" alt="Feedback form link">
-                    <img src="/training-material/shared/images/feedback.png" alt="Preview of the google form" />
-                </a>
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833={{ own_material_id }}">Feedback Form</a></iframe>
 
                 <h1>{{locale['citing-tutorial'] | default: "Citing this Tutorial"}}</h1>
                 <p>
@@ -356,7 +399,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
 
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-{% assign authors = page.contributors | filter_authors:page.contributions -%}
+{% assign authors = page | filter_authors -%}
 	author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 	title = "{{ page.title }} (Galaxy Training Materials)",
 	year = "{{ page.last_modified_at | date: "%Y"}}",
@@ -384,9 +427,12 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                    </p>
                 </blockquote>
 
-                {% if page.contributions %}
-                {% include _includes/funding-statement.md contributions=page.contributions %}
-                {% endif %}
+        {% if page.contributions and page.contributions.funding %}
+		<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+		<p>These individuals or organisations provided funding support for the development of this resource</p>
+
+                {% include _includes/funding-statement.md funders=page.contributions.funding %}
+        {% endif %}
 
 
 <script>
@@ -428,8 +474,15 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 {% endif %}
 
 		{% if own_material.tools %}
-                <blockquote class="agenda follow-up" id="admins-install-missing-tools">
-                    <div class="box-title">Galaxy Administrators: Install the missing tools</div>
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
 			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
 <div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl {{ own_material.api }} | jq .admin_install_yaml -r)</code></pre></div>
 <p>Alternatively you can copy and paste the following YAML</p>
@@ -437,6 +490,63 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                 </blockquote>
 		{% endif %}
 
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   {% assign feedback_histo = site | get_rating_histogram_chart:own_material_id %}
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   {% for hist in feedback_histo %}
+			<tr>
+				<th scope="row">{{ hist[0] | to_stars }}</th>
+				<td style="--size: {{ hist[1][1] }}">{{ hist[1][0] }}</td>
+			</tr>
+		   {% endfor %}
+		   </table>
+		   </p>
+		{% assign feedbacks = site | get_recent_feedbacks:own_material_id %}
+        {% comment %} Uncomment to debug feedback size: <p>Feedbacks Count: {{ feedbacks.size }}</p> {% endcomment %}
+        {% if feedbacks.size > 0 %}
+		    {% for feedback in feedbacks %}
+		    <b>{{ feedback[0] }}</b>
+		    <ul>
+				{% for feed in feedback[1] %}
+				<li>
+					{{ feed.rating | to_stars }}:
+					{% if feed.pro %}<b>Liked</b>: {{ feed.pro }}{% endif %}
+					{% if feed.con %}<b>Disliked</b>: {{ feed.con }}{% endif %}
+				</li>
+				{% endfor %}
+		    </ul>
+		    {% endfor %}
+        {% else %}
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        {% endif %}
+		</blockquote>
+
+
+
+
+		{% assign upcoming_events = site | get_upcoming_events_for_this: new_material %}
+		{% assign upcoming_event_count = upcoming_events | size %}
+		{% if upcoming_event_count > 0 %}
+		<blockquote class="details hide-when-printing" id="upcoming-events">
+                  <div id="upcoming-events-c" class="box-title">
+                    <button type="button" aria-controls="upcoming-events-c" aria-expanded="false">
+                      <i class="fas fa-calendar" aria-hidden="true"></i>
+                      Upcoming events which cover this topic<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>Want to learn more with a live instructor? Check out these upcoming events:</p>
+		   {% include _includes/event-table.html events=upcoming_events campaign="via-tutorial" %}
+		</blockquote>
+		{% endif %}
 
                 </section>
 

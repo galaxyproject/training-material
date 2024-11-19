@@ -21,10 +21,17 @@ contributors:
 - hexylena
 level: Intermediate
 subtopic: workflows
+
+recordings:
+- captioners:
+  - mvdbeek
+  date: '2022-07-06'
+  length: 30M
+  youtube_id: otvEuDlCye0
+  speakers:
+  - mvdbeek
+
 ---
-
-
-# Introduction
 
 
 Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.

@@ -39,8 +39,6 @@ contributors:
   - erxleben
 ---
 
-# Introduction
-
 
 This tutorial uses ChIP-seq datasets from a study published by {% cite Wu_2014 %}. The goal of this study was to investigate "the dynamics of occupancy and the role in gene regulation of the transcription factor TAL1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation."
 
@@ -75,7 +73,7 @@ Because of the long processing time for the large original files, we have downsa
 
 # Quality control
 
-As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check out the tutorial [here]({{site.baseurl}}/topics/sequence-analysis).
+As for any NGS data analysis, ChIP-seq data must be quality controlled before being aligned to a reference genome. For more detailed information on NGS quality control, check [out the tutorials]({% link topics/sequence-analysis/index.md %}).
 
 > <hands-on-title>Performing quality control</hands-on-title>
 >
@@ -84,6 +82,17 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the ChIP-seq raw data (\*.fastqsanger) from [Zenodo](https://doi.org/10.5281/zenodo.197100).
+>
+>    ```
+>    https://zenodo.org/record/197100/files/G1E_input_R1_downsampled_SRR507859.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_input_R2_downsampled_SRR507860.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_Tal1_R1_downsampled_SRR492444.fastqsanger
+>    https://zenodo.org/record/197100/files/G1E_Tal1_R2_downsampled_SRR492445.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_input_R1_downsampled_SRR492453.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_input_R2_downsampled_SRR492454.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocyte_Tal1_R1_downsampled_SRR549006.fastqsanger
+>    https://zenodo.org/record/197100/files/Megakaryocytes_Tal1_R2_downsampled_SRR549007.fastqsanger
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
@@ -111,8 +120,8 @@ As for any NGS data analysis, ChIP-seq data must be quality controlled before be
 >    > 2. Why is the quality score decreasing across the length of the reads?
 >    >
 >    > > <solution-title></solution-title>
->    > > 1. The phred-score. This score gives the probability of an incorrect base *e.g.* a score of 20 means that it is likely by 1% that one base is incorrect. See [here](https://en.wikipedia.org/wiki/Phred_quality_score) for more information.
->    > > 2. This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See [here](https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina) for more information.
+>    > > 1. The phred-score. This score gives the probability of an incorrect base *e.g.* a score of 20 means that it is likely by 1% that one base is incorrect. See [the wikipedia page on Phred](https://en.wikipedia.org/wiki/Phred_quality_score) for more information.
+>    > > 2. This is an unsolved technical issue of the sequencing machines. The longer the sequences are the more likely are errors. See [this article](https://www.ecseq.com/support/ngs/why-does-the-sequence-quality-decrease-over-the-read-in-illumina) for more information.
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
@@ -154,7 +163,7 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 # Aligning reads to a reference genome
 
 To determine where DNA fragments originated from in the genome, the sequenced reads must be aligned to a reference genome. This is equivalent to solving a jigsaw puzzle, but unfortunately, not all pieces are unique. In principle, you could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. Aligning millions of short sequences this way, however, can take a couple of weeks.
-Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool [here](https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/btp324).
+Nowadays, there are many read alignment programs for sequenced DNA, BWA being one of them. You can read more about the BWA algorithm and tool in {% cite Li_2009 %}.
 
 > <hands-on-title>Aligning reads to a reference genome</hands-on-title>
 >
@@ -207,7 +216,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, BWA being on
 
 To assess the similarity between the replicates sequencing datasets, it is a common technique to calculate the correlation of read counts for the different samples.
 
-We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found [here](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
+We expect that the replicate samples will cluster more closely to each other than to other samples. We will be use tools from the package deepTools for the next few steps. More information on deepTools can be found [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/list_of_tools.html).
 
 > <hands-on-title>Assessing correlation between samples</hands-on-title>
 >
@@ -244,7 +253,7 @@ We expect that the replicate samples will cluster more closely to each other tha
 >     ![heatmap](../../images/tal1/plotCorrelation_heatmap_pearson_1kb.png "Heatmap of correlation matrix generated by plotCorrelation.")
 {: .hands_on}
 
-Additional information on how to interpret plotCorrelation plots can be found [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background).
+Additional information on how to interpret plotCorrelation plots can be found [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/tools/plotCorrelation.html#background).
 
 # Assessing IP strength
 
@@ -280,7 +289,7 @@ We will now evaluate the quality of the immunoprecipitation step in the ChIP-seq
 >    {: .question}
 {: .hands_on}
 
-Additional information on how to interpret plotFingerprint plots can be found [here](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
+Additional information on how to interpret plotFingerprint plots can be found [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/tools/plotFingerprint.html#background).
 
 # Determining TAL1 binding sites
 
@@ -375,7 +384,7 @@ We show here an alternative to Trackster, [IGV](http://software.broadinstitute.o
 >
 > 1. Open IGV on your local computer.
 > 2. Click on each narrow peaks result file from the MACS2 computations on "display with IGV" --> "local Mouse mm10"
-> 3. For more information about IGV see [here]({{site.baseurl}}/topics/introduction/tutorials/igv-introduction/tutorial.html)
+> 3. For more information about IGV see [the IGV Tutorial]({% link topics/introduction/tutorials/igv-introduction/tutorial.md %})
 {: .hands_on}
 
 # Identifying unique and common TAL1 peaks between stages
@@ -497,7 +506,7 @@ We will now check whether the samples have more reads from regions of the genome
 >    >
 >    > > <solution-title></solution-title>
 >    > > 1. In an input ChIP-seq file, the expectation is that DNA fragments are uniformly sampled from the genome. This is in contrast to an IP ChIP-seq file where it is expected that certain genomic regions contain more reads (*i.e.* regions that are bound by the protein that is immunopurified). Therefore, non-uniformity of reads in the input sample could be a result of GC-bias, whereby more GC-rich fragments are preferentially amplified during PCR.
->    > > 2. To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
+>    > > 2. To answer this question, run the computeGCbias tool as described above and check out the results. What do YOU think? For more examples and information on how to interpret the results, check out the tool usage documentation [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html#background).
 >    > {: .solution }
 >    {: .question}
 >
@@ -517,7 +526,7 @@ We will now check whether the samples have more reads from regions of the genome
 >    {: .question}
 {: .hands_on}
 
-Additional information on how to interpret computeGCbias plots can be found [here](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html).
+Additional information on how to interpret computeGCbias plots can be found [in deepTools' documentation](https://deeptools.readthedocs.io/en/latest/content/tools/computeGCBias.html).
 
 
 # Conclusion

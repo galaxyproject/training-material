@@ -14,6 +14,9 @@ jobs:
   build:
     name: calibreapp/image-actions
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     # Only run on main repo on and PRs that match the main repo.
     if: |
       github.repository == 'galaxyproject/training-material' &&
@@ -21,7 +24,10 @@ jobs:
        github.event.pull_request.head.repo.full_name == github.repository)
     steps:
       - name: Checkout Branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
       - name: Compress Images
         id: calibre
         uses: calibreapp/image-actions@main
@@ -34,7 +40,7 @@ jobs:
         if: |
           github.event_name != 'pull_request' &&
           steps.calibre.outputs.markdown != ''
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: Auto Compress Images
           branch-suffix: timestamp

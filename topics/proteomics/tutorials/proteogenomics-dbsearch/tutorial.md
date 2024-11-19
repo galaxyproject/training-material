@@ -33,9 +33,19 @@ contributors:
   - pravs3683
 subtopic: multi-omics
 tags: [proteogenomics]
+
+recordings:
+- captioners:
+  - emmaleith
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: q1OjmTcbvBA
+  speakers:
+  - andrewr
+
 ---
 
-# Introduction
 
 In this tutorial, we perform proteogenomic database searching using the Mass Spectrometry data. The inputs for performing the proteogenomic database searching are the peaklist MGF files and the FASTA database file. The FASTA database is obtained by running the first workflow “Uniprot_cRAP_SAV_indel_translatedbed.FASTA”. The second workflow focuses on performing database search of the peak list files (MGFs).
 
@@ -57,12 +67,15 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 > <hands-on-title>data upload and organization</hands-on-title>
 >
 > 1. Create a **new history** and name it something meaningful (e.g. *Proteogenomics DB search*)
-> 2. Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
+> 2. Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13270741.svg)](https://doi.org/10.5281/zenodo.13270741)
 >    ```
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
 >    https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
+>    https://zenodo.org/records/13270741/files/Uniprot_cRAP_SAV_indel_translatedbed.FASTA
+>    https://zenodo.org/records/13270741/files/Reference_Protein_Accessions.tabular
+>
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -77,7 +90,7 @@ In this tutorial, we perform proteogenomic database searching using the Mass Spe
 
 # Match peptide sequences
 
-The search database labelled `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` is the input database that
+The search database labeled `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` is the input database that
 will be used to match MS/MS to peptide sequences via a sequence database search.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.The generated dataset collection of the three *MGF files* in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.
@@ -230,7 +243,7 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 >
 {: .hands_on}
 
-The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform Query tabular to extract list of known peptides from the UniProt and cRAP database.
+The next step is to remove known peptides from the list of PSMs that we acquired from the Peptide Shaker results. For that, we need to perform Query tabular to extract the list of known peptides from the UniProt and cRAP database.
 
 
 ## Query Tabular
@@ -317,7 +330,7 @@ The next step is to remove known peptides from the list of PSM's that we acquire
 >
 >    - *"include query result column headers"*: `Yes`
 >
->  - Click **Run Tool** and inspect the query results file after it turned green.
+>  - Click **Run Tool** and inspect the query results file after it turns green.
 >
 {: .hands_on}
 
@@ -351,7 +364,7 @@ The output from this step is that the resultant peptides would be those which do
 >    ```
 >  - *"include query result column headers"*: `Yes`
 >
->  - Click **Run Tool** and inspect the query results file after it turned green.
+>  - Click **Run Tool** and inspect the query results file after it turns green.
 >
 > ![QT](../../images/QT_output.png)
 >
@@ -382,11 +395,11 @@ The output FASTA file is going to be subjected to BLAST-P analysis.
 
 
 
-# **Conclusion**
+# Conclusion
 
 
-This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
-Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
+This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to performing database searching with mass spectrometry files and having peptides ready for Blast-P analysis, you can perform follow-up analysis using the next GTN "Proteogenomics Novel Peptide Analysis".
+Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes, and the workflow will need to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 

@@ -36,9 +36,14 @@ contributions:
 tags:
 - prokaryote
 - one-health
+- microgalaxy
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_3324 # Infectious disease
+- topic_2885 # DNA polymorphism
 ---
 
-# Introduction
 
 In a disease outbreak situation, to understand the dynamics and the size of the outbreak, it is essential to detect transmission clusters to distinguish likely outbreak cases from unrelated background cases. Such detection is nowadays often based on actual sequencing data that enables quantitative conclusions about differences between pathogen isolates.
 
@@ -778,11 +783,6 @@ The two tables we have generated in the two parts of the tutorial share a sample
 >
 >      The *transmission clusters* report only lists the subset of samples that were assigned to a cluster, while the drug-resistance table has a line for every sample. We want to keep all samples from the second table and indicate missing information from the first with `-` values (see next parameter).
 >    - *"Value to put in unpaired (empty) fields"*: `-`
->        - {% icon param-repeat %} *"Insert Replacement"*
->          - *"Find pattern"*: `Drug-resistance: `
->
->              Note the space at the end of the pattern!
->          - *"Replace with"*: leave this field empty
 >
 {: .hands_on}
 

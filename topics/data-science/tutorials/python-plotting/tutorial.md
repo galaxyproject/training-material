@@ -23,11 +23,13 @@ key_points:
 - Python has many libraries offering a variety of capabilities, which makes it popular for beginners, as well as, more experienced users
 - You can use scientific libraries like Matplotlib to perform exploratory data analysis.
 subtopic: python
-contributors:
+contributions:
+  authorship:
   - mcmaniou
   - fpsom
   - carpentries
-  - erasmusplus
+  funding:
+  - gallantries
 
 priority: 3
 notebook:

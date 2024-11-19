@@ -1,28 +1,49 @@
 ---
 layout: tutorial_hands_on
-
-title: "Chloroplast genome assembly"
-zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
+title: Chloroplast genome assembly
+zenodo_link: https://doi.org/10.5281/zenodo.3567224
 tags:
-  - plants
-  - nanopore
+- plants
+- nanopore
+- jbrowse1
 questions:
-  - "How can we assemble a chloroplast genome?"
+- How can we assemble a chloroplast genome?
 objectives:
-  - "Assemble a chloroplast genome from long reads"
-  - "Polish the assembly with short reads"
-  - "Annotate the assembly and view"
-  - "Map reads to the assembly and view"
-
-time_estimation: "2h"
+- Assemble a chloroplast genome from long reads
+- Polish the assembly with short reads
+- Annotate the assembly and view
+- Map reads to the assembly and view
+time_estimation: 2h
 key_points:
-  - "A chloroplast genome can be assembled with long reads and polished with short reads"
-  - "The assembly graph is useful to look at and think about genomic structure"
-  - "We can map raw reads back to the assembly and investigate areas of high or low read coverage"
-  - "We can view an assembly, its mapped reads, and its annotations in JBrowse"
+- A chloroplast genome can be assembled with long reads and polished with short reads
+- The assembly graph is useful to look at and think about genomic structure
+- We can map raw reads back to the assembly and investigate areas of high or low read
+  coverage
+- We can view an assembly, its mapped reads, and its annotations in JBrowse
 contributors:
+- annasyme
+recordings:
+- captioners:
   - annasyme
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 35M
+  youtube_id: eyfCyINTD_E
+  speakers:
+  - annasyme
+- youtube_id: gIcbY9kXdTo
+  length: 16M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-12'
+  speakers:
+  - hannahkimincompbio
+  captioners:
+  - hannahkimincompbio
+  bot-timestamp: 1726113532
+
+
 ---
+
 
 # Introduction
 
@@ -89,7 +110,7 @@ We will look at the quality of the nanopore reads.
 > > <solution-title></solution-title>
 > > This will depend on the aim of your analysis, but usually:
 > > * **Sequencing depth** (the number of reads covering each base position; also called "coverage"). Higher depth is usually better, but at very high depths it may be better to subsample the reads, as errors can swamp the assembly graph.
-> > * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [here](https://en.wikipedia.org/wiki/Phred_quality_score).
+> > * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [on Wikipedia](https://en.wikipedia.org/wiki/Phred_quality_score).
 > > * **Read lengths** (read lengths histogram, and reads lengths vs. quality plots). Your analysis or assembly may need reads of a certain length.
 > {: .solution}
 {: .question}

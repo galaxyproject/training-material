@@ -21,9 +21,9 @@ time_estimation: "8h"
 key_points:
 contributors:
   - yvanlebras
----
 
-# Introduction
+subtopic: ecologyanalysis
+---
 
 
 In the study of [Hohenlohe *et al.* 2010](http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1000862), a genome scan of nucleotide diversity and differentiation in natural populations of threespine stickleback *Gasterosteus aculeatus* was conducted. Authors used Illumina-sequenced RAD tags to identify and type over 45,000 single nucleotide polymorphisms (SNPs) in each of 100 individuals from two oceanic and three freshwater populations.

@@ -5,7 +5,7 @@
 			{% if include.key == "=" %}
 				Any key permitted
 			{% else %}
-				<code>{{ include.key }}</code>
+				(Required) <code>{{ include.key }}</code>
 			{% endif %}
 		{% else %}
 		<button type="button" aria-expanded="true" aria-label="Toggle tip box: {{ include.key }}">
@@ -41,7 +41,7 @@
 
 
 
-{% if include.value.examples or include.value.enum %}
+{% if include.value._examples or include.value.enum %}
 <p>
 	<b>Example(s)</b>
 
@@ -49,7 +49,7 @@
 <div markdown=1>
 ```yaml
 {{include.key}}:
-{%- for ex in include.value.examples %}
+{%- for ex in include.value._examples %}
 - {{ ex | replace_newline_doublespace }}
 {%- endfor %}
 {%- for ex in include.value.enum %}
@@ -60,11 +60,11 @@
 {%- elsif include.value.type == "map" -%}
 <div markdown=1>
 ```yaml
-{{ include.value.examples }}
+{{ include.value._examples }}
 ```
 </div>
 {%- else -%}
-	{% for ex in include.value.examples %}
+	{% for ex in include.value._examples %}
 <div markdown=1>
 ```yaml
 {{ include.key }}: {{ ex }}

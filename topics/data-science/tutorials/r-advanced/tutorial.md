@@ -40,17 +40,29 @@ key_points:
 - Pipes can be used to combine simple operations into complex procedures.
 subtopic: r
 priority: 2
-contributors:
+contributions:
+  authorship:
   - carpentries
   - bebatut
   - fpsom
   - tobyhodges
-  - erasmusplus
+  funding:
+  - gallantries
 tags:
 - R
----
 
-# Introduction
+recordings:
+- captioners:
+  - ksuderman
+  - nagoue
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: _hWBGdlICqg
+  speakers:
+  - fpsom
+
+---
 
 With HTS-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. ["Reference-based RNA-Seq data analysis"]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}), and create some visualisations.
 

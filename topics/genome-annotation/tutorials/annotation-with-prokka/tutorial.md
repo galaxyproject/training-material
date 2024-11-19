@@ -4,7 +4,10 @@ layout: tutorial_hands_on
 title: "Genome annotation with Prokka"
 zenodo_link: "https://doi.org/10.5281/zenodo.1156405"
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
 questions:
   - "How can we annotate a bacterial genome?"
   - "How can we visualize annotated genomic features?"
@@ -22,14 +25,32 @@ contributors:
   - tseemann
   - slugger70
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
+follow_up_training:
+  - type: "internal"
+    topic_name: genome-annotation
+    tutorials:
+      - apollo
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 20M
+  youtube_id: B8pIQZPf21Y
+  speakers:
+  - abretaud
+
 ---
-
-# Introduction
-
 
 In this section we will use a software tool called Prokka to annotate a draft genome sequence. Prokka is a “wrapper”; it collects together several pieces of software (from various authors), and so avoids “re-inventing the wheel”.
 
-Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using [Prodigal](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2848648/); second, the *function* of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found [here](https://github.com/tseemann/prokka).
+Prokka finds and annotates features (both protein coding regions and RNA genes, i.e. tRNA, rRNA) present on on a sequence. Note, Prokka uses a two-step process for the annotation of protein coding regions: first, protein coding regions on the genome are identified using [Prodigal](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2848648/); second, the *function* of the encoded protein is predicted by similarity to proteins in one of many protein or protein domain databases. Prokka is a software tool that can be used to annotate bacterial, archaeal and viral genomes quickly, generating standard output files in GenBank, EMBL and gff formats. More information about Prokka can be found in [Prokka's github link](https://github.com/tseemann/prokka).
 
 > <agenda-title></agenda-title>
 >
@@ -88,7 +109,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 
 > <hands-on-title>Visualize the annotation</hands-on-title>
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - {% icon param-file %} *"Select the reference genome"*: `fna` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >

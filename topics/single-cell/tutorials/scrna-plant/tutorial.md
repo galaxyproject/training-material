@@ -37,9 +37,19 @@ contributors:
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 
+
+recordings:
+- captioners:
+  - mtekman
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 55M
+  youtube_id: yKlJ5ESri7o
+  speakers:
+  - mtekman
+
 ---
 
-# Introduction
 
 Single cell RNA-seq analysis is a cornerstone of developmental research and provides a great level of detail in understanding the underlying dynamic processes within tissues. In the context of plants, this highlights some of the key differentiation pathways that root cells undergo.
 

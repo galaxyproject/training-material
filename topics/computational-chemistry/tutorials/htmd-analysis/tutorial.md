@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: High Throughput Molecular Dynamics and Analysis
 level: Advanced
-zenodo_link: 'https://zenodo.org/badge/latestdoi/260474701'
+zenodo_link: 'https://zenodo.org/records/3813283'
 questions:
 - How are protein-ligand systems parameterized for molecular dynamics simulation?
 - What kind of analysis can be carried out on molecular trajectories?
@@ -23,11 +23,19 @@ contributors:
 - chrisbarnettster
 - bgruening
 
+
+recordings:
+- captioners:
+  - simonbray
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H40M
+  youtube_id: LjW3nES04bI
+  speakers:
+  - simonbray
+  - chrisbarnettster
+
 ---
-
-
-# Introduction
-
 
 This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to the N-terminal domain of Hsp90 (heat shock protein 90).
 

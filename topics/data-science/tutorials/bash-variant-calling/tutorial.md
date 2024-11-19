@@ -20,7 +20,7 @@ contributions:
   - hexylena
   - carpentries
   funding:
-  - erasmusplus
+  - gallantries
 ---
 
 

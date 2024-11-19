@@ -20,7 +20,7 @@ From the terminal window on your computer, you can use **wget** or **curl**.
    > **``curl -o outfile '<link>' ``  
    > ``curl -o outfile --insecure '<link>'     # ignore SSL certificate warnings``  
    > ``curl -C - -o outfile '<link>'           # continue an interrupted download``**
-4. For dataset collections and datasets within collections you have to supply your [API key](https://training.galaxyproject.org/training-material/faqs/galaxy/preferences_admin_api_key.html) with the request
+4. For dataset collections and datasets within collections you have to supply your [API key]({% link faqs/galaxy/preferences_admin_api_key.md %}) with the request
    - Sample commands for **wget** and **curl** respectively are:
    > 
    > **``wget https://usegalaxy.org/api/dataset_collections/d20ad3e1ccd4595de/download?key=MYSECRETAPIKEY``**

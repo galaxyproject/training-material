@@ -1,15 +1,18 @@
 ---
-title: How to unhide "hidden datasets"?
+title: How to hide datasets?
 area: datasets
 box_type: tip
 layout: faq
-contributors: [jennaj, beachyesh]
+contributors: [jennaj, beachyesh, nekrut]
 ---
 
-If you have run a workflow with hidden datasets, in your History:
-- Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets**
-- Or use the toggle ``hidden`` to view them
+To hide datasets:
 
-When using the [Copy Datasets](https://training.galaxyproject.org/training-material/faqs/galaxy/histories_copy_dataset.html) feature, hidden datasets will not be available to transfer from the **Source History** list of datasets. To include them:
-1. Click the **gear icon** {% icon galaxy-gear %} → Click **Unhide Hidden Datasets**
-2. Click the **gear icon** {% icon galaxy-gear %} → Click **Copy Datasets** 
+- Click {% icon history-select-multiple %} icon at the top of the history pane;
+- Select datasets you want to hide;
+- Click the dropdown that would appear at the top of the history;
+- Select **"Hide"** option.
+
+![An animated gif showing how to hide datasets]({% link shared/images/datasets_hide.gif %})
+
+

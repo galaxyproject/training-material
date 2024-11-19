@@ -4,7 +4,11 @@ layout: tutorial_hands_on
 title: Refining Genome Annotations with Apollo (prokaryotes)
 zenodo_link: https://zenodo.org/record/4889110
 tags:
+  - gmod
   - prokaryote
+  - microgalaxy
+  - jbrowse1
+  - apollo2
 questions:
   - How to visualize your genome after automated annotations have been performed?
   - How to manually annotate genome after automated annotations have been performed?
@@ -30,7 +34,8 @@ contributions:
     - nathandunn
     - mboudet
   funding:
-    - erasmusplus
+    - gallantries
+    - eurosciencegateway
 
 requirements:
   - type: "internal"
@@ -43,18 +48,32 @@ requirements:
       - annotation-with-prokka
 
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0623 # Gene and protein families
+- topic_0080 # Sequence analysis
 abbreviations:
   OGS: Official Gene Set
+
+recordings:
+- captioners:
+  - abretaud
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: ywK1fhM-QFU
+  speakers:
+  - abretaud
+
 ---
+
+
+After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 > <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
-
-# Introduction
-
-
-After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
 [Apollo](https://github.com/gmod/apollo) {% cite Dunn2019 %} provides a platform to do this. It is a web-based, collaborative genome annotation editor. Think of it as "Google Docs" for genome annotation, multiple users can work together simultaneously to curate evidences and annotate a genome.
 

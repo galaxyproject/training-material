@@ -182,26 +182,16 @@ module GTNNotebooks
     out.flatten(1).join("\n")
   end
 
-  def self.construct_byline(metadata)
-    folks = if metadata.key?('contributors')
-              metadata['contributors']
-            else
-              metadata['contributions']['authorship']
-            end
-
-    contributors = nil
-    File.open('CONTRIBUTORS.yaml', 'r') do |f2|
-      contributors = YAML.safe_load(f2.read)
-    end
-
+  def self.construct_byline(site, metadata)
+    folks = Gtn::Contributors.get_authors(metadata)
     folks.map do |c|
-      name = contributors.fetch(c, { 'name' => c }).fetch('name', c)
+      name = Gtn::Contributors.fetch_name(site, c)
       "[#{name}](https://training.galaxyproject.org/hall-of-fame/#{c}/)"
     end.join(', ')
   end
 
-  def self.add_metadata_cell(notebook, metadata)
-    by_line = construct_byline(metadata)
+  def self.add_metadata_cell(site, notebook, metadata)
+    by_line = construct_byline(site, metadata)
 
     meta_header = [
       "<div style=\"border: 2px solid #8A9AD0; margin: 1em 0.2em; padding: 0.5em;\">\n\n",
@@ -323,8 +313,8 @@ module GTNNotebooks
       and (language.nil? or data['notebook']['language'].downcase == language)
   end
 
-  def self.render_rmarkdown(page_data, page_content, page_url, page_last_modified, fn)
-    by_line = construct_byline(page_data)
+  def self.render_rmarkdown(site, page_data, page_content, page_url, page_last_modified, fn)
+    by_line = construct_byline(site, page_data)
 
     # Replace top level `>` blocks with fenced `:::`
     content = group_doc_by_first_char(page_content)
@@ -411,7 +401,7 @@ module GTNNotebooks
     notebook = convert_notebook_markdown(content, accepted_languages)
     # This extracts the metadata yaml header and does manual formatting of
     # the header data to make for a nicer notebook.
-    notebook = add_metadata_cell(notebook, data)
+    notebook = add_metadata_cell(site, notebook, data)
 
     # Apply language specific conventions
     case notebook_language
@@ -514,7 +504,7 @@ module GTNNotebooks
                                "<blockquote class=\"#{key}\" style=\"border: 2px solid #{val}; margin: 1em 0.2em\">")
         end
 
-        # Images are referenced in the GTN through relative URLs which is
+        # Images are referenced in the through relative URLs which is
         # fab, but in a notebook this doesn't make sense as it will live
         # outside of the GTN. We need real URLs.
         #
@@ -528,19 +518,15 @@ module GTNNotebooks
             image_path = File.join(dir, path)
 
             if img[-3..].downcase == 'png'
-              # puts "[GTN/Notebook/Images] Embedding png: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/png;base64,#{data}")
             elsif (img[-3..].downcase == 'jpg') || (img[-4..].downcase == 'jpeg')
-              # puts "[GTN/Notebook/Images] Embedding jpg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/jpeg;base64,#{data}")
             elsif img[-3..].downcase == 'svg'
-              # puts "[GTN/Notebook/Images] Embedding svg: #{img}"
               data = Base64.encode64(File.binread(image_path))
               %(<img src="data:image/svg+xml;base64,#{data}")
             else
-              # puts "[GTN/Notebook/Images] Fallback for #{img}"
               # Falling back to non-embedded images
               "<img src=\"https://training.galaxyproject.org/training-material/#{page_url.split('/')[0..-2].join('/')}/.."
             end

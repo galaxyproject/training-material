@@ -19,16 +19,27 @@ key_points:
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
 subtopic: next-steps
-contributors:
+
+contributions:
+  authorship:
+    - nekrut
+    - mvdbeek
+    - tnabtaf
+    - blankenberg
+
+recordings:
+- captioners:
   - nekrut
-  - mvdbeek
-  - tnabtaf
-  - blankenberg
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 15M
+  youtube_id: 9mIL0tIfZ_o
+  speakers:
+  - nekrut
+
 ---
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
-
-# Introduction to sequencing data
 
 ## FASTQ manipulation and quality control
 
@@ -73,7 +84,7 @@ It is common to prepare pair-end and mate-pair sequencing libraries. This is hig
 
 Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:
 
-#### Two single files
+### Two single files
 
 File 1
 
@@ -105,7 +116,7 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 > Note that read IDs are **identical** in two files and they are listed in **the same** order. In some cases read IDs in the first and second file may be appended with `/1` and `/2` tags, respectively.
 {: .comment}
 
-#### Interleaved file
+### Interleaved file
 
 ```
 @1/1
@@ -390,19 +401,19 @@ You can upload data in Galaxy using one of these ways:
 
 This works well for small files because web browser do not like lengthy file transfers:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/FFCDx1rMGAQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="FFCDx1rMGAQ" title="Uploading data from your computer" %}
 
 ## Using FTP
 
 FTP ([file transfer protocol](https://en.wikipedia.org/wiki/File_Transfer_Protocol)) allows transferring large collection of files:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/hC8KSuT_OP8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="hC8KSuT_OP8" title="Uploading with FTP" %}
 
 ## From NCBI short read archive
 
 Finally, datasets can be uploaded directly from NCBI's short read archive:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Q4t-beYZ-do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="Q4t-beYZ-do" title="Uploading from SRA" %}
 
 > <comment-title></comment-title>
 >
@@ -448,7 +459,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 > <hands-on-title>Upload `SraRunInfo.csv` file into Galaxy</hands-on-title>
 >
-> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. Go to your Galaxy instance of choice such as one of the [UseGalaxy.* instances](https://galaxyproject.org/usegalaxy/) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
 > ![Data upload button](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:

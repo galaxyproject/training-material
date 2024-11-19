@@ -1,6 +1,6 @@
 > <hands-on-title>Visualization of the reads in JBrowse</hands-on-title>
 >
-> 1. **JBrowse** {% icon tool %} genome browser, with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} browser, with the following parameters:
 >    - *"Reference genome to display"*: Use a built-in genome
 >       - *"Select a reference genome"*: `mm10`
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`

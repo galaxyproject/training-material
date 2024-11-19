@@ -30,8 +30,6 @@ contributors:
   - fidelram
 ---
 
-# Introduction
-
 
 This exercise uses the dataset from the Nature publication by [Ross-Inness et al., 2012](https://www.ncbi.nlm.nih.gov/pubmed/22217937).
 The goal of this article was to identify the binding sites of the Estrogen receptor, a transcription factor known to be associated with different types of breast cancer.
@@ -87,7 +85,7 @@ The first step of any ChIP-Seq data analysis is quality control of the raw seque
 >
 >    > <tip-title>Importing data from a data library</tip-title>
 >    >
->    > * Go into "Shared data" (top panel) then "Data libraries"
+>    > * Go into "Data" (top panel) then "Data libraries"
 >    > * Click on "Training data" and then "Analyses of ChIP-Seq data"
 >    > * Select interesting file
 >    > * Click on "Import selected datasets into history"

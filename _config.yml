@@ -27,9 +27,11 @@ small_logo: "assets/images/GTN-60px.png"
 help_url: https://help.galaxyproject.org/
 other_languages: #"fr, ja, es, pt, ar"
   en: English
+  de: Deutsch
+  es: Español
+  zh-CN: 中文
   fr: Français
   ja: 日本語
-  es: Español
   pt: Português
   ar: العربية
 
@@ -48,14 +50,17 @@ javascript_bundles:
       - assets/js/theme.js
   main:
     preload: true
+    defer: true
+    async: true
     resources:
-      - assets/js/jquery.slim.min.js
-      - assets/js/popper.min.js
-      - assets/js/bootstrap.min.js
-      - assets/js/bootstrap-toc.min.js
-      - assets/js/clipboard.min.js
-      - assets/js/list.min.js
+      - assets/js/jquery.slim.min.js   # Mandatory for bootstrap.
+      - assets/js/popper.min.js        # Everywhere, dropdown menu.
+      - assets/js/bootstrap.min.js     # Everywhere
+      - assets/js/bootstrap-toc.min.js # Only tutorials, faqs
+      - assets/js/clipboard.min.js     # Used on anything with a pre
+      - assets/js/anchor.min.js        # Used on every page.
       - assets/js/main.js
+      # - assets/js/list.min.js # Potentially unused?
 
 # Conversion
 markdown: kramdown
@@ -83,6 +88,15 @@ abbreviate:
     - tutorial_slides
     - base_slides
 
+# for event pages, invite link expires after 400 uses :s
+# update invite link gxy.io link here when needed: https://github.com/galaxyproject/gxy.io/blob/main/group_vars/all.yaml
+slack:
+  invite_link: http://gxy.io/gtn-slack  # this points to the invite link
+  general_channel: https://gtnsmrgsbord.slack.com/archives/C01MNM98X9V
+  social_channel: https://gtnsmrgsbord.slack.com/archives/C01EDBVMHBQ
+  single_cell_channel: https://gtnsmrgsbord.slack.com/archives/C06PBRR40D7
+
+
 # Icon tag config
 icon-tag:
   announcement: fas fa-bullhorn
@@ -92,30 +106,53 @@ icon-tag:
   cofest: fas fa-users
   comment: far fa-comment-dots
   congratulations: far fa-thumbs-up
+  copy: far fa-copy
   curriculum: fas fa-graduation-cap
   details: fas fa-info-circle
   docker_image: fab fa-docker
+  download: fas fa-download
+  download-cloud: fas fa-cloud-arrow-down
+  dropdown: fas fa-caret-down
   email: far fa-envelope
   exchange: fas fa-exchange-alt
   external-link: fas fa-external-link-alt
   switch-histories: fas fa-exchange-alt
   event: far fa-calendar
+  event-date: far fa-calendar
+  event-location: fas fa-location-dot
+  event-cost: fas fa-tag
   feedback: far fa-comments
   galaxy-advanced-search: fas fa-angle-double-down
-  galaxy-barchart: fas fa-chart-bar
+  galaxy-show-active: fa fa-map-marker
+  galaxy-barchart: fas fa-chart-column
+  galaxy-visualise: fas fa-chart-column
+  galaxy-visualize: fas fa-chart-column
+  galaxy-vis-config: fas fa-angle-double-left
+  galaxy-viz-config: fas fa-angle-double-left
   galaxy-bug: fas fa-bug
   galaxy-chart-select-data: fas fa-database
   galaxy-clear: fas fa-times-circle
   galaxy-columns: fas fa-columns
+  galaxy-multihistory: fas fa-columns
   galaxy-cross: fas fa-times
+  galaxy-dataset-map: fas fa-sitemap
   galaxy-delete: fas fa-trash
   galaxy-dropdown: fas fa-caret-down
-  galaxy-history-options: fas fa-caret-down # Replaces gear.
+  galaxy-history-options: fas fa-bars # Replaces gear, fa-caret-down
   galaxy-eye: far fa-eye
   galaxy-gear: fas fa-cog
+  galaxy-histories-activity: fas fa-hdd
   galaxy-history: fas fa-columns
+  galaxy-dataset-collapse: fa fa-compress
+  galaxy-history-archive: fas fa-archive
+  galaxy-history-size: fas fa-database
+  galaxy-history-storage-choice: fas fa-hard-drive
+  galaxy-history-refresh: fas fa-arrows-rotate
+  galaxy-history-input: fas fa-sign-in-alt
+  galaxy-history-answer: fas fa-sign-out-alt
   galaxy-home: fas fa-home
   galaxy-info: fas fa-info-circle
+  galaxy-lab: fa fa-tv
   galaxy-library: far fa-folder
   galaxy-link: fas fa-link
   galaxy-panelview: fas fa-list
@@ -131,10 +168,14 @@ icon-tag:
   galaxy-tags: fas fa-tags
   galaxy-toggle: fas fa-toggle-on
   galaxy-upload: fas fa-upload
+  galaxy-download: fas fa-download
+  galaxy-wf-best-practices: fas fa-wand-magic-sparkles
   galaxy-wf-connection: fas fa-arrows-alt-h
   galaxy-wf-edit: fa fa-edit
   galaxy-wf-new: fas fa-plus
   galaxy-wf-report-download: fas fa-print
+  galaxy-wf-options: fas fa-cog
+  galaxy-workflows-activity: fas fa-sitemap
   galaxy_instance: fas fa-external-link-alt
   github: fab fa-github
   gitter: fab fa-gitter
@@ -143,7 +184,8 @@ icon-tag:
   hands_on: fas fa-pencil-alt
   help: far fa-question-circle
   history-annotate: fas fa-comment
-  history-share: fas fa-toggle-on
+  history-share: fas fa-share-alt
+  history-select-multiple: fas fa-check-square
   instances: fas fa-globe
   interactive_tour: fas fa-magic
   keypoints: fas fa-key
@@ -164,10 +206,11 @@ icon-tag:
   param-select: fas fa-filter
   param-text: fas fa-pencil-alt
   param-toggle: fas fa-toggle-on
-  point-right: fa fa-hand-o-right
+  point-right: far fa-hand-point-right
+  plus: fas fa-plus
   pref-info: fas fa-user
   pref-password: fas fa-unlock-alt
-  pref-identities: far fa-id-card-o
+  pref-identities: far fa-id-card
   pref-permissions: fas fa-users
   pref-dataprivate: fas fa-lock
   pref-apikey: fas fa-key
@@ -177,15 +220,19 @@ icon-tag:
   pref-signout: fa fa-sign-out
   pref-notifications: far fa-plus-square
   pref-delete: fas fa-radiation
+  pref-palette: fas fa-palette
+  pref-list: fas fa-list
   purl: fas fa-fingerprint
   question: far fa-question-circle
   references: far fa-bookmark
   requirements: fas fa-check-circle
   rss-feed: fas fa-rss
+  save: far fa-save
   search: fas fa fa-search
   slides: fab fa-slideshare
   solution: far fa-eye
   sticky-note: fas fa-sticky-note
+  subdomain: fa fa-tv
   time: fas fa-hourglass-half
   text-document: fas fa-file-alt
   tip: far fa-lightbulb
@@ -203,6 +250,16 @@ icon-tag:
   video: fas fa-video
   video-slides: far fa-play-circle
   zenodo_link: far fa-copy
+  version: fas fa-code-commit
+  rating: far fa-star
+  dataset-rerun: fas fa-arrow-rotate-right
+  dataset-related-datasets: fas fa-sitemap
+  dataset-visualize: fas fa-chart-bar
+  dataset-save: fas fa-save
+  dataset-link: fas fa-link
+  dataset-question: fas fa-question
+  dataset-info: fas fa-info-circle
+  dataset-undelete: fas fa-trash-can-arrow-up
 
 # To exclude in _site
 exclude:
@@ -245,7 +302,7 @@ plugins:
   - jekyll-feed
   - jekyll-redirect-from
 
-# An announcement to display on the home page
+# An announcement to play on the home page
 #announcement:
 #   class: success
 #   title: GTN Celebrates Pride Month

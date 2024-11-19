@@ -119,10 +119,9 @@ afterwards. By asking participants to put up the sticky when they are done,
 you will have a sense of when most of your learners are ready to continue.
 
 **Request to instructors:**
- - Collect all sticky notes and add them to [this GitHub issue](https://github.com/galaxyproject/training-material/issues/989)
+ - Collect all sticky notes and add them to [this GitHub issue](https://github.com/galaxyproject/training-material/discussions/1452)
    after the workshop to share the feedback and ideas for improvements with the GTN community.
  - Add any feedback received from yourself, other instructors, and helpers here as well
- - Example feedback posts from other instructors: [here](https://github.com/galaxyproject/training-material/issues/989#issuecomment-493438843) and [here](https://github.com/galaxyproject/training-material/issues/989#issuecomment-493642457)
 
 
 ---
@@ -245,9 +244,10 @@ name: setup
 
 - Training materials: https://training.galaxyproject.org
 - Galaxy (an instructor will tell you which Galaxy to use)
-  - Main: https://usegalaxy.org
-  - EU: https://usegalaxy.eu
-  - Australia: https://usegalaxy.org.au
+  {% assign servers = nil | list_usegalaxy_servers_shuffle %}
+  {% for server in servers %}
+  - {{ server.name }} {{ server.url }}
+  {% endfor %}
   - [Other](https://galaxyproject.org/use/)
 - Register/log in
   - You may receive an e-mail with an activation link

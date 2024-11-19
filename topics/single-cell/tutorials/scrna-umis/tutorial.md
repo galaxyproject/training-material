@@ -26,10 +26,19 @@ contributors:
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
+
+recordings:
+- captioners:
+  - khanteymoori
+  date: '2021-03-18'
+  galaxy_version: '21.01'
+  length: 10M
+  youtube_id: AJ17BicjmYU
+  speakers:
+  - nomadscientist
+
 ---
 
-
-# Introduction
 
 
 Barcodes are small oligonucleotides that are inserted into the captured sequence at a specific point, and provide two pieces of information about the sequence:

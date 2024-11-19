@@ -3,16 +3,22 @@ layout: page
 title: Licenses
 ---
 
+# Image Credits
+
+Our default avatar is from https://thenounproject.com/icon/users-1926333/ available under CC-BY
+
+# Fonts
+
 ## Atkinson Hyperlegible
 
 <pre>
 {% include assets/fonts/AtkinsonHyperlegible/LICENSE.txt %}
 </pre>
 
-## Yanone Kaffeesatz
+## Altin-DIN
 
 <pre>
-{% include assets/fonts/yanonekaffeesatz/LICENSE.txt %}
+{% include assets/fonts/DIN1451/OFL-1.1.txt %}
 </pre>
 
 ## Comic Mono

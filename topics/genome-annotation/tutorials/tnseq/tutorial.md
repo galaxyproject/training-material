@@ -7,6 +7,7 @@ tags:
   - bacteria
   - tnseq
   - essential genes
+  - microgalaxy
 questions:
   - "What is Transposon insertion Sequencing?"
   - "How to get TA sites Coverage ? "
@@ -25,16 +26,17 @@ contributors:
   - delphine-l
   - bebatut
 subtopic: prokaryote
+edam_ontology:
+- topic_0622 # Genomics
+- topic_3301 # Microbiology
+- topic_0080 # Sequence analysis
+- topic_0798 # Mobile genetic elements
 priority: 4
 ---
-
-# Introduction
-
 
 In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limited by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
 ## Transposon insertion Sequencing
-
 
 Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
@@ -594,9 +596,10 @@ Now that we have the counts of insertions per TA site, we can use them to predic
 To predict the essential genes in our datasets, we will use the Transit tool {% cite dejesus2015transit %}.
 
 ## Transit
+
 Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 transposon. In total, 3 methods are available to assess gene essentiality in one sample.
 
-#### Gumbel method
+### Gumbel method
 
 The Gumbel method performs a gene by gene analysis of essentiality for Mariner data based on the longest consecutive sequence of TA site without insertions in a gene. This allows to identify essential domains regardless of insertion at other location of the gene.
 
@@ -606,13 +609,13 @@ The total distribution of the maximum run of non-insertion per gene is therefore
 
 Using these two distribution, the posterior probability of each distribution is calculated for each gene. Some genes can be classified as "Unclear" if one probability is not winning over the other. Some other can be classified as "Small" if the space of TA sites covered by the gene is insufficient to categorize it (See the [Transit Manual for the Gumbel method](https://transit.readthedocs.io/en/latest/transit_methods.html#gumbel)).
 
-#### HMM method
+### HMM method
 
 The HMM method performs a whole genome essentiality analysis for Mariner data. This approach uses the clustering of TA sites along the genome to identify essential regions, and then apply results to the annotation to identify genes containing essential regions. The HMM method provides a classification for each TA site into 4 states : Essential, Non-Essential, Growth Advantage, and Growth Defect.
 
 This method require a well-saturated library and is sensitive to sparse datasets {% cite dejesus2013hidden %}.
 
-#### Tn5Gaps method
+### Tn5Gaps method
 
 The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificity. The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
 creating libraries with lower insertion rates. The difference from the Gumbel method described above is that the run of non insertion are computer on the whole genome instead of individual genes. The longest run of non insertion considered is not the longest within the gene, but the longest one overlapping the gene.

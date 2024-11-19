@@ -17,13 +17,15 @@ level: Intermediate
 key_points:
 - PacBio data allows to perform good quality genome assembly
 - Quast and BUSCO make it easy to compare the quality of assemblies
-contributors:
-- abretaud
-- alexcorm
-- r1corre
-- lleroi
-- stephanierobin
-- erasmusplus
+contributions:
+  authorship:
+  - abretaud
+  - alexcorm
+  - r1corre
+  - lleroi
+  - stephanierobin
+  funding:
+  - gallantries
 
 follow_up_training:
  - type: internal
@@ -33,8 +35,6 @@ follow_up_training:
 
 ---
 
-
-# Introduction
 
 
 In this tutorial, we will assemble a genome of a species of fungi in the family Mucoraceae, *Mucor mucedo*, from PacBio sequencing data. These data were obtained from NCBI ([SRR8534473](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534473), [SRR8534474](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534474) and [SRR8534475](https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534475)). The quality of the assembly obtained will be analyzed, in particular by comparing it to a reference assembly, obtained with Falcon assembler, and available on the [JGI website](https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html).

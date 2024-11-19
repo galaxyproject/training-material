@@ -3,9 +3,13 @@ layout: learning-pathway
 
 title: Discovering galaxy through climate analysis
 description: |
-  How to have a complete overview of how Galaxy works going from the user welcome page to use batch tools and finishing by conducting interactive analysis. These set of 3 Climate tutorials allow you to understand and see plenty of the multiple features of Galaxy and learning about the cool subject of climate analysis. 
+  How to have a complete overview of how Galaxy works going from the user welcome page to use batch tools and finishing by conducting interactive analysis. These set of 3 Climate tutorials allow you to understand and see plenty of the multiple features of Galaxy and learning about the cool subject of climate analysis.
 tags: [Climate, Overview]
 
+editorial_board:
+- Marie59
+
+type: use
 
 pathway:
   - section: "Following 3 climate tutorials"

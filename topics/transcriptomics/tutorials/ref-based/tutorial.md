@@ -57,9 +57,30 @@ contributions:
     - lldelisle
   editing:
     - hexylena
+    - clsiguret
+
+recordings:
+- youtube_id: AeiW3IItO_c
+  speakers:
+  - lldelisle
+  captioners:
+  - lldelisle
+  date: '2023-05-15'
+  galaxy_version: '23.01'
+  length: 2H50M
+  cyoa: true
+- captioners:
+  - hexylena
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 2H30M
+  youtube_id: j4onRSN650A
+  speakers:
+  - bebatut
+
 ---
 
-# Introduction
 
 In recent years, RNA sequencing (in short RNA-Seq) has become a very widely used technology to analyze the continuously changing cellular transcriptome, i.e. the set of all RNA molecules in one cell or a population of cells. One of the most common aims of RNA-Seq is the profiling of gene expression by identifying genes or molecular pathways that are differentially expressed (DE) between two or more biological conditions. This tutorial demonstrates a computational workflow for the detection of DE genes and pathways from RNA-Seq data by providing a complete analysis of an RNA-Seq experiment profiling *Drosophila* cells after the depletion of a regulatory gene.
 
@@ -132,7 +153,7 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="fastqsanger" %}
 >
-> 4. Create a paired collection named `2 PE fastqs`, rename your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
+> 4. Create a paired collection named `2 PE fastqs`, name your pairs with the sample name followed by the attributes: `GSM461177_untreat_paired` and `GSM461180_treat_paired`.
 >
 >    {% snippet faqs/galaxy/collections_build_list_paired.md %}
 >
@@ -162,8 +183,8 @@ We will first need to transform our the list of pairs to a simple list.
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
 >     - *"Input Collection"*: `2 PE fastqs`
 >
-> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
+> 2. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"Raw read data from your current history"*: Output of **Flatten collection** {% icon tool %} selected as **Dataset collection**
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
@@ -244,14 +265,14 @@ We should trim the reads to get rid of bases that were sequenced with high uncer
 
 > <hands-on-title>Trimming FASTQs</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1) %} with the following parameters to trim low quality sequences:
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters to trim low quality sequences:
 >    - *"Single-end or Paired-end reads?"*: `Paired-end Collection`
 >       - {% icon param-collection %} *"Paired Collection"*: `2 PE fastqs`
->    - In *"Filter Options"*
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
 >       - *"Minimum length (R1)"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->    - In *"Outputs selector"*
+>    - In *"Additional outputs to generate"*
 >       - Select: `Report: Cutadapt's per-adapter statistics. You can use this file with MultiQC.`
 >
 >      {% include topics/sequence-analysis/tutorials/quality-control/trimming_question.md %}
@@ -348,7 +369,7 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >    >
 >    {: .comment}
 >
-> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.10b+galaxy3) %} with the following parameters to map your reads on the reference genome:
+> 2. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.11a+galaxy0) %} with the following parameters to map your reads on the reference genome:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
 >       - {% icon param-collection %} *"RNA-Seq FASTQ/FASTA paired reads"*: the `Cutadapt on collection N: Reads` (output of **Cutadapt** {% icon tool %})
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
@@ -357,8 +378,8 @@ We will map our reads to the *Drosophila melanogaster* genome using **STAR** ({%
 >           - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: the imported `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >           - *"Length of the genomic sequence around annotated junctions"*: `36`
 >
->               This parameter should be length of reads - 1
->    - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
+>             This parameter should be length of reads - 1
+>                - *"Per gene/transcript output"*: `Per gene read counts (GeneCounts)`
 >    - *"Compute coverage"*:
 >       - `Yes in bedgraph format`
 >
@@ -676,7 +697,7 @@ In principle, the counting of reads overlapping with genomic features is a fairl
 
 RNAs that are typically targeted in RNA-Seq experiments are single stranded (*e.g.*, mRNAs) and thus have polarity (5' and 3' ends that are functionally distinct). During a typical RNA-Seq experiment the information about strandness is lost after both strands of cDNA are synthesized, size selected, and converted into a sequencing library. However, this information can be quite useful for the read counting step, especially for reads located on the overlap of 2 genes that are on different strands.
 
-![Why strandness?](../../images/ref-based/strandness_why.png "If strandess information was lost during library preparation, Read1 will be assigned to gene1 located on the forward strand but Read2 will be 'ambiguous' as it can be assigned to gene1 (forward strand) or gene2 (reverse strand).")
+![Why strandness?](../../images/ref-based/strandness_why.png "If strandness information was lost during library preparation, Read1 will be assigned to gene1 located on the forward strand but Read2 will be 'ambiguous' as it can be assigned to gene1 (forward strand) or gene2 (reverse strand).")
 
 Some library preparation protocols create so-called *stranded* RNA-Seq libraries that preserve the strand information ({% cite levin2010comprehensive %} provides an excellent overview). In practice, with Illumina RNA-Seq protocols you are unlikely to encounter all of the possibilities described in this article. You will most likely deal with either:
 
@@ -698,7 +719,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
 
-![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene.")
+![How to estimate the strandness?](../../images/ref-based/strandness_cases.png "In a stranded forward library, reads map mostly on the same strand as the genes. With stranded reverse library, reads map mostly on the opposite strand. With unstranded library, reads map on genes on both strands independently of the orientation of the gene (Example for single-end read library).")
 
 There are 4 ways to estimate strandness from **STAR** results (choose the one you prefer)
 
@@ -720,8 +741,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >    {: .tip}
     >
     > 2. **IGV** {% icon tool %}
-    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 4 between 540 kb to 560 kb), on the `mapped.bam` track
-    >    2. Right click and then select `Group Aligments by` -> `first-in-pair strand`
+    >    1. Zoom to `chr3R:9,445,000-9,448,000` (Chromosome 3 between 9,445 kb to 9,448 kb), on the `mapped.bam` track
+    >    2. Right click and then select `Color Aligments by` -> `first-in-pair strand`
     >    3. Right click and select `Squished`
     >
     {: .hands_on}
@@ -751,8 +772,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
     > <hands-on-title>Estimate strandness with pyGenometracks from STAR coverage</hands-on-title>
     >
-    > 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy1) %}:
-    >    - *"Region of the genome to limit the operation"*: `chr4:540,000-560,000`
+    > 1. {% tool [pyGenomeTracks](toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.8+galaxy2) %}:
+    >    - *"Region of the genome to plot"*: `chr4:540,000-560,000`
     >    - In *"Include tracks in your plot"*:
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Bedgraph track`
@@ -773,8 +794,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >        - {% icon param-repeat %} *"Insert Include tracks in your plot"*
     >            - *"Choose style of the track"*: `Gene track / Bed track`
     >                - *"Plot title"*: `Genes`
-    >                - *"height"*: `5`
     >                - {% icon param-file %} *"Track file(s) bed or gtf format"*: Select `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
+    >                - *"height"*: `5`
     {: .hands_on}
 
     > <question-title></question-title>
@@ -854,13 +875,13 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
     >
     >    You may already have converted this `BED12` file from the `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz` dataset earlier if you did the detailed part on quality checks. In this case, no need to redo it a second time
     >
-    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy2) %} to determine the library strandness with the following parameters:
+    > 2. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0) %} to determine the library strandness with the following parameters:
     >    - {% icon param-collection %} *"Input .bam file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
     >    - {% icon param-file %} *"Reference gene model"*: BED12 file (output of **Convert GTF to BED12** {% icon tool %})
-    >    - *"Number of reads sampled from SAM/BAM file (default = 200000)"*: `200000`
+    >    - *"Number of reads sampled"*: `200000`
     {: .hands_on}
 
-    {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1) %} tool generates one file with information on:
+    {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.3+galaxy0) %} tool generates one file with information on:
     - Paired-end or single-end library
     - Fraction of reads failed to determine
     - 2 lines
@@ -935,9 +956,8 @@ There are 4 ways to estimate strandness from **STAR** results (choose the one yo
 
 ## Counting reads per genes
 
-In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results.
 
-{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" %}
+{% include _includes/cyoa-choices.html option1="featureCounts" option2="STAR" default="featureCounts" text="In order to count the number of reads per gene, we offer a parallel tutorial for the 2 methods (STAR and featureCounts) which give very similar results. Which methods would you prefer to use?" disambiguation="tool"%}
 
 <div class="featureCounts" markdown="1">
 
@@ -945,10 +965,10 @@ As you chose to use the featureCounts flavor of the tutorial, we now run **featu
 
 > <hands-on-title>Counting the number of reads per annotated gene</hands-on-title>
 >
-> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy1) %} with the following parameters to count the number of reads per gene:
+> 1. {% tool [featureCounts](toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.3+galaxy2) %} with the following parameters to count the number of reads per gene:
 >    - {% icon param-collection %} *"Alignment file"*: `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 >    - *"Specify strand information"*: `Unstranded`
->    - *"Gene annotation file"*: `in your history`
+>    - *"Gene annotation file"*: `A GFF/GTF file in your history`
 >        - {% icon param-file %} *"Gene annotation file"*: `Drosophila_melanogaster.BDGP6.32.109_UCSC.gtf.gz`
 >    - *"GFF feature type filter"*: `exon`
 >    - *"GFF gene identifier"*: `gene_id`
@@ -1143,7 +1163,10 @@ To be able to identify differential gene expression induced by PS depletion, all
 
 > <hands-on-title>Import all count files</hands-on-title>
 >
-> 1. Create a new empty history
+> 1. Create a **new empty history**
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library:
 >
 >    - `GSM461176_untreat_single_featureCounts.counts`
@@ -1163,10 +1186,6 @@ To be able to identify differential gene expression induced by PS depletion, all
 >    {{ page.zenodo_link }}/files/GSM461181_treat_paired_featureCounts.counts
 >    {{ page.zenodo_link }}/files/GSM461182_untreat_single_featureCounts.counts
 >    ```
->
-> 3. Create a collection list with all these counts that you label `all counts`. Rename each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
->
->    {% snippet faqs/galaxy/collections_build_list.md %}
 >
 {: .hands_on}
 
@@ -1202,7 +1221,7 @@ To compare samples or gene expressions, the gene counts need to be normalized. W
 > - sequencing depth (the "Million" part)
 > - gene length (the "Kilobase" part)
 >
-> Let's use the previous example to explain RPK, FPKM and TPM.
+> Let's use the previous example to explain RPKM, FPKM and TPM.
 >
 > For **RPKM** (Reads Per Kilobase Million),
 >
@@ -1439,47 +1458,93 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 > We recommend that you add all factors you think may affect gene expression in your experiment. It can be the sequencing type like here, but it can also be the manipulation (if different persons are involved in the library preparation), other batch effects, etc...
 {: .comment}
 
+If you have only one or two factors with few number of biological replicates, the basic setup of **DESeq2** is enough. In the case of a complex experimental setup with a large number of biological replicates, tag-based collections are appropriate. Both approaches give the same results. The Tag-based approach requires a few additional steps before running the **DESeq2** tool but it will payoff when working with a complex experimental setup.
+
+{% include _includes/cyoa-choices.html option1="Basic" option2="Tag-based" option3="Collection split" default="Basic" text="Which approach would you prefer to use?" disambiguation="deseq"%}
+
+<div class="Basic" markdown="1">
+
+We can now run **DESeq2**:
+
+> <hands-on-title>Determine differentially expressed features</hands-on-title>
+>
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
+>    - *"how"*: `Select datasets per level`
+>        - In *"Factor"*:
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
+>           - In *"1: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
+>               - In *"Count file(s)"*: `Select all the treated count files (GSM461179, GSM461180, GSM461181)`
+>           - In *"2: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
+>               - In *"Count file(s)"*: `Select all the untreated count files (GSM461176, GSM461177, GSM461178, GSM461182)`
+>       - {% icon param-repeat %} *"Insert Factor"*
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
+>               - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
+>                        - In *"Count file(s)"*: `Select all the paired-end count files (GSM461177, GSM461178, GSM461180, GSM461181)`
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
+>                        - In *"Count file(s)"*: `Select all the single-end count files (GSM461176, GSM461179, GSM461182)`
+>    - *"Files have header?"*: `Yes`
+>    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
+>    - In *"Output options"*:
+>        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
+>
+{: .hands_on}
+
+</div>
+
+<div class="Tag-based" markdown="1">
+
 DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use tags on our collection of counts to easily select all samples belonging to the same category. For more information about alternative ways to set group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %}).
 
 > <hands-on-title>Add tags to your collection for each of these factors</hands-on-title>
 >
-> 1. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+> 1. Create a collection list with all these counts that you label `all counts`. Name each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `all counts`
 >
 >    We will now extract from the names the factors:
 >
-> 2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %}
+> 3. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1) %}
 >      - {% icon param-file %} *"File to process"*: output of **Extract element identifiers** {% icon tool %}
 >      - In *"Replacement"*:
 >         - In *"1: Replacement"*
 >            - *"Find pattern"*: `(.*)_(.*)_(.*)`
 >            - *"Replace with"*: `\1_\2_\3\tgroup:\2\tgroup:\3`
 >
->     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements from file](__TAG_FROM_FILE__) %} tool
+>     This step creates 2 additional columns with the type of treatment and sequencing that can be used with the {% tool [Tag elements](__TAG_FROM_FILE__) %} tool
 >
-> 3. Change the datatype to `tabular`
+> 4. Change the datatype to `tabular`
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
 >
-> 4. {% tool [Tag elements](__TAG_FROM_FILE__) %}
+> 5. {% tool [Tag elements](__TAG_FROM_FILE__) %}
 >      - {% icon param-collection %} *"Input Collection"*: `all counts`
 >      - {% icon param-file %} *"Tag collection elements according to this file"*: output of **Replace Text** {% icon tool %}
 >
-> 5. Inspect the new collection
+> 6. Inspect the new collection
 >
 >    > <tip-title>You cannot see the changes?</tip-title>
 >    >
->    > You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in DESeq2.
+>    > You may not see it at first glance as the names are the same. However if you click on one and click on {% icon galaxy-tags %} **Edit dataset tags**, you should see 2 tags which start with 'group:'. This keyword will allow to use these tags in **DESeq2**.
 >     >
 >     {: .tip}
 >
 {: .hands_on}
 
-We can now run DESeq2:
+We can now run **DESeq2**:
 
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
-> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy2) %} with the following parameters:
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
 >        - {% icon param-collection %} *"Count file(s) collection"*: output of **Tag elements** {% icon tool %}
 >        - In *"Factor"*:
@@ -1503,10 +1568,88 @@ We can now run DESeq2:
 >                        - *"Select groups that correspond to this factor level"*: `Tags: single`
 >    - *"Files have header?"*: `Yes`
 >    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
 >    - In *"Output options"*:
 >        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
 >
 {: .hands_on}
+
+</div>
+<div class="Collection-split" markdown="1">
+
+DESeq2 requires to provide for each factor, counts of samples in each category. We will thus use patterns on the name of our samples to easily select all samples belonging to the same category.
+
+> <hands-on-title>Generate a collection of each category</hands-on-title>
+>
+> 1. Create a collection list with all these counts that you label `all counts`. Name each item so it only has the GSM id, the treatment and the library, for example, `GSM461176_untreat_single`.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 2. {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %} with the following parameters:
+>    - {% icon param-collection %} *"Dataset collection"*: `all counts`
+>
+>    We will now split the collection by treatment. We need to find a pattern which will be present into only one of the 2 categories. We will use the word `untreat`:
+>
+> 3. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `untreat`
+>
+> 4. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `all counts`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
+>
+> 5. Rename both collections `untreated` (the filtered collection) and `treated` (the discarded collection).
+>
+> We will repeat the same process using `single`
+>
+> 6. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/9.3+galaxy1) %} (grep) with the following parameters:
+>    - *"Select lines from"*: `Extract element identifiers on data XXX` (output of  **Extract element identifiers** {% icon tool %})
+>    - *"that"*: `Match`
+>    - *"Regular Expression"*: `single`
+>
+> 7. {% tool [Filter collecion](__FILTER_FROM_FILE__) %} with the following parameters:
+>    - *"Input collection"*: `all counts`
+>    - *"How should the elements to remove be determined"*: `Remove if identifiers are ABSENT from file`
+>        - *"Filter out identifiers absent from"*: `Search in textfiles on data XXX` (output of  **Search in textfiles** {% icon tool %})
+>
+> 8. Rename both collections `single` (the filtered collection) and `paired` (the discarded collection).
+{: .hands_on}
+
+We can now run **DESeq2**:
+
+> <hands-on-title>Determine differentially expressed features</hands-on-title>
+>
+> 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.8+galaxy0) %} with the following parameters:
+>    - *"how"*: `Select datasets per level`
+>        - In *"Factor"*:
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Treatment`
+>           - In *"1: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `treated`
+>               - {% icon param-collection %} *"Count file(s)"*: Select the collection `treated`
+>           - In *"2: Factor level"*:
+>               - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `untreated`
+>               - {% icon param-collection %} *"Count file(s)"*: Select the collection `untreated`
+>       - {% icon param-repeat %} *"Insert Factor"*
+>           - *"Specify a factor name, e.g. effects_drug_x or cancer_markers"*: `Sequencing`
+>               - In *"Factor level"*:
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `PE`
+>                        - {% icon param-collection %} *"Count file(s)"*: Select the collection `paired`
+>                    - {% icon param-repeat %} *"Insert Factor level"*
+>                        - *"Specify a factor level, typical values could be 'tumor', 'normal', 'treated' or 'control'"*: `SE`
+>                        - {% icon param-collection %} *"Count file(s)"*: Select the collection `single`
+>    - *"Files have header?"*: `Yes`
+>    - *"Choice of Input data"*: `Count data (e.g. from HTSeq-count, featureCounts or StringTie)`
+>    - In *"Advanced options"*:
+>        - *"Use beta priors"*: `Yes`
+>    - In *"Output options"*:
+>        - *"Output selector"*: `Generate plots for visualizing the analysis results`, `Output normalised counts`
+>
+{: .hands_on}
+</div>
 
 **DESeq2** generated 3 outputs:
 
@@ -1729,7 +1872,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >
 >    We will now select only the genes with a fold change (FC) > 2 or FC < 0.5. Note that the DESeq2 output file contains $$log_{2} FC$$, rather than FC itself, so we filter for $$abs(log_{2} FC) > 1$$ (which implies FC > 2 or FC < 0.5).
 >
-> 3. {% tool [Filter](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
+> 3. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract genes with an $$abs(log_{2} FC) > 1$$:
 >    - {% icon param-file %} *"Filter"*: `Genes with significant adj p-value`
 >    - *"With following condition"*: `abs(c3)>1`
 >    - *"Number of header lines to skip"*: `1`
@@ -1743,7 +1886,7 @@ Now we would like to extract the most differentially expressed genes due to the 
 >    >
 >    > > <solution-title></solution-title>
 >    > >
->    > > 1. 114, or 11.79% of the significantly differentially expressed genes.
+>    > > 1. We get 113 genes (114 lines including a header), or 11.79% of the significantly differentially expressed genes.
 >    > > 2. The *Pasilla* gene can be found with a quick Search (or even using  {% tool [Filter data on any column using simple expressions](Filter1) %} )
 >    > {: .solution}
 >    {: .question}
@@ -1799,7 +1942,7 @@ We now have a table with 114 lines (the 113 most differentially expressed genes 
 
 > <hands-on-title>Plot the heatmap of the normalized counts of these genes for the samples</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3.1+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Log2(value+1) transform my data`
 >    - *"Enable data clustering"*: `Yes`
@@ -1822,7 +1965,7 @@ You should obtain something similar to:
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 130 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.
+> > 1. The X-axis shows the 7 samples, together with a dendrogram representing the similarity between their levels of gene expression. The Y-axis shows the 113 differentially expressed genes, likewise with a dendrogram representing the similarity between the levels of gene expression.
 > > 2. The samples are clustering by treatment.
 > > 3. The scale changes and we only see few genes.
 > > 4. Because the normalized expression of the gene `FBgn0013688` in `GSM461180_treat_paired` is at `0`.
@@ -1904,7 +2047,7 @@ We would like now to plot a heatmap for the Z-scores:
 
 > <hands-on-title>Plot the Z-score of the most differentially expressed genes</hands-on-title>
 >
-> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3+galaxy0) %} to plot the heatmap:
+> 1. {% tool [heatmap2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/3.1.3.1+galaxy0) %} to plot the heatmap:
 >    - {% icon param-file %} *"Input should have column headers"*: `Normalized counts for the most differentially expressed genes`
 >    - *"Data transformation"*: `Plot the data as it is`
 >    - *"Compute z-scores prior to clustering"*: `Compute on rows`
@@ -1991,7 +2134,7 @@ We have now the two required input files for goseq.
 
 > <hands-on-title>Perform GO analysis</hands-on-title>
 >
-> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0) %} with
+> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0) %} with
 >    - *"Differentially expressed genes file"*: `Gene IDs and differential expression`
 >    - *"Gene lengths file"*: `Gene IDs and length`
 >    - *"Gene categories"*: `Get categories`
@@ -2029,7 +2172,7 @@ We have now the two required input files for goseq.
     > >
     > > 1. 60 GO terms (0.50%) are over-represented and 7 (0.07%) under-represented.
     > >
-    > >    {% tool [Filter](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
+    > >    {% tool [Filter data on any column using simple expressions](Filter1) %} on c8 (adjusted p-value for over-represented GO terms) and c9 (adjusted p-value for under-represented GO terms)
     > >
     > > 2. For over-represented, 50 BP, 5 CC and 5 MF and for under-represented, 5 BP, 2 CC and 0 MF
     > >
@@ -2070,7 +2213,7 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
 
 > <hands-on-title>Perform KEGG pathway analysis</hands-on-title>
 >
-> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0) %} with
+> 1. {% tool [goseq](toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.50.0+galaxy0) %} with
 >    - *"Differentially expressed genes file"*: `Gene IDs and differential expression`
 >    - *"Gene lengths file"*: `Gene IDs and length`
 >    - *"Gene categories"*: `Get categories`
@@ -2097,9 +2240,9 @@ For example, the pathway `dme00010` represents the glycolysis process (conversio
     > > <solution-title></solution-title>
     > >
     > > 1. The file has 128 lines including an header, so 127 KEGG pathways have been identified.
-    > > 2. 2 KEGG pathways (2.34%) are over-represented, using **Filter** on c6 (adjusted p-value for over-represented KEGG pathways)
+    > > 2. 2 KEGG pathways (2.34%) are over-represented, using {% tool [Filter data on any column using simple expressions](Filter1) %} on c6 (adjusted p-value for over-represented KEGG pathways)
     > > 3. The 2 KEGG pathways over-represented are `01100` and `00010`. By searching on the [KEGG database](https://www.genome.jp/kegg/kegg2.html) for them, we can find more information about these pathways: `01100` corresponds to all metabolic pathways and `00010` to pathway for Glycolysis / Gluconeogenesis.
-    > > 4. No KEGG pathway is under-represented, using **Filter** on c7 (adjusted p-value for under-represented KEGG pathways)
+    > > 4. No KEGG pathway is under-represented, using {% tool [Filter data on any column using simple expressions](Filter1) %} on c7 (adjusted p-value for under-represented KEGG pathways)
     > {: .solution}
     {: .question}
 
@@ -2227,7 +2370,10 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 
 > <hands-on-title></hands-on-title>
 >
-> 1. Create a new history
+> 1. Create a **new empty history**
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
 >
 >    - `Drosophila_melanogaster.BDGP6.87.dexseq.gtf`
@@ -2295,7 +2441,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 
 > <hands-on-title></hands-on-title>
 >
-> 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
+> 1. {% tool [Filter data on any column using simple expressions](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >
 > > <question-title></question-title>
 > >

@@ -41,12 +41,23 @@ tags:
 - interactive-tools
 key_points:
 - To be added
-contributors:
+contributions:
+  authorship:
   - fpsom
-  - erasmusplus
----
+  funding:
+  - gallantries
 
-# Introduction to Machine Learning and Data mining
+recordings:
+- captioners:
+  - MariaTsayo
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H30M
+  youtube_id: RT-g6KyAGdE
+  speakers:
+  - fpsom
+
+---
 
 This is an Introduction to Machine Learning in R, in which you'll learn the basics of unsupervised learning for pattern recognition and supervised learning for prediction. At the end of this workshop, we hope that you will:
 - appreciate the importance of performing exploratory data analysis (or EDA) before starting to model your data.
@@ -119,9 +130,7 @@ Tip 4 in the "Ten quick tips for machine learning in computational biology" ({% 
 > This algorithm-selection step, which usually occurs at the beginning of a machine learning journey, can be dangerous for beginners. In fact, an inexperienced practitioner might end up choosing a complicated, inappropriate data mining method which might lead him/her to bad results, as well as to lose precious time and energy. Therefore, this is our tip for the algorithm selection: if undecided, start with the simplest algorithm (Hand DJ, "Classifier technology and the illusion of progress". Stat Sci. 2006; 21(1):1–14).
 >
 > By employing a simple algorithm, you will be able to keep everything under control, and better understand what is happening during the application of the method. In addition, a simple algorithm will provide better generalization skills, less chance of overfitting, easier training and faster learning properties than complex methods. As David J. Hand explained, complex models should be employed only if the dataset features provide some reasonable justification for their usage.
->
-> (from {% cite Chicco_2017 %})
-{: .quote}
+{: .quote cite="{% cite_url Chicco_2017 %}"}
 
 
 # Exploratory Data Analysis (EDA) and Unsupervised Learning

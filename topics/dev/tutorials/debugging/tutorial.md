@@ -37,10 +37,8 @@ requirements:
     tutorials:
       - architecture
 subtopic: core
+
 ---
-
-# Introduction
-
 
 In this tutorial we will demonstrate how to find and fix common types of bugs you may encounter as a contributor to Galaxy. We will step you through the process of finding and fixing a bug - from locating specific errors in the logs of Galaxy's GitHub Actions, to identifying their cause, developing a solution and committing your edits
 
@@ -393,7 +391,7 @@ Client tests are tests written by developers to test front-end code. In the case
 > <hands-on-title>Fixing a failing client unit test</hands-on-title>
 >
 > 1. **Finding the failing test on GitHub**
->    In this section we, again, can't demonstrate the remote output, so we descibe it instead. 
+>    In this section we, again, can't demonstrate the remote output, so we descibe it instead.
 >    One of the failing tests on GitHub says "Client Unit Testing / jest". Clicking on Details beside that failure, will open up a the terminal output from that test. Here you should be able to see what test is failing.
 >
 >    > <solution-title></solution-title>

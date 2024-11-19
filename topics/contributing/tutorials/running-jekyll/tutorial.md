@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Running the GTN website locally"
+title: "Running the GTN website locally using the command line"
 questions:
   - "How to setup the infrastructure to build training webpages?"
 objectives:
@@ -9,7 +9,8 @@ objectives:
   - "Running the GTN material website locally"
   - "Tracking changes to the content live in the webbrowser"
 time_estimation: "15m"
-subtopic: writing
+subtopic: getting-started
+priority: 2
 key_points:
   - "Checking the generated website can be done locally"
 contributors:
@@ -17,8 +18,6 @@ contributors:
   - bgruening
   - shiltemann
 ---
-
-# Introduction
 
 
 If you want to run the entire GTN material website locally or test your new training material you can do this!
@@ -88,7 +87,7 @@ Once Jekyll and its modules are installed in our conda environment, we can check
 With `make serve-quick`, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).
 
 
-> <tip-title>Tips</tip-title>
+> <tip-title></tip-title>
 >
 > 1. Use `make serve` instead of `make serve-quick` to get all plugins, but also configure the post, host and pass additional flags. This however can be quite slow.
 >

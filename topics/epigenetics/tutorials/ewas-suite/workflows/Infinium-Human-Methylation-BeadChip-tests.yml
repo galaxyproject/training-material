@@ -1,0 +1,55 @@
+- doc: Test outline for Infinium-Human-Methylation-BeadChip
+  job:
+    R01C02_Red.idat:
+      class: File
+      path: test-data/R01C02_Red.idat.idat
+      filetype: idat
+    R02C02_Red.idat:
+      class: File
+      path: test-data/R02C02_Red.idat.idat
+      filetype: idat
+    R05C02_Red.idat:
+      class: File
+      path: test-data/R05C02_Red.idat.idat
+      filetype: idat
+    R06C02_Red.idat:
+      class: File
+      path: test-data/R06C02_Red.idat.idat
+      filetype: idat
+    R01C02_Green.idat:
+      class: File
+      path: test-data/R01C02_Green.idat.idat
+      filetype: idat
+    R02C02_Green.idat:
+      class: File
+      path: test-data/R02C02_Green.idat.idat
+      filetype: idat
+    R05C02_Green.idat:
+      class: File
+      path: test-data/R05C02_Green.idat.idat
+      filetype: idat
+    R06C02_Green.idat:
+      class: File
+      path: test-data/R06C02_Green.idat.idat
+      filetype: idat
+    phenotype Table txt file:
+      class: File
+      path: test-data/phenotype Table txt file.tabular
+      filetype: tabular
+    UCSC Main on Human:
+      class: File
+      path: test-data/UCSC Main on Human.gtf
+      filetype: gtf
+  outputs:
+    GO Enrichment Analysis of a Gene Set:
+      asserts:
+        has_text:
+          text: "ADCY8"
+    Table of Translated Gene ID's:
+      asserts:
+        has_text:
+          text: "ZCCHC3"
+    Differentially Methylated Positions:
+      asserts:
+        has_n_columns:
+          n: 6

@@ -1,0 +1,152 @@
+---
+type: map
+mapping:
+    layout:
+        type: str
+        required: true
+        enum:
+            - event-external
+        description: |
+            This must be set to `event-external`
+    external:
+        type: str
+        required: true
+        description: |
+            URL to the external event
+    title:
+        type: str
+        required: true
+        description: |
+            Title of the event
+        _examples:
+            - Smörgåsbord 2023
+            - MTS Basics Workshop
+    contributions:
+        required: true
+        description: |
+            List of tutorial contributors. Here we break them down into several broad categories to help contributors identify how they contributed to a specific tutorial.
+        _examples: |
+            contributions:
+                organisers:
+                    - shiltemann
+                    - bebatut
+                instructors:
+                    - hexylena
+                    - bebatut
+                    - natefoo
+                testing:
+                    - bebatut
+                infrastructure:
+                    - natefoo
+                funding:
+                    - gallantries
+        type: map
+        mapping:
+            testing:
+                type: seq
+                description: These entities tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            infrastructure:
+                type: seq
+                description: These entities managed and provided infrastructure to the GTN or for training purposes
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+                  - GRANTS
+            funding:
+                type: seq
+                description: These entities provided funding support for the development of this resource
+                sequence:
+                - type: str
+                  enum:
+                  - ORGANISATIONS
+                  - GRANTS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            organisers:
+                description: These entities organised the event
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+            instructors:
+                description: These entities helped or instructed at the event
+                type: seq
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
+                  - ORGANISATIONS
+    draft:
+        type: bool
+        description: |
+            `true` to hide your event. This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    description:
+        type: str
+        required: true
+        description: |
+            A brief description of the event.
+    date_start:
+        type: date
+        description: |
+            When the event starts
+        _examples:
+            - 2024-04-01
+    date_end:
+        type: date
+        description: |
+            When the event ends
+        _examples:
+            - 2024-04-01
+    location:
+        required: false
+        description: |
+            Physical location of the event, only required for in-person events
+        _examples: |
+          location:
+            name: Zoom
+          location:
+            name: Bioinf Dept
+            address: 42 E Main St.
+            city: Reyjkjavik
+            country: Iceland
+        type: map
+        mapping:
+          name:
+            required: true
+            type: str
+          address:
+            type: str
+          city:
+            type: str
+          country:
+            type: str
+          region:
+            type: str
+          postcode:
+            type: str
+          geo:
+            type: map
+            mapping:
+              lat:
+                type: float
+              lon:
+                type: float
+    google_form_id:
+        type: int
+        description: |
+            An internal ID tracking which form response generated this in the GTN Google Forms. Please do not add this manually.

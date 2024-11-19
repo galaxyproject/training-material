@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
+require './_plugins/gtn'
+
 Jekyll::Hooks.register :site, :post_write do |site|
+  if Jekyll.env != 'production'
+    Jekyll.logger.info '[GTN/Webfinger] Skipping webfinger generation in development'
+    next
+  end
+
   # Make the directory
-  Jekyll.logger.info 'Generating webfinger files'
+  Jekyll.logger.info '[GTN/Webfinger] Generating webfinger files'
   FileUtils.mkdir_p "#{site.dest}/api/fedi"
 
-  site.data['contributors']
-      .select { |_k, v| v['fediverse'] }
-      .each do |k, v|
+  Gtn::Contributors.list(site)
+                   .select { |_k, v| v['fediverse'] }
+                   .each do |k, v|
     # saving the outputs to
     # training-material/api/fedi/resource=acct%3Ahexylena%40galaxy.training.json
 

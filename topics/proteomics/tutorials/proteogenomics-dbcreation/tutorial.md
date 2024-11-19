@@ -28,9 +28,19 @@ contributors:
   - pravs3683
 subtopic: multi-omics
 tags: [proteogenomics]
+
+recordings:
+- captioners:
+  - emmaleith
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 40M
+  youtube_id: b_kZf8mXHdo
+  speakers:
+  - jj-umn
+
 ---
 
-# Introduction
 
 **Proteogenomics** involves the use of mass spectrometry (MS) based proteomics data against genomics and transcriptomics data to identify peptides and to understand protein-level evidence of gene expression. In the first section of the tutorial, we will create a protein database (FASTA) using RNA-sequencing files (FASTQ) and then perform sequence database searching using the resulting FASTA file with the MS data to identify peptides corresponding to novel proteoforms. Then, we will assign the genomic coordinates and annotations for these identified peptides and visualize the data for its spectral quality and genomic localization
 
@@ -71,7 +81,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
+> 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13270741.svg)](https://doi.org/10.5281/zenodo.13270741)
 >    ```
 >    https://zenodo.org/records/1489208/files/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger

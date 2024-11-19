@@ -14,15 +14,26 @@ time_estimation: "15m"
 key_points:
   - "Finding good training datasets is hard!"
   - "Creating a new tutorial involves several steps: some are mandatory, some can be skipped even if they are recommended"
-subtopic: writing
+subtopic: getting-started
+priority: 3
 contributors:
   - bebatut
   - hexylena
   - shiltemann
   - lldelisle
+
+recordings:
+- captioners:
+  - EngyNasr
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 42M
+  youtube_id: Vw9h5kvRH2k
+  speakers:
+  - bebatut
+
 ---
 
-# Introduction
 
 
 Galaxy is a great solution to train bioinformatics concepts:

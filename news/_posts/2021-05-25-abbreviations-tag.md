@@ -7,7 +7,7 @@ tutorial: "topics/dev/tutorials/bioblend-dev/tutorial.html"
 layout: news
 ---
 
-Thanks to the great tutorial developed by first time contributor {% include _includes/contributor-badge.html id="rikeshi" %} and edited by {% include _includes/contributor-badge.html id="simonbray" %}, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.
+Thanks to the great tutorial developed by first time contributor @gtn:rikeshi and edited by @gtn:simonbray, we noticed that they defined a number of abbreviations and re-used those throughout their tutorial.
 
 As the GTN is intended to be easy for contributors and easy for learners, we wanted to make use of the [`<abbr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/abbr) tag which allows you to define commonly re-used terms in your HTML. However this is a bit clumsy to write every time, so we've implemented a tag and some metadata which permits easily defining and referencing abbreviations throughout your text.
 
@@ -25,13 +25,13 @@ abbreviations:
 
 And in your text you can use braces to refer to the term
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > <code>
 > > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
 > > </code>
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > The `/jobs` Application Programming Interface (API) will return JavaScript Object Notation (JSON). When we call the <abbr title="Application Programming Interface">API</abbr> we'll get back this result <abbr title="JavaScript Object Notation">JSON</abbr>.
 > >

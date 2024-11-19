@@ -12,7 +12,7 @@ module Jekyll
     end
 
     def generate(site) # :nodoc:
-      puts '[GTN/Boxify]'
+      Jekyll.logger.info '[GTN/Boxify]'
       site.pages.each { |page| boxify page, site }
       site.posts.docs.each { |post| boxify post, site }
     end

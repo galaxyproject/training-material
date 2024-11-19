@@ -1,0 +1,19 @@
+- doc: Test outline for ml_regression
+  job:
+    train_rows:
+      class: File
+      path: test-data/train_rows.tabular
+      filetype: tabular
+    test_rows_labels:
+      class: File
+      path: test-data/test_rows_labels.tabular
+      filetype: tabular
+    test_rows:
+      class: File
+      path: test-data/test_rows.tabular
+      filetype: tabular
+  outputs:
+    output_scatter_plot:
+      asserts:
+        has_text:
+          text: "html"

@@ -1,12 +1,13 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require './_plugins/util'
 require 'yaml'
 require 'find'
 
 Find.find('topics/').each do |fn|
   if File.basename(fn) == 'tutorial.md'
-    data = YAML.load_file(fn)
+    data = safe_load_yaml(fn)
     if data.key?('notebook') && (data['notebook'].key? 'pyolite')
       parts = fn.split('/')
       puts "_site/training-material/#{parts[0..-2].join('/')}/#{parts[1]}-#{parts[3]}.ipynb"

@@ -1,39 +1,49 @@
 ---
 layout: tutorial_hands_on
-
-title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+title: Mutation calling, viral genome reconstruction and lineage/clade assignment
+  from SARS-CoV-2 sequencing data
 subtopic: one-health
 level: Intermediate
-zenodo_link: "https://zenodo.org/record/5036687"
 questions:
-- How can a complete analysis, including viral consensus sequence reconstruction and lineage assignment be performed?
-- How can such an analysis be kept manageable for lots of samples, yet flexible enough to handle different types of input data?
-- What are key results beyond consensus genomes and lineage assignments that need to be understood to avoid inappropriate conclusions about samples?
-- How can the needs for high-throughput data analysis in an ongoing infectious disease outbreak/pandemic and the need for proper quality control and data inspection be balanced?
+- How can a complete analysis, including viral consensus sequence reconstruction and
+  lineage assignment be performed?
+- How can such an analysis be kept manageable for lots of samples, yet flexible enough
+  to handle different types of input data?
+- What are key results beyond consensus genomes and lineage assignments that need
+  to be understood to avoid inappropriate conclusions about samples?
+- How can the needs for high-throughput data analysis in an ongoing infectious disease
+  outbreak/pandemic and the need for proper quality control and data inspection be
+  balanced?
 objectives:
-- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis through public workflow registries
-- Choose and run a workflow to discover mutations in a batch of viral samples from sequencing data obtained through a range of different protocols and platforms
-- Run a workflow to summarize and visualize the mutation discovery results for a batch of samples
+- Discover and obtain recommended Galaxy workflows for SARS-CoV-2 sequence data analysis
+  through public workflow registries
+- Choose and run a workflow to discover mutations in a batch of viral samples from
+  sequencing data obtained through a range of different protocols and platforms
+- Run a workflow to summarize and visualize the mutation discovery results for a batch
+  of samples
 - Run a workflow to construct viral consensus sequences for the samples in a batch
-- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade to assign samples to predefined lineages
-- Combine information from different analysis steps to be able to draw appropriate conclusions about individual samples and batches of viral data
+- Know different SARS-CoV-2 lineage classification systems, and use pangolin and Nextclade
+  to assign samples to predefined lineages
+- Combine information from different analysis steps to be able to draw appropriate
+  conclusions about individual samples and batches of viral data
 time_estimation: 3H
 key_points:
-- The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2 genome surveillance, which is freely available through public workflow registries.
-- The workflows enable processing of whole batches of samples with rather limited user interaction.
-- They provide a high-throughput and flexible analysis solution without compromising on accuracy, nor on the possibility to explore intermediate steps and outputs in detail.
-
+- The Galaxy Covid-19 project has developed a flexible set of workflows for SARS-CoV-2
+  genome surveillance, which is freely available through public workflow registries.
+- The workflows enable processing of whole batches of samples with rather limited
+  user interaction.
+- They provide a high-throughput and flexible analysis solution without compromising
+  on accuracy, nor on the possibility to explore intermediate steps and outputs in
+  detail.
 requirements:
-  -
-    type: "internal"
-    topic_name: galaxy-interface
-    tutorials:
-      - collections
-  -
-    type: "internal"
-    topic_name: variant-analysis
-    tutorials:
-      - sars-cov-2
+- type: internal
+  topic_name: galaxy-interface
+  tutorials:
+  - collections
+- type: internal
+  topic_name: variant-analysis
+  tutorials:
+  - sars-cov-2
 contributions:
   authorship:
   - wm75
@@ -45,10 +55,35 @@ tags:
 - covid19
 - virology
 - one-health
+recordings:
+- youtube_id: hjlmCWQhBvI
+  date: '2023-05-10'
+  speakers:
+  - wm75
+  captioners:
+  - wm75
+  length: 55M
+- captioners:
+  - hexylena
+  date: '2021-08-09'
+  length: 1H30M
+  youtube_id: vnFQ2fR_fzw
+  speakers:
+  - wm75
+- youtube_id: -HQB1zyWWXM
+  length: 55M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-27'
+  speakers:
+  - wm75
+  captioners:
+  - wm75
+  bot-timestamp: 1727459029
+
+
 ---
 
 
-# Introduction
 
 Sequence-based monitoring of global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for surveilling the emergence and spread of new viral variants, and for understanding the evolutionary dynamics of the virus.
 
@@ -227,7 +262,7 @@ For the suggested batch of early Omicron data we suggest downloading it via URLs
 >
 > - Option 2: Import from a shared data library
 >
->   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / DOI: 10.5281/zenodo.5036686" box_type="none" %}
+>   {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" collection_type="List of Pairs" collection_name="Sequencing data" tohistory="the history you created for this tutorial" path="GTN - Material / Variant analysis / Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data / Omicron_batch_analysis" box_type="none" %}
 >
 {: .hands_on}
 
@@ -251,7 +286,7 @@ Besides the sequenced reads data, we need at least two additional datasets for c
 >    1. {% tool [Upload](upload1) %} the reference to your history via the link above and make sure the dataset format is set to `fasta`.
 >
 >       {% snippet faqs/galaxy/datasets_import_via_link.md format="fasta" %}
->    2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) in entire line %} to simplify the reference sequence name
+>    2. {% tool [Replace Text in entire line](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/9.3+galaxy1) in entire line %} to simplify the reference sequence name
 >       - {% icon param-file %} *"File to process"*: the uploaded reference sequence from the ENA
 >       - In {% icon param-repeat %} *"1. Replacement"*:
 >         - *"Find pattern"*: `^>.+`
@@ -851,7 +886,7 @@ Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used
 
 > <hands-on-title>From consensus sequences to clade assignments using Pangolin</hands-on-title>
 >
-> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.2+galaxy0) %} with the following parameters:
+> 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/4.3+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA File(s)"*: `Multisample consensus FASTA`
 >    - *"Include header line in output file"*: `Yes`
 >

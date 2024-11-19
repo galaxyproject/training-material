@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Basics of machine learning"
-zenodo_link: https://zenodo.org/record/1468039#.W8zyxBRoSAo
+zenodo_link: https://zenodo.org/record/1468039
 questions:
   - "What is machine learning?"
   - "Why is it useful?"
@@ -26,8 +26,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 [Machine learning](https://en.wikipedia.org/wiki/Machine_learning) uses techniques from statistics, mathematics and computer science to make computer programs learn from data. It is one of the most popular fields of computer science and finds applications in multiple streams of data analysis such as [classification](https://en.wikipedia.org/wiki/Statistical_classification), [regression](https://en.wikipedia.org/wiki/Regression_analysis), [clustering](https://en.wikipedia.org/wiki/Cluster_analysis), [dimensionality reduction](https://en.wikipedia.org/wiki/Dimensionality_reduction), [density estimation](https://en.wikipedia.org/wiki/Density_estimation) and many more. Some real-life applications are spam filtering, medical diagnosis, autonomous driving, recommendation systems, facial recognition, stock prices prediction and many more. The following image shows a basic flow of any machine learning task. Data is provided by a user to a machine learning algorithm for analysis.
 
@@ -45,7 +43,7 @@ The following image shows how a classification task is performed. The complete d
 
 ![data](images/prediction.png "Supervised learning.")
 
-This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039#.W8zyxBRoSAo).
+This tutorial shows how to use a machine learning module implemented as a Galaxy tool. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/1468039).
 
 > <agenda-title></agenda-title>
 >

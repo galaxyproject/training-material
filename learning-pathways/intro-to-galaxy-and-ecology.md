@@ -16,7 +16,7 @@ cover-image-alt: "Drawing of an Ecological System"
 editorial_board:
 - yvanlebras
 funding:
-- erasmusplus
+- gallantries
 
 
 pathway:

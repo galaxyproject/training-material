@@ -14,15 +14,24 @@ key_points:
 - Diversity indicators
 - Champs Blocs
 - Boulder Fields
-contributors:
-- Marie59
-- yvanlebras
+tags:
+  - Ecosystem EBV class
+  - EBV dataset
+  - EBV workflow
+  - Marine ecosystems
+contributions:
+  authorship:
+  - Marie59
+  - yvanlebras
+  funding:
+  - pndb
 translations:
    - fr
+ 
+subtopic: ecologyanalysis
 ---
 
 
-# Introduction
 This tutorial will allow you to better apprehend the workflow for indicators on boulder fields. This will help you understand the effects of global and local changes on marine habitats, and the effectiveness of the management measures adopted, requires standardized monitoring and robust and sensitive indicators reflecting the state of the habitats.
 
 The "mediolittoral boulder fields" habitat harbors a high diversity of micro-habitats and species due to its high structural heterogeneity and its intermediate position on the foreshore, which makes it one of the most diversified mediolittoral habitats and of high ecological interest along the French Channel-Atlantic coast. It is also a very attractive habitat for recreational fishing, which, through the reworking of the blocks, can impact the communities.

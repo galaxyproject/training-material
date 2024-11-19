@@ -241,6 +241,16 @@ planemo test \
 
 Planemo will autodetect that the `workflow-test.yml` file and load that for the testing.
 
+### Skipping Testing in the GTN
+
+If for some reason you want to skip this workflow being tested in the GTN,
+please add a comment with `GTN_RUN_SKIP_REASON` in the `-test.yml` file stating
+the reason it is skipped.
+
+This will also exempt you from writing output tests.
+
+A good use case for this is you want to provide a working test, but the workflow takes upwards of 6 hours to execute (e.g. large download jobs.)
+
 # Creating the `data-library.yaml` (recommended)
 
 The datasets needed for a tutorial can also be integrated in the Galaxy instance inside of data libraries. These allow the datasets to be easily shared with all users of a Galaxy instance. Additionally it lets trainees avoid each re-downloading the input data.

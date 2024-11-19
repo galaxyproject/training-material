@@ -30,8 +30,6 @@ contributors:
 
 ---
 
-# Introduction
-
 
 This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described [in our dedicated site](https://covid19.galaxyproject.org/cheminformatics).
 

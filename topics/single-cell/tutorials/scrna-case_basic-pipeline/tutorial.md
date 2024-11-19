@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Filter, plot and explore single-cell RNA-seq data (Scanpy)
+title: Filter, plot and explore single-cell RNA-seq data with Scanpy
 subtopic: single-cell-CS
 priority: 3
 zenodo_link: 'https://zenodo.org/record/7053673'
@@ -9,6 +9,19 @@ zenodo_link: 'https://zenodo.org/record/7053673'
 redirect_from:
 - /topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial
 - /topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial
+
+answer_histories:
+  - label: "UseGalaxy.eu"
+    history: https://usegalaxy.eu/u/j.jakiela/h/filter-plot-and-explore-single-cell-rna-seq-data-updated
+    date: 2023-10-10
+  - label: "Older version"
+    history: https://usegalaxy.eu/u/wendi.bacon.training/h/cs3filter-plot-and-explore-single-cell-rna-seq-data---answer-key-2
+    date: 2024-02-28
+
+input_histories:
+  - label: "UseGalaxy.eu"
+    history:  https://usegalaxy.eu/published/history?id=67ff4cea2adc574d
+
 questions:
 - Is my single cell dataset a quality dataset?
 - How do I generate and annotate cell clusters?
@@ -34,6 +47,7 @@ requirements:
 tags:
 - 10x
 - paper-replication
+- MIGHTS
 
 
 contributions:
@@ -53,10 +67,19 @@ follow_up_training:
     tutorials:
         - scrna-case_JUPYTER-trajectories
         - scrna-case_monocle3-trajectories
+
+recordings:
+- captioners:
+  - nomadscientist
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 30M
+  youtube_id: M6iepSJh0EQ
+  speakers:
+  - nomadscientist
+
 ---
 
-
-# Introduction
 
 
 You've done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest. Now it's time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights! There are many packages for analysing single cell data - Seurat {% cite Satija2015 %}, Scanpy {% cite Wolf2018 %}, Monocle {% cite Trapnell2014 %}, Scater {% cite McCarthy2017 %}, and so forth. We're working with Scanpy, because currently Galaxy hosts the most Scanpy tools of all of those options.
@@ -76,15 +99,15 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 ## Get data
 
-We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
+We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/j.jakiela/h/filter-plot-explore-tutorial-input) or download from Zenodo below.
 
 You can access the data for this tutorial in multiple ways:
 
-1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/j.jakiela/h/all-total-samples-processed-after-alevin-into-single-object)), then you can use those! Be careful, in the previous tutorials we worked on downsampled datasets, but here we start with the object containing total data from all the samples! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history:
 
    {% snippet faqs/galaxy/histories_copy_dataset.md %}
 
-2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey)
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/published/history?id=67ff4cea2adc574d)
 
    {% snippet faqs/galaxy/histories_import.md %}
 
@@ -108,11 +131,19 @@ You can access the data for this tutorial in multiple ways:
 >
 {: .hands_on}
 
+4. **Importing data from EBI Single Cell Expression Atlas**
+
+You can also pull the data from publicly available [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home). You can simply access the dataset we are working on by using the tool *EBI SCXA Data Retrieval* with experiment id of [E-MTAB-6945](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads). This [short tutorial]({% link topics/single-cell/tutorials/EBI-retrieval/tutorial.md %}) will show you how to use this tool and modify the output so that it's compatible with this tutorial and its workflow.
+
+
+
 # Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
 {% snippet topics/single-cell/faqs/single_cell_omics.md %}
+
+{% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 # Filtering
 
@@ -612,7 +643,7 @@ We're still looking at around 20 dimensions at this point. We need to identify h
 >
 > 1. {% tool [Scanpy ComputeGraph](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunPCA** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Maximum number of neighbours used"*: `15`
 >    - *"Use the indicated representation"*: `X_pca`
 >    - *"Number of PCs to use"*: `20`
@@ -634,12 +665,12 @@ Two major visualisations for this data are tSNE and UMAP. We must calculate the 
 > 1. {% tool [Scanpy RunTSNE](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy ComputeGraph** {% icon tool %})
 >    - *"Use the indicated representation"*: `X_pca`
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"The perplexity is related to the number of nearest neighbours, select a value between 5 and 50"*: `30`
 >
 > 2. {% tool [Scanpy RunUMAP](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunTSNE** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 {: .hands_on}
 
 {% icon congratulations %} Congratulations! You have prepared your object and created neighborhood coordinates. We can now use those to call some clusters!
@@ -673,7 +704,7 @@ Finally, let's identify clusters! Unfortunately, it's not as majestic as biologi
 >
 > 1. {% tool [Scanpy FindCluster](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy RunUMAP** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `No`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `No`
 >    - *"Resolution, high value for more and smaller clusters"*: `0.6`
 {: .hands_on}
 
@@ -695,7 +726,7 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 > 3. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `Final object`
 >    - *"The sample grouping/clustering to use"*: `genotype`
->    - *"Use programme defaults"*: {% icon history-share %} `Yes`
+>    - *"Use programme defaults"*: {% icon param-toggle %} `Yes`
 >
 > 4. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - genotype`
 >
@@ -817,7 +848,7 @@ The authors weren't interested in further annotation of the DP cells, so neither
 >
 > 2. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: `Final object`
->    - *"Copy observations (such as clusters)"*: {% icon history-share %} *Yes*
+>    - *"Copy observations (such as clusters)"*: {% icon param-toggle %} *Yes*
 >    - **Keys from obs to copy**
 >    - *"+ Insert Keys from obs to copy"*
 >    - *"Key contains"*: `louvain`

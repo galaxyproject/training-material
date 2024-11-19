@@ -25,9 +25,6 @@ subtopic: workflows
 ---
 
 
-# Introduction
-
-
 
 Workflows are a powerful feature in Galaxy that allow you to link multiple steps of complex analysis.
 In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.

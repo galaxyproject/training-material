@@ -1,10 +1,13 @@
 ---
 layout: base
+title: GTN Accessibility
 ---
 
 ## Accessibility
 
 The Galaxy Training Network is committed to making its content accessible to all learners, including those with disabilities. While we are a volunteer organisation, we are constantly working to ensure that our training materials are accessible to everyone, regardless of their abilities or background. We use a variety of accessibility features and tools, including alt text, closed captioning, and automated testing, to make our content accessible to all learners.
+
+We aim for WCAG 2.0 AA compliance (AAA where possible), under the default theme and styling of the GTN. We are investigating our Section 508 compliance.
 
 ### Accessibility Features
 

@@ -1,0 +1,551 @@
+---
+layout: base
+---
+
+{% assign event = page %}
+
+{% unless event.external %}
+<script type="application/ld+json">
+{{ page | generate_event_jsonld: site }}
+</script>
+{% endunless %}
+
+<section class="event">
+    <hgroup>
+      <h1>{{ event.title }}</h1>
+      <p>
+        {% if event.async %}Asynchronous, {% endif %}
+        {% if event.mode == "online" %}
+        Virtual course
+        {% elsif event.mode == "onsite" %}
+        In-person course
+        {% else %}
+        Hybrid course
+        {% endif %}
+      </p>
+    </hgroup>
+
+    {% if event.status == 'wip' %}
+    <div class="alert alert-warning">
+    {% icon warning %}<strong> Warning: </strong>  This page is currently <b>under construction</b>, the program and descriptions may still change. Please check back later for the finalized information.
+    </div>
+    {% endif %}
+
+    <div class="zrow">
+	    <div class="zcol-md-9">
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Course Overview</button>
+  </li>
+  {% if event.program %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="program-tab" data-toggle="tab" data-target="#program" type="button" role="tab" aria-controls="program" aria-selected="false">Program</button>
+  </li>
+  {% endif %}
+  {% if event.infrastructure %}
+  <li class="nav-item" role="presentation">
+     <button class="nav-link" id="setup-tab" data-toggle="tab" data-target="#setup" type="button" role="tab" aria-controls="setup" aria-selected="false" >Setup</button>
+  </li>
+  {% endif %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-toggle="tab" data-target="#instructors" type="button" role="tab" aria-controls="instructors" aria-selected="false">Instructor Zone</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane show active" id="overview" role="tabpanel" aria-labelledby="home-tab">
+    {% if event.external %}
+       <p class="alert alert-primary">
+       For details about the course, please vist the <a class="btn btn-primary" href="{{event.external}}">Course Page</a>
+       </p>
+    {% endif %}
+
+    <p>{{ event.description | markdownify }}</p>
+    <p>{{ content | markdownify }}</p>
+
+    {% if event.audience %}
+    <h3>Who is this course for?</h3>
+    {{ event.audience }}
+    {% endif %}
+
+    {% if event.requirements %}
+    <h3 id="requirements">Requirements</h3>
+    <p>Before joining this event, we recommend you to have a look at:</p>
+
+    <ul>
+        {% include _includes/display_extra_training.md extra_trainings=event.requirements %}
+    </ul>
+    {% endif %}
+
+
+<section>
+	{% if event.location.geo %}
+	<h3 id="location">Event Location</h3>
+
+	<script src="{% link assets/js/leaflet-1.9.3.js %}"></script>
+	<div id="map" style="width: 100%; height: 300px"></div>
+
+	<script>
+	const map = L.map('map').setView([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}], 14);
+	var OPNVKarte = L.tileLayer('https://tileserver.memomaps.de/tilegen/{z}/{x}/{y}.png', {
+		maxZoom: 18,
+		attribution: 'Map <a href="https://memomaps.de/">memomaps.de</a> <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+	});
+	OPNVKarte.addTo(map);
+	L.marker([{{ event.location.geo.lat }}, {{ event.location.geo.lon }}]).addTo(map)
+		.bindPopup('{{ event.title }}')
+		.openPopup();
+	</script>
+	<p>Geocoding via <a href="https://nominatim.org/">Nominatim</a>, Map data from <a href="https://openstreetmap.org">OpenStreetMap</a></p>
+	{% endif %}
+
+
+	<!-- Maintained by -->
+	<h3 id="Organisers">Organisers & Instructors</h3>
+	<p>This event is brought to you by:</p>
+	{% include _includes/contributor-list2.html contributors=page.contributions badge=true %}
+
+
+	{% if event.contributions.funding %}
+	{% include _includes/funding-statement.md funders=page.contributions.funding %}
+	{% endif %}
+
+</section>
+
+  </div>
+
+  <!-- Programme Tab -->
+  <div class="tab-pane " id="program" role="tabpanel" aria-labelledby="program-tab">
+
+
+    {% if event.external %}
+       For details about the course, please vist the <a href="{{event.external}}">Course Page</a>
+    {% else %}
+
+     {% if event.infrastructure %}
+     <h3> Before you start </h3>
+     <p>Before starting the course, make sure to follow the setup instructions</p>
+
+    <button id="setup-button" class="btn btn-info" onClick="$('#setup-tab').tab('show');">View Setup Instructions</button>
+    {% endif %}
+
+
+    {% for section in event.program %}
+      {% if section.subsection %}
+        <h4 id="{{ section.section | slugify }}">{{ section.section }}</h4>
+      {% elsif section.section != nil %}
+        <h3 id="{{ section.section | slugify }}">{{ section.section }}</h3>
+      {% endif %}
+      <p>{{ section.description | markdownify }}</p>
+
+      {% if section.tracks %}
+        {% assign buttoncol = "crimson, orangered, darkorange, green, mediumblue, darkmagenta" | split: "," %}
+        {% for track in section.tracks %}
+          {% assign i = forloop.index | minus: 1 | modulo: 6 %}
+          {% if track.link  contains 'https://' or track.link contains 'http://' %}
+             {% assign tracklink = track.link %}
+          {% else %}
+             {% assign tracklink = site.pages | where:"path", track.link  | first %}
+             {% assign tracklink = tracklink.url | relative_url | default: '#' %}
+          {% endif %}
+
+          <a class="btn btn-square-large" style="display: inline-flex; align-items: center; background-color: {{buttoncol[i]}}; color: white" href="{{ tracklink }}" ><span style="width: 100%">{{ track.title }}</span></a>
+        {% endfor %}
+      {% endif %}
+
+	  {% if section.tutorials %}
+        {% assign hidetimes= section.async | default: page.async %}
+        {% assign material_list = site | convert_to_material_list: section.tutorials %}
+	    {% include _includes/tutorial_list.html sub=material_list page=page responsive=false async=hidetimes customheader=section.custom %}
+	  {% endif %}
+
+    {% endfor %} <!-- for each section -->
+  {% endif %} <!-- if event not external -->
+
+  </div><!-- end programme tab -->
+
+
+  <!-- Setup Tab -->
+  {% if event.infrastructure %}
+  <div class="tab-pane " id="setup" role="tabpanel" aria-labelledby="setup-tab">
+
+    <h3>Get set up for the course!</h3>
+    <p>Follow the steps below to get set up with everything you need to participate in the course!</p>
+
+    <!-- Galaxy setup -->
+    {% unless event.infrastructure.no_galaxy %}
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/galaxylogo.png %}" class="card-img" alt="Galaxy logo" style="max-height: 10em">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Create a Galaxy Account</h5>
+			<p class="card-text">
+              Create an account on one of the following Galaxy servers:
+              <ul>
+              {% for galaxy in event.infrastructure.servers %}
+              <li><a href="{{ galaxy.server }}">{{galaxy.name}}</a></li>
+              {% endfor %}
+              </ul>
+            </p>
+            <p class="card-text">
+              You will get an email with <b>activation link</b>. It may end up in your junk folder.
+            </p>
+			<p class="card-text text-muted">
+              Note: If you already have a Galaxy account you can skip this step and just log in to your existing account.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	{% endunless %}
+
+    <!-- TIaaS setup -->
+    {% if event.infrastructure.tiaas %}
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/galaxy-for-trainers.svg %}" class="card-img" alt="cartoon of a person standing in front of a blackboard" style="max-height: 10em">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join Galaxy Training Group (TIaaS)</h5>
+			<p class="card-text">
+            Join TIaaS by clicking on the link below matching your Galaxy server:
+            <ul>
+              {% for galaxy in event.infrastructure.servers %}
+              {% if galaxy.tiaas_link %}
+              <li><a href="{{galaxy.tiaas_link}}">{{galaxy.name}} TIaaS</a></li>
+              {% else %}
+              <li>{{galaxy.name}} is not using TIaaS</li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+            </p>
+            <p class="card-text">
+            This will give your analysis jobs <b>priority on Galaxy</b> for the duration of the event. Make sure you are <b>logged in</b> before clicking the link.
+            You should see a <b>green message box</b> if all went well.
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    {% endif %}
+
+
+    <!-- Support setup -->
+    {% if event.infrastructure.support %}
+    {% assign support = event.infrastructure.support %}
+    <div class="card setup-card">
+	  <div class="row no-gutters">
+		<div class="col-sm-3">
+		  <img src="{% link assets/images/galaxy-for-developers.svg %}" class="card-img" alt="cartoon of a person leaning against a laptop" style="max-height:10em">
+		</div>
+		<div class="col-sm-9">
+		  <div class="card-body">
+			<h5 class="card-title">Join {{support.platform | default: "Slack" }}!</h5>
+			<p class="card-text">
+
+            We will provide support via {{support.platform | default: "Slack" }}. Here you can <b>ask any questions</b> you may have during the course,
+            and <b>socialize</b> with your fellow participants and instructors.
+
+            The following steps will get you set up with {{support.platform | default: "Slack" }}:
+
+
+            <ol>
+              <li>Join {{support.platform}} via this <a href="{{support.join_link | default: site.slack.invite_link }}">Invite Link</a></li>
+              <li>Join the event channel: <a href="{{support.link | default: site.slack.general_channel}}">#{{event.infrastructure.support.channel | default: "general"}}</a></li>
+              <li>Introduce yourself here!</li>
+            </ol>
+
+            </p>
+		  </div>
+		</div>
+	  </div>
+	</div>
+    {% endif %}
+
+
+    <!-- Custom Setup Instructions -->
+    {% if event.infrastructure.custom %}
+    <div class="card setup-card">
+      <div class="row no-gutters">
+        <div class="col-sm-3">
+          <img src="{% link assets/images/galaxy-for-admins.svg %}" class="card-img" alt="Galaxy logo">
+        </div>
+        <div class="col-sm-9">
+          <div class="card-body">
+            <h5 class="card-title">Prepare for the Course</h5>
+            <p class="card-text">
+              {{ event.infrastructure.custom.description | markdownify }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+
+
+
+
+  </div><!-- end setup tab -->
+  {% endif %}
+
+
+  <div class="tab-pane " id="instructors" role="tabpanel" aria-labelledby="instructors-tab">
+<section>
+	<h2>Instructor Zone</h2>
+
+	<p>
+	Check out our checklists for
+	</p>
+	<ul>
+		<li><a href="{% link topics/teaching/tutorials/organize-workshop/tutorial.md %}">Organising a Workshop</a> to check that you haven't forgotten any important step.</li>
+		<li><a href="{% link topics/teaching/tutorials/running-workshop/tutorial.md %}">Running a Workshop</a>, helpful reminders closer to your event.</li>
+	</ul>
+
+
+	{% if event.infrastructure %}
+	<h4>Request TIaaS</h4>
+	<p>Training Infrastructure as a Service (TIaaS) is a service that allows you to request space for your course on a server, it helps ensure courses run smoothly by separating your trainee's jobs into a separate queue. <a href="{% link topics/teaching/tutorials/setup-tiaas-for-training/tutorial.md %}">Learn more about TIaaS in our tutorial</a>.</p>
+	<p>The following links will open a (mostly) pre-filled out TIaaS form, <emph>if that server supports TIaaS</emph>. Otherwise you might see "page not found".</p>
+	<p>Once you receive a URL from the admins, please set it as a <code>tiaas_link</code> in your event metadata.</p>
+	{%- capture org0 -%}{{ event.contributions.organisers[0] }}{%- endcapture -%}
+	<ul>
+	{% for server in event.infrastructure.servers %}
+{%- capture urlparams -%}
+?name={{ site.data.contributors[org0].name | uri_escape}}
+&email={{ site.data.contributors[org0].email | uri_escape }}
+&title={{ event.title | uri_escape }}
+&description={{ event.description | uri_escape }}
+&start={{ event.date_start }}
+&end={{ event.date_end }}
+&website={{ site.url }}{{ site.baseurl }}{{ page.url }}
+&use_gtn=true&gtn_links={{ 'See course event' | uri_escape }}
+&training_identifier={{ server.tiaas_link | split:'/' | last | uri_escape }}
+{%- endcapture -%}
+		<li>
+			<a href="{{ server.server }}/tiaas/new/{{ urlparams }}">Request TIaaS @ {{ server.server }}</a>
+		</li>
+	{% endfor %}
+	</ul>
+	{% endif %}
+
+
+<h3> Add your event to the Galaxy Hub Event Horizon </h3>
+<p>
+To also list your event on the <a href="https://galaxyproject.org/events/">Galaxy Event Horizon</a>, copy the text below, and add your event to the <a href="https://github.com/galaxyproject/galaxy-hub/tree/master/content/events">Galaxy Hub GitHub Repo</a>. Create a folder for your event here, and add an index.md file with the following contents:
+</p>
+
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code>---
+title: "{{event.title}}"
+date: '{{event.date_start}}'
+days: {{event.duration}}
+tease: {{event.description}}
+#continent: EU
+location: "{{event.location.name}}{%if event.location.city %},{{event.location.city}}{%endif%}{% if event.location.coutnry %}, {{event.location.country}}{% endif %}"
+external_url: "{{site.url}}{{site.baseurl}}{{ page.url }}"
+gtn: true
+contact: "{{event.contact_email}}"
+subsites: [all]
+---
+</code></pre></div></div>
+
+
+	<h3>Promote the Event</h3>
+
+	<p><abbr title="Tooting is the verb used when posting to mastodon or the fediverse, which are like open source twitter.">Tootable</abbr>/Tweetable version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Slack-compatible version:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+:calendar: {{ event | collapse_date_pretty }}
+:arrow_right: {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+:pencil: Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+	<p>Version with schedule:</p>
+<div data-commit="Add requirement" class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+{{ event.title }}! 📢
+
+{{ page.description }}
+
+**Agenda**:
+{% for section in event.program -%}
+{%- unless section.subsection -%}
+- {{ section.section }}
+{% endunless -%}
+{%- endfor %}
+📅 {{ event | collapse_date_pretty }}
+➡️ {% if page.short_id %}https://gxy.io/GTN:{{ page.short_id }}{% else %}{{ site.url }}{{ site.baseurl }}{{ page.url }}{% endif %}
+{%- if event.registration.link %}
+📝 Registration is open {% if event.registration.deadline %}until {{ event.registration.deadline }}{% endif %}! {{ event.registration.link }}
+{% endif %}
+</code></pre></div>      </div>
+
+
+</section>
+
+  </div>
+</div>
+
+	</div> <!-- col-md-9 -->
+	<div class="zcol-md-3">
+
+        <img class="event-image" src="{{site.baseurl}}/{{event.cover-image | default: '/assets/images/GTN-event-logo.png' }}" alt="{{event.cover-image-alt | default: 'event logo' }}">
+        {% assign enddate = event.date_end | default: event.date_start %}
+		{% assign passed = enddate | is_date_passed %}
+
+        {% unless event.external %}
+
+		{% if passed %}
+		<span class="btn btn-primary btn-lg btn-block disabled">Event is Over</span>
+		{% else %}
+          {% assign deadline = event.registration.deadline | default: event.date_start %}
+		  {% assign passed = deadline | is_date_passed %}
+          {% if passed %}
+          <span class="btn btn-primary btn-lg btn-block disabled">Registration is closed</span>
+          {% elsif event.registration.open == false %}
+          <a href="#" class="btn btn-primary btn-lg btn-block">Registration opens soon!</a>
+          {% else %}
+            {% if event.registration.link %}
+		    <a href="{{ event.registration.link }}" class="btn btn-primary btn-lg btn-block">Register Now!</a>
+              {% if event.registration.deadline %}
+              <p style="margin-top:1em"><b>Deadline:</b> {{event.registration.deadline | date: "%-d %B %Y" }}</p>
+              {% endif %}
+            {%endif %}
+          {% endif %}
+		{% endif %}
+        {% endunless %}
+		<hr/>
+
+		<b> Event details </b>
+		<table>
+			<tr><td style="min-width: 2rem">{% icon event-date %}</td><td>{{ event | collapse_date_pretty }}</td></tr>
+			<tr><td>{% icon event-location %}</td><td>{% if event.location %}{{ event.location | format_location }}{% elsif event.mode == "online" %}Online{% else %}Please set a location{% endif %}</td></tr>
+            {% if event.cost %}
+			<tr><td>{% icon event-cost %}</td><td>{{ event.cost }}</td></tr>
+            {% endif %}
+			{% if event.contact_email %}
+			<tr><td>{% icon email %}</td><td><a href="mailto:{{ event.contact_email }}?subject={{ event.title | uri_escape }}">{{event.contact_email}}</a></td></tr>
+			{% endif %}
+		</table>
+
+		<hr />
+        <b> Add this event to your calendar </b>
+
+           {% include _includes/calendar-buttons.html %}
+
+		<hr />
+
+		<b>Organisers</b><br/>
+		{% for org in event.contributions.organisers %}
+			{% include _includes/contributor-badge-inline.html id=org %}
+		{% endfor %}
+
+        {% if event.contributions.instructors.size < 10 %}
+        <br/><br/><b>Instructors</b><br/>
+            {% for instructor in event.contributions.instructors %}
+			{% include _includes/contributor-badge-inline.html id=instructor %}
+		{% endfor %}
+
+        {% endif %}
+
+        {% if event.contributions.funding %}
+		<hr />
+		<b>In collaboration with</b><br/>
+		{% for org in event.contributions.funding %}
+			{% include _includes/contributor-badge-inline.html id=org %}
+		{% endfor %}
+        {% endif %}
+
+	</div>
+</div><!-- row -->
+
+</section>
+
+
+<script>
+(function (window, document) {
+    function onDocumentReady(fn) {
+        if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+            fn();
+        } else {
+            document.addEventListener('DOMContentLoaded', fn);
+        }
+    }
+
+    onDocumentReady(function () {
+        $('#myTab button').click(function(e) {
+          console.log("bla");
+          e.preventDefault();
+          $(this).tab('show');
+        });
+
+        // store the currently selected tab in the hash value
+        $("ul.nav-tabs > li > button").on("click", function(e) {
+            var id = $(e.target).attr('data-target').substr(1);
+            window.history.replaceState(null, null, '#'+id);
+        });
+
+        // on load of the page: switch to the currently selected tab
+        var hash = window.location.hash;
+        if (hash){
+        	var potential_tab = $('#myTab button[data-target="' + hash + '"]')
+        	if (potential_tab.length != 0) {
+            	potential_tab.tab('show');
+        	} else {
+            	var target_tab = '#' + $(`${hash}`).closest(".tab-pane").attr("id")
+            	$('#myTab button[data-target="' + target_tab + '"]').tab('show');
+            	$(hash).get(0).scrollIntoView();
+        	}
+        }
+    });
+})(window, document);
+
+
+</script>
+
+<style>
+.zrow {
+	display: grid;
+	grid-template-rows: 1fr;
+	gap: 1em 1em;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-areas:
+	  "Main Main Main Meta";
+}
+@media (max-width: 768px) {
+	.zrow {
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-areas:
+		  "Meta"
+		  "Main";
+	}
+}
+
+.zcol-md-9 { grid-area: Main; }
+.zcol-md-3 { grid-area: Meta; }
+
+
+</style>

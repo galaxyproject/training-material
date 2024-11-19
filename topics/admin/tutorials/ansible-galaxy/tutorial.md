@@ -30,6 +30,7 @@ contributions:
   - lldelisle
   testing:
   - mira-miracoli
+  - edmontosaurus
 tags:
   - ansible
   - deploying
@@ -49,12 +50,45 @@ edam_ontology:
 - topic_3489 # Database Management
 - topic_0605 # Informatics
 - topic_3071 # Data Management
+
+recordings:
+- captioners:
+  - natefoo
+  - hexylena
+  date: '2022-03-01'
+  galaxy_version: '21.05'
+  length: 2H50M
+  youtube_id: LPK8rP_qUiA
+  speakers:
+  - natefoo
+  - hexylena
+- captioners:
+  - natefoo
+  - hexylena
+  date: '2021-06-28'
+  galaxy_version: '21.05'
+  length: 2H47M
+  youtube_id: zT70luZqPOU
+  speakers:
+  - natefoo
+- captioners:
+  - shiltemann
+  - hexylena
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 53M
+  youtube_id: il83uApg7Hc
+  speakers:
+  - hexylena
+
 ---
 
-This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
+This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks.  If not, please consider following our [Ansible Tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %}) first.
 
-> An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
-{: .quote}
+Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
+
+> An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems
+{: .quote cite="https://en.wikipedia.org/wiki/Ansible"}
 
 We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
@@ -1142,6 +1176,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > You can add this file to your repository with `git add .gitattributes`
 >    > to ensure colleagues get a copy of the file too. Just **be sure**
 >    > `.vault-password.txt` is listed in your `.gitignore` file!
+>    >
+>    > You will also need to run this command to define how the `ansible-vault` differ should work:
+>    >
+>    > ```
+>    > git config --global diff.ansible-vault.textconv "ansible-vault view"
+>    > ```
 >    >
 >    > If you have more vault secrets, you can adjust this line (or add more,
 >    > wildcards are supported) to list all of your secret files. This tells

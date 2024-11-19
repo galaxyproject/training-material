@@ -1,6 +1,7 @@
 ---
 layout: embed
 title: Cross UseGalaxy.* Workflow Search
+description: Search for workflows across all UseGalaxy.* servers and WorkflowHub
 ---
 
 <style>
@@ -36,7 +37,14 @@ title: Cross UseGalaxy.* Workflow Search
 				<td>{{ workflow.updated }}</td>
 				<td>
 					{% for id in workflow.ids %}
-					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}" target="_blank">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% if id[0] == "https://workflowhub.eu" %}
+					<a href="{{ id[0] }}/workflows/{{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a><br/>
+					<a href="https://my.galaxy.training/?path=/workflows/trs_import%3ftrs_server=workflowhub.eu%26run_form=true%26trs_id={{ id[1] }}%26trs_version=1">
+						Load in Galaxy
+					</a><br/>
+						{% else %}
+					<a href="{{ id[0] }}/published/workflow?id={{ id[1] }}">{{ id[0] }} <i class="fa fa-external-link-alt" aria-hidden="true"></i></a>
+						{% endif %}
 					{% endfor %}
 				</td>
 			</tr>
@@ -56,20 +64,50 @@ const table  = document.getElementById('results'),
       rows   = table.tBodies[0].rows;
 
 function clean(query){
-	return query.toLowerCase().replace(/[^a-z0-9]/g, '')
+	return query.toLowerCase().replace(/[^a-z0-9 ]/g, '')
 }
 
-function search(textQuery){
-	// If no query, show all.
-	if (textQuery == "") {
-		document.querySelectorAll("#results tr").forEach(r => r.style.display = "");
-		return;
-	}
+function search(params){
+	const textQuery = params.get('query')?.toLowerCase().replace(/[^a-z0-9 ]/g, '');
+	const filter_all = params.get('all')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_any = params.get('any')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_none = params.get('none')?.split(" ").map(f => f.trim().toLowerCase().replace(/[^a-z0-9 ]/g, ''));
+	const filter_server = params.get('server');
 
-	// Otherwise, filter
 	var to_hide = rows.filter(row => {
-		if (clean(row.children[0].innerText + row.children[1].innerText).indexOf(clean(textQuery)) == -1) {
+		var text = clean(row.children[0].innerText + " " + row.children[1].innerText);
+		if (filter_server) {
+			// Every term in filter_all must be present
+			// Immediately reject if not all present.
+			if (row.children[3].innerText.indexOf(server) == -1) {
+				return true;
+			}
+		}
+		if (filter_all) {
+			// Every term in filter_all must be present
+			// Immediately reject if not all present.
+			if (!filter_all.every(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (filter_none){
+			// Every term in filter_none must not be present
+			// Immediately reject if not all present.
+			if (filter_none.some(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (filter_any){
+			// At least one term in filter_any must be present
+			// If any failed, exit for sure.
+			if(!filter_any.some(f => text.indexOf(f) != -1)) {
+				return true;
+			}
+		}
+		if (textQuery && textQuery != "" && text.indexOf(textQuery) == -1) {
 			return true;
+		} else {
+			return false;
 		}
 		return false;
 	});
@@ -83,6 +121,5 @@ function search(textQuery){
 // Get the q parameter from URL
 // This is a redeclaration of the `var params` in themes.js, not sure how we want to handle that long term.
 var params = (new URL(document.location)).searchParams;
-paramSearch = params.get('query')
-search(paramSearch)
+search(params)
 </script>

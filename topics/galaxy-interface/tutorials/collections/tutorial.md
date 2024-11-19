@@ -22,6 +22,24 @@ contributors:
   - nekrut
 
 subtopic: manage
+
+recordings:
+- youtube_id: uN6nP3I7QLE
+  captioners:
+  - delphine-l
+  date: '2023-05-09'
+  length: 13M
+  speakers:
+  - delphine-l
+- captioners:
+  - annefou
+  - mariipia10
+  date: '2021-08-09'
+  length: 11M
+  youtube_id: uZUt9XIHUQo
+  speakers:
+  - nekrut
+
 ---
 
 {% snippet faqs/gtn/galaxy_tested_with.md version="22.01" %}
@@ -30,7 +48,7 @@ Here we will show Galaxy features designed to help with the analysis of large nu
 
 # Getting data
 
-First, we need to upload datasets. Cut and paste the following URLs to Galaxy upload tool (see a {% icon tip %} **Tip** on how to do this [below](#tip-upload-fastqsanger-datasets-via-links)). 
+First, we need to upload datasets. Cut and paste the following URLs to Galaxy upload tool (see a {% icon tip %} **Tip** on how to do this [below](#tip-upload-fastqsanger-datasets-via-links)).
 
 ```
 https://zenodo.org/record/5119008/files/M117-bl_1.fq.gz
@@ -44,9 +62,12 @@ https://zenodo.org/record/5119008/files/M117C1-ch_2.fq.gz
 ```
 
 > <hands-on-title>Set format to `fastqsanger.gz`</hands-on-title>
-> The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.  
+> The above datasets are in `fastqsanger.gz` format. It is necessary to explicitly set format in Galaxy. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. There is a variety of [fastq format flavors](https://en.wikipedia.org/wiki/FASTQ_format) and it is difficult to guess them automatically.
 >
-> {% snippet faqs/galaxy/dataset_upload_fastqsanger_via_urls.md %}
+> {% snippet faqs/galaxy/datasets_import_via_link.md format="fastqsanger.gz" %}
+>
+> {% snippet topics/assembly/tutorials/vgp_genome_assembly/faqs/dataset_upload_fastqsanger_via_urls.md %}
+>
 {: .hands_on}
 
 ## About these datasets
@@ -64,9 +85,9 @@ These datasets represent genomic DNA (enriched for mitochondria via a long range
 
 # Creating a paired dataset collection
 
-You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually. 
+You can see that there are eight datasets forming four pairs. Obviously, we can manipulate them one-by-one (e.g., start four mapping jobs, call variants four times and so on), but this will unnecessarily tedious. Moreover, imagine if you have 100s or 1,000s of pairs: it will be impossible to process them individually.
 
-This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with. 
+This is exactly why we developed collections. Dataset collections allow combining multiple datasets into a single entity. Thus instead of dealing with four, a hundred, or a thousand of individual datasets you have only one item in Galaxy history to deal with.
 
 Because our data is *paired* we need to create a hierarchical collection called **Paired Dataset Collection** or **Paired Collection**. In such collection there are two layers. The first layer corresponds to individual samples (e.g., `M117-bl`). The second layer represent `forward` and `reverse` reads corresponding to each sample:
 
@@ -106,7 +127,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 ```
 
 > <hands-on-title>Set format to `fasta.gz`</hands-on-title>
-> The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format. 
+> The above dataset is in `fasta.gz` format. The {% icon tip %} **Tip** section below explains how to upload these data and set the correct format.
 >
 > {% snippet faqs/galaxy/datasets_import_via_link.md reset_form="True" link="https://zenodo.org/record/5119008/files/chrM.fa.gz" format="fasta.gz" %}
 {: .hands_on}
@@ -127,11 +148,9 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > The interface should look like this:
 >
-> ------
 >
-> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png)
+> ![bwa_mem_interface](../../images/collections/bwa_mem_interface_coll_tut.png "Tool interface")
 >
-> ------
 >
 >    - Click **Run Tool** button
 >
@@ -143,7 +162,7 @@ You will see jobs being submitted and new datasets appearing in the history. Bec
 
 ## Calling variants
 
-After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets. 
+After we mapped reads against the mitochondrial genome, we can now call variants. In this step a variant calling tool `lofreq` will take a collection of BAM datasets (the one produced by `BWA-MEM`), identify differences between reads and the reference, and output these differences as a collection of [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) datasets.
 
 > <hands-on-title>Call variants  </hands-on-title>
 >
@@ -153,7 +172,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 >        - {% icon param-file %} *"Reference"*: `chrM.fa.gz (as fasta)` (Input dataset)
 >    - *"Call variants across"*: `Whole reference`
 >    - *"Types of variants to call"*: `SNVs and indels`
-> 
+>
 > The interface should look like this:
 >
 > ------
@@ -168,7 +187,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 
 ## Create table of variants using **SnpSift Extract Fields**
 
-We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with `SNPSift`: a tool specifically designed for manipulation of tab-delimited data. 
+We will now convert VCF datasets into tab delimited format as it will be easier to work with. This will be done with `SNPSift`: a tool specifically designed for manipulation of tab-delimited data.
 
 
 > <hands-on-title>Create table of variants</hands-on-title>
@@ -197,7 +216,7 @@ As a result of this operation we now have a collection of four tab delimited fil
 
 We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+{% include _includes/youtube.html id="ypuFZ1RKMIY" title="Collapsing collections" %}
 
 > <hands-on-title>Collapse a collection</hands-on-title>
 >
@@ -284,7 +303,7 @@ From there you can import histories to make them your own.
 
 # Collection operations
 
-In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by `BWA-MEM`. Varinat calling by `lofreq` and field extraction with `SnpEff` maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset. 
+In this brief analysis we took four paired datasets, created a collection, analyzed this collection and finally created a single report. Such "lifecycle" is shown in the figure below. Here we started with eight fastq datasets representing four paired end samples. A paired collection was reduced to a list of BAM datasets by `BWA-MEM`. Varinat calling by `lofreq` and field extraction with `SnpEff` maintained collection structure: these tools processed four individual datasets changing their formats from BAM to VCF, and from VCF to Tab-delimited. Finally, we collapsed collection by merging its content into a single dataset.
 
 ![Collection lifecycle](../../images/collections/collection_lifecycle.svg "Collection lifecycle. Arrows = individual fastq datasets; Four shades of yellow = four samples analyzed in this example. ")
 
@@ -339,8 +358,8 @@ This tools allow filtering elements from a data collection.  It takes an input c
 Given a collection:
 
 ```
- Collection: [Dataset A] 
-             [Dataset B] 
+ Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 ```
 
@@ -368,8 +387,8 @@ the tool will return two collections:
 Given a collection:
 
 ```
- Collection: [Dataset A] 
-             [Dataset B] 
+ Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 ```
 and a text file:
@@ -392,7 +411,7 @@ the tool will return two collections:
 
 ### Relabel identifiers
 
-{% icon tool %}  **Relabel identifiers** changes identifiers of datasets within a collection using identifiers from a supplied file. 
+{% icon tool %}  **Relabel identifiers** changes identifiers of datasets within a collection using identifiers from a supplied file.
 
 New identifiers can be supplied as either a simple list or a tab-delimited file mapping old identifier to the new ones. This is controlled using **How should the new identifiers be specified?** drop-down:
 
@@ -401,8 +420,8 @@ New identifiers can be supplied as either a simple list or a tab-delimited file 
 Given a collection:
 
 ```
- Collection: [Dataset A] 
-             [Dataset B] 
+ Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 ```
 
@@ -418,8 +437,8 @@ and a simple text file:
 the tool will return:
 
 ```
- Collection: [Dataset Alpha] 
-             [Dataset Beta] 
+ Collection: [Dataset Alpha]
+             [Dataset Beta]
              [Dataset Gamma]
 ```
 
@@ -428,8 +447,8 @@ the tool will return:
 Given a collection:
 
 ```
- Collection: [Dataset A] 
-             [Dataset B] 
+ Collection: [Dataset A]
+             [Dataset B]
              [Dataset X]
 ```
 
@@ -445,8 +464,8 @@ and a simple text file (you can see that entries do not have to be in order here
 the tool will return:
 
 ```
- Collection: [Dataset Alpha] 
-             [Dataset Beta] 
+ Collection: [Dataset Alpha]
+             [Dataset Beta]
              [Dataset Gamma]
 ```
 
@@ -459,8 +478,8 @@ the tool will return:
 The tool sort in ascending order. When *numeric* sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:
 
 ```
- Collection: [Horse123] 
-             [Donkey543] 
+ Collection: [Horse123]
+             [Donkey543]
              [Mule176]
 ```
 
@@ -468,8 +487,8 @@ The tool will output:
 
 ```
  Collection: [Horse123]
-             [Mule176] 
-             [Donkey543] 
+             [Mule176]
+             [Donkey543]
 ```
 
 #### Sorting from file
@@ -477,8 +496,8 @@ The tool will output:
 Alternative, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:
 
 ```
- Collection: [Horse123] 
-             [Donkey543] 
+ Collection: [Horse123]
+             [Donkey543]
              [Mule176]
 ```
 
@@ -486,15 +505,15 @@ and a file specifying sort order:
 
 ```
  Donkey543
- Horse123 
+ Horse123
  Mule176
 ```
 
 the output will predictably look like this:
 
 ```
- Collection: [Donkey543] 
-             [Horse123] 
+ Collection: [Donkey543]
+             [Horse123]
              [Mule176]
 ```
 
@@ -504,14 +523,14 @@ the output will predictably look like this:
 
 The relationship between element names and tags is specified in a two column tab-delimited file. This file may contain less entries than elements in the collection. In that case only matching list identifiers will be tagged.
 
-To create name: or group: tags prepend them with `#` (you can also use `name:`) or `group:`, respectively. 
+To create name: or group: tags prepend them with `#` (you can also use `name:`) or `group:`, respectively.
 
 More about tags
 
 > <tip-title>More about tags</tip-title>
 > Galaxy allows tagging datasets to facilitate analyses. There are several types of tags including simple tags, name tags, and group tags. **Simple** tags allow you to attach an alternative label to a dataset, which will make it easier to find it later. **Name** tags allow you to track propagation of a dataset through the analyses: all datasets derived from the initial dataset labeled with a name tag will inherit it. Finally, **group** tags allow you to label group of datasets. This is useful. for example, for differential expression analysis where you can have two groups of datasets labeled as "treatment" and "control".
 >
->To learn mote about tags go to [training site](https://training.galaxyproject.org/training-material/search?query=tags).
+>To learn mote about tags go to [training site]({% link search.md %}?query=tags).
 {: .tip}
 
 ## Tools that change collection structure
@@ -526,24 +545,24 @@ This tool takes nested collections such as a list of lists or a list of dataset 
 
 ### Merge collections
 
-{% icon tool %}  **Merge collections** takes two or more collections and creates a single collection from them. 
+{% icon tool %}  **Merge collections** takes two or more collections and creates a single collection from them.
 
 By default the tool assumes that collections that are being merged have unique dataset names. If it not the case only one (the first) of the datasets with a repeated name will be included in the merged collection. For example, suppose you have two collections. Each has two datasets named "A" and "B":
 ```
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Merging them will produce a single collection with only two datasets:
 
 ```
- Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+ Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 ```
 
@@ -554,20 +573,20 @@ This behavior can be changed by clicking on "*Advanced Options*" link. The follo
 Input:
 
 ```
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Output:
 
 ```
- Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+ Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 ```
 
@@ -579,20 +598,20 @@ Here if two collection have identical dataset names, a dataset is chosen from th
 Input:
 
 ```
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Output:
 
 ```
- Merged Collection: [Dataset A] 
-                    [Dataset B] 
-                    [Dataset X] 
+ Merged Collection: [Dataset A]
+                    [Dataset B]
+                    [Dataset X]
                     [Dataset Y]
 ```
 
@@ -604,22 +623,22 @@ Here if two collection have identical dataset names, a dataset is chosen from th
 Input:
 
 ```
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Output:
 
 ```
- Merged Collection: [Dataset A_1] 
+ Merged Collection: [Dataset A_1]
                     [Dataset B_1]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X]
                     [Dataset Y]
 ```
 
@@ -630,22 +649,22 @@ Input:
 
 ```
 
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Output:
 
 ```
- Merged Collection: [Dataset A] 
+ Merged Collection: [Dataset A]
                     [Dataset B]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X]
                     [Dataset Y]
 ```
 
@@ -654,22 +673,22 @@ Output:
 Input:
 
 ```
- Collection 1: [Dataset A] 
-               [Dataset B] 
+ Collection 1: [Dataset A]
+               [Dataset B]
                [Dataset X]
- Collection 2: [Dataset A] 
-               [Dataset B] 
+ Collection 2: [Dataset A]
+               [Dataset B]
                [Dataset Y]
 ```
 
 Output:
 
 ```
- Merged Collection: [Dataset A_1] 
+ Merged Collection: [Dataset A_1]
                     [Dataset B_2]
-                    [Dataset A_2] 
-                    [Dataset B_2]  
-                    [Dataset X_1] 
+                    [Dataset A_2]
+                    [Dataset B_2]
+                    [Dataset X_1]
                     [Dataset Y_2]
 ```
 
@@ -679,7 +698,7 @@ This option will simply trigger an error.
 
 ### Zip collection
 
-{% icon tool %} **Zip collection** takes two collections and creates a paired collection from them. 
+{% icon tool %} **Zip collection** takes two collections and creates a paired collection from them.
 
 If you have one collection containing only forward reads and one containing only reverse, this tools will "zip" them together into a simple paired collection. For example, given two collections with `forward` and `reverse` reads they can be "zipped" into a single paired collection:
 
@@ -687,7 +706,7 @@ If you have one collection containing only forward reads and one containing only
 
 ### Unzip collection
 
-{% icon tool %} **Unzip collection** takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets). 
+{% icon tool %} **Unzip collection** takes a paired collection and "unzips" it into two simple dataset collections (lists of datasets).
 
 Given a paired collection of forward and reverse reads this tool will "unzip" it into two collections containing forward and reverse reads, respectively:
 
@@ -697,13 +716,13 @@ Given a paired collection of forward and reverse reads this tool will "unzip" it
 
 ### Column join
 
-{% icon tool %} **Column join** merges elements of a collection on a given column. 
+{% icon tool %} **Column join** merges elements of a collection on a given column.
 
 If you have a collection with three elements (image below), merging it on the first column will first produce a union on values found in the first column of each elements and then paste elements having the same value side-by-side:
 
 ![Column join](../../images/collections/join_on_column.svg)
 
-### Collapse collection 
+### Collapse collection
 
 {% icon tool %} **Collapse collection** merges elements together (head-to-tail) in the order of the collection. Its power comes from the ability to add identifiers when it performs the merge. Identifiers can be added in variety of ways specified by the **Prepend File name** option as shown in the figure below (we used option **A** in the last step of this tutorial). **A** = `Same line and each line in dataset`; **B** = `Same line and only once per dataset`; **C** =  `Line above`
 

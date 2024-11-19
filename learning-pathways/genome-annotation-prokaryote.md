@@ -11,7 +11,8 @@ cover-image-alt: "Galaxy Genome Annotation logo"
 editorial_board:
 - abretaud
 funding:
-- erasmusplus
+- gallantries
+- eurosciencegateway
 
 pathway:
   - section: "Module 1: Introduction"
@@ -23,9 +24,11 @@ pathway:
 
   - section: "Module 2: Gene calling and functional annotation"
     description: |
-      In this module you will learn to run the Funannotate tool suite to find the position of genes and to functionally annotate them
+      In this module you will learn to run tools to find the position of genes and other genomic components and to functionally annotate them
     tutorials:
-      - name: annotation-with-prokka
+      #- name: annotation-with-prokka
+      #  topic: genome-annotation
+      - name: bacterial-genome-annotation
         topic: genome-annotation
 
   - section: "Module 3: Manual curation"

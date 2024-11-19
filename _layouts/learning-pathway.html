@@ -11,22 +11,18 @@ layout: base
   {% assign gitter = site.gitter_url %}
 {% endif %}
 
-
-<section>
-<h3> GTN Learning Pathway </h3>
-<div>
-  <div style="display:inline-block;vertical-align:top;width:10%">
-   <img src="{{site.baseurl}}/assets/images/learning-pathway.png" alt="A graphic depicting a winding path from a start symbol to a trophy, with tutorials along the way" />
-   </div>
-   <div  style="display:inline-block; margin-left: 2em; width:70%">
-      We recommend you follow the tutorials in the order presented on this page. They have been selected to fit together and build up your knowledge step by step. If a lesson has both slides and a tutorial, we recommend you start with the slides, then proceed with the tutorial.
-   </div>
-</div>
-</section>
-
+<script type="application/ld+json">
+{{ page | generate_learning_pathway_jsonld: site }}
+</script>
 
 <section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
-    <h1>{{ pathway.title }}</h1>
+    <hgroup>
+      <h1>{{ pathway.title }}</h1>
+      {% icon purl %}<abbr title="Persistent URL">PURL</abbr>:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a>
+    </hgroup>
+
+    {% snippet faqs/gtn/what-is-a-learning-pathway.md %}
+
     <p>{{ pathway.description | markdownify }}</p>
     <p>{{ content | markdownify }}</p>
 
@@ -62,10 +58,10 @@ layout: base
 	{% include _includes/contributor-list.html contributors=editorial_board badge=true %}
 
 	{% if pathway.funding %}
-	<h2 id="funders">Funders</h2>
-	<p>This material was funded by:</p>
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
 	{% assign funders = pathway.funding | sorted %}
-	{% include _includes/contributor-list.html contributors=funders badge=true %}
+	{% include _includes/funding-statement.md funders=funders %}
 	{% endif %}
 
 </section>

@@ -1,0 +1,46 @@
+- doc: Test outline for Genome-Assembly-of-MRSA-using-Oxford-Nanopore-MinION-(and-Illumina-data-if-available)
+  job:
+    Illumina reverse raw reads:
+      class: File
+      location: https://zenodo.org/record/10669812/files/DRR187567.fastq.bz2
+      filetype: fastqsanger.bz2
+    Illumina forward raw reads:
+      class: File
+      location: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+      filetype: fastqsanger.bz2
+    Nanopore raw reads:
+      class: File
+      location: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
+      filetype: fastqsanger.bz2
+  outputs:
+    nanoplot_before_filtering:
+      asserts:
+        has_text:
+          text: "number_of_reads"
+        has_text:
+          text: "91288"
+        has_n_lines:
+          n: 24
+    nanoplot_after_filtering:
+      asserts:
+        has_text:
+          text: "number_of_reads"
+        has_n_lines:
+          n: 24
+    flye_assembly_info:
+      asserts:
+        has_text:
+          text: "contig_1"
+        has_n_lines:
+          n: 2
+    quast_report_before_polishing:
+      asserts:
+        has_text:
+          text: "Flye"
+        
+    quast_report_after_polishing:
+      asserts:
+        has_text:
+          text: "Flye"
+        has_text:
+          text: "Polypolish"

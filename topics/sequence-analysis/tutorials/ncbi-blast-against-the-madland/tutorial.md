@@ -15,14 +15,17 @@ key_points:
 
   - Diamond  quickly aligns large-scale data sets using a compressed version of the reference sequences called a "database diamond".
   - MAdLand is a database of fully sequenced plant and algal genomes, with an emphasis on non-seed plants and streptophyte algae that can be use for sequence similarity search.
-contributors:
-  - deeptivarshney
 
+contributions:
+  authorship:
+    - deeptivarshney
+  funding:
+    - madland
+    - nfdi4plants
+
+tags:
+  - plants
 ---
-
-## Introduction
-
-<!-- This is a comment. -->
 
 
 MAdLandDB is a protein database comprising of a comprehensive collection of fully sequenced plant and algal genomes, with a particular emphasis on non-seed plants and streptophyte algae. Additionally, for comparative analysis, the database also includes genomes from various other organisms such as fungi, animals, the SAR group, bacteria, and archaea. The database is actively developed and maintained by the [Rensing lab](http://plantco.de) and released in the [MAdLand](https://madland.science/) setting. It employs a system of species abbreviation using a 5 letter code, which is constructed using the first three letters of the genus and the first two letters of the species name, for example, CHABR for *Chara braunii*. Furthermore, the database provides gene identification through the addition of gene ID’s and supplementary information such as the encoding source of the gene, whether it is plastome encoded (pt) or transcriptome-based (tr) in cases when a genome is not yet available. The key advantage of this database is its non-redundant nature, and the fact that all sequences are predominantly from genome projects, thereby increasing their reliability.
@@ -55,11 +58,11 @@ MAdLandDB is a protein database comprising of a comprehensive collection of full
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
->   
+>
 >
 {: .hands_on}
 
-We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB. 
+We just imported a FASTA file into Galaxy. Now, the next would be to perfrom the BLAST analysis against MAdLandDB.
 
 ## Perform NCBI Blast+ on Galaxy
 
@@ -68,20 +71,20 @@ Since MAdLandDB is the collection of protein sequences, You can perform {% tool 
 > <hands-on-title> Similarity search against MAdLand Database </hands-on-title>
 >
 > 1. {% tool [BLASTp](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/2.10.1+galaxy2) %} OR {% tool [BLASTx](toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastx_wrapper/2.10.1+galaxy2) %} with the following parameters:
->    - _"Protein query sequence(s)"_: `Amino acid input sequence` (In case of BLASTp) *OR* 
->    - _"Translated nucleotide query sequence(s)"_: `Translated nucleotide input sequence` (In case of BLASTx) 
+>    - _"Protein query sequence(s)"_: `Amino acid input sequence` (In case of BLASTp) *OR*
+>    - _"Translated nucleotide query sequence(s)"_: `Translated nucleotide input sequence` (In case of BLASTx)
 >    - _"Subject database/sequences"_: `Locally installed BLAST database`
 >    - _"Protein BLAST database"_: `MadLandDB (Genome zoo) plant and algal genomes with a focus on non-seed plants and streptophyte algae (22 Dec 2022)`
 >    - _"Set expectation value cutoff"_: `0.001`
 >    - _"Output format"_:
->    - In _"Output Options"_: `Tabular (extended 25 columns)` 
+>    - In _"Output Options"_: `Tabular (extended 25 columns)`
 > <img src="../../images/ncbi-blast-against-the-madland/blast-example.png" alt="blast against madland" width="80%">
 >
 {: .hands_on}
 
 ## Blast output
 
-{% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields : 
+{% icon tool %} The BLAST output will be in tabular format (you can select the desired output format from the drop down menu) and include the following fields :
 
 | Column | NCBI name | Description |
 |-------|------------|-------------|
@@ -115,5 +118,3 @@ The fields are separated by tabs, and each row represents a single hit. For more
 >
 > See {% cite Buchfink2014 %} for more discussion.
 {: .details}
-
-

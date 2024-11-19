@@ -4,7 +4,10 @@ layout: tutorial_hands_on
 title: Genome annotation with Maker (short)
 zenodo_link: https://doi.org/10.5281/zenodo.4406623
 tags:
+  - gmod
   - eukaryote
+  - maker
+  - jbrowse1
 questions:
   - How to annotate an eukaryotic genome?
   - How to evaluate and visualize annotated genomic features?

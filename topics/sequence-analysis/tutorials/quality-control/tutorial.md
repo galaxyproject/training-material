@@ -1,33 +1,33 @@
 ---
 layout: tutorial_hands_on
-
-title: "Quality Control"
-zenodo_link: "https://zenodo.org/records/61771"
+title: Quality Control
+zenodo_link: https://zenodo.org/records/61771
 questions:
-  - How to perform quality control of NGS raw data?
-  - What are the quality parameters to check for a dataset?
-  - How to improve the quality of a dataset?
+- How to perform quality control of NGS raw data?
+- What are the quality parameters to check for a dataset?
+- How to improve the quality of a dataset?
 objectives:
-  - Assess short reads FASTQ quality using FASTQE 🧬😎 and FastQC
-  - Assess long reads FASTQ quality using Nanoplot and PycoQC
-  - Perform quality correction with Cutadapt (short reads)
-  - Summarise quality metrics MultiQC
-  - Process single-end and paired-end data
+- "Assess short reads FASTQ quality using FASTQE \U0001F9EC\U0001F60E and FastQC"
+- Assess long reads FASTQ quality using Nanoplot and PycoQC
+- Perform quality correction with Cutadapt (short reads)
+- Summarise quality metrics MultiQC
+- Process single-end and paired-end data
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - mapping
-time_estimation: "1H30M"
+- type: internal
+  topic_name: sequence-analysis
+  tutorials:
+  - mapping
+time_estimation: 1H30M
 level: Introductory
 key_points:
-  - Perform quality control on every dataset before running any other bioinformatics analysis
-  - Assess the quality metrics and improve quality if necessary
-  - Check the impact of the quality control
-  - Different tools are available to provide additional quality metrics
-  - For paired-end reads analyze the forward and reverse reads together
-contributors:
+- Perform quality control on every dataset before running any other bioinformatics
+  analysis
+- Assess the quality metrics and improve quality if necessary
+- Check the impact of the quality control
+- Different tools are available to provide additional quality metrics
+- For paired-end reads analyze the forward and reverse reads together
+contributions:
+  authorship:
   - bebatut
   - mblue9
   - alexcorm
@@ -35,12 +35,41 @@ contributors:
   - lleroi
   - r1corre
   - stephanierobin
-  - erasmusplus
   - neoformit
+  funding:
+  - gallantries
+
+recordings:
+- youtube_id: coaMGvZazoc
+  length: 50M
+  speakers:
+  - LonsBio
+  captioners:
+  - LonsBio
+  date: '2023-05-19'
+- captioners:
+  - bebatut
+  - nagoue
+  - shiltemann
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H10M
+  youtube_id: QJRlX2hWDKM
+  speakers:
+  - heylf
+- youtube_id: uiWZea53QIA
+  length: 51M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-30'
+  speakers:
+  - dianichj
+  captioners:
+  - dianichj
+  bot-timestamp: 1727710795
+
 
 ---
 
-# Introduction
 
 
 During sequencing, the nucleotide bases in a DNA or RNA sample (library) are determined by the sequencer. For each fragment in the library, a sequence is generated, also called a **read**, which is simply a succession of nucleotides.
@@ -562,21 +591,21 @@ To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/e
 
 > <hands-on-title>Improvement of sequence quality</hands-on-title>
 >
-> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy2) %} with the following parameters
+> 1. {% tool [Cutadapt](toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.9+galaxy1) %} with the following parameters
 >    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `Reads` (Input dataset)
+>       - {% icon param-file %} *"FASTQ/A file"*: `Reads` (Input dataset)
 >
 >          > <tip-title>Files not selectable?</tip-title>
 >          > If your FASTQ file cannot be selected, you might check whether the format is FASTQ with Sanger-scaled quality values (`fastqsanger.gz`). You can edit the data type by clicking on the pencil symbol.
 >          {: .tip}
->    - In *"Read 1 Options"*:
->       - *"Insert 3' (End) Adapters"*:
+>    - In *"Read 1 Adapters"*:
+>       - *"1: 3' (End) Adapters"*:
 >          - *"Source"*: `Enter custom sequence`
->          - *"Enter custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
+>          - *"Custom 3' adapter sequence"*: `CTGTCTCTTATACACATCT`
+>    - In *"Other Read Trimming Options"*
+>       - *"Quality cutoff(s) (R1)"*: `20`
+>    - In *"Read Filtering Options"*
+>       - *"Minimum length (R1)"*: `20`
 >    - {% icon param-select %} *"Outputs selector"*: `Report`
 >
 > 2. Inspect the generated txt file (`Report`)

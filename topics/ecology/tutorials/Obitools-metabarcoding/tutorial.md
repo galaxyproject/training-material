@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Metabarcoding/eDNA through Obitools
-zenodo_link: https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1
+zenodo_link: https://zenodo.org/record/5932108
 questions:
 - how to analyze DNA metabarcoding / eDNA data produced on Illumina sequencers using the OBITools?
 objectives:
@@ -18,17 +18,32 @@ tags:
   - EBV workflow
   - eDNA
   - Metabarcoding
-contributors:
-- colineroyaux
-- onorvez
-- ecoissac
-- fboyer
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - onorvez
+  - ecoissac
+  - fboyer
+  - yvanlebras
+  funding:
+  - gallantries
+  - pndb
 
+
+recordings:
+- captioners:
+  - yvanlebras
+  date: '2022-03-03'
+  galaxy_version: '21.09'
+  length: 1H15M
+  youtube_id: o2cUvb_lmLs
+  speakers:
+  - yvanlebras
+
+subtopic: ecologyanalysis
 ---
 
 
-# Introduction
 
 
 Based on this [OBITools official tutorial](https://pythonhosted.org/OBITools/wolves.html), you will learn here how to analyze DNA metabarcoding data produced on Illumina sequencers using:
@@ -78,7 +93,7 @@ The data needed to run the tutorial are the following:
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip?download=1)
+> 2. Import the zip archive containing input files from [Zenodo](https://zenodo.org/record/5932108/files/wolf_tutorial.zip)
 >
 >    ```
 >    https://zenodo.org/record/5932108/files/wolf_tutorial.zip

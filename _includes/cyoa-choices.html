@@ -1,4 +1,4 @@
-<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa{{ include.disambiguation }}">
 	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
 	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
 	{% if include.text %}
@@ -7,20 +7,20 @@
 	</p>
 	{% endif %}
 	{% if include.option1 %}
-		<input id="cyoa-opt1" type="radio" name="cyoa" value="{{ include.option1 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option1 | slugify_unsafe }}')">
-		<label for="cyoa-opt1" class="select btn btn-secondary">{{ include.option1 }}</label>
+		<input id="cyoa-opt1{{ include.disambiguation }}" type="radio" name="cyoa{{ include.disambiguation }}" value="{{ include.option1 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option1 | slugify_unsafe }}', 'gtn-cyoa{{ include.disambiguation }}')">
+		<label for="cyoa-opt1{{ include.disambiguation }}" class="select btn btn-secondary">{{ include.option1 }}</label>
 	{% endif %}
 	{% if include.option2 %}
-		<input id="cyoa-opt2" type="radio" name="cyoa" value="{{ include.option2 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option2 | slugify_unsafe }}')">
-		<label for="cyoa-opt2" class="select btn btn-secondary">{{ include.option2 }}</label>
+		<input id="cyoa-opt2{{ include.disambiguation }}" type="radio" name="cyoa{{ include.disambiguation }}" value="{{ include.option2 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option2 | slugify_unsafe }}', 'gtn-cyoa{{ include.disambiguation }}')">
+		<label for="cyoa-opt2{{ include.disambiguation }}" class="select btn btn-secondary">{{ include.option2 }}</label>
 	{% endif %}
 	{% if include.option3 %}
-		<input id="cyoa-opt3" type="radio" name="cyoa" value="{{ include.option3 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option3 | slugify_unsafe }}')">
-		<label for="cyoa-opt3" class="select btn btn-secondary">{{ include.option3  }}</label>
+		<input id="cyoa-opt3{{ include.disambiguation }}" type="radio" name="cyoa{{ include.disambiguation }}" value="{{ include.option3 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option3 | slugify_unsafe }}', 'gtn-cyoa{{ include.disambiguation }}')">
+		<label for="cyoa-opt3{{ include.disambiguation }}" class="select btn btn-secondary">{{ include.option3  }}</label>
 	{% endif %}
 	{% if include.option4 %}
-		<input id="cyoa-opt4" type="radio" name="cyoa" value="{{ include.option4 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option4 | slugify_unsafe }}')">
-		<label for="cyoa-opt4" class="select btn btn-secondary">{{ include.option4 }}</label>
+		<input id="cyoa-opt4{{ include.disambiguation }}" type="radio" name="cyoa{{ include.disambiguation }}" value="{{ include.option4 | slugify_unsafe }}" onclick="cyoaChoice('{{ include.option4 | slugify_unsafe }}', 'gtn-cyoa{{ include.disambiguation }}')">
+		<label for="cyoa-opt4{{ include.disambiguation }}" class="select btn btn-secondary">{{ include.option4 }}</label>
 	{% endif %}
 
 	{% if include.default %}
@@ -33,7 +33,7 @@
 			}
 		}
 		ready(function() {
-			cyoaDefault("{{ include.default | slugify_unsafe }}");
+			cyoaDefault("{{ include.default | slugify_unsafe }}", "gtn-cyoa{{ include.disambiguation }}");
 		})
 	</script>
 	{% endif %}

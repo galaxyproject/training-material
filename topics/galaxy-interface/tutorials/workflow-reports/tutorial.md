@@ -30,13 +30,21 @@ contributions:
     - guerler
     - mvdbeek
   funding:
-    - erasmusplus
+    - gallantries
 level: Intermediate
 subtopic: workflows
+
+recordings:
+- captioners:
+  - shiltemann
+  date: '2022-07-06'
+  length: 30M
+  youtube_id: hrZhpsiGaPM
+  speakers:
+  - shiltemann
+
 ---
 
-
-# Introduction
 
 
 Workflows are a powerful Galaxy feature that allows you to scale up your analysis by performing an end-to-end analysis with a single click of a button. In order to aid interpretation of workflow results, *workflow reports* may be configured to combine and display the most important analysis results in a single, customizable view.
@@ -64,7 +72,7 @@ We will start by importing this workflow into your Galaxy account:
 >
 > 1. **Import the workflow** into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_run_trs.md path="/topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.ga" title="Galaxy 101 for Everyone" %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/galaxy-interface/tutorials/workflow-reports/workflows/galaxy-101-everyone.ga" title="Galaxy 101 for Everyone" %}
 >
 >
 {: .hands_on}
@@ -321,7 +329,11 @@ Well done! You have created a customized workflow report with text and workflow 
   - peeks into dataset (useful for large files that cannot be included in their entirety in the report)
   - ..and more!
 
+## Make your reports nicer!
 
+{% snippet faqs/galaxy/reports_tables.md %}
+
+{% snippet faqs/galaxy/reports_collapsible_box.md %}
 
 # Share or publish your workflow report
 

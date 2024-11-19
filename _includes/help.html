@@ -3,35 +3,31 @@
         {% icon help %} Help
     </a>
     <div class="dropdown-menu dropdown-menu-right">
-        <!-- disable Tess for now
-        <form method="get" action="https://tess.elixir-europe.org/materials">
-            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
-            <input type="hidden" value="Galaxy Training" name="content_provider">
-            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
-        </form>
-        -->
-
 	<a class="dropdown-item" href="{% link faqs/index.md %}" title="Check our FAQs">
            {% icon question %} FAQs
         </a>
         {% if topic %}
         {% unless topic.tag_based %}
+        {% if topic.title %}
         <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{topic.name}}/faqs/" title="Check our FAQs for the {{topic.title}} topic">
            {% icon question %} Topic FAQs
         </a>
+        {% endif %}
         {% endunless %}
         {% elsif page.layout == 'topic' %}
         {% unless page.tag_based %}
+        {% if page.topic_title %}
         <a class="dropdown-item" href="{{ site.baseurl }}/topics/{{page.topic_name}}/faqs/" title="Check our FAQs for the {{page.topic_title}} topic">
            {% icon question %} Topic FAQs
         </a>
+        {% endif %}
         {% endunless %}
         {% endif %}
         <a class="dropdown-item" href="{{ site.help_url }}" title="Discuss on Galaxy Help">
             {% icon feedback %} Galaxy Help Forum
         </a>
         <a class="dropdown-item" href="{{ site.gitter_url }}" title="Discuss on gitter">
-           {% icon gitter %} Discuss on Gitter
+           {% icon gitter %} Discuss on Matrix
         </a>
     </div>
 </li>

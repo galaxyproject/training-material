@@ -1,0 +1,1 @@
+- During asynchronous events Instructors are more like Helpers, as the instructing portion is already done!

@@ -21,8 +21,6 @@ contributors:
 - anuprulez
 ---
 
-# Introduction
-
 
 The goal of [unsupervised learning](https://en.wikipedia.org/wiki/Unsupervised_learning) is to discover hidden patterns in any unlabeled data. One of the approaches to unsupervised learning is [clustering](https://en.wikipedia.org/wiki/Cluster_analysis). In this tutorial, we will discuss clustering, its types and a few algorithms to find clusters in data. Clustering groups data points based on their similarities. Each group is called a cluster and contains data points with high similarity and low similarity with data points in other clusters. In short, data points of a cluster are more similar to each other than they are to the data points of other clusters. The goal of clustering is to divide a set of data points in such a way that similar items fall into the same cluster, whereas dissimilar data points fall in different clusters. Further in this tutorial, we will discuss ideas on how to choose different metrics of similarity  between data points and use them in different clustering algorithms.
 
@@ -119,7 +117,7 @@ All data points are chosen at the bottom and each one is assigned to a separate 
 
 By looking at the dendrogram, the clusters can be observed showing different groups in the best way. The optimal number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse maximum distance vertically without intersecting a cluster.
 
-In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read [here](https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/).
+In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB. For more details, please read [this blogpost entitled *"Clustering | Introduction, Different Methods, and Applications"*](https://www.analyticsvidhya.com/blog/2016/11/an-introduction-to-clustering-and-different-methods-of-clustering/).
 ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 

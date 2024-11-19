@@ -1,0 +1,85 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "From Copernicus Sentinel 5P data to panoply visualization of volcanic activity impact to atmosphere",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0008-0622-604X",
+            "name": "Marie Joss\u00e9",
+            "url": "https://github.com/Marie59"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Sentinel5 volcanic data",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "interactive_tool_copernicus_notebook",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Copernicus Data Space Ecosystem",
+            "outputs": [
+                {
+                    "name": "output_collection",
+                    "type": "input"
+                },
+                {
+                    "name": "jupyter_notebook",
+                    "type": "ipynb"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_copernicus_notebook",
+            "tool_state": "{\"__input_ext\": \"ipynb\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"mode\": {\"mode_select\": \"scratch\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.1",
+            "type": "tool",
+            "uuid": "5154c0af-a442-40fd-b120-f10a6ee61980",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "interactive_tool_panoply",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "infiles": {
+                    "id": 0,
+                    "output_name": "output_collection"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Panoply",
+            "outputs": [
+                {
+                    "name": "outputs",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 324,
+                "top": 44
+            },
+            "post_job_actions": {},
+            "tool_id": "interactive_tool_panoply",
+            "tool_state": "{\"__input_ext\": \"netcdf\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infiles\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.5.1",
+            "type": "tool",
+            "uuid": "39633a52-4fba-4a70-8214-2694b1871493",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [],
+    "uuid": "0bfff47e-86fc-4246-9fe7-ba6d8b4be19f",
+    "version": 1
+}

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Age prediction using machine learning
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: https://zenodo.org/record/2545213
 questions:
 - How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?
 objectives:
@@ -18,8 +18,6 @@ contributors:
 - polkhe
 - anuprulez
 ---
-
-# Introduction
 
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) is used to create predictive models by learning features from datasets. In the studies performed by [Jason G. Fleischer et al. 2018](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9) and [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), biomarkers are examined to predict the chronological age of humans by analysing the RNA-seq gene expression levels and DNA methylation pattern respectively. Different machine learning algorithms are used in these studies to select specific biomarkers to make age prediction. The RNA-seq gene expression ([FPKM](https://www.ebi.ac.uk/training/online/glossary/fpkm)) dataset is generated using fibroblast cell lines of humans. The skin fibroblasts cells keep damage that happens with age. Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. Within each individual, [DNA methylation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3174260/) changes with age. This knowledge is used to select useful biomarkers from DNA methylation dataset. The [CpGs sites](https://en.wikipedia.org/wiki/CpG_site) with the highest correlation to age are selected as the biomarkers/features. In both these studies, specific biomarkers are analysed by machine learning algorithms to create an age prediction model.
@@ -69,7 +67,7 @@ We proceed to the analysis by uploading the RNA-seq dataset. The dataset has `13
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/2545213#.XEWTJ9-YVa0)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
 >    https://zenodo.org/record/2545213/files/training_data_normal.tsv

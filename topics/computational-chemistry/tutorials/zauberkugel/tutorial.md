@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Protein target prediction of a bioactive ligand with Align-it and ePharmaLib
 level: Intermediate
-zenodo_link: 'https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar'
+zenodo_link: 'https://zenodo.org/record/6055897'
 questions:
 - What is a pharmacophore model?
 - How can I perform protein target prediction with a multi-step workflow or the one-step Zauberkugel workflow?
@@ -20,9 +20,6 @@ contributors:
 - simonbray
 
 ---
-
-
-# Introduction
 
 
 Historically, the pharmacophore concept was formulated in 1909 by the German physician and Nobel prize laureate Paul Ehrlich ({% cite Ehrlich1909 %}). According to the [International Union of Pure and Applied Chemistry (IUPAC)](https://iupac.org/), a pharmacophore is defined as “an ensemble of steric and electronic features that is necessary to ensure the optimal supramolecular interactions with a specific biological target and to trigger (or block) its biological response” ({% cite Wermuth1998 %}). Starting from the cocrystal structure of a non-covalent protein–ligand complex (e.g. Figure 1), pharmacophore perception involves the extraction of the key molecular features of the bioactive ligand at the protein–ligand contact interface into a single model ({% cite Moumbock2019 %}). These pharmacophoric features mainly include: H-bond acceptor (HACC or A), H-bond donor (HDON or D), lipophilic group (LIPO or H), negative center (NEGC or N), positive center (POSC or P), and aromatic ring (AROM or R) moieties. Moreover, receptor-based excluded spheres (EXCL) can be added in order to mimic spatial constraints of the binding pocket (Figure 2). Once a pharmacophore model has been generated, a query can be performed either in a forward manner, using several ligands to search for novel putative hits of a given target, or in a reverse manner, by screening a single ligand against multiple pharmacophore models in search of putative protein targets ({% cite Steindl2006 %}).
@@ -79,7 +76,7 @@ Firstly, we will retrieve the concatenated ePharmaLib subset representing *P. fa
 >
 > 1. Upload the dataset from the [Zenodo](https://zenodo.org) link provided to your Galaxy history.
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md link="hhttps://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md link="https://zenodo.org/record/6055897/files/ePharmaLib_PHARAO_plasmodium.phar" %}
 >
 >    > <comment-title>ePharmaLib versions</comment-title>
 >    >
@@ -126,9 +123,9 @@ In this step, we will manually create an SMI file containing the SMILES of staur
 > >
 > > A SMILES string can automatically be generated from a ligand name or 2D structure with a desktop molecule editor such [ChemDraw®](https://perkinelmerinformatics.com/products/research/chemdraw/) and [Marvin®](https://chemaxon.com/products/marvin), or with web-based molecule editors such as [PubChem Sketcher](https://pubchem.ncbi.nlm.nih.gov//edit3/index.html) and [ChemDraw® JS](https://chemdrawdirect.perkinelmer.cloud/js/sample/index.html). Moreover, the pre-computed SMILES strings of a large number of bioactive compounds can be retrieved from chemical databases such as [PubChem](https://pubchem.ncbi.nlm.nih.gov/). e.g.
 > >
-> >    ```
-> >    https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
-> >    ```
+> > ```
+> > https://pubchem.ncbi.nlm.nih.gov/compound/44259#section=Isomeric-SMILES&fullscreen=true
+> > ```
 > >
 > {: .tip}
 >

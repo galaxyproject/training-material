@@ -18,7 +18,11 @@ module Jekyll
     end
 
     def render(context)
-      puts '[GTN/Search]'
+      if Jekyll.env != 'production'
+        Jekyll.logger.info '[GTN/Search] Skipping search generation in development'
+        return
+      end
+      Jekyll.logger.info '[GTN/Search]'
 
       site = context.registers[:site]
       topics = TopicFilter.list_topics_h(site)

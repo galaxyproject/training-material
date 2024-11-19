@@ -27,9 +27,11 @@ key_points:
 notebook:
   language: bash
 subtopic: bash
-contributors:
-- hexylena
-- erasmusplus
+contributions:
+  authorship:
+  - hexylena
+  funding:
+  - gallantries
 tags:
 - game
 - bash

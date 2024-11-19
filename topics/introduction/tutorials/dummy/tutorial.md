@@ -19,9 +19,6 @@ contributors:
 ---
 
 
-# Introduction
-
-
 There are several ways to get data into Galaxy:
 - Uploading a file by pasting in a URL
 - Uploading a file from the computer

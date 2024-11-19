@@ -13,9 +13,6 @@ contributors:
   - bebatut
 ---
 
-# Introduction
-
-
 The website with the training material can be run locally. Sometimes, it is also interesting to freeze the tutorials or to get PDFs of the tutorials.
 
 > <agenda-title></agenda-title>

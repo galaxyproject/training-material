@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}" dir="auto">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>{{ page.title | default: site.title }}</title>
+
+	{%- assign topic_id = page | get_topic -%}
+	{%- assign topic = site.data[topic_id] -%}
+	{%- assign og_title = site | get_og_title:page,false -%}
+	{%- assign og_title_rev = site | get_og_title:page,true-%}
+
+        <title>{{ og_title_rev | default: site.title }}</title>
         {% if jekyll.environment == 'production' %}
             {% include _includes/analytics.html %}
         {% endif %}
@@ -15,40 +21,44 @@
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
         <link rel="preload" href="{{ site.baseurl }}/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        {% if page.js_requirements.mathjax %}
         <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML" as="script" crossorigin>
+        {% endif %}
         <link rel="preload" href="{{ site.baseurl }}/assets/css/main.css?v=3" as="style">
         {{ 'load' | bundle_preloads }}
         <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css?v=3">
         <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
         <meta name="theme-color" content="#2c3143"/>
-
+	{% if page.layout == "faq" %}
+	<link rel="alternate" type="application/json+oembed" href="https://oembed.apps.galaxyproject.eu/oembed?format=json&url={{ site.url }}{{ site.baseurl }}{{ page.url }}" title="oEmbed Profile" />
+	{% endif %}
 
         {{ page | generate_dublin_core: site }}
-
-        {% assign topic = site.data[page.topic_name] %}
-        {% assign og_title = topic.title %}
-        {% if page.title %}
-            {% assign og_title = page.title %}
-        {% endif %}
-        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}">
+        {%- assign og_desc = page.description | default: page.excerpt | default:topic.summary | default: page.content | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" | strip_html | regex_replace:'[\n\r\s"]',' ' | truncate: 1000 -%}
+        <meta name="description" content="{{ og_desc }}">
         <meta property="og:site_name" content="Galaxy Training Network">
-        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}">
-        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}">
+	<meta property="og:title" content="{{ og_title | default: page.title }}">
+        <meta property="og:description" content="{{ og_desc }}">
 
         {%- if page.cover %}{% assign coverimage = page.cover %}
-        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "/assets/images/cofest.png" %}
-        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "/assets/images/GalaxyNews.png" %}
-        {%- elsif page.tags contains "gat" %}{% assign coverimage = "/assets/images/gat.png" %}
-        {%- else %}{% assign coverimage = "/assets/images/GTNLogo1000.png" %}{% endif %}
-        {% assign og_image = page.og_image | default: coverimage | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
-        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}">
+        {%- elsif page.tags contains "cofest" %}{% assign coverimage = "assets/images/cofest.png" %}
+        {%- elsif page.tags contains "galaxy" %}{% assign coverimage = "assets/images/GalaxyNews.png" %}
+        {%- elsif page.tags contains "gat" %}{% assign coverimage = "assets/images/gat.png" %}
+        {%- else %}{% assign coverimage = "assets/images/GTNLogo1000.png" %}{% endif %}
+        {% assign og_image = page.og_image | default: page['cover-image'] | default: topic.og_image | default: coverimage | default: "assets/images/GTNLogo1000.png" %}
+	{%- if page.layout == "tutorial_hands_on" or page.layout == "tutorial_slides" or page.layout == "event" or page.layout == "workflow" or page.layout == "faq" or page.layout == "introduction_slides" or page.layout == "learning-pathway"  -%}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url | replace: ".html", ".png" }}">
+	{% elsif page.layout == "topic" or page.layout == "recordings" %}
+	<meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social{{ page.url }}index.png">
+	{%- else -%}
+	<meta property="og:image" content="{% if og_image contains 'https://' %}{{ og_image }}{% else %}{{ site.url }}{{ site.baseurl }}/{{ og_image }}{% endif %}">
+	{%- endif -%}
 
-        {% if page.layout == "tutorial_hands_on" %}
+        {%- if page.layout == "tutorial_hands_on" -%}
         <script type="application/ld+json">
-            {% include _includes/material.jsonld material=page topic=topic site=site %}
+            {%- include _includes/material.jsonld material=page topic=topic site=site -%}
         </script>
-        {% endif %}
+        {%- endif -%}
     </head>
     <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
         {{ 'theme' | load_bundle }}
@@ -64,6 +74,14 @@
         {% include _includes/default-footer.html %}
 
         {{ 'main' | load_bundle }}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+	{% if page.js_requirements.mathjax %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+	{% endif %}
+	{% if page.js_requirements.mermaid %}
+	<script src="{{ site.baseurl }}/assets/js/mermaid@10.6.1.js" async></script>
+	<link rel="preload" href="{{ site.baseurl }}/assets/js/mermaid@10.6.1.js" as="script" crossorigin>
+	{% endif %}
+
     </body>
 </html>

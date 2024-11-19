@@ -10,22 +10,26 @@ time_estimation: 0H30M
 key_points:
 - From WFS webservice, you can now access GIS remote data, build a query to select a subpart of the data, and import it to Galaxy through QGIS Galaxy interactive tool.
 tags:
+  - earth-system
   - GIS
   - Geographical Information System
   - WFS
   - Spatial data
-  - QGIS
   - Maps
   - OGC
-contributors:
-- colineroyaux
-- Marie59
-- yvanlebras
+contributions:
+  authorship:
+  - colineroyaux
+  - Marie59
+  - yvanlebras
+  funding:
+  - gallantries
+  - fairease
+  - pndb
 
+subtopic: ecologyaccess
 ---
 
-
-# Introduction
 
 Based on this [QGIS official tutorial](https://docs.qgis.org/2.18/en/docs/training_manual/online_resources/wfs.html), you will learn here how to access, filter and import GIS data through WFS web service using QGIS Galaxy interactive tool:
 

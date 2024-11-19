@@ -38,9 +38,18 @@ tags:
 contributors:
   - wm75
 
+recordings:
+- captioners:
+  - mtekman
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 25M
+  youtube_id: jNFLYhjgJPs
+  speakers:
+  - gallardoalba
+
 ---
 
-# Introduction
 
 
 In some research or clinical contexts it is not possible, or very hard, to
@@ -163,7 +172,7 @@ steps are independent of the data source you choose.
 >    > A name tag will automatically propagate to any new dataset derived
 >    > from the tagged dataset.
 >    {: .comment}
->    
+>
 >    You can create a name tag by attaching a tag starting with `#` to any
 >    dataset.
 >
@@ -314,7 +323,7 @@ steps are independent of the data source you choose.
 >          - Click **Apply**
 >        - *"Type"*: `fastqsanger.gz`
 >        - *"Name"*: `Nanopore data` (or similar)
->        - *"Add nametag for name:"* {% icon param-check %}    
+>        - *"Add nametag for name:"* {% icon param-check %}
 >        - Click **Upload**
 >
 {: .hands_on}

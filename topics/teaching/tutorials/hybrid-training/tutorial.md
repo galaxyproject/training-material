@@ -20,18 +20,18 @@ contributions:
     - bebatut
     - fpsom
   funding:
-    - erasmusplus
+    - gallantries
 ---
-
-> <tip-title>Combine with Australia Biocommon paper</tip-title>
-> This is an excellent companion paper: {% cite Hall_2021 %}
-{: .tip}
 
 **hybrid training events**, i.e. pairing-up on-site helpers with remote instructors across multiple sites simultaneously:
 
 ![Hybrid training diagram, a single remote instructor broadcasts training to multiple sites](./images/hybrid_training.png)
 
 With this model, we aim to bring training events to the trainees while reducing the environmental impact of instructor travel.
+
+> <tip-title>Combine with Australia Biocommon paper</tip-title>
+> This is an excellent companion paper: {% cite Hall_2021 %}
+{: .tip}
 
 # What is an hybrid training event?
 

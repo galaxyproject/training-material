@@ -13,7 +13,8 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
-subtopic: writing
+subtopic: getting-started
+priority: 4
 contributions:
   authorship:
   - bebatut
@@ -21,12 +22,13 @@ contributions:
   editing:
   - bgruening
   - shiltemann
+  funding:
+  - gallantries
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
 ---
 
-# Introduction
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
@@ -192,15 +194,15 @@ All tutorials and slides must give credit to all contributors. This can be any t
    To define a funding body in the `CONTRIBUTORS.yaml` there are a few extra fields available:
 
    ```yaml
-   erasmusplus:
-     name: Erasmus+ Programme
+   gallantries:
+     name: Gallantries Project
      joined: 2020-09
      avatar: "https://www.erasmusplus.nl/assets/images/logo.png"
      github: false
      funder: true
      funding_id: 2020-1-NL01-KA203-064717
      funding_statement: |
-        This project ([`2020-1-NL01-KA203-064717`](https://ec.europa.eu/programmes/erasmus-plus/projects/eplus-project-details/#project/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
+        This project ([`2020-1-NL01-KA203-064717`](https://erasmus-plus.ec.europa.eu/projects/search/details/2020-1-NL01-KA203-064717)) is funded with the support of the Erasmus+ programme of the European Union. Their funding has supported a large number of tutorials within the GTN across a wide array of topics.
         ![eu flag with the text: with the support of the erasmus programme of the european union](https://gallantries.github.io/assets/images/logosbeneficaireserasmusright_en.jpg)
    ```
 
@@ -283,6 +285,18 @@ The generated tutorial is structured with:
 >
 {: .hands_on}
 
+## Self Study Tutorials
+
+By following all of the guidelines in this file you can be sure that your tutorial will be optimised for self-study.
+The GTN framework encourages the use of snippets, and PTDK ensures tutorials have fully detailed parameters learners should configure.
+If you make use of snippets in appropriate places, learners can easily follow a tutorial despite different skill levels with Galaxy.
+
+Additionally use of [Question and Solution boxes](#questions-and-solutions-boxes) can ensure that students can self-check their understanding and progress as they progress through the tutorial.
+Generally we recommend one or more questions (and associated correct solutions!) after every hands-on box (which might have a one or more steps to follow.)
+These questions will let students be sure their work is correct before they proceed too far.
+As such you should design your questions carefully in order to catch common and likely failure modes that learners may encounter.
+If a student might forget to select a less-common or deeply-nested parameter, be sure that your question following that hands on tests that properly, and if possible explain that in the solutions.
+
 ## Adding images with captions
 
 To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`!​[proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
@@ -308,12 +322,11 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > should be functional; `figcaption` descriptions should be editorial or
 > illustrative.**
 >
-> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .quote}
+{: .quote cite="https://thoughtbot.com/blog/alt-vs-figcaption" author="thoughtbot.com"}
 
 As an example for this image:
 
-![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+![alt text]({{site.baseurl}}/topics/microbiome/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
 {% raw %}
 ```markdown
@@ -336,6 +349,8 @@ Surround your math expression with two `$` signs on each side (like in LaTeX mat
 - block expressions, *e.g.* `$$ 5 + 5 $$` will be rendered in its own line block as
 
    $$ 5 + 5 $$
+
+- Note: if inline mode is not working correctly, you can force it by using the following delimiters instead of dollar signs: `\\( 5 +5 \\)`
 
 Dollar signs are therefore *reserved characters* for instructing the templating system to open/close LaTeX math blocks. If you want to use a `$` within your expression, you will need to *escape* it: `$$ a + 3\$ = 5\$ $$` will be rendered as: $$ a + 3\$ = 5\$ $$
 
@@ -389,7 +404,7 @@ The rendered table is then given as a minimum-width and centred matrix:
 
 ## Internally linking to other training material
 
-If you want to link to other training material within your text, please use the {%raw%}`{% link path/to/file.ext %}`{%endraw%} tag:
+If you want to link to other training material within your text, please use the {%raw%}`{​% link path/to/file.ext %​}`{%endraw%} tag:
 
 {%raw%}
 ```markdown
@@ -399,7 +414,7 @@ If you want to link to other training material within your text, please use the 
 
 (Note the `.md` extension, and not `.html`, always provide the file name here, it will automatically be converted to the correct link)
 
-If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{% link %}`{%endraw%} tag:
+If you want to link to a specific section in a tutorial using an anchor (e.g. `#getting-started`), place it outside of the {%raw%}`{​% link %​}`{%endraw%} tag:
 
 {%raw%}
 ```markdown
@@ -590,7 +605,7 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
-## **Questions** and **solution** boxes
+## **Questions** and **Solutions** boxes
 
 Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
 They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
@@ -631,6 +646,8 @@ Questions should be quick to answer. You can directly ask a question and expect 
 With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.
 
 In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-selfstudy.md %}
 
 
 ## **Tips** box
@@ -839,6 +856,28 @@ Rendered:
 > ```
 {: .code-out}
 
+## **Quote** boxes
+
+{% raw %}
+```markdown
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+```
+{% endraw %}
+
+Rendered:
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra" author="Yogi Berra"}
+
+The citation and author parameters are both optional. If provided the `cite` key must be a URL.
+
+> If you don't know where you're going, you might not get there.
+{: .quote cite="https://en.m.wikiquote.org/wiki/Yogi_Berra"}
+
+> If you don't know where you're going, you might not get there.
+{: .quote author="Yogi Berra"}
+
 # Additional Features to Improve Learning
 
 Here we cover additional features you can use throughout your tutorials to improve the learning experience.
@@ -883,11 +922,89 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
+## Example Histories
+
+If you have example input histories for your tutorial, perhaps for specific servers where trainees will often follow a tutorial but want to skip a slow input step, then you can provide example histories as part of your tutorial.
+
+> <code-in-title>Tutorial Frontmatter</code-in-title>
+> ```yaml
+> answer_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/generating-a-single-cell-matrix-using-alevin-3
+>   - label: "Older Alevin version"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---answer-key
+>     date: 2024-01-01
+> input_histories:
+>   - label: "UseGalaxy.eu"
+>     history: https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1
+> ```
+{: .code-in}
+
+> <code-out-title>Rendered Tutorial</code-out-title>
+> ![a screenshot of the GTN metadata box showing a dropdown for input histories and answer histories. The answer histories features two examples one on UseGalaxy.eu and an older alevin one, each with a date. In the dropdown is also a link to an FAQ titled how to use this](images/example-histories.png)
+{: .code-out}
+
+## Workflows
+
+In some tutorials you aren't as interested in teaching users the individual steps for analysing data, but rather want to focus on some downstream aspects of analysis, or to showcase the best practice workflows that are already available for a user to use! In those cases it can be useful to have a nicer way of inviting the user to execute those steps.
+
+If you are accessing these in tutorial mode, they should function as button that, when clicked, launch the workflow directly. Outside of tutorial mode, they will link to our redirection service which will let you supply which Galaxy you plan to use.
+
+Note that if for some reason the 'fancy' method doesn't work, there are fallback tip boxes to help a user execute a similar procedure manually.
+
+### GTN Workflows
+
+If you've included the workflow in the GTN but haven't uploaded to a repository yet:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_trs.md path="topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" title="Galaxy Workflow Data QC" %}
+
+
+### WorkflowHub
+
+You can use a dedicated snippet to invite users to run a WorkflowHub workflow:
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_wfh.md title="mRNA-Seq BY-COVID Pipeline" wfhub_id="685" version="1" %}
+
+Note that it links to a specific workflow, on any Galaxy server. When this tutorial is opened from within the Tutorial Mode, that link will change to one on the current server, removing the intermediate step.
+
+### Dockstore
+
+Please note that the dockstore ID should be provided without the `#workflow/` prefix, so starting from `github.com`.
+
+{% raw %}
+```markdown
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
+```
+{% endraw %}
+
+Rendered:
+
+{% snippet faqs/galaxy/workflows_run_ds.md title="K-mer Profiling HiFi" dockstore_id="github.com/iwc-workflows/kmer-profiling-hifi-VGP1/main" version="v0.1.5" %}
+
+This snippet has the same behaviour, it will use my.galaxy.training links to make them server independent, but in Tutorial Mode it will open on the current server.
 
 
 ## FAQs (snippets)
 
 Many common questions or instructions may be useful to share between different tutorials. For example instructions on how to start a new history or importing data. To make these types of snippets easier to re-use and avoid duplication, they are available in the form of *snippets*.
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching.md %}
 
 ### Finding snippets
 These are available in folders named `faqs`, either at the project level, topic level, or tutorial level.
@@ -935,6 +1052,7 @@ or without a box altogether:
 {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 
 
+
 ### Creating new FAQs/snippets
 
 Do you want to include something in your tutorial that you think might be useful in other tutorials as well? Or are you answering a frequently asked question? Consider creating a snippet for it
@@ -961,6 +1079,8 @@ Here you can write the snippet / answer to the FAQ in Markdown
 {% assign kid_key = "FAQ Schema" %}
 {% assign kid_val = site.data['schema-faq'] %}
 {% include _includes/schema-render.html key=kid_key value=kid_val %}
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-faqs.md %}
 
 ### FAQ pages
 
@@ -1013,11 +1133,14 @@ To use these icons, take the name of the icon, 'details' in this example, and wr
 {% raw %}{% icon details %}{% endraw %}
 ```
 
+Some icons have multiple aliases, any may be used, but we'd suggest trying to choose the most semantically appropriate one in case Galaxy later decides to change the icon.
+
 <div class="row">
-{% for icon in site["icon-tag"] %}
+{% assign icon_groups = site['icon-tag'] | group_icons %}
+{% for icon in icon_groups %}
 	<div class="col-md-2 col-sm-3" style="text-align: center">
-		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
-		<div>{{ icon[0] }}</div>
+		<div style="font-size: 400%">{% icon_var icon[0][0] %}</div>
+		<div>{% for z in icon[0] %}{{ z }}{%unless forloop.last%},{%endunless%} {% endfor %}</div>
 	</div>
 {% endfor %}
 </div>
@@ -1063,23 +1186,25 @@ Sometimes you're writing a large tutorial and at one small step there are multip
 
 Include this markdown where you want your user to choose between the multiple paths:
 
+<!-- GTN:IGNORE:041 we cannot tell code samples from text so we get dupe warnings here. -->
+
 > <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```
-> {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
+> {% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados"
 >        text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}{% endraw %}
 > ```
 {: .code-in}
 
-{% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+{% include _includes/cyoa-choices.html option1="Ananas of course" option2="Avocados" default="Avocados" text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
 
-And then they can wrap the relevant sections with a `div` block with the relevant class. You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
+And then they can wrap the relevant sections with a `div` block with the relevant class (if you have space in your option, use `-` in the class). You **must** set `markdown="1"` as well to have the inner contents rendered corretly.
 
 **NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
 
 > > <code-in-title>Markdown</code-in-title>
 > > ```
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1097,7 +1222,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 >
 > > <code-out-title></code-out-title>
 > >
-> > <div class="Ananas" markdown="1">
+> > <div class="Ananas-of-course" markdown="1">
 > > - 🍍 are fantastic
 > > - hands on!
 > > - questions!
@@ -1113,7 +1238,58 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > {: .code-out}
 {: .code-2col}
 
-This can also be used inline: My favourite fruit is an <span class="Ananas">🍍</span><span class="Avocados">🥑</span>.
+> <tip-title>Why ananas-of-course? Name munging</tip-title>
+> CYOAs work by filtering the content based on the class name. Class names cannot contain spaces, so, we need to replace all whitespace with `-`.
+> The exact algorithm we use to create 'safe' IDs is:
+>
+> 1. Remove the following character `"`, `'`, `/`, `;`, `:`, `,`, `.`, `!`, `@`, `#`, `$`, `%`, `^`, `&`, `*`, `(`, `)` from the text.
+> 2. Replace all whitespace with `-`
+> 3. Replace multiple `-`s with a single `-`
+>
+> This results in retaining capitalisation. Hence, `Ananas of course` becomes `Ananas-of-course`.
+> For a more complicated example `(RNA) inhibitors` would become `RNA-inhibitors`.
+{: .tip}
+
+This can also be used inline: My favourite fruit is an <span class="Ananas-of-course">🍍</span><span class="Avocados">🥑</span>.
+
+> <tip-title>Multiple, Disconnected CYOAs</tip-title>
+> If you wish to have multiple CYOAs in a single tutorial, you are free to do that! However you must:
+>
+> 1. Ensure that all options are disjoint, there should not be any shared terms! (I.e if the both CYOAs need to use "STAR", please find a different way to phrase it, or even use "STAR ", it just needs to be different.)
+> 2. Provide a disambiguation term for them, passed as a parameter to all, or all but one, includes.
+>
+> This disambiguation term will affect the URL parameter, which will become `?gtn-cyoa{term}={value}`
+>
+> E.g.:
+>
+> ```
+> {% raw %}
+> {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
+> {% include _includes/cyoa-choices.html option1="Yes" option2="No" text="Do the thing?" disambiguation="english" %}
+> {% endraw %}
+> ```
+{: .tip}
+
+> <tip-title>Using every branch</tip-title>
+> We, the GTN, don't always know if you *intend* to have not used a specific branch. As such we recommend that if you have a branch that has no steps, you should include a `div` block with the class name of that branch, just so we know for sure you meant it to be empty.
+>
+> E.g. 
+>
+> ```
+> {% raw %}
+> {% include _includes/cyoa-choices.html option1="Yes, they don't pass QC" option2="No" text="Do you think your samples need to be filtered?" %}
+> 
+> <div class="Yes-they-dont-pass-QC" markdown="1">
+> Some content here!
+> </div>
+> 
+> <div class="No" markdown="1">
+> <!-- intentionally empty. This comment itself isn't necessary, but we recommend adding the div. -->
+> </div>
+> 
+> {% endraw %}
+> ```
+{: .tip}
 
 ### URL Parameter
 
@@ -1121,6 +1297,8 @@ The branch can be selected via URL parameter e.g. for courses, to prevent users 
 
 - [See this page with Ananas](?gtn-cyoa=Ananas#choose-your-own-tutorial)
 - [See this page with Avocados](?gtn-cyoa=Avocados#choose-your-own-tutorial)
+
+{% snippet topics/contributing/tutorials/create-new-tutorial-content/faqs/remote-teaching-cyoa.md %}
 
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
@@ -1208,7 +1386,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
-- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
+- Do **not** use icons `{% raw %}{% icon galaxy-eye %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 

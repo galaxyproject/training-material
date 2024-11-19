@@ -15,7 +15,7 @@ else
 	changed_slides="$(echo "$videos" | xargs ./bin/filter-resource-metadata video)"
 fi
 
-$(npm bin)/http-server -p 9876 _site &
+./node_modules/.bin/http-server -p 9876 _site &
 
 for slides in $changed_slides; do
 	echo "====== $slides ======"
@@ -26,7 +26,7 @@ for slides in $changed_slides; do
 
 	# Process the slides
 	echo $built_slides
-	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
+	docker run --rm --network host -v $(pwd):/slides astefanutti/decktape:3.9  automatic -s 1920x1080 http://127.0.0.1:9876/training-material/$slides /slides/_site/training-material/$pdf
 
 	# Build the slides
 	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"

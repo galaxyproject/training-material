@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Infinium Human Methylation BeadChip"
-zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
+zenodo_link: "https://zenodo.org/record/1251211"
 questions:
   - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
   - "How to analyse and visualise Infinium Human Methylation BeadChip's?"
@@ -13,10 +13,19 @@ objectives:
 key_points:
 - "Infinium Human Methylation BeadChip is an array based technology to generate DNA methylation profiling at individual CpG loci in the human genome based on Illumina’s bead technology."
 - "Time and cost efficiency followed by high sample output, and overall quantitative accuracy and reproducibility made Infinium Human Methylation BeadChip one of the most widely used arrays on the market."
-contributors:
-  - kkamieniecka
-  - poterlowicz-lab
+contributions:
+  authorship:
+    - kkamieniecka
+    - khaled196
+    - poterlowicz-lab
+  editing: []
+  testing: []
+  funding:
+    - elixir-europe
 ---
+
+This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.
+
 > <agenda-title></agenda-title>
 > In this tutorial we will do:
 > 1. TOC
@@ -25,12 +34,6 @@ contributors:
 >
 >
 {: .agenda}
-
-This tutorial is based on Hugo W, Shi H, Sun L, Piva M et al.: Non-genomic and Immune Evolution of Melanoma Acquiring MAPKi Resistance {% cite Hugo2015 %}.
-
-The data we use in this tutorial are available at [Zenodo](https://zenodo.org/record/1251211).
-
----
 
 # Introduction
 
@@ -75,6 +78,7 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >    - `GSM1588705_8795207119_R05C02_Grn.idat`
 >    - `GSM1588706_8795207135_R02C02_Grn.idat`
 >    - `GSM1588707_8795207119_R06C02_Grn.idat`
+>    - `phenotypeTable.txt`
 >
 >    > <details-title>List of Zenodo URLs</details-title>
 >    > ```
@@ -86,30 +90,50 @@ The first step of the Infinium Human Methylation BeadChip array analysis is raw 
 >    > https://zenodo.org/record/1251211/files/GSM1588706_8795207135_R02C02_Grn.idat
 >    > https://zenodo.org/record/1251211/files/GSM1588705_8795207119_R05C02_Grn.idat
 >    > https://zenodo.org/record/1251211/files/GSM1588707_8795207119_R06C02_Grn.idat
+>    > https://zenodo.org/record/1251211/files/phenotypeTable.txt
 >    > ```
 >    {: .details}
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    > <comment-title>Phenotype table</comment-title>
+>    > Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
+>    {: .comment}
 >
-> 3. Run **Infinium Human Methylation BeadChip** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
->    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
-> ![Raw_intensity_data_loading](../../images/1Raw_intensity_data_loading.png)
+> 3. Run **UCSC Main** {% icon tool %} to obtain the reference genome. The tool will take you to the **UCSC table browser**. Use the following parameters to extract the reference genome
+>   - *"clade"*: `Mammal`
+>   - *"genome"*: `Human`
+>   - *"assembly"*: `Feb. 2009 (GRCh37/hg19)`
+>   - *"group"*: `Regulation`
+>   - *"track"*: `HAIB Methyl450`
+>   - *"table"*: `GM12878 (wgEncodeHaibMethyl450Gm12878SitesRep1)`
+>   - *"region"*: `genome`
+>   - *"output format"*: `GTF - gene transfer (limited)`
+>   - *"Send output to"*: `Galaxy` (only)
+>   - Click on the **get output** button at the bottom of the screen
+>   - On the next page, click on the **Send Query to Galaxy** button
+>   - Wait for the upload to finish
+>
+>
+> After exporting the reference genome from UCSC, we need to make sure that it is in the right dataset build.
+>
+> Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it. \
+> Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
+>
+> {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
+>
+> Click on `display at UCSC` towards the bottom of the history item.
+> This will launch UCSC Genome Browser with your Custom Track
+> ![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 {: .hands_on}
+
 
 # .idat preprocessing
 
 Preprocessing and data quality assurance is an important step in Infinium Methylation Assay analysis. Idat dataset represents two colour data with a green and a red channel and can be converted into methylated and unmethylated signals or into Beta values. The Infinium Human Methylation BeadChip tool extracts and plots the quality control data frame with two columns mMed and uMed which are the medians of methylation signals (Meth and Unmeth). Comparing them against one another allows users to detect and remove low-quality samples.
 
 ![quality_control](../../images/quality_control.png)
-
-> <hands-on-title>Preprocessing</hands-on-title>
-> Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and disrupt downstream analysis of results.  {% cite Hansen %} It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
-> ![idat_preprocessing](../../images/2idat_preprocessing.png)
->
-{: .hands_on}
 
 > <comment-title>Normalisation of the data</comment-title>
 > If your files require normalisation, you might prefer to use one of the other preprocessing tools provided in Infinium Human Methylation BeadChip tool i.e. Preprocess Funnorm or Preprocess Quantile look for recommendation at {% cite Hansen %}.
@@ -119,24 +143,23 @@ Preprocessing and data quality assurance is an important step in Infinium Methyl
 # Differentially methylated regions and positions analysis
 
 The main goal of the **Infinium Human Methylation BeadChip** analysis is to simplify the way differentially methylated loci sites are detected. The **Infinium Human Methylation BeadChip** pipeline contains differentially methylated positions (DMPs) detection with respect to a phenotype covariate, and more complex solutions for finding differentially methylated regions (DMRs). Genomic regions that are differentially methylated between two conditions can be tracked using a bumphunting algorithm. The algorithm first implements a t-statistic at each methylated loci location, with optional smoothing, then groups probes into clusters with a maximum location gap and a cutoff size to refer the lowest possible value of genomic profile hunted by our tool.
-> <comment-title>Phenotype table</comment-title>
-> Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
-{: .comment}
 
-However, for the purpose of this tutorial we would like you to upload phenotype table from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) repository.
-
-> <hands-on-title>Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</hands-on-title>
->    ```
->    https://zenodo.org/record/1251211/files/phenotypeTable.txt
->    ```
-> ![pheno table](../../images/3parameters.png)
-> Set the following parameters:
+> <hands-on-title>detecting methylated loci sites</hands-on-title>
+> 1. Run {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} with the following parameters to map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
+>    - {% icon param-files %} *"red channel files"*: all files ending in `_Red`
+>    - {% icon param-files %} *"green channel files"*: all files ending in `Grn`
+>
+>
+> Ilumina methylation array data can be mapped to the genome with or without additional preprocessing methods. Incomplete annotation of genetic variations such as single nucleotide polymorphism (SNP) may affect DNA measurements and disrupt downstream analysis of results. {% cite Hansen %} It is highly recommended to remove the probes that contain either an SNP at the methylated loci interrogation or at the single nucleotide extension. In this tutorial we will remove probes affected by genetic variation by selecting **(Optional) Preprocessing Method** {% icon tool %}.
+>
+>    - *"(Optional) Preprocessing Method"*: `Remove SNPS`
+>
+>
+>    - *"Phenotype Table"*:`The phenotypeTable.txt file uploaded from Zenodo`
 >    - *"maxGap Size"*:`250`
 >    We will use the default gap of 250 base pairs (bps), i.e. any two points more than 250 bps away are put in a new cluster.
 >    - *"Cutoff Size"*:`0.1`
 >    In order to find segments that are positive, near zero, and negative. We need a cutoff which is one number in which case “near zero” default 0.1
->
-> ![params](../../images/4parameters.png)
 >    - *"Number of Resamples"*:`0`
 > Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using 'bootstrap' method.
 >    - *"nullMethod"*:`permutation`
@@ -144,40 +167,13 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > ‘permutation’ (defaults to ‘permutation’).
 >    - *"Phenotype Type"*:`categorical`
 > Identify regions where methylation is associated with a continuous or categorical phenotype.
->
-> Search for `UCSC Main` in the tool search bar (top left)
-> ![params](../../images/5parameters.png)
 >    - *"qCutoff Size"*:`0.5`
 > Diffrentialy methylated positions with an FDR q-value greater than this value will not be returned.
 >    - *"Variance Shrinkage"*:` TRUE`
 > Default TRUE as it is recommended when sample sizes are small <10
 >    - *"Genome Table"*: `wgEncodeHaibMethyl450 ... `
-> Click on `UCSC Main` {% icon tool %}. You will be taken to the **UCSC table browser**
-> ![UCSC](../../images/5UCSC.png "UCSC")
-> Set the following options:
->     - *"clade"*: `Mammal`
->     - *"genome"*: `Human`
->     - *"assembly"*: `Feb. 2009 (GRCh37/hg19)`
->     - *"group"*: `Regulation`
->     - *"track"*: `HAIB Methyl450`
->     - *"table"*: `GM12878 (wgEncodeHaibMethyl450Gm12878SitesRep1)`
->     - *"region"*: `genome`
->     - *"output format"*: `GTF - gene transfer (limited)`
->     - *"Send output to"*: `Galaxy` (only)
-> Click on the **get output** button at the bottom of the screen
-> On the next page, click on the **Send Query to Galaxy** button
-> Wait for the upload to finish
-> We will now map the imported datasets against phenotype covariate and reference genome obtained from UCSC.
-> Click on the **Differentially_Methylated_Positions.bed** output in your history to expand it.
-> Set the database build of your dataset to `Human Feb. 2009 (GRCh37/hg19) (hg19)`(if it is not set automatically)
 >
-> {% snippet faqs/galaxy/datasets_change_dbkey.md dbkey="hg19" %}
->
-> Click on `display at UCSC` towards the bottom of the history item.
-> This will launch UCSC Genome Browser with your Custom Track
 {: .hands_on}
-
-![Display at UCSC](../../images/ucsc.png "UCSC genome track showing differentialy methylated regions located on chromosome 6")
 
 > <question-title></question-title>
 > How do we define phenotype covariate?
@@ -185,35 +181,32 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > > Phenotype covariate is the set of observable characteristics of an individual resulting from the gene-environment interactions
 > {: .solution}
 {: .question}
-
 # Annotation and visualization
-
 In addition to downstream analysis users can annotate the differentially methylated loci at the promoter regions of genes with gene function descriptions, and relationships between these concepts.
-
 > <hands-on-title> Annotate Differentially Methylated Position</hands-on-title>
-> 1. Run **chipeakanno annopeaks** {% icon tool %}on the output of minfi_dmp with the following parameters
->   - {% icon param-file %} *"Differentialy methylated data"*: output of **minfi dmp** {% icon tool %}
+> 1. Run {% tool [ChIPpeakAnno annoPeaks](toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0) %} on the output of {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %} with the following parameters
+>   - {% icon param-file %} *"Differentialy methylated Positions"*: output of {% tool [Infinium Human Methylation BeadChip](toolshed.g2.bx.psu.edu/repos/kpbioteam/ewastools/minfi_analysis/2.1.0) %}
 >   - *"bindingType"*: `StartSite`
 >   - *"bindingRegionStart"*:`-5000`
 >   - *"bindingRegionEnd"*:`3000`
->   - *"Additional Column of Score"*:`8`
+>   - *"Additional Column of Score"*:`5`
 >
 >        Position of column of score optional value if it is required
 >
-> 2. **Cut** {% icon tool %} on the previous output adjusting the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of genes
->   - *"Cut columns"*: `c16`hhh
+> 2. Run {% tool [Cut](Cut1) %} on the previous output adjusting the following parameters to cut "gene_name" column from table of annotated peaks and then get a list of genes
+>   - *"Cut columns"*: `c16`
 >   - *"Delimited by"*: `Tab`
->   - {% icon param-file %} *"From"*: output of **chipeakanno annopeaks** {% icon tool %}
+>   - {% icon param-file %} *"From"*: output of {% tool [ChIPpeakAnno annoPeaks](toolshed.g2.bx.psu.edu/repos/kpbioteam/chipeakanno_annopeaks/chipeakanno_annopeaks/0.1.0) %}
 >
-> 3. **Remove beginning** {% icon tool %} of `Gene List` with the following parameters
+> 3. Use {% tool [Remove beginning](Remove beginning1) %} on `Gene List` with the following parameters
 >   - *"Remove first"*: `1`
->   - {% icon param-file %} *"from"*: output of **Cut** {% icon tool %}
+>   - {% icon param-file %} *"from"*: output of {% tool [Cut](Cut1) %}
 >
-> 4. Run  **clusterProfiler bitr** {% icon tool %} on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
+> 4. Run {% tool [Cluster Profiler Bitr](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0) %} on the previous output adjusting the following parameters to convert the list of genes to list of entrez ID
 >   - *"Input Type Gene ID"*: `SYMBOL`
 >   - *"Output Type Gene ID"*: `ENTREZID`
 >
-> 5. Use the output of the  clusterProfiler bitr {% icon tool %} to run a GO Enrichment Analysis using **clusterProfiler go**
+> 5. Run a GO Enrichment Analysis using {% tool  [clusterProfiler go](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_go/clusterprofiler_go/0.1.0) %} on the output of the {% tool  [Cluster Profiler Bitr](toolshed.g2.bx.psu.edu/repos/kpbioteam/clusterprofiler_bitr/clusterprofiler_bitr/0.1.0) %}
 {: .hands_on}
 
 ![Functional annotations](../../images/funcann.jpg "Results of GO enrichments analysis for DMPs")
@@ -227,4 +220,4 @@ GO:0048545 | response to steroid hormone | 1.38EE-54 | 2.11E-51 | HDAC9/ RAB10/ 
 # Conclusion
 
 
-Epigenetic aberrations which involve DNA modifications give researchers an interest in identifying novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as a ready to run pipline in supplementary materials.
+Epigenetic aberrations which involve DNA modifications give researchers an interest in identifying novel non-genetic factors responsible for complex human phenotypes such as height, weight, and disease. To identify methylation changes researchers need to perform complicated and time consuming computational analysis. Here, the EWAS suite becomes a solution for this inconvenience and provides a simplified downstream analysis available as a ready to run pipline in supplementary materials. For more details, see the associated publication {% cite Murat2020 %}
