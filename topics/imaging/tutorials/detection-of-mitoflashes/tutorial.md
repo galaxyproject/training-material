@@ -149,42 +149,33 @@ Here is an example of what the final output from the curve fitting tool in this 
 
 ![Curve fitting results mitoflash](../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png "Mitoflash Curve Fitting Results: Data for plotting.")
 
-
-### Example Cases: Identifying Key Mitoflash Scenarios
-
-Below is an example of how your data might look, illustrating differences between **INTENSITY**, **CURVE**, and **CURVE_A** for detected spots. Notice the highlighted rows where **INTENSITY** exceeds **CURVE** and/or **CURVE_A**, representing potential mitoflash events or borderline cases.
-
-```
-| FRAME | POS_X | POS_Y | INTENSITY | CURVE   | CURVE_A |
-|-------|-------|-------|-----------|---------|---------|
-| 1     | 57    | 474   | 114.84    | 116.10  | 165.38  |
-| 2     | 57    | 474   | 115.91    | 116.11  | 165.39  |
-| 3     | 57    | 474   | 166.00    | 166.05  | 165.40  | ← INTENSITY > CURVE_A (mitoflash event) |
-| 4     | 57    | 474   | 116.24    | 116.13  | 165.42  |
-| 5     | 57    | 474   | 116.40    | 116.15  | 165.43  |
-| 6     | 57    | 474   | 164.50    | 165.00  | 165.44  | ← CURVE > CURVE_A while INTENSITY < CURVE_A |
-| 7     | 57    | 474   | 165.10    | 165.20  | 165.45  | ← INTENSITY and CURVE ≈ CURVE_A (borderline case) |
-| 8     | 57    | 474   | 115.69    | 116.33  | 165.62  |
-```
-
-> <question-title>Spot Analysis: Evaluating Intensity and Fitted Curves</question-title>
+> <question-title>Example Analysis</question-title>
 >
-> Based on the example data table provided:
+> Consider the following example data table.
 >
-> 1. How many frames show **INTENSITY** values exceeding the stricter threshold (**CURVE_A**)?
-> 2. How many frames have a **CURVE** value exceeding **CURVE_A** while **INTENSITY** remains below **CURVE_A**?
-> 3. What does a case like Frame 7 (where both **INTENSITY** and **CURVE** are close to **CURVE_A**) indicate in terms of biological significance or computational interpretation?
+> | FRAME | POS_X | POS_Y | INTENSITY | CURVE   | CURVE_A |
+> |-------|-------|-------|-----------|---------|---------|
+> | 1     | 57    | 474   | 114.84    | 116.10  | 165.38  |
+> | 2     | 57    | 474   | 115.91    | 116.11  | 165.39  |
+> | 3     | 57    | 474   | 166.00    | 166.05  | 165.40  |
+> | 4     | 57    | 474   | 116.24    | 116.13  | 165.42  |
+> | 5     | 57    | 474   | 116.40    | 116.15  | 165.43  |
+> | 6     | 57    | 474   | 164.50    | 165.00  | 165.44  |
+> | 7     | 57    | 474   | 165.10    | 165.20  | 165.45  |
+> | 8     | 57    | 474   | 115.69    | 116.33  | 165.62  |
+>
+>
+> 1. Which frames show **INTENSITY** values that correspond to mitoflash events?
+> 2. What does a case like Frame 7 (where both **INTENSITY** and **CURVE** are close to **CURVE_A**) indicate in terms of biological significan    ce or computational interpretation?
 >
 > > <solution-title>Solutions</solution-title>
 > >
-> > 1. **1 frame**: Frame 3 demonstrates **INTENSITY > CURVE_A**, marking it as a mitoflash event.
-> > 2. **1 frame**: Frame 6 shows **CURVE > CURVE_A**, while **INTENSITY** remains below **CURVE_A**.
-> > 3. Frame 7 represents a borderline case where both **INTENSITY** and **CURVE** are near **CURVE_A**. This could reflect computational noise, weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.
+> > 1. Frame 3 demonstrates a brief but significant increase of the intensity value (**INTENSITY > CURVE_A**), that corresponds to a mitoflash     event. Frame 6 shows **CURVE > CURVE_A**, while **INTENSITY** remains below **CURVE_A**.
+> > 2. Frame 7 represents a borderline case where both **INTENSITY** and **CURVE** are near **CURVE_A**. This could reflect computational noise    , weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.
 > >
 > {: .solution}
 >
 {: .question}
-
 
 ### Key Parameters for Analysis and Plotting
 
