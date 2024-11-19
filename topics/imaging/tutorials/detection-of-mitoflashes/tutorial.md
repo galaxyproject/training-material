@@ -129,7 +129,7 @@ Mitoflashes are identified based on sudden changes in fluorescence intensity in 
 >
 > 1. {% tool [Perform curve fitting](toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.3-2) %} with the following parameters:
 >    - {% icon param-file %} *"File name of input data points (xlsx)"*: Output from the **Perform linking in time series (nearest neighbors)** tool.
->    - **Degree of the polynomial function**: Set to `2nd degree` to capture intensity peaks that characterize mitoflash events.
+>    - **Degree of the polynomial function**: Set to `2nd degree`.
 >    - **Penalty**: Choose *Least absolute deviations (LAD)* for robust fitting to intensity fluctuations.
 >    - **Alpha**: Set a significance level, such as `0.01`, to generate assistive curves if needed.
 >
