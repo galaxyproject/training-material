@@ -35,7 +35,7 @@ Mitoflashes are triggered by elevated **reactive oxygen species (ROS)** levels, 
 
 Importantly, the frequency and kinetics of mitoflashes hold physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell ({% cite Li2020 %}).
 
-In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using general Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
+In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
 
 > <agenda-title></agenda-title>
 >
