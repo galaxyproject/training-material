@@ -63,10 +63,10 @@ You can access the data for this tutorial in multiple ways:
 > <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
+> 2. Import the AnnData object from [Zenodo](https://zenodo.org/records/7053673)
 >
 >    ```
->    {{ page.zenodo_link }}/files/Mito-counted_AnnData
+>    https://zenodo.org/record/7053673/files/Mito-counted_AnnData
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
