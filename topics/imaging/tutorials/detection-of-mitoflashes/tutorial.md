@@ -83,7 +83,7 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 
 # Analyzing Mitochondrial Movement
 
-In this section, we will focus on identifying mitochondrial regions in a time-lapse sequence by detecting spots based on local intensity maxima. This step provides insights into mitochondrial energy production and cellular health dynamics.
+In this section, we will focus on the detection of the mitochondria in a time-lapse image sequence based on local intensity maxima. This will provide insights into mitochondrial energy production and cellular health dynamics in the subsequent analysis.
 
 ## Step 1: Mitochondrion Detection
 
