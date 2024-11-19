@@ -115,7 +115,7 @@ By linking each mitochondrion’s position across frames, we ensure that intensi
 >    - **Intensity threshold**: A recommended starting value is `25%` of the global maximum intensity. Increase to `30-40%` for stricter filtering if spots have low intensity.
 >    - **Minimum track length**: Use `50%` of the sequence length as a baseline. Adjust based on the expected duration of mitoflash events.
 >    
->    This tool links detected spots across frames to track movement. The **Neighborhood size** parameter controls the pixel range for associating points between frames. Reducing the **Intensity threshold** filters out weaker signals, reducing the number of spurious tracks.
+>    This tool links detected spots across frames to track their movement. The **Neighborhood size** parameter controls the maximum allowed distance for associating points between frames (in pixels). Increase the **Intensity threshold** parameter to filter out more weak signals (e.g., to remove spurious tracks).
 >
 {: .hands_on}
 
