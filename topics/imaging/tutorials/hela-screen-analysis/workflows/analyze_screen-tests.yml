@@ -1,0 +1,20 @@
+- doc: Test outline for analyze_screen
+  job:
+    rules:
+      class: File
+      path: test-data/rules.tabular
+      filetype: tabular
+    input images:
+      class: Collection
+      collection_type: list
+      elements:
+        - class: File
+          identifier: input_image_1.tiff
+          path: test-data/input_image_1.tiff
+        - class: File
+          identifier: input_image_2.tif
+          path: test-data/input_image_2.tiff
+  outputs:
+    output:
+      path: test-data/analyze_screen_output.tabular
+      compare: diff
