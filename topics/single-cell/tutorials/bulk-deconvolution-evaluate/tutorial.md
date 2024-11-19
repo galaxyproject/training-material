@@ -7,11 +7,11 @@ priority: 3
 zenodo_link: ''
 
 questions:
-- How do I evaluate my reference data
-- How do I compare different deconvolution tools
-- What are the best metrics for determining tool accuracy
+- How do I evaluate my reference data?
+- How do I compare different deconvolution tools?
+- What are the best metrics for determining tool accuracy?
 objectives:
-- Generate psuedo-bulk data from single-cell RNA data.
+- Generate psuedo-bulk data from single-cell RNA data
 - Process the single-cell and psuedo-bulk data using various deconvolution tools
 - Evaluate and visualse the results of the different deconvolution methods
 time_estimation: 2H
