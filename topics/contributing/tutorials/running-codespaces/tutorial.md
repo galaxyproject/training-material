@@ -192,16 +192,16 @@ When you have finished your changes, it all looks good in the preview, you want 
 > 2. **Option 2: via the web interface**
 >    - Create a new branch:
 >      -  On the bottom-left, click on the branch logo (probably labelled "main")
->         ![button on the bottom of the page with the current branch](images/codespace-branch-change1.png)
+>         ![button on the bottom of the page with the current branch](images/codespaces-branch-change1.png)
 >      - Enter `fix-title` as the name for your new branch (at top of window)
->         ![Addint a new branch](images/codespace-branch-change2.png)
+>         ![Addint a new branch](images/codespaces-branch-change2.png)
 >      - Choose "+ Create new branch..." from the dropdown
 >    - Commit changes:
 >      - On the left menu, click on the "changed files" tab
 >        ![button on the left menu to show changed files](images/codespaces-commit-1.png)
 >      - You should see your changed file (`tutorial.md`)
 >      - Click on the "+" icon next to the file we edited to *stage changes*
->        ![stage changes button](images/codespaces-commit-puls.png)
+>        ![stage changes button](images/codespaces-commit-plus.png)
 >      - Enter a commit message (top of window)
 >      - Hit the checkmark icon below the massage to commit the changes
 >   - Publish changes
