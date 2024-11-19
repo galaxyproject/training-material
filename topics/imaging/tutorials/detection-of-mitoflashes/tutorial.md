@@ -83,9 +83,9 @@ First, we need to upload the data we'll work with. Ensure that you have the nece
 
 In this section, we will focus on identifying mitochondrial regions in a time-lapse sequence by detecting spots based on local intensity maxima. This step provides insights into mitochondrial energy production and cellular health dynamics.
 
-## Step 1: Detecting Mitochondrial Regions
+## Step 1: Mitochondrion Detection
 
-> <hands-on-title>Detecting Mitochondrial Regions</hands-on-title>
+> <hands-on-title>Mitochondrion Detection</hands-on-title>
 >
 > 1. {% tool [Spot Detection](toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1) %} with the following recommended parameters:
 >    - {% icon param-file %} *"Image input"*: `mitoflashes_8bit.tiff`
