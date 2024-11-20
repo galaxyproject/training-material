@@ -41,7 +41,9 @@ contributions:
 
 # Introduction
 
-introduction here
+An important step in single-cell analysis is cell annotation. This is the task of taking single-cell data and assigning cell-type labels to each cell based on the cell's expression values and some type of reference data. This step can be done manually through dimensionality reduction and labelling clusters with known marker genes, such as in this tutorial [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). However, this process can take time, can be subjective, and isn't very reproducible.
+
+A better approach is to use tools to automate this process! That will be the focus of this tutorial. We will pre-process our data and use [Scmap](https://www.sanger.ac.uk/tool/scmap/) to automatically label our cells!
 
 
 ## Get data
