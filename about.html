@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>About the GTN</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@26565a0b4d9981c265bf5121156efd3df70de1fd",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/about.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="About the GTN">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-11-20 16:44:38 +0000"><meta name="description" content="      The GTN is a collection of free, FAIR, open-source, reusable e-Learning materials for life sciences and beyond         Our mission: provide a platform for accessible, interactive training materials for everyone.      Our Pillars    Free & Open      Automatically FAIR      Community Driven      Accessible      Easy to Contribute      Classroom or Self-study       ## A global view  Our materials have grown significantly over the years. We have a global audience, with users from over 200 countries. Our materials are used by thousands of learners every month. See [more detailed statistics]({% link stats/index.md %}) on our dedicated page.   {% snippet faqs/gtn/gtn_stats.md %}   ## Findable, Accessible, Interoperable, Reusable          FAIR Checker reports a 100% FAIRness score for GTN materials, better than some competing e-learning material infrastructures.     The GTN infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) pr...">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="About the GTN">
+        <meta property="og:description" content="      The GTN is a collection of free, FAIR, open-source, reusable e-Learning materials for life sciences and beyond         Our mission: provide a platform for accessible, interactive training materials for everyone.      Our Pillars    Free & Open      Automatically FAIR      Community Driven      Accessible      Easy to Contribute      Classroom or Self-study       ## A global view  Our materials have grown significantly over the years. We have a global audience, with users from over 200 countries. Our materials are used by thousands of learners every month. See [more detailed statistics]({% link stats/index.md %}) on our dedicated page.   {% snippet faqs/gtn/gtn_stats.md %}   ## Findable, Accessible, Interoperable, Reusable          FAIR Checker reports a 100% FAIRness score for GTN materials, better than some competing e-learning material infrastructures.     The GTN infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) pr...">
+        <meta property="og:image" content="https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png"></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+			
+
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/about.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/about.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            <a class="dropdown-item" href="/training-material/feedback.html">
+                <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+            </a>
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        <section>
+  
+
+  <div id="hero">
+  <p id="hero-headline">
+  The GTN is a collection of free, FAIR, open-source, reusable e-Learning materials for life sciences and beyond
+  </p>
+  <p id="hero-subtitle">
+  Our mission: provide a platform for accessible, interactive training materials for everyone.
+  </p>
+</div>
+
+<h2>Our Pillars</h2>
+
+<div class="row" id="button-row">
+<div class="col-md-2">
+<div>Free &amp; Open</div>
+<a href="#free--open-source">
+<img src="/training-material/assets/images/undraw_open_source.svg" alt="cartoon of MIT and CC license" />
+</a>
+</div>
+<div class="col-md-2">
+<div>Automatically FAIR</div>
+<a href="#findable-accessible-interoperable-reusable">
+<img src="/training-material/assets/images/undraw_automation.svg" alt="cartoon of a factory" />
+</a>
+</div>
+<div class="col-md-2">
+<div>Community Driven</div>
+<a href="#community">
+<img src="/training-material/assets/images/undraw_community.svg" alt="cartoon of several humans chatting" />
+</a>
+</div>
+<div class="col-md-2">
+<div>Accessible</div>
+<a href="#accessibility">
+<img src="/training-material/assets/images/undraw_accessible.svg" alt="cartoon of a blind person crossing a street" />
+</a>
+</div>
+<div class="col-md-2">
+<div>Easy to Contribute</div>
+<a href="#easy-contributions">
+<img src="/training-material/assets/images/undraw_developer.svg" alt="cartoon of a person at a laptop working" />
+</a>
+</div>
+<div class="col-md-2">
+<div>Classroom or Self-study</div>
+<a href="#e-learning-materials">
+<img src="/training-material/assets/images/undraw_online_learning.svg" alt="cartoon of a person studying at a laptop" />
+</a>
+</div>
+</div>
+
+<h2 id="a-global-view">A global view</h2>
+
+<p>Our materials have grown significantly over the years. We have a global audience, with users from over 200 countries. Our materials are used by thousands of learners every month. See <a href="/training-material/stats/index.html">more detailed statistics</a> on our dedicated page.</p>
+
+<div>
+<!--SNIPPET--> <!-- tutorial stats --> <div class="row" style="color: var(--text-color-boxtitle)"> <div class="col-md-3">  <div class="gtn-card color-agenda">    <div class="card-title">33</div>    <div class="card-text">Topics</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-tip">    <div class="card-title">431</div>    <div class="card-text">Tutorials</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-handson">    <div class="card-title">19</div>    <div class="card-text">Learning Paths</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-details">    <div class="card-title">458</div>    <div class="card-text"><abbr title="Frequently Asked Questions">FAQs</abbr></div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-comment">    <div class="card-title">422</div>    <div class="card-text">Contributors</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-handson">    <div class="card-title">9.4</div>    <div class="card-text">Years</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-handson">    <div class="card-title">96</div>    <div class="card-text">News Posts</div>  </div> </div> <div class="col-md-3">  <div class="gtn-card color-handson">    <div class="card-title">200</div>    <div class="card-text">Videos (135.0h)</div>  </div> </div> </div> <!--END_SNIPPET-->
+</div>
+
+<h2 id="findable-accessible-interoperable-reusable">Findable, Accessible, Interoperable, Reusable</h2>
+
+<div class="row">
+<div class="col-md-4">
+<figure>
+  <img alt="A screenshot of a radar plot visibly from fair-checker's site showing a perfect score." src="/training-material/news/images/FAIR-Checker-us.png" />
+  <figcaption>FAIR Checker reports a 100% FAIRness score for GTN materials, better than some competing e-learning material infrastructures.</figcaption>
+</figure>
+</div>
+<div class="col-md-8">
+
+    <p>The GTN infrastructure has been developed in accordance with the FAIR (Findable, Accessible, Interoperable, Reusable) principles for training materials (<span class="citation"><a href="#Garcia2020">Garcia <i>et al.</i> 2020</a></span>). Following these principles enables trainers and trainees to find, reuse, adapt, and improve the available tutorials.</p>
+
+    <p>By contributing to the GTN, you can be certain that materials are 100% FAIR and compliant with the 10 Simple Rules for FAIR training materials. Every learning resource contributed to the GTN <strong>automatically</strong> receives:</p>
+
+    <ul>
+      <li>Automatic Persistent URLs</li>
+      <li>Automatic TeSS registration</li>
+      <li>Automatic BioSchemas compliant LD+JSON metadata</li>
+      <li>Automatic monthly archival copies on <a href="https://training.galaxyproject.org/archive/">the GTN archive</a></li>
+      <li>Page view statistics via <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org">Plausible</a></li>
+    </ul>
+
+    <p>We have an open and welcoming collaborative peer-review and curation process as users contribute materials to the GTN.</p>
+
+    <p>The GTN is integrated with the <a href="https://tess.elixir-europe.org/">ELIXIR Training e-Support System (TeSS)</a>, which is a platform for discovering and sharing learning materials and events. Every tutorial, slide deck, event, and learning pathway in the GTN is automatically registered with TeSS, making it easy for users to find and access the materials.</p>
+
+  </div>
+</div>
+
+<h2 id="accessibility">Accessibility</h2>
+
+<p>The GTN strives to meet WCAG 2.0 AA compliance, and WCAG 2.0 AAA where possible. We regularly test our materials for their screen-reader accessibility and have implemented <a href="/training-material/accessibility.html">a range of features</a> to ensure the website is accessible to everyone, regardless of disability.</p>
+
+<h2 id="e-learning-materials">e-Learning Materials</h2>
+
+<div class="row">
+<div class="col-md-8">
+
+    <p>Materials in the GTN are designed to be interactive, engaging, and accessible. Many are additionally designed to reproduce a published analysis from literature, helping document and showcase reproducibility.</p>
+
+    <p>Tutorials are designed around rich metadata, every tutorial including extensive metadata that help learners and educators decide if the materials are useful to them:</p>
+
+    <ul>
+      <li>Audience</li>
+      <li>Difficulty Level</li>
+      <li>SMART Learning Objectives</li>
+      <li>Key Points</li>
+      <li>Pre-requisite materials</li>
+      <li>License (always open source!)</li>
+      <li>Duration (for teaching)</li>
+      <li>and more</li>
+    </ul>
+
+    <p>Every tutorial is highly structured with both expository information, clearly demarcated hands-on exercises, and then formative assessments to help learners check their understanding.</p>
+
+    <p>GTN e-Learning materials are complemented with excellent technical support such as input datasets available on Zenodo, as well as workflows which match the tutorial’s steps. Some tutorials additionally feature recordings from previous times this material was taught. Galaxy tutorials also indicate which public servers can be used for the tutorial, identifying servers which support every tool used in a given learning material.</p>
+
+  </div>
+<div class="col-md-4">
+<figure>
+  <img alt="Screenshot of a GTN learning material showing metadata and authors for a tutorial" src="/training-material/assets/images/tutorial-overview.png" />
+  <figcaption>GTN e-Learning materials feature robust metadata and a clear, easy to follow structure.</figcaption>
+</figure>
+</div>
+</div>
+
+<h2 id="proven-impact">Proven Impact</h2>
+
+<p>Please read further about our community driven approach and the infrastructure we have built to support both educators and learners in <span class="citation"><a href="#Batut2018">Batut <i>et al.</i> 2018</a></span> and <span class="citation"><a href="#hiltemann2023galaxy">Hiltemann <i>et al.</i> 2023</a></span>.</p>
+
+<h2 id="community">Community</h2>
+
+<p>Our community has been key to the GTN’s success, providing materials, feedback, and support to learners. We have a growing number of contributors, who have helped to create our diverse set of materials.</p>
+
+<h3 id="easy-contributions">Easy Contributions</h3>
+
+<p>We aim to make contribution easy: all contributions to the GTN can be done in a web browser, without the installation of any additional software to decrease burdens of contributors. Additionally we take many steps to make it easier for contributors to contribute. Based on their feedback we support adding events, news, FAQs, and more via <a href="/training-material/news/2024/07/17/google-forms.html">Google forms</a>.</p>
+
+<h3 id="stay-in-touch">Stay in Touch</h3>
+
+<p>You can follow us on <a rel="me" href="https://mstdn.science/@gtn"><span style="fill: var(--hyperlink);"><svg width="1em" height="1em" viewBox="0 0 8.4937906 9.1084023" version="1.1" id="svg356" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">  <g id="layer1" transform="translate(-70.566217,-144.26757)">    <path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z" id="path2318"></path>  </g></svg></span> Mastodon</a> or <a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"><span style="fill: var(--hyperlink);"><svg viewBox="0 0 64 57" width="1em"><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span> Bluesky</a>, or get in touch with us via <a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">Matrix Chat</a>.</p>
+
+<div class="card">
+  <div class="card-header"> 
+  Thanks to our <b>425 GTN contributors</b>!
+  </div>
+  <div class="card-body">
+    <p class="card-text contributor-quilt" style="margin: 1em;">
+    <img src="https://avatars.githubusercontent.com/contributor1?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/contributor2?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/awspolly?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/a-asai?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/abretaud?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/abdulrahmanazab?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/abueg?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ahmedhamidawan?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/AfiDede?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/afgane?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/aisanjiangw?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ajadi-abiola?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/alaaelghamry?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ales-ibt?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/alexcorm?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/allegravia?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Allen13x?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/alliecreason?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/almahmoud?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/andrewr?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/andrewjpage?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/anish-mudaraddi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/andrewsnelgrove?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/annasyme?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/annefou?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/annesiegel?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/AnomalyCodes?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/anuprulez?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/arashghodousi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/asmasonomics?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/assuntad23?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/astrovsky01?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/adamtaranto?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/aurelienmoumbock?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/avahoffman?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/avani-k?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/baberlevi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bagnacan?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/beachyesh?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/beatrizserrano?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bebatut?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bedroesb?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bernandez?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bernt-matthias?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bethanmanley?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bethsheets?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bgruening?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bazante1?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/BasileGoussard?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/blankclemens?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/blankenberg?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bphipson?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/bfranicevic?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/breakthewall?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/brigidagallone?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Brilator?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/burkemlou?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/B0r1sD?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/CameronFRWatson?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cansavvy?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cat-bro?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cfusterbarcelo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Camila-goclowski?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/charitylaw?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/chensy96?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Chinonyemildred?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/chklopp?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ChaoZhang123?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/claraurf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/claresloggett?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/clsiguret?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cmonjeau?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/CMR248?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/colineroyaux?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/combesf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/coverbeck?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cganote?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/chrisbarnettster?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cstritt?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cutsort?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cxli233?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/d-salgado?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/danielabutano?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Sch-Da?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dannon?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/davidchristiany?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/davebx?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dbrites?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dechendb?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/delphine-l?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/deeptivarshney?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/desmond-jasper?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dianichj?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/DinithiRajapaksha?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dirowa?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dlalgroup?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dmaticzka?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dpelletier?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dpryan79?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dsobral?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/dyusuf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/eancelet?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/elichad?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/edmontosaurus?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ehumph?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ElectronicBlueberry?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/emmaleith?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/emmaustin20?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/emichn?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/EngyNasr?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ennovytje?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/erxleben?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/estebanpw?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ethering?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Ezichi-Fav?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/cumbof?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/felicitas215?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/fidelram?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/FilipposZ?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/foellmelanie?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/fpsom?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/fmareuil?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/frederikcoppens?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Freymaurer?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/friedue?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/fubar2?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/GabrielaLopez?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/gallardoalba?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/GaloGS?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/GarethPrice-Aus?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/garimavs?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/gatwirival?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/gf777?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/GitFab93?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/gmauro?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/guerler?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/guillaume-gricourt?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hannahkimincompbio?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hdashnow?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hechth?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/heylf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hexhowells?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hexylena?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hmenager?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hrhotz?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hrukkudyr?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/huitang-earth?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/hujambo-dunia?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/igcbioinformatics?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/igormakunin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ioanagry?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ilveroluca?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/IrelCM?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/j34ni?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jaidevjoshi83?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jbmihoub?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jdavcs?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jennaj?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jennydg?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jfallmann?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jfaulon?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jfrancoismartin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jgoecks?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jj-umn?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jkh1?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jkreplak?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/joelvdavies?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pinin4fjords?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/JasperO98?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jmchilton?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/joachimwolff?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/JovMaksimovic?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jpmaree?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jraysajulga?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jrr-cpt?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jsaintvanne?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jtleek?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/jxtx?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/katherinecox?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/katherine-d21?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/katrinleinweber?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kenza12?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kellsnow?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/khanteymoori?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/khaled196?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kinow?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kikkomep?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/KlemensFroehlich?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kostrykin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kxk302?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kysrpex?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Lain-inrae?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lamouresparus?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/leandro-liborio?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Laura190?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lecorguille?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/LeilyR?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lilianarutaihwa?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/linzyelton?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lgallegovillar?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lldelisle?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lisanna?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lleroi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/LonsBio?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/loraine-gueguen?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/lybCNU?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kilpert?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/kkamieniecka?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ksuderman?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/poterlowicz-lab?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/malloryfreeberg?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/manabuishii?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mjostaszewski?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/MariaTsayo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mariipia10?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mariecrane?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Marie59?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/MarisaJL?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/martenson?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/MarenStillger?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Martin-Kuhl?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/marziacremona?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mateeullah905?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/matthias313?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/MattiHoch?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/maximskorik?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mbaardwijk?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mblue9?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mboudet?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mccalluc?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mcharleston?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mcmaniou?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Mehgan-E?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Melkeb?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/melpetera?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/meltemktn?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mgramm1?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/miaomiaozhou88?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/michelemaroni89?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/millen2223?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mira-miracoli?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/miRlyKayleigh?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/moffmade?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/moheydarian?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mritchie?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mschatz?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/msozzoni?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mtekman?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mvdbeek?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/mwolfien?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/martinwolst?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Nilchia?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/smza?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/myles-bilong?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nagoue?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nakucher?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/natalie-wa?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/natefoo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nathandunn?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nekrut?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/neoformit?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nicherndon?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/NickSto?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nomadscientist?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/npalopoli?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/npechl?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nsjuty?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nsoranzo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nturaga?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/NUKnightLab?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Nurzhamalyrys?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nuwang?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/nvk747?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/odameron?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/odoppelt?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/olanag1?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/onorvez?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/otatadeabigail?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pajanne?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/PapXis?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/RareSeas?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/paige-kulzer?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/PatCapon39?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/patrick-austin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/paulineauffret?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/PaulineSGN?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pauldg?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/paulocilasjr?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/paulzierep?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pavanvidem?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pickettbd?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pclo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pcm32?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/plushz?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/polkhe?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ppalagi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pratikdjagtap?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pravs3683?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/proccaserra?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/prodromus?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ptsefton?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/pvanheus?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/qchiujunhao?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Quickbeasts51429?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rabernat?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rahmot?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Rassine?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/r1corre?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rikeshi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/roncoronimiguel?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rosiealice?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/robertmand?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/robertmeller?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/reginaesinamabotsi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rlibouba?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/rwinand?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/RZ9082?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/s3by01?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/SabrinaZander?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/SaimMomin12?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/samanthaanjei?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sandygudie?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sanneabeln?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sanjaysrikakulam?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/saramorsy?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sarah-peter?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/saritadc?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/saskia-lawson-tovey?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sbenateau?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sebastian-schaaf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sonalhenson?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Shians?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/shiltemann?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Shorla?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/shwdey?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/simonbray?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/simleo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sitjart?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/slegras?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/slugger70?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/SNG888?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/Sofokli5?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sophia120199?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/stain?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/StellaEggels?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/stephanierobin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/stortebecker?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/subinamehta?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/suchitrathapa?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sujaikumar?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/supernord?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sunyi000?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tb143?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tbrown91?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tcollins2011?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tduigou?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tealiie?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/teresa-m?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/TanguyGen?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/thanhleviet?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/themudo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/ThibaudGlinez?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/thobalose?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/thomasmanke?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/thomaswollmann?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/timonschlegel?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tizzir?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tnabtaf?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tobyhodges?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/torhou?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/torfinnnome?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tseemann?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tsenapathi?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/trungN?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/TKlingstrom?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/tvedtees?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/valentinmarcon?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/vdda?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/vivekbhr?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/vladvisan?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/vloux?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/wee-snufkin?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/willdurand?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/willemdek11?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/workflow4metabolomics?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/wm75?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/wverastegui?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/xgaia?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/xtrojak?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yguitton?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yhoogstrate?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yochannah?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yvandenb?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yvanlebras?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/yvesvdb?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/zargham-ahmad?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/sonjafiliposka?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/amisev1971?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/korvoj?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/domlgreen?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/isouyioul?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/CarolinLeister?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/achim-kit?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/agCleo?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/CRHAD26?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/MennaGamal?s=50" style="width: 33px;margin:0" alt="avatar" />
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"> 
+  Brought to you by <b>49 contributing organisations</b> and <b>18 supporting grants</b>!
+  </div>
+  <div class="card-body">
+    <p class="card-text contributor-quilt" style="margin: 1em;">
+    <img src="/training-material/assets/images/abromics.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/Australian-Biocommons-Favicon-RGB.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-avans.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/carpentries?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/deNBI?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/earlham_logo.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/edctp.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="https://cdn.egi.eu/app/uploads/2021/11/egi-logo.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/Excelerate_whitebackground.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/elixir.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/elixir.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/d0fccaa9dc8dc8615eb7146d6c5e96bd36f11f3a/EMBL_EBI_Logo_black.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-erasmusmc.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/EU-logo.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/FIND.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/ifb.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/inab-certh.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/irccs.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="https://jetstream-cloud.org/images/home/jetstream-2.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/hopkins.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/linq.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-madland.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/moffitt.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/minnesotauni.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://raw.githubusercontent.com/bgruening/presentations/master/shared/resources/img/14_MPI_IE_logo_mit_180.gif" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/MWK.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/ncbi.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-dataplant.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/nih.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/nsf.gif" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/panacea.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/pangens.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/petermac.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/PNDB_sub.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/psu.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/u/18176583?s=200&amp;v=4" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/sanbi.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/uni_san_raffaele.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/sciensano.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="https://raw.githubusercontent.com/bgruening/presentations/bce348bb606c312d531c479e63a66efc2bc38d44/shared/resources/img/MEDEP.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/spun-logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/swiss-tph.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/tb_capt.svg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-uga.svg" style="width: 33px;margin:0" alt="avatar" /><img src="https://raw.githubusercontent.com/nomadscientist/scrnaseq_training/master/logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://raw.githubusercontent.com/bgruening/presentations/a2e38e4b007994af798320db3a0131c4bb891c0e/shared/resources/img/logo_freiburg.jpg" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/UTas_logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/logo-vib.png" style="width: 33px;margin:0" alt="avatar" />
+
+    <img src="/training-material/topics/ai4life/images/AI4Life-logo_giraffe-solid.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/BioNT_Logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/by-covid?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://avatars.githubusercontent.com/CINECA-Project?s=50" style="width: 33px;margin:0" alt="avatar" /><img src="https://elixir-europe.org/sites/default/files/styles/right-medium/public/images/converge_logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/edctp-eu.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/dash.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://www.eosc-life.eu/wp-content/themes/eosc-life-v2/assets/images/eosclogo.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/eurosciencegateway.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/fair_ease_colour.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/shared/images/fnso.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://gallantries.github.io/assets/images/gallantries-logo.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://www.ashg.org/wp-content/uploads/2021/07/nhgri-logo-800x167-1.png" style="width: 33px;margin:0" alt="avatar" /><img src="https://www.ashg.org/wp-content/uploads/2021/07/nhgri-logo-800x167-1.png" style="width: 33px;margin:0" alt="avatar" /><img src="/training-material/assets/images/avatar.png" style="width: 33px;margin:0" alt="avatar" />
+    </p>
+  </div>
+</div>
+
+<p>We are always looking for new contributors, so if you have a tutorial you would like to share, please get in touch!</p>
+
+<div id="cta-lp" style="color: var(--brand-color-contrast);background: var(--brand-color);">
+<div style="background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #fff1 10px, #fff1 20px );padding: 1rem;">
+	<h3 style="margin: unset;">How You Can Help</h3>
+<p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
+<span>Join the GTN today, sharing your learning and expertise!</span>
+<a href="/training-material/topics/contributing/index.html" class="btn btn-success">Get Involved</a>
+</p>
+</div>
+</div>
+
+<h2 id="history">History</h2>
+
+<div class="row">
+<div class="col-md-8">
+
+    <p>The GTN started in July of 2015 as a collection of just a handful of <i>Galaxy-specific</i> training materials. A few slides, and a few hands-on tutorials were available covering topics like RNA-Seq, ChIP-Seq, and other NGS topics.</p>
+
+    <p>The GTN is a community-driven project, with contributions from people around the world.</p>
+
+    <p>Over time, it has grown to include materials for a wide range of topics, in bioinformatics and beyond! We now cover a range of scientific topics and methodologies.</p>
+
+  </div>
+
+<div class="col-md-4">
+<figure>
+  <img alt="screenshot of the gtn on the left and galaxy on the right, both are very old looking" src="/training-material/shared/images/interactive_training-old.png" />
+  <figcaption>The GTN started out in July 2015, and has changed significantly since then</figcaption>
+</figure>
+</div>
+</div>
+
+<h2 id="free--open-source">Free &amp; Open Source</h2>
+
+<p>Both the GTN Framework, and all materials in the GTN are openly licensed and free to use. The GTN code and libraries is available under <a href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>, and most tutorials are available under a Creative Commons license <a href="https://spdx.org/licenses/CC-BY-4.0&quot;">CC-BY-4.0</a></p>
+
+<style>
+#hero {
+    border: 2px solid var(--border-light);
+    margin: 1rem;
+    padding: 1rem 3rem;
+    text-align: center;
+    border-radius: 25px;
+}
+#hero-headline {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+#hero-subtitle {
+    font-size: 1.5rem;
+}
+.main-content {
+    font-size: 1.25;
+}
+figure {
+margin: 0;
+}
+.tutorial_tag {
+  margin-inline-end: 0.2rem;
+}
+
+#button-row div.col-md-2 div {
+    font-size: 1.5rem;
+}
+#button-row a {
+    display: block;
+    border: none;
+}
+#button-row a:hover {
+    border: 1px solid var(--hyperlink);
+}
+</style>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li id="Batut2018">Batut, B., S. Hiltemann, A. Bagnacani, D. Baker, V. Bhardwaj <i>et al.</i>, 2018 <b>Community-Driven Data Analysis Training for Biology</b>. Cell Systems 6: 752–758.e1. <a href="https://doi.org/10.1016/j.cels.2018.05.012">10.1016/j.cels.2018.05.012</a></li>
+<li id="Garcia2020">Garcia, L., B. Batut, M. L. Burke, M. Kuzak, F. Psomopoulos <i>et al.</i>, 2020 <b>Ten simple rules for making training materials FAIR</b> (S. Markel, Ed.). PLOS Computational Biology 16: e1007854. <a href="https://doi.org/10.1371/journal.pcbi.1007854">10.1371/journal.pcbi.1007854</a></li>
+<li id="hiltemann2023galaxy">Hiltemann, S., H. Rasche, S. Gladman, H.-R. Hotz, D. Larivière <i>et al.</i>, 2023 <b>Galaxy Training: A powerful framework for teaching!</b> PLOS Computational Biology 19: e1010752. <a href="https://doi.org/10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a></li></ol>
+
+
+</section>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides learners with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/about.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/about.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/about.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/26565a0b4d9981c265bf5121156efd3df70de1fd">26565a0</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+
+				<span style="font-size: 1.3em">Publications</span>
+				<ul class="no-bullets">
+					<li><a href="https://doi.org/10.1371/journal.pcbi.1010752">Hiltemann et al. 2023</a></li>
+					<li><a href="https://doi.org/10.1016/j.cels.2018.05.012"> Batut et al. 2018</a></li>
+					<li><a href="/training-material/faqs/gtn/gtn_citing.html">Citing Us</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
