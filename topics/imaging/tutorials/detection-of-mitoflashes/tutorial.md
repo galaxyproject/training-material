@@ -37,7 +37,7 @@ Importantly, the frequency and kinetics of mitoflashes hold physiological and pa
 
 In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you'll gain insights into mitochondrial behavior and activity over time.
 
-This tutorial is based on a workflow originally described in % cite Wang2022 %.
+This tutorial is based on a workflow originally described in {% cite Wang2022 %}.
 
 > <agenda-title></agenda-title>
 >
