@@ -18,7 +18,7 @@ hide_title: true
 <div class="row" id="button-row">
 <div class="col-md-2">
 <div>Free & Open</div>
-<a href="#free-open-source">
+<a href="#free--open-source">
 <img src="{% link assets/images/undraw_open_source.svg %}" alt="cartoon of MIT and CC license">
 </a>
 </div>
@@ -36,7 +36,7 @@ hide_title: true
 </div>
 <div class="col-md-2">
 <div>Accessible</div>
-<a href="#accessibilty">
+<a href="#accessibility">
 <img src="{% link assets/images/undraw_accessible.svg %}" alt="cartoon of a blind person crossing a street">
 </a>
 </div>
