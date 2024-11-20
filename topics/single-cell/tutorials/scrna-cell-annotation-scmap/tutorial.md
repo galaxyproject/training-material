@@ -216,7 +216,7 @@ We now need to take our reference data and index it so that it can be searched e
 
 In this tutorial we will do both cluster level and cell level prediction, lets start with cluster level!
 
-# Scmap (Cluster)
+## Scmap (Cluster)
 
 As described earlier we need to build an index at the cluster level that can be searched, so lets do that!
 
@@ -288,7 +288,7 @@ A snippet of the output table can be seen below
 
 In the table we can see each cell in our query, the predicted cell type label, and the confidence of each prediction. Remember that these tools are not perfect and may miss-label cells, so the confidence score acts as a proxy for the quality of the prediction.
 
-# Scmap (Cell)
+## Scmap (Cell)
 
 > <hands-on-title>Build cell index</hands-on-title>
 >
