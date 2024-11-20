@@ -166,12 +166,12 @@ Here is an example of what the final output from the curve fitting tool in this 
 >
 >
 > 1. Which frames show **INTENSITY** values that correspond to mitoflash events?
-> 2. What does a case like Frame 7 (where both **INTENSITY** and **CURVE** are close to **CURVE_A**) indicate in terms of biological significan    ce or computational interpretation?
+> 2. What does a case like Frame 7 (where both **INTENSITY** and **CURVE** are close to **CURVE_A**) indicate in terms of biological significance or computational interpretation?
 >
 > > <solution-title>Solutions</solution-title>
 > >
-> > 1. Frame 3 demonstrates a brief but significant increase of the intensity value (**INTENSITY > CURVE_A**), that corresponds to a mitoflash     event. Frame 6 shows **CURVE > CURVE_A**, while **INTENSITY** remains below **CURVE_A**.
-> > 2. Frame 7 represents a borderline case where both **INTENSITY** and **CURVE** are near **CURVE_A**. This could reflect computational noise    , weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.
+> > 1. Frame 3 demonstrates a brief but significant increase of the intensity value (**INTENSITY > CURVE_A**), that corresponds to a mitoflash event. Frame 6 shows **CURVE > CURVE_A**, while **INTENSITY** remains below **CURVE_A**.
+> > 2. Frame 7 represents a borderline case where both **INTENSITY** and **CURVE** are near **CURVE_A**. This could reflect computational noise, weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.
 > >
 > {: .solution}
 >
