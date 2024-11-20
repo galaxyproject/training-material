@@ -1,0 +1,15 @@
+digraph main {
+  node [fontname="Atkinson Hyperlegible", shape=box, color=white,style=filled,color=peachpuff,margin="0.2,0.2"];
+  edge [fontname="Atkinson Hyperlegible"];
+  0[label="Mitochondrion detection"]
+  kb84bfb3315eb4984b109fab32f3813df[color=lightseagreen,label="Output\nSpot Detection of Mitoflashes"]
+  0 -> kb84bfb3315eb4984b109fab32f3813df
+  1[label="Mitochondrion tracking"]
+  0 -> 1 [label="fn_out"]
+  ka25e891300194dd3aed48138e7dd8da3[color=lightseagreen,label="Output\nSpot Detection Across Frames"]
+  1 -> ka25e891300194dd3aed48138e7dd8da3
+  2[label="Curve fitting to measured intensities"]
+  1 -> 2 [label="fn_out"]
+  ka978b043f0894d418f5d0df99915dd45[color=lightseagreen,label="Output\nCurve Fitting for Mitoflash Detection"]
+  2 -> ka978b043f0894d418f5d0df99915dd45
+}

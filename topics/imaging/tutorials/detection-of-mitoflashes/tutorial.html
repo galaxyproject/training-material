@@ -1,0 +1,1649 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><title>Hands-on: Tracking of mitochondria and capturing mitoflashes / Tracking of mitochondria and capturing mitoflashes / Imaging</title>
+        
+            <meta name="google-site-verification" content="9mOXn2JL833-i7-aioCCEuIdG4_tb6qjwUozB5GJnPQ" />
+
+<!-- JavaScript Error Monitoring, and performance tracking. -->
+<script
+  src="https://browser.sentry-cdn.com/7.52.1/bundle.tracing.min.js"
+  integrity="sha384-muuFXKS3752PNA4rPm9Uq6BLvOfV4CXyr9MHDBPvozOJJUWLKkogEFWOIRoVps43"
+  crossorigin="anonymous"
+></script>
+<script type="text/javascript">
+if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	console.log("Sentry: opt-in");
+	Sentry.init({
+		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
+		release: "galaxy-training-network@4273115a66d93b38ff66ba2777e2bfc0118b4315",
+		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
+		sampleRate: 0.1,
+		tracesSampleRate: 0.1,
+		// Capture Replay for no sessions by default
+		replaysSessionSampleRate: 0.01,
+		// plus for 1% of sessions with an error
+		replaysOnErrorSampleRate: 0.01,
+		// PII OFF
+		sendDefaultPii: false, // Off by default but just in case.
+		environment: "production",
+	});
+}
+</script>
+
+<!-- Page view tracking -->
+<script defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+<script>
+if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTrack !== "1") {
+	localStorage.removeItem("plausible_ignore")
+	console.log("Plausible: opt-in");
+	window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }
+} else {
+	// if they're opting-out, or DNT
+	// we might get one page by accident but we won't get future ones.
+	localStorage.setItem("plausible_ignore", "true")
+}
+</script>
+
+        
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon">
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml">
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html">
+        <link rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Regular-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Bold-102a.woff2" as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/training-material/assets/fonts/AtkinsonHyperlegible/Atkinson-Hyperlegible-Italic-102a.woff2" as="font" type="font/woff2" crossorigin>
+        
+        <link rel="preload" href="/training-material/assets/css/main.css?v=3" as="style">
+        <link rel='preload' href='/training-material/assets/js/bundle.theme.f1f2de89.js' as='script'>
+<link rel='preload' href='/training-material/assets/js/bundle.main.40d4e218.js' as='script'>
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=3">
+        <link rel="manifest" href="/training-material/manifest.json">
+        <meta name="theme-color" content="#2c3143"/>
+	
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material">
+<meta name="DC.type" content="text">
+<meta name="DC.title" content="Tracking of mitochondria and capturing mitoflashes">
+<meta name="DC.publisher" content="Galaxy Training Network">
+<meta name="DC.date" content="2024-11-20 15:03:23 +0000">
+<meta name="DC.creator" content="Diana Chiang Jurado">
+<meta name="DC.creator" content="Leonid Kostrykin"><meta name="description" content="Image analysis using Galaxy">
+        <meta property="og:site_name" content="Galaxy Training Network">
+	<meta property="og:title" content="Imaging / Tracking of mitochondria and capturing mitoflashes / Hands-on: Tracking of mitochondria and capturing mitoflashes">
+        <meta property="og:description" content="Image analysis using Galaxy">
+        <meta property="og:image" content="https://galaxy-training.s3.amazonaws.com/social/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.png">
+	<script type="application/ld+json">
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Training: A Powerful Framework for Teaching!",
+      "url": "https://doi.org/10.1371/journal.pcbi.1010752"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Community-Driven Data Analysis Training for Biology",
+      "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+    }
+  ],
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Tracking of mitochondria and capturing mitoflashes",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "provider": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "workTranslation": [
+
+  ],
+  "creativeWorkStatus": "Active",
+  "dateModified": "2024-11-20 15:03:23 +0000",
+  "datePublished": "2024-11-20 15:03:23 +0000",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+      "@type": "Organization"
+    },
+    "id": "https://training.galaxyproject.org",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "legalName": "Galaxy Training Network",
+    "alternateName": "GTN",
+    "url": "https://training.galaxyproject.org",
+    "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+    "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+    "keywords": [
+      "galaxy",
+      "bioinformatics",
+      "training",
+      "fair",
+      "accessible"
+    ],
+    "status": "active",
+    "foundingDate": "2015-06-29",
+    "socialMedia": "https://mstdn.science/@gtn",
+    "type": "project"
+  },
+  "funder": [
+
+  ],
+  "funding": [
+
+  ],
+  "identifier": "https://gxy.io/GTN:",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+  },
+  "abstract": "# Introduction",
+  "learningResourceType": "e-learning",
+  "name": "Tracking of mitochondria and capturing mitoflashes",
+  "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html",
+  "version": 1,
+  "timeRequired": "PT1H",
+  "teaches": "- Understand the biological significance of mitoflashes and their implications for cellular health.\n- Learn to track mitochondrial movements in live-cell imaging data.\n- Use image analysis tools to detect and quantify mitoflashes.",
+  "keywords": [
+    "Imaging",
+    "bioimaging",
+    "mitoflash",
+    "mitochondria"
+  ],
+  "description": "## Abstract\n\n# Introduction\n\n\n## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n\n## Questions this  will address\n\n - What are mitoflashes, and why are they relevant for understanding mitochondrial function?\n - How can bioinformatics and image analysis tools help in tracking and analyzing mitochondrial dynamics?\n\n\n## Learning Objectives\n\n- Understand the biological significance of mitoflashes and their implications for cellular health.\n- Learn to track mitochondrial movements in live-cell imaging data.\n- Use image analysis tools to detect and quantify mitoflashes.\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html",
+      "name": "FAIR Bioimage Metadata",
+      "description": "Hands-on for 'FAIR Bioimage Metadata' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html",
+      "name": "REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data",
+      "description": "Hands-on for 'REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data' tutorial",
+      "learningResourceType": "e-learning",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "http://purl.org/dc/terms/conformsTo": {
+          "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+          "@type": "Organization"
+        },
+        "id": "https://training.galaxyproject.org",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "legalName": "Galaxy Training Network",
+        "alternateName": "GTN",
+        "url": "https://training.galaxyproject.org",
+        "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+        "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+        "keywords": [
+          "galaxy",
+          "bioinformatics",
+          "training",
+          "fair",
+          "accessible"
+        ],
+        "status": "active",
+        "foundingDate": "2015-06-29",
+        "socialMedia": "https://mstdn.science/@gtn",
+        "type": "project"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/dianichj/",
+      "name": "Diana Chiang Jurado",
+      "image": "https://avatars.githubusercontent.com/dianichj",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-5857-1477",
+      "orcid": "https://orcid.org/0000-0002-5857-1477"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.3-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/kostrykin/",
+      "name": "Leonid Kostrykin",
+      "image": "https://avatars.githubusercontent.com/kostrykin",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+            "@type": "Organization"
+          },
+          "id": "https://training.galaxyproject.org",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "legalName": "Galaxy Training Network",
+          "alternateName": "GTN",
+          "url": "https://training.galaxyproject.org",
+          "logo": "https://training.galaxyproject.org/training-material/assets/images/GTNLogo1000.png",
+          "fundingModel": "The GTN's infrastructure relies on GitHub and the Galaxy Project for hosting costs. There are no full time paid staff members of the GTN. Individuals are occasionally funded on GTN-adjacent projects.",
+          "keywords": [
+            "galaxy",
+            "bioinformatics",
+            "training",
+            "fair",
+            "accessible"
+          ],
+          "status": "active",
+          "foundingDate": "2015-06-29",
+          "socialMedia": "https://mstdn.science/@gtn",
+          "type": "project"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/",
+          "name": "ELIXIR Europe",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://elixir-europe.org"
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "http://purl.org/dc/terms/conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Organization/0.3-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "id": "https://training.galaxyproject.org/training-material/hall-of-fame/deNBI/",
+          "name": "de.NBI",
+          "description": "An organization supporting the Galaxy Training Network",
+          "url": "https://www.denbi.de/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0003-1323-3762",
+      "orcid": "https://orcid.org/0000-0003-1323-3762"
+    }
+  ],
+  "contributor": [
+
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3382",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3382",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3382"
+    }
+  ],
+  "educationalLevel": "Beginner",
+  "mentions": [
+    {
+      "@type": "Thing",
+      "url": "https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/workflows/",
+      "name": "Associated Workflows"
+    },
+    {
+      "@type": "Thing",
+      "url": "https://zenodo.org/records/14071552",
+      "name": "Associated Training Datasets"
+    }
+  ]
+}</script></head>
+    <body data-spy="scroll" data-target="#toc" data-brightness="auto" data-contrast="auto">
+        <script  src='/training-material/assets/js/bundle.theme.f1f2de89.js'></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/imaging" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Imaging
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/learning-pathways" title="Learning Pathways">
+                           <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Learning Pathways
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+	<a class="dropdown-item" href="/training-material/faqs/index.html" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/imaging/faqs/" title="Check our FAQs for the Imaging topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Matrix
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Settings">
+	<i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> Settings
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+	<h6 class="dropdown-header">Preferences</h6>
+
+	<a href="/training-material/user/theme.html" class="dropdown-item">
+		<i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+	</a>
+
+	<a href="/training-material/user/privacy.html" class="dropdown-item">
+		<i class="fas fa-lock" aria-hidden="true"></i><span class="visually-hidden">pref-dataprivate</span> Data Privacy
+	</a>
+
+	<div class="dropdown-divider"></div>
+
+	<h6 class="dropdown-header">For Everyone</h6>
+
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.md">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Propose a change or correction
+        </a>
+
+	<h6 class="dropdown-header">Instructor Utilities</h6>
+
+        <a class="dropdown-item" href="/training-material/stats.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html">
+            <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page View Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html">
+                    <i class="fas fa-chart-column" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search2">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+
+
+<article class="tutorial topic-imaging">
+    <h1 data-toc-skip>Tracking of mitochondria and capturing mitoflashes</h1>
+    
+
+    <section aria-labelledby="overview-box" id="tutorial-metadata">
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/dianichj/" class="contributor-badge contributor-dianichj"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/dianichj?s=36" alt="Diana Chiang Jurado avatar" width="36" class="avatar" />
+    Diana Chiang Jurado</a><a href="/training-material/hall-of-fame/kostrykin/" class="contributor-badge contributor-kostrykin"><img src="/training-material/assets/images/orcid.png" alt="orcid logo" width="36" height="36"/><img src="https://avatars.githubusercontent.com/kostrykin?s=36" alt="Leonid Kostrykin avatar" width="36" class="avatar" />
+    Leonid Kostrykin</a>
+		</td>
+	</tr>
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div id="overview-box" class="box-title">Overview</div>
+        
+        <img alt="Creative Commons License: CC-BY" class="float-right" style="border-width:0; display: inline-block; margin:0" src="/training-material/assets/images/cc-by.png" width="88" height="31"/>
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>What are mitoflashes, and why are they relevant for understanding mitochondrial function?</p>
+</li>
+        
+        <li><p>How can bioinformatics and image analysis tools help in tracking and analyzing mitochondrial dynamics?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Understand the biological significance of mitoflashes and their implications for cellular health.</p>
+</li>
+        
+        <li><p>Learn to track mitochondrial movements in live-cell imaging data.</p>
+</li>
+        
+        <li><p>Use image analysis tools to detect and quantify mitoflashes.</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+    
+        
+        
+        
+        <li>
+          <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        </li>
+        
+    
+
+    
+        
+        
+        
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-metadata/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: FAIR Bioimage Metadata</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                        
+                        
+                            
+                                <li>
+                                  <a href="/training-material/topics/fair/tutorials/bioimage-REMBI/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> Hands-on: REMBI - Recommended Metadata for Biological Images – metadata guidelines for bioimaging data</a>
+                                </li>
+                            
+                        
+                    
+                
+                    
+                
+            
+        
+    
+
+
+        
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+
+        
+
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="https://zenodo.org/records/14071552">
+    <i class="far fa-copy" aria-hidden="true"></i>&nbsp;Datasets
+</a>
+
+</li>
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/imaging/tutorials/detection-of-mitoflashes/workflows/" title="Tracking of mitochondria and capturing mitoflashes workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                <li class="btn btn-default supporting_material">    <a class="topic-icon" href="/training-material/topics/imaging/tutorials/detection-of-mitoflashes/faqs/" title="Frequently Asked Questions">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+</li>
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+            
+                
+                <li class="btn btn-default supporting_material">
+
+
+
+
+
+
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Available on these Galaxies 
+    </a>
+    <ul class="dropdown-menu">
+        
+	<li class="dropdown-header">
+		<b>Known Working</b>
+	</li>
+	
+	
+
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.eu" title="">
+			UseGalaxy.eu <abbr title="This instance supports the precise tool versions used in this tutorial">✅</abbr> <abbr title="This is a UseGalaxy.* server which meets minimum requirements for a public Galaxy">⭐️</abbr>
+		</a>
+	</li>
+    
+    
+    
+    
+	<li class="dropdown-header">
+		<b>Possibly Working</b>
+	</li>
+    
+	<li>
+		<a class="dropdown-item" href="https://usegalaxy.cz/" title="">
+			UseGalaxy.cz
+		</a>
+	</li>
+    
+    
+
+    </ul>
+
+</li>
+                
+            
+        </ul>
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Published:</strong> Nov 20, 2024 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 20, 2024 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+		
+            Tutorial Content is licensed under
+            
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+            
+            The GTN Framework is licensed under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>
+        </div>
+        
+
+	
+	
+
+	
+	
+	<div><strong><i class="fas fa-code-commit" aria-hidden="true"></i><span class="visually-hidden">version</span> Revision:</strong> 1 </div>
+
+    </blockquote>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2 hide-when-printing">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <section aria-label="Tutorial Content" id="tutorial-content">
+                <h1 id="introduction">Introduction</h1>
+
+<p>Mitochondria act like fuel stations for the cell, supplying the energy needed to keep it functioning and healthy. During certain activities, they can produce bursts of <strong>superoxide</strong>, known as ‘<strong>mitoflashes</strong>.’ These short, intense events occur in individual mitochondria and can be observed in cardiomyocytes, skeletal muscle, hippocampal neurons, chondrocytes, isolated mitochondria, and among other types of eukaryotic cells using confocal microscopy. Commonly detected with a mitochondria-targeted circularly permuted fluorescent protein (mt-cpYFP), mitoflashes provide real-time insights into mitochondrial respiration function <em>in situ</em> and act as a biosensor for superoxide levels, reflecting the activity of the mitochondrial electron transport chain.</p>
+
+<p>Mitoflashes are triggered by elevated <strong>reactive oxygen species (ROS)</strong> levels, and various physiological and stress-related signals including fluctuations in mitochondrial membrane potential, transient openings of the mitochondrial permeability transition pore (mPTP), calcium level changes, and bioenergetic stress (like nutrient deprivation or high metabolic demand, <span class="citation"><a href="#Wang2022">Wang <i>et al.</i> 2022</a></span>). Additionally, they can be induced during specific cellular processes, like differentiation and certain developmental stages, where mitochondrial function is tightly regulated. This burst event activates the mPTP, causing a depolarization of the mitochondrial membrane potential (ΔΨm) and a mild alkalization of the matrix (<span class="citation"><a href="#Feng2019">Feng <i>et al.</i> 2019</a></span>). While mitoflashes signal mitochondrial activity and ROS changes, they do not precisely quantify ROS levels or other cellular signatures. These events, however, are able to distinguish active from static mitochondria, making them valuable biomarkers for tracking mitochondrial health and function.</p>
+
+<p>Importantly, the frequency and kinetics of mitoflashes hold physiological and pathophysiological implications. They correlate with key processes such as muscle contraction, cell differentiation, neuron development, wound healing, and lifespan prediction. The frequency and characteristics of mitoflashes vary by cell type; for example, adult cardiomyocytes display approximately 3.8 ± 0.5 mitoflashes, while primary cultured hippocampal neurons show around 31 ± 4 per cell (<span class="citation"><a href="#Li2020">Li <i>et al.</i> 2020</a></span>).</p>
+
+<p>In this tutorial, you will learn to track mitochondria in live-cell imaging data and detect mitoflashes using Galaxy tools for image analysis. You will work with time-lapse microscopy data, often stored as TIFF files with image stacks, to observe and analyze mitochondrial events across multiple time points. By identifying these events and quantifying their frequency through intensity measurements fitted to a curve, you’ll gain insights into mitochondrial behavior and activity over time.</p>
+
+<p>This tutorial is based on a workflow originally described in % cite Wang2022 %.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda">Agenda</div>
+
+  <p>In this tutorial, we will cover:</p>
+
+  <ol>
+    <li>Understanding the concept and biological relevance of mitoflashes.</li>
+    <li>Processing live-cell imaging data for mitochondrial tracking.</li>
+    <li>Detecting and analyzing mitoflashes with Galaxy tools.</li>
+    <li>Analysis and Interpretation of mitoflash events.</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="preparing-your-data">Preparing Your Data</h1>
+
+<p>First, we need to upload the data we’ll work with. Ensure that you have the necessary files prepared from Zenodo or a shared data library within Galaxy.</p>
+
+<h2 id="data-upload">Data Upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Data Upload</div>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial in Galaxy.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Creating a new history</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To create a new history simply click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel:</p>   <p><img src="/training-material/shared/images/history_create_new.svg" alt="UI for creating new history" /></p>   <!-- the original drawing can be found here https://docs.google.com/drawings/d/1cCBrLAo4kDGic5QyB70rRiWJAKTenTU8STsKDaLcVU8/edit?usp=sharing --> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Import the mitoflash imaging data from <a href="https://zenodo.org/records/14071552">Zenodo</a> or from the shared data library:
+      <ul>
+        <li><strong>Important:</strong> Choose the correct data type if prompted (tiff).</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/records/14071552/files/mitoflashes_8bit.tiff
+</code></pre></div>      </div>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing via links</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> at the top of the tool panel</p>   </li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link(s) into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Importing data from a data library</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ol>   <li>Go into <strong>Data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor.     <ul>       <li>On most Galaxies tutorial data will be provided in a folder named <strong>GTN - Material –&gt; Topic Name -&gt; Tutorial Name</strong>.</li>     </ul>   </li>   <li>Select the desired files</li>   <li>Click on <strong>Add to History</strong> <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden">galaxy-dropdown</span> near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>     <p>In the pop-up window, choose</p>     <ul>       <li><em>“Select history”</em>: the history you want to import the data to (or create a new one)</li>     </ul>   </li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Confirm that the datatypes are correct for each file:
+      <ul>
+        <li><code class="language-plaintext highlighter-rouge">mitoflashes_8bit.tiff</code> should be an image in <strong>tiff</strong> file format.</li>
+      </ul>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Changing the datatype</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>In the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Assign Datatype</strong>, select <code class="language-plaintext highlighter-rouge">datatypes</code> from “<em>New type</em>” dropdown     <ul>       <li>Tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <p><!--END_SNIPPET--></p>
+    </li>
+    <li>Tag each dataset with a label like “mitoflash_1” for easy identification later if you are working with multiple images.</li>
+  </ol>
+
+</blockquote>
+
+<h1 id="analyzing-mitochondrial-movement">Analyzing Mitochondrial Movement</h1>
+
+<p>In this section, we will focus on the detection of the mitochondria in a time-lapse image sequence based on local intensity maxima. This will provide insights into mitochondrial energy production and cellular health dynamics in the subsequent analysis.</p>
+
+<h2 id="step-1-mitochondrion-detection">Step 1: Mitochondrion Detection</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mitochondrion-detection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mitochondrion Detection</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/spot_detection_2d/ip_spot_detection_2d/0.0.1" title="Spot Detection tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Spot Detection</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.1)</span> with the following recommended parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Image input”</em>: <code class="language-plaintext highlighter-rouge">mitoflashes_8bit.tiff</code></li>
+        <li><strong>Starting time point</strong>: <code class="language-plaintext highlighter-rouge">1</code> (first frame in the stack)</li>
+        <li><strong>Ending time point</strong>: <code class="language-plaintext highlighter-rouge">0</code> (use <code class="language-plaintext highlighter-rouge">0</code> to process until the last frame)</li>
+        <li><strong>Intensity measurement method</strong>: Set to <code class="language-plaintext highlighter-rouge">Smoothed</code> for a more averaged intensity or <code class="language-plaintext highlighter-rouge">Robust</code> for resilience to outliers.</li>
+        <li><strong>Threshold</strong>: Start at 10%; lower to 5-8% to catch weaker signals, or raise to 15-20% to focus on the strongest signals.</li>
+        <li><strong>Gaussian filter sigma</strong>: Use a value around <code class="language-plaintext highlighter-rouge">1</code> to suppress noise; increase to <code class="language-plaintext highlighter-rouge">1.5</code> if noise is high.</li>
+        <li><strong>Boundary pixels</strong>: Set to <code class="language-plaintext highlighter-rouge">10</code> to ignore spots within the image edges, adjusting as needed for image size.</li>
+      </ul>
+
+      <p>This tool detects mitochondria based on intensity maxima. Adjusting the threshold parameter can improve the accuracy of spot detection, allowing to reduce the number of missed or spuriously detected mitochondria (as a rule of thumb, the latter is better tolerable for our analysis).</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="step-2-tracking-mitochondrial-movement">Step 2: Tracking Mitochondrial Movement</h2>
+
+<p>Mitochondria are dynamic organelles, constantly moving, and changing position within the cell. Without tracking, intensity measurements could be inconsistent or misleading, as they might reflect overlapping signals from different mitochondria rather than continuous changes in a single organelle.</p>
+
+<p>By linking each mitochondrion’s position across frames, we ensure that intensity fluctuations represent true changes within the same mitochondrial structure, enabling precise analysis of events like mitoflashes.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-tracking-mitochondrial-movement"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Tracking Mitochondrial Movement</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/points_association_nn/ip_points_association_nn/0.0.3-2" title="Perform linking in time series (nearest neighbors) tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform linking in time series (nearest neighbors)</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-2)</span> with the following recommended parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Coordinates (and intensities) of input points”</em>: Output from the <strong>Spot Detection</strong> tool.</li>
+        <li><strong>Neighborhood size</strong>: Set to <code class="language-plaintext highlighter-rouge">6</code> pixels as a starting value. Adjust within <code class="language-plaintext highlighter-rouge">1-10</code> pixels based on the density of points and proximity between spots across frames.</li>
+        <li><strong>Intensity threshold</strong>: A recommended starting value is <code class="language-plaintext highlighter-rouge">25%</code> of the global maximum intensity. Increase to <code class="language-plaintext highlighter-rouge">30-40%</code> for stricter filtering if spots have low intensity.</li>
+        <li><strong>Minimum track length</strong>: Use <code class="language-plaintext highlighter-rouge">50%</code> of the sequence length as a baseline. Adjust based on the expected duration of mitoflash events.</li>
+      </ul>
+
+      <p>This tool links detected spots across frames to track their movement. The <strong>Neighborhood size</strong> parameter controls the maximum allowed distance for associating points between frames (in pixels). Increase the <strong>Intensity threshold</strong> parameter to filter out more weak signals (e.g., to remove spurious tracks).</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="detecting-mitoflashes">Detecting Mitoflashes</h1>
+
+<p>Mitoflashes are identified based on sudden changes in fluorescence intensity in mitochondria, signifying superoxide bursts. We will use a curve-fitting tool to capture these fluctuations and measure their characteristics.</p>
+
+<h2 id="step-3-curve-fitting-for-mitoflash-detection">Step 3: Curve Fitting for Mitoflash Detection</h2>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-mitoflash-detection"><i class="fas fa-pencil-alt" aria-hidden="true" ></i> Hands-on: Mitoflash Detection</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/curve_fitting/ip_curve_fitting/0.0.3-2" title="Perform curve fitting tool" aria-role="button"><i class="fas fa-wrench" aria-hidden="true"></i> <strong>Perform curve fitting</strong> (<i class="fas fa-cubes" aria-hidden="true"></i> Galaxy version 0.0.3-2)</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File name of input data points (xlsx)”</em>: Output from the <strong>Perform linking in time series (nearest neighbors)</strong> tool.</li>
+        <li><strong>Degree of the polynomial function</strong>: Set to <code class="language-plaintext highlighter-rouge">2nd degree</code>.</li>
+        <li><strong>Penalty</strong>: Choose <em>Least absolute deviations (LAD)</em> for robust fitting to intensity fluctuations.</li>
+        <li><strong>Alpha</strong>: Set a significance level, such as <code class="language-plaintext highlighter-rouge">0.01</code>, to generate assistive curves if needed.</li>
+      </ul>
+
+      <p>This step uses polynomial curve fitting to model the basic underlying intensity patterns over time. The chosen <strong>Penalty</strong> ensures that the curve remains robust against brief, high-intensity deviations (e.g., mitoflashes or image noise), preserving the basic intensity trends. Mitoflash events are then identified as intensity values that significantly exceed the fitted curve by a specified threshold. To aid in this identification, an assistive curve is generated to represent the significance threshold, allowing mitoflash events to be easily recognized as those values exceeding the assistive curve.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="analysis-and-interpretation-of-results">Analysis and Interpretation of Results</h2>
+
+<p>Congratulations! You’ve reached the final step of your analysis and now have a fully prepared results table, ready for interpretation and further exploration! The output is an Excel file containing the columns <strong>FRAME</strong>, <strong>POS_X</strong>, <strong>POS_Y</strong>, <strong>INTENSITY</strong>, <strong>CURVE</strong>, and <strong>CURVE_A</strong>. This information is available for all detected spots in your image stack and can be used to calculate metrics for interpreting and plotting your mitoflash events results.</p>
+
+<p>Therefore, we can now analyze the <em>frequency</em>, <em>duration</em>, and <em>intensity</em> of the mitoflashes. This data will allow us to understand the physiological significance of mitoflashes in processes like muscle contraction, neuron development, and wound healing. In the upcoming section, we will expand on how to interpret and plot these mitoflash events to give them biological meaning.</p>
+
+<p>Here is an example of what the final output from the curve fitting tool in this tutorial looks like:</p>
+
+<figure id="figure-1" style="max-width: 90%;"><img src="../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png" alt="Curve fitting results mitoflash. " width="871" height="883" loading="lazy" /><a target="_blank" href="../../images/detection-of-mitoflashes/Curve_fitting_results_mitoflash.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Mitoflash Curve Fitting Results: Data for plotting.</figcaption></figure>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-example-analysis"><i class="far fa-question-circle" aria-hidden="true" ></i> Question: Example Analysis</div>
+
+  <p>Consider the following example data table.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>FRAME</th>
+        <th>POS_X</th>
+        <th>POS_Y</th>
+        <th>INTENSITY</th>
+        <th>CURVE</th>
+        <th>CURVE_A</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>57</td>
+        <td>474</td>
+        <td>114.84</td>
+        <td>116.10</td>
+        <td>165.38</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>57</td>
+        <td>474</td>
+        <td>115.91</td>
+        <td>116.11</td>
+        <td>165.39</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>57</td>
+        <td>474</td>
+        <td>166.00</td>
+        <td>166.05</td>
+        <td>165.40</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>57</td>
+        <td>474</td>
+        <td>116.24</td>
+        <td>116.13</td>
+        <td>165.42</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>57</td>
+        <td>474</td>
+        <td>116.40</td>
+        <td>116.15</td>
+        <td>165.43</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>57</td>
+        <td>474</td>
+        <td>164.50</td>
+        <td>165.00</td>
+        <td>165.44</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>57</td>
+        <td>474</td>
+        <td>165.10</td>
+        <td>165.20</td>
+        <td>165.45</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>57</td>
+        <td>474</td>
+        <td>115.69</td>
+        <td>116.33</td>
+        <td>165.62</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ol>
+    <li>Which frames show <strong>INTENSITY</strong> values that correspond to mitoflash events?</li>
+    <li>What does a case like Frame 7 (where both <strong>INTENSITY</strong> and <strong>CURVE</strong> are close to <strong>CURVE_A</strong>) indicate in terms of biological significance or computational interpretation?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-solutions"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solutions" aria-expanded="true"><i class="far fa-eye" aria-hidden="true" ></i> <span>Solution: Solutions</span><span class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Frame 3 demonstrates a brief but significant increase of the intensity value (<strong>INTENSITY &gt; CURVE_A</strong>), that corresponds to a mitoflash event. Frame 6 shows <strong>CURVE &gt; CURVE_A</strong>, while <strong>INTENSITY</strong> remains below <strong>CURVE_A</strong>.</li>
+      <li>Frame 7 represents a borderline case where both <strong>INTENSITY</strong> and <strong>CURVE</strong> are near <strong>CURVE_A</strong>. This could reflect computational noise, weak mitoflash activity, or background fluctuations that do not meet the threshold for a significant event.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h3 id="key-parameters-for-analysis-and-plotting">Key Parameters for Analysis and Plotting</h3>
+
+<ol>
+  <li>
+    <p><strong>FRAME</strong>: Represents time points in the data, with each row corresponding to a frame in the time-lapse sequence. Use <strong>FRAME</strong> as the x-axis for time-based plotting.</p>
+  </li>
+  <li>
+    <p><strong>POS_X</strong> and <strong>POS_Y</strong>: These columns provide the coordinates of each detected mitoflash, allowing visualization of mitochondrial movement and spatial distribution within the cell.</p>
+  </li>
+  <li>
+    <p><strong>INTENSITY</strong>: Shows the raw intensity values for each mitochondrion at each time point. Plotting <strong>INTENSITY</strong> against <strong>FRAME</strong> reveals fluctuations over time, with peaks indicating mitoflash events.</p>
+  </li>
+  <li>
+    <p><strong>CURVE</strong> and <strong>CURVE_A</strong>: Contain fitted curve data that smooths out noise to highlight true intensity peaks. <strong>CURVE</strong> is the main fit, while <strong>CURVE_A</strong> may show adjusted fits if available.</p>
+
+    <ul>
+      <li><strong>Amplitude (F/F0)</strong>: The peak value in <strong>CURVE</strong> or <strong>CURVE_A</strong>, representing the magnitude of each mitoflash. Higher amplitudes indicate stronger bursts, which can have biological significance.</li>
+      <li><strong>Tpk (Time to Peak)</strong>: The frame where <strong>CURVE</strong> or <strong>CURVE_A</strong> reaches maximum intensity, indicating the speed of each mitoflash.</li>
+      <li><strong>T50 (Duration)</strong>: The frames where the curve values are at least half of the peak value, representing the mitoflash duration. Longer durations may reflect sustained mitochondrial activity.</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="suggested-plots">Suggested Plots</h3>
+
+<ul>
+  <li>
+    <p><strong>Mitoflash Intensity Over Time</strong>: Plot <strong>FRAME</strong> (x-axis) against <strong>INTENSITY</strong> or <strong>CURVE</strong> (y-axis) to observe intensity fluctuations over time, with peaks marking mitoflash events.</p>
+  </li>
+  <li>
+    <p><strong>Amplitude and Duration Analysis</strong>: Create a histogram or scatter plot of <strong>Amplitude</strong> (from <strong>CURVE</strong> peaks) and <strong>T50</strong> to explore the distribution of mitoflash magnitudes and durations.</p>
+  </li>
+  <li>
+    <p><strong>Spatial Mapping of Mitoflashes</strong>: Use <strong>POS_X</strong> and <strong>POS_Y</strong> for a 2D plot, with each point representing a mitoflash location. Color-code points by <strong>Amplitude</strong> to show intensity distribution across the cell.</p>
+  </li>
+</ul>
+
+<p>This format seamlessly integrates the example data and a question for the user to reflect on and interact with the tutorial, helping them understand how to interpret differences between <strong>INTENSITY</strong>, <strong>CURVE</strong>, and <strong>CURVE_A</strong>.</p>
+
+<p>These analyses and visualizations provide an understanding of mitochondrial activity and responses to cellular conditions, enabling insights into mitochondrial health and function in various states.</p>
+
+<figure id="figure-2" style="max-width: 90%;"><img src="../../images/detection-of-mitoflashes/Workflow_mitoflash.png" alt="Image of the workflow. " width="1488" height="1118" loading="lazy" /><a target="_blank" href="../../images/detection-of-mitoflashes/Workflow_mitoflash.png" rel="noopener noreferrer"><small>Open image in new tab</small></a><br /><br /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Overview of the workflow for detecting mitoflash using Mitochondrion detection (Step 1), Mitochondrion tracking (Step 2), and Curve fitting to measured intensities (Step 3).</figcaption></figure>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we have covered key techniques for tracking mitochondria and detecting mitoflashes. By processing and analyzing live-cell imaging data, you can gain valuable insights into mitochondrial behavior and health in cells. Tracking mitoflashes can contribute to studies in metabolism, aging, and diseases linked to mitochondrial dysfunction in verious cell types and eukaryotic organisms.</p>
+
+                </section>
+
+                <section aria-label="Tutorial Footer, Feedback, Citation" id="tutorial-footer">
+                        <h3>You've Finished the Tutorial</h3>
+                        <button id="tutorial-finish-button" class="btn btn-primary" onclick="tutorial_finish()">I finished this tutorial 👍</button>
+                        <p style="display: none" id="tutorial-finish-text">Please also consider filling out the <a href="#gtn-feedback">Feedback Form</a> as well!</p>
+                        <script>
+                        function tutorial_finish() {
+                          if(typeof plausible !== 'undefined'){
+                            // Plausible may be undefined (script blocked)
+                            // or it may be defined, but opted-out (select box/DNT),
+                            // which means `plausible()` will work but not send data, *nor* execute the callback.
+                            plausible('TutorialComplete', {props: {path: document.location.pathname}})
+                          }
+                          // since the callback is completely cosmetic, we'll just issue it optimistically.
+                          tutorial_finish_finish();
+                        }
+                        function tutorial_finish_finish() {
+                          document.getElementById("tutorial-finish-button").innerText = 'Congrats! Thanks for letting us know! 🎉'
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-button").disabled = true
+                          document.getElementById("tutorial-finish-text").style.display = 'block'
+                        }
+                        </script>
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Mitoflashes are superoxide events in mitochondria that signal functional states and stress responses.</p>
+</li>
+                        
+                        <li><p>Bioinformatics tools can facilitate the visualization, tracking, and quantitative analysis of these events.</p>
+</li>
+                        
+                        <li><p>Proper tracking and analysis of mitoflashes contribute to understanding mitochondrial behavior and health in cells.</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/imaging/faqs/">FAQ page for the Imaging topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/imaging#references">here</a>.</p>
+                
+
+
+                
+                <h1 id="bibliography">References</h1>
+                <ol class="bibliography"><li id="Feng2019">Feng, G., B. Liu, J. Li, T. Cheng, Z. Huang <i>et al.</i>, 2019 <b>Mitoflash biogenesis and its role in the autoregulation of mitochondrial proton electrochemical potential</b>. The Journal of General Physiology 151: 727–737. <a href="https://doi.org/10.1085/jgp.201812176">10.1085/jgp.201812176</a></li>
+<li id="Li2020">Li, A., Y. Qin, M. Gao, W. Jiang, B. Liu <i>et al.</i>, 2020 <b>Protocol for Imaging of Mitoflashes in Live Cardiomyocytes</b>. STAR Protocols 1: 100101. <a href="https://doi.org/10.1016/j.xpro.2020.100101">10.1016/j.xpro.2020.100101</a></li>
+<li id="Wang2022">Wang, D., Q. Gao, I. Schaefer, H. Moerz, U. Hoheisel <i>et al.</i>, 2022 <b>TRPM3-mediated dynamic mitochondrial activity in nerve growth factor-induced latent sensitization of chronic low back pain</b>. Pain 163: e1115–e1128. <a href="https://doi.org/10.1097/j.pain.0000000000002642">10.1097/j.pain.0000000000002642</a></li></ol>
+                
+
+                
+
+                <h1 id="gtn-feedback">Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/detection-of-mitoflashes"><a href="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=imaging/detection-of-mitoflashes">Feedback Form</a></iframe>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Diana Chiang Jurado, Leonid Kostrykin,  <b>Tracking of mitochondria and capturing mitoflashes (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html">https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Hiltemann, Saskia, Rasche, Helena et al., 2023 <b>Galaxy Training: A Powerful Framework for Teaching!</b> PLOS Computational Biology <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1010752">10.1371/journal.pcbi.1010752</a>
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{imaging-detection-of-mitoflashes,
+author = "Diana Chiang Jurado and Leonid Kostrykin",
+	title = "Tracking of mitochondria and capturing mitoflashes (Galaxy Training Materials)",
+	year = "",
+	month = "",
+	day = ""
+	url = "\url{https://training.galaxyproject.org/training-material/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.html}",
+	note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+        
+
+
+<script>
+// update the date on load, or leave fallback of 'today'
+const citationTodaysDate = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", citationTodaysDate.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+		
+                <blockquote class="details follow-up" id="admins-install-missing-tools">
+                  <div id="admin-missing-tools" class="box-title">
+                    <button type="button" aria-controls="admin-missing-tools" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Galaxy Administrators: Install the missing tools<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+
+			<p>You can use Ephemeris's <code>shed-tools install</code> command to install the tools used in this tutorial.</p>
+<div class="highlight"><pre class="highlight"><code>shed-tools install [-g GALAXY] [-a API_KEY] -t &lt;(curl https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.json | jq .admin_install_yaml -r)</code></pre></div>
+<p>Alternatively you can copy and paste the following YAML</p>
+<div class="highlight"><pre class="highlight"><code>---
+install_tool_dependencies: true
+install_repository_dependencies: true
+install_resolver_dependencies: true
+tools:
+- name: curve_fitting
+  owner: imgteam
+  revisions: 2dc244356765
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: points_association_nn
+  owner: imgteam
+  revisions: f3fad67af22c
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+- name: spot_detection_2d
+  owner: imgteam
+  revisions: d78372040976
+  tool_panel_section_label: Imaging
+  tool_shed_url: https://toolshed.g2.bx.psu.edu/
+</code></pre></div>
+                </blockquote>
+		
+
+		<blockquote class="details hide-when-printing" id="feedback-responses">
+                  <div id="feedback-response-c" class="box-title">
+                    <button type="button" aria-controls="feedback-response-c" aria-expanded="false">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> Feedback<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+
+		   <p>
+		   
+		   <table class="charts-css bar show-labels" style="--labels-size: 8rem; overflow-y: hidden">
+		   
+		   </table>
+		   </p>
+		
+        
+        
+            <p>No feedback has been recieved yet for this training. Be the first one by filling in the feedback form from <a href="#gtn-feedback">above</a>. </p>
+        
+		</blockquote>
+
+
+
+
+		
+		
+		
+
+                </section>
+
+            </div>
+        </div>
+    </div>
+</article>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        <footer>
+	<hr />
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<span style="font-size: 2em">GTN</span>
+				<p>
+					The GTN provides researchers with a free, open repository of online training
+					materials, with a focus on hands-on training that aims to be directly applicable for learners.
+					We aim to connect researchers and learners with local trainers, and events worldwide.
+				</p>
+				<p>
+					We promote FAIR and Open Science practices worldwide, are committed to the accessibility of this platform and training for everyone.
+				</p>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">About Us</span>
+				<ul class="no-bullets">
+					<li><a href="/training-material/faqs/gtn/gtn-what-is-it.html">About</a></li>
+					<li><a rel="code-of-conduct" href="https://galaxyproject.org/community/coc/">Code of Conduct</a></li>
+					<li><a href="/training-material/accessibility.html">Accessibility</a></li>
+					<li><a href="/training-material/faqs/gtn/fair_training.html">100% FAIR Training</a></li>
+					<li><a href="/training-material/faqs/gtn/collaborative_development.html">Collaborative Development</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Page</span>
+				<ul class="no-bullets">
+					
+
+					
+
+					<li>
+						<a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">
+							Content licensed under Creative Commons Attribution 4.0 International License
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/edit/main/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+						</a>
+					</li>
+					<li>
+						<a href="https://github.com/galaxyproject/training-material/commits/main/topics/imaging/tutorials/detection-of-mitoflashes/tutorial.md">
+						<i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View Changes on GitHub
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Support</span>
+				<ul class="no-bullets">
+					<li><a rel="me" href="/training-material/faqs/galaxy/">Galaxy FAQs</a></li>
+					<li><a rel="me" href="https://help.galaxyproject.org">Galaxy Help Forum</a></li>
+					<li><a rel="me" href="http://gxy.io/gtn-slack">GTN Slack Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/%23Galaxy-Training-Network_Lobby%3Agitter.im">GTN Matrix Chat</a></li>
+					<li><a rel="me" href="https://matrix.to/#/#galaxyproject_Lobby:gitter.im">Galaxy Matrix Chat</a></li>
+				</ul>
+				<span style="font-size: 1.3em">Framework</span>
+				<ul class="no-bullets">
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4273115a66d93b38ff66ba2777e2bfc0118b4315">4273115</a></li>
+					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
+					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-3">
+				<span style="font-size: 1.3em">Follow Us!</span>
+				<ul class="no-bullets">
+					<li><span style="fill: var(--hyperlink);"><?xml version="1.0" encoding="UTF-8" standalone="no"?><svg   width="1em"   height="1em"   viewBox="0 0 8.4937906 9.1084023"   version="1.1"   id="svg356"   xmlns="http://www.w3.org/2000/svg"   xmlns:svg="http://www.w3.org/2000/svg">  <g     id="layer1"     transform="translate(-70.566217,-144.26757)">    <path       style="fill-opacity:1;stroke:none;stroke-width:0.0179182"       d="m 76.39081,152.24155 c -0.737138,0.20763 -1.554999,0.29101 -2.311453,0.14333 -0.475335,-0.0928 -0.891898,-0.32923 -1.031589,-0.82423 -0.04356,-0.15434 -0.06132,-0.32388 -0.06142,-0.48378 0.353724,0.0457 0.702251,0.1304 1.057176,0.17407 0.701338,0.0864 1.394702,0.0784 2.096434,0.008 0.744056,-0.0745 1.433711,-0.21546 2.060598,-0.64854 0.243974,-0.16855 0.474672,-0.39133 0.603487,-0.66252 0.181421,-0.38195 0.175886,-0.89336 0.204447,-1.30803 0.0923,-1.34029 0.20588,-2.98599 -1.076708,-3.846 -0.499561,-0.33497 -1.208891,-0.39913 -1.791824,-0.45742 -0.987026,-0.0987 -1.971078,-0.0946 -2.956509,0.0338 -0.841146,0.10961 -1.595223,0.31468 -2.1065,1.0443 -0.493296,0.70396 -0.509564,1.52563 -0.509564,2.34729 0,1.37831 -0.05534,2.87744 0.595934,4.13911 0.504703,0.97774 1.498709,1.29589 2.52184,1.41832 0.473239,0.0566 0.96049,0.0849 1.434158,0.0172 0.328853,-0.0471 0.650325,-0.0999 0.966886,-0.20511 0.08957,-0.0298 0.266911,-0.0614 0.322027,-0.14486 0.04089,-0.0618 0.0099,-0.15812 0.0035,-0.22545 -0.01611,-0.16924 -0.02094,-0.34967 -0.02096,-0.51963 m -1.594723,-5.48298 c 0.214822,-0.25951 0.315898,-0.56088 0.60922,-0.75705 0.687899,-0.46006 1.692038,-0.11202 1.992096,0.63161 0.214571,0.5317 0.140174,1.15913 0.140174,1.72017 v 1.03925 c 0,0.0911 0.04009,0.30954 -0.01842,0.38339 -0.04193,0.053 -0.173018,0.0287 -0.232436,0.0287 h -0.698809 v -1.88142 c 0,-0.28413 0.04813,-0.63823 -0.09912,-0.89591 -0.234746,-0.4108 -0.875019,-0.36105 -1.092116,0.0358 -0.123368,0.22555 -0.116792,0.50369 -0.116792,0.75257 v 1.0751 h -0.931726 v -1.05718 c 0,-0.2555 0.0024,-0.53932 -0.121773,-0.77049 -0.21432,-0.39919 -0.857782,-0.44403 -1.090217,-0.0358 -0.147324,0.25871 -0.09604,0.61056 -0.09604,0.89591 v 1.88142 H 72.09042 v -1.98893 c 0,-0.4711 -0.01604,-0.95902 0.233201,-1.3797 0.585269,-0.98786 2.133584,-0.74836 2.472454,0.32253 z"       id="path2318" />  </g></svg></span> <a rel="me" href="https://mstdn.science/@gtn">Mastodon</a></li>
+					<li><span style="fill: var(--hyperlink);"><svg  viewBox="0 0 64 57" width="1em" ><path style="fill-opacity:1;stroke:none;stroke-width:0.0179182" d="M13.873 3.805C21.21 9.332 29.103 20.537 32 26.55v15.882c0-.338-.13.044-.41.867-1.512 4.456-7.418 21.847-20.923 7.944-7.111-7.32-3.819-14.64 9.125-16.85-7.405 1.264-15.73-.825-18.014-9.015C1.12 23.022 0 8.51 0 6.55 0-3.268 8.579-.182 13.873 3.805ZM50.127 3.805C42.79 9.332 34.897 20.537 32 26.55v15.882c0-.338.13.044.41.867 1.512 4.456 7.418 21.847 20.923 7.944 7.111-7.32 3.819-14.64-9.125-16.85 7.405 1.264 15.73-.825 18.014-9.015C62.88 23.022 64 8.51 64 6.55c0-9.818-8.578-6.732-13.873-2.745Z"></path></svg></span><a rel="me" href="https://bsky.app/profile/galaxytraining.bsky.social"> Bluesky</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</footer>
+
+
+        <script  async defer src='/training-material/assets/js/bundle.main.40d4e218.js'></script>
+
+	
+	
+
+    </body>
+</html>
