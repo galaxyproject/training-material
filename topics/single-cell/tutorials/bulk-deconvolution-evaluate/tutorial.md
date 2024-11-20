@@ -51,7 +51,7 @@ In this tutorial we will be using single-cell data with known cell-type proporti
 
 # Get the single-cell data
 
-First we need to create a new history in Galaxy and load in our single-cell data. We are going to use the single-cell dataset from a previous deconvolution tutorial found here: [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html](https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html).
+First we need to create a new history in Galaxy and load in our single-cell data. We are going to use the single-cell dataset from a previous deconvolution tutorial found here: [https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music/tutorial.html]({% link topics/single-cell/tutorials/bulk-music/tutorial.md %}).
 
 > <hands-on-title>Data upload</hands-on-title>
 >
