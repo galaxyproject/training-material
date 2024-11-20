@@ -211,3 +211,7 @@ margin: 0;
     border: 1px solid var(--hyperlink);
 }
 </style>
+
+## References
+
+{% bibliography --cited %}
