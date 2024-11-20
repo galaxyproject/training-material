@@ -30,7 +30,7 @@ For a full list of metadata fields for events, please have a look at our [schema
 Please also feel free to contact us with ideas for improvements! We know that training comes in many different forms, so if something in your event is not yet supported, let us know and we are happy to add it!
 
 
-## External events
+### External events
 
 Already have a course webpage? Great! In this case, you only have to provide the most basic information about your course (title, desciption, dates, location).
 

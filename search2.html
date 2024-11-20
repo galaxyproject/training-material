@@ -153,6 +153,13 @@ function search(){
 	to_hide.map(r => r.style.display = "none");
 
 	previousSearch = `${textQuery} ${typeFilter} ${levelFilter}`
+
+	if(typeof plausible !== 'undefined'){
+		// Plausible may be undefined (script blocked)
+		// or it may be defined, but opted-out (select box/DNT),
+		// which means `plausible()` will work but not send data, *nor* execute the callback.
+		plausible('Search', {props: {query: textQuery, type: typeFilter, level: levelFilter}})
+	}
 }
 
 // Attribution: https://gist.github.com/beaucharman/1f93fdd7c72860736643d1ab274fee1a

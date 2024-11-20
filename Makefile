@@ -65,6 +65,10 @@ bundle-install: clean  ## install gems if Ruby is already present (e.g. on gitpo
 	bundle install
 .PHONE: bundle-install
 
+bundle-update: bundle-install  ## install gems if Ruby is already present (e.g. on gitpod.io)
+	bundle update
+.PHONE: bundle-update
+
 serve: api/swagger.json ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
@@ -82,12 +86,24 @@ serve-quick: api/swagger.json ## run a local server (faster, some plugins disabl
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
 
+preview: serve-codespaces
+.PHONY: serve-codespaces
+
+serve-codespaces: codespace-clean bundle-install bundle-update
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
+.PHONY: serve-codespaces
+
+codespace-clean:
+	rm -rf /workspaces/.codespaces/shared/editors/jetbrains;
+	rm -f /workspaces/training-material/.git/objects/pack/tmp_pack*
+.PHONY: codespace-clean
+
 serve-gitpod: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml --incremental --livereload
+	bundle exec jekyll serve --config _config.yml --incremental
 .PHONY: serve-gitpod
 
 serve-gitpod-quick: bundle-install  ## run a server on a gitpod.io environment
-	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental --livereload
+	bundle exec jekyll serve --config _config.yml,_config-dev.yml --incremental
 .PHONY: serve-gitpod-quick
 
 build-gitpod: bundle-install  ## run a build on a gitpod.io environment
