@@ -6,6 +6,7 @@ box_type: tip
 contributors: [bebatut,shiltemann]
 ---
 
+<!-- GTN:IGNORE:002 -->
 
 This website is a collection of hands-on tutorials that are designed to be interactive and are built around Galaxy:
 
