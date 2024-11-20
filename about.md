@@ -157,34 +157,7 @@ The GTN started in July of 2015 as a collection of just a handful of <i>Galaxy-s
 
 The GTN is a community-driven project, with contributions from people around the world.
 
-Over time, it has grown to include materials for a wide range of topics, in bioinformatics and beyond! We now cover a range of scientific topics and methodologies:
-
-{%- assign sorted_topics = site | list_topics_ids -%}
-{%- for topic_name in sorted_topics -%}
-{%- assign topic = site.data[topic_name] -%}
-{%- if topic.type == "use" -%}
-{%- if topic.name != "introduction" -%}
-{%- if topic.topic_type != "technology" -%}
-{%- if topic.draft != true or jekyll.environment != "production" -%}
-<a class="label label-default tutorial_tag" style="background: #f2f2b1; border-color: #aa8;" href="{{ site.baseurl }}/topics/{{ topic.name }}/">
-{{ topic.title }}</a>
-{%- endif -%}
-{%- endif -%}
-{%- endif -%}
-{%- endif -%}
-{%- endfor -%}
-
-{%- for topic_name in sorted_topics -%}
-{%- assign topic = site.data[topic_name] -%}
-{%- if topic.type == "use" -%}
-{%- if topic.topic_type == "technology" -%}
-{%- if topic.draft != true or jekyll.environment != "production" -%}
-<a class="label label-default tutorial_tag" style="background: #e4e0fb; border-color: #4a456c;" href="{{ site.baseurl }}/topics/{{ topic.name }}/">
-{{ topic.title }}</a>
-{%- endif -%}
-{%- endif -%}
-{%- endif -%}
-{%- endfor -%}
+Over time, it has grown to include materials for a wide range of topics, in bioinformatics and beyond! We now cover a range of scientific topics and methodologies.
 
 </div>
 
@@ -199,7 +172,8 @@ Over time, it has grown to include materials for a wide range of topics, in bioi
 
 ## Free & Open Source
 
-Both the GTN Framework, and all materials in the GTN are openly licensed and free to use. The GTN code and libraries is available under <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a>, and most tutorials are available under a Creative Commons license: <a rel="license" href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+Both the GTN Framework, and all materials in the GTN are openly licensed and free to use. The GTN code and libraries is available under [MIT](https://github.com/galaxyproject/training-material/blob/main/LICENSE.md), and most tutorials are available under a Creative Commons license [CC-BY-4.0](https://spdx.org/licenses/CC-BY-4.0")
+
 
 <style>
 #hero {
