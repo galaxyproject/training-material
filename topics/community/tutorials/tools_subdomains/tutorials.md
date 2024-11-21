@@ -77,7 +77,7 @@ This part is only to make batch tool visible in your subdomain.
 >    - If not already done clone the Galaxy europe [Infrastructure-playbook repo](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master)
 >    - Create a branch on your fork
 >    - Go to the file **tool_conf.xml.j2** in **templates/galaxy/config/**
->    - Open it and edit it by adding the xml file of the interactive tool to the section interactive tool or any other interactive tool section (to know more on how to create your interactive tool section folow [this tutorial]({%link topics/dev/tutorials/tool-from-scratch/tutorial.md %}))
+>    - Open it and edit it by adding the xml file of the interactive tool to the section interactive tool or any other interactive tool section (to know more on how to create your interactive tool section folow [this tutorial]({%link topics/admin/tutorials/subdomain/tutorial.md %}))
 >    - Below an example of how to add the interactive tool panoply to the earth system subdomain.
 >
 > ![Image of the modification to make in the tool_conf.xml.j2 file](../../images/tool_subdomain/add_interactive_tool.png)
