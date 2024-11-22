@@ -7,7 +7,6 @@ questions:
 - How can we predict the neoantigens presented by tumor cells?
 - How does the HLA genotype affect the immune response to cancer?
 objectives:
-The following tools will be used in this tutorial:
   - Predict potential neoantigens based on HLA binding affinity.
   - Understand the role of HLA genotyping in predicting personalized immune responses.
   - Use specific tools for processing sequence data to predict HLA-binding peptides.
