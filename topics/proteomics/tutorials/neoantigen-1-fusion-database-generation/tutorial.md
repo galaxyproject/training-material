@@ -311,8 +311,11 @@ By leveraging **Query Tabular**, researchers can efficiently refine and structur
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `outfile` (output of **Text reformatting** {% icon tool %})
 >            - In *"Table Options"*:
 >                - *"Specify Column Names (comma-separated list)"*: `c1,c2,c3,c4`
->    - *"SQL Query to generate tabular output"*: `SELECT t1.c1 || '__' || t1.c2  || '__' || t1.c3, t1.c4
-FROM t1 `
+>    - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT t1.c1 || '__' || t1.c2  || '__' || t1.c3, t1.c4
+>FROM t1
+> ```
 >    - *"include query result column headers"*: `No`
 >
 >
