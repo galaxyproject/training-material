@@ -136,7 +136,7 @@ INNER JOIN t2
 ON t1.c1 = t2.c1`
 >    - *"include query result column headers"*: `No`
 >
->
+{: .hands_on}
 
 
 
@@ -164,7 +164,7 @@ In this step, we will use the Convert tool to modify characters in a dataset. Sp
 > > 1. The "Convert" tool is used to replace or remove specific characters in a dataset, such as pipe characters (|). This ensures that the data conforms to the required format for subsequent analysis or tools. Pipe characters are often used as delimiters in tabular data. Replacing them might be necessary if the data needs to be formatted for a different tool or if the pipe character interferes with parsing in downstream steps.
 > >
 > {: .solution}
->
+> 
 {: .question}
 
 ### Editing certain "u" characters 
@@ -394,8 +394,6 @@ FROM  t1`
 > {: .solution}
 >
 {: .question}
-
-{: .hands_on}
 
 
 # B: Database for IEDB 
