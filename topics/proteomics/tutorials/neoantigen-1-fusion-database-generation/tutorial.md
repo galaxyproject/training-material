@@ -240,49 +240,51 @@ The reformatting step ensures that the processed data adheres to the requirement
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `fusions_tsv` (output of **Arriba** {% icon tool %})
 >    - *"AWK Program"*:
->      ` (NR==1){
-    for (i=1;i<=NF;i++) {
-        if ($i ~ gene1) { 
-            gene1 = i;
-        }
-        if ($i == gene2) { 
-            gene2 = i;
-        }
-        if ($i == breakpoint1) { 
-            breakpoint1 = i;
-        }
-        if ($i == breakpoint2) { 
-            breakpoint2 = i;
-        }
-        if ($i == reading_frame) { 
-            reading_frame = i;
-        }
-        if ($i == peptide_sequence) { 
-            pscol = i;
-        }
-    }
-}
-(NR>1){
-    pseq = $pscol
-    if (pseq != .) {
-        bp = index(pseq,|);
-        pos = bp - 8; 
-        n=split(pseq,array,|);
-        pep = toupper(array[1] array[2])
-        sub([*],,pep)
-        g1 = $gene1;
-        g2 = $gene2;
-        sub([(,].*,,g1);
-        sub([(,].*,,g2);
-        id = g1 _ g2
-        brkpnts = $breakpoint1 _ $breakpoint2 
-        neopep = substr(pep,pos)
-        if ($reading_frame == in-frame) {
-            neopep = substr(pep,pos,16)
-        }
-        print(id \t (NR-1) \t brkpnts \t neopep);  
-    }
-} `
+> ```
+> (NR==1){
+>    for (i=1;i<=NF;i++) {
+>        if ($i ~ gene1) { 
+>            gene1 = i;
+>        }
+>        if ($i == gene2) { 
+>            gene2 = i;
+>        }
+>        if ($i == breakpoint1) { 
+>            breakpoint1 = i;
+>        }
+>        if ($i == breakpoint2) { 
+>            breakpoint2 = i;
+>        }
+>        if ($i == reading_frame) { 
+>            reading_frame = i;
+>        }
+>        if ($i == peptide_sequence) { 
+>            pscol = i;
+>        }
+>    }
+> }
+> (NR>1){
+>    pseq = $pscol
+>    if (pseq != .) {
+>        bp = index(pseq,|);
+>        pos = bp - 8; 
+>        n=split(pseq,array,|);
+>        pep = toupper(array[1] array[2])
+>        sub([*],,pep)
+>        g1 = $gene1;
+>        g2 = $gene2;
+>        sub([(,].*,,g1);
+>        sub([(,].*,,g2);
+>        id = g1 _ g2
+>        brkpnts = $breakpoint1 _ $breakpoint2 
+>        neopep = substr(pep,pos)
+>        if ($reading_frame == in-frame) {
+>            neopep = substr(pep,pos,16)
+>        }
+>        print(id \t (NR-1) \t brkpnts \t neopep);  
+>    }
+> }
+> ```
 >
 >
 >
