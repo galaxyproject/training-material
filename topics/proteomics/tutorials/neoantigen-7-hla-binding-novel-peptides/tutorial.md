@@ -377,18 +377,22 @@ The peptides, including both strong and weak binders, are annotated with their r
 >                - *"Use first line as column names"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"SQL Query to generate tabular output"*: `SELECT *
-FROM t1 
-WHERE t1.icore IN (SELECT c1 FROM t2)
-`
+>    - *"SQL Query to generate tabular output"*:
+>   ``` sql
+>   SELECT * FROM t1 
+>    WHERE t1.icore IN (SELECT c1 FROM t2)
+>   ```
 >    - *"include query result column headers"*: `Yes`
 >    - In *"Additional Queries"*:
 >        - In *"SQL Query"*:
 >            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*: `SELECT icore
-FROM t1 
-WHERE t1.icore IN (SELECT c1 FROM t2)
-ORDER BY icore`
+>                - *"SQL Query to generate tabular output"*:
+>              ``` sql
+>              SELECT icore
+>              FROM t1 
+>              WHERE t1.icore IN (SELECT c1 FROM t2)
+>              ORDER BY icore
+>              ```
 >                - *"include query result column headers"*: `No`
 >
 >
@@ -405,18 +409,23 @@ ORDER BY icore`
 >                - *"Use first line as column names"*: `Yes`
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Filter** {% icon tool %})
->    - *"SQL Query to generate tabular output"*: `SELECT *
-FROM t1 
-WHERE t1.icore IN (SELECT c1 FROM t2)
-`
+>    - *"SQL Query to generate tabular output"*:
+>   ``` sql
+>   SELECT *
+>    FROM t1 
+>    WHERE t1.icore IN (SELECT c1 FROM t2)
+>   ```
 >    - *"include query result column headers"*: `Yes`
 >    - In *"Additional Queries"*:
 >        - In *"SQL Query"*:
 >            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*: `SELECT icore
-FROM t1 
-WHERE t1.icore IN (SELECT c1 FROM t2)
-ORDER BY icore`
+>                - *"SQL Query to generate tabular output"*:
+>              ``` sql
+>              SELECT icore
+>              FROM t1 
+>              WHERE t1.icore IN (SELECT c1 FROM t2)
+>              ORDER BY icore
+>              ```
 >                - *"include query result column headers"*: `No`
 >
 >
