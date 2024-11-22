@@ -115,7 +115,7 @@ This workflow provides a structured approach to preparing fusion neoantigen data
 # Data preparation
 
 
-## **Convert compressed file to uncompressed.**
+## Convert compressed file to uncompressed
 
 Uncompressing data is a crucial first step in many bioinformatics workflows because raw sequencing data files, especially from high-throughput sequencing, are often stored in compressed formats (such as `.gz` or `.zip`) to save storage space and facilitate faster data transfer. Compressed files need to be uncompressed to make the data readable and accessible for analysis tools, which generally require the data to be in plain text or other compatible formats. By uncompressing these files, we ensure that downstream applications can efficiently process and analyze the raw sequencing data without compatibility issues related to compression. In this workflow, we do that for both forward and reverse files.
 
@@ -221,7 +221,7 @@ The output includes a list of fusion candidates with key information like fusion
 >
 {: .question}
 
-## **Text reformatting**
+## Clean up data using **Text reformatting**
 
 **Text Reformatting** is a step used in bioinformatics workflows to manipulate and clean up data for easier downstream processing. In fusion detection workflows, text reformatting is often used to parse and restructure output files, making the data consistent and accessible for subsequent analysis steps.
 
@@ -289,7 +289,7 @@ The reformatting step ensures that the processed data adheres to the requirement
 
 
 
-## **Query Tabular**
+## Data refinement with **Query Tabular**
 
 **Query Tabular** is a bioinformatics tool used to extract and manipulate specific data from tabular datasets in workflows. This tool allows users to perform SQL-like queries on tabular data, enabling them to filter, aggregate, and transform datasets based on user-defined criteria.
 
@@ -336,7 +336,7 @@ Tabular to FASTA conversion is a common task in bioinformatics that transforms d
 {: .hands_on}
 
 
-## **Regex Find And Replace**
+## Using **Regex Find And Replace**
 
 Using regex (regular expressions) for find and replace is a powerful technique for text manipulation, allowing you to search for patterns and replace them with desired text. Below is a guide on how to use regex for find and replace, including examples in different programming languages. In this context, we are adding "fusion" to the database header.
 
