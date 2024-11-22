@@ -38,8 +38,6 @@ redirect_from:
 ---
 
 
-# Introduction
-
 Proteogenomics leverages mass spectrometry (MS)-based proteomics data alongside genomics and transcriptomics data to identify neoantigens—unique peptide sequences arising from tumor-specific mutations. In the initial section of this tutorial, we will construct a customized protein database (FASTA) using RNA-sequencing files (FASTQ) derived from tumor samples. Following this, we will conduct sequence database searches using the resultant FASTA file and MS data to identify peptides corresponding to novel proteoforms, specifically focusing on potential neoantigens. We will then assign genomic coordinates and annotations to these identified peptides and visualize the data, assessing both spectral quality and genomic localization.
 
 In this framework, Proteogenomics incorporates RNA-Seq data to generate tailored protein sequence databases, enabling the identification of protein sequence variants, including neoantigens, through mass spectrometry analysis ({% cite Chambers_2017 %}).
