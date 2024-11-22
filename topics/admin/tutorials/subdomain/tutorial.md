@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Create a subdomain for your community
+title: Create a subdomain for your community on UseGalaxy.eu
 questions:
 - What are the Galaxy communities ?
 - What's a subdomain ?
