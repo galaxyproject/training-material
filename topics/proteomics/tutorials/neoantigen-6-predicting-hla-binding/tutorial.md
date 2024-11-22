@@ -67,6 +67,7 @@ This hands-on tutorial is designed to offer practical experience for learners ai
 {: .agenda}
 
 # Predicting HLA binding
+## Overview of HLA Binding Prediction Workflow
 This tutorial provides a step-by-step guide for predicting HLA binding of neoantigens, a crucial part of personalized immunotherapy research. Using OptiType and seq2HLA, we will perform HLA typing and analyze which neoantigens are likely to bind to a specific individual’s HLA molecules, potentially driving an immune response. This process is essential for identifying candidate peptides that could serve as effective targets in immunotherapy.
 
 ### 1. Get Data
