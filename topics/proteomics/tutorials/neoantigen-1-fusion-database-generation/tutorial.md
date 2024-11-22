@@ -59,7 +59,7 @@ To generate the fusion database, RNA star and Arriba tools are used in this work
 >
 {: .agenda}
 
-# Neoantigen database generation
+# Neoantigen Database Generation
 
 ## Overview of Fusion Neoantigen Database Workflow
 
