@@ -323,7 +323,7 @@ FROM t1 `
 
 Tabular to FASTA conversion is a common task in bioinformatics that transforms data structured in a tabular format (such as CSV or TSV) into FASTA format, widely used for representing nucleotide or protein sequences. This conversion is essential when sequence data needs to be input into various bioinformatics tools or databases that require FASTA-formatted files.
 
-> <hands-on-title> COnverting tabular to fasta </hands-on-title>
+> <hands-on-title> Converting tabular to fasta </hands-on-title>
 >
 > 1. {% tool [Tabular-to-FASTA](toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tab-delimited file"*: `output` (output of **Query Tabular** {% icon tool %})
