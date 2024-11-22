@@ -184,15 +184,17 @@ This step involves reformatting and filtering the HLA alleles output from the Op
 >
 > 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/9.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `result` (output of **OptiType** {% icon tool %})
->    - *"AWK Program"*: `$1 ~ /[0-9]/{ 
-    for (i = 2; i <=7; i++) { allele[$i]++}
-}
-END {
-    for (i in allele) {
-        print i
-    }
-}`
->
+>    - *"AWK Program"*:
+> ```
+> $1 ~ /[0-9]/{ 
+>    for (i = 2; i <=7; i++) { allele[$i]++}
+> }
+> END {
+>    for (i in allele) {
+>        print i
+>    }
+> }
+> ```
 >
 {: .hands_on}
 
