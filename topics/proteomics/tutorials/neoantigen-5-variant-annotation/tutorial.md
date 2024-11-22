@@ -220,8 +220,11 @@ In this step, we will use the Query Tabular tool to extract specific information
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (Input dataset)
 >    - *"SQL Query to generate tabular output"*:
-> ``` sq
-> SELECT t1.c1,t1.c8,t1.c9,t1.c11,t1.c12,t2.c5,t2.c6,t1.c7 FROM t1 INNER JOIN t2 ON t1.c3 = t2.c4
+> ``` sql
+> SELECT t1.c1,t1.c8,t1.c9,t1.c11,t1.c12,t2.c5,t2.c6,t1.c7
+> FROM t1
+> INNER JOIN t2
+> ON t1.c3 = t2.c4
 > ```
 >    - *"include query result column headers"*: `No`
 >
@@ -261,7 +264,15 @@ The Query Tabular step in this workflow is used to extract and calculate genomic
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Query Tabular** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
 > ``` sql
-> SELECT t1.*, CASE WHEN t1.c7 = '-' THEN t1.c3 - t1.c9 WHEN t1.c7 = '+' THEN t1.c2 + t1.c9 END AS start, CASE WHEN t1.c7 = '-' THEN t1.c3 - t1.c10 WHEN t1.c7 = '+' THEN t1.c2 + t1.c10 END AS stop FROM t1
+> SELECT t1.*,
+> CASE
+> WHEN t1.c7 = '-' THEN t1.c3 - t1.c9
+> WHEN t1.c7 = '+' THEN t1.c2 + t1.c9
+> END AS start,
+> CASE
+> WHEN t1.c7 = '-' THEN t1.c3 - t1.c10
+> WHEN t1.c7 = '+' THEN t1.c2 + t1.c10
+> END AS stop FROM t1
 > ```
 >    - *"include query result column headers"*: `No`
 >
@@ -294,7 +305,14 @@ This step is necessary to extract and reorganize relevant genomic information fr
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `output` (output of **Query Tabular** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
 > ``` sql
-> SELECT c8 AS `chromosome`, c11  AS `chromStart`, c12 AS `chromEnd`, c1 AS `name`, c6 AS `score`, c7 AS `strand` FROM t1
+> SELECT
+> c8 AS `chromosome`,
+> c11  AS `chromStart`,
+> c12 AS `chromEnd`,
+> c1 AS `name`,
+> c6 AS `score`,
+> c7 AS `strand`
+> FROM t1
 > ```
 >    - *"include query result column headers"*: `No`
 >
@@ -355,16 +373,19 @@ In this step, we are using Query Tabular to extract and format relevant informat
 >    - In *"Database Table"*:
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `classified` (output of **PepPointer** {% icon tool %})
->    - *"SQL Query to generate tabular output"*: `SELECT 
-c4 AS Peptide,
-c1 AS Chromosome,
-c2 AS Start,
-c3 AS End,
-c6 AS Strand,
-c7 AS Annotation,
-c1||':'||c2||'-'||c3 AS IGV_Genome_Coordinate,
-'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position='||c1||'%3A'||c2||'-'||c3 AS UCSC_Genome_Browser
-FROM  t1`
+>    - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT 
+> c4 AS Peptide,
+> c1 AS Chromosome,
+> c2 AS Start,
+> c3 AS End,
+> c6 AS Strand,
+> c7 AS Annotation,
+> c1||':'||c2||'-'||c3 AS IGV_Genome_Coordinate,
+> 'https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&position='||c1||'%3A'||c2||'-'||c3 AS UCSC_Genome_Browser
+> FROM  t1
+> ```
 >    - *"include query result column headers"*: `Yes`
 >
 >
