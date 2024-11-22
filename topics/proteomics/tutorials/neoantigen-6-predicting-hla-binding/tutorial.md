@@ -255,26 +255,36 @@ In this step, we use the Query Tabular tool to validate and organize the HLA typ
 >                            - *"replacement expression"*: `HLA-\1`
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `seq2hla`
->    - *"SQL Query to generate tabular output"*: `SELECT hla
-FROM
-(SELECT c1 AS hla FROM optitype
-UNION
-SELECT c1 AS hla FROM seq2hla WHERE c1 LIKE '%*%:%'
-UNION 
-SELECT c2 AS hla FROM seq2hla WHERE c2 LIKE '%*%:%') 
-ORDER BY hla`
+>    - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT hla FROM
+> (SELECT c1 AS hla FROM optitype
+> UNION
+> SELECT c1 AS hla FROM seq2hla WHERE c1 LIKE '%*%:%'
+> UNION 
+> SELECT c2 AS hla FROM seq2hla WHERE c2 LIKE '%*%:%') 
+> ORDER BY hla
+> ```
+> 
 >    - *"include query result column headers"*: `No`
 >    - In *"Additional Queries"*:
 >        - In *"SQL Query"*:
 >            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*: `SELECT c1 FROM optitype
-ORDER BY c1`
->                - *"include query result column headers"*: `No`
->            - {% icon param-repeat %} *"Insert SQL Query"*
->                - *"SQL Query to generate tabular output"*: `SELECT c1 FROM seq2hla WHERE c1 LIKE '%*%:%' 
-UNION 
-SELECT c2 FROM seq2hla WHERE c2 LIKE '%*%:%'`
->                - *"include query result column headers"*: `No`
+>                - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT c1 FROM optitype
+> ORDER BY c1
+> ```
+>  - *"include query result column headers"*: `No`
+>    - {% icon param-repeat %} *"Insert SQL Query"*
+>        - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT c1 FROM seq2hla WHERE c1 LIKE '%*%:%' 
+> UNION 
+> SELECT c2 FROM seq2hla WHERE c2 LIKE '%*%:%'
+> ```
+> 
+> - *"include query result column headers"*: `No`
 >
 >
 {: .hands_on}
