@@ -54,7 +54,9 @@ In this workflow, (A) Generation of variant database, (B) Generation of assemble
 >
 {: .agenda}
 
-# Neoantigen-Non-normal-database generation
+# Neoantigen Non-normal Database Generation
+
+## Overview of Non-normal Neoantigen Database Workflow
 
 This tutorial guides users through the process of generating a non-normal variant database. It encompasses essential bioinformatics steps to identify and prepare variant-specific peptides for immunological studies. Below is an overview of each major stage:
 
