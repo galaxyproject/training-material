@@ -19,7 +19,7 @@ topic | features
 [metaQuantome-Taxonomy](tutorials/metaquantome-taxonomy/tutorial.md) | [:book:](tutorials/metaquantome-taxonomy/tutorial.md)
 [metaQuantome-Function](tutorials/metaquantome-function/tutorial.md) | [:book:](tutorials/metaquantome-function/tutorial.md)
 [EncyclopeDIA](tutorials/encyclopedia/tutorial.md) | [:book:](tutorials/encyclopedia/tutorial.md)
-[Neoantigen-1-Fusion-Database-generation](tutorials/neoantigen-fusion-database-generation) | [:book:](tutorials/clinical-mp-1-database-generation/tutorial.md)
+[Neoantigen-1-Fusion-Database-generation](tutorials/neoantigen-1-fusion-database-generation/tutorial.md) | [:book:](tutorials/neoantigen-1-fusion-database-generation/tutorial.md)
 [Neoantigen-2-Non-Normal-Database-generation](tutorials/neoantigen-non-normal-database-generation/tutorial.md) | [:book:](tutorials/clinical-mp-2-discovery/tutorial.md)
 [Neoantigen-3-Discovery-Peptidomics](tutorials/neoantigen-fragpipe-discovery/tutorial.md) | [:book:](tutorials/clinical-mp-3-verification/tutorial.md)
 [Neoantigen-4-Peptidomics-verification](tutorials/neoantigen-peptide-verification/tutorial.md) | [:book:](tutorials/clinical-mp-4-quantitation/tutorial.md)
