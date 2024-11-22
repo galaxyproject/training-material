@@ -43,8 +43,6 @@ redirect_from:
 ---
 
 
-# Introduction
-
 Neoantigen prediction for HLA binding is a critical component of personalized cancer immunotherapy. Neoantigens, which are tumor-specific antigens resulting from mutations in cancer cells, can be recognized by the immune system, making them promising targets for tailored immunotherapies. Human leukocyte antigen (HLA) molecules play a key role in presenting these neoantigens on the surface of cells, where they can be detected by T-cells, triggering an immune response.
 
 This tutorial focuses on predicting HLA binding affinities for potential neoantigens, an essential step in identifying effective targets for immunotherapy. The workflow includes the use of tools such as OptiType and seq2HLA to determine HLA genotypes, as well as data reformatting and querying methods to manage complex data outputs.
