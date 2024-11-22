@@ -380,7 +380,7 @@ The peptides, including both strong and weak binders, are annotated with their r
 >    - *"SQL Query to generate tabular output"*:
 >   ``` sql
 >   SELECT * FROM t1 
->    WHERE t1.icore IN (SELECT c1 FROM t2)
+>   WHERE t1.icore IN (SELECT c1 FROM t2)
 >   ```
 >    - *"include query result column headers"*: `Yes`
 >    - In *"Additional Queries"*:
@@ -412,8 +412,8 @@ The peptides, including both strong and weak binders, are annotated with their r
 >    - *"SQL Query to generate tabular output"*:
 >   ``` sql
 >   SELECT *
->    FROM t1 
->    WHERE t1.icore IN (SELECT c1 FROM t2)
+>   FROM t1 
+>   WHERE t1.icore IN (SELECT c1 FROM t2)
 >   ```
 >    - *"include query result column headers"*: `Yes`
 >    - In *"Additional Queries"*:
