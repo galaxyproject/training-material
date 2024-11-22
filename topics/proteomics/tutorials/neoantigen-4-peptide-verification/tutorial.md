@@ -218,10 +218,11 @@ Query Tabular is a tool used to query tabular datasets using SQL-like commands. 
 >        - {% icon param-repeat %} *"Insert Database Table"*
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `psm_rank_txt` (output of **PepQuery2** {% icon tool %})
 >    - *"SQL Query to generate tabular output"*:
-`SELECT c1,c4
-FROM t1
-WHERE (c20 = 'Yes')
-`
+> ``` sql
+> SELECT c1,c4
+> FROM t1
+> WHERE (c20 = 'Yes')
+> ```
 >    - *"include query result column headers"*: `No`
 >
 >
@@ -344,18 +345,20 @@ The tool helps to refine the data by removing sequences that meet specific crite
 >                - In *"Table Index"*:
 >                    - {% icon param-repeat %} *"Insert Table Index"*
 >                        - *"Index on Columns"*: `pep`
->    - *"SQL Query to generate tabular output"*: `SELECT DISTINCT pep.*
-FROM pep 
-JOIN blast ON pep.pep = blast.qseq
-WHERE pep.pep NOT IN (
-    SELECT qseq 
-    FROM blast 
-    WHERE pident = 100
-)
-AND (blast.pident < 100 
-     OR blast.gapopen >= 1 
-     OR blast.length < blast.qlen)
-ORDER BY pep.pep`
+>    - *"SQL Query to generate tabular output"*:
+> ``` sql
+> SELECT DISTINCT pep.*
+> FROM pep 
+> JOIN blast ON pep.pep = blast.qseq
+> WHERE pep.pep NOT IN
+> (SELECT qseq 
+> FROM blast 
+> WHERE pident = 100)
+> AND (blast.pident < 100
+> OR blast.gapopen >= 1
+> OR blast.length < blast.qlen)
+> ORDER BY pep.pep
+> ```
 >    - *"include query result column headers"*: `No`
 >
 >
