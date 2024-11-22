@@ -136,7 +136,7 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 {: .hands_on}
 
 
-## Alignment with **RNA STAR**
+## Alignment with RNA STAR
 
 **RNA STAR** (Spliced Transcripts Alignment to a Reference) is a high-performance tool used to align RNA sequencing (RNA-seq) reads to a reference genome. It identifies the best matches between RNA reads and genome sequences by detecting exon-exon junctions, which are critical for accurately mapping reads from spliced transcripts. RNA STAR uses a "two-pass" mapping approach that first identifies splice junctions across all reads and then uses these junctions to guide a more accurate alignment on the second pass. This capability is especially valuable for studying gene expression, discovering novel splice variants, and identifying fusion genes in cancer and other disease research. The output includes aligned sequences that can be used in subsequent steps of bioinformatics pipelines, such as fusion detection and differential expression analysis.
 
@@ -177,7 +177,7 @@ Uncompressing data is a crucial first step in many bioinformatics workflows beca
 >
 {: .question}
 
-## Fusion detection with **Arriba**
+## Fusion detection with Arriba
 
 **Arriba** is a specialized tool used for detecting gene fusions from RNA sequencing (RNA-seq) data. It is particularly focused on identifying fusion events in cancer, where gene fusions can drive oncogenic processes. Arriba uses the output from **RNA STAR** alignments, specifically looking at chimeric alignments that result from fusion transcripts, and applies a series of filtering steps to reduce false positives. 
 
@@ -221,7 +221,7 @@ The output includes a list of fusion candidates with key information like fusion
 >
 {: .question}
 
-## Clean up data using **Text reformatting**
+## Clean up data using Text reformatting
 
 **Text Reformatting** is a step used in bioinformatics workflows to manipulate and clean up data for easier downstream processing. In fusion detection workflows, text reformatting is often used to parse and restructure output files, making the data consistent and accessible for subsequent analysis steps.
 
@@ -289,7 +289,7 @@ The reformatting step ensures that the processed data adheres to the requirement
 
 
 
-## Data refinement with **Query Tabular**
+## Data refinement with Query Tabular
 
 **Query Tabular** is a bioinformatics tool used to extract and manipulate specific data from tabular datasets in workflows. This tool allows users to perform SQL-like queries on tabular data, enabling them to filter, aggregate, and transform datasets based on user-defined criteria.
 
@@ -321,7 +321,7 @@ By leveraging **Query Tabular**, researchers can efficiently refine and structur
 {: .hands_on}
 
 
-##  **Tabular-to-FASTA**
+##  Transform data using Tabular-to-FASTA
 
 Tabular to FASTA conversion is a common task in bioinformatics that transforms data structured in a tabular format (such as CSV or TSV) into FASTA format, widely used for representing nucleotide or protein sequences. This conversion is essential when sequence data needs to be input into various bioinformatics tools or databases that require FASTA-formatted files.
 
@@ -336,7 +336,7 @@ Tabular to FASTA conversion is a common task in bioinformatics that transforms d
 {: .hands_on}
 
 
-## Using **Regex Find And Replace**
+## Using Regex Find And Replace
 
 Using regex (regular expressions) for find and replace is a powerful technique for text manipulation, allowing you to search for patterns and replace them with desired text. Below is a guide on how to use regex for find and replace, including examples in different programming languages. In this context, we are adding "fusion" to the database header.
 
