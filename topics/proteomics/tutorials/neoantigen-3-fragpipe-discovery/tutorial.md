@@ -255,10 +255,7 @@ In this workflow, this step filters the tabular data to isolate the rows that me
 >            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Select** {% icon tool %})
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `fp`
->    - *"SQL Query to generate tabular output"*: `SELECT c1
-FROM fp
-WHERE (c16 IS NULL OR c16 = '')
-AND (c18 IS NULL OR c18 = '')`
+>    - *"SQL Query to generate tabular output"*: `SELECT c1 FROM fp WHERE (c16 IS NULL OR c16 = '') AND (c18 IS NULL OR c18 = '')`
 >    - *"include query result column headers"*: `No`
 >
 >
