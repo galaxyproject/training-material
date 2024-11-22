@@ -44,8 +44,6 @@ redirect_from:
 ---
 
 
-# Introduction
-
 Neoantigens are tumor-specific antigens that arise from somatic mutations in cancer cells. These mutations result in the generation of abnormal peptides that can be presented by the immune system’s Major Histocompatibility Complex (MHC) molecules. Neoantigens are gaining significant attention in cancer immunotherapy, as they hold the potential to be used in personalized vaccines and therapies aimed at stimulating the immune system to target and destroy tumor cells.
 
 The process of identifying neoantigens begins with the analysis of genomic data to detect somatic mutations, followed by the prediction of the corresponding peptide sequences that can bind to MHC molecules. This process involves a combination of bioinformatics tools and techniques, including variant calling, peptide prediction, and MHC binding affinity analysis. Successful identification of neoantigens can pave the way for personalized treatment strategies that improve patient outcomes in cancer therapy.
