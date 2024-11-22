@@ -42,8 +42,6 @@ redirect_from:
 ---
 
 
-# Introduction
-
 In this tutorial, we will guide you through a bioinformatics workflow aimed at merging neoantigen databases with known human protein sequences, preparing the data for proteomics analysis using FragPipe. This workflow involves processing FASTA files, filtering for unique sequences, and validating the FASTA databases before using FragPipe to perform peptide identification and validation of neoantigens.
 
 Throughout the tutorial, you will learn how to integrate multiple datasets, ensuring that you can perform analyses such as the identification of potential neoantigens, which are critical for cancer immunotherapy and vaccine development. The tools and steps covered here are important for any bioinformatics pipeline dealing with proteomics and neoantigen discovery.
