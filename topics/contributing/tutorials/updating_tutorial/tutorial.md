@@ -104,7 +104,7 @@ Always good to check! If you're not sure how, skip to the next step!
 > 7. Add your name as a *contributor* to the tutorial as an **editor** in the metadata.
 {: .hands_on}
 
-You may find this tutorial to be a helpful reference in the Markdown content of a GTN tutorial: [Creating content in Markdown]({% link topics/contributing/tutorials/create-new-tutorial-content.md %})
+You may find this tutorial to be a helpful reference in the Markdown content of a GTN tutorial: [Creating content in Markdown]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
 
 # Phase 6: Make a pull request and (optional) update workflow testing
 
