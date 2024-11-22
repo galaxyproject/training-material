@@ -54,8 +54,9 @@ This tutorial outlines a comprehensive workflow for the identification, predicti
 >
 {: .agenda}
 
-# Neoantigen HLA binding Novel peptides
+# Neoantigen HLA binding for Novel peptides
 
+## Overview of HLA Binding Prediction for Potential Neoantigens
 This workflow outlines a structured approach to predicting and analyzing peptide-HLA (MHC-I) binding affinities, focusing on neoantigens for immunotherapy. Here's an overview of the workflow, broken into key steps:
 
 ### 1. Get Data
