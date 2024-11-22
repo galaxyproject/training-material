@@ -42,8 +42,6 @@ redirect_from:
 ---
 
 
-# Introduction
-
 Verification is an essential step in the process of analyzing neoantigens to ensure that the identified peptides or proteins are accurate and reliable. Neoantigens, which are novel antigens arising from tumor-specific mutations, are crucial for cancer immunotherapy. However, the prediction and identification of these neoantigens must be rigorously validated to ensure they are truly present and capable of eliciting an immune response. Without proper verification, the therapeutic potential of neoantigens cannot be realized, leading to wasted resources and failed treatments.
 
 In this tutorial, we will guide you through a series of bioinformatics tools used to verify novel peptides and proteins predicted from mass spectrometry data. These tools help confirm the presence and specificity of the identified neoantigens by comparing them to protein databases, checking for validation against spectral data, and performing sequence analysis.
