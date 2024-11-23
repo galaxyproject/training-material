@@ -101,13 +101,13 @@ Zenodo.
 >   
 >    - Select the following files: 
 >    
->    `image85-H-01-00.tif`
->    `image85-H-01-00.tif.tabular`
->    `image86-H-02-00.tif`
->    `image86-H-02-00.tif.tabular`
->    `image87-H-03-00.tif`
->    `image87-H-03-00.tif.tabular`
->    `metadata_dataset.csv`
+>       - `image85-H-01-00.tif`
+>       - `image85-H-01-00.tif.tabular`
+>       - `image86-H-02-00.tif`
+>       - `image86-H-02-00.tif.tabular`
+>       - `image87-H-03-00.tif`
+>       - `image87-H-03-00.tif.tabular`
+>       - `metadata_dataset.csv`
 > 
 > 3. Tag each dataset with a label like "image" (tif files), "rois" (tabular files) and "metadata" (csv file)
 > for easy identification
@@ -129,7 +129,7 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 >    Select the datasets`image85-H-01-00.tif`, `image86-H-02-00.tif` and `image87-H-03-00.tif`
 >    - **OMERO host URL**: Input the url of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
->    - **Target Dataset Name**: Type "My_OMERO_Test"
+>    - {% icon param-file %}**Target Dataset Name**: Type "My_OMERO_Test"
 > 
 >    A log file txt file will be
 >    created with the OMERO ID of the newly imported images
@@ -158,7 +158,7 @@ We will learn now how to upload **Key Value pairs** using the **OMERO Metadata I
 >    - {% icon param-file %} *Annotation file*: `metadata_file.tsv`
 >    - **OMERO host URL**: Input the url of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
->    - **Target Object Type**: Select *"Dataset"*
+>    - {% icon param-file %}**Target Object Type**: Select *"Dataset"*
 >    - **Selection**: Select *"Target an existing object"*
 >    - **Object ID**: Input the ID of the previously created dataset. *4005* for this training
 >    - **Annotation type**: Select *"KV"*
@@ -185,7 +185,7 @@ Check the `roi_file.tsv` to have an example. Everything is explained in the tool
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
 > 1. {% tool [OMERO ROI Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_roi_import/131470834fee) %} with the following recommended parameters:
->    - {% icon param-file %} *Tab File with ROIs*: `roi_file.tsv`
+>    - {% icon param-file %}**Tab File with ROIs**: `roi_file.tsv`
 >    - **OMERO host URL**: Input the url of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Image ID where annotate the ROIs**: Select the **image ID** where to annotate the ROIs. We will go for *30782*
@@ -236,7 +236,7 @@ Now, let's try to get an annotation file...
 > 1. {% tool [OMERO get Object](https://toolshed.g2.bx.psu.edu/view/ufz/omero_get_id/ae07ea142e0f) %} with the following recommended parameters:
 >    - **OMERO host URL**: The target OMERO host url
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
->    - **TType of object to fetch:**: Select *"Annotation"*
+>    - **Type of object to fetch:**: Select *"Annotation"*
 >    - **How do you provide the ID(s) of the OMERO object?**: Select *"Comma separated values"*
 >    - **ID(s) of the object(s) to fetch on OMERO separated by comma**: 4005
 >
@@ -289,18 +289,20 @@ workflow re-usable with different datasets.
 > <hands-on-title>Create the inputs for the OMERO pipeline</hands-on-title>
 >
 > 1. Create a new workflow in the workflow editor.
+>
 >    {% snippet faqs/galaxy/workflows_create_new.md %}
-> 2. Select "Input dataset collection" from the list of tools {% icon param-collection %}:
->    - **1: Input dataset collection** appears in your workflow. 
->    Change the "Label" of this input to `Input image Datasets`.
-> 3. Add two "Input dataset" {% icon param-file %}:
->    - **2: Input Dataset** and **3: Input Dataset** appears in your workflow. 
-> Change the "Label" of these inputs to `Input Tabular ROIs` and `Input Metadata File`
-> 4. Add three "Simple Input for Workflow Logic" {% icon param-file %}:
+>
+> 2. Select {% icon tool %}**Input dataset collection** from the list of tools:
+>    - {% icon param-collection %}**1: Input dataset collection** appears in your workflow. 
+>    Change the "Label" of this input to *Input image Dataset*.
+> 3. Add two {% icon tool %}**Input dataset**:
+>    - {% icon param-file %}**2: Input Dataset** and {% icon param-file %}**3: Input Dataset** appears in your workflow. 
+> Change the "Label" of these inputs to *Input Tabular ROIs* and *Input Metadata File*
+> 4. Add three {% icon tool %}**Simple Input for Workflow Logic**:
 >    - **4: Simple input for workflow logic**, **5: Simple input for workflow logic**, 
 >    **6: Simple input for workflow logic**  appear in your workflow. 
->    Change the "Label" of these inputs to `Target Dataset Name`, `OMERO instance address` and
->    `Annotation type`
+>    Change the "Label" of these inputs to *Target Dataset Name*, *OMERO instance address* and
+>    *Annotation type*
 >    
 {: .hands_on}
 
@@ -311,12 +313,11 @@ We add now the step for the image import
 >
 >1. While in the workflow editor add {% tool [OMERO Image Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_import/18b86dcdd421) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **1: Input image Datasets** to the "Images to Import in OMERO" 
->   input of {% icon workflow %} **7: OMERO Image Import**.
+>   input of {% icon tool %}**7: OMERO Image Import**.
 >   - Connect the output of {% icon param-file %} **4: Target Dataset Name** to the "Target Dataset Name" 
->   input of {% icon workflow %} **7: OMERO Image Import**.
+>   input of {% icon tool %}**7: OMERO Image Import**.
 >   - Connect the output of {% icon param-file %} **5: OMERO instance address** to the "OMERO host url"
->   input of {% icon workflow %} **7: OMERO Image Import**.
-
+>   input of {% icon tool %}**7: OMERO Image Import**.
 {: .hands_on}
 
 ### Step 3 - Dynamically parse image IDs 
@@ -325,17 +326,15 @@ This can be done with the following tool sequence:
 
 > <hands-on-title>Parse Images IDs </hands-on-title>
 >
->1. Add {% tool [Convert](https://usegalaxy.eu/root?tool_id=Convert%20characters1) %}  from the list of tools:
->   - Connect the output of {% icon param-file %} **7: OMERO Image Import** to the "Convert" 
->   input {% icon workflow %}
->2. Add {% tool [Replace text](https://toolshed.g2.bx.psu.edu/view/bgruening/text_processing/86755160afbf) %}  from the list of tools:
->   - Connect the output of {% icon param-file %} **8: Convert** to the "Replace Text" 
->      input {% icon workflow %}
->3. Add {% tool [Split File](https://toolshed.g2.bx.psu.edu/view/bgruening/split_file_to_collection/2dae863c8f42) %}  from the list of tools:
->   - Connect the output of {% icon param-file %} **9: Replace Text** to the "Split File" 
->      input {% icon workflow %}>4. Add {% tool [Parse parameter value](https://usegalaxy.org/root?tool_id=param_value_from_file) %}  from the list of tools:
->   - Connect the output of {% icon param-file %} **10: Split File** to the "Parse parameter value" 
->      input {% icon workflow %} {: .hands_on}
+>1. Add {% icon tool %}**Convert** from the list of tools:
+>   - Connect the output of {% icon tool %}**7: OMERO Image Import** to the {% icon tool %}**Convert** input
+>2. Add {% icon tool %}**Replace text**  from the list of tools:
+>   - Connect the output of {% icon tool %}**8: Convert** to the {% icon tool %}**Replace text** input 
+>3. Add {% icon tool %}**Split File**  from the list of tools:
+>   - Connect the output of {% icon tool %}**Replace text** to the {% icon tool %}**Split File** 
+>4. Add {% icon tool %}**Parse parameter value**  from the list of tools:
+>   - Connect the output of {% icon tool %}**Split File** to the {% icon tool %}**Parse parameter value**
+{: .hands_on}
 
 This sequence of tools dynamically parse the single image ID which are use them for input of the metadata and 
 ROI tools. In this way, it is possible to associate a sequence of annotation to several uploaded images.
