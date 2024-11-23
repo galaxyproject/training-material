@@ -23,7 +23,7 @@ contributions:
 requirements:
 -
   type: "internal"
-  topic_name: community
+  topic_name: contributing
   tutorials:
       - github-interface-contribution
 
@@ -112,5 +112,6 @@ At this point, you're welcome to make your Pull Request for the updated tutorial
 
 But if you can make the workflow tests, that would be amazing!
 Here's the tutorial: [Creating workflow tests using Planemo]({% link faqs/gtn/gtn_workflow_testing.md %})
+
 
 {% icon congratulations %} Congratulations! You've made it to the end! Thank you so much for contributing to the sustainability of Galaxy tutorials!
