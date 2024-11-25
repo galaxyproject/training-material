@@ -61,7 +61,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 * As at June 2021, Galaxy has three new version releases per year - in each of January, May and September. The versions are denominated by the year and month - `YY.MM`. i.e. January 2021's Galaxy release is version *21.01*.
 * Official Galaxy versions are tagged on the [Galaxy Project's GitHub releases page](https://github.com/galaxyproject/galaxy/releases) as `vYY.MM`. e.g. *v21.01*
 * Each version also has an official branch in the GitHub repo named `release_YY.MM`. e.g. *release_21.01*
-* Galaxy versions will be supported with security fixes, bug patches and other improvements for [one year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions) from the time of release at which time they will become "End of Life" and will no longer be supported.
+* Galaxy versions will be supported with security fixes, bug patches and other improvements for [one year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md#supported-versions) from the time of release at which time they will become "End of Life" and will no longer be supported.
 
 > <agenda-title></agenda-title>
 >
@@ -143,8 +143,8 @@ We can see from this page that the latest release version of Galaxy is *21.01* (
 
 Each release of Galaxy is accompanied by extensive release notes in two different "flavours."
 
-* "Full release notes" which have extensive detail about all changes made since the last release. This version of the release notes is targetted to Administrators who may need to know about minor fixes, configuration details, security issues, new features and other things found in the latest version.
-* "User facing" release notes which provide an visual and interactive summary of the release highlights, additions and new features targetted towards end users, trainers and funders etc.
+* "Full release notes" which have extensive detail about all changes made since the last release. This version of the release notes is targeted to Administrators who may need to know about minor fixes, configuration details, security issues, new features and other things found in the latest version.
+* "User facing" release notes which provide an visual and interactive summary of the release highlights, additions and new features targeted towards end users, trainers and funders etc.
 
 Before upgrading your Galaxy server to the latest version (or even a new version for that matter) - It is **HIGHLY recommended** that you read the release notes for that version. The notes are *very extensive* and may contain important information on any new features, links  and how to configure them for your server.
 
@@ -253,7 +253,7 @@ Congratulations, you're Galaxy server should now be updated to the latest versio
 
 # Ongoing maintenance
 
-The Galaxy development community continually support release versions of Galaxy [for 1 year.](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions) They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
+The Galaxy development community continually support release versions of Galaxy [for 1 year.](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md#supported-versions) They regularly update releases with bug fixes, patches and security enhancements. Therefore it is important that we as administrators keep our Galaxy servers up to date regardless of which release we are running.
 
 The easiest way to do this is to regularly re-run the Ansible playbook. It will check with GitHub and grab any new changes to Galaxy since the last time you ran it and automatically keep everything up to date. The large **usegalaxy.\*** servers all re-run the playbook on a regular schedule for this purpose.
 
