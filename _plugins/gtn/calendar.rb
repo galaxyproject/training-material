@@ -29,25 +29,22 @@ module Gtn
     def self.extract_event(e)
       e.description.force_encoding('UTF-8')
       e.summary.force_encoding('UTF-8')
+      desc = Kramdown::Document.new(e.description, :html_to_native => true)
+          .to_kramdown
+
       {
         'id' => e.summary.downcase.gsub(/\s+/, '-').gsub(/[^a-z0-9-]/, ''),
         'date' => e.dtstart,
         'meta' => {
-          'layout' => 'event',
+          'layout' => 'event_external',
           'title' => e.summary.to_s,
           'date_start' => e.dtstart.to_date,
           'date_end' => e.dtend.to_date,
           'tags' => ['google-calendar'],
           'mode' => 'online',
           'async' => false,
+          'description' => desc,
         },
-        'content' => Kramdown::Document.new(e.description, :html_to_native => true)
-          .to_kramdown
-          .gsub('</p>', "\n\n")
-          .gsub('<p>', "\n\n")
-          .gsub('/^\s*$/','')
-          .gsub(/\n{3,}/, "\n\n")
-          .strip
       }
     end
   end

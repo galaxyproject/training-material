@@ -16,7 +16,7 @@ Jekyll::Hooks.register :site, :post_write do |site|
 
       File.open(path, 'w') do |file|
         event['meta']['tags'].push(tags).flatten!
-        event['contributions'] = {'organisers' => organisers}
+        event['meta']['contributions'] = {'organisers' => organisers}
 
         file.write(event['meta'].to_yaml)
         file.write("---\n")
