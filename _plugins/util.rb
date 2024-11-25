@@ -1,4 +1,5 @@
 require 'yaml'
+require 'net/http'
 
 def safe_load_yaml(file)
   YAML.load_file(file)
@@ -55,4 +56,18 @@ end
 
 def unsafe_slugify(text)
   text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
+end
+
+def request(url, json: false)
+  uri = URI.parse(url)
+  request = Net::HTTP::Get.new(uri)
+  if json
+    request['Accept'] = 'application/json'
+  end
+  req_options = {
+    use_ssl: uri.scheme == 'https',
+  }
+  Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+    http.request(request)
+  end
 end

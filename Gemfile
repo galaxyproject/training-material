@@ -27,3 +27,6 @@ gem 'commander'
 
 # RO-Crates
 gem 'rubyzip', '~> 2.3.0'
+
+# Calendars
+gem 'icalendar'
