@@ -25,3 +25,5 @@ The following icons are currently available:
 	</div>
 {% endfor %}
 </div>
+
+New icons can be added in `_config.yaml`, and you can search for the corresponding icons at https://fontawesome.com/v4/icons/
