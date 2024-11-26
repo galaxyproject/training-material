@@ -19,6 +19,6 @@ contributors: [jennaj, garimavs]
         - If the problem is present in your own Galaxy, the administrative configuration may be a factor.
         - For the fastest help directly from the development community, admin issues can be alternatively reported to the mailing list or the GalaxyProject [Gitter channel](https://gitter.im/galaxyproject/Lobby).
 
-- For **Security Issues**, do not report them via GitHub. Kindly disclose these as explained in this [document](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md).
+- For **Security Issues**, do not report them via GitHub. Kindly disclose these as explained in this [document](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY.md).
 - For **Bug Reporting**, create a Github issue. Include the steps mentioned [in these instructions]({% link faqs/galaxy/analysis_troubleshooting_reporting.md %}).
 - Search the [GTN Search](https://training.galaxyproject.org/search) to find prior Q & A, FAQs, tutorials, and other documentation across all Galaxy resources, to verify in case your issue was already faced by someone.
