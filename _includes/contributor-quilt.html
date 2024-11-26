@@ -1,10 +1,27 @@
 <div class="card">
-  <div class="card-header">
-  Thanks to our <b>{{ site.data.contributors | size }} GTN contributors</b>!
+  <div class="card-header">{% assign contrib_count = site.data.contributors | size %} 
+  Thanks to our <b>{{ contrib_count - 3 }} GTN contributors</b>!
   </div>
   <div class="card-body">
     <p class="card-text contributor-quilt" style="margin: 1em;">
     {% for entity in site.data.contributors -%}
+    <img src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 50 }}" style="width: 33px;margin:0" alt="avatar"/>
+    {%- endfor %}
+    </p>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header"> 
+  Brought to you by <b>{{ site.data.organisations | size }} contributing organisations</b> and <b>{{ site.data.grants | size }} supporting grants</b>!
+  </div>
+  <div class="card-body">
+    <p class="card-text contributor-quilt" style="margin: 1em;">
+    {% for entity in site.data.organisations -%}
+    <img src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 50 }}" style="width: 33px;margin:0" alt="avatar"/>
+    {%- endfor %}
+
+    {% for entity in site.data.grants -%}
     <img src="{{ entity[1] | fetch_entity_avatar_url: entity[0], 50 }}" style="width: 33px;margin:0" alt="avatar"/>
     {%- endfor %}
     </p>

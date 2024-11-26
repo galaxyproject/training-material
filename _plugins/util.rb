@@ -1,3 +1,5 @@
+require 'yaml'
+
 def safe_load_yaml(file)
   YAML.load_file(file)
 rescue StandardError
@@ -49,4 +51,8 @@ def markdownify(site, text)
   site.find_converter_instance(
     Jekyll::Converters::Markdown
   ).convert(text.to_s)
+end
+
+def unsafe_slugify(text)
+  text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
 end

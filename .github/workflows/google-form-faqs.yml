@@ -6,6 +6,9 @@ on:
 jobs:
   runner-job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     # Only run on main repo on and PRs that match the main repo.
     if: |
       github.repository == 'galaxyproject/training-material' &&
@@ -46,7 +49,7 @@ jobs:
         if: |
           github.event_name != 'pull_request' &&
           steps.generate.outputs.new_ids != '0'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: Import FAQs from Google Form
           title: "[Google Form] New FAQ!"

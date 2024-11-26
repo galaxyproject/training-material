@@ -691,11 +691,18 @@ module Jekyll
         # "award":,
         # "author" described below
         # "character":,
-        citation: {
-          '@type': 'CreativeWork',
-          name: 'Community-Driven Data Analysis Training for Biology',
-          url: 'https://doi.org/10.1016/j.cels.2018.05.012'
-        },
+        citation: [
+          {
+            '@type': 'CreativeWork',
+            name: 'Galaxy Training: A Powerful Framework for Teaching!',
+            url: 'https://doi.org/10.1371/journal.pcbi.1010752'
+          },
+          {
+            '@type': 'CreativeWork',
+            name: 'Community-Driven Data Analysis Training for Biology',
+            url: 'https://doi.org/10.1016/j.cels.2018.05.012'
+          }
+        ],
         # "comment":,
         # "commentCount":,
         # "contentLocation":,
@@ -921,6 +928,11 @@ module Jekyll
                           '@type': 'Thing',
                           url: url,
                           name: "Quarto/RMarkdown Notebook"
+                        })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: "https://bio.tools/tool/rstudio",
+                          name: "RStudio"
                         })
         end
       end
