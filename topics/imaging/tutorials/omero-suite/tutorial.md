@@ -69,6 +69,11 @@ of the server you are using. You can now use it in [UseGalaxy.eu](https://usegal
 admin to add it. For more info about the configuration on the admin side, 
 please take a look at the [README file of the tool](https://github.com/galaxyproject/tools-iuc/blob/main/tools/idr_download/README.md).
 
+**Please Notice**: The configuration file, which contains your OMERO password and username, will be stored in the job working directory.
+    This directory only exists during the runtime of the job and should only be accessible by the system user that runs the job.
+    However, please be aware that your username and password **may be exposed** to users with administrative rights.
+    We are working on increasing the security of the OMERO suite
+
 # Prepare your data
 
 We need a dataset to upload into your OMERO instance. 
