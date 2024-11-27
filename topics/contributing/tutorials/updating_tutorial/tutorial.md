@@ -1,15 +1,16 @@
 ---
 layout: tutorial_hands_on
 
-title: Updating a tutorial
+title: Updating tool versions in a tutorial
 subtopic: getting-started
 priority: 6
 
 questions:
-- How can I update a tutorial in the GTN?
+- How can I update the tool versions in a tutorial in the GTN?
+- What else do these updates impact, and how do I update that for consistency?
 
 objectives:
-- Implement tutorial update on existing GTN material
+- Implement tutorial tool version update on existing GTN material
 
 time_estimation: 1H
 key_points:
@@ -66,7 +67,12 @@ If the workflow has tools that are up to date (or very close!), great! That tuto
 
 # Phase 2: Check that nobody else is working on this
 
-Always good to check! If you're not sure how, skip to the next step!
+It's always a good idea to check, just in case!
+
+You can:
+ - Send a message to the [GTN Matrix Channel](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) is your quickest way forward.
+ - Search through the [GTN Github Repository](https://github.com/galaxyproject/training-material) for existing draft Pull Requests.
+ - Check with [individual communities](https://galaxyproject.org/community/sig/), who may have their own method of tracking. For example, the [🖖🏾Single-cell & sPatial Omics Community](https://galaxyproject.org/community/sig/singlecell/) have a shared [Click-Up board](https://sharing.clickup.com/9015477668/b/h/5-90152810734-2/557452707486fef) at the time of writing.
 
 # Phase 3: Update the workflow
 
@@ -75,8 +81,13 @@ Always good to check! If you're not sure how, skip to the next step!
 > 1. Select {% icon galaxy-wf-options %} **Workflow Options** from the **Workflow Editor**
 > 2. Select {% icon upgrade_workflow %} **Upgrade workflow** to automatically update the tools.
 > 3. Address any issues that may arise.
-> 4. **Save** the workflow.
+> 4. Ensure the workflow meets workflow best practices and add your name as a contributor, if not there already.
+>
+>    {% snippet faqs/galaxy/workflows_best_practices.md %}
+>
+> 5. **Save** the workflow.
 {: .hands_on}
+
 
 # Phase 4: Test & fix the workflow
 
@@ -91,6 +102,37 @@ Always good to check! If you're not sure how, skip to the next step!
 {: .hands_on}
 
 # Phase 5: Update the tutorial
+
+> <warning-title>If you run out of time</warning-title>
+> You have already completed a large chunk of work (updated workflow + answer key history) to get here, and we don't want to lose it!
+> Updating the tutorial to match the updated workflow can be a separate contribution. So if you get to this point and run out of time, please:
+> 1. Create an **issue** on the GTN Github Repo and include shareable links to your updated workflow & answer key history
+> 2. Message on the GTN Matrix channel with a link to your issue and explaining which tutorial you updated.
+> If, however, you are able to finish the task yourself, please read on!
+{: .warning}
+
+Note that you will need to have done either the [Contributing to the GTN Github tutorial using command line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %}) or the [Contributing to the GTN Github tutorial using Github Desktop]({% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %}). It's helpful as well to understand the folder structure in the GTN, particularly how images go in an image folder either in a tutorial or in the parent folder. Each `topic` has roughly the following structure:
+
+Each topic has the following structure:
+
+```
+├── README.md
+├── metadata.yaml
+├── images
+├── docker
+│   ├── Dockerfile
+├── slides
+│   ├── index.html
+├── tutorials
+│   ├── tutorial1
+│   │   ├── tutorial.md
+│   │   ├── slides.html
+│   │   ├── data-library.yaml
+│   │   ├── workflows
+│   │   │   ├── workflow.ga
+```
+
+The `tutorial.md` is what you'll be editing, however you will also at the end upload a `workflow.ga` file and likely some image files.
 
 > <hands-on-title>Update the tools in the tutorial</hands-on-title>
 >
