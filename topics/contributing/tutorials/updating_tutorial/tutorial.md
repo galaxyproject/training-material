@@ -82,7 +82,7 @@ You can:
 > 1. Select {% icon galaxy-wf-options %} **Workflow Options** from the **Workflow Editor**
 > 2. Select {% icon upgrade_workflow %} **Upgrade workflow** to automatically update the tools.
 > 3. Address any issues that may arise.
-> 4. Ensure the workflow meets workflow best practices and add your name as a contributor, if not there already.
+> 4. Ensure the workflow meets workflow best practices using the {% icon galaxy-wf-best-practices %} **Best Practices** button and add your name as a contributor, if not there already.
 >
 >    {% snippet faqs/galaxy/workflows_best_practices.md %}
 >
