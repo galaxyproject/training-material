@@ -20,6 +20,8 @@ key_points:
 contributions:
   authorship:
     - nomadscientist
+  editing:
+    - wee-snufkin
 
 requirements:
 -
