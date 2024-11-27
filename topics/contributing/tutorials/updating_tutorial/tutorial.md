@@ -55,6 +55,7 @@ If the workflow has tools that are up to date (or very close!), great! That tuto
 </div>
 
 <div class="Yes" markdown="2">
+
 > <hands-on-title>Import the workflow</hands-on-title>
 >
 > 1. **Navigate to your target {% icon hands_on %} Hands-on tutorial**
