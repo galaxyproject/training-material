@@ -56,7 +56,7 @@ First we need to create a new history in Galaxy and load in our single-cell data
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial *"Deconvolution: Evaluating Reference Data"*
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+> 2. Import the files from [Zenodo](https://zenodo.org/records/5719228) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
 >     -> `{{ page.title }}`):
 >
