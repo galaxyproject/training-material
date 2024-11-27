@@ -82,11 +82,7 @@ You can:
 > 1. Select {% icon galaxy-wf-options %} **Workflow Options** from the **Workflow Editor**
 > 2. Select {% icon upgrade_workflow %} **Upgrade workflow** to automatically update the tools.
 > 3. Address any issues that may arise.
-> 4. Ensure the workflow meets workflow best practices using the {% icon galaxy-wf-best-practices %} **Best Practices** button and add your name as a contributor, if not there already.
->
->    {% snippet faqs/galaxy/workflows_best_practices.md %}
->
-> 5. **Save** the workflow.
+> 4. **Save** the workflow.
 {: .hands_on}
 
 
@@ -95,11 +91,19 @@ You can:
 > <hands-on-title>Test the workflow</hands-on-title>
 >
 > 1. Import the input datasets from the tutorial you are upgrading (follow the instructions on the tutorial itself for this).
-> 2. Run your updated workflow on the datasets.
+> 2. Run your updated workflow on the input datasets.
 > 3. Address any issues that may arise, and **NOTE DOWN** all changes.
-> 4. Add yourself as an author of the workflow.
-> 5. **Save** the final workflow.
-> 6. **Save** the final (*answer key*) history (with the correctly run workflow).
+> 4. Ensure the workflow meets workflow best practices using the {% icon galaxy-wf-best-practices %} **Best Practices** button and add your name as a contributor, if not there already.
+>
+>    {% snippet faqs/galaxy/workflows_best_practices.md %}
+>
+> 5. Add yourself as an author of the workflow.
+> 6. **Save** the workflow.
+> 7. Run your updated workflow on the input datasets in a fresh history.
+> 7. **Save** this history as an answer key history & make your history publicly available in Published Histories.
+>
+>    {% snippet faqs/galaxy/histories_sharing.md %}
+>
 {: .hands_on}
 
 # Phase 5: Update the tutorial
@@ -141,7 +145,7 @@ The `tutorial.md` is what you'll be editing, however you will also at the end up
 > 2. **Update tool instructions**: (Simultaneously) update the text to address any differences arising during the update, i.e. new parameters to set or other changes.
 > 3. **Update images**: Wherever images are used to show tool outputs, these will need updating. Use your final history for this.
 > 4. **Update text**: Wherever results are referenced in the tutorial text, update these numbers (and possibly interpretation) to reflect the new answer key history.
-> 5. **Update header**: In the metadata at the beginning of the tutorial, there are likely answer key history links. Update this by making your answer key history public and putting the link there.
+> 5. **Update header**: In the metadata at the beginning of the tutorial, there are likely answer key history links. Update this by adding the link to your answer key history.
 > 6. **Update workflow file**: In the tutorial folder in the `training-material` repository, there is a subfolder titled `workflows`. Download your updated workflow as a file and deposit that file there.
 > 7. Check if there are any links to workflows/histories in the tutorial text, and if so, update them.
 > 7. Add your name as a *contributor* to the tutorial as an **editor** in the metadata.
