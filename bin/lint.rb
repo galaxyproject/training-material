@@ -945,6 +945,22 @@ module GtnLinter
     errors
   end
 
+  def self.useless_intro(contents)
+    joined_contents = contents.join("\n")
+    joined_contents.scan(/\n---\n+# Introduction/m)
+      .map do |line|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: 0,
+        match_start: 0,
+        match_end: 0,
+        replacement: '',
+        message: 'Please do not include an # Introduction section, it is unnecessary here, just start directly into your text. The first paragraph that is seen by our infrastructure will automatically be shown in a few places as an abstract.',
+        code: 'GTN:046'
+      )
+    end
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -975,7 +991,8 @@ module GtnLinter
       *empty_alt_text(contents),
       *check_bad_trs_link(contents),
       *nonsemantic_list(contents),
-      *cyoa_branches(contents)
+      *cyoa_branches(contents),
+      *useless_intro(contents)
     ]
   end
 
