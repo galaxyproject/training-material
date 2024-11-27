@@ -351,7 +351,7 @@ On the top of each report is a table with in rows statistics for contigs larger 
       > > <solution-title></solution-title>
       > >
       > > 1. The genome fraction is 30.22% for ERR2231568 and 58.73% for ERR2231572
-      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (844%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
+      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (84.4%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
       > >
       > {: .solution}
       >
