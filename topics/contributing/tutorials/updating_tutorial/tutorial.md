@@ -56,7 +56,7 @@ If the workflow has tools that are up to date (or very close!), great! That tuto
 
 </div>
 
-<div class="Yes" markdown="2">
+<div class="Yes" markdown="1">
 
 > <hands-on-title>Import the workflow</hands-on-title>
 >
