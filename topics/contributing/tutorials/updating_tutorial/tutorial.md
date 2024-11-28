@@ -22,6 +22,7 @@ contributions:
     - nomadscientist
   editing:
     - wee-snufkin
+    - bebatut
 
 requirements:
 -
