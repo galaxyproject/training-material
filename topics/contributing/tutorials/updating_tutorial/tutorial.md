@@ -47,7 +47,10 @@ We encourage you to pick a tutorial to try this on, so you can use this tutorial
 >
 > 1. **Find a {% icon hands_on %} Hands-on tutorial** in your training topic of interest (for example, Single-cell)
 > 2. **Select the {% icon workflow %} workflow** from the header
-> 3. **Import the workflow** to your server
+> 3. **Import the workflow** to your favourite Galaxy server
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
 > 4. Go to the **Workflow** menu and select {% icon galaxy-wf-edit %} **Edit workflow**
 > 5. **Click through the tools** in the workflow and check the {% icon tool-versions %} to see if the tools are outdated.
 {: .hands_on}
@@ -62,7 +65,10 @@ If the workflow has tools that are up to date (or very close!), great! That tuto
 >
 > 1. **Navigate to your target {% icon hands_on %} Hands-on tutorial**
 > 2. **Select the {% icon workflow %} workflow** from the header
-> 3. **Import the workflow** to your server
+> 3. **Import the workflow** to your favourite Galaxy server
+>
+>    {% snippet faqs/galaxy/workflows_import.md %}
+>
 > 4. Go to the **Workflow** menu and select {% icon galaxy-wf-edit %} **Edit workflow**
 {: .hands_on}
 
