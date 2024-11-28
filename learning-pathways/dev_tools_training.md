@@ -5,7 +5,7 @@ type: admin-dev-community
 description: |
   Discover Galaxy's communities and learn how to  create your subdomain and enrich it by writing, testing and submiting your tools on Galaxy. This learning pathway
   will guide you through all the steps required to build a tool for Galaxy with Planemo for batch tools and how write an interactive tool.
-cover-image: assets/images/community_subdomain.png
+cover-image: assets/images/galaxy_subdomain.png
 cover-image-alt: Image of a researcher or developer on a computer thinking of building a community.
 editorial_board:
 - Marie59
