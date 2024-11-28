@@ -82,7 +82,9 @@ It's always a good idea to check, just in case!
 You can:
  - Send a message to the [GTN Matrix Channel](https://matrix.to/#/#Galaxy-Training-Network_Lobby:gitter.im) is your quickest way forward.
  - Search through the [GTN Github Repository](https://github.com/galaxyproject/training-material) for existing draft Pull Requests.
- - Check with [individual communities](https://galaxyproject.org/community/sig/), who may have their own method of tracking. For example, the [🖖🏾Single-cell & sPatial Omics Community](https://galaxyproject.org/community/sig/singlecell/) have a shared [Click-Up board](https://sharing.clickup.com/9015477668/b/h/5-90152810734-2/557452707486fef) at the time of writing.
+ - Check with [individual communities](https://galaxyproject.org/community/sig/), who may have their own method of tracking. 
+ 
+      For example, the [🖖🏾Single-cell & sPatial Omics Community](https://galaxyproject.org/community/sig/singlecell/) have a shared [Click-Up board](https://sharing.clickup.com/9015477668/b/h/5-90152810734-2/557452707486fef) at the time of writing.
 
 # Phase 3: Update the workflow
 
