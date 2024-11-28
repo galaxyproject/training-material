@@ -111,9 +111,9 @@ It's crucial to test the workflow, as often times the outputs will be different 
 >    {% snippet faqs/galaxy/workflows_best_practices.md %}
 >
 > 5. Add yourself as an author of the workflow.
-> 6. **Save** the workflow.
-> 7. Run your updated workflow on the input datasets in a fresh history.
-> 7. **Save** this history as an answer key history & make your history publicly available in Published Histories.
+> 6. **Save** the `updated workflow`.
+> 7. Run your `updated workflow` on the input datasets in a fresh history.
+> 7. **Save** this history as an `answer key history` & make your history publicly available in Published Histories.
 >
 >    {% snippet faqs/galaxy/histories_sharing.md %}
 >
@@ -122,9 +122,9 @@ It's crucial to test the workflow, as often times the outputs will be different 
 # Phase 5: Update the tutorial
 
 > <warning-title>If you run out of time</warning-title>
-> You have already completed a large chunk of work (updated workflow + answer key history) to get here, and we don't want to lose it!
-> Updating the tutorial to match the updated workflow can be a separate contribution. So if you get to this point and run out of time, please:
-> 1. Create an **issue** on the GTN Github Repo and include shareable links to your updated workflow & answer key history
+> You have already completed a large chunk of work (`updated workflow`+ `answer key history`) to get here, and we don't want to lose it!
+> Updating the tutorial to match the `updated workflow` can be a separate contribution. So if you get to this point and run out of time, please:
+> 1. Create an **issue** on the GTN Github Repository and include shareable links to your `updated workflow` & `answer key history`
 > 2. Message on the GTN Matrix channel with a link to your issue and explaining which tutorial you updated.
 > If, however, you are able to finish the task yourself, please read on!
 {: .warning}
@@ -154,12 +154,12 @@ The `tutorial.md` is what you'll be editing, however you will also at the end up
 
 > <hands-on-title>Update the tools in the tutorial</hands-on-title>
 >
-> 1. **Update tool versions**: Each {% icon hands_on %} *Hands-on* step in the tutorial will likely have tool (s) with versions in the text. Update these versions / links to be equivalent to your updated workflow.
+> 1. **Update tool versions**: Each {% icon hands_on %} *Hands-on* step in the tutorial will likely have tool (s) with versions in the text. Update these versions / links to be equivalent to your `updated workflow`.
 > 2. **Update tool instructions**: (Simultaneously) update the text to address any differences arising during the update, i.e. new parameters to set or other changes.
-> 3. **Update images**: Wherever images are used to show tool outputs, these will need updating. Use your final history for this.
-> 4. **Update text**: Wherever results are referenced in the tutorial text, update these numbers (and possibly interpretation) to reflect the new answer key history.
-> 5. **Update header**: In the metadata at the beginning of the tutorial, there are likely answer key history links. Update this by adding the link to your answer key history.
-> 6. **Update workflow file**: In the tutorial folder in the `training-material` repository, there is a subfolder titled `workflows`. Download your updated workflow as a file and deposit that file there.
+> 3. **Update images**: Wherever images are used to show tool outputs, these will need updating. Use your final `answer key history` for this.
+> 4. **Update text**: Wherever results are referenced in the tutorial text, update these numbers (and possibly interpretation) to reflect the new `answer key history`.
+> 5. **Update header**: In the metadata at the beginning of the tutorial, there are likely `answer key history` links. Update this by adding the link to your `answer key history`.
+> 6. **Update workflow file**: In the tutorial folder in the `training-material` repository, there is a subfolder titled `workflows`. Download your `updated workflow` as a file and deposit that file there.
 > 7. Check if there are any links to workflows/histories in the tutorial text, and if so, update them.
 > 7. Add your name as a *contributor* to the tutorial as an **editor** in the metadata.
 {: .hands_on}
