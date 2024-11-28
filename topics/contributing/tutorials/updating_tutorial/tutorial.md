@@ -86,6 +86,8 @@ You can:
 
 # Phase 3: Update the workflow
 
+Now, you will update the workflow to using the latest {% icon tool-versions %} tool versions.
+
 > <hands-on-title>Update the workflow</hands-on-title>
 >
 > 1. Select {% icon galaxy-wf-options %} **Workflow Options** from the **Workflow Editor**
