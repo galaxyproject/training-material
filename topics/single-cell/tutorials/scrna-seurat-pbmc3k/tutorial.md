@@ -142,27 +142,56 @@ Representing the matrix with these three files is convenient for sharing the dat
 
 ## SeuratObject
 
-In order to analyse the data using Seurat, we will first need to create a Seurat Object. A Seurat Object can store all our data, including the gene names, cell barcodes and matrix in a single RDS file. Since Seurat was written in the R programming language, Seurat Objects are saved as RData or RDS files. An RDS file is simply a type of RData file that contains a single object.
+In order to analyse the data using Seurat, we will first need to create a SeuratObject. A SeuratObject can store all our data, including the gene names, cell barcodes and matrix in a single RDS file. Since Seurat was written in the R programming language, SeuratObjects are saved as RData or RDS files. An RDS file is simply a type of RData file that contains a single object.
 
-Seurat Objects can also hold any metadata we might have about our cells or genes, as well as the information we will produce during our analysis, such as our dimensional reductions and cell clusters. A Seurat Object can hold data in multiple layers (also known as slots in earlier version of Seurat). We can have layers of raw counts, normalised data, and scaled data. We could also store multiple assays or types of data in a single object, although in this tutorial we will only be using one assay for RNA-seq data. The Seurat Object is designed to be self-contained so that we don't have to work with lots of different files, even if we have different versions or types of data. 
+SeuratObjects can also hold any metadata we might have about our cells or genes, as well as the information we will produce during our analysis, such as our dimensional reductions and cell clusters. A SeuratObject can hold data in multiple layers (also known as slots in earlier version of Seurat). We can have layers of raw counts, normalised data, and scaled data. We could also store multiple assays or types of data in a single object, although in this tutorial we will only be using one assay for RNA-seq data. The SeuratObject is designed to be self-contained so that we don't have to work with lots of different files, even if we have different versions or types of data. 
 
-Creating a Seurat Object in R would require two steps - first, we would need to read in our data, in this case using the `Read10X` function, then secondly we would turn it into a Seurat Object using the `CreateSeuratObject` function. On Galaxy, we can perform both steps with a single tool. The `CreateSeuratObject` function also generates some QC metrics and performs basic filtering of the data.
+Creating a SeuratObject in R would require two steps - first, we would need to read in our data, in this case using the `Read10X` function, then secondly we would turn it into a SeuratObject using the `CreateSeuratObject` function. On Galaxy, we can perform both steps with a single tool. The `CreateSeuratObject` function also generates some QC metrics and performs basic filtering of the data.
 
-> <hands-on-title>Create a Seurat Object</hands-on-title>
+> <hands-on-title>Create a SeuratObject</hands-on-title>
 >
-> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0) %} with the following parameters:
+> 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy1) %} with the following parameters:
 >    - *"Method used"*: `Create Seurat Object`
 >        - *"Select format of input"*: `matrix market (for e.g. 10x data)`
 >            - {% icon param-file %} *"Counts matrix with features as rows, cells as columns (.mtx)"*: `matrix.mtx`
+>            - {% icon param-file %} *"List of gene names (for rows)"*: `genes.tsv`
+>            - {% icon param-file %} *"List of cell barcodes (for columns)"*: `barcodes.tsv`
 >        - *"Include features detected in at least this many cells"*: `3`
 >        - *"Include cells where at least this many features are detected"*: `200`
 >        - *"Calculate percentage of mito genes in each cell"*: `No`
 >
-> 3. Rename the generated file to `Input 3k PBMC`
-> 4. Check that the format is `rds`
+> 2. Rename the generated file to `Input 3k PBMC`
+> 
+> 3. Check that the format is `rds`
 {: .hands_on}
 
-We can't look at the RDS file directly as it is designed for computers to read, rather than humans, but the Seurat tools will now be able to interact with the data. 
+We can't look at the RDS file directly as it is designed for computers to read, rather than humans, but the Seurat tools will now be able to interact with the data. We can also use the {% tool Seurat Data Management %} tool to look inside our new SeuratObject.
+
+> <hands-on-title>Inspect the `Input 3k PBMC` SeuratObject</hands-on-title>
+>
+> 1. {% tool [Seurat Data Management](toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0) %} with the following parameters:
+>    - *"Method used"*: `Inspect Seurat Object`
+>        - *"Display information about"*: `General`
+>
+> 2. Click the {% icon galaxy-eye %} on the output in your history to see some information about your SeuratObject
+> 
+{: .hands_on}
+
+> <question-title></question-title>
+>
+> 1. How many cells and genes are in the `Input 3k PBMC` SeuratObject we just created? 
+> 2. Is this the same as the number of cells and genes we started out with?
+>
+> > <solution-title></solution-title>
+> > 1. If we click on the {% icon galaxy-eye %} of the output from {% tool Seurat Data Management %} we can see some general information about our SeuratObject. We can see that it contains information about 2700 samples (cells) and 13,714 features (genes).
+> > 2. When we looked at the `matrix.mtx` file previously, we saw that it contained information on the same 2700 cells, but that there were 32,738 genes with non-zero values in the matrix. That means we are missing 19,024 genes - but don't worry, this is supposed to happen! Remember that we set the `Include features detected in at least this many cells` parameter to `3` - this got rid of any genes that were found in fewer than three cells. We assume that these genes are just technical noise (e.g. misreads, reads mapped to the wrong gene) rather than real biological features. We also set the `Include cells where at least this many features are detected` to `200` - this would have removed any cells that had fewer than 200 genes found in them. In this case, we didn't remove any cells as all 2700 of them must have had at least 200 genes. If we did have cells with fewer than 200 genes, we would want to get rid of them they are probably low quality cells or cell fragments. We would usually expect to find more features in an undamaged cell that was captured and sequenced properly.
+> >
+> {: .solution}
+{: .question}
+
+> <comment-title></comment-title>
+> If you would like to see the impact of the initial filtering performed by {% tool Seurat Create %}, then you can rerun it step with these filters removed (or changed) and then perform the QC visualisation steps described in the next section on the unfiltered dataset. The Seurat pipeline usually includes some filtering during object creation, which shouldn't cause any problems as long as we use reasonable thresholds that only filter out the lowest quality cells and genes.  We can always come back and create a new object with different values if we suspect they weren't right for our dataset once we make our QC plots or if we have problems later on in the analysis.
+{: .comment}
 
 # Preprocessing
 
@@ -190,24 +219,18 @@ Quality control is an essential step in preparing single cell data for analysis.
 
 In order to mitigate these problems, we need to remove low-quality cells at the start of the analysis.
 
-The `CreateSeuratObject` function we used in the {% tool Seurat Create %} tool automatically calculates some QC metrics and allows us to filter out the lowest quality cells and features immediately. We removed any genes that were found in fewer than three cells. We assume that these genes are just technical noise (e.g. misreads, reads mapped to the wrong gene) rather than real biological features. We also removed cells where we detected fewer than 200 genes. We assume that these are low quality cells or cell fragments as we would usually expect to find more features in an undamaged cell that was captured and sequenced properly. We can always come back and create a new object with different values if we suspect they weren't right for our dataset once we make our QC plots or if we have problems later on in the analysis.
-
-> <comment-title></comment-title>
-> If you would like to see the impact of this initial filtering on the dataset, then you can rerun the previous step with these filters removed and then perform the following visualisation steps on the unfiltered dataset. The Seurat pipeline usually includes some filtering during object creation, which shouldn't cause any problems as long as we use reasonable thresholds that only filter out the lowest quality cells and genes.
-{: .comment}
-
-We will now check the data to see if it requires any further filtering.
+The `CreateSeuratObject` function we used in the {% tool Seurat Create %} tool automatically calculates some QC metrics and allowed us to filter out the lowest quality cells and features immediately. We will now check the data to see if it requires any further filtering.
 
 ### Computation of QC metrics
 
-We already have two useful QC metrics that were calculated when we created our Seurat Object: 
+We already have two useful QC metrics that were calculated when we created our SeuratObject: 
 
 - **nCount_RNA** the total sum of RNAs that were found in each cell.
     The total number of counts is related to cell size, but it can also be an indication of quality. If `nCount_RNA` is very high we might be looking at results from a doublet or multiplet - two or more cells that were isolated together during the experiment. If `nCount_RNA` is very low, then it is likely that we lost a lot of the RNA due to cell lysis (breakage) or inefficient cDNA capture and amplification - or perhaps we only captured a fragment of a cell. 
 - **nFeature_RNA** the number of unique genes that were detected in each cell.
     We would expect to see some variation in the variety of genes expressed by cells of different sizes, types, and conditions, but if this number is unusually high or low then it could be a sign of poor quality. High `nFeature_RNA` could be another sign of a doublet or multiplet - we might have captured cells of different types and processed them together. Low `nFeature_RNA` could be due to loss of RNA if `nCount_RNA` is also low, or a sign that we have failed to capture the diversity of the transcript population, perhaps due to technical problems in our experiment. 
 
-One other metric that is often used to assess cell quality is the proportion of reads that came from the mitochondrial genome. The proportion is often higher in low quality, damaged or dying cells. Mitochondrial RNAs, which are protected inside the mitochondrial membranes, can be the last RNAs to be degraded or lost from a damaged cell, so we can end up with higher proportions of them in a low quality cell. We could have calculated the proportion of mitochondrial genes while creating our Seurat Object, but we will calculate it separately here to see how it is done - and how we could do the same for other types of genes.
+One other metric that is often used to assess cell quality is the proportion of reads that came from the mitochondrial genome. The proportion is often higher in low quality, damaged or dying cells. Mitochondrial RNAs, which are protected inside the mitochondrial membranes, can be the last RNAs to be degraded or lost from a damaged cell, so we can end up with higher proportions of them in a low quality cell. We could have calculated the proportion of mitochondrial genes while creating our SeuratObject, but we will calculate it separately here to see how it is done - and how we could do the same for other types of genes.
 
 We can identify mitochondrial genes from their gene symbols. Human genes that are encoded in the mitochondrial DNA (rather than in the cell nucleus) have names beginning with 'MT-'. Different naming patterns are used in other species. The {% tool Seurat Create %} tool can identify genes based on a specific naming pattern and then calculate the proportion of reads in each cell that came from these genes. We could use this tool to calculate the proportions of other genes with shared naming patterns too, such as ribosomal genes.
 
@@ -275,10 +298,10 @@ We can visualise the QC metrics to help us decide where to set our thresholds fo
 
 We can now set our QC thresholds based on these plots. Unfortunately, there are no standard thresholds that can be applied to every dataset, so we need to look at our data and make this decision for ourselves. 
 
-We've already filtered out the cells with the lowest total counts when we created the Seurat Object, so we'll focus on filtering the number of unique features and the proportion of mitochondrial reads. We saw on the scatter plots that the cells with high values for these two metrics also had the highest nCount_RNA values, so we'll actually be getting rid of the cells with the highest total counts too.
+We've already filtered out the cells with the lowest total counts when we created the SeuratObject, so we'll focus on filtering the number of unique features and the proportion of mitochondrial reads. We saw on the scatter plots that the cells with high values for these two metrics also had the highest nCount_RNA values, so we'll actually be getting rid of the cells with the highest total counts too.
 
 > <comment-title></comment-title>
-> If you've used Scanpy or followed the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might be wondering why we aren't visualising and filtering our genes as well as our cells. Seurat enables us to set the minimum number of cells that genes must be present in when we create the Seurat Object, but the pipeline doesn't usually include any further quality checks for genes. If we did need to do further filtering, we could do this in R by calculating an appropriate QC metric and subsetting the data.
+> If you've used Scanpy or followed the [Clustering 3K PBMCs with Scanpy]({% link topics/single-cell/tutorials/scrna-scanpy-pbmc3k/tutorial.md %}) tutorial then you might be wondering why we aren't visualising and filtering our genes as well as our cells. Seurat enables us to set the minimum number of cells that genes must be present in when we create the SeuratObject, but the pipeline doesn't usually include any further quality checks for genes. If we did need to do further filtering, we could do this in R by calculating an appropriate QC metric and subsetting the data.
 {: .comment}
 
 > <question-title></question-title>
@@ -349,13 +372,13 @@ If we produce the same plots again, we can see what has changed in our data.
 
 ## Further Preprocessing 
 
-Now that we're happy with the cells left in our Seurat Object, we can begin preparing the data for analysis. Seurat provides two routes for preprocessing, one with separate tools for each step and another that combines all these preprocessing steps into a single tool, `SCTransform`.
+Now that we're happy with the cells left in our SeuratObject, we can begin preparing the data for analysis. Seurat provides two routes for preprocessing, one with separate tools for each step and another that combines all these preprocessing steps into a single tool, `SCTransform`.
 
 > <comment-title></comment-title>
 >
 > `SCTransform` makes preprocessing quicker and easier because it combines several steps from the standard Seurat pipeline into one. `SCTransform` normalises and scales the data while also selecting highly variable features. It also takes a different approach to preprocessing that can be more effective at removing technical effects from the data.
 >
-> Once you are familiar with the separate steps, you might find it more effective and convenient to use `SCTransform`. The main difference to be aware of when using `SCTransform` is that the results will be stored as a new assay called `SCT` in the Seurat Object. You will need to use this assay in the following analysis steps, instead of the original `RNA` assay. After running `SCTransform`, `SCT` will be set as the default assay for the Seurat Object so the tools should automatically use the correct one. The methods and default settings used in `SCTransform` also differ from the standard pipeline, so you should expect to see some differences in your results compared to the other route.
+> Once you are familiar with the separate steps, you might find it more effective and convenient to use `SCTransform`. The main difference to be aware of when using `SCTransform` is that the results will be stored as a new assay called `SCT` in the SeuratObject. You will need to use this assay in the following analysis steps, instead of the original `RNA` assay. After running `SCTransform`, `SCT` will be set as the default assay for the SeuratObject so the tools should automatically use the correct one. The methods and default settings used in `SCTransform` also differ from the standard pipeline, so you should expect to see some differences in your results compared to the other route.
 >
 {: .comment}
 
@@ -363,7 +386,7 @@ The usual preprocessing steps for single cell data are normalisation, selection 
 
 - **Normalisation**
     Normalisation deals with variations in the number of reads we counted for each cell that were caused by systemic technical differences. We might have captured more RNAs or produced more copies of them during the PCR amplification step in some cells. If we don't remove these differences then they could obscure the biological differences we're trying to explore. We could end up with clusters of cells based on how many RNAs we captured or copied rather than on their cell type.
-    The default normalisation method for the separate `NormalizeData` tool in Seurat is `LogNormalize`, which simply divides the number of counts for each gene by the total counts for the cell, multiplies this by a scale factor (10,000 is the default), and then log-transforms the results. Essentially, we're working out how many counts we would have for each gene if we had produced 10,000 reads from each cell, instead of getting different numbers of reads from different cells. The log-transformation then increases the impact that genes that showed stronger relative differences in expression between cells will have on our analysis (e.g. a gene that is expressed at an average count of 50 in cell type A and 10 in cell type B should have a bigger impact than a gene that is expressed at an average count of 1100 in A and 1000 in B). The normalised data will be stored in the `data` layer of the Seurat Object. The unnormalised data will still be available in the `counts` layer.
+    The default normalisation method for the separate `NormalizeData` tool in Seurat is `LogNormalize`, which simply divides the number of counts for each gene by the total counts for the cell, multiplies this by a scale factor (10,000 is the default), and then log-transforms the results. Essentially, we're working out how many counts we would have for each gene if we had produced 10,000 reads from each cell, instead of getting different numbers of reads from different cells. The log-transformation then increases the impact that genes that showed stronger relative differences in expression between cells will have on our analysis (e.g. a gene that is expressed at an average count of 50 in cell type A and 10 in cell type B should have a bigger impact than a gene that is expressed at an average count of 1100 in A and 1000 in B). The normalised data will be stored in the `data` layer of the SeuratObject. The unnormalised data will still be available in the `counts` layer.
     Although this form of normalisation is widely-used, it does assume that each cell originally had the same number of RNA molecules, which isn't the case when our samples contain cells of different types and sizes. SCTransform takes a different approach to normalisation that doesn't make the same assumption about the cells {% cite SCTransform2022 %}. Instead, it creates a model of the UMI counts that enables it to regress out variation in sequencing depth (nFeature_RNA) and pools information from genes with similar abundances to adjust the variances. The corrected counts will be stored in the `counts` layer of the new SCT assay. The log1p(counts) will be stored in the `data` layer and the pearson residuals will be stored in the `scale.data` layer.
 - **Selection of highly variable features**
     Rather than use the entire dataset in every stage of the analysis, we can focus on the genes that provide the most information - the highly variable genes that showed the biggest differences in expression between cells. We assume that these bigger differences reflect genuine biological differences, while the smaller differences in expression seen in other genes is down to chance or technical noise. Focusing on the most variable genes can make biological differences clearer in single cell analysis.
@@ -379,7 +402,7 @@ The usual preprocessing steps for single cell data are normalisation, selection 
 The Seurat pipeline can include another step during preprocessing of our single cell data. We can regress out (or remove) the impact of unwanted sources of variation. We could use this to remove the effects of the cell cycle or the differences associated with the proportion of mitochondrial genes. The goal is to reduce differences that are related to factors we are not interested in as this can help the differences we are interested in (like those between cell types or experimental groups) stand out more.
 It is possible to use the `ScaleData` function to regress out unwanted variation, but the creators of Seurat recommend using `SCTransform` for preprocessing if you want to do any regression. `SCTransform` automatically regresses out variation associated with sequencing depth (unique counts or nFeature_RNA) and can also regress out other variables - here we will also regress out the variation associated with the proportion of mitochondrial content.
 
-{% include _includes/cyoa-choices.html option1='Separate Preprocessing Steps' option2='SCTransform' defualt='Separate-Preprocessing-Steps' text="You can perform each preprocessing step separately, which might give you a better understanding of the different elements involved in preprocessing, or run them all at once using SCTransform." %}
+{% include _includes/cyoa-choices.html option1='Separate Preprocessing Steps' option2='SCTransform' default='Separate-Preprocessing-Steps' text="You can perform each preprocessing step separately, which might give you a better understanding of the different elements involved in preprocessing, or run them all at once using SCTransform." %}
 
 <div class='Separate-Preprocessing-Steps' markdown='1'>
 ><hands-on-title>Separate Preprocessing Steps</hands-on-title>
@@ -510,6 +533,8 @@ The standard Seurat pipeline performs the PCA on the Variable Features only, rat
 >    - *"Method used"*: `Run a PCA dimensionality reduction using 'RunPCA'`
 >        - *"Output list of top genes"*: `Yes`
 >
+> 2. Rename the output as `PCA Results`
+>
 {: .hands_on}
 
 ### Visualise the PCA Results
@@ -523,7 +548,7 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 ><hands-on-title>Visualise the PCA Results - Dimensional Loadings</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize Reduction Results with 'VizDimLoadings'`
 >        - *"Number of dimensions to display"*: `3`
 >        - In *"Plot Formatting Options"*:
@@ -554,7 +579,7 @@ Next, let's see how our cells are distributed along the top PCs. We can use `Dim
 ><hands-on-title>Visualise the PCA Results - DimPlot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize Dimensional Reduction with 'DimPlot'`
 >        - *"Name of reduction to use"*: `pca`
 >
@@ -581,7 +606,7 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 ><hands-on-title>Visualise the PCA Results - Feature Plots</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: Use the top positive and negative genes for PCs 1-3. If you did the separate preprocessing steps these will be `CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP` but if you used SCTransform they will be `MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`
 >        - *"Dimension to plot on x axis"*: `1`
@@ -593,7 +618,7 @@ We don't have to use PCs 1 and 2 as the axes. We can decide which PCs we want to
 >        - *"Width of plot in pixels"*: `3100`
 >
 > 2. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*:  Use the top positive and negative genes for PCs 1-3. If you did the separate preprocessing steps these will be `CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP` but if you used SCTransform they will be `MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`
 >        - *"Dimension to plot on x axis"*: `2`
@@ -645,7 +670,7 @@ Another option for visualising our PCA results is to use `DimHeatmap` to produce
 > <hands-on-title>Visualise the PCA Results - Heatmaps</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize Reduction Results with 'DimHeatmap'`
 >        - *"Dimensions from reduction to plot"*: `1`
 >        - In *"Advanced Options"*:
@@ -653,7 +678,7 @@ Another option for visualising our PCA results is to use `DimHeatmap` to produce
 >            - *"Return an equal number of genes with + and - scores"*: `Yes`
 >
 > 2. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize Reduction Results with 'DimHeatmap'`
 >        - *"Dimensions from reduction to plot"*: `1:15`
 >        - In *"Advanced Options"*:
@@ -696,7 +721,7 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 ><hands-on-title>Make an Elbow Plot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Determine dimensionality with 'ElbowPlot'`
 >        - *"Number of dimensions to plot standard deviation for"*: If you ran the separate preprocessing steps then enter `30` here, if you used SCTransfrom then enter `50`
 >
@@ -742,7 +767,7 @@ The best approach to building the neighborhood graph and the optimal value for `
 ><hands-on-title>Find Neighbors by Computing a Neighborhood Graph</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Compute nearest neighbors with 'FindNeighbors'`
 >        - *"Number of dimensions from reduction to use as input"*: Use `10` if you ran the separate preprocessing steps or `30` if you used SCTransform.
 >
@@ -787,6 +812,8 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 >        - *"Run UMAP on dimensions, features, graph or KNN output"*: `dims`
 >            - *"Number of dimensions from reduction to use as input"*: If you ran separate preprocessing steps, leave this as `10`, if you used SCTransform then change it to `30`
 >
+> 2. Rename the output as `UMAP Results`
+>
 {: .hands_on}
 
 ## Visualise UMAP
@@ -796,12 +823,12 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 ><hands-on-title>Visualise the UMAP</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize Dimensional Reduction with 'DimPlot'`
 >        - *"Name of reduction to use"*: `umap`
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: Use the top positive and negative genes for PCs 1-3. If you did the separate preprocessing steps these will be `CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP` but if you used SCTransform they will be `MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`
 >        - In *"Plot Formatting Options"*:
@@ -842,7 +869,7 @@ UMAP plots aren't the only way to see what is going on with the clusters we've j
 ><hands-on-title>Visualise Expression across Clusters with a Violin Plot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*:  Use the top positive and negative genes for PCs 1-3. If you did the separate preprocessing steps these will be `CST3,CD79A,HLA-DQA1,MALAT1,NKG7,PPBP` but if you used SCTransform they will be `MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`
 >        - In *"Plot Formatting Options"*:
@@ -883,7 +910,7 @@ Seurat also provides different tools for finding markers using these tests so th
 We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransfrom - you'll just see some differences in the lists of markers.
 
 > <comment-title></comment-title>
-> When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original Seurat Object by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
+> When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original SeuratObject by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
 {: .comment}
 
 ## Find Positive Markers for Every Cluster Compared to the Rest
@@ -897,7 +924,7 @@ We can look for both positive and negative markers, or limit the results to just
 > <hands-on-title>Use `FindAllMarkers` to Compare All Clusters</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Identify marker genes with 'FindAllMarkers'`
 >        - *"Select test to run"*: `wilcox`
 >        - *"Limit output to top N markers per cluster"*: `No`
@@ -943,7 +970,7 @@ Let's try finding the positive and negative markers of cluster 2.
 ><hands-on-title>Use `FindMarkers` on a Single Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Identify marker genes for specific groups with 'FindMarkers'`
 >        - *"Compare markers between clusters of cells"*: `Yes`
 >            - *"Identity class to define markers for"*: `2`
@@ -989,7 +1016,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 ><hands-on-title>Use `FindMarkers` to Compare Specific Clusters</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Identify marker genes for specific groups with 'FindMarkers'`
 >        - *"Compare markers between clusters of cells"*: `Yes`
 >            - *"Identity class to define markers for"*: `5`
@@ -1024,7 +1051,7 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 ><hands-on-title>Use `FindMarkers` to Calculate Classification Power</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Identify marker genes for specific groups with 'FindMarkers'`
 >        - *"Compare markers for two groups of cells"*: `No`
 >        - *"Change cell identities before finding markers"*: `No`
@@ -1073,7 +1100,7 @@ If we're taking the unsupervised approach, then we might want to limit our marke
 ><hands-on-title>Find the Top 10 Positive Markers for Each Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Identify marker genes with 'FindAllMarkers'`
 >        - *"Minimum log-fold difference to test"*: `1.0`
 >        - *"Select test to run"*: `wilcox`
@@ -1126,7 +1153,7 @@ The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If
 ><hands-on-title>Make Violin Plots of B Cell Markers</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*: `CD79A,MS4A1`
 >
@@ -1141,7 +1168,7 @@ Sometimes the results aren't quite so clear as markers might be expressed across
 ><hands-on-title>Make Violin Plots of T Cell Markers</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*: `IL7R,CCR7,S100A4,CD8A`
 >        - In *"Plot Formatting Options"*:
@@ -1183,7 +1210,7 @@ To continue with the supervised approach, we can check the expression of the cho
 
 > <hands-on-title>Colour the UMAP Plot by Canonical Marker Expression</hands-on-title>
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: `IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`
 >    - *"Change size of plot"*: `Yes`
@@ -1204,7 +1231,7 @@ If you used SCTransform, then you'll have more clusters to annotate. We can use 
 
 > <hands-on-title>Colour the UMAP Plot by T Cell Marker Expression</hands-on-title>
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
 >        - *"Features to plot"*: `GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15`
 >    - *"Change size of plot"*: `Yes`
@@ -1233,7 +1260,7 @@ Another option for visualising marker gene expression across clusters is the Vio
 > <hands-on-title>Use Violin Plots to Compare Expression of Canonical Markers by Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*: `IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`
 >    - *"Change size of plot"*: `Yes`
@@ -1255,7 +1282,7 @@ Again, if we used SCTransform for preprocessing, we can use those additional T c
 > <hands-on-title>Use Violin Plots to Compare Expression of T Cell Markers by Cluster</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*: `GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15`
 >    - *"Change size of plot"*: `Yes`
@@ -1308,7 +1335,7 @@ We can now rename our clusters using these cell names, while keeping a copy of t
 > <hands-on-title>Rename Clusters with Cell Types</hands-on-title>
 >
 > 1. {% tool [Seurat Data Management](toolshed.g2.bx.psu.edu/repos/iuc/seurat_data/seurat_data/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Manipulate Seurat Object`
 >        - *"Manipulation to perform"*: `Rename idents`
 >            - *"Rename all idents"*: `Yes`
