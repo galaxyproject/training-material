@@ -144,6 +144,7 @@ Each topic has the following structure:
 ├── tutorials
 │   ├── tutorial1
 │   │   ├── tutorial.md
+│   │   ├── images
 │   │   ├── slides.html
 │   │   ├── data-library.yaml
 │   │   ├── workflows
