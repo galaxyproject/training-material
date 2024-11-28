@@ -82,7 +82,7 @@ This part is only to make batch tool visible in your subdomain.
 >
 > ![Image of the modification to make in the tool_conf.xml.j2 file](../../images/tool_subdomain/add_interactive_tool.png)
 >
->   - Then commit your changes and write a nice message for the admin when you open your Pull Request.
+>   - Then, commit your changes and write a nice message for the admin when you open your Pull Request.
 {: .hands_on}
 
 If you choose to create a new section for your interactive tool don't forget add this section to your subdomain ! 
