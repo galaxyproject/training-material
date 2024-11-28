@@ -140,7 +140,7 @@ The beginning of the file should look like this:
 
 Representing the matrix with these three files is convenient for sharing the data, but not for processing them. Different single cell analysis packages have attempted to solve the problem of storage and analysis by inventing their own formats, which has led to the proliferation of many different 'standards' in the scRNA-seq package ecosystem.
 
-## Seurat Object
+## SeuratObject
 
 In order to analyse the data using Seurat, we will first need to create a Seurat Object. A Seurat Object can store all our data, including the gene names, cell barcodes and matrix in a single RDS file. Since Seurat was written in the R programming language, Seurat Objects are saved as RData or RDS files. An RDS file is simply a type of RData file that contains a single object.
 
@@ -148,17 +148,18 @@ Seurat Objects can also hold any metadata we might have about our cells or genes
 
 Creating a Seurat Object in R would require two steps - first, we would need to read in our data, in this case using the `Read10X` function, then secondly we would turn it into a Seurat Object using the `CreateSeuratObject` function. On Galaxy, we can perform both steps with a single tool. The `CreateSeuratObject` function also generates some QC metrics and performs basic filtering of the data.
 
-><hands-on-title>Create a Seurat Object</hands-on-title>
+> <hands-on-title>Create a Seurat Object</hands-on-title>
+>
 > 1. {% tool [Seurat Create](toolshed.g2.bx.psu.edu/repos/iuc/seurat_create/seurat_create/5.0+galaxy0) %} with the following parameters:
 >    - *"Method used"*: `Create Seurat Object`
 >        - *"Select format of input"*: `matrix market (for e.g. 10x data)`
->            - {% icon param-file %} *"Counts matrix with features as rows, cells as columns (.mtx)"*: `output` (Input dataset)
+>            - {% icon param-file %} *"Counts matrix with features as rows, cells as columns (.mtx)"*: `matrix.mtx`
 >        - *"Include features detected in at least this many cells"*: `3`
 >        - *"Include cells where at least this many features are detected"*: `200`
 >        - *"Calculate percentage of mito genes in each cell"*: `No`
 >
 > 3. Rename the generated file to `Input 3k PBMC`
-> 4. Check that the format is `RDS`
+> 4. Check that the format is `rds`
 {: .hands_on}
 
 We can't look at the RDS file directly as it is designed for computers to read, rather than humans, but the Seurat tools will now be able to interact with the data. 
@@ -179,11 +180,11 @@ Quality control is an essential step in preparing single cell data for analysis.
 >
 > #### Distortion of population heterogeneity during variance estimation or principal components analysis
 >
-> When we cluster single cell data, we're looking for the biggest differences between groups of cells. If we have lots of low-quality cells, then the biggest differences we'll see might be these differences in quality, rather than something more biologically interesting. Differences in quality can have a big impact because low-quality cells often have low total RNA counts. When we perform scaling normalisation on these cells during preprocessing, this can make the variances for the genes they do express much bigger than for other cells. When we select the most variable genes in the dataset, we'll end up picking the ones expressed by low-quality cells. We'll use these in our PCA analysis, likely ending up with top principal components based on cell quality rather than biology, making it harder to detect the differences we're actually interested in.
+> When we cluster single cell data, we're looking for the biggest differences between groups of cells. If we have lots of low-quality cells, then the biggest differences we'll see might be these differences in quality, rather than something more biologically interesting. Differences in quality can have a big impact because low-quality cells often have low total RNA counts. When we perform scaling and normalisation on these cells during preprocessing, this can make the variances for the genes they do express much bigger than for other cells. When we select the most variable genes in the dataset, we'll end up picking the ones expressed by low-quality cells. We'll use these in our PCA analysis, likely ending up with top principal components based on cell quality rather than biology, making it harder to detect the differences we're actually interested in.
 >
 > #### Misidentification of upregulated genes
 >
-> Another problem that arises when we apply our preprocessing steps to small, low quality cells is that the genes we detect in them can appear to be strongly upregulated. Since we didn't detect many other genes in these cells, even a small difference in the number of transcripts detected can end up becoming much larger after normalisation. For example, contaminating transcripts may be present in all cells at low but constant levels. With the increased scaling normalization in low-quality cells, the small counts for these transcripts may become large normalized expression values, so we might think we've found a population of cells where these genes are upregulated.
+> Another problem that arises when we apply our preprocessing steps to small, low quality cells is that the genes we detect in them can appear to be strongly upregulated. Since we didn't detect many other genes in these cells, even a small difference in the number of transcripts detected can end up becoming much larger after normalisation. For example, contaminating transcripts may be present in all cells at low but constant levels. With the increased scaling and normalization in low-quality cells, the small counts for these transcripts may become large normalized expression values, so we might think we've found a population of cells where these genes are upregulated.
 >
 {: .details}
 
@@ -201,10 +202,10 @@ We will now check the data to see if it requires any further filtering.
 
 We already have two useful QC metrics that were calculated when we created our Seurat Object: 
 
-- ** nCount_RNA** the total sum of RNAs that were found in each cell
-    The total number of counts is related to cell size, but it can also be an indication of quality. If nCount_RNA is very high we might be looking at results from a doublet or multiplet - two or more cells that were isolated together during the experiment. If nCount_RNA is very low, then it is likely that we lost a lot of the RNA due to cell lysis (breakage) or inefficient cDNA capture and amplification - or perhaps we only captured a fragment of a cell. 
-- ** nFeature_RNA** the number of unique genes that were detected in each cell
-    We would expect to see some variation in the variety of genes expressed by cells of different sizes, types, and conditions, but if this number is unusually high or low then it could be a sign of poor quality. High nFeature_RNA could be another sign of a doublet or multiplet - we might have captured cells of different types and processed them together. Low nFeature_RNA could be due to loss of RNA if nCount_RNA is also low, or a sign that we have failed to capture the diversity of the transcript population, perhaps due to technical problems in our experiment. 
+- **nCount_RNA** the total sum of RNAs that were found in each cell.
+    The total number of counts is related to cell size, but it can also be an indication of quality. If `nCount_RNA` is very high we might be looking at results from a doublet or multiplet - two or more cells that were isolated together during the experiment. If `nCount_RNA` is very low, then it is likely that we lost a lot of the RNA due to cell lysis (breakage) or inefficient cDNA capture and amplification - or perhaps we only captured a fragment of a cell. 
+- **nFeature_RNA** the number of unique genes that were detected in each cell.
+    We would expect to see some variation in the variety of genes expressed by cells of different sizes, types, and conditions, but if this number is unusually high or low then it could be a sign of poor quality. High `nFeature_RNA` could be another sign of a doublet or multiplet - we might have captured cells of different types and processed them together. Low `nFeature_RNA` could be due to loss of RNA if `nCount_RNA` is also low, or a sign that we have failed to capture the diversity of the transcript population, perhaps due to technical problems in our experiment. 
 
 One other metric that is often used to assess cell quality is the proportion of reads that came from the mitochondrial genome. The proportion is often higher in low quality, damaged or dying cells. Mitochondrial RNAs, which are protected inside the mitochondrial membranes, can be the last RNAs to be degraded or lost from a damaged cell, so we can end up with higher proportions of them in a low quality cell. We could have calculated the proportion of mitochondrial genes while creating our Seurat Object, but we will calculate it separately here to see how it is done - and how we could do the same for other types of genes.
 
@@ -287,8 +288,7 @@ We've already filtered out the cells with the lowest total counts when we create
 >
 > > <solution-title></solution-title>
 > > 1. A threshold of 2500 seems sensible for this dataset. The violin plot for nFeature_RNA shows that most of our cells should be under this threshold, so we won't lose too much of our data. The scatter plot shows that the cells above this threshold also had unusually high values of nCount_RNA, which suggest they could include some doublets.
-> > 2. A threshold of 5% should work for this dataset. As before, the violin plot shows that the majority of our cells are below this threshold, but in this case the cells above it had low total RNA counts, which suggests these could be damaged cells that had lost a lot of their other RNAs.
-> > Although there are few standards to guide us in single cell analysis, you will see the same 5% threshold for mitochondrial content used in many studies. It often works well, but it can filter out energetic cell types such as muscle cells, so we shouldn't apply this threshold without considering whether it works for our dataset. Some studies don't filter on mitochondrial reads at all! 
+> > 2. A threshold of 5% should work for this dataset. As before, the violin plot shows that the majority of our cells are below this threshold, but in this case the cells above it had low total RNA counts, which suggests these could be damaged cells that had lost a lot of their other RNAs. Although there are few standards to guide us in single cell analysis, you will see the same 5% threshold for mitochondrial content used in many studies. It often works well, but it can filter out energetic cell types such as muscle cells, so we shouldn't apply this threshold without considering whether it works for our dataset. Some studies don't filter on mitochondrial reads at all! 
 > >
 > {: .solution}
 {: .question}
@@ -314,20 +314,20 @@ If we produce the same plots again, we can see what has changed in our data.
 > <hands-on-title>Re-Visualise QC Metrics</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `Mitochondrial Annotations` (output of **Seurat Create** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `Filtered Dataset` (output of **Seurat Create** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
 >        - *"Features to plot"*: `nFeature_RNA,nCount_RNA,percent.mt`
 >        - In *"Plot Formatting Options"*:
 >            - *"Number of columns to display"*: `3`
 >
 > 2. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `Mitochondrial Annotations` (output of **Seurat Create** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `Filtered Dataset` (output of **Seurat Create** {% icon tool %})
 >    - *"Method used"*: `Scatter Plot with 'FeatureScatter'`
 >        - *"First feature to plot"*: `nCount_RNA`
 >        - *"Second feature to plot"*: `percent.mt`
 >
 > 3. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `Mitochondrial Annotations` (output of **Seurat Create** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `Filtered Dataset` (output of **Seurat Create** {% icon tool %})
 >    - *"Method used"*: `Scatter Plot with 'FeatureScatter'`
 >        - *"First feature to plot"*: `nCount_RNA`
 >        - *"Second feature to plot"*: `nFeature_RNA`
@@ -390,13 +390,13 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 >        - *"Method for normalization"*: `LogNormalize`
 >
 > 2. {% tool [Seurat Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Preprocessing** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of previous **Seurat Preprocessing** {% icon tool %})
 >    - *"Method used"*: `Identify highly variable genes with 'FindVariableFeatures'`
 >        - *"Method to select variable features"*: `vst`
 >        - *"Output list of most variable features"*: `Yes`
 >
 > 3. {% tool [Seurat Preprocessing](toolshed.g2.bx.psu.edu/repos/iuc/seurat_preprocessing/seurat_preprocessing/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Preprocessing** {% icon tool %})
+>    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of previous **Seurat Preprocessing** {% icon tool %})
 >    - *"Method used"*: `Scale and regress with 'ScaleData'`
 >        - *"Regress out a variable"*: `No`
 >        - *"Features to scale"*: `All Features`
