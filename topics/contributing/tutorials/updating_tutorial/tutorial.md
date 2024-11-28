@@ -41,11 +41,14 @@ We encourage you to pick a tutorial to try this on, so you can use this tutorial
 {% include _includes/cyoa-choices.html option1="No" option2="Yes" default="No"
        text="Do you already have a tutorial and workflow you want to update?" %}
 
-<div class="No" markdown="1">
 
+<div class="No" markdown="1">
 > <hands-on-title>Check for an outdated workflow</hands-on-title>
 >
 > 1. **Find a {% icon hands_on %} Hands-on tutorial** in your training topic of interest (for example, Single-cell)
+</div>
+<div class="Yes" markdown="1">
+</div>
 > 2. **Select the {% icon workflow %} workflow** from the header
 > 3. **Import the workflow** to your favourite Galaxy server
 >
@@ -57,9 +60,8 @@ We encourage you to pick a tutorial to try this on, so you can use this tutorial
 
 If the workflow has tools that are up to date (or very close!), great! That tutorial does not need updating! Try another one!
 
-</div>
 
-<div class="Yes" markdown="1">
+
 
 > <hands-on-title>Import the workflow</hands-on-title>
 >
@@ -72,7 +74,6 @@ If the workflow has tools that are up to date (or very close!), great! That tuto
 > 4. Go to the **Workflow** menu and select {% icon galaxy-wf-edit %} **Edit workflow**
 {: .hands_on}
 
-</div>
 
 # Phase 2: Check that nobody else is working on this
 
