@@ -61,7 +61,7 @@ This part is only to make batch tool visible in your subdomain.
 
 # Add a section of tools to your subdomain
 > <hands-on-title>Sections for your subdomain</hands-on-title>
->    - If not already done clone the Galaxy europe [Infrastructure-playbook repo](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master)
+>    - If not already done clone the Galaxy Europe [Infrastructure-playbook repo](https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master)
 >    - Create a branch on your fork
 >    - Go to the file **global_host_filters.py.j2** in **templates/galaxy/config/**
 >    - Open it and edit it the "DOMAIN_SECTIONS" part go to your subdomain line and in the list of section add the one you need for instance `"climate_analysis"`
