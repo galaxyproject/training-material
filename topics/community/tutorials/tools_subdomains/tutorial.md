@@ -40,7 +40,7 @@ This tutorial explains how to make your brand new tools, once they're published 
 
 > <hands-on-title>Tool sections (for batch tools) </hands-on-title>
 >    - Clone the Github repository of the Galaxy server (of where your subdomain to be attached)
->    - For Galaxy Europe, fork the [usegalaxy-eu-tools repo](https://github.com/usegalaxy-eu/usegalaxy-eu-tools/tree/master)
+>    - For Galaxy Europe, fork the [usegalaxy-eu-tools repo](https://github.com/usegalaxy-eu/usegalaxy-eu-tools)
 >    - Create a branch on your fork
 >    - Browse through the different yaml files and select the one that correspond to your subdomain for earth system everything is made under the ecology owner. 
 >    - Once in the yaml you can add the section for your tool (you want to know what are the existing tool sections ? Go check the [ToolShed's categories](https://toolshed.g2.bx.psu.edu/)) 
