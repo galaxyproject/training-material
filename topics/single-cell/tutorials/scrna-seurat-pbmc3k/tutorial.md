@@ -452,8 +452,6 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 {: .hands_on}
 </div>
 
-<div class='Separate-Preprocessing-Steps SCTransform' markdown='1'>
-
 ### Visualise Highly Variable Genes
 
 ><hands-on-title>Visualise Results</hands-on-title>
@@ -483,7 +481,8 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > <solution-title></solution-title>
 > > 
 > > 1. We can check the list of the top variable genes in our history by clicking on the {% icon galaxy-eye %} or see them on our variable features plot.
-> > <div class='Separate-Preprocessing-Steps' markdown='1'>
+> > <span class='Separate-Preprocessing-Steps'>
+> >
 > > > |    |         |
 > > > |----|---------|
 > > > | 1  | PPBP    |
@@ -497,9 +496,10 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > > | 9  | GNG11   |
 > > > | 10 | FCER1A  |
 > > {: .matrix}
-> > </div>
+> > </span>
 > >
-> > <div class='SCTransform' markdown='1'>
+> > <span class='SCTransform'>
+> >
 > > > |    |          |
 > > > |----|----------|
 > > > | 1  | S100A9   |
@@ -513,7 +513,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 > > > | 9  | FTH1     |
 > > > | 10 | CCL5     |
 > > {: .matrix}
-> > </div>
+> > </span>
 > >
 > > > <comment-title></comment-title>
 > > > The list of highly variable genes you end up with will depend on which preprocessing route you chose. The two preprocessing routes use different methods to select features, so they won't always end up with the same genes, although there are likely to be some similarities. `SCTransform` also returns 3000 variable genes by default, rather than the 2000 selected by `FindVariableFeatures`. We can select more features with `SCTransform` because its normalisation method is better at removing technical effects from the data, so we believe that these additional genes reflect subtler biological variations rather than technical differences.
@@ -603,14 +603,14 @@ Rather than just looking at a list of genes, we can also produce plots to help u
 > 2. Are any of our top 10 highly variable genes associated with the top PCS? Does this surprise you?
 > 3. When we plot the cells along the PC axes (in the next step) do you expect to see differences in the expression of these genes along the associated axis?
 > > <solution-title></solution-title>
-> > <div class='Separate-Preprocessing-Steps' markdown='1'>
+> > <span class='Separate-Preprocessing-Steps'>
 > > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. The top positively associated genes were CST3 for PC1, CD79A for PC2, and HLA-DQA1 for PC3. The top negatively associated genes were MALAT1 for PC1, NKG7 for PC2, and PPBP for PC3. However, these top genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression.
 > > The figures show us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
-> > </div>
-> > <div class='SCTransform' markdown='1'>
+> > </span>
+> > <span class='SCTransform'>
 > > 1. The list produced by the `RunPCA` function shows the genes that were most strongly positively and negatively assocated with each PC. The top positively associated genes were MALAT1 for PC1, NKG7 for PC2, and S100A8 for PC3, while the top negatively associated genes were FTL for PC1, HLA-DRA for PC2, and CD74 for PC3. However, these top genes don't define the PCs by themselves - they are part of groups of genes that showed correlated patterns of expression.
 > > The figures show us more information about the top genes. We can see the top 30 genes in each of these groups on the plots. We can also see how strongly each of these genes was associated with the PC.
-> > </div>
+> > </span>
 > > 2. We can see that some of our highly variable genes are associated with the top PCs. For example, FTL is one of the top genes associated with PC1. We should expect to see some of our highly variable genes here as we used the features we selected to perform the PCA. It also makes sense that our top 10 variable genes are strongly associated with PCs, because we know these are the genes that varied most across the dataset and the PCA was looking for these strong differences in expression. However, a gene that varied a lot won't necessarily be associated with a top PC unless its expression correlates with other variable genes - a group of correlated genes is likely to have a stronger impact than a single gene, even if that one gene varies a lot.
 > > 3. Since these are the genes that most are strongly associated with each PC, we should expect to see strong differences in their expression from one end of the associated axis to the other. The genes positively associated with PC1 should mainly be expressed near the positive end of the PC1 axis while the negatively associated genes should mainly be expressed at the negative end. We would expect to see similar patterns for the other PCs.
 > {: .solution}
@@ -791,7 +791,7 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Determine dimensionality with 'ElbowPlot'`
->        - *"Number of dimensions to plot standard deviation for"*: <span class="Separate-Preprocessing-Steps">`30`</span><span class="SCTransfrom">`50`</span>
+>        - *"Number of dimensions to plot standard deviation for"*: <span class="Separate-Preprocessing-Steps">`30`</span><span class="SCTransform">`50`</span>
 >
 {: .hands_on}
 
@@ -810,15 +810,15 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 > <question-title></question-title>
 > 1. How many PCs should we use?
 > > <solution-title></solution-title>
-<div class='Separate-Preprocessing-Steps' markdown='1'>
+<span class='Separate-Preprocessing-Steps'>
 > > 1. As with many decisions in single cell analysis, there isn't an exact method for deciding how many PCs we should use. The elbow or bend in our plot appears to be around PC9-10, so we'll use 10 dimensions in this tutorial, but you could justifiably choose anywhere between about PC7 to PC12 on the basis of this plot. It is usually better to err on the higher side than to get rid of PCs that might be useful. Sometimes it is worth repeating the analysis with different numbers of PCs to see how it affects the results.
 > > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells (e.g. MZB1 is a marker for Plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs on the basis of our Elbow Plot.
 > > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset (especially after seeing the weaker patterns in those later heatmaps) - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead.
-> > </div>
-> > <div class='SCTransform' markdown='1'>
+> > </span>
+> > <span class='SCTransform'>
 > > 1. The plot shows a sharp elbow or bend at around PC10, but there is a gradual slope down towards the x-axis after this rather than an immediate drop to the bottom. In order to capture some of this additional variation for our analysis, we might decide to include 30 PCs. The curve of dots is much flatter and closer to the x-axis after this point, so the additional PCs won't explain much more of the variation.
 > > We can actually use more PCs when we preprocess with SCTransform than if we used the separate preprocessing tools because the more effective normalisation method seems to be better at removing technical effects from the data. When we preprocess with SCTransform, we assume that higher PCs are more likely to represent subtle biological variation rather than technical effects, so we might improve our results by including more of them.
-> > </div>
+> > </span>
 > {: .solution}
 {: .question}
 
@@ -849,7 +849,7 @@ The best approach to building the neighborhood graph and the optimal value for `
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `PCA Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Compute nearest neighbors with 'FindNeighbors'`
->        - *"Number of dimensions from reduction to use as input"*: <span class="Separate-Preprocessing-Steps">`10`</span><span class="SCTransfrom">`30`</span>
+>        - *"Number of dimensions from reduction to use as input"*: <span class="Separate-Preprocessing-Steps">`10`</span><span class="SCTransform">`30`</span>
 >
 {: .hands_on}
 
@@ -857,7 +857,7 @@ The best approach to building the neighborhood graph and the optimal value for `
 
 Seurat also offers a variety of different clustering algorithms, including SLM, Leiden and Louvain. We will follow the default Seurat pipeline and use the Louvain algorithm.
 
-We need to define a value for the resolution parameter, which determines the size of the clusters the algorithm will find. We'll set the resolution at `0.5` for now, or `0.8` if we used SCTransfrom for preprocessing, but this is one of those parameters that we'll often want to try a few different values for when working with single cell data. We'll set a higher resolution on the SCTransform route because we expect it to capture more of the biological variation, so we might be able to find more clusters.
+We need to define a value for the resolution parameter, which determines the size of the clusters the algorithm will find. We'll set the resolution at `0.5` for now, or `0.8` if we used SCTransform for preprocessing, but this is one of those parameters that we'll often want to try a few different values for when working with single cell data. We'll set a higher resolution on the SCTransform route because we expect it to capture more of the biological variation, so we might be able to find more clusters.
 
 > <comment-title></comment-title>
 > Resolution is one of the key parameters you might need to change when performing clustering. It sets the 'granularity' of the clustering - you can choose a lower value to arrange your data into bigger clusters or use a higher resolution if you're looking for lots of little clusters. The best resolution can depend on how varied your cells are - do you think there are only a few different cell types or should your sample contain lots of different populations of cells? The resolution will usually need to be higher for larger datasets too. In most cases, a resolution of between 0.4 and 1.2 will work well - we're using a fairly low value here as we have a smaller dataset.
@@ -868,7 +868,7 @@ We need to define a value for the resolution parameter, which determines the siz
 > 1. {% tool [Seurat Find Clusters](toolshed.g2.bx.psu.edu/repos/iuc/seurat_clustering/seurat_clustering/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `rds_out` (output of **Seurat Find Clusters** {% icon tool %})
 >    - *"Method used"*: `Identify cell clusters with 'FindClusters'`
->        - *"Resolution"*: <span class="Separate-Preprocessing-Steps">`0.5`</span><span class="SCTransfrom">`0.8`</span>
+>        - *"Resolution"*: <span class="Separate-Preprocessing-Steps">`0.5`</span><span class="SCTransform">`0.8`</span>
 >        - *"Algorithm for modularity optimization"*: `1. Original Louvain`
 >
 {: .hands_on}
@@ -890,7 +890,7 @@ Two options are available for non-linear dimensional reduction with Seurat on Ga
 >    - *"Method used"*: `Run a UMAP dimensional reduction using 'RunUMAP'`
 >        - *"UMAP implementation to run"*: `uwot`
 >        - *"Run UMAP on dimensions, features, graph or KNN output"*: `dims`
->            - *"Number of dimensions from reduction to use as input"*: <span class="Separate-Preprocessing-Steps">`10`</span><span class="SCTransfrom">`30`</span>
+>            - *"Number of dimensions from reduction to use as input"*: <span class="Separate-Preprocessing-Steps">`10`</span><span class="SCTransform">`30`</span>
 >
 > 2. Rename the output as `UMAP Results`
 >
@@ -910,7 +910,7 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
->        - *"Features to plot"*: Use the top positive and negative genes for PCs 1-3: <span class="Separate-Preprocessing-Steps">`CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP`</span><span class="SCTransfrom">`MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`</span>
+>        - *"Features to plot"*: Use the top positive and negative genes for PCs 1-3: <span class="Separate-Preprocessing-Steps">`CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP`</span><span class="SCTransform">`MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`</span>
 >        - In *"Plot Formatting Options"*:
 >            - *"Number of columns to display"*: `3`
 >    - *"Change size of plot"*: `Yes`
@@ -939,10 +939,10 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 > 2. Are there any relationships between our clusters and expression of the top genes associated with the first three PCs?
 >
 > > <solution-title></solution-title>
-> > 1. We have three main groups of cells in our plot and they are more clearly separated here than the cells in our PCA plot. Since the cells have been coloured by the cluster they were assigned to by the `FindClusters` algorithm, we can see that if we used the separate preprocessing tools, we have identified 9 clusters in our data. Using SCTransform, we identified 12 clusters, suggesting that preprocessing with this tool enabled us to capture more of the biological variation. In both cases, the first cluster is numbered as zero.
+> > 1. We have three main groups of cells in our plot and they are more clearly separated here than the cells in our PCA plot. Since the cells have been coloured by the cluster they were assigned to by the `FindClusters` algorithm, we can see that we have identified <span class="Separate-Preprocessing-Steps">9</span><span class="SCTransform">12</span> clusters in our data. The first cluster is numbered as zero. If you have tried both preprocessing routes in this tutorial, you will see that we identified more clusters when using SCTransform (12 of them) than with the separate preprocessing tools (only nine!). It seems that preprocessing with SCTransform enables us to capture more of the biological variation.
 > > Only one of the three main clumps of cells is made up of a single cluster (cluster 3). The other two big groups have been split up into different clusters by the algorithm, suggesting that there are some differences within them - this is one of the reasons we don't just want to rely on our eyes when identifying clusters. The UMAP can give us a quick overview of the data and our clusters, but we must be careful about overinterpreting it. We can't see everything about the data just be looking!
 > > 2. Although this plot looks somewhat different from our PCA plot, we can still see patterns in the expression of the top genes that were associated with our PCs. The top positive and negative genes associated with PCs 1, 2, and 3 are expressed in different parts of the UMAP plot.  This makes sense, because we used the PCA to make the UMAP, so the cells that were at different ends of the PC axes should be in different parts of the UMAP plot too. We don't see the same relationships between the genes and the axes, because we're now looking at a UMAP plot not a PCA plot - the UMAP axes are not the same as the PCA axes!
-> > As well as the broader patterns across the plot, we can also see some relationships between the top genes and specific clusters. In the plots produced after using the separate preprocessing tools, the top negative gene for PC2, NKG7, is expressed at the highest level in cluster 6 and at a slightly lower level in the adjacent cluster 4. This must be one of the genes that caused the clustering algorithm to assign these cells into separate clusters even though they are part of the same larger group on the plot. Again, this makes sense because we used the PCA reduction to create the neighborhood graph that we then used to identify our clusters.
+> > As well as the broader patterns across the plot, we can also see some relationships between the top genes and specific clusters. <span class="Separate-Preprocessing-Steps">The top negative gene for PC2, NKG7, is expressed at the highest level in cluster 6 and at a slightly lower level in the adjacent cluster 4.</span>The top negative gene for PC1, FTL, is expressed in both the neighbouring clusters 1 and 6, but the top positive gene for PC3, S100A8, is only expressed in cluster 1.<span class="SCTransform"></span> This must be one of the genes that caused the clustering algorithm to assign these cells into separate clusters even though they are part of the same larger group on the plot. Again, this makes sense because we used the PCA reduction to create the neighborhood graph that we then used to identify our clusters.
 > {: .solution}
 {: .question}
 
@@ -950,13 +950,12 @@ Now we can visualise the UMAP, just as we did with the PCA. We can also colour i
 
 UMAP plots aren't the only way to see what is going on with the clusters we've just identified - and they aren't always the best choice when we're interested in which cells express specific genes. For example, we can create violin plots to show the expression of our top six genes from the PCA across the clusters we've just identified.
 
-
 ><hands-on-title>Visualise Expression across Clusters with a Violin Plot</hands-on-title>
 >
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
->        - *"Features to plot"*:  Use the top positive and negative genes for PCs 1-3: <span class="Separate-Preprocessing-Steps">`CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP`</span><span class="SCTransfrom">`MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`</span>
+>        - *"Features to plot"*:  Use the top positive and negative genes for PCs 1-3: <span class="Separate-Preprocessing-Steps">`CST3,CD79A,HLA-DQA1, MALAT1,NKG7,PPBP`</span><span class="SCTransform">`MALAT1,NKG7,S100A8,FTL,HLA-DRA,CD74`</span>
 >        - In *"Plot Formatting Options"*:
 >            - *"Number of columns to display"*: `3`
 >    - *"Change size of plot"*: `Yes`
@@ -980,9 +979,9 @@ UMAP plots aren't the only way to see what is going on with the clusters we've j
 > 1. Are the top genes for PCs 1-3 expressed in the clusters you expected?
 > 2. Do you find it easier to understand gene expression with the violin plots or the UMAPs we coloured by expression in the last step?
 > > <solution-title></solution-title>
-> > 1. We can see the same expression patterns in the violin plots as we did in the UMAP feature plots. For example, if you're following the separate preprocessing route, MALAT1 is expressed across most of the clusters while PPBP is only expressed in cluster 8. We can see similarities between the UMAP and violin plots for the SCTransform route too, such as S100A8 expression being highest in cluster 1.
-> > We can also see that there is some expression of the top genes outside the clusters they are most highly expressed in, although usually at low levels in a small number of cells. An exception on the plots for the separate preprocessing route is a cell in cluster 1 that expressed very high levels of HLA-DQA1 - perhaps this cell was assigned to the wrong cluster or maybe there was some contamination or error, but it could also just be an unusual cell that really did have higher levels of this gene!
-> > 2. The UMAP plots can give us a good overview of the data that you may find easier to picture and remember, but it can be hard to tell where one cluster ends and another begins. The violin plots can be clearer as each cluster is plotted separately and we can see the whole range of expression - we would have a hard time picking out that outlier in cluster 1 with high levels of HLA-DQA1 from the UMAP plot.
+> > 1. We can see the same expression patterns in the violin plots as we did in the UMAP feature plots. <span class="Separate-Preprocessing-Steps">For example, MALAT1 is expressed across most of the clusters while PPBP is only expressed in cluster 8.</span><span class="SCTransform">*For example, S100A8 expression is highest in cluster 1.</span>
+> > We can also see that there is some expression of the top genes outside the clusters they are most highly expressed in, although usually at low levels in a small number of cells. <span class="Separate-Preprocessing-Steps">One exception we can see on this plot is a cell in cluster 1 that expressed very high levels of HLA-DQA1 - perhaps this cell was assigned to the wrong cluster or maybe there was some contamination or error, but it could also just be an unusual cell that really did have higher levels of this gene!</span><span class="SCTransform"></span>
+> > 2. The UMAP plots can give us a good overview of the data that you may find easier to picture and remember, but it can be hard to tell where one cluster ends and another begins. The violin plots can be clearer as each cluster is plotted separately and we can see the whole range of expression - <span class="Separate-Preprocessing-Steps">we would have a hard time picking out that outlier in cluster 1 with high levels of HLA-DQA1 from the UMAP plot.</span><span class="SCTranform">we can spot outliers more easily on this plot.</span>
 > {: .solution}
 {: .question}
 
@@ -996,7 +995,7 @@ Marker genes are usually detected by their differential expression (DE) between 
 
 Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters or experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups.
 
-We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransfrom - you'll just see some differences in the lists of markers.
+<span class="Separate-Preprocessing-Steps">Let's try out some of these options on our dataset.</span><span class="SCTransform">We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransform - you'll just see some differences in the lists of markers If you've aleady completed the other version of this tutorial, then you might want to move on to the next section [to start identifying the cell types in your clusters.]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}#Identify-Cell-Types).</span>
 
 > <comment-title></comment-title>
 > When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original SeuratObject by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
@@ -1084,6 +1083,7 @@ We don't have a cluster column this time as we were only testing one group again
 > 2. Are these the same as the top five markers for cluster 2 when we ran `FindAllMarkers`?
 > > <solution-title></solution-title>
 > > 1. When we look at the marker table, we can see that the first five genes listed as markers of cluster 2 are:
+> >
 > > > |    |      |
 > > > |----|------|
 > > > | 1  | IL32 |
@@ -1118,6 +1118,7 @@ We just used `FindMarkers` to run the same test on cluster 2 as `FindAllMarkers`
 > 2. Are these the same as the top five markers for the cluster when we ran FindAllMarkers?
 > > <solution-title></solution-title>
 > > 1. The top five markers in the output table are:
+> >
 > > > |    |               |
 > > > |----|---------------|
 > > > | 1  | FCGR3A        |
@@ -1158,6 +1159,7 @@ We can also use other methods for DE analyis in Seurat. We can use the 'ROC' tes
 >
 > > <solution-title></solution-title>
 > > 1. the top five markers in the output table are: 
+> >
 > > > |    |       |
 > > > |----|-------|
 > > > | 1  | RPS12 |
@@ -1362,7 +1364,7 @@ If you used the separate preprocessing steps then your plots should look like th
 
 ![14 Violin plots showing expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, and 4, with some expression in cluster 7. Plot 2 shows CCR7 expression in cluster 0 and to a lesser extent in cluster 2. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression across all clusters, with the highest expression in clusters 1 and 7. Plot 5 shows S100A4 expression across all clusters, with the highest expression in clusters 1 and 5. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5 and to a lesser extent in cluster 1. Plot 10 shows GNLY expression in clusters 4 and 6. Plot 11 shows NKG7 expression in clusters 4 and 6, with some expression at lower levels in clusters 5 and 7. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5, and 7 with some expression in cluster 8. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers.png "Violin plots showing expression of canonical marker genes by cluster (Separate preprocessing steps)")
 
-If you used SCTransfrom then you should see these violin plots:
+If you used SCTransform then you should see these violin plots:
 
 ![14 Violin plots showing expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression across all clusters, with high expression in cluster 1 and 9. Plot 5 shows S100A4 expression across all clusters, with the highest expression in clusters 1, 6, and 9. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4, 7, and 8. Plot 8 shows FCGR3A expression in clusters 5, 6, and 7. Plot 9 shows MS4A7 expression in cluster 6 with some low expression in cluster 1. Plot 10 shows high GNLY expression in cluster 5 as well as expression at various levels in cluster 7. Plot 11 shows NKG7 expression in clusters 4, 5, and 7. Plot 12 shows FCER1A expression in cluster 9. Plot 13 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 14 shows PPBP expression in cluster 11.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers_SCT.png "Violin plots showing expression of canonical marker genes by cluster (SCTransform)")
 
