@@ -45,6 +45,8 @@ topic_name: single-cell
   </div>
 </div>
 
+## Try event horizon
+<a class="Single-cell & sPatial Omics Event Horizon" href="{% if event.external %}{{event.external}}{% else %}{{site.baseurl}}{{event.url}}{% endif %}{% if include.campaign %}?utm_source=gtn&utm_medium=event-table&utm_campaign={{ include.campaign }}{% endif %}">{{event.title}}{% if event.draft %} (draft, will be hidden) {% endif %}</a>
 
 ## Want to contribute?
 
