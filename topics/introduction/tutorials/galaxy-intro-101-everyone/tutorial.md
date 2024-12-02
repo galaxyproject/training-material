@@ -29,7 +29,7 @@ contributions:
     - annefou
     - nagoue
     - chrisbarnettster
-    - michelemaroni89
+    - michelemaroni
     - olanag1
     - tnabtaf
     - shiltemann
