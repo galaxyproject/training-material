@@ -31,9 +31,6 @@ tags:
   - git-gat
 ---
 
-# Overview
-
-
 Celery is a distributed task queue written in Python that can spawn multiple workers and enables asynchronous task processing on multiple nodes. It supports scheduling, but focuses more on real-time operations.
 
 From the Celery website:
@@ -52,7 +49,9 @@ From the Celery website:
 >
 {: .quote cite="https://docs.celeryq.dev/en/stable/getting-started/introduction.html#what-s-a-task-queue"}
 
-[A slideshow presentation on this subject is available](slides.html). 
+[A slideshow presentation on this subject is available](slides.html).
+
+If you are not interesting in managing Redis and Flower, you might be interested in the [lower-configuration deployment option]({% link topics/admin/tutorials/celeryless/tutorial.md %}).
 
 > <agenda-title></agenda-title>
 >

@@ -31,6 +31,7 @@ key_points:
 tags:
 - 10x
 - paper-replication
+- MIGHTS
 contributions:
   authorship:
   - nomadscientist
@@ -232,7 +233,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > <hands-on-title>Running Alevin</hands-on-title>
 >
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %} 
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.10.1+galaxy0) %}
 >
 >     > <question-title></question-title>
 >     >
@@ -526,7 +527,7 @@ We will nevertheless proceed with your majestic annotated expression matrix of 3
 >    - {% icon param-file %} *"Input object in sce,rds,rdata.sce format"*: `Emptied-Object`
 >
 > If the dataset does not show up in the corresponding input field or displays as 'unavailable', don't worry - try dragging the dataset from the history panel and dropping it into the input field. If this still doesn't work, then you can change the datatype to rdata.sce.
-> 
+>
 > {% snippet faqs/galaxy/datasets_change_datatype.md %}
 >
 > 2. Rename {% icon galaxy-pencil %} output `N701-400k-AnnData`

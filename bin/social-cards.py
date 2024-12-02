@@ -24,6 +24,9 @@ for path, time in meta.items():
     if time < last_timestamp:
         continue
 
+    if '/tags/' in path:
+        continue
+
     # Do something with the path
     print(f"New social card: {path}")
     # download the svg
@@ -35,7 +38,7 @@ for path, time in meta.items():
 
     # Convert to png
     if not os.path.exists(out.replace('.svg', '.png')):
-        subprocess.check_call(['magick', '-density', '100', out, out.replace('.svg', '.png')])
+        subprocess.check_call(['convert', '-density', '100', out, out.replace('.svg', '.png')])
         subprocess.check_call(['optipng', out.replace('.svg', '.png')])
     max_ts = max(max_ts, time)
 

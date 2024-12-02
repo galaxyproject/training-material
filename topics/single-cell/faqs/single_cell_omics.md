@@ -12,6 +12,6 @@ The Single Cell Omics Lab currently uses the main European Galaxy infrastructure
 
 Try it out!
 
- - {% icon subdomain %} [Europe | Single Cell Omics Lab](https://singlecell.usegalaxy.eu)
- - {% icon subdomain %} [USA | Single Cell Omics Lab](https://singlecell.usegalaxy.org)
- - {% icon subdomain %} [Australia | Single Cell Omics Lab](https://singlecell.usegalaxy.org.au)
+ - {% icon subdomain %} [Europe: Single Cell Omics Lab](https://singlecell.usegalaxy.eu)
+ - {% icon subdomain %} [USA: Single Cell Omics Lab](https://singlecell.usegalaxy.org)
+ - {% icon subdomain %} [Australia: Single Cell Omics Lab](https://singlecell.usegalaxy.org.au)
