@@ -106,7 +106,7 @@ The Response feature is a categorical target variable indicating whether patient
 > 4) Encode `Cancer Type` using one-hot encoding. 
 > 5) Save the dataset as a .tsv file.
 >
-> A jupyter notebook for preprocessing can be found at Dockstore: [LORIS_preprocessing](https://dockstore.org/notebooks/github.com/paulocilasjr/pycaret-use-case/preprocessing:main?tab=info)
+> A Jupyter notebook for preprocessing can be found at Dockstore: [LORIS_preprocessing](https://dockstore.org/notebooks/github.com/paulocilasjr/pycaret-use-case/preprocessing:main?tab=info)
 >
 {:  .comment}
 
