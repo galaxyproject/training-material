@@ -1,8 +1,14 @@
 ---
 layout: tutorial_hands_on
 
+<<<<<<< Updated upstream
 title: Upload images and metadata in OMERO using the OMERO-suite
 zenodo_link: -- to be assigned--
+=======
+title: Overview on The Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy
+level: Intermediate
+zenodo_link: https://zenodo.org/records/14205500
+>>>>>>> Stashed changes
 questions:
 - How can I use Galaxy to upload images and metadata into OMERO?
 - Which are the different tools of the Galaxy OMERO-suite?
@@ -17,10 +23,8 @@ key_points:
 contributions:
   authorship:
     - rmassei
-tags:
-  - bio-imaging
-  - RDM
-  - OMERO
+  funding:
+    - nfdi4bioimage
 ---
 The efficient and accurate treatment of microscopy metadata is of great importance, as it 
 provides insights that are essential for effective image management, search, organisation, 
