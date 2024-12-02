@@ -3,6 +3,15 @@ layout: topic
 topic_name: single-cell
 ---
 
+> <agenda-title></agenda-title>
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 {% snippet faqs/galaxy/analysis_troubleshooting.md sc=true %}
 
 ## Want to explore analysis beyond our tutorials?
@@ -16,20 +25,23 @@ topic_name: single-cell
   </div>
 </section>
 
-## News & Events - ROW
+## News & Events - ROW2
 
 <div class="row">
-    <!-- First Column: Publicly Shared Workflow -->
-  <div class="col-md-6 mb-4">
-    <h2 class="mb-3">Publicly Shared Workflow</h2>
-    <p>Check out workflows shared by users like you!</p>
-    <iframe src="https://training.galaxyproject.org/training-material/workflows/embed.html?query=single-cell" height="600px" width="100%" class="gtn-embed" frameborder="1"></iframe>
-  </div>
-
-  <!-- Second Column: News and Events -->
+  <!-- First Column: News and Events -->
   <div class="col-md-6 mb-4">
     <h2 class="mb-3">News and Events</h2>
     <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html"></iframe>
+  </div>
+  <!-- Second Column: How to contribute -->
+<div class="col-md-6 mb-4">
+    <h2 class="mt-4 mb-3">Want to Contribute?</h2>
+    <p>If you want to help us behind the scenes, from testing workflows and tutorials to building tools, join our Galaxy Single-cell & Spatial Omics Community of Practice!</p>
+    <ul class="contribute-list">
+      <li>{% icon point-right %} [Community of Practice](https://galaxyproject.org/projects/singlecell/)</li>
+      <li>{% icon feedback %} [Matrix Chat Forum](https://matrix.to/#/#spoc3:matrix.org)</li>
+      <li>{% icon email %} [Mailing List](https://lists.galaxyproject.org/lists/single-cell-cop.lists.galaxyproject.org/)</li>
+    </ul>
   </div>
 </div>
 
