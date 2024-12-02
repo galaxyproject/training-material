@@ -168,3 +168,62 @@ module Jekyll
     end
   end
 end
+
+Jekyll::Hooks.register :site, :post_read do |site|
+  if Jekyll.env == 'production'
+    Jekyll.logger.info "[GTN/Reviewers] Ingesting GitHub reviewer metadata"
+    start_time = Time.now
+    # Maps a lowercase version of their name to the potential mixed-case version
+    contribs_lower = site.data['contributors'].map{|k, v| [k.downcase, k]}.to_h
+
+    # Annotate the from github metadata
+    gh_reviewers_by_path = Hash.new { |hash, key| hash[key] = [] }
+    # Hash of PRs by path
+    site.data['github'].each do |num, pr|
+      # Within a PR we have some reviews, let's get that set organised:
+      reviewers = pr['reviews'].map do |review|
+        # Just "people"
+        contribs_lower.fetch(review['author']['login'].downcase, review['author']['login'])
+      end.uniq.reject{|x| x == 'github-actions'}
+
+      pr['files'].select{|p| p['path'] =~ /.(md|html)$/}.each do |file|
+        gh_reviewers_by_path[file['path']] += reviewers
+        gh_reviewers_by_path[file['path']].uniq!
+      end
+    end
+
+    # For all of our pages, if the path is mentioned above, then, tag it.
+    site.pages.select{|t| gh_reviewers_by_path.key?(t.path)}.each do |t|
+      if t['layout'] == 'tutorial_hands_on' or !%w[base_slides introduction_slides tutorial_slides].index(t['layout']).nil?
+        if t.data.key?('contributors')
+          t.data['contributors'] += gh_reviewers_by_path[t.path]
+          t.data['contributors'].uniq!
+        elsif t.data.key?('contributions')
+          if t.data['contributions'].key?('reviewing')
+            t.data['contributions']['reviewing'] += gh_reviewers_by_path[t.path]
+          else
+            t.data['contributions']['reviewing'] = gh_reviewers_by_path[t.path]
+          end
+          t.data['contributions']['reviewing'].uniq!
+        end
+      end
+    end
+
+    site.posts.docs.select{|t| gh_reviewers_by_path.key?(t.path)}.each do |t|
+      if t['layout'] == 'news'
+        if t.data.key?('contributors')
+          t.data['contributors'] += gh_reviewers_by_path[t.path]
+          t.data['contributors'].uniq!
+        elsif t.data.key?('contributions')
+          if t.data['contributions'].key?('reviewing')
+            t.data['contributions']['reviewing'] += gh_reviewers_by_path[t.path]
+          else
+            t.data['contributions']['reviewing'] = gh_reviewers_by_path[t.path]
+          end
+          t.data['contributions']['reviewing'].uniq!
+        end
+      end
+    end
+    Jekyll.logger.info "[GTN/Reviewers] Complete in #{Time.now - start_time} seconds"
+  end
+end
