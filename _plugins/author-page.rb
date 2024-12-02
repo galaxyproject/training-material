@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require './_plugins/gtn/mod'
 require './_plugins/gtn'
 
 module Jekyll
@@ -187,8 +188,9 @@ Jekyll::Hooks.register :site, :post_read do |site|
       end.uniq.reject{|x| x == 'github-actions'}
 
       pr['files'].select{|p| p['path'] =~ /.(md|html)$/}.each do |file|
-        gh_reviewers_by_path[file['path']] += reviewers
-        gh_reviewers_by_path[file['path']].uniq!
+        real_path = Gtn::PublicationTimes.chase_rename(file['path'])
+        gh_reviewers_by_path[real_path] += reviewers
+        gh_reviewers_by_path[real_path].uniq!
       end
     end
 
