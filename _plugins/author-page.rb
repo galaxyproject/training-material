@@ -198,6 +198,7 @@ Jekyll::Hooks.register :site, :post_read do |site|
     site.pages.select{|t| gh_reviewers_by_path.key?(t.path)}.each do |t|
       if t['layout'] == 'tutorial_hands_on' or !%w[base_slides introduction_slides tutorial_slides].index(t['layout']).nil?
         if t.data.key?('contributors')
+          # Automatically 'upgrade' to new structure
           t.data['contributions'] = {
             'authorship' => t.data['contributors'],
             'reviewing' => gh_reviewers_by_path[t.path]
