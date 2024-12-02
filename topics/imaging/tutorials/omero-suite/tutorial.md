@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Overview on The Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy
+title: Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy
 level: Intermediate
 zenodo_link: https://zenodo.org/records/14205500
 questions:
@@ -35,9 +35,9 @@ with a centralised repository to store images and metadata, tools for collaborat
 sharing, and advanced functionalities for image processing and analysis.
 
 In this tutorial, you will learn how to use the different tools of the **Galaxy OMERO-suite**. 
-The  **Galaxy OMERO-suite** is based on the python packages omero-py and ezomero, and it allows to interactively build pipelines to upload and fetch image data in OMERO 
+The  **Galaxy OMERO-suite** is based on the Python packages omero-py and ezomero, and it allows interactively building pipelines to upload and fetch image data in OMERO 
 using a Galaxy workflow. 
-Images can automatically enrich with metadata (i.e. key-value pairs, tags, raw data, regions 
+Images can automatically be enriched with metadata (i.e. key-value pairs, tags, raw data, regions 
 of interest) and uploaded to an OMERO server. The tools give the possibility 
 to the user to intuitively fetch images from the local server and 
 perform image analysis.
@@ -75,9 +75,7 @@ please take a look at the [README file of the tool](https://github.com/galaxypro
 # Prepare your data
 
 We need a dataset to upload into your OMERO instance. 
-To this end, we have prepared an
-integrative dataset with images, metadata and region of interest (ROIs)  in
-Zenodo. 
+To this end, we have prepared an integrative dataset with images, metadata and regions of interest (ROIs) in Zenodo. 
 
 
 ## Data Upload - Image, metadata and ROI files
@@ -111,7 +109,7 @@ Zenodo.
 >       - `image87-H-03-00.tif.tabular`
 >       - `metadata_dataset.csv`
 > 
-> 3. Tag each dataset with a label like "image" (tif files), "rois" (tabular files) and "metadata" (csv file)
+> 3. Tag each dataset with a label like "image" (tif files), "rois" (tabular files) and "metadata" (CSV file)
 > for easy identification
 >
 
@@ -119,7 +117,7 @@ Zenodo.
 
 # Upload images and metadata
 
-In this section, we will focus on how uploading images and metadata into a use defined OMERO instance.
+In this section, we will focus on how uploading images and metadata into a user-defined OMERO instance.
 This is done by using the **OMERO Image Import** and **OMERO Metadata Import** tools.
 
 ## Step 1: Image Upload
@@ -129,11 +127,11 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 > 1. {% tool [OMERO Image Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} *Images to import into OMERO*: You can select here different files to import into OMERO.
 >    Select the datasets `image85-H-01-00.tif`, `image86-H-02-00.tif` and `image87-H-03-00.tif`
->    - **OMERO host URL**: Input the url of your OMERO instance.
+>    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - {% icon param-file %} **Target Dataset Name**: Type "My_OMERO_Test"
 > 
->    A log file txt file will be
+>    A log file text file will be
 >    created with the OMERO ID of the newly imported images
 >
 {: .hands_on}
@@ -146,19 +144,19 @@ dataset called "My_OMERO_Test" with ID 4005, while images have IDs 30781, 30782 
 
 ## Step 2: Upload metadata
 
-You can upload two different kind of metadata files using the OMERO-suite.
+You can upload two different kinds of metadata files using the OMERO-suite.
 
 - **Key Value Pairs:** Useful for displaying dataset and image metadata in OMERO.web. 
 Key Value pairs are for unstructured data where every object can have different keys, and they can be easily edited ad-hoc by users.
 - **Tables:** Useful for showing results for multiple images at the same time. Tables are suitable for e.g. analysis results or large structured data, columns have defined types (kv pairs are all strings) and can be queried like a database table.
 
-We will learn now how to upload **Key Value pairs** using the **OMERO Metadata Import** tool
+We will learn now how to upload **Key-Value pairs** using the **OMERO Metadata Import** tool
 
 > <hands-on-title>Upload Key-Value Pairs into OMERO</hands-on-title>
 >
 > 1. {% tool [OMERO Metadata Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_metadata_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} *Annotation file*: `metadata_file.tsv`
->    - **OMERO host URL**: Input the url of your OMERO instance.
+>    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - {% icon param-file %} **Target Object Type**: Select *"Dataset"*
 >    - **Selection**: Select *"Target an existing object"*
@@ -169,7 +167,7 @@ We will learn now how to upload **Key Value pairs** using the **OMERO Metadata I
 {: .hands_on}
 
 Switch back to your OMERO instance. 
-The Key Values are now in OMERO, associated to a target dataset! Well done!
+The Key Values are now in OMERO, associated with a target dataset! Well done!
 ![img_2.png](../../images/omero-suite/omero_metadata.png)
 
 # Upload region of interest (ROIs)
@@ -177,7 +175,7 @@ OMERO support the ROI visualization in OMERO.viewer.
 In this section you will learn to associate ROIs coordinates to
 an image stored in OMERO using the **OMERO ROI Import** tool.
 
-Please note that this tool support just polygon ROIs given in a specific format.
+Please note that this tool supports just polygon ROIs given in a specific format.
 The tool [Analyze particles](https://toolshed.g2.bx.psu.edu/view/imgteam/imagej2_analyze_particles_binary/862af85a50ec)
 can automatically create the ROIs in this specific format.
 
@@ -188,32 +186,32 @@ Check the `roi_file.tsv` to have an example. Everything is explained in the tool
 >
 > 1. {% tool [OMERO ROI Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_roi_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} **Tab File with ROIs**: `roi_file.tsv`
->    - **OMERO host URL**: Input the url of your OMERO instance.
+>    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Image ID where annotate the ROIs**: Select the **image ID** where to annotate the ROIs. We will go for *30782*
 >
 {: .hands_on}
 
-Switch back to your OMERO instance and the image by double-clicking it. 
+Switch back to your OMERO instance and the image by double-clicking it.
 This will open the OMERO.viewer. 
 Go now to the "ROIs" sub-panel.
-The ROIs are now annotated in OMERO and associated to the target image! **Awesome!**
+The ROIs are now annotated in OMERO and associated with the target image! **Awesome!**
 ![img_3.png](../../images/omero-suite/omero_rois.png)
 
 
 
-# Get OMERO objects IDs and Annotations
-You can get information on project, datasets and image IDs. 
+# Get OMERO object IDs and Annotations
+You can get information on projects, datasets and image IDs. 
 Furthermore, you can fetch annotations and tables
-associated to a OMERO object. This is done with the **OMERO get IDs** and 
+associated with an OMERO object. This is done with the **OMERO get IDs** and 
 **OMERO get Object** tools, respectively.
 
-First of all, let's try to get all the images IDs present in all Datasets!
+First of all, let's try to get all the image IDs present in all Datasets!
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
 > 1. {% tool [OMERO get IDs](https://toolshed.g2.bx.psu.edu/view/ufz/omero_get_id/5.18.0+galaxy3) %} with the following recommended parameters:
->    - **OMERO host URL**: Input the url of your OMERO instance.
+>    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Type of object to fetch ID:**: Select *"Dataset IDs"*
 >    - **Which datasets?**: Select *"All datasets"*
@@ -236,7 +234,7 @@ Now, let's try to get an annotation file...
 > <hands-on-title>Get an annotation file from OMERO</hands-on-title>
 >
 > 1. {% tool [OMERO get Object](https://toolshed.g2.bx.psu.edu/view/ufz/omero_get_id/5.18.0+galaxy3) %} with the following recommended parameters:
->    - **OMERO host URL**: The target OMERO host url
+>    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Type of object to fetch:**: Select *"Annotation"*
 >    - **How do you provide the ID(s) of the OMERO object?**: Select *"Comma separated values"*
@@ -249,7 +247,7 @@ Perfect, you fetched the Annotation file "REMBI_Annotation".
 **OMERO get Object** is particularly useful when you want to fetch data associated with your dataset or 
 images!
 
-# Filter OMERO object based on filename, tags and Key Value Pairs
+# Filter OMERO object based on filename, tags and Key-Value Pairs
 Finally, you filter OMERO objects based on their features... One option is to filter by filename,
 a useful parameter to apply if you want to get certain images. 
 
@@ -258,7 +256,7 @@ This can be done by using the **OMERO IDs** Tool
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
 > 1. {% tool [OMERO IDs](https://toolshed.g2.bx.psu.edu/view/ufz/omero_filter/375281d11535) %} with the following recommended parameters:
->    - **OMERO host URL**: The target OMERO host url
+>    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Filename to search among the image IDs**: Type `image85-H-01-00_tif.tiff`
 >    - **List of images IDs**: Type *30781,30782,30783*
@@ -277,16 +275,15 @@ Which is ID associated to the image with file name "image85-H-01-00_tif.tiff"!
 However, you can also use this tool to fetch images with specific file names or tags,
 making data fetching an easy task...
 
-# A full workflow for data management with the OMERO-suite 
+# A full workflow for data management with the OMERO suite 
 
 In this section, you will learn to integrate all the different tools to build a workflow for uploading
 an images, metadata and ROIs  into OMERO.
 
 ### Step 1 - Define the OMERO inputs
-To make the workflow works, you need to define six input. 
+To make the workflow work, you need to define six inputs. 
 
-This will make this
-workflow re-usable with different datasets.
+This will make this workflow reusable with different datasets.
 
 > <hands-on-title>Create the inputs for the OMERO pipeline</hands-on-title>
 >
@@ -309,7 +306,7 @@ workflow re-usable with different datasets.
 {: .hands_on}
 
 ### Step 2 - OMERO Import
-We add now the step for the image import
+We now add the step for the image import
 
 > <hands-on-title>Add the image upload step to the workflow</hands-on-title>
 >
@@ -323,7 +320,7 @@ We add now the step for the image import
 {: .hands_on}
 
 ### Step 3 - Dynamically parse image IDs 
-We need now a small series of steps to dynamically parse the uploaded images IDs.
+We need now a small series of steps to dynamically parse the IDs of the uploaded images.
 This can be done with the following tool sequence:
 
 > <hands-on-title>Parse Images IDs </hands-on-title>
@@ -338,12 +335,12 @@ This can be done with the following tool sequence:
 >   - Connect the output of {% icon tool %} **10: Split File**  to the {% icon tool %} **11: Parse parameter value**
 {: .hands_on}
 
-This sequence of tools dynamically parse the single image ID which are use them for input of the metadata and 
-ROI tools. In this way, it is possible to associate a sequence of annotation to several uploaded images.
+This sequence of tools dynamically parses the single image ID which are use them for input of the metadata and 
+ROI tools. In this way, it is possible to associate a sequence of annotations to several uploaded images.
 
 ### Metadata and ROIs input
 
-Last section is to upload metadata and ROIs
+The last section is to upload metadata and ROIs
 
 > <hands-on-title> Add tools to upload metadata and ROIs </hands-on-title>
 >
@@ -377,20 +374,19 @@ pipeline.
 
 # Conclusion
 
-In this exercise you imported images into OMERO using Galaxy. You also learn how to
-import metadata and ROIs, as well as get information such as images ID and annotation file
-from a target OMERO isntance.
+In this exercise, you imported images into OMERO using Galaxy. You also learn how to
+import metadata and ROIs, as well as get information such as image ID and annotation file
+from a target OMERO instance.
 
 
 # References
 
 - Allan, C., Burel, JM., Moore, J. et al. OMERO: flexible, model-driven data management for experimental biology. 
 Nat Methods 9, 245–253 (2012). https://doi.org/10.1038/nmeth.1896
-- Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for scientific data management and
+- Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for Scientific Data Management and
 stewardship. Sci Data 3, 160018 (2016). https://doi.org/10.1038/sdata.2016.18
 
 ## Acknowledgement
 
 We acknowledge the support of [**NFDI4BIOIMAGE**](https://nfdi4bioimage.de/home/), 
-funded by the German Research Foundation (DFG) within the 
-framework of the NFDI – project numbers: 501864659.
+funded by the German Research Foundation (DFG) within the framework of the NFDI – project numbers: 501864659.
