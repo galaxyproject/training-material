@@ -81,10 +81,10 @@
 	{% endif %}
 
 	{% if include.contributors.reviewing %}
-	<tr>
+	<tr class="reviewers">
 		<td><abbr title="These people reviewed this material for accuracy and correctness">Reviewers</abbr></td>
 		<td>
-			{% for id in include.contributors.reviewing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id %}{% else %}{% assign name = contributors[id].name | default: id -%}{{ name -}}{% endif %}{%- endfor -%}
+			{% for id in include.contributors.reviewing %}{{ include.sep }}{% if include.badge %}{% include _includes/contributor-badge.html id=id small=true %}{% else %}{{ contributors[id].name | default: id }}{% endif %}{%- endfor -%}
 		</td>
 	</tr>
 	{% endif %}
