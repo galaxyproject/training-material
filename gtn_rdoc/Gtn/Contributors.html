@@ -123,7 +123,7 @@
           <p>Convenience method to allow us to handle nil sites, and load directly from disk ourselves.</p>
 
           <div class="method-source-code" id="_load_file-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 127</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 129</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">_load_file</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">category</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">nil?</span>
     <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;[GTN/Contributor] Loading #{category} from disk, this access could be improved&quot;</span>
@@ -160,7 +160,7 @@
 <p>Returns: <code>Hash</code> of contributor information <code>String</code> type of contributor (e.g. ‘contributor’, ‘organisation’, ‘grant’)</p>
 
           <div class="method-source-code" id="fetch-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 144</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>, <span class="ruby-value">warn:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">_load_file</span>(<span class="ruby-identifier">site</span>, <span class="ruby-string">&#39;contributors&#39;</span>).<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
     <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;contributor&#39;</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>][<span class="ruby-identifier">c</span>]]
@@ -170,7 +170,10 @@
     <span class="ruby-keyword">return</span> [<span class="ruby-string">&#39;grant&#39;</span>, <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>][<span class="ruby-identifier">c</span>]]
   <span class="ruby-keyword">else</span>
     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">warn</span>
-      <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Contributor #{c} not found&quot;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-ivar">@HAS_WARNED_ON</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">c</span>)
+        <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Contributor #{c} not found&quot;</span>
+        <span class="ruby-ivar">@HAS_WARNED_ON</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">c</span>)
+      <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
@@ -204,7 +207,7 @@
 <p>Returns: <code>Hash</code> of contributor information</p>
 
           <div class="method-source-code" id="fetch_contributor-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 167</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_contributor</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)[<span class="ruby-value">1</span>]
 <span class="ruby-keyword">end</span></pre>
@@ -233,7 +236,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a funder or not</p>
 
           <div class="method-source-code" id="fetch_funding_url-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 221</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 226</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_funding_url</span>(<span class="ruby-identifier">contributor</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">contributor</span>[<span class="ruby-string">&#39;funding_id&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contributor</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;funding_database&#39;</span>)
 
@@ -279,7 +282,7 @@
 <p>Returns: <code>String</code> of contributor name</p>
 
           <div class="method-source-code" id="fetch_name-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 178</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 183</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fetch_name</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>, <span class="ruby-value">warn:</span> <span class="ruby-keyword">false</span>)
   <span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>, <span class="ruby-value">warn:</span> <span class="ruby-identifier">warn</span>)[<span class="ruby-value">1</span>].<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -311,7 +314,7 @@
 <p>Returns: <code>Array</code> of funder IDs mixing grants + organisations</p>
 
           <div class="method-source-code" id="get_all_funding-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 116</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_all_funding</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;funding&#39;</span>)
     <span class="ruby-comment"># The ones specifically in the Grants table</span>
@@ -345,7 +348,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 31</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 33</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_authors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>] <span class="ruby-operator">||</span> []
@@ -380,7 +383,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_contributors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 15</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 17</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_contributors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
@@ -415,7 +418,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_funders-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 94</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_funders</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_all_funding</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">data</span>).<span class="ruby-identifier">reject</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">f</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -447,7 +450,7 @@
 <p>Returns: <code>Array</code> of grant IDs</p>
 
           <div class="method-source-code" id="get_grants-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 105</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_grants</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_all_funding</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">data</span>).<span class="ruby-identifier">select</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">f</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -476,7 +479,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_instructors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 61</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_instructors</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;instructors&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;instructors&#39;</span>]
@@ -509,7 +512,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_non_authors-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 75</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_non_authors</span>(<span class="ruby-identifier">material</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">material</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributors&#39;</span>)
     []
@@ -547,7 +550,7 @@
 <p>Returns: <code>Array</code> of contributor IDs</p>
 
           <div class="method-source-code" id="get_organisers-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 47</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">get_organisers</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;contributions&#39;</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;organisers&#39;</span>)
     <span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributions&#39;</span>][<span class="ruby-string">&#39;organisers&#39;</span>]
@@ -580,7 +583,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a grant or not</p>
 
           <div class="method-source-code" id="grant-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 211</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 216</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">grant?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -609,7 +612,7 @@
 <p>Returns: <code>Hash</code> of contributors, grants, organisations merged together</p>
 
           <div class="method-source-code" id="list-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 188</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">list</span>(<span class="ruby-identifier">site</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>]
       .<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;grants&#39;</span>])
@@ -641,7 +644,7 @@
 <p>Returns: <code>Boolean</code> of whether the contributor is a contributor or not</p>
 
           <div class="method-source-code" id="person-3F-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 201</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/contributors.rb, line 206</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">person?</span>(<span class="ruby-identifier">site</span>, <span class="ruby-identifier">c</span>)
   <span class="ruby-identifier">site</span>.<span class="ruby-identifier">data</span>[<span class="ruby-string">&#39;contributors&#39;</span>].<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">c</span>)
 <span class="ruby-keyword">end</span></pre>

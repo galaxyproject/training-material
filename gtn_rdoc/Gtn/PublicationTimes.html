@@ -116,7 +116,7 @@
           
 
           <div class="method-source-code" id="cached_command-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 184</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 189</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cached_command</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">command</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">discover_caches</span>.<span class="ruby-identifier">nil?</span>
 
@@ -137,7 +137,7 @@
         <div class="method-header">
           <div class="method-heading">
             <span class="method-name">chase_rename</span><span
-              class="method-args">(renames, path, depth: 0)</span>
+              class="method-args">(path, depth: 0)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
         </div>
@@ -146,9 +146,13 @@
           
 
           <div class="method-source-code" id="chase_rename-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">chase_rename</span>(<span class="ruby-identifier">renames</span>, <span class="ruby-identifier">path</span>, <span class="ruby-value">depth:</span> <span class="ruby-value">0</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">renames</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">path</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">chase_rename</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value">depth:</span> <span class="ruby-value">0</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@RENAMES</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">init_cache</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">@@RENAMES</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">path</span>
     <span class="ruby-comment"># TODO(hexylena)</span>
     <span class="ruby-comment"># This happens because it&#39;s the wrong datastructure, if there&#39;s a loop</span>
     <span class="ruby-comment"># in there, it&#39;ll just cycle through it endlessly.</span>
@@ -159,7 +163,7 @@
       <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">error</span> <span class="ruby-node">&quot;[GTN/Time/Pub] Too many renames for #{path}&quot;</span>
       <span class="ruby-identifier">path</span>
     <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">chase_rename</span>(<span class="ruby-identifier">renames</span>, <span class="ruby-identifier">renames</span>[<span class="ruby-identifier">path</span>], <span class="ruby-value">depth:</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+      <span class="ruby-identifier">chase_rename</span>(<span class="ruby-identifier">@@RENAMES</span>[<span class="ruby-identifier">path</span>], <span class="ruby-value">depth:</span> <span class="ruby-identifier">depth</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">path</span>
@@ -184,7 +188,7 @@
           
 
           <div class="method-source-code" id="clean_path-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 203</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 208</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">clean_path</span>(<span class="ruby-identifier">f</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{^\./}</span>
     <span class="ruby-identifier">f</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span>]
@@ -213,7 +217,7 @@
           
 
           <div class="method-source-code" id="command-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 195</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 200</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">command</span>
   <span class="ruby-string">`git log --first-parent --name-status --diff-filter=AR --pretty=&#39;GTN_GTN:%ct&#39; `</span>
 <span class="ruby-keyword">end</span></pre>
@@ -236,7 +240,7 @@
           
 
           <div class="method-source-code" id="discover_caches-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 165</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 170</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">discover_caches</span>
   <span class="ruby-comment"># Really there should only be one, but maybe someone&#39;s been silly so</span>
   <span class="ruby-comment"># we&#39;ll just take the first one we find.</span>
@@ -261,7 +265,7 @@
           
 
           <div class="method-source-code" id="generate_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 171</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 176</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">generate_cache</span>
   <span class="ruby-identifier">rev</span> = <span class="ruby-string">`git rev-list -n 1 main`</span>.<span class="ruby-identifier">strip</span>
 
@@ -293,12 +297,12 @@
           
 
           <div class="method-source-code" id="init_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 138</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">init_cache</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">@@TIME_CACHE</span>.<span class="ruby-identifier">nil?</span>
 
   <span class="ruby-identifier">@@TIME_CACHE</span> = {}
-  <span class="ruby-identifier">renames</span> = {}
+  <span class="ruby-identifier">@@RENAMES</span> = {}
 
   <span class="ruby-constant">Jekyll</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info</span> <span class="ruby-string">&#39;[GTN/Time/Pub] Filling Publication Time Cache&#39;</span>
   <span class="ruby-identifier">cached_command</span>
@@ -310,11 +314,11 @@
       <span class="ruby-identifier">modification_type</span>, <span class="ruby-identifier">path</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">modification_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;A&#39;</span>
         <span class="ruby-comment"># Chase the renames.</span>
-        <span class="ruby-identifier">final_filename</span> = <span class="ruby-identifier">chase_rename</span>(<span class="ruby-identifier">renames</span>, <span class="ruby-identifier">path</span>)
+        <span class="ruby-identifier">final_filename</span> = <span class="ruby-identifier">chase_rename</span>(<span class="ruby-identifier">path</span>)
         <span class="ruby-identifier">@@TIME_CACHE</span>[<span class="ruby-identifier">final_filename</span>] = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">date</span>.<span class="ruby-identifier">to_i</span>)
       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">modification_type</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;R&#39;</span>
         <span class="ruby-identifier">_</span>, <span class="ruby-identifier">moved_from</span>, <span class="ruby-identifier">moved_to</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-        <span class="ruby-identifier">renames</span>[<span class="ruby-identifier">moved_from</span>] = <span class="ruby-identifier">moved_to</span> <span class="ruby-comment"># Point from the &#39;older&#39; version to the newer.</span>
+        <span class="ruby-identifier">@@RENAMES</span>[<span class="ruby-identifier">moved_from</span>] = <span class="ruby-identifier">moved_to</span> <span class="ruby-comment"># Point from the &#39;older&#39; version to the newer.</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -339,7 +343,7 @@
           
 
           <div class="method-source-code" id="obtain_time-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 213</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 218</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">obtain_time</span>(<span class="ruby-identifier">f_unk</span>)
   <span class="ruby-identifier">f</span> = <span class="ruby-identifier">clean_path</span>(<span class="ruby-identifier">f_unk</span>)
   <span class="ruby-identifier">init_cache</span>
@@ -375,7 +379,7 @@
           
 
           <div class="method-source-code" id="time_cache-source">
-            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 199</span>
+            <pre><span class="ruby-comment"># File _plugins/gtn/mod.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">time_cache</span>
   <span class="ruby-identifier">@@TIME_CACHE</span>
 <span class="ruby-keyword">end</span></pre>

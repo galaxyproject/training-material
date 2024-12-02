@@ -194,8 +194,8 @@
       "id": "fair/med-chem-data",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-12-02 15:26:40 +0000",
-      "pub_date": "2024-12-02 15:26:40 +0000",
+      "mod_date": "2024-12-02 16:42:36 +0000",
+      "pub_date": "2024-12-02 16:42:36 +0000",
       "version": 0,
       "workflows": [
         {
@@ -236,7 +236,7 @@
 
           ],
           "test_results": null,
-          "modified": "2024-12-02 15:26:40 +0000",
+          "modified": "2024-12-02 16:42:36 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEthylamine\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Compound conversion\"];\n  0 -->|output| 2;\n  aff8fa4f-c254-4f05-9560-52bad6c7e04a[\"Output\\nBenzenesulfonyl chloride SDF\"];\n  2 --> aff8fa4f-c254-4f05-9560-52bad6c7e04a;\n  style aff8fa4f-c254-4f05-9560-52bad6c7e04a stroke:#2c3143,stroke-width:4px;\n  3[\"Search ChEMBL database\"];\n  0 -->|output| 3;\n  044d2c08-92ed-45c9-9868-ee802998d92c[\"Output\\nSubstructures from ChEMBL database\"];\n  3 --> 044d2c08-92ed-45c9-9868-ee802998d92c;\n  style 044d2c08-92ed-45c9-9868-ee802998d92c stroke:#2c3143,stroke-width:4px;\n  4[\"Search ChEMBL database\"];\n  0 -->|output| 4;\n  99274b60-732d-4276-969f-ccc3673a872a[\"Output\\nLipinski substructures from ChEMBL database\"];\n  4 --> 99274b60-732d-4276-969f-ccc3673a872a;\n  style 99274b60-732d-4276-969f-ccc3673a872a stroke:#2c3143,stroke-width:4px;\n  5[\"Compound conversion\"];\n  1 -->|output| 5;\n  77ad7b99-5761-46a3-b9a6-1dd3d8e2baac[\"Output\\nEthylamine SDF\"];\n  5 --> 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac;\n  style 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac stroke:#2c3143,stroke-width:4px;\n  6[\"Reaction maker\"];\n  2 -->|outfile| 6;\n  5 -->|outfile| 6;\n  f9d1d7fd-e854-469b-a464-6811998e058e[\"Output\\nReaction product\"];\n  6 --> f9d1d7fd-e854-469b-a464-6811998e058e;\n  style f9d1d7fd-e854-469b-a464-6811998e058e stroke:#2c3143,stroke-width:4px;\n  b0bd7ed2-a80b-44ce-994b-999e1d472281[\"Output\\nReaction maker logfile\"];\n  6 --> b0bd7ed2-a80b-44ce-994b-999e1d472281;\n  style b0bd7ed2-a80b-44ce-994b-999e1d472281 stroke:#2c3143,stroke-width:4px;\n  7[\"Visualisation\"];\n  6 -->|outfile| 7;\n  fc618f3f-6aa5-4970-841d-56f4eabf47b7[\"Output\\nVisualisation of reaction product\"];\n  7 --> fc618f3f-6aa5-4970-841d-56f4eabf47b7;\n  style fc618f3f-6aa5-4970-841d-56f4eabf47b7 stroke:#2c3143,stroke-width:4px;\n  8[\"Drug-likeness\"];\n  6 -->|outfile| 8;\n  7ad8c184-e10d-4fce-a402-3e79da6e09ac[\"Output\\nDrug-likeness of product molecule\"];\n  8 --> 7ad8c184-e10d-4fce-a402-3e79da6e09ac;\n  style 7ad8c184-e10d-4fce-a402-3e79da6e09ac stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nEthylamine\"]\n  2[label=\"Compound conversion\"]\n  0 -> 2 [label=\"output\"]\n  kaff8fa4fc2544f05956052bad6c7e04a[color=lightseagreen,label=\"Output\\nBenzenesulfonyl chloride SDF\"]\n  2 -> kaff8fa4fc2544f05956052bad6c7e04a\n  3[label=\"Search ChEMBL database\"]\n  0 -> 3 [label=\"output\"]\n  k044d2c0892ed45c99868ee802998d92c[color=lightseagreen,label=\"Output\\nSubstructures from ChEMBL database\"]\n  3 -> k044d2c0892ed45c99868ee802998d92c\n  4[label=\"Search ChEMBL database\"]\n  0 -> 4 [label=\"output\"]\n  k99274b60732d4276969fccc3673a872a[color=lightseagreen,label=\"Output\\nLipinski substructures from ChEMBL database\"]\n  4 -> k99274b60732d4276969fccc3673a872a\n  5[label=\"Compound conversion\"]\n  1 -> 5 [label=\"output\"]\n  k77ad7b99576146a3b9a61dd3d8e2baac[color=lightseagreen,label=\"Output\\nEthylamine SDF\"]\n  5 -> k77ad7b99576146a3b9a61dd3d8e2baac\n  6[label=\"Reaction maker\"]\n  2 -> 6 [label=\"outfile\"]\n  5 -> 6 [label=\"outfile\"]\n  kf9d1d7fde854469ba4646811998e058e[color=lightseagreen,label=\"Output\\nReaction product\"]\n  6 -> kf9d1d7fde854469ba4646811998e058e\n  kb0bd7ed2a80b44ce994b999e1d472281[color=lightseagreen,label=\"Output\\nReaction maker logfile\"]\n  6 -> kb0bd7ed2a80b44ce994b999e1d472281\n  7[label=\"Visualisation\"]\n  6 -> 7 [label=\"outfile\"]\n  kfc618f3f6aa54970841d56f4eabf47b7[color=lightseagreen,label=\"Output\\nVisualisation of reaction product\"]\n  7 -> kfc618f3f6aa54970841d56f4eabf47b7\n  8[label=\"Drug-likeness\"]\n  6 -> 8 [label=\"outfile\"]\n  k7ad8c184e10d4fcea4023e79da6e09ac[color=lightseagreen,label=\"Output\\nDrug-likeness of product molecule\"]\n  8 -> k7ad8c184e10d4fcea4023e79da6e09ac\n}",
           "workflow_tools": [
@@ -842,11 +842,6 @@
             "usegalaxy": false
           },
           {
-            "url": "https://galaxy.bio.di.uminho.pt/",
-            "name": "PhagePromotor",
-            "usegalaxy": false
-          },
-          {
             "url": "https://usegalaxy.be/",
             "name": "UseGalaxy.be",
             "usegalaxy": false
@@ -989,10 +984,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "missing",
@@ -1139,10 +1130,6 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -1284,10 +1271,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "exact",
@@ -1433,10 +1416,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -1586,10 +1565,6 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -1733,10 +1708,6 @@
               },
               {
                 "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
-              },
-              {
-                "state": "missing",
                 "server": "https://usegalaxy.be/"
               },
               {
@@ -1877,10 +1848,6 @@
               {
                 "state": "missing",
                 "server": "http://pepsimili.e-nios.com:8080/"
-              },
-              {
-                "state": "missing",
-                "server": "https://galaxy.bio.di.uminho.pt/"
               },
               {
                 "state": "inexact",
@@ -2268,6 +2235,11 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "shiltemann",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -2430,6 +2402,81 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -2460,6 +2507,9 @@
         ],
         "funding": [
           "by-covid"
+        ],
+        "reviewing": [
+          "shiltemann"
         ]
       },
       "license": "Apache-2.0",
@@ -2587,6 +2637,39 @@
           ],
           "id": "by-covid",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
         }
       ],
       "urls": {
@@ -2643,6 +2726,11 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "bgruening",
+          "khaled196"
         ]
       },
       "subtopic": "pointers",
@@ -2934,6 +3022,79 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -2992,6 +3153,12 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "shiltemann",
+          "hexylena",
+          "GarethPrice-Aus",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -3135,6 +3302,88 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Gareth Price",
+          "joined": "2024-09",
+          "id": "GarethPrice-Aus",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/GarethPrice-Aus.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/GarethPrice-Aus/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -3181,6 +3430,12 @@
         ],
         "editing": [
           "hexylena"
+        ],
+        "reviewing": [
+          "shiltemann",
+          "hexylena",
+          "kkamieniecka",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -3372,6 +3627,94 @@
           "id": "hexylena",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -3416,6 +3759,12 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "kkamieniecka",
+          "shiltemann",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -3573,6 +3922,94 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -3632,38 +4069,6 @@
         "The RO-Crate specification recommends which types and keys to use"
       ],
       "subtopic": "ro-crate",
-      "contributors": [
-        {
-          "name": "Stian Soiland-Reyes",
-          "email": "soiland-reyes@manchester.ac.uk",
-          "twitter": "soilandreyes",
-          "orcid": "0000-0001-9842-9718",
-          "joined": "2023-04",
-          "elixir_node": "uk",
-          "location": {
-            "country": "UK",
-            "lat": 53.46724379071192,
-            "lon": -2.233631283105614
-          },
-          "fediverse": "https://scholar.social/@soilandreyes",
-          "fediverse_flavor": "mastodon",
-          "affiliations": [
-            "by-covid",
-            "elixir-europe"
-          ],
-          "id": "stain",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/stain.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stain/"
-        },
-        {
-          "name": "Peter Sefton",
-          "orcid": "0000-0002-3545-944X",
-          "joined": "2023-04",
-          "id": "ptsefton",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/ptsefton.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/"
-        }
-      ],
       "priority": 1,
       "abbreviations": {
         "FAIR": "Findable, Accessible, Interoperable, Reusable; a set of principles for publishing research data and metadata",
@@ -3690,6 +4095,16 @@
       },
       "short_id": "T00348",
       "symlink": null,
+      "contributions": {
+        "authorship": [
+          "stain",
+          "ptsefton"
+        ],
+        "reviewing": [
+          "hexylena",
+          "shiltemann"
+        ]
+      },
       "url": "/topics/fair/tutorials/ro-crate-intro/tutorial.html",
       "topic_name": "fair",
       "tutorial_name": "ro-crate-intro",
@@ -3770,6 +4185,100 @@
         "video": false
       },
       "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Stian Soiland-Reyes",
+          "email": "soiland-reyes@manchester.ac.uk",
+          "twitter": "soilandreyes",
+          "orcid": "0000-0001-9842-9718",
+          "joined": "2023-04",
+          "elixir_node": "uk",
+          "location": {
+            "country": "UK",
+            "lat": 53.46724379071192,
+            "lon": -2.233631283105614
+          },
+          "fediverse": "https://scholar.social/@soilandreyes",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "by-covid",
+            "elixir-europe"
+          ],
+          "id": "stain",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/stain.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stain/"
+        },
+        {
+          "name": "Peter Sefton",
+          "orcid": "0000-0002-3545-944X",
+          "joined": "2023-04",
+          "id": "ptsefton",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/ptsefton.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/ptsefton/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        }
+      ],
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/ro-crate-intro/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/ro-crate-intro/tutorial.json"
@@ -3815,6 +4324,9 @@
         ],
         "funding": [
           "nfdi4plants"
+        ],
+        "reviewing": [
+
         ]
       },
       "subtopic": "dataplant",
@@ -4074,6 +4586,13 @@
         ],
         "funding": [
           "by-covid"
+        ],
+        "reviewing": [
+          "shiltemann",
+          "yvanlebras",
+          "hexylena",
+          "simleo",
+          "elichad"
         ]
       },
       "license": "Apache-2.0",
@@ -4263,6 +4782,109 @@
           ],
           "id": "by-covid",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "affiliations": [
+            "pndb",
+            "gallantries",
+            "fairease",
+            "fnso2019",
+            "elixir-europe"
+          ],
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Simone Leo",
+          "joined": "2023-04",
+          "elixir_node": "it",
+          "orcid": "0000-0001-8271-5429",
+          "affiliations": [
+            "by-covid",
+            "elixir-europe"
+          ],
+          "id": "simleo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simleo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simleo/"
+        },
+        {
+          "name": "Eli Chadwick",
+          "email": "eli.chadwick@manchester.ac.uk",
+          "orcid": "0000-0002-0035-6475",
+          "joined": "2022-11",
+          "id": "elichad",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/elichad.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elichad/"
         }
       ],
       "urls": {
@@ -4307,6 +4929,12 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "kkamieniecka",
+          "shiltemann",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -4473,6 +5101,94 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -4529,6 +5245,11 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "bgruening",
+          "khaled196"
         ]
       },
       "subtopic": "pointers",
@@ -4821,6 +5542,79 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -4859,6 +5653,13 @@
         "funding": [
           "by-covid",
           "eurosciencegateway"
+        ],
+        "reviewing": [
+          "bgruening",
+          "shiltemann",
+          "Marie59",
+          "yvanlebras",
+          "hexylena"
         ]
       },
       "license": "Apache-2.0",
@@ -5031,6 +5832,130 @@
           ],
           "id": "eurosciencegateway",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "email": "marie.josse@ifremer.fr",
+          "affiliations": [
+            "pndb",
+            "fairease"
+          ],
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "affiliations": [
+            "pndb",
+            "gallantries",
+            "fairease",
+            "fnso2019",
+            "elixir-europe"
+          ],
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
         }
       ],
       "urls": {
@@ -5065,6 +5990,12 @@
         ],
         "funding": [
           "by-covid"
+        ],
+        "reviewing": [
+          "hexylena",
+          "elichad",
+          "shiltemann",
+          "yvanlebras"
         ]
       },
       "license": "Apache-2.0",
@@ -5204,6 +6135,96 @@
           ],
           "id": "by-covid",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Eli Chadwick",
+          "email": "eli.chadwick@manchester.ac.uk",
+          "orcid": "0000-0002-0035-6475",
+          "joined": "2022-11",
+          "id": "elichad",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/elichad.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elichad/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "affiliations": [
+            "pndb",
+            "gallantries",
+            "fairease",
+            "fnso2019",
+            "elixir-europe"
+          ],
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
         }
       ],
       "urls": {
@@ -5261,6 +6282,12 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "shiltemann",
+          "hexylena",
+          "bgruening",
+          "khaled196"
         ]
       },
       "subtopic": "pointers",
@@ -5554,6 +6581,112 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -5598,6 +6731,13 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "kkamieniecka",
+          "nomadscientist",
+          "shiltemann",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -5764,6 +6904,112 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "matrix": "nomadscientist:matrix.org",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Senior Lecturer at The Open University",
+          "fediverse": "https://mstdn.science/@wendibacon1",
+          "fediverse_flavor": "mastodon",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -5807,6 +7053,11 @@
         "funding": [
           "elixir-uk-dash",
           "elixir-europe"
+        ],
+        "reviewing": [
+          "hexylena",
+          "shiltemann",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -6069,6 +7320,81 @@
           ],
           "id": "elixir-europe",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -6108,6 +7434,13 @@
         ],
         "funding": [
           "by-covid"
+        ],
+        "reviewing": [
+          "hexylena",
+          "elichad",
+          "shiltemann",
+          "simleo",
+          "yvanlebras"
         ]
       },
       "requirements": [
@@ -6300,6 +7633,109 @@
           ],
           "id": "by-covid",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/by-covid/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Eli Chadwick",
+          "email": "eli.chadwick@manchester.ac.uk",
+          "orcid": "0000-0002-0035-6475",
+          "joined": "2022-11",
+          "id": "elichad",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/elichad.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elichad/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Simone Leo",
+          "joined": "2023-04",
+          "elixir_node": "it",
+          "orcid": "0000-0001-8271-5429",
+          "affiliations": [
+            "by-covid",
+            "elixir-europe"
+          ],
+          "id": "simleo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/simleo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/simleo/"
+        },
+        {
+          "name": "Yvan Le Bras",
+          "email": "yvan.le-bras@mnhn.fr",
+          "twitter": "Yvan2935",
+          "matrix": "yvanlebras:matrix.org",
+          "orcid": "0000-0002-8504-068X",
+          "joined": "2017-09",
+          "elixir_node": "fr",
+          "affiliations": [
+            "pndb",
+            "gallantries",
+            "fairease",
+            "fnso2019",
+            "elixir-europe"
+          ],
+          "id": "yvanlebras",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/yvanlebras.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/"
         }
       ],
       "urls": {
@@ -6358,6 +7794,11 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "bgruening",
+          "khaled196"
         ]
       },
       "subtopic": "pointers",
@@ -6652,6 +8093,79 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -6708,6 +8222,11 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "bgruening",
+          "khaled196"
         ]
       },
       "subtopic": "pointers",
@@ -6994,6 +8513,79 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
@@ -7035,6 +8627,12 @@
         "funding": [
           "elixir-uk-dash",
           "elixir-europe"
+        ],
+        "reviewing": [
+          "hexylena",
+          "shiltemann",
+          "khaled196",
+          "kkamieniecka"
         ]
       },
       "subtopic": "fair-data",
@@ -7301,6 +8899,94 @@
           ],
           "id": "elixir-europe",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-europe/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Saskia Hiltemann",
+          "maintainer_contact": "gitter",
+          "email": "saskia.hiltemann@gmail.com",
+          "fediverse": "https://mstdn.science/@shiltemann",
+          "fediverse_flavor": "mastodon",
+          "bluesky": "shiltemann.bsky.social",
+          "linkedin": "shiltemann",
+          "matrix": "shiltemann:matrix.org",
+          "orcid": "0000-0003-3803-468X",
+          "joined": "2017-09",
+          "bio": "Researcher at Erasmus Medical Center",
+          "elixir_node": "nl",
+          "contact_for_training": true,
+          "affiliations": [
+            "uni-freiburg",
+            "nfdi4plants",
+            "elixir-europe"
+          ],
+          "former_affiliations": [
+            "CINECA-Project",
+            "gallantries",
+            "erasmusmc"
+          ],
+          "location": {
+            "country": "NL",
+            "lat": 51.912,
+            "lon": 4.462
+          },
+          "id": "shiltemann",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
+        },
+        {
+          "name": "Katarzyna Kamieniecka",
+          "twitter": "katemurat",
+          "orcid": "0009-0004-2454-5950",
+          "joined": "2018-08",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "kkamieniecka",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/kkamieniecka.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kkamieniecka/"
         }
       ],
       "urls": {
@@ -7346,6 +9032,10 @@
         ],
         "funding": [
           "elixir-uk-dash"
+        ],
+        "reviewing": [
+          "hexylena",
+          "khaled196"
         ]
       },
       "subtopic": "fair-data",
@@ -7567,6 +9257,48 @@
           "funding_statement": "This Fellowship was funded through the ELIXIR-UK DaSH project as part of the UKRI Innovation Scholars: Data Science Training in Health and Bioscience call (DaSH). (MR/V038966/1). The project aims to embed Research Data Management (RDM) know-how into UK universities and institutes by producing and delivering training in FAIR data stewardship using ELIXIR-UK knowledge and resources.",
           "id": "elixir-uk-dash",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/elixir-uk-dash/"
+        },
+        {
+          "name": "Helena Rasche",
+          "orcid": "0000-0001-9760-8992",
+          "maintainer_contact": "gitter",
+          "matrix": "hexylena:matrix.org",
+          "joined": "2017-09",
+          "elixir_node": "nl",
+          "affiliations": [
+            "erasmusmc",
+            "gallantries",
+            "by-covid",
+            "elixir-europe",
+            "elixir-converge"
+          ],
+          "former_affiliations": [
+            "deNBI",
+            "avans-atgm",
+            "uni-freiburg"
+          ],
+          "contact_for_training": false,
+          "location": {
+            "country": "NL",
+            "lat": 51.91,
+            "lon": 4.46
+          },
+          "id": "hexylena",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+        },
+        {
+          "name": "Khaled Jum’ah",
+          "email": "k.jumah@bradford.ac.uk",
+          "orcid": "0000-0001-5481-8893",
+          "joined": "2022-09",
+          "elixir_node": "uk",
+          "affiliations": [
+            "elixir-europe"
+          ],
+          "id": "khaled196",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/khaled196.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/khaled196/"
         }
       ],
       "urls": {
