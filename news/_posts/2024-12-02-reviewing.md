@@ -1,5 +1,5 @@
 ---
-title: Credit where it's due: GTN Reviewers in the spotlight
+title: "Credit where it's due: GTN Reviewers in the spotlight"
 layout: news
 tags:
 - gtn infrastructure
