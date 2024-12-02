@@ -194,8 +194,8 @@
       "id": "fair/med-chem-data",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-12-02 08:57:13 +0000",
-      "pub_date": "2024-12-02 08:57:13 +0000",
+      "mod_date": "2024-12-02 09:08:13 +0000",
+      "pub_date": "2024-12-02 09:08:13 +0000",
       "version": 0,
       "workflows": [
         {
@@ -236,7 +236,7 @@
 
           ],
           "test_results": null,
-          "modified": "2024-12-02 08:57:13 +0000",
+          "modified": "2024-12-02 09:08:13 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nEthylamine\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Compound conversion\"];\n  0 -->|output| 2;\n  aff8fa4f-c254-4f05-9560-52bad6c7e04a[\"Output\\nBenzenesulfonyl chloride SDF\"];\n  2 --> aff8fa4f-c254-4f05-9560-52bad6c7e04a;\n  style aff8fa4f-c254-4f05-9560-52bad6c7e04a stroke:#2c3143,stroke-width:4px;\n  3[\"Search ChEMBL database\"];\n  0 -->|output| 3;\n  044d2c08-92ed-45c9-9868-ee802998d92c[\"Output\\nSubstructures from ChEMBL database\"];\n  3 --> 044d2c08-92ed-45c9-9868-ee802998d92c;\n  style 044d2c08-92ed-45c9-9868-ee802998d92c stroke:#2c3143,stroke-width:4px;\n  4[\"Search ChEMBL database\"];\n  0 -->|output| 4;\n  99274b60-732d-4276-969f-ccc3673a872a[\"Output\\nLipinski substructures from ChEMBL database\"];\n  4 --> 99274b60-732d-4276-969f-ccc3673a872a;\n  style 99274b60-732d-4276-969f-ccc3673a872a stroke:#2c3143,stroke-width:4px;\n  5[\"Compound conversion\"];\n  1 -->|output| 5;\n  77ad7b99-5761-46a3-b9a6-1dd3d8e2baac[\"Output\\nEthylamine SDF\"];\n  5 --> 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac;\n  style 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac stroke:#2c3143,stroke-width:4px;\n  6[\"Reaction maker\"];\n  2 -->|outfile| 6;\n  5 -->|outfile| 6;\n  f9d1d7fd-e854-469b-a464-6811998e058e[\"Output\\nReaction product\"];\n  6 --> f9d1d7fd-e854-469b-a464-6811998e058e;\n  style f9d1d7fd-e854-469b-a464-6811998e058e stroke:#2c3143,stroke-width:4px;\n  b0bd7ed2-a80b-44ce-994b-999e1d472281[\"Output\\nReaction maker logfile\"];\n  6 --> b0bd7ed2-a80b-44ce-994b-999e1d472281;\n  style b0bd7ed2-a80b-44ce-994b-999e1d472281 stroke:#2c3143,stroke-width:4px;\n  7[\"Visualisation\"];\n  6 -->|outfile| 7;\n  fc618f3f-6aa5-4970-841d-56f4eabf47b7[\"Output\\nVisualisation of reaction product\"];\n  7 --> fc618f3f-6aa5-4970-841d-56f4eabf47b7;\n  style fc618f3f-6aa5-4970-841d-56f4eabf47b7 stroke:#2c3143,stroke-width:4px;\n  8[\"Drug-likeness\"];\n  6 -->|outfile| 8;\n  7ad8c184-e10d-4fce-a402-3e79da6e09ac[\"Output\\nDrug-likeness of product molecule\"];\n  8 --> 7ad8c184-e10d-4fce-a402-3e79da6e09ac;\n  style 7ad8c184-e10d-4fce-a402-3e79da6e09ac stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\nBenzenesulfonyl chloride\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nEthylamine\"]\n  2[label=\"Compound conversion\"]\n  0 -> 2 [label=\"output\"]\n  kaff8fa4fc2544f05956052bad6c7e04a[color=lightseagreen,label=\"Output\\nBenzenesulfonyl chloride SDF\"]\n  2 -> kaff8fa4fc2544f05956052bad6c7e04a\n  3[label=\"Search ChEMBL database\"]\n  0 -> 3 [label=\"output\"]\n  k044d2c0892ed45c99868ee802998d92c[color=lightseagreen,label=\"Output\\nSubstructures from ChEMBL database\"]\n  3 -> k044d2c0892ed45c99868ee802998d92c\n  4[label=\"Search ChEMBL database\"]\n  0 -> 4 [label=\"output\"]\n  k99274b60732d4276969fccc3673a872a[color=lightseagreen,label=\"Output\\nLipinski substructures from ChEMBL database\"]\n  4 -> k99274b60732d4276969fccc3673a872a\n  5[label=\"Compound conversion\"]\n  1 -> 5 [label=\"output\"]\n  k77ad7b99576146a3b9a61dd3d8e2baac[color=lightseagreen,label=\"Output\\nEthylamine SDF\"]\n  5 -> k77ad7b99576146a3b9a61dd3d8e2baac\n  6[label=\"Reaction maker\"]\n  2 -> 6 [label=\"outfile\"]\n  5 -> 6 [label=\"outfile\"]\n  kf9d1d7fde854469ba4646811998e058e[color=lightseagreen,label=\"Output\\nReaction product\"]\n  6 -> kf9d1d7fde854469ba4646811998e058e\n  kb0bd7ed2a80b44ce994b999e1d472281[color=lightseagreen,label=\"Output\\nReaction maker logfile\"]\n  6 -> kb0bd7ed2a80b44ce994b999e1d472281\n  7[label=\"Visualisation\"]\n  6 -> 7 [label=\"outfile\"]\n  kfc618f3f6aa54970841d56f4eabf47b7[color=lightseagreen,label=\"Output\\nVisualisation of reaction product\"]\n  7 -> kfc618f3f6aa54970841d56f4eabf47b7\n  8[label=\"Drug-likeness\"]\n  6 -> 8 [label=\"outfile\"]\n  k7ad8c184e10d4fcea4023e79da6e09ac[color=lightseagreen,label=\"Output\\nDrug-likeness of product molecule\"]\n  8 -> k7ad8c184e10d4fcea4023e79da6e09ac\n}",
           "workflow_tools": [
@@ -2008,6 +2008,180 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/med-chem-data/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/med-chem-data/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "title": "An earth-system RO-Crate",
+      "video": true,
+      "questions": [
+        "How to generate a RO-Crate",
+        "How to follow a Marine Omics study",
+        "How to read a RO-Crate ?"
+      ],
+      "objectives": [
+        "Understand RO-Crate in an earth-system context"
+      ],
+      "time_estimation": "1H",
+      "tags": [
+        "earth-system",
+        "ro-crate",
+        "ocean",
+        "marine omics"
+      ],
+      "key_points": [
+        "RO-Crate in earth-system analysis",
+        "Marine omics workflow "
+      ],
+      "contributions": {
+        "authorship": [
+          "Marie59"
+        ],
+        "funding": [
+          "fairease",
+          "eurosciencegateway"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/fair/tutorials/earth_system_rocrate/slides.html",
+      "topic_name": "fair",
+      "tutorial_name": "earth_system_rocrate",
+      "dir": "topics/fair/tutorials/earth_system_rocrate",
+      "id": "fair/earth_system_rocrate",
+      "hands_on": false,
+      "slides": true,
+      "mod_date": "2024-12-02 09:01:23 +0000",
+      "pub_date": "2024-12-02 09:01:23 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/earth_system_rocrate/tutorial.json",
+      "tools": [
+
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+          {
+            "name": "UseGalaxy.eu",
+            "url": "https://usegalaxy.eu",
+            "id": "eu",
+            "human": "Galaxy Europe",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org",
+            "url": "https://usegalaxy.org",
+            "id": "us",
+            "human": "Galaxy Main",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.org.au",
+            "url": "https://usegalaxy.org.au",
+            "id": "au",
+            "human": "Galaxy Australia",
+            "usegalaxy": true
+          },
+          {
+            "name": "UseGalaxy.fr",
+            "url": "https://usegalaxy.fr",
+            "id": "fr",
+            "human": "Galaxy France",
+            "usegalaxy": true
+          }
+        ]
+      },
+      "supported_servers_matrix": {
+        "servers": [
+
+        ],
+        "tools": [
+
+        ]
+      },
+      "topic_name_human": "FAIR Data, Workflows, and Research",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools: []\n",
+      "tours": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": true
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marie Josse",
+          "joined": "2022-03",
+          "email": "marie.josse@ifremer.fr",
+          "affiliations": [
+            "pndb",
+            "fairease"
+          ],
+          "id": "Marie59",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/Marie59.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/"
+        },
+        {
+          "name": "Fair-Ease",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/fair_ease_colour.png",
+          "url": "https://training.galaxyproject.org/training-material/api/grants/fairease.json",
+          "funding_id": "101058785",
+          "funding_database": "cordis",
+          "funding_statement": "FAIR-EASE is a RIA project funded under HORIZON-INFRA-2021-EOSC-01-04, and it involves a consortium of 25 partners from all over Europe.",
+          "members": [
+            "Marie59",
+            "yvanlebras"
+          ],
+          "id": "fairease",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fairease/"
+        },
+        {
+          "name": "EuroScienceGateway",
+          "github": false,
+          "joined": "2023-10",
+          "avatar": "/training-material/assets/images/eurosciencegateway.png",
+          "url": "https://training.galaxyproject.org/training-material/api/grants/eurosciencegateway.json",
+          "funding_id": "101057388",
+          "funding_database": "cordis",
+          "funding_statement": "EuroScienceGateway was funded by the European Union programme Horizon Europe (HORIZON-INFRA-2021-EOSC-01-04) under grant agreement number 101057388 and by UK Research and Innovation (UKRI) under the UK government’s Horizon Europe funding guarantee grant number 10038963.",
+          "members": [
+            "abretaud",
+            "anuprulez",
+            "bgruening",
+            "erxleben",
+            "pauldg",
+            "rlibouba"
+          ],
+          "id": "eurosciencegateway",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/eurosciencegateway/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/earth_system_rocrate/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/fair/tutorials/earth_system_rocrate/slides.json"
       }
     },
     {
