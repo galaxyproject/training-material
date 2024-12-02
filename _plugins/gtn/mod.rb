@@ -115,9 +115,14 @@ module Gtn
   # This is faster than talking to the file system.
   module PublicationTimes
     @@TIME_CACHE = nil
+    @@RENAMES = nil
 
-    def self.chase_rename(renames, path, depth: 0)
-      if renames.key? path
+    def self.chase_rename(path, depth: 0)
+      if @@RENAMES.nil?
+        self.init_cache
+      end
+
+      if @@RENAMES.key? path
         # TODO(hexylena)
         # This happens because it's the wrong datastructure, if there's a loop
         # in there, it'll just cycle through it endlessly.
@@ -128,7 +133,7 @@ module Gtn
           Jekyll.logger.error "[GTN/Time/Pub] Too many renames for #{path}"
           path
         else
-          chase_rename(renames, renames[path], depth: depth + 1)
+          chase_rename(@@RENAMES[path], depth: depth + 1)
         end
       else
         path
@@ -139,7 +144,7 @@ module Gtn
       return unless @@TIME_CACHE.nil?
 
       @@TIME_CACHE = {}
-      renames = {}
+      @@RENAMES = {}
 
       Jekyll.logger.info '[GTN/Time/Pub] Filling Publication Time Cache'
       cached_command
@@ -151,11 +156,11 @@ module Gtn
           modification_type, path = f.split("\t")
           if modification_type == 'A'
             # Chase the renames.
-            final_filename = chase_rename(renames, path)
+            final_filename = chase_rename(path)
             @@TIME_CACHE[final_filename] = Time.at(date.to_i)
           elsif modification_type[0] == 'R'
             _, moved_from, moved_to = f.split("\t")
-            renames[moved_from] = moved_to # Point from the 'older' version to the newer.
+            @@RENAMES[moved_from] = moved_to # Point from the 'older' version to the newer.
           end
         end
       end
