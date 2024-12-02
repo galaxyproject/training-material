@@ -16,7 +16,7 @@ topic_name: single-cell
   <!-- Second Column: News and Events -->
   <div class="col-md-6 mb-4">
     <h3 class="mb-3">News and Events</h3>
-    <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html"></iframe>
+    <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/matrix-day.w.html"></iframe>
   </div>
 </div>
 
