@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,289 +211,76 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Pathway analysis with the MINERVA Platform</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Pathway analysis with the MINERVA Platform</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">BY-COVID: Data Download</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Helena Rasche
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Jun 11, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.html">BY-COVID: Data Download</a></td>
 
-
-			License: 
+			<td>Jun 11, 2024</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/AGPL-3.0-or-later">AGPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-BY-COVID__Data_Download.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-by-covid--data-download"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nSample Table"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["Cut"];
-  0 -->|output| 1;
-  2["Select"];
-  1 -->|out_file1| 2;
-  3["Faster Download and Extract Reads in FASTQ"];
-  2 -->|out_file1| 3;
-  b7c7e59d-6a78-41af-ae59-e52fcc1fe2f6["Output\noutput_collection"];
-  3 --> b7c7e59d-6a78-41af-ae59-e52fcc1fe2f6;
-  style b7c7e59d-6a78-41af-ae59-e52fcc1fe2f6 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.html">mRNA-Seq BY-COVID Pipeline: Analysis</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">mRNA-Seq BY-COVID Pipeline: Analysis</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Iacopo Cristoferi, 
-				
-				Helena Rasche, 
-				
-				Clinical Bioinformatics Unit, Pathology Department, Eramus Medical Center
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Mar 28, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>Mar 28, 2024</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Analysis.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--analysis"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nfeatureCounts: Counts"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nfactordata"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Collection\nfeatureCounts: Lengths"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["Column join"];
-  0 -->|output| 3;
-  4["Extract dataset"];
-  2 -->|output| 4;
-  5["countdata"];
-  3 -->|tabular_output| 5;
-  e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5["Output\ncount_data"];
-  5 --> e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5;
-  style e8dcfaaf-0d8d-46eb-8cc9-ce2fbdfc45e5 stroke:#2c3143,stroke-width:4px;
-  6["annodata"];
-  3 -->|tabular_output| 6;
-  7["Replace Text"];
-  5 -->|outfile| 7;
-  8["limma DEG analysis"];
-  6 -->|out_tab| 8;
-  7 -->|outfile| 8;
-  1 -->|output| 8;
-  1c8d7950-1003-4c86-9986-c6ed1264cd8b["Output\nlimma_report"];
-  8 --> 1c8d7950-1003-4c86-9986-c6ed1264cd8b;
-  style 1c8d7950-1003-4c86-9986-c6ed1264cd8b stroke:#2c3143,stroke-width:4px;
-  9["Extract dataset"];
-  8 -->|outTables| 9;
-  10["MINERVA Formatting"];
-  9 -->|output| 10;
-  9ce4f48b-e742-4b7c-9bde-5d51f11068d3["Output\nminerva_table"];
-  10 --> 9ce4f48b-e742-4b7c-9bde-5d51f11068d3;
-  style 9ce4f48b-e742-4b7c-9bde-5d51f11068d3 stroke:#2c3143,stroke-width:4px;
-  11["Join two Datasets"];
-  9 -->|output| 11;
-  4 -->|output| 11;
-  12["Compute"];
-  11 -->|out_file1| 12;
-  13["Cut"];
-  12 -->|out_file1| 13;
-  14["Unique"];
-  13 -->|out_file1| 14;
-  15["Cut"];
-  14 -->|outfile| 15;
-  16["Cut"];
-  14 -->|outfile| 16;
-  17["goseq"];
-  15 -->|out_file1| 17;
-  16 -->|out_file1| 17;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.html">mRNA-Seq BY-COVID Pipeline: Counts</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">mRNA-Seq BY-COVID Pipeline: Counts</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Iacopo Cristoferi, 
-				
-				Helena Rasche, 
-				
-				Clinical Bioinformatics Unit, Pathology Department, Eramus Medical Center
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Mar 28, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>Mar 28, 2024</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/minerva-pathways/workflows/Galaxy-Workflow-mRNA-Seq_BY-COVID_Pipeline__Counts.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-minerva-pathways/versions/galaxy-workflow-mrna-seq-by-covid-pipeline--counts"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nmRNA-Seq Reads"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nUCSC Genome"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["FastQC"];
-  0 -->|output| 2;
-  3["Cutadapt"];
-  0 -->|output| 3;
-  4["FastQC"];
-  3 -->|out1| 4;
-  5["HISAT2"];
-  3 -->|out1| 5;
-  6["featureCounts"];
-  5 -->|output_alignments| 6;
-  5cb5bd5d-df81-4463-8002-e89551780f01["Output\noutput_feature_lengths"];
-  6 --> 5cb5bd5d-df81-4463-8002-e89551780f01;
-  style 5cb5bd5d-df81-4463-8002-e89551780f01 stroke:#2c3143,stroke-width:4px;
-  5dec13e1-0011-472c-a72d-6715fe55c23c["Output\noutput_short"];
-  6 --> 5dec13e1-0011-472c-a72d-6715fe55c23c;
-  style 5dec13e1-0011-472c-a72d-6715fe55c23c stroke:#2c3143,stroke-width:4px;
-  7["Read Distribution"];
-  5 -->|output_alignments| 7;
-  1 -->|output| 7;
-  8["Gene Body Coverage BAM"];
-  5 -->|output_alignments| 8;
-  1 -->|output| 8;
-  9["Multi QC raw reads"];
-  2 -->|text_file| 9;
-  4 -->|text_file| 9;
-  3 -->|report| 9;
-  5 -->|summary_file| 9;
-  7 -->|output| 9;
-  8 -->|outputtxt| 9;
-  6 -->|output_summary| 9;
-  9217af4e-e34c-4a49-9d67-4b3df511ac2c["Output\nhtml_report"];
-  9 --> 9217af4e-e34c-4a49-9d67-4b3df511ac2c;
-  style 9217af4e-e34c-4a49-9d67-4b3df511ac2c stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -555,7 +342,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

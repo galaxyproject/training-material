@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,280 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Pangeo ecosystem 101 for everyone - Introduction to Xarray Galaxy Tools</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">GTN 'Pangeo 101 for everyone - Xarray'</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anne Fouilloux
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Feb 18, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/workflows/main_workflow.html">GTN 'Pangeo 101 for everyone - Xarray'</a></td>
 
-
-			License: 
+			<td>Feb 18, 2022</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/climate/tutorials/pangeo/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/climate-pangeo/versions/main-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Parameter\nplot first time e.g. index=0"];
-  style 0 fill:#ded,stroke:#393,stroke-width:4px;
-  1["ℹ️ Input Dataset\nCAMS-PM2_5-20211222.netcdf"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Parameter\nplot forecast time 2 days 12:00 UTC"];
-  style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["ℹ️ Input Parameter\ntime=5"];
-  style 3 fill:#ded,stroke:#393,stroke-width:4px;
-  4["ℹ️ Input Parameter\ntime=6"];
-  style 4 fill:#ded,stroke:#393,stroke-width:4px;
-  5["ℹ️ Input Parameter\ntime=3"];
-  style 5 fill:#ded,stroke:#393,stroke-width:4px;
-  6["ℹ️ Input Parameter\ntime=2"];
-  style 6 fill:#ded,stroke:#393,stroke-width:4px;
-  7["ℹ️ Input Parameter\ntime=7"];
-  style 7 fill:#ded,stroke:#393,stroke-width:4px;
-  8["ℹ️ Input Parameter\ntime=1"];
-  style 8 fill:#ded,stroke:#393,stroke-width:4px;
-  9["ℹ️ Input Parameter\ntime=4"];
-  style 9 fill:#ded,stroke:#393,stroke-width:4px;
-  10["ℹ️ Input Parameter\ntime=0"];
-  style 10 fill:#ded,stroke:#393,stroke-width:4px;
-  11["NetCDF xarray Coordinate Info"];
-  1 -->|output| 11;
-  12["NetCDF xarray Metadata Info"];
-  1 -->|output| 12;
-  13["extract longitude"];
-  11 -->|output_dir| 13;
-  14["extract latitude"];
-  11 -->|output_dir| 14;
-  15["Extract time from coordinate info"];
-  11 -->|output_dir| 15;
-  3b4968d7-8984-4e66-87a9-a3ab8fc12ca4["Output\ninput dataset(s) (extracted element)"];
-  15 --> 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4;
-  style 3b4968d7-8984-4e66-87a9-a3ab8fc12ca4 stroke:#2c3143,stroke-width:4px;
-  16["NetCDF xarray operations"];
-  1 -->|output| 16;
-  14 -->|output| 16;
-  13 -->|output| 16;
-  12 -->|output| 16;
-  17["NetCDF xarray operations"];
-  1 -->|output| 17;
-  15 -->|output| 17;
-  12 -->|output| 17;
-  18["NetCDF xarray operations"];
-  1 -->|output| 18;
-  15 -->|output| 18;
-  14 -->|output| 18;
-  13 -->|output| 18;
-  12 -->|output| 18;
-  19["PM2.5 CAMS Europe 0 days 00:00 UTC reference time"];
-  15 -->|output| 19;
-  0 -->|output| 19;
-  1 -->|output| 19;
-  12 -->|output| 19;
-  42483031-21e2-4d88-8898-4a9aa9bb10e5["Output\nPM2.5 reference date Europe"];
-  19 --> 42483031-21e2-4d88-8898-4a9aa9bb10e5;
-  style 42483031-21e2-4d88-8898-4a9aa9bb10e5 stroke:#2c3143,stroke-width:4px;
-  20["PM2.5 CAMS forecast 2 days 12:00 UTC"];
-  15 -->|output| 20;
-  2 -->|output| 20;
-  1 -->|output| 20;
-  12 -->|output| 20;
-  07ba8141-bad3-4a61-833d-3b3e82b53fdb["Output\nPM2.5 fc 2 days 12:00 UTC Europe"];
-  20 --> 07ba8141-bad3-4a61-833d-3b3e82b53fdb;
-  style 07ba8141-bad3-4a61-833d-3b3e82b53fdb stroke:#2c3143,stroke-width:4px;
-  21["NetCDF xarray Selection"];
-  16 -->|output_netcdf| 21;
-  12 -->|output| 21;
-  22["NetCDF xarray Coordinate Info"];
-  17 -->|output_netcdf| 22;
-  23["NetCDF xarray Coordinate Info"];
-  18 -->|output_netcdf| 23;
-  24["NetCDF xarray Metadata Info"];
-  18 -->|output_netcdf| 24;
-  25["Column Regex Find And Replace"];
-  21 -->|simpleoutput| 25;
-  26["PM2.5 over Naples 4 days forecast"];
-  21 -->|simpleoutput| 26;
-  8984beb4-e593-42f8-8de5-0e92631061c7["Output\n1D plot PM2.5 over Naples (4 days forecast)"];
-  26 --> 8984beb4-e593-42f8-8de5-0e92631061c7;
-  style 8984beb4-e593-42f8-8de5-0e92631061c7 stroke:#2c3143,stroke-width:4px;
-  27["Extract times from coordinates"];
-  22 -->|output_dir| 27;
-  28["Extract time"];
-  23 -->|output_dir| 28;
-  29[" stripes PM2.5 over Naples 4 days forecast"];
-  25 -->|out_file1| 29;
-  92cad576-78b5-4e07-9a07-6f05ff8f4a56["Output\nPM2.5 stripes Naples for 4 days forecast from reference date"];
-  29 --> 92cad576-78b5-4e07-9a07-6f05ff8f4a56;
-  style 92cad576-78b5-4e07-9a07-6f05ff8f4a56 stroke:#2c3143,stroke-width:4px;
-  30["NetCDF xarray map plotting"];
-  27 -->|output| 30;
-  0 -->|output| 30;
-  18 -->|output_netcdf| 30;
-  24 -->|output| 30;
-  31["NetCDF xarray map plotting"];
-  28 -->|output| 31;
-  6 -->|output| 31;
-  18 -->|output_netcdf| 31;
-  24 -->|output| 31;
-  32["NetCDF xarray map plotting"];
-  28 -->|output| 32;
-  8 -->|output| 32;
-  18 -->|output_netcdf| 32;
-  24 -->|output| 32;
-  33["NetCDF xarray map plotting"];
-  28 -->|output| 33;
-  5 -->|output| 33;
-  18 -->|output_netcdf| 33;
-  24 -->|output| 33;
-  34["NetCDF xarray map plotting"];
-  28 -->|output| 34;
-  9 -->|output| 34;
-  18 -->|output_netcdf| 34;
-  24 -->|output| 34;
-  35["NetCDF xarray map plotting"];
-  28 -->|output| 35;
-  4 -->|output| 35;
-  18 -->|output_netcdf| 35;
-  24 -->|output| 35;
-  36["NetCDF xarray map plotting"];
-  28 -->|output| 36;
-  7 -->|output| 36;
-  18 -->|output_netcdf| 36;
-  24 -->|output| 36;
-  37["NetCDF xarray map plotting"];
-  28 -->|output| 37;
-  3 -->|output| 37;
-  18 -->|output_netcdf| 37;
-  24 -->|output| 37;
-  38["NetCDF xarray map plotting"];
-  28 -->|output| 38;
-  3 -->|output| 38;
-  18 -->|output_netcdf| 38;
-  24 -->|output| 38;
-  39["NetCDF xarray map plotting"];
-  28 -->|output| 39;
-  4 -->|output| 39;
-  18 -->|output_netcdf| 39;
-  24 -->|output| 39;
-  40["NetCDF xarray map plotting"];
-  28 -->|output| 40;
-  10 -->|output| 40;
-  18 -->|output_netcdf| 40;
-  24 -->|output| 40;
-  41["NetCDF xarray map plotting"];
-  28 -->|output| 41;
-  5 -->|output| 41;
-  18 -->|output_netcdf| 41;
-  24 -->|output| 41;
-  42["NetCDF xarray map plotting"];
-  28 -->|output| 42;
-  6 -->|output| 42;
-  18 -->|output_netcdf| 42;
-  24 -->|output| 42;
-  43["NetCDF xarray map plotting"];
-  28 -->|output| 43;
-  10 -->|output| 43;
-  18 -->|output_netcdf| 43;
-  24 -->|output| 43;
-  44["NetCDF xarray map plotting"];
-  28 -->|output| 44;
-  7 -->|output| 44;
-  18 -->|output_netcdf| 44;
-  24 -->|output| 44;
-  45["NetCDF xarray map plotting"];
-  28 -->|output| 45;
-  9 -->|output| 45;
-  18 -->|output_netcdf| 45;
-  24 -->|output| 45;
-  46["NetCDF xarray map plotting"];
-  28 -->|output| 46;
-  8 -->|output| 46;
-  18 -->|output_netcdf| 46;
-  24 -->|output| 46;
-  47["Merge collections"];
-  30 -->|output_dir| 47;
-  32 -->|output_dir| 47;
-  31 -->|output_dir| 47;
-  33 -->|output_dir| 47;
-  34 -->|output_dir| 47;
-  37 -->|output_dir| 47;
-  35 -->|output_dir| 47;
-  36 -->|output_dir| 47;
-  48["Merge collections"];
-  43 -->|output_dir| 48;
-  46 -->|output_dir| 48;
-  42 -->|output_dir| 48;
-  41 -->|output_dir| 48;
-  45 -->|output_dir| 48;
-  38 -->|output_dir| 48;
-  39 -->|output_dir| 48;
-  44 -->|output_dir| 48;
-  49["PM2.5 forecast 10:00 - 17:00 UTC > 30 um/m3"];
-  47 -->|output| 49;
-  1c16eeb7-dfe1-40de-9be7-3aa2a8568308["Output\nPM2.5 (values > 30 um/m3)  fc 10:00 - 17:00 UTC over Italy"];
-  49 --> 1c16eeb7-dfe1-40de-9be7-3aa2a8568308;
-  style 1c16eeb7-dfe1-40de-9be7-3aa2a8568308 stroke:#2c3143,stroke-width:4px;
-  50["PM2.5 forecast 10:00 - 17:00 UTC "];
-  48 -->|output| 50;
-  070fe227-b533-4c77-bed0-4d005b174920["Output\nPM2.5 fc 10:00 - 17:00 UTC over Italy"];
-  50 --> 070fe227-b533-4c77-bed0-4d005b174920;
-  style 070fe227-b533-4c77-bed0-4d005b174920 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -546,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

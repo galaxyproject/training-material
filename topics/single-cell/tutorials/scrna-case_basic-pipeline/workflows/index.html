@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,463 +211,60 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Filter, plot and explore single-cell RNA-seq data with Scanpy</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Filter, plot and explore single-cell RNA-seq data with Scanpy</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">CS3_Filter, Plot and Explore Single-cell RNA-seq Data</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Nov 18, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.html">CS3_Filter, Plot and Explore Single-cell RNA-seq Data</a></td>
 
-
-			License: 
-				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/cs3-filter--plot-and-explore-single-cell-rna-seq-data"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
-
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nMito-counted AnnData"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["Inspect AnnData"];
-  0 -->|output| 1;
-  2["Scanpy FilterCells"];
-  0 -->|output| 2;
-  08175d7f-f4f4-413c-ad86-f59587ff692e["Output\nGenes-filtered Object"];
-  2 --> 08175d7f-f4f4-413c-ad86-f59587ff692e;
-  style 08175d7f-f4f4-413c-ad86-f59587ff692e stroke:#2c3143,stroke-width:4px;
-  3["Plot"];
-  0 -->|output| 3;
-  bfc499ee-630a-498b-9be6-696d9bb78837["Output\nScatter - genes x UMIs"];
-  3 --> bfc499ee-630a-498b-9be6-696d9bb78837;
-  style bfc499ee-630a-498b-9be6-696d9bb78837 stroke:#2c3143,stroke-width:4px;
-  4["Plot"];
-  0 -->|output| 4;
-  f2c78ef3-7d31-4930-954c-0133cce27a41["Output\nScatter - mito x genes"];
-  4 --> f2c78ef3-7d31-4930-954c-0133cce27a41;
-  style f2c78ef3-7d31-4930-954c-0133cce27a41 stroke:#2c3143,stroke-width:4px;
-  5["Plot"];
-  0 -->|output| 5;
-  348818e6-9def-41fd-a390-6f8525c57cd8["Output\nViolin - genotype - log"];
-  5 --> 348818e6-9def-41fd-a390-6f8525c57cd8;
-  style 348818e6-9def-41fd-a390-6f8525c57cd8 stroke:#2c3143,stroke-width:4px;
-  6["Plot"];
-  0 -->|output| 6;
-  844f5e7c-78c8-4f28-8e15-cea35ada8fef["Output\nViolin - batch - log"];
-  6 --> 844f5e7c-78c8-4f28-8e15-cea35ada8fef;
-  style 844f5e7c-78c8-4f28-8e15-cea35ada8fef stroke:#2c3143,stroke-width:4px;
-  7["Inspect AnnData"];
-  0 -->|output| 7;
-  8["Plot"];
-  0 -->|output| 8;
-  3b1232c5-d16a-434d-806e-79fd77f7c05f["Output\nScatter - mito x UMIs"];
-  8 --> 3b1232c5-d16a-434d-806e-79fd77f7c05f;
-  style 3b1232c5-d16a-434d-806e-79fd77f7c05f stroke:#2c3143,stroke-width:4px;
-  9["Inspect AnnData"];
-  0 -->|output| 9;
-  10["Plot"];
-  0 -->|output| 10;
-  a639cdc0-da40-4df9-8348-23117528b24a["Output\nViolin - sex - log"];
-  10 --> a639cdc0-da40-4df9-8348-23117528b24a;
-  style a639cdc0-da40-4df9-8348-23117528b24a stroke:#2c3143,stroke-width:4px;
-  11["Plot"];
-  2 -->|output_h5ad| 11;
-  69bf3e42-63e2-4b5b-9d63-5aac9d6b5691["Output\nViolin - Filterbygenes"];
-  11 --> 69bf3e42-63e2-4b5b-9d63-5aac9d6b5691;
-  style 69bf3e42-63e2-4b5b-9d63-5aac9d6b5691 stroke:#2c3143,stroke-width:4px;
-  12["Scanpy FilterCells"];
-  2 -->|output_h5ad| 12;
-  f378cb4e-0a77-49d9-b92a-752dbea4b09a["Output\nCounts-filtered Object"];
-  12 --> f378cb4e-0a77-49d9-b92a-752dbea4b09a;
-  style f378cb4e-0a77-49d9-b92a-752dbea4b09a stroke:#2c3143,stroke-width:4px;
-  13["Inspect AnnData"];
-  2 -->|output_h5ad| 13;
-  f9e862db-eb22-4124-8fe0-0fdcfcfb8393["Output\nGeneral - Filterbygenes"];
-  13 --> f9e862db-eb22-4124-8fe0-0fdcfcfb8393;
-  style f9e862db-eb22-4124-8fe0-0fdcfcfb8393 stroke:#2c3143,stroke-width:4px;
-  14["Inspect AnnData"];
-  12 -->|output_h5ad| 14;
-  794f72b5-c2c3-46a0-ac15-b9f1e94941d2["Output\nGeneral - Filterbycounts"];
-  14 --> 794f72b5-c2c3-46a0-ac15-b9f1e94941d2;
-  style 794f72b5-c2c3-46a0-ac15-b9f1e94941d2 stroke:#2c3143,stroke-width:4px;
-  15["Scanpy FilterCells"];
-  12 -->|output_h5ad| 15;
-  b915da66-6435-4871-baa0-3e494ba73c96["Output\nMito-filtered Object"];
-  15 --> b915da66-6435-4871-baa0-3e494ba73c96;
-  style b915da66-6435-4871-baa0-3e494ba73c96 stroke:#2c3143,stroke-width:4px;
-  16["Plot"];
-  12 -->|output_h5ad| 16;
-  3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa["Output\nViolin - Filterbycounts"];
-  16 --> 3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa;
-  style 3aef86d7-d34d-4b24-bc97-bf8c97d8d2fa stroke:#2c3143,stroke-width:4px;
-  17["Inspect AnnData"];
-  15 -->|output_h5ad| 17;
-  cd94a4c6-5665-4bdf-88ea-4f4d41efa893["Output\nGeneral - Filterbymito"];
-  17 --> cd94a4c6-5665-4bdf-88ea-4f4d41efa893;
-  style cd94a4c6-5665-4bdf-88ea-4f4d41efa893 stroke:#2c3143,stroke-width:4px;
-  18["Scanpy FilterGenes"];
-  15 -->|output_h5ad| 18;
-  ee63ef0a-98ed-45cb-b144-1154f84ae452["Output\nFiltered Object"];
-  18 --> ee63ef0a-98ed-45cb-b144-1154f84ae452;
-  style ee63ef0a-98ed-45cb-b144-1154f84ae452 stroke:#2c3143,stroke-width:4px;
-  19["Plot"];
-  15 -->|output_h5ad| 19;
-  7e48a14f-08fd-45ab-b613-606bf64dcf9d["Output\nViolin - Filterbymito"];
-  19 --> 7e48a14f-08fd-45ab-b613-606bf64dcf9d;
-  style 7e48a14f-08fd-45ab-b613-606bf64dcf9d stroke:#2c3143,stroke-width:4px;
-  20["Inspect AnnData"];
-  18 -->|output_h5ad| 20;
-  d59efa9b-d049-4f0e-8bd8-8ae982a45d0a["Output\nGeneral - Filtered object"];
-  20 --> d59efa9b-d049-4f0e-8bd8-8ae982a45d0a;
-  style d59efa9b-d049-4f0e-8bd8-8ae982a45d0a stroke:#2c3143,stroke-width:4px;
-  21["Scanpy NormaliseData"];
-  18 -->|output_h5ad| 21;
-  22["Scanpy FindVariableGenes"];
-  21 -->|output_h5ad| 22;
-  23["Scanpy ScaleData"];
-  22 -->|output_h5ad| 23;
-  24["Scanpy RunPCA"];
-  23 -->|output_h5ad| 24;
-  25["Plot"];
-  24 -->|output_h5ad| 25;
-  993dea99-990f-460a-beb9-46e5c97ee898["Output\nPCA Variance"];
-  25 --> 993dea99-990f-460a-beb9-46e5c97ee898;
-  style 993dea99-990f-460a-beb9-46e5c97ee898 stroke:#2c3143,stroke-width:4px;
-  26["Scanpy ComputeGraph"];
-  24 -->|output_h5ad| 26;
-  27["Scanpy RunTSNE"];
-  26 -->|output_h5ad| 27;
-  28["Scanpy RunUMAP"];
-  27 -->|output_h5ad| 28;
-  29["Scanpy FindCluster"];
-  28 -->|output_h5ad| 29;
-  30["Scanpy FindMarkers"];
-  29 -->|output_h5ad| 30;
-  308b4961-4d50-442b-9bca-bbb1992426ba["Output\nMarkers - cluster"];
-  30 --> 308b4961-4d50-442b-9bca-bbb1992426ba;
-  style 308b4961-4d50-442b-9bca-bbb1992426ba stroke:#2c3143,stroke-width:4px;
-  035bbbce-fb57-48c8-83d5-2b0cd0376541["Output\nFinal object"];
-  30 --> 035bbbce-fb57-48c8-83d5-2b0cd0376541;
-  style 035bbbce-fb57-48c8-83d5-2b0cd0376541 stroke:#2c3143,stroke-width:4px;
-  31["Scanpy FindMarkers"];
-  29 -->|output_h5ad| 31;
-  1705e219-192a-4f52-9b26-64fcbcd303ea["Output\nMarkers - genotype"];
-  31 --> 1705e219-192a-4f52-9b26-64fcbcd303ea;
-  style 1705e219-192a-4f52-9b26-64fcbcd303ea stroke:#2c3143,stroke-width:4px;
-  32["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 32;
-  33["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 33;
-  34["Manipulate AnnData"];
-  30 -->|output_h5ad| 34;
-  35["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 35;
-  36["Inspect AnnData"];
-  30 -->|output_h5ad| 36;
-  37["AnnData Operations"];
-  34 -->|anndata| 37;
-  30 -->|output_h5ad| 37;
-  38["Join two Datasets"];
-  30 -->|output_tsv| 38;
-  36 -->|var| 38;
-  39["Join two Datasets"];
-  31 -->|output_tsv| 39;
-  36 -->|var| 39;
-  40["AnnData Operations"];
-  37 -->|output_h5ad| 40;
-  a6d48df0-403f-4efc-a75f-9504a960884e["Output\nFinal cell annotated object"];
-  40 --> a6d48df0-403f-4efc-a75f-9504a960884e;
-  style a6d48df0-403f-4efc-a75f-9504a960884e stroke:#2c3143,stroke-width:4px;
-  41["Cut"];
-  38 -->|out_file1| 41;
-  0ee7f9b6-b065-4e26-93df-6e6e2fe458a9["Output\nMarkers - cluster - named"];
-  41 --> 0ee7f9b6-b065-4e26-93df-6e6e2fe458a9;
-  style 0ee7f9b6-b065-4e26-93df-6e6e2fe458a9 stroke:#2c3143,stroke-width:4px;
-  42["Cut"];
-  39 -->|out_file1| 42;
-  fdb88faa-9b76-4edb-b89b-427c098a473e["Output\nMarkers - genotype - named"];
-  42 --> fdb88faa-9b76-4edb-b89b-427c098a473e;
-  style fdb88faa-9b76-4edb-b89b-427c098a473e stroke:#2c3143,stroke-width:4px;
-  43["Scanpy PlotEmbed"];
-  40 -->|output_h5ad| 43;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Filter, Plot and Explore Single-cell RNA-seq Data updated</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Wendi Bacon, 
-				
-				Julia Jakiela
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Jun 13, 2023</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>Nov 18, 2022</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_basic-pipeline/versions/filter--plot-and-explore-single-cell-rna-seq-data-updated"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nMito-counted AnnData"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["Inspect AnnData"];
-  0 -->|output| 1;
-  2["Scanpy FilterCells"];
-  0 -->|output| 2;
-  6a00b14b-d3f8-4771-963a-76115c8eaf2f["Output\nGenes-filtered Object"];
-  2 --> 6a00b14b-d3f8-4771-963a-76115c8eaf2f;
-  style 6a00b14b-d3f8-4771-963a-76115c8eaf2f stroke:#2c3143,stroke-width:4px;
-  3["Plot"];
-  0 -->|output| 3;
-  c123842e-b2d2-43ad-81f0-6ba3b45d4021["Output\nScatter - genes x UMIs"];
-  3 --> c123842e-b2d2-43ad-81f0-6ba3b45d4021;
-  style c123842e-b2d2-43ad-81f0-6ba3b45d4021 stroke:#2c3143,stroke-width:4px;
-  4["Plot"];
-  0 -->|output| 4;
-  f1020d4d-555e-42fa-ba21-52a151b91a5b["Output\nScatter - mito x genes"];
-  4 --> f1020d4d-555e-42fa-ba21-52a151b91a5b;
-  style f1020d4d-555e-42fa-ba21-52a151b91a5b stroke:#2c3143,stroke-width:4px;
-  5["Plot"];
-  0 -->|output| 5;
-  a7fe6020-8f1e-470a-9ed3-f2b5e95516e0["Output\nViolin - genotype - log"];
-  5 --> a7fe6020-8f1e-470a-9ed3-f2b5e95516e0;
-  style a7fe6020-8f1e-470a-9ed3-f2b5e95516e0 stroke:#2c3143,stroke-width:4px;
-  6["Plot"];
-  0 -->|output| 6;
-  15e501bc-8ddb-4519-89eb-dde431ea96c1["Output\nViolin - batch - log"];
-  6 --> 15e501bc-8ddb-4519-89eb-dde431ea96c1;
-  style 15e501bc-8ddb-4519-89eb-dde431ea96c1 stroke:#2c3143,stroke-width:4px;
-  7["Inspect AnnData"];
-  0 -->|output| 7;
-  8["Plot"];
-  0 -->|output| 8;
-  eff22f46-baa6-4e00-ba82-d5e12ce26ff0["Output\nScatter - mito x UMIs"];
-  8 --> eff22f46-baa6-4e00-ba82-d5e12ce26ff0;
-  style eff22f46-baa6-4e00-ba82-d5e12ce26ff0 stroke:#2c3143,stroke-width:4px;
-  9["Inspect AnnData"];
-  0 -->|output| 9;
-  10["Plot"];
-  0 -->|output| 10;
-  56677ca4-129c-476c-85ec-69d1bb3d800d["Output\nViolin - sex - log"];
-  10 --> 56677ca4-129c-476c-85ec-69d1bb3d800d;
-  style 56677ca4-129c-476c-85ec-69d1bb3d800d stroke:#2c3143,stroke-width:4px;
-  11["Plot"];
-  2 -->|output_h5ad| 11;
-  acb61ea4-bcb9-45db-beef-e2bf1a176701["Output\nViolin - Filterbygenes"];
-  11 --> acb61ea4-bcb9-45db-beef-e2bf1a176701;
-  style acb61ea4-bcb9-45db-beef-e2bf1a176701 stroke:#2c3143,stroke-width:4px;
-  12["Scanpy FilterCells"];
-  2 -->|output_h5ad| 12;
-  51853662-4519-4229-a2ea-b22a53e7ef73["Output\nCounts-filtered Object"];
-  12 --> 51853662-4519-4229-a2ea-b22a53e7ef73;
-  style 51853662-4519-4229-a2ea-b22a53e7ef73 stroke:#2c3143,stroke-width:4px;
-  13["Inspect AnnData"];
-  2 -->|output_h5ad| 13;
-  362a7fe6-24bb-4398-ae48-870f4b4bb774["Output\nGeneral - Filterbygenes"];
-  13 --> 362a7fe6-24bb-4398-ae48-870f4b4bb774;
-  style 362a7fe6-24bb-4398-ae48-870f4b4bb774 stroke:#2c3143,stroke-width:4px;
-  14["Inspect AnnData"];
-  12 -->|output_h5ad| 14;
-  edf24149-9341-4fe7-b10c-3fcf092faaa5["Output\nGeneral - Filterbycounts"];
-  14 --> edf24149-9341-4fe7-b10c-3fcf092faaa5;
-  style edf24149-9341-4fe7-b10c-3fcf092faaa5 stroke:#2c3143,stroke-width:4px;
-  15["Scanpy FilterCells"];
-  12 -->|output_h5ad| 15;
-  a88ec405-265f-4a59-a75e-34e3b05b0096["Output\nMito-filtered Object"];
-  15 --> a88ec405-265f-4a59-a75e-34e3b05b0096;
-  style a88ec405-265f-4a59-a75e-34e3b05b0096 stroke:#2c3143,stroke-width:4px;
-  16["Plot"];
-  12 -->|output_h5ad| 16;
-  a7c8b0d9-82d3-4438-a212-b5f7c56d36b8["Output\nViolin - Filterbycounts"];
-  16 --> a7c8b0d9-82d3-4438-a212-b5f7c56d36b8;
-  style a7c8b0d9-82d3-4438-a212-b5f7c56d36b8 stroke:#2c3143,stroke-width:4px;
-  17["Inspect AnnData"];
-  15 -->|output_h5ad| 17;
-  56882809-e19f-451a-8010-bc55dcee482f["Output\nGeneral - Filterbymito"];
-  17 --> 56882809-e19f-451a-8010-bc55dcee482f;
-  style 56882809-e19f-451a-8010-bc55dcee482f stroke:#2c3143,stroke-width:4px;
-  18["Scanpy FilterGenes"];
-  15 -->|output_h5ad| 18;
-  00846477-dec5-408a-83b2-105fff7ce05b["Output\nFiltered Object"];
-  18 --> 00846477-dec5-408a-83b2-105fff7ce05b;
-  style 00846477-dec5-408a-83b2-105fff7ce05b stroke:#2c3143,stroke-width:4px;
-  19["Plot"];
-  15 -->|output_h5ad| 19;
-  7582e113-2004-4255-a1f3-d3123373f342["Output\nViolin - Filterbymito"];
-  19 --> 7582e113-2004-4255-a1f3-d3123373f342;
-  style 7582e113-2004-4255-a1f3-d3123373f342 stroke:#2c3143,stroke-width:4px;
-  20["Inspect AnnData"];
-  18 -->|output_h5ad| 20;
-  2d870a40-c602-4a1c-afef-450489354d39["Output\nGeneral - Filtered object"];
-  20 --> 2d870a40-c602-4a1c-afef-450489354d39;
-  style 2d870a40-c602-4a1c-afef-450489354d39 stroke:#2c3143,stroke-width:4px;
-  21["Scanpy NormaliseData"];
-  18 -->|output_h5ad| 21;
-  22["Scanpy FindVariableGenes"];
-  21 -->|output_h5ad| 22;
-  a0eb92b1-0263-4179-b7af-4bd9bcc9c960["Output\nUse_me_FVG"];
-  22 --> a0eb92b1-0263-4179-b7af-4bd9bcc9c960;
-  style a0eb92b1-0263-4179-b7af-4bd9bcc9c960 stroke:#2c3143,stroke-width:4px;
-  23["Scanpy ScaleData"];
-  22 -->|output_h5ad| 23;
-  5776dbb9-0cac-40c0-9bae-9accae16a7a0["Output\nUse_me_Scaled"];
-  23 --> 5776dbb9-0cac-40c0-9bae-9accae16a7a0;
-  style 5776dbb9-0cac-40c0-9bae-9accae16a7a0 stroke:#2c3143,stroke-width:4px;
-  24["Scanpy RunPCA"];
-  23 -->|output_h5ad| 24;
-  25["Plot"];
-  24 -->|output_h5ad| 25;
-  f0b6f578-050f-4936-9ee7-9956b0760c6f["Output\nPCA Variance"];
-  25 --> f0b6f578-050f-4936-9ee7-9956b0760c6f;
-  style f0b6f578-050f-4936-9ee7-9956b0760c6f stroke:#2c3143,stroke-width:4px;
-  26["Scanpy ComputeGraph"];
-  24 -->|output_h5ad| 26;
-  27["Scanpy RunTSNE"];
-  26 -->|output_h5ad| 27;
-  28["Scanpy RunUMAP"];
-  27 -->|output_h5ad| 28;
-  29["Scanpy FindCluster"];
-  28 -->|output_h5ad| 29;
-  30["Scanpy FindMarkers"];
-  29 -->|output_h5ad| 30;
-  7cfe5c9c-1c80-41b4-b669-633b1d7d40e3["Output\nMarkers - cluster"];
-  30 --> 7cfe5c9c-1c80-41b4-b669-633b1d7d40e3;
-  style 7cfe5c9c-1c80-41b4-b669-633b1d7d40e3 stroke:#2c3143,stroke-width:4px;
-  98e98405-951e-4c6c-be01-3c925ae35449["Output\nFinal object"];
-  30 --> 98e98405-951e-4c6c-be01-3c925ae35449;
-  style 98e98405-951e-4c6c-be01-3c925ae35449 stroke:#2c3143,stroke-width:4px;
-  31["Scanpy FindMarkers"];
-  29 -->|output_h5ad| 31;
-  1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4["Output\nMarkers - genotype"];
-  31 --> 1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4;
-  style 1e9f229d-eb34-4a5b-a6d9-e70c7b0581f4 stroke:#2c3143,stroke-width:4px;
-  32["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 32;
-  33["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 33;
-  34["Manipulate AnnData"];
-  30 -->|output_h5ad| 34;
-  35["Scanpy PlotEmbed"];
-  30 -->|output_h5ad| 35;
-  36["Inspect AnnData"];
-  30 -->|output_h5ad| 36;
-  37["AnnData Operations"];
-  34 -->|anndata| 37;
-  30 -->|output_h5ad| 37;
-  38["Join two Datasets"];
-  30 -->|output_tsv| 38;
-  36 -->|var| 38;
-  39["Join two Datasets"];
-  31 -->|output_tsv| 39;
-  36 -->|var| 39;
-  40["AnnData Operations"];
-  37 -->|output_h5ad| 40;
-  10bd70f8-ffcb-442b-9647-e5b947b6d35e["Output\nFinal cell annotated object"];
-  40 --> 10bd70f8-ffcb-442b-9647-e5b947b6d35e;
-  style 10bd70f8-ffcb-442b-9647-e5b947b6d35e stroke:#2c3143,stroke-width:4px;
-  41["Cut"];
-  38 -->|out_file1| 41;
-  4f822c1c-91c5-4be4-8f9b-d5bdda0a037e["Output\nMarkers - cluster - named"];
-  41 --> 4f822c1c-91c5-4be4-8f9b-d5bdda0a037e;
-  style 4f822c1c-91c5-4be4-8f9b-d5bdda0a037e stroke:#2c3143,stroke-width:4px;
-  42["Cut"];
-  39 -->|out_file1| 42;
-  3b471f3d-263d-4299-9b7d-8a8ae1aa556e["Output\nMarkers - genotype - named"];
-  42 --> 3b471f3d-263d-4299-9b7d-8a8ae1aa556e;
-  style 3b471f3d-263d-4299-9b7d-8a8ae1aa556e stroke:#2c3143,stroke-width:4px;
-  43["Scanpy PlotEmbed"];
-  40 -->|output_h5ad| 43;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/Filter,-Plot-and-Explore-Single-cell-RNA-seq-Data-updated.html">Filter, Plot and Explore Single-cell RNA-seq Data updated</a></td>
 
+			<td>Jun 13, 2023</td>
+			<td>1</td>
+			<td>
+				
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				
+			</td>
 
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -729,7 +326,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

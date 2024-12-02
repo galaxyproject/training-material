@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,192 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">16S Microbial Analysis with mothur (extended)</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">16S Microbial Analysis with mothur (extended)</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Training: 16S rRNA Sequencing With Mothur: Main Tutorial</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/mothur-miseq-sop/workflows/mothur-miseq-sop.html">Training: 16S rRNA Sequencing With Mothur: Main Tutorial</a></td>
+
+			<td>Jan 15, 2024</td>
+			<td>1</td>
+			<td>
 				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Jan 15, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
-				
-				None Specified, defaults to
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/microbiome/tutorials/mothur-miseq-sop/workflows/mothur-miseq-sop.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/microbiome-mothur-miseq-sop/versions/mothur-miseq-sop"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nInput FASTQ pairs"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nsilva.v4.fasta"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  10["Count.seqs"];
-  8 -->|groups_out| 10;
-  9 -->|out_names| 10;
-  11["Align.seqs"];
-  1 -->|output| 11;
-  9 -->|out_fasta| 11;
-  12["Summary.seqs"];
-  10 -->|seq_count| 12;
-  11 -->|out_align| 12;
-  13["Screen.seqs"];
-  10 -->|seq_count| 13;
-  11 -->|out_align| 13;
-  14["Filter.seqs"];
-  13 -->|fasta_out| 14;
-  15["Unique.seqs"];
-  14 -->|filteredfasta| 15;
-  13 -->|count_out| 15;
-  16["Pre.cluster"];
-  15 -->|out_fasta| 16;
-  15 -->|out_count| 16;
-  17["Chimera.vsearch"];
-  16 -->|fasta_out| 17;
-  16 -->|count_out| 17;
-  18["Remove.seqs"];
-  17 -->|out_accnos| 18;
-  17 -->|out_count| 18;
-  16 -->|fasta_out| 18;
-  19["Classify.seqs"];
-  2 -->|output| 19;
-  18 -->|count_out| 19;
-  18 -->|fasta_out| 19;
-  3 -->|output| 19;
-  2["ℹ️ Input Dataset\ntrainset9_032012.pds.fasta"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  20["Remove.lineage"];
-  18 -->|count_out| 20;
-  18 -->|fasta_out| 20;
-  19 -->|taxonomy_out| 20;
-  21["Get.groups"];
-  20 -->|fasta_out| 21;
-  20 -->|count_out| 21;
-  22["Remove.groups"];
-  20 -->|fasta_out| 22;
-  20 -->|count_out| 22;
-  20 -->|taxonomy_out| 22;
-  23["Seq.error"];
-  4 -->|output| 23;
-  21 -->|count_out| 23;
-  21 -->|fasta_out| 23;
-  24["Dist.seqs"];
-  21 -->|fasta_out| 24;
-  25["Cluster.split"];
-  22 -->|fasta_out| 25;
-  22 -->|count_out| 25;
-  22 -->|taxonomy_out| 25;
-  26["Cluster"];
-  21 -->|count_out| 26;
-  24 -->|out_dist| 26;
-  27["Make.shared"];
-  22 -->|count_out| 27;
-  25 -->|otulist| 27;
-  28["Classify.otu"];
-  22 -->|count_out| 28;
-  25 -->|otulist| 28;
-  22 -->|taxonomy_out| 28;
-  29["Make.shared"];
-  21 -->|count_out| 29;
-  26 -->|otulist| 29;
-  3["ℹ️ Input Dataset\ntrainset9_032012.pds.tax"];
-  style 3 stroke:#2c3143,stroke-width:4px;
-  30["Summary.single"];
-  27 -->|shared| 30;
-  31["Count.groups"];
-  27 -->|shared| 31;
-  32["Dist.shared"];
-  27 -->|shared| 32;
-  33["Rarefaction.single"];
-  27 -->|shared| 33;
-  34["Sub.sample"];
-  27 -->|shared| 34;
-  35["Taxonomy-to-Krona"];
-  28 -->|taxonomies| 35;
-  36["Rarefaction.single"];
-  29 -->|shared| 36;
-  37["Tree.shared"];
-  32 -->|distfiles| 37;
-  38["Heatmap.sim"];
-  32 -->|distfiles| 38;
-  39["Plotting tool"];
-  33 -->|rarefactioncurves| 39;
-  4["ℹ️ Input Dataset\nHMP_MOCK.v35.fasta"];
-  style 4 stroke:#2c3143,stroke-width:4px;
-  40["Venn"];
-  34 -->|shared_out| 40;
-  41["Make.biom"];
-  28 -->|taxonomies| 41;
-  5 -->|output| 41;
-  34 -->|shared_out| 41;
-  42["Krona pie chart"];
-  35 -->|outputfile| 42;
-  43["Newick Display"];
-  37 -->|tre| 43;
-  5["ℹ️ Input Dataset\nmouse.dpw.metadata"];
-  style 5 stroke:#2c3143,stroke-width:4px;
-  6["Make.contigs"];
-  0 -->|output| 6;
-  7["Summary.seqs"];
-  6 -->|fasta| 7;
-  8["Screen.seqs"];
-  6 -->|fasta| 8;
-  6 -->|group| 8;
-  9["Unique.seqs"];
-  8 -->|fasta_out| 9;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -458,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,116 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Secondary metabolite discovery</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Secondary metabolite discovery</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Gene Cluster Product Similarity Search </h5>
-			<h6 class="card-subtitle mb-2 text-muted">
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
+
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/workflows/main_workflow.html">Gene Cluster Product Similarity Search </a></td>
+
+			<td>Feb 21, 2024</td>
+			<td>1</td>
+			<td>
 				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Feb 21, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
-				
-				None Specified, defaults to
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/secondary-metabolite-discovery/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-secondary-metabolite-discovery/versions/main-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Parameter\nQuery Genomes"];
-  style 0 fill:#ded,stroke:#393,stroke-width:4px;
-  1["ℹ️ Input Dataset\nJupyter Notebook Genbank2Features"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nTarget Molecules Natural Compound Library"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["NCBI Accession Download"];
-  0 -->|output| 3;
-  faecdec3-711d-43ba-bb91-38a4b4b3932d["Output\nNCBI Accession Download on input dataset(s): Log"];
-  3 --> faecdec3-711d-43ba-bb91-38a4b4b3932d;
-  style faecdec3-711d-43ba-bb91-38a4b4b3932d stroke:#2c3143,stroke-width:4px;
-  c8857c6f-ec99-4d29-8c98-be7a63a9f029["Output\nNCBI Accession Download on input dataset(s): Downloaded Files"];
-  3 --> c8857c6f-ec99-4d29-8c98-be7a63a9f029;
-  style c8857c6f-ec99-4d29-8c98-be7a63a9f029 stroke:#2c3143,stroke-width:4px;
-  4["Molecule to fingerprint"];
-  2 -->|output| 4;
-  5["Antismash"];
-  3 -->|output| 5;
-  cc813ad7-f423-4cb8-ba79-8201abab206a["Output\nAntismash on input dataset(s): HTML report"];
-  5 --> cc813ad7-f423-4cb8-ba79-8201abab206a;
-  style cc813ad7-f423-4cb8-ba79-8201abab206a stroke:#2c3143,stroke-width:4px;
-  6["Collapse clusters in one Genbank entry"];
-  5 -->|genbank| 6;
-  7["Extract SMILES qualifiers"];
-  1 -->|output| 7;
-  6 -->|output| 7;
-  8["Convert table to smi format"];
-  7 -->|output_collection| 8;
-  9["Remove beginning"];
-  8 -->|outfile| 9;
-  10["Remove duplicated molecules"];
-  9 -->|out_file1| 10;
-  11["Molecule to fingerprint"];
-  10 -->|outfile| 11;
-  12["Natural Product"];
-  10 -->|outfile| 12;
-  13["Drug-likeness"];
-  10 -->|outfile| 13;
-  14["Similarity Search"];
-  11 -->|outfile| 14;
-  4 -->|outfile| 14;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -382,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

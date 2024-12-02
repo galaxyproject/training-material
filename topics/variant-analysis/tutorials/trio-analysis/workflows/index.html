@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,149 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Trio Analysis using Synthetic Datasets from RD-Connect GPAP</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Trio Analysis using Synthetic Datasets from RD-Connect GPAP</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Trio Analysis Tutorial</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Jasper Ouwerkerk
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Jul 11, 2023</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.html">Trio Analysis Tutorial</a></td>
 
-
-			License: 
+			<td>Jul 11, 2023</td>
+			<td>5</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/trio-analysis/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/variant-analysis-trio-analysis/versions/main-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["EGA Download Client"];
-  85672f3a-1556-49b6-be09-2e6c81721fb3["Output\nEGA Download Client: authorized datasets"];
-  0 --> 85672f3a-1556-49b6-be09-2e6c81721fb3;
-  style 85672f3a-1556-49b6-be09-2e6c81721fb3 stroke:#2c3143,stroke-width:4px;
-  1["EGA Download Client"];
-  acd2bcf0-4b9d-4743-9034-716e73d4824f["Output\nList of files in EGAD00001008392"];
-  1 --> acd2bcf0-4b9d-4743-9034-716e73d4824f;
-  style acd2bcf0-4b9d-4743-9034-716e73d4824f stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\npedigree"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["Search in textfiles"];
-  1 -->|dataset_file_list| 3;
-  6d5d135e-a373-4938-9374-019a09f45a51["Output\nList of Case 5 VCFs"];
-  3 --> 6d5d135e-a373-4938-9374-019a09f45a51;
-  style 6d5d135e-a373-4938-9374-019a09f45a51 stroke:#2c3143,stroke-width:4px;
-  4["EGA Download Client"];
-  3 -->|output| 4;
-  bdce7169-390b-4adb-9305-5550d5d70a73["Output\nCase 5 VCFs.gz"];
-  4 --> bdce7169-390b-4adb-9305-5550d5d70a73;
-  style bdce7169-390b-4adb-9305-5550d5d70a73 stroke:#2c3143,stroke-width:4px;
-  5["Convert compressed file to uncompressed."];
-  4 -->|downloaded_file_collection| 5;
-  82b71cdc-d813-4c77-8ff3-fa59e1725709["Output\nCase 5 VCFs"];
-  5 --> 82b71cdc-d813-4c77-8ff3-fa59e1725709;
-  style 82b71cdc-d813-4c77-8ff3-fa59e1725709 stroke:#2c3143,stroke-width:4px;
-  6["Column Regex Find And Replace"];
-  5 -->|output1| 6;
-  5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27["Output\nCase 5 VCFs (Fixed Header and Chr)"];
-  6 --> 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27;
-  style 5e1ff158-cf8a-4dc8-9c22-b987a9f5ac27 stroke:#2c3143,stroke-width:4px;
-  7["bcftools norm"];
-  6 -->|out_file1| 7;
-  96b34c8d-fa92-48cb-b01f-c05364deba5d["Output\nCase 5 Normalized VCFs"];
-  7 --> 96b34c8d-fa92-48cb-b01f-c05364deba5d;
-  style 96b34c8d-fa92-48cb-b01f-c05364deba5d stroke:#2c3143,stroke-width:4px;
-  8["Filter"];
-  7 -->|output_file| 8;
-  a8539eb9-8bc3-473b-a27f-201c3acf5539["Output\nCase 5 Normalized VCFs (Removed <NON_REF>)"];
-  8 --> a8539eb9-8bc3-473b-a27f-201c3acf5539;
-  style a8539eb9-8bc3-473b-a27f-201c3acf5539 stroke:#2c3143,stroke-width:4px;
-  9["bcftools merge"];
-  8 -->|out_file1| 9;
-  b5c479b2-e58a-4fe2-b1cf-fc64476c8192["Output\nCase 5 Merged VCF"];
-  9 --> b5c479b2-e58a-4fe2-b1cf-fc64476c8192;
-  style b5c479b2-e58a-4fe2-b1cf-fc64476c8192 stroke:#2c3143,stroke-width:4px;
-  10["SnpEff eff:"];
-  9 -->|output_file| 10;
-  cd7b4941-4f4c-4631-8ad5-3411e60fbbd9["Output\nCase 5 SnpEff Annotated vcf"];
-  10 --> cd7b4941-4f4c-4631-8ad5-3411e60fbbd9;
-  style cd7b4941-4f4c-4631-8ad5-3411e60fbbd9 stroke:#2c3143,stroke-width:4px;
-  11["Convert uncompressed file to compressed"];
-  10 -->|snpeff_output| 11;
-  6e5e1084-b5e1-4daf-8f3b-bd3868a52a25["Output\nSnpEff Annotated vcf_bgzip"];
-  11 --> 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25;
-  style 6e5e1084-b5e1-4daf-8f3b-bd3868a52a25 stroke:#2c3143,stroke-width:4px;
-  12["gene.iobio visualisation"];
-  11 -->|output1| 12;
-  11 -->|output1| 12;
-  11 -->|output1| 12;
-  0b30f4e0-7328-4479-8a56-bbf828fcfdba["Output\nCase 5 gene.iobio results"];
-  12 --> 0b30f4e0-7328-4479-8a56-bbf828fcfdba;
-  style 0b30f4e0-7328-4479-8a56-bbf828fcfdba stroke:#2c3143,stroke-width:4px;
-  13["Case 5 GEMINI Database"];
-  11 -->|output1| 13;
-  2 -->|output| 13;
-  8a1964d9-607c-4dd3-a2dc-0f9a68dbb681["Output\nGEMINI Database"];
-  13 --> 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681;
-  style 8a1964d9-607c-4dd3-a2dc-0f9a68dbb681 stroke:#2c3143,stroke-width:4px;
-  14["Case 5 GEMINI Inheritance pattern"];
-  13 -->|outfile| 14;
-  960ef978-089c-4292-81b5-731965c72a0d["Output\nCase 5 GEMINI results"];
-  14 --> 960ef978-089c-4292-81b5-731965c72a0d;
-  style 960ef978-089c-4292-81b5-731965c72a0d stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -415,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,759 +211,172 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Large genome assembly and polishing</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Large genome assembly and polishing</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Assembly polishing - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_polishing.html">Assembly polishing - upgraded</a></td>
 
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_polishing.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-polishing"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nAssembly to be polished"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nlong reads"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Parameter\nminimap setting for long reads"];
-  style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["ℹ️ Input Dataset\nIllumina reads R1"];
-  style 3 stroke:#2c3143,stroke-width:4px;
-  4["🛠️ Subworkflow\nRacon polish with long reads, x4 - upgraded"];
-  style 4 fill:#edd,stroke:#900,stroke-width:4px;
-  0 -->|output| 4;
-  1 -->|output| 4;
-  2 -->|output| 4;
-  5["Medaka polish"];
-  4 -->|Assembly polished by long reads using Racon| 5;
-  1 -->|output| 5;
-  e3136060-bce7-4af3-87c4-9dcbb0d1f531["Output\nAssembly polished by long reads using Medaka"];
-  5 --> e3136060-bce7-4af3-87c4-9dcbb0d1f531;
-  style e3136060-bce7-4af3-87c4-9dcbb0d1f531 stroke:#2c3143,stroke-width:4px;
-  6["Fasta statistics after Racon long read polish"];
-  4 -->|Assembly polished by long reads using Racon| 6;
-  7["Fasta statistics after Medaka polish"];
-  5 -->|out_consensus| 7;
-  8["🛠️ Subworkflow\nRacon polish with Illumina reads R1 only, x2 - upgraded"];
-  style 8 fill:#edd,stroke:#900,stroke-width:4px;
-  5 -->|out_consensus| 8;
-  3 -->|output| 8;
-  9["Fasta statistics after Racon short read polish"];
-  8 -->|Assembly polished by short reads using Racon| 9;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_with_Flye.html">Assembly with Flye - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Assembly with Flye - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assembly_with_Flye.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assembly-with-flye"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nlong reads"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["Flye: assembly"];
-  0 -->|output| 1;
-  3960e31d-7a9e-400c-bb21-f6e47b75e649["Output\nFlye assembly on input dataset(s) (consensus)"];
-  1 --> 3960e31d-7a9e-400c-bb21-f6e47b75e649;
-  style 3960e31d-7a9e-400c-bb21-f6e47b75e649 stroke:#2c3143,stroke-width:4px;
-  e524f295-a957-4c91-838c-f8e98e809b6c["Output\nFlye assembly on input dataset(s) (assembly_graph)"];
-  1 --> e524f295-a957-4c91-838c-f8e98e809b6c;
-  style e524f295-a957-4c91-838c-f8e98e809b6c stroke:#2c3143,stroke-width:4px;
-  48b854e2-dd6e-4345-8d05-09abca6659da["Output\nFlye assembly on input dataset(s) (Graphical Fragment Assembly)"];
-  1 --> 48b854e2-dd6e-4345-8d05-09abca6659da;
-  style 48b854e2-dd6e-4345-8d05-09abca6659da stroke:#2c3143,stroke-width:4px;
-  8672c172-71a7-432c-9679-a8e37f36cf53["Output\nFlye assembly on input dataset(s) (assembly_info)"];
-  1 --> 8672c172-71a7-432c-9679-a8e37f36cf53;
-  style 8672c172-71a7-432c-9679-a8e37f36cf53 stroke:#2c3143,stroke-width:4px;
-  2["Fasta statistics"];
-  1 -->|consensus| 2;
-  3["Quast genome report"];
-  1 -->|consensus| 3;
-  17cdf8e0-8ad4-4570-afae-1861934fc678["Output\nQuast on input dataset(s):  HTML report"];
-  3 --> 17cdf8e0-8ad4-4570-afae-1861934fc678;
-  style 17cdf8e0-8ad4-4570-afae-1861934fc678 stroke:#2c3143,stroke-width:4px;
-  4["Bandage image: Flye assembly"];
-  1 -->|assembly_gfa| 4;
-  e66bd129-146f-48dc-95b8-39a2a1ffb68d["Output\nBandage Image on input dataset(s): Assembly Graph Image"];
-  4 --> e66bd129-146f-48dc-95b8-39a2a1ffb68d;
-  style e66bd129-146f-48dc-95b8-39a2a1ffb68d stroke:#2c3143,stroke-width:4px;
-  5["Bar chart: show contig sizes"];
-  1 -->|assembly_info| 5;
-  6d0a4e23-d631-4e37-8930-3d22fc91369b["Output\nBar chart showing contig sizes"];
-  5 --> 6d0a4e23-d631-4e37-8930-3d22fc91369b;
-  style 6d0a4e23-d631-4e37-8930-3d22fc91369b stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assess_genome_quality.html">Assess genome quality - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Assess genome quality - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Assess_genome_quality.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-assess-genome-quality"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nPolished assembly"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nReference genome"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["Busco: assess assembly"];
-  0 -->|output| 2;
-  219e4952-36e0-4b01-a407-e774b5b02dca["Output\nBusco short summary"];
-  2 --> 219e4952-36e0-4b01-a407-e774b5b02dca;
-  style 219e4952-36e0-4b01-a407-e774b5b02dca stroke:#2c3143,stroke-width:4px;
-  3["Quast: assess assembly"];
-  1 -->|output| 3;
-  0 -->|output| 3;
-  77ab0186-4cfd-460f-b71e-39a923414ef4["Output\nQuast on input dataset(s):  HTML report"];
-  3 --> 77ab0186-4cfd-460f-b71e-39a923414ef4;
-  style 77ab0186-4cfd-460f-b71e-39a923414ef4 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Combined_workflows_for_large_genome_assembly.html">Combined workflows for large genome assembly - upgraded </a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Combined workflows for large genome assembly - upgraded </h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Combined_workflows_for_large_genome_assembly.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-combined-workflows-for-large-genome-assembly"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nlong reads"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nR1"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nR2"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Parameter\nminimap settings for long reads"];
-  style 3 fill:#ded,stroke:#393,stroke-width:4px;
-  4["ℹ️ Input Dataset\nReference genome for Quast"];
-  style 4 stroke:#2c3143,stroke-width:4px;
-  5["🛠️ Subworkflow\nkmer counting - meryl - upgraded"];
-  style 5 fill:#edd,stroke:#900,stroke-width:4px;
-  1 -->|output| 5;
-  6["🛠️ Subworkflow\nData QC - upgraded"];
-  style 6 fill:#edd,stroke:#900,stroke-width:4px;
-  1 -->|output| 6;
-  2 -->|output| 6;
-  0 -->|output| 6;
-  7["🛠️ Subworkflow\nTrim and filter reads - fastp - upgraded "];
-  style 7 fill:#edd,stroke:#900,stroke-width:4px;
-  1 -->|output| 7;
-  2 -->|output| 7;
-  0 -->|output| 7;
-  8["🛠️ Subworkflow\nAssembly with Flye - upgraded"];
-  style 8 fill:#edd,stroke:#900,stroke-width:4px;
-  7 -->|fastp filtered long reads| 8;
-  9["🛠️ Subworkflow\nAssembly polishing - upgraded"];
-  style 9 fill:#edd,stroke:#900,stroke-width:4px;
-  8 -->|Flye assembly on input datasets consensus| 9;
-  7 -->|fastp filtered R1 reads| 9;
-  7 -->|fastp filtered long reads| 9;
-  3 -->|output| 9;
-  10["🛠️ Subworkflow\nAssess genome quality - upgraded"];
-  style 10 fill:#edd,stroke:#900,stroke-width:4px;
-  9 -->|Assembly polished by long reads using Medaka| 10;
-  4 -->|output| 10;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.html">Data QC - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Data QC - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Data_QC.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-data-qc"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nInput file: long reads"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nInput file: Illumina reads R1"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nInput file: Illumina reads R2"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["Nanoplot: long reads"];
-  0 -->|output| 3;
-  73d0e4cf-366e-41c1-810a-b269638826b3["Output\nNanoPlot on input dataset(s): HTML report"];
-  3 --> 73d0e4cf-366e-41c1-810a-b269638826b3;
-  style 73d0e4cf-366e-41c1-810a-b269638826b3 stroke:#2c3143,stroke-width:4px;
-  4["FastQC on R1"];
-  1 -->|output| 4;
-  5["FastQC on R2"];
-  2 -->|output| 5;
-  6["MultiQC: combine fastQC reports"];
-  4 -->|text_file| 6;
-  5 -->|text_file| 6;
-  8baf8700-876e-4a74-ad99-6e656f3ba618["Output\nMultiQC on input dataset(s): Webpage"];
-  6 --> 8baf8700-876e-4a74-ad99-6e656f3ba618;
-  style 8baf8700-876e-4a74-ad99-6e656f3ba618 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Racon_polish_with_Illumina_reads_x2.html">Racon polish with Illumina reads (R1 only), x2 - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Racon polish with Illumina reads (R1 only), x2 - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Racon_polish_with_Illumina_reads_x2.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-illumina-reads-x2"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nAssembly to be polished"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nIllumina reads, R1, in fastq.gz format"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["Minimap2 round 1: map reads to assembly"];
-  1 -->|output| 2;
-  0 -->|output| 2;
-  3["Racon round 1: polish assembly"];
-  0 -->|output| 3;
-  2 -->|alignment_output| 3;
-  1 -->|output| 3;
-  4["Minimap2 round 2: map reads to assembly"];
-  1 -->|output| 4;
-  3 -->|consensus| 4;
-  5["Racon round 2: polish assembly"];
-  3 -->|consensus| 5;
-  4 -->|alignment_output| 5;
-  1 -->|output| 5;
-  594819c3-668e-4575-b9a6-4459ffacf952["Output\nAssembly polished by short reads using Racon"];
-  5 --> 594819c3-668e-4575-b9a6-4459ffacf952;
-  style 594819c3-668e-4575-b9a6-4459ffacf952 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Racon_polish_with_long_reads_x4.html">Racon polish with long reads, x4 - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Racon polish with long reads, x4 - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Racon_polish_with_long_reads_x4.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-racon-polish-with-long-reads-x4"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nAssembly to be polished"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nlong reads"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Parameter\nminimap setting for long reads "];
-  style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["Minimap2: map long reads to assembly"];
-  2 -->|output| 3;
-  1 -->|output| 3;
-  0 -->|output| 3;
-  4["Racon: polish 1"];
-  0 -->|output| 4;
-  3 -->|alignment_output| 4;
-  1 -->|output| 4;
-  5["Minimap2: map long reads to polished assembly 1"];
-  2 -->|output| 5;
-  1 -->|output| 5;
-  4 -->|consensus| 5;
-  6["Racon: polish 2"];
-  4 -->|consensus| 6;
-  5 -->|alignment_output| 6;
-  1 -->|output| 6;
-  7["Minimap2: map long reads to polished assembly 2"];
-  2 -->|output| 7;
-  1 -->|output| 7;
-  6 -->|consensus| 7;
-  8["Racon: polish 3"];
-  6 -->|consensus| 8;
-  7 -->|alignment_output| 8;
-  1 -->|output| 8;
-  9["Minimap2: map long reads to polished assembly 3"];
-  2 -->|output| 9;
-  1 -->|output| 9;
-  8 -->|consensus| 9;
-  10["Racon: polish 4"];
-  8 -->|consensus| 10;
-  9 -->|alignment_output| 10;
-  1 -->|output| 10;
-  bcf0f03c-5951-46a7-aa38-545aed9bc183["Output\nAssembly polished by long reads using Racon"];
-  10 --> bcf0f03c-5951-46a7-aa38-545aed9bc183;
-  style bcf0f03c-5951-46a7-aa38-545aed9bc183 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Trim_and_filter_reads.html">Trim and filter reads - fastp - upgraded </a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Trim and filter reads - fastp - upgraded </h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-Trim_and_filter_reads.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-trim-and-filter-reads"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nIllumina reads R1"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nIllumina reads R2"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nlong reads"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["fastp on short reads"];
-  0 -->|output| 3;
-  1 -->|output| 3;
-  656e4138-41ab-4561-8989-33de9ac9a2f3["Output\nfastp report on short reads html"];
-  3 --> 656e4138-41ab-4561-8989-33de9ac9a2f3;
-  style 656e4138-41ab-4561-8989-33de9ac9a2f3 stroke:#2c3143,stroke-width:4px;
-  0d53f347-0368-47cb-953a-2e4dac57e013["Output\nfastp filtered R1 reads"];
-  3 --> 0d53f347-0368-47cb-953a-2e4dac57e013;
-  style 0d53f347-0368-47cb-953a-2e4dac57e013 stroke:#2c3143,stroke-width:4px;
-  10fbe1e5-400c-4ffe-8794-9b776b0d7322["Output\nfastp report on short reads json"];
-  3 --> 10fbe1e5-400c-4ffe-8794-9b776b0d7322;
-  style 10fbe1e5-400c-4ffe-8794-9b776b0d7322 stroke:#2c3143,stroke-width:4px;
-  639ed3f7-0e51-4e5d-b6f8-081378962109["Output\nfastp filtered R2 reads"];
-  3 --> 639ed3f7-0e51-4e5d-b6f8-081378962109;
-  style 639ed3f7-0e51-4e5d-b6f8-081378962109 stroke:#2c3143,stroke-width:4px;
-  4["fastp on long reads"];
-  2 -->|output| 4;
-  5e0d2c3d-41a4-4823-ae9c-b1e4d2826541["Output\nfastp report on long reads html"];
-  4 --> 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541;
-  style 5e0d2c3d-41a4-4823-ae9c-b1e4d2826541 stroke:#2c3143,stroke-width:4px;
-  e6018ad6-86f4-4e78-8cf2-ccc8b97022fe["Output\nfastp filtered long reads"];
-  4 --> e6018ad6-86f4-4e78-8cf2-ccc8b97022fe;
-  style e6018ad6-86f4-4e78-8cf2-ccc8b97022fe stroke:#2c3143,stroke-width:4px;
-  69f8383b-a1be-4a74-95f4-3dba35e01426["Output\nfastp report on long reads json"];
-  4 --> 69f8383b-a1be-4a74-95f4-3dba35e01426;
-  style 69f8383b-a1be-4a74-95f4-3dba35e01426 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-kmer_counting.html">kmer counting - meryl - upgraded</a></td>
 
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">kmer counting - meryl - upgraded</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anna Syme
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>May 8, 2024</td>
+			<td>2</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/largegenome/workflows/Galaxy-Workflow-kmer_counting.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/assembly-largegenome/versions/galaxy-workflow-kmer-counting"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nIllumina reads R1"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["Meryl - count kmers"];
-  0 -->|output| 1;
-  899ddd93-4c0f-4f81-a973-8120494ed983["Output\nMeryl on input dataset(s): read-db.meryldb"];
-  1 --> 899ddd93-4c0f-4f81-a973-8120494ed983;
-  style 899ddd93-4c0f-4f81-a973-8120494ed983 stroke:#2c3143,stroke-width:4px;
-  2["Meryl - generate histogram"];
-  1 -->|read_db| 2;
-  3["Genomescope"];
-  2 -->|read_db_hist| 3;
-  efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac["Output\nGenomeScope on input dataset(s) Transformed log plot"];
-  3 --> efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac;
-  style efc727b6-1ef4-4c4c-8cce-35c7d3cc8aac stroke:#2c3143,stroke-width:4px;
-  701df341-5767-44bc-ade2-6af498ab7467["Output\nGenomeScope on input dataset(s) Transformed linear plot"];
-  3 --> 701df341-5767-44bc-ade2-6af498ab7467;
-  style 701df341-5767-44bc-ade2-6af498ab7467 stroke:#2c3143,stroke-width:4px;
-  85fa4004-b351-47b3-84aa-6788d338037a["Output\nGenomeScope on input dataset(s) Log plot"];
-  3 --> 85fa4004-b351-47b3-84aa-6788d338037a;
-  style 85fa4004-b351-47b3-84aa-6788d338037a stroke:#2c3143,stroke-width:4px;
-  c71ce055-98f0-4354-9397-2f8833b90cc4["Output\nGenomeScope on input dataset(s) Linear plot"];
-  3 --> c71ce055-98f0-4354-9397-2f8833b90cc4;
-  style c71ce055-98f0-4354-9397-2f8833b90cc4 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ❌ </td>
+			<td> ✅ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -1025,7 +438,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

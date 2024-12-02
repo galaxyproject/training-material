@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,153 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Scanpy Parameter Iterator</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Scanpy Parameter Iterator</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Scanpy Parameter Iterator workflow full (imported from URL)</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Julia Jakiela
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Jul 19, 2023</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.html">Scanpy Parameter Iterator workflow full (imported from URL)</a></td>
 
-
-			License: 
+			<td>Jul 19, 2023</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scanpy_parameter_iterator/workflows/Scanpy-Parameter-Iterator-workflow-full.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scanpy_parameter_iterator/versions/scanpy-parameter-iterator-workflow-full"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nScanpy RunPCA: AnnData object"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ParameterIterator n-neighbors"];
-  2["ℹ️ Input Dataset\nScanpy ComputeGraph on data X and data Y: Graph object AnnData"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["ParameterIterator perplexity"];
-  4["ℹ️ Input Dataset\nScanpy RunUMAP on data X: UMAP object AnnData"];
-  style 4 stroke:#2c3143,stroke-width:4px;
-  5["ParameterIterator resolution"];
-  6["Scanpy ComputeGraph"];
-  0 -->|output| 6;
-  1 -->|parameter_iteration| 6;
-  1e60c7cd-7e02-450f-a403-f3df1e548757["Output\nScanpy ComputeGraph on collection X: Graph object AnnData (n-neighbours)"];
-  6 --> 1e60c7cd-7e02-450f-a403-f3df1e548757;
-  style 1e60c7cd-7e02-450f-a403-f3df1e548757 stroke:#2c3143,stroke-width:4px;
-  7["Scanpy RunTSNE"];
-  2 -->|output| 7;
-  3 -->|parameter_iteration| 7;
-  15143fea-5e2b-4b25-b5d1-0726da910f67["Output\nScanpy RunTSNE on collection X: tSNE object AnnData (perplexity)"];
-  7 --> 15143fea-5e2b-4b25-b5d1-0726da910f67;
-  style 15143fea-5e2b-4b25-b5d1-0726da910f67 stroke:#2c3143,stroke-width:4px;
-  8["Scanpy FindCluster"];
-  4 -->|output| 8;
-  5 -->|parameter_iteration| 8;
-  6fdddfe7-c4da-4421-86a0-9819ce4c769c["Output\nScanpy FindCluster on collection X: Clusters AnnData (resolution)"];
-  8 --> 6fdddfe7-c4da-4421-86a0-9819ce4c769c;
-  style 6fdddfe7-c4da-4421-86a0-9819ce4c769c stroke:#2c3143,stroke-width:4px;
-  9["Scanpy RunTSNE"];
-  6 -->|output_h5ad| 9;
-  7c988247-b167-4733-859f-fcd582f91959["Output\nScanpy RunTSNE on collection X: tSNE object AnnData (n-neighbours)"];
-  9 --> 7c988247-b167-4733-859f-fcd582f91959;
-  style 7c988247-b167-4733-859f-fcd582f91959 stroke:#2c3143,stroke-width:4px;
-  10["Scanpy RunUMAP"];
-  7 -->|output_h5ad| 10;
-  1f5abfa2-845c-4763-9f87-e4b167aa7bc8["Output\nScanpy RunUMAP on collection X: UMAP object AnnData (perplexity)"];
-  10 --> 1f5abfa2-845c-4763-9f87-e4b167aa7bc8;
-  style 1f5abfa2-845c-4763-9f87-e4b167aa7bc8 stroke:#2c3143,stroke-width:4px;
-  11["Scanpy PlotEmbed"];
-  8 -->|output_h5ad| 11;
-  99185d1e-047f-47f2-9081-07506e1c17df["Output\nresolution_pca_plots"];
-  11 --> 99185d1e-047f-47f2-9081-07506e1c17df;
-  style 99185d1e-047f-47f2-9081-07506e1c17df stroke:#2c3143,stroke-width:4px;
-  12["Scanpy PlotEmbed"];
-  8 -->|output_h5ad| 12;
-  65d7b619-8659-4008-9e56-db21fda6ce8c["Output\nresolution_umap_plots"];
-  12 --> 65d7b619-8659-4008-9e56-db21fda6ce8c;
-  style 65d7b619-8659-4008-9e56-db21fda6ce8c stroke:#2c3143,stroke-width:4px;
-  13["Scanpy PlotEmbed"];
-  8 -->|output_h5ad| 13;
-  bdcaf837-5fc4-4024-a87a-eabfa0110127["Output\nresolution_tsne_plots"];
-  13 --> bdcaf837-5fc4-4024-a87a-eabfa0110127;
-  style bdcaf837-5fc4-4024-a87a-eabfa0110127 stroke:#2c3143,stroke-width:4px;
-  14["Scanpy RunUMAP"];
-  9 -->|output_h5ad| 14;
-  8a0b3d69-e7df-4977-b8eb-ec478b914a26["Output\nScanpy RunUMAP on collection X: UMAP object AnnData (n-neighbours)"];
-  14 --> 8a0b3d69-e7df-4977-b8eb-ec478b914a26;
-  style 8a0b3d69-e7df-4977-b8eb-ec478b914a26 stroke:#2c3143,stroke-width:4px;
-  15["Scanpy FindCluster"];
-  10 -->|output_h5ad| 15;
-  c2e0d48f-9f0e-4452-8fb5-e78420578c65["Output\nScanpy FindCluster on collection X: Clusters AnnData (perplexity)"];
-  15 --> c2e0d48f-9f0e-4452-8fb5-e78420578c65;
-  style c2e0d48f-9f0e-4452-8fb5-e78420578c65 stroke:#2c3143,stroke-width:4px;
-  16["Scanpy FindCluster"];
-  14 -->|output_h5ad| 16;
-  c952b32e-99d5-4b94-a6d7-be59439c4dca["Output\nScanpy FindCluster on collection X: Clusters AnnData (n-neighbours)"];
-  16 --> c952b32e-99d5-4b94-a6d7-be59439c4dca;
-  style c952b32e-99d5-4b94-a6d7-be59439c4dca stroke:#2c3143,stroke-width:4px;
-  17["Scanpy PlotEmbed"];
-  15 -->|output_h5ad| 17;
-  44c0ec07-b64e-428f-9254-5217e8041416["Output\nperplexity_plots"];
-  17 --> 44c0ec07-b64e-428f-9254-5217e8041416;
-  style 44c0ec07-b64e-428f-9254-5217e8041416 stroke:#2c3143,stroke-width:4px;
-  18["Scanpy PlotEmbed"];
-  16 -->|output_h5ad| 18;
-  0b30f573-8ebd-4582-9bcd-58ba5c778658["Output\nn-neighbors_plots"];
-  18 --> 0b30f573-8ebd-4582-9bcd-58ba5c778658;
-  style 0b30f573-8ebd-4582-9bcd-58ba5c778658 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -419,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

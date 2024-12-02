@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,263 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Genome-wide alternative splicing analysis</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Genome-wide alternative splicing analysis</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">GTN_differential_isoform_expression</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Cristobal Gallardo, 
-				
-				Lucille Delisle
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Sep 12, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.html">GTN_differential_isoform_expression</a></td>
 
-
-			License: 
+			<td>Sep 12, 2024</td>
+			<td>3</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/differential-isoform-expression/workflows/main_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-differential-isoform-expression/versions/main-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Collection\nRNA-seq data collection"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nGenome annotation"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nReference genome"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nPfam-A HMM library"];
-  style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Dataset\nPfam-A HMM Stockholm file"];
-  style 4 stroke:#2c3143,stroke-width:4px;
-  5["ℹ️ Input Dataset\nActive sites dataset"];
-  style 5 stroke:#2c3143,stroke-width:4px;
-  6["ℹ️ Input Dataset\nCPAT header"];
-  style 6 stroke:#2c3143,stroke-width:4px;
-  7["Flatten collection"];
-  0 -->|output| 7;
-  8["fastp"];
-  0 -->|output| 8;
-  9["Convert GTF to BED12"];
-  1 -->|output| 9;
-  10["Search in textfiles"];
-  1 -->|output| 10;
-  11["Search in textfiles"];
-  1 -->|output| 11;
-  12["FastQC"];
-  7 -->|output| 12;
-  13["gather fastp reports"];
-  8 -->|report_json| 13;
-  14["RNA STAR"];
-  1 -->|output| 14;
-  2 -->|output| 14;
-  8 -->|output_paired_coll| 14;
-  15["Gene BED To Exon/Intron/Codon BED"];
-  9 -->|bed_file| 15;
-  16["gffread"];
-  10 -->|output| 16;
-  2 -->|output| 16;
-  17["gffread"];
-  11 -->|output| 17;
-  2 -->|output| 17;
-  18["gather FastQC reports"];
-  12 -->|text_file| 18;
-  19["Concatenate datasets"];
-  14 -->|splice_junctions| 19;
-  20["Compute"];
-  15 -->|out_file1| 20;
-  21["Filter"];
-  19 -->|out_file1| 21;
-  22["Sort"];
-  20 -->|out_file1| 22;
-  23["Cut"];
-  21 -->|out_file1| 23;
-  24["Text reformatting"];
-  22 -->|out_file1| 24;
-  25["Text reformatting"];
-  22 -->|out_file1| 25;
-  26["Sort"];
-  23 -->|out_file1| 26;
-  27["Unique lines"];
-  26 -->|out_file1| 27;
-  28["RNA STAR"];
-  1 -->|output| 28;
-  2 -->|output| 28;
-  8 -->|output_paired_coll| 28;
-  27 -->|outfile| 28;
-  29["StringTie"];
-  1 -->|output| 29;
-  28 -->|mapped_reads| 29;
-  30["Infer Experiment"];
-  28 -->|mapped_reads| 30;
-  9 -->|bed_file| 30;
-  31["Gene Body Coverage BAM"];
-  28 -->|mapped_reads| 31;
-  9 -->|bed_file| 31;
-  32["Junction Saturation"];
-  28 -->|mapped_reads| 32;
-  9 -->|bed_file| 32;
-  33["Junction Annotation"];
-  28 -->|mapped_reads| 33;
-  9 -->|bed_file| 33;
-  34["Inner Distance"];
-  28 -->|mapped_reads| 34;
-  9 -->|bed_file| 34;
-  35["Read Distribution"];
-  28 -->|mapped_reads| 35;
-  9 -->|bed_file| 35;
-  36["StringTie merge"];
-  1 -->|output| 36;
-  29 -->|output_gtf| 36;
-  37["gffread"];
-  29 -->|output_gtf| 37;
-  2 -->|output| 37;
-  38["MultiQC"];
-  28 -->|output_log| 38;
-  28 -->|reads_per_gene| 38;
-  30 -->|output| 38;
-  32 -->|outputr| 38;
-  31 -->|outputtxt| 38;
-  34 -->|outputfreqtxt| 38;
-  35 -->|output| 38;
-  33 -->|stats| 38;
-  39["StringTie"];
-  36 -->|out_gtf| 39;
-  28 -->|mapped_reads| 39;
-  40["GffCompare"];
-  1 -->|output| 40;
-  36 -->|out_gtf| 40;
-  41["Plot a transcript in intron"];
-  28 -->|signal_unique_str2| 41;
-  28 -->|signal_unique_str1| 41;
-  36 -->|out_gtf| 41;
-  42["gffread"];
-  36 -->|out_gtf| 42;
-  2 -->|output| 42;
-  43["Plot ADD3"];
-  28 -->|signal_unique_str2| 43;
-  28 -->|signal_unique_str1| 43;
-  36 -->|out_gtf| 43;
-  44["Plot ADD3 zoomed"];
-  28 -->|signal_unique_str2| 44;
-  28 -->|signal_unique_str1| 44;
-  36 -->|out_gtf| 44;
-  45["rnaQUAST"];
-  1 -->|output| 45;
-  2 -->|output| 45;
-  37 -->|output_exons| 45;
-  46["Extract element identifiers"];
-  39 -->|transcript_expression| 46;
-  47["Filter"];
-  40 -->|tmap_output| 47;
-  48["Search in textfiles"];
-  46 -->|output| 48;
-  49["Filter collection"];
-  48 -->|output| 49;
-  39 -->|transcript_expression| 49;
-  50["IsoformSwitchAnalyzeR"];
-  1 -->|output| 50;
-  49 -->|output_discarded| 50;
-  36 -->|out_gtf| 50;
-  49 -->|output_filtered| 50;
-  42 -->|output_exons| 50;
-  51["IsoformSwitchAnalyzeR"];
-  50 -->|switchList| 51;
-  52["PfamScan"];
-  5 -->|output| 52;
-  51 -->|isoformAA| 52;
-  4 -->|output| 52;
-  3 -->|output| 52;
-  53["CPAT"];
-  16 -->|output_exons| 53;
-  51 -->|isoformNT| 53;
-  17 -->|output_exons| 53;
-  2 -->|output| 53;
-  54["Cut"];
-  53 -->|orf_seqs_prob_best| 54;
-  55["Add column"];
-  54 -->|out_file1| 55;
-  56["Remove beginning"];
-  55 -->|out_file1| 56;
-  57["Concatenate datasets"];
-  6 -->|output| 57;
-  56 -->|out_file1| 57;
-  58["IsoformSwitchAnalyzeR"];
-  57 -->|out_file1| 58;
-  52 -->|output| 58;
-  51 -->|switchList| 58;
-  59["IsoformSwitchAnalyzeR"];
-  57 -->|out_file1| 59;
-  52 -->|output| 59;
-  51 -->|switchList| 59;
-  d2f0865b-20ba-43ef-8ebc-ad9f517ec60d["Output\nconsequencesSummary"];
-  59 --> d2f0865b-20ba-43ef-8ebc-ad9f517ec60d;
-  style d2f0865b-20ba-43ef-8ebc-ad9f517ec60d stroke:#2c3143,stroke-width:4px;
-  8dd90968-6ef6-48e1-a104-547cbeaa80c8["Output\nconsequencesEnrichment"];
-  59 --> 8dd90968-6ef6-48e1-a104-547cbeaa80c8;
-  style 8dd90968-6ef6-48e1-a104-547cbeaa80c8 stroke:#2c3143,stroke-width:4px;
-  6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc["Output\nsplicingEnrichment"];
-  59 --> 6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc;
-  style 6b812e8d-997d-4a53-9c4f-cb2aa3bb26bc stroke:#2c3143,stroke-width:4px;
-  9c8369e2-8f86-4984-a47a-a35415ecb9b9["Output\nmostSwitching"];
-  59 --> 9c8369e2-8f86-4984-a47a-a35415ecb9b9;
-  style 9c8369e2-8f86-4984-a47a-a35415ecb9b9 stroke:#2c3143,stroke-width:4px;
-  292b9609-061f-49f7-94fc-7831526bb48b["Output\nsplicingSummary"];
-  59 --> 292b9609-061f-49f7-94fc-7831526bb48b;
-  style 292b9609-061f-49f7-94fc-7831526bb48b stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -529,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

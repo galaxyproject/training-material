@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,119 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Data management in Medicinal Chemistry</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Data management in Medicinal Chemistry</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Data management in Medicinal Chemistry workflow</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Julia Jakiela
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Jan 8, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.html">Data management in Medicinal Chemistry workflow</a></td>
 
-
-			License: 
+			<td>Jan 8, 2024</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/med-chem-data/workflows/Data-management-in-Medicinal-Chemistry-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/computational-chemistry-med-chem-data/versions/data-management-in-medicinal-chemistry-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nBenzenesulfonyl chloride"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nEthylamine"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["Compound conversion"];
-  0 -->|output| 2;
-  aff8fa4f-c254-4f05-9560-52bad6c7e04a["Output\nBenzenesulfonyl chloride SDF"];
-  2 --> aff8fa4f-c254-4f05-9560-52bad6c7e04a;
-  style aff8fa4f-c254-4f05-9560-52bad6c7e04a stroke:#2c3143,stroke-width:4px;
-  3["Search ChEMBL database"];
-  0 -->|output| 3;
-  044d2c08-92ed-45c9-9868-ee802998d92c["Output\nSubstructures from ChEMBL database"];
-  3 --> 044d2c08-92ed-45c9-9868-ee802998d92c;
-  style 044d2c08-92ed-45c9-9868-ee802998d92c stroke:#2c3143,stroke-width:4px;
-  4["Search ChEMBL database"];
-  0 -->|output| 4;
-  99274b60-732d-4276-969f-ccc3673a872a["Output\nLipinski substructures from ChEMBL database"];
-  4 --> 99274b60-732d-4276-969f-ccc3673a872a;
-  style 99274b60-732d-4276-969f-ccc3673a872a stroke:#2c3143,stroke-width:4px;
-  5["Compound conversion"];
-  1 -->|output| 5;
-  77ad7b99-5761-46a3-b9a6-1dd3d8e2baac["Output\nEthylamine SDF"];
-  5 --> 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac;
-  style 77ad7b99-5761-46a3-b9a6-1dd3d8e2baac stroke:#2c3143,stroke-width:4px;
-  6["Reaction maker"];
-  2 -->|outfile| 6;
-  5 -->|outfile| 6;
-  f9d1d7fd-e854-469b-a464-6811998e058e["Output\nReaction product"];
-  6 --> f9d1d7fd-e854-469b-a464-6811998e058e;
-  style f9d1d7fd-e854-469b-a464-6811998e058e stroke:#2c3143,stroke-width:4px;
-  b0bd7ed2-a80b-44ce-994b-999e1d472281["Output\nReaction maker logfile"];
-  6 --> b0bd7ed2-a80b-44ce-994b-999e1d472281;
-  style b0bd7ed2-a80b-44ce-994b-999e1d472281 stroke:#2c3143,stroke-width:4px;
-  7["Visualisation"];
-  6 -->|outfile| 7;
-  fc618f3f-6aa5-4970-841d-56f4eabf47b7["Output\nVisualisation of reaction product"];
-  7 --> fc618f3f-6aa5-4970-841d-56f4eabf47b7;
-  style fc618f3f-6aa5-4970-841d-56f4eabf47b7 stroke:#2c3143,stroke-width:4px;
-  8["Drug-likeness"];
-  6 -->|outfile| 8;
-  7ad8c184-e10d-4fce-a402-3e79da6e09ac["Output\nDrug-likeness of product molecule"];
-  8 --> 7ad8c184-e10d-4fce-a402-3e79da6e09ac;
-  style 7ad8c184-e10d-4fce-a402-3e79da6e09ac stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -385,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

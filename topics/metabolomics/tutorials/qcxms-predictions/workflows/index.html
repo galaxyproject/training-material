@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,143 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Predicting EI+ mass spectra with QCxMS</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Predicting EI+ mass spectra with QCxMS</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">End-to-end EI+ mass spectra prediction workflow using QCxMS</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				RECETOX SpecDat
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Oct 1, 2024</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/qcxms-predictions/workflows/End-to-end-EI+-mass-spectra-prediction-workflow-using-QCxMS.html">End-to-end EI+ mass spectra prediction workflow using QCxMS</a></td>
 
-
-			License: 
+			<td>Oct 1, 2024</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/MIT">MIT</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/qcxms-predictions/workflows/End-to-end-EI+-mass-spectra-prediction-workflow-using-QCxMS.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/metabolomics-qcxms-predictions/versions/end-to-end-ei--mass-spectra-prediction-workflow-using-qcxms"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nInput Molecules with SMILES and NAME without a header."];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Parameter\nNumber of conformers to generate"];
-  style 1 fill:#ded,stroke:#393,stroke-width:4px;
-  2["ℹ️ Input Parameter\nOptimization Levels"];
-  style 2 fill:#ded,stroke:#393,stroke-width:4px;
-  3["ℹ️ Input Parameter\nQC Method"];
-  style 3 fill:#ded,stroke:#393,stroke-width:4px;
-  4["Cut SMILES column"];
-  0 -->|output| 4;
-  5["Cut NAME column"];
-  0 -->|output| 5;
-  6["Split file"];
-  4 -->|output| 6;
-  7["Split file"];
-  5 -->|output| 7;
-  8["Parse parameter value"];
-  7 -->|list_output_tab| 8;
-  9["Convert compounds from SMILES to SDF and add the name as title."];
-  8 -->|text_param| 9;
-  6 -->|list_output_tab| 9;
-  10["Merge the individual SDF files"];
-  9 -->|outfile| 10;
-  11["Generate conformers"];
-  10 -->|out_file1| 11;
-  1 -->|output| 11;
-  f4f8881e-cd64-42ae-8435-1288e4e473b5["Output\nconformer_output"];
-  11 --> f4f8881e-cd64-42ae-8435-1288e4e473b5;
-  style f4f8881e-cd64-42ae-8435-1288e4e473b5 stroke:#2c3143,stroke-width:4px;
-  12["Molecular format conversion "];
-  11 -->|outfile| 12;
-  5dcb6f02-62c9-4f43-9810-a10052b59b41["Output\nXYZ output"];
-  12 --> 5dcb6f02-62c9-4f43-9810-a10052b59b41;
-  style 5dcb6f02-62c9-4f43-9810-a10052b59b41 stroke:#2c3143,stroke-width:4px;
-  13["xTB molecular optimization"];
-  12 -->|file_outputs| 13;
-  2 -->|output| 13;
-  01a9a1af-e225-4613-94f9-dfdad37c93a2["Output\noptimized output"];
-  13 --> 01a9a1af-e225-4613-94f9-dfdad37c93a2;
-  style 01a9a1af-e225-4613-94f9-dfdad37c93a2 stroke:#2c3143,stroke-width:4px;
-  14["QCxMS neutral run"];
-  3 -->|output| 14;
-  13 -->|output| 14;
-  e6e6a07b-d478-4a87-b491-42abee9094b1["Output\n[.in] output"];
-  14 --> e6e6a07b-d478-4a87-b491-42abee9094b1;
-  style e6e6a07b-d478-4a87-b491-42abee9094b1 stroke:#2c3143,stroke-width:4px;
-  969b3e2f-fbee-48f9-829a-c0032580e6f8["Output\n[.xyz] output"];
-  14 --> 969b3e2f-fbee-48f9-829a-c0032580e6f8;
-  style 969b3e2f-fbee-48f9-829a-c0032580e6f8 stroke:#2c3143,stroke-width:4px;
-  dc4811ad-6cff-42cc-a2f8-52ab585f47fe["Output\n[.start] output"];
-  14 --> dc4811ad-6cff-42cc-a2f8-52ab585f47fe;
-  style dc4811ad-6cff-42cc-a2f8-52ab585f47fe stroke:#2c3143,stroke-width:4px;
-  15["QCxMS production run"];
-  14 -->|coords1| 15;
-  14 -->|coords2| 15;
-  14 -->|coords3| 15;
-  fc53168a-99f8-441c-9325-2d812bf03100["Output\nres output"];
-  15 --> fc53168a-99f8-441c-9325-2d812bf03100;
-  style fc53168a-99f8-441c-9325-2d812bf03100 stroke:#2c3143,stroke-width:4px;
-  16["Filter failed datasets"];
-  15 -->|res_files| 16;
-  17["QCxMS get results"];
-  12 -->|file_outputs| 17;
-  16 -->|output| 17;
-  d81bf92a-604c-46b9-86a9-bf3c2281ebcb["Output\nMSP output"];
-  17 --> d81bf92a-604c-46b9-86a9-bf3c2281ebcb;
-  style d81bf92a-604c-46b9-86a9-bf3c2281ebcb stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ✅ </td>
+			<td> ✅ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -409,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

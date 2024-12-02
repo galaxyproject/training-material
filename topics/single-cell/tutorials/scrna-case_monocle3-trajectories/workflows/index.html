@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,488 +211,76 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Inferring single cell trajectories with Monocle3</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Inferring single cell trajectories with Monocle3</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">AnnData object to Monocle input files</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated Nov 18, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.html">AnnData object to Monocle input files</a></td>
 
-
-			License: 
-				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-anndata-object-to-monocle-input-files"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
-
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nAnnData to extract genes & cells annotations"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nAnnData before processing to extract clean expression matrix"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["Extract cell annotations"];
-  0 -->|output| 2;
-  9d66a217-4269-4fb4-9a4e-520eedbb0c9d["Output\nExtracted cell annotations (obs)"];
-  2 --> 9d66a217-4269-4fb4-9a4e-520eedbb0c9d;
-  style 9d66a217-4269-4fb4-9a4e-520eedbb0c9d stroke:#2c3143,stroke-width:4px;
-  3["Extract gene annotations"];
-  0 -->|output| 3;
-  03537e97-d668-4ce2-ba6b-2952a18a2752["Output\nExtracted gene annotations (var)"];
-  3 --> 03537e97-d668-4ce2-ba6b-2952a18a2752;
-  style 03537e97-d668-4ce2-ba6b-2952a18a2752 stroke:#2c3143,stroke-width:4px;
-  4["Extract clean expression matrix"];
-  1 -->|output| 4;
-  963462c8-4ae0-486c-8173-d98339127850["Output\nUnprocessed expression matrix"];
-  4 --> 963462c8-4ae0-486c-8173-d98339127850;
-  style 963462c8-4ae0-486c-8173-d98339127850 stroke:#2c3143,stroke-width:4px;
-  5["Filter out unwanted cell types"];
-  2 -->|obs| 5;
-  5dcb7029-8d03-445d-bb3e-a3119e502be4["Output\nCells without macrophages"];
-  5 --> 5dcb7029-8d03-445d-bb3e-a3119e502be4;
-  style 5dcb7029-8d03-445d-bb3e-a3119e502be4 stroke:#2c3143,stroke-width:4px;
-  6["gene_short_name annotation"];
-  3 -->|var| 6;
-  15fd415b-2d73-4a1d-92ad-200bb2e73853["Output\nGenes table with gene_short_name colname"];
-  6 --> 15fd415b-2d73-4a1d-92ad-200bb2e73853;
-  style 15fd415b-2d73-4a1d-92ad-200bb2e73853 stroke:#2c3143,stroke-width:4px;
-  7["Cut cells IDs"];
-  5 -->|out_file1| 7;
-  f9bde249-43b9-4424-8285-e437549223e2["Output\nFiltered cells IDs "];
-  7 --> f9bde249-43b9-4424-8285-e437549223e2;
-  style f9bde249-43b9-4424-8285-e437549223e2 stroke:#2c3143,stroke-width:4px;
-  8["Cut genes IDs"];
-  6 -->|out_file1| 8;
-  b22efa1d-db99-435f-9357-74150ac9a437["Output\nGenes IDs"];
-  8 --> b22efa1d-db99-435f-9357-74150ac9a437;
-  style b22efa1d-db99-435f-9357-74150ac9a437 stroke:#2c3143,stroke-width:4px;
-  9["Filter matrix by cells"];
-  7 -->|out_file1| 9;
-  4 -->|X| 9;
-  b45f18b6-e385-41a1-a8f0-f94e6616e2b3["Output\nPre-filtered matrix (by cells)"];
-  9 --> b45f18b6-e385-41a1-a8f0-f94e6616e2b3;
-  style b45f18b6-e385-41a1-a8f0-f94e6616e2b3 stroke:#2c3143,stroke-width:4px;
-  10["Remove duplicate column cells IDs"];
-  9 -->|out_file1| 10;
-  f4d6a581-9b42-41dc-9a4a-278fe5d6591c["Output\nFiltered matrix (by cells) "];
-  10 --> f4d6a581-9b42-41dc-9a4a-278fe5d6591c;
-  style f4d6a581-9b42-41dc-9a4a-278fe5d6591c stroke:#2c3143,stroke-width:4px;
-  11["Transpose matrix"];
-  10 -->|output| 11;
-  e4eb8fb3-2028-41fb-8aca-b1c0a6e6bfe5["Output\nfiltered matrix (by cells) transposed"];
-  11 --> e4eb8fb3-2028-41fb-8aca-b1c0a6e6bfe5;
-  style e4eb8fb3-2028-41fb-8aca-b1c0a6e6bfe5 stroke:#2c3143,stroke-width:4px;
-  12["Filter matrix by genes"];
-  8 -->|out_file1| 12;
-  11 -->|out_file| 12;
-  c0481255-0187-407c-9f29-f4c0069d9285["Output\nPre-filtered matrix (by cells & genes)"];
-  12 --> c0481255-0187-407c-9f29-f4c0069d9285;
-  style c0481255-0187-407c-9f29-f4c0069d9285 stroke:#2c3143,stroke-width:4px;
-  13["Remove duplicate column genes IDs"];
-  12 -->|out_file1| 13;
-  4dcd8e60-1298-4886-be8f-af1eac9f20f7["Output\nFiltered matrix (by cells & genes)"];
-  13 --> 4dcd8e60-1298-4886-be8f-af1eac9f20f7;
-  style 4dcd8e60-1298-4886-be8f-af1eac9f20f7 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Monocle3 workflow</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated Nov 18, 2022</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
-				
-				None Specified, defaults to
-				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
-				
-				<br/>
-			Tests: ❌
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
-
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nExpression matrix input"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nCell annotations input"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nGene annotations input"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["Monocle3 create"];
-  1 -->|output| 3;
-  0 -->|output| 3;
-  2 -->|output| 3;
-  30db218d-f9e5-426d-ac9b-7823743ab5fb["Output\nMonocle3 create on input dataset(s): cds3"];
-  3 --> 30db218d-f9e5-426d-ac9b-7823743ab5fb;
-  style 30db218d-f9e5-426d-ac9b-7823743ab5fb stroke:#2c3143,stroke-width:4px;
-  4["Monocle3 preprocess"];
-  3 -->|output_rds| 4;
-  38996ee0-0c00-4a01-ad18-f2e505eaf780["Output\nMonocle3 preprocess on input dataset(s): cds3"];
-  4 --> 38996ee0-0c00-4a01-ad18-f2e505eaf780;
-  style 38996ee0-0c00-4a01-ad18-f2e505eaf780 stroke:#2c3143,stroke-width:4px;
-  5["Monocle3 reduceDim"];
-  4 -->|output_rds| 5;
-  21edf68f-72df-457d-aad7-c5fc5afa2b6b["Output\nMonocle3 reduceDim on input dataset(s): cds3"];
-  5 --> 21edf68f-72df-457d-aad7-c5fc5afa2b6b;
-  style 21edf68f-72df-457d-aad7-c5fc5afa2b6b stroke:#2c3143,stroke-width:4px;
-  6["Monocle3 partition"];
-  5 -->|output_rds| 6;
-  fdb0e520-27c4-43a0-8f27-a25832a0816d["Output\nMonocle3 partition on input dataset(s): cds3"];
-  6 --> fdb0e520-27c4-43a0-8f27-a25832a0816d;
-  style fdb0e520-27c4-43a0-8f27-a25832a0816d stroke:#2c3143,stroke-width:4px;
-  7["Plot cell type"];
-  5 -->|output_rds| 7;
-  5e309658-e20f-4da1-8841-818f16fa8f01["Output\nCell type plot"];
-  7 --> 5e309658-e20f-4da1-8841-818f16fa8f01;
-  style 5e309658-e20f-4da1-8841-818f16fa8f01 stroke:#2c3143,stroke-width:4px;
-  8["Plot genotype"];
-  5 -->|output_rds| 8;
-  aca3b2c0-2d3b-4a4e-8732-cf6ddc7844a4["Output\nGenotype plot"];
-  8 --> aca3b2c0-2d3b-4a4e-8732-cf6ddc7844a4;
-  style aca3b2c0-2d3b-4a4e-8732-cf6ddc7844a4 stroke:#2c3143,stroke-width:4px;
-  9["Plot batch"];
-  5 -->|output_rds| 9;
-  c8eec2e4-1a64-47bb-812b-4002968c57c8["Output\nBatch plot"];
-  9 --> c8eec2e4-1a64-47bb-812b-4002968c57c8;
-  style c8eec2e4-1a64-47bb-812b-4002968c57c8 stroke:#2c3143,stroke-width:4px;
-  10["Plot sex"];
-  5 -->|output_rds| 10;
-  c75954dd-34d5-4a20-bcf3-e5cd92d74885["Output\nSex plot"];
-  10 --> c75954dd-34d5-4a20-bcf3-e5cd92d74885;
-  style c75954dd-34d5-4a20-bcf3-e5cd92d74885 stroke:#2c3143,stroke-width:4px;
-  11["Monocle3 top markers"];
-  6 -->|output_rds| 11;
-  12["Plot genes"];
-  6 -->|output_rds| 12;
-  f91c22a3-8c6d-432a-92c5-cb010115fa86["Output\nGene expression plot"];
-  12 --> f91c22a3-8c6d-432a-92c5-cb010115fa86;
-  style f91c22a3-8c6d-432a-92c5-cb010115fa86 stroke:#2c3143,stroke-width:4px;
-  13["Plot partition"];
-  6 -->|output_rds| 13;
-  f4c5f89b-edd7-489c-b4a2-a7a3e7d6a89d["Output\nPartition plot"];
-  13 --> f4c5f89b-edd7-489c-b4a2-a7a3e7d6a89d;
-  style f4c5f89b-edd7-489c-b4a2-a7a3e7d6a89d stroke:#2c3143,stroke-width:4px;
-  14["Plot cluster"];
-  6 -->|output_rds| 14;
-  a2c1a628-d79d-4e37-ad33-de92033021a8["Output\nCluster plot"];
-  14 --> a2c1a628-d79d-4e37-ad33-de92033021a8;
-  style a2c1a628-d79d-4e37-ad33-de92033021a8 stroke:#2c3143,stroke-width:4px;
-  15["Monocle3 learnGraph"];
-  6 -->|output_rds| 15;
-  ed2003aa-4680-409f-8d79-e79b878a786c["Output\nMonocle3 learnGraph on input dataset(s): cds3"];
-  15 --> ed2003aa-4680-409f-8d79-e79b878a786c;
-  style ed2003aa-4680-409f-8d79-e79b878a786c stroke:#2c3143,stroke-width:4px;
-  16["Plot learned trajectory"];
-  15 -->|output_rds| 16;
-  6fa555f1-b4f2-4e5d-bce1-ed462d8e056d["Output\nCell types & learned trajectory path plot"];
-  16 --> 6fa555f1-b4f2-4e5d-bce1-ed462d8e056d;
-  style 6fa555f1-b4f2-4e5d-bce1-ed462d8e056d stroke:#2c3143,stroke-width:4px;
-  17["Monocle3 orderCells"];
-  15 -->|output_rds| 17;
-  96d10412-3d7f-4970-b541-6f4367fa3f37["Output\nMonocle3 orderCells on input dataset(s): cds3"];
-  17 --> 96d10412-3d7f-4970-b541-6f4367fa3f37;
-  style 96d10412-3d7f-4970-b541-6f4367fa3f37 stroke:#2c3143,stroke-width:4px;
-  18["Monocle3 diffExp"];
-  17 -->|output_rds| 18;
-  db1dc457-2d6e-47cc-b7ce-d0a4d23e9498["Output\nDifferential expression of genes - table"];
-  18 --> db1dc457-2d6e-47cc-b7ce-d0a4d23e9498;
-  style db1dc457-2d6e-47cc-b7ce-d0a4d23e9498 stroke:#2c3143,stroke-width:4px;
-  19["Plot pseudotime"];
-  17 -->|output_rds| 19;
-  d1b3efd2-0a81-4dad-8652-589c2678fbaa["Output\nPseudotime plot"];
-  19 --> d1b3efd2-0a81-4dad-8652-589c2678fbaa;
-  style d1b3efd2-0a81-4dad-8652-589c2678fbaa stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Trajectory analysis using Monocle3 - full tutorial workflow</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Julia Jakiela
-				
-			</h6>
-
-			<p class="card-text">
-				<small class="text-muted">Last updated May 16, 2023</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
-
-
-			License: 
+			<td>Nov 18, 2022</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Trajectory-analysis-using-Monocle3---full-tutorial-workflow.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/trajectory-analysis-using-monocle3---full-tutorial-workflow"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nAnnData to extract genes & cells annotations"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nAnnData before processing to extract clean expression matrix"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["Extract cell annotations"];
-  0 -->|output| 2;
-  0646798d-3a5d-420a-a7cf-cde6cec722d5["Output\nExtracted cell annotations (obs)"];
-  2 --> 0646798d-3a5d-420a-a7cf-cde6cec722d5;
-  style 0646798d-3a5d-420a-a7cf-cde6cec722d5 stroke:#2c3143,stroke-width:4px;
-  3["Extract gene annotations"];
-  0 -->|output| 3;
-  84162745-68b0-41a5-b06e-a285440ba095["Output\nExtracted gene annotations (var)"];
-  3 --> 84162745-68b0-41a5-b06e-a285440ba095;
-  style 84162745-68b0-41a5-b06e-a285440ba095 stroke:#2c3143,stroke-width:4px;
-  4["Extract clean expression matrix"];
-  1 -->|output| 4;
-  3f03af0c-ac41-4450-b5ba-639a79ea543b["Output\nUnprocessed expression matrix"];
-  4 --> 3f03af0c-ac41-4450-b5ba-639a79ea543b;
-  style 3f03af0c-ac41-4450-b5ba-639a79ea543b stroke:#2c3143,stroke-width:4px;
-  5["Filter out macrophages"];
-  2 -->|obs| 5;
-  fb81e9a1-0603-419a-83f5-0c9f94939b16["Output\nCells without macrophages"];
-  5 --> fb81e9a1-0603-419a-83f5-0c9f94939b16;
-  style fb81e9a1-0603-419a-83f5-0c9f94939b16 stroke:#2c3143,stroke-width:4px;
-  6["gene_short_name annotation"];
-  3 -->|var| 6;
-  94a60e6c-cdf7-48e5-8b55-d221cef22688["Output\nGenes table with gene_short_name colname"];
-  6 --> 94a60e6c-cdf7-48e5-8b55-d221cef22688;
-  style 94a60e6c-cdf7-48e5-8b55-d221cef22688 stroke:#2c3143,stroke-width:4px;
-  7["Cut cells IDs"];
-  5 -->|out_file1| 7;
-  34146c30-2666-481f-8d49-a849d5d3aa91["Output\nFiltered cells IDs "];
-  7 --> 34146c30-2666-481f-8d49-a849d5d3aa91;
-  style 34146c30-2666-481f-8d49-a849d5d3aa91 stroke:#2c3143,stroke-width:4px;
-  8["Cut genes IDs"];
-  6 -->|out_file1| 8;
-  8f38fb93-cb30-4fbc-90c5-7f6bd023feea["Output\nGenes IDs"];
-  8 --> 8f38fb93-cb30-4fbc-90c5-7f6bd023feea;
-  style 8f38fb93-cb30-4fbc-90c5-7f6bd023feea stroke:#2c3143,stroke-width:4px;
-  9["Filter matrix by cells"];
-  7 -->|out_file1| 9;
-  4 -->|X| 9;
-  f654c045-5fea-43f9-96d6-492c810593d2["Output\nPre-filtered matrix (by cells)"];
-  9 --> f654c045-5fea-43f9-96d6-492c810593d2;
-  style f654c045-5fea-43f9-96d6-492c810593d2 stroke:#2c3143,stroke-width:4px;
-  10["Remove duplicate column cells IDs"];
-  9 -->|out_file1| 10;
-  f633c125-a4d0-4fa7-ab87-022349f4ac70["Output\nFiltered matrix (by cells) "];
-  10 --> f633c125-a4d0-4fa7-ab87-022349f4ac70;
-  style f633c125-a4d0-4fa7-ab87-022349f4ac70 stroke:#2c3143,stroke-width:4px;
-  11["Transpose matrix"];
-  10 -->|output| 11;
-  3202091e-1afc-4f50-8922-1f9e50c490fc["Output\nfiltered matrix (by cells) transposed"];
-  11 --> 3202091e-1afc-4f50-8922-1f9e50c490fc;
-  style 3202091e-1afc-4f50-8922-1f9e50c490fc stroke:#2c3143,stroke-width:4px;
-  12["Filter matrix by genes"];
-  8 -->|out_file1| 12;
-  11 -->|out_file| 12;
-  6c23cbd5-a1b5-428e-8ff9-ebac4893ad88["Output\nPre-filtered matrix (by cells & genes)"];
-  12 --> 6c23cbd5-a1b5-428e-8ff9-ebac4893ad88;
-  style 6c23cbd5-a1b5-428e-8ff9-ebac4893ad88 stroke:#2c3143,stroke-width:4px;
-  13["Remove duplicate column genes IDs"];
-  12 -->|out_file1| 13;
-  25839326-0b5d-4e74-91ec-24e22c08f7c5["Output\nFiltered matrix (by cells & genes)"];
-  13 --> 25839326-0b5d-4e74-91ec-24e22c08f7c5;
-  style 25839326-0b5d-4e74-91ec-24e22c08f7c5 stroke:#2c3143,stroke-width:4px;
-  14["Monocle3 create"];
-  5 -->|out_file1| 14;
-  13 -->|output| 14;
-  6 -->|out_file1| 14;
-  f8c5589c-a70d-416e-a9de-ebc987f61fc3["Output\nMonocle3 create on input dataset(s): cds3"];
-  14 --> f8c5589c-a70d-416e-a9de-ebc987f61fc3;
-  style f8c5589c-a70d-416e-a9de-ebc987f61fc3 stroke:#2c3143,stroke-width:4px;
-  15["Monocle3 preprocess"];
-  14 -->|output_rds| 15;
-  c134942f-60e7-4cd0-8c32-da4a303b879d["Output\nMonocle3 preprocess on input dataset(s): cds3"];
-  15 --> c134942f-60e7-4cd0-8c32-da4a303b879d;
-  style c134942f-60e7-4cd0-8c32-da4a303b879d stroke:#2c3143,stroke-width:4px;
-  16["Monocle3 reduceDim"];
-  15 -->|output_rds| 16;
-  2c9fb108-2a1c-41df-a8d8-81a18b66d2a1["Output\nMonocle3 reduceDim on input dataset(s): cds3"];
-  16 --> 2c9fb108-2a1c-41df-a8d8-81a18b66d2a1;
-  style 2c9fb108-2a1c-41df-a8d8-81a18b66d2a1 stroke:#2c3143,stroke-width:4px;
-  17["Monocle3 partition"];
-  16 -->|output_rds| 17;
-  93371c10-6583-47fc-830f-9a90dc980766["Output\nMonocle3 partition on input dataset(s): cds3"];
-  17 --> 93371c10-6583-47fc-830f-9a90dc980766;
-  style 93371c10-6583-47fc-830f-9a90dc980766 stroke:#2c3143,stroke-width:4px;
-  18["Plot cell type"];
-  16 -->|output_rds| 18;
-  f096d060-82e8-4847-9e8f-b22c9288f565["Output\nCell type plot"];
-  18 --> f096d060-82e8-4847-9e8f-b22c9288f565;
-  style f096d060-82e8-4847-9e8f-b22c9288f565 stroke:#2c3143,stroke-width:4px;
-  19["Plot genotype"];
-  16 -->|output_rds| 19;
-  aab28bb1-e2e7-4b7d-9b2b-1cab64bea287["Output\nGenotype plot"];
-  19 --> aab28bb1-e2e7-4b7d-9b2b-1cab64bea287;
-  style aab28bb1-e2e7-4b7d-9b2b-1cab64bea287 stroke:#2c3143,stroke-width:4px;
-  20["Plot batch"];
-  16 -->|output_rds| 20;
-  9b362eee-9238-47c5-a4c2-85f3995430f4["Output\nBatch plot"];
-  20 --> 9b362eee-9238-47c5-a4c2-85f3995430f4;
-  style 9b362eee-9238-47c5-a4c2-85f3995430f4 stroke:#2c3143,stroke-width:4px;
-  21["Plot sex"];
-  16 -->|output_rds| 21;
-  c2a1e104-ef2d-4b66-ac2b-bf0251714434["Output\nSex plot"];
-  21 --> c2a1e104-ef2d-4b66-ac2b-bf0251714434;
-  style c2a1e104-ef2d-4b66-ac2b-bf0251714434 stroke:#2c3143,stroke-width:4px;
-  22["Monocle3 top markers"];
-  17 -->|output_rds| 22;
-  23["Plot genes"];
-  17 -->|output_rds| 23;
-  e8867379-82c6-4c32-a2d3-0b24670269ae["Output\nGene expression plot"];
-  23 --> e8867379-82c6-4c32-a2d3-0b24670269ae;
-  style e8867379-82c6-4c32-a2d3-0b24670269ae stroke:#2c3143,stroke-width:4px;
-  24["Plot partition"];
-  17 -->|output_rds| 24;
-  3f7b0a7c-85d6-430b-8385-fa9a76385c0e["Output\nPartition plot"];
-  24 --> 3f7b0a7c-85d6-430b-8385-fa9a76385c0e;
-  style 3f7b0a7c-85d6-430b-8385-fa9a76385c0e stroke:#2c3143,stroke-width:4px;
-  25["Plot cluster"];
-  17 -->|output_rds| 25;
-  40b65826-f73e-4054-a56d-b241985d6996["Output\nCluster plot"];
-  25 --> 40b65826-f73e-4054-a56d-b241985d6996;
-  style 40b65826-f73e-4054-a56d-b241985d6996 stroke:#2c3143,stroke-width:4px;
-  26["Monocle3 learnGraph"];
-  17 -->|output_rds| 26;
-  294b1a49-cec6-49d0-bcd4-3a954da67bec["Output\nMonocle3 learnGraph on input dataset(s): cds3"];
-  26 --> 294b1a49-cec6-49d0-bcd4-3a954da67bec;
-  style 294b1a49-cec6-49d0-bcd4-3a954da67bec stroke:#2c3143,stroke-width:4px;
-  27["Plot learned trajectory"];
-  26 -->|output_rds| 27;
-  c85ddefe-8eaf-4d21-93ed-ca0859286bf0["Output\nCell types & learned trajectory path plot"];
-  27 --> c85ddefe-8eaf-4d21-93ed-ca0859286bf0;
-  style c85ddefe-8eaf-4d21-93ed-ca0859286bf0 stroke:#2c3143,stroke-width:4px;
-  28["Monocle3 orderCells"];
-  26 -->|output_rds| 28;
-  5aea5752-b767-4fc8-8741-1f4d1c659a41["Output\nMonocle3 orderCells on input dataset(s): cds3"];
-  28 --> 5aea5752-b767-4fc8-8741-1f4d1c659a41;
-  style 5aea5752-b767-4fc8-8741-1f4d1c659a41 stroke:#2c3143,stroke-width:4px;
-  29["Monocle3 diffExp"];
-  28 -->|output_rds| 29;
-  3c298624-9f06-4e52-b2a8-fb834b87c296["Output\nDifferential expression of genes - table"];
-  29 --> 3c298624-9f06-4e52-b2a8-fb834b87c296;
-  style 3c298624-9f06-4e52-b2a8-fb834b87c296 stroke:#2c3143,stroke-width:4px;
-  30["Plot pseudotime"];
-  28 -->|output_rds| 30;
-  813d15bb-0771-4aed-9226-4874c1ddba59["Output\nPseudotime plot"];
-  30 --> 813d15bb-0771-4aed-9226-4874c1ddba59;
-  style 813d15bb-0771-4aed-9226-4874c1ddba59 stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.html">Monocle3 workflow</a></td>
 
+			<td>Nov 18, 2022</td>
+			<td>1</td>
+			<td>
+				
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				
+			</td>
 
-</div>
+			<td> ❌ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Trajectory-analysis-using-Monocle3---full-tutorial-workflow.html">Trajectory analysis using Monocle3 - full tutorial workflow</a></td>
 
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
+			<td>May 16, 2023</td>
+			<td>1</td>
+			<td>
+				
+				<a href="https://spdx.org/licenses/CC-BY-4.0">CC-BY-4.0</a>
+				
+			</td>
 
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -754,7 +342,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>

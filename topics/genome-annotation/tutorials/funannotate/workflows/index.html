@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@1979953112a1561c1dfa4b455685706c02404dd9",
+		release: "galaxy-training-network@d4e397bc3fa30423539d37c7baed5f3d278b39a5",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -211,152 +211,44 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
         <div class="container main-content" role="main">
         
 
-<section class="tutorial">
-    <h1 data-toc-skip>Workflows</h1>
-    <p>These workflows are associated with <a href="../tutorial.html">Genome annotation with Funannotate</a></p>
-    <p>To use these workflows in Galaxy you can either click the links to download the workflows, or you can right-click and copy the link to the workflow which can be used in the Galaxy form to import workflows.</p>
+<section>
+	<h1 data-toc-skip>Workflows</h1>
+	<p>These workflows are associated with <a href="../tutorial.html">Genome annotation with Funannotate</a></p>
 
+<table  class="table table-striped">
+	<thead>
+		<tr>
+			<th>Workflow</th>
 
-    <div class="row">
-    
-	<div class="col-md-6">
-		<div class="card">
-		<div class="card-body">
-			<h5 class="card-title">Funannotate</h5>
-			<h6 class="card-subtitle mb-2 text-muted">
-				
-				Anthony Bretaudeau
-				
-			</h6>
+			<th>Updated</th>
+			<th>Version</th>
+			<th>License</th>
 
-			<p class="card-text">
-				<small class="text-muted">Last updated May 3, 2023</small>
-			</p>
-			<p class="card-text">
-			<span tabindex="0" role="button" class="workflow show-when-galaxy-proxy-active" data-workflow="https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate">Launch in Tutorial Mode</span>
-			<a href="/training-material/faqs/galaxy/tutorial_mode.html" class="hide-when-galaxy-proxy-active"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span></a>
-			<br/>
+			<th>Tests</th>
+			<th>Reports</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		<tr>
+			<td><a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/workflows/funannotate.html">Funannotate</a></td>
 
-
-			License: 
+			<td>May 3, 2023</td>
+			<td>1</td>
+			<td>
 				
 				<a href="https://spdx.org/licenses/GPL-3.0-or-later">GPL-3.0-or-later</a>
 				
-				<br/>
-			Tests: ✅
-			Results: Not yet automated
-			</p>
-<div class="dropdown">
-  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
-    Import or Download
-  </button>
-  <div class="dropdown-menu">
-			<a href="https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/funannotate/workflows/funannotate.ga" class="dropdown-item">Download Galaxy Workflow.ga</a>
-			
-			
-			<a href="https://usegalaxy.org/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Main</a>
-			
-			<a href="https://usegalaxy.eu/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Europe</a>
-			
-			<a href="https://usegalaxy.fr/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy France</a>
-			
-			<a href="https://usegalaxy.org.au/workflows/trs_import?run_form=true&trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate" class="dropdown-item hide-when-galaxy-proxy-active">Galaxy Australia</a>
-			
-			<a href="https://my.galaxy.training/?path=/workflows/trs_import%3Frun_form=true%26trs_url=https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/genome-annotation-funannotate/versions/funannotate"
-			   class="dropdown-item hide-when-galaxy-proxy-active">Import to another server (≥23.0+ only!)</a>
-  </div>
-</div>
+			</td>
 
-	<pre class="mermaid">flowchart TD
-  0["ℹ️ Input Dataset\nGenome assembly"];
-  style 0 stroke:#2c3143,stroke-width:4px;
-  1["ℹ️ Input Dataset\nRNASeq reads forward"];
-  style 1 stroke:#2c3143,stroke-width:4px;
-  2["ℹ️ Input Dataset\nRNASeq reads reverse"];
-  style 2 stroke:#2c3143,stroke-width:4px;
-  3["ℹ️ Input Dataset\nProtein evidence sequences"];
-  style 3 stroke:#2c3143,stroke-width:4px;
-  4["ℹ️ Input Dataset\nNCBI submission template"];
-  style 4 stroke:#2c3143,stroke-width:4px;
-  5["ℹ️ Input Dataset\nAlternate annotation gbk"];
-  style 5 stroke:#2c3143,stroke-width:4px;
-  6["ℹ️ Input Dataset\nAlternate annotation gff3"];
-  style 6 stroke:#2c3143,stroke-width:4px;
-  7["RNA STAR"];
-  0 -->|output| 7;
-  1 -->|output| 7;
-  2 -->|output| 7;
-  79cf59ea-3aef-4cb8-9c70-5b42e03a5da9["Output\nMapped RNASeq"];
-  7 --> 79cf59ea-3aef-4cb8-9c70-5b42e03a5da9;
-  style 79cf59ea-3aef-4cb8-9c70-5b42e03a5da9 stroke:#2c3143,stroke-width:4px;
-  8["Funannotate predict annotation"];
-  3 -->|output| 8;
-  7 -->|mapped_reads| 8;
-  0 -->|output| 8;
-  9["eggNOG Mapper"];
-  8 -->|fasta_proteins| 9;
-  10["InterProScan"];
-  8 -->|fasta_proteins| 10;
-  11["Funannotate functional"];
-  9 -->|annotations| 11;
-  8 -->|annot_gbk| 11;
-  10 -->|outfile_xml| 11;
-  4 -->|output| 11;
-  d0694cd1-6d81-4d72-83b9-94cb57dc1502["Output\nFinal annotation (genbank)"];
-  11 --> d0694cd1-6d81-4d72-83b9-94cb57dc1502;
-  style d0694cd1-6d81-4d72-83b9-94cb57dc1502 stroke:#2c3143,stroke-width:4px;
-  9a1e7b70-1090-41ed-8637-65b7372a9f6c["Output\nFinal annotation (CDS sequences)"];
-  11 --> 9a1e7b70-1090-41ed-8637-65b7372a9f6c;
-  style 9a1e7b70-1090-41ed-8637-65b7372a9f6c stroke:#2c3143,stroke-width:4px;
-  99fffa40-2196-491d-9a66-559ebf2d9561["Output\nFinal annotation (mRNA sequences)"];
-  11 --> 99fffa40-2196-491d-9a66-559ebf2d9561;
-  style 99fffa40-2196-491d-9a66-559ebf2d9561 stroke:#2c3143,stroke-width:4px;
-  17b03b77-0485-4176-b2b3-03bfa2d3bcb0["Output\nFinal annotation (protein sequences)"];
-  11 --> 17b03b77-0485-4176-b2b3-03bfa2d3bcb0;
-  style 17b03b77-0485-4176-b2b3-03bfa2d3bcb0 stroke:#2c3143,stroke-width:4px;
-  4a0602fc-e6d2-43fc-9957-344707c22c05["Output\nFinal annotation (GFF3)"];
-  11 --> 4a0602fc-e6d2-43fc-9957-344707c22c05;
-  style 4a0602fc-e6d2-43fc-9957-344707c22c05 stroke:#2c3143,stroke-width:4px;
-  12["JBrowse"];
-  0 -->|output| 12;
-  11 -->|gff3| 12;
-  7 -->|mapped_reads| 12;
-  ac4d8805-f123-44d2-b30f-8ac906cc471f["Output\nJBrowse"];
-  12 --> ac4d8805-f123-44d2-b30f-8ac906cc471f;
-  style ac4d8805-f123-44d2-b30f-8ac906cc471f stroke:#2c3143,stroke-width:4px;
-  13["Funannotate compare"];
-  5 -->|output| 13;
-  11 -->|gbk| 13;
-  e531c81f-f6b7-4c82-a712-c562873ff714["Output\nFunannotate compare report"];
-  13 --> e531c81f-f6b7-4c82-a712-c562873ff714;
-  style e531c81f-f6b7-4c82-a712-c562873ff714 stroke:#2c3143,stroke-width:4px;
-  14["AEGeAn ParsEval"];
-  6 -->|output| 14;
-  11 -->|gff3| 14;
-  0d776b46-2c1c-4083-9f9d-a213fa62eb81["Output\nAEGeAN report"];
-  14 --> 0d776b46-2c1c-4083-9f9d-a213fa62eb81;
-  style 0d776b46-2c1c-4083-9f9d-a213fa62eb81 stroke:#2c3143,stroke-width:4px;
-  15["Busco"];
-  11 -->|fa_proteins| 15;
-  57a619f5-b331-4ca6-8e6e-72eb61860032["Output\nBusco summary"];
-  15 --> 57a619f5-b331-4ca6-8e6e-72eb61860032;
-  style 57a619f5-b331-4ca6-8e6e-72eb61860032 stroke:#2c3143,stroke-width:4px;
-  97d23764-ad4a-4d69-948c-c81afb76fbaf["Output\nBusco image"];
-  15 --> 97d23764-ad4a-4d69-948c-c81afb76fbaf;
-  style 97d23764-ad4a-4d69-948c-c81afb76fbaf stroke:#2c3143,stroke-width:4px;
-	</pre>
-		</div><!-- card-body -->
-	</div><!-- card -->
-</div><!-- col -->
-
-
-</div>
-
-   <h1 style="margin-top:2em">Importing into Galaxy</h1>
-   Below are the instructions for importing these workflows directly into your Galaxy server of choice to start using them!
-
-   <!--SNIPPET--><blockquote class="hands_on">   <div class="box-title hands_on-title" id="hands-on-importing-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i> Hands-on: Importing a workflow</div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Import</strong> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul>   <p>Below is a short video demonstrating how to import a workflow from GitHub using this procedure:</p>   <figure> <iframe credentialless="" allowfullscreen="" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin allow-popups" allow="accelerometer 'none'; ambient-light-sensor 'none'; autoplay 'none'; battery 'none'; bluetooth 'none'; browsing-topics 'none'; camera 'none'; ch-ua 'none'; display-capture 'none'; domain-agent 'none'; document-domain 'none'; encrypted-media 'none'; execution-while-not-rendered 'none'; execution-while-out-of-viewport 'none'; gamepad 'none'; geolocation 'none'; gyroscope 'none'; hid 'none'; identity-credentials-get 'none'; idle-detection 'none'; keyboard-map 'none'; local-fonts 'none'; magnetometer 'none'; microphone 'none'; midi 'none'; navigation-override 'none'; otp-credentials 'none'; payment 'none'; picture-in-picture 'none'; publickey-credentials-create 'none'; publickey-credentials-get 'none'; screen-wake-lock 'none'; serial 'none'; speaker-selection 'none'; sync-xhr 'none'; usb 'none'; web-share 'none'; window-management 'none'; xr-spatial-tracking 'none'" csp="sandbox allow-scripts allow-same-origin;" width="560" height="315" src="https://www.youtube-nocookie.com/embed/hoP36Te5wko" title="Importing a workflow from URL" frameborder="0" loading="lazy"></iframe> <figcaption>   <span class="figcaption-prefix"><strong>Video</strong>:</span> Importing a workflow from URL</figcaption> </figure> </blockquote> <!--END_SNIPPET-->
-
+			<td> ✅ </td>
+			<td> ❌ </td>
+			<td> ❌ </td>
+		</tr>
+	
+	</tbody>
+</table>
 </section>
 
         </div>
@@ -418,7 +310,7 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/1979953112a1561c1dfa4b455685706c02404dd9">1979953</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/d4e397bc3fa30423539d37c7baed5f3d278b39a5">d4e397b</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
