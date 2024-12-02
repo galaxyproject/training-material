@@ -9,7 +9,7 @@ questions:
 - How can I evaluate the model to confirm its performance?
 objectives:
 - Use a large dataset of immune checkpoint blockade (ICB)-treated and non-ICB-treated patients across 18 solid tumor types, encompassing a wide range of clinical, pathologic and genomic features to build a Machine Learning Model.
-- Build a Machine Learing model using PyCaret tool available in Galaxy.
+- Build a Machine Learning model using PyCaret in Galaxy.
 - Evaluate the model for robustness by comparing it with the original LORIS LLR6 model published by Chang et al., 2024.
 
 time_estimation: 1H
