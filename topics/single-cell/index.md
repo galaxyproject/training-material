@@ -7,9 +7,30 @@ topic_name: single-cell
 
 ## Want to explore analysis beyond our tutorials?
 
-Check out workflows shared by users like you!
+<iframe src="https://training.galaxyproject.org/training-material/workflows/embed.html?query=single-cell" height="600px" width="100%" class="gtn-embed" frameborder="1"></iframe>
 
-<iframe src="https://training.galaxyproject.org/training-material/workflows/embed.html?query=single-cell" height="600px" width="100%" class="gtn-embed" frameborder="0"></iframe>
+## News & Events
+<section>
+    <h2 class="mb-3">News and Events</h2>
+      <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html"></iframe>
+  </div>
+</section>
+
+<div class="row">
+    <!-- First Column: Publicly Shared Workflow -->
+  <div class="col-md-6 mb-4">
+    <h2 class="mb-3">Publicly Shared Workflow</h2>
+    <p>Check out workflows shared by users like you!</p>
+    <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html"></iframe>
+  </div>
+
+  <!-- Second Column: News and Events -->
+  <div class="col-md-6 mb-4">
+    <h2 class="mb-3">News and Events</h2>
+    <iframe width="100%" height="600px" src="https://training.galaxyproject.org/training-material/feeds/single-cell-month.w.html"></iframe>
+  </div>
+</div>
+
 
 ## Want to contribute?
 
