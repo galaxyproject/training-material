@@ -155,7 +155,7 @@ After training and testing your model, you should see two new files in your hist
 
 - PyCaret Model Report: This file contains all the plots for the models trained, along with the best model selected.
 
-For the purposes of this tutorial, we will focus on the PyCaret Model Report.
+For this tutorial, we will focus on the PyCaret Model Report.
 
 # PyCaret Model Report 
 The PyCaret HTML report provides a comprehensive and interactive overview of the trained model’s performance in an accessible, browser-ready format. This report documents key aspects of the model’s training and evaluation process, offering insights into how well the model performed on both the training and test datasets. The report consists of four tabs: Setup & Best Model, Best Model Plots, Feature Importance, and Explainer.
