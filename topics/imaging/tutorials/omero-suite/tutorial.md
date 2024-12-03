@@ -17,6 +17,8 @@ key_points:
 contributions:
   authorship:
     - rmassei
+  editing:
+    - bgruening
   funding:
     - nfdi4bioimage
 ---
@@ -49,7 +51,6 @@ perform image analysis.
 > 1. Learn the different tools of the Galaxy OMERO-suite to manage image data and metadata
 > 2. Get data from an OMERO instance using the Galaxy OMERO-suite
 > 3. Build a pipeline for image and metadata upload into OMERO
->
 {: .agenda}
 
 
@@ -111,8 +112,6 @@ To this end, we have prepared an integrative dataset with images, metadata and r
 > 
 > 3. Tag each dataset with a label like "image" (tif files), "rois" (tabular files) and "metadata" (CSV file)
 > for easy identification
->
-
 {: .hands_on}
 
 # Upload images and metadata
@@ -133,7 +132,6 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 > 
 >    A log file text file will be
 >    created with the OMERO ID of the newly imported images
->
 {: .hands_on}
 
 After tool execution, you can check the images in your OMERO instance!
@@ -163,7 +161,6 @@ We will learn now how to upload **Key-Value pairs** using the **OMERO Metadata I
 >    - **Object ID**: Input the ID of the previously created dataset. *4005* for this training
 >    - **Annotation type**: Select *"KV"*
 >    - **Annotation Name**: Type *"REMBI_Annotation"*
->
 {: .hands_on}
 
 Switch back to your OMERO instance. 
@@ -189,7 +186,6 @@ Check the `roi_file.tsv` to have an example. Everything is explained in the tool
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Image ID where annotate the ROIs**: Select the **image ID** where to annotate the ROIs. We will go for *30782*
->
 {: .hands_on}
 
 Switch back to your OMERO instance and the image by double-clicking it.
@@ -216,8 +212,6 @@ First of all, let's try to get all the image IDs present in all Datasets!
 >    - **Type of object to fetch ID:**: Select *"Dataset IDs"*
 >    - **Which datasets?**: Select *"All datasets"*
 >    - **ID of the project**: *0*
->
->
 {: .hands_on}
 
 Since we have just one dataset in your OMERO instance, the tool will produce a tabular file
@@ -239,8 +233,6 @@ Now, let's try to get an annotation file...
 >    - **Type of object to fetch:**: Select *"Annotation"*
 >    - **How do you provide the ID(s) of the OMERO object?**: Select *"Comma separated values"*
 >    - **ID(s) of the object(s) to fetch on OMERO separated by comma**: 4005
->
->
 {: .hands_on}
 
 Perfect, you fetched the Annotation file "REMBI_Annotation". 
@@ -260,8 +252,6 @@ This can be done by using the **OMERO IDs** Tool
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Filename to search among the image IDs**: Type `image85-H-01-00_tif.tiff`
 >    - **List of images IDs**: Type *30781,30782,30783*
->
->
 {: .hands_on}
 
 As an output, you will have a tabular file with the following info:
@@ -302,7 +292,6 @@ This will make this workflow reusable with different datasets.
 >    **6: Simple input for workflow logic**  appear in your workflow. 
 >    Change the "Label" of these inputs to *Target Dataset Name*, *OMERO instance address* and
 >    *Annotation type*
->    
 {: .hands_on}
 
 ### Step 2 - OMERO Import
@@ -359,7 +348,8 @@ The last section is to upload metadata and ROIs
 >   input of {% icon tool %} **13: OMERO ROI Import**.
 >   - Connect the output of {% icon param-file %} **11: Parse parameter value** to the "Image ID where annotate the ROIs"
 >   input of {% icon tool %} **13: OMERO ROI Import**.
->3. Save your workflow and name it `OMERO_basic_upload`. {: .hands_on}
+>3. Save your workflow and name it `OMERO_basic_upload`.
+{: .hands_on}
 
 
 You are done! The final workflow should  look like this:
