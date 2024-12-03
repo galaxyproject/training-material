@@ -597,7 +597,7 @@ The JupyterLab environment that we will wrap in this tutorial is a simple Jupyte
 allows the user to upload data in a Jupyter environment, manipulate notebooks, and download
 outputs. 
 
-Our example JupyterLab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) 
+Our example JupyterLab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) .
 But you can also check another implementation of [JupyterLabs](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
 In the following sections, we will study how it can be built into a GxIT.
 
