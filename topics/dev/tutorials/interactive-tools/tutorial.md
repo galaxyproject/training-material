@@ -593,12 +593,12 @@ We have demonstrated how to pass an input file to the Docker container. But what
 
 # The JupyterLab
 
-The jupyterlab environement that we will wrap in this tutorial is a simple jupyterlab tool which
-allows the user to upload data in an jupyter environment, manipulate notebooks, and download
+The JupyterLab environment that we will wrap in this tutorial is a simple JupyterLab tool which
+allows the user to upload data in a Jupyter environment, manipulate notebooks, and download
 outputs. 
 
-Our example jupyterlab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) 
-But you can also check an other implementation of [jupyterlabs](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
+Our example JupyterLab can already be found [online](https://github.com/usegalaxy-eu/docker-copernicus-notebooks) 
+But you can also check another implementation of [JupyterLabs](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile).
 In the following sections, we will study how it can be built into a GxIT.
 
 
