@@ -233,8 +233,8 @@ The above will be done twice to emulate multiple "subjects". Since the deconvolu
 >    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga" title="QC Report" %}
 >
 > 2. Run **Workflow pseudobulk and actual proportions** {% icon workflow %} using the following parameters:
->    - {% icon param-collection %} *"Metadata"*: `metadata collection`
->    - {% icon param-collection %} *"Expression Data"*: `expression data collection`
+>    - {% icon param-collection %} *"Metadata"*: `Metadata`
+>    - {% icon param-collection %} *"Expression Data"*: `Expression Data`
 >
 >    {% snippet faqs/galaxy/workflows_run.md %}
 > 3. Add a tag labelled `#A` to the first "Actual cell proportions" and "Pseudobulk" collections
