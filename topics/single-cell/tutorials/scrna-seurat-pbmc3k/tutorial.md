@@ -995,7 +995,7 @@ Marker genes are usually detected by their differential expression (DE) between 
 
 Seurat also provides different tools for finding markers using these tests so that we can ask various questions about how genes are differentially expressed between clusters or experimental groups. We can use `FindAllMarkers` to identify the markers of each cluster compared to all the other clusters or we can use `FindMarkers` to look for differences between specific clusters or groups.
 
-<span class="Separate-Preprocessing-Steps">Let's try out some of these options on our dataset.</span><span class="SCTransform">We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransform - you'll just see some differences in the lists of markers If you've aleady completed the other version of this tutorial, then you might want to move on to the next section [to start identifying the cell types in your clusters.]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}#Identify-Cell-Types).</span>
+<span class="Separate-Preprocessing-Steps">Let's try out some of these options on our dataset.</span><span class="SCTransform">We'll discuss the markers found after using the separate preprocessing tools in this section, but you can run the same analyses after using SCTransform - you'll just see some differences in the lists of markers If you've aleady completed the other version of this tutorial, then you might want to move on to the next section [to start identifying the cell types in your clusters.]({% link topics/single-cell/tutorials/scrna-seurat-pbmc3k/tutorial.md %}#Identify-Cell-Types)</span>
 
 > <comment-title></comment-title>
 > When we find markers using the Seurat tools on Galaxy, we will get two outputs: a CSV file and an RDS file. Both files contain the same content, a table of marker genes and the relevant statistics from the test, but in different formats. We'll be able to read the CSV table, while Seurat tools can interact with the RDS file. Seurat doesn't save the outputs from DE tests into the original SeuratObject by default. This means that we won't be able to use the RDS outputs from finding markers if we want to perform further analysis of our dataset - we'll need to use the output from the previous step instead as that is where all our expression data, metadata, reductions and neighborhood graphs are. However, we can use the RDS markers file for plotting and investigating our marker genes.
@@ -1206,7 +1206,7 @@ If we're taking the unsupervised approach, then we might want to limit our marke
 >    
 {: .hands_on}
 
-We could now search online or in a database such as [PanglaoDB](https://panglaodb.se/) or the [Human Protein Atlas](https://www.proteinatlas.org/) to find out which cell types express the markers we've identified for each cluster. If we look at the top 10 markers for cluster 3, we see that the first gene in the list is CD79A, whether we used SCTransform or not. This was also the top positive marker for PC2 when we used the separate preprocessing tools.
+We could now search online or in a database such as [PanglaoDB](https://panglaodb.se/) or the [Human Protein Atlas](https://www.proteinatlas.org/) to find out which cell types express the markers we've identified for each cluster. If we look at the top 10 markers for cluster 3, we see that the first gene in the list is CD79A.
 
 > <question-title></question-title>
 > 1. Which type of cells express CD79A?
@@ -1221,6 +1221,8 @@ If we were to continue with this unsupervised approach, we would look at more of
 The unsupervised approach might be the only option if we don't know exactly what we're looking for - we might be investigating rare cell types, working with samples from an understudied species, or looking at the changes that happen in a particular disease. However, in many cases, we can use what we already know to begin to understand our dataset. We can look for genes that previous research has identified as markers for the cell types we expect to see. We won't always get all the answers we need from a supervised approach like this, but it can be a quicker way to identify known cell types. 
 
 A supervised approach should work well for the current dataset because PBMCs have been very well characterised. We know which cell types should be present in a PBMC sample and which genes each of these cell types should be expressing. 
+
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
 To begin, we'll need a list of these canonical markers for PBMCs. Let's use the one provided in the [original Seurat version](https://satijalab.org/seurat/articles/pbmc3k_tutorial) of this tutorial:
 
@@ -1239,6 +1241,34 @@ To begin, we'll need a list of these canonical markers for PBMCs. Let's use the 
 > | Platelet      | PPBP          |
 {: .matrix}
 
+</div>
+
+<div class='SCTransform' markdown='1'>
+
+To begin, we'll need a list of these canonical markers for PBMCs. Let's use the ones provided in the original Seurat [clustering](https://satijalab.org/seurat/articles/pbmc3k_tutorial) and [SCTransform](https://satijalab.org/seurat/articles/sctransform_vignette.html) tutorials:
+
+> | Cell Type            | Marker Genes        |
+> | ---------------------|---------------------|
+> | CD14+ Mono           | CD14, LYZ           |
+> | B                    | MS4A1               |
+> | FCGR3A+ Mono         | FCGR3A, MS4A7       |
+> | NK                   | GNLY, NKG7          |
+> | DC                   | FCER1A, CST3        |
+> | Platelet             | PPBP                |
+> | Naive CD4+ T         | IL7R, CCR7          |
+> | Memory CD4+ T        | IL7R, S100A4        |
+> | IFN-activated CD4+ T | IL7R, ISG15, IL32   |
+> | Naive CD8+ T         | CD8A, CCR7          |
+> | Memory CD8+ T        | CD8A, CCL5          |
+> | Effector CD8+ T      | CD8A, GZMK          |
+{: .matrix}
+
+> <comment-title></comment-title>
+If you've already done the other version of this tutorial, using the separate preprocessing tools, you might notice this list includes some additional markers for T cells. SCTransform can reveal more of the biological variation in our dataset - remember that it produced 12 clusters, rather than the nine we would find using the separate preprocessing tools. We can use these extra markers to identify those additional clusters.
+> {: .comment}
+
+</div>
+
 The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If we look back at our table of the top 10 markers, we can see that this was actually the second gene in the list, so if we'd continued with the unsupervised approach we'd have ended up using the same gene to help identify our B cells. Both of these genes are actually very good markers for B cells, so some lists of B cell markers might suggest using CD79A rather than (or in addition to) MS4A1. If we plot the expression of both genes across our clusters, we should be able to see where our B cells are.
 
 ><hands-on-title>Make Violin Plots of B Cell Markers</hands-on-title>
@@ -1250,7 +1280,17 @@ The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If
 >
 {: .hands_on}
 
-![Plots A and B each show two violin plots with expression of CD79A and MS4A1 mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of CD79A and MS4A1 by cluster after performing A. Separate preprocessing steps B. SCTransform")
+<div class='Separate-Preprocessing-Steps' markdown='1'>
+
+![Two violin plots showing expression of CD79A and MS4A1 mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of CD79A and MS4A1 by cluster")
+
+</div>
+
+<div class='SCTransform' markdown='1'>
+
+![Two violin plots showing expression of CD79A and MS4A1 mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of CD79A and MS4A1 by cluster")
+
+</div>
 
 Both CD79A and MS4A1 are mainly expressed in cluster 3, with very little expression in any of the other clusters. Since most cells in cluster 3 are expressing these two well-known markers of B cells and our DE test showed they were expressed more by this cluster than in the rest of the data, we can confidently say that cluster 3 represents our B cell population.
 
@@ -1261,7 +1301,7 @@ Sometimes the results aren't quite so clear as markers might be expressed across
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
->        - *"Features to plot"*: `IL7R,CCR7,S100A4,CD8A`
+>        - *"Features to plot"*: <span class='Separate-Preprocessing-Steps'>`IL7R,CCR7,S100A4,CD8A`</span><span class='SCTransform'>`IL7R,CCR7,S100A4,CD8A,GZMK,CCL5,IL32,ISG15`</span>
 >        - In *"Plot Formatting Options"*:
 >            - *"Number of columns to display"*: `4`
 >    - *"Change size of plot"*: `Yes`
@@ -1269,80 +1309,68 @@ Sometimes the results aren't quite so clear as markers might be expressed across
 >
 {: .hands_on}
 
-![In Part A, the first violin plot shows IL7R expressed in clusters 0, 2 and 4 (although there is some lower level expression in cluster 7). Second plot shows high CCR7 expression in cluster 0 with some expression in cluster 2. Plot 3 shows S100A4 expression across most clusters, including cluster 2. Fourth plot shows CD8A expression in cluster 4. In Part B, the first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, and CD8A by cluster after performing A. Separate preprocessing steps B. SCTransform")
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
-We can see that IL7R (also known as CD4+) is mainly expressed in clusters 0, 2, and 4, with some expression in cluster 7, if we're following the separate preprocessing steps route or in clusters 0, 2, 4, 8, and 10 if we're on the SCTransform route. With this marker alone, we could only identify these as clusters of T cells - and in the case of cluster 7 from the separate preprocessing route plot, we would be making a mistake as once we plot markers of other cell types, we'll see that these aren't T cells at all!
+![The first violin plot shows IL7R expressed in clusters 0, 2 and 4 (although there is some lower level expression in cluster 7). Second plot shows high CCR7 expression in cluster 0 with some expression in cluster 2. Plot 3 shows S100A4 expression across most clusters, including at high levels in cluster 2. Fourth plot shows CD8A expression in cluster 4.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, and CD8A by cluster")
 
-If we look at which other markers are being expressed (or not expressed) by the T cell clusters, we can identify different types of T cells. Expression of CCR7 is associated with naive T cells, while S100A4 is associated with memory T cells, so you should be able to identify clusters of naive and memory CD4+ T cells in these plots for both the separate and SCTransform preprocessing routes.
+We can see that IL7R (also known as CD4+) is mainly expressed in clusters 0, 2, and 4, with some expression in cluster 7. If we were using this marker alone, we could only identify these as clusters of T cells - and in the case of cluster 7, we would be making a mistake as once we plot markers of other cell types, we'll see that these aren't T cells at all!
 
-We can also see that using SCTransform for preprocessing has allowed us to break down our T cells into more clusters, which could enable us to identify more different types. It looks like these might include additional subtypes of CD8+ T cells, as we have three clusters expressing CD8A when we use SCTransform, but only one when we used the separate preprocessing steps. 
+If we look at which other markers are being expressed (or not expressed) by the T cell clusters, we can identify different types of T cells. Expression of CCR7 is associated with naive T cells, while S100A4 is associated with memory T cells, so you should be able to identify clusters of naive and memory CD4+ T cells in these plots. We can also see that some of our cells are expressing CD8A as well as CD4, so these are CD8+ T cells. We'll label these clusters below after looking at our other cell type markers.
 
-We'll use some additional T cell markers from the [original Seurat SCTransform](https://satijalab.org/seurat/articles/sctransform_vignette.html) tutorial to identify these clusters below. We should be able to identify the following T cell subtypes using these markers:
+</div>
 
-> | Cell Type            | Marker Genes        |
-> | ---------------------|---------------------|
-> | Naive CD4+ T         | IL7R, CCR7          |
-> | Memory CD4+ T        | IL7R, S100A4        |
-> | IFN-activated CD4+ T | IL7R, ISG15, IL32   |
-> | CD8+ T               | CD8A                |
-> | Naive CD8+ T         | CD8A, CCR7          |
-> | Memory CD8+ T        | CD8A, CCL5          |
-> | Effector CD8+ T      | CD8A, GZMK          |
-{: .matrix}
+<div class='SCTransform' markdown='1'>
 
-Some of these patterns are clearer to see than others and we haven't plotted all of these T cell marker genes yet. The violin plots we just made can only help us identify Naive and Memory CD4+ T cells and CD8+ T cells as a whole, but we'll visualise the expression of these other T cell markers for the SCTransform route results below.
+![The first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including at high levels in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8. Plot 5 shows GZMK expression in cluster 4 with some lower level expression in cluster 7. Plot 6 shows CCL5 expression in clusters 4, 5, 7, and 11. Plot 7 shows IL32 expression across most clusters, including  Plot 8 shows ISG15 expression at low levels in most clusters, with higher expression in cluster 10.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, CD8A,  by cluster")
+
+We can see that IL7R (also known as CD4+) is mainly expressed in clusters 0, 2, 4, 8, and 10. With this marker alone, we could only identify these as clusters of T cells, but if we look at which other markers are being expressed (or not expressed) by these T cell clusters, we can identify different types of T cells. To start with, we can see that two of these clusters, 4 and 8, are also expressing CD8A, which identifies them as CD8+ T cells. The expression of CD8A also helps us to identify one more cluster of T cells that we wouldn't have spotted using CD4 alone - cluster 7.
+
+We can use the rest of our T cell markers to identify different subtypes of CD4+ and CD8+ T cells. For our CD4+ cells, expression of CCR7 is associated with naive T cells, while S100A4 is associated with memory T cells. We also have some CD4+ T cells expressing ISG15 and IL32, which marks them as IFN activated T cells. For the CD8+ clusters, we can again use CCR7 to pick out the naive T cells, but we will use CCL5 to identify the memory T cells. We can also spot a third group of CD8+ T cells that are expressing GZMK, which identifies them as effector T cells.
+
+You should be able to identify clusters of all six of these T cell subtypes in your plots. Using SCTransform for preprocessing has allowed us to break down our T cells into more clusters than if we used the separate preprocessing tools. It looks like these include additional subtypes of CD8+ T cells, as we have three clusters expressing CD8A alongside different T cell subtype markers, when we would only have one cluster of CD8+ cells if we used the separate preprocessing steps. We'll label all of these clusters later, after looking at the markers for other cell types.
+
+</div>
 
 > <comment-title></comment-title>
 > How do you know which markers to use to identify different cell types? 
 > Unfortunately, there isn't always an easy answer - it depends on how well defined the cell types you're interested in are. A quick search online or a look through the literature should give you an idea of which markers other people have used to identify the cell types you expect to see in your sample. You could look for genes that have been identified by previous single cell studies or ones that are used to identify or isolate a specific cell type. For well studied cell types like PBMCs, it should be easy to find lists of canonical markers that are often used.
 {: .comment}
 
-To continue with the supervised approach, we can check the expression of the chosen markers in our clusters to see if they match the known expression patterns of specific cell types. We could just look at our list of the top positive markers, but there are also several options for visualising marker gene expression. We'll try a few of them here to give you an idea of the types of plots you can use in the future.
+To continue with the supervised approach, we can check the expression of the chosen markers in our clusters to see if they match the known expression patterns of specific cell types. We could just look for these genes in our list of the top positive markers, but there are also several options for visualising marker gene expression. We'll try a few of them here to give you an idea of the types of plots you can use in the future.
 
 > <hands-on-title>Colour the UMAP Plot by Canonical Marker Expression</hands-on-title>
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
->        - *"Features to plot"*: `IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`
+>        - *"Features to plot"*: <span class='Separate-Preprocessing-Steps'>`IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`</span><span class='SCTransform'>`CD14,LYZ,MS4A1,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP,IL7R,CCR7,S100A4,CD8A,GZMK,CCL5,IL32,ISG15`</span>
 >    - *"Change size of plot"*: `Yes`
 >        - *"Width of plot in pixels"*: `4100`
 >        - *"Height of plot in pixels"*: `4100`
 >
 {: .hands_on}
 
-If you used the separate preprocessing tools, then your plots should look like this:
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
-![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2 and part of cluster 4. Plot 2 shows CCR7 expression in cluster 0. Plot 3 shows CD14 expression mainly in cluster 1. Plot 4 shows LYZ expression in clusters 1, 5 and 7. Plot 5 shows high S100A4 expression in clusters 1, 5, and 7 with medium expression in clusters 2, 4 and 6. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5. Plot 10 shows GNLY expression in cluster 6. Plot 11 shows NKG7 expression in clusters 4 and 6. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5 and 7. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers.png "UMAP plots showing expression of canonical markers for PBMCs (Separate preprocessing steps)")
+![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2 and part of cluster 4. Plot 2 shows CCR7 expression in cluster 0. Plot 3 shows CD14 expression mainly in cluster 1. Plot 4 shows LYZ expression in clusters 1, 5 and 7. Plot 5 shows high S100A4 expression in clusters 1, 5, and 7 with medium expression in clusters 2, 4 and 6. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5. Plot 10 shows GNLY expression in cluster 6. Plot 11 shows NKG7 expression in clusters 4 and 6. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5 and 7. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers.png "UMAP plots showing expression of canonical markers for PBMCs")
 
-If you used SCTransform for preprocessing, then your plots should look like this: 
+</div>
 
-![14 UMAP Plots coloured by expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, 4, 8, 10 and part of cluster 7. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows CD14 expression mainly in cluster 1. Plot 4 shows LYZ expression in clusters 1, 6, and 9. Plot 5 shows high S100A4 expression in clusters 1 and 6 with medium expression in clusters 0, 4, 5, 7 and 9. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in clusters 4, 7, and 8. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 6. Plot 10 shows GNLY expression in cluster 5. Plot 11 shows NKG7 expression in clusters 5 and 7. Plot 12 shows FCER1A expression in cluster 9. Plot 13 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 14 shows PPBP expression in cluster 11.](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers_SCT.png "UMAP plots showing expression of canonical markers for PBMCs (SCTransform)")
+<div class='SCTransform' markdown='1'>
 
-If you used SCTransform, then you'll have more clusters to annotate. We can use those additional T cell subtype markers to do this as our extra clusters represent different types of T cells.
+![18 UMAP Plots coloured by expression of different genes. Plot 1 shows CD14 expression mainly in cluster 1. Plot 2 shows LYZ expression in clusters 1, 6, and 9.  Plot 3 shows MS4A1 expression in cluster 3.  Plot 4 shows FCGR3A expression in clusters 5 and 6. Plot 5 shows MS4A7 expression in cluster 6. Plot 6 shows GNLY expression in cluster 5. Plot 7 shows NKG7 expression in clusters 5 and 7. Plot 8 shows FCER1A expression in cluster 9. Plot 9 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 10 shows PPBP expression in cluster 11.  Plot 11 shows IL7R expression in clusters 0, 2, 4, 8, 10 and part of cluster 7. Plot 12 shows CCR7 expression in clusters 2, 8, and 10. Plot 13 shows high S100A4 expression in clusters 1 and 6 with medium expression in clusters 0, 4, 5, 7 and 9. Plot 14 shows CD8A expression in clusters 4, 7, and 8. Plot 15 shows GZMK expression in cluster 4. Plot 16 shows CCL5 expression in clusters 4, 5, and 7. Plot 17 shows IL32 expression in clusters 0, 2, 4, 5, 6, 7, and 11. Plot 18 shows high ISG15 expression in cluster 10 with some expression in clusters 1 and 6](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_CellTypeMarkers_SCT.png "UMAP plots showing expression of canonical markers for PBMCs")
 
-> <hands-on-title>Colour the UMAP Plot by T Cell Marker Expression</hands-on-title>
-> 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
->    - *"Method used"*: `Visualize expression with 'FeaturePlot'`
->        - *"Features to plot"*: `GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15`
->    - *"Change size of plot"*: `Yes`
->        - *"Width of plot in pixels"*: `4100`
->        - *"Height of plot in pixels"*: `4100`
->
-{: .hands_on}
+</div>
 
-![6 UMAP Plots coloured by expression of different genes. Plot 1 shows GZMK expression in cluster 4. Plot 2 shows CCL5 expression in clusters 4, 5, and 7. Plot 3 shows CCR7 expression in clusters 1, 8, and 10. Plot 4 shows high S100A4 expression in clusters 1 and 6 with medium expression in clusters 0, 4, 5, 7 and 9. Plot 5 shows IL32 expression in clusters 0, 2, 4, 5, 6, 7, and 11. Plot 6 shows high ISG15 expression in cluster 10 with some expression in clusters 1 and 6](../../images/scrna-seurat-pbmc3k/seurat_FeaturePlot_T_Markers_SCT.png "UMAP plots showing expression of canonical markers for T cells (SCTransform)")
-
-We have produced a series of UMAP plots, each coloured according to the expression level of a different marker gene. We can look back at the UMAP plots we created earlier showing the clusters for the [separate preprocessing route](#figure-17) and [SCTransform route](#figure-18) to see which areas correspond to specific clusters.
+We have produced a series of UMAP plots, each coloured according to the expression level of a different marker gene. We can look back at the UMAP plots we created earlier showing the cluster numbers to see which areas correspond to specific clusters.
 
 > <question-title></question-title>
 > 1. Are the markers clearly associated with one or more clusters?
 > 2. Are the canonical markers only expressed in these clusters?
 > 3. How similar are the clusters in terms of their expression of these cell type markers? Are more similar cell types closer together on the UMAP plot?
 > > <solution-title></solution-title>
-> > 1. Each cell type marker is clearly expressed at higher levels in certain parts of the plots - we don't have the same problem as we did when we plotted the top genes for PCs 1-3 and found that MALAT1 was expressed at quite high levels across the entire plot! When we compare the expression plots to the clusters we previously plotted, we can see that they match up quite well with each other. Most of the markers are expressed more in certain clusters, but there isn't always a clear boundary, especially for clusters that are close together in the plot. Some markers are associated with a single cluster, such as PPBP, while others are expressed across multiple clusters.
-> > 2. Although marker expression mainly occurs in one or more clusters, there is still some expression by cells in other parts of the plot. It could be that these genes are sometimes expressed by other cell types, but these could also be cells of the same type that have simply ended up further away in the plot. It can sometimes be hard to tell which cluster these cells have been assigned to from these plots, especially when you consider that some points could be hidden behind others. Cells of the same type might have been assigned to different clusters, but there could also be a few cells that have been plotted at a distance from the main part of their assigned cluster - for example, in the plots for the separate preprocessing route you might be able to spot a couple of differently coloured cells at the tip of cluster 7 and by cluster 8.
-> > 3. We can distinguish between all of our clusters on the basis of which known markers they are shown to express. Each cluster expresses a unique combination of these genes, although the markers aren't only expressed in the clusters they're mainly associated with. Some of the clusters are more similar to each other, particularly those that are close together on the plot, forming part of the same larger group of cells. For example, clusters 1, 5 and 7 are grouped together on the plot for the separate preprocessing steps route and all express a lot of LYZ, S100A4, and CST3. Since the UMAP was created based on the PCA, which was in turn based on similarities in expression of the highly variable genes, it makes sense that clusters that are plotted closer together are more similar to each other. However, we should always remember that we're only looking at a 2D plot of the first two UMAP dimensions, so we shouldn't read too much into what we see! The plot can't tell us everything about the relationships between cells and clusters.
+> > 1. Each cell type marker is clearly expressed at higher levels in certain parts of the plots - we don't have the same problem as we did when we plotted the top genes for PCs 1-3 and found that MALAT1 was expressed at quite high levels across the entire plot! When we compare the expression plots to the clusters we previously plotted, we can see that they match up quite well with each other. Most of the markers are expressed more in certain clusters, but there isn't always a clear boundary, especially for clusters that are close together in the plot. Some markers are associated with a single cluster, such as MS4A1 and PPBP, while others are expressed across multiple clusters.
+> > 2. Although marker expression mainly occurs in one or more clusters, there is still some expression by cells in other parts of the plot. It could be that these genes are sometimes expressed by other cell types, but these could also be cells of the same type that have simply ended up further away in the plot. It can sometimes be hard to tell which cluster these cells have been assigned to from these plots, especially when you consider that some points could be hidden behind others. Cells of the same type might have been assigned to different clusters, but there could also be a few cells that have been plotted at a distance from where the main part of their assigned cluster appears on this plot. <span class-'Separate-Preprocessing-Steps'>If we look back at the UMAP coloured by cluster, we can spot a couple of differently coloured cells at the tip of cluster 7 and by cluster 8.</span><span class='SCTransform'>If we look back at the UMAP coloured by cluster, we can spot a couple of differently coloured cells and mixed into cluster 3 and at the tip of cluster 10.</span>
+> > 3. We can distinguish between all of our clusters on the basis of which known markers they are shown to express. Each cluster expresses a unique combination of these genes, although the markers aren't only expressed in the clusters they're mainly associated with. Some of the clusters are more similar to each other, particularly those that are close together on the plot, forming part of the same larger group of cells. <span class-'Separate-Preprocessing-Steps'>For example, clusters 1, 5 and 7 are grouped together on the plot and all express a lot of LYZ, S100A4, and CST3.</span><span class='SCTransform'>For example, clusters 1 and 6 are grouped together on the plot for and both express a lot of S100A4 and CST3.</span> Since the UMAP was created based on the PCA, which was in turn based on similarities in expression of the highly variable genes, it makes sense that clusters that are plotted closer together are more similar in expression to each other. However, we should always remember that we're only looking at a 2D plot of the first two UMAP dimensions, so we shouldn't read too much into what we see! The plot can't tell us everything about the relationships between cells and clusters.
 > {: .solution}
 {: .question}
 
@@ -1353,36 +1381,24 @@ Another option for visualising marker gene expression across clusters is the Vio
 > 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
 >    - *"Method used"*: `Violin Plot with 'VlnPlot'`
->        - *"Features to plot"*: `IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`
+>        - *"Features to plot"*: <span class='Separate-Preprocessing-Steps'>`IL7R,CCR7,CD14,LYZ,S100A4,MS4A1,CD8A,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP`</span><span class='SCTransform'>`CD14,LYZ,MS4A1,FCGR3A,MS4A7,GNLY,NKG7,FCER1A,CST3,PPBP,IL7R,CCR7,S100A4,CD8A,GZMK,CCL5,IL32,ISG15`</span>
 >    - *"Change size of plot"*: `Yes`
 >        - *"Width of plot in pixels"*: `4100`
 >        - *"Height of plot in pixels"*: `4100`
 >
 {: .hands_on}
 
-If you used the separate preprocessing steps then your plots should look like this:
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
-![14 Violin plots showing expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, and 4, with some expression in cluster 7. Plot 2 shows CCR7 expression in cluster 0 and to a lesser extent in cluster 2. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression across all clusters, with the highest expression in clusters 1 and 7. Plot 5 shows S100A4 expression across all clusters, with the highest expression in clusters 1 and 5. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5 and to a lesser extent in cluster 1. Plot 10 shows GNLY expression in clusters 4 and 6. Plot 11 shows NKG7 expression in clusters 4 and 6, with some expression at lower levels in clusters 5 and 7. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5, and 7 with some expression in cluster 8. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers.png "Violin plots showing expression of canonical marker genes by cluster (Separate preprocessing steps)")
+![14 Violin plots showing expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, and 4, with some expression in cluster 7. Plot 2 shows CCR7 expression in cluster 0 and to a lesser extent in cluster 2. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression across all clusters, with the highest expression in clusters 1 and 7. Plot 5 shows S100A4 expression across all clusters, with the highest expression in clusters 1 and 5. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4. Plot 8 shows FCGR3A expression in clusters 5 and 6. Plot 9 shows MS4A7 expression in cluster 5 and to a lesser extent in cluster 1. Plot 10 shows GNLY expression in clusters 4 and 6. Plot 11 shows NKG7 expression in clusters 4 and 6, with some expression at lower levels in clusters 5 and 7. Plot 12 shows FCER1A expression in cluster 7. Plot 13 shows CST3 expression in clusters 1, 5, and 7 with some expression in cluster 8. Plot 14 shows PPBP expression in cluster 8.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers.png "Violin plots showing expression of canonical marker genes by cluster")
 
-If you used SCTransform then you should see these violin plots:
+</div>
 
-![14 Violin plots showing expression of different genes. Plot 1 shows IL7R expression in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows CD14 expression in cluster 1. Plot 4 shows LYZ expression across all clusters, with high expression in cluster 1 and 9. Plot 5 shows S100A4 expression across all clusters, with the highest expression in clusters 1, 6, and 9. Plot 6 shows MS4A1 expression in cluster 3. Plot 7 shows CD8A expression in cluster 4, 7, and 8. Plot 8 shows FCGR3A expression in clusters 5, 6, and 7. Plot 9 shows MS4A7 expression in cluster 6 with some low expression in cluster 1. Plot 10 shows high GNLY expression in cluster 5 as well as expression at various levels in cluster 7. Plot 11 shows NKG7 expression in clusters 4, 5, and 7. Plot 12 shows FCER1A expression in cluster 9. Plot 13 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 14 shows PPBP expression in cluster 11.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers_SCT.png "Violin plots showing expression of canonical marker genes by cluster (SCTransform)")
+<div class='SCTransform' markdown='1'>
 
-Again, if we used SCTransform for preprocessing, we can use those additional T cell subtype markers to identify our smaller clusters. We can show these on violin plots too.
+![18 Violin plots showing expression of different genes. Plot 1 shows CD14 expression in cluster 1. Plot 2 shows LYZ expression across all clusters, with high expression in cluster 1 and 9.  Plot 3 shows MS4A1 expression in cluster 3.  Plot 4 shows FCGR3A expression in clusters 5, 6, and 7. Plot 5 shows MS4A7 expression in cluster 6 with some low expression in cluster 1. Plot 6 shows high GNLY expression in cluster 5 as well as expression at various levels in cluster 7. Plot 7 shows NKG7 expression in clusters 4, 5, and 7. Plot 8 shows FCER1A expression in cluster 9. Plot 9 shows CST3 expression in clusters 1, 6, 9, and 11. Plot 10 shows PPBP expression in cluster 11. Plot 11 shows IL7R expression in clusters 0, 2, 4, 8, and 10. Plot 12 shows CCR7 expression in clusters 2, 8, and 10. Plot 13 shows S100A4 expression across all clusters, with the highest expression in clusters 1, 6, and 9. Plot 14 shows CD8A expression in cluster 4, 7, and 8. Plot 15 shows GZMK expression in cluster 4 with some expression in cluster 7. Plot 16 shows CCL5 expression in cluster 4, 5, 7, and 11. Plot 17 shows IL32 expression across clusters 0, 2, 4, 5, 7, 8, and 10 with some expression in cluster 11. Plot 18 shows ISG15 expression across most clusters, with the highest expression in cluster 10.](../../images/scrna-seurat-pbmc3k/seurat_Violin_CellTypeMarkers_SCT.png "Violin plots showing expression of canonical marker genes by cluster")
 
-> <hands-on-title>Use Violin Plots to Compare Expression of T Cell Markers by Cluster</hands-on-title>
->
-> 1. {% tool [Seurat Visualize](toolshed.g2.bx.psu.edu/repos/iuc/seurat_plot/seurat_plot/5.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file with the Seurat object"*: `UMAP Results` (output of **Seurat Run Dimensional Reduction** {% icon tool %})
->    - *"Method used"*: `Violin Plot with 'VlnPlot'`
->        - *"Features to plot"*: `GZMK,CCL5,CCR7,S100A4,CCR7,IL32,ISG15`
->    - *"Change size of plot"*: `Yes`
->        - *"Width of plot in pixels"*: `4100`
->        - *"Height of plot in pixels"*: `4100`
->
-{: .hands_on}
-
-![6 Violin plots showing expression of different genes. Plot 1 shows GZMK expression in cluster 4 with some expression in cluster 7. Plot 2 shows CCL5 expression in cluster 4, 5, 7, and 11. Plot 3 CCR7 expression in clusters 2, 8, and 10. Plot 4 shows S100A4 expression across all clusters, with the highest expression in clusters 1, 6, and 9. Plot 5 shows IL32 expression across clusters 0, 2, 4, 5, 7, 8, and 10 with some expression in cluster 11. Plot 6 shows ISG15 expression across most clusters, with the highest expression in cluster 10.](../../images/scrna-seurat-pbmc3k/seurat_Violin_T_Markers_SCT.png "Violin plots showing expression of canonical T cell marker genes by cluster (SCTransform)")
+</div>
 
 > <question-title></question-title>
 > 1. Are the markers clearly associated with one or more clusters?
@@ -1390,36 +1406,65 @@ Again, if we used SCTransform for preprocessing, we can use those additional T c
 > 3. How similar are the clusters to each other in terms of their marker gene expression - are there any clusters that seem particularly alike?
 > > <solution-title></solution-title>
 > > 1. The violin plot can make the associations between clusters and markers look clearer, since each cluster is plotted separately and labelled by number. Some of the markers are clearly expressed mainly in one or a few clusters, while others like LYZ and S100A4 are expressed across most of the clusters.
-> > 2. None of the markers are unique to a specific cluster - there are always a few dots (or cells) in the other clusters that are expressing these genes. We can also see that the expression level varies within each cluster as there are cells at different positions along the vertical axis. As well as looking at the expression level in individual cells (dots) we can compare the overall expression patterns by looking at the coloured violin shapes, which show us where most of the cells in each cluster are plotted. For example, in the plots for the separate preprocessing route, we can see there was more variation in the expression level of NKG7 in cluster 4 (where the violin shape is longer) than there was in cluster 6 (where there is a short violin shape as all the cells showed high expression of this gene).
-> > 3. Each cluster has a unique pattern of expression of the canonical markers. Some clusters are very distinct as they express markers that are rarely seen in other clusters. In the plots for both preprocessing routes, cluster 3 is the only cluster to express MS4A1 and it doesn't express much of the other markers. Other clusters seem to be more similar to each other, with multiple clusters of T cells all expressing IL7R, although the expression levels of other genes vary between these cells allowing us to classify them as different subtypes. This makes sense because cluster 3 is far away from all the other clusters in the UMAP while the different T cell clusters are close to each other because of their similarities.
+> > 2. None of the markers are unique to a specific cluster - there are always a few dots (or cells) in the other clusters that are expressing these genes. We can also see that the expression level varies within each cluster as there are cells at different positions along the vertical axis. As well as looking at the expression level in individual cells (dots) we can compare the overall expression patterns by looking at the coloured violin shapes, which show us where most of the cells in each cluster are plotted. For example, we can see there was more variation in the expression level of NKG7 in cluster 4 (where the violin shape is longer) than there was in cluster <span class='Separate-Preprocessing-Steps'>6</span><span class='SCTransform'>5</span> (where there is a short violin shape as all the cells showed high expression of this gene).
+> > 3. Each cluster has a unique pattern of expression of the canonical markers. Some clusters are very distinct as they express markers that are rarely seen in other clusters. Cluster 3 is the only cluster to express MS4A1 and it doesn't express much of the other markers. Other clusters seem to be more similar to each other, with multiple clusters of T cells all expressing IL7R, although the expression levels of other genes vary between these cells allowing us to classify them as different subtypes. This makes sense because cluster 3 is far away from all the other clusters in the UMAP while the different T cell clusters are close to each other because of their similarities.
 > {: .solution}
 {: .question}
 
 Based on our table of marker genes and these plots, we know which clusters were expressing the canonical markers for each cell type or subtype. We can use this information to annotate our clusters by cell type.
 
+<div class='Separate-Preprocessing-Steps' markdown='1'>
+  
 > <question-title></question-title>
 > 1. Can you identify the cell types for each cluster?
 > > <solution-title></solution-title>
 > > 1. Based on the expression of the known PBMC markers, we can assign the following cell types to our clusters: 
 > >
-> > > | Cell Type            |Marker Genes       | Clusters (Separate Steps) | Clusters (SCTransform) |
-> > > | ---------------------|-------------------|---------------------------|------------------------|
-> > > | Naive CD4+ T         | IL7R, CCR7        |            0              |           2            |
-> > > | CD14+ Mono           | CD14, LYZ         |            1              |           1            |
-> > > | Memory CD4+ T        | IL7R, S100A4      |            2              |           0            |
-> > > | B                    | MS4A1             |            3              |           3            |
-> > > | CD8+ T               | CD8A              |            4              |        8, 7, 4         |
-> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |            5              |           6            |
-> > > | NK                   | GNLY, NKG7        |            6              |           5            |
-> > > | DC                   | FCER1A, CST3      |            7              |           9            |
-> > > | Platelet             | PPBP              |            8              |          11            |
-> > > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |                           |          10            |
-> > > | Naive CD8+ T         | CD8A, CCR7        |                           |          8             |
-> > > | Memory CD8+ T        | CD8A, CCL5        |                           |          7             |
-> > > | Effector CD8+ T      | CD8A, GZMK        |                           |          4             |
+> > > | Cell Type            | Marker Genes      | Clusters        |
+> > > | ---------------------|-------------------|-----------------|
+> > > | Naive CD4+ T         | IL7R, CCR7        |        0        |
+> > > | CD14+ Mono           | CD14, LYZ         |        1        |
+> > > | Memory CD4+ T        | IL7R, S100A4      |        2        |
+> > > | B                    | MS4A1             |        3        |
+> > > | CD8+ T               | CD8A              |        4        |
+> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |        5        |
+> > > | NK                   | GNLY, NKG7        |        6        |
+> > > | DC                   | FCER1A, CST3      |        7        |
+> > > | Platelet             | PPBP              |        8        |
 > > {: .matrix}
 > {: .solution}
 {: .question}
+
+</div>
+
+<div class='SCTransform' markdown='1'>
+  
+> <question-title></question-title>
+> 1. Can you identify the cell types for each cluster?
+> > <solution-title></solution-title>
+> > 1. Based on the expression of the known PBMC markers, we can assign the following cell types to our clusters: 
+> >
+> > > | Cell Type            | Marker Genes      | Clusters       |
+> > > | ---------------------|-------------------|----------------|
+> > > | CD14+ Mono           | CD14, LYZ         |       1        |
+> > > | B                    | MS4A1             |       3        |
+> > > | CD8+ T               | CD8A              |    8, 7, 4     |
+> > > | FCGR3A+ Mono         | FCGR3A, MS4A7     |       6        |
+> > > | NK                   | GNLY, NKG7        |       5        |
+> > > | DC                   | FCER1A, CST3      |       9        |
+> > > | Platelet             | PPBP              |      11        |
+> > > | Naive CD4+ T         | IL7R, CCR7        |       2        |
+> > > | Memory CD4+ T        | IL7R, S100A4      |       0        |
+> > > | IFN-activated CD4+ T | IL7R, ISG15, IL32 |      10        |
+> > > | Naive CD8+ T         | CD8A, CCR7        |       8        |
+> > > | Memory CD8+ T        | CD8A, CCL5        |       7        |
+> > > | Effector CD8+ T      | CD8A, GZMK        |       4        |
+> > {: .matrix}
+> {: .solution}
+{: .question}
+> > > 
+
+</div>
 
 We can now rename our clusters using these cell names, while keeping a copy of the original idents (the cluster numbers) in case we want to use them again. It will be easier to interpret our plots and any downstream analyses we run if we can use cell names rather than cluster numbers!
 
@@ -1430,7 +1475,7 @@ We can now rename our clusters using these cell names, while keeping a copy of t
 >    - *"Method used"*: `Manipulate Seurat Object`
 >        - *"Manipulation to perform"*: `Rename idents`
 >            - *"Rename all idents"*: `Yes`
->                - *"New names"*: If you ran the separate preprocessing steps, enter `CD4 Naive T, CD14 Mono, CD4 Memory T, B, CD8 T,FCGR3A Mono, NK, DC, Platelet` or if you used SCtransform, enter `CD4 Memory T, CD14 Mono, CD4 Naive T, B, CD8 Effector T, NK, FCGR3A Mono, CD8 Memory T, CD8 Naive T,DC, CD4 IFN-activated T,Platelet`
+>                - *"New names"*: <span class='Separate-Preprocessing-Steps'>`CD4 Naive T, CD14 Mono, CD4 Memory T, B, CD8 T,FCGR3A Mono, NK, DC, Platelet`</span><span class='SCtransform'>`CD4 Memory T, CD14 Mono, CD4 Naive T, B, CD8 Effector T, NK, FCGR3A Mono, CD8 Memory T, CD8 Naive T,DC, CD4 IFN-activated T,Platelet`</span>
 >            - *"Save copy of old idents first"*: `Yes`
 >
 > 2. Rename the output as `Annotated Clusters`
@@ -1448,13 +1493,17 @@ Now we can plot our UMAP again, this time showing the names of our clusters.
 >
 {: .hands_on}
 
-The annotated cell clusters will look like this if you used the separate preprocessing tools: 
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
-![Plot showing three big groups of cells divided into 9 clusters and coloured by cell type. The smallest of these three main groups only contains cells coloured as B cells. The other two groups are made up of cells from different cell types.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_CellTypes.png "UMAP coloured by cluster (Separate preprocessing steps)")
+![Plot showing three big groups of cells divided into 9 clusters and coloured by cell type. The smallest of these three main groups only contains cells coloured as B cells. The other two groups are made up of cells from different cell types.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_CellTypes.png "UMAP coloured by cell type")
 
-If you used SCTransform instead then your annotated clusters will look like this:
+</div>
 
-![Plot showing three big groups of cells divided into 12 clusters and coloured by cell type. The smallest of these three main groups only contains cells coloured as B cells. The other two groups are made up of cells from different cell types.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_CellTypes_SCT.png "UMAP coloured by cluster (SCTransform)")
+<div class='SCTransform' markdown='1'>
+
+![Plot showing three big groups of cells divided into 12 clusters and coloured by cell type. The smallest of these three main groups only contains cells coloured as B cells. The other two groups are made up of cells from different cell types.](../../images/scrna-seurat-pbmc3k/seurat_UMAP_DimPlot_CellTypes_SCT.png "UMAP coloured by cell type")
+
+</div>
 
 ## Canonical Markers vs Marker Genes
 
@@ -1464,11 +1513,10 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 
 > <hands-on-title>Create Heatmaps to Compare Expression by Cluster - Canonical Markers</hands-on-title>
 >
-> 1. Use the Upload Data - Paste/Fetch data option to create a table of genes to plot. Select the input type as **tabular** and enter a list of genes, one on each row. You can type these in or copy and paste one of the following lists - don't copy the empty header row if you do this!
+> 1. Use the Upload Data - Paste/Fetch data option to create a table of genes to plot. Select the input type as **tabular** and enter a list of genes, one on each row. You can type these in or copy and paste the following list - don't copy the empty header row if you do this!
 > 
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
-> 
-> If you used the separate preprocessing tools:
+> <span class='Separate-Preprocessing-Steps'>
 >
 > |        |
 > |--------|
@@ -1486,8 +1534,10 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 > | FCER1A |
 > | CST3   |
 > | PPBP   |
+> 
+></span>
 >
-> If you used SCTransform:
+><span class='SCTransform'>
 > 
 > |        |
 > |--------|
@@ -1509,7 +1559,9 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 > | FCER1A |
 > | CST3   |
 > | PPBP   |
-> 
+>
+> </span>
+>
 > 2. Rename the file as `Canonical Markers` when it has finished uploading and make sure the datatype is **tabular**
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md %}
@@ -1527,13 +1579,17 @@ In order to create a heatmap, we need to prepare a tabular file with a list of t
 >
 {: .hands_on}
 
-The heatmap of the canonical markers will look like this if you used the separate preprocessing tools: 
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
-![Heatmap showing expression of IL7R mainly in CD4NaiveT, CD4MemoryT, and CD8T cells, expression of CCR7 mainly in CD4NaiveT, CD4MemoryT, and B cells, expression of CD14 in CD14Mono cells, expression of LYZ in clusters CD14Mono, FCGR3Mono, and DC cells, expression of S100A4 in CD14Mono and FCGR3A cells, expression of MS4A1 in B cells, expression of CD8A in CD8T cells, expression of FCGR3A in FCGR3AMono and NK cells, expression of MS4A7 in FCGR3AMono and some CD14Mono cells, expression of GNLY in NK cells and to a lesser extent in CD8T cells, expression of NKG7 in CD8T and NK cells, expression of FCER1A in cluster DC, expression of CST3 in CD14Mono, FCGR3A and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster (Separate preprocessing tools)")
+![Heatmap showing expression of IL7R mainly in CD4NaiveT, CD4MemoryT, and CD8T cells, expression of CCR7 mainly in CD4NaiveT, CD4MemoryT, and B cells, expression of CD14 in CD14Mono cells, expression of LYZ in clusters CD14Mono, FCGR3Mono, and DC cells, expression of S100A4 in CD14Mono and FCGR3A cells, expression of MS4A1 in B cells, expression of CD8A in CD8T cells, expression of FCGR3A in FCGR3AMono and NK cells, expression of MS4A7 in FCGR3AMono and some CD14Mono cells, expression of GNLY in NK cells and to a lesser extent in CD8T cells, expression of NKG7 in CD8T and NK cells, expression of FCER1A in cluster DC, expression of CST3 in CD14Mono, FCGR3A and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers.png "Heatmap showing expression of known PBMC markers by cluster")
 
-If you used SCTransform for preprocessing then you should see this heatmap:
+</div>
 
-![Heatmap showing expression of IL7R mainly in CD4MemoryT, CD4NaiveT, and CD8EffectorT cells, expression of GZMK in CD8EffectorT cells and some CD8MemoryT cells, expression of CCL5 in CD8EffectorT, CD8MemoryT and most NK cells, expression of CCR7 mainly in CD4NaiveT and CD8NaiveT cells, expression of CD14 in CD14Mono cells, expression of IL32 in CD4MemoryT, CD8EffectorT, and CD8MemoryT cells as well as some NK cells, expression of ISG15 in CD4IFN-activatedT cells as well as some CD14Mono and FCGR3AMono cells, expression of LYZ in CD14Mono and DC cells, expression of S100A4 mainly in CD14Mono and FCGR3AMono cells but also in some CD4MemoryT cells, expression of MS4A1 in B cells, expression of CD8A in CD8EffectorT, CD8MemoryT, and CD8NaiveT cells, expression of FCGR3A in FCGR3AMono and NK cells as well as some CD8MemoryT cells, expression of MS4A7 in FCG3RAMono cells with some expression by CD14Mono cells, expression of GNLY in NK cells, expression of NKG7 in NK and CD8MemoryT cells as well as some CD8EffectorT cells, expression of FCER1A in DC, expression of CST3 in CD14Mono, FCGR3AMono and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers_SCT.png "Heatmap showing expression of known PBMC markers by cluster (SCTransform)")
+<div class='SCTransform' markdown='1'>
+
+![Heatmap showing expression of IL7R mainly in CD4MemoryT, CD4NaiveT, and CD8EffectorT cells, expression of GZMK in CD8EffectorT cells and some CD8MemoryT cells, expression of CCL5 in CD8EffectorT, CD8MemoryT and most NK cells, expression of CCR7 mainly in CD4NaiveT and CD8NaiveT cells, expression of CD14 in CD14Mono cells, expression of IL32 in CD4MemoryT, CD8EffectorT, and CD8MemoryT cells as well as some NK cells, expression of ISG15 in CD4IFN-activatedT cells as well as some CD14Mono and FCGR3AMono cells, expression of LYZ in CD14Mono and DC cells, expression of S100A4 mainly in CD14Mono and FCGR3AMono cells but also in some CD4MemoryT cells, expression of MS4A1 in B cells, expression of CD8A in CD8EffectorT, CD8MemoryT, and CD8NaiveT cells, expression of FCGR3A in FCGR3AMono and NK cells as well as some CD8MemoryT cells, expression of MS4A7 in FCG3RAMono cells with some expression by CD14Mono cells, expression of GNLY in NK cells, expression of NKG7 in NK and CD8MemoryT cells as well as some CD8EffectorT cells, expression of FCER1A in DC, expression of CST3 in CD14Mono, FCGR3AMono and DC cells, and expression of PPBP in Platelets.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_CellType_markers_SCT.png "Heatmap showing expression of known PBMC markers by cluster")
+
+</div>
 
 Rather than looking at the canonical markers, we might want to make a heatmap of the top markers from our DE analysis.
 In order to do this, we'll need to turn the output from `FindAllMarkers` into a tabular file type. We can then cut out the column with the list of gene names, getting rid of the column header, and use this as an input for the plot.
@@ -1569,13 +1625,17 @@ In order to do this, we'll need to turn the output from `FindAllMarkers` into a 
 >
 {: .hands_on}
 
-If you are following the separate preprocessing tools route then you should see a heatmap like this:
+<div class='Separate-Preprocessing-Steps' markdown='1'>
 
 ![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. For example the CD8T cells show some expression of the top markers for CD4NaiveT and CD4MemoryT cells, although expression of their own top markers is much higher.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers.png "Heatmap showing expression of the top 10 markers for each cluster")
 
-If you're on the SCTransform route then your heatmap should look like this:
+</div>
+
+<div class='SCTransform' markdown='1'>
 
 ![Heatmap showing blocks of higher expression for the top 10 markers in the clusters they are markers for. Most cells in each cluster express the markers for that cluster but the patterns are stronger for some genes than others. Some cells outside the clusters also express the markers. For example, the different T cell subtypes often show high expression of the top markers for other T cell groups.](../../images/scrna-seurat-pbmc3k/seurat_DoHeatmap_TopPositiveMarkers_SCT.png "Heatmap showing expression of the top 10 markers for each cluster")
+
+</div>
 
 Looking at these plots, we can see that there are clear associations between certain genes and clusters. In both cases, we can also see that there is variation in the expression level of these genes within the associated clusters, with some cells expressing little or none of the gene. We can also see cells outside of the associated clusters that are expressing the genes. This is true for both the known cell type markers and the markers we identified through our DE analysis - even when a statistical test has identified a significant association with one cluster, there are still differences between cells.
 
@@ -1583,14 +1643,14 @@ Comparing the two plots also shows us why the supervised approach can be faster 
 
 > <question-title></question-title>
 > 1. Which plot type was best for annotating clusters?
-> 2. Are you happy with this clustering - even for cluster 0 (the CD4NaiveT cells) on the separate preprocessing steps route, which had a lot of ribosomal genes in its top markers list?
+> 2. Are you happy with this clustering? <span class='Separate-Preprocessing-Steps'>What about for for cluster 0, the CD4NaiveT cells, which had a lot of ribosomal genes in its top markers list?</span><span class='SCTransform'></span>
 > > <solution-title></solution-title>
 > > 1. The best type of plot for identifying cell types can depend on your data as well as your own personal preferences. You might find one plot easier to interpret than another. It can also be helpful to create different types of plots as some patterns may be clearer on one type while others are clearer on another. It's also good to be able to confirm your interpretation on multiple plots! 
 > > UMAP plots are often used to provide a quick and memorable overview of the data, but it can be tricky to match the expression patterns to the clusters, especially given the limitations of these plots - some cells can be hidden, adjacent clusters can blend into each other, and we can't rely on the 2D plot to accurately represent all the relationships between cells and clusters.
 > > Violin plots present each cluster separately, so they can make it easier to differentiate between clusters. Since every cluster is given the same amount of space on the plot, no matter how many cells it contains, violin plots can also make it easier to see what's going on with smaller clusters. We can also get a clearer idea of how much variation there is within and between clusters, although some of the points may still be hidden behind others.
 > > Heatmaps can give us the best overview of the variation between cells as each cell is given its own little section on the plot. We can see how consistently the markers are expressed within the cluster and how common it is for cells outside the cluster to express the same genes. We can also see the overall patterns as blocks of cells with similar expression profiles, including the clusters that share similar patterns. However, heatmaps can be less useful if we want to focus on individual cells or genes, as it can be hard to pick out details.
 > > 2. We should be happy with the results of our clustering as they match up with what we already know about PBMCs. We have been able to annotate each cluster as a different cell type based on a supervised approach - and we could do the same using an unsupervised approach. The decisions we made along the way, such as the number of PCs we used and how many nearest neighbors we looked for have worked well. We even identified some subtypes of T cells, although we were able to separate out more of these when we used SCTransform.
-> > On the separate preprocessing route, even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!
+> > <span class='Separate-Preprocessing-Steps'>On the separate preprocessing route, even though many of the top markers for cluster 0 were from ribosomal genes, we were still able to identify it as a specific cell type. Cluster 0 represents our population of Naive CD4+ T cells. If we search online to learn a bit more about this cell type, we'll quickly find that it is known to have lots of ribosomes, so in this case, we can be confident that the high expression of ribosomal genes in these cells is due to real biological differences between cell types, rather than a problem with our data. If we weren't able to assign a cell type to cluster 0, for example because it expressed a mix of markers for different types, then we would come to a different conclusion!</span><span class='SCTransform'></span>
 > > If we couldn't see strong associations between our clusters and the different cell types that we expect to see in the dataset, then this would be very suspicious - did something go wrong with our experiment or analysis? We would need to go back and try to identify the problem to see if we can fix it. If the problem isn't too bad, we might just need to change some of the clustering parameters to get clusters that make biological sense - maybe we would need to use more PCs, look for more/fewer nearest neighbors, or simply change the resolution. If the problem is more serious, we might need to recheck the quality of our data or make bigger changes to the analysis.
 > {: .solution}
 {: .question}
