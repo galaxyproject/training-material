@@ -604,7 +604,7 @@ In the following sections, we will study how it can be built into a GxIT.
 
 > <hands-on-title></hands-on-title>
 >
-> First, let's clone the repository to take a quick look at a basic implementation of a jupyterlab.
+> First, let's clone the repository to take a quick look at a basic implementation of a JupyterLab.
 >
 > ```console
 > $ git clone https://github.com/bgruening/docker-jupyter-notebook.git
