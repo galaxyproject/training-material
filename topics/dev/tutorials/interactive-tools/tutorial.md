@@ -587,7 +587,7 @@ We have demonstrated how to pass an input file to the Docker container. But what
 
 <div class="Jupyterlab" markdown="1">
 
-# The jupyterlab
+# The JupyterLab
 
 The jupyterlab environement that we will wrap in this tutorial is a simple jupyterlab tool which
 allows the user to upload data in an jupyter environment, manipulate notebooks, and download
