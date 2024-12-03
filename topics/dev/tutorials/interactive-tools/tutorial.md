@@ -589,7 +589,7 @@ We have demonstrated how to pass an input file to the Docker container. But what
 
 </div>
 
-<div class="Jupyterlab" markdown="1">
+<div class="JupyterLab" markdown="1">
 
 # The JupyterLab
 
