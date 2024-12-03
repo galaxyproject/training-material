@@ -157,7 +157,7 @@ cycle.
 {: .comment}
 
 
-{% include _includes/cyoa-choices.html option1="Application" option2="Jupyterlab" default="Application" text="Do you want to build a desktop application or a jupyterlab tool ?" %}
+{% include _includes/cyoa-choices.html option1="Application" option2="JupyterLab" default="Application" text="Do you want to build a desktop application or a JupyterLab tool ?" %}
 
 <div class="Application" markdown="1">
 
