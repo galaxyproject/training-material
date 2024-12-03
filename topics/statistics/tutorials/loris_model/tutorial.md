@@ -140,7 +140,7 @@ The Response feature is a categorical target variable indicating whether patient
 # Using PyCaret Model Comparison Tool
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [PyCaret Model Comparison](.bx.psu.edu/repos/paulo_lyra_jr/pycaret_model_comparison/PyCaret_Model_Comparison/2024.3.3.2+0) %} with the following parameters:
+> 1. {% tool [PyCaret Model Comparison](toolshed.g2.bx.psu.edu/repos/paulo_lyra_jr/pycaret_model_comparison/PyCaret_Model_Comparison/2024.3.3.2+0) %} with the following parameters:
 >    - {% icon param-file %} *"Input Dataset (CSV or TSV)"*: `Chowell_train_Response.tsv`
 >    - {% icon param-file %} *"Test Dataset (CSV or TSV)"*: `Chowell_test_Response.tsv`
 >    - {% icon param-file %} *"Select the target column"*: `C22: Response`
