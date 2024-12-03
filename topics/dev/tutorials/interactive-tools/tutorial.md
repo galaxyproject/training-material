@@ -781,7 +781,7 @@ CMD /startup.sh
 
 And with all this your Dockerfile is ready.
 
-You now need to publish this image o a public repository.
+You now need to publish this image on a public repository.
 Anyone can use this Dockerfile to rebuild the image if necessary.
 In any case don't forget to have all the files shown when we cloned this [repository](https://github.com/bgruening/docker-jupyter-notebook/tree/master) next to your Dockerfile.
 
