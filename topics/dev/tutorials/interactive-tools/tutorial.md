@@ -720,7 +720,7 @@ Then you can add the package specific to the environment you want to have in you
 
 ```
 
-Then, you can add some configurations to have some configuration and a welcome notebook by default (this is generic to all JupyterLab GxITs)
+Then, you can add some configurations to have some configuration and a welcome notebook by default (this is generic to all JupyterLab GxITs).
 
 ```
 ADD ./startup.sh /startup.sh
