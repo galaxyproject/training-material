@@ -619,7 +619,7 @@ In the following sections, we will study how it can be built into a GxIT.
 > ├── .
 > └── startup.sh
 > ```
-> You'll find a Dockerfile, startup.sh, and a README that will describe how the dockerfile here for an Gxit works. We encourage you to read thi README.
+> You'll find a Dockerfile, startup.sh, and a README that will describe how the Dockerfile here for a GxIT works. We encourage you to read this README.
 >
 {: .hands_on}
 
