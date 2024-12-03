@@ -574,6 +574,7 @@ It can also be useful to create and inject environment variables into the tool c
 ```
 
 ## Galaxy history interaction
+
 We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user's Galaxy history? For example, if the user creates a file within the application. That's where the environment variables created in the tool XML become useful.
 
 > <tip-title>Access histories in R</tip-title>
