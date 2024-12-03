@@ -207,7 +207,7 @@ These are specific to your container; these are required for an R-Shiny containe
 
 ## The Dockerfile
 
-If you need some help to start your Dockerfile you can always some inspiration from the previous interactve tools build in Galaxy. Go check some of the Dockerfiles for instance the one for the application [QGIS](https://github.com/usegalaxy-eu/docker-qgis) or for [ODV](https://github.com/bgruening/docker-odv/tree/main)
+If you need some help to start your Dockerfile you can always get some inspiration from the previous interactive tools built in Galaxy. Go check some of the Dockerfiles, for instance the one for the [QGIS](https://github.com/usegalaxy-eu/docker-qgis) application or for [ODV](https://github.com/bgruening/docker-odv/tree/main).
 
 > <tip-title>A brief primer on Docker</tip-title>
 > Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single "image", which can be run on any machine with Docker installed.
