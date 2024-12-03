@@ -452,11 +452,13 @@ subsites: [all]
 		</table>
 
 		<hr />
+	{% unless page.hide_calendar_buttons %}
         <b> Add this event to your calendar </b>
 
            {% include _includes/calendar-buttons.html %}
 
 		<hr />
+	{% endunless %}
 
 		<b>Organisers</b><br/>
 		{% for org in event.contributions.organisers %}
