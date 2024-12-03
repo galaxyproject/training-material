@@ -698,7 +698,7 @@ RUN conda config --add channels conda-forge && \
     ansible-kernel \
     bioblend galaxy-ie-helpers \
 ```
-With those packages installed you have the bases to have a functionnal environement in your jupyterlab AND be able to link your jupyterlab to the Galaxy history with the pacakage `bioblend galaxy-ie-helpers`.
+With those packages installed, you have the bases to have a functional environment in your JupyterLab AND be able to link your JupyterLab to the Galaxy history with the package `bioblend galaxy-ie-helpers`.
 
 Then you can add the package specific to the environement you want to have in you jupyterlab for instance 
 
