@@ -625,7 +625,7 @@ In the following sections, we will study how it can be built into a GxIT.
 
 ## The Dockerfile
 
-If you need some help to start your Dockerfile you can always some inspiration from the previous interactve tools build in Galaxy. Go check some of the Dockerfiles for instance the one for the [Copernicus data sapce ecosystem jupyterlab](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) or for a basic [jupyterlab here](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile)
+If you need some help to start your Dockerfile you can always some inspiration from the previous interactive tools built in Galaxy. Go check some of the Dockerfiles, for instance, the one for the [Copernicus data space ecosystem JupyterLab](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) or for a basic [JupyterLab here](https://github.com/bgruening/docker-jupyter-notebook/blob/master/Dockerfile)
 
 > <tip-title>A brief primer on Docker</tip-title>
 > Docker allows an entire application context to be containerized. A typical web application consists of an operating system, installed dependancies, web server configuration, database configuration and, of course, the codebase of the software itself. A Docker container can encapsulate all of these components in a single "image", which can be run on any machine with Docker installed.
