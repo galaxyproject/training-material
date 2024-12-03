@@ -819,7 +819,7 @@ If you are lucky, you might find an available Docker image for the application y
 
 ## Test the image
 
-Before we go pushing our container to the cloud, we should give it a local test run to ensure that it's working correctly on our development machine. Have a play and see how our little web app works!
+Before we push our container to the cloud, we should give it a local test run to ensure that it's working correctly on our development machine. Have a play and see how our little web app `works!`
 
 > <hands-on-title></hands-on-title>
 > ```sh
