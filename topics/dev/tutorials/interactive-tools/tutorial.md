@@ -779,7 +779,7 @@ CMD /startup.sh
 
 ```
 
-And with all this your Dockerfile is ready 
+And with all this your Dockerfile is ready.
 
 You now need to publish this image o a public repository.
 Anyone can use this Dockerfile to rebuild the image if necessary.
