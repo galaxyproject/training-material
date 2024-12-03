@@ -755,7 +755,7 @@ RUN cd /home/$NB_USER/ &&  \
     rm -r /home/$NB_USER/notebook-samples-main
 ```
 
-Finally, some general variables of environment :
+Finally, some general variables of environment:
 
 ```
 # ENV variables to replace conf file
