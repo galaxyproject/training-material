@@ -700,7 +700,7 @@ RUN conda config --add channels conda-forge && \
 ```
 With those packages installed, you have the bases to have a functional environment in your JupyterLab AND be able to link your JupyterLab to the Galaxy history with the package `bioblend galaxy-ie-helpers`.
 
-Then you can add the package specific to the environement you want to have in you jupyterlab for instance 
+Then you can add the package specific to the environment you want to have in your JupyterLab for instance 
 
 ```
     # specific sentinel, openeo packages
