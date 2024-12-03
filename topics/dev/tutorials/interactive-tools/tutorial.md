@@ -559,7 +559,7 @@ $__user_id__
 $__user_email__
 ```
 
-It can also be useful to create and inject environment variables into the tool context. This can be acheived using the `<environment variables>` tag in the tool XML. The [RStudio GxIT](https://github.com/galaxyproject/galaxy/blob/b180b7909dc3fe2750fbc8b90214e201eb276794/tools/interactive/interactivetool_rstudio.xml#L12) again provides an example of this:
+It can also be useful to create and inject environment variables into the tool context. This can be achieved using the `<environment variables>` tag in the tool XML. The [RStudio GxIT](https://github.com/galaxyproject/galaxy/blob/b180b7909dc3fe2750fbc8b90214e201eb276794/tools/interactive/interactivetool_rstudio.xml#L12) again provides an example of this:
 
 ```xml
 <environment_variables>
