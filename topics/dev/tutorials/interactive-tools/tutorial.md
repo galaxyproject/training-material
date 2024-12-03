@@ -657,7 +657,7 @@ If you need some help to start your Dockerfile you can always some inspiration f
 {: .tip}
 
 
-Let's check out [the Dockerfile](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) that we'll use to containerize our Jupyterlab.
+Let's check out [the Dockerfile](https://github.com/usegalaxy-eu/docker-copernicus-notebooks/blob/main/Dockerfile) that we'll use to containerize our JupyterLab.
 
 This container recipe can be used to build a Docker image which can be pushed to a
 container registry in the cloud, ready for consumption by our Galaxy instance:
