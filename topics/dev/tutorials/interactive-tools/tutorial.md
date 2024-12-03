@@ -340,7 +340,7 @@ next to your Dockerfile.
 >    {: .tip}
 {: .hands_on}
 
-If you are lucky, you might find an available Docker image for the application you are trying to wrap. However, existing Docker images often require some "tweaking" before they will work as a GxIT. Some example configuration changes are:
+If you are lucky, you might find an available Docker image for the application you are trying to wrap. Some configuration changes can be needed such as:
 
 1. Expose the correct port. The application, Docker and tool XML ports must be aligned!
 2. Log output to an external file - useful for debugging.
@@ -809,7 +809,8 @@ In any case don't forget to have all the files shown when we cloned this [reposi
 >    {: .tip}
 {: .hands_on}
 
-If you are lucky, you might find an available Docker image for the application you are trying to wrap. However, existing Docker images often require some "tweaking" before they will work as a GxIT. Some example configuration changes are:
+If you are lucky, you might find an available Docker image for the application you are trying to wrap. Some configuration changes can be needed such as:
+
 
 1. Expose the correct port. The application, Docker and tool XML ports must be aligned!
 2. Log output to an external file - useful for debugging.
