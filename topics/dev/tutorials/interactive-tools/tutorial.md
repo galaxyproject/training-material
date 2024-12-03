@@ -741,7 +741,7 @@ ADD ./default_notebook.ipynb /home/$NB_USER/notebook.ipynb
 
 ```
 
-You can also add your own set of notebooks to guide the user like that :
+You can also add your own set of notebooks to guide the user like that:
 
 ```
 # Download notebooks
