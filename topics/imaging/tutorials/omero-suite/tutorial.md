@@ -320,7 +320,7 @@ We now add the step for the image import
 {: .hands_on}
 
 ### Step 3 - Dynamically parse image IDs 
-We need now a small series of steps to dynamically parse the IDs of the uploaded images.
+We need now a small series of steps to get the ID of the image we just upload into OMERO
 This can be done with the following tool sequence:
 
 > <hands-on-title>Parse Images IDs </hands-on-title>
@@ -335,10 +335,9 @@ This can be done with the following tool sequence:
 >   - Connect the output of {% icon tool %} **10: Split File**  to the {% icon tool %} **11: Parse parameter value**
 {: .hands_on}
 
-This sequence of tools dynamically parses the single image ID which are use them for input of the metadata and 
-ROI tools. In this way, it is possible to associate a sequence of annotations to several uploaded images.
+We got the OMERO image ID! We can now use it as an input for next sequence of tools...
 
-### Metadata and ROIs input
+### Step 4 - Metadata and ROIs input
 
 The last section is to upload metadata and ROIs
 
@@ -385,8 +384,3 @@ from a target OMERO instance.
 Nat Methods 9, 245–253 (2012). https://doi.org/10.1038/nmeth.1896
 - Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for Scientific Data Management and
 stewardship. Sci Data 3, 160018 (2016). https://doi.org/10.1038/sdata.2016.18
-
-## Acknowledgement
-
-We acknowledge the support of [**NFDI4BIOIMAGE**](https://nfdi4bioimage.de/home/), 
-funded by the German Research Foundation (DFG) within the framework of the NFDI – project numbers: 501864659.
