@@ -23,7 +23,7 @@ contributions:
 
 
 
-If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitHub CodeSpaces! Everybody gets 60 free hours of CodeSpaces per month
+If you are working on your own training materials and want preview them online without installing anything on your computer, you can do this using GitHub CodeSpaces! Everybody gets 60 free hours of CodeSpaces per month.
 
 
 > <agenda-title></agenda-title>
@@ -41,17 +41,27 @@ If you are working on your own training materials and want preview them online w
 
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
-> 1. Navigate to the GTN GitHub repository, [github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material)
+> 1. **Create a fork** of the [GTN GitHub repository](https://github.com/galaxyproject/training-material)
 >
-> 2. Click on the green **Code** button
+>    {% snippet topics/contributing/faqs/github-fork-gtn.md %}
 >
-> 3. At the top, switch to the **CodeSpaces** tab
+> 2. Already have a fork of the GTN? Make sure it is up to date.
+>
+>    {% snippet topics/contributing/faqs/github-fork-master-main.md %}
+>
+>    {% snippet topics/contributing/faqs/github-fork-sync.md %}
+>
+> 2. **Navigate to your fork** of the GTN
+>
+> 3. Click on the green **Code** button
+>
+> 4. At the top, switch to the **CodeSpaces** tab
 >    ![the codespaces tab of the menu](images/codespaces-launch.png)
 >
-> 4. Click on **Create codespace on main**
+> 5. Click on **Create codespace on main**
 >    - Note: if you switch to a specific branch in GitHub first, you can create a codespace for that branch
 >
-> 5. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
+> 6. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
 >    - It may take a couple minutes to finish setting everything up
 >    - In this environment you can also build the GTN website to preview your changes
 >    - When everything is ready, you should see something like this:
@@ -178,31 +188,44 @@ When you have finished your changes, it all looks good in the preview, you want 
 
 
 > <hands-on-title>Comitting changes</hands-on-title>
+> Before you can commit your changes you have to create a branch. You have two options to preform this task:
+>  1. **Option 1: via the terminal**
+>    - Hit <kbd>ctrl+c</kbd> if your preview was still running to stop it
+>    - Create a new branch, commit your changes, push changes:
 >
-> First we commit our changes inside the codespace:
-> 1. Go to the "Source Control" icon on the left menu bar (it should have a blue dot on it)
-> 2. You should see your changed file (`tutorial.md`)
->    ![source control tab](images/codespaces-commit-1.png)
-> 3. Hover over the file name, and **click on the plus* icon* to *stage* it
-> 4. Enter a commit message (e.g. "updated tutorial title)
->    ![adding a commit message](images/codespaces-commit-2.png)
-> 5. Click on the green **Commit** button
+>    ```bash
+>    git checkout -b fix-title
+>    git commit -m "update tutorial title" topics/introduction/tutorials/galaxy-intro-short/tutorial.md
+>    git push origin fix-title
+>    ```
+>
+> 2. **Option 2: via the web interface**
+>    - Create a new branch:
+>      -  On the bottom-left, click on the branch logo (probably labelled "main")
+>         ![button on the bottom of the page with the current branch](images/codespaces-branch-change1.png)
+>      - Enter `fix-title` as the name for your new branch (at top of window)
+>         ![Addint a new branch](images/codespaces-branch-change2.png)
+>      - Choose "+ Create new branch..." from the dropdown
+>    - Commit changes:
+>      - On the left menu, click on the "changed files" tab
+>        ![button on the left menu to show changed files](images/codespaces-commit-1.png)
+>      - You should see your changed file (`tutorial.md`)
+>      - Click on the "+" icon next to the file we edited to *stage changes*
+>        ![stage changes button](images/codespaces-commit-plus.png)
+>      - Enter a commit message (top of window)
+>      - Hit the checkmark icon below the massage to commit the changes
+>   - Publish changes
+>     - Click the cloud button at bottom left to publish your changes
+>       ![publish changes button](images/codespace-publlish.png)
 >
 {: .hands_on}
 
-Next, we will push these changes to a branch/fork. We will do this from outside of our codespace for convenience.
+Next, we will see these changes to on your branch/fork. We will do this from outside of our codespace.
 
 > <hands-on-title>Pushing changes to GitHub</hands-on-title>
 >
 > 1. In your browser (outside of codespaces), navigate to the [GTN GitHub page](https://github.com/galaxyproject/training-material)
-> 2. Click on the green **Code** button again
-> 3. Click on the 3-dots menu to the right of your (randomly generated) codespace name
->    ![screenshot of the codespace options menu](images/codespaces-stop-2.png)
-> 4. Choose **Export changes to a branch**
->    - For you, it could be **Export changes to fork**
->    ![screenshot of export to branch dialogue window](images/codespaces-export-to-branch.png)
-> 5. Once it is done, click **See branch** button
->    - This will take you to the new branch
+> 2. GitHub will helpfully show you any recent branches you've pushed to your fork
 >    - Click the **Compare & pull request** button to create a PR for your changes
 >    ![compare and pull request button on the new branch](images/codespaces-compare-pr.png)
 {: .hands_on}
