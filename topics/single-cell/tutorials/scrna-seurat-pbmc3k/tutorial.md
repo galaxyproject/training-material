@@ -471,7 +471,7 @@ It is possible to use the `ScaleData` function to regress out unwanted variation
 
 <div class='SCTransform' markdown='1'>
   
-![Most genes are closely grouped together, right at the bottom of the plot with low standardized variance. The selected variable genes are highlighted in red and labelled by name. They are higher up on the plot, showing they have higher standardized variances although most are still quite close to the non variable genes. They are S100A9, GNLY, LYZ, S100A8, NKG7, FTL, GZMB, IGLL5, FTH1, and CCL5.](../../images/scrna-seurat-pbmc3k/seurat_variable_genes.png "Plot showing the standardized variances of variable and non-variable genes. The top 10 most variable genes are labelled.")
+![Most genes are closely grouped together, right at the bottom of the plot with low standardized variance. The selected variable genes are highlighted in red and labelled by name. They are higher up on the plot, showing they have higher standardized variances although most are still quite close to the non variable genes. They are S100A9, GNLY, LYZ, S100A8, NKG7, FTL, GZMB, IGLL5, FTH1, and CCL5.](../../images/scrna-seurat-pbmc3k/seurat_variable_genes_SCT.png "Plot showing the standardized variances of variable and non-variable genes. The top 10 most variable genes are labelled.")
 
 </div>
 
@@ -755,9 +755,9 @@ Another option for visualising our PCA results is to use `DimHeatmap` to produce
 
 <div class='SCTransform' markdown='1'>
 
-![The heatmap is sharply divided into four quarters. The left side of shows PCA scores for groups of cells that have low values for the genes in the top half of the plot that were negatively associated with PC1 and high values for genes in the bottom half that were positively associated with PC1. Cells on the right side have high values in the top half of the plot and low values in the bottom half of the plot](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1.png "Heatmap of PCA scores for the top 30 genes associated with PC1")
+![The heatmap is sharply divided into four quarters. The left side of shows PCA scores for groups of cells that have low values for the genes in the top half of the plot that were negatively associated with PC1 and high values for genes in the bottom half that were positively associated with PC1. Cells on the right side have high values in the top half of the plot and low values in the bottom half of the plot](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1_SCT.png "Heatmap of PCA scores for the top 30 genes associated with PC1")
 
-![The plot shows 15 heatmaps displaying PCA scores for the top cells and genes for PC1 to PC15. The first two plots are clearly divided into quarters but the pattern becomes less clear in subsequent plots.](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1_15.png "Heatmap of PCA scores for the top 30 genes associated with PCs 1 to 15")
+![The plot shows 15 heatmaps displaying PCA scores for the top cells and genes for PC1 to PC15. The first two plots are clearly divided into quarters but the pattern becomes less clear in subsequent plots.](../../images/scrna-seurat-pbmc3k/seurat_heatmap_PC_1_15_SCT.png "Heatmap of PCA scores for the top 30 genes associated with PCs 1 to 15")
 
 </div>
 
@@ -803,14 +803,14 @@ The Elbow Plot ranks the PCs based on the percentage of variance that each of th
 
 <div class='SCTransform' markdown='1'>
 
-![Dots showing the standard deviation for each PC start high for PC1 then drop substantially for each following PC. A sharp bend appears around PC10, with a gentler slope down towards the horizontal axis from this point. The dots from PC30 onwards are close to the bottom axis, with low standard deviations.](../../images/scrna-seurat-pbmc3k/seurat_elbowplot.png "Elbow Plot showing the standard deviations for the first 30 PCs")
+![Dots showing the standard deviation for each PC start high for PC1 then drop substantially for each following PC. A sharp bend appears around PC10, with a gentler slope down towards the horizontal axis from this point. The dots from PC30 onwards are close to the bottom axis, with low standard deviations.](../../images/scrna-seurat-pbmc3k/seurat_elbowplot_SCT.png "Elbow Plot showing the standard deviations for the first 30 PCs")
 
 </div>
 
 > <question-title></question-title>
 > 1. How many PCs should we use?
 > > <solution-title></solution-title>
-<span class='Separate-Preprocessing-Steps'>
+> > <span class='Separate-Preprocessing-Steps'>
 > > 1. As with many decisions in single cell analysis, there isn't an exact method for deciding how many PCs we should use. The elbow or bend in our plot appears to be around PC9-10, so we'll use 10 dimensions in this tutorial, but you could justifiably choose anywhere between about PC7 to PC12 on the basis of this plot. It is usually better to err on the higher side than to get rid of PCs that might be useful. Sometimes it is worth repeating the analysis with different numbers of PCs to see how it affects the results.
 > > As always, it is also important to consider biology when making your decision. In this case, an expert might have spotted that the genes strongly associated with PCs 12 and 13 are known markers for certain rare subtypes of immune cells (e.g. MZB1 is a marker for Plasmacytoid Dendritic cells). However, these cells are so rare that we're unlikely to find many in a dataset of this size, so these PCs might not be that useful here. In a larger dataset or one that was enriched for these cell types, we might decide to include these PCs in our analysis because of these genes. Since we only have 2700 cells, we can't be sure that this is a true biological signal rather than just noise, so we'll stick with the top 10 PCs on the basis of our Elbow Plot.
 > > It's also worth noting that we calcualted 50 PCs earlier, but only plotted 30 of them here as we wouldn't expect to need all 50 to explain this small dataset (especially after seeing the weaker patterns in those later heatmaps) - if we didn't see a clear bend in this plot, we could try plotting all 50 PCs instead.
@@ -1265,7 +1265,7 @@ To begin, we'll need a list of these canonical markers for PBMCs. Let's use the 
 
 > <comment-title></comment-title>
 If you've already done the other version of this tutorial, using the separate preprocessing tools, you might notice this list includes some additional markers for T cells. SCTransform can reveal more of the biological variation in our dataset - remember that it produced 12 clusters, rather than the nine we would find using the separate preprocessing tools. We can use these extra markers to identify those additional clusters.
-> {: .comment}
+{: .comment}
 
 </div>
 
@@ -1288,7 +1288,7 @@ The suggested marker gene for B cells isn't our top marker, CD79A, but MS4A1. If
 
 <div class='SCTransform' markdown='1'>
 
-![Two violin plots showing expression of CD79A and MS4A1 mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin.png "Violin plots showing expression of CD79A and MS4A1 by cluster")
+![Two violin plots showing expression of CD79A and MS4A1 mainly in cluster 3](../../images/scrna-seurat-pbmc3k/seurat_MS4A1_CD79A_Violin_SCT.png "Violin plots showing expression of CD79A and MS4A1 by cluster")
 
 </div>
 
@@ -1321,7 +1321,7 @@ If we look at which other markers are being expressed (or not expressed) by the 
 
 <div class='SCTransform' markdown='1'>
 
-![The first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including at high levels in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8. Plot 5 shows GZMK expression in cluster 4 with some lower level expression in cluster 7. Plot 6 shows CCL5 expression in clusters 4, 5, 7, and 11. Plot 7 shows IL32 expression across most clusters, including  Plot 8 shows ISG15 expression at low levels in most clusters, with higher expression in cluster 10.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers.png "Violin plots showing expression of IL7R, CCR7, S100A4, CD8A,  by cluster")
+![The first violin plot show IL7R expressed in clusters 0, 2, 4, 8, and 10. Plot 2 shows CCR7 expression in clusters 2, 8, and 10. Plot 3 shows S100A4 expression across most clusters, including at high levels in cluster 0. Plot 4 shows expression of CD8A in clusters 4, 7, and 8. Plot 5 shows GZMK expression in cluster 4 with some lower level expression in cluster 7. Plot 6 shows CCL5 expression in clusters 4, 5, 7, and 11. Plot 7 shows IL32 expression across most clusters, including  Plot 8 shows ISG15 expression at low levels in most clusters, with higher expression in cluster 10.](../../images/scrna-seurat-pbmc3k/seurat_violin_T_cell_markers_SCT.png "Violin plots showing expression of IL7R, CCR7, S100A4, CD8A, GZMK, and CCL5 by cluster")
 
 We can see that IL7R (also known as CD4+) is mainly expressed in clusters 0, 2, 4, 8, and 10. With this marker alone, we could only identify these as clusters of T cells, but if we look at which other markers are being expressed (or not expressed) by these T cell clusters, we can identify different types of T cells. To start with, we can see that two of these clusters, 4 and 8, are also expressing CD8A, which identifies them as CD8+ T cells. The expression of CD8A also helps us to identify one more cluster of T cells that we wouldn't have spotted using CD4 alone - cluster 7.
 
@@ -1462,7 +1462,6 @@ Based on our table of marker genes and these plots, we know which clusters were 
 > > {: .matrix}
 > {: .solution}
 {: .question}
-> > > 
 
 </div>
 
