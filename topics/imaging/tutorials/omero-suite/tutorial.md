@@ -270,7 +270,7 @@ making data fetching an easy task...
 In this section, you will learn to integrate all the different tools to build a workflow for uploading
 an images, metadata and ROIs  into OMERO.
 
-### Step 1 - Define the OMERO inputs
+## Step 1 - Define the OMERO inputs
 To make the workflow work, you need to define six inputs. 
 
 This will make this workflow reusable with different datasets.
@@ -294,7 +294,7 @@ This will make this workflow reusable with different datasets.
 >    *Annotation type*
 {: .hands_on}
 
-### Step 2 - OMERO Import
+## Step 2 - OMERO Import
 We now add the step for the image import
 
 > <hands-on-title>Add the image upload step to the workflow</hands-on-title>
@@ -308,7 +308,7 @@ We now add the step for the image import
 >   input of {% icon tool %} **7: OMERO Image Import**.
 {: .hands_on}
 
-### Step 3 - Dynamically parse image IDs 
+## Step 3 - Dynamically parse image IDs 
 We need now a small series of steps to get the ID of the image we just upload into OMERO
 This can be done with the following tool sequence:
 
@@ -326,7 +326,7 @@ This can be done with the following tool sequence:
 
 We got the OMERO image ID! We can now use it as an input for next sequence of tools...
 
-### Step 4 - Metadata and ROIs input
+## Step 4 - Metadata and ROIs input
 
 The last section is to upload metadata and ROIs
 
