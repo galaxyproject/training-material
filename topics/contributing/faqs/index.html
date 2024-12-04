@@ -18,7 +18,7 @@ if(localStorage.getItem('sentry-opt-out') !== 'opt-out' && navigator.doNotTrack 
 	console.log("Sentry: opt-in");
 	Sentry.init({
 		dsn: "https://45e0ec6e4373462b92969505df37cf40@sentry.galaxyproject.org/10",
-		release: "galaxy-training-network@81faa8da6b41165ffd6cc7bf4ec97b308881c471",
+		release: "galaxy-training-network@4dcf4c69d322d6ae99952dbf87a02edf19169088",
 		integrations: [new Sentry.BrowserTracing(), new Sentry.Replay()],
 		sampleRate: 0.1,
 		tracesSampleRate: 0.1,
@@ -269,6 +269,34 @@ if(localStorage.getItem('plausible-opt-out') !== 'opt-out' && navigator.doNotTra
 
  <br> 
 
+<h3 id="github"> <a href="#github"> Github </a></h3>
+
+<hr/>
+
+
+
+<h4 class="faq-area"> Forking the GTN repository <a href="/training-material/topics/contributing/faqs/github-fork-gtn.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-forking-the-gtn-repository"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-forking-the-gtn-repository" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Forking the GTN repository</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Go on the GitHub repository: <a href="https://github.com/galaxyproject/training-material" width="50%">github.com/galaxyproject/training-material</a></li>   <li>Click on the <strong>Fork</strong> button (top-right corner of the page)</li> </ul>   <p><img src="/training-material/topics/contributing/images/PR_fork.jpg" alt="The fork button on GitHub" /></p> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Syncing your Fork of the GTN <a href="/training-material/topics/contributing/faqs/github-fork-sync.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-syncing-your-fork-of-the-gtn"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-syncing-your-fork-of-the-gtn" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Syncing your Fork of the GTN</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Whenever you want to contribute something new to the GTN, it is important to start with an up-to-date branch. To do this, you should always update the main branch of your fork, before creating a so-called <em>feature branch</em>, a branch where you make your changes.</p>   <ol>   <li>Point your browser to your fork of the GTN repository     <ul>       <li>The url will be <code class="language-plaintext highlighter-rouge">https://github.com/&lt;your username&gt;/training_material</code> (replacing ‘your username’ with your GitHub username)</li>     </ul>   </li>   <li>     <p>You might see a message like “This branch is 367 commits behind galaxyproject/training-material:main.” as in the screenshot below.</p>     <p><img src="/training-material/topics/contributing/images/github_update_fork.png" alt="Github with the top bar of a repository shown, including the button for 'Sync Fork'" /></p>   </li>   <li>     <p>Click the <strong>Sync Fork</strong> button on your fork to update it to the latest version.</p>   </li>   <li><strong>TIP:</strong> never work directly on your main branch, since that will make the sync process more difficult. Always create a new branch before committing your changes.</li> </ol> </blockquote> <!--END_SNIPPET-->
+
+
+
+
+<h4 class="faq-area"> Updating the default branch from master to main <a href="/training-material/topics/contributing/faqs/github-fork-master-main.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+
+<!--SNIPPET--><blockquote class="tip">   <div class="box-title tip-title" id="tip-updating-the-default-branch-from-master-to-main"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-updating-the-default-branch-from-master-to-main" aria-expanded="true"><i class="far fa-lightbulb" aria-hidden="true"></i> <span>Tip: Updating the default branch from master to main</span><span class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you created your fork a long time ago, the default branch on your fork may still be called <strong>master</strong> instead of <strong>main</strong></p>   <ol>   <li>Point your browser to your fork of the GTN repository     <ul>       <li>The url will be <code class="language-plaintext highlighter-rouge">https://github.com/&lt;your username&gt;/training_material</code> (replacing <your username=""> with your GitHub username)</your></li>     </ul>   </li>   <li>     <p>Check the default branch that is shown (at top left).</p>     <p><img src="/training-material/topics/contributing/images/github_update_fork.png" alt="Github with the top bar of a repository shown, including the button for 'Sync Fork'" /></p>   </li>   <li>Does it say <code class="language-plaintext highlighter-rouge">main</code>?     <ul>       <li>Congrats, nothing to do, <strong>you can skip the rest of these steps</strong></li>     </ul>   </li>   <li>     <p>Does it say <code class="language-plaintext highlighter-rouge">master</code>? Then you need to update it, following the instructions below</p>   </li>   <li>Go to your fork’s settings (Click on the gear icon called “Settings”)</li>   <li>Find “Branches” on the left</li>   <li>If it says master you can click on the ⇆  icon to switch branches.</li>   <li>Select <code class="language-plaintext highlighter-rouge">main</code> (it may not be present).</li>   <li>If it isn’t present, use the pencil icon to rename <code class="language-plaintext highlighter-rouge">master</code> to <code class="language-plaintext highlighter-rouge">main</code>.</li> </ol> </blockquote> <!--END_SNIPPET-->
+
+
+
+ <br> 
+
 <h3 id="gtn"> <a href="#gtn"> Gtn </a></h3>
 
 <hr/>
@@ -417,7 +445,7 @@ add a button, include configuration options:
 				</ul>
 				<span style="font-size: 1.3em">Framework</span>
 				<ul class="no-bullets">
-					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/81faa8da6b41165ffd6cc7bf4ec97b308881c471">81faa8d</a></li>
+					<li>Revision <a href="https://github.com/galaxyproject/training-material/commit/4dcf4c69d322d6ae99952dbf87a02edf19169088">4dcf4c6</a></li>
 					<li><a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">MIT</a> Licensed</li>
 					<li><a href="https://jekyllrb.com/">Jekyll(4.3.2 | production)</a></li>
 				</ul>
