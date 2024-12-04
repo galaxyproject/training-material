@@ -41,17 +41,27 @@ If you are working on your own training materials and want preview them online w
 
 > <hands-on-title>Setting up GitPod</hands-on-title>
 >
-> 1. Navigate to the GTN GitHub repository, [github.com/galaxyproject/training-material](https://github.com/galaxyproject/training-material)
+> 1. **Create a fork** of the [GTN GitHub repository](https://github.com/galaxyproject/training-material)
 >
-> 2. Click on the green **Code** button
+>    {% snippet topics/contributing/faqs/github-fork-gtn.md %}
 >
-> 3. At the top, switch to the **CodeSpaces** tab
+> 2. Already have a fork of the GTN? Make sure it is up to date.
+>
+>    {% snippet topics/contributing/faqs/github-fork-master-main.md %}
+>
+>    {% snippet topics/contributing/faqs/github-fork-sync.md %}
+>
+> 2. **Navigate to your fork** of the GTN
+>
+> 3. Click on the green **Code** button
+>
+> 4. At the top, switch to the **CodeSpaces** tab
 >    ![the codespaces tab of the menu](images/codespaces-launch.png)
 >
-> 4. Click on **Create codespace on main**
+> 5. Click on **Create codespace on main**
 >    - Note: if you switch to a specific branch in GitHub first, you can create a codespace for that branch
 >
-> 5. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
+> 6. This will setup a [Visual Studio Code](https://code.visualstudio.com/) environment for you
 >    - It may take a couple minutes to finish setting everything up
 >    - In this environment you can also build the GTN website to preview your changes
 >    - When everything is ready, you should see something like this:
