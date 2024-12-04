@@ -45,6 +45,20 @@ layout: base
     {% endif %}
 
     <h2 id="material">Material</h2>
+
+    {% if topic.toc %}
+      <p>
+      <blockquote class="agenda">
+      <div class="box-title agenda-title" id="agenda">Jump to a section!</div>
+      <ul class="markdown-toc">
+      {% for subtopic in topic_material %}
+        <li><a href="#st-{{ subtopic[0] | slugify }}">{{subtopic[1].subtopic.title}}</a></li>
+      {% endfor %}
+      </ul>
+      </blockquote>
+      </p>
+    {% endif %}
+
     <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
 
     {% if topic.draft %}
