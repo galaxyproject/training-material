@@ -1,7 +1,7 @@
 ---
 layout: learning-pathway
 title: Tool development for a nice & shiny subdomain
-type: admin-dev-community
+type: admin-dev
 description: |
   Discover Galaxy's communities and learn how to  create your subdomain and enrich it by writing, testing and submiting your tools on Galaxy. This learning pathway
   will guide you through all the steps required to build a tool for Galaxy with Planemo for batch tools and how write an interactive tool.
