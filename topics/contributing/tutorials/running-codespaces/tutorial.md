@@ -18,6 +18,8 @@ key_points:
 contributions:
   authorship:
   - shiltemann
+  editing:
+  - teresa-m
 
 ---
 
