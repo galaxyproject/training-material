@@ -19,7 +19,7 @@ pathway:
     tutorials:
       - name: sig_define
         topic: community
-      - name: create_subdomain
+      - name: subdomain
         topic: admin
       - name: sig_create
         topic: community
