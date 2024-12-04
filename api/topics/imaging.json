@@ -144,7 +144,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Mitochondrion detection\"];\n  b84bfb33-15eb-4984-b109-fab32f3813df[\"Output\\nSpot Detection of Mitoflashes\"];\n  0 --> b84bfb33-15eb-4984-b109-fab32f3813df;\n  style b84bfb33-15eb-4984-b109-fab32f3813df stroke:#2c3143,stroke-width:4px;\n  1[\"Mitochondrion tracking\"];\n  0 -->|fn_out| 1;\n  a25e8913-0019-4dd3-aed4-8138e7dd8da3[\"Output\\nSpot Detection Across Frames\"];\n  1 --> a25e8913-0019-4dd3-aed4-8138e7dd8da3;\n  style a25e8913-0019-4dd3-aed4-8138e7dd8da3 stroke:#2c3143,stroke-width:4px;\n  2[\"Curve fitting to measured intensities\"];\n  1 -->|fn_out| 2;\n  a978b043-f089-4d41-8f5d-0df99915dd45[\"Output\\nCurve Fitting for Mitoflash Detection\"];\n  2 --> a978b043-f089-4d41-8f5d-0df99915dd45;\n  style a978b043-f089-4d41-8f5d-0df99915dd45 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Mitochondrion detection\"]\n  kb84bfb3315eb4984b109fab32f3813df[color=lightseagreen,label=\"Output\\nSpot Detection of Mitoflashes\"]\n  0 -> kb84bfb3315eb4984b109fab32f3813df\n  1[label=\"Mitochondrion tracking\"]\n  0 -> 1 [label=\"fn_out\"]\n  ka25e891300194dd3aed48138e7dd8da3[color=lightseagreen,label=\"Output\\nSpot Detection Across Frames\"]\n  1 -> ka25e891300194dd3aed48138e7dd8da3\n  2[label=\"Curve fitting to measured intensities\"]\n  1 -> 2 [label=\"fn_out\"]\n  ka978b043f0894d418f5d0df99915dd45[color=lightseagreen,label=\"Output\\nCurve Fitting for Mitoflash Detection\"]\n  2 -> ka978b043f0894d418f5d0df99915dd45\n}",
           "workflow_tools": [
@@ -410,6 +410,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -553,6 +557,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -582,9 +590,9 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.1",
                   "0.0.3",
-                  "0.0.2"
+                  "0.0.2",
+                  "0.0.1"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -693,6 +701,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -723,8 +735,8 @@
                 "state": "inexact",
                 "versions": [
                   "0.0.3",
-                  "0.0.2",
-                  "0.0.1"
+                  "0.0.1",
+                  "0.0.2"
                 ],
                 "server": "https://usegalaxy.cz/"
               },
@@ -830,6 +842,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -1159,7 +1175,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\nInput Dataset Collection\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nmarkers.csv\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"];\n  style 2 stroke:#2c3143,stroke-width:4px;\n  3[\"BaSiC Illumination\"];\n  0 -->|output| 3;\n  4[\"ASHLAR\"];\n  3 -->|output_dfp| 4;\n  3 -->|output_ffp| 4;\n  0 -->|output| 4;\n  1 -->|output| 4;\n  5[\"UNetCoreograph\"];\n  4 -->|output| 5;\n  6[\"Mesmer\"];\n  5 -->|tma_sections| 6;\n  ee73bee3-59e7-4e1c-87fd-197b8eac7e15[\"Output\\nMesmer on input dataset(s): Mask\"];\n  6 --> ee73bee3-59e7-4e1c-87fd-197b8eac7e15;\n  style ee73bee3-59e7-4e1c-87fd-197b8eac7e15 stroke:#2c3143,stroke-width:4px;\n  7[\"Convert image\"];\n  5 -->|tma_sections| 7;\n  8[\"MCQUANT\"];\n  1 -->|output| 8;\n  5 -->|tma_sections| 8;\n  6 -->|mask| 8;\n  fe28534a-2b3f-4ecc-8ba9-a106b2d1425c[\"Output\\nPrimary Mask Quantification\"];\n  8 --> fe28534a-2b3f-4ecc-8ba9-a106b2d1425c;\n  style fe28534a-2b3f-4ecc-8ba9-a106b2d1425c stroke:#2c3143,stroke-width:4px;\n  9[\"Rename OME-TIFF Channels\"];\n  1 -->|output| 9;\n  7 -->|output| 9;\n  10[\"Convert McMicro Output to Anndata\"];\n  8 -->|cellmask| 10;\n  11[\"Single Cell Phenotyping\"];\n  10 -->|outfile| 11;\n  2 -->|output| 11;\n  12[\"Vitessce Visualization\"];\n  11 -->|output| 12;\n  9 -->|renamed_image| 12;\n  6 -->|mask| 12;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\nInput Dataset Collection\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nmarkers.csv\"]\n  2[color=lightblue,label=\"ℹ️ Input Dataset\\nPhenotypeWorkflow\"]\n  3[label=\"BaSiC Illumination\"]\n  0 -> 3 [label=\"output\"]\n  4[label=\"ASHLAR\"]\n  3 -> 4 [label=\"output_dfp\"]\n  3 -> 4 [label=\"output_ffp\"]\n  0 -> 4 [label=\"output\"]\n  1 -> 4 [label=\"output\"]\n  5[label=\"UNetCoreograph\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Mesmer\"]\n  5 -> 6 [label=\"tma_sections\"]\n  kee73bee359e74e1c87fd197b8eac7e15[color=lightseagreen,label=\"Output\\nMesmer on input dataset(s): Mask\"]\n  6 -> kee73bee359e74e1c87fd197b8eac7e15\n  7[label=\"Convert image\"]\n  5 -> 7 [label=\"tma_sections\"]\n  8[label=\"MCQUANT\"]\n  1 -> 8 [label=\"output\"]\n  5 -> 8 [label=\"tma_sections\"]\n  6 -> 8 [label=\"mask\"]\n  kfe28534a2b3f4ecc8ba9a106b2d1425c[color=lightseagreen,label=\"Output\\nPrimary Mask Quantification\"]\n  8 -> kfe28534a2b3f4ecc8ba9a106b2d1425c\n  9[label=\"Rename OME-TIFF Channels\"]\n  1 -> 9 [label=\"output\"]\n  7 -> 9 [label=\"output\"]\n  10[label=\"Convert McMicro Output to Anndata\"]\n  8 -> 10 [label=\"cellmask\"]\n  11[label=\"Single Cell Phenotyping\"]\n  10 -> 11 [label=\"outfile\"]\n  2 -> 11 [label=\"output\"]\n  12[label=\"Vitessce Visualization\"]\n  11 -> 12 [label=\"output\"]\n  9 -> 12 [label=\"renamed_image\"]\n  6 -> 12 [label=\"mask\"]\n}",
           "workflow_tools": [
@@ -2086,6 +2102,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -2226,6 +2246,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -2371,6 +2395,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -2506,6 +2534,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -2645,6 +2677,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -2778,6 +2814,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -2922,6 +2962,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -3077,6 +3121,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -3212,6 +3260,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -3353,6 +3405,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -3488,6 +3544,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -3744,6 +3804,1174 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Overview of the Galaxy OMERO-suite - Upload images and metadata in OMERO using Galaxy",
+      "level": "Intermediate",
+      "zenodo_link": "https://zenodo.org/records/14205500",
+      "questions": [
+        "How can I use Galaxy to upload images and metadata into OMERO?",
+        "Which are the different tools of the Galaxy OMERO-suite?"
+      ],
+      "objectives": [
+        "Understand how the different tools of the Galaxy OMERO-suite works",
+        "Build a complete pipeline for image and metadata upload into OMERO"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Proper data management plays an important role in image processing",
+        "Galaxy can facilitate the integration of data management tools into an image processing pipeline",
+        "The OMERO-suite allows to easily manage by building a FAIR pipeline"
+      ],
+      "contributions": {
+        "authorship": [
+          "rmassei"
+        ],
+        "editing": [
+          "bgruening"
+        ],
+        "funding": [
+          "nfdi4bioimage"
+        ]
+      },
+      "js_requirements": {
+        "mathjax": null,
+        "mermaid": false
+      },
+      "short_id": null,
+      "symlink": null,
+      "url": "/topics/imaging/tutorials/omero-suite/tutorial.html",
+      "topic_name": "imaging",
+      "tutorial_name": "omero-suite",
+      "dir": "topics/imaging/tutorials/omero-suite",
+      "id": "imaging/omero-suite",
+      "hands_on": true,
+      "slides": false,
+      "mod_date": "2024-12-04 11:35:17 +0000",
+      "pub_date": "2024-12-04 11:35:17 +0000",
+      "version": 1,
+      "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/omero-suite/tutorial.json",
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_get_id/omero_get_id/5.18.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4"
+      ],
+      "supported_servers": {
+        "exact": [
+
+        ],
+        "inexact": [
+
+        ]
+      },
+      "supported_servers_matrix": {
+        "servers": [
+          {
+            "url": "http://apostl.moffitt.org/",
+            "name": "APOSTL"
+          },
+          {
+            "url": "http://smile.hku.hk/SARGs",
+            "name": "ARGs-OAP"
+          },
+          {
+            "url": "https://iris.angers.inra.fr/galaxypub-cfbp",
+            "name": "CIRM-CFBP"
+          },
+          {
+            "url": "https://vm-chemflow-francegrille.eu/",
+            "name": "ChemFlow"
+          },
+          {
+            "url": "https://hyperbrowser.uio.no/coloc-stats",
+            "name": "Coloc-stats"
+          },
+          {
+            "url": "https://coralsnp.science.psu.edu/galaxy/",
+            "name": "CoralSNP"
+          },
+          {
+            "url": "http://cropgalaxy.excellenceinbreeding.org/",
+            "name": "CropGalaxy"
+          },
+          {
+            "url": "http://dintor.eurac.edu/",
+            "name": "Dintor"
+          },
+          {
+            "url": "http://www.freebioinfo.org/",
+            "name": "FreeBioinfo"
+          },
+          {
+            "url": "http://igg.cloud.ba.infn.it/galaxy",
+            "name": "GASLINI"
+          },
+          {
+            "url": "https://galaxy.mesocentre.uca.fr",
+            "name": "Galaxy@AuBi",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxy.pasteur.fr/",
+            "name": "Galaxy@Pasteur",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://galaxytrakr.org/",
+            "name": "GalaxyTrakr",
+            "usegalaxy": false
+          },
+          {
+            "url": "http://hyperbrowser.uio.no/hb/",
+            "name": "Genomic Hyperbrowser"
+          },
+          {
+            "url": "http://gigagalaxy.net/",
+            "name": "GigaGalaxy"
+          },
+          {
+            "url": "https://galaxy-web.ipk-gatersleben.de",
+            "name": "IPK Galaxy Blast Suite"
+          },
+          {
+            "url": "https://www.immportgalaxy.org/",
+            "name": "ImmPort Galaxy"
+          },
+          {
+            "url": "http://galaxy.interactomix.com/",
+            "name": "InteractoMIX"
+          },
+          {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
+            "url": "https://mississippi.sorbonne-universite.fr",
+            "name": "MISSISSIPPI",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://neo.engr.uconn.edu/",
+            "name": "Mandoiu Lab"
+          },
+          {
+            "url": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/",
+            "name": "MiModD NacreousMap"
+          },
+          {
+            "url": "http://galaxy.inf.ethz.ch",
+            "name": "Oqtans"
+          },
+          {
+            "url": "https://palfinder.ls.manchester.ac.uk/",
+            "name": "Palfinder"
+          },
+          {
+            "url": "http://pepsimili.e-nios.com:8080/",
+            "name": "PepSimili",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.be/",
+            "name": "UseGalaxy.be",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.cz/",
+            "name": "UseGalaxy.cz",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.eu",
+            "name": "UseGalaxy.eu",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.fr/",
+            "name": "UseGalaxy.fr",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.no/",
+            "name": "UseGalaxy.no",
+            "usegalaxy": false
+          },
+          {
+            "url": "https://usegalaxy.org",
+            "name": "UseGalaxy.org (Main)",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://usegalaxy.org.au",
+            "name": "UseGalaxy.org.au",
+            "usegalaxy": true
+          },
+          {
+            "url": "https://viralvariant.anses.fr/",
+            "name": "Viral Variant Visualizer (VVV)"
+          }
+        ],
+        "tools": [
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_get_id/omero_get_id/5.18.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy0",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy0"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy3"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy3"
+          },
+          {
+            "id": "toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4",
+            "servers": [
+              {
+                "state": "missing",
+                "server": "http://apostl.moffitt.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://smile.hku.hk/SARGs"
+              },
+              {
+                "state": "missing",
+                "server": "https://iris.angers.inra.fr/galaxypub-cfbp"
+              },
+              {
+                "state": "missing",
+                "server": "https://vm-chemflow-francegrille.eu/"
+              },
+              {
+                "state": "missing",
+                "server": "https://hyperbrowser.uio.no/coloc-stats"
+              },
+              {
+                "state": "missing",
+                "server": "https://coralsnp.science.psu.edu/galaxy/"
+              },
+              {
+                "state": "missing",
+                "server": "http://cropgalaxy.excellenceinbreeding.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://dintor.eurac.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://www.freebioinfo.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://igg.cloud.ba.infn.it/galaxy"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.mesocentre.uca.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy.pasteur.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxytrakr.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://hyperbrowser.uio.no/hb/"
+              },
+              {
+                "state": "missing",
+                "server": "http://gigagalaxy.net/"
+              },
+              {
+                "state": "missing",
+                "server": "https://galaxy-web.ipk-gatersleben.de"
+              },
+              {
+                "state": "missing",
+                "server": "https://www.immportgalaxy.org/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
+                "server": "https://mississippi.sorbonne-universite.fr"
+              },
+              {
+                "state": "missing",
+                "server": "https://neo.engr.uconn.edu/"
+              },
+              {
+                "state": "missing",
+                "server": "http://mapping-by-sequencing.vm.uni-freiburg.de:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.inf.ethz.ch"
+              },
+              {
+                "state": "missing",
+                "server": "https://palfinder.ls.manchester.ac.uk/"
+              },
+              {
+                "state": "missing",
+                "server": "http://pepsimili.e-nios.com:8080/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.be/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.cz/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.eu"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.fr/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.no/"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org"
+              },
+              {
+                "state": "missing",
+                "server": "https://usegalaxy.org.au"
+              },
+              {
+                "state": "missing",
+                "server": "https://viralvariant.anses.fr/"
+              }
+            ],
+            "version": "5.18.0+galaxy4"
+          }
+        ]
+      },
+      "topic_name_human": "Imaging",
+      "admin_install": {
+        "install_tool_dependencies": true,
+        "install_repository_dependencies": true,
+        "install_resolver_dependencies": true,
+        "tools": [
+          {
+            "name": "omero_filter",
+            "owner": "ufz",
+            "revisions": "375281d11535",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "omero_get_id",
+            "owner": "ufz",
+            "revisions": "ae07ea142e0f",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "omero_get_value",
+            "owner": "ufz",
+            "revisions": "9a50e57339d8",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "omero_import",
+            "owner": "ufz",
+            "revisions": "18b86dcdd421",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "omero_metadata_import",
+            "owner": "ufz",
+            "revisions": "351c6b43e16c",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          },
+          {
+            "name": "omero_roi_import",
+            "owner": "ufz",
+            "revisions": "131470834fee",
+            "tool_panel_section_label": "Imaging",
+            "tool_shed_url": "https://toolshed.g2.bx.psu.edu/"
+          }
+        ]
+      },
+      "admin_install_yaml": "---\ninstall_tool_dependencies: true\ninstall_repository_dependencies: true\ninstall_resolver_dependencies: true\ntools:\n- name: omero_filter\n  owner: ufz\n  revisions: 375281d11535\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: omero_get_id\n  owner: ufz\n  revisions: ae07ea142e0f\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: omero_get_value\n  owner: ufz\n  revisions: 9a50e57339d8\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: omero_import\n  owner: ufz\n  revisions: 18b86dcdd421\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: omero_metadata_import\n  owner: ufz\n  revisions: 351c6b43e16c\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n- name: omero_roi_import\n  owner: ufz\n  revisions: 131470834fee\n  tool_panel_section_label: Imaging\n  tool_shed_url: https://toolshed.g2.bx.psu.edu/\n",
+      "tours": false,
+      "video": false,
+      "slides_recordings": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "license": "CC-BY-4.0",
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Riccardo Massei",
+          "email": "riccardo.massei@ufz.de",
+          "orcid": "0000-0003-2104-9519",
+          "joined": "2024-11",
+          "affiliations": [
+            "nfdi4bioimage"
+          ],
+          "id": "rmassei",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/rmassei.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/rmassei/"
+        },
+        {
+          "name": "Björn Grüning",
+          "email": "bjoern.gruening@gmail.com",
+          "twitter": "bjoerngruening",
+          "fediverse": "https://fosstodon.org/@bgruening",
+          "fediverse_flavor": "mastodon",
+          "matrix": "bgruening:matrix.org",
+          "orcid": "0000-0002-3079-6586",
+          "elixir_node": "de",
+          "linkedin": "bgruening",
+          "contact_for_training": true,
+          "joined": "2017-09",
+          "location": {
+            "country": "DE",
+            "lat": 47.997791,
+            "lon": 7.842609
+          },
+          "affiliations": [
+            "eurosciencegateway",
+            "eosc-life",
+            "by-covid",
+            "deNBI",
+            "sfb992",
+            "elixir-converge",
+            "uni-freiburg",
+            "elixir-europe"
+          ],
+          "id": "bgruening",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+        },
+        {
+          "short_name": "NFDI4BIOIMAGE",
+          "name": "NFDI4BIOIMAGE",
+          "joined": "2024-11",
+          "url": "https://training.galaxyproject.org/training-material/api/organisations/nfdi4bioimage.json",
+          "avatar": "/training-material/shared/images/nfdi4bioimage.jpeg",
+          "members": [
+            "rmassei"
+          ],
+          "id": "nfdi4bioimage",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nfdi4bioimage/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/omero-suite/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/omero-suite/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Introduction to Image Analysis using Galaxy",
       "zenodo_link": "https://zenodo.org/record/3362976",
       "level": "Introductory",
@@ -3931,7 +5159,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput_image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"Show image info\"];\n  0 -->|output| 1;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Perform histogram equalization\"];\n  2 -->|output| 3;\n  4[\"Threshold image\"];\n  2 -->|output| 4;\n  5[\"Convert binary image to label map\"];\n  4 -->|output| 5;\n  6[\"Overlay images\"];\n  3 -->|output| 6;\n  5 -->|output| 6;\n  d362c206-756d-4f04-82f0-bd6f24907e04[\"Output\\nout_png\"];\n  6 --> d362c206-756d-4f04-82f0-bd6f24907e04;\n  style d362c206-756d-4f04-82f0-bd6f24907e04 stroke:#2c3143,stroke-width:4px;\n  7[\"Count objects in label map\"];\n  5 -->|output| 7;\n  9c56017b-20c7-4ad3-8340-d36dd6b2e7b4[\"Output\\noutput\"];\n  7 --> 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4;\n  style 9c56017b-20c7-4ad3-8340-d36dd6b2e7b4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput_image\"]\n  1[label=\"Show image info\"]\n  0 -> 1 [label=\"output\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Perform histogram equalization\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Threshold image\"]\n  2 -> 4 [label=\"output\"]\n  5[label=\"Convert binary image to label map\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Overlay images\"]\n  3 -> 6 [label=\"output\"]\n  5 -> 6 [label=\"output\"]\n  kd362c206756d4f0482f0bd6f24907e04[color=lightseagreen,label=\"Output\\nout_png\"]\n  6 -> kd362c206756d4f0482f0bd6f24907e04\n  7[label=\"Count objects in label map\"]\n  5 -> 7 [label=\"output\"]\n  k9c56017b20c74ad38340d36dd6b2e7b4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k9c56017b20c74ad38340d36dd6b2e7b4\n}",
           "workflow_tools": [
@@ -4198,6 +5426,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -4341,6 +5573,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -4366,8 +5602,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.4",
-                  "0.0.3"
+                  "0.0.3",
+                  "0.0.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -4487,6 +5723,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -4634,6 +5874,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -4785,6 +6029,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -4928,6 +6176,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -5079,6 +6331,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5225,6 +6481,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -5254,8 +6514,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.3",
                   "0.0.1",
+                  "0.0.3",
                   "0.0.2"
                 ],
                 "server": "https://usegalaxy.cz/"
@@ -5368,6 +6628,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -5981,7 +7245,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Collection\\ninput images\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nrules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"🛠️ Subworkflow\\nfeature_extraction\"];\n  style 2 fill:#edd,stroke:#900,stroke-width:4px;\n  1 -->|output| 2;\n  0 -->|output| 2;\n  3[\"Collapse Collection\"];\n  2 -->|output| 3;\n  189572e7-e0e6-4818-91b1-441beced67a4[\"Output\\noutput\"];\n  3 --> 189572e7-e0e6-4818-91b1-441beced67a4;\n  style 189572e7-e0e6-4818-91b1-441beced67a4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Collection\\ninput images\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nrules\"]\n  2[color=lightcoral,label=\"🛠️ Subworkflow\\nfeature_extraction\"]\n  1 -> 2 [label=\"output\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Collapse Collection\"]\n  2 -> 3 [label=\"output\"]\n  k189572e7e0e6481891b1441beced67a4[color=lightseagreen,label=\"Output\\noutput\"]\n  3 -> k189572e7e0e6481891b1441beced67a4\n}",
           "workflow_tools": [
@@ -6212,7 +7476,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"ℹ️ Input Dataset\\ninput image\"];\n  style 0 stroke:#2c3143,stroke-width:4px;\n  1[\"ℹ️ Input Dataset\\nfilter rules\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"Filter 2-D image\"];\n  0 -->|output| 2;\n  3[\"Threshold image\"];\n  2 -->|output| 3;\n  4[\"Convert binary image to label map\"];\n  3 -->|output| 4;\n  5[\"Extract image features\"];\n  4 -->|output| 5;\n  6[\"Filter label map by rules\"];\n  5 -->|output| 6;\n  4 -->|output| 6;\n  1 -->|output| 6;\n  f6f7f638-0f3c-404e-ab2e-5281a0393060[\"Output\\noutput\"];\n  6 --> f6f7f638-0f3c-404e-ab2e-5281a0393060;\n  style f6f7f638-0f3c-404e-ab2e-5281a0393060 stroke:#2c3143,stroke-width:4px;\n  7[\"Extract image features\"];\n  6 -->|output| 7;\n  0 -->|output| 7;\n  31da5e27-19fe-465e-95f0-96d3f6dcaba4[\"Output\\noutput\"];\n  7 --> 31da5e27-19fe-465e-95f0-96d3f6dcaba4;\n  style 31da5e27-19fe-465e-95f0-96d3f6dcaba4 stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[color=lightblue,label=\"ℹ️ Input Dataset\\ninput image\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nfilter rules\"]\n  2[label=\"Filter 2-D image\"]\n  0 -> 2 [label=\"output\"]\n  3[label=\"Threshold image\"]\n  2 -> 3 [label=\"output\"]\n  4[label=\"Convert binary image to label map\"]\n  3 -> 4 [label=\"output\"]\n  5[label=\"Extract image features\"]\n  4 -> 5 [label=\"output\"]\n  6[label=\"Filter label map by rules\"]\n  5 -> 6 [label=\"output\"]\n  4 -> 6 [label=\"output\"]\n  1 -> 6 [label=\"output\"]\n  kf6f7f6380f3c404eab2e5281a0393060[color=lightseagreen,label=\"Output\\noutput\"]\n  6 -> kf6f7f6380f3c404eab2e5281a0393060\n  7[label=\"Extract image features\"]\n  6 -> 7 [label=\"output\"]\n  0 -> 7 [label=\"output\"]\n  k31da5e2719fe465e95f096d3f6dcaba4[color=lightseagreen,label=\"Output\\noutput\"]\n  7 -> k31da5e2719fe465e95f096d3f6dcaba4\n}",
           "workflow_tools": [
@@ -6522,6 +7786,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -6665,6 +7933,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -6690,8 +7962,8 @@
               {
                 "state": "inexact",
                 "versions": [
-                  "0.0.4",
-                  "0.0.3"
+                  "0.0.3",
+                  "0.0.4"
                 ],
                 "server": "https://usegalaxy.be/"
               },
@@ -6811,6 +8083,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -6959,6 +8235,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -7101,6 +8381,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -7249,6 +8533,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -7401,6 +8689,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -7544,6 +8836,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "exact",
@@ -8079,7 +9375,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting modules\"];\n  1[\"Download images\"];\n  2[\"Segment complete nuclei\"];\n  0 -->|output_pipeline| 2;\n  3[\"Segmentation mask complete nuclei\"];\n  2 -->|output_pipeline| 3;\n  4[\"Label nuclei\"];\n  3 -->|output_pipeline| 4;\n  5[\"Save labelled nuclei\"];\n  4 -->|output_pipeline| 5;\n  6[\"Detect dark holes in nuclei\"];\n  5 -->|output_pipeline| 6;\n  7[\"Segment nucleoli that fall inside nuclei\"];\n  6 -->|output_pipeline| 7;\n  8[\"Segment nucleoli\"];\n  7 -->|output_pipeline| 8;\n  9[\"Convert the segmented nucleoli into an image\"];\n  8 -->|output_pipeline| 9;\n  10[\"Combine masks nuclei + nucleoli\"];\n  9 -->|output_pipeline| 10;\n  11[\"Save combined segmentation masks\"];\n  10 -->|output_pipeline| 11;\n  12[\"Segment all nuclei\"];\n  11 -->|output_pipeline| 12;\n  13[\"Segmentation mask nucleoli including cells touching borders\"];\n  12 -->|output_pipeline| 13;\n  14[\"Extract background\"];\n  13 -->|output_pipeline| 14;\n  15[\"Measure the image granularity\"];\n  14 -->|output_pipeline| 15;\n  16[\"Measure the nuclei texture\"];\n  15 -->|output_pipeline| 16;\n  17[\"Measure the nuclei intensity\"];\n  16 -->|output_pipeline| 17;\n  18[\"Measure size and shape of nuclei and nucleoli\"];\n  17 -->|output_pipeline| 18;\n  19[\"Relate nucleoli with their parent nuclei\"];\n  18 -->|output_pipeline| 19;\n  20[\"Measure the image quality\"];\n  19 -->|output_pipeline| 20;\n  21[\"Measure the area occupied by nuclei and nucleoli\"];\n  20 -->|output_pipeline| 21;\n  22[\"Measure the image intensity\"];\n  21 -->|output_pipeline| 22;\n  23[\"Export measurements\"];\n  22 -->|output_pipeline| 23;\n  24[\"Run CellProfiler\"];\n  1 -->|output_tar| 24;\n  23 -->|output_pipeline| 24;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting modules\"]\n  1[label=\"Download images\"]\n  2[label=\"Segment complete nuclei\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Segmentation mask complete nuclei\"]\n  2 -> 3 [label=\"output_pipeline\"]\n  4[label=\"Label nuclei\"]\n  3 -> 4 [label=\"output_pipeline\"]\n  5[label=\"Save labelled nuclei\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"Detect dark holes in nuclei\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"Segment nucleoli that fall inside nuclei\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"Segment nucleoli\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Convert the segmented nucleoli into an image\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"Combine masks nuclei + nucleoli\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"Save combined segmentation masks\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"Segment all nuclei\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  13[label=\"Segmentation mask nucleoli including cells touching borders\"]\n  12 -> 13 [label=\"output_pipeline\"]\n  14[label=\"Extract background\"]\n  13 -> 14 [label=\"output_pipeline\"]\n  15[label=\"Measure the image granularity\"]\n  14 -> 15 [label=\"output_pipeline\"]\n  16[label=\"Measure the nuclei texture\"]\n  15 -> 16 [label=\"output_pipeline\"]\n  17[label=\"Measure the nuclei intensity\"]\n  16 -> 17 [label=\"output_pipeline\"]\n  18[label=\"Measure size and shape of nuclei and nucleoli\"]\n  17 -> 18 [label=\"output_pipeline\"]\n  19[label=\"Relate nucleoli with their parent nuclei\"]\n  18 -> 19 [label=\"output_pipeline\"]\n  20[label=\"Measure the image quality\"]\n  19 -> 20 [label=\"output_pipeline\"]\n  21[label=\"Measure the area occupied by nuclei and nucleoli\"]\n  20 -> 21 [label=\"output_pipeline\"]\n  22[label=\"Measure the image intensity\"]\n  21 -> 22 [label=\"output_pipeline\"]\n  23[label=\"Export measurements\"]\n  22 -> 23 [label=\"output_pipeline\"]\n  24[label=\"Run CellProfiler\"]\n  1 -> 24 [label=\"output_tar\"]\n  23 -> 24 [label=\"output_pipeline\"]\n}",
           "workflow_tools": [
@@ -9450,6 +10746,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -9590,6 +10890,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -9737,6 +11041,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -9878,6 +11186,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -10025,6 +11337,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -10166,6 +11482,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -10313,6 +11633,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -10454,6 +11778,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -10601,6 +11929,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -10742,6 +12074,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -10889,6 +12225,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -11030,6 +12370,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -11177,6 +12521,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -11318,6 +12666,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -11465,6 +12817,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -11606,6 +12962,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -11753,6 +13113,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -11894,6 +13258,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -12041,6 +13409,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -12185,6 +13557,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -12326,6 +13702,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -12826,7 +14206,7 @@
             }
           ],
           "test_results": null,
-          "modified": "2024-12-04 10:00:16 +0000",
+          "modified": "2024-12-04 11:36:25 +0000",
           "mermaid": "flowchart TD\n  0[\"Starting Modules\"];\n  1[\"ℹ️ Input Dataset\\nInput dataset\"];\n  style 1 stroke:#2c3143,stroke-width:4px;\n  2[\"ColorToGray\"];\n  0 -->|output_pipeline| 2;\n  3[\"Unzip\"];\n  1 -->|output| 3;\n  4[\"IdentifyPrimaryObjects\"];\n  2 -->|output_pipeline| 4;\n  5[\"MeasureObjectSizeShape\"];\n  4 -->|output_pipeline| 5;\n  6[\"MeasureObjectIntensity\"];\n  5 -->|output_pipeline| 6;\n  7[\"TrackObjects\"];\n  6 -->|output_pipeline| 7;\n  8[\"OverlayOutlines\"];\n  7 -->|output_pipeline| 8;\n  9[\"Tile\"];\n  8 -->|output_pipeline| 9;\n  10[\"SaveImages\"];\n  9 -->|output_pipeline| 10;\n  11[\"ExportToSpreadsheet\"];\n  10 -->|output_pipeline| 11;\n  12[\"CellProfiler\"];\n  3 -->|unzipped| 12;\n  11 -->|output_pipeline| 12;\n  dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e[\"Output\\nCellProfiler pipeline output files\"];\n  12 --> dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e;\n  style dab4a9ee-fb53-4c74-93f5-8a0c7f7eb13e stroke:#2c3143,stroke-width:4px;",
           "graph_dot": "digraph main {\n  node [fontname=\"Atkinson Hyperlegible\", shape=box, color=white,style=filled,color=peachpuff,margin=\"0.2,0.2\"];\n  edge [fontname=\"Atkinson Hyperlegible\"];\n  0[label=\"Starting Modules\"]\n  1[color=lightblue,label=\"ℹ️ Input Dataset\\nInput dataset\"]\n  2[label=\"ColorToGray\"]\n  0 -> 2 [label=\"output_pipeline\"]\n  3[label=\"Unzip\"]\n  1 -> 3 [label=\"output\"]\n  4[label=\"IdentifyPrimaryObjects\"]\n  2 -> 4 [label=\"output_pipeline\"]\n  5[label=\"MeasureObjectSizeShape\"]\n  4 -> 5 [label=\"output_pipeline\"]\n  6[label=\"MeasureObjectIntensity\"]\n  5 -> 6 [label=\"output_pipeline\"]\n  7[label=\"TrackObjects\"]\n  6 -> 7 [label=\"output_pipeline\"]\n  8[label=\"OverlayOutlines\"]\n  7 -> 8 [label=\"output_pipeline\"]\n  9[label=\"Tile\"]\n  8 -> 9 [label=\"output_pipeline\"]\n  10[label=\"SaveImages\"]\n  9 -> 10 [label=\"output_pipeline\"]\n  11[label=\"ExportToSpreadsheet\"]\n  10 -> 11 [label=\"output_pipeline\"]\n  12[label=\"CellProfiler\"]\n  3 -> 12 [label=\"unzipped\"]\n  11 -> 12 [label=\"output_pipeline\"]\n  kdab4a9eefb534c7493f58a0c7f7eb13e[color=lightseagreen,label=\"Output\\nCellProfiler pipeline output files\"]\n  12 -> kdab4a9eefb534c7493f58a0c7f7eb13e\n}",
           "workflow_tools": [
@@ -13687,6 +15067,10 @@
             "name": "InteractoMIX"
           },
           {
+            "url": "http://galaxy.ul.edu.lb/",
+            "name": "Lebanese University Galaxy"
+          },
+          {
             "url": "https://mississippi.sorbonne-universite.fr",
             "name": "MISSISSIPPI",
             "usegalaxy": false
@@ -13827,6 +15211,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -13974,6 +15362,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -14108,6 +15500,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -14255,6 +15651,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -14396,6 +15796,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -14543,6 +15947,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -14684,6 +16092,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -14831,6 +16243,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -14965,6 +16381,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -15112,6 +16532,10 @@
               },
               {
                 "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
+              },
+              {
+                "state": "missing",
                 "server": "https://mississippi.sorbonne-universite.fr"
               },
               {
@@ -15246,6 +16670,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -15384,6 +16812,10 @@
               {
                 "state": "missing",
                 "server": "http://galaxy.interactomix.com/"
+              },
+              {
+                "state": "missing",
+                "server": "http://galaxy.ul.edu.lb/"
               },
               {
                 "state": "missing",
@@ -15759,8 +17191,8 @@
       "id": "imaging/bioimage-metadata",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-12-04 10:00:16 +0000",
-      "pub_date": "2024-12-04 10:00:16 +0000",
+      "mod_date": "2024-12-04 11:36:25 +0000",
+      "pub_date": "2024-12-04 11:36:25 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-metadata/tutorial.json",
       "tools": [
@@ -16066,8 +17498,8 @@
       "id": "imaging/bioimage-REMBI",
       "hands_on": true,
       "slides": false,
-      "mod_date": "2024-12-04 10:00:16 +0000",
-      "pub_date": "2024-12-04 10:00:16 +0000",
+      "mod_date": "2024-12-04 11:36:25 +0000",
+      "pub_date": "2024-12-04 11:36:25 +0000",
       "version": 0,
       "api": "https://training.galaxyproject.org/training-material/api/topics/imaging/tutorials/bioimage-REMBI/tutorial.json",
       "tools": [
