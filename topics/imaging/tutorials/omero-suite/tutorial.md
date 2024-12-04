@@ -123,7 +123,7 @@ This is done by using the **OMERO Image Import** and **OMERO Metadata Import** t
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO Image Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_import/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} *Images to import into OMERO*: You can select here different files to import into OMERO.
 >    Select the datasets `image85-H-01-00.tif`, `image86-H-02-00.tif` and `image87-H-03-00.tif`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
@@ -152,7 +152,7 @@ We will learn now how to upload **Key-Value pairs** using the **OMERO Metadata I
 
 > <hands-on-title>Upload Key-Value Pairs into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO Metadata Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_metadata_import/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3) %} with the following recommended parameters:
 >    - {% icon param-file %} *Annotation file*: `metadata_file.tsv`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
@@ -181,7 +181,7 @@ Check the `roi_file.tsv` to have an example. Everything is explained in the tool
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO ROI Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_roi_import/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4) %} with the following recommended parameters:
 >    - {% icon param-file %} **Tab File with ROIs**: `roi_file.tsv`
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
@@ -206,7 +206,7 @@ First of all, let's try to get all the image IDs present in all Datasets!
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO get IDs](https://toolshed.g2.bx.psu.edu/view/ufz/omero_get_id/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO get IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_id/omero_get_id/5.18.0+galaxy0) %} with the following recommended parameters:
 >    - **OMERO host URL**: Input the URL of your OMERO instance.
 >    - **OMERO port**: Input the OMERO port (pre-defined value, *4064*)
 >    - **Type of object to fetch ID:**: Select *"Dataset IDs"*
@@ -227,7 +227,7 @@ Now, let's try to get an annotation file...
 
 > <hands-on-title>Get an annotation file from OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO get Object](https://toolshed.g2.bx.psu.edu/view/ufz/omero_get_id/5.18.0+galaxy3) %} with the following recommended parameters:
+> 1. {% tool [OMERO get Object](toolshed.g2.bx.psu.edu/repos/ufz/omero_get_value/omero_get_value/5.18.0+galaxy0) %} with the following recommended parameters:
 >    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Type of object to fetch:**: Select *"Annotation"*
@@ -247,7 +247,7 @@ This can be done by using the **OMERO IDs** Tool
 
 > <hands-on-title>Upload images into OMERO</hands-on-title>
 >
-> 1. {% tool [OMERO IDs](https://toolshed.g2.bx.psu.edu/view/ufz/omero_filter/375281d11535) %} with the following recommended parameters:
+> 1. {% tool [OMERO IDs](toolshed.g2.bx.psu.edu/repos/ufz/omero_filter/omero_filter/5.18.0+galaxy0) %} with the following recommended parameters:
 >    - **OMERO host URL**: The target OMERO host URL
 >    - **OMERO port**: The OMERO port, pre-defined to *4064*
 >    - **Filename to search among the image IDs**: Type `image85-H-01-00_tif.tiff`
@@ -299,7 +299,7 @@ We now add the step for the image import
 
 > <hands-on-title>Add the image upload step to the workflow</hands-on-title>
 >
->1. While in the workflow editor add {% tool [OMERO Image Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_import/5.18.0+galaxy3) %}  from the list of tools:
+>1. While in the workflow editor add {% tool [OMERO Image Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_import/omero_import/5.18.0+galaxy3) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **1: Input image Datasets** to the "Images to Import in OMERO" 
 >   input of {% icon tool %} **7: OMERO Image Import**.
 >   - Connect the output of {% icon param-file %} **4: Target Dataset Name** to the "Target Dataset Name" 
@@ -332,7 +332,7 @@ The last section is to upload metadata and ROIs
 
 > <hands-on-title> Add tools to upload metadata and ROIs </hands-on-title>
 >
->1. Add {% tool [OMERO Metadata Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_metadata_import/5.18.0+galaxy3) %}  from the list of tools:
+>1. Add {% tool [OMERO Metadata Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_metadata_import/omero_metadata_import/5.18.0+galaxy3) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **5: OMERO instance address** to the "OMERO host url"
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
 >   - Connect the output of {% icon param-file %} **11: Parse parameter value** to the "Object ID"
@@ -341,7 +341,7 @@ The last section is to upload metadata and ROIs
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
 >   - Connect the output of {% icon param-file %} **3: Input Metadata File** to the "Annotation file"
 >   input of {% icon tool %} **12: OMERO Metadata Import**.
->2. Add {% tool [OMERO ROI Import](https://toolshed.g2.bx.psu.edu/view/ufz/omero_roi_import/5.18.0+galaxy3) %}  from the list of tools:
+>2. Add {% tool [OMERO ROI Import](toolshed.g2.bx.psu.edu/repos/ufz/omero_roi_import/omero_roi_import/5.18.0+galaxy4) %}  from the list of tools:
 >   - Connect the output of {% icon param-file %} **5: OMERO instance address** to the "OMERO host url"
 >   input of {% icon tool %} **13: OMERO ROI Import**.
 >   - Connect the output of {% icon param-file %} **2: Input Tabular ROIs** to the "Tab File with ROIs"
