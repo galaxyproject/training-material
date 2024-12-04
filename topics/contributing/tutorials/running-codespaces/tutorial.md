@@ -225,8 +225,7 @@ Next, we will see these changes to on your branch/fork. We will do this from out
 > <hands-on-title>Pushing changes to GitHub</hands-on-title>
 >
 > 1. In your browser (outside of codespaces), navigate to the [GTN GitHub page](https://github.com/galaxyproject/training-material)
-> 2. Once it is done, click **See branch** button
->    - This will take you to the new branch
+> 2. GitHub will helpfully show you any recent branches you've pushed to your fork
 >    - Click the **Compare & pull request** button to create a PR for your changes
 >    ![compare and pull request button on the new branch](images/codespaces-compare-pr.png)
 {: .hands_on}
