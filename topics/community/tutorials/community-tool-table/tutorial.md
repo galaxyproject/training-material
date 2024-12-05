@@ -23,6 +23,7 @@ tags:
 contributions:
   authorship:
     - bebatut
+    - paulzierep
 
 ---
 
@@ -120,15 +121,19 @@ To generate this file, we recommend you to use the `tools_filtered_by_ts_categor
 
 > <hands-on-title>Review tools in your community table</hands-on-title>
 >
-> 1. Download the `tools_filtered_by_ts_categories.tsv` file in `communities/<your community>/resources/`.
-> 2. Open `tools.tsv` with a Spreadsheet Software
-> 3. Review each line corresponding to a tool
+> 1. Download the `tools.tsv` file in `results/<your community>`.
+> 2. Open `tools.tsv` with a Spreadsheet Software.
+> 3. Review each line corresponding to a tool. 
+>        
+>    You can also just review some tools. Those tools that are not reviewed will have be set to `FALSE` in the `Reviewed` column of the updated table.
+>    1. Change the value in the `Reviewed` column from `FALSE` to `TRUE` (this will be done automatically if an entry of the tool in `tools_status.tsv` exists).
+>    2. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
+>    3. Add `TRUE` or `FALSE` also to the `Deprecated` column.
+> 4. Copy paste the `Galaxy wrapper id`, `To keep`, `Deprecated` columns in a new table (in that order). 
 >
->    1. Add `TRUE` to the `To keep` column if the tool should be kept, and `FALSE` if not.
->    2. Add `TRUE` or `FALSE` also to the `Deprecated` column.
->
-> 5. Export the new table as TSV
-> 6. Submit the TSV as `tools_status.tsv` in your `communities/<your community>/metadata/` folder.
+>    This can also be done using the reference function of your Spreadsheet Software.
+> 5. Export the new table as TSV (without header).
+> 6. Submit the TSV as `tools_status.tsv` in your community folder.
 > 7. Wait for the Pull Request to be merged
 >
 {: .hands_on}
