@@ -203,12 +203,13 @@ Cutadapt enables the removal of adapters, polyA tails, and other artifacts from 
 >    > This is to ensure that all your files names end with .fastq.gz
 >    {: .comment}
 >
->
 > 3. {% tool [Paste](Paste1) %}
 >    - In *"Paste"*:
 >      - Select the file from {% tool [Extract element identifiers](toolshed.g2.bx.psu.edu/repos/iuc/collection_element_identifiers/collection_element_identifiers/0.0.2) %}
 >    - In *"and"*:
 >      - Select the file from {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.3) %}
+>    - *"Delimited by"*:
+>      - Tab
 >
 > 4. **Check the datatype**
 >    - should be 'tabular'. If not, change it now.
