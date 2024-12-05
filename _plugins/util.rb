@@ -1,5 +1,36 @@
 require 'yaml'
 
+ALLOWED_SHORT_IDS = [
+  'ChangeCase',
+  'Convert characters1',
+  'Count1',
+  'Cut1',
+  'Extract_features1',
+  'Filter1',
+  'Grep1',
+  'Grouping1',
+  'Paste1',
+  'Remove beginning1',
+  'Show beginning1',
+  'Summary_Statistics1',
+  'addValue',
+  'cat1',
+  'comp1',
+  'gene2exon1',
+  'gff2bed1',
+  'intermine',
+  'join1',
+  'param_value_from_file',
+  'random_lines1',
+  'sort1',
+  # 'ucsc_table_direct1', # This does not work, surprisingly.
+  'upload1',
+  'wc_gnu',
+  'wig_to_bigWig'
+].freeze
+
+ALLOWED_LOWER_SHORT_IDS = ALLOWED_SHORT_IDS.map(&:downcase)
+
 def safe_load_yaml(file)
   YAML.load_file(file)
 rescue StandardError
@@ -68,6 +99,39 @@ def fix_version(version)
   .gsub(/^v/, '')
 end
 
+def acceptable_tool?(tool_id)
+  # Public TS links are fine
+  if tool_id.start_with?('toolshed.g2.bx.psu.edu')
+    return true
+  end
+
+  # These are always allowed (mostly built-ins)
+  if ALLOWED_LOWER_SHORT_IDS.include?(tool_id.downcase) || tool_id =~ /^__.*__$/
+    return true
+  end
+
+  if tool_id.start_with?('interactive_tool_')
+    return true
+  end
+
+  if tool_id.start_with?('CONVERTER_')
+    return true
+  end
+
+  # Templated tool IDs are hopefully fine!
+  if tool_id.start_with?('{{')
+    return true
+  end
+
+  # Just the tutorial
+  if tool_id.start_with?('Toolshed ID')
+    return true
+  end
+
+  # Unacceptable
+  return false
+end
+
 if __FILE__ == $PROGRAM_NAME
   require 'test/unit'
     # Testing for the class
@@ -78,7 +142,7 @@ if __FILE__ == $PROGRAM_NAME
 
       # toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1
       assert_equal(fix_version("2013_11_29+galaxy1"), "2013.11.29galaxy1")
-      
+
       # toolshed.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+galaxy3
       assert_equal(fix_version("1.0.0_rc1+galaxy3"), "1.0.0rc1galaxy3")
 
@@ -86,3 +150,4 @@ if __FILE__ == $PROGRAM_NAME
       assert_equal(fix_version("3+galaxy0"), "3.0.0galaxy0")
     end
   end
+end
