@@ -161,10 +161,10 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 
 > <hands-on-title>Sorting reads into families</hands-on-title>
 >
-> Run {% icon tool %} **Du Novo: Make families** with the following parameters:
->  - {% icon param-file %} *Sequencing reads, mate 1*: The forward raw reads (`SRR1799908_forward`)
->  - {% icon param-file %} *Sequencing reads, mate 2*: The reverse raw reads (`SRR1799908_reverse`)
->  - {% icon param-text %} *Tag length*: `12`
+> 1. {% icon tool %} **Du Novo: Make families** with the following parameters:
+>    - {% icon param-file %} *Sequencing reads, mate 1*: The forward raw reads (`SRR1799908_forward`)
+>    - {% icon param-file %} *Sequencing reads, mate 2*: The reverse raw reads (`SRR1799908_reverse`)
+>    - {% icon param-text %} *Tag length*: `12`
 {: .hands_on}
 
 ### Correcting barcodes
@@ -175,9 +175,9 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 
 > <hands-on-title>Correcting barcodes</hands-on-title>
 >
-> Run {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
->  - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Make families**
->  - {% icon param-text %} *Maximum differences*: `3`
+> 1. {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
+>    - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Make families**
+>    - {% icon param-text %} *Maximum differences*: `3`
 {: .hands_on}
 
 ### Aligning families
@@ -193,9 +193,9 @@ After grouping reads that came from the same original fragment, we need to align
 
 > <hands-on-title>Aligning families</hands-on-title>
 >
-> Run {% icon tool %} **Du Novo: Align families** with the following parameters:
->  - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Correct barcodes**
->  - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
+> 1. {% icon tool %} **Du Novo: Align families** with the following parameters:
+>    - {% icon param-file %} *Input reads*: The output of {% icon tool %} **Correct barcodes**
+>    - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
 {: .hands_on}
 
 ### Making consensus sequences
@@ -206,16 +206,16 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 > <hands-on-title>Making consensus sequences</hands-on-title>
 >
-> Run {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
->  - {% icon param-file %} *Aligned input reads*: The output of {% icon tool %} **Align families**
->  - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
->  - {% icon param-text %} *Consensus % threshold*: `0.7`
->  - {% icon param-select %} *Output format*: `FASTQ`
->  - {% icon param-check %} *Output single-strand consensus sequences as well*: `Yes`
+> 1. {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
+>    - {% icon param-file %} *Aligned input reads*: The output of {% icon tool %} **Align families**
+>    - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
+>    - {% icon param-text %} *Consensus % threshold*: `0.7`
+>    - {% icon param-select %} *Output format*: `FASTQ`
+>    - {% icon param-check %} *Output single-strand consensus sequences as well*: `Yes`
 >
-> This tool will produce 4 output files, in two sets of paired-end FASTQ files:
->  - one pair for the single-stranded consensus sequences (called `SSCS mate 1` and `2`)
->  - one pair for the double-stranded consensus sequences (called `mate 1` and `2`).
+> 2. This tool will produce 4 output files, in two sets of paired-end FASTQ files:
+>    - one pair for the single-stranded consensus sequences (called `SSCS mate 1` and `2`)
+>    - one pair for the double-stranded consensus sequences (called `mate 1` and `2`).
 {: .hands_on}
 
 > <comment-title>Setting output formats</comment-title>
@@ -250,16 +250,16 @@ This information could be useful for some analyses, but not for our variant call
 
 > <hands-on-title>Filtering the consensus sequences</hands-on-title>
 >
-> Run {% icon tool %} **Sequence Content Trimmer** with the following parameters:
->  - {% icon param-select %} *Paired reads?*: `Paired`
->  - {% icon param-file %} *Input reads (mate 1)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 1)
->  - {% icon param-file %} *Input reads (mate 2)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 2)
->  - {% icon param-text %} *Bases to filter on*: `ACGT`
->  - {% icon param-text %} *Frequency threshold*: `0.2`
->  - {% icon param-text %} *Size of the window*: `10`
->  - {% icon param-check %} *Invert filter bases*: `Yes`
->  - {% icon param-check %} *Set a minimum read length*: `Yes`
->  - {% icon param-text %} *Minimum read length*: `50`
+> 1. {% icon tool %} **Sequence Content Trimmer** with the following parameters:
+>    - {% icon param-select %} *Paired reads?*: `Paired`
+>    - {% icon param-file %} *Input reads (mate 1)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 1)
+>    - {% icon param-file %} *Input reads (mate 2)*: The double-stranded output of {% icon tool %} **Make consensus reads** (mate 2)
+>    - {% icon param-text %} *Bases to filter on*: `ACGT`
+>    - {% icon param-text %} *Frequency threshold*: `0.2`
+>    - {% icon param-text %} *Size of the window*: `10`
+>    - {% icon param-check %} *Invert filter bases*: `Yes`
+>    - {% icon param-check %} *Set a minimum read length*: `Yes`
+>    - {% icon param-text %} *Minimum read length*: `50`
 {: .hands_on}
 
 # Calling variants with duplex consensus sequences
@@ -276,10 +276,10 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 
 > <hands-on-title>Align with BWA-MEM</hands-on-title>
 >
-> Run {% icon tool %} **Map with BWA-MEM** with the following parameters:
->  - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
->  - {% icon param-file %} *Select first set of reads*: The first output from the {% icon tool %} **Sequence Content Trimmer**
->  - {% icon param-file %} *Select second set of reads*: The second output from the {% icon tool %} **Sequence Content Trimmer**
+> 1. {% icon tool %} **Map with BWA-MEM** with the following parameters:
+>    - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
+>    - {% icon param-file %} *Select first set of reads*: The first output from the {% icon tool %} **Sequence Content Trimmer**
+>    - {% icon param-file %} *Select second set of reads*: The second output from the {% icon tool %} **Sequence Content Trimmer**
 {: .hands_on}
 
 ### Left Aligning indels
@@ -288,10 +288,10 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 
 > <hands-on-title>Left-align indels</hands-on-title>
 >
-> Run {% icon tool %} **BamLeftAlign** with the following parameters:
->  - {% icon param-file %} *Select alignment file in BAM format*: The output of {% icon tool %} **Map with BWA-MEM**
->  - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38`
->    - The same genome we aligned to.
+> 1. {% icon tool %} **BamLeftAlign** with the following parameters:
+>    - {% icon param-file %} *Select alignment file in BAM format*: The output of {% icon tool %} **Map with BWA-MEM**
+>    - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38`
+>      - The same genome we aligned to.
 {: .hands_on}
 
 ## Calling the variants
@@ -308,18 +308,18 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 
 > <hands-on-title>Count the variants</hands-on-title>
 >
-> Run {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
->  - {% icon param-file %} *BAM file*: The output of {% icon tool %} **BamLeftAlign**
->  - {% icon param-select %} *Using reference genome*: `hg38`
->    - The same genome we aligned to.
->  - {% icon param-check %} *Insert Restrict to regions*: Click to add a region.
->  - {% icon param-text %} *Chromosome*: `chr9`
->    - *ABL1* is on chr9. Restricting it to this region saves some processing time.
->  - {% icon param-text %} *Minimum base quality*: `0`
->    - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
->  - {% icon param-text %} *Minimum mapping quality*: `20`
->  - {% icon param-text %} *Ploidy*: `1`
->    - Ploidy is irrelevant here as it is a mixture of multiple genomes.
+> 1. {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
+>    - {% icon param-file %} *BAM file*: The output of {% icon tool %} **BamLeftAlign**
+>    - {% icon param-select %} *Using reference genome*: `hg38`
+>      - The same genome we aligned to.
+>    - {% icon param-check %} *Insert Restrict to regions*: Click to add a region.
+>    - {% icon param-text %} *Chromosome*: `chr9`
+>      - *ABL1* is on chr9. Restricting it to this region saves some processing time.
+>    - {% icon param-text %} *Minimum base quality*: `0`
+>      - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
+>    - {% icon param-text %} *Minimum mapping quality*: `20`
+>    - {% icon param-text %} *Ploidy*: `1`
+>      - Ploidy is irrelevant here as it is a mixture of multiple genomes.
 {: .hands_on}
 
 The {% icon tool %} **Naive Variant Caller (NVC)** generates a [VCF](https://en.wikipedia.org/wiki/Variant_Call_Format) file that can be viewed at genome browsers such as [IGV](https://www.broadinstitute.org/igv/). Yet one rarely finds variants by looking at genome browsers. We'll want to use tools to search for variants that fit our criteria.
@@ -330,12 +330,12 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 
 > <hands-on-title>Read the variants file</hands-on-title>
 >
-> Run {% icon tool %} **Variant Annotator** with the following parameters:
->  - {% icon param-file %} *Input variants from Naive Variants Detector*: The output of {% icon tool %} **Naive Variant Caller (NVC)**
->  - {% icon param-text %} *Minor allele frequency threshold*: `0`
->  - {% icon param-text %} *Coverage threshold*: `10`
->  - {% icon param-check %} *Output stranded base counts*: `Yes`
->    - To be able to filter for strand bias.
+> 1. {% icon tool %} **Variant Annotator** with the following parameters:
+>    - {% icon param-file %} *Input variants from Naive Variants Detector*: The output of {% icon tool %} **Naive Variant Caller (NVC)**
+>    - {% icon param-text %} *Minor allele frequency threshold*: `0`
+>    - {% icon param-text %} *Coverage threshold*: `10`
+>    - {% icon param-check %} *Output stranded base counts*: `Yes`
+>      - To be able to filter for strand bias.
 {: .hands_on}
 
 ### Filtering out the noise
@@ -346,10 +346,10 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 
 > <hands-on-title>Filter the raw variants list</hands-on-title>
 >
-> Run {% icon tool %} **Filter** with the following parameters:
->  - {% icon param-file %} *Filter*: The output of {% icon tool %} **Variant Annotator**
->  - {% icon param-text %} *With following condition*: `c16 >= 0.01`
->  - {% icon param-check %} *Number of header lines to skip*: `1`
+> 1. {% icon tool %} **Filter** with the following parameters:
+>    - {% icon param-file %} *Filter*: The output of {% icon tool %} **Variant Annotator**
+>    - {% icon param-text %} *With following condition*: `c16 >= 0.01`
+>    - {% icon param-check %} *Number of header lines to skip*: `1`
 {: .hands_on}
 
 ## Results
