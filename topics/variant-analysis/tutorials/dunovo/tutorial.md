@@ -155,10 +155,6 @@ One can see that these data are of excellent quality and no additional processin
 
 Now we are ready to collapse the raw reads into duplex consensus sequences.
 
-> <comment-title>Finding Du Novo</comment-title>
-> * The tools in this portion of the tutorial can all be found in the **NGS: Du Novo** section.
-{: .comment}
-
 ### Sorting reads into families
 
 The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags from each read pair and concatenate them into a 24bp barcode. Then, it will use the barcodes to sort the reads into families that all descend from the same original fragment.
