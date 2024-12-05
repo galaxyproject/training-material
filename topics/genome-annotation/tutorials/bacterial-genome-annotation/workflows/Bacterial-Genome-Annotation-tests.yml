@@ -1,0 +1,26 @@
+- doc: Test for Bacterial-Genome-Annotation tutorial workflow
+  job:
+    contigs:
+      class: File
+      path: https://zenodo.org/record/10572227/files/DRR187559_contigs.fasta
+      filetype: fasta
+  outputs:
+    isescan_results:
+      asserts:
+        has_text:
+          text: "contig00019"
+    integronfinder_summary:
+      asserts:
+        has_text:
+          text: "contig00019"
+    plasmidfinder_results:
+      asserts:
+        has_text:
+          text: "contig00019"
+    bakta_summary:
+      asserts:
+        has_text:
+          text: "Count: 44"
+      asserts:
+        has_text:
+          text: "tRNAs: 57"

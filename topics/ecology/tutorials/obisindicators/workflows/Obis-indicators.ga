@@ -1,0 +1,145 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "From Obis data to Biodiversity indicators",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0009-0008-0622-604X",
+            "name": "Marie Joss\u00e9",
+            "url": "https://github.com/Marie59"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "Marine Omics visualisation",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "OBIS occurences",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 0,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/obis_data/obis_data/0.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "1fcd81d65467",
+                "name": "obis_data",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"lat_max\": \"45.0\", \"lat_min\": \"41.5\", \"long_max\": \"10.0\", \"long_min\": \"7.5\", \"species\": null, \"taxon\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "1336aa8b-cc83-4568-89dc-8509e1810d83",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Advanced Cut",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 220,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/9.3+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "12615d397df7",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"delimiter\": \"\", \"colnames_option\": {\"header\": \"Y\", \"__current_case__\": 0, \"list\": \"1\\n9\\n10\\n61\\n113\"}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "9.3+galaxy0",
+            "type": "tool",
+            "uuid": "6a3e63db-52ee-48d9-a3fe-88f9b665531f",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Ocean biodiversity indicators",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "input"
+                },
+                {
+                    "name": "output_index",
+                    "type": "csv"
+                }
+            ],
+            "position": {
+                "left": 440,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/obisindicators/obisindicators/0.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "393957ecc97d",
+                "name": "obisindicators",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"colnames\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"latitude\": \"2\", \"longitude\": \"3\", \"records\": \"5\", \"resolution\": \"9\", \"separator\": \"t\", \"species\": \"4\", \"type\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.0.2",
+            "type": "tool",
+            "uuid": "e0aec8cb-4135-44f7-9cd7-08556c54c6f6",
+            "when": null,
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "Ocean",
+        "Marineomics",
+        "earth-system"
+    ],
+    "uuid": "6dd5b232-ee1a-4cc3-8d30-8ec29d8473c3",
+    "version": 3
+}

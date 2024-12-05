@@ -18,11 +18,11 @@ key_points:
     - "Heinz helps narrow down the scope to find the key pathways"
     - "Multiple CPUs will accelerate the computation especially for the complex datasets"
 contributors:
-    - cicozhang
+    - ChaoZhang123
 ---
 
 # Overview
-{:.no_toc}
+
 
 The human microbiome plays a key role in health and disease. Thanks to comparative metatranscriptomics,
 the cellular functions that are deregulated by the microbiome in disease can now be computationally
@@ -38,7 +38,7 @@ the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/167
 and we will reproduce some of the computational steps from this study with simplified data and
 parameters to speed up the analysis for the purposes of this tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -48,13 +48,13 @@ parameters to speed up the analysis for the purposes of this tutorial.
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 
 In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
 and what kind of calculation is involved, view the flowchart below.
 
-![Heinz flowchart](../../images/flowchart-heinz.png)
+![Heinz flowchart](../../images/transcriptomics_images/flowchart-heinz.png)
 
 # Obtaining and preparing data  [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg)](https://doi.org/10.5281/zenodo.1344105)
 
@@ -66,7 +66,7 @@ material. In this tutorial, we start with the interpreted data, which are KO
 ([KEGG Orthology](https://www.genome.jp/kegg/ko.html)) count data. All the data needed for this tutorial are
 available from Zenodo.
 
-> ### {% icon details %} Background: What is KO count?
+> <details-title>Background: What is KO count?</details-title>
 >
 > KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 > It is a term specific to [KEGG](https://www.genome.jp/kegg/) database. It is a group concept, similar to the concept "pathway", which
@@ -83,7 +83,7 @@ samples collected from all dental surfaces of 36 individuals who had either a ca
 a caries-negative (health) oral profile. Each of the 36 samples was sequenced, pre-processed and transformed
 into KO counts. We will use these count data as the starting point to perform the network analysis.
 
-> ### {% icon comment %} Dataset details
+> <comment-title>Dataset details</comment-title>
 > The count data of the 36 samples are separated into 36 files, organized into two groups:
 > 'CP' (caries-positive) and 'CN' (caries-negative).
 {: .comment}
@@ -93,19 +93,20 @@ into KO counts. We will use these count data as the starting point to perform th
 
 After knowing what our input data are like, let's get them into Galaxy history:
 
-> ### {% icon hands_on %} Hands-on: Obtaining our data
+> <hands-on-title>Obtaining our data</hands-on-title>
 >
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+>    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. **Upload Disease Dataset**
 >    - Open the file upload menu
 >    - Click on  **Collection** tab
 >    - Click on the **Paste/Fetch data** button
 >    - Copy the Zenodo links for the Disease Datasets
->      > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Disease, CP)
+>      > <details-title>View list of Zenodo URLs for Dental Caries Dataset (Disease, CP)</details-title>
 >      > ```
 >      > https://zenodo.org/record/1344105/files/2241_CP_DZ_PairTo_2242.txt
 >      > https://zenodo.org/record/1344105/files/2126_CP_MZ_PairTo_2125.txt
@@ -135,7 +136,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 > 3. **Upload control (healthy) datasets**
 >    - Repeat the previous steps with the samples from healthy individuals:
->      > ### {% icon details %} View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)
+>      > <details-title>View list of Zenodo URLs for Dental Caries Dataset (Healthy, CN)</details-title>
 >      > ```
 >      > https://zenodo.org/record/1344105/files/2310_CN_DZ_PairTo_2309.txt
 >      > https://zenodo.org/record/1344105/files/2062_CN_DZ_PairTo_2061.txt
@@ -158,12 +159,12 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >      {: .details}
 >    - Name this collection: `CN`
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. How many samples do you have in our disease collection (CP)? How many healthy samples (CN)?
 >    > 2. How many columns in each file? What are these columns?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > 1. You should have 19 samples in the disease collection (CP), and 17 in the negative collection (CN).
 >    > > 2. There are two columns, one is the KO IDs, the other is the count.
@@ -173,13 +174,13 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 {: .hands_on}
 
-> ### {% icon tip %} Tip: Creating a collection from files already in your history
+> <tip-title>Creating a collection from files already in your history</tip-title>
 >
 > *Dataset collections* enables us to easily run tools on multiple datasets at once, you probably
 > have done that in the file upload menu using the `Collection` tab. If not, you can still create
 > *dataset collections* manually.
 >
-> > ### {% icon hands_on %} Manually organizing our data into a collection
+> > <hands-on-title>Manually organizing our data into a collection</hands-on-title>
 > >
 > > If you have all the datasets in the history, but they are not organized into a collection yet,
 > > you can follow these steps to create a collection:
@@ -187,16 +188,13 @@ After knowing what our input data are like, let's get them into Galaxy history:
 > > 1. Click on the **checkmark icon** at top of your history.
 > >   ![Checkmark icon in history menu](../../../../shared/images/history_menu_buttons2.png)
 > >
-> > 2. Select all the files whose name contains `CP`, then click on **for all selected..** and select
+> > 2. Select all the files whose name contains `CP`, then click on **n of N selected** and select
 > >   **Build Dataset List** from the dropdown menu.
 > >
 > > 3. In the next dialog window, you need to give a name, here we just set it to `CP`, then click **Create list**.
 > >
-> > 4. Hidden these selected files by clicking on **for all selected..** and selecting **Hidden datasets**.
-> >   **Note:** This step is optional, we do it here to keep Galaxy history clean.
-> >
-> > 5. Redo the Step 2, 3, 4 for CN, set the name of the data list as 'CN'.
-> {: .details}
+> > 4. Redo the Step 2, 3 for CN, set the name of the data list as 'CN'.
+> {: .hands_on}
 {: .tip}
 
 
@@ -205,7 +203,7 @@ After knowing what our input data are like, let's get them into Galaxy history:
 
 ## What is differential expression analysis?
 
-> ### {% icon comment %} A defintion
+> <comment-title>A definition</comment-title>
 >
 > The definition of differential expression analysis given by
 > [EBI](https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene)
@@ -232,7 +230,7 @@ may look up the pros and cons of each tool. Here we use DESeq2.
 
 After learning about differential expression analysis, let's get some hands-on experience.
 
-> ### {% icon hands_on %} Hands-on: DEA via DESeq2
+> <hands-on-title>DEA via DESeq2</hands-on-title>
 >
 > - **DESeq2** {% icon tool %} with the following parameters
 >   - *"Specify a factor name"*: `dental_caries` (under `1: Factor`)
@@ -265,9 +263,9 @@ under alternative hypothesis, the noise component (which holds under null hypoth
 modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model
 (BUM model), as the figure below shows.
 
-![p-values are fitted to a mixture model](../../images/bum.jpeg){:width="50%"}
+![p-values are fitted to a mixture model](../../images/transcriptomics_images/bum.jpeg){:width="50%"}
 
-> ### {% icon comment %} Why do we need a mixture model?
+> <comment-title>Why do we need a mixture model?</comment-title>
 >
 > To avoid making this tutorial sound like a math class, let's focus on the philosophy of using a statistical model.
 > In the graph above, we have visualized the p-values; those bins have some shapes; by viewing the figure, it
@@ -282,7 +280,7 @@ modeled by a uniform distribution. With this knowledge, we can fit these p-value
 Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool
 **Fit a BUM model**, that's a file that only contains p-values.
 
-> ### {% icon hands_on %} Hands-on: extract p-values from DESeq2 output
+> <hands-on-title>extract p-values from DESeq2 output</hands-on-title>
 >
 > - **cut** columns from a table {% icon tool %} with the following parameters:
 >   - *"Cut columns"*: `c6`
@@ -293,7 +291,7 @@ Before fitting to BUM model in Galaxy, we need to prepare the input data for the
 
 Now we can **Fit a BUM model**:
 
-> ### {% icon hands_on %} Hands-on: fit the BUM model
+> <hands-on-title>fit the BUM model</hands-on-title>
 >
 > - **Fit a BUM model** {% icon tool %} with the following parameters
 >   - *"Input file"*: the output of **cut**
@@ -323,7 +321,7 @@ NPTX1	CIAO1
 
 Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 
-> ### {% icon hands_on %} Upload edge file
+> <hands-on-title>Upload edge file</hands-on-title>
 >
 > 1. **Upload the edge file from Zenodo**
 >    - Open the upload menu
@@ -341,7 +339,7 @@ Upload this edge file (hereafter we call it edge file) into the Galaxy instance.
 As the first step, we need to calculate a Heinz score for each node, using the BUM model parameters
 we obtained; meanwhile, we also need to specify an FDR value as input.
 
-> ### {% icon comment %} What is an FDR value?
+> <comment-title>What is an FDR value?</comment-title>
 >
 > FDR is short for false discovery rate, which is a method of conceptualizing the rate of type I errors
 > in null hypothesis testing when conducting multiple comparisons, if you are interested, view the detail
@@ -355,11 +353,11 @@ For different datasets and problems, we probably need to pick up an FDR value se
 Similar to **Fit a BUM model**, we also need to prepare the input data for the tool
 **Calculate a Heinz score**.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What is the requirement of the input data format for **Calculate a Heinz score**?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > In the user interface of the tool "Calculate a Heinz score", we see that "A node file with p-values" is needed.
 > > It should contain two columns delimited by tab, one is KO ID; the other, p-value.
@@ -367,7 +365,7 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 > {: .solution}
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: extract geneID and p-values from DESeq2 output
+> <hands-on-title>extract geneID and p-values from DESeq2 output</hands-on-title>
 >
 > - **cut** columns from a table {% icon tool %} with the following parameters
 >   - *"Cut columns"*: `c1,c6`
@@ -376,7 +374,7 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: calculate Heinz scores
+> <hands-on-title>calculate Heinz scores</hands-on-title>
 >
 > - **Calculate a Heinz score** {% icon tool %} with the following parameters
 >   - *"A node file with p-values"*: the output of the previous **cut** step
@@ -386,7 +384,7 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 {: .hands_on}
 
 
-> ### {% icon comment %} What is the Heinz score?
+> <comment-title>What is the Heinz score?</comment-title>
 >
 > To figure out this score without reading the formula, we can understand Heinz score in this way. FDR is involved in calculating a p-value threshold
 > and any KO whose p-value is below this threshold is regarded as significant, which means the Heinz score is positive (another calculation in the formula). If we pick a higher FDR value, then we will have a higher p-value threshold, and more KOs are probably regarded as significant. In this situation, we probably have many false positive (those regarded as significant are actually not) on the one hand; on the other hand, Heinz will deliver a bigger subnetwork, which might be exhausting to analyze. Therefore, we need to pick up an FDR value properly.
@@ -398,7 +396,7 @@ Similar to **Fit a BUM model**, we also need to prepare the input data for the t
 
 After getting Heinz scores, let's run Heinz program to find the optimal subnetwork from the background network which we mentioned earlier.
 
-> ### {% icon hands_on %} Hands-on: pinpoint the optimal subnetwork
+> <hands-on-title>pinpoint the optimal subnetwork</hands-on-title>
 >
 > - **Identify optimal scoring subnetwork** {% icon tool %} with the following parameters
 >   - *"File containing Heinz scores"*: the output of **Calculate a Heinz score**
@@ -408,7 +406,7 @@ After getting Heinz scores, let's run Heinz program to find the optimal subnetwo
 
 It usually takes a few minutes to get the result, but mind you, for some tasks, it might take a few hours to get a result in practice.
 
-> ### {% icon comment %} The running time of the program
+> <comment-title>The running time of the program</comment-title>
 >
 > * Graph problem is way more complicated than we thought.
 > * It might take a much longer time for some complicated datasets.
@@ -420,7 +418,7 @@ It usually takes a few minutes to get the result, but mind you, for some tasks, 
 
 The result we got from the last step is not very human-readable, is it? It is a little painful to understand the Heinz result directly. Therefore we need to visualize the output by making it into graphs.
 
-> ### {% icon hands_on %} Hands-on: visualize the optimal subnetwork
+> <hands-on-title>visualize the optimal subnetwork</hands-on-title>
 >
 > - **Visualize** the optimal scoring subnetwork {% icon tool %} with the following parameters
 >   - *"Heinz output file"*: the output of **Identify optimal scoring subnetwork**
@@ -429,13 +427,13 @@ The result we got from the last step is not very human-readable, is it? It is a 
 
 In this tutorial, you probably get a similar graph to the following:
 
-![p-values are fitted to a mixture model](../../images/Heinz_visualisation.png){:width="30%"}
+![p-values are fitted to a mixture model](../../images/transcriptomics_images/Heinz_visualisation.png){:width="30%"}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > According to the figure above, Why are some shapes are round, others square?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Round shape corresponds to positive Heinz score; square shape corresponds to negative Heinz score.
 > >
@@ -445,7 +443,7 @@ In this tutorial, you probably get a similar graph to the following:
 
 In addition to the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study [May et al.](https://academic.oup.com/bioinformatics/article/32/11/1678/2240171), perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:
 
-![metaModules Result](../../images/metaModules.png){:width="60%"}
+![metaModules Result](../../images/transcriptomics_images/metaModules.png){:width="60%"}
 
 If you are interested, you may try to make sense of the result yourself. To answer the question "which pathways are potentially contributing to dental caries?", we need to find the key pathways relevant to the subnetwork. To achieve that, we probably need to combine information from other bioinformatics services and literature.
 
@@ -454,17 +452,17 @@ If you are interested, you may try to make sense of the result yourself. To answ
 
 Let's assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.
 
-> ### {% icon hands_on %} Hands-on: Extract the Heinz workflow
+> <hands-on-title>Extract the Heinz workflow</hands-on-title>
 >
 > 1. Extract the workflow from your history
 >
->    {% include snippets/extract_workflow.md %}
+>    {% snippet faqs/galaxy/workflows_extract_from_history.md %}
 >
 > 2. Run the workflow on the dataset in this tutorial
 >
 {: .hands_on}
 
-![Heinz workflow](../../images/heinz-workflow.png)
+![Heinz workflow](../../images/transcriptomics_images/heinz-workflow.png)
 
 As a self practice, you ran the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?
 

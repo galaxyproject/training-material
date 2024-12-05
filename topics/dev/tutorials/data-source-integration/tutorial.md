@@ -12,11 +12,12 @@ contributors:
  - bebatut
  - shiltemann
  - gmauro
- - erasche
+ - hexylena
 key_points:
  - It is possible to couple an external data resource with a Galaxy server
  - The external data resource is accessed through his native interface
  - Data flows from the external data resource to the Galaxy server without the need of "downloading" the data
+subtopic: advanced
 ---
 
 # Data Source Integration
@@ -31,7 +32,7 @@ of "downloading" the data. In this hands on, we will use the resource from [DoRi
 but the main point about this short section is:
 if you have a data source which you think is very important for your research with Galaxy let us know!
 
-> ### {% icon hands_on %} Hands on!
+> <hands-on-title>Hands on!</hands-on-title>
 >
 > 1. Create a new history called "doRiNA"
 > 2. Go to Get Data::doRiNA search

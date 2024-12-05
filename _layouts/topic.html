@@ -2,116 +2,118 @@
 layout: base
 ---
 
-{% include _includes/default-header.html %}
+{% assign topic = site.data[page.topic_name] | default: page.topic %}
+{% assign topic_material = site | list_materials_structured:topic.name %}
 
-{% assign topic = site.data[page.topic_name] %}
-{% assign contributors = site.data['contributors'] %}
-{% assign instances = site.data['instances'] %}
-{% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign language = site.other_languages | split: ", " %}
-
+<!-- Gitter -->
 {% if topic.gitter %}
-<script>
-  ((window.gitter = {}).chat = {}).options = {
-  room: '{{ topic.gitter }}'
-  };
-</script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
 {% endif %}
 
-<div class="container main-content">
-    <section>
-        <h1>{{ topic.title }}</h1>
-        <p>{{ topic.summary }}</p>
+<section class="tutorials-list {{ topic.name }} topic-type-{{ topic.type }}">
+    <h1>{{ topic.title }}</h1>
+    <p>{{ topic.summary | markdownify }}</p>
 
-        {% if topic.requirements %}
-        <h2 id="requirements">Requirements</h2>
-        <p>Before diving into this topic, we recommend you to have a look at:</p>
+    {% if topic.gitter %}
+    <p><em>For any question or discussions related to this topic, or to connect with others in the community, please visit the community chat:</em></p>
+    <p><a class="btn btn-success" href="https://matrix.to/#/#{{topic.gitter}}">{% icon comment %} &nbsp; Community Matrix Chat</a></p>
+    {% endif%}
 
-        <ul>
-            {% include snippets/display_extra_training.md extra_trainings=topic.requirements %}
-        </ul>
-        {% endif %}
 
-        {% unless topic.subtopics %}<div id="tutorial_list">{% endunless %}
-            <h2 id="material">Material</h2>
-            {% unless topic.subtopics %}
-            <div class="search_box">
-                {% icon search %}
-                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
-                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
-            </div>
-            {% endunless %}
-            {% if topic.subtopics %}
-              {% for subtopic in topic.subtopics %}
-                <h3>{{ subtopic.title}}</h3>
-                {{ subtopic.description }} </br></br>
-                {% include _includes/tutorial_list.html sub=subtopic %}
-              {% endfor %}
-              <div id="tutorial_list">
-              <h3> Other </h3>
-              <div class="search_box">
-                {% icon search %}
-                <input data-search-type="tutorial_title" class="search" id="tutorial_search" placeholder="Search" />
-                <span id="clear_search" title="Clear filters"> {% icon galaxy-cross %} </span>
-              </div></br>
-              Assorted other tutorials </br></br>
-              {% include _includes/tutorial_list.html sub="other" %}
-            {% else %}
-               {% include _includes/tutorial_list.html %}
-            {% endif %}
-        </div>
 
-        {% if topic.type == "use" %}
-            <h2 id="docker_image">Galaxy instances</h2>
-            <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
-            {% if topic.docker_image and topic.docker_image != "" %}
-                <p>You can also use the following Docker image for these tutorials:</p>
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
-                <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
-            {% endif %}
-        {% endif %}
+    {% if topic.requirements %}
+    <h2 id="requirements">Requirements</h2>
+    <p>Before diving into this topic, we recommend you to have a look at:</p>
 
-        <h2 id="maintainers">Maintainers</h2>
-        <p>This material is maintained by:</p>
-        {% assign maintainers = topic.maintainers | sorted %}
-        {% include _includes/contributor-badge-list.html contributors=maintainers %}
+    <ul>
+        {% include _includes/display_extra_training.md extra_trainings=topic.requirements %}
+    </ul>
+    {% endif %}
 
-        <p>
-            <em>For any question related to this topic and the content, you can contact them or visit our <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter channel</a>.</em>
+    {% if topic.learning_path_cta %}
+    <div id="cta-lp" style="color: var(--brand-color-contrast);background: var(--brand-color);">
+      <div style="background: repeating-linear-gradient( 135deg, transparent, transparent 10px, #fff1 10px, #fff1 20px );padding: 1rem;">
+        <h3 style="margin: unset;">Not sure where to start?</h3>
+        <p style="display: flex;justify-content: space-between;align-items: center;vertical-align: bottom;margin-bottom: 0;">
+          <span>Try the {{ topic.title }} Learning Pathway!</span>
+	  <a href="/training-material/learning-pathways/{{ topic.learning_path_cta }}.html?utm_source=gtn&utm_medium=topic-{{ topic.name }}&utm_campaign=home-cta-lp" class="btn btn-success">Start Learning</a>
         </p>
+      </div>
+    </div>
+    {% endif %}
 
-        <h2 id="contributors">Contributors</h2>
-        <p>This material was contributed to by:</p>
-        {% assign contributors_list = "" | split: ',' %}
-        {% for material in topic_material %}
-            {% for c in material.contributors %}
-                {% if contributors_list contains c %}
-                {% else %}
-                    {% assign contributors_list = contributors_list | push: c %}
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-        {% assign contributors_list_sorted = contributors_list | sorted %}
-        {% include _includes/contributor-badge-list.html contributors=contributors_list_sorted %}
+    <h2 id="material">Material</h2>
 
-        {% if topic.references %}
-        <h2 id="references">References</h2>
-        <ul>
-        {% for reference in topic.references %}
-            <li class="citation">
-                <strong>{{ reference.authors }}:</strong> <a href="{{ reference.link }}">{{ reference.title }}</a>
-                {% if reference.summary != "" %}
-                <br><cite>{{ reference.summary }}</cite>
-                {% endif %}
-            </li>
-        {% endfor %}
-        </ul>
+    {% if topic.toc %}
+      <p>
+      <blockquote class="agenda">
+      <div class="box-title agenda-title" id="agenda">Jump to a section!</div>
+      <ul class="markdown-toc">
+      {% for subtopic in topic_material %}
+        <li><a href="#st-{{ subtopic[0] | slugify }}">{{subtopic[1].subtopic.title}}</a></li>
+      {% endfor %}
+      </ul>
+      </blockquote>
+      </p>
+    {% endif %}
+
+    <i>You can view the tutorial materials in different languages by clicking the dropdown icon next to the slides ({% icon slides %}) and tutorial ({% icon tutorial %}) buttons below. </i>
+
+    {% if topic.draft %}
+    <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}
+    {% for subtopic in topic_material %}
+        <!-- subtopic = [{{subtopic[0]}}, {subtopic => {{ subtopic[1].subtopic }}, materials => [ ... ]} ] -->
+
+        {% if subtopic[0] != "__FLAT__" %}
+        <h3 id="st-{{ subtopic[0] | slugify }}">{{ subtopic[1].subtopic.title }}</h3>
+        <p>{{ subtopic[1].subtopic.description }}</p>
         {% endif %}
-    </section>
-</div>
 
-{% include _includes/default-footer.html %}
+        {% include _includes/tutorial_list.html sub=subtopic %}
+    {% endfor %}
+
+    {{ content }}
+
+    {% unless topic.tag_based %}
+    <h2 id="topic-faq">Frequently Asked Questions</h2>
+    <p>Common questions regarding this topic have been collected on a <a href="faqs/">dedicated FAQ page </a>. Common questions related to specific tutorials can be accessed from the tutorials themselves.</p>
+
+    {% if jekyll.environment == "production" %}
+    <p><a href="feed.xml">Follow topic updates {% icon rss-feed %}</a> with our RSS Feed</p>
+    {% endif %}
+    {% endunless %}
+
+    {% if topic.editorial_board %}
+    <h2 id="editorial-board">Editorial Board</h2>
+    <p>This material is reviewed by our Editorial Board:</p>
+    {% assign editorial_board = topic.editorial_board | sorted %}
+    {% include _includes/contributor-list.html contributors=editorial_board badge=true %}
+    {% endif %}
 
 
+    <h2 id="contributors">Contributors</h2>
+    <p>This material was contributed to by:</p>
+    {% assign contributors_list_sorted = topic_material | identify_contributors: site %}
+    {% include _includes/contributor-list.html contributors=contributors_list_sorted badge=true %}
 
+	<h2 id="funding">{{locale['references']| default: "Funding" }}</h2>
+	<p>These individuals or organisations provided funding support for the development of this resource</p>
+    {% assign funders_list_sorted = topic_material | identify_funders: site %}
+    {% include _includes/funding-statement.md funders=funders_list_sorted %}
+
+    {% if topic.references %}
+    <h2 id="references">References</h2>
+    <ul>
+    {% for reference in topic.references %}
+        <li class="citation">
+            <strong>{{ reference.authors }}:</strong> <a href="{{ reference.link }}">{{ reference.title }}</a>
+            {% if reference.summary != "" %}
+            <br><cite>{{ reference.summary }}</cite>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+</section>

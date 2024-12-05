@@ -1,0 +1,35 @@
+@startuml
+!include plantuml_options.txt
+
+database {
+component database
+}
+component models
+component jobs
+component auth
+component toolbox
+component workflows
+component metadata
+component objectstore
+component jobmetrics
+component managers
+component api
+
+[models] ..> [database]
+[jobs] ..> [models]
+[auth] ..> [models]
+[toolbox] ..> [models]
+[workflows] ..> [models]
+[metadata] ..> [models]
+[objectstore] ..> [models]
+[jobmetrics] ..> [models]
+[managers] ..> [jobmetrics]
+[managers] ..> [metadata]
+[managers] ..> [objectstore]
+[managers] ..> [workflows]
+[managers] ..> [toolbox]
+[managers] ..> [auth]
+[managers] ..> [jobs]
+[api] ..> [managers]
+
+@enduml

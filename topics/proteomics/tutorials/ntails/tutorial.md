@@ -2,8 +2,9 @@
 layout: tutorial_hands_on
 
 title: "Detection and quantitation of N-termini (degradomics) via N-TAILS"
-edam_ontology: "topic_0121"
+edam_ontology: ["topic_0121"]
 zenodo_link: ""
+level: Intermediate
 questions:
   - "How can protein N-termini be enriched for LC-MS/MS?"
   - "How to analyze the LC-MS/MS data?"
@@ -17,6 +18,8 @@ key_points:
 contributors:
   - stortebecker
   - bgruening
+subtopic: special
+tags: []
 ---
 
 N-Tails is a special Proteomics technique to analyze peptide abundancy changes of protein N-termini. Prior to the MS measurement, N-Tails enriches unmodified, as well as acetylated N-termini. Both common and "unusual" N-termini are identified, where "unusual" means that the protein N-terminus was changes.
@@ -29,7 +32,7 @@ The figure below illustrates the mechanism of N-Tails. It was originally publish
 
 The N-Tails technique was originally designed to research protease biology and has most often been used in this field. It was originally published in [Kleifeld et al., Nat. Biotechnol., 2010](https://www.ncbi.nlm.nih.gov/pubmed/20208520).
 
-> ### {% icon comment %} Comment: Interpretation of N-Tails results
+> <comment-title>Interpretation of N-Tails results</comment-title>
 >
 > Be careful when interpreting the results of N-Tails experiments. While the technique **is** fit to identify direct protease substrates, it does not discriminate direct from indirect ("downstream") effects. Thus, most of the identified N-termini will **not** be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. The information can be extracted from the peptide IDs, but this step is so far not included in the workflow.
 >

@@ -1,0 +1,36 @@
+{% assign path = include.path %}
+
+{% assign coverimage = path.coverimage | default: "/assets/images/GTNLogo1000.png" %}
+{% assign coverimagealt = path.coverimagealt | default: "GTN logo with a multi-coloured star and the words Galaxy Training Network"%}
+
+{% if path.draft != true or jekyll.environment != "production" %}
+  <div class="pathwayitem col-md-4">
+    <a href="{{site.baseurl}}{{path.url}}">
+    <div class="card d-flex">
+      <div class="d-flex align-items-center" style="height:200px;">
+      {% if path.cover-image %}
+      <img class="pathwaycover card-img-top" src="{{site.baseurl}}/{{path.cover-image}}" alt="{{ path.cover-image-alt }}" loading="lazy">
+      {% else %}
+      <img class="pathwaycover card-img-top" src="{{site.baseurl}}{{coverimage}}" alt="{{ coverimagealt }}" loading="lazy">
+      {% endif %}
+      </div>
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title">{{path.title}}</h5>
+        <p class="card-text">
+          {{path.description | markdownify | strip_html | truncatewords: 60}}
+        </p>
+      </div>
+      <div class="card-footer">
+
+        {% if path.draft %}
+        <span class="label label-default tutorial_tag" style="{{ 'Draft' | colour_tag }}">Draft</span>
+        {% endif %}
+
+        {% for tag in path.tags %}
+        <span class="label label-default tutorial_tag" style="{{ tag | colour_tag }}">{{ tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+    </a>
+  </div>
+{% endif %}

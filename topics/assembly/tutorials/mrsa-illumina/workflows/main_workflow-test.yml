@@ -1,0 +1,29 @@
+---
+- doc: Test for "Genome Assembly of MRSA using Illumina MiSeq Data"
+  job:
+    DRR187559_1:
+      class: File
+      location: https://zenodo.org/record/10669812/files/DRR187559_1.fastqsanger.bz2
+      filetype: fastqsanger.bz2
+    DRR187559_2:
+      class: File
+      location: https://zenodo.org/record/10669812/files/DRR187559_2.fastqsanger.bz2
+      filetype: fastqsanger.bz2
+  outputs:
+    fastp_json:
+      asserts:
+        has_text:
+          text: "903564"
+    fastp_json:
+      asserts:
+        has_text:
+          text: "Final assembly graph"
+    bandage_info_output:
+      asserts:
+        has_n_lines:
+          n: 19
+    quast_output:
+      asserts:
+        has_text:
+          text: "# contigs"
+

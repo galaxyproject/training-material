@@ -21,19 +21,17 @@ contributors:
 ---
 
 
-# Introduction
-{:.no_toc}
 Small Non-coding RNAs (ncRNAs) play a vital role in many cellular processes such as RNA splicing, translation, gene regulation. The small RNA-seq is a type of RNA-seq in which RNA fragments are size selected to capture only short RNAs. One of the most common applications of the small RNA-seq is discovering novel small ncRNAs. Mapping the small RNA-seq data reveals interesting patterns that represent the traces of the small RNA processing.
 
 For example, consider the miRNA biogenesis. The primary miRNA transcripts are processed by Drosha-complexes and results in hairpin precursor miRNAs. Then after they transported to the cytoplasm, Dicer slices off the hairpin. One of the RNA strands bound by Argonaute proteins regulates the target mRNA while the other strand is degraded.
 
-The following figure (bottom part of the figure is taken from [DOI: 10.1038/nrg3162](https://doi.org/10.1038/nrg3162)) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
+The following figure (bottom part of the figure is taken from {% cite Pasquinelli2012 %}) represents one of the small RNA processing patterns. The vertical block bars represent a mapped reads on reference genome. The height of the bars represents the number of reads mapped at that location. Reads in each bubble represent a *read profile*. In this case, they both are from miRNAs. From the small RNA-seq, we often see the two processed miRNA strands after mapping. The miRNA strand which targets the mRNA is expressed and we see more reads compared to the degraded strand. The gap between those two piles of reads represents the missing hairpin.
 
-![read profiles](../../images/blockclust_profiles.png "Patterns of processing in read profiles")
+![read profiles](../../images/transcriptomics_images/blockclust_profiles.png "Patterns of processing in read profiles")
 
 In this tutorial, we will learn how to use **BlockClust** to cluster similar processing patterns together.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -50,11 +48,11 @@ In the first step, we convert the BAM file into BED file. This is not a plain fi
 {: .hands_on}
 ## Get data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2172221/files/GSM769512.bam)
 >
@@ -62,14 +60,14 @@ In the first step, we convert the BAM file into BED file. This is not a plain fi
 >    https://zenodo.org/record/2172221/files/GSM769512.bam
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Why is it mandatory to clip the adapters from the small RNA-seq data?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Generally, the processed RNA fragments from the small RNAs are about 18-30nt long. If the sequenced read length is longer than the fragment (which is usually the case), the sequencer reads into the 3' adapter.
 > >
@@ -80,7 +78,7 @@ In the first step, we convert the BAM file into BED file. This is not a plain fi
 
 ## Sort BAM file
 Before continue to BAM to BED conversion we need to sort the alignments in the input BAM file by their positions.
-> ### {% icon hands_on %} Hands-on: Sort BAM
+> <hands-on-title>Sort BAM</hands-on-title>
 > 1. **Samtools sort** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM File"*: `GSM769512.bam`
 >
@@ -88,7 +86,7 @@ Before continue to BAM to BED conversion we need to sort the alignments in the i
 
 ## BAM to BED of tags
 Now it is time to do the actual conversion.
-> ### {% icon hands_on %} Hands-on: **BlockClust** preprocessing
+> <hands-on-title><b>BlockClust</b> preprocessing</hands-on-title>
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Pre-processing `
 >    - {% icon param-file %} *"BAM file containing alignments"*: output of **Samtools sort** {% icon tool %}
@@ -99,9 +97,9 @@ Now it is time to do the actual conversion.
 
 Now we group the adjacent reads into so-called blocks and blockgroups using blockbuster tool. In general, each blockgroup should represent a single ncRNA read profile.
 
-![blocks of a blockgroup](../../images/blockclust_blocks.png "Representation of blocks and blockgroups of a read profile")
+![blocks of a blockgroup](../../images/transcriptomics_images/blockclust_blocks.png "Representation of blocks and blockgroups of a read profile")
 
-> ### {% icon details %} More details about the theory
+> <details-title>More details about the theory</details-title>
 >
 > The idea is to perform peak detection on the signal obtained by counting the number of reads per nucleotide. This signal, spanning adjacent loci, is then modeled with a mixture of Gaussians. An iterative greedy procedure is then used to collect reads that belong to the same block, starting from the largest Gaussian component, and removing them in successive iterations. The tool further assembles a sequence of adjacent blocks into a blockgroup if the blocks are either overlapping or are at a distance smaller than a user-defined threshold. A more detailed explanation is at [the blockbuster website](http://hoffmann.bioinf.uni-leipzig.de/LIFE/blockbuster.html)
 >
@@ -112,7 +110,7 @@ Now we group the adjacent reads into so-called blocks and blockgroups using bloc
 
 In order to run the blockbuster successfully the input BED file need to be sorted by chromosome, strand, start position and then end positions.
 
-> ### {% icon hands_on %} Hands-on: Sort the BED file
+> <hands-on-title>Sort the BED file</hands-on-title>
 >
 > 1. **Sort** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: output of **BlockClust** {% icon tool %}
@@ -137,7 +135,7 @@ In order to run the blockbuster successfully the input BED file need to be sorte
 
 ## Group reads into blocks and blockgroups using **blockbuster**
 
-> ### {% icon hands_on %} Hands-on: blockbuster
+> <hands-on-title>blockbuster</hands-on-title>
 >
 > 1. **blockbuster** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BED file containing read expressions"*: output of **Sort** {% icon tool %}
@@ -150,7 +148,7 @@ In order to run the blockbuster successfully the input BED file need to be sorte
 Here we use **BlockClust** in clustering mode. All you need here is the output of the **blockbuster**.
 
 Apart from clustering, **BlockClust** has built-in class specific discriminative models for C/D box snoRNA, H/ACA box snoRNA, miRNA, rRNA, snRNA, tRNA and Y_RNA. So it can also be used to predict if a read profile might belong to one of the known ncRNA class.
-> ### {% icon hands_on %} Hands-on: clustering
+> <hands-on-title>clustering</hands-on-title>
 >
 > 1. **BlockClust** {% icon tool %} with the following parameters:
 >    - *"Select mode of operation"*: `Clustering and classification`
@@ -173,7 +171,7 @@ The `BlockClust: Pairwise similarities` file contains the pairwise similarities 
 
 Next, we will visualize the read profiles (from the BAM file) and the predictions (BED from **BlockClust**) together.
 
-> ### {% icon hands_on %} Hands-on: visualization
+> <hands-on-title>visualization</hands-on-title>
 >
 > 1. Install [IGV](https://software.broadinstitute.org/software/igv/download) (if not already installed)
 > 2. Start IGV locally
@@ -185,13 +183,13 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Do you see any already annotated transcript in that location?
 > 2. What does the read profile resemble?
 > 3. What did **BlockClust** predict?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. There is no annotated gene from RefSeq annotation on the same strand.
 > > 2. It resembles the miRNA profiles mentioned in the introduction section. One of the read piles looks like mature miRNA and the other like miRNA*.
@@ -201,7 +199,7 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 >
 {: .question}
 
-> ### {% icon comment %} Comments
+> <comment-title></comment-title>
 >
 > In order for this step to work, you will need to have either IGV or [Java web start](https://www.java.com/en/download/faq/java_webstart.xml)
 > installed on your machine. However, the questions in this section can also be answered by inspecting the IGV screenshots below.
@@ -213,6 +211,6 @@ Next, we will visualize the read profiles (from the BAM file) and the prediction
 
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we learned how to use **BlockClust** to cluster real small RNA sequencing read profiles based on their similarity. We also learned that the **BlockClust** can also be used to classify the read profiles based on pre-built classification models.

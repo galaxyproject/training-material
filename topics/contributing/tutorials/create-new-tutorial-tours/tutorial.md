@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Creating Interactive Galaxy Tours"
+title: "Creating Interactive Galaxy Tours"
 questions:
   - "What is a Interactive Galaxy Tour?"
   - "How can we create an Interactive Tour?"
@@ -18,8 +18,7 @@ contributors:
   - shiltemann
 ---
 
-# Introduction
-{:.no_toc}
+
 
 Galaxy is a great solution to train the bioinformatics concepts:
 
@@ -34,7 +33,7 @@ We take inspiration from [Software Carpentry](https://software-carpentry.org). W
 
 In this tutorial, you will understand how to design and develop a new tutorial fitting in this training material repository. As doing helps to understand, we will develop a small tutorial to explain BLAST with the full infrastructure to be able to run this tutorial anywhere.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -100,9 +99,9 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 [A Web browser plugin](https://github.com/TailorDev/galaxy-tourbuilder) is available to help the creation and the test (on the fly) of an interactive tour.
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="//imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="https://imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote><script async src="https://s.imgur.com/min/embed.js" charset="utf-8"></script>
 
-> ### {% icon hands_on %} Hands-on: Install and start the plugin
+> <hands-on-title>Install and start the plugin</hands-on-title>
 >
 > 1. Install the plugin using the app store of your web-browser:
 >     - [Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg)
@@ -115,7 +114,7 @@ The YAML file of a tour can be integrated in a Galaxy instance by placing the YA
 
 We can now create easily a Galaxy Interactive Tour and test it on the fly.
 
-> ### {% icon hands_on %} Hands-on: Create a Galaxy Interactive Tour
+> <hands-on-title>Create a Galaxy Interactive Tour</hands-on-title>
 >
 > 1. Create a Galaxy Interactive Tour for "BLAST" tutorial
 > 2. Test it with the plugin
@@ -125,4 +124,4 @@ We can now create easily a Galaxy Interactive Tour and test it on the fly.
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+

@@ -1,0 +1,441 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "introduction",
+    "format-version": "0.1",
+    "name": "GTN Training: Galaxy 101 For Everyone",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null, 
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "iris"
+                }
+            ],
+            "label": "iris",
+            "name": "iris",
+            "outputs": [],
+            "position": {
+                "left": 200,
+                "top": 405
+            },
+            "tool_id": null,
+            "tool_state": "{\"name\": \"iris\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6a8d8ca9-8bb9-414b-af8f-50d07721b363",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "csv_to_tabular",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "csv": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Convert CSV to tabular",
+            "outputs": [
+                {
+                    "name": "tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 439,
+                "top": 376
+            },
+            "post_job_actions": {
+                "HideDatasetActiontabular": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "tabular"
+                }
+            },
+            "tool_id": "csv_to_tabular",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"csv\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "f4c788f6-afb6-4350-9531-b6830601dbae",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "in_file": {
+                    "id": 1,
+                    "output_name": "tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Datamash",
+            "outputs": [
+                {
+                    "name": "out_file",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 547,
+                "top": 200
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "562f3c677828",
+                "name": "datamash_ops",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"operations\": [{\"__index__\": 0, \"op_name\": \"mean\", \"op_column\": \"1\"}, {\"__index__\": 1, \"op_name\": \"sstdev\", \"op_column\": \"1\"}, {\"__index__\": 2, \"op_name\": \"mean\", \"op_column\": \"2\"}, {\"__index__\": 3, \"op_name\": \"sstdev\", \"op_column\": \"2\"}, {\"__index__\": 4, \"op_name\": \"mean\", \"op_column\": \"3\"}, {\"__index__\": 5, \"op_name\": \"sstdev\", \"op_column\": \"3\"}, {\"__index__\": 6, \"op_name\": \"mean\", \"op_column\": \"4\"}, {\"__index__\": 7, \"op_name\": \"sstdev\", \"op_column\": \"4\"}], \"__page__\": null, \"ignore_case\": \"true\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"__rerun_remap_job_id__\": null, \"header_in\": \"true\", \"in_file\": {\"__class__\": \"ConnectedValue\"}, \"need_sort\": \"true\", \"print_full_line\": \"false\", \"header_out\": \"true\", \"grouping\": \"5\"}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "e1a58a79-5102-450e-bfe0-200f0e64139d",
+            "workflow_outputs": [
+                {"output_name": "out_file", "label": "datamash_output"}
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 740,
+                "top": 388
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"__rerun_remap_job_id__\": null, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"num_lines\": \"1\", \"__page__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "5a721290-088b-48c0-adf0-7645c84b6dfb",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 544
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Cut1",
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"delimiter\": \"T\", \"columnList\": \"c5\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "1a42cbbc-aa27-464c-be01-4a8cf10e7726",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 664
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"operations\": [], \"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"ignorelines\": null, \"groupcol\": \"5\", \"__rerun_remap_job_id__\": null, \"ignorecase\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "dcd3ddc6-d871-45dd-94ed-3eae56dd56db",
+            "workflow_outputs": [
+                {"output_name": "out_file1", "label": "group1"}
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 784
+            },
+            "post_job_actions": {
+                "HideDatasetActionout_file1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"operations\": [{\"opcol\": \"1\", \"__index__\": 0, \"optype\": \"length\", \"opround\": \"no\", \"opdefault\": \"\"}], \"__page__\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"ignorelines\": null, \"groupcol\": \"5\", \"__rerun_remap_job_id__\": null, \"ignorecase\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\"}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "285a3852-71cb-4137-be1d-b0ec0a59d9e9",
+            "workflow_outputs": [
+                {"output_name": "out_file1", "label": "group2"}
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Scatterplot w ggplot2",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Scatterplot w ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                },
+                {
+                    "name": "output2",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 904
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "9cec81e1b90e",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"axis_title_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"plot_title_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"points\": {\"pointcolor\": \"black\", \"alpha\": \"1.0\", \"pointoptions\": \"defined\", \"__current_case__\": 1, \"size\": \"2.0\"}, \"factor\": {\"factorcol\": \"5\", \"colororder\": \"1\", \"colors\": \"Set2\", \"__current_case__\": 1, \"factoring\": \"Single\"}, \"axis_text_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"type\": \"points\", \"legend\": \"yes\", \"gridlinecust\": \"default\"}, \"xlab\": \"Sepal length\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"title\": \"Sepal length as a function of sepal width\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"1\", \"yplot\": \"2\", \"ylab\": \"Sepal width\", \"out\": {\"additional_output_format\": \"pdf\", \"width_output_dim\": \"7.0\", \"dpi_output_dim\": \"300.0\", \"height_output_dim\": \"7.0\", \"unit_output_dim\": \"in\"}}",
+            "tool_version": "2.2.1+galaxy1",
+            "type": "tool",
+            "uuid": "fa412209-5e3a-448e-8b0b-fa88870e19c1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output2",
+                    "uuid": "adcb2e3f-ee9a-41c5-9b5a-ceb2afcb5e7f"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input1": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Scatterplot w ggplot2",
+                    "name": "input1"
+                }
+            ],
+            "label": null,
+            "name": "Scatterplot w ggplot2",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "png"
+                },
+                {
+                    "name": "output2",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 967,
+                "top": 1024
+            },
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {},
+                    "action_type": "HideDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "9cec81e1b90e",
+                "name": "ggplot2_point",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"axis_title_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"plot_title_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"transform\": \"none\", \"scaling\": {\"plot_scaling\": \"Automatic\", \"__current_case__\": 0}, \"theme\": \"bw\", \"points\": {\"pointcolor\": \"black\", \"alpha\": \"1.0\", \"pointoptions\": \"defined\", \"__current_case__\": 1, \"size\": \"2.0\"}, \"factor\": {\"factorcol\": \"5\", \"colororder\": \"1\", \"colors\": \"Set2\", \"__current_case__\": 1, \"factoring\": \"Single\"}, \"axis_text_customization\": {\"__current_case__\": 0, \"axis_customization\": \"default\"}, \"type\": \"points\", \"legend\": \"yes\", \"gridlinecust\": \"default\"}, \"xlab\": \"Petal length\", \"input1\": {\"__class__\": \"RuntimeValue\"}, \"title\": \"Petal length as a function of petal width\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"xplot\": \"3\", \"yplot\": \"4\", \"ylab\": \"Petal width\", \"out\": {\"additional_output_format\": \"pdf\", \"width_output_dim\": \"7.0\", \"dpi_output_dim\": \"300.0\", \"height_output_dim\": \"7.0\", \"unit_output_dim\": \"in\"}}",
+            "tool_version": "2.2.1+galaxy1",
+            "type": "tool",
+            "uuid": "8e7b3f8d-2b8b-46cb-93d4-0d74bf54441e",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output2",
+                    "uuid": "a39df0d2-253a-4db2-b86d-9cbf0e5c1822"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "infile": {
+                    "id": 4,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Unique",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1187,
+                "top": 424
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0a8c6b61f0f4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__page__\": null, \"ignore_case\": \"false\", \"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"__rerun_remap_job_id__\": null, \"is_numeric\": \"false\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"infile\": {\"__class__\": \"ConnectedValue\"}}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "3e2d84e9-2fff-4321-9db6-41af99367162",
+            "workflow_outputs": [
+                {
+                    "label": "unique_output",
+                    "output_name": "outfile",
+                    "uuid": "ec39c0ad-eb26-47d6-b9a7-c2e5ffa043c6"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "introduction"
+    ],
+    "uuid": "4f508ea6-854b-4813-8043-848a259e32c2",
+    "version": 1
+}

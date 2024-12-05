@@ -1,5 +1,7 @@
+{% assign locale = site.data.lang[page.lang] %}
+
 {% if include.material.zenodo_link != nil and include.material.zenodo_link != "" %}
-<a class="topic-icon" href="{{ include.material.zenodo_link }}">
-    {% icon zenodo_link %}{% if include.label %} Datasets{% endif %}
+<a class="btn btn-default topic-icon" title="Zenodo datasets used in this tutorial" href="{{ include.material.zenodo_link }}">
+    {% icon zenodo_link aria=false %}{% if include.label %}&nbsp;{{ locale['datasets'] | default: "Datasets"}}{% endif %}
 </a>
 {% endif %}

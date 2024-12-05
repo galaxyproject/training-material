@@ -1,0 +1,75 @@
+---
+layout: faqs
+---
+
+{% if page.snippets_dir %}
+{% assign snippets_dir = page.snippets_dir %}
+{% else %}
+{% assign snippets_dir = page.dir | remove_first: '/' %}
+{% endif %}
+
+{% assign faqs =  site.pages | where: "layout", "faq"  %}
+{% assign topic_faqs = faqs | where_exp: "item", "item.path contains snippets_dir "%}
+
+
+{% if page.area_order %}
+  {% for a in page.area_order %}
+    {% assign tmp = topic_faqs | where: "area", a %}
+    {% if forloop.first %}
+      {% assign topic_faqs_sorted = tmp %}
+    {% else %}
+      {% assign topic_faqs_sorted = topic_faqs_sorted | concat: tmp %}
+    {% endif %}
+  {% endfor %}
+{% else %}
+  {% assign topic_faqs_sorted = topic_faqs | sort: "title" | sort: "area", "first" %}
+{% endif %}
+
+
+{% assign area_prev = '' %}
+{% for q in topic_faqs_sorted %}
+{% unless q.area == area_prev %}
+{% unless forloop.first %} <br> {% endunless %}
+{% if q.area == nil %}
+<h3 id="tutorial-faqs"> <a href="#tutorial-faqs"> Tutorial Questions </a></h3>
+{% else %}
+<h3 id="{{q.area}}"> <a href="#{{q.area}}"> {{ q.area | capitalize}} </a></h3>
+{% endif %}
+<hr/>
+{% assign area_prev = q.area %}
+{% endunless %}
+
+<h4 class="faq-area"> {{q.title}} <a href="{{site.baseurl}}{{q.url}}"><i class="fas fa-external-link-alt"></i></a> </h4>
+{{q.description}}
+{% snippet {{q.path}} %}
+
+{% endfor %}
+
+{% if page.url contains '/tutorials/' %}
+<br>
+<h3 id="general-faqs"> <a href="#general-faqs"> General Questions </a></h3>
+<hr>
+<!-- Add the "help my tool is missing FAQ to all tutorial faq pages -->
+<h4 class="faq-area"> Can't find one of the tools for this tutorial? <a href="{{site.baseurl}}/faqs/galaxy/tools_missing.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+{% snippet /faqs/galaxy/tools_missing.md %}
+<h4 class="faq-area"> Running into an error? <a href="{{site.baseurl}}/faqs/galaxy/analysis_troubleshooting.html"><i class="fas fa-external-link-alt"></i></a> </h4>
+{% snippet /faqs/galaxy/analysis_troubleshooting.md %}
+
+{% endif %}
+
+
+
+
+{% if page.cited %}
+<h2 id="bibliography">{{locale['references']| default: "References" }}</h2>
+{% bibliography --cited %}
+{% endif %}
+
+
+<br><br><hr>
+<h5>Still have questions?</h5>
+
+{% include _includes/button.html link="https://gitter.im/Galaxy-Training-Network/Lobby" label="Gitter Chat Support" colour="yellow" buttonsize="medium" %}
+
+{% include _includes/button.html link="https://help.galaxyproject.org" label="Galaxy Help Forum" colour="purple" buttonsize="medium" %}
+
