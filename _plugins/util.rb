@@ -53,6 +53,10 @@ def markdownify(site, text)
   ).convert(text.to_s)
 end
 
+def unsafe_slugify(text)
+  text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
+end
+
 def fix_version(version)
   version
   .gsub('_beta+galaxy', '+galaxy')
@@ -82,4 +86,3 @@ if __FILE__ == $PROGRAM_NAME
       assert_equal(fix_version("3+galaxy0"), "3.0.0galaxy0")
     end
   end
-end

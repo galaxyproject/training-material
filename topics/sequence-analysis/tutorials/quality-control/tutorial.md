@@ -19,6 +19,7 @@ follow_up_training:
   - mapping
 time_estimation: 1H30M
 level: Introductory
+subtopic: basics
 key_points:
 - Perform quality control on every dataset before running any other bioinformatics
   analysis
@@ -36,6 +37,8 @@ contributions:
   - r1corre
   - stephanierobin
   - neoformit
+  editing:
+  - Swathi266
   funding:
   - gallantries
 
@@ -148,12 +151,19 @@ It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGC
 >
 > 1. Which ASCII character corresponds to the worst Phred score for Illumina 1.8+?
 > 2. What is the Phred quality score of the 3rd nucleotide of the 1st sequence?
-> 3. What is the accuracy of this 3rd nucleotide?
+> 3. How to calculate the accuracy of the nucleotide base with the ASCII code `/`?
+> 4. What is the accuracy of this 3rd nucleotide?
 >
 > > <solution-title></solution-title>
 > > 1. The worst Phred score is the smallest one, so 0. For Illumina 1.8+, it corresponds to the `!` character.
 > > 2. The 3rd nucleotide of the 1st sequence has a ASCII character `G`, which correspond to a score of 38.
-> > 3. The corresponding nucleotide `G` has an accuracy of almost 99.99%
+> > 3. This can be calculated as follows:
+> >    - ASCII code for `/` is 47
+> >    - Quality score = 47-33=14
+> >    - Formula to find the probability of error: \\(P = 10^{-Q/10}\\)
+> >    - Probability of error = \\(10^{-14/10}\\) = 0.03981
+> >    - Therefore Accuracy = 100 - 0.03981 = 99.96%
+> > 4. The corresponding nucleotide `G` has an accuracy of almost 99.96%
 > >
 > {: .solution }
 {: .question}

@@ -1,0 +1,138 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "An earth-system RO-Crate"
+video: true
+questions:
+  - "How to generate a RO-Crate"
+  - "How to follow a Marine Omics study"
+  - "How to read a RO-Crate ?"
+objectives:
+  - "Understand RO-Crate in an earth-system context"
+time_estimation: 1H
+tags:
+  - earth-system
+  - ro-crate
+  - ocean
+  - marine omics
+key_points:
+  - "RO-Crate in earth-system analysis"
+  - "Marine omics workflow "
+contributions:
+  authorship:
+    - Marie59
+  funding:
+    - fairease
+    - eurosciencegateway
+---
+
+# Workflow context
+
+The workflow used as an example here goes from :
+- First, produce a protein FASTA file from a nucleotide FASTA file using ({% tool [Prodigal](tool_id=toolshed.g2.bx.psu.edu/repos/iuc/prodigal/prodigal/2.6.3+galaxy0) %}) (a tool that predicts protein-coding genes from DNA sequences).
+- Then, use ({% tool [InterProscan](toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.59-91.0+galaxy3) %}) to create a tabular. Interproscan is a batch tool to query the InterPro database. It helps identify and predict the functions of proteins by comparing them to known databases.
+- Finally, discover ({% tool [SanntiS](toolshed.g2.bx.psu.edu/repos/ecology/sanntis_marine/sanntis_marine/0.9.3.5+galaxy1) %}) both to build genbank and especially to detect and annotate biosynthetic gene clusters (BGCs).
+---
+
+## The workflow itself
+
+<iframe title="Galaxy Workflow Embed" style="width: 100%; height: 700px; border: none;" src="https://earth-system.usegalaxy.eu/published/workflow?id=b9c938d1af08124b&embed=true&buttons=true&about=false&heading=false&minimap=true&zoom_controls=true&initialX=-20&initialY=-20&zoom=1"></iframe>
+---
+
+## Run the workflow
+
+Import and run the [Biosynthetic Gene Clusters workflow](https://earth-system.usegalaxy.eu/u/marie.josse/w/marine-omics-identifying-biosynthetic-gene-clusters)
+
+To know more on how to do that follow the [tutorial]({% link topics/ecology/tutorials/marine_omics_bgc/tutorial.md %})
+---
+
+
+## Generate the RO-Crate 
+
+Once you run the workflow you can generate the RO-Crate. To do so follow the [tutorial]({% link topics/fair/tutorials/ro-crate-in-galaxy/tutorial.md %})
+---
+
+
+### From workflow to RO-Crate 
+
+![From workflow to RO-Crate](./images/workflow_rocrate.png)
+---
+
+### The RO-Crate folder and architecture
+
+![From workflow to RO-Crate](./images/all_tree_structure.png)
+---
+
+### Let's dive into the ro-crate-metadata.json
+
+![Date of RO-Crate creation and other informations](./images/rocrate1.png)
+---
+
+### Description of the RO-Crate structure
+
+![Description of the RO-Crate structure](./images/rocrate2.png)
+---
+
+### Galaxy Provenance
+
+![Date of RO-Crate creation and other informations](./images/rocrate3.png)
+---
+
+### Title and workflow details
+
+![Title and details of the workflow](./images/rocrate4.png)
+---
+
+### Dates 
+
+![Dates of running the workflow and creation of the RO-Crate](./images/rocrate5.png)
+---
+
+### Data
+
+![Data uploaded for the workflow and produced by it](./images/rocrate6.png)
+---
+
+### First tool Prodigal 
+
+![Details on Prodigal](./images/rocrate7.png)
+---
+
+### Second tool Regex Find and Replace
+
+![Details on Regex Find and Replace](./images/rocrate8.png)
+---
+
+### Third tool InterProScan 
+
+![Details on InterProScan](./images/rocrate9.png)
+---
+
+### Fourth tool SanntiS to build Genbank
+
+![Details on SanntiS to build Genbank](./images/rocrate10.png)
+---
+
+### Fourth tool SanntiS to annotate biosynthetic gene clusters
+
+![Details on SanntiS to annotate biosynthetic gene clusters](./images/rocrate11.png)
+---
+
+### Details on the different files in the RO-Crate
+
+![Details on the different files in the RO-Crate](./images/rocrate12.png)
+---
+
+### End of the ro-crate-metadata.json
+
+![Details on the different files in the RO-Crate and end of the ro-crate-metadata.json](./images/rocrate13.png)
+---
+
+### Thank you!
+
+Try to do the same on your workflow!
+
+
+
+
