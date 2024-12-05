@@ -1,0 +1,384 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Structural genome annotation with Helixer",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "https://orcid.org/0009-0001-4920-9951",
+            "name": "Romane Libouban"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Training - Helixer",
+    "steps": {
+        "0": {
+            "annotation": "Genome input (fasta format)",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Genome input (fasta format)",
+                    "name": "Genome"
+                }
+            ],
+            "label": "Genome",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0.0,
+                "top": 393.5426496082689
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "332fb9cd-3819-4e81-8aa5-c6cc6fbda4f7",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Structural annotation step",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/genouest/helixer/helixer/0.3.3+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Helixer",
+                    "name": "input"
+                }
+            ],
+            "label": "Helixer",
+            "name": "Helixer",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 495.6559490752344,
+                "top": 126.52477912175132
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/genouest/helixer/helixer/0.3.3+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e3846dc36c4d",
+                "name": "helixer",
+                "owner": "genouest",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"lineages\": \"fungi\", \"option_overlap\": {\"use_overlap\": \"true\", \"__current_case__\": 0, \"overlap_offset\": null, \"overlap_core_length\": null}, \"post_processing\": {\"window_size\": \"100\", \"edge_threshold\": \"0.1\", \"peak_threshold\": \"0.8\", \"min_coding_length\": \"100\"}, \"size\": \"8\", \"species\": null, \"subsequence_length\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.3+galaxy1",
+            "type": "tool",
+            "uuid": "c151bbb2-deb9-4fb6-a047-7a92ede3171a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Helixer",
+                    "output_name": "output",
+                    "uuid": "9ebeb90d-1528-494c-a88d-50f28836d7c7"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Compleam is described as a faster and more accurate reimplementation of Busco.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/compleasm/compleasm/0.2.5+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "compleasm",
+            "name": "compleasm",
+            "outputs": [
+                {
+                    "name": "full_table_busco",
+                    "type": "tsv"
+                },
+                {
+                    "name": "full_table",
+                    "type": "tsv"
+                },
+                {
+                    "name": "miniprot",
+                    "type": "gff3"
+                },
+                {
+                    "name": "translated_protein",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 677.3732598347183,
+                "top": 639.0246967831238
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/compleasm/compleasm/0.2.5+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "47f9f4d13d2c",
+                "name": "compleasm",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"busco_database\": \"v5\", \"chromInfo\": \"/shared/ifbstor1/galaxy/mutable-config/tool-data/shared/ucsc/chrom/?.len\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"lineage_dataset\": \"mucorales_odb10\", \"mode\": \"busco\", \"outputs\": [\"full_table_busco\", \"full_table\", \"miniprot\", \"translated_protein\"], \"specified_contigs\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.2.5+galaxy0",
+            "type": "tool",
+            "uuid": "e95adff9-488d-41af-b55c-c137ab9667cf",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "compleasm miniprot",
+                    "output_name": "miniprot",
+                    "uuid": "e0d3aa0b-d18b-41af-a6fc-28a8688fe9a5"
+                },
+                {
+                    "label": "compleasm full table",
+                    "output_name": "full_table",
+                    "uuid": "93b908a5-e39f-4cfb-84c3-edf4ab8b71cf"
+                },
+                {
+                    "label": "compleasm full table busco",
+                    "output_name": "full_table_busco",
+                    "uuid": "7c9cb7e2-dfac-4aa1-b87d-f6a2eb7e21a5"
+                },
+                {
+                    "label": "compleasm translated protein",
+                    "output_name": "translated_protein",
+                    "uuid": "9215afe6-4aad-4d43-a3a1-c2c5ab0ea1e2"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "BSUCO assesses the quality of genomic data. The tool inspects the transcription sequences of predicted genes.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Busco",
+                    "name": "input"
+                }
+            ],
+            "label": "BUSCO",
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "busco_missing",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                },
+                {
+                    "name": "busco_gff",
+                    "type": "gff3"
+                },
+                {
+                    "name": "busco_miniprot",
+                    "type": "gff3"
+                }
+            ],
+            "position": {
+                "left": 948.5586447752132,
+                "top": 415.14516016871283
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.5.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "ea8146ee148f",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\", \"contig_break\": \"10\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"miniprot\": true, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"mucorales_odb10\"}, \"lineage_conditional\": {\"selector\": \"download\", \"__current_case__\": 1}, \"outputs\": [\"short_summary\", \"missing\", \"image\", \"gff\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.5.0+galaxy0",
+            "type": "tool",
+            "uuid": "af725f3e-ee5a-485b-af11-d87a8ecf9aeb",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "BUSCO sum",
+                    "output_name": "busco_sum",
+                    "uuid": "703a797f-428b-4c41-984f-1283bb8eecaa"
+                },
+                {
+                    "label": "BUSCO miniprot",
+                    "output_name": "busco_miniprot",
+                    "uuid": "e3879637-613a-45cf-90a0-3eecab2e0981"
+                },
+                {
+                    "label": "BUSCO gff3",
+                    "output_name": "busco_gff",
+                    "uuid": "acbfdee0-cafd-46e8-81e9-8a1fd22ee758"
+                },
+                {
+                    "label": "BUSCO summary image",
+                    "output_name": "summary_image",
+                    "uuid": "5574f029-f31d-4d20-a847-4d1818f95707"
+                },
+                {
+                    "label": "BUSCO missing",
+                    "output_name": "busco_missing",
+                    "uuid": "b19bfb5f-901f-4568-a461-53bfc980bdcc"
+                },
+                {
+                    "label": "BUSCO table",
+                    "output_name": "busco_table",
+                    "uuid": "0ba757ff-6c1b-496b-a288-335369058923"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "Calculate statistics from a genome annotation in GFF3 format",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "gff": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "ref_genome|genome": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Genome annotation statistics",
+                    "name": "gff"
+                },
+                {
+                    "description": "runtime parameter for tool Genome annotation statistics",
+                    "name": "ref_genome"
+                }
+            ],
+            "label": "Genome annotation statistics Helixer",
+            "name": "Genome annotation statistics",
+            "outputs": [
+                {
+                    "name": "summary",
+                    "type": "txt"
+                },
+                {
+                    "name": "graphs",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "left": 1011.9681945236466,
+                "top": 0.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4",
+            "tool_shed_repository": {
+                "changeset_revision": "8cffbd184762",
+                "name": "jcvi_gff_stats",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"gff\": {\"__class__\": \"RuntimeValue\"}, \"ref_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.8.4",
+            "type": "tool",
+            "uuid": "64572fdd-797c-44e9-8662-2ae4d51528c1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "graphs helixer",
+                    "output_name": "graphs",
+                    "uuid": "a445f12b-685d-47af-b407-90fa7ea935b1"
+                },
+                {
+                    "label": "summary helixer",
+                    "output_name": "summary",
+                    "uuid": "8eae8a88-c73d-42dc-ad0d-62d2f1d29c6a"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "Visualization",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "reference_genome|genome": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool JBrowse",
+                    "name": "reference_genome"
+                }
+            ],
+            "label": "JBrowse",
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 1175.5063439719256,
+                "top": 231.38681642718768
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6e57ff585c0",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"gencode\": \"1\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": true, \"aboutDescription\": \"\", \"show_tracklist\": true, \"show_nav\": true, \"show_overview\": true, \"show_menu\": true, \"hideGenomeOptions\": false}, \"plugins\": {\"BlastView\": true, \"ComboTrackSelector\": false, \"GCContent\": false}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": {\"__class__\": \"RuntimeValue\"}}, \"standalone\": \"minimal\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Annotation\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"RuntimeValue\"}, \"match_part\": {\"match_part_select\": false, \"__current_case__\": 1}, \"index\": false, \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": null}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.11+galaxy1",
+            "type": "tool",
+            "uuid": "f77404b0-6e49-4951-9553-65ef0a24499a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "JBrowse output",
+                    "output_name": "output",
+                    "uuid": "2bac35a7-8379-4269-9769-e0e0c541f4a3"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "d2fa1512-57c4-4f45-85fe-4d4bfe801f7a",
+    "version": 3
+}

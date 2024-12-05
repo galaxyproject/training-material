@@ -24,7 +24,6 @@ tags:
   - Biodiversity
   - FAIR
   - Data Paper
-draft: true
 contributions:
     authorship:
         - yvanlebras
@@ -37,6 +36,7 @@ contributions:
         - fnso2019
         - pndb
 
+subtopic: ecologymetadatamgt
 ---
 
 
@@ -167,7 +167,7 @@ Then you can add final elements as:
 > **You can add [semantic annotations](https://eml.ecoinformatics.org/semantic-annotation-primer)!**
 > 
 >  
-> <p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can 1/ register here http://cedar.metadatacenter.org/ then 2/ go on the "profile" on http://cedar.metadatacenter.org/ and there 3/ you can find the API key.</p>
+> <p align="justify"> To do so, you need to reach the MetaShARK parameters (upper right icon) then enter your CEDAR token. To create a CEDAR account, you can 1/ register here http://cedar.metadatacenter.org/ then 2/ go on the "profile" on https://cedar.metadatacenter.org/ and there 3/ you can find the API key.</p>
 > 
 >  API key format to enter is something like: 
 > ```

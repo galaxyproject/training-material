@@ -23,8 +23,19 @@ contributors:
 - wm75
 - hexylena
 - shiltemann
+level: Advanced
 tags:
 - cyoa
+
+
+recordings:
+- youtube_id: 3OWXWOkJRqU
+  speakers:
+  - JasperO98
+  captioners:
+  - JasperO98
+  date: '2023-05-12'
+  length: 40M
 
 ---
 

@@ -4,39 +4,27 @@
     "comments": [
         {
             "child_steps": [
-                2,
-                5
+                11,
+                17,
+                25,
+                14,
+                23,
+                24
             ],
             "color": "green",
             "data": {
-                "title": "Trimming to retain samples reads quality"
+                "title": "Creating a table for samples reads count before and after hosts sequences removal and the percentage of found hosts sequences"
             },
-            "id": 1,
+            "id": 7,
             "position": [
-                294,
-                474
+                2025.8999999999999,
+                798.6999999999999
             ],
             "size": [
-                498,
-                346.8
+                1403,
+                223
             ],
             "type": "frame"
-        },
-        {
-            "color": "lime",
-            "data": {
-                "text": "In this workflow, we recommend nanopore samples since we are using some tools that are specified for nanopore such as: Minimap2, Nanoplot porechp and fastp.\n\nIn order to switch to illumina please remove the nanoplot step, replace porechop and fastp with cutadapt or trimmomatic, and finally replace Minimap2 with  Bowtie2.\n\nThis workflow also take single-end reads to switch to paired-end, you have to check this option in most of the tools used. "
-            },
-            "id": 0,
-            "position": [
-                294.3,
-                145.60000000000002
-            ],
-            "size": [
-                460,
-                228
-            ],
-            "type": "markdown"
         },
         {
             "child_steps": [
@@ -71,12 +59,12 @@
             },
             "id": 5,
             "position": [
-                890.2,
-                918.9
+                892.1,
+                911.2
             ],
             "size": [
-                571.2,
-                785.3
+                569.3,
+                815
             ],
             "type": "frame"
         },
@@ -92,12 +80,12 @@
             },
             "id": 4,
             "position": [
-                292,
-                923.4
+                293,
+                915.4
             ],
             "size": [
-                521,
-                780
+                520,
+                810
             ],
             "type": "frame"
         },
@@ -141,34 +129,46 @@
                 0
             ],
             "size": [
-                1688.1,
-                294.5
+                1772,
+                293
             ],
             "type": "frame"
         },
         {
             "child_steps": [
-                11,
-                17,
-                25,
-                14,
-                23,
-                24
+                2,
+                5
             ],
             "color": "green",
             "data": {
-                "title": "Creating a table for samples reads count before and after hosts sequences removal and the percentage of found hosts sequences"
+                "title": "Trimming to retain samples reads quality"
             },
-            "id": 7,
+            "id": 1,
             "position": [
-                2025.8999999999999,
-                798.6999999999999
+                294,
+                474
             ],
             "size": [
-                1403,
-                223
+                498,
+                346.8
             ],
             "type": "frame"
+        },
+        {
+            "color": "lime",
+            "data": {
+                "text": "In this workflow, we recommend nanopore samples since we are using some tools that are specified for nanopore such as: Minimap2, Nanoplot porechp and fastp.\n\nIn order to switch to illumina please remove the nanoplot step, replace porechop and fastp with cutadapt or trimmomatic, and finally replace Minimap2 with  Bowtie2.\n\nThis workflow also take single-end reads to switch to paired-end, you have to check this option in most of the tools used. "
+            },
+            "id": 0,
+            "position": [
+                294.3,
+                145.60000000000002
+            ],
+            "size": [
+                460,
+                228
+            ],
+            "type": "markdown"
         }
     ],
     "creator": [
@@ -334,8 +334,8 @@
                 }
             ],
             "position": {
-                "left": 312,
-                "top": 963.4027630516179
+                "left": 314,
+                "top": 955.4031261035689
             },
             "post_job_actions": {
                 "RenameDatasetActionlog_read_length": {
@@ -388,6 +388,11 @@
             "when": null,
             "workflow_outputs": [
                 {
+                    "label": "nanoplot_qc_on_reads_before_preprocessing_nanostats",
+                    "output_name": "nanostats",
+                    "uuid": "15ecf5b1-e0eb-405a-ac3a-359feb66d4cd"
+                },
+                {
                     "label": "nanoplot_on_reads_before_preprocessing_nanostats_post_filtering",
                     "output_name": "nanostats_post_filtering",
                     "uuid": "304110f9-60d0-4ba2-8b3b-fae0e2a49554"
@@ -396,11 +401,6 @@
                     "label": "nanoplot_qc_on_reads_before_preprocessing_html_report",
                     "output_name": "output_html",
                     "uuid": "f2bd0a1f-cd60-4a36-a7d0-8025cc19ea2e"
-                },
-                {
-                    "label": "nanoplot_qc_on_reads_before_preprocessing_nanostats",
-                    "output_name": "nanostats",
-                    "uuid": "15ecf5b1-e0eb-405a-ac3a-359feb66d4cd"
                 }
             ]
         },
@@ -459,6 +459,13 @@
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "text_file"
+                },
+                "TagDatasetActionhtml_file": {
+                    "action_arguments": {
+                        "tags": "FastQC_Before_Preprocessing_HTM"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "html_file"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
@@ -516,8 +523,8 @@
                 }
             ],
             "position": {
-                "left": 572,
-                "top": 513.9721887008918
+                "left": 575,
+                "top": 505.969807011772
             },
             "post_job_actions": {
                 "RenameDatasetActionout1": {
@@ -532,6 +539,13 @@
                         "newname": "nanopore_sequenced_reads_processed_with_fastp_after_host_removal_html_report"
                     },
                     "action_type": "RenameDatasetAction",
+                    "output_name": "report_html"
+                },
+                "TagDatasetActionreport_html": {
+                    "action_arguments": {
+                        "tags": "fastp_HTML"
+                    },
+                    "action_type": "TagDatasetAction",
                     "output_name": "report_html"
                 }
             },
@@ -602,6 +616,13 @@
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "stats"
+                },
+                "TagDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "tags": "MultiQC_Before_Preprocessing_HTML"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "html_report"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
@@ -618,14 +639,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "multiQC_html_report_before_preprocessing",
-                    "output_name": "html_report",
-                    "uuid": "0f92196d-047d-4918-819d-c0ff7cd3ae85"
-                },
-                {
                     "label": "multiQC_stats_before_preprocessing",
                     "output_name": "stats",
                     "uuid": "ebffe782-a56c-431f-8af4-c0cb8d7a02fc"
+                },
+                {
+                    "label": "multiQC_html_report_before_preprocessing",
+                    "output_name": "html_report",
+                    "uuid": "0f92196d-047d-4918-819d-c0ff7cd3ae85"
                 }
             ]
         },
@@ -663,8 +684,8 @@
                 }
             ],
             "position": {
-                "left": 906.0314896173257,
-                "top": 55.860022459943664
+                "left": 895.0333251953125,
+                "top": 55.86977039067824
             },
             "post_job_actions": {
                 "RenameDatasetActionalignment_output": {
@@ -724,8 +745,8 @@
                 }
             ],
             "position": {
-                "left": 910.1959411446596,
-                "top": 958.9066643599034
+                "left": 914.2000122070312,
+                "top": 951.2031138965376
             },
             "post_job_actions": {
                 "RenameDatasetActionlog_read_length": {
@@ -783,14 +804,14 @@
                     "uuid": "b5899290-4c57-4662-ad22-860654652ade"
                 },
                 {
-                    "label": "nanoplot_qc_on_reads_after_preprocessing_nanostats",
-                    "output_name": "nanostats",
-                    "uuid": "42db7f93-919e-4bbb-81a1-06411a9da410"
-                },
-                {
                     "label": "nanoplot_on_reads_after_preprocessing_nanostats_post_filtering",
                     "output_name": "nanostats_post_filtering",
                     "uuid": "949bfdf5-3d79-4dad-bdd8-c3a25e6af4cf"
+                },
+                {
+                    "label": "nanoplot_qc_on_reads_after_preprocessing_nanostats",
+                    "output_name": "nanostats",
+                    "uuid": "42db7f93-919e-4bbb-81a1-06411a9da410"
                 }
             ]
         },
@@ -849,6 +870,13 @@
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "text_file"
+                },
+                "TagDatasetActionhtml_file": {
+                    "action_arguments": {
+                        "tags": "FastQC_After_Preprocessing_HTML"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "html_file"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.74+galaxy0",
@@ -901,8 +929,8 @@
                 }
             ],
             "position": {
-                "left": 1132.9258865960498,
-                "top": 48.92628195373835
+                "left": 1109.933349609375,
+                "top": 59.936451298881366
             },
             "post_job_actions": {
                 "RenameDatasetActionmapped": {
@@ -934,14 +962,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "host_sequences_bam",
-                    "output_name": "mapped",
-                    "uuid": "3b1e626f-6bc1-484c-be01-366534361b73"
-                },
-                {
                     "label": "non_host_sequences_bam",
                     "output_name": "unmapped",
                     "uuid": "14a53fe2-f296-43aa-86b7-243278c1050c"
+                },
+                {
+                    "label": "host_sequences_bam",
+                    "output_name": "mapped",
+                    "uuid": "3b1e626f-6bc1-484c-be01-366534361b73"
                 }
             ]
         },
@@ -1013,8 +1041,8 @@
                 }
             ],
             "position": {
-                "left": 1361.5906451294316,
-                "top": 45.38566689542016
+                "left": 1331.5833129882812,
+                "top": 44.38643298833449
             },
             "post_job_actions": {
                 "ChangeDatatypeActionoutput": {
@@ -1172,8 +1200,8 @@
                 }
             ],
             "position": {
-                "left": 1488,
-                "top": 172
+                "left": 1516,
+                "top": 176.0031322070845
             },
             "post_job_actions": {},
             "tool_id": "__FILTER_FAILED_DATASETS__",
@@ -1343,8 +1371,8 @@
                 }
             ],
             "position": {
-                "left": 1709.433349609375,
-                "top": 28.41668701171875
+                "left": 1766.433349609375,
+                "top": 33.419788701225116
             },
             "post_job_actions": {
                 "RenameDatasetActionhtml_file": {
@@ -1421,8 +1449,8 @@
                 }
             ],
             "position": {
-                "left": 1896.4151368086827,
-                "top": 454.89742134783603
+                "left": 1897.4166870117188,
+                "top": 442.90312610356887
             },
             "post_job_actions": {
                 "RenameDatasetActionoutput_1": {
@@ -1430,6 +1458,13 @@
                         "newname": "collection_of_preprocessed_samples"
                     },
                     "action_type": "RenameDatasetAction",
+                    "output_name": "output_1"
+                },
+                "TagDatasetActionoutput_1": {
+                    "action_arguments": {
+                        "tags": "collection_of_preprocessed_samples"
+                    },
+                    "action_type": "TagDatasetAction",
                     "output_name": "output_1"
                 }
             },
@@ -1474,8 +1509,8 @@
                 }
             ],
             "position": {
-                "left": 1925.4666748046875,
-                "top": 40.866668701171875
+                "left": 1985.4666748046875,
+                "top": 32.86977039067824
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1521,8 +1556,8 @@
                 }
             ],
             "position": {
-                "left": 2136.9000244140625,
-                "top": 50.01666259765625
+                "left": 2199.9000244140625,
+                "top": 38.01979480474074
             },
             "post_job_actions": {},
             "tool_id": "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0",
@@ -1560,8 +1595,8 @@
                 }
             ],
             "position": {
-                "left": 2354.113604572875,
-                "top": 54.17820869704319
+                "left": 2434.11669921875,
+                "top": 40.186451298881366
             },
             "post_job_actions": {
                 "RenameDatasetActionout_file1": {
@@ -1701,6 +1736,13 @@
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "out_file1"
+                },
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "removed_hosts_percentage_tabular"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.3",
@@ -1769,6 +1811,13 @@
                     },
                     "action_type": "RenameDatasetAction",
                     "output_name": "stats"
+                },
+                "TagDatasetActionhtml_report": {
+                    "action_arguments": {
+                        "tags": "MultiQC_After_Preprocessing_HTML"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "html_report"
                 }
             },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1",
@@ -1785,14 +1834,14 @@
             "when": null,
             "workflow_outputs": [
                 {
-                    "label": "multiQC_stats_after_preprocessing",
-                    "output_name": "stats",
-                    "uuid": "13cbf6c7-6954-4458-aa66-a5b020c63822"
-                },
-                {
                     "label": "multiQC_html_report_after_preprocessing",
                     "output_name": "html_report",
                     "uuid": "0b1b5a73-36ee-42a2-a220-1ced6ec7378b"
+                },
+                {
+                    "label": "multiQC_stats_after_preprocessing",
+                    "output_name": "stats",
+                    "uuid": "13cbf6c7-6954-4458-aa66-a5b020c63822"
                 }
             ]
         }
@@ -1804,6 +1853,6 @@
         "name:Nanopore",
         "name:IWC"
     ],
-    "uuid": "688c0ce8-11ec-4db2-94d9-70bb6a0f31aa",
-    "version": 176
+    "uuid": "188d6f86-3bbf-4dfb-9451-74d8448592e1",
+    "version": 181
 }

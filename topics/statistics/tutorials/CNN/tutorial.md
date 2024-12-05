@@ -1,6 +1,5 @@
 ---
 layout: tutorial_hands_on
-
 title: Deep Learning (Part 3) - Convolutional neural networks (CNN)
 zenodo_link: https://zenodo.org/record/4697906
 questions:
@@ -10,20 +9,40 @@ objectives:
 - Understand the inspiration behind CNN and learn the CNN architecture
 - Learn the convolution operation and its parameters
 - Learn how to create a CNN using Galaxy's deep learning tools
-- Solve an image classification problem on MNIST digit classification dataset using CNN in Galaxy
+- Solve an image classification problem on MNIST digit classification dataset using
+  CNN in Galaxy
 requirements:
-  -
-    type: internal
-    topic_name: statistics
-    tutorials:
-      - intro_deep_learning
-      - FNN
-      - RNN
+- type: internal
+  topic_name: statistics
+  tutorials:
+  - intro_deep_learning
+  - FNN
+  - RNN
 time_estimation: 2H
 contributors:
 - kxk302
+recordings:
+- captioners:
+  - FilipposZ
+  date: '2021-02-15'
+  galaxy_version: '21.01'
+  length: 1H
+  youtube_id: P1NVYOJrv_4
+  speakers:
+  - kxk302
+- youtube_id: vp6YF2NRIZk
+  length: 45M
+  galaxy_version: 24.1.3.dev0
+  date: '2024-10-05'
+  speakers:
+  - hujambo-dunia
+  captioners:
+  - hujambo-dunia
+  bot-timestamp: 1728137291
+
 
 ---
+
 
 
 Artificial neural networks are a machine learning discipline that have been successfully applied to problems
@@ -159,7 +178,7 @@ $$ \frac{(\text{input size} - \text{(filter size + (filter size -1)*(dilation - 
 
 Figure 7 illustrates the calculations for a convolution operation, via a 3 by 3 filter on a single channel 5 by 5 input vector (5 x 5 x 1). Figure 8
 illustrates the calculations when the input vector has 3 channels (5 x 5 x 3). To show this in 2 dimensions, we are displaying each channel in input
-vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions. 
+vector and filter separately. Figure 9 shows a sample multi-channel 2D convolution in 3 dimensions.
 
 ![Three matrices representing an input vector and another three matrices representing a filter, along with calculation for multiple input channel two dimensional convolution operation ](../../images/Conv_multiple_input_channel.png "Illustration of multiple input channel two dimensional convolution")
 
@@ -210,7 +229,7 @@ to compare various Machine Learning techniques.
 >    >
 >    > * Click on the title of the history (by default the title is `Unnamed history`)
 >    >
->    >   ![Renaming history](../../../../shared/images/rename_history.png)
+>    >   ![Renaming history]({% link shared/images/rename_history.png %})
 >    >
 >    > * Type `Galaxy Introduction` as the name
 >    > * Press <kbd>Enter</kbd>
@@ -347,7 +366,7 @@ The model builder can be downloaded as a zip file.
 >    - *"Select input type:"*: `tabular data`
 >        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
+>        - *"Dataset containing class labels or target values"*: `To categorical on y_train` (the output of the first step)
 >        - *"Choose how to select data by column:"*: `All columns`
 >    - Click *"Run Tool"*
 >

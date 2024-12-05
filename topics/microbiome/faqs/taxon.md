@@ -4,8 +4,7 @@ area: format
 box_type: details
 layout: faq
 contributors: [bebatut]
-redirect_from:
-- /topics/metagenomics/faqs/taxon
+redirect_from: [/topics/metagenomics/faqs/taxon]
 ---
 
 Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, DNA data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.
