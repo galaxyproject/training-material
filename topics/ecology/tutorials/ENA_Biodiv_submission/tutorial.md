@@ -83,7 +83,7 @@ The goal is to present an accessible and reproductible workflow for data submiss
 >
 > {% snippet faqs/galaxy/workflows_run.md %}
 >
-> ![Data submission Workflow](./images/image7.PNG)
+> This workflow takes as input ab1 sequences fles and produce filtered FastQ and Fasta files so sequences passing the quality checks are compared to NCBI nucleotidic database using Blastn operation.
 {: .hands_on}
 
 ## Tools used in the "Prepare Data submission" Workflow
