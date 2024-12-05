@@ -109,8 +109,9 @@ end
 
 # Linting functions for the GTN
 module GtnLinter
-  @BAD_TOOL_LINK = /{% tool (\[[^\]]*\])\(https?.*tool_id=([^)]*)\)\s*%}/i
-  @BAD_TOOL_LINK2 = %r{{% tool (\[[^\]]*\])\(https://toolshed.g2([^)]*)\)\s*%}}i
+  @BAD_TOOL_LINK = /{% tool (\[[^\]]*\])\(\s*https?.*tool_id=([^)]*)\)\s*%}/i
+  @BAD_TOOL_LINK2 = %r{{% tool (\[[^\]]*\])\(\s*https://toolshed.g2([^)]*)\)\s*%}}i
+  @MAYBE_OK_TOOL_LINK = /{% tool (\[[^\]]*\])\(([^)]*)\)\s*%}/i
 
   def self.find_matching_texts(contents, query)
     contents.map.with_index do |text, idx|
@@ -394,6 +395,24 @@ module GtnLinter
           code: 'GTN:009'
         )
       end
+
+    find_matching_texts(contents, @MAYBE_OK_TOOL_LINK)
+      .map do |idx, _text, selected|
+
+        if acceptable_tool?(selected[2])
+          next
+        end
+
+        ReviewDogEmitter.error(
+          path: @path,
+          idx: idx,
+          match_start: selected.begin(0),
+          match_end: selected.end(0) + 1,
+          replacement: "{% tool #{selected[1]}(#{selected[2]}) %}",
+          message: 'You have used an invalid tool URL, it should be of the form "toolshed.g2.bx.psu.edu/repos/{owner}/{repo}/{tool}/{version}" (or an internal tool ID) so, please double check.',
+          code: 'GTN:009'
+        )
+      end
   end
 
   def self.bad_zenodo_links(contents)
@@ -432,35 +451,6 @@ module GtnLinter
     end
     res
   end
-
-  ALLOWED_SHORT_IDS = [
-    'ChangeCase',
-    'Convert characters1',
-    'Count1',
-    'Cut1',
-    'Extract_features1',
-    'Filter1',
-    'Grep1',
-    'Grouping1',
-    'Paste1',
-    'Remove beginning1',
-    'Show beginning1',
-    'Summary_Statistics1',
-    'addValue',
-    'cat1',
-    'comp1',
-    'gene2exon1',
-    'gff2bed1',
-    'intermine',
-    'join1',
-    'param_value_from_file',
-    'random_lines1',
-    'sort1',
-    # 'ucsc_table_direct1', # This does not work, surprisingly.
-    'upload1',
-    'wc_gnu',
-    'wig_to_bigWig'
-  ].freeze
 
   def self.check_tool_link(contents)
     find_matching_texts(contents, /{%\s*tool \[([^\]]*)\]\(([^)]*)\)\s*%}/)
@@ -506,11 +496,8 @@ module GtnLinter
                     ))
         end
 
-        if !ALLOWED_SHORT_IDS.include?(link) &&
-           !link.match(/^interactive_tool_/) &&
-           !link.match(/__[A-Z_]+__/) &&
-           !link.match(/^{{.*}}$/) &&
-           !link.match(/^CONVERTER_/)
+
+        if !acceptable_tool?(link)
           errs.push(ReviewDogEmitter.error(
                       path: @path,
                       idx: idx,
@@ -1052,6 +1039,28 @@ module GtnLinter
                    ))
     end
 
+    tool_ids = tool_id_extractor(contents)
+
+    # Check if they use TS tools, we do this here because it's easier to look at the plain text.
+    tool_ids.each do |step_id, id|
+      if ! acceptable_tool?(id)
+        results += [
+          ReviewDogEmitter.error(
+            path: @path,
+            idx: 0,
+            match_start: 0,
+            match_end: 0,
+            replacement: nil,
+            message: "A step in your workflow (#{step_id}) uses an invalid tool ID (#{id}) or a tool ID from the testtoolshed. These are not permitted in GTN tutorials. If this is in error, you can add it to the top of _plugins/utils.rb",
+            code: 'GTN:017'
+          )
+        ]
+      end
+    end
+
+
+
+
     if contents.key?('creator')
       contents['creator']
         .select { |c| c['class'] == 'Person' }
@@ -1303,6 +1312,9 @@ module GtnLinter
           test = YAML.safe_load(File.open(test_file))
           test_plain = File.read(test_file)
           # check that for each test, the outputs is non-empty
+          unless test.is_a?(Array)
+            next
+          end
           test.each do |test_job|
             if (test_job['outputs'].nil? || test_job['outputs'].empty?) && !test_plain.match(/GTN_RUN_SKIP_REASON/)
               results += [
@@ -1320,22 +1332,6 @@ module GtnLinter
 
       end
 
-      # Check if they use TS tools, we do this here because it's easier to look at the plain text.
-      contents.split("\n").each.with_index do |text, linenumber|
-        if text.match(/testtoolshed/)
-          results += [
-            ReviewDogEmitter.error(
-              path: @path,
-              idx: linenumber,
-              match_start: 0,
-              match_end: text.length,
-              replacement: nil,
-              message: 'This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.',
-              code: 'GTN:017'
-            )
-          ]
-        end
-      end
       results += fix_ga_wf(data)
 
       results = filter_results(results, ignores)

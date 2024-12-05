@@ -6,8 +6,10 @@ require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 require './_plugins/gtn/git'
+require './_plugins/gtn/hooks'
 require './_plugins/gtn/ro-crate'
 require './_plugins/gtn'
+require './_plugins/util'
 
 ##
 # Use Jekyll's Markdown converter to convert text to HTML
@@ -300,17 +302,6 @@ module Jekyll
       page2.data['layout'] = nil
       site.pages << page2
 
-      # Not really an API
-      TopicFilter.list_materials_by_tool(site).each do |tool, tutorials|
-        page2 = PageWithoutAFile.new(site, '', 'by-tool/', "#{tool.gsub('%20', ' ')}.html")
-        page2.content = nil
-        page2.data['layout'] = 'by_tool'
-        page2.data['short_tool'] = tool
-        page2.data['observed_tool_ids'] = tutorials['tool_id']
-        page2.data['tutorial_list'] = tutorials['tutorials']
-        site.pages << page2
-      end
-
       # GA4GH TRS Endpoint
       # Please note that this is all a fun hack
       TopicFilter.list_all_materials(site).select { |m| m['workflows'] }.each do |material|
@@ -346,6 +337,11 @@ module Jekyll
       end
     end
   end
+end
+
+
+Jekyll::Hooks.register :site, :post_read do |site|
+  Gtn::Hooks.by_tool(site)
 end
 
 # Basically like `PageWithoutAFile`, we just write out the ones we'd created earlier.

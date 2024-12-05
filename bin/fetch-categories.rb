@@ -26,10 +26,9 @@ end
 
 # Parse the response
 toolcats_eu = fetch_toolcats('https://usegalaxy-eu.github.io/usegalaxy-eu-tools/api/labels.json')
-# toolcats_eu = File.open('/tmp/tmp.ccFYsrbAa5/usegalaxy-eu-tools/api/labels.json') { |f| YAML.safe_load(f) }
 toolcats_org = fetch_toolcats('https://galaxyproject.github.io/usegalaxy-tools/api/labels.json')
 toolcats_aus = fetch_toolcats('https://usegalaxy-au.github.io/usegalaxy-au-tools/api/labels.json')
-# toolcats_aus = File.open('/tmp/tmp.ccFYsrbAa5/usegalaxy-au-tools/api/labels.json') { |f| YAML.safe_load(f) }
+
 tool_ids = (toolcats_org.keys + toolcats_eu.keys + toolcats_aus.keys).uniq
 # tool_ids = toolcats_org.keys
 tool_ids.sort!
