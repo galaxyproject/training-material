@@ -403,9 +403,6 @@ We've prepared two workflows which split the above analysis into two steps:
 
 You can use the variant calling workflow to call variants using the SSCS instead of the DCS.
 
-![Du Novo workflow](../../images/workflow-dunovo.png "Workflow 1: Making consensus sequences")
-
-![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png "Workflow 2: Variant calling")
 
 # Conclusion
 
