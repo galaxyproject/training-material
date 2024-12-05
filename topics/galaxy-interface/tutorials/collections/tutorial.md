@@ -48,11 +48,6 @@ recordings:
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
 
-#### In this tutorial we assume the following:
-
-- you already have basic understanding of how Galaxy works (if you don't see [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html) tutorial;
-- you have an account in Galaxy ([see this](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#01-setting-up-galaxy-account) if you don't);
-- you have your browser configured as described [here](https://github.com/nekrut/galaxy/wiki/Galaxy101-1#00-getting-your-display-sorted-out).
 
 # Getting data
 
