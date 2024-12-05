@@ -360,6 +360,7 @@ For this tutorial we will use the ENA default sample checklist.
 >    - *"Action to execute"*: `Add new (meta)data`
 >    - *"Select the metadata input method"*: `Excel file`
 >    - *"Select the ENA sample checklist"*: `ENA default sample checklist (ERC000011)`
+>    - *"Select Excel file based on template"*: `TB.xlsx`
 >    - *"Select input data"*: `Dataset or dataset collection`
 >
 >    > <comment-title> Datatype </comment-title>
