@@ -113,6 +113,14 @@ We are doing a first Quality control on the raw files using FastQC and MultiQC.
 >
 > 1. What is the quality of your sequences?
 > 2. Do you have adapters?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Quality is quite good looking at the "status checks" section of MultiQC. Only "Per base sequence Content" and "Overrepresented sequences" 
+> >
+> > 2. The related MultiQC section mention: "No samples found with any adapter contamination > 0.1%"
+> >
+> {: .solution}
 {: .question}
 
 # Cleaning the Data
