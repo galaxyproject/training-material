@@ -11,7 +11,9 @@ module Gtn
     # Params:
     # +site+:: Jekyll site object
     def self.by_tool(site)
-      Jekyll.logger.info "[GTN/Hooks/by_tool] Started"
+      Jekyll.logger.debug "[GTN/Hooks/by_tool] Started"
+      init_count = site.pages.size
+      start_time = Time.now
 
       tools = TopicFilter.list_materials_by_tool(site)
       tools.reject!{|tool, _| tool.include?('{{')}
@@ -64,6 +66,7 @@ module Gtn
         end
 
       end
+      Jekyll.logger.info "[GTN/Hooks/by_tool] #{site.pages.size - init_count} pages added in #{Time.now - start_time}s"
     end
   end
 end
