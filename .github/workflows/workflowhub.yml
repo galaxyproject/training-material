@@ -1,21 +1,27 @@
 name: "[Cron] Upload workflows to (DEV)WorkflowHub"
 
+concurrency:
+  group: wfh-${{ github.head_ref }}
+  cancel-in-progress: false # Not sure about this.
+
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    # We'll run this daily at noon.
-    - cron:  '59 12 * * *'
+    - cron:  '55 12 * * 1'
   workflow_dispatch:
 
 jobs:
   runner-job:
     if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 2000
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v2
@@ -53,10 +59,14 @@ jobs:
         run: |
           python bin/wfh-upload.py
         env:
-          DEV_WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
+          WFH_TOKEN: ${{ secrets.DEV_WFH_TOKEN }}
+
+      - name: Any changes?
+        run: |
+          git diff
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: Update WorkflowHub IDs
           branch-suffix: timestamp

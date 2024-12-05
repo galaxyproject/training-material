@@ -3,29 +3,26 @@ layout: tutorial_hands_on
 title: Visualization of RNA-Seq results with Volcano Plot
 level: Introductory
 subtopic: visualisation
-zenodo_link: "https://zenodo.org/record/2529117"
+zenodo_link: https://zenodo.org/record/2529117
 questions:
-  - "How to generate a volcano plot from RNA-seq data?"
+- How to generate a volcano plot from RNA-seq data?
 objectives:
-  - "Create a volcano plot of RNA-seq data to visualize significant genes"
-time_estimation: "30m"
+- Create a volcano plot of RNA-seq data to visualize significant genes
+time_estimation: 30m
 key_points:
-  - "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
+- A volcano plot can be used to quickly visualize significant genes in RNA-seq results
 contributors:
-  - mblue9
+- mblue9
 requirements:
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
-          - rna-seq-counts-to-genes
+- type: internal
+  topic_name: transcriptomics
+  tutorials:
+  - rna-seq-counts-to-genes
 follow_up_training:
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
-          - rna-seq-viz-with-volcanoplot-r
-
+- type: internal
+  topic_name: transcriptomics
+  tutorials:
+  - rna-seq-viz-with-volcanoplot-r
 recordings:
 - captioners:
   - mblue9
@@ -35,8 +32,19 @@ recordings:
   youtube_id: uNGXIcEGZwA
   speakers:
   - mblue9
+- youtube_id: ZnvAWAgk7Z4
+  length: 13M
+  galaxy_version: " 24.1.2.dev0"
+  date: '2024-09-06'
+  speakers:
+  - SaimMomin12
+  captioners:
+  - SaimMomin12
+  bot-timestamp: 1725623696
+
 
 ---
+
 
 ![Volcano plot highlighting significant genes](../../images/rna-seq-viz-with-volcanoplot/volcanoplot.png){: style="float:right;width:60%" }
 Volcano plots are commonly used to display the results of RNA-seq or other omics experiments. A volcano plot is a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). It enables quick visual identification of genes with large fold changes that are also statistically significant. These may be the most biologically significant genes. In a volcano plot, the most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top.
@@ -163,7 +171,7 @@ As in the previous plot, genes are coloured if they pass the thresholds for FDR 
 
 ## Create volcano plot labelling genes of interest
 
-We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial [here]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %}) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `volcano_genes` file and shown below. We will label these genes in the volcano plot. We'll add boxes around the labels to highlight the gene names.
+We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (have a look at this [visualization tutorial]({% link topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.md %}) if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors' main gene of interest, Mcl1. These genes are provided in the `volcano_genes` file and shown below. We will label these genes in the volcano plot. We'll add boxes around the labels to highlight the gene names.
 
 ![Volcano genes](../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png){: height="25%"}
 

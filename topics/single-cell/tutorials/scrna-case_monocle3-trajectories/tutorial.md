@@ -48,6 +48,7 @@ requirements:
 tags:
 - 10x
 - paper-replication
+- MIGHTS
 
 contributions:
   authorship:

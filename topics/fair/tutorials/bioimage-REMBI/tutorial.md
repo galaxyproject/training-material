@@ -13,7 +13,7 @@ objectives:
 - Find out what REMBI is and why it is useful
 - Categorise what metadata belongs to each of the submodules of REMBI
 - Gather the metadata for an example bioimage dataset
-  
+
 time_estimation: "15m"
 
 key_points:
@@ -23,7 +23,7 @@ tags:
 - fair
 - data management
 - bioimaging
-  
+
 priority: 5
 
 contributions:
@@ -34,6 +34,7 @@ contributions:
     - poterlowicz-lab
   funding:
     - elixir-uk-dash
+    - elixir-europe
 subtopic: fair-data
 
 requirements:
@@ -47,6 +48,14 @@ requirements:
 follow_up_training:
   - type: "internal"
     topic_name: imaging
+
+recordings:
+  - speakers:
+    - lcooper
+    date: '2024-09-12'
+    length: 48M14S
+    youtube_id: "QA82MzWle_w"
+
 ---
 
 # Metadata guidelines for bioimaging data
@@ -59,7 +68,7 @@ REMBI (Recommended Metadata for Biological Images) was proposed as a draft metad
 > In the [REMBI paper](https://www.nature.com/articles/s41592-021-01166-8), the authors consider three potential user groups who require different metadata. Find out what are these three groups and their metadata requirements.
 >
 > > <solution-title></solution-title>
-> > The identified three user groups are: Biologists, Imaging scientists, Computer-vision researchers. 
+> > The identified three user groups are: Biologists, Imaging scientists, Computer-vision researchers.
 > > - A research biologist may be interested in the biological sample that has been imaged to compare it to similar samples that they are working with.
 > > - An imaging scientist may be interested in how the image was acquired so they can improve upon current image acquisition techniques.
 > > - A computer vision researcher may be interested in annotated ground-truth segmentations, that can be obtained from the image, so they can develop faster and more accurate  algorithms.
@@ -70,11 +79,11 @@ REMBI (Recommended Metadata for Biological Images) was proposed as a draft metad
 > <tip-title>Instructor Note</tip-title>
 >
 > If you're an instructor leading this training, you might ask people to work in small groups for this exercise and encourage the discussion. Ask group members to share which of the user groups they identify as and what metadata they would want.
-> 
+>
 {: .tip}
 
-# Categories of metadata 
-REMBI covers different categories of metadata, such as: 
+# Categories of metadata
+REMBI covers different categories of metadata, such as:
 - study
 - study component
 - biosample
@@ -84,9 +93,9 @@ REMBI covers different categories of metadata, such as:
 - image correlation
 - analyzed data
 
-Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well. 
+Within each module, there are attributes that should be included to make the published data FAIR. We will explore all the modules and attributes suggested by REMBI and we'll show some examples as well.
 
-## Study 
+## Study
 The first module of REMBI metadata describes the Study and should include:
 - Study type
 - Study description
@@ -165,11 +174,11 @@ This should include all the information that relates to all the data in the proj
 
 A study component can be thought of as an experiment, both the physical experiment and subsequent data analysis, or a series of experiments that have been conducted with the same aim in mind.
 
-The associated metadata should describe the imaging method used and include a description of the image dataset. The REMBI guidelines store high-level metadata in the study component and then divide the more detailed metadata into other modules. 
+The associated metadata should describe the imaging method used and include a description of the image dataset. The REMBI guidelines store high-level metadata in the study component and then divide the more detailed metadata into other modules.
 
 Within the Study component we include the Imaging Method which should describe the techniques used to acquire the raw data. This could be one or multiple methods, which should be part of a relevant ontology. For Confocal Microscopy data, we can use the Biological Imaging Methods Ontology, although it is also present in a number of other ontologies.
 
-The description of the study component should include an overview of what was imaged as well as any processed data that is created during analysis. 
+The description of the study component should include an overview of what was imaged as well as any processed data that is created during analysis.
 
 > <comment-title>Example</comment-title>
 > <table>
@@ -187,7 +196,7 @@ The description of the study component should include an overview of what was im
 
 > <tip-title>Storing metadata</tip-title>
 >
-> You could either choose to store the metadata in the same file as your study data or have a new file for each study component. This could be stored in the same place as your study metadata, or you could create a subdirectory structure. 
+> You could either choose to store the metadata in the same file as your study data or have a new file for each study component. This could be stored in the same place as your study metadata, or you could create a subdirectory structure.
 {: .tip}
 
 ## Biosample
@@ -270,9 +279,9 @@ You can leave out some of the variables if they are not part of your experiment.
 
 ## Image acquisition
 Here you should include all the information about the instrument you used and how it was set up. Like with the specimen metadata, describe this information as though you are speaking to someone who already knows how to use a similar instrument. What would they need to know to produce the same image data?
- 
+
 Check with your facility manager if they have any guidelines for what details need to be recorded for your particular instrument. Make sure that the parameters you record can actually be used by someone else if they don’t have exactly the same instrument or setup. For example, don’t say that you used a certain percentage of laser power, as this doesn’t tell you how much power was used unless you also provide the total power of the laser. If the instrument software has automatically generated a metadata file, remember to save this. Depending on its content, this may be sufficient.
- 
+
 Start with the details of the equipment for the Instrument Attributes. If this is commercial equipment, include the make and model, a short description of what type of instrument it is and details about its configuration. If the instrument is bespoke, you will need to include more details. Next, you should include image acquisition parameters. These relate to how the instrument was set up for the particular experiment. Some of these may be captured automatically by the instrument’s software, so make things easy for yourself and check if a file is generated and what’s in it. If a file is generated, then you only need to manually record anything that is missing from the file.
 
 > <comment-title>Example</comment-title>
@@ -310,8 +319,8 @@ Start with the details of the equipment for the Instrument Attributes. If this i
 
 > <tip-title>Helpful resources</tip-title>
 >
-> To help you collect the information for your own data, you might have a look at the local resources from your institution or universities. For example, at Warwick University, there are [webpages](https://warwick.ac.uk/fac/sci/med/research/biomedical/facilities/camdu/methodsreporting/) describing the metadata that needs to be collected for some of the microscopes. 
-> 
+> To help you collect the information for your own data, you might have a look at the local resources from your institution or universities. For example, at Warwick University, there are [webpages](https://warwick.ac.uk/fac/sci/med/research/biomedical/facilities/camdu/methodsreporting/) describing the metadata that needs to be collected for some of the microscopes.
+>
 {: .tip}
 
 ## Image data
@@ -416,4 +425,4 @@ This section should not include metadata for any image data, including processed
 For more examples, check out REMBI Supplementary Information - either in [pdf](https://static-content.springer.com/esm/art%3A10.1038%2Fs41592-021-01166-8/MediaObjects/41592_2021_1166_MOESM1_ESM.pdf) or [spreadsheet](https://docs.google.com/spreadsheets/d/1Ck1NeLp-ZN4eMGdNYo2nV6KLEdSfN6oQBKnnWU6Npeo/edit#gid=1023506919).
 
 
-At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management habits, share them with others and hence contribute to the development of Science toghether. 
+At first glance, it might seem to be quite a stretch to collect all that metadata! But don’t get discouraged - following those guidelines will ensure better communication between the scientists and will make your research FAIR: Findable, Accessible, Interoperable, Reusable. During big data era when we are surrounded by so much resources, it’s crucial to get good data management habits, share them with others and hence contribute to the development of Science toghether.

@@ -20,13 +20,17 @@ key_points:
   - Run quality control on every sequencing dataset before any other analyses
   - Choose QC parameters carefully
   - Re-run FastQC to check the impact of the quality control
-contributors:
+contributions:
+  authorship:
   - bebatut
   - abretaud
   - alexcorm
   - lleroi
   - r1corre
   - stephanierobin
+  editing:
+  - Swathi266
+  funding:
   - gallantries
 
 
@@ -180,7 +184,17 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 
 ### Quality score encoding
 
+.image-100[
 ![Encoding of the quality score with ASCII characters for different Phred encoding. The ascii code sequence is shown at the top with symbols for 33 to 64, upper case letters, more symbols, and then lowercase letters. Sanger maps from 33 to 73 while solexa is shifted, starting at 59 and going to 104. Illumina 1.3 starts at 54 and goes to 104, Illumina 1.5 is shifted three scores to the right but still ends at 104. Illumina 1.8+ goes back to the Sanger except one single score wider. Illumina](../../../sequence-analysis/images/fastq-quality-encoding.png)
+]
+
+
+.pull-bottom[
+- Quality score (Q) is encoded as [ASCII characters](https://www.ascii-code.com/characters)
+- Formula to find the probability of error \\(P = 10 ^{-Q/10}\\)
+- [ASCII base 33](https://drive5.com/usearch/manual/quality_score.html) is now almost universally used. ASCII 33 is the first “normal" ASCII character.
+
+]
 
 ???
 

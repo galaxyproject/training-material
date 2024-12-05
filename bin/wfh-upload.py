@@ -7,11 +7,24 @@ import requests
 import glob
 import time
 import multiprocessing
+import argparse
 
-GTN_PROJECT_ID = 63
+# GTN_BOT_ID = https://workflowhub.eu/people/731
 
-if len(sys.argv) == 2:
-    crates = [sys.argv[1]]
+argparser = argparse.ArgumentParser()
+argparser.add_argument("--prod", action="store_true", help="Upload to production")
+argparser.add_argument("--crate", type=str, help="Upload a single crate (defaults to all)")
+args = argparser.parse_args()
+
+if args.prod:
+    WORKFLOWHUB = "https://workflowhub.eu"
+    GTN_PROJECT_ID = 12
+else:
+    WORKFLOWHUB = "https://dev.workflowhub.eu"
+    GTN_PROJECT_ID = 63
+
+if args.crate:
+    crates = [args.crate]
 else:
     crates = glob.glob(
         "_site/training-material/api/workflows/**/rocrate.zip", recursive=True
@@ -34,12 +47,14 @@ def doUpload(crate_path):
         "workflow[project_ids][]": (None, GTN_PROJECT_ID), # GTN's ID.
     }
     headers = {
-        "authorization": "Token " + os.environ["DEV_WFH_TOKEN"], 
+        "authorization": "Token " + os.environ["WFH_TOKEN"],
         'User-Agent': 'GTN (github.com/galaxyproject/training-material@1.0)',
+        # 'Content-type': 'application/json',
+        'Accept': 'application/json',
     }
 
     response = requests.post(
-        "https://dev.workflowhub.eu/workflows/submit", files=payload, headers=headers
+        f"{WORKFLOWHUB}/workflows/submit", files=payload, headers=headers
     )
     code = response.status_code
     if code != 200:
@@ -56,25 +71,58 @@ def doUpload(crate_path):
         "id": wfid,
         "type": "workflows",
         "attributes": {
-          "policy": {
-            "access": "download",
-            "permissions": [
-              {
-                "resource": {
-                  "id": str(GTN_PROJECT_ID),
-                  "type": "projects"
-                },
-                "access": "manage"
-              }
-            ]
-          }
         }
       }
     }
+    current_policy = response.json()['data']['attributes']['policy']
 
-    if response.json()['data']['attributes']['discussion_links'] and not any(
+    updated_policy = {}
+    if current_policy['access'] != 'download':
+        updated_policy['access'] = 'download'
+
+    gtn_permission = [x for x in current_policy['permissions'] if x['resource']['id'] == str(GTN_PROJECT_ID)]
+    if len(gtn_permission) != 1:
+        updated_policy['permissions'] = current_policy['permissions'] + [
+            {
+                "resource": {
+                    "id": str(GTN_PROJECT_ID),
+                    "type": "projects"
+                },
+                "access": "manage"
+            }
+        ]
+    else:
+        if gtn_permission[0]['access'] != 'manage':
+            gtn_permission[0]['access'] = 'manage'
+            updated_policy['permissions'] = current_policy['permissions']
+
+    # "policy": {
+    #   "access": "download",
+    #   "permissions": [
+    #     {
+    #       "resource": {
+    #         "id": str(GTN_PROJECT_ID),
+    #         "type": "projects"
+    #       },
+    #       "access": "manage"
+    #     }
+    #   ]
+    # }
+
+    # {'access': 'download',
+    #  'permissions': [{'access': 'manage',
+    #                   'resource': {'id': '63', 'type': 'projects'}}]}
+    #
+    push = False
+    if updated_policy:
+        push = True
+        permissions_update['data']['attributes']['policy'] = updated_policy
+
+    dls = response.json()['data']['attributes']['discussion_links']
+    if dls is None or len(dls) == 0 or (not any(
         x['label'] == 'GTN Matrix' for x in response.json()['data']['attributes']['discussion_links']
-    ):
+    )):
+        push = True
         permissions_update['data']['attributes']['discussion_links'] = [
             {
                 "label": "GTN Matrix",
@@ -82,14 +130,16 @@ def doUpload(crate_path):
             }
         ]
 
-
-    headers.update({
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-    })
-    response2 = requests.put(f"https://dev.workflowhub.eu/workflows/{wfid}", headers=headers, json=permissions_update)
-    if response2.status_code != 200:
-        print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
+    # https://github.com/seek4science/seek/issues/1957
+    if push:
+        print(f"Permissions update required for {wfid}: {permissions_update['data']['attributes']}")
+        headers.update({
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+        })
+        response2 = requests.put(f"{WORKFLOWHUB}/workflows/{wfid}", headers=headers, json=permissions_update)
+        if response2.status_code != 200:
+            print(f"Error {response2.status_code} updating permissions for {wfid}: {response2.text}")
 
     p = crate_path.split("/")
     windex = p.index("workflows")

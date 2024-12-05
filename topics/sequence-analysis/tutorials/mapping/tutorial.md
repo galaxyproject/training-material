@@ -1,46 +1,42 @@
 ---
 layout: tutorial_hands_on
-
-title: "Mapping"
-zenodo_link: "https://doi.org/10.5281/zenodo.1324070"
+title: Mapping
+zenodo_link: https://doi.org/10.5281/zenodo.1324070
 questions:
-  - What is mapping?
-  - What two things are crucial for a correct mapping?
-  - What is BAM?
+- What is mapping?
+- What two things are crucial for a correct mapping?
+- What is BAM?
 objectives:
-  - Run a tool to map reads to a reference genome
-  - Explain what is a BAM file and what it contains
-  - Use genome browser to understand your data
-time_estimation: "1h"
+- Run a tool to map reads to a reference genome
+- Explain what is a BAM file and what it contains
+- Use genome browser to understand your data
+time_estimation: 1h
 key_points:
-  - Know your data!
-  - Mapping is not trivial
-  - There are many mapping algorithms, it depends on your data which one to choose
+- Know your data!
+- Mapping is not trivial
+- There are many mapping algorithms, it depends on your data which one to choose
+subtopic: basics
 requirements:
-  -
-    type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - quality-control
+- type: internal
+  topic_name: sequence-analysis
+  tutorials:
+  - quality-control
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-      - ref-based
-  -
-    type: "internal"
-    topic_name: epigenetics
-    tutorials:
-      - formation_of_super-structures_on_xi
+- type: internal
+  topic_name: transcriptomics
+  tutorials:
+  - ref-based
+- type: internal
+  topic_name: epigenetics
+  tutorials:
+  - formation_of_super-structures_on_xi
 level: Introductory
-edam_ontology: 
-  - topic_0102 # Mapping
+edam_ontology:
+- topic_0102
 contributors:
-  - joachimwolff
-  - bebatut
-  - hexylena
-
+- joachimwolff
+- bebatut
+- hexylena
 recordings:
 - captioners:
   - shiltemann
@@ -50,8 +46,19 @@ recordings:
   youtube_id: 1wm-62E2NkY
   speakers:
   - pvanheus
+- youtube_id: B-CFWSkZzRc
+  length: 24M
+  galaxy_version: 24.1.2.dev0
+  date: '2024-09-07'
+  speakers:
+  - DinithiRajapaksha
+  captioners:
+  - DinithiRajapaksha
+  bot-timestamp: 1725707919
+
 
 ---
+
 
 Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.
 
@@ -136,7 +143,7 @@ Currently, there are over 60 different mappers, and their number is growing. In 
 >
 > 2. Inspect the `mapping stats` file by clicking on the {% icon galaxy-eye %} (eye) icon
 >
->    
+>
 >
 {: .hands_on}
 

@@ -111,7 +111,7 @@ module Jekyll
     #  slugify_unsafe("Hello, World!") # => "Hello-World"
     def slugify_unsafe(text)
       # Gets rid of *most* things without making it completely unusable?
-      text.gsub(%r{["'\\/;:,.!@#$%^&*()]}, '').gsub(/\s/, '-').gsub(/-+/, '-')
+      unsafe_slugify(text)
     end
 
     ##
@@ -399,7 +399,7 @@ module Jekyll
 
     def layout_to_human(layout)
       case layout
-      when /slides/
+      when /_slides/ # excludes slides-plain
         'Slides'
       when /tutorial_hands_on/
         'Hands-on'
@@ -407,6 +407,8 @@ module Jekyll
         'FAQs'
       when 'news'
         'News'
+      when 'workflow'
+        'Workflow'
       end
     end
 
@@ -569,6 +571,10 @@ module Jekyll
     def topic_name_from_page(page, site)
       if page.key? 'topic_name'
         site.data[page['topic_name']]['title']
+      elsif page['url'] =~ /^\/faqs\/gtn/
+        'GTN FAQ'
+      elsif page['url'] =~ /^\/faqs\/galaxy/
+        'Galaxy FAQ'
       else
         site.data.fetch(page['url'].split('/')[2], { 'title' => '' })['title']
       end
@@ -702,9 +708,13 @@ module Jekyll
     # Example:
     #  {{ site | get_upcoming_events }}
     def get_upcoming_events_for_this(site, material)
-      get_upcoming_events(site)
-        .select { |_p, materials| materials.include? material['id'] }
-        .map { |p, _materials| p }
+      if material.nil?
+        []
+      else
+        get_upcoming_events(site)
+          .select { |_p, materials| materials.include? material['id'] }
+          .map { |p, _materials| p }
+      end
     end
 
     def shuffle(array)
@@ -837,7 +847,7 @@ Liquid::Template.register_filter(Jekyll::GtnFunctions)
 ##
 # We're going to do some find and replace, to replace `@gtn:contributorName` with a link to their profile.
 Jekyll::Hooks.register :site, :pre_render do |site|
-  pfo_keys = site.data['contributors'].keys + site.data['funders'].keys + site.data['organisations'].keys
+  pfo_keys = site.data['contributors'].keys + site.data['grants'].keys + site.data['organisations'].keys
   site.posts.docs.each do |post|
     if post.content
       post.content = post.content.gsub(/@gtn:([a-zA-Z0-9_-]+)/) do |match|
@@ -889,10 +899,10 @@ Jekyll::Hooks.register :site, :post_read do |site|
           end
 
           site.data['organisations'][affiliation]['members'] << name
-        elsif site.data['funders'].key?(affiliation)
-          site.data['funders'][affiliation]['members'] = [] if !site.data['funders'][affiliation].key?('members')
+        elsif site.data['grants'].key?(affiliation)
+          site.data['grants'][affiliation]['members'] = [] if !site.data['grants'][affiliation].key?('members')
 
-          site.data['funders'][affiliation]['members'] << name
+          site.data['grants'][affiliation]['members'] << name
         end
       end
     end
@@ -905,12 +915,12 @@ Jekyll::Hooks.register :site, :post_read do |site|
           end
 
           site.data['organisations'][affiliation]['former_members'] << name
-        elsif site.data['funders'].key?(affiliation)
-          if !site.data['funders'][affiliation].key?('former_members')
-            site.data['funders'][affiliation]['former_members'] = []
+        elsif site.data['grants'].key?(affiliation)
+          if !site.data['grants'][affiliation].key?('former_members')
+            site.data['grants'][affiliation]['former_members'] = []
           end
 
-          site.data['funders'][affiliation]['former_members'] << name
+          site.data['grants'][affiliation]['former_members'] << name
         end
       end
     end
@@ -935,8 +945,20 @@ Jekyll::Hooks.register :site, :post_read do |site|
     page.data['short_id'] = shortlinks_reversed[page.url]
   end
 
+  # Annotate symlinks
+  site.pages.each do |page|
+    page.data['symlink'] = File.symlink?(page.path)
+    # Elsewhere we checked more levels deep, maybe enable if needed.
+    # || File.symlink?(File.dirname(page.path)) || File.symlink?(File.dirname(File.dirname(page.path)))
+  end
+
   Jekyll.logger.info '[GTN] Annotating events'
   site.pages.select { |p| p.data['layout'] == 'event' || p.data['layout'] == 'event-external' }.each do |page|
+
+    unless page.data['date_start']
+      # if no date set, use a mock date to prevent build from failihng
+      page.data['date_start'] = Date.parse('2121-01-01')
+    end
     page.data['not_started'] = page.data['date_start'] > Date.today
     page.data['event_over'] = (page.data['date_end'] || page.data['date_start']) < Date.today
 

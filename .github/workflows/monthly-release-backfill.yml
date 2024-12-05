@@ -17,6 +17,8 @@ jobs:
         with:
           ref: "${{ github.event.inputs.selected_tag }}"
           fetch-depth: 0
+          fetch-tags: true
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: actions/setup-python@v5
@@ -46,7 +48,8 @@ jobs:
           pip install pyyaml
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
-          npm install
+          rm -f package.json package-lock.json yarn.lock
+          npm install markdown-yaml-metadata-parser lunr
           bundle pristine ffi
       # END Dependencies
 
@@ -66,7 +69,7 @@ jobs:
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^title: .*|title: 'GTN Archive ${SOURCE_TAG}'|g" _config.yml
-          npm install
+          curl -L https://hexylena.github.io/toolshed-version-database/tool-meta.json > metadata/tool-meta.json
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material

@@ -15,12 +15,17 @@ key_points:
 - To process untargeted LC-MS metabolomic data, you need a large variety of steps and tools.
 - Although main steps are standard, various ways to combined tools exist, depending on your data.
 - Resources are available in Galaxy, but do not forget that you need appropriate knowledge to perform a relevant analysis.
-contributors:
-- melpetera
-- lecorguille
-- jfrancoismartin
-- yguitton
-- workflow4metabolomics
+
+contributions:
+  authorship:
+    - melpetera
+    - lecorguille
+    - jfrancoismartin
+    - yguitton
+    - workflow4metabolomics
+  editing: []
+  funding:
+    - elixir-europe
 
 ---
 
@@ -209,7 +214,7 @@ Note that you can either:
 {: .tip}
 
 
-#### Prepare your sampleMetadata file
+### Prepare your sampleMetadata file
 
 The sampleMetadata file is a tab-separated table, in text format. This table has to be filled by the user. You can use any
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
@@ -282,7 +287,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 {: .tip}
 
 
-#### Upload the sampleMetada file with 'Get data'
+### Upload the sampleMetada file with 'Get data'
 
 > <hands-on-title>Upload the sampleMetada</hands-on-title>
 >
@@ -869,7 +874,7 @@ to get rid of it.
 >
 {: .hands_on}
 
-**What transformation has this tool done to the ions' intensities?**
+### What transformation has this tool done to the ions' intensities?
 
 For each ion independently, the normalisation process works as described in the following picture:
 
@@ -989,8 +994,7 @@ dataset size) and your study design. You should think carefully about what is ap
 In this tutorial, we will take the example of univariate analysis, using the `bmi` column of the **sampleMetadata file** as
 the study's biological factor investigated (body mass index). Since this variable is quantitative, we will chose in this example to measure
 the link between the BMI and the measured ions using a **statistical correlation calculation**. For more examples of
-statistical analysis performed on LC-MS data, you can take a few minutes to watch the [usemetabo.org](https://usemetabo.org) open course video
-[here](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis).
+statistical analysis performed on LC-MS data, you can take a few minutes to watch the [usemetabo.org](https://usemetabo.org) open [course video](https://usemetabo.org/courses/w4mlc-ms-statistical-analysis).
 
 ## Computation of statistical indices
 

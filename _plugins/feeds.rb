@@ -2,31 +2,66 @@
 
 require './_plugins/jekyll-topic-filter'
 require './_plugins/gtn'
+require './_plugins/util'
 require 'json'
 
-# TODO: move into a lib somewhere.
-def collapse_date_pretty(event)
-  s = event['date_start']
-  e = if event['date_end'].nil?
-        s
-      else
-        event['date_end']
-      end
-  # want dates like "Mar 22-25, 2024" or "Mar 22-May 1, 2024"
-  if s.year == e.year
-    if s.month == e.month
-      if s.day == e.day
-        "#{s.strftime('%B')} #{s.day}, #{s.year}"
-      else
-        "#{s.strftime('%B')} #{s.day}-#{e.day}, #{s.year}"
-      end
-    else
-      "#{s.strftime('%B')} #{s.day}-#{e.strftime('%B')} #{e.day}, #{s.year}"
-    end
-  else
-    "#{s.strftime('%B')} #{s.day}, #{s.year}-#{e.strftime('%B')} #{e.day}, #{e.year}"
+class DateTime
+  def to_euro_lunch
+    self.to_date.to_datetime + 0.6
   end
 end
+
+TRACKING = "?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
+
+PRIO = [
+  'news',
+  'events',
+  'learning-pathways',
+  'tutorials',
+  'slides',
+  'recordings',
+  'faqs',
+  'workflows',
+  'contributors',
+  'grants',
+  'organisations'
+].map.with_index { |x, i| [x, i] }.to_h
+
+def track(url)
+  if url =~ /utm_source/
+    url
+  elsif url.include? '#'
+    url.gsub(/#/, TRACKING + '#')
+  else
+    url + TRACKING
+  end
+end
+
+def objectify(attrs, url, path)
+  obj = attrs.clone
+  obj['__path'] = path
+  obj['__url'] = url
+
+  def obj.data
+    self
+  end
+
+  def obj.path
+    self['__path']
+  end
+
+  def obj.url
+    self['__url']
+  end
+
+  def obj.content
+    self.fetch('content', 'NO CONTENT AVAILABLE')
+  end
+
+  obj
+end
+
+FEED_WIDGET_XSLT = Nokogiri::XSLT(File.read('feed-widget.xslt.xml'))
 
 def serialise(site, feed_path, builder)
   # The builder won't let you add a processing instruction, so we have to
@@ -52,6 +87,9 @@ def serialise(site, feed_path, builder)
   )
   finalised.root.add_previous_sibling pi
   File.write(feed_path.gsub(/\.xml$/, '.w.xml'), finalised.to_xml)
+
+  # Write out HTML version since Safari doesn't support XSLT on XML. Rip.
+  File.write(feed_path.gsub(/\.xml$/, '.w.html'), FEED_WIDGET_XSLT.transform(finalised))
 end
 
 def markdownify(site, text)
@@ -62,7 +100,7 @@ end
 
 ICON_FOR = {
   'contributors' => '🧑‍🏫',
-  'funders' => '💰',
+  'grants' => '💰',
   'organisations' => '🏢',
   'events' => '📅',
   'tutorials' => '📚',
@@ -70,6 +108,8 @@ ICON_FOR = {
   'news' => '📰',
   'faqs' => '❓',
   'workflows' => '🛠️',
+  'learning-pathways' => '🛤️',
+  'recordings' => '🎥',
 }
 
 def generate_opml(site, groups)
@@ -120,7 +160,7 @@ def generate_topic_feeds(site, topic, bucket)
 
       mats.each do |time, group, page, tags|
         xml.entry do
-          xml.title(ICON_FOR[group] + " " +page.data['title'])
+          xml.title(ICON_FOR[group] + " " + page.data['title'])
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
           # Our links are (mostly) stable
@@ -130,7 +170,7 @@ def generate_topic_feeds(site, topic, bucket)
           # xml.published(Gtn::PublicationTimes.obtain_time(page.path).to_datetime.rfc3339)
           xml.updated(time.rfc3339)
 
-          tags.each do |tag|
+          tags.uniq.each do |tag|
             xml.category(term: tag)
           end
 
@@ -180,6 +220,7 @@ def all_date_sorted_materials(site)
   materials = TopicFilter.list_all_materials(site).reject { |k, _v| k['draft'] }
   news = site.posts.select { |x| x['layout'] == 'news' }
   faqs = site.pages.select { |x| x['layout'] == 'faq' }
+  pathways = site.pages.select { |x| x['layout'] == 'learning-pathway' }
   workflows = Dir.glob('topics/**/*.ga')
 
   bucket = events.map do |e|
@@ -188,12 +229,35 @@ def all_date_sorted_materials(site)
 
   materials.each do |m|
     tags = [m['topic_name']] + (m['tags'] || [])
-    bucket += m.fetch('ref_tutorials', []).map do |t|
-      [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+    m.fetch('ref_tutorials', []).map do |t|
+      bucket << [Gtn::PublicationTimes.obtain_time(t.path).to_datetime, 'tutorials', t, tags]
+
+      (t['recordings'] || []).map do |r|
+        url = '/' + t.path.gsub(/tutorial(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + t['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
+
+        obj = objectify(attr, url, t.path)
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
+      end
     end
 
-    bucket += m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
-      [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+
+    m.fetch('ref_slides', []).reject { |s| s.url =~ /-plain.html/ }.map do |s|
+      bucket << [Gtn::PublicationTimes.obtain_time(s.path).to_datetime, 'slides', s, tags]
+
+      (s['recordings'] || []).map do |r|
+        url = '/' + s.path.gsub(/slides(_[A_Z_]*)?.(html|md)$/, 'recordings/')
+        url += "#tutorial-recording-#{Date.parse(r['date']).strftime('%-d-%B-%Y').downcase}"
+        attr = {'title' => "Recording of " + s['title'], 
+                'contributors' => r['speakers'] + (r['captions'] || []),
+                'content' => "A #{r['length']} long recording is now available."}
+        obj = objectify(attr, url, s.path)
+        bucket << [DateTime.parse(r['date'].to_s), 'recordings', obj, tags]
+      end
     end
   end
 
@@ -206,53 +270,78 @@ def all_date_sorted_materials(site)
     [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'faqs', n, ['faqs', tag]]
   end
 
+  bucket += pathways.map do |n|
+    tags = ['learning-pathway'] + (n['tags'] || [])
+    [Gtn::PublicationTimes.obtain_time(n.path).to_datetime, 'learning-pathways', n, tags]
+  end
+
   bucket += workflows.map do |n|
     tag = Gtn::PublicationTimes.clean_path(n).split('/')[1]
     wf_data = JSON.parse(File.read(n))
-    obj = Hash.new
-    obj['__path'] = n
-    obj['title'] = wf_data['name']
-    obj['description'] = wf_data['annotation']
-    obj['tags'] = wf_data['tags']
-    obj['contributors'] = wf_data.fetch('creator', []).map do |c|
-      p ">> #{c}"
-      matched = site.data['contributors'].select{|k, v| v.fetch('orcid', nil) == c.fetch('identifier', false)}.first
-      if matched
-        matched[0]
-      else
-        c['name']
+
+    attrs = {
+      'title' => wf_data['name'],
+      'description' => wf_data['annotation'],
+      'tags' => wf_data['tags'],
+      'contributors' => wf_data.fetch('creator', []).map do |c|
+        matched = site.data['contributors'].select{|k, v| 
+          v.fetch('orcid', "does-not-exist") == c.fetch('identifier', "").gsub('https://orcid.org/', '')
+        }.first
+        if matched
+          matched[0]
+        else
+          c['name']
+        end
       end
-    end
-    # Fake a page.
-    def obj.data
-      self
-    end
-    def obj.path
-      self['__path']
-    end
-    def obj.url
-      '/' + self['__path'][0..self['__path'].rindex('/')]
-    end
+    }
+
+    # These aren't truly stable. I'm not sure what to do about that.
+    obj = objectify(attrs, '/' + n.gsub(/\.ga$/, '.html'), n)
+    # obj = objectify(attrs, '/' + n.path[0..n.path.rindex('/')], n)
+
 
     [Gtn::PublicationTimes.obtain_time(n).to_datetime, 'workflows', obj, ['workflows', tag] + obj['tags']]
   end
 
+  # Remove symlinks from bucket.
+  bucket = bucket.reject { |date, type, page, tags|
+    File.symlink?(page.path) || File.symlink?(File.dirname(page.path)) || File.symlink?(File.dirname(File.dirname(page.path)))
+  }
+
   bucket += site.data['contributors'].map do |k, v|
-    [DateTime.parse("#{v['joined']}-01"), 'contributors', k, ['contributor']]
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
+
+    [DateTime.parse("#{v['joined']}-01T12:00:00", 'content' => "GTN Contributions from #{k}"), 'contributors', obj, ['contributor']]
   end
-  bucket += site.data['funders'].map do |k, v|
-    # TODO: backdate funders, organisations
+
+  bucket += site.data['grants'].map do |k, v|
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
+
+    # TODO: backdate grants, organisations
     if v['joined']
-      [DateTime.parse("#{v['joined']}-01"), 'funders', k, ['funder']]
-    end
-  end.compact
-  bucket += site.data['organisations'].map do |k, v|
-    if v['joined']
-      [DateTime.parse("#{v['joined']}-01"), 'organisations', k, ['organisation']]
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'grants', obj, ['grant']]
     end
   end.compact
 
-  bucket.sort_by { |x| x[0] }.reverse
+  bucket += site.data['organisations'].map do |k, v|
+    a = {'title' => "@#{k}",
+         'content' => "GTN Contributions from #{k}"}
+    obj = objectify(a, "/hall-of-fame/#{k}/", k)
+
+    if v['joined']
+      [DateTime.parse("#{v['joined']}-01T12:00:00"), 'organisations', obj, ['organisation']]
+    end
+  end.compact
+
+  bucket
+    .reject{|x| x[0] > DateTime.now } # Remove future-dated materials
+    .reject{|x| x[2]['draft'] == true } # Remove drafts
+    .sort_by {|x| x[0] } # Date-sorted, not strictly necessary since will be grouped.
+    .reverse
 end
 
 def group_bucket_by(bucket, group_by: 'day')
@@ -270,7 +359,18 @@ def group_bucket_by(bucket, group_by: 'day')
       .group_by { |x| x[0].strftime('%Y-%m') }
       .to_h { |_k, v| [v.map { |x| x[0] }.min, v] }
   else
-    raise "Unknown group_by: #{group_by}"
+    # Pretend this is an h
+    # bucket
+    #   .map { |x| [x[0], x] }
+    #   .to_h
+    bucket
+      .map.with_index { |x, i| [x[0] + i / 100000000.0, [x]] }
+      .to_h
+    # We add an artificial separator in the range of miliseconds to each file,
+    # should never grow more than 1s, likely, to ensure each of these are
+    # individual items. This is kludge-y, yeah, but downstream processing wants
+    # to group_by in places, and we don't want to trigger it collapsing there
+    # too.
   end
 end
 
@@ -278,10 +378,151 @@ def format_contents(xml, site, parts, title, group_by: 'day')
   # output += '<div xmlns="http://www.w3.org/1999/xhtml">'
 end
 
+
+
+def generate_matrix_feed_itemized(site, mats, group_by: 'day', filter_by: nil)
+  filter_title = nil
+  if !filter_by.nil?
+    mats = mats.select { |x| x[3].include?(filter_by) }
+    filter_title = filter_by.gsub('-', ' ').capitalize
+  end
+
+  case group_by
+  when 'day'
+    # Reject anything that is today
+    mats = mats.reject { |x| x[0].strftime('%Y-%m-%d') == Date.today.strftime('%Y-%m-%d') }
+  when 'week'
+    mats = mats.reject { |x| x[0].strftime('%Y-%W') == Date.today.strftime('%Y-%W') }
+  when 'month'
+    mats = mats.reject { |x| x[0].strftime('%Y-%m') == Date.today.strftime('%Y-%m') }
+  end
+
+  bucket = group_bucket_by(mats, group_by: group_by)
+  lookup = {
+    'day' => 'Daily',
+    'week' => 'Weekly',
+    'month' => 'Monthly',
+    nil => 'All'
+  }
+
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.i.xml"
+
+  feed_path = File.join(site.dest, path)
+  Jekyll.logger.info '[GTN/Feeds] Generating matrix/i feed'
+
+  dir = File.dirname(feed_path)
+  FileUtils.mkdir_p(dir) unless File.directory?(dir)
+
+  # Group by days
+  builder = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
+    # Set stylesheet
+    xml.feed(xmlns: 'http://www.w3.org/2005/Atom') do
+      # Set generator also needs a URI attribute
+      xml.generator('Jekyll', uri: 'https://jekyllrb.com/')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/#{path}", rel: 'self')
+      xml.link(href: "#{site.config['url']}#{site.baseurl}/", rel: 'alternate')
+      # convert '2024-01-01' to date
+      xml.updated(DateTime.now.rfc3339)
+      xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
+      title_parts = ["GTN", filter_title, lookup[group_by], "Updates"].compact
+      # title used for slack's 'bot name', so should be something useful.
+      xml.title(title_parts.join(' '))
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, and contributors in the GTN.')
+      xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
+
+      bucket.each do |bucket_date, parts|
+        parts.group_by { |x| x[1] }.sort_by { |x| PRIO[x[0]] }.each do |type, items|
+          if items.length.positive?
+            items.each do |date, type, page, tags|
+              # Entry per-item.
+              xml.entry do
+
+                # This is a feed of only NEW tutorials, so we only include publication times.
+                if group_by.nil?
+                  xml.published(bucket_date.rfc3339)
+                  xml.updated(bucket_date.rfc3339)
+                else
+                  xml.published(bucket_date.to_euro_lunch.rfc3339)
+                  xml.updated(bucket_date.to_euro_lunch.rfc3339)
+                end
+
+                href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}"
+
+                xml.id(href)
+                xml.link(href: track(href))
+
+                tags.uniq.each do |tag|
+                  xml.category(term: tag)
+                end
+                xml.category(term: "new #{page['layout']}")
+
+                if page.data.key?('description')
+                  xml.summary(page.data['description'])
+                else
+                  md = page.content[0..page.content.index("\n")].strip
+                  html = markdownify(site, md)
+                  text = Nokogiri::HTML(html).text
+                  xml.summary(text)
+                end
+
+                prefix = type.gsub(/s$/, '').gsub(/-/, ' ').capitalize.gsub(/Faq/, 'FAQ').gsub(/New$/, 'Post')
+                title = "#{ICON_FOR[type]} New #{prefix}: #{page.data['title']}"
+
+                xml.title(title)
+
+                had_authors = false
+                Gtn::Contributors.get_authors(page.data).each do |c|
+                  xml.author do
+                    had_authors = true
+                    xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+                    if c !~ / /
+                      xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+                    end
+                  end
+                end
+
+                if !had_authors
+                  xml.author do
+                    xml.name('GTN')
+                    xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/")
+                    xml.email('galaxytrainingnetwork@gmail.com')
+                  end
+                end
+
+                Gtn::Contributors.get_non_authors(page.data).each do |c|
+                  xml.contributor do
+                    xml.name(Gtn::Contributors.fetch_name(site, c, warn:false))
+                    if c !~ / /
+                      xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/#{c}/")
+                    end
+                  end
+                end
+
+              end
+            end
+          end
+        end
+      end
+
+      xml.author do
+        xml.name('GTN')
+        xml.uri("#{site.config['url']}#{site.baseurl}/hall-of-fame/")
+        xml.email('galaxytrainingnetwork@gmail.com')
+      end
+    end
+  end
+
+  serialise(site, feed_path, builder)
+end
+
+
+
+
 # Our old style matrix bot postsx
 def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
   # new materials (tut + sli)
-  # new funders/contributors/orgs
+  # new grants/contributors/orgs
   # new news posts(?)
   filter_title = nil
   if !filter_by.nil?
@@ -306,10 +547,8 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
     'month' => 'Monthly'
   }
 
-  path = "feeds/matrix-#{group_by}.xml"
-  if filter_by
-    path = "feeds/#{filter_by}-#{group_by}.xml"
-  end
+  parts = [filter_by || 'matrix', group_by || 'all']
+  path = "feeds/#{parts.join('-')}.xml"
 
   feed_path = File.join(site.dest, path)
   Jekyll.logger.info '[GTN/Feeds] Generating matrix feed'
@@ -331,7 +570,7 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
       xml.id("#{site.config['url']}#{site.baseurl}/#{path}")
       title_parts = [filter_title, "#{lookup[group_by]} Updates"].compact
       xml.title(title_parts.join(' — '))
-      xml.subtitle('The latest materials, events, news in the GTN.')
+      xml.subtitle('The latest events, tutorials, slides, blog posts, FAQs, workflows, learning paths, recordings, and contributors in the GTN.')
       xml.logo("#{site.config['url']}#{site.baseurl}/assets/images/GTN-60px.png")
 
       bucket.each do |date, parts|
@@ -357,30 +596,18 @@ def generate_matrix_feed(site, mats, group_by: 'day', filter_by: nil)
             xml.div(xmlns: 'http://www.w3.org/1999/xhtml') do
               # xml.h4 title
 
-              prio = [
-                'news',
-                'events',
-                'tutorials',
-                'slides',
-                'faqs',
-                'workflows',
-                'contributors',
-                'funders',
-                'organisations'
-              ].map.with_index { |x, i| [x, i] }.to_h
-
-              parts.group_by { |x| x[1] }.sort_by { |x| prio[x[0]] }.each do |type, items|
-                xml.h4 "#{ICON_FOR[type]} #{type.capitalize}"
+              parts.group_by { |x| x[1] }.sort_by { |x| PRIO[x[0]] }.each do |type, items|
+                xml.h4 "#{ICON_FOR[type]} #{type.gsub(/-/, ' ').capitalize}"
                 if items.length.positive?
                   xml.ul do
                     items.each do |date, _type, page, _tags|
                       xml.li do
                         if page.is_a?(String)
-                          href = "#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}/hall-of-fame/#{page}/")
                           text = "@#{page}"
                         else
                           text = page.data['title']
-                          href = "#{site.config['url']}#{site.config['baseurl']}#{page.url}?utm_source=matrix&utm_medium=newsbot&utm_campaign=matrix-news"
+                          href = track("#{site.config['url']}#{site.config['baseurl']}#{page.url}")
                         end
                         if group_by != 'day'
                           text += " (#{date.strftime('%B %d, %Y')})"
@@ -448,7 +675,7 @@ def generate_event_feeds(site)
 
       events.each do |page|
         xml.entry do
-          pdate = collapse_date_pretty(page.data)
+          pdate = collapse_event_date_pretty(page.data)
           xml.title("[#{pdate}] #{page.data['title']}")
           link = "#{site.config['url']}#{site.baseurl}#{page.url}"
           xml.link(href: link)
@@ -520,6 +747,8 @@ Jekyll::Hooks.register :site, :post_write do |site|
         {title: "#{topic} all changes", url: "#{site.config['url']}#{site.baseurl}/topic/feed.xml"}
 
       generate_matrix_feed(site, bucket, group_by: 'month', filter_by: topic)
+      generate_matrix_feed_itemized(site, bucket, group_by: nil, filter_by: topic)
+
       opml['GTN Topics - Digests'] <<
         {title: "#{topic} monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/#{topic}-month.xml"}
     end
@@ -528,8 +757,13 @@ Jekyll::Hooks.register :site, :post_write do |site|
     generate_matrix_feed(site, bucket, group_by: 'week')
     generate_matrix_feed(site, bucket, group_by: 'month')
 
+    generate_matrix_feed_itemized(site, bucket, group_by: nil)
+    generate_matrix_feed_itemized(site, bucket, group_by: 'day')
+
     opml['GTN Digests'] = [
+      {title: "GTN Firehose", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix.i.xml"},
       {title: "GTN daily changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.xml"},
+      {title: "GTN daily changes (itemized, one change per entry)", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-daily.i.xml"},
       {title: "GTN weekly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-weekly.xml"},
       {title: "GTN monthly changes", url: "#{site.config['url']}#{site.baseurl}/feeds/matrix-monthly.xml"}
     ]

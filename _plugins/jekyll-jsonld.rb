@@ -3,6 +3,7 @@
 require 'json'
 require './_plugins/gtn'
 require './_plugins/gtn/git'
+require './_plugins/util'
 
 module Jekyll
   # Generate JSON-LD metadata for the GTN.
@@ -155,7 +156,7 @@ module Jekyll
         },
         id: "#{site['url']}#{site['baseurl']}/hall-of-fame/#{id}/",
         name: Gtn::Contributors.fetch_name(site, id),
-        description: contributor.fetch('funding_statement', 'An organization supporting the Galaxy Training Network'),
+        description: 'An organization supporting the Galaxy Training Network',
       }
 
       organization['url'] = contributor['url'] if contributor.key?('url') && contributor['url']
@@ -178,12 +179,12 @@ module Jekyll
       }
     end
 
-    def generate_funding_jsonld(id, contributor, site)
+    def generate_grant_jsonld(id, contributor, site)
       organization = {
         '@context': 'https://schema.org',
         '@type': 'Grant',
         identifier: contributor['funding_id'],
-        url: contributor['url'] || Gtn::Contributors.fetch_funding_url(contributor),
+        url: Gtn::Contributors.fetch_funding_url(contributor) || contributor['url'],
         funder: generate_funder_jsonld(id, contributor, site)
       }
 
@@ -197,16 +198,16 @@ module Jekyll
     # Generate the JSON-LD metadata for a person, funder, or organisation as JSON.
     # Parameters:
     # +id+:: The id of the person.
-    # +contributor+:: The contributor object from CONTRIBUTORS.yaml.
     # +site+:: The site object.
+    # +json+:: Should the output be rendered as JSON (only really used in contributor page.)
     # Returns:
     # +String+:: The JSON-LD metadata.
     def to_pfo_jsonld(id, site, json: true)
       contributor = Gtn::Contributors.fetch_contributor(site, id)
       d = if Gtn::Contributors.person?(site, id)
             generate_person_jsonld(id, contributor, site)
-          elsif Gtn::Contributors.funder?(site, id)
-            generate_funder_jsonld(id, contributor, site)
+          elsif Gtn::Contributors.grant?(site, id)
+            generate_grant_jsonld(id, contributor, site)
           else
             generate_org_jsonld(id, contributor, site)
           end
@@ -273,26 +274,28 @@ module Jekyll
       instructors = Gtn::Contributors.get_instructors(page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funders = Gtn::Contributors.get_funders(page.to_h).map do |x|
+      funders = Gtn::Contributors.get_funders(site, page.to_h).map do |x|
         to_pfo_jsonld(x, site, json: false)
       end
-      funding = Gtn::Contributors.get_funders(page.to_h).map do |x|
-        generate_funding_jsonld(x, Gtn::Contributors.fetch_contributor(site, x), site)
+      funding = Gtn::Contributors.get_grants(site, page.to_h).map do |x|
+        to_pfo_jsonld(x, site, json: false)
       end
 
       materials = []
-      page['program'].each do |section|
-        if !section.key? 'tutorials'
-          next
-        end
-
-        section['tutorials'].each do |tutorial|
-          if tutorial.key?('custom')
+      if page['program']
+        page['program'].each do |section|
+          if !section.key? 'tutorials'
             next
           end
 
-          material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
-          materials.push(material)
+          section['tutorials'].each do |tutorial|
+            if tutorial.key?('custom')
+              next
+            end
+
+            material = TopicFilter.fetch_tutorial_material(site, tutorial['topic'], tutorial['name'])
+            materials.push(material)
+          end
         end
       end
       materials.compact!
@@ -322,12 +325,14 @@ module Jekyll
         end
       end
 
-      syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
-        {
-          '@type': 'Syllabus',
-          name: section['section'],
-          description: section.fetch('description', nil),
-        }
+      if page['program']
+        syllab = page['program'].reject { |s| s['section'].nil? }.map do |section|
+          {
+            '@type': 'Syllabus',
+            name: section['section'],
+            description: section.fetch('description', nil),
+          }
+        end
       end
 
       data = {
@@ -400,7 +405,7 @@ module Jekyll
 
       # We CANNOT guarantee A11Y
       # data.update(A11Y)
-      if page['cost'].downcase == 'free'
+      if page['cost'] and page['cost'].downcase == 'free'
         data['isAccessibleForFree'] = true
         offer = {
           '@type': 'Offer',
@@ -409,7 +414,7 @@ module Jekyll
           category: 'Free',
           isAccessibleForFree: true,
         }
-      else
+      elsif page['cost']
         data['isAccessibleForFree'] = false
         offer = {
           '@type': 'Offer',
@@ -506,6 +511,18 @@ module Jekyll
         material.fetch('objectives', [])
       end.flatten.compact
 
+      funders = materials.map do |material|
+        Gtn::Contributors.get_funders(site, material).map do |x|
+          to_pfo_jsonld(x, site, json: false)
+        end
+      end.flatten.uniq.compact
+
+      funding = materials.map do |material|
+        Gtn::Contributors.get_grants(site, material).map do |x|
+          to_pfo_jsonld(x, site, json: false)
+        end
+      end.flatten.uniq.compact
+
       # TODO: add topic edam terms too? Not sure.
       parts = []
       materials.each do |material|
@@ -553,8 +570,8 @@ module Jekyll
         # learningResourceType
         # teaches
 
-        # funder: funders, # Org or person
-        # funding: funding, # Grant
+        funder: funders, # Org or person
+        funding: funding, # Grant
         publisher: GTN,
         provider: GTN,
         syllabusSections: syllab,
@@ -674,18 +691,26 @@ module Jekyll
         # "award":,
         # "author" described below
         # "character":,
-        citation: {
-          '@type': 'CreativeWork',
-          name: 'Community-Driven Data Analysis Training for Biology',
-          url: 'https://doi.org/10.1016/j.cels.2018.05.012'
-        },
+        citation: [
+          {
+            '@type': 'CreativeWork',
+            name: 'Galaxy Training: A Powerful Framework for Teaching!',
+            url: 'https://doi.org/10.1371/journal.pcbi.1010752'
+          },
+          {
+            '@type': 'CreativeWork',
+            name: 'Community-Driven Data Analysis Training for Biology',
+            url: 'https://doi.org/10.1016/j.cels.2018.05.012'
+          }
+        ],
         # "comment":,
         # "commentCount":,
         # "contentLocation":,
         # "contentRating":,
         # "contentReferenceTime":,
         # "contributor" described below
-        copyrightHolder: GTN,
+        # copyrightHolder: GTN,
+        # copyrightNotice: m
         # "copyrightYear":,
         # "correction":,
         # "creator":,
@@ -699,7 +724,7 @@ module Jekyll
         # "encodingFormat":,
         # "exampleOfWork":,
         # "expires":,
-        # "funder":,
+        # "funder": funding,
         # "genre":,
         # "hasPart" described below
         headline: (material['title']).to_s,
@@ -775,9 +800,29 @@ module Jekyll
         end
       end
 
+      if material.key?('copyright')
+        # copyrightHolder: GTN,
+        data['copyrightNotice'] = material['copyright']
+      else
+        # I'm not sure this is accurate.
+        data['copyrightHolder'] = GTN
+      end
+
+      funders = Gtn::Contributors.get_funders(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+      grants = Gtn::Contributors.get_grants(site, material).map do |x|
+        to_pfo_jsonld(x, site, json: false)
+      end
+
+      data['funder'] = funders
+      data['funding'] = grants
+
       data['identifier'] = "https://gxy.io/GTN:#{material['short_id']}" if material.key?('short_id')
 
       data.update(A11Y)
+
+      actual_material = TopicFilter.fetch_tutorial_material(site, material['topic_name'], material['tutorial_name'])
 
       # info depending if tutorial, hands-on or slide level
       # parts = []
@@ -788,12 +833,35 @@ module Jekyll
 
       data['isPartOf'] = topic_desc
 
+      data['abstract'] = material
+        .fetch('content', '')
+        .strip
+        .split("\n")
+        .first
+
+      if ! data['abstract'].nil?
+        data['abstract'] = data['abstract']
+          .gsub(/\{\{\s*site.baseurl\s*\}\}/, url_prefix(site))
+          .gsub(/\[{{\s*site.url\s*}}/, '[' + url_prefix(site))
+          .gsub(/{% link (topics[^%]*).md %}/, url_prefix(site) + '\1.html')
+          .gsub(/{% link (topics[^%]*).html %}/, url_prefix(site) + '\1.html')
+          .gsub(/\s*\(?{%\s*cite [^}]+\s*%}\)?/, '')
+          .gsub('{{ site.github_repository }}', safe_site_config(site, 'github_repository', 'https://example.com'))
+          .gsub(/{% snippet ([^%]*) %}/, '')
+          .gsub(/{% include ([^%]*) %}/, '')
+      end
+
+      description.push("## Abstract\n\n#{data['abstract']}\n\n")
+
       if (material['name'] == 'tutorial.md') || (material['name'] == 'slides.html')
-        data['learningResourceType'] = if material['name'] == 'tutorial.md'
-                                         'hands-on tutorial'
-                                       else
-                                         'slides'
-                                       end
+
+        if material['name'] == 'tutorial.md'
+          data['learningResourceType'] = 'e-learning'
+          description.push("## About This Material\n\nThis is a Hands-on Tutorial from the GTN which is usable either for individual self-study, or as a teaching material in a classroom.\n\n")
+        else
+          data['learningResourceType'] = 'slides'
+        end
+
         data['name'] = material['title']
         data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
 
@@ -808,26 +876,74 @@ module Jekyll
         # Description with questions, objectives and keypoints
         if material.key?('questions') && !material['questions'].nil? && material['questions'].length.positive?
           questions = material['questions'].join("\n - ")
-          description.push("The questions this #{material['type']} addresses are:\n - #{questions}\n\n")
+          description.push("## Questions this #{material['type']} will address\n\n - #{questions}\n\n")
         end
         if material.key?('objectives') && !material['objectives'].nil? && material['objectives'].length.positive?
-          objectives = material['objectives'].join("\n - ")
-          description.push("The objectives are:\n - #{objectives}\n\n")
+          objectives = material['objectives'].map{|x| "- #{x}"}.join("\n")
+          description.push("## Learning Objectives\n\n#{objectives}\n\n")
           data['teaches'] = objectives
         end
         if material.key?('keypoints') && !material['keypoints'].nil? && material['keypoints'].length.positive?
           keypoints = material['keypoints'].join("\n - ")
-          description.push("The keypoints are:\n - #{keypoints}\n\n")
+          description.push("## Key Points\n\n - #{keypoints}\n\n")
         end
 
         # Keywords
         data['keywords'] = [topic['title']] + (material['tags'] || [])
         # Zenodo links
-        if material.key?('zenodo_link')
+      end
+
+      # Mentions are 'external resources' in TeSS.
+      # This could be expanded with
+      # - supported servers
+      # - tools and resources used (e.g. Galaxy) or tools linked to the TS.
+      # - slides (if tutorial) and tutorial (if slides)
+      # - other materials in the same topic?
+      if actual_material.key?('workflows')
+        mentions.push({
+                        '@type': 'Thing',
+                        url: "#{site['url']}#{site['baseurl']}#{material['dir']}workflows/",
+                        name: "Associated Workflows"
+                      })
+      end
+
+      # Notebooks
+      if actual_material.key?('notebook')
+        if actual_material['notebook']['language'] != 'r'
+          # Python, Bash, SQL (all via jupyter)
+          url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.ipynb"
           mentions.push({
                           '@type': 'Thing',
-                          url: (material['zenodo_link']).to_s,
-                          name: "Training data for #{material['title']} tutorial"
+                          url: url,
+                          name: "Jupyter Notebook (with Solutions)"
+                        })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: url.gsub(/\.ipynb$/, '-course.ipynb'),
+                          name: "Jupyter Notebook (without Solutions)"
+                        })
+        elsif actual_material['notebook']['language'] == 'r' # Actual R
+          url = "#{site['url']}#{site['baseurl']}#{material['dir']}#{material['topic_name']}-#{material['tutorial_name']}.Rmd"
+          mentions.push({
+                          '@type': 'Thing',
+                          url: url,
+                          name: "Quarto/RMarkdown Notebook"
+                        })
+          mentions.push({
+                          '@type': 'Thing',
+                          url: "https://bio.tools/tool/rstudio",
+                          name: "RStudio"
+                        })
+        end
+      end
+
+      # Zenodo link out
+      if actual_material.key?('zenodo_link') && ! actual_material['zenodo_link'].nil?
+        if actual_material['zenodo_link'].length.positive?
+          mentions.push({
+                          '@type': 'Thing',
+                          url: (actual_material['zenodo_link']).to_s,
+                          name: "Associated Training Datasets"
                         })
         end
       end
@@ -885,7 +1001,7 @@ module Jekyll
                             '@context': 'http://schema.org',
                             '@type': 'LearningResource',
                             url: (page['hands_on_url']).to_s,
-                            learningResourceType: 'hands-on tutorial',
+                            learningResourceType: 'e-learning',
                             interactivityType: 'expositive',
                           }
                         )
@@ -901,7 +1017,7 @@ module Jekyll
                                "/#{tuto}/tutorial.html",
                           name: (page['title']).to_s,
                           description: "Hands-on for '#{page['title']}' tutorial",
-                          learningResourceType: 'hands-on tutorial',
+                          learningResourceType: 'e-learning',
                           interactivityType: 'expositive',
                           provider: GTN
                         }
@@ -970,8 +1086,7 @@ module Jekyll
       data['about'] = about
 
       data['educationalLevel'] = material.key?('level') ? eduLevel[material['level']] : 'Beginner'
-      data['mentions'] = (material['tags'] || []).map { |x| { '@type': 'Thing', name: x, url: "#{site['url']}#{site['baseurl']}/tags/#{x}/" } }
-      data['abstract'] = material.fetch('content', '').strip.split("\n").first
+      data['mentions'] = mentions
 
       data
     end

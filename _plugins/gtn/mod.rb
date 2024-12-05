@@ -57,11 +57,11 @@ module Gtn
       previous_commit = discover_caches.split('-').last.split('.').first
       previous = File.read(discover_caches)
 
-      `git log --name-only --pretty='GTN_GTN:%ct' #{previous_commit}..` + previous
+      `git log --first-parent --name-only --pretty='GTN_GTN:%ct' #{previous_commit}..` + previous
     end
 
     def self.command
-      `git log --name-only --pretty='GTN_GTN:%ct'`
+      `git log --first-parent --name-only --pretty='GTN_GTN:%ct'`
     end
 
     def self.time_cache
@@ -115,10 +115,26 @@ module Gtn
   # This is faster than talking to the file system.
   module PublicationTimes
     @@TIME_CACHE = nil
+    @@RENAMES = nil
 
-    def self.chase_rename(renames, path)
-      if renames.key? path
-        chase_rename(renames, renames[path])
+    def self.chase_rename(path, depth: 0)
+      if @@RENAMES.nil?
+        self.init_cache
+      end
+
+      if @@RENAMES.key? path
+        # TODO(hexylena)
+        # This happens because it's the wrong datastructure, if there's a loop
+        # in there, it'll just cycle through it endlessly.
+        # This is obviously bad. But it'll do for now because it doesn't affect
+        # any of our core files. We should replace this in the future.
+        # This is why we have the grep_v below, to weed out the problematic files.
+        if depth > 10
+          Jekyll.logger.error "[GTN/Time/Pub] Too many renames for #{path}"
+          path
+        else
+          chase_rename(@@RENAMES[path], depth: depth + 1)
+        end
       else
         path
       end
@@ -128,7 +144,7 @@ module Gtn
       return unless @@TIME_CACHE.nil?
 
       @@TIME_CACHE = {}
-      renames = {}
+      @@RENAMES = {}
 
       Jekyll.logger.info '[GTN/Time/Pub] Filling Publication Time Cache'
       cached_command
@@ -136,15 +152,15 @@ module Gtn
         .map { |x| x.split("\n\n") }
         .select { |x| x.length > 1 }
         .each do |date, files|
-        files.split("\n").grep(/\.(md|html|ga)$/).each do |f|
+        files.split("\n").grep_v(/\.(png|json|_ga|jpg)/).each do |f|
           modification_type, path = f.split("\t")
           if modification_type == 'A'
             # Chase the renames.
-            final_filename = chase_rename(renames, path)
+            final_filename = chase_rename(path)
             @@TIME_CACHE[final_filename] = Time.at(date.to_i)
           elsif modification_type[0] == 'R'
             _, moved_from, moved_to = f.split("\t")
-            renames[moved_from] = moved_to # Point from the 'older' version to the newer.
+            @@RENAMES[moved_from] = moved_to # Point from the 'older' version to the newer.
           end
         end
       end

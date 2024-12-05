@@ -1,0 +1,1317 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Discovery workflow with SG/PS and MaxQuant to generate microbial peptides",
+    "comments": [],
+    "creator": [
+        {
+            "class": "Organization",
+            "identifier": "0000-0001-9818-0537",
+            "name": "Subina Mehta"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "CC-BY-4.0",
+    "name": "WF2_Discovery-Workflow",
+    "steps": {
+        "0": {
+            "annotation": "FastaCLI: MetaNovo Human SwissProt cRAP with decoys on data 1 (MetaNovo Human SwissProt cRAP_concatenated_target_decoy) (49,076 sequences)",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "FastaCLI: MetaNovo Human SwissProt cRAP with decoys on data 1 (MetaNovo Human SwissProt cRAP_concatenated_target_decoy) (49,076 sequences)",
+                    "name": "Human UniProt Microbial Proteins (from MetaNovo) and cRAP "
+                }
+            ],
+            "label": "Human UniProt Microbial Proteins (from MetaNovo) and cRAP ",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 249.51593017578125,
+                "top": 272.60801696777344
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"fasta\"], \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c0c1c1cf-e899-4b8e-b1b1-6a4f24d87ad1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/ident_params/4.0.41+galaxy1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Identification Parameters: PAR file",
+            "name": "Identification Parameters",
+            "outputs": [
+                {
+                    "name": "Identification_Parameters_File",
+                    "type": "json"
+                }
+            ],
+            "position": {
+                "left": 814.9930419921875,
+                "top": 0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionIdentification_Parameters_File": {
+                    "action_arguments": {
+                        "newname": "Identification Parameters (PAR)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "Identification_Parameters_File"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/ident_params/4.0.41+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3ec27b4cee7c",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"advanced_options\": {\"spectrum_annotation_options\": {\"annotation_level\": \"0.75\", \"annotation_mz_tolerance\": \"0.5\", \"annotation_high_resolution\": true}, \"sequence_matching_options\": {\"sequence_matching_type\": \"2\", \"sequence_matching_x\": \"0.25\", \"sequence_matching_enzymatic_tags\": false, \"sequence_matching_max_ptms_per_tag\": \"3\", \"sequence_matching_min_amino_acid_score\": \"30\", \"sequence_matching_min_tag_length\": \"3\"}, \"import_filters_options\": {\"min_peptide_length\": \"8\", \"max_peptide_length\": \"30\", \"max_precursor_error\": \"10.0\", \"max_precursor_error_type\": \"1\", \"missed_cleavages_min\": null, \"missed_cleavages_max\": null, \"exclude_unknown_ptms\": true}, \"ptm_localization_options\": {\"ptm_score\": {\"ptm_score_selector\": \"1\", \"__current_case__\": 0, \"score_neutral_losses\": false, \"ptm_threshold\": \"95.0\"}, \"ptm_sequence_matching_type\": \"1\", \"ptm_alignment\": true}, \"gene_annotation_options\": {\"use_gene_mapping\": false, \"update_gene_mapping\": false}, \"protein_inference_options\": {\"simplify_protein_groups_conditional\": {\"simplify_protein_groups_selector\": \"yes\", \"__current_case__\": 1, \"simplify_protein_groups_evidence\": true, \"simplify_protein_groups_confidence\": true, \"simplify_protein_groups_confidence_threshold\": \"0.05\", \"simplify_protein_groups_enzymaticity\": true, \"simplify_protein_groups_variant\": true}, \"simplify_protein_pi_modifications\": true}, \"validation_levels_options\": {\"protein_fdr\": \"1.0\", \"peptide_fdr\": \"1.0\", \"psm_fdr\": \"1.0\"}, \"fraction_analysis_options\": {\"protein_fraction_mw_confidence\": \"95.0\"}, \"database_processing_options\": {\"decoy_conditional\": {\"create_decoy_selector\": \"yes\", \"__current_case__\": 1, \"decoy_tag\": \"_REVERSED\", \"decoy_type\": \"1\"}, \"decoy_file_tag\": \"_concatenated_target_decoy\"}}, \"searchengines_options\": {\"xtandem\": {\"xtandem_advanced\": \"no\", \"__current_case__\": 0}, \"myrimatch\": {\"myrimatch_advanced\": \"no\", \"__current_case__\": 0}, \"msgf\": {\"msgf_advanced\": \"no\", \"__current_case__\": 0}, \"ms_amanda\": {\"ms_amanda_advanced\": \"no\", \"__current_case__\": 0}, \"omssa\": {\"omssa_advanced\": \"no\", \"__current_case__\": 0}, \"comet\": {\"comet_advanced\": \"no\", \"__current_case__\": 0}, \"tide\": {\"tide_advanced\": \"no\", \"__current_case__\": 0}, \"directtag\": {\"directtag_advanced\": \"no\", \"__current_case__\": 0}, \"metamorpheus\": {\"metamorpheus_advanced\": \"no\", \"__current_case__\": 0}, \"novor\": {\"novor_advanced\": \"no\", \"__current_case__\": 0}, \"pepnovo\": {\"pepnovo_advanced\": \"no\", \"__current_case__\": 0}, \"pnovo\": {\"pnovo_advanced\": \"no\", \"__current_case__\": 0}}, \"spectrum_matching_options\": {\"fixed_modifications\": [\"Carbamidomethylation of C\", \"TMT 11-plex of K+4\", \"TMT 11-plex of peptide N-term\"], \"variable_modifications\": [\"Oxidation of M\"], \"digestion\": {\"cleavage\": \"0\", \"__current_case__\": 0, \"digests\": [{\"__index__\": 0, \"enzyme\": \"Trypsin\", \"missed_cleavages\": \"2\", \"specificity\": \"0\"}]}, \"precursor_ion_tol_units\": \"1\", \"precursor_ion_tol\": \"10.0\", \"fragment_tol_units\": \"0\", \"fragment_tol\": \"0.6\", \"min_charge\": \"2\", \"max_charge\": \"6\", \"forward_ion\": \"b\", \"reverse_ion\": \"y\", \"min_isotope\": \"0\", \"max_isotope\": \"1\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.41+galaxy1",
+            "type": "tool",
+            "uuid": "abaf5892-7976-4526-9cf6-a0c96b9222ea",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "Identification_Parameters_File",
+                    "uuid": "4a0e51c2-f558-4c3b-bf33-3616f4583771"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "RAW files (Dataset Collection)"
+                }
+            ],
+            "label": "RAW files (Dataset Collection)",
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 833.7075958251953
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"format\": [\"thermo.raw\"], \"tag\": null, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "c0f85358-244a-4254-ac94-e920a6cdbe39",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Human SwissProt (reviewed only)",
+            "name": "Protein Database Downloader",
+            "outputs": [
+                {
+                    "name": "output_database",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 634.6446672462531,
+                "top": 607.9219329733031
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_database": {
+                    "action_arguments": {
+                        "newname": "Human SwissProt (reviewed only)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_database"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+            "tool_shed_repository": {
+                "changeset_revision": "983bf725dfc2",
+                "name": "dbbuilder",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"from\": \"uniprot\", \"__current_case__\": 0, \"taxon\": \"9606\", \"taxon_id\": null, \"reviewed\": \"reviewed:true\", \"set\": \"keyword:KW-1185\", \"include_isoform\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.4",
+            "type": "tool",
+            "uuid": "5b0de886-9f18-4dd2-8e81-4b29467e727a",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Human SwissProt (reviewed only)",
+                    "output_name": "output_database",
+                    "uuid": "e0de9f90-a710-4b55-af62-41ba1c2d8e1f"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+            "errors": null,
+            "id": 4,
+            "input_connections": {},
+            "inputs": [],
+            "label": "Contaminants (cRAP)",
+            "name": "Protein Database Downloader",
+            "outputs": [
+                {
+                    "name": "output_database",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 631.7479350358844,
+                "top": 788.9833201774142
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.4",
+            "tool_shed_repository": {
+                "changeset_revision": "983bf725dfc2",
+                "name": "dbbuilder",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"source\": {\"from\": \"cRAP\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.4",
+            "type": "tool",
+            "uuid": "6f0be889-015d-4be0-a997-dd63e18344eb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 5,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Experimental Design Discovery MaxQuant"
+                }
+            ],
+            "label": "Experimental Design Discovery MaxQuant",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 881.6298217773438,
+                "top": 922.0535430908203
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": null}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "9652a70a-de8c-4966-b7cf-121f1b9f0b54",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/fasta_cli/4.0.41+galaxy1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input_database": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": "FastaCLI__MetaNovo_Human_SwissProt_cRAP_with_decoys_on_data_1_(MetaNovo_Human_SwissProt_cRAP_concatenated_target_decoy).fasta",
+            "name": "FastaCLI",
+            "outputs": [
+                {
+                    "name": "input_database_concatenated_target_decoy",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 873.1780375305545,
+                "top": 286.53022010497557
+            },
+            "post_job_actions": {
+                "RenameDatasetActioninput_database_concatenated_target_decoy": {
+                    "action_arguments": {
+                        "newname": "FastaCLI__MetaNovo_Human_SwissProt_cRAP_with_decoys_on_data_1_(MetaNovo_Human_SwissProt_cRAP_concatenated_target_decoy).fasta"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "input_database_concatenated_target_decoy"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/fasta_cli/4.0.41+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3ec27b4cee7c",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"database_processing_options\": {\"decoy_tag\": \"_REVERSED\", \"decoy_type\": \"2\", \"decoy_file_tag\": \"_concatenated_target_decoy\"}, \"input_database\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.41+galaxy1",
+            "type": "tool",
+            "uuid": "7a0729f9-8827-4202-a20e-48e103efc502",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "msconvert",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "mzml"
+                }
+            ],
+            "position": {
+                "left": 213.25472010132836,
+                "top": 454.38506518621944
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2",
+            "tool_shed_repository": {
+                "changeset_revision": "6153e8ada1ee",
+                "name": "msconvert",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"data_processing\": {\"peak_picking\": {\"pick_peaks\": true, \"__current_case__\": 1, \"pick_peaks_ms_levels\": \"1-\", \"pick_peaks_algorithm\": \"vendor\"}, \"precursor_refinement\": {\"use_mzrefinement\": false, \"__current_case__\": 0}, \"charge_state_calculation\": {\"charge_state_calculation_method\": \"false\", \"__current_case__\": 0}, \"thresholds\": [], \"filter_mz_windows\": {\"do_mzwindow_filter\": false, \"__current_case__\": 0}, \"etd_filtering\": {\"do_etd_filtering\": false, \"__current_case__\": 0}, \"ms2denoise\": {\"denoise\": false, \"__current_case__\": 1}, \"ms2deisotope\": false, \"demultiplex\": {\"demultiplex_on\": false, \"__current_case__\": 1}}, \"filtering\": {\"activation\": \"false\", \"indices\": [], \"scan_numbers\": [], \"strip_it\": false, \"filter_ms_levels\": {\"do_ms_level_filter\": false, \"__current_case__\": 0}, \"polarity\": \"false\", \"analyzer\": \"false\"}, \"general_options\": {\"combineIonMobilitySpectra\": false, \"scan_summing\": {\"do_scan_summing\": false, \"__current_case__\": 0}, \"simAsSpectra\": false, \"srmAsSpectra\": false, \"acceptZeroLengthSpectra\": false, \"ignoreUnknownInstrumentError\": false, \"multi_run_output\": {\"do_multi_run_output\": false, \"__current_case__\": 0, \"runIndexSet\": \"0\"}}, \"input\": {\"__class__\": \"ConnectedValue\"}, \"license_agreement\": true, \"output_type\": \"mgf\", \"settings\": {\"mz_encoding\": \"64\", \"intensity_encoding\": \"32\", \"binary_compression\": \"zlib\", \"gzip_compression\": false}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.20287.2",
+            "type": "tool",
+            "uuid": "83018642-2850-4df8-b328-ee1e8bdc8fcb",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "batchmode|input_fastas_0|input_fasta": {
+                    "id": 3,
+                    "output_name": "output_database"
+                },
+                "batchmode|input_fastas_1|input_fasta": {
+                    "id": 4,
+                    "output_name": "output_database"
+                }
+            },
+            "inputs": [],
+            "label": "Human SwissProt+cRAP",
+            "name": "FASTA Merge Files and Filter Unique Sequences",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 902.4973253039605,
+                "top": 577.0886700391638
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Human SwissProt+cRAP"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f546e7278f04",
+                "name": "fasta_merge_files_and_filter_unique_sequences",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"accession_parser\": \"^>([^ ]+).*$\", \"batchmode\": {\"processmode\": \"individual\", \"__current_case__\": 0, \"input_fastas\": [{\"__index__\": 0, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}, {\"__index__\": 1, \"input_fasta\": {\"__class__\": \"ConnectedValue\"}}]}, \"uniqueness_criterion\": \"sequence\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2.0",
+            "type": "tool",
+            "uuid": "a35c2efa-70f2-41e8-bc46-cb2a245fdf57",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Human SwissProt+cRAP",
+                    "output_name": "output",
+                    "uuid": "2f14902f-b005-4c08-b6d1-6d7ee0b4b199"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/2.0.3.0+galaxy0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input_opts|fasta_files": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "paramGroups_0|files": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "search_opts|template": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MaxQuant",
+                    "name": "input_opts"
+                },
+                {
+                    "description": "runtime parameter for tool MaxQuant",
+                    "name": "search_opts"
+                }
+            ],
+            "label": null,
+            "name": "MaxQuant",
+            "outputs": [
+                {
+                    "name": "proteinGroups",
+                    "type": "tabular"
+                },
+                {
+                    "name": "mqpar",
+                    "type": "xml"
+                },
+                {
+                    "name": "peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "msms",
+                    "type": "tabular"
+                },
+                {
+                    "name": "msmsScans",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary",
+                    "type": "tabular"
+                },
+                {
+                    "name": "log",
+                    "type": "txt"
+                },
+                {
+                    "name": "config",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 1389.0771241398825,
+                "top": 778.3294605307798
+            },
+            "post_job_actions": {
+                "TagDatasetActionpeptides": {
+                    "action_arguments": {
+                        "tags": "#MQ_Peptides"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "peptides"
+                },
+                "TagDatasetActionproteinGroups": {
+                    "action_arguments": {
+                        "tags": "#MQ_ProteinGroups"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "proteinGroups"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/2.0.3.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "9c52362ae7bb",
+                "name": "maxquant",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_opts\": {\"ftype\": \".thermo.raw\", \"fasta_files\": {\"__class__\": \"ConnectedValue\"}, \"identifier_parse_rule\": \">([^\\\\s]*)\", \"description_parse_rule\": \">(.*)\"}, \"output_opts\": {\"dry_run\": false, \"output\": [\"proteinGroups\", \"mqpar\", \"peptides\", \"msms\", \"msmsScans\", \"summary\", \"log\", \"config\"]}, \"paramGroups\": [{\"__index__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}, \"maxMissedCleavages\": \"2\", \"fixedModifications\": [\"Carbamidomethyl (C)\"], \"variableModifications\": [\"Oxidation (M)\"], \"enzymes\": [\"Trypsin/P\"], \"digestion_mode\": \"0\", \"quant_method\": {\"select_quant_method\": \"reporter_ion_ms2\", \"__current_case__\": 3, \"iso_labels\": {\"labeling\": \"tmt11plex\", \"__current_case__\": 4}, \"filter_by_pif\": {\"filter_pif\": \"True\", \"__current_case__\": 0, \"reporter_pif\": \"0.75\"}}}], \"protein_quant\": {\"peptides_for_quantification\": \"1\", \"only_unmod_prot\": {\"unmod_prot\": \"True\", \"__current_case__\": 0, \"mods_used_prot_quant\": [\"Oxidation (M)\"], \"discard_unmod_cpart_peptides\": true}, \"lfq_opts\": {\"separateLfq\": false, \"lfqStabilizeLargeRatios\": true, \"lfqRequireMsms\": true, \"do_ibaq\": {\"ibaq\": \"False\", \"__current_case__\": 1}, \"advancedSiteIntensities\": true}}, \"qc\": {\"do_it\": \"false\", \"__current_case__\": 1}, \"search_opts\": {\"template\": {\"__class__\": \"ConnectedValue\"}, \"min_peptide_len\": \"8\", \"max_peptide_mass\": \"4600\", \"min_unique_pep\": \"0\", \"calc_peak_properties\": false, \"mbr\": {\"match_between_runs\": \"True\", \"__current_case__\": 1, \"matching_time_window\": \"0.7\", \"matching_ion_mobility_window\": \"0.05\", \"alignment_time_window\": \"20\", \"alignment_ion_mobility_window\": \"1\", \"match_unidentified_features\": false}, \"incl_contaminants\": false, \"decoy_mode\": \"revert\", \"psm_fdr\": \"0.01\", \"protein_fdr\": \"0.01\", \"min_pep_length\": \"8\", \"max_pep_length\": \"50\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.3.0+galaxy0",
+            "type": "tool",
+            "uuid": "46c61a69-355c-44ac-9945-0e4d43f0b2ec",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "proteinGroups",
+                    "uuid": "5306e0c0-bd4c-44ea-9f3c-817f959ed3d4"
+                },
+                {
+                    "label": null,
+                    "output_name": "peptides",
+                    "uuid": "a2bbaad0-27ba-491c-9462-efd4a1e8efb6"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/4.0.41+galaxy1",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input_fasta_file": {
+                    "id": 6,
+                    "output_name": "input_database_concatenated_target_decoy"
+                },
+                "input_parameters_file": {
+                    "id": 1,
+                    "output_name": "Identification_Parameters_File"
+                },
+                "peak_lists_files": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Search GUI",
+            "outputs": [
+                {
+                    "name": "searchgui_results",
+                    "type": "searchgui_archive"
+                }
+            ],
+            "position": {
+                "left": 1136.7332639974097,
+                "top": 127.37631486278212
+            },
+            "post_job_actions": {
+                "TagDatasetActionsearchgui_results": {
+                    "action_arguments": {
+                        "tags": "#SGPS"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "searchgui_results"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/4.0.41+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "3ec27b4cee7c",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input_fasta_file\": {\"__class__\": \"ConnectedValue\"}, \"input_parameters_file\": {\"__class__\": \"ConnectedValue\"}, \"peak_lists_files\": {\"__class__\": \"ConnectedValue\"}, \"search_engines_options\": {\"engines\": [\"X!Tandem\", \"MSGF\"]}, \"searchgui_advanced\": {\"searchgui_advanced_selector\": \"basic\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.0.41+galaxy1",
+            "type": "tool",
+            "uuid": "58cf1b78-91c0-4726-8697-df2504d14611",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "FASTA-to-Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1164.016315312491,
+                "top": 613.9918560941873
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "7e801ab2b70e",
+                "name": "fasta_to_tabular",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"descr_columns\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "9a63693a-1b5b-4160-99da-4636a09f3fed",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "input": {
+                    "id": 9,
+                    "output_name": "peptides"
+                }
+            },
+            "inputs": [],
+            "label": "Select microbial peptides (MQ)",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1644.1114561742336,
+                "top": 809.3114768624164
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Select microbial peptides (MQ)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(_HUMAN)|(_REVERSED)|(CON)|(con)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "cb9b81ce-c86e-4b07-ba18-3d1deddeded5",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Select microbial peptides (MQ)",
+                    "output_name": "out_file1",
+                    "uuid": "d7718bab-9e75-4729-bfb6-03bc3112a0e2"
+                }
+            ]
+        },
+        "13": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/2.0.33+galaxy1",
+            "errors": null,
+            "id": 13,
+            "input_connections": {
+                "searchgui_input": {
+                    "id": 10,
+                    "output_name": "searchgui_results"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Peptide Shaker",
+                    "name": "optional_main_parameters"
+                },
+                {
+                    "description": "runtime parameter for tool Peptide Shaker",
+                    "name": "optional_main_parameters"
+                },
+                {
+                    "description": "runtime parameter for tool Peptide Shaker",
+                    "name": "optional_main_parameters"
+                }
+            ],
+            "label": null,
+            "name": "Peptide Shaker",
+            "outputs": [
+                {
+                    "name": "mzidentML",
+                    "type": "mzid"
+                },
+                {
+                    "name": "output_certificate",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_psm",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_peptides",
+                    "type": "tabular"
+                },
+                {
+                    "name": "output_proteins",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1376.5616292921313,
+                "top": 136.11307746315038
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutput_peptides": {
+                    "action_arguments": {
+                        "tags": "#PS_Peptides"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output_peptides"
+                },
+                "TagDatasetActionoutput_psm": {
+                    "action_arguments": {
+                        "tags": "#PS_PSM"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output_psm"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/2.0.33+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "a6ff76e057fd",
+                "name": "peptideshaker",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"exporting_options\": {\"zip_conditional\": {\"zip_output_boolean\": false, \"__current_case__\": 0, \"export_psdb\": false}, \"mzidentml_conditional\": {\"mzidentml_creation\": true, \"__current_case__\": 0, \"include_sequences\": false, \"contact_options\": {\"contact_options_selector\": \"no\", \"__current_case__\": 0}}, \"followup_conditional\": {\"followup_conditional_selector\": \"no\", \"__current_case__\": 0}, \"output_reports\": [\"3\", \"6\", \"9\", \"0\"]}, \"optional_main_parameters\": {\"input_optional_identification_parameters\": {\"__class__\": \"RuntimeValue\"}, \"input_fasta_file\": {\"__class__\": \"RuntimeValue\"}, \"input_optional_spectrum_files\": {\"__class__\": \"RuntimeValue\"}}, \"searchgui_input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.0.33+galaxy1",
+            "type": "tool",
+            "uuid": "d8293305-e003-4c82-9085-a6a6e27563f3",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_proteins",
+                    "uuid": "3dfa370b-aaa1-4b0b-ab51-801ed5abf804"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_peptides",
+                    "uuid": "062fabe0-3631-4888-9a0e-5ea16af9c564"
+                },
+                {
+                    "label": null,
+                    "output_name": "mzidentML",
+                    "uuid": "275ca0b9-f609-4cb7-8a1f-3ada482634fe"
+                },
+                {
+                    "label": null,
+                    "output_name": "output_psm",
+                    "uuid": "39e82c48-26d6-4717-9efe-06a73e37dfdc"
+                }
+            ]
+        },
+        "14": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "errors": null,
+            "id": 14,
+            "input_connections": {
+                "input": {
+                    "id": 11,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1909.4926854592713,
+                "top": 567.042966564121
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/filter_tabular/filter_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "557ec8d7087d",
+                "name": "filter_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"comment_char\": true, \"input\": {\"__class__\": \"ConnectedValue\"}, \"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"select_columns\", \"__current_case__\": 9, \"columns\": \"1\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"replace\", \"__current_case__\": 11, \"column\": \"1\", \"regex_pattern\": \"^[^|]+[|]([^| ]+).*$\", \"regex_replace\": \"\\\\1\", \"add\": null}}], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "e42dd88c-5e82-400e-810f-cb34746ce438",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "15": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 15,
+            "input_connections": {
+                "input": {
+                    "id": 12,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "MQ Peptide Sequences",
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1902.5901641524533,
+                "top": 824.464841564121
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c1\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "d182a597-2b4f-4f60-bd76-e6cea6f9f610",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "16": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 16,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "output_peptides"
+                }
+            },
+            "inputs": [],
+            "label": "Select microbial peptides (SGPS)",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1624.5012303811463,
+                "top": 133.08277443284737
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Select microbial peptides (SGPS)"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(_HUMAN)|(_REVERSED)|(CON)|(con)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "088c67e2-5680-45ac-8fc6-58107304378b",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Select microbial peptides (SGPS)",
+                    "output_name": "out_file1",
+                    "uuid": "14fd9080-df92-4c61-b1f1-3f700a166700"
+                }
+            ]
+        },
+        "17": {
+            "annotation": "",
+            "content_id": "Grep1",
+            "errors": null,
+            "id": 17,
+            "input_connections": {
+                "input": {
+                    "id": 13,
+                    "output_name": "output_psm"
+                }
+            },
+            "inputs": [],
+            "label": "Select microbial PSMs",
+            "name": "Select",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1633.4693115204132,
+                "top": 337.1769700021041
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Select microbial PSMs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grep1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"invert\": \"-v\", \"keep_header\": true, \"pattern\": \"(_HUMAN)|(_REVERSED)|(CON)|(con)\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.4",
+            "type": "tool",
+            "uuid": "77835fcd-c645-48fa-bfe2-2519cebdf93c",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "18": {
+            "annotation": "",
+            "content_id": "Remove beginning1",
+            "errors": null,
+            "id": 18,
+            "input_connections": {
+                "input": {
+                    "id": 15,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Remove beginning",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 2433.9505822987603,
+                "top": 727.5273267677195
+            },
+            "post_job_actions": {},
+            "tool_id": "Remove beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"num_lines\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "3eb21bbd-483c-4685-b3e8-1feec0354c47",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "19": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 19,
+            "input_connections": {
+                "input": {
+                    "id": 16,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Filter confident microbial peptides",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1882.4063928456353,
+                "top": 138.52877496551775
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Filter confident microbial peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c17=='Confident'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "a2763f6c-4bb4-4637-b9a5-4319b8176e57",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter confident microbial peptides",
+                    "output_name": "out_file1",
+                    "uuid": "1c6c953f-d192-4953-938a-9f401315bc0d"
+                }
+            ]
+        },
+        "20": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 20,
+            "input_connections": {
+                "input": {
+                    "id": 17,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Filter confident microbial PSMs",
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1892.8411851041578,
+                "top": 346.8881407177668
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Filter confident microbial PSMs"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c24=='Confident'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "2986ffd8-f797-4bdd-ba33-e3383bb3cbd1",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Filter confident microbial PSMs",
+                    "output_name": "out_file1",
+                    "uuid": "d8ec7f0c-7ba1-4733-a3dc-74a9ef298dc2"
+                }
+            ]
+        },
+        "21": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 21,
+            "input_connections": {
+                "input1": {
+                    "id": 18,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "MQ Distinct Peptides",
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2692.1307728764114,
+                "top": 524.4947117996797
+            },
+            "post_job_actions": {
+                "EmailActionout_file1": {
+                    "action_arguments": {
+                        "host": "usegalaxy.eu"
+                    },
+                    "action_type": "EmailAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "MQ Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "eadd5e67-4653-4895-bd99-d7ec8e8514f7",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "MQ Peptides",
+                    "output_name": "out_file1",
+                    "uuid": "07cae017-0b39-4065-b83e-b5f2e27fe740"
+                }
+            ]
+        },
+        "22": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+            "errors": null,
+            "id": 22,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 20,
+                    "output_name": "out_file1"
+                },
+                "tables_1|table": {
+                    "id": 20,
+                    "output_name": "out_file1"
+                },
+                "tables_2|table": {
+                    "id": 14,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": null,
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2171.9906509540633,
+                "top": 230.25374870190512
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.3.0",
+            "tool_shed_repository": {
+                "changeset_revision": "cf34c344508d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"35\"}, \"save_db\": false, \"sqlquery\": \"SELECT id,Proteins,Sequence\\nFROM psms \\nWHERE psms.ln NOT IN\\n(SELECT distinct prots.ln\\nFROM prots JOIN Uniprot ON prots.prot = Uniprot.prot)\\nORDER BY psms.ln\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"prepend_line_num\", \"__current_case__\": 2}}]}, \"tbl_opts\": {\"table_name\": \"psms\", \"column_names_from_first_line\": false, \"col_names\": \"ln,id,Proteins,Sequence\", \"load_named_columns\": true, \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": false, \"index_columns\": \"ln\"}]}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}, {\"__index__\": 1, \"filter\": {\"filter_type\": \"prepend_line_num\", \"__current_case__\": 2}}, {\"__index__\": 2, \"filter\": {\"filter_type\": \"normalize\", \"__current_case__\": 12, \"columns\": \"3\", \"separator\": \",\"}}]}, \"tbl_opts\": {\"table_name\": \"prots\", \"column_names_from_first_line\": false, \"col_names\": \"ln,id,prot\", \"load_named_columns\": true, \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": true, \"index_columns\": \"prot,ln\"}]}}, {\"__index__\": 2, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"Uniprot\", \"column_names_from_first_line\": false, \"col_names\": \"prot\", \"load_named_columns\": false, \"pkey_autoincr\": \"\", \"indexes\": [{\"__index__\": 0, \"unique\": false, \"index_columns\": \"prot\"}]}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.3.0",
+            "type": "tool",
+            "uuid": "6727a48b-5576-4fd9-a8d6-b998c2f25e65",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "23": {
+            "annotation": "",
+            "content_id": "Cut1",
+            "errors": null,
+            "id": 23,
+            "input_connections": {
+                "input": {
+                    "id": 22,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Cut",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2429.0139478882484,
+                "top": 319.9166126933824
+            },
+            "post_job_actions": {},
+            "tool_id": "Cut1",
+            "tool_state": "{\"columnList\": \"c3\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.2",
+            "type": "tool",
+            "uuid": "079cee20-8cf1-417e-9ede-9e8d3e4157e1",
+            "when": null,
+            "workflow_outputs": []
+        },
+        "24": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 24,
+            "input_connections": {
+                "input1": {
+                    "id": 23,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "SGPS Distinct Peptides",
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 2692.21992119554,
+                "top": 329.70161173161625
+            },
+            "post_job_actions": {
+                "EmailActionout_file1": {
+                    "action_arguments": {
+                        "host": "usegalaxy.eu"
+                    },
+                    "action_type": "EmailAction",
+                    "output_name": "out_file1"
+                },
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "SGPS Distinct Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "17433c88-5d56-453f-9371-dc2943eecac2",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "SGPS Distinct Peptides",
+                    "output_name": "out_file1",
+                    "uuid": "b6c61697-ff52-43c0-8fb4-765d7b4204cc"
+                }
+            ]
+        },
+        "25": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "errors": null,
+            "id": 25,
+            "input_connections": {
+                "inputs": [
+                    {
+                        "id": 21,
+                        "output_name": "out_file1"
+                    },
+                    {
+                        "id": 24,
+                        "output_name": "out_file1"
+                    }
+                ]
+            },
+            "inputs": [],
+            "label": "SGPS-MQ Peptides",
+            "name": "Concatenate datasets",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 3005.427930624518,
+                "top": 411.55050647320707
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "SGPS-MQ Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d698c222f354",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"inputs\": {\"__class__\": \"ConnectedValue\"}, \"queries\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "967a29c5-8ef9-45de-918a-f99e3f9a058f",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "SGPS-MQ Peptides",
+                    "output_name": "out_file1",
+                    "uuid": "a8c2de2e-e322-4830-9d28-2f79bf937013"
+                }
+            ]
+        },
+        "26": {
+            "annotation": "",
+            "content_id": "Grouping1",
+            "errors": null,
+            "id": 26,
+            "input_connections": {
+                "input1": {
+                    "id": 25,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": "Distinct Peptides",
+            "name": "Group",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 3283.0311189112367,
+                "top": 419.0948684617405
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "Distinct Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Grouping1",
+            "tool_state": "{\"groupcol\": \"1\", \"ignorecase\": false, \"ignorelines\": null, \"input1\": {\"__class__\": \"ConnectedValue\"}, \"operations\": [], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1.4",
+            "type": "tool",
+            "uuid": "b5462dd0-3af9-41d4-a011-65d4244525a9",
+            "when": null,
+            "workflow_outputs": [
+                {
+                    "label": "Distinct Peptides",
+                    "output_name": "out_file1",
+                    "uuid": "ef0d91b1-042f-4a9f-a2b6-bf73d82f24f7"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:clinicalMP"
+    ],
+    "uuid": "3df5081d-a2cc-4473-b80a-cf6c06cae698",
+    "version": 2
+}

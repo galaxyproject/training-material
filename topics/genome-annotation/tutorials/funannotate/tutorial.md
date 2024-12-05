@@ -36,6 +36,7 @@ contributions:
   funding:
     - gallantries
     - eurosciencegateway
+    - elixir-europe
 
 abbreviations:
   NMDS: Non-metric multidimensional scaling
@@ -102,7 +103,7 @@ In this tutorial, you will learn how to perform a structural genome annotation, 
 
 To annotate our genome using Funannotate, we will use the following files:
 
-- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}).
+- The **genome sequence** in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the [RepeatMasker tutorial]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %}). For this tutorial, we will try to annotate the genome assembled in the [Flye assembly tutorial]({% link topics/assembly/tutorials/flye-assembly/tutorial.md %}) and already masked for you using RepeatMasker.
 - Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.
 - A set of **protein sequences**, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that's why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial, we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.
 

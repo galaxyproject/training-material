@@ -1,4 +1,4 @@
-name: "[Cron] Update Commit Cache"
+name: "[Cron] Update Commit Cache, PR Data"
 on:
   workflow_dispatch:
   schedule:
@@ -6,6 +6,9 @@ on:
 jobs:
   runner-job:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     # Only run on main repo on and PRs that match the main repo.
     if: |
       github.repository == 'galaxyproject/training-material' &&
@@ -15,6 +18,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1000
+          persist-credentials: false
 
       # BEGIN Dependencies
       - uses: ruby/setup-ruby@v1
@@ -54,9 +58,16 @@ jobs:
         run: |
           bundle exec ruby bin/geocode.rb
 
+      - name: Update github metadata dataset
+        id: ghmeta
+        run: |
+          bundle exec ruby bin/collect-gh.rb
+        env:
+          GH_TOKEN: ${{ github.token }}
+
       - name: Create Pull Request
         # If it's not a Pull Request then commit any changes as a new PR.
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           title: Update Cached Commit Data
           branch-suffix: timestamp

@@ -7,11 +7,11 @@ layout: faq
 contributors: [nekrut]
 ---
 
-You can view multiple Galaxy histories at once. This allows to better understand your analyses and also makes itv possible to drag datasets between histories. This is called "**History multiview**". The multiview can be enabled either view History menu or via the ACtivity Bar:
+You can view multiple Galaxy histories at once. This allows to better understand your analyses and also makes it possible to drag datasets between histories. This is called "**History multiview**". The multiview can be enabled either view History menu or via the Activity Bar:
 
 1. Enabling Multiview via History menu is done by first clicking on the {% icon galaxy-history-options %} "**History options**" drop-down and selecting {% icon galaxy-multihistory %} "**Show Histories Side-by-Side option**":
 
-   ![Enabling side-by-side view using History Options menu]({% link shared/images/histories_side_by_side_view.svg %})
+   ![Enabling side-by-side view using History Options menu]({% link shared/images/histories_side_by_side_view.svg %})  
 
 2. Clicking the {% icon galaxy-multihistory %} "**History Multiview**" button within the Activity Bar:
 
