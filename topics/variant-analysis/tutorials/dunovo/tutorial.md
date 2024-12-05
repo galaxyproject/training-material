@@ -108,21 +108,22 @@ You can obtain the data from [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.go
 
 > <hands-on-title>Importing the raw data</hands-on-title>
 >
-> Option 1: Import the files from Zenodo (this will work with any Galaxy instance):
-> 1. In the Galaxy interface, click on the upload icon.  
->    \- The one with an up arrow, at the top of the **Tools** panel on the left.
-> 2. In the window that pops up, click the button on the bottom labeled *Paste/Fetch data*.
-> 3. Then paste this link into the text box that appears:  
->    `https://zenodo.org/record/3554549/files/SRR1799908_forward.fastq?download=1`
-> 4. Name the dataset `SRR1799908_forward`.
-> 5. Repeat steps 2-4 but with the following link, and the name `SRR1799908_reverse`:  
->    `https://zenodo.org/record/3554549/files/SRR1799908_reverse.fastq?download=1`
-> 6. Then click the *Start* button, then *Close*.
+> 1. **Import** the datasets from Zenodo, or from a data library.
 >
-> Option 2: Obtain the files by importing [this Galaxy history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015) (this only works on [usegalaxy.org](https://usegalaxy.org)):
-> 1. Make sure you're logged into [Galaxy](https://usegalaxy.org).
-> 2. Go to [the history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
-> 3. Click on the plus button in the upper right (next to **About this History**).
+>    ```
+>    https://zenodo.org/record/3554549/files/SRR1799908_forward.fastq
+>    https://zenodo.org/record/3554549/files/SRR1799908_reverse.fastq
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the datasets to
+>    - `SRR1799908_forward`
+>    - `SRR1799908_reverse`
+>
+>    {% snippet faqs/galaxy/datasets_rename.md %}
+>
 {: .hands_on}
 
 This creates two datasets in our galaxy history: one for forward reads and one for reverse.
